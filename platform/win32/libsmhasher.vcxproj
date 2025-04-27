@@ -284,6 +284,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/smhasher/farsh.c" />
     <ClCompile Include="../../thirdparty/owemdjee/smhasher/fasthash.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/smhasher/floppsyhash.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/gxhash.c" />
     <ClCompile Include="../../thirdparty/owemdjee/smhasher/halfsiphash.c" />
     <ClCompile Include="../../thirdparty/owemdjee/smhasher/hasshe2.c" />
     <ClCompile Include="../../thirdparty/owemdjee/smhasher/inverse/murmur2.c" />
@@ -360,6 +361,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/smhasher/Stats.h" />
     <ClInclude Include="../../thirdparty/owemdjee/smhasher/Types.h" />
     <ClInclude Include="../../thirdparty/owemdjee/smhasher/aesni-hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/aesnihash-peterrk.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/smhasher/ahash.h" />
     <ClInclude Include="../../thirdparty/owemdjee/smhasher/asconhashv12/api.h" />
     <ClInclude Include="../../thirdparty/owemdjee/smhasher/asconhashv12/ascon.h" />
@@ -389,6 +391,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/smhasher/fasthash.h" />
     <ClInclude Include="../../thirdparty/owemdjee/smhasher/fhtw.h" />
     <ClInclude Include="../../thirdparty/owemdjee/smhasher/floppsyhash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/gxhash.h" />
     <ClInclude Include="../../thirdparty/owemdjee/smhasher/halftime-hash.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/smhasher/jody_hash32.h" />
     <ClInclude Include="../../thirdparty/owemdjee/smhasher/jody_hash64.h" />
@@ -449,6 +452,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/smhasher/umash_long.inc" />
     <ClInclude Include="../../thirdparty/owemdjee/smhasher/ustd.h" />
     <ClInclude Include="../../thirdparty/owemdjee/smhasher/vmac.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/w1hash.h" />
     <ClInclude Include="../../thirdparty/owemdjee/smhasher/wyhash.h" />
     <ClInclude Include="../../thirdparty/owemdjee/smhasher/wyhash32.h" />
     <ClInclude Include="../../thirdparty/owemdjee/smhasher/xmsx.h" />
@@ -488,6 +492,7 @@
     <Text Include="../../thirdparty/owemdjee/smhasher/doc/City64low.txt" />
     <Text Include="../../thirdparty/owemdjee/smhasher/doc/City64noSeed.txt" />
     <Text Include="../../thirdparty/owemdjee/smhasher/doc/CityCrc128.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/CityCrc256.txt" />
     <Text Include="../../thirdparty/owemdjee/smhasher/doc/Crap8.txt" />
     <Text Include="../../thirdparty/owemdjee/smhasher/doc/FNV128.txt" />
     <Text Include="../../thirdparty/owemdjee/smhasher/doc/FNV1A_Pippip_Yurii.txt" />
@@ -535,6 +540,7 @@
     <Text Include="../../thirdparty/owemdjee/smhasher/doc/TSip.txt" />
     <Text Include="../../thirdparty/owemdjee/smhasher/doc/VHASH_32.txt" />
     <Text Include="../../thirdparty/owemdjee/smhasher/doc/VHASH_64.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/aesni-hash-peterrk.txt" />
     <Text Include="../../thirdparty/owemdjee/smhasher/doc/aesni-low.txt" />
     <Text Include="../../thirdparty/owemdjee/smhasher/doc/aesni.txt" />
     <Text Include="../../thirdparty/owemdjee/smhasher/doc/aesnihash.txt" />
@@ -565,6 +571,10 @@
     <Text Include="../../thirdparty/owemdjee/smhasher/doc/crc32_hw1.txt" />
     <Text Include="../../thirdparty/owemdjee/smhasher/doc/crc32_pclmul.txt" />
     <Text Include="../../thirdparty/owemdjee/smhasher/doc/crc64_hw.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/crc64_jones.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/crc64_jones1.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/crc64_jones2.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/crc64_jones3.txt" />
     <Text Include="../../thirdparty/owemdjee/smhasher/doc/crcutil.txt" />
     <Text Include="../../thirdparty/owemdjee/smhasher/doc/discoNONG.txt" />
     <Text Include="../../thirdparty/owemdjee/smhasher/doc/discohash1-128.txt" />
@@ -576,6 +586,7 @@
     <Text Include="../../thirdparty/owemdjee/smhasher/doc/donothing64.txt" />
     <Text Include="../../thirdparty/owemdjee/smhasher/doc/edonr224.txt" />
     <Text Include="../../thirdparty/owemdjee/smhasher/doc/edonr256.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/epyc.html" />
     <Text Include="../../thirdparty/owemdjee/smhasher/doc/falkhash.txt" />
     <Text Include="../../thirdparty/owemdjee/smhasher/doc/farmhash128_c.txt" />
     <Text Include="../../thirdparty/owemdjee/smhasher/doc/farmhash32_c.txt" />
@@ -591,12 +602,15 @@
     <Text Include="../../thirdparty/owemdjee/smhasher/doc/fletcher4.txt" />
     <Text Include="../../thirdparty/owemdjee/smhasher/doc/floppsyhash.txt" />
     <Text Include="../../thirdparty/owemdjee/smhasher/doc/gcc.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/gxhash32.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/gxhash64.txt" />
     <Text Include="../../thirdparty/owemdjee/smhasher/doc/halftime_hash128.txt" />
     <Text Include="../../thirdparty/owemdjee/smhasher/doc/halftime_hash256.txt" />
     <Text Include="../../thirdparty/owemdjee/smhasher/doc/halftime_hash512.txt" />
     <Text Include="../../thirdparty/owemdjee/smhasher/doc/halftime_hash64.txt" />
     <Text Include="../../thirdparty/owemdjee/smhasher/doc/hasshe2.txt" />
     <Text Include="../../thirdparty/owemdjee/smhasher/doc/i686.html" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/i7.html" />
     <Text Include="../../thirdparty/owemdjee/smhasher/doc/intel.html" />
     <Text Include="../../thirdparty/owemdjee/smhasher/doc/jodyhash32.txt" />
     <Text Include="../../thirdparty/owemdjee/smhasher/doc/jodyhash64.txt" />
@@ -693,6 +707,7 @@
     <Text Include="../../thirdparty/owemdjee/smhasher/doc/umash32.txt" />
     <Text Include="../../thirdparty/owemdjee/smhasher/doc/umash32_hi.txt" />
     <Text Include="../../thirdparty/owemdjee/smhasher/doc/umash64.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/w1hash.txt" />
     <Text Include="../../thirdparty/owemdjee/smhasher/doc/wyhash.txt" />
     <Text Include="../../thirdparty/owemdjee/smhasher/doc/wyhash32.txt" />
     <Text Include="../../thirdparty/owemdjee/smhasher/doc/wyhash32low.txt" />
@@ -733,6 +748,8 @@
     <Text Include="../../thirdparty/owemdjee/smhasher/testpoor-but-good.sh" />
     <Text Include="../../thirdparty/owemdjee/smhasher/testseeds.sh" />
     <Text Include="../../thirdparty/owemdjee/smhasher/testspeed-air.sh" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/testspeed-epyc.sh" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/testspeed-i7.sh" />
     <Text Include="../../thirdparty/owemdjee/smhasher/testspeed-intel.sh" />
     <Text Include="../../thirdparty/owemdjee/smhasher/testspeed-phone.sh" />
     <Text Include="../../thirdparty/owemdjee/smhasher/testspeed-ryzen3.sh" />

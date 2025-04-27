@@ -225,9 +225,11 @@
   <ItemGroup>
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/benchmarks/brute_force_vs_bvh/brute_force_vs_bvh.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/benchmarks/bvh_driver/bvh_driver.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ArborX/benchmarks/dbscan/converter.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ArborX/benchmarks/dbscan/dbscan.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ArborX/benchmarks/dbscan/print_timers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/benchmarks/cluster/data.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/benchmarks/cluster/dbscan.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/benchmarks/cluster/hdbscan.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/benchmarks/cluster/mst.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/benchmarks/cluster/print_timers.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/benchmarks/develop/develop.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/benchmarks/distributed_tree_driver/distributed_tree_driver.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/benchmarks/execution_space_instances/execution_space_instances_driver.cpp" />
@@ -237,8 +239,10 @@
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/examples/access_traits/example_host_access_traits.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/examples/brute_force/example_brute_force.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/examples/callback/example_callback.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/examples/custom_distance/example_custom_distance.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/examples/dbscan/example_dbscan.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/examples/distributed_tree/distributed_knn.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/examples/emst/example_emst.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/examples/molecular_dynamics/example_molecular_dynamics.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/examples/moving_least_squares/moving_least_squares.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/examples/raytracing/example_raytracing.cpp" />
@@ -254,6 +258,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstCompileOnlyGeometry.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstCompileOnlyMain.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstCompileOnlyTypeRequirements.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstCompileOnlyVersionMacros.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstCompileOnlyWeightedEdges.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstContainerAdaptors.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstDBSCAN.cpp" />
@@ -272,6 +277,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstDetailsKokkosExtViewHelpers.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstDetailsMortonCodes.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstDetailsMutualReachabilityDistance.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstDetailsSVD.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstDetailsTreeConstruction.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstDetailsTreeNodeLabeling.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstDetailsUtils.cpp" />
@@ -284,7 +290,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstInterpDetailsCompactRadialBasisFunction.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstInterpDetailsMLSCoefficients.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstInterpDetailsPolyBasis.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstInterpDetailsSVD.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstInterpMovingLeastSquares.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstKDOP.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstKokkosToolsAnnotations.cpp" />
@@ -309,11 +314,11 @@
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/benchmarks/brute_force_vs_bvh/brute_force_vs_bvh.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/benchmarks/brute_force_vs_bvh/brute_force_vs_bvh_timpl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/benchmarks/bvh_driver/benchmark_registration.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ArborX/benchmarks/dbscan/ArborX_DBSCANVerification.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ArborX/benchmarks/dbscan/data.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ArborX/benchmarks/dbscan/dbscan.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ArborX/benchmarks/dbscan/dbscan_timpl.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ArborX/benchmarks/dbscan/print_timers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/benchmarks/cluster/ArborX_DBSCANVerification.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/benchmarks/cluster/data.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/benchmarks/cluster/data_timpl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/benchmarks/cluster/parameters.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/benchmarks/cluster/print_timers.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/benchmarks/triangulated_surface_distance/generator.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/benchmarks/utils/ArborXBenchmark_PointClouds.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/benchmarks/utils/ArborXBenchmark_TimeMonitor.hpp" />
@@ -359,7 +364,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/interpolation/detail/ArborX_InterpDetailsCompactRadialBasisFunction.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/interpolation/detail/ArborX_InterpDetailsMovingLeastSquaresCoefficients.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/interpolation/detail/ArborX_InterpDetailsPolynomialBasis.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/interpolation/detail/ArborX_InterpDetailsSymmetricPseudoInverseSVD.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/kokkos_ext/ArborX_KokkosExtAccessibilityTraits.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/kokkos_ext/ArborX_KokkosExtArithmeticTraits.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/kokkos_ext/ArborX_KokkosExtKernelStdAlgorithms.hpp" />
@@ -376,6 +380,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/misc/ArborX_PriorityQueue.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/misc/ArborX_SortUtils.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/misc/ArborX_Stack.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/misc/ArborX_SymmetricSVD.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/misc/ArborX_Utils.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/misc/ArborX_Vector.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/spatial/ArborX_BruteForce.hpp" />
@@ -383,7 +388,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/spatial/ArborX_LinearBVH.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/spatial/detail/ArborX_AccessTraits.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/spatial/detail/ArborX_AttachIndices.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/spatial/detail/ArborX_BatchedQueries.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/spatial/detail/ArborX_BruteForceImpl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/spatial/detail/ArborX_Callbacks.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/spatial/detail/ArborX_CrsGraphWrapperImpl.hpp" />
@@ -429,9 +433,9 @@
     <Text Include="../../thirdparty/owemdjee/ArborX/benchmarks/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/ArborX/benchmarks/brute_force_vs_bvh/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/ArborX/benchmarks/bvh_driver/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/ArborX/benchmarks/dbscan/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/ArborX/benchmarks/dbscan/README.md" />
-    <Text Include="../../thirdparty/owemdjee/ArborX/benchmarks/dbscan/input.txt" />
+    <Text Include="../../thirdparty/owemdjee/ArborX/benchmarks/cluster/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ArborX/benchmarks/cluster/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ArborX/benchmarks/cluster/input.txt" />
     <Text Include="../../thirdparty/owemdjee/ArborX/benchmarks/develop/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/ArborX/benchmarks/distributed_tree_driver/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/ArborX/benchmarks/execution_space_instances/CMakeLists.txt" />
@@ -452,8 +456,10 @@
     <Text Include="../../thirdparty/owemdjee/ArborX/examples/access_traits/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/ArborX/examples/brute_force/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/ArborX/examples/callback/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ArborX/examples/custom_distance/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/ArborX/examples/dbscan/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/ArborX/examples/distributed_tree/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ArborX/examples/emst/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/ArborX/examples/molecular_dynamics/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/ArborX/examples/moving_least_squares/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/ArborX/examples/raytracing/CMakeLists.txt" />
@@ -465,6 +471,7 @@
     <Text Include="../../thirdparty/owemdjee/ArborX/examples/viz/requirements.txt" />
     <Text Include="../../thirdparty/owemdjee/ArborX/scripts/benchmark.py" />
     <Text Include="../../thirdparty/owemdjee/ArborX/scripts/benchmark_plot.py" />
+    <Text Include="../../thirdparty/owemdjee/ArborX/scripts/check_copyright.sh" />
     <Text Include="../../thirdparty/owemdjee/ArborX/scripts/check_format_cpp.sh" />
     <Text Include="../../thirdparty/owemdjee/ArborX/scripts/docker_cmake" />
     <Text Include="../../thirdparty/owemdjee/ArborX/scripts/requirements.txt" />

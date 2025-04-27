@@ -224,14 +224,20 @@
   </ImportGroup>
   <ItemGroup>
     <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/2of5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/2of5inter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/2of5inter_based.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/auspost.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/aztec.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/bc412.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/bmp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/channel.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/codabar.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/codablock.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/code.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/code1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/code11.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/code128.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/code128_based.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/code16k.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/code49.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/common.c" />
@@ -239,6 +245,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/dllversion.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/dmatrix.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/dotcode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/dxfilmedge.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/eci.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/emf.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/filemem.c" />
@@ -273,9 +280,11 @@
     <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_big5.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_bmp.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_channel.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_codabar.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_codablock.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_code.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_code1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_code11.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_code128.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_code16k.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_code49.c" />
@@ -283,6 +292,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_composite.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_dmatrix.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_dotcode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_dxfilmedge.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_eci.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_emf.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/tests/test_filemem.c" />
@@ -327,6 +337,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/vector.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libzint/backend_qt/qzint.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libzint/backend_qt/tests/test_qzint.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend_tcl/win/nmakehlp.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libzint/backend_tcl/zint.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libzint/extras/cuecat.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libzint/extras/daft.c" />
@@ -872,6 +883,13 @@
     <Text Include="../../thirdparty/owemdjee/libzint/backend_tcl/tclconfig/README.txt" />
     <Text Include="../../thirdparty/owemdjee/libzint/backend_tcl/tclconfig/install-sh" />
     <Text Include="../../thirdparty/owemdjee/libzint/backend_tcl/tclconfig/tcl.m4" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend_tcl/win/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend_tcl/win/gitmanifest.in" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend_tcl/win/makefile.vc" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend_tcl/win/rules-ext.vc" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend_tcl/win/rules.vc" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend_tcl/win/targets.vc" />
+    <Text Include="../../thirdparty/owemdjee/libzint/backend_tcl/win/zintUuid.h.in" />
     <Text Include="../../thirdparty/owemdjee/libzint/cmake/zint_add_test.cmake" />
     <Text Include="../../thirdparty/owemdjee/libzint/cmake_uninstall.cmake.in" />
     <Text Include="../../thirdparty/owemdjee/libzint/debian/changelog" />
@@ -937,6 +955,7 @@
     <Text Include="../../thirdparty/owemdjee/libzint/docs/images/dpd.svg" />
     <Text Include="../../thirdparty/owemdjee/libzint/docs/images/dpident.svg" />
     <Text Include="../../thirdparty/owemdjee/libzint/docs/images/dpleit.svg" />
+    <Text Include="../../thirdparty/owemdjee/libzint/docs/images/dxfilmedge.svg" />
     <Text Include="../../thirdparty/owemdjee/libzint/docs/images/ean14.svg" />
     <Text Include="../../thirdparty/owemdjee/libzint/docs/images/eanx13.svg" />
     <Text Include="../../thirdparty/owemdjee/libzint/docs/images/eanx5.svg" />

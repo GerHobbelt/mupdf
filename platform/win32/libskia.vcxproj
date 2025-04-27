@@ -346,6 +346,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/skia/bench/TypefaceBench.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/bench/VertBench.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/bench/VertexColorSpaceBench.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/skia/bench/WebpBlendBench.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/bench/WritePixelsBench.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/bench/WriterBench.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/bench/graphite/BoundsManagerBench.cpp" />
@@ -1381,6 +1382,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/skia/example/external_client/src/graphite_native_metal.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/example/external_client/src/graphite_native_vulkan.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/example/external_client/src/path_main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/skia/example/external_client/src/play_skottie.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/example/external_client/src/shape_text.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/example/external_client/src/svg_renderer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/example/external_client/src/use_skresources.cpp" />
@@ -1392,8 +1394,10 @@
     <ClCompile Include="../../thirdparty/owemdjee/skia/experimental/lowp-basic/lerp-study.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/experimental/lowp-basic/lowp_experiments.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/experimental/rust_cxx/main.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/skia/experimental/rust_png/SkPngRustDecoder.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/skia/experimental/rust_png/impl/SkPngRustCodec.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/skia/experimental/rust_png/decoder/SkPngRustDecoder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/skia/experimental/rust_png/decoder/impl/SkPngRustCodec.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/skia/experimental/rust_png/encoder/SkPngRustEncoder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/skia/experimental/rust_png/encoder/impl/SkPngRustEncoderImpl.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/experimental/tools/coreGraphicsPdf2png.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/experimental/tskit/bindings/core.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/experimental/tskit/bindings/extension.cpp" />
@@ -1445,7 +1449,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/skia/gm/bitmapshader.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/gm/bitmaptiled.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/gm/bleed.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/skia/gm/blend.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/gm/blurcircles.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/gm/blurcircles2.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/gm/blurignorexform.cpp" />
@@ -1880,6 +1883,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/skia/modules/jetski/src/Surface.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/modules/jetski/src/SurfaceThread.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/modules/jetski/src/Utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/skia/modules/jsonreader/SkJSONReader.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/modules/pathkit/pathkit_wasm_bindings.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/modules/skcms/skcms.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/modules/skcms/src/skcms_TransformBaseline.cc" />
@@ -1924,7 +1928,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/skia/modules/skottie/src/effects/InvertEffect.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/modules/skottie/src/effects/LevelsEffect.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/modules/skottie/src/effects/LinearWipeEffect.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/skia/modules/skottie/src/effects/MotionBlurEffect.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/modules/skottie/src/effects/MotionTileEffect.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/modules/skottie/src/effects/RadialWipeEffect.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/modules/skottie/src/effects/ShadowStyles.cpp" />
@@ -2152,6 +2155,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/codec/SkPixmapUtils.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/codec/SkPngCodec.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/codec/SkPngCodecBase.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/skia/src/codec/SkPngCompositeChunkReader.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/codec/SkRawCodec.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/codec/SkSampledCodec.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/codec/SkSampler.cpp" />
@@ -2258,6 +2262,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/core/SkMaskBlurFilter.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/core/SkMaskCache.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/core/SkMaskFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/skia/src/core/SkMaskFilterBase.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/core/SkMaskGamma.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/core/SkMasks.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/core/SkMatrix.cpp" />
@@ -2401,6 +2406,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/encode/SkJpegEncoderImpl.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/encode/SkJpegEncoder_none.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/encode/SkJpegGainmapEncoder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/skia/src/encode/SkPngEncoderBase.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/encode/SkPngEncoderImpl.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/encode/SkPngEncoder_none.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/encode/SkWebpEncoderImpl.cpp" />
@@ -2738,7 +2744,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/BufferManager.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/Caps.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/ClientMappedBufferManager.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/ClipStack_graphite.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/ClipAtlasManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/ClipStack.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/CommandBuffer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/ComputePathAtlas.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/ComputePipeline.cpp" />
@@ -2763,6 +2770,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/PaintParams.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/PaintParamsKey.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/PathAtlas.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/PrecompileContext.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/ProxyCache.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/PublicPrecompile.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/QueueManager.cpp" />
@@ -2785,6 +2793,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/SpecialImage_Graphite.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/Surface_Graphite.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/Texture.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/TextureFormat.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/TextureInfo.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/TextureProxy.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/TextureUtils.cpp" />
@@ -2803,7 +2812,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/dawn/DawnComputePipeline.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/dawn/DawnErrorChecker.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/dawn/DawnGraphicsPipeline.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/dawn/DawnGraphiteTypesPriv.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/dawn/DawnGraphiteUtils.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/dawn/DawnQueueManager.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/dawn/DawnResourceProvider.cpp" />
@@ -2811,7 +2819,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/dawn/DawnSharedContext.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/dawn/DawnTexture.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/dawn/DawnTextureInfo.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/dawn/DawnUtils.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/geom/AnalyticBlurMask.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/geom/IntersectionTree.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/geom/Shape.cpp" />
@@ -2824,6 +2831,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/precompile/PrecompileMaskFilter.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/precompile/PrecompileRuntimeEffect.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/precompile/PrecompileShader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/precompile/SerializationUtils.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/render/AnalyticBlurRenderStep.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/render/AnalyticRRectRenderStep.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/render/BitmapTextRenderStep.cpp" />
@@ -2858,7 +2866,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/vk/VulkanDescriptorSet.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/vk/VulkanFramebuffer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/vk/VulkanGraphicsPipeline.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/vk/VulkanGraphiteTypes.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/vk/VulkanGraphiteUtils.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/vk/VulkanImageView.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/vk/VulkanQueueManager.cpp" />
@@ -2932,8 +2939,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/pdf/SkClusterator.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/pdf/SkDeflate.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/pdf/SkDocument_PDF_None.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/skia/src/pdf/SkJpegInfo_libjpegturbo.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/skia/src/pdf/SkJpegInfo_none.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/pdf/SkKeyedImage.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/pdf/SkPDFBitmap.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/pdf/SkPDFDevice.cpp" />
@@ -2994,6 +2999,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/ports/SkScalerContext_win_dw.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/ports/SkTypeface_fontations.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/ports/SkTypeface_mac_ct.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/skia/src/ports/SkTypeface_proxy.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/ports/SkTypeface_win_dw.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/sfnt/SkOTTable_name.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/sfnt/SkOTUtils.cpp" />
@@ -3170,7 +3176,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/utils/SkGetExecutablePath_linux.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/utils/SkGetExecutablePath_mac.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/utils/SkGetExecutablePath_win.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/skia/src/utils/SkJSON.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/utils/SkJSONWriter.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/utils/SkMatrix22.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/src/utils/SkMultiPictureDocument.cpp" />
@@ -3248,6 +3253,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/skia/tests/ColorTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/tests/CompressedBackendAllocationTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/tests/CopySurfaceTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/skia/tests/CoreBlittersTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/tests/CtsEnforcement.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/tests/CubicChopTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/tests/CubicMapTest.cpp" />
@@ -3463,6 +3469,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/skia/tests/PictureTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/tests/PinnedImageTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/tests/PixelRefTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/skia/tests/PngGainmapTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/tests/Point3Test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/tests/PointTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/tests/PolyUtilsTest.cpp" />
@@ -3530,6 +3537,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/skia/tests/SkMallocTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/tests/SkPathRangeIterTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/tests/SkPngRustDecoderTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/skia/tests/SkPngRustEncoderTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/tests/SkRasterPipelineOptsTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/tests/SkRasterPipelineTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/tests/SkRemoteGlyphCacheTest.cpp" />
@@ -3658,13 +3666,13 @@
     <ClCompile Include="../../thirdparty/owemdjee/skia/tests/graphite/precompile/CombinationBuilderTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/tests/graphite/precompile/PaintParamsKeyTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/tests/graphite/precompile/ThreadedPrecompileTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/skia/tests/graphite/precompile/UserdefinedStableKeyTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/tools/AndroidSkDebugToStdOut.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/tools/CrashHandler.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/tools/DDLPromiseImageHelper.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/tools/DDLTileHelper.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/tools/DecodeUtils.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/tools/EncodeUtils.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/skia/tools/GpuToolUtils.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/tools/HashAndEncode.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/tools/LsanSuppressions.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/tools/MSKPPlayer.cpp" />
@@ -3739,9 +3747,12 @@
     <ClCompile Include="../../thirdparty/owemdjee/skia/tools/gpu/vk/VkYcbcrSamplerHelper.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/tools/graphite/ContextFactory.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/tools/graphite/GraphiteTestContext.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/skia/tools/graphite/GraphiteToolUtils.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/tools/graphite/ProtectedUtils_Graphite.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/tools/graphite/UniqueKeyUtils.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/tools/graphite/dawn/GraphiteDawnTestContext.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/skia/tools/graphite/precompile/PipelineCallbackHandler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/skia/tools/graphite/precompile/PrecompileEffectFactories.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/tools/graphite/vk/GraphiteVulkanTestContext.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/tools/image_diff_metric.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/tools/imgcvt.cpp" />
@@ -3763,24 +3774,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/skia/tools/skdiff/skdiff_html.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/tools/skdiff/skdiff_main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/tools/skdiff/skdiff_utils.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/skia/tools/skiaserve/Request.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/skia/tools/skiaserve/Response.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/skia/tools/skiaserve/skiaserve.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/skia/tools/skiaserve/urlhandlers/BreakHandler.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/skia/tools/skiaserve/urlhandlers/ClipAlphaHandler.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/skia/tools/skiaserve/urlhandlers/CmdHandler.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/skia/tools/skiaserve/urlhandlers/ColorModeHandler.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/skia/tools/skiaserve/urlhandlers/DataHandler.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/skia/tools/skiaserve/urlhandlers/DownloadHandler.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/skia/tools/skiaserve/urlhandlers/EnableGPUHandler.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/skia/tools/skiaserve/urlhandlers/ImgHandler.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/skia/tools/skiaserve/urlhandlers/InfoHandler.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/skia/tools/skiaserve/urlhandlers/OpBoundsHandler.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/skia/tools/skiaserve/urlhandlers/OpsHandler.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/skia/tools/skiaserve/urlhandlers/OverdrawHandler.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/skia/tools/skiaserve/urlhandlers/PostHandler.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/skia/tools/skiaserve/urlhandlers/QuitHandler.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/skia/tools/skiaserve/urlhandlers/RootHandler.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/tools/skottie2movie.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/tools/skp_parser.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/tools/skpbench/skpbench.cpp" />
@@ -3792,6 +3785,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/skia/tools/sksl-minify/SkSLMinify.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/tools/skslc/Main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/tools/skslc/ProcessWorklist.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/skia/tools/sksltrace/SkSLTraceUtils.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/tools/testrunners/benchmark/BazelBenchmarkTestRunner.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/tools/testrunners/benchmark/target/BenchmarkTarget.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/tools/testrunners/benchmark/target/GaneshBenchmarkTarget.cpp" />
@@ -3856,6 +3850,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/skia/tools/viewer/PatchSlide.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/tools/viewer/PathClipSlide.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/tools/viewer/PathEffectsSlide.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/skia/tools/viewer/PathLerpSlide.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/tools/viewer/PathOverstrokeSlide.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/tools/viewer/PathSlide.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/skia/tools/viewer/PathTessellatorsSlide.cpp" />
@@ -3945,9 +3940,12 @@
     <ClInclude Include="../../thirdparty/owemdjee/skia/experimental/ffmpeg/SkVideoDecoder.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/experimental/ffmpeg/SkVideoEncoder.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/experimental/lowp-basic/QMath.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/skia/experimental/rust_png/SkPngRustDecoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/skia/experimental/rust_png/decoder/SkPngRustDecoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/skia/experimental/rust_png/decoder/impl/SkPngRustCodec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/skia/experimental/rust_png/encoder/SkPngRustEncoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/skia/experimental/rust_png/encoder/impl/SkPngRustEncoderImpl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/experimental/rust_png/ffi/FFI.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/skia/experimental/rust_png/impl/SkPngRustCodec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/skia/experimental/rust_png/ffi/UtilsForFFI.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/experimental/tskit/bindings/bindings.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/gm/gm.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/include/android/AHardwareBufferUtils.h" />
@@ -4070,6 +4068,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/skia/include/core/SkYUVAPixmaps.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/include/docs/SkMultiPictureDocument.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/include/docs/SkPDFDocument.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/skia/include/docs/SkPDFJpegHelpers.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/include/docs/SkXPSDocument.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/include/effects/Sk1DPathEffect.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/include/effects/Sk2DPathEffect.h" />
@@ -4149,16 +4148,21 @@
     <ClInclude Include="../../thirdparty/owemdjee/skia/include/gpu/graphite/GraphiteTypes.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/include/gpu/graphite/Image.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/include/gpu/graphite/ImageProvider.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/skia/include/gpu/graphite/LogPriority.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/skia/include/gpu/graphite/PrecompileContext.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/include/gpu/graphite/Recorder.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/include/gpu/graphite/Recording.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/include/gpu/graphite/Surface.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/include/gpu/graphite/TextureInfo.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/include/gpu/graphite/YUVABackendTextures.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/include/gpu/graphite/dawn/DawnBackendContext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/skia/include/gpu/graphite/dawn/DawnGraphiteTypes.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/include/gpu/graphite/dawn/DawnTypes.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/include/gpu/graphite/dawn/DawnUtils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/include/gpu/graphite/mtl/MtlBackendContext.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/include/gpu/graphite/mtl/MtlGraphiteTypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/skia/include/gpu/graphite/mtl/MtlGraphiteTypesUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/skia/include/gpu/graphite/mtl/MtlGraphiteTypes_cpp.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/include/gpu/graphite/mtl/MtlGraphiteUtils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/include/gpu/graphite/precompile/PaintOptions.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/include/gpu/graphite/precompile/Precompile.h" />
@@ -4169,6 +4173,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/skia/include/gpu/graphite/precompile/PrecompileMaskFilter.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/include/gpu/graphite/precompile/PrecompileRuntimeEffect.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/include/gpu/graphite/precompile/PrecompileShader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/skia/include/gpu/graphite/vk/VulkanGraphiteContext.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/include/gpu/graphite/vk/VulkanGraphiteTypes.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/include/gpu/graphite/vk/VulkanGraphiteUtils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/include/gpu/mtl/MtlMemoryAllocator.h" />
@@ -4198,7 +4203,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/skia/include/ports/SkTypeface_fontations.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/include/ports/SkTypeface_mac.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/include/ports/SkTypeface_win.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/skia/include/private/SkColorData.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/include/private/SkEncodedInfo.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/include/private/SkExif.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/include/private/SkGainmapInfo.h" />
@@ -4254,6 +4258,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/skia/include/private/chromium/SkChromeRemoteGlyphCache.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/include/private/chromium/SkDiscardableMemory.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/include/private/chromium/SkImageChromium.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/skia/include/private/chromium/SkPMColor.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/include/private/chromium/Slug.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/include/private/gpu/ganesh/GrContext_Base.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/include/private/gpu/ganesh/GrD3DTypesMinimal.h" />
@@ -4294,6 +4299,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/skia/modules/jetski/src/Surface.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/modules/jetski/src/SurfaceThread.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/modules/jetski/src/Utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/skia/modules/jsonreader/SkJSONReader.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/modules/skcms/skcms.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/modules/skcms/src/Transform_inl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/modules/skcms/src/skcms_Transform.h" />
@@ -4316,7 +4322,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/skia/modules/skottie/src/animator/KeyframeAnimator.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/modules/skottie/src/animator/VectorKeyframeAnimator.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/modules/skottie/src/effects/Effects.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/skia/modules/skottie/src/effects/MotionBlurEffect.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/modules/skottie/src/layers/shapelayer/ShapeLayer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/modules/skottie/src/text/Font.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/modules/skottie/src/text/RangeSelector.h" />
@@ -4523,6 +4528,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/codec/SkPixmapUtilsPriv.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/codec/SkPngCodec.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/codec/SkPngCodecBase.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/skia/src/codec/SkPngCompositeChunkReader.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/codec/SkPngPriv.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/codec/SkRawCodec.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/codec/SkSampledCodec.h" />
@@ -4562,6 +4568,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/core/SkChecksum.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/core/SkClipStack.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/core/SkClipStackDevice.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/skia/src/core/SkColorData.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/core/SkColorFilterPriv.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/core/SkColorSpacePriv.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/core/SkColorSpaceXformSteps.h" />
@@ -4578,6 +4585,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/core/SkDrawBase.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/core/SkDrawProcs.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/core/SkDrawShadowInfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/skia/src/core/SkDrawTypes.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/core/SkEdge.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/core/SkEdgeBuilder.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/core/SkEdgeClipper.h" />
@@ -4718,6 +4726,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/encode/SkImageEncoderPriv.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/encode/SkJPEGWriteUtility.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/encode/SkJpegEncoderImpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/skia/src/encode/SkPngEncoderBase.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/encode/SkPngEncoderImpl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/AsyncReadTypes.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/AtlasTypes.h" />
@@ -5103,7 +5112,8 @@
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/BuiltInCodeSnippetID.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/Caps.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/ClientMappedBufferManager.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/ClipStack_graphite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/ClipAtlasManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/ClipStack.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/CommandBuffer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/CommandTypes.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/ComputePathAtlas.h" />
@@ -5140,9 +5150,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/PaintParamsKey.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/PathAtlas.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/PipelineData.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/PrecompileContextPriv.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/PrecompileInternal.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/ProxyCache.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/PublicPrecompile.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/QueueManager.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/RasterPathAtlas.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/RasterPathUtils.h" />
@@ -5165,6 +5175,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/SpecialImage_Graphite.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/Surface_Graphite.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/Texture.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/TextureFormat.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/TextureInfoPriv.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/TextureProxy.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/TextureProxyView.h" />
@@ -5184,25 +5195,23 @@
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/dawn/DawnComputePipeline.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/dawn/DawnErrorChecker.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/dawn/DawnGraphicsPipeline.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/dawn/DawnGraphiteTypesPriv.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/dawn/DawnGraphiteUtilsPriv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/dawn/DawnGraphiteUtils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/dawn/DawnQueueManager.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/dawn/DawnResourceProvider.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/dawn/DawnSampler.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/dawn/DawnSharedContext.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/dawn/DawnTexture.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/dawn/DawnUtilsPriv.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/geom/AnalyticBlurMask.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/geom/AnalyticClip.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/geom/BoundsManager.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/geom/CoverageMaskShape.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/geom/EdgeAAQuad.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/geom/Geometry.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/geom/IntersectionTree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/geom/NonMSAAClip.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/geom/Rect.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/geom/Shape.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/geom/SubRunData.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/geom/Transform_graphite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/geom/Transform.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/mtl/MtlBlitCommandEncoder.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/mtl/MtlBuffer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/mtl/MtlCaps.h" />
@@ -5210,8 +5219,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/mtl/MtlComputeCommandEncoder.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/mtl/MtlComputePipeline.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/mtl/MtlGraphicsPipeline.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/mtl/MtlGraphiteTypesPriv.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/mtl/MtlGraphiteUtilsPriv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/mtl/MtlGraphiteUtils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/mtl/MtlQueueManager.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/mtl/MtlRenderCommandEncoder.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/mtl/MtlResourceProvider.h" />
@@ -5228,6 +5236,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/precompile/PrecompileImageFiltersPriv.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/precompile/PrecompileShaderPriv.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/precompile/PrecompileShadersPriv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/precompile/SerializationUtils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/render/AnalyticBlurRenderStep.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/render/AnalyticRRectRenderStep.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/render/BitmapTextRenderStep.h" />
@@ -5261,8 +5270,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/vk/VulkanDescriptorSet.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/vk/VulkanFramebuffer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/vk/VulkanGraphicsPipeline.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/vk/VulkanGraphiteTypesPriv.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/vk/VulkanGraphiteUtilsPriv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/vk/VulkanGraphiteUtils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/vk/VulkanImageView.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/vk/VulkanQueueManager.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/gpu/graphite/vk/VulkanRenderPass.h" />
@@ -5336,7 +5344,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/pdf/SkBitmapKey.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/pdf/SkClusterator.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/pdf/SkDeflate.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/skia/src/pdf/SkJpegInfo.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/pdf/SkKeyedImage.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/pdf/SkPDFBitmap.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/pdf/SkPDFDevice.h" />
@@ -5373,6 +5380,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/ports/SkTypeface_FreeType.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/ports/SkTypeface_fontations_priv.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/ports/SkTypeface_mac_ct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/skia/src/ports/SkTypeface_proxy.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/ports/SkTypeface_win_dw.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/ports/fontations/src/skpath_bridge.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/sfnt/SkIBMFamilyClass.h" />
@@ -5571,7 +5579,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/utils/SkFloatToDecimal.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/utils/SkFloatUtils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/utils/SkGetExecutablePath.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/skia/src/utils/SkJSON.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/utils/SkJSONWriter.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/utils/SkMatrix22.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/src/utils/SkMultiPictureDocumentPriv.h" />
@@ -5693,10 +5700,13 @@
     <ClInclude Include="../../thirdparty/owemdjee/skia/tools/gpu/vk/VkYcbcrSamplerHelper.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/tools/graphite/ContextFactory.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/tools/graphite/GraphiteTestContext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/skia/tools/graphite/GraphiteToolUtils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/tools/graphite/TestOptions.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/tools/graphite/UniqueKeyUtils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/tools/graphite/dawn/GraphiteDawnTestContext.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/tools/graphite/mtl/GraphiteMtlTestContext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/skia/tools/graphite/precompile/PipelineCallbackHandler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/skia/tools/graphite/precompile/PrecompileEffectFactories.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/tools/graphite/vk/GraphiteVulkanTestContext.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/tools/ios_utils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/tools/library/LoadDynamicLibrary.h" />
@@ -5713,9 +5723,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/skia/tools/skdiff/skdiff.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/tools/skdiff/skdiff_html.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/tools/skdiff/skdiff_utils.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/skia/tools/skiaserve/Request.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/skia/tools/skiaserve/Response.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/skia/tools/skiaserve/urlhandlers/UrlHandler.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/tools/skottie_ios_app/GrContextHolder.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/tools/skottie_ios_app/SkMetalViewBridge.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/tools/skottie_ios_app/SkiaContext.h" />
@@ -5723,6 +5730,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/skia/tools/skottie_ios_app/SkottieViewController.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/tools/skqp/src/skqp.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/tools/skslc/ProcessWorklist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/skia/tools/sksltrace/SkSLTraceUtils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/tools/skui/InputState.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/tools/skui/Key.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/tools/skui/ModifierKey.h" />
@@ -5741,6 +5749,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/skia/tools/trace/SkPerfettoTrace.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/tools/unicode_comparison/cpp/bridge.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/tools/viewer/AnimTimer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/skia/tools/viewer/AnimatedImageSlide.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/tools/viewer/BisectSlide.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/tools/viewer/ClickHandlerSlide.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/tools/viewer/GMSlide.h" />
@@ -5761,6 +5770,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/skia/tools/window/DisplayParams.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/tools/window/GLWindowContext.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/tools/window/GraphiteDawnWindowContext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/skia/tools/window/GraphiteDisplayParams.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/tools/window/GraphiteNativeMetalWindowContext.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/tools/window/GraphiteNativeVulkanWindowContext.h" />
     <ClInclude Include="../../thirdparty/owemdjee/skia/tools/window/MetalWindowContext.h" />
@@ -5794,6 +5804,8 @@
     <Font Include="../../thirdparty/owemdjee/skia/modules/canvaskit/tests/assets/test.ttc" />
     <Font Include="../../thirdparty/owemdjee/skia/modules/canvaskit/tests/assets/test_glyphs-glyf_colr_1.ttf" />
     <Font Include="../../thirdparty/owemdjee/skia/resources/fonts/7630.otf" />
+    <Font Include="../../thirdparty/owemdjee/skia/resources/fonts/DejaVuSans.subset.ttf" />
+    <Font Include="../../thirdparty/owemdjee/skia/resources/fonts/DejaVuSans.subset_noHx.ttf" />
     <Font Include="../../thirdparty/owemdjee/skia/resources/fonts/Distortable.ttf" />
     <Font Include="../../thirdparty/owemdjee/skia/resources/fonts/Em.ttf" />
     <Font Include="../../thirdparty/owemdjee/skia/resources/fonts/Funkster.ttf" />
@@ -5854,6 +5866,7 @@
     <Image Include="../../thirdparty/owemdjee/skia/resources/images/3x3.png" />
     <Image Include="../../thirdparty/owemdjee/skia/resources/images/CMYK.jpg" />
     <Image Include="../../thirdparty/owemdjee/skia/resources/images/Connecting.png" />
+    <Image Include="../../thirdparty/owemdjee/skia/resources/images/F-exif-chunk-early.png" />
     <Image Include="../../thirdparty/owemdjee/skia/resources/images/Generic_Error.png" />
     <Image Include="../../thirdparty/owemdjee/skia/resources/images/Onboard.png" />
     <Image Include="../../thirdparty/owemdjee/skia/resources/images/alphabetAnim.gif" />
@@ -5872,9 +5885,11 @@
     <Image Include="../../thirdparty/owemdjee/skia/resources/images/apng-test-suite--regions--dispose-op-none.png" />
     <Image Include="../../thirdparty/owemdjee/skia/resources/images/arrow.png" />
     <Image Include="../../thirdparty/owemdjee/skia/resources/images/baby_tux.png" />
+    <Image Include="../../thirdparty/owemdjee/skia/resources/images/bmp-size-32x32-8bpp.bmp" />
     <Image Include="../../thirdparty/owemdjee/skia/resources/images/box.gif" />
     <Image Include="../../thirdparty/owemdjee/skia/resources/images/brickwork-texture.jpg" />
     <Image Include="../../thirdparty/owemdjee/skia/resources/images/brickwork_normal-map.jpg" />
+    <Image Include="../../thirdparty/owemdjee/skia/resources/images/cicp_pq.png" />
     <Image Include="../../thirdparty/owemdjee/skia/resources/images/cmyk_yellow_224_224_32.jpg" />
     <Image Include="../../thirdparty/owemdjee/skia/resources/images/colorTables.gif" />
     <Image Include="../../thirdparty/owemdjee/skia/resources/images/color_wheel.gif" />
@@ -5898,14 +5913,18 @@
     <Image Include="../../thirdparty/owemdjee/skia/resources/images/filter_reference.png" />
     <Image Include="../../thirdparty/owemdjee/skia/resources/images/flightAnim.gif" />
     <Image Include="../../thirdparty/owemdjee/skia/resources/images/flutter_logo.jpg" />
+    <Image Include="../../thirdparty/owemdjee/skia/resources/images/gainmap.png" />
     <Image Include="../../thirdparty/owemdjee/skia/resources/images/gainmap_gcontainer_only.jpg" />
+    <Image Include="../../thirdparty/owemdjee/skia/resources/images/gainmap_gdat_no_gmap.png" />
     <Image Include="../../thirdparty/owemdjee/skia/resources/images/gainmap_iso21496_1.jpg" />
     <Image Include="../../thirdparty/owemdjee/skia/resources/images/gainmap_iso21496_1_adobe_gcontainer.jpg" />
+    <Image Include="../../thirdparty/owemdjee/skia/resources/images/gainmap_no_gdat.png" />
     <Image Include="../../thirdparty/owemdjee/skia/resources/images/gamut.png" />
     <Image Include="../../thirdparty/owemdjee/skia/resources/images/gif-transparent-index.gif" />
     <Image Include="../../thirdparty/owemdjee/skia/resources/images/google_chrome.ico" />
     <Image Include="../../thirdparty/owemdjee/skia/resources/images/grayscale.jpg" />
     <Image Include="../../thirdparty/owemdjee/skia/resources/images/grayscale.png" />
+    <Image Include="../../thirdparty/owemdjee/skia/resources/images/green15x15.png" />
     <Image Include="../../thirdparty/owemdjee/skia/resources/images/half-transparent-white-pixel.png" />
     <Image Include="../../thirdparty/owemdjee/skia/resources/images/icc-v2-gbr.jpg" />
     <Image Include="../../thirdparty/owemdjee/skia/resources/images/iconstrip.png" />
@@ -5977,6 +5996,13 @@
     <Image Include="../../thirdparty/owemdjee/skia/resources/images/out-of-palette.gif" />
     <Image Include="../../thirdparty/owemdjee/skia/resources/images/plane.png" />
     <Image Include="../../thirdparty/owemdjee/skia/resources/images/plane_interlaced.png" />
+    <Image Include="../../thirdparty/owemdjee/skia/resources/images/plte_trns.png" />
+    <Image Include="../../thirdparty/owemdjee/skia/resources/images/plte_trns_gama.png" />
+    <Image Include="../../thirdparty/owemdjee/skia/resources/images/pngsuite/basn0g04.png" />
+    <Image Include="../../thirdparty/owemdjee/skia/resources/images/pngsuite/basn2c08.png" />
+    <Image Include="../../thirdparty/owemdjee/skia/resources/images/pngsuite/basn2c16.png" />
+    <Image Include="../../thirdparty/owemdjee/skia/resources/images/pngsuite/basn3p01.png" />
+    <Image Include="../../thirdparty/owemdjee/skia/resources/images/progressive_kitten_missing_eof.jpg" />
     <Image Include="../../thirdparty/owemdjee/skia/resources/images/purple-displayprofile.png" />
     <Image Include="../../thirdparty/owemdjee/skia/resources/images/rainbow-gradient.png" />
     <Image Include="../../thirdparty/owemdjee/skia/resources/images/randPixels.bmp" />
@@ -6055,7 +6081,6 @@
     <Image Include="../../thirdparty/owemdjee/skia/tools/perf-canvaskit-puppeteer/canvas_perf_assets/test_1500x959.jpg" />
     <Image Include="../../thirdparty/owemdjee/skia/tools/perf-canvaskit-puppeteer/canvas_perf_assets/test_512x512.png" />
     <Image Include="../../thirdparty/owemdjee/skia/tools/perf-canvaskit-puppeteer/canvas_perf_assets/test_64x64.png" />
-    <Image Include="../../thirdparty/owemdjee/skia/tools/skiaserve/favicon.ico" />
     <Text Include="../../thirdparty/owemdjee/skia/AUTHORS" />
     <Text Include="../../thirdparty/owemdjee/skia/BUILD.bazel" />
     <Text Include="../../thirdparty/owemdjee/skia/CONTRIBUTING" />
@@ -6096,6 +6121,7 @@
     <Text Include="../../thirdparty/owemdjee/skia/bazel/external/cxx/BUILD.bazel" />
     <Text Include="../../thirdparty/owemdjee/skia/bazel/external/cxxbridge_cmd/BUILD.bazel" />
     <Text Include="../../thirdparty/owemdjee/skia/bazel/external/dawn/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/skia/bazel/external/delaunator/BUILD.bazel" />
     <Text Include="../../thirdparty/owemdjee/skia/bazel/external/dng_sdk/BUILD.bazel" />
     <Text Include="../../thirdparty/owemdjee/skia/bazel/external/egl/BUILD.bazel" />
     <Text Include="../../thirdparty/owemdjee/skia/bazel/external/expat/BUILD.bazel" />
@@ -6237,11 +6263,11 @@
     <Text Include="../../thirdparty/owemdjee/skia/experimental/rust_cxx/BUILD.bazel" />
     <Text Include="../../thirdparty/owemdjee/skia/experimental/rust_cxx/hello-world.rs" />
     <Text Include="../../thirdparty/owemdjee/skia/experimental/rust_cxx/hype-bridge.rs" />
-    <Text Include="../../thirdparty/owemdjee/skia/experimental/rust_png/BUILD.bazel" />
     <Text Include="../../thirdparty/owemdjee/skia/experimental/rust_png/README.md" />
+    <Text Include="../../thirdparty/owemdjee/skia/experimental/rust_png/decoder/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/skia/experimental/rust_png/encoder/BUILD.bazel" />
     <Text Include="../../thirdparty/owemdjee/skia/experimental/rust_png/ffi/BUILD.bazel" />
     <Text Include="../../thirdparty/owemdjee/skia/experimental/rust_png/ffi/FFI.rs" />
-    <Text Include="../../thirdparty/owemdjee/skia/experimental/rust_png/patches/BUILD.bazel" />
     <Text Include="../../thirdparty/owemdjee/skia/experimental/tools/android_skp_capture.sh" />
     <Text Include="../../thirdparty/owemdjee/skia/experimental/tools/generate-unicode-test-txt" />
     <Text Include="../../thirdparty/owemdjee/skia/experimental/tools/gerrit_percent_encode" />
@@ -6474,6 +6500,8 @@
     <Text Include="../../thirdparty/owemdjee/skia/infra/bots/assets/mskp/VERSION" />
     <Text Include="../../thirdparty/owemdjee/skia/infra/bots/assets/node/VERSION" />
     <Text Include="../../thirdparty/owemdjee/skia/infra/bots/assets/node/create.py" />
+    <Text Include="../../thirdparty/owemdjee/skia/infra/bots/assets/patch_linux_amd64/VERSION" />
+    <Text Include="../../thirdparty/owemdjee/skia/infra/bots/assets/patch_linux_amd64/create.py" />
     <Text Include="../../thirdparty/owemdjee/skia/infra/bots/assets/protoc/VERSION" />
     <Text Include="../../thirdparty/owemdjee/skia/infra/bots/assets/protoc/create.py" />
     <Text Include="../../thirdparty/owemdjee/skia/infra/bots/assets/provisioning_profile_ios/VERSION" />
@@ -6590,6 +6618,7 @@
     <Text Include="../../thirdparty/owemdjee/skia/infra/bots/recipe_modules/build/examples/full.expected/Build-Mac-Clang-arm64-Debug-iOS_iOS12.json" />
     <Text Include="../../thirdparty/owemdjee/skia/infra/bots/recipe_modules/build/examples/full.expected/Build-Mac-Clang-arm64-Release-Graphite_Native_Dawn_Metal.json" />
     <Text Include="../../thirdparty/owemdjee/skia/infra/bots/recipe_modules/build/examples/full.expected/Build-Mac-Clang-arm64-Release-Graphite_Native_Metal.json" />
+    <Text Include="../../thirdparty/owemdjee/skia/infra/bots/recipe_modules/build/examples/full.expected/Build-Mac-Clang-arm64-Release-iOS18_Metal.json" />
     <Text Include="../../thirdparty/owemdjee/skia/infra/bots/recipe_modules/build/examples/full.expected/Build-Mac-Clang-x86_64-Debug-ASAN.json" />
     <Text Include="../../thirdparty/owemdjee/skia/infra/bots/recipe_modules/build/examples/full.expected/Build-Mac-Clang-x86_64-Debug-Metal.json" />
     <Text Include="../../thirdparty/owemdjee/skia/infra/bots/recipe_modules/build/examples/full.expected/Build-Mac-Clang-x86_64-Release-Graphite_Native_Metal_Vello.json" />
@@ -6647,7 +6676,8 @@
     <Text Include="../../thirdparty/owemdjee/skia/infra/bots/recipe_modules/flavor/examples/full.expected/Perf-Android-Clang-AndroidOne-GPU-Mali400MP2-arm-Release-All-Android_SkottieTracing.json" />
     <Text Include="../../thirdparty/owemdjee/skia/infra/bots/recipe_modules/flavor/examples/full.expected/Perf-Android-Clang-GalaxyS20-GPU-MaliG77-arm64-Release-All-Android_Vulkan.json" />
     <Text Include="../../thirdparty/owemdjee/skia/infra/bots/recipe_modules/flavor/examples/full.expected/Perf-Android-Clang-GalaxyS7_G930FD-GPU-MaliT880-arm64-Debug-All-Android.json" />
-    <Text Include="../../thirdparty/owemdjee/skia/infra/bots/recipe_modules/flavor/examples/full.expected/Perf-Android-Clang-NVIDIA_Shield-CPU-TegraX1-arm64-Release-All-Android.json" />
+    <Text Include="../../thirdparty/owemdjee/skia/infra/bots/recipe_modules/flavor/examples/full.expected/Perf-Android-Clang-MokeyGo32-CPU-Cortex-arm-Release-All-Android.json" />
+    <Text Include="../../thirdparty/owemdjee/skia/infra/bots/recipe_modules/flavor/examples/full.expected/Perf-Android-Clang-MotoG73-GPU-BXM_8_256-arm64-Release-All-Android.json" />
     <Text Include="../../thirdparty/owemdjee/skia/infra/bots/recipe_modules/flavor/examples/full.expected/Perf-Android-Clang-Nexus5x-GPU-Adreno418-arm64-Debug-All-Android.json" />
     <Text Include="../../thirdparty/owemdjee/skia/infra/bots/recipe_modules/flavor/examples/full.expected/Perf-Android-Clang-Pixel6-GPU-Adreno620-arm64-Release-All-Android.json" />
     <Text Include="../../thirdparty/owemdjee/skia/infra/bots/recipe_modules/flavor/examples/full.expected/Perf-ChromeOS-Clang-SamsungChromebookPlus-GPU-MaliT860-arm-Release-All.json" />
@@ -6670,6 +6700,8 @@
     <Text Include="../../thirdparty/owemdjee/skia/infra/bots/recipe_modules/flavor/examples/full.expected/Test-Mac10.13-Clang-MacBookPro11.5-CPU-AVX2-x86_64-Debug-All-ASAN.json" />
     <Text Include="../../thirdparty/owemdjee/skia/infra/bots/recipe_modules/flavor/examples/full.expected/Test-Ubuntu18-Clang-Golo-GPU-QuadroP400-x86_64-Release-All-Valgrind_AbandonGpuContext_SK_CPU_LIMIT_SSE41.json" />
     <Text Include="../../thirdparty/owemdjee/skia/infra/bots/recipe_modules/flavor/examples/full.expected/Test-Win10-Clang-NUC5i7RYH-CPU-AVX2-x86_64-Debug-All-NativeFonts_DWriteCore.json" />
+    <Text Include="../../thirdparty/owemdjee/skia/infra/bots/recipe_modules/flavor/examples/full.expected/Test-iOS-Clang-iPhone8-GPU-AppleA11-arm64-Release-All-RPI.json" />
+    <Text Include="../../thirdparty/owemdjee/skia/infra/bots/recipe_modules/flavor/examples/full.expected/Test-iOS-Clang-iPhone8-GPU-AppleA11-arm64-Release-All.json" />
     <Text Include="../../thirdparty/owemdjee/skia/infra/bots/recipe_modules/flavor/examples/full.expected/cpu_scale_failed.json" />
     <Text Include="../../thirdparty/owemdjee/skia/infra/bots/recipe_modules/flavor/examples/full.expected/cpu_scale_failed_golo.json" />
     <Text Include="../../thirdparty/owemdjee/skia/infra/bots/recipe_modules/flavor/examples/full.expected/cpu_scale_failed_once.json" />
@@ -6685,6 +6717,7 @@
     <Text Include="../../thirdparty/owemdjee/skia/infra/bots/recipe_modules/flavor/ios.py" />
     <Text Include="../../thirdparty/owemdjee/skia/infra/bots/recipe_modules/flavor/resources/dump_adb_log.py" />
     <Text Include="../../thirdparty/owemdjee/skia/infra/bots/recipe_modules/flavor/resources/ios_debug_cmd.py" />
+    <Text Include="../../thirdparty/owemdjee/skia/infra/bots/recipe_modules/flavor/resources/ios_xcode_run.py" />
     <Text Include="../../thirdparty/owemdjee/skia/infra/bots/recipe_modules/flavor/resources/remove_file_on_device.py" />
     <Text Include="../../thirdparty/owemdjee/skia/infra/bots/recipe_modules/flavor/resources/run_sh.py" />
     <Text Include="../../thirdparty/owemdjee/skia/infra/bots/recipe_modules/flavor/resources/scale_cpu.py" />
@@ -6735,6 +6768,10 @@
     <Text Include="../../thirdparty/owemdjee/skia/infra/bots/recipe_modules/vars/examples/full.expected/win_test.json" />
     <Text Include="../../thirdparty/owemdjee/skia/infra/bots/recipe_modules/vars/examples/full.py" />
     <Text Include="../../thirdparty/owemdjee/skia/infra/bots/recipe_modules/vars/resources/get_env_var.py" />
+    <Text Include="../../thirdparty/owemdjee/skia/infra/bots/recipe_modules/xcode/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/skia/infra/bots/recipe_modules/xcode/api.py" />
+    <Text Include="../../thirdparty/owemdjee/skia/infra/bots/recipe_modules/xcode/examples/full.expected/xcode-test.json" />
+    <Text Include="../../thirdparty/owemdjee/skia/infra/bots/recipe_modules/xcode/examples/full.py" />
     <Text Include="../../thirdparty/owemdjee/skia/infra/bots/recipes.py" />
     <Text Include="../../thirdparty/owemdjee/skia/infra/bots/recipes/README.md" />
     <Text Include="../../thirdparty/owemdjee/skia/infra/bots/recipes/compile.expected/Build-Win-Clang-x86-Debug.json" />
@@ -6775,11 +6812,10 @@
     <Text Include="../../thirdparty/owemdjee/skia/infra/bots/recipes/sync_and_compile.expected/Build-Debian10-Clang-arm-Release-NoPatch.json" />
     <Text Include="../../thirdparty/owemdjee/skia/infra/bots/recipes/sync_and_compile.expected/Build-Win10-Clang-x86_64-Release-NoDEPS.json" />
     <Text Include="../../thirdparty/owemdjee/skia/infra/bots/recipes/sync_and_compile.py" />
-    <Text Include="../../thirdparty/owemdjee/skia/infra/bots/recipes/test.expected/Test-Android-Clang-Pixel2XL-GPU-Adreno540-arm-Debug-All-Android_ASAN.json" />
-    <Text Include="../../thirdparty/owemdjee/skia/infra/bots/recipes/test.expected/Test-Android-Clang-Pixel2XL-GPU-Adreno540-arm64-Debug-All-Android.json" />
+    <Text Include="../../thirdparty/owemdjee/skia/infra/bots/recipes/test.expected/Test-Android12-Clang-Pixel5-GPU-Adreno620-arm64-Release-All-Android_Vulkan.json" />
     <Text Include="../../thirdparty/owemdjee/skia/infra/bots/recipes/test.expected/Test-Debian10-Clang-GCE-CPU-AVX2-x86_64-Debug-All-Fontations.json" />
     <Text Include="../../thirdparty/owemdjee/skia/infra/bots/recipes/test.expected/Test-Debian10-Clang-GCE-CPU-AVX2-x86_64-Release-All-Lottie.json" />
-    <Text Include="../../thirdparty/owemdjee/skia/infra/bots/recipes/test.expected/Test-Win10-Clang-ShuttleC-GPU-GTX960-x86_64-Debug-All-ANGLE.json" />
+    <Text Include="../../thirdparty/owemdjee/skia/infra/bots/recipes/test.expected/Test-Win11-Clang-Dell3930-GPU-GTX1660-x86_64-Debug-All.json" />
     <Text Include="../../thirdparty/owemdjee/skia/infra/bots/recipes/test.py" />
     <Text Include="../../thirdparty/owemdjee/skia/infra/bots/recipes/test_canvaskit.expected/Test-Debian10-EMCC-GCE-GPU-WEBGL1-wasm-Debug-All-CanvasKit.json" />
     <Text Include="../../thirdparty/owemdjee/skia/infra/bots/recipes/test_canvaskit.expected/canvaskit_trybot.json" />
@@ -7004,6 +7040,7 @@
     <Text Include="../../thirdparty/owemdjee/skia/modules/canvaskit/webgpu.js" />
     <Text Include="../../thirdparty/owemdjee/skia/modules/jetski/BUILD.bazel" />
     <Text Include="../../thirdparty/owemdjee/skia/modules/jetski/README" />
+    <Text Include="../../thirdparty/owemdjee/skia/modules/jsonreader/BUILD.bazel" />
     <Text Include="../../thirdparty/owemdjee/skia/modules/pathkit/BUILD.bazel" />
     <Text Include="../../thirdparty/owemdjee/skia/modules/pathkit/CHANGELOG.md" />
     <Text Include="../../thirdparty/owemdjee/skia/modules/pathkit/Makefile" />
@@ -7200,7 +7237,6 @@
     <Text Include="../../thirdparty/owemdjee/skia/platform_tools/debugging/vs/Skia.natvis" />
     <Text Include="../../thirdparty/owemdjee/skia/platform_tools/ios/bin/ios_cat_file" />
     <Text Include="../../thirdparty/owemdjee/skia/platform_tools/ios/bin/ios_mkdir" />
-    <Text Include="../../thirdparty/owemdjee/skia/platform_tools/ios/bin/ios_mount" />
     <Text Include="../../thirdparty/owemdjee/skia/platform_tools/ios/bin/ios_path_exists" />
     <Text Include="../../thirdparty/owemdjee/skia/platform_tools/ios/bin/ios_pull_if_needed" />
     <Text Include="../../thirdparty/owemdjee/skia/platform_tools/ios/bin/ios_push_file" />
@@ -7208,10 +7244,9 @@
     <Text Include="../../thirdparty/owemdjee/skia/platform_tools/ios/bin/ios_restart" />
     <Text Include="../../thirdparty/owemdjee/skia/platform_tools/ios/bin/ios_rm" />
     <Text Include="../../thirdparty/owemdjee/skia/platform_tools/ios/bin/ios_setup.sh" />
-    <Text Include="../../thirdparty/owemdjee/skia/platform_tools/ios/bin/ios_umount" />
+    <Text Include="../../thirdparty/owemdjee/skia/platform_tools/ios/bin/ios_setup_idevicefs.sh" />
+    <Text Include="../../thirdparty/owemdjee/skia/platform_tools/ios/bin/ios_setup_ifuse.sh" />
     <Text Include="../../thirdparty/owemdjee/skia/relnotes/README.md" />
-    <Text Include="../../thirdparty/owemdjee/skia/relnotes/TimerQuery.md" />
-    <Text Include="../../thirdparty/owemdjee/skia/relnotes/WGLWaitSync.md" />
     <Text Include="../../thirdparty/owemdjee/skia/requirements.txt" />
     <Text Include="../../thirdparty/owemdjee/skia/resources/BUILD.bazel" />
     <Text Include="../../thirdparty/owemdjee/skia/resources/Cowboy.svg" />
@@ -7313,6 +7348,8 @@
     <Text Include="../../thirdparty/owemdjee/skia/resources/skottie/skottie-masking-opaque.json" />
     <Text Include="../../thirdparty/owemdjee/skia/resources/skottie/skottie-masking-translucent.json" />
     <Text Include="../../thirdparty/owemdjee/skia/resources/skottie/skottie-matte-blendmode.json" />
+    <Text Include="../../thirdparty/owemdjee/skia/resources/skottie/skottie-matte-nonsequential.json" />
+    <Text Include="../../thirdparty/owemdjee/skia/resources/skottie/skottie-matte-visible.json" />
     <Text Include="../../thirdparty/owemdjee/skia/resources/skottie/skottie-mergepaths-effect.json" />
     <Text Include="../../thirdparty/owemdjee/skia/resources/skottie/skottie-motion-blur-mask.json" />
     <Text Include="../../thirdparty/owemdjee/skia/resources/skottie/skottie-motion-blur-ph-360.json" />
@@ -10458,7 +10495,6 @@
     <Text Include="../../thirdparty/owemdjee/skia/tools/sk_app/unix/BUILD.bazel" />
     <Text Include="../../thirdparty/owemdjee/skia/tools/skdiff/BUILD.bazel" />
     <Text Include="../../thirdparty/owemdjee/skia/tools/skia-client-search.html" />
-    <Text Include="../../thirdparty/owemdjee/skia/tools/skiaserve/tester/tester.py" />
     <Text Include="../../thirdparty/owemdjee/skia/tools/skottie-wasm-perf/Makefile" />
     <Text Include="../../thirdparty/owemdjee/skia/tools/skottie-wasm-perf/package-lock.json" />
     <Text Include="../../thirdparty/owemdjee/skia/tools/skottie-wasm-perf/package.json" />
@@ -10567,6 +10603,7 @@
     <Text Include="../../thirdparty/owemdjee/skia/tools/skslc/BUILD.bazel" />
     <Text Include="../../thirdparty/owemdjee/skia/tools/skslc/Makefile" />
     <Text Include="../../thirdparty/owemdjee/skia/tools/skslc/compile_sksl.bzl" />
+    <Text Include="../../thirdparty/owemdjee/skia/tools/sksltrace/BUILD.bazel" />
     <Text Include="../../thirdparty/owemdjee/skia/tools/skui/BUILD.bazel" />
     <Text Include="../../thirdparty/owemdjee/skia/tools/svg/README.md" />
     <Text Include="../../thirdparty/owemdjee/skia/tools/svg/svg_downloader.py" />
@@ -10617,7 +10654,7 @@
     <Xml Include="../../thirdparty/owemdjee/skia/platform_tools/android/apps/skottie/src/main/res/layout/demo_layout.xml" />
     <Xml Include="../../thirdparty/owemdjee/skia/platform_tools/android/apps/skottie/src/main/res/layout/main_layout.xml" />
     <Xml Include="../../thirdparty/owemdjee/skia/platform_tools/android/apps/skqp/src/main/AndroidManifest.xml" />
-    <Xml Include="../../thirdparty/owemdjee/skia/platform_tools/android/apps/skqp/src/main/AndroidTest.xml" />
+    <Xml Include="../../thirdparty/owemdjee/skia/platform_tools/android/apps/skqp/src/main/AndroidTestTemplate.xml" />
     <Xml Include="../../thirdparty/owemdjee/skia/platform_tools/android/apps/skqp/src/main/res/layout/activity_main.xml" />
     <Xml Include="../../thirdparty/owemdjee/skia/platform_tools/android/apps/skqp/src/main/res/layout/activity_skqp.xml" />
     <Xml Include="../../thirdparty/owemdjee/skia/platform_tools/android/apps/skqp/src/main/res/layout/content_skqp.xml" />

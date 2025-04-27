@@ -262,6 +262,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/libavif/src/io.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libavif/src/mem.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libavif/src/obu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libavif/src/properties.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libavif/src/rawdata.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libavif/src/read.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libavif/src/reformat.c" />
@@ -306,8 +307,11 @@
     <ClCompile Include="../../thirdparty/owemdjee/libavif/tests/gtest/avifmetadatatest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libavif/tests/gtest/avifminitest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libavif/tests/gtest/avifopaquetest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libavif/tests/gtest/avifpixitest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libavif/tests/gtest/avifpng16bittest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libavif/tests/gtest/avifprogressivetest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libavif/tests/gtest/avifpropertytest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libavif/tests/gtest/avifpropinternaltest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libavif/tests/gtest/avifrangetest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libavif/tests/gtest/avifreadimagetest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libavif/tests/gtest/avifrgbtest.cc" />
@@ -317,8 +321,10 @@
     <ClCompile Include="../../thirdparty/owemdjee/libavif/tests/gtest/avifscaletest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libavif/tests/gtest/avifsize0test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libavif/tests/gtest/avifstreamtest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libavif/tests/gtest/avifsvttest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libavif/tests/gtest/aviftest_helpers.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libavif/tests/gtest/aviftilingtest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libavif/tests/gtest/aviftransformtest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libavif/tests/gtest/avifutilstest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libavif/tests/gtest/avify4mtest.cc" />
     <ClInclude Include="../../thirdparty/owemdjee/libavif/apps/avifgainmaputil/combine_command.h" />
@@ -385,6 +391,7 @@
     <Text Include="../../thirdparty/owemdjee/libavif/cmake/Modules/LocalAom.cmake" />
     <Text Include="../../thirdparty/owemdjee/libavif/cmake/Modules/LocalAvm.cmake" />
     <Text Include="../../thirdparty/owemdjee/libavif/cmake/Modules/LocalDav1d.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libavif/cmake/Modules/LocalFuzztest.cmake" />
     <Text Include="../../thirdparty/owemdjee/libavif/cmake/Modules/LocalGTest.cmake" />
     <Text Include="../../thirdparty/owemdjee/libavif/cmake/Modules/LocalJpeg.cmake" />
     <Text Include="../../thirdparty/owemdjee/libavif/cmake/Modules/LocalLibXml2.cmake" />
@@ -426,9 +433,13 @@
     <Text Include="../../thirdparty/owemdjee/libavif/libavif.pc.cmake" />
     <Text Include="../../thirdparty/owemdjee/libavif/tests/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libavif/tests/CTestCustom.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libavif/tests/cmd_test_common.sh" />
     <Text Include="../../thirdparty/owemdjee/libavif/tests/data/README.md" />
     <Text Include="../../thirdparty/owemdjee/libavif/tests/data/alpha_noispe.avif" />
     <Text Include="../../thirdparty/owemdjee/libavif/tests/data/arc_triomphe_extent1000_nullbyte_extent1310.avif" />
+    <Text Include="../../thirdparty/owemdjee/libavif/tests/data/circle_custom_properties.avif" />
+    <Text Include="../../thirdparty/owemdjee/libavif/tests/data/clap_irot_imir_non_essential.avif" />
+    <Text Include="../../thirdparty/owemdjee/libavif/tests/data/clop_irot_imor.avif" />
     <Text Include="../../thirdparty/owemdjee/libavif/tests/data/color_grid_alpha_grid_gainmap_nogrid.avif" />
     <Text Include="../../thirdparty/owemdjee/libavif/tests/data/color_grid_alpha_grid_tile_shared_in_dimg.avif" />
     <Text Include="../../thirdparty/owemdjee/libavif/tests/data/color_grid_alpha_nogrid.avif" />
@@ -436,6 +447,8 @@
     <Text Include="../../thirdparty/owemdjee/libavif/tests/data/color_nogrid_alpha_nogrid_gainmap_grid.avif" />
     <Text Include="../../thirdparty/owemdjee/libavif/tests/data/colors-animated-12bpc-keyframes-0-2-3.avif" />
     <Text Include="../../thirdparty/owemdjee/libavif/tests/data/colors-animated-8bpc-alpha-exif-xmp.avif" />
+    <Text Include="../../thirdparty/owemdjee/libavif/tests/data/colors-animated-8bpc-audio.avif" />
+    <Text Include="../../thirdparty/owemdjee/libavif/tests/data/colors-animated-8bpc-depth-exif-xmp.avif" />
     <Text Include="../../thirdparty/owemdjee/libavif/tests/data/colors-animated-8bpc.avif" />
     <Text Include="../../thirdparty/owemdjee/libavif/tests/data/colors_hdr_p3.avif" />
     <Text Include="../../thirdparty/owemdjee/libavif/tests/data/colors_hdr_rec2020.avif" />
@@ -452,6 +465,7 @@
     <Text Include="../../thirdparty/owemdjee/libavif/tests/data/draw_points_idat_metasize0.avif" />
     <Text Include="../../thirdparty/owemdjee/libavif/tests/data/draw_points_idat_progressive.avif" />
     <Text Include="../../thirdparty/owemdjee/libavif/tests/data/draw_points_idat_progressive_metasize0.avif" />
+    <Text Include="../../thirdparty/owemdjee/libavif/tests/data/extended_pixi.avif" />
     <Text Include="../../thirdparty/owemdjee/libavif/tests/data/io/cosmos1650_yuv444_10bpc_p3pq.avif" />
     <Text Include="../../thirdparty/owemdjee/libavif/tests/data/io/kodim03_yuv420_8bpc.avif" />
     <Text Include="../../thirdparty/owemdjee/libavif/tests/data/io/kodim23_yuv420_8bpc.avif" />
@@ -487,6 +501,7 @@
     <Text Include="../../thirdparty/owemdjee/libavif/tests/test_cmd_lossless.sh" />
     <Text Include="../../thirdparty/owemdjee/libavif/tests/test_cmd_metadata.sh" />
     <Text Include="../../thirdparty/owemdjee/libavif/tests/test_cmd_progressive.sh" />
+    <Text Include="../../thirdparty/owemdjee/libavif/tests/test_cmd_stdin.sh" />
     <Text Include="../../thirdparty/owemdjee/libavif/tests/test_cmd_targetsize.sh" />
     <Xml Include="../../thirdparty/owemdjee/libavif/tests/data/goldens/circle-trns-after-plte.png.avif.xml" />
     <Xml Include="../../thirdparty/owemdjee/libavif/tests/data/goldens/dog_exif_extended_xmp_icc.jpg.avif.xml" />

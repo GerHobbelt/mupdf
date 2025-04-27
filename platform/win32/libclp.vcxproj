@@ -223,6 +223,7 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp/BoundedReader.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp/BufferReader.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp/BufferedFileReader.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp/CurlDownloadHandler.cpp" />
@@ -281,6 +282,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp/ffi/KeyValuePairLogEvent.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp/ffi/SchemaTree.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp/ffi/encoding_methods.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp/ffi/ir_stream/IrErrorCode.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp/ffi/ir_stream/Serializer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp/ffi/ir_stream/decoding_methods.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp/ffi/ir_stream/encoding_methods.cpp" />
@@ -315,6 +317,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp/streaming_archive/writer/File.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp/streaming_archive/writer/Segment.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp/streaming_archive/writer/utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp/streaming_compression/lzma/Compressor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp/streaming_compression/lzma/Decompressor.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp/streaming_compression/passthrough/Compressor.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp/streaming_compression/passthrough/Decompressor.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp/streaming_compression/zstd/Compressor.cpp" />
@@ -322,6 +326,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp/string_utils/string_utils.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp/utf8_utils.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/ArchiveReader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/ArchiveReaderAdaptor.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/ArchiveWriter.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/ColumnReader.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/ColumnWriter.cpp" />
@@ -330,6 +335,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/DictionaryWriter.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/FileReader.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/FileWriter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/InputConfig.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/JsonConstructor.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/JsonFileIterator.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/JsonParser.cpp" />
@@ -350,6 +356,10 @@
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/ZstdCompressor.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/ZstdDecompressor.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/clp-s.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/indexer/CommandLineArguments.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/indexer/IndexManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/indexer/MySQLIndexStorage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/indexer/indexer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/search/AddTimestampConditions.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/search/AndExpr.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/search/BooleanLiteral.cpp" />
@@ -376,6 +386,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/search/clp_search/Grep.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/search/clp_search/Query.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/search/kql/kql.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/search/sql/sql.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/glt/BufferReader.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/glt/BufferedFileReader.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/glt/EncodedVariableInterpreter.cpp" />
@@ -464,6 +475,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/reducer/network_utils.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/src/reducer/reducer_server.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/tests/test-Array.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/tests/test-BoundedReader.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/tests/test-BufferedFileReader.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/tests/test-EncodedVariableInterpreter.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/tests/test-FileDescriptorReader.cpp" />
@@ -477,7 +489,10 @@
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/tests/test-StreamingCompression.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/tests/test-TimestampPattern.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/tests/test-Utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/tests/test-clp_s-end_to_end.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/tests/test-clp_s-search.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/tests/test-encoding_methods.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/tests/test-error_handling.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/tests/test-ffi_IrUnitHandlerInterface.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/tests/test-ffi_KeyValuePairLogEvent.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/tests/test-ffi_SchemaTree.cpp" />
@@ -490,10 +505,12 @@
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/tests/test-math_utils.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/tests/test-query_methods.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/tests/test-regex_utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/tests/test-sql.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/tests/test-string_utils.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/clp/components/core/tests/test-utf8_utils.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/Array.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/ArrayBackedPosIntSet.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/BoundedReader.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/BufferReader.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/BufferedFileReader.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/CommandLineArgumentsBase.hpp" />
@@ -565,12 +582,14 @@
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/clp/utils.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/database_utils.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/dictionary_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/error_handling/ErrorCode.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/ffi/KeyValuePairLogEvent.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/ffi/SchemaTree.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/ffi/Value.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/ffi/encoding_methods.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/ffi/encoding_methods.inc" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/ffi/ir_stream/Deserializer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/ffi/ir_stream/IrErrorCode.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/ffi/ir_stream/IrUnitHandlerInterface.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/ffi/ir_stream/IrUnitType.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/ffi/ir_stream/Serializer.hpp" />
@@ -624,6 +643,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/streaming_compression/Compressor.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/streaming_compression/Constants.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/streaming_compression/Decompressor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/streaming_compression/lzma/Compressor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/streaming_compression/lzma/Constants.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/streaming_compression/lzma/Decompressor.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/streaming_compression/passthrough/Compressor.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/streaming_compression/passthrough/Decompressor.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/streaming_compression/zstd/Compressor.hpp" />
@@ -635,6 +657,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/utf8_utils.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp/version.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/ArchiveReader.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/ArchiveReaderAdaptor.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/ArchiveWriter.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/BufferViewReader.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/ColumnReader.hpp" />
@@ -649,6 +672,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/ErrorCode.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/FileReader.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/FileWriter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/InputConfig.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/JsonConstructor.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/JsonFileIterator.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/JsonParser.hpp" />
@@ -661,6 +685,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/SchemaReader.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/SchemaTree.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/SchemaWriter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/SingleFileArchiveDefs.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/TimestampDictionaryReader.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/TimestampDictionaryWriter.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/TimestampEntry.hpp" />
@@ -672,6 +697,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/ZstdCompressor.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/ZstdDecompressor.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/archive_constants.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/indexer/CommandLineArguments.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/indexer/IndexManager.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/indexer/MySQLIndexStorage.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/search/AddTimestampConditions.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/search/AndExpr.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/search/BooleanLiteral.hpp" />
@@ -698,10 +726,12 @@
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/search/StringLiteral.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/search/Transformation.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/search/Value.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/search/antlr_common/ErrorListener.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/search/clp_search/EncodedVariableInterpreter.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/search/clp_search/Grep.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/search/clp_search/Query.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/search/kql/kql.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/search/sql/sql.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/glt/ArrayBackedPosIntSet.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/glt/BufferReader.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/glt/BufferedFileReader.hpp" />
@@ -831,6 +861,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/reducer/network_utils.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/src/reducer/types.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/tests/LogSuppressor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/clp/components/core/tests/TestOutputCleaner.hpp" />
     <Image Include="../../thirdparty/owemdjee/clp/docs/src/clp-complete-solution.png" />
     <Image Include="../../thirdparty/owemdjee/clp/docs/src/clp-json-benchmark.png" />
     <Image Include="../../thirdparty/owemdjee/clp/docs/src/clp-unstructured-benchmark.png" />
@@ -842,9 +873,11 @@
     <Text Include="../../thirdparty/owemdjee/clp/components/clp-package-utils/clp_package_utils/__init__.py" />
     <Text Include="../../thirdparty/owemdjee/clp/components/clp-package-utils/clp_package_utils/general.py" />
     <Text Include="../../thirdparty/owemdjee/clp/components/clp-package-utils/clp_package_utils/scripts/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/clp/components/clp-package-utils/clp_package_utils/scripts/archive_manager.py" />
     <Text Include="../../thirdparty/owemdjee/clp/components/clp-package-utils/clp_package_utils/scripts/compress.py" />
     <Text Include="../../thirdparty/owemdjee/clp/components/clp-package-utils/clp_package_utils/scripts/decompress.py" />
     <Text Include="../../thirdparty/owemdjee/clp/components/clp-package-utils/clp_package_utils/scripts/native/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/clp/components/clp-package-utils/clp_package_utils/scripts/native/archive_manager.py" />
     <Text Include="../../thirdparty/owemdjee/clp/components/clp-package-utils/clp_package_utils/scripts/native/compress.py" />
     <Text Include="../../thirdparty/owemdjee/clp/components/clp-package-utils/clp_package_utils/scripts/native/decompress.py" />
     <Text Include="../../thirdparty/owemdjee/clp/components/clp-package-utils/clp_package_utils/scripts/native/search.py" />
@@ -860,11 +893,12 @@
     <Text Include="../../thirdparty/owemdjee/clp/components/clp-py-utils/clp_py_utils/compression.py" />
     <Text Include="../../thirdparty/owemdjee/clp/components/clp-py-utils/clp_py_utils/core.py" />
     <Text Include="../../thirdparty/owemdjee/clp/components/clp-py-utils/clp_py_utils/create-db-tables.py" />
-    <Text Include="../../thirdparty/owemdjee/clp/components/clp-py-utils/clp_py_utils/create-results-cache-indices.py" />
     <Text Include="../../thirdparty/owemdjee/clp/components/clp-py-utils/clp_py_utils/decorators.py" />
     <Text Include="../../thirdparty/owemdjee/clp/components/clp-py-utils/clp_py_utils/initialize-clp-metadata-db.py" />
     <Text Include="../../thirdparty/owemdjee/clp/components/clp-py-utils/clp_py_utils/initialize-orchestration-db.py" />
+    <Text Include="../../thirdparty/owemdjee/clp/components/clp-py-utils/clp_py_utils/initialize-results-cache.py" />
     <Text Include="../../thirdparty/owemdjee/clp/components/clp-py-utils/clp_py_utils/pretty_size.py" />
+    <Text Include="../../thirdparty/owemdjee/clp/components/clp-py-utils/clp_py_utils/s3_utils.py" />
     <Text Include="../../thirdparty/owemdjee/clp/components/clp-py-utils/clp_py_utils/sql_adapter.py" />
     <Text Include="../../thirdparty/owemdjee/clp/components/clp-py-utils/pyproject.toml" />
     <Text Include="../../thirdparty/owemdjee/clp/components/core/CHANGELOG.md" />
@@ -888,12 +922,17 @@
     <Text Include="../../thirdparty/owemdjee/clp/components/core/src/clp/regex_utils/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/clp/components/core/src/clp/string_utils/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/indexer/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/search/kql/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/search/kql/Kql.g4" />
+    <Text Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/search/sql/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/clp/components/core/src/clp_s/search/sql/Sql.g4" />
     <Text Include="../../thirdparty/owemdjee/clp/components/core/src/glt/glt/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/clp/components/core/src/glt/string_utils/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/clp/components/core/src/reducer/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/clp/components/core/tests/test_log_files/log.txt" />
+    <Text Include="../../thirdparty/owemdjee/clp/components/core/tests/test_log_files/test_no_floats_sorted.jsonl" />
+    <Text Include="../../thirdparty/owemdjee/clp/components/core/tests/test_log_files/test_search.jsonl" />
     <Text Include="../../thirdparty/owemdjee/clp/components/core/tests/test_schema_files/colon_missing_schema.txt" />
     <Text Include="../../thirdparty/owemdjee/clp/components/core/tests/test_schema_files/easy_schema.txt" />
     <Text Include="../../thirdparty/owemdjee/clp/components/core/tests/test_schema_files/empty_schema.txt" />
@@ -904,12 +943,10 @@
     <Text Include="../../thirdparty/owemdjee/clp/components/core/tests/test_schema_files/schema_without_delimiters.txt" />
     <Text Include="../../thirdparty/owemdjee/clp/components/core/tests/test_schema_files/search_schema.txt" />
     <Text Include="../../thirdparty/owemdjee/clp/components/core/tests/test_search_queries/easy.txt" />
-    <Text Include="../../thirdparty/owemdjee/clp/components/core/tools/docker-images/clp-core-ubuntu-focal/Dockerfile" />
-    <Text Include="../../thirdparty/owemdjee/clp/components/core/tools/docker-images/clp-core-ubuntu-focal/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/clp/components/core/tools/docker-images/clp-core-ubuntu-jammy/Dockerfile" />
+    <Text Include="../../thirdparty/owemdjee/clp/components/core/tools/docker-images/clp-core-ubuntu-jammy/build.sh" />
     <Text Include="../../thirdparty/owemdjee/clp/components/core/tools/docker-images/clp-env-base-centos-stream-9/Dockerfile" />
     <Text Include="../../thirdparty/owemdjee/clp/components/core/tools/docker-images/clp-env-base-centos-stream-9/build.sh" />
-    <Text Include="../../thirdparty/owemdjee/clp/components/core/tools/docker-images/clp-env-base-ubuntu-focal/Dockerfile" />
-    <Text Include="../../thirdparty/owemdjee/clp/components/core/tools/docker-images/clp-env-base-ubuntu-focal/build.sh" />
     <Text Include="../../thirdparty/owemdjee/clp/components/core/tools/docker-images/clp-env-base-ubuntu-jammy/Dockerfile" />
     <Text Include="../../thirdparty/owemdjee/clp/components/core/tools/docker-images/clp-env-base-ubuntu-jammy/build.sh" />
     <Text Include="../../thirdparty/owemdjee/clp/components/core/tools/scripts/db/init-db.py" />
@@ -921,6 +958,7 @@
     <Text Include="../../thirdparty/owemdjee/clp/components/core/tools/scripts/lib_install/install-cmake.sh" />
     <Text Include="../../thirdparty/owemdjee/clp/components/core/tools/scripts/lib_install/install-curl.sh" />
     <Text Include="../../thirdparty/owemdjee/clp/components/core/tools/scripts/lib_install/libarchive.sh" />
+    <Text Include="../../thirdparty/owemdjee/clp/components/core/tools/scripts/lib_install/liblzma.sh" />
     <Text Include="../../thirdparty/owemdjee/clp/components/core/tools/scripts/lib_install/lz4.sh" />
     <Text Include="../../thirdparty/owemdjee/clp/components/core/tools/scripts/lib_install/macos/install-all.sh" />
     <Text Include="../../thirdparty/owemdjee/clp/components/core/tools/scripts/lib_install/mariadb-connector-c.sh" />
@@ -942,13 +980,14 @@
     <Text Include="../../thirdparty/owemdjee/clp/components/job-orchestration/job_orchestration/executor/compress/__init__.py" />
     <Text Include="../../thirdparty/owemdjee/clp/components/job-orchestration/job_orchestration/executor/compress/celery.py" />
     <Text Include="../../thirdparty/owemdjee/clp/components/job-orchestration/job_orchestration/executor/compress/celeryconfig.py" />
-    <Text Include="../../thirdparty/owemdjee/clp/components/job-orchestration/job_orchestration/executor/compress/fs_compression_task.py" />
+    <Text Include="../../thirdparty/owemdjee/clp/components/job-orchestration/job_orchestration/executor/compress/compression_task.py" />
     <Text Include="../../thirdparty/owemdjee/clp/components/job-orchestration/job_orchestration/executor/query/__init__.py" />
     <Text Include="../../thirdparty/owemdjee/clp/components/job-orchestration/job_orchestration/executor/query/celery.py" />
     <Text Include="../../thirdparty/owemdjee/clp/components/job-orchestration/job_orchestration/executor/query/celeryconfig.py" />
-    <Text Include="../../thirdparty/owemdjee/clp/components/job-orchestration/job_orchestration/executor/query/extract_ir_task.py" />
+    <Text Include="../../thirdparty/owemdjee/clp/components/job-orchestration/job_orchestration/executor/query/extract_stream_task.py" />
     <Text Include="../../thirdparty/owemdjee/clp/components/job-orchestration/job_orchestration/executor/query/fs_search_task.py" />
     <Text Include="../../thirdparty/owemdjee/clp/components/job-orchestration/job_orchestration/executor/query/utils.py" />
+    <Text Include="../../thirdparty/owemdjee/clp/components/job-orchestration/job_orchestration/executor/utils.py" />
     <Text Include="../../thirdparty/owemdjee/clp/components/job-orchestration/job_orchestration/reducer/reducer.py" />
     <Text Include="../../thirdparty/owemdjee/clp/components/job-orchestration/job_orchestration/scheduler/__init__.py" />
     <Text Include="../../thirdparty/owemdjee/clp/components/job-orchestration/job_orchestration/scheduler/compress/__init__.py" />
@@ -981,6 +1020,7 @@
     <Text Include="../../thirdparty/owemdjee/clp/components/log-viewer-webui/server/package.json" />
     <Text Include="../../thirdparty/owemdjee/clp/components/log-viewer-webui/server/settings.json" />
     <Text Include="../../thirdparty/owemdjee/clp/components/log-viewer-webui/server/src/DbManager.js" />
+    <Text Include="../../thirdparty/owemdjee/clp/components/log-viewer-webui/server/src/S3Manager.js" />
     <Text Include="../../thirdparty/owemdjee/clp/components/log-viewer-webui/server/src/app.js" />
     <Text Include="../../thirdparty/owemdjee/clp/components/log-viewer-webui/server/src/app.test.js" />
     <Text Include="../../thirdparty/owemdjee/clp/components/log-viewer-webui/server/src/main.js" />
@@ -997,6 +1037,7 @@
     <Text Include="../../thirdparty/owemdjee/clp/components/package-template/src/etc/mongo/mongod.conf" />
     <Text Include="../../thirdparty/owemdjee/clp/components/package-template/src/etc/mysql/conf.d/logging.cnf" />
     <Text Include="../../thirdparty/owemdjee/clp/components/package-template/src/etc/redis/redis.conf" />
+    <Text Include="../../thirdparty/owemdjee/clp/components/package-template/src/sbin/admin-tools/archive-manager.sh" />
     <Text Include="../../thirdparty/owemdjee/clp/components/package-template/src/sbin/compress.sh" />
     <Text Include="../../thirdparty/owemdjee/clp/components/package-template/src/sbin/decompress.sh" />
     <Text Include="../../thirdparty/owemdjee/clp/components/package-template/src/sbin/search.sh" />
@@ -1066,6 +1107,7 @@
     <Text Include="../../thirdparty/owemdjee/clp/components/webui/imports/utils/misc.js" />
     <Text Include="../../thirdparty/owemdjee/clp/components/webui/imports/utils/mongo.js" />
     <Text Include="../../thirdparty/owemdjee/clp/components/webui/launcher.js" />
+    <Text Include="../../thirdparty/owemdjee/clp/components/webui/linter/package-lock.json" />
     <Text Include="../../thirdparty/owemdjee/clp/components/webui/linter/package.json" />
     <Text Include="../../thirdparty/owemdjee/clp/components/webui/package-lock.json" />
     <Text Include="../../thirdparty/owemdjee/clp/components/webui/package.json" />
@@ -1083,7 +1125,6 @@
     <Text Include="../../thirdparty/owemdjee/clp/docs/src/dev-guide/components-core/index.md" />
     <Text Include="../../thirdparty/owemdjee/clp/docs/src/dev-guide/components-core/macos-deps-install.md" />
     <Text Include="../../thirdparty/owemdjee/clp/docs/src/dev-guide/components-core/regex-utils.md" />
-    <Text Include="../../thirdparty/owemdjee/clp/docs/src/dev-guide/components-core/ubuntu-focal-deps-install.md" />
     <Text Include="../../thirdparty/owemdjee/clp/docs/src/dev-guide/components-core/ubuntu-jammy-deps-install.md" />
     <Text Include="../../thirdparty/owemdjee/clp/docs/src/dev-guide/components-log-viewer-webui.md" />
     <Text Include="../../thirdparty/owemdjee/clp/docs/src/dev-guide/components-webui.md" />
@@ -1102,6 +1143,11 @@
     <Text Include="../../thirdparty/owemdjee/clp/docs/src/user-guide/core-unstructured/glt.md" />
     <Text Include="../../thirdparty/owemdjee/clp/docs/src/user-guide/core-unstructured/index.md" />
     <Text Include="../../thirdparty/owemdjee/clp/docs/src/user-guide/core-unstructured/make-dictionaries-readable.md" />
+    <Text Include="../../thirdparty/owemdjee/clp/docs/src/user-guide/guides-overview.md" />
+    <Text Include="../../thirdparty/owemdjee/clp/docs/src/user-guide/guides-using-object-storage/clp-config.md" />
+    <Text Include="../../thirdparty/owemdjee/clp/docs/src/user-guide/guides-using-object-storage/clp-usage.md" />
+    <Text Include="../../thirdparty/owemdjee/clp/docs/src/user-guide/guides-using-object-storage/index.md" />
+    <Text Include="../../thirdparty/owemdjee/clp/docs/src/user-guide/guides-using-object-storage/object-storage-config.md" />
     <Text Include="../../thirdparty/owemdjee/clp/docs/src/user-guide/index.md" />
     <Text Include="../../thirdparty/owemdjee/clp/docs/src/user-guide/quick-start-cluster-setup/index.md" />
     <Text Include="../../thirdparty/owemdjee/clp/docs/src/user-guide/quick-start-cluster-setup/multi-node.md" />
@@ -1122,9 +1168,6 @@
     <Text Include="../../thirdparty/owemdjee/clp/lint-tasks.yml" />
     <Text Include="../../thirdparty/owemdjee/clp/requirements.txt" />
     <Text Include="../../thirdparty/owemdjee/clp/ruff.toml" />
-    <Text Include="../../thirdparty/owemdjee/clp/tools/docker-images/clp-execution-base-ubuntu-focal/Dockerfile" />
-    <Text Include="../../thirdparty/owemdjee/clp/tools/docker-images/clp-execution-base-ubuntu-focal/build.sh" />
-    <Text Include="../../thirdparty/owemdjee/clp/tools/docker-images/clp-execution-base-ubuntu-focal/setup-scripts/install-prebuilt-packages.sh" />
     <Text Include="../../thirdparty/owemdjee/clp/tools/docker-images/clp-execution-base-ubuntu-jammy/Dockerfile" />
     <Text Include="../../thirdparty/owemdjee/clp/tools/docker-images/clp-execution-base-ubuntu-jammy/build.sh" />
     <Text Include="../../thirdparty/owemdjee/clp/tools/docker-images/clp-execution-base-ubuntu-jammy/setup-scripts/install-prebuilt-packages.sh" />

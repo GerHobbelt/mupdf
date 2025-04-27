@@ -1,0 +1,1045 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFF6B65D}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBICU;ICU_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/unicode-icu/icu4c/include;../../thirdparty/owemdjee/unicode-icu/icu4c/source/common;../../thirdparty/owemdjee/unicode-icu/icu4c/source/i18n;../../thirdparty/owemdjee/unicode-icu/icu4c/source/tools/ctestfw;../../thirdparty/owemdjee/unicode-icu/icu4c/source/tools/toolutil;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBICU;ICU_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>U_CHARSET_IS_UTF8=1;U_IMPORT=;BUILD_MONOLITHIC;BUILDING_LIBICU;ICU_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/unicode-icu/icu4c/include;../../thirdparty/owemdjee/unicode-icu/icu4c/source/common;../../thirdparty/owemdjee/unicode-icu/icu4c/source/i18n;../../thirdparty/owemdjee/unicode-icu/icu4c/source/tools/ctestfw;../../thirdparty/owemdjee/unicode-icu/icu4c/source/tools/toolutil;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBICU;ICU_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/unicode-icu/icu4c/include;../../thirdparty/owemdjee/unicode-icu/icu4c/source/common;../../thirdparty/owemdjee/unicode-icu/icu4c/source/i18n;../../thirdparty/owemdjee/unicode-icu/icu4c/source/tools/ctestfw;../../thirdparty/owemdjee/unicode-icu/icu4c/source/tools/toolutil;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBICU;ICU_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>U_CHARSET_IS_UTF8=1;U_IMPORT=;BUILD_MONOLITHIC;BUILDING_LIBICU;ICU_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/unicode-icu/icu4c/include;../../thirdparty/owemdjee/unicode-icu/icu4c/source/common;../../thirdparty/owemdjee/unicode-icu/icu4c/source/i18n;../../thirdparty/owemdjee/unicode-icu/icu4c/source/tools/ctestfw;../../thirdparty/owemdjee/unicode-icu/icu4c/source/tools/toolutil;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBICU;ICU_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/unicode-icu/icu4c/include;../../thirdparty/owemdjee/unicode-icu/icu4c/source/common;../../thirdparty/owemdjee/unicode-icu/icu4c/source/i18n;../../thirdparty/owemdjee/unicode-icu/icu4c/source/tools/ctestfw;../../thirdparty/owemdjee/unicode-icu/icu4c/source/tools/toolutil;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBICU;ICU_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>U_CHARSET_IS_UTF8=1;U_IMPORT=;BUILD_MONOLITHIC;BUILDING_LIBICU;ICU_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/unicode-icu/icu4c/include;../../thirdparty/owemdjee/unicode-icu/icu4c/source/common;../../thirdparty/owemdjee/unicode-icu/icu4c/source/i18n;../../thirdparty/owemdjee/unicode-icu/icu4c/source/tools/ctestfw;../../thirdparty/owemdjee/unicode-icu/icu4c/source/tools/toolutil;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBICU;ICU_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/unicode-icu/icu4c/include;../../thirdparty/owemdjee/unicode-icu/icu4c/source/common;../../thirdparty/owemdjee/unicode-icu/icu4c/source/i18n;../../thirdparty/owemdjee/unicode-icu/icu4c/source/tools/ctestfw;../../thirdparty/owemdjee/unicode-icu/icu4c/source/tools/toolutil;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBICU;ICU_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>U_CHARSET_IS_UTF8=1;U_IMPORT=;BUILD_MONOLITHIC;BUILDING_LIBICU;ICU_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/unicode-icu/icu4c/include;../../thirdparty/owemdjee/unicode-icu/icu4c/source/common;../../thirdparty/owemdjee/unicode-icu/icu4c/source/i18n;../../thirdparty/owemdjee/unicode-icu/icu4c/source/tools/ctestfw;../../thirdparty/owemdjee/unicode-icu/icu4c/source/tools/toolutil;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/Object.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/analysis/DictionaryExposableMorphology.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/analysis/MorphologicalAnalyzer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/analysis/RussianExposableMorphology.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/ArticleDetectionFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/CommonConceptFactory-c.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/CommonConceptFactory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/CommonConceptFactoryImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/CommonConceptFactoryProvider.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/DefaultArticleLookupFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/DefaultDisplayFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/DefaultFeatureFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/DefinitenessDisplayFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/DeterminerAdpositionDetectionFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/DictionaryLookupFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/DictionaryLookupInflector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/DisplayValue-c.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/DisplayValue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/InflectableStringConcept-c.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/InflectableStringConcept.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/LocalizedCommonConceptFactoryProvider-c.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/LocalizedCommonConceptFactoryProvider.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/NumberConcept-c.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/NumberConcept.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/Plurality.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/PronounConcept-c.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/PronounConcept.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/SemanticConcept.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/SemanticConceptList.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/SemanticFeature.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/SemanticFeatureConcept-c.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/SemanticFeatureConceptBase.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/SemanticFeatureModel-c.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/SemanticFeatureModel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/SemanticFeatureModel_DisplayData.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/SemanticUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/SemanticValue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/SpeakableConcept.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/SpeakableString-c.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/SpeakableString.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/StaticArticleLookupFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/ArCommonConceptFactory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/DaCommonConceptFactory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/DeCommonConceptFactory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/EnCommonConceptFactory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/EsCommonConceptFactory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/EsCommonConceptFactory_EsAndList.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/EsCommonConceptFactory_EsOrList.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/FrCommonConceptFactory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/HeCommonConceptFactory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/HeCommonConceptFactory_HeAndList.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/HiCommonConceptFactory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/ItCommonConceptFactory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/ItCommonConceptFactory_ItAndList.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/JaCommonConceptFactory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/KoCommonConceptFactory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/KoCommonConceptFactory_KoAndList.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/MsCommonConceptFactory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/NbCommonConceptFactory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/NlCommonConceptFactory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/PtCommonConceptFactory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/RuCommonConceptFactory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/SrCommonConceptFactory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/SvCommonConceptFactory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/ThCommonConceptFactory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/TrCommonConceptFactory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/ViCommonConceptFactory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/YueCommonConceptFactory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/ZhCommonConceptFactory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dictionary/DictionaryKeyIterator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dictionary/DictionaryMetaData-c.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dictionary/DictionaryMetaData.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dictionary/DictionaryMetaData_MMappedDictionary.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dictionary/Inflector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dictionary/Inflector_Inflection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dictionary/Inflector_InflectionPattern.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dictionary/Inflector_MMappedDictionary.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dictionary/PhraseProperties.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dictionary/metadata/CharsetConverter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dictionary/metadata/StringArrayContainer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dictionary/metadata/StringContainer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/exception/ClassCastException.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/exception/Exception.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/exception/FileNotFoundException.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/exception/ICUException.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/exception/IOException.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/exception/IllegalArgumentException.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/exception/IllegalStateException.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/exception/IncompatibleVersionException.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/exception/IndexOutOfBoundsException.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/exception/InvalidConfigurationException.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/exception/MissingResourceException.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/exception/NullPointerException.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/exception/RuntimeException.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/exception/Throwable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/exception/XMLParseException.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/ArGrammarSynthesizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/ArGrammarSynthesizer_ArDisplayFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/ArGrammarSynthesizer_ArticleLookupFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/ArGrammarSynthesizer_AsPrepositionLookupFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/ArGrammarSynthesizer_DefinitenessLookupFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/ArGrammarSynthesizer_PronounLookupFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/ArGrammarSynthesizer_ToPrepositionLookupFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/ArGrammarSynthesizer_WithPrepositionLookupFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/DaGrammarSynthesizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/DaGrammarSynthesizer_ArticleLookupFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/DaGrammarSynthesizer_DaDisplayFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/DeGrammarSynthesizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/DeGrammarSynthesizer_ArticleLookupFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/DeGrammarSynthesizer_DeDisplayFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/EnGrammarSynthesizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/EnGrammarSynthesizer_ArticleLookupFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/EnGrammarSynthesizer_CaseLookupFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/EnGrammarSynthesizer_CountLookupFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/EnGrammarSynthesizer_EnDisplayFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/EsGrammarSynthesizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/EsGrammarSynthesizer_ArticleLookupFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/EsGrammarSynthesizer_CountGenderLookupFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/EsGrammarSynthesizer_EsDisplayFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/FrGrammarSynthesizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/FrGrammarSynthesizer_ArticleElidedFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/FrGrammarSynthesizer_ArticleLookupFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/FrGrammarSynthesizer_CountLookupFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/FrGrammarSynthesizer_FrDisplayFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/FrGrammarSynthesizer_GenderLookupFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/GrammarSynthesizerFactory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/GrammarSynthesizerUtil.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/GrammemeConstants.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/HeGrammarSynthesizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/HeGrammarSynthesizer_DefinitenessLookupFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/HeGrammarSynthesizer_GenderLookupFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/HeGrammarSynthesizer_HeDisplayFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/HeGrammarSynthesizer_WithConditionalHyphen.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/HiGrammarSynthesizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/HiGrammarSynthesizer_CountLookupFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/HiGrammarSynthesizer_GenderLookupFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/HiGrammarSynthesizer_HiDisplayFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/ItGrammarSynthesizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/ItGrammarSynthesizer_ArticleLookupFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/ItGrammarSynthesizer_CountLookupFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/ItGrammarSynthesizer_DefiniteArticleLookupFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/ItGrammarSynthesizer_GenderLookupFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/ItGrammarSynthesizer_IndefiniteArticleLookupFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/ItGrammarSynthesizer_ItDisplayFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/KoGrammarSynthesizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/KoGrammarSynthesizer_KoDisplayFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/KoGrammarSynthesizer_ParticleLookupFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/KoGrammarSynthesizer_ParticleResolver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/NbGrammarSynthesizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/NbGrammarSynthesizer_ArticleLookupFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/NbGrammarSynthesizer_NbDisplayFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/NlGrammarSynthesizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/NlGrammarSynthesizer_ArticleLookupFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/NlGrammarSynthesizer_DefinitenessLookupFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/NlGrammarSynthesizer_NlAdjectiveInflectionPattern.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/NlGrammarSynthesizer_NlDisplayFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/NlGrammarSynthesizer_NlNounInflectionPattern.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/NlGrammarSynthesizer_NlVerbInflectionPattern.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/PtGrammarSynthesizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/PtGrammarSynthesizer_ArticleLookupFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/PtGrammarSynthesizer_GenericLookupFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/PtGrammarSynthesizer_PtDisplayFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/RuGrammarSynthesizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/RuGrammarSynthesizer_AboutPrepositionLookupFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/RuGrammarSynthesizer_ArticleLookupFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/RuGrammarSynthesizer_InPrepositionLookupFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/RuGrammarSynthesizer_RuDisplayFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/RuGrammarSynthesizer_ToPrepositionLookupFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/RuGrammarSynthesizer_WithPrepositionLookupFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/SignificantTokenInflector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/SrGrammarSynthesizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/SrGrammarSynthesizer_SrDisplayFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/SvGrammarSynthesizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/SvGrammarSynthesizer_ArticleLookupFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/SvGrammarSynthesizer_GenderLookupFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/SvGrammarSynthesizer_SvDisplayFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/TrGrammarSynthesizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/TrGrammarSynthesizer_DeConjunctionArticleLookupFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/TrGrammarSynthesizer_InterrogativeArticleLookupFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/TrGrammarSynthesizer_TrDisplayFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/lang/StringFilterUtil.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/lang/features/LanguageGrammarFeatures.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/lang/features/LanguageGrammarFeatures_Feature.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/lang/features/LanguageGrammarFeatures_GrammarCategory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/lang/features/LanguageGrammarFeatures_GrammarFeatures.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/resources/DataRegistrationService-c.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/resources/DataRegistrationService.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/CharRange.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/Chunk.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/Token.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/TokenChain.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/TokenExtractor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/TokenIterator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/TokenUtil.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/Token_Delim.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/Token_Head.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/Token_Tail.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/Token_Word.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/Tokenizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/TokenizerFactory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/dictionary/DictionaryTokenizerConfig.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/dictionary/GermanicDecompounder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/dictionary/ParsingsScorer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/dictionary/Segment.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/dictionary/SegmentFuger.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/dictionary/SegmentValidator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/iterator/ICUTokenExtractorIterator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/iterator/NumberCleaverIterator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/iterator/RegexSplitIterator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/iterator/TokenExtractorIterator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/locale/DefaultTokenizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/locale/GermanicTokenExtractorIterator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/locale/GermanicWordAndDelimiterTokenExtractor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/locale/SemiticTokenExtractorIterator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/locale/SemiticWordAndDelimiterTokenExtractor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/locale/SemiticWordAndDelimiterTokenExtractor_AffixRecord.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/locale/ar/ArTokenizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/locale/da/DaDictionaryTokenizerConfig.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/locale/da/DaTokenizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/locale/nb/NbDictionaryTokenizerConfig.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/locale/nb/NbTokenizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/locale/nl/NlDictionaryTokenizerConfig.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/locale/nl/NlTokenizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/locale/sv/SvDictionaryTokenizerConfig.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/locale/sv/SvTokenizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/trie/SerializedTrie.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/util/AutoFileDescriptor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/util/DelimitedStringIterator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/util/LocaleUtils-c.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/util/LocaleUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/util/Logger.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/util/LoggerConfig-c.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/util/LoggerConfig.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/util/MemoryMappedFile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/util/ResourceLocator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/util/StringUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/util/StringViewUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/util/TypeConversionUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/util/ULocale.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/util/UnicodeSetUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/util/VersionUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/src/inflection/dialog/DialogThreadSafetyTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/src/inflection/dialog/FormatTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/src/inflection/dialog/InflectableStringConceptTest-c.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/src/inflection/dialog/InflectableStringConceptTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/src/inflection/dialog/InflectionTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/src/inflection/dialog/ListTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/src/inflection/dialog/NumberConceptTest-c.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/src/inflection/dialog/NumberConceptTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/src/inflection/dialog/PronounConceptTest-c.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/src/inflection/dialog/PronounConceptTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/src/inflection/dialog/QuoteTest-c.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/src/inflection/dialog/QuoteTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/src/inflection/dialog/SemanticConceptTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/src/inflection/dialog/SemanticFeatureModelTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/src/inflection/dictionary/DictionaryMetaDataTest-c.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/src/inflection/dictionary/DictionaryMetaDataTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/src/inflection/dictionary/MMappedDictionaryTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/src/inflection/dictionary/PhrasePropertiesTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/src/inflection/exception/ExceptionTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/src/inflection/grammar/synthesis/DefaultSemanticFeatureTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/src/inflection/grammar/synthesis/PrepositionArticleTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/src/inflection/grammar/synthesis/QuantifyTest-c.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/src/inflection/grammar/synthesis/QuantifyTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/src/inflection/lang/StringFilterUtilTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/src/inflection/lang/features/LanguageGrammarFeaturesTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/src/inflection/performance/PerformanceUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/src/inflection/performance/TestDictionaryPerformance.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/src/inflection/performance/TestInflectionPerformance.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/src/inflection/resources/DataRegistrationServiceTest-c.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/src/inflection/resources/DataRegistrationServiceTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/src/inflection/tokenizer/ChunkTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/src/inflection/tokenizer/TokenChainTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/src/inflection/tokenizer/TokenTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/src/inflection/tokenizer/TokenizerTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/src/inflection/util/DelimitedStringIteratorTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/src/inflection/util/LocaleUtilsTest-c.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/src/inflection/util/LocaleUtilsTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/src/inflection/util/LogToString.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/src/inflection/util/LoggerConfigTest-c.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/src/inflection/util/StringUtilsTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/src/inflection/util/VersionUtilsTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/src/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/src/util/TestUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/src/util/XMLUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/buildDictionary/BuildDictionary.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/buildDictionary/Dictionary.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/buildDictionary/DictionaryLogger.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/buildDictionary/InflectionDictionary.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/buildDictionary/Inflector_Inflection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/buildDictionary/Inflector_InflectionDictionary.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/buildDictionary/Inflector_InflectionPattern.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/buildDictionary/Inflector_Suffix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/buildDictionary/LexicalDictionaryBuilder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/buildTokDictionary/buildTokDictionary.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/generateICUWrapper/generateICUWrapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/generateInflectionWrapper/generateInflectionWrapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/text2cpp/text2cpp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/xml2cpp/xml2cpp.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/icu4cxx/BreakIterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/icu4cxx/Normalizer2.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/icu4cxx/NumberFormat.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/icu4cxx/RegularExpression.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/icu4cxx/UnicodeSet.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/icu4cxx/fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/Object.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/analysis/DictionaryExposableMorphology.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/analysis/MorphologicalAnalyzer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/analysis/RussianExposableMorphology.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/analysis/fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/ArticleDetectionFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/CommonConceptFactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/CommonConceptFactory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/CommonConceptFactoryImpl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/CommonConceptFactoryProvider.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/DefaultArticleLookupFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/DefaultDisplayFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/DefaultFeatureFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/DefinitenessDisplayFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/DeterminerAdpositionDetectionFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/DictionaryLookupFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/DictionaryLookupInflector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/DisplayValue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/DisplayValue.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/InflectableStringConcept.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/InflectableStringConcept.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/LocalizedCommonConceptFactoryProvider.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/LocalizedCommonConceptFactoryProvider.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/NumberConcept.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/NumberConcept.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/Plurality.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/PronounConcept.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/PronounConcept.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/SemanticConcept.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/SemanticConceptList.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/SemanticFeature.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/SemanticFeatureConcept.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/SemanticFeatureConceptBase.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/SemanticFeatureModel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/SemanticFeatureModel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/SemanticFeatureModel_DisplayData.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/SemanticUtils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/SemanticValue.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/SpeakableConcept.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/SpeakableString.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/SpeakableString.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/StaticArticleLookupFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/ArCommonConceptFactory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/DaCommonConceptFactory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/DeCommonConceptFactory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/EnCommonConceptFactory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/EsCommonConceptFactory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/EsCommonConceptFactory_EsAndList.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/EsCommonConceptFactory_EsOrList.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/FrCommonConceptFactory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/HeCommonConceptFactory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/HeCommonConceptFactory_HeAndList.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/HiCommonConceptFactory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/ItCommonConceptFactory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/ItCommonConceptFactory_ItAndList.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/JaCommonConceptFactory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/KoCommonConceptFactory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/KoCommonConceptFactory_KoAndList.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/MsCommonConceptFactory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/NbCommonConceptFactory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/NlCommonConceptFactory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/PtCommonConceptFactory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/RuCommonConceptFactory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/SrCommonConceptFactory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/SvCommonConceptFactory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/ThCommonConceptFactory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/TrCommonConceptFactory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/ViCommonConceptFactory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/YueCommonConceptFactory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/ZhCommonConceptFactory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dictionary/DictionaryKeyIterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dictionary/DictionaryMetaData.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dictionary/DictionaryMetaData.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dictionary/DictionaryMetaData_MMappedDictionary.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dictionary/Inflector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dictionary/Inflector_Inflection.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dictionary/Inflector_InflectionPattern.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dictionary/Inflector_MMappedDictionary.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dictionary/PhraseProperties.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dictionary/fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dictionary/metadata/CharsetConverter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dictionary/metadata/CompressedArray.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dictionary/metadata/MarisaTrie.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dictionary/metadata/MarisaTrieIterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dictionary/metadata/StringArrayContainer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dictionary/metadata/StringContainer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dictionary/metadata/fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/exception/ClassCastException.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/exception/Exception.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/exception/FileNotFoundException.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/exception/ICUException.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/exception/IOException.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/exception/IllegalArgumentException.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/exception/IllegalStateException.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/exception/IncompatibleVersionException.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/exception/IndexOutOfBoundsException.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/exception/InvalidConfigurationException.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/exception/MissingResourceException.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/exception/NullPointerException.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/exception/RuntimeException.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/exception/Throwable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/exception/XMLParseException.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/exception/fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/featureToggle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/ArGrammarSynthesizer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/ArGrammarSynthesizer_ArDisplayFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/ArGrammarSynthesizer_ArticleLookupFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/ArGrammarSynthesizer_AsPrepositionLookupFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/ArGrammarSynthesizer_DefinitenessLookupFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/ArGrammarSynthesizer_PronounLookupFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/ArGrammarSynthesizer_ToPrepositionLookupFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/ArGrammarSynthesizer_WithPrepositionLookupFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/DaGrammarSynthesizer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/DaGrammarSynthesizer_ArticleLookupFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/DaGrammarSynthesizer_DaDisplayFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/DeGrammarSynthesizer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/DeGrammarSynthesizer_ArticleLookupFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/DeGrammarSynthesizer_DeDisplayFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/EnGrammarSynthesizer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/EnGrammarSynthesizer_ArticleLookupFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/EnGrammarSynthesizer_CaseLookupFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/EnGrammarSynthesizer_CountLookupFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/EnGrammarSynthesizer_EnDisplayFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/EsGrammarSynthesizer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/EsGrammarSynthesizer_ArticleLookupFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/EsGrammarSynthesizer_CountGenderLookupFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/EsGrammarSynthesizer_EsDisplayFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/FrGrammarSynthesizer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/FrGrammarSynthesizer_ArticleElidedFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/FrGrammarSynthesizer_ArticleLookupFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/FrGrammarSynthesizer_CountLookupFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/FrGrammarSynthesizer_FrDisplayFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/FrGrammarSynthesizer_GenderLookupFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/GrammarSynthesizerFactory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/GrammarSynthesizerUtil.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/GrammemeConstants.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/HeGrammarSynthesizer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/HeGrammarSynthesizer_DefinitenessLookupFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/HeGrammarSynthesizer_GenderLookupFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/HeGrammarSynthesizer_HeDisplayFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/HeGrammarSynthesizer_WithConditionalHyphen.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/HiGrammarSynthesizer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/HiGrammarSynthesizer_CountLookupFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/HiGrammarSynthesizer_GenderLookupFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/HiGrammarSynthesizer_HiDisplayFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/ItGrammarSynthesizer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/ItGrammarSynthesizer_ArticleLookupFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/ItGrammarSynthesizer_CountLookupFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/ItGrammarSynthesizer_DefiniteArticleLookupFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/ItGrammarSynthesizer_GenderLookupFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/ItGrammarSynthesizer_IndefiniteArticleLookupFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/ItGrammarSynthesizer_ItDisplayFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/KoGrammarSynthesizer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/KoGrammarSynthesizer_KoDisplayFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/KoGrammarSynthesizer_ParticleLookupFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/KoGrammarSynthesizer_ParticleResolver.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/NbGrammarSynthesizer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/NbGrammarSynthesizer_ArticleLookupFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/NbGrammarSynthesizer_NbDisplayFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/NlGrammarSynthesizer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/NlGrammarSynthesizer_ArticleLookupFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/NlGrammarSynthesizer_DefinitenessLookupFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/NlGrammarSynthesizer_NlAdjectiveInflectionPattern.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/NlGrammarSynthesizer_NlDisplayFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/NlGrammarSynthesizer_NlNounInflectionPattern.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/NlGrammarSynthesizer_NlVerbInflectionPattern.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/PtGrammarSynthesizer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/PtGrammarSynthesizer_ArticleLookupFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/PtGrammarSynthesizer_GenericLookupFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/PtGrammarSynthesizer_PtDisplayFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/RuGrammarSynthesizer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/RuGrammarSynthesizer_AboutPrepositionLookupFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/RuGrammarSynthesizer_ArticleLookupFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/RuGrammarSynthesizer_InPrepositionLookupFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/RuGrammarSynthesizer_RuDisplayFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/RuGrammarSynthesizer_ToPrepositionLookupFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/RuGrammarSynthesizer_WithPrepositionLookupFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/SignificantTokenInflector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/SrGrammarSynthesizer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/SrGrammarSynthesizer_SrDisplayFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/SvGrammarSynthesizer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/SvGrammarSynthesizer_ArticleLookupFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/SvGrammarSynthesizer_GenderLookupFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/SvGrammarSynthesizer_SvDisplayFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/TrGrammarSynthesizer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/TrGrammarSynthesizer_DeConjunctionArticleLookupFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/TrGrammarSynthesizer_InterrogativeArticleLookupFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/TrGrammarSynthesizer_TrDisplayFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/lang/StringFilterUtil.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/lang/features/LanguageGrammarFeatures.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/lang/features/LanguageGrammarFeatures_Feature.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/lang/features/LanguageGrammarFeatures_GrammarCategory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/lang/features/LanguageGrammarFeatures_GrammarFeatures.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/lang/features/fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/lang/fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/npc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/resources/DataRegistrationService.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/resources/DataRegistrationService.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/resources/DataResource.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/resources/fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/CharRange.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/Chunk.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/StringTokenizerBridgeProvider.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/Token.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/TokenChain.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/TokenExtractor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/TokenIterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/TokenUtil.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/Token_Delim.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/Token_Head.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/Token_Tail.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/Token_Word.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/Tokenizer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/TokenizerFactory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/dictionary/DictionaryTokenizerConfig.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/dictionary/GermanicDecompounder.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/dictionary/ParsingsScorer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/dictionary/Segment.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/dictionary/SegmentFuger.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/dictionary/SegmentValidator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/dictionary/fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/iterator/ICUTokenExtractorIterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/iterator/NumberCleaverIterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/iterator/RegexSplitIterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/iterator/TokenExtractorIterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/iterator/fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/locale/DefaultTokenizer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/locale/GermanicTokenExtractorIterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/locale/GermanicWordAndDelimiterTokenExtractor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/locale/SemiticTokenExtractorIterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/locale/SemiticWordAndDelimiterTokenExtractor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/locale/SemiticWordAndDelimiterTokenExtractor_AffixRecord.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/locale/ar/ArTokenizer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/locale/ar/fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/locale/da/DaDictionaryTokenizerConfig.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/locale/da/DaTokenizer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/locale/da/fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/locale/fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/locale/nb/NbDictionaryTokenizerConfig.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/locale/nb/NbTokenizer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/locale/nb/fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/locale/nl/NlDictionaryTokenizerConfig.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/locale/nl/NlTokenizer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/locale/nl/fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/locale/sv/SvDictionaryTokenizerConfig.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/locale/sv/SvTokenizer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/locale/sv/fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/trie/SerializedTrie.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/tokenizer/trie/fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/util/AutoCRelease.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/util/AutoFileDescriptor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/util/DelimitedStringIterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/util/Finally.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/util/LocaleUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/util/LocaleUtils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/util/Logger.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/util/LoggerConfig.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/util/LoggerConfig.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/util/MemoryMappedFile.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/util/ResourceLocator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/util/StringUtils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/util/StringViewUtils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/util/TypeConversionUtils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/util/ULocale.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/util/UnicodeSetUtils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/util/Validate.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/util/VersionUtils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/util/fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/src/inflection/performance/PerformanceUtils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/src/inflection/util/LogToString.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/src/util/StringContainer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/src/util/TestUtils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/src/util/XMLUtils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/buildDictionary/Dictionary.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/buildDictionary/DictionaryLogger.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/buildDictionary/InflectionDictionary.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/buildDictionary/Inflector_Inflection.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/buildDictionary/Inflector_InflectionDictionary.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/buildDictionary/Inflector_InflectionPattern.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/buildDictionary/Inflector_Suffix.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/buildDictionary/LexicalDictionaryBuilder.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/buildDictionary/OverlappingSpanArray.hpp" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/README.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/data/de/lexicon.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/data/en/lexicon.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/data/es/lexicon.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/data/fr/lexicon.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/data/sr/lexicon.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/data/sr/lexicon_data.json" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/data/tools/extract_cldr_data.py" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/data/tools/new_lexeme_sample.json" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/data/tools/wikidata_sample.json" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/data/tools/wikidata_upload.py" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/documents/add_lexicon_data.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/documents/how_to_add_new_language.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/documents/scope.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/documents/wikidata_statistics.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/fst/inflection_en.py" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/fst/inflection_en_test.py" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/fst/inflection_sr.py" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/fst/inflection_sr_test.py" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/fst/utils.py" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/fst/utils_test.py" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/README.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/cmake/build_options.mk" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/cmake/checkCompileHeaders.cmake" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/cmake/dependICU.cmake" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/cmake/inflectionMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/cmake/installPublicHeaders.cmake" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/cmake/query_versions.mk" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/cmake/runTests.cmake" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/cmake/versions.mk" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/docs/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/docs/Doxyfile" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/ext/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/ext/README.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/ext/lib/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/ext/lib/Catch2/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/ext/lib/Marisa/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/ext/lib/Marisa/patch.sh" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/gradle.properties" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/gradle/wrapper/gradle-wrapper.properties" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/gradlew" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/README.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/contraction/contractionExpandingTable_de.csv" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/contraction/contractionExpandingTable_en.csv" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/contraction/contractionExpandingTable_es.csv" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/contraction/contractionExpandingTable_fr.csv" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/contraction/contractionExpandingTable_it.csv" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/inflection/pronoun.properties" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/inflection/pronoun_ar.csv" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/inflection/pronoun_da.csv" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/inflection/pronoun_de.csv" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/inflection/pronoun_en.csv" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/inflection/pronoun_es.csv" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/inflection/pronoun_fr.csv" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/inflection/pronoun_he.csv" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/inflection/pronoun_hi.csv" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/inflection/pronoun_id.csv" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/inflection/pronoun_it.csv" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/inflection/pronoun_ja.csv" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/inflection/pronoun_ko.csv" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/inflection/pronoun_ms.csv" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/inflection/pronoun_nb.csv" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/inflection/pronoun_nl.csv" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/inflection/pronoun_pt.csv" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/inflection/pronoun_ru.csv" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/inflection/pronoun_sr.csv" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/inflection/pronoun_sv.csv" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/inflection/pronoun_th.csv" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/inflection/pronoun_tr.csv" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/inflection/pronoun_vi.csv" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/inflection/pronoun_yue.csv" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/inflection/pronoun_zh.csv" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/inflection/pronoun_zh_Hant.csv" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/locale/fallback-locales.properties" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/locale/registration-locale-list.properties" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/locale/supported-locales.properties" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/tokenizer/ar/nondecompound.tok" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/tokenizer/config_ar.properties" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/tokenizer/config_cmn.properties" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/tokenizer/config_da.properties" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/tokenizer/config_de.properties" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/tokenizer/config_en.properties" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/tokenizer/config_es.properties" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/tokenizer/config_fr.properties" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/tokenizer/config_he.properties" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/tokenizer/config_hi.properties" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/tokenizer/config_id.properties" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/tokenizer/config_in.properties" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/tokenizer/config_it.properties" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/tokenizer/config_iw.properties" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/tokenizer/config_ja.properties" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/tokenizer/config_ko.properties" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/tokenizer/config_ms.properties" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/tokenizer/config_nb.properties" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/tokenizer/config_nl.properties" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/tokenizer/config_no.properties" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/tokenizer/config_pt.properties" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/tokenizer/config_ru.properties" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/tokenizer/config_sr.properties" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/tokenizer/config_sv.properties" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/tokenizer/config_th.properties" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/tokenizer/config_tr.properties" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/tokenizer/config_vi.properties" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/tokenizer/config_wuu.properties" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/tokenizer/config_yue.properties" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/tokenizer/config_zh.properties" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/tokenizer/da/tokenizer.dictionary" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/tokenizer/he/nondecompound.tok" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/tokenizer/nl/tokenizer.dictionary" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/tokenizer/no/tokenizer.dictionary" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/tokenizer/sv/tokenizer.dictionary" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/share/inflection/config.properties" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/formattest.xsd" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/buildDictionary/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/buildTokDictionary/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/buildTokDictionary/doc/html/index.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/buildTokDictionary/doc/html/style.css" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/dictionary-parser/ParseWikidata" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/dictionary-parser/README.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/dictionary-parser/src/main/java/org/unicode/wikidata/ClaimsJsonDeserializer.java" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/dictionary-parser/src/main/java/org/unicode/wikidata/DictionaryEntry.java" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/dictionary-parser/src/main/java/org/unicode/wikidata/DocumentState.java" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/dictionary-parser/src/main/java/org/unicode/wikidata/EnumComparator.java" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/dictionary-parser/src/main/java/org/unicode/wikidata/Grammar.java" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/dictionary-parser/src/main/java/org/unicode/wikidata/GrammemeSetComparator.java" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/dictionary-parser/src/main/java/org/unicode/wikidata/Inflection.java" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/dictionary-parser/src/main/java/org/unicode/wikidata/InflectionPattern.java" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/dictionary-parser/src/main/java/org/unicode/wikidata/Lexeme.java" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/dictionary-parser/src/main/java/org/unicode/wikidata/LexemeForm.java" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/dictionary-parser/src/main/java/org/unicode/wikidata/LexemeRepresentation.java" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/dictionary-parser/src/main/java/org/unicode/wikidata/LexemesJsonDeserializer.java" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/dictionary-parser/src/main/java/org/unicode/wikidata/ParseWikidata.java" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/dictionary-parser/src/main/java/org/unicode/wikidata/ParserDefaults.java" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/dictionary-parser/src/main/java/org/unicode/wikidata/ParserOptions.java" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/dictionary-parser/src/main/resources/org/unicode/wikidata/P898.properties" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/dictionary-parser/src/main/resources/org/unicode/wikidata/filter_de.properties" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/dictionary-parser/src/main/resources/org/unicode/wikidata/filter_en.properties" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/dictionary-parser/src/main/resources/org/unicode/wikidata/filter_es.properties" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/dictionary-parser/src/main/resources/org/unicode/wikidata/filter_it.properties" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/dictionary-parser/src/main/resources/org/unicode/wikidata/filter_ru.properties" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/dictionary-parser/src/test/java/org/unicode/wikidata/ParseWikidataTest.java" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/dictionary-parser/src/test/resources/lexiconCorrectOut.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/dictionary-parser/src/test/resources/sourceLexicon.json" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/generateICUWrapper/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/generateICUWrapper/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/generateInflectionWrapper/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/generateInflectionWrapper/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/generateInflectionWrapper/generateInflectionC.py" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/scripts/strip_prefix_from_tag.sh" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/scripts/version.sh" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/text2cpp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/text2cpp/Generate_DataResource.cpp.sh" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/xml2cpp/CMakeLists.txt" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/dictionary/inflectional_ar.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/dictionary/inflectional_de.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/dictionary/inflectional_fr.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/dictionary/inflectional_he.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/dictionary/inflectional_hi.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/dictionary/inflectional_it.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/dictionary/inflectional_nb.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/dictionary/inflectional_nl.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/dictionary/inflectional_pt.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/dictionary/inflectional_ru.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/dictionary/inflectional_sr.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/dictionary/inflectional_tr.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/features/grammar.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/format/en_US.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/format/es_MX.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/format/ru_RU.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/inflection/ar.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/inflection/da.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/inflection/de.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/inflection/en.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/inflection/es.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/inflection/fr.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/inflection/he.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/inflection/hi.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/inflection/it.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/inflection/ko.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/inflection/nb.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/inflection/nl.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/inflection/pt.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/inflection/ru.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/inflection/sr.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/inflection/sv.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/inflection/tr.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/pronoun/ar.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/pronoun/da.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/pronoun/de.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/pronoun/en.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/pronoun/es.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/pronoun/fr.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/pronoun/he.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/pronoun/hi.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/pronoun/it.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/pronoun/ja.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/pronoun/ko.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/pronoun/ms.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/pronoun/nb.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/pronoun/nl.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/pronoun/pt.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/pronoun/ru.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/pronoun/sr.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/pronoun/sv.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/pronoun/th.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/pronoun/tr.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/pronoun/yue_CN.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/pronoun/zh_CN.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/pronoun/zh_HK.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/pronoun/zh_TW.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/tokenizer/ar.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/tokenizer/da.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/tokenizer/en.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/tokenizer/he.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/tokenizer/nb.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/tokenizer/nl.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/tokenizer/sv.xml" />
+  </ItemGroup>
+  <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+</Project>
+  

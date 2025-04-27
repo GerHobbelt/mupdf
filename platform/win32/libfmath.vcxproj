@@ -223,25 +223,34 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/fmath/avx2.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/fmath/bench.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/fmath/ck.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/fmath/exp_v.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/fmath/fastexp.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/fmath/limit.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/fmath/log_v.cpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/fmath/fmath.h" />
+    <ClCompile Include="../../thirdparty/owemdjee/fmath/src/cpu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fmath/test/avx2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fmath/test/ck.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fmath/test/exp_v.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fmath/test/fastexp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fmath/test/limit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fmath/test/log_misc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fmath/test/log_v.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/fmath/fmath.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/fmath/include/cybozu/benchmark.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/fmath/include/cybozu/inttype.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/fmath/include/cybozu/test.hpp" />
-    <NASM Include="../../thirdparty/owemdjee/fmath/fmath.asm" />
+    <ClInclude Include="../../thirdparty/owemdjee/fmath/include/fmath.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fmath/src/cpu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fmath/src/cpu.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fmath/src/xbyak_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fmath/test/cybozu/benchmark.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fmath/test/cybozu/inttype.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fmath/test/cybozu/test.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fmath/test/cybozu/xorshift.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fmath/test/reference.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fmath/test/table.h" />
+    <NASM Include="../../thirdparty/owemdjee/fmath/src/fmath.asm" />
     <Text Include="../../thirdparty/owemdjee/fmath/Makefile" />
     <Text Include="../../thirdparty/owemdjee/fmath/algo-ja.md" />
-    <Text Include="../../thirdparty/owemdjee/fmath/fmath.S" />
-    <Text Include="../../thirdparty/owemdjee/fmath/gen_fmath.py" />
+    <Text Include="../../thirdparty/owemdjee/fmath/mk.bat" />
+    <Text Include="../../thirdparty/owemdjee/fmath/mklib.bat" />
     <Text Include="../../thirdparty/owemdjee/fmath/readme.md" />
-    <Text Include="../../thirdparty/owemdjee/fmath/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/fmath/src/fmath.S" />
+    <Text Include="../../thirdparty/owemdjee/fmath/src/gen_fmath.py" />
+    <Text Include="../../thirdparty/owemdjee/fmath/src/s_xbyak.py" />
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>

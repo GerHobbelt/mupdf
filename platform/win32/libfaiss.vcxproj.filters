@@ -126,7 +126,7 @@
     <Filter Include="Misc Files\conda\faiss-gpu">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0038}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\conda\faiss-gpu-raft">
+    <Filter Include="Misc Files\conda\faiss-gpu-cuvs">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0039}</UniqueIdentifier>
     </Filter>
     <Filter Include="Misc Files\contrib">
@@ -575,6 +575,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/faiss/faiss/gpu/test/TestGpuMemoryException.cpp">
       <Filter>Source Files\faiss\gpu\test</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/faiss/faiss/gpu/test/TestGpuResidualQuantizer.cpp">
+      <Filter>Source Files\faiss\gpu\test</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/faiss/faiss/gpu/test/TestUtils.cpp">
       <Filter>Source Files\faiss\gpu\test</Filter>
     </ClCompile>
@@ -783,6 +786,9 @@
       <Filter>Source Files\tests</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/faiss/tests/test_fastscan_perf.cpp">
+      <Filter>Source Files\tests</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/faiss/tests/test_hamming.cpp">
       <Filter>Source Files\tests</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/faiss/tests/test_heap.cpp">
@@ -1214,10 +1220,10 @@
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/gpu/test/TestUtils.h">
       <Filter>Header Files\faiss\gpu\test</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/gpu/utils/DeviceUtils.h">
+    <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/gpu/utils/CuvsUtils.h">
       <Filter>Header Files\faiss\gpu\utils</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/gpu/utils/RaftUtils.h">
+    <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/gpu/utils/DeviceUtils.h">
       <Filter>Header Files\faiss\gpu\utils</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/gpu/utils/StackDeviceMemory.h">
@@ -1430,6 +1436,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/utils/hamming_distance/avx2-inl.h">
       <Filter>Header Files\faiss\utils\hamming_distance</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/utils/hamming_distance/avx512-inl.h">
+      <Filter>Header Files\faiss\utils\hamming_distance</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/utils/hamming_distance/common.h">
       <Filter>Header Files\faiss\utils\hamming_distance</Filter>
     </ClInclude>
@@ -1613,10 +1622,10 @@
     <Text Include="../../thirdparty/owemdjee/faiss/benchs/bench_ivf_fastscan_single_query.py">
       <Filter>Misc Files\benchs</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/faiss/benchs/bench_ivfflat_raft.py">
+    <Text Include="../../thirdparty/owemdjee/faiss/benchs/bench_ivfflat_cuvs.py">
       <Filter>Misc Files\benchs</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/faiss/benchs/bench_ivfpq_raft.py">
+    <Text Include="../../thirdparty/owemdjee/faiss/benchs/bench_ivfpq_cuvs.py">
       <Filter>Misc Files\benchs</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/faiss/benchs/bench_pairwise_distances.py">
@@ -1703,17 +1712,17 @@
     <Text Include="../../thirdparty/owemdjee/faiss/conda/conda_build_config.yaml">
       <Filter>Misc Files\conda</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/faiss/conda/faiss-gpu-raft/build-lib.sh">
-      <Filter>Misc Files\conda\faiss-gpu-raft</Filter>
+    <Text Include="../../thirdparty/owemdjee/faiss/conda/faiss-gpu-cuvs/build-lib.sh">
+      <Filter>Misc Files\conda\faiss-gpu-cuvs</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/faiss/conda/faiss-gpu-raft/build-pkg.sh">
-      <Filter>Misc Files\conda\faiss-gpu-raft</Filter>
+    <Text Include="../../thirdparty/owemdjee/faiss/conda/faiss-gpu-cuvs/build-pkg.sh">
+      <Filter>Misc Files\conda\faiss-gpu-cuvs</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/faiss/conda/faiss-gpu-raft/meta.yaml">
-      <Filter>Misc Files\conda\faiss-gpu-raft</Filter>
+    <Text Include="../../thirdparty/owemdjee/faiss/conda/faiss-gpu-cuvs/meta.yaml">
+      <Filter>Misc Files\conda\faiss-gpu-cuvs</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/faiss/conda/faiss-gpu-raft/test_cpu_dispatch.sh">
-      <Filter>Misc Files\conda\faiss-gpu-raft</Filter>
+    <Text Include="../../thirdparty/owemdjee/faiss/conda/faiss-gpu-cuvs/test_cpu_dispatch.sh">
+      <Filter>Misc Files\conda\faiss-gpu-cuvs</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/faiss/conda/faiss-gpu/build-lib.sh">
       <Filter>Misc Files\conda\faiss-gpu</Filter>
@@ -1904,6 +1913,9 @@
     <Text Include="../../thirdparty/owemdjee/faiss/faiss/gpu/test/test_contrib_gpu.py">
       <Filter>Misc Files\faiss\gpu\test</Filter>
     </Text>
+    <Text Include="../../thirdparty/owemdjee/faiss/faiss/gpu/test/test_cuvs.py">
+      <Filter>Misc Files\faiss\gpu\test</Filter>
+    </Text>
     <Text Include="../../thirdparty/owemdjee/faiss/faiss/gpu/test/test_gpu_basics.py">
       <Filter>Misc Files\faiss\gpu\test</Filter>
     </Text>
@@ -1916,6 +1928,9 @@
     <Text Include="../../thirdparty/owemdjee/faiss/faiss/gpu/test/test_gpu_index_ivfsq.py">
       <Filter>Misc Files\faiss\gpu\test</Filter>
     </Text>
+    <Text Include="../../thirdparty/owemdjee/faiss/faiss/gpu/test/test_gpu_index_refs.py">
+      <Filter>Misc Files\faiss\gpu\test</Filter>
+    </Text>
     <Text Include="../../thirdparty/owemdjee/faiss/faiss/gpu/test/test_gpu_index_serialize.py">
       <Filter>Misc Files\faiss\gpu\test</Filter>
     </Text>
@@ -1923,9 +1938,6 @@
       <Filter>Misc Files\faiss\gpu\test</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/faiss/faiss/gpu/test/test_multi_gpu.py">
-      <Filter>Misc Files\faiss\gpu\test</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/faiss/faiss/gpu/test/test_raft.py">
       <Filter>Misc Files\faiss\gpu\test</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/faiss/faiss/gpu/test/torch_test_contrib_gpu.py">
@@ -2049,9 +2061,6 @@
       <Filter>Misc Files\tests</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/faiss/tests/test_omp_threads_py.py">
-      <Filter>Misc Files\tests</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/faiss/tests/test_oom_exception.py">
       <Filter>Misc Files\tests</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/faiss/tests/test_partition.py">

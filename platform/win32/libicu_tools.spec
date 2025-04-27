@@ -4,7 +4,7 @@ also-ignore:
 	test/
 	samples/
 	
-	docs/design/struct/tries/bytestrie/
+	docs/
 	
 	icu4c/source/tools/escapesrc/expect-simple.cpp
 	icu4c/source/tools/escapesrc/test-simple.cpp

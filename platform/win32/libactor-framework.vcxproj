@@ -273,6 +273,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/action.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/actor.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/actor_addr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/actor_cast.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/actor_clock.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/actor_companion.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/actor_companion.test.cpp" />
@@ -406,6 +407,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/set_thread_name.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/stream_bridge.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/stringification_inspector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/stringification_inspector.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/sync_request_bouncer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/sync_ring_buffer.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/test_coordinator.cpp" />
@@ -424,6 +426,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/exit_reason.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/expected.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/byte.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/combine_latest.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/concat_map.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/coordinated.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/coordinator.cpp" />
@@ -450,6 +453,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/op/prefix_and_tail.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/op/publish.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/op/pullable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/op/retry.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/op/sample.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/op/ucast.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/op/zip_with.test.cpp" />
@@ -898,6 +902,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/bounds_checker.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/cas_weak.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/cleanup_and_release.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/combine_latest.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/comparable.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/config_consumer.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/consumer.hpp" />
@@ -1042,6 +1047,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/op/prefix_and_tail.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/op/publish.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/op/pullable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/op/retry.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/op/sample.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/op/state.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/op/ucast.hpp" />
@@ -1501,6 +1507,7 @@
     <Text Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/op/README.md" />
     <Text Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/tests/data/quotes.txt" />
     <Text Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/tests/data/range.bin" />
+    <Text Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/tests/data/values.json" />
     <Text Include="../../thirdparty/owemdjee/actor-framework/libcaf_io/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/actor-framework/libcaf_net/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/actor-framework/libcaf_openssl/CMakeLists.txt" />

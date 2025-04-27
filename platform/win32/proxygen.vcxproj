@@ -265,6 +265,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/samples/websocket/main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/tests/HTTPServerTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/tests/RequestHandlerAdaptorTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/dns/AsyncDNSStatsCollector.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/dns/CAresResolver.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/dns/CachingDNSResolver.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/dns/DNSModule.cpp" />
@@ -433,9 +434,10 @@
     <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/test/MockCodecDownstreamTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/test/SecondaryAuthManagerTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/test/TestUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/sink/HTTPConnectSink.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/sink/HTTPTransactionSink.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/sink/HTTPTunnelSink.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/sink/test/HTTPTunnelSinkTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/sink/test/HTTPConnectSinkTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/stats/ConnectionStats.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/stats/HTTPCodecStats.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/stats/HTTPCodecStatsFilter.cpp" />
@@ -571,6 +573,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/samples/push/PushStats.h" />
     <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/samples/static/StaticHandler.h" />
     <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/httpserver/samples/websocket/WebSocketHandler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/dns/AsyncDNSStatsCollector.h" />
     <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/dns/CAresResolver.h" />
     <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/dns/CachingDNSResolver.h" />
     <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/dns/DNSModule.h" />
@@ -606,7 +609,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/SynchronizedLruQuicPskCache.h" />
     <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/Types.h" />
     <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/Window.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/CodecDictionaries.h" />
     <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/CodecProtocol.h" />
     <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/CodecUtil.h" />
     <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/codec/ControlMessageRateLimitFilter.h" />
@@ -748,6 +750,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/test/MockSessionObserver.h" />
     <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/session/test/TestUtils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/sink/FlowControlInfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/sink/HTTPConnectSink.h" />
     <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/sink/HTTPSink.h" />
     <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/sink/HTTPTransactionSink.h" />
     <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/sink/HTTPTunnelSink.h" />
@@ -756,8 +759,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/stats/HTTPCodecStatsFilter.h" />
     <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/stats/HeaderCodecStats.h" />
     <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/stats/ResponseCodeStatsMinute.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/stats/SPDYStats.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/stats/SPDYStatsFilter.h" />
     <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/stats/TLResponseCodeStats.h" />
     <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/stats/ThreadLocalHTTPSessionStats.h" />
     <ClInclude Include="../../thirdparty/owemdjee/proxygen/proxygen/lib/http/structuredheaders/StructuredHeadersBuffer.h" />
@@ -913,6 +914,7 @@
     <Text Include="../../thirdparty/owemdjee/proxygen/build/fbcode_builder/manifests/boost" />
     <Text Include="../../thirdparty/owemdjee/proxygen/build/fbcode_builder/manifests/bz2" />
     <Text Include="../../thirdparty/owemdjee/proxygen/build/fbcode_builder/manifests/cabal" />
+    <Text Include="../../thirdparty/owemdjee/proxygen/build/fbcode_builder/manifests/cachelib" />
     <Text Include="../../thirdparty/owemdjee/proxygen/build/fbcode_builder/manifests/clang" />
     <Text Include="../../thirdparty/owemdjee/proxygen/build/fbcode_builder/manifests/cmake" />
     <Text Include="../../thirdparty/owemdjee/proxygen/build/fbcode_builder/manifests/cpptoml" />
@@ -938,8 +940,10 @@
     <Text Include="../../thirdparty/owemdjee/proxygen/build/fbcode_builder/manifests/hexdump" />
     <Text Include="../../thirdparty/owemdjee/proxygen/build/fbcode_builder/manifests/hsthrift" />
     <Text Include="../../thirdparty/owemdjee/proxygen/build/fbcode_builder/manifests/iproute2" />
+    <Text Include="../../thirdparty/owemdjee/proxygen/build/fbcode_builder/manifests/jom" />
     <Text Include="../../thirdparty/owemdjee/proxygen/build/fbcode_builder/manifests/jq" />
     <Text Include="../../thirdparty/owemdjee/proxygen/build/fbcode_builder/manifests/katran" />
+    <Text Include="../../thirdparty/owemdjee/proxygen/build/fbcode_builder/manifests/libaio" />
     <Text Include="../../thirdparty/owemdjee/proxygen/build/fbcode_builder/manifests/libbpf" />
     <Text Include="../../thirdparty/owemdjee/proxygen/build/fbcode_builder/manifests/libcurl" />
     <Text Include="../../thirdparty/owemdjee/proxygen/build/fbcode_builder/manifests/libdwarf" />
@@ -970,6 +974,7 @@
     <Text Include="../../thirdparty/owemdjee/proxygen/build/fbcode_builder/manifests/ninja" />
     <Text Include="../../thirdparty/owemdjee/proxygen/build/fbcode_builder/manifests/nlohmann-json" />
     <Text Include="../../thirdparty/owemdjee/proxygen/build/fbcode_builder/manifests/nmap" />
+    <Text Include="../../thirdparty/owemdjee/proxygen/build/fbcode_builder/manifests/numa" />
     <Text Include="../../thirdparty/owemdjee/proxygen/build/fbcode_builder/manifests/openr" />
     <Text Include="../../thirdparty/owemdjee/proxygen/build/fbcode_builder/manifests/openssl" />
     <Text Include="../../thirdparty/owemdjee/proxygen/build/fbcode_builder/manifests/osxfuse" />
@@ -993,6 +998,7 @@
     <Text Include="../../thirdparty/owemdjee/proxygen/build/fbcode_builder/manifests/rust-shed" />
     <Text Include="../../thirdparty/owemdjee/proxygen/build/fbcode_builder/manifests/sapling" />
     <Text Include="../../thirdparty/owemdjee/proxygen/build/fbcode_builder/manifests/snappy" />
+    <Text Include="../../thirdparty/owemdjee/proxygen/build/fbcode_builder/manifests/sparsemap" />
     <Text Include="../../thirdparty/owemdjee/proxygen/build/fbcode_builder/manifests/sqlite3" />
     <Text Include="../../thirdparty/owemdjee/proxygen/build/fbcode_builder/manifests/systemd" />
     <Text Include="../../thirdparty/owemdjee/proxygen/build/fbcode_builder/manifests/tree" />

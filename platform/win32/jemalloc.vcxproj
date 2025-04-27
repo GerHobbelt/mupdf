@@ -275,6 +275,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/prof_stack_range.c" />
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/prof_stats.c" />
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/prof_sys.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/prof_threshold.c" />
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/psset.c" />
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/rtree.c" />
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/safety_check.c" />
@@ -363,7 +364,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/hook.c" />
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/hpa.c" />
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/hpa_background_thread.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/hpa_validate_conf.c" />
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/hpdata.c" />
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/huge.c" />
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/inspect.c" />
@@ -401,6 +401,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/prof_sys_thread_name.c" />
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/prof_tctx.c" />
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/prof_thread_name.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/prof_threshold.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/prof_threshold_small.c" />
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/psset.c" />
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/ql.c" />
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/test/unit/qr.c" />
@@ -518,6 +520,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/prof_stats.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/prof_structs.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/prof_sys.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/prof_threshold.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/prof_types.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/psset.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/ql.h" />
@@ -659,7 +662,6 @@
     <Text Include="../../thirdparty/owemdjee/jemalloc/test/unit/bin_batching.sh" />
     <Text Include="../../thirdparty/owemdjee/jemalloc/test/unit/binshard.sh" />
     <Text Include="../../thirdparty/owemdjee/jemalloc/test/unit/hpa_background_thread.sh" />
-    <Text Include="../../thirdparty/owemdjee/jemalloc/test/unit/hpa_validate_conf.sh" />
     <Text Include="../../thirdparty/owemdjee/jemalloc/test/unit/inspect.sh" />
     <Text Include="../../thirdparty/owemdjee/jemalloc/test/unit/junk.sh" />
     <Text Include="../../thirdparty/owemdjee/jemalloc/test/unit/junk_alloc.sh" />
@@ -680,9 +682,11 @@
     <Text Include="../../thirdparty/owemdjee/jemalloc/test/unit/prof_sys_thread_name.sh" />
     <Text Include="../../thirdparty/owemdjee/jemalloc/test/unit/prof_tctx.sh" />
     <Text Include="../../thirdparty/owemdjee/jemalloc/test/unit/prof_thread_name.sh" />
+    <Text Include="../../thirdparty/owemdjee/jemalloc/test/unit/prof_threshold_small.sh" />
     <Text Include="../../thirdparty/owemdjee/jemalloc/test/unit/safety_check.sh" />
     <Text Include="../../thirdparty/owemdjee/jemalloc/test/unit/san.sh" />
     <Text Include="../../thirdparty/owemdjee/jemalloc/test/unit/size_check.sh" />
+    <Text Include="../../thirdparty/owemdjee/jemalloc/test/unit/size_classes.sh" />
     <Text Include="../../thirdparty/owemdjee/jemalloc/test/unit/tcache_max.sh" />
     <Text Include="../../thirdparty/owemdjee/jemalloc/test/unit/thread_event.sh" />
     <Text Include="../../thirdparty/owemdjee/jemalloc/test/unit/zero.sh" />

@@ -329,6 +329,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/faiss/faiss/gpu/test/TestGpuIndexIVFPQ.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/faiss/faiss/gpu/test/TestGpuIndexIVFScalarQuantizer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/faiss/faiss/gpu/test/TestGpuMemoryException.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/faiss/faiss/gpu/test/TestGpuResidualQuantizer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/faiss/faiss/gpu/test/TestUtils.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/faiss/faiss/gpu/test/demo_ivfpq_indexing_gpu.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/faiss/faiss/gpu/utils/StackDeviceMemory.cpp" />
@@ -399,6 +400,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/faiss/tests/test_distances_simd.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/faiss/tests/test_factory_tools.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/faiss/tests/test_fastscan_perf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/faiss/tests/test_hamming.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/faiss/tests/test_heap.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/faiss/tests/test_hnsw.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/faiss/tests/test_ivf_index.cpp" />
@@ -542,8 +544,8 @@
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/gpu/perf/IndexWrapper-inl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/gpu/perf/IndexWrapper.h" />
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/gpu/test/TestUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/gpu/utils/CuvsUtils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/gpu/utils/DeviceUtils.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/gpu/utils/RaftUtils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/gpu/utils/StackDeviceMemory.h" />
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/gpu/utils/StaticUtils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/gpu/utils/Timer.h" />
@@ -614,6 +616,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/utils/hamming-inl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/utils/hamming.h" />
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/utils/hamming_distance/avx2-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/utils/hamming_distance/avx512-inl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/utils/hamming_distance/common.h" />
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/utils/hamming_distance/generic-inl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/faiss/faiss/utils/hamming_distance/hamdis-inl.h" />
@@ -675,8 +678,8 @@
     <Text Include="../../thirdparty/owemdjee/faiss/benchs/bench_index_pq.py" />
     <Text Include="../../thirdparty/owemdjee/faiss/benchs/bench_ivf_fastscan.py" />
     <Text Include="../../thirdparty/owemdjee/faiss/benchs/bench_ivf_fastscan_single_query.py" />
-    <Text Include="../../thirdparty/owemdjee/faiss/benchs/bench_ivfflat_raft.py" />
-    <Text Include="../../thirdparty/owemdjee/faiss/benchs/bench_ivfpq_raft.py" />
+    <Text Include="../../thirdparty/owemdjee/faiss/benchs/bench_ivfflat_cuvs.py" />
+    <Text Include="../../thirdparty/owemdjee/faiss/benchs/bench_ivfpq_cuvs.py" />
     <Text Include="../../thirdparty/owemdjee/faiss/benchs/bench_pairwise_distances.py" />
     <Text Include="../../thirdparty/owemdjee/faiss/benchs/bench_partition.py" />
     <Text Include="../../thirdparty/owemdjee/faiss/benchs/bench_polysemous_1bn.py" />
@@ -705,10 +708,10 @@
     <Text Include="../../thirdparty/owemdjee/faiss/cmake/faiss-config.cmake.in" />
     <Text Include="../../thirdparty/owemdjee/faiss/cmake/link_to_faiss_lib.cmake" />
     <Text Include="../../thirdparty/owemdjee/faiss/conda/conda_build_config.yaml" />
-    <Text Include="../../thirdparty/owemdjee/faiss/conda/faiss-gpu-raft/build-lib.sh" />
-    <Text Include="../../thirdparty/owemdjee/faiss/conda/faiss-gpu-raft/build-pkg.sh" />
-    <Text Include="../../thirdparty/owemdjee/faiss/conda/faiss-gpu-raft/meta.yaml" />
-    <Text Include="../../thirdparty/owemdjee/faiss/conda/faiss-gpu-raft/test_cpu_dispatch.sh" />
+    <Text Include="../../thirdparty/owemdjee/faiss/conda/faiss-gpu-cuvs/build-lib.sh" />
+    <Text Include="../../thirdparty/owemdjee/faiss/conda/faiss-gpu-cuvs/build-pkg.sh" />
+    <Text Include="../../thirdparty/owemdjee/faiss/conda/faiss-gpu-cuvs/meta.yaml" />
+    <Text Include="../../thirdparty/owemdjee/faiss/conda/faiss-gpu-cuvs/test_cpu_dispatch.sh" />
     <Text Include="../../thirdparty/owemdjee/faiss/conda/faiss-gpu/build-lib.sh" />
     <Text Include="../../thirdparty/owemdjee/faiss/conda/faiss-gpu/build-pkg.sh" />
     <Text Include="../../thirdparty/owemdjee/faiss/conda/faiss-gpu/meta.yaml" />
@@ -772,14 +775,15 @@
     <Text Include="../../thirdparty/owemdjee/faiss/faiss/gpu/test/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/faiss/faiss/gpu/test/test_cagra.py" />
     <Text Include="../../thirdparty/owemdjee/faiss/faiss/gpu/test/test_contrib_gpu.py" />
+    <Text Include="../../thirdparty/owemdjee/faiss/faiss/gpu/test/test_cuvs.py" />
     <Text Include="../../thirdparty/owemdjee/faiss/faiss/gpu/test/test_gpu_basics.py" />
     <Text Include="../../thirdparty/owemdjee/faiss/faiss/gpu/test/test_gpu_index.py" />
     <Text Include="../../thirdparty/owemdjee/faiss/faiss/gpu/test/test_gpu_index_ivfflat.py" />
     <Text Include="../../thirdparty/owemdjee/faiss/faiss/gpu/test/test_gpu_index_ivfsq.py" />
+    <Text Include="../../thirdparty/owemdjee/faiss/faiss/gpu/test/test_gpu_index_refs.py" />
     <Text Include="../../thirdparty/owemdjee/faiss/faiss/gpu/test/test_gpu_index_serialize.py" />
     <Text Include="../../thirdparty/owemdjee/faiss/faiss/gpu/test/test_index_cpu_to_gpu.py" />
     <Text Include="../../thirdparty/owemdjee/faiss/faiss/gpu/test/test_multi_gpu.py" />
-    <Text Include="../../thirdparty/owemdjee/faiss/faiss/gpu/test/test_raft.py" />
     <Text Include="../../thirdparty/owemdjee/faiss/faiss/gpu/test/torch_test_contrib_gpu.py" />
     <Text Include="../../thirdparty/owemdjee/faiss/faiss/python/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/faiss/faiss/python/__init__.py" />
@@ -821,7 +825,6 @@
     <Text Include="../../thirdparty/owemdjee/faiss/tests/test_merge_index.py" />
     <Text Include="../../thirdparty/owemdjee/faiss/tests/test_meta_index.py" />
     <Text Include="../../thirdparty/owemdjee/faiss/tests/test_omp_threads_py.py" />
-    <Text Include="../../thirdparty/owemdjee/faiss/tests/test_oom_exception.py" />
     <Text Include="../../thirdparty/owemdjee/faiss/tests/test_partition.py" />
     <Text Include="../../thirdparty/owemdjee/faiss/tests/test_product_quantizer.py" />
     <Text Include="../../thirdparty/owemdjee/faiss/tests/test_referenced_objects.py" />

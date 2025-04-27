@@ -12,30 +12,42 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Misc Files\cmake">
+    <Filter Include="Header Files\compat">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0001}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\doc">
+    <Filter Include="Misc Files\cmake">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0002}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\doc\zip">
+    <Filter Include="Misc Files\doc">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0003}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\test">
+    <Filter Include="Misc Files\doc\zip">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0004}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\test">
+    <Filter Include="Misc Files\test">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0005}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\compat">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0006}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\test">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0007}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/minizip-ng/compat/ioapi.c">
+      <Filter>Source Files\compat</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/minizip-ng/compat/unzip.c">
+      <Filter>Source Files\compat</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/minizip-ng/compat/zip.c">
+      <Filter>Source Files\compat</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/minizip-ng/minigzip.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/minizip-ng/minizip.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/minizip-ng/mz_compat.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/minizip-ng/mz_crypt.c">
@@ -116,6 +128,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/minizip-ng/test/test_encoding.cc">
       <Filter>Source Files\test</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/minizip-ng/test/test_file.cc">
+      <Filter>Source Files\test</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/minizip-ng/test/test_main.cc">
       <Filter>Source Files\test</Filter>
     </ClCompile>
@@ -131,10 +146,19 @@
     <ClCompile Include="../../thirdparty/owemdjee/minizip-ng/test/test_stream_crypt.cc">
       <Filter>Source Files\test</Filter>
     </ClCompile>
-    <ClInclude Include="../../thirdparty/owemdjee/minizip-ng/mz.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="../../thirdparty/owemdjee/minizip-ng/compat/crypt.h">
+      <Filter>Header Files\compat</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/minizip-ng/mz_compat.h">
+    <ClInclude Include="../../thirdparty/owemdjee/minizip-ng/compat/ioapi.h">
+      <Filter>Header Files\compat</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/minizip-ng/compat/unzip.h">
+      <Filter>Header Files\compat</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/minizip-ng/compat/zip.h">
+      <Filter>Header Files\compat</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/minizip-ng/mz.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/minizip-ng/mz_crypt.h">
@@ -267,9 +291,6 @@
       <Filter>Misc Files\doc\zip</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/minizip-ng/minizip.pc.cmakein">
-      <Filter>Misc Files</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/minizip-ng/mz_compat_shim.h.in">
       <Filter>Misc Files</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/minizip-ng/test/CMakeLists.txt">

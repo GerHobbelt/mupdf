@@ -300,6 +300,7 @@
     <ClCompile Include="../../thirdparty/curl/lib/http_negotiate.c" />
     <ClCompile Include="../../thirdparty/curl/lib/http_ntlm.c" />
     <ClCompile Include="../../thirdparty/curl/lib/http_proxy.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/httpsrr.c" />
     <ClCompile Include="../../thirdparty/curl/lib/idn.c" />
     <ClCompile Include="../../thirdparty/curl/lib/if2ip.c" />
     <ClCompile Include="../../thirdparty/curl/lib/imap.c" />
@@ -397,6 +398,7 @@
     <ClCompile Include="../../thirdparty/curl/lib/vtls/sectransp.c" />
     <ClCompile Include="../../thirdparty/curl/lib/vtls/vtls.c" />
     <ClCompile Include="../../thirdparty/curl/lib/vtls/vtls_scache.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/vtls/vtls_spack.c" />
     <ClCompile Include="../../thirdparty/curl/lib/vtls/wolfssl.c" />
     <ClCompile Include="../../thirdparty/curl/lib/vtls/x509asn1.c" />
     <ClCompile Include="../../thirdparty/curl/lib/warnless.c" />
@@ -437,6 +439,7 @@
     <ClCompile Include="../../thirdparty/curl/src/tool_progress.c" />
     <ClCompile Include="../../thirdparty/curl/src/tool_setopt.c" />
     <ClCompile Include="../../thirdparty/curl/src/tool_sleep.c" />
+    <ClCompile Include="../../thirdparty/curl/src/tool_ssls.c" />
     <ClCompile Include="../../thirdparty/curl/src/tool_stderr.c" />
     <ClCompile Include="../../thirdparty/curl/src/tool_strdup.c" />
     <ClCompile Include="../../thirdparty/curl/src/tool_urlglob.c" />
@@ -483,7 +486,6 @@
     <ClInclude Include="../../thirdparty/curl/lib/config-plan9.h" />
     <ClInclude Include="../../thirdparty/curl/lib/config-riscos.h" />
     <ClInclude Include="../../thirdparty/curl/lib/config-win32.h" />
-    <ClInclude Include="../../thirdparty/curl/lib/config-win32ce.h" />
     <ClInclude Include="../../thirdparty/curl/lib/conncache.h" />
     <ClInclude Include="../../thirdparty/curl/lib/connect.h" />
     <ClInclude Include="../../thirdparty/curl/lib/content_encoding.h" />
@@ -549,6 +551,7 @@
     <ClInclude Include="../../thirdparty/curl/lib/http_negotiate.h" />
     <ClInclude Include="../../thirdparty/curl/lib/http_ntlm.h" />
     <ClInclude Include="../../thirdparty/curl/lib/http_proxy.h" />
+    <ClInclude Include="../../thirdparty/curl/lib/httpsrr.h" />
     <ClInclude Include="../../thirdparty/curl/lib/idn.h" />
     <ClInclude Include="../../thirdparty/curl/lib/if2ip.h" />
     <ClInclude Include="../../thirdparty/curl/lib/imap.h" />
@@ -633,13 +636,13 @@
     <ClInclude Include="../../thirdparty/curl/lib/vtls/vtls.h" />
     <ClInclude Include="../../thirdparty/curl/lib/vtls/vtls_int.h" />
     <ClInclude Include="../../thirdparty/curl/lib/vtls/vtls_scache.h" />
+    <ClInclude Include="../../thirdparty/curl/lib/vtls/vtls_spack.h" />
     <ClInclude Include="../../thirdparty/curl/lib/vtls/wolfssl.h" />
     <ClInclude Include="../../thirdparty/curl/lib/vtls/x509asn1.h" />
     <ClInclude Include="../../thirdparty/curl/lib/warnless.h" />
     <ClInclude Include="../../thirdparty/curl/lib/ws.h" />
     <ClInclude Include="../../thirdparty/curl/plan9/lib/mkfile.inc" />
     <ClInclude Include="../../thirdparty/curl/plan9/src/mkfile.inc" />
-    <ClInclude Include="../../thirdparty/curl/projects/wolfssl_options.h" />
     <ClInclude Include="../../thirdparty/curl/src/Makefile.inc" />
     <ClInclude Include="../../thirdparty/curl/src/slist_wc.h" />
     <ClInclude Include="../../thirdparty/curl/src/terminal.h" />
@@ -678,6 +681,7 @@
     <ClInclude Include="../../thirdparty/curl/src/tool_setopt.h" />
     <ClInclude Include="../../thirdparty/curl/src/tool_setup.h" />
     <ClInclude Include="../../thirdparty/curl/src/tool_sleep.h" />
+    <ClInclude Include="../../thirdparty/curl/src/tool_ssls.h" />
     <ClInclude Include="../../thirdparty/curl/src/tool_stderr.h" />
     <ClInclude Include="../../thirdparty/curl/src/tool_strdup.h" />
     <ClInclude Include="../../thirdparty/curl/src/tool_urlglob.h" />
@@ -709,7 +713,6 @@
     <Text Include="../../thirdparty/curl/appveyor.sh" />
     <Text Include="../../thirdparty/curl/appveyor.yml" />
     <Text Include="../../thirdparty/curl/buildconf" />
-    <Text Include="../../thirdparty/curl/buildconf.bat" />
     <Text Include="../../thirdparty/curl/configure.ac" />
     <Text Include="../../thirdparty/curl/curl-config.in" />
     <Text Include="../../thirdparty/curl/docs/ALTSVC.md" />
@@ -738,6 +741,8 @@
     <Text Include="../../thirdparty/curl/docs/HSTS.md" />
     <Text Include="../../thirdparty/curl/docs/HTTP-COOKIES.md" />
     <Text Include="../../thirdparty/curl/docs/HTTP3.md" />
+    <Text Include="../../thirdparty/curl/docs/HTTPSRR.md" />
+    <Text Include="../../thirdparty/curl/docs/INFRASTRUCTURE.md" />
     <Text Include="../../thirdparty/curl/docs/INSTALL" />
     <Text Include="../../thirdparty/curl/docs/INSTALL-CMAKE.md" />
     <Text Include="../../thirdparty/curl/docs/INSTALL.md" />
@@ -1014,6 +1019,7 @@
     <Text Include="../../thirdparty/curl/docs/cmdline-opts/ssl-no-revoke.md" />
     <Text Include="../../thirdparty/curl/docs/cmdline-opts/ssl-reqd.md" />
     <Text Include="../../thirdparty/curl/docs/cmdline-opts/ssl-revoke-best-effort.md" />
+    <Text Include="../../thirdparty/curl/docs/cmdline-opts/ssl-sessions.md" />
     <Text Include="../../thirdparty/curl/docs/cmdline-opts/ssl.md" />
     <Text Include="../../thirdparty/curl/docs/cmdline-opts/sslv2.md" />
     <Text Include="../../thirdparty/curl/docs/cmdline-opts/sslv3.md" />
@@ -1095,6 +1101,8 @@
     <Text Include="../../thirdparty/curl/docs/libcurl/curl_easy_reset.md" />
     <Text Include="../../thirdparty/curl/docs/libcurl/curl_easy_send.md" />
     <Text Include="../../thirdparty/curl/docs/libcurl/curl_easy_setopt.md" />
+    <Text Include="../../thirdparty/curl/docs/libcurl/curl_easy_ssls_export.md" />
+    <Text Include="../../thirdparty/curl/docs/libcurl/curl_easy_ssls_import.md" />
     <Text Include="../../thirdparty/curl/docs/libcurl/curl_easy_strerror.md" />
     <Text Include="../../thirdparty/curl/docs/libcurl/curl_easy_unescape.md" />
     <Text Include="../../thirdparty/curl/docs/libcurl/curl_easy_upkeep.md" />
@@ -1203,6 +1211,7 @@
     <Text Include="../../thirdparty/curl/docs/libcurl/opts/CURLINFO_FTP_ENTRY_PATH.md" />
     <Text Include="../../thirdparty/curl/docs/libcurl/opts/CURLINFO_HEADER_SIZE.md" />
     <Text Include="../../thirdparty/curl/docs/libcurl/opts/CURLINFO_HTTPAUTH_AVAIL.md" />
+    <Text Include="../../thirdparty/curl/docs/libcurl/opts/CURLINFO_HTTPAUTH_USED.md" />
     <Text Include="../../thirdparty/curl/docs/libcurl/opts/CURLINFO_HTTP_CONNECTCODE.md" />
     <Text Include="../../thirdparty/curl/docs/libcurl/opts/CURLINFO_HTTP_VERSION.md" />
     <Text Include="../../thirdparty/curl/docs/libcurl/opts/CURLINFO_LASTSOCKET.md" />
@@ -1220,6 +1229,7 @@
     <Text Include="../../thirdparty/curl/docs/libcurl/opts/CURLINFO_PRIVATE.md" />
     <Text Include="../../thirdparty/curl/docs/libcurl/opts/CURLINFO_PROTOCOL.md" />
     <Text Include="../../thirdparty/curl/docs/libcurl/opts/CURLINFO_PROXYAUTH_AVAIL.md" />
+    <Text Include="../../thirdparty/curl/docs/libcurl/opts/CURLINFO_PROXYAUTH_USED.md" />
     <Text Include="../../thirdparty/curl/docs/libcurl/opts/CURLINFO_PROXY_ERROR.md" />
     <Text Include="../../thirdparty/curl/docs/libcurl/opts/CURLINFO_PROXY_SSL_VERIFYRESULT.md" />
     <Text Include="../../thirdparty/curl/docs/libcurl/opts/CURLINFO_QUEUE_TIME_T.md" />
@@ -1638,10 +1648,8 @@
     <Text Include="../../thirdparty/curl/projects/Windows/VC12/lib/libcurl.tmpl" />
     <Text Include="../../thirdparty/curl/projects/Windows/VC12/src/curl.tmpl" />
     <Text Include="../../thirdparty/curl/projects/build-openssl.bat" />
-    <Text Include="../../thirdparty/curl/projects/build-wolfssl.bat" />
     <Text Include="../../thirdparty/curl/projects/checksrc.bat" />
     <Text Include="../../thirdparty/curl/projects/generate.bat" />
-    <Text Include="../../thirdparty/curl/projects/wolfssl_override.props" />
     <Text Include="../../thirdparty/curl/renovate.json" />
     <Text Include="../../thirdparty/curl/scripts/Makefile.am" />
     <Text Include="../../thirdparty/curl/scripts/cd2cd" />
@@ -1673,7 +1681,6 @@
     <Text Include="../../thirdparty/curl/src/Makefile.am" />
     <Text Include="../../thirdparty/curl/src/mk-file-embed.pl" />
     <Text Include="../../thirdparty/curl/src/mkhelp.pl" />
-    <Text Include="../../thirdparty/curl/src/tool_hugehelp.c.cvs" />
     <Text Include="../../thirdparty/curl/winbuild/Makefile.vc" />
     <Text Include="../../thirdparty/curl/winbuild/MakefileBuild.vc" />
     <Text Include="../../thirdparty/curl/winbuild/README.md" />

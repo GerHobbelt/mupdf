@@ -356,6 +356,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/base/cord_utils.cc">
       <Filter>Source Files\riegeli\base</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/base/debug.cc">
+      <Filter>Source Files\riegeli\base</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/base/errno_mapping.cc">
       <Filter>Source Files\riegeli\base</Filter>
     </ClCompile>
@@ -384,6 +387,9 @@
       <Filter>Source Files\riegeli\base</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/base/status.cc">
+      <Filter>Source Files\riegeli\base</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/base/stream_utils.cc">
       <Filter>Source Files\riegeli\base</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/base/string_utils.cc">
@@ -461,9 +467,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/fd_internal.cc">
       <Filter>Source Files\riegeli\bytes</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/fd_internal_for_headers.cc">
-      <Filter>Source Files\riegeli\bytes</Filter>
-    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/fd_mmap_reader.cc">
       <Filter>Source Files\riegeli\bytes</Filter>
     </ClCompile>
@@ -500,10 +503,16 @@
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/ostream_writer.cc">
       <Filter>Source Files\riegeli\bytes</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/position_shifting_backward_writer.cc">
+      <Filter>Source Files\riegeli\bytes</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/position_shifting_reader.cc">
       <Filter>Source Files\riegeli\bytes</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/position_shifting_writer.cc">
+      <Filter>Source Files\riegeli\bytes</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/prefix_limiting_backward_writer.cc">
       <Filter>Source Files\riegeli\bytes</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/prefix_limiting_reader.cc">
@@ -677,19 +686,19 @@
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/lz4/lz4_writer.cc">
       <Filter>Source Files\riegeli\lz4</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/message_parse.cc">
-      <Filter>Source Files\riegeli\messages</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/message_serialize.cc">
-      <Filter>Source Files\riegeli\messages</Filter>
-    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/message_wire_format.cc">
       <Filter>Source Files\riegeli\messages</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/text_parse.cc">
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/parse_message.cc">
       <Filter>Source Files\riegeli\messages</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/text_print.cc">
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/serialize_message.cc">
+      <Filter>Source Files\riegeli\messages</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/text_parse_message.cc">
+      <Filter>Source Files\riegeli\messages</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/text_print_message.cc">
       <Filter>Source Files\riegeli\messages</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/ordered_varint/ordered_varint_reading.cc">
@@ -833,6 +842,12 @@
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/byte_fill.h">
       <Filter>Header Files\riegeli\base</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/bytes_ref.h">
+      <Filter>Header Files\riegeli\base</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/c_string_ref.h">
+      <Filter>Header Files\riegeli\base</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/chain.h">
       <Filter>Header Files\riegeli\base</Filter>
     </ClInclude>
@@ -855,6 +870,9 @@
       <Filter>Header Files\riegeli\base</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/cord_utils.h">
+      <Filter>Header Files\riegeli\base</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/debug.h">
       <Filter>Header Files\riegeli\base</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/dependency.h">
@@ -953,13 +971,16 @@
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/status.h">
       <Filter>Header Files\riegeli\base</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/stream_utils.h">
+      <Filter>Header Files\riegeli\base</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/string_ref.h">
+      <Filter>Header Files\riegeli\base</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/string_utils.h">
       <Filter>Header Files\riegeli\base</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/temporary_storage.h">
-      <Filter>Header Files\riegeli\base</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/to_string_view.h">
       <Filter>Header Files\riegeli\base</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/type_erased_ref.h">
@@ -1016,6 +1037,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/cfile_internal.h">
       <Filter>Header Files\riegeli\bytes</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/cfile_internal_for_cc.h">
+      <Filter>Header Files\riegeli\bytes</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/cfile_reader.h">
       <Filter>Header Files\riegeli\bytes</Filter>
     </ClInclude>
@@ -1052,7 +1076,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/fd_internal.h">
       <Filter>Header Files\riegeli\bytes</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/fd_internal_for_headers.h">
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/fd_internal_for_cc.h">
       <Filter>Header Files\riegeli\bytes</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/fd_mmap_reader.h">
@@ -1094,10 +1118,19 @@
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/ostream_writer.h">
       <Filter>Header Files\riegeli\bytes</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/path_ref.h">
+      <Filter>Header Files\riegeli\bytes</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/position_shifting_backward_writer.h">
+      <Filter>Header Files\riegeli\bytes</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/position_shifting_reader.h">
       <Filter>Header Files\riegeli\bytes</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/position_shifting_writer.h">
+      <Filter>Header Files\riegeli\bytes</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/prefix_limiting_backward_writer.h">
       <Filter>Header Files\riegeli\bytes</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/prefix_limiting_reader.h">
@@ -1319,19 +1352,19 @@
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/lz4/lz4_writer.h">
       <Filter>Header Files\riegeli\lz4</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/message_parse.h">
-      <Filter>Header Files\riegeli\messages</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/message_serialize.h">
-      <Filter>Header Files\riegeli\messages</Filter>
-    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/message_wire_format.h">
       <Filter>Header Files\riegeli\messages</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/text_parse.h">
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/parse_message.h">
       <Filter>Header Files\riegeli\messages</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/text_print.h">
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/serialize_message.h">
+      <Filter>Header Files\riegeli\messages</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/text_parse_message.h">
+      <Filter>Header Files\riegeli\messages</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/text_print_message.h">
       <Filter>Header Files\riegeli\messages</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/ordered_varint/ordered_varint_internal.h">
@@ -1392,6 +1425,9 @@
       <Filter>Header Files\riegeli\tensorflow\io</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/tensorflow/io/file_writer.h">
+      <Filter>Header Files\riegeli\tensorflow\io</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/tensorflow/io/tstring_writer.h">
       <Filter>Header Files\riegeli\tensorflow\io</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/text/ascii_align.h">

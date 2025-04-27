@@ -224,7 +224,7 @@
   </ImportGroup>
   <ItemGroup>
     <ClCompile Include="../../thirdparty/owemdjee/PhotonLibOS/common/alog.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/PhotonLibOS/common/checksum/crc32c.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotonLibOS/common/checksum/crc.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/PhotonLibOS/common/checksum/test/test_checksum.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/PhotonLibOS/common/estring.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/PhotonLibOS/common/event-loop.cpp" />
@@ -326,13 +326,14 @@
     <ClCompile Include="../../thirdparty/owemdjee/PhotonLibOS/net/http/test/forward_proxy_server.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/PhotonLibOS/net/http/test/fs_server.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/PhotonLibOS/net/http/test/headers_test.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/PhotonLibOS/net/http/test/pure_libcurl.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/PhotonLibOS/net/http/test/server_function_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/PhotonLibOS/net/http/test/server_perf.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/PhotonLibOS/net/http/url.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/PhotonLibOS/net/iostream.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/PhotonLibOS/net/kernel_socket.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/PhotonLibOS/net/pooled_socket.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotonLibOS/net/rsocket/rsocket.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotonLibOS/net/rsocket/test/test-rsocket.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/PhotonLibOS/net/security-context/sasl-stream.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/PhotonLibOS/net/security-context/test/test-sasl.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/PhotonLibOS/net/security-context/test/test.cpp" />
@@ -390,6 +391,8 @@
     <ClInclude Include="../../thirdparty/owemdjee/PhotonLibOS/common/async_stream.h" />
     <ClInclude Include="../../thirdparty/owemdjee/PhotonLibOS/common/callback.h" />
     <ClInclude Include="../../thirdparty/owemdjee/PhotonLibOS/common/checksum/crc32c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotonLibOS/common/checksum/crc64ecma.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotonLibOS/common/checksum/sse2neon.h" />
     <ClInclude Include="../../thirdparty/owemdjee/PhotonLibOS/common/consistent-hash-map.h" />
     <ClInclude Include="../../thirdparty/owemdjee/PhotonLibOS/common/conststr.h" />
     <ClInclude Include="../../thirdparty/owemdjee/PhotonLibOS/common/enumerable.h" />
@@ -453,6 +456,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/PhotonLibOS/fs/throttled-file.h" />
     <ClInclude Include="../../thirdparty/owemdjee/PhotonLibOS/fs/virtual-file.h" />
     <ClInclude Include="../../thirdparty/owemdjee/PhotonLibOS/fs/xfile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotonLibOS/include/photon/common/checksum/crc64ecma.h" />
     <ClInclude Include="../../thirdparty/owemdjee/PhotonLibOS/include/photon/common/executor/easyawaiter.h" />
     <ClInclude Include="../../thirdparty/owemdjee/PhotonLibOS/include/photon/common/hash_combine.h" />
     <ClInclude Include="../../thirdparty/owemdjee/PhotonLibOS/include/photon/common/message.h" />
@@ -466,6 +470,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/PhotonLibOS/include/photon/io/fstack-dpdk.h" />
     <ClInclude Include="../../thirdparty/owemdjee/PhotonLibOS/include/photon/net/datagram_socket.h" />
     <ClInclude Include="../../thirdparty/owemdjee/PhotonLibOS/include/photon/net/iostream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotonLibOS/include/photon/net/rsocket/rsocket.h" />
     <ClInclude Include="../../thirdparty/owemdjee/PhotonLibOS/include/photon/net/utils-stdstring.h" />
     <ClInclude Include="../../thirdparty/owemdjee/PhotonLibOS/include/photon/thread/arch.h" />
     <ClInclude Include="../../thirdparty/owemdjee/PhotonLibOS/include/photon/thread/awaiter.h" />
@@ -494,6 +499,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/PhotonLibOS/net/http/url.h" />
     <ClInclude Include="../../thirdparty/owemdjee/PhotonLibOS/net/http/verb.h" />
     <ClInclude Include="../../thirdparty/owemdjee/PhotonLibOS/net/iostream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotonLibOS/net/rsocket/rsocket.h" />
     <ClInclude Include="../../thirdparty/owemdjee/PhotonLibOS/net/security-context/sasl-stream.h" />
     <ClInclude Include="../../thirdparty/owemdjee/PhotonLibOS/net/security-context/tls-stream.h" />
     <ClInclude Include="../../thirdparty/owemdjee/PhotonLibOS/net/socket.h" />
@@ -538,6 +544,8 @@
     <Image Include="../../thirdparty/owemdjee/PhotonLibOS/doc/static/img/api/thread-vcpu.png" />
     <Image Include="../../thirdparty/owemdjee/PhotonLibOS/doc/static/img/favicon.ico" />
     <Image Include="../../thirdparty/owemdjee/PhotonLibOS/doc/static/img/photon.png" />
+    <NASM Include="../../thirdparty/owemdjee/PhotonLibOS/common/checksum/test/crc32_iscsi_00.asm" />
+    <NASM Include="../../thirdparty/owemdjee/PhotonLibOS/common/checksum/test/crc64_ecma_refl_by8.asm" />
     <Text Include="../../thirdparty/owemdjee/PhotonLibOS/CMake/Findaio.cmake" />
     <Text Include="../../thirdparty/owemdjee/PhotonLibOS/CMake/Findcurl.cmake" />
     <Text Include="../../thirdparty/owemdjee/PhotonLibOS/CMake/Finde2fs.cmake" />
@@ -547,6 +555,7 @@
     <Text Include="../../thirdparty/owemdjee/PhotonLibOS/CMake/Findgoogletest.cmake" />
     <Text Include="../../thirdparty/owemdjee/PhotonLibOS/CMake/Findgsasl.cmake" />
     <Text Include="../../thirdparty/owemdjee/PhotonLibOS/CMake/Findopenssl.cmake" />
+    <Text Include="../../thirdparty/owemdjee/PhotonLibOS/CMake/Findrdmacore.cmake" />
     <Text Include="../../thirdparty/owemdjee/PhotonLibOS/CMake/Finduring.cmake" />
     <Text Include="../../thirdparty/owemdjee/PhotonLibOS/CMake/Findzlib.cmake" />
     <Text Include="../../thirdparty/owemdjee/PhotonLibOS/CMake/build-from-src.cmake" />
@@ -555,7 +564,10 @@
     <Text Include="../../thirdparty/owemdjee/PhotonLibOS/LICENSE" />
     <Text Include="../../thirdparty/owemdjee/PhotonLibOS/README.md" />
     <Text Include="../../thirdparty/owemdjee/PhotonLibOS/common/checksum/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/PhotonLibOS/common/checksum/test/checksum.crc64" />
     <Text Include="../../thirdparty/owemdjee/PhotonLibOS/common/checksum/test/checksum.in" />
+    <Text Include="../../thirdparty/owemdjee/PhotonLibOS/common/checksum/test/crc32_iscsi_crc_ext.S" />
+    <Text Include="../../thirdparty/owemdjee/PhotonLibOS/common/checksum/test/crc64_ecma_refl_pmull.S" />
     <Text Include="../../thirdparty/owemdjee/PhotonLibOS/common/executor/test/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/PhotonLibOS/common/memory-stream/test/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/PhotonLibOS/common/test/CMakeLists.txt" />
@@ -639,6 +651,7 @@
     <Text Include="../../thirdparty/owemdjee/PhotonLibOS/fs/test/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/PhotonLibOS/io/test/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/PhotonLibOS/net/http/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/PhotonLibOS/net/rsocket/test/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/PhotonLibOS/net/security-context/test/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/PhotonLibOS/net/test/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/PhotonLibOS/rpc/test/CMakeLists.txt" />

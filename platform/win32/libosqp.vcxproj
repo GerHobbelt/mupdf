@@ -250,6 +250,14 @@
     <ClCompile Include="../../thirdparty/owemdjee/osqp/algebra/mkl/vector.c" />
     <ClCompile Include="../../thirdparty/owemdjee/osqp/examples/osqp_codegen_demo.c" />
     <ClCompile Include="../../thirdparty/owemdjee/osqp/examples/osqp_demo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/examples/osqp_simple_demo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/examples/problems/cvxqp2_s.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/examples/problems/hs21.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/examples/problems/hs35.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/examples/problems/largeqp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/examples/problems/primalc1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/examples/problems/qpcblend.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/examples/problems/qptest.c" />
     <ClCompile Include="../../thirdparty/owemdjee/osqp/src/auxil.c" />
     <ClCompile Include="../../thirdparty/owemdjee/osqp/src/codegen.c" />
     <ClCompile Include="../../thirdparty/owemdjee/osqp/src/derivative.c" />
@@ -259,10 +267,12 @@
     <ClCompile Include="../../thirdparty/owemdjee/osqp/src/osqp_api.c" />
     <ClCompile Include="../../thirdparty/owemdjee/osqp/src/polish.c" />
     <ClCompile Include="../../thirdparty/owemdjee/osqp/src/profilers.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/src/profilers_impl.c" />
     <ClCompile Include="../../thirdparty/owemdjee/osqp/src/profilers_itt.c" />
     <ClCompile Include="../../thirdparty/owemdjee/osqp/src/profilers_nvtx.c" />
     <ClCompile Include="../../thirdparty/owemdjee/osqp/src/profilers_omnitrace.c" />
     <ClCompile Include="../../thirdparty/owemdjee/osqp/src/profilers_roctx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/src/profilers_terminal.c" />
     <ClCompile Include="../../thirdparty/owemdjee/osqp/src/scaling.c" />
     <ClCompile Include="../../thirdparty/owemdjee/osqp/src/timing_linux.c" />
     <ClCompile Include="../../thirdparty/owemdjee/osqp/src/timing_macos.c" />
@@ -280,6 +290,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/osqp/tests/codegen/test_codegen.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osqp/tests/codegen/vector/vec_codegen_test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/osqp/tests/codegen/vector/vec_codegen_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/tests/csc_api/test_csc_api.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osqp/tests/custom_memory/custom_memory.c" />
     <ClCompile Include="../../thirdparty/owemdjee/osqp/tests/custom_printing/custom_printing.c" />
     <ClCompile Include="../../thirdparty/owemdjee/osqp/tests/demo/test_demo.cpp" />
@@ -298,6 +309,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/osqp/tests/osqp_tester.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osqp/tests/primal_dual_infeasibility/test_primal_dual_infeasibility.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osqp/tests/primal_infeasibility/test_primal_infeasibility.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/tests/settings/test_settings.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osqp/tests/unconstrained/test_unconstrained.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osqp/tests/update_matrices/test_update_matrices.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osqp/tests/utils/test_utils.cpp" />
@@ -326,6 +338,13 @@
     <ClInclude Include="../../thirdparty/owemdjee/osqp/algebra/mkl/blas_helpers.h" />
     <ClInclude Include="../../thirdparty/owemdjee/osqp/algebra/mkl/lin_sys/direct/pardiso_interface.h" />
     <ClInclude Include="../../thirdparty/owemdjee/osqp/algebra/mkl/lin_sys/indirect/mkl-cg_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/examples/problems/cvxqp2_s.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/examples/problems/hs21.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/examples/problems/hs35.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/examples/problems/largeqp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/examples/problems/primalc1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/examples/problems/qpcblend.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/examples/problems/qptest.h" />
     <ClInclude Include="../../thirdparty/owemdjee/osqp/include/private/algebra_matrix.h" />
     <ClInclude Include="../../thirdparty/owemdjee/osqp/include/private/algebra_vector.h" />
     <ClInclude Include="../../thirdparty/owemdjee/osqp/include/private/auxil.h" />
@@ -445,6 +464,7 @@
     <Text Include="../../thirdparty/owemdjee/osqp/docs/examples/portfolio.rst" />
     <Text Include="../../thirdparty/owemdjee/osqp/docs/examples/setup-and-solve.rst" />
     <Text Include="../../thirdparty/owemdjee/osqp/docs/examples/svm.rst" />
+    <Text Include="../../thirdparty/owemdjee/osqp/docs/examples/torch.rst" />
     <Text Include="../../thirdparty/owemdjee/osqp/docs/examples/update-matrices.rst" />
     <Text Include="../../thirdparty/owemdjee/osqp/docs/examples/update-vectors.rst" />
     <Text Include="../../thirdparty/owemdjee/osqp/docs/get_started/C.rst" />
@@ -606,6 +626,7 @@
     <Text Include="../../thirdparty/owemdjee/osqp/tests/codegen/generate_problem.py" />
     <Text Include="../../thirdparty/owemdjee/osqp/tests/codegen/matrix/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/osqp/tests/codegen/vector/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/osqp/tests/csc_api/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/osqp/tests/custom_memory/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/osqp/tests/custom_printing/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/osqp/tests/demo/CMakeLists.txt" />
@@ -627,6 +648,7 @@
     <Text Include="../../thirdparty/owemdjee/osqp/tests/primal_infeasibility/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/osqp/tests/primal_infeasibility/__init__.py" />
     <Text Include="../../thirdparty/owemdjee/osqp/tests/primal_infeasibility/generate_problem.py" />
+    <Text Include="../../thirdparty/owemdjee/osqp/tests/settings/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/osqp/tests/solve_linsys/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/osqp/tests/solve_linsys/__init__.py" />
     <Text Include="../../thirdparty/owemdjee/osqp/tests/solve_linsys/generate_problem.py" />

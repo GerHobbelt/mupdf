@@ -236,6 +236,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/base/chain.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/base/compact_string.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/base/cord_utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/base/debug.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/base/errno_mapping.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/base/external_data.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/base/memory_estimator.cc" />
@@ -246,6 +247,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/base/shared_buffer.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/base/sized_shared_buffer.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/base/status.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/base/stream_utils.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/base/string_utils.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/base/unicode.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/brotli/brotli_allocator.cc" />
@@ -271,7 +273,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/cord_writer.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/fd_handle.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/fd_internal.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/fd_internal_for_headers.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/fd_mmap_reader.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/fd_reader.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/fd_writer.cc" />
@@ -284,8 +285,10 @@
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/null_backward_writer.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/null_writer.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/ostream_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/position_shifting_backward_writer.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/position_shifting_reader.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/position_shifting_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/prefix_limiting_backward_writer.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/prefix_limiting_reader.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/prefix_limiting_writer.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/pullable_reader.cc" />
@@ -343,11 +346,11 @@
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/lz4/lz4_dictionary.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/lz4/lz4_reader.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/lz4/lz4_writer.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/message_parse.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/message_serialize.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/message_wire_format.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/text_parse.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/text_print.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/parse_message.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/serialize_message.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/text_parse_message.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/text_print_message.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/ordered_varint/ordered_varint_reading.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/ordered_varint/ordered_varint_writing.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/records/chunk_reader.cc" />
@@ -395,6 +398,8 @@
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/buffer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/buffering.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/byte_fill.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/bytes_ref.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/c_string_ref.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/chain.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/chain_base.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/chain_details.h" />
@@ -403,6 +408,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/compare.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/constexpr.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/cord_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/debug.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/dependency.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/dependency_base.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/dependency_manager.h" />
@@ -435,9 +441,10 @@
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/sized_shared_buffer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/stable_dependency.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/status.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/stream_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/string_ref.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/string_utils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/temporary_storage.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/to_string_view.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/type_erased_ref.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/type_id.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/type_traits.h" />
@@ -456,6 +463,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/buffered_writer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/cfile_handle.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/cfile_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/cfile_internal_for_cc.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/cfile_reader.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/cfile_writer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/chain_backward_writer.h" />
@@ -468,7 +476,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/cord_writer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/fd_handle.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/fd_internal.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/fd_internal_for_headers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/fd_internal_for_cc.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/fd_mmap_reader.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/fd_reader.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/fd_writer.h" />
@@ -482,8 +490,11 @@
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/null_backward_writer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/null_writer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/ostream_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/path_ref.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/position_shifting_backward_writer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/position_shifting_reader.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/position_shifting_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/prefix_limiting_backward_writer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/prefix_limiting_reader.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/prefix_limiting_writer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/pullable_reader.h" />
@@ -557,11 +568,11 @@
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/lz4/lz4_dictionary.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/lz4/lz4_reader.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/lz4/lz4_writer.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/message_parse.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/message_serialize.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/message_wire_format.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/text_parse.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/text_print.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/parse_message.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/serialize_message.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/text_parse_message.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/text_print_message.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/ordered_varint/ordered_varint_internal.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/ordered_varint/ordered_varint_reading.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/ordered_varint/ordered_varint_writing.h" />
@@ -582,6 +593,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/snappy/snappy_writer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/tensorflow/io/file_reader.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/tensorflow/io/file_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/tensorflow/io/tstring_writer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/text/ascii_align.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/text/join.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/text/write_int.h" />

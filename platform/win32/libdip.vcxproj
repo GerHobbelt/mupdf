@@ -290,7 +290,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/libdip/src/library/framework_projection.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libdip/src/library/framework_scan.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libdip/src/library/framework_separable.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/library/graph.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libdip/src/library/image.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libdip/src/library/image_copy.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libdip/src/library/image_data.cpp" />
@@ -346,6 +345,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/libdip/src/morphology/one_dimensional.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libdip/src/morphology/pathopening.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libdip/src/morphology/reconstruction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/morphology/stochastic_watershed.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libdip/src/morphology/upperskeleton2d.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libdip/src/morphology/watershed.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libdip/src/morphology/watershed_support.cpp" />
@@ -363,6 +363,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/libdip/src/regions/region_adjacency_graph.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libdip/src/segmentation/canny.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libdip/src/segmentation/ellipse_fit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/segmentation/graph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdip/src/segmentation/graph_cut.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libdip/src/segmentation/kmeans_clustering.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libdip/src/segmentation/minimum_variance_partitioning.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libdip/src/segmentation/superpixels.cpp" />
@@ -438,6 +440,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/nonlinear.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/overload.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/pixel_table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/polygon.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/private/constfor.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/private/pcg_extras.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/libdip/include/diplib/private/pcg_random.hpp" />
@@ -488,6 +491,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/libdip/src/file_io/file_io_support.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdip/src/generation/draw_support.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdip/src/geometry/interpolation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdip/src/histogram/threshold_algorithms.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdip/src/library/framework_support.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdip/src/measurement/feature_aspect_ratio_feret.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdip/src/measurement/feature_bending_energy.h" />
@@ -557,8 +561,6 @@
     <Image Include="../../thirdparty/owemdjee/libdip/doc/src/PyDIP/basics-12.png" />
     <Image Include="../../thirdparty/owemdjee/libdip/doc/src/PyDIP/basics-13.png" />
     <Image Include="../../thirdparty/owemdjee/libdip/doc/src/PyDIP/basics-14.png" />
-    <Image Include="../../thirdparty/owemdjee/libdip/doc/src/PyDIP/basics-16.png" />
-    <Image Include="../../thirdparty/owemdjee/libdip/doc/src/PyDIP/basics-17.png" />
     <Image Include="../../thirdparty/owemdjee/libdip/doc/src/PyDIP/basics-2.png" />
     <Image Include="../../thirdparty/owemdjee/libdip/doc/src/PyDIP/basics-3.png" />
     <Image Include="../../thirdparty/owemdjee/libdip/doc/src/PyDIP/basics-4.png" />
@@ -569,6 +571,9 @@
     <Image Include="../../thirdparty/owemdjee/libdip/doc/src/PyDIP/basics-9.png" />
     <Image Include="../../thirdparty/owemdjee/libdip/doc/src/PyDIP/filtering-2.png" />
     <Image Include="../../thirdparty/owemdjee/libdip/doc/src/PyDIP/filtering-3.png" />
+    <Image Include="../../thirdparty/owemdjee/libdip/doc/src/PyDIP/measurement-1.png" />
+    <Image Include="../../thirdparty/owemdjee/libdip/doc/src/PyDIP/measurement-2.png" />
+    <Image Include="../../thirdparty/owemdjee/libdip/doc/src/PyDIP/measurement-3.png" />
     <Image Include="../../thirdparty/owemdjee/libdip/doc/src/PyDIP/tensor_images-1.png" />
     <Image Include="../../thirdparty/owemdjee/libdip/doc/src/PyDIP/tensor_images-2.png" />
     <Image Include="../../thirdparty/owemdjee/libdip/doc/src/PyDIP/tensor_images-3.png" />
@@ -592,6 +597,7 @@
     <Text Include="../../thirdparty/owemdjee/libdip/changelogs/diplib_3.4.3.md" />
     <Text Include="../../thirdparty/owemdjee/libdip/changelogs/diplib_3.5.0.md" />
     <Text Include="../../thirdparty/owemdjee/libdip/changelogs/diplib_3.5.1.md" />
+    <Text Include="../../thirdparty/owemdjee/libdip/changelogs/diplib_3.5.2.md" />
     <Text Include="../../thirdparty/owemdjee/libdip/changelogs/diplib_next.md" />
     <Text Include="../../thirdparty/owemdjee/libdip/changelogs/readme.txt" />
     <Text Include="../../thirdparty/owemdjee/libdip/changelogs/template.md" />
@@ -643,6 +649,7 @@
     <Text Include="../../thirdparty/owemdjee/libdip/doc/src/PyDIP/filtering.md" />
     <Text Include="../../thirdparty/owemdjee/libdip/doc/src/PyDIP/indexing.md" />
     <Text Include="../../thirdparty/owemdjee/libdip/doc/src/PyDIP/installation.md" />
+    <Text Include="../../thirdparty/owemdjee/libdip/doc/src/PyDIP/measurement.md" />
     <Text Include="../../thirdparty/owemdjee/libdip/doc/src/PyDIP/numpy.md" />
     <Text Include="../../thirdparty/owemdjee/libdip/doc/src/PyDIP/tensor_images.md" />
     <Text Include="../../thirdparty/owemdjee/libdip/doc/src/concepts.md" />
@@ -664,6 +671,7 @@
     <Text Include="../../thirdparty/owemdjee/libdip/tools/FindFreeGLUT.cmake" />
     <Text Include="../../thirdparty/owemdjee/libdip/tools/FindGLFW.cmake" />
     <Text Include="../../thirdparty/owemdjee/libdip/tools/FindMatlab.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libdip/tools/add_doc_links_to_dipimage.py" />
     <Text Include="../../thirdparty/owemdjee/libdip/tools/build/cmake_windows_2017a.bat" />
     <Text Include="../../thirdparty/owemdjee/libdip/tools/build/cmake_windows_2018b.bat" />
     <Text Include="../../thirdparty/owemdjee/libdip/tools/build/deploy_linux.sh" />

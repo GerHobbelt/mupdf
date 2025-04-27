@@ -282,7 +282,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/libxml2/example/xpath2.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libxml2/globals.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libxml2/hash.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libxml2/legacy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxml2/lintmain.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libxml2/list.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libxml2/nanohttp.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libxml2/parser.c" />
@@ -390,18 +390,18 @@
     <ClInclude Include="../../thirdparty/owemdjee/libxml2/include/private/globals.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libxml2/include/private/html.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libxml2/include/private/io.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxml2/include/private/lint.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libxml2/include/private/memory.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libxml2/include/private/parser.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libxml2/include/private/regexp.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libxml2/include/private/save.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libxml2/include/private/shell.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libxml2/include/private/string.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libxml2/include/private/threads.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libxml2/include/private/tree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxml2/include/private/unicode.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libxml2/include/private/xinclude.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libxml2/include/private/xpath.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libxml2/include/private/xzlib.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libxml2/include/wsockcompat.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libxml2/iso8859x.inc" />
     <ClInclude Include="../../thirdparty/owemdjee/libxml2/libxml.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libxml2/test/relaxng/include0.inc" />
@@ -576,13 +576,8 @@
     <Text Include="../../thirdparty/owemdjee/libxml2/libxml.m4" />
     <Text Include="../../thirdparty/owemdjee/libxml2/libxml2-config.cmake.cmake.in" />
     <Text Include="../../thirdparty/owemdjee/libxml2/libxml2-config.cmake.in" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/libxml2.syms" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/m4/ax_append_flag.m4" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/m4/ax_append_link_flags.m4" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/m4/ax_check_link_flag.m4" />
     <Text Include="../../thirdparty/owemdjee/libxml2/m4/ax_gcc_func_attribute.m4" />
     <Text Include="../../thirdparty/owemdjee/libxml2/m4/ax_recursive_eval.m4" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/m4/ax_require_defined.m4" />
     <Text Include="../../thirdparty/owemdjee/libxml2/meson_options.txt" />
     <Text Include="../../thirdparty/owemdjee/libxml2/post_update.sh" />
     <Text Include="../../thirdparty/owemdjee/libxml2/result/HTML/53867.html" />
@@ -636,6 +631,8 @@
     <Text Include="../../thirdparty/owemdjee/libxml2/result/HTML/html5-entities.html.sax" />
     <Text Include="../../thirdparty/owemdjee/libxml2/result/HTML/html5_enc.html" />
     <Text Include="../../thirdparty/owemdjee/libxml2/result/HTML/html5_enc.html.sax" />
+    <Text Include="../../thirdparty/owemdjee/libxml2/result/HTML/implied1.html" />
+    <Text Include="../../thirdparty/owemdjee/libxml2/result/HTML/implied1.html.sax" />
     <Text Include="../../thirdparty/owemdjee/libxml2/result/HTML/issue318.html" />
     <Text Include="../../thirdparty/owemdjee/libxml2/result/HTML/issue318.html.sax" />
     <Text Include="../../thirdparty/owemdjee/libxml2/result/HTML/issue380.html" />
@@ -1209,6 +1206,10 @@
     <Text Include="../../thirdparty/owemdjee/libxml2/result/errors/comment1.xml.str" />
     <Text Include="../../thirdparty/owemdjee/libxml2/result/errors/content1.xml.err" />
     <Text Include="../../thirdparty/owemdjee/libxml2/result/errors/content1.xml.str" />
+    <Text Include="../../thirdparty/owemdjee/libxml2/result/errors/doctype1.xml.err" />
+    <Text Include="../../thirdparty/owemdjee/libxml2/result/errors/doctype1.xml.str" />
+    <Text Include="../../thirdparty/owemdjee/libxml2/result/errors/doctype2.xml.err" />
+    <Text Include="../../thirdparty/owemdjee/libxml2/result/errors/doctype2.xml.str" />
     <Text Include="../../thirdparty/owemdjee/libxml2/result/errors/dup-xml-attr.xml.err" />
     <Text Include="../../thirdparty/owemdjee/libxml2/result/errors/dup-xml-attr.xml.str" />
     <Text Include="../../thirdparty/owemdjee/libxml2/result/errors/dup-xml-attr2.xml.err" />
@@ -1225,6 +1226,8 @@
     <Text Include="../../thirdparty/owemdjee/libxml2/result/errors/invalid-start-tag-2.xml.str" />
     <Text Include="../../thirdparty/owemdjee/libxml2/result/errors/issue151.xml.err" />
     <Text Include="../../thirdparty/owemdjee/libxml2/result/errors/issue151.xml.str" />
+    <Text Include="../../thirdparty/owemdjee/libxml2/result/errors/issue868.xml.err" />
+    <Text Include="../../thirdparty/owemdjee/libxml2/result/errors/issue868.xml.str" />
     <Text Include="../../thirdparty/owemdjee/libxml2/result/errors/name.xml.err" />
     <Text Include="../../thirdparty/owemdjee/libxml2/result/errors/name.xml.str" />
     <Text Include="../../thirdparty/owemdjee/libxml2/result/errors/name2.xml.err" />
@@ -1847,6 +1850,7 @@
     <Text Include="../../thirdparty/owemdjee/libxml2/result/schemas/bug313982_0_0.err" />
     <Text Include="../../thirdparty/owemdjee/libxml2/result/schemas/bug321475_1_0.err" />
     <Text Include="../../thirdparty/owemdjee/libxml2/result/schemas/bug322411_1_0.err" />
+    <Text Include="../../thirdparty/owemdjee/libxml2/result/schemas/bug322411_1_1.err" />
     <Text Include="../../thirdparty/owemdjee/libxml2/result/schemas/bug323510_1_0.err" />
     <Text Include="../../thirdparty/owemdjee/libxml2/result/schemas/bug455953_0_0.err" />
     <Text Include="../../thirdparty/owemdjee/libxml2/result/schemas/changelog093_1_0.err" />
@@ -2151,6 +2155,7 @@
     <Text Include="../../thirdparty/owemdjee/libxml2/test/HTML/fp40.htm" />
     <Text Include="../../thirdparty/owemdjee/libxml2/test/HTML/html5-entities.html" />
     <Text Include="../../thirdparty/owemdjee/libxml2/test/HTML/html5_enc.html" />
+    <Text Include="../../thirdparty/owemdjee/libxml2/test/HTML/implied1.html" />
     <Text Include="../../thirdparty/owemdjee/libxml2/test/HTML/issue318.html" />
     <Text Include="../../thirdparty/owemdjee/libxml2/test/HTML/issue380.html" />
     <Text Include="../../thirdparty/owemdjee/libxml2/test/HTML/liclose.html" />
@@ -2586,6 +2591,7 @@
     <Text Include="../../thirdparty/owemdjee/libxml2/tools/genHtmlEnt.py" />
     <Text Include="../../thirdparty/owemdjee/libxml2/tools/genUnicode.py" />
     <Text Include="../../thirdparty/owemdjee/libxml2/tools/gentest.py" />
+    <Text Include="../../thirdparty/owemdjee/libxml2/tools/xmlmod.py" />
     <Text Include="../../thirdparty/owemdjee/libxml2/win32.msvc2008/libxml.def" />
     <Text Include="../../thirdparty/owemdjee/libxml2/win32.msvc2010/libxml.def" />
     <Text Include="../../thirdparty/owemdjee/libxml2/win32/Makefile.mingw" />
@@ -2593,6 +2599,7 @@
     <Text Include="../../thirdparty/owemdjee/libxml2/win32/Readme.txt" />
     <Text Include="../../thirdparty/owemdjee/libxml2/win32/configure.js" />
     <Text Include="../../thirdparty/owemdjee/libxml2/win32/libxml.def" />
+    <Text Include="../../thirdparty/owemdjee/libxml2/xml2-config-meson" />
     <Text Include="../../thirdparty/owemdjee/libxml2/xml2-config.in" />
     <Text Include="../../thirdparty/owemdjee/libxml2/xstc/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/libxml2/xstc/fixup-tests.py" />
@@ -3055,6 +3062,8 @@
     <Xml Include="../../thirdparty/owemdjee/libxml2/test/errors/charref1.xml" />
     <Xml Include="../../thirdparty/owemdjee/libxml2/test/errors/comment1.xml" />
     <Xml Include="../../thirdparty/owemdjee/libxml2/test/errors/content1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxml2/test/errors/doctype1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxml2/test/errors/doctype2.xml" />
     <Xml Include="../../thirdparty/owemdjee/libxml2/test/errors/dup-xml-attr.xml" />
     <Xml Include="../../thirdparty/owemdjee/libxml2/test/errors/dup-xml-attr2.xml" />
     <Xml Include="../../thirdparty/owemdjee/libxml2/test/errors/empty.xml" />
@@ -3064,6 +3073,7 @@
     <Xml Include="../../thirdparty/owemdjee/libxml2/test/errors/invalid-start-tag-1.xml" />
     <Xml Include="../../thirdparty/owemdjee/libxml2/test/errors/invalid-start-tag-2.xml" />
     <Xml Include="../../thirdparty/owemdjee/libxml2/test/errors/issue151.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxml2/test/errors/issue868.xml" />
     <Xml Include="../../thirdparty/owemdjee/libxml2/test/errors/name.xml" />
     <Xml Include="../../thirdparty/owemdjee/libxml2/test/errors/name2.xml" />
     <Xml Include="../../thirdparty/owemdjee/libxml2/test/errors/name3.xml" />
@@ -3353,6 +3363,7 @@
     <Xml Include="../../thirdparty/owemdjee/libxml2/test/schemas/bug313982_0.xml" />
     <Xml Include="../../thirdparty/owemdjee/libxml2/test/schemas/bug321475_0.xml" />
     <Xml Include="../../thirdparty/owemdjee/libxml2/test/schemas/bug322411_0.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxml2/test/schemas/bug322411_1.xml" />
     <Xml Include="../../thirdparty/owemdjee/libxml2/test/schemas/bug323510_0.xml" />
     <Xml Include="../../thirdparty/owemdjee/libxml2/test/schemas/bug455953_0.xml" />
     <Xml Include="../../thirdparty/owemdjee/libxml2/test/schemas/changelog093_0.xml" />

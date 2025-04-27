@@ -1577,6 +1577,19 @@ lyra
 celero
 gtest-tap-listener
 
+0__scratch
+	
+lwlog
+Jungle
+data_tamer
+forestdb
+binary_log
+Arduino-KalmanFilter
+poisson-disc-distribution-bridson
+OpenRAND
+fast_io
+libinflection
+
 EOT
 ) | grep -e "$FILTER"
 )
@@ -1656,6 +1669,10 @@ logger_benchmarks
 politician
 win32-fileapi-demo
 hashtable-bench
+
+0__scratch
+
+msvc_sln_cleaner
 
 EOT
 ) | grep -e "$FILTER"
@@ -1875,11 +1892,14 @@ if [[ "$ARG" =~ [12] ]] ; then
 	# we do this brute-force by simply adding ALL projects to that solution again; the next
 	# load by Visual Studio will clean up the .sln file for us.
 	echo "augment MSVC solution 'm-dev-list.sln' by adding all known *$FILTER* projects..."
-	(
-		for f in $( ls *.vcxproj | tr -d '\r' | grep -i -e "$FILTER" ) ; do
-			node ./mk_project_line_for_sln.js $f
-		done
-	) >> m-dev-list.sln
+	for f in $( ls *.vcxproj | tr -d '\r' | grep -i -e "$FILTER" ) ; do
+		LINECOUNT=$( grep -w $f m-dev-list.sln | wc -l )
+		echo "$LINECOUNT :: $f"
+		if test 1 != $LINECOUNT ; then 
+			echo "ADDING:::: $f" 
+			node ./mk_project_line_for_sln.js $f >> m-dev-list.sln 
+		fi 
+	done
 fi
 
 if [[ "$ARG" =~ [3] ]] ; then

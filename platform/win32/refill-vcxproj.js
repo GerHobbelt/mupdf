@@ -134,6 +134,7 @@ const projectMap = {
 	"libupskirt": "upskirt-markdown",
 	"libXMP-Toolkit": "XMP-Toolkit-SDK",
 	"qrencode-test": "libqrencode",
+	"libinflection": "unicode-inflection",
 	"libicu": "unicode-icu",
 	"libicu_tools": "unicode-icu",
 	"libicu_tests": "unicode-icu",

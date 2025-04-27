@@ -330,6 +330,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/sbcl/tlsf-bsd/tests/test-alloc.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sbcl/tlsf-bsd/tests/test-bits.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sbcl/tlsf-bsd/tlsf/tlsf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sbcl/tools-for-build/64-bit-time-test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sbcl/tools-for-build/arm-softfp-test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sbcl/tools-for-build/avx2.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sbcl/tools-for-build/determine-endianness.c" />
@@ -344,7 +345,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/sbcl/tools-for-build/os-provides-posix-spawn-test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sbcl/tools-for-build/os-provides-suseconds-t-test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sbcl/tools-for-build/os-provides-wakebyaddr-test.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sbcl/tools-for-build/where-is-mcontext.c" />
     <ClInclude Include="../../thirdparty/owemdjee/sbcl/doc/entities.inc" />
     <ClInclude Include="../../thirdparty/owemdjee/sbcl/src/runtime/align.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sbcl/src/runtime/android-os.h" />
@@ -485,6 +485,7 @@
     <Text Include="../../thirdparty/owemdjee/sbcl/benchmarks/hash-table/macrobenchmark.sh" />
     <Text Include="../../thirdparty/owemdjee/sbcl/benchmarks/hash-table/run-macrobenchmarks.sh" />
     <Text Include="../../thirdparty/owemdjee/sbcl/benchmarks/hash-table/run-microbenchmarks.sh" />
+    <Text Include="../../thirdparty/owemdjee/sbcl/benchmarks/rwlbench.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/benchmarks/slot-value.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/benchmarks/threads-compile.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/binary-distribution.sh" />
@@ -1099,6 +1100,7 @@
     <Text Include="../../thirdparty/owemdjee/sbcl/src/code/riscv-vm.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/src/code/room.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/src/code/run-program.lisp" />
+    <Text Include="../../thirdparty/owemdjee/sbcl/src/code/rwlock.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/src/code/save.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/src/code/sc-offset.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/src/code/seq.lisp" />
@@ -1488,6 +1490,7 @@
     <Text Include="../../thirdparty/owemdjee/sbcl/src/compiler/x86-64/system.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/src/compiler/x86-64/target-avx2-insts.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/src/compiler/x86-64/target-insts.lisp" />
+    <Text Include="../../thirdparty/owemdjee/sbcl/src/compiler/x86-64/tls.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/src/compiler/x86-64/type-vops.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/src/compiler/x86-64/values.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/src/compiler/x86-64/vm.lisp" />
@@ -1670,6 +1673,7 @@
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/clos-add-remove-method.impure.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/clos-cache.impure.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/clos-call-next-method.impure.lisp" />
+    <Text Include="../../thirdparty/owemdjee/sbcl/tests/clos-discrimination-net.impure.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/clos-ignore.interactive.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/clos-interrupts.impure.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/clos-method-combination-caches.pure.lisp" />
@@ -1687,6 +1691,7 @@
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/colorize-windows-console.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/colorize.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/compare-and-swap.impure.lisp" />
+    <Text Include="../../thirdparty/owemdjee/sbcl/tests/compile-constnil.impure.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/compiler-1.impure-cload.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/compiler-2.impure-cload.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/compiler-2.impure.lisp" />
@@ -1977,6 +1982,7 @@
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/simd-pack.pure.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/sleepytests.pure.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/slot-boundp.impure.lisp" />
+    <Text Include="../../thirdparty/owemdjee/sbcl/tests/slot-mapper.impure.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/slot-unbound.impure.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/slot-value.impure.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/smoke.impure.lisp" />
@@ -2007,6 +2013,7 @@
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/timer-dead-thread.impure.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/timer.impure.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/timing" />
+    <Text Include="../../thirdparty/owemdjee/sbcl/tests/tmpfile.pure.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/toplevel.test.sh" />
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/trace.impure.lisp" />
     <Text Include="../../thirdparty/owemdjee/sbcl/tests/traceroot.impure.lisp" />

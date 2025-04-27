@@ -273,11 +273,14 @@
     <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/ds/combininglock.h" />
     <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/ds/ds.h" />
     <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/ds/entropy.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/ds/flaglock.h" />
     <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/ds/mpmcstack.h" />
     <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/ds/pagemap.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/ds/singleton.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/ds_aal/ds_aal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/ds_aal/flaglock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/ds_aal/prevent_fork.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/ds_aal/singleton.h" />
     <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/ds_core/bits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/ds_core/cheri.h" />
     <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/ds_core/concept.h" />
     <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/ds_core/defines.h" />
     <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/ds_core/ds_core.h" />
@@ -286,8 +289,10 @@
     <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/ds_core/ptrwrap.h" />
     <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/ds_core/redblacktree.h" />
     <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/ds_core/seqset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/ds_core/tid.h" />
     <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/global/bounds_checks.h" />
     <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/global/global.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/global/globalalloc.h" />
     <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/global/libc.h" />
     <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/global/memcpy.h" />
     <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/global/scopedalloc.h" />
@@ -296,10 +301,8 @@
     <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/mem/backend_wrappers.h" />
     <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/mem/corealloc.h" />
     <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/mem/entropy.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/mem/external_alloc.h" />
     <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/mem/freelist.h" />
     <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/mem/freelist_queue.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/mem/globalalloc.h" />
     <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/mem/localalloc.h" />
     <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/mem/localcache.h" />
     <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/mem/mem.h" />
@@ -308,6 +311,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/mem/pooled.h" />
     <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/mem/remoteallocator.h" />
     <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/mem/remotecache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/mem/secondary.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/mem/secondary/default.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/mem/secondary/gwp_asan.h" />
     <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/mem/sizeclasstable.h" />
     <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/mem/ticker.h" />
     <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/override/malloc-extensions.h" />
@@ -331,12 +337,24 @@
     <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/pal/pal_plain.h" />
     <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/pal/pal_posix.h" />
     <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/pal/pal_solaris.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/pal/pal_tid_default.h" />
     <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/pal/pal_timer_default.h" />
     <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/pal/pal_windows.h" />
     <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/snmalloc.h" />
     <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/snmalloc_core.h" />
     <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/snmalloc_front.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/stl/array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/stl/atomic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/stl/cxx/array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/stl/cxx/atomic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/stl/cxx/type_traits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/stl/cxx/utility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/stl/gnu/array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/stl/gnu/atomic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/stl/gnu/type_traits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/stl/gnu/utility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/stl/new.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/stl/type_traits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/stl/utility.h" />
     <Image Include="../../thirdparty/owemdjee/snmalloc/docs/security/data/ChunkMap.png" />
     <Image Include="../../thirdparty/owemdjee/snmalloc/docs/security/data/doublefreeprotection.gif" />
     <Image Include="../../thirdparty/owemdjee/snmalloc/docs/security/data/memcpy_perf.png" />
@@ -353,6 +371,10 @@
     <Text Include="../../thirdparty/owemdjee/snmalloc/docs/StrictProvenance.md" />
     <Text Include="../../thirdparty/owemdjee/snmalloc/docs/combininglock.md" />
     <Text Include="../../thirdparty/owemdjee/snmalloc/docs/combininglockperf.svg" />
+    <Text Include="../../thirdparty/owemdjee/snmalloc/docs/release/0.7/README.md" />
+    <Text Include="../../thirdparty/owemdjee/snmalloc/docs/release/0.7/benchres.csv" />
+    <Text Include="../../thirdparty/owemdjee/snmalloc/docs/release/0.7/perf-startup.svg" />
+    <Text Include="../../thirdparty/owemdjee/snmalloc/docs/release/0.7/snmalloc-msgpass.svg" />
     <Text Include="../../thirdparty/owemdjee/snmalloc/docs/security/FreelistProtection.md" />
     <Text Include="../../thirdparty/owemdjee/snmalloc/docs/security/GuardedMemcpy.md" />
     <Text Include="../../thirdparty/owemdjee/snmalloc/docs/security/README.md" />
@@ -370,6 +392,9 @@
     <Text Include="../../thirdparty/owemdjee/snmalloc/security.md" />
     <Text Include="../../thirdparty/owemdjee/snmalloc/snmalloc.pdf" />
     <Text Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/README.md" />
+    <Text Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/stl/README.md" />
+    <Text Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/stl/cxx/README.md" />
+    <Text Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/stl/gnu/README.md" />
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>

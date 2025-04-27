@@ -1,0 +1,1387 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF505EB3}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFAST_IO;FAST_IO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFAST_IO;FAST_IO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFAST_IO;FAST_IO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFAST_IO;FAST_IO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFAST_IO;FAST_IO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFAST_IO;FAST_IO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFAST_IO;FAST_IO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFAST_IO;FAST_IO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFAST_IO;FAST_IO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFAST_IO;FAST_IO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFAST_IO;FAST_IO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFAST_IO;FAST_IO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0001.refterm/filebuf_file.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0001.refterm/fpipe.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0001.refterm/fstream.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0001.refterm/iostream.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0001.refterm/out_buf.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0001.refterm/stdio.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0001.refterm/stdio_hack.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0002.file_io_tsc/c_file_unlocked_tsc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0002.file_io_tsc/iobuf_file_tsc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0002.file_io_tsc/longspaces/fstream.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0002.file_io_tsc/longspaces/iobuf_file.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0002.file_io_tsc/longspaces/iobuf_file_verify.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0002.file_io_tsc/longspaces/stdio.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0002.file_io_tsc/longspaces/u32iobuf_file.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0002.file_io_tsc/longspaces/u32utf8_file.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0002.file_io_tsc/random/c_file.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0002.file_io_tsc/random/filebuf_file.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0002.file_io_tsc/random/iobuf_file.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0002.file_io_tsc/random/stdio.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0002.file_io_tsc/random/stream.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0002.file_io_tsc/stdio_tsc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0002.file_io_tsc/time/c_file.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0002.file_io_tsc/time/c_file_unlocked.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0002.file_io_tsc/time/fast_io_llvm_raw_fd_ostream_file.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0002.file_io_tsc/time/fast_io_llvm_raw_fd_ostream_file_l10n.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0002.file_io_tsc/time/filebuf_file.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0002.file_io_tsc/time/fstream.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0002.file_io_tsc/time/fstream_std_format.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0002.file_io_tsc/time/iobuf_file.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0002.file_io_tsc/time/iobuf_file_be32.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0002.file_io_tsc/time/iobuf_file_bin.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0002.file_io_tsc/time/iobuf_file_concatln.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0002.file_io_tsc/time/iobuf_file_l10n.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0002.file_io_tsc/time/iobuf_file_le32.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0002.file_io_tsc/time/iobuf_file_leb128.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0002.file_io_tsc/time/iobuf_file_mutex.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0002.file_io_tsc/time/iobuf_file_mutex_big.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0002.file_io_tsc/time/iobuf_file_std_format.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0002.file_io_tsc/time/iobuf_file_std_format_locale.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0002.file_io_tsc/time/iobuf_file_unsafe_rt_fprint.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0002.file_io_tsc/time/iobuf_file_unsafe_rt_fprint_l10n.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0002.file_io_tsc/time/llvm_raw_fd_ostream.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0002.file_io_tsc/time/stdio.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0002.file_io_tsc/time/u32iobuf_file.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0002.file_io_tsc/time/wiobuf_file.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0003.file_io_hex/fstream.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0003.file_io_hex/fstream_locale.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0003.file_io_hex/iobuf_file.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0003.file_io_hex/iobuf_file_addrvw.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0003.file_io_hex/iobuf_file_l10n.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0004.file_io_floating/charconv_general.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0004.file_io_floating/charconv_general_float.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0004.file_io_floating/charconv_hexfloat.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0004.file_io_floating/charconv_hexfloat_float.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0004.file_io_floating/decimal.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0004.file_io_floating/decimal_float.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0004.file_io_floating/decimal_l10n.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0004.file_io_floating/general.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0004.file_io_floating/general_float.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0004.file_io_floating/general_l10n.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0004.file_io_floating/hexfloat.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0004.file_io_floating/hexfloat_float.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0005.time/fast_io.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0005.time/glibc_nl_langinfo.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0005.time/iso8601.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0005.time/put_time.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0006.random/password/ibuf_white_hole_engine.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0006.random/password/mt19937_64.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0006.random/password/random_device.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0007.concat/concat_cstring.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0007.concat/concat_hstring.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0007.concat/concat_qstring.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0007.concat/concat_string.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0007.concat/concat_vs_format.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0007.concat/to_hstring.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0008/comparison.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0008/seperate/charconv.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0008/seperate/charconv_no_c_str.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0008/seperate/dragonbox.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0008/seperate/dragonbox_no_c_str.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0008/seperate/fast_io.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0008/seperate/fast_io_direct.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0008/seperate/fast_io_no_c_str.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0008/seperate_short/charconv_no_c_str.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0008/seperate_short/dragonbox_no_c_str.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0008/seperate_short/fast_io_no_c_str.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0009.concatstring/concat.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0009.concatstring/format.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0009.concatstring/stringstream.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0009.concatstring/tostring.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0010.line/contiguous_line_scanner.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0010.line/getline.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0010.line/line_get.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0010.line/line_get_fbf.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0010.line/line_scanner.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0010.line/random_data.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0010.line/scan_qstring.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0010.line/scan_qstring_u16utf8.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0010.line/scan_strlike.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0010.line/scan_u16string_u16utf8.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0010.line/scan_winrt_hstring.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0011.containers/vector/0000.initialization/fast_io.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0011.containers/vector/0000.initialization/std.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0011.containers/vector/0001.push_back/fast_io.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0011.containers/vector/0001.push_back/fast_io_unchecked.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0011.containers/vector/0001.push_back/std.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0011.containers/vector/0002.multi_push_back/fast_io.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0011.containers/vector/0002.multi_push_back/std.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0011.containers/vector/0002.multi_push_back/std_mimalloc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0012.isa/sha512.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0013.bitset/filebuf_file.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0013.bitset/ostream.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0013.bitset/u8c_file.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0013.bitset/u8c_file_unlocked.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0013.bitset/u8obuf_file.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0014.codecvt/u16utf8_file.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0014.codecvt/u32utf8_file.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0014.codecvt/u8iobuf_file.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0015.string/istream.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0015.string/random_data.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0015.string/scan.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0015.string/scan_fbf.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0015.string/scan_qstring.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0015.string/scan_qstring_u16utf8.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0015.string/scan_strlike.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0015.string/scan_u16string_u16utf8.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0015.string/scan_winrt_hstring.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0016.endl/filebuf_file.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0016.endl/ofstream.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0016.endl/ofstream_endl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0016.endl/u8c_file_unlocked.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0016.endl/u8native_file.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/benchmark/0016.endl/u8obuf_file.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0000.compile/compile.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0000.compile/compile_hosted.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0001.helloworld/helloworld.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0001.helloworld/helloworld_android_remote_dbg.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0001.helloworld/helloworld_box.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0001.helloworld/helloworld_dbg.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0001.helloworld/helloworld_out.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0001.helloworld/helloworld_out_buf_mutex.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0002.a+b/a+b.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0002.a+b/base36_a+b.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0002.a+b/hex_a+b.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0003.manipulators/0x2a.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0003.manipulators/0x2a_0x.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0003.manipulators/0x2a_0x_imbue.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0003.manipulators/0x2a_0x_imbue_for_fout.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0003.manipulators/0x2a_custom.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0003.manipulators/boolalpha.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0003.manipulators/chvw.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0003.manipulators/cond.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0003.manipulators/os_c_str.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0003.manipulators/pointer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0003.manipulators/rgvw.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0003.manipulators/width.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0003.manipulators/width_runtime.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0004.time/posix_clock_gettime.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0004.time/timezone.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0005.sha/compile_time.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0005.sha/crc32.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0005.sha/cryptopp_md5.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0005.sha/cryptopp_sha256.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0005.sha/cryptopp_sha512.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0005.sha/md5.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0005.sha/native_hash_file.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0005.sha/ossl_evp.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0005.sha/ossl_md5.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0005.sha/ossl_sha1.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0005.sha/ossl_sha256.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0005.sha/ossl_sha512.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0005.sha/sha1.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0005.sha/sha256.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0005.sha/sha512.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0006.file_io/count_all_spaces_in_file.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0006.file_io/file_loader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0006.file_io/file_loader_extra.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0006.file_io/ibuf_file.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0006.file_io/utf8_to_utf16.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0007.legacy/c_file.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0007.legacy/construct_fp_from_syscall.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0007.legacy/construct_fstream_from_syscall.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0007.legacy/construct_fstream_from_syscall_l10n.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0007.legacy/filebuf_file.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0007.legacy/filebuf_file_ostream.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0007.legacy/get_file_descriptor_from_std_cout.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0007.legacy/text.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0008.openssl/bio.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0008.openssl/construct_bio_from_syscall.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0009.filesystem/add_utf8_bom_to_all_cplusplus_files.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0009.filesystem/binary_to_text.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0009.filesystem/count_lines_in_cpp_files.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0009.filesystem/count_rust_files.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0009.filesystem/gcc_symlink_install.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0009.filesystem/gccx86canadianfix.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0009.filesystem/rename_all_files_uppercase_to_lowercase.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0009.filesystem/text_to_binary.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0009.filesystem/update_wow_toc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0010.status/status.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0011.qt/construct_qtextstream_from_syscall.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0011.qt/qfile.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0011.qt/qstring.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0011.qt/qstring_concat.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0011.qt/qstring_get.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0011.qt/qvariant.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0012.transmit/transmit.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0013.graph/shortest_path/dijkstra.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0013.graph/shortest_path/dijkstra_optimize.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0013.graph/shortest_path/generate_graph.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0013.graph/shortest_path/spfa.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0013.graph/shortest_path/spfa_optimize.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0013.graph/strongly_connected_component/gabow.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0013.graph/strongly_connected_component/gabow_non_recursive.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0013.graph/strongly_connected_component/gabow_non_recursive_iterator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0013.graph/strongly_connected_component/generate_graph.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0013.graph/strongly_connected_component/tarjan.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0013.graph/strongly_connected_component/tarjan_non_recursive.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0013.graph/strongly_connected_component/tarjan_non_recursive_iterator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0013.graph/topological_sorting/generate_graph.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0013.graph/topological_sorting/topsort.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0014.random/generate_error_domain.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0014.random/kana.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0014.random/name.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0014.random/password.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0014.random/pin.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0014.random/sexratio.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0014.random/sexratio_with_artificial_womb.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0014.random/stop_born_child_until_boy.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0015.match/ipv4.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0016.dll/win32.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0017.network/dns.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0017.network/http.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0017.network/raw.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0017.network/tcp_client.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0017.network/tcp_server.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0018.i18n/l10n.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0018.i18n/l10n_info.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0019.llvm/construct_llvm_raw_fd_ostream_from_syscall.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0020.operating_system/limine/kernel/kernel.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0021.kernel_driver/linux/kernel.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0021.kernel_driver/linux/main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0021.kernel_driver/nt/kernel_entry.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0022.complex/complex.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0023.to/to.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0024.mfc/atl_file.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0024.mfc/mfc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0024.mfc/mfc_file.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0025.winrt/hstring.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0025.winrt/hstring_get.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0026.lua/hello_fast_io.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0027.filelock/buffer_lock.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0027.filelock/buffered_file_with_file_lock.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0027.filelock/filelock.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0027.filelock/filelock_request.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0028.python/pybytes.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0029.containers/vector.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0029.containers/vectorvector.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0030.binary_serialization/leb128.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0030.binary_serialization/leb128_input.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0030.binary_serialization/lec559_lebe.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0030.binary_serialization/wasm.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0031.concat/concat.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0031.concat/concat_code_cvt.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/examples/0032.parse_by_scan/parse_by_scan.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/C.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/POSIX.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/aa_DJ.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/aa_ER.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/aa_ER@saaho.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/aa_ET.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/af_ZA.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/agr_PE.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ak_GH.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/am_ET.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/an_ES.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/anp_IN.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ar_AE.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ar_BH.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ar_DZ.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ar_EG.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ar_IN.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ar_IQ.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ar_JO.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ar_KW.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ar_LB.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ar_LY.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ar_MA.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ar_OM.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ar_QA.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ar_SA.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ar_SD.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ar_SS.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ar_SY.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ar_TN.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ar_YE.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/as_IN.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ast_ES.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ayc_PE.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/az_AZ.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/az_IR.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/be_BY.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/be_BY@latin.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/bem_ZM.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ber_DZ.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ber_MA.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/bg_BG.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/bhb_IN.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/bho_IN.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/bho_NP.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/bi_VU.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/bn_BD.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/bn_IN.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/bo_CN.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/bo_IN.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/br_FR.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/br_FR@euro.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/brx_IN.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/bs_BA.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/byn_ER.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ca_AD.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ca_ES.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ca_ES@euro.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ca_ES@valencia.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ca_FR.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ca_IT.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ce_RU.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/chr_US.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ckb_IQ.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/cmn_TW.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/crh_UA.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/cs_CZ.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/csb_PL.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/cv_RU.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/cy_GB.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/da_DK.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/de_AT.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/de_AT@euro.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/de_BE.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/de_BE@euro.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/de_CH.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/de_DE.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/de_DE@euro.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/de_IT.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/de_LI.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/de_LU.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/de_LU@euro.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/doi_IN.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/dsb_DE.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/dv_MV.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/dz_BT.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/el_CY.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/el_GR.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/el_GR@euro.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/en_AG.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/en_AU.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/en_BW.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/en_CA.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/en_DK.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/en_GB.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/en_HK.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/en_IE.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/en_IE@euro.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/en_IL.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/en_IN.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/en_NG.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/en_NZ.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/en_PH.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/en_SC.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/en_SG.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/en_US.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/en_ZA.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/en_ZM.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/en_ZW.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/eo.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/es_AR.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/es_BO.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/es_CL.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/es_CO.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/es_CR.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/es_CU.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/es_DO.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/es_EC.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/es_ES.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/es_ES@euro.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/es_GT.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/es_HN.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/es_MX.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/es_NI.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/es_PA.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/es_PE.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/es_PR.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/es_PY.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/es_SV.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/es_US.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/es_UY.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/es_VE.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/et_EE.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/eu_ES.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/eu_ES@euro.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/fa_IR.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ff_SN.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/fi_FI.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/fi_FI@euro.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/fil_PH.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/fo_FO.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/fr_BE.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/fr_BE@euro.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/fr_CA.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/fr_CH.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/fr_FR.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/fr_FR@euro.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/fr_LU.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/fr_LU@euro.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/fur_IT.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/fy_DE.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/fy_NL.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ga_IE.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ga_IE@euro.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/gd_GB.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/gez_ER.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/gez_ER@abegede.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/gez_ET.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/gez_ET@abegede.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/gl_ES.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/gl_ES@euro.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/gu_IN.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/gv_GB.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ha_NG.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/hak_TW.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/he_IL.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/hi_IN.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/hif_FJ.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/hne_IN.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/hr_HR.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/hsb_DE.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ht_HT.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/hu_HU.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/hy_AM.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/i18n.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ia_FR.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/id_ID.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ig_NG.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ik_CA.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/is_IS.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/it_CH.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/it_IT.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/it_IT@euro.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/iu_CA.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ja_JP.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ka_GE.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/kab_DZ.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/kk_KZ.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/kl_GL.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/km_KH.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/kn_IN.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ko_KR.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/kok_IN.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ks_IN.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ks_IN@devanagari.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ku_TR.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/kw_GB.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ky_KG.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/lb_LU.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/lg_UG.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/li_BE.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/li_NL.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/lij_IT.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ln_CD.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/lo_LA.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/lt_LT.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/lv_LV.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/lzh_TW.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/mag_IN.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/mai_IN.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/mai_NP.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/mfe_MU.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/mg_MG.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/mhr_RU.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/mi_NZ.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/miq_NI.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/mjw_IN.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/mk_MK.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ml_IN.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/mn_MN.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/mni_IN.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/mnw_MM.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/mr_IN.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ms_MY.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/mt_MT.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/my_MM.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/nan_TW.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/nan_TW@latin.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/nb_NO.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/nds_DE.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/nds_NL.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ne_NP.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/nhn_MX.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/niu_NU.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/niu_NZ.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/nl_AW.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/nl_BE.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/nl_BE@euro.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/nl_NL.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/nl_NL@euro.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/nn_NO.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/nr_ZA.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/nso_ZA.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/oc_FR.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/om_ET.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/om_KE.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/or_IN.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/os_RU.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/pa_IN.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/pa_PK.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/pap_AW.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/pap_CW.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/pl_PL.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ps_AF.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/pt_BR.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/pt_PT.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/pt_PT@euro.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/quz_PE.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/raj_IN.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ro_RO.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ru_RU.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ru_UA.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/rw_RW.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/sa_IN.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/sah_RU.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/sat_IN.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/sc_IT.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/sd_IN.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/sd_IN@devanagari.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/se_NO.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/sgs_LT.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/shn_MM.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/shs_CA.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/si_LK.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/sid_ET.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/sk_SK.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/sl_SI.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/sm_WS.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/so_DJ.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/so_ET.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/so_KE.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/so_SO.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/sq_AL.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/sq_MK.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/sr_ME.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/sr_RS.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/sr_RS@latin.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ss_ZA.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/st_ZA.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/sv_FI.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/sv_FI@euro.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/sv_SE.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/sw_KE.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/sw_TZ.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/szl_PL.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ta_IN.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ta_LK.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/tcy_IN.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/te_IN.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/tg_TJ.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/th_TH.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/the_NP.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ti_ER.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ti_ET.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/tig_ER.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/tk_TM.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/tl_PH.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/tn_ZA.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/to_TO.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/tpi_PG.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/tr_CY.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/tr_TR.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ts_ZA.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/tt_RU.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/tt_RU@iqtelif.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ug_CN.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/uk_UA.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/unm_US.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ur_IN.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ur_PK.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/uz_UZ.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/uz_UZ@cyrillic.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/ve_ZA.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/vi_VN.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/wa_BE.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/wa_BE@euro.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/wae_CH.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/wal_ET.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/wo_SN.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/xh_ZA.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/yi_US.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/yo_NG.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/yue_HK.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/yuw_PG.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/zh_CN.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/zh_HK.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/zh_SG.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/zh_TW.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/locale/zu_ZA.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/tests/0001.input/invalid_number.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/tests/0002.printscan/print.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/tests/0002.printscan/scan.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/tests/0003.concat/constexpr.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/tests/0003.concat/integer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/tests/0004.floating/complex_double.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/tests/0004.floating/double.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/tests/0004.floating/float.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/tests/0004.floating/lc_double.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/tests/0004.floating/rounding.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/tests/0004.floating/scientific_0.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/tests/0004.floating/test_all_float32.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/tests/0004.floating/zero.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/tests/0005.lc_time/all_date_format.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/tests/0005.lc_time/lc_time.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/tests/0006.output_device/constant_buffer_output_stream.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/tests/0006.output_device/simplest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/tests/0007.multiparas/11args.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/tests/0007.multiparas/11args_unlocked.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/tests/0008.width/lc_width.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/tests/0008.width/width.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/tests/0009.http_header/head.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/tests/0010.intrinsics/umul.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/tests/0011.manipulators/os_c_str.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/tests/0012.umul/umul.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/tests/0013.pr_rsv/bounds_checking_array.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/tests/0013.pr_rsv/bounds_checking_c_array.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/tests/0013.pr_rsv/pr_rsv.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/tests/0013.pr_rsv/pr_rsv_scientific.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/tests/0014.integer/block_function_pointer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/tests/0014.integer/test_hex.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/tests/0014.integer/test_integer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/tests/0015.temp_file/tmp.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/tests/0016.address_sanitizer/reserve_printable.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/tests/0017.error/error.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/tests/0017.error/reject.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/tests/0017.error/reject_filename.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/tests/0018.operator_support/operator_output.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/tests/0019.boost/uuid.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/tests/0020.scanners/contiguous_line_scanner.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/tests/0020.scanners/getline.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/tests/0020.scanners/line_scanner.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/tests/0021.binary_serialization/le_get32.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/tests/0021.binary_serialization/str_get_all.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/tests/0022.char_categories/fullwidth.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/tests/0023.bitset/bitset.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/tests/0024.timestamp/basic_timestamp.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/tests/0024.timestamp/constexpr.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/tests/0024.timestamp/context_scan.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/tests/0024.timestamp/iso8601_timestamp.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/tests/0024.timestamp/overflow.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/tests/0024.timestamp/roundtrip.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/tests/0025.ip/concat_ip.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/tests/0025.ip/ipv4v6.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/tests/0026.container/trivialclass.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/tests/0027.rwreflect/read_some.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fast_io/tests/0027.rwreflect/write_some.cc" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/benchmark/0001.refterm/filebufpch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/benchmark/0001.refterm/iostreampch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/benchmark/0001.refterm/pch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/benchmark/0002.file_io_tsc/longspaces/longspaces.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/benchmark/0002.file_io_tsc/random/generate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/benchmark/0011.containers/vector/0002.multi_push_back/main.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_concept.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/alias.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/allocation/adapters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/allocation/allocator_adapter_flags.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/allocation/c_malloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/allocation/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/allocation/custom.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/allocation/has_methods_detect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/allocation/impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/allocation/linux_kernel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/allocation/mimalloc_driver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/allocation/msvc/impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/allocation/msvc/msvc_linker_32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/allocation/msvc/msvc_linker_32_i686.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/allocation/msvc/msvc_linker_64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/allocation/nt_rtlheapalloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/allocation/win32_heapalloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/allocation/wincrt_malloc_dbg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/asan_support.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/black_hole.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/buffer_view.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/char_category.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/codecvt/code_cvt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/codecvt/gb18030.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/codecvt/general.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/codecvt/impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/codecvt/utf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/codecvt/utf_ebcdic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/codecvt/utf_util_table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/compare.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/concat/concat_buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/concat/concat_general.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/concat/impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/concat/strlike_reference_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/concepts/decorator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/concepts/details.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/concepts/impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/concepts/operation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/concepts/operation_details.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/concepts/parse_code.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/concepts/stream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/concepts/strlike.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/concepts/type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/dll_mode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/drain.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/dynamic_io_buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/ebcdic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/empty.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/enums/access_how.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/enums/flock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/enums/impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/enums/utime_flags.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/freestanding/addressof.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/freestanding/algorithm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/freestanding/allocator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/freestanding/array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/freestanding/bytes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/freestanding/cstr_len.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/freestanding/impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/freestanding/noexcept_call.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/freestanding/ranges.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/freestanding/relocatable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/freestanding/std_allocator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/http_header.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/igenerator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/integers/chrono.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/integers/crypto_hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/integers/digits_table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/integers/impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/integers/integer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/integers/jeaiii_method.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/integers/match.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/integers/optimize_size/impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/integers/pointer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/integers/sto/sto_contiguous.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/integers/sto/sto_generate_base_tb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/integers/uprsv/dec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/integers/uprsv/hex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/integers/uprsv/impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/intrinsics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/intrinsics/carry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/intrinsics/impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/intrinsics/msvc/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/intrinsics/msvc/impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/intrinsics/msvc/x86.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/intrinsics/udivmod.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/io_deco_ref.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/io_ref.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/iso/iso8601.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/iso/isos.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/literals/literal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/literals/none_ascii.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/local_new_array_ptr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/mode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/overflow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/parse_code.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/perms.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/pr_rsv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/print_freestanding.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/random_access_transmit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/range_view.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/read_all.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/rwreflect/impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/rwreflect/reflectread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/rwreflect/reflectwrite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/scan_freestanding.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/secure_clear_guard.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/seek.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/simd/cpu_flags.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/simd/gcc_clang.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/simd/generic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/simd/generic_operations.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/simd/impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/simd/is_all_zeros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/simd/mask_countr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/simd/prrsv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/simd/x86_64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/simd_find.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/socket/addrprt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/socket/addrscn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/socket/impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/socket/ip.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/socket/posix_sockaddr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/socket/sock_family.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/socket/sock_protocol.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/socket/sock_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/socket_enum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/source_location.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/temporary_buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/terminate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/timestamp_counter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/to.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/transmit/impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/transmit/scanner.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/transmit/transmit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/unit_character_input_buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_core_impl/utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_crypto.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_crypto/cipher/aes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_crypto/hash/crc32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_crypto/hash/impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_crypto/hash/md5.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_crypto/hash/md5_sha_hash_context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_crypto/hash/sha1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_crypto/hash/sha256.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_crypto/hash/sha256_scalar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_crypto/hash/sha256_simd16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_crypto/hash/sha256_x86_sha_extensions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_crypto/hash/sha256_x86_sha_extensions_msvc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_crypto/hash/sha512.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_crypto/hash/sha512_scalar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_crypto/hash/sha512_simd16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_crypto/hash/sha512_simd32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_crypto/hash/sha512_simd32_shuffle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_crypto/padding/padding.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_crypto/padding/pkcs7_padding.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_crypto/padding/zero_padding.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_crypto/platforms/impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_crypto/platforms/nt_bcrypt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_crypto/platforms/ossl_evp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_crypto/platforms/win32/apis.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_crypto/platforms/win32/impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_crypto/platforms/win32/msvc_linker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_crypto/platforms/win32/msvc_linker_32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_crypto/platforms/win32/msvc_linker_32_i686.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_crypto/platforms/win32/msvc_linker_64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_crypto/streamcipher/chacha/impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_crypto/streamcipher/chacha/runtime.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_crypto/streamcipher/chacha/scalar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_crypto/streamcipher/chacha/simd16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_crypto/tls/cipher_suite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_crypto/tls/client_hello.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_crypto/tls/tls.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_crypto/tls/version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_device.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/asio_driver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/asio_driver/socket_io_observer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/avformat/avio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/avr/console.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/boost/graph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/boost/uuid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/boost_iostreams.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/bootloader/stvl2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/bootloader/stvl2_struct_iterator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/capstone.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/cppwinrt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/cppwinrt_impl/hstring.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/cppwinrt_impl/impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/cryptopp_driver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/fast_io_async.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/kernel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/limine/kernel_console.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/linux_kernel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/linux_kernel_impl/kpr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/llvm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/llvm_impl/hack_buffer_ptr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/llvm_impl/raw_fd_ostream_file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/llvm_impl/raw_ostream_io_observer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/mangling.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/mfc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/mfc_impl/atl_cstring.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/mfc_impl/atl_file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/mfc_impl/mfc_file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/nt_kernel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/nt_kernel_impl/driver_object.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/openssl_driver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/openssl_driver/bio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/openssl_driver/context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/openssl_driver/crypto.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/openssl_driver/error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/openssl_driver/evp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/openssl_driver/hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/openssl_driver/init.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/openssl_driver/observer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/openssl_driver/ossl_lib_context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/openssl_driver/settings.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/openssl_driver/ssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/posix_iconv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/posix_iconv_impl/impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/pulseaudio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/python/pyobject.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/qt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/qt_impl/qdebug.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/qt_impl/qfile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/qt_impl/qiodevice.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/qt_impl/qstring.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/refterm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/stvl2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/timer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/tsc_timer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/win32_internet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/win32_memory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/zlib_driver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_driver/zlib_driver/gzfile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_dsal/impl/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_dsal/impl/freestanding.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_dsal/impl/vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_dsal/vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_freestanding.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_freestanding_impl/auto_indent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_freestanding_impl/cond.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_freestanding_impl/exception.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_freestanding_impl/generator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_freestanding_impl/io_buffer/general.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_freestanding_impl/io_buffer/impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_freestanding_impl/io_buffer/input.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_freestanding_impl/io_buffer/input_deco.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_freestanding_impl/io_buffer/input_normal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_freestanding_impl/io_buffer/main.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_freestanding_impl/io_buffer/mode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_freestanding_impl/io_buffer/output.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_freestanding_impl/io_buffer/output_deco.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_freestanding_impl/io_buffer/output_normal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_freestanding_impl/scanners/impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_freestanding_impl/scanners/line_scanner.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_freestanding_impl/serializations/impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_freestanding_impl/serializations/leb128.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_freestanding_impl/serializations/lebe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_freestanding_impl/serializations/str_get.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_freestanding_impl/serializations/strlike_get.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_freestanding_impl/serializations/wasm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_freestanding_impl/space_reserve.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_freestanding_impl/width.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/api_encoding_converter/impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/api_encoding_converter/nt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/api_encoding_converter/posix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/api_encoding_converter/std_filesystem_pseudo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/api_encoding_converter/win32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/async_coro.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/auto_indent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/box.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/dbg/android.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/dbg/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/dbg/err.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/dbg/impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/dbg/nt_dbg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/dll/dll.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/dll/posix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/dll/win32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/file_loaders/allocation_file_loader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/file_loaders/impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/file_loaders/posix_file_loader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/file_loaders/win32_file_loader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/filesystem/apis.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/filesystem/fsutils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/filesystem/native.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/filesystem/nt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/filesystem/nt_at.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/filesystem/posix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/filesystem/posix_at.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/iomutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/mmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/platforms/com_error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/platforms/errc_default_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/platforms/errc_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/platforms/errno_to_win32_code.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/platforms/linux/aarch64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/platforms/linux/amd64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/platforms/linux/generic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/platforms/linux/loongarch64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/platforms/linux/riscv64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/platforms/linux/system_call.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/platforms/linux_zerocopy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/platforms/msdos.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/platforms/native.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/platforms/native_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/platforms/nt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/platforms/nt/impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/platforms/nt/nt_code.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/platforms/nt/nt_definitions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/platforms/nt/nt_linker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/platforms/nt/nt_path.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/platforms/nt/rtl_unicode_string_unique_ptr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/platforms/omap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/platforms/posix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/platforms/posix_dns.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/platforms/posix_file_lock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/platforms/posix_mapping.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/platforms/posix_netmode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/platforms/posix_netop.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/platforms/systemcall_details.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/platforms/win32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/platforms/win32/apis.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/platforms/win32/impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/platforms/win32/msvc_linker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/platforms/win32/msvc_linker_32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/platforms/win32/msvc_linker_32_i686.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/platforms/win32/msvc_linker_64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/platforms/win32/utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/platforms/win32/win32_definitions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/platforms/win32_code.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/platforms/win32_code_to_errno.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/platforms/win32_error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/platforms/win32_iocp_overlapped.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/platforms/win32_mapping.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/platforms/win32_network/service.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/platforms/win32_network/socket_file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/platforms/win32_network/win32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/platforms/win32_network/win32_9x_dns.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/platforms/win32_network/win32_dns.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/platforms/win32_scheduling.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/platforms/wine/linux_syscall_table/i686.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/platforms/wine/linux_syscall_table/impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/platforms/wine/linux_syscall_table/x86_64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/platforms/wine/wine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/posix_error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/posix_error_scatter/avr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/posix_error_scatter/generic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/posix_error_scatter/impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/posix_error_scatter/unknown.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/posix_status.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/process_revamp/native.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/process_revamp/nt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/process_revamp/posix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/process_revamp/win32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/threads/mutex/gcc_gthread_mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/threads/mutex/impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/threads/mutex/mcf_gthread_mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/threads/mutex/posix_pthread_mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/threads/mutex/rtl_critical_section.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/threads/mutex/single.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/threads/mutex/win32_critical_section.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/timeutil/environ_timezone.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/timeutil/impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/timeutil/posix_timezone.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/timeutil/time.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/timeutil/win32_regtz_to_ianatz.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/timeutil/win32_timezone.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/white_hole/linux_getrandom.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/white_hole/posix_dev_urandom.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/white_hole/rtl_gen_random.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/white_hole/wasi_random_get.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/white_hole/white_hole.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/white_hole/win32_crypt_gen_random.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted/wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_hosted_crypto.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_i18n.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_i18n/imbuer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_i18n/iso14651.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_i18n/lc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_i18n/lc_numbers/boolalpha.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_i18n/lc_numbers/chrono.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_i18n/lc_numbers/cond.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_i18n/lc_numbers/impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_i18n/lc_numbers/integers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_i18n/lc_numbers/lc_time.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_i18n/lc_numbers/width.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_i18n/lc_print.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_i18n/lc_print_status.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_i18n/locale/impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_i18n/locale/posix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_i18n/locale/win32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_i18n/locale/win32_lcid_table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_i18n/timezone.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_legacy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_legacy_impl/c/avrlibc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_legacy_impl/c/custom.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_legacy_impl/c/done.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_legacy_impl/c/general.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_legacy_impl/c/glibc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_legacy_impl/c/impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_legacy_impl/c/llvm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_legacy_impl/c/macros_general.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_legacy_impl/c/mlibc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_legacy_impl/c/msvcrt_lock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_legacy_impl/c/musl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_legacy_impl/c/serenity.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_legacy_impl/c/uclibc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_legacy_impl/c/unix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_legacy_impl/c/wincrt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_legacy_impl/filebuf/bp_hack/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_legacy_impl/filebuf/bp_hack/emulated.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_legacy_impl/filebuf/bp_hack/impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_legacy_impl/filebuf/bp_hack/libc++.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_legacy_impl/filebuf/bp_hack/libstdc++.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_legacy_impl/filebuf/bp_hack/msvc_stl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_legacy_impl/filebuf/filebuf_file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_legacy_impl/filebuf/fp_hack/impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_legacy_impl/filebuf/fp_hack/libc++.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_legacy_impl/filebuf/fp_hack/libc++symbol.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_legacy_impl/filebuf/fp_hack/libstdc++.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_legacy_impl/filebuf/fp_hack/msvc_stl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_legacy_impl/filebuf/op_out.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_legacy_impl/filebuf/streambuf_io_observer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_unit/async.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_unit/bitset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_unit/chrono.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_unit/complex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_unit/filesystem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_unit/floating.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_unit/floating/hexfloat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_unit/floating/impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_unit/floating/lc_hexfloat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_unit/floating/lc_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_unit/floating/lc_roundtrip.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_unit/floating/precision.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_unit/floating/punning.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_unit/floating/roundtrip.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_unit/gb18030.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_unit/gb18030_impl/gb18030_tb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_unit/gb18030_impl/gb18030_uni2_tb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_unit/gb18030_impl/gb18030_uni4_tb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_unit/string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_unit/string_impl/concat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_unit/string_impl/impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_unit/string_impl/lc_concat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_unit/string_impl/libc++.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_unit/string_impl/libstdc++.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_unit/string_impl/msvc_stl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_unit/string_impl/ostring_ref.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_unit/string_impl/scan_str_ctx_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/include/fast_io_unit/timespec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/localedef.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fast_io/src/i18n_data/main.h" />
+    <Image Include="../../thirdparty/owemdjee/fast_io/examples/0020.operating_system/limine/Capture.PNG" />
+    <Text Include="../../thirdparty/owemdjee/fast_io/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/fast_io/benchmark/0001.refterm/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/fast_io/benchmark/0008/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/fast_io/benchmark/0012.isa/around_asm.s" />
+    <Text Include="../../thirdparty/owemdjee/fast_io/benchmark/0012.isa/around_cpp.s" />
+    <Text Include="../../thirdparty/owemdjee/fast_io/benchmark/0012.isa/sha512_loongarch64_gcc.s" />
+    <Text Include="../../thirdparty/owemdjee/fast_io/benchmark/0012.isa/sha512_openssl.s" />
+    <Text Include="../../thirdparty/owemdjee/fast_io/benchmark/0012.isa/sha512_x86_64_clang.s" />
+    <Text Include="../../thirdparty/owemdjee/fast_io/benchmark/0012.isa/sha512_x86_64_gcc.s" />
+    <Text Include="../../thirdparty/owemdjee/fast_io/examples/0013.graph/Readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/fast_io/examples/0013.graph/shortest_path/graph.txt" />
+    <Text Include="../../thirdparty/owemdjee/fast_io/examples/0013.graph/strongly_connected_component/directed_graph.txt" />
+    <Text Include="../../thirdparty/owemdjee/fast_io/examples/0014.random/freq.txt" />
+    <Text Include="../../thirdparty/owemdjee/fast_io/examples/0020.operating_system/limine/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/fast_io/examples/0020.operating_system/limine/kernel/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/fast_io/examples/0020.operating_system/limine/limine.cfg" />
+    <Text Include="../../thirdparty/owemdjee/fast_io/examples/0021.kernel_driver/linux/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/fast_io/examples/0021.kernel_driver/nt/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/fast_io/examples/0026.lua/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/fast_io/examples/0026.lua/luabit.lua" />
+    <Text Include="../../thirdparty/owemdjee/fast_io/examples/0026.lua/main.lua" />
+    <Text Include="../../thirdparty/owemdjee/fast_io/license.txt" />
+    <Text Include="../../thirdparty/owemdjee/fast_io/man/concat.3" />
+    <Text Include="../../thirdparty/owemdjee/fast_io/man/native_file.3" />
+    <Text Include="../../thirdparty/owemdjee/fast_io/man/print.3" />
+    <Text Include="../../thirdparty/owemdjee/fast_io/man/to.3" />
+    <Text Include="../../thirdparty/owemdjee/fast_io/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/fast_io/support.md" />
+    <Text Include="../../thirdparty/owemdjee/fast_io/tests/0001.input/invalid.txt" />
+    <Text Include="../../thirdparty/owemdjee/fast_io/tests/0002.printscan/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/fast_io/tests/0009.http_header/test.txt" />
+    <Text Include="../../thirdparty/owemdjee/fast_io/tests/0020.scanners/test.txt" />
+    <Text Include="../../thirdparty/owemdjee/fast_io/tests/CMakeLists.txt" />
+  </ItemGroup>
+  <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+</Project>
+  

@@ -405,6 +405,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/xg-arglist-parser.c" />
     <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/xg-check.c" />
     <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/xg-encoding.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/xg-formatstring.c" />
     <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/xg-message.c" />
     <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/xg-mixed-string.c" />
     <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/xg-pos.c" />
@@ -574,7 +575,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/lib/version.c" />
     <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/tests/test-accessors.c" />
     <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/tests/test-instanceof.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/gettext/os2/iconv/iconv.c" />
     <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-runtime/intl/eval-plural.h" />
     <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-runtime/intl/export.h" />
     <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-runtime/intl/gettextP.h" />
@@ -691,6 +691,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/xg-arglist-parser.h" />
     <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/xg-check.h" />
     <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/xg-encoding.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/xg-formatstring.h" />
     <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/xg-message.h" />
     <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/xg-mixed-string.h" />
     <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/xg-pos.h" />
@@ -820,7 +821,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/lib/textstyle.h" />
     <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/lib/textstyle/version.in.h" />
     <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/lib/textstyle/woe32dll.in.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/gettext/os2/iconv/iconv.h" />
     <ResourceCompile Include="../../thirdparty/owemdjee/gettext/gettext-runtime/intl/libintl.rc" />
     <ResourceCompile Include="../../thirdparty/owemdjee/gettext/gettext-runtime/libasprintf/libasprintf.rc" />
     <ResourceCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/libgettextpo/libgettextpo.rc" />
@@ -840,6 +840,7 @@
     <Text Include="../../thirdparty/owemdjee/gettext/DEPENDENCIES" />
     <Text Include="../../thirdparty/owemdjee/gettext/HACKING" />
     <Text Include="../../thirdparty/owemdjee/gettext/INSTALL" />
+    <Text Include="../../thirdparty/owemdjee/gettext/INSTALL.aix" />
     <Text Include="../../thirdparty/owemdjee/gettext/INSTALL.windows" />
     <Text Include="../../thirdparty/owemdjee/gettext/JOIN-GNU" />
     <Text Include="../../thirdparty/owemdjee/gettext/Makefile.am" />
@@ -2041,6 +2042,8 @@
     <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/tests/xgettext-java-5" />
     <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/tests/xgettext-java-6" />
     <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/tests/xgettext-java-7" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/tests/xgettext-java-8" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/tests/xgettext-java-9" />
     <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/tests/xgettext-java-stackovfl-1" />
     <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/tests/xgettext-java-stackovfl-2" />
     <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/tests/xgettext-java-stackovfl-3" />
@@ -2126,6 +2129,7 @@
     <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/tests/xgettext-python-5" />
     <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/tests/xgettext-python-6" />
     <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/tests/xgettext-python-7" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/tests/xgettext-python-8" />
     <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/tests/xgettext-python-stackovfl-1" />
     <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/tests/xgettext-python-stackovfl-2" />
     <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/tests/xgettext-python-stackovfl-3" />
@@ -2171,6 +2175,8 @@
     <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/tests/xgettext-vala-3" />
     <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/tests/xgettext-vala-4" />
     <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/tests/xgettext-vala-5" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/tests/xgettext-vala-6" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/tests/xgettext-vala-7" />
     <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/tests/xgettext-vala-stackovfl-1" />
     <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/tests/xgettext-vala-stackovfl-2" />
     <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/tests/xgettext-ycp-1" />
@@ -2291,12 +2297,6 @@
     <Text Include="../../thirdparty/owemdjee/gettext/m4/lt~obsolete.m4" />
     <Text Include="../../thirdparty/owemdjee/gettext/m4/more-warnings.m4" />
     <Text Include="../../thirdparty/owemdjee/gettext/m4/woe32-dll.m4" />
-    <Text Include="../../thirdparty/owemdjee/gettext/os2/Makefile" />
-    <Text Include="../../thirdparty/owemdjee/gettext/os2/README.OS2" />
-    <Text Include="../../thirdparty/owemdjee/gettext/os2/backward.def" />
-    <Text Include="../../thirdparty/owemdjee/gettext/os2/configure.awk" />
-    <Text Include="../../thirdparty/owemdjee/gettext/os2/iconv/Makefile" />
-    <Text Include="../../thirdparty/owemdjee/gettext/os2/iconv/README" />
     <Text Include="../../thirdparty/owemdjee/gettext/windows/windres-options" />
     <Xml Include="../../thirdparty/owemdjee/gettext/gettext-runtime/doc/Admin/PoInventory.xml" />
     <Xml Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c-gnome3/hello.gresource.xml" />

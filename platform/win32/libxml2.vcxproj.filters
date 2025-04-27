@@ -13,10 +13,10 @@
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files\include">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0001}</UniqueIdentifier>
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0002}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\include\libxml">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0002}</UniqueIdentifier>
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0001}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\include\private">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0003}</UniqueIdentifier>
@@ -425,7 +425,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/libxml2/hash.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/libxml2/legacy.c">
+    <ClCompile Include="../../thirdparty/owemdjee/libxml2/lintmain.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/libxml2/list.c">
@@ -749,6 +749,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/libxml2/include/private/io.h">
       <Filter>Header Files\include\private</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/libxml2/include/private/lint.h">
+      <Filter>Header Files\include\private</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/libxml2/include/private/memory.h">
       <Filter>Header Files\include\private</Filter>
     </ClInclude>
@@ -761,9 +764,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/libxml2/include/private/save.h">
       <Filter>Header Files\include\private</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/libxml2/include/private/shell.h">
-      <Filter>Header Files\include\private</Filter>
-    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/libxml2/include/private/string.h">
       <Filter>Header Files\include\private</Filter>
     </ClInclude>
@@ -771,6 +771,9 @@
       <Filter>Header Files\include\private</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/libxml2/include/private/tree.h">
+      <Filter>Header Files\include\private</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/libxml2/include/private/unicode.h">
       <Filter>Header Files\include\private</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/libxml2/include/private/xinclude.h">
@@ -781,9 +784,6 @@
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/libxml2/include/private/xzlib.h">
       <Filter>Header Files\include\private</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/libxml2/include/wsockcompat.h">
-      <Filter>Header Files\include</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/libxml2/iso8859x.inc">
       <Filter>Header Files</Filter>
@@ -1307,25 +1307,10 @@
     <Text Include="../../thirdparty/owemdjee/libxml2/libxml2-config.cmake.in">
       <Filter>Misc Files</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/libxml2/libxml2.syms">
-      <Filter>Misc Files</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/libxml2/m4/ax_append_flag.m4">
-      <Filter>Misc Files\m4</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/libxml2/m4/ax_append_link_flags.m4">
-      <Filter>Misc Files\m4</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/libxml2/m4/ax_check_link_flag.m4">
-      <Filter>Misc Files\m4</Filter>
-    </Text>
     <Text Include="../../thirdparty/owemdjee/libxml2/m4/ax_gcc_func_attribute.m4">
       <Filter>Misc Files\m4</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/libxml2/m4/ax_recursive_eval.m4">
-      <Filter>Misc Files\m4</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/libxml2/m4/ax_require_defined.m4">
       <Filter>Misc Files\m4</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/libxml2/meson_options.txt">
@@ -1485,6 +1470,12 @@
       <Filter>Misc Files\result\HTML</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/libxml2/result/HTML/html5_enc.html.sax">
+      <Filter>Misc Files\result\HTML</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/libxml2/result/HTML/implied1.html">
+      <Filter>Misc Files\result\HTML</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/libxml2/result/HTML/implied1.html.sax">
       <Filter>Misc Files\result\HTML</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/libxml2/result/HTML/issue318.html">
@@ -3206,6 +3197,18 @@
     <Text Include="../../thirdparty/owemdjee/libxml2/result/errors/content1.xml.str">
       <Filter>Misc Files\result\errors</Filter>
     </Text>
+    <Text Include="../../thirdparty/owemdjee/libxml2/result/errors/doctype1.xml.err">
+      <Filter>Misc Files\result\errors</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/libxml2/result/errors/doctype1.xml.str">
+      <Filter>Misc Files\result\errors</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/libxml2/result/errors/doctype2.xml.err">
+      <Filter>Misc Files\result\errors</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/libxml2/result/errors/doctype2.xml.str">
+      <Filter>Misc Files\result\errors</Filter>
+    </Text>
     <Text Include="../../thirdparty/owemdjee/libxml2/result/errors/dup-xml-attr.xml.err">
       <Filter>Misc Files\result\errors</Filter>
     </Text>
@@ -3252,6 +3255,12 @@
       <Filter>Misc Files\result\errors</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/libxml2/result/errors/issue151.xml.str">
+      <Filter>Misc Files\result\errors</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/libxml2/result/errors/issue868.xml.err">
+      <Filter>Misc Files\result\errors</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/libxml2/result/errors/issue868.xml.str">
       <Filter>Misc Files\result\errors</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/libxml2/result/errors/name.xml.err">
@@ -5120,6 +5129,9 @@
     <Text Include="../../thirdparty/owemdjee/libxml2/result/schemas/bug322411_1_0.err">
       <Filter>Misc Files\result\schemas</Filter>
     </Text>
+    <Text Include="../../thirdparty/owemdjee/libxml2/result/schemas/bug322411_1_1.err">
+      <Filter>Misc Files\result\schemas</Filter>
+    </Text>
     <Text Include="../../thirdparty/owemdjee/libxml2/result/schemas/bug323510_1_0.err">
       <Filter>Misc Files\result\schemas</Filter>
     </Text>
@@ -6030,6 +6042,9 @@
       <Filter>Misc Files\test\HTML</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/libxml2/test/HTML/html5_enc.html">
+      <Filter>Misc Files\test\HTML</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/libxml2/test/HTML/implied1.html">
       <Filter>Misc Files\test\HTML</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/libxml2/test/HTML/issue318.html">
@@ -7337,6 +7352,9 @@
     <Text Include="../../thirdparty/owemdjee/libxml2/tools/gentest.py">
       <Filter>Misc Files\tools</Filter>
     </Text>
+    <Text Include="../../thirdparty/owemdjee/libxml2/tools/xmlmod.py">
+      <Filter>Misc Files\tools</Filter>
+    </Text>
     <Text Include="../../thirdparty/owemdjee/libxml2/win32.msvc2008/libxml.def">
       <Filter>Misc Files\win32.msvc2008</Filter>
     </Text>
@@ -7357,6 +7375,9 @@
     </Text>
     <Text Include="../../thirdparty/owemdjee/libxml2/win32/libxml.def">
       <Filter>Misc Files\win32</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/libxml2/xml2-config-meson">
+      <Filter>Misc Files</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/libxml2/xml2-config.in">
       <Filter>Misc Files</Filter>
@@ -8744,6 +8765,12 @@
     <Xml Include="../../thirdparty/owemdjee/libxml2/test/errors/content1.xml">
       <Filter>Misc Files\test\errors</Filter>
     </Xml>
+    <Xml Include="../../thirdparty/owemdjee/libxml2/test/errors/doctype1.xml">
+      <Filter>Misc Files\test\errors</Filter>
+    </Xml>
+    <Xml Include="../../thirdparty/owemdjee/libxml2/test/errors/doctype2.xml">
+      <Filter>Misc Files\test\errors</Filter>
+    </Xml>
     <Xml Include="../../thirdparty/owemdjee/libxml2/test/errors/dup-xml-attr.xml">
       <Filter>Misc Files\test\errors</Filter>
     </Xml>
@@ -8769,6 +8796,9 @@
       <Filter>Misc Files\test\errors</Filter>
     </Xml>
     <Xml Include="../../thirdparty/owemdjee/libxml2/test/errors/issue151.xml">
+      <Filter>Misc Files\test\errors</Filter>
+    </Xml>
+    <Xml Include="../../thirdparty/owemdjee/libxml2/test/errors/issue868.xml">
       <Filter>Misc Files\test\errors</Filter>
     </Xml>
     <Xml Include="../../thirdparty/owemdjee/libxml2/test/errors/name.xml">
@@ -9636,6 +9666,9 @@
       <Filter>Misc Files\test\schemas</Filter>
     </Xml>
     <Xml Include="../../thirdparty/owemdjee/libxml2/test/schemas/bug322411_0.xml">
+      <Filter>Misc Files\test\schemas</Filter>
+    </Xml>
+    <Xml Include="../../thirdparty/owemdjee/libxml2/test/schemas/bug322411_1.xml">
       <Filter>Misc Files\test\schemas</Filter>
     </Xml>
     <Xml Include="../../thirdparty/owemdjee/libxml2/test/schemas/bug323510_0.xml">

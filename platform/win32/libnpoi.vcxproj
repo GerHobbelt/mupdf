@@ -436,6 +436,7 @@
     <Text Include="../../thirdparty/owemdjee/npoi/README.md" />
     <Text Include="../../thirdparty/owemdjee/npoi/Read Me.txt" />
     <Text Include="../../thirdparty/owemdjee/npoi/benchmarks/NPOI.Benchmarks/AutoSizeColumnBenchmark.cs" />
+    <Text Include="../../thirdparty/owemdjee/npoi/benchmarks/NPOI.Benchmarks/DataFormatReadBenchmark.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/benchmarks/NPOI.Benchmarks/LargeExcelFileBenchmark.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/benchmarks/NPOI.Benchmarks/Program.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/benchmarks/NPOI.Benchmarks/RangeValuesBenchmark.cs" />
@@ -1127,8 +1128,6 @@
     <Text Include="../../thirdparty/owemdjee/npoi/main/SS/Formula/Atp/IfNa.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/main/SS/Formula/Atp/Ifs.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/main/SS/Formula/Atp/MRound.cs" />
-    <Text Include="../../thirdparty/owemdjee/npoi/main/SS/Formula/Atp/Maxifs.cs" />
-    <Text Include="../../thirdparty/owemdjee/npoi/main/SS/Formula/Atp/MinIfs.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/main/SS/Formula/Atp/NetworkdaysFunction.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/main/SS/Formula/Atp/ParityFunction.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/main/SS/Formula/Atp/RandBetween.cs" />
@@ -1284,6 +1283,7 @@
     <Text Include="../../thirdparty/owemdjee/npoi/main/SS/Formula/Functions/FloorMath.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/main/SS/Formula/Functions/Forecast.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/main/SS/Formula/Functions/FreeRefFunction.cs" />
+    <Text Include="../../thirdparty/owemdjee/npoi/main/SS/Formula/Functions/Frequency.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/main/SS/Formula/Functions/Function.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/main/SS/Formula/Functions/Function0Arg.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/main/SS/Formula/Functions/Function1Arg.cs" />
@@ -1324,7 +1324,9 @@
     <Text Include="../../thirdparty/owemdjee/npoi/main/SS/Formula/Functions/Matrix/Mdeterm.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/main/SS/Formula/Functions/Matrix/Minverse.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/main/SS/Formula/Functions/Matrix/Transpose.cs" />
+    <Text Include="../../thirdparty/owemdjee/npoi/main/SS/Formula/Functions/Maxifs.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/main/SS/Formula/Functions/MinaMaxa.cs" />
+    <Text Include="../../thirdparty/owemdjee/npoi/main/SS/Formula/Functions/Minifs.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/main/SS/Formula/Functions/Mirr.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/main/SS/Formula/Functions/Mod.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/main/SS/Formula/Functions/Mode.cs" />
@@ -1570,6 +1572,7 @@
     <Text Include="../../thirdparty/owemdjee/npoi/main/SS/UserModel/ClientAnchor.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/main/SS/UserModel/Color.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/main/SS/UserModel/ColorScaleFormatting.cs" />
+    <Text Include="../../thirdparty/owemdjee/npoi/main/SS/UserModel/Column.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/main/SS/UserModel/Comment.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/main/SS/UserModel/ComparisonOperator.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/main/SS/UserModel/ConditionFilterData.cs" />
@@ -1635,6 +1638,7 @@
     <Text Include="../../thirdparty/owemdjee/npoi/main/SS/UserModel/ShapeTypes.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/main/SS/UserModel/Sheet.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/main/SS/UserModel/SheetConditionalFormatting.cs" />
+    <Text Include="../../thirdparty/owemdjee/npoi/main/SS/UserModel/SheetVisibility.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/main/SS/UserModel/Table.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/main/SS/UserModel/TableStyle.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/main/SS/UserModel/TableStyleInfo.cs" />
@@ -1731,6 +1735,7 @@
     <Text Include="../../thirdparty/owemdjee/npoi/main/Util/RLEDecompressingInputStream.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/main/Util/RecordFormatException.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/main/Util/RecyclableMemory.cs" />
+    <Text Include="../../thirdparty/owemdjee/npoi/main/Util/ReplacingInputStream.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/main/Util/RuntimeException.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/main/Util/ShortField.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/main/Util/ShortList.cs" />
@@ -1856,7 +1861,9 @@
     <Text Include="../../thirdparty/owemdjee/npoi/ooxml/XSSF/UserModel/Extensions/XSSFCellFill.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/ooxml/XSSF/UserModel/Extensions/XSSFHeaderFooter.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/ooxml/XSSF/UserModel/Helpers/ColumnHelper.cs" />
+    <Text Include="../../thirdparty/owemdjee/npoi/ooxml/XSSF/UserModel/Helpers/ColumnShifter.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/ooxml/XSSF/UserModel/Helpers/HeaderFooterHelper.cs" />
+    <Text Include="../../thirdparty/owemdjee/npoi/ooxml/XSSF/UserModel/Helpers/XSSFColumnShifter.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/ooxml/XSSF/UserModel/Helpers/XSSFFormulaUtils.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/ooxml/XSSF/UserModel/Helpers/XSSFIgnoredErrorHelper.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/ooxml/XSSF/UserModel/Helpers/XSSFPasswordHelper.cs" />
@@ -1886,6 +1893,7 @@
     <Text Include="../../thirdparty/owemdjee/npoi/ooxml/XSSF/UserModel/XSSFClientAnchor.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/ooxml/XSSF/UserModel/XSSFColor.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/ooxml/XSSF/UserModel/XSSFColorScaleFormatting.cs" />
+    <Text Include="../../thirdparty/owemdjee/npoi/ooxml/XSSF/UserModel/XSSFColumn.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/ooxml/XSSF/UserModel/XSSFComment.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/ooxml/XSSF/UserModel/XSSFConditionFilterData.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/ooxml/XSSF/UserModel/XSSFConditionalFormatting.cs" />
@@ -2633,8 +2641,6 @@
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/main/SS/Formula/Atp/TestIfna.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/main/SS/Formula/Atp/TestIfs.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/main/SS/Formula/Atp/TestMRound.cs" />
-    <Text Include="../../thirdparty/owemdjee/npoi/testcases/main/SS/Formula/Atp/TestMaxIfs.cs" />
-    <Text Include="../../thirdparty/owemdjee/npoi/testcases/main/SS/Formula/Atp/TestMinifs.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/main/SS/Formula/Atp/TestNetworkdaysFunction.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/main/SS/Formula/Atp/TestRandBetween.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/main/SS/Formula/Atp/TestSwitch.cs" />
@@ -2671,7 +2677,6 @@
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/main/SS/Formula/Function/TestReadMissingBuiltInFuncs.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/main/SS/Formula/Functions/AbstractNumericTestCase.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/main/SS/Formula/Functions/BaseTestFunctionsFromSpreadsheet.cs" />
-    <Text Include="../../thirdparty/owemdjee/npoi/testcases/main/SS/Formula/Functions/CountifsTests.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/main/SS/Formula/Functions/EvalFactory.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/main/SS/Formula/Functions/NumericFunctionInvoker.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/main/SS/Formula/Functions/RefEvalImplementation.cs" />
@@ -2708,6 +2713,7 @@
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/main/SS/Formula/Functions/TestFixed.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/main/SS/Formula/Functions/TestFixedFunctionsFromSpreadsheet.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/main/SS/Formula/Functions/TestForecast.cs" />
+    <Text Include="../../thirdparty/owemdjee/npoi/testcases/main/SS/Formula/Functions/TestFrequency.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/main/SS/Formula/Functions/TestHex2Dec.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/main/SS/Formula/Functions/TestIPMT.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/main/SS/Formula/Functions/TestImRealFunctionsFromSpreadsheet.cs" />
@@ -2726,7 +2732,9 @@
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/main/SS/Formula/Functions/TestMatch.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/main/SS/Formula/Functions/TestMatchFunctionsFromSpreadsheet.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/main/SS/Formula/Functions/TestMathX.cs" />
+    <Text Include="../../thirdparty/owemdjee/npoi/testcases/main/SS/Formula/Functions/TestMaxIfs.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/main/SS/Formula/Functions/TestMid.cs" />
+    <Text Include="../../thirdparty/owemdjee/npoi/testcases/main/SS/Formula/Functions/TestMinifs.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/main/SS/Formula/Functions/TestMirr.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/main/SS/Formula/Functions/TestNormDist.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/main/SS/Formula/Functions/TestNormInv.cs" />
@@ -2894,10 +2902,12 @@
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/ooxml/SS/Format/TestCellFormatPart.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/ooxml/SS/Formula/Eval/TestXSSFCircularReferences.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/ooxml/SS/Formula/Functions/CompareNumericFuncEvalTestBase.cs" />
+    <Text Include="../../thirdparty/owemdjee/npoi/testcases/ooxml/SS/Formula/Functions/TestCountifs.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/ooxml/SS/Formula/Functions/TestFloorCeilingMath.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/ooxml/SS/Formula/Functions/TestProper.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/ooxml/SS/Formula/Functions/TestRate.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/ooxml/SS/Formula/Functions/TestStdevAndVarVariants.cs" />
+    <Text Include="../../thirdparty/owemdjee/npoi/testcases/ooxml/SS/Formula/Functions/TestSumifsXSSF.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/ooxml/SS/Formula/TestFormulaParser.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/ooxml/SS/Formula/TestStructuredReferences.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/ooxml/SS/TestWorkbookFactory.cs" />
@@ -2964,6 +2974,7 @@
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/ooxml/XSSF/UserModel/Extensions/TestXSSFCellFill.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/ooxml/XSSF/UserModel/Helpers/TestColumnHelper.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/ooxml/XSSF/UserModel/Helpers/TestHeaderFooterHelper.cs" />
+    <Text Include="../../thirdparty/owemdjee/npoi/testcases/ooxml/XSSF/UserModel/TestCloneSheet.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/ooxml/XSSF/UserModel/TestFormulaEvaluatorOnXSSF.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/ooxml/XSSF/UserModel/TestMissingWorkbookOnXSSF.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/ooxml/XSSF/UserModel/TestMultiSheetFormulaEvaluatorOnXSSF.cs" />
@@ -2976,6 +2987,7 @@
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/ooxml/XSSF/UserModel/TestXSSFChartSheet.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/ooxml/XSSF/UserModel/TestXSSFColGrouping.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/ooxml/XSSF/UserModel/TestXSSFColor.cs" />
+    <Text Include="../../thirdparty/owemdjee/npoi/testcases/ooxml/XSSF/UserModel/TestXSSFColumn.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/ooxml/XSSF/UserModel/TestXSSFComment.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/ooxml/XSSF/UserModel/TestXSSFConditionalFormatting.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/ooxml/XSSF/UserModel/TestXSSFDataFormat.cs" />
@@ -3002,6 +3014,7 @@
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/ooxml/XSSF/UserModel/TestXSSFShapeName.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/ooxml/XSSF/UserModel/TestXSSFSheet.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/ooxml/XSSF/UserModel/TestXSSFSheetAutosizeColumn.cs" />
+    <Text Include="../../thirdparty/owemdjee/npoi/testcases/ooxml/XSSF/UserModel/TestXSSFSheetColumns.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/ooxml/XSSF/UserModel/TestXSSFSheetCopyTo.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/ooxml/XSSF/UserModel/TestXSSFSheetMergeRegions.cs" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/ooxml/XSSF/UserModel/TestXSSFSheetRowGrouping.cs" />
@@ -3216,6 +3229,7 @@
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/document/ListEntryNoListTable.doc" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/document/Lists.doc" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/document/MarkAuthorsTable.doc" />
+    <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/document/NPOI-bug-1481.docx" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/document/NoHeadFoot.doc" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/document/NoHeadFoot.docx" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/document/Numbering.docx" />
@@ -3377,6 +3391,7 @@
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/openxml4j/TestPackageCoreProperiesGetters.docx" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/openxml4j/TestPackageCoreProperiesSetters.docx" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/openxml4j/TestPackageThumbnail.docx" />
+    <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/openxml4j/bug-60626.vml" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/openxml4j/invalid.xlsx" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/openxml4j/sample.docx" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/openxml4j/sample.xlsx" />
@@ -3427,6 +3442,7 @@
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/12843-1.xls" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/12843-2.xls" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/13224.xls" />
+    <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/1370_clonesheet_withhyperlink.xlsx" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/13796.xls" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/14330-1.xls" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/14330-2.xls" />
@@ -3616,6 +3632,7 @@
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/51461.xls" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/51470.xlsx" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/51498.xls" />
+    <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/51519.xlsx" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/51535.xls" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/51585.xlsx" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/51626.xlsx" />
@@ -3712,6 +3729,7 @@
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/56730.xlsx" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/56737.xls" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/56737.xlsx" />
+    <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/56822-Countifs.xlsx" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/56957.xlsx" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/57003-FixedFunctionTestCaseData.xls" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/57074.xls" />
@@ -3962,6 +3980,7 @@
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/atp.xlsx" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/background_color.xlsx" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/blankworkbook.xls" />
+    <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/bug60858.xlsx" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/bug67784.xlsx" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/bug_42794.xls" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/ca_apparel_browse_tree_guide._TTH_.xls" />
@@ -4007,6 +4026,8 @@
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/finance.xls" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/florida_data.ashx.xls" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/headerFooterTest.xlsx" />
+    <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/hinstall.xls" />
+    <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/hparams.xls" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/intercept.xls" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/invalid.xlsx" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/mirrTest.xls" />
@@ -4015,6 +4036,8 @@
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/multibookFormulaA.xls" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/multibookFormulaB.xls" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/mv-calculator-final-2-20-2013.xlsm" />
+    <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/named-cell-in-formula-test.xls" />
+    <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/named-cell-test.xls" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/namedinput.xls" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/noHeaderFooter47244.xls" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/noSharedStringTable.xlsx" />
@@ -4025,6 +4048,7 @@
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/password.xls" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/picture.xlsx" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/poc-shared-strings.xlsx" />
+    <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/poc-xmlbomb-empty.xlsx" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/poc-xmlbomb.xlsx" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/protected_passtika.xlsx" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/rank.xls" />
@@ -4062,6 +4086,7 @@
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/test_properties1" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/text.xls" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/unicodeNameRecord.xls" />
+    <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/unicodeSheetName.xlsx" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/vmlDrawing1.vml" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/workbookProtection-sheet_password-2013.xlsx" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/workbookProtection-workbook_password-2013.xlsx" />
@@ -4071,8 +4096,10 @@
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/workbookProtection_workbook_structure_protected.xlsx" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/workbookProtection_workbook_windows_protected.xlsx" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/workbookProtection_worksheet_protected.xlsx" />
+    <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/xinstall.xlsx" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/xlsx-jdbc.xlsx" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/xor-encryption-abc.xls" />
+    <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/xparams.xlsx" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/spreadsheet/yearfracExamples.xls" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/xmldsign/Office2010-SP1-XAdES-X-L.docx" />
     <Text Include="../../thirdparty/owemdjee/npoi/testcases/test-data/xmldsign/bug58630.xlsx" />
