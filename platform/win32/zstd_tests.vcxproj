@@ -19,31 +19,35 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{00112979-815B-4F64-BC9D-2190780C0A35}</ProjectGuid>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-101000000006}</ProjectGuid>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v143</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v143</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
@@ -105,122 +109,120 @@
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <ClCompile>
-      <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/zstd;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/zstd/lib/compress;../../thirdparty/owemdjee/zstd/programs;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_ZSTD_DEMOS;ZSTD_DEMOS_STATICLIB;CLIPP_CLIPP_CLIPP_WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-    </ClCompile>
-    <Link>
-      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
-      <TargetMachine>MachineX86</TargetMachine>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-      <OptimizeReferences>true</OptimizeReferences>
-      <EnableCOMDATFolding>false</EnableCOMDATFolding>
-      <ForceFileOutput>
-      </ForceFileOutput>
-    </Link>
-    <ResourceCompile>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/zstd;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/zstd/lib/compress;../../thirdparty/owemdjee/zstd/programs;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-    </ResourceCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Midl>
-      <TargetEnvironment>X64</TargetEnvironment>
-    </Midl>
-    <ClCompile>
-      <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/zstd;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/zstd/lib/compress;../../thirdparty/owemdjee/zstd/programs;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_ZSTD_DEMOS;ZSTD_DEMOS_STATICLIB;CLIPP_CLIPP_CLIPP_WIN64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-    </ClCompile>
-    <Link>
-      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
-      <TargetMachine>MachineX64</TargetMachine>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-      <OptimizeReferences>true</OptimizeReferences>
-      <EnableCOMDATFolding>false</EnableCOMDATFolding>
-      <ForceFileOutput>
-      </ForceFileOutput>
-    </Link>
-    <ResourceCompile>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/zstd;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/zstd/lib/compress;../../thirdparty/owemdjee/zstd/programs;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-    </ResourceCompile>
-  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZSTD;ZSTD_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
     <ClCompile>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/zstd;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/zstd/lib/compress;../../thirdparty/owemdjee/zstd/programs;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_ZSTD_DEMOS;ZSTD_DEMOS_STATICLIB;CLIPP_CLIPP_CLIPP_WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/zstd/lib/common;../../thirdparty/owemdjee/zstd/zlibWrapper;../../thirdparty/owemdjee/zstd/contrib/seekable_format;../../thirdparty/owemdjee/zstd/programs;../../thirdparty/owemdjee/zstd/lib/compress;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/zlib;../../scripts/zlib;../../thirdparty/owemdjee/zstd/build/single_file_libs/examples;../../thirdparty/owemdjee/getopt;../../thirdparty/curl/include;../../thirdparty/owemdjee/zstd/contrib/pzstd;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>ZSTD_NOBENCH;BUILD_MONOLITHIC;BUILDING_LIBZSTD;ZSTD_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
-    <Link>
-      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
-      <OptimizeReferences>true</OptimizeReferences>
-      <EnableCOMDATFolding>false</EnableCOMDATFolding>
-      <TargetMachine>MachineX86</TargetMachine>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-      <ForceFileOutput>
-      </ForceFileOutput>
-    </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/zstd;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/zstd/lib/compress;../../thirdparty/owemdjee/zstd/programs;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZSTD;ZSTD_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/zstd/lib/common;../../thirdparty/owemdjee/zstd/zlibWrapper;../../thirdparty/owemdjee/zstd/contrib/seekable_format;../../thirdparty/owemdjee/zstd/programs;../../thirdparty/owemdjee/zstd/lib/compress;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/zlib;../../scripts/zlib;../../thirdparty/owemdjee/zstd/build/single_file_libs/examples;../../thirdparty/owemdjee/getopt;../../thirdparty/curl/include;../../thirdparty/owemdjee/zstd/contrib/pzstd;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZSTD;ZSTD_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/zstd/lib/common;../../thirdparty/owemdjee/zstd/zlibWrapper;../../thirdparty/owemdjee/zstd/contrib/seekable_format;../../thirdparty/owemdjee/zstd/programs;../../thirdparty/owemdjee/zstd/lib/compress;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/zlib;../../scripts/zlib;../../thirdparty/owemdjee/zstd/build/single_file_libs/examples;../../thirdparty/owemdjee/getopt;../../thirdparty/curl/include;../../thirdparty/owemdjee/zstd/contrib/pzstd;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>ZSTD_NOBENCH;BUILD_MONOLITHIC;BUILDING_LIBZSTD;ZSTD_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZSTD;ZSTD_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/zstd/lib/common;../../thirdparty/owemdjee/zstd/zlibWrapper;../../thirdparty/owemdjee/zstd/contrib/seekable_format;../../thirdparty/owemdjee/zstd/programs;../../thirdparty/owemdjee/zstd/lib/compress;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/zlib;../../scripts/zlib;../../thirdparty/owemdjee/zstd/build/single_file_libs/examples;../../thirdparty/owemdjee/getopt;../../thirdparty/curl/include;../../thirdparty/owemdjee/zstd/contrib/pzstd;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
-      <TargetEnvironment>X64</TargetEnvironment>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZSTD;ZSTD_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
     </Midl>
     <ClCompile>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/zstd;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/zstd/lib/compress;../../thirdparty/owemdjee/zstd/programs;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_ZSTD_DEMOS;ZSTD_DEMOS_STATICLIB;CLIPP_CLIPP_CLIPP_WIN64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/zstd/lib/common;../../thirdparty/owemdjee/zstd/zlibWrapper;../../thirdparty/owemdjee/zstd/contrib/seekable_format;../../thirdparty/owemdjee/zstd/programs;../../thirdparty/owemdjee/zstd/lib/compress;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/zlib;../../scripts/zlib;../../thirdparty/owemdjee/zstd/build/single_file_libs/examples;../../thirdparty/owemdjee/getopt;../../thirdparty/curl/include;../../thirdparty/owemdjee/zstd/contrib/pzstd;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>ZSTD_NOBENCH;BUILD_MONOLITHIC;BUILDING_LIBZSTD;ZSTD_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
-    <Link>
-      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
-      <OptimizeReferences>true</OptimizeReferences>
-      <EnableCOMDATFolding>false</EnableCOMDATFolding>
-      <TargetMachine>MachineX64</TargetMachine>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-      <ForceFileOutput>
-      </ForceFileOutput>
-    </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/zstd;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/zstd/lib/compress;../../thirdparty/owemdjee/zstd/programs;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZSTD;ZSTD_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/zstd/lib/common;../../thirdparty/owemdjee/zstd/zlibWrapper;../../thirdparty/owemdjee/zstd/contrib/seekable_format;../../thirdparty/owemdjee/zstd/programs;../../thirdparty/owemdjee/zstd/lib/compress;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/zlib;../../scripts/zlib;../../thirdparty/owemdjee/zstd/build/single_file_libs/examples;../../thirdparty/owemdjee/getopt;../../thirdparty/curl/include;../../thirdparty/owemdjee/zstd/contrib/pzstd;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ProjectReference Include="libpthread-win32.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff8df2c2}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libzlib.vcxproj">
-      <Project>{5edcf4fd-0291-4fb9-8d96-458957ca5e3c}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libzstd.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518fffeb6e4}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libzstd_examples.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518f4feb6e4}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libzstd_zlibwrap.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518fffeb6e5}</Project>
-    </ProjectReference>
-  </ItemGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZSTD;ZSTD_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/zstd/lib/common;../../thirdparty/owemdjee/zstd/zlibWrapper;../../thirdparty/owemdjee/zstd/contrib/seekable_format;../../thirdparty/owemdjee/zstd/programs;../../thirdparty/owemdjee/zstd/lib/compress;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/zlib;../../scripts/zlib;../../thirdparty/owemdjee/zstd/build/single_file_libs/examples;../../thirdparty/owemdjee/getopt;../../thirdparty/curl/include;../../thirdparty/owemdjee/zstd/contrib/pzstd;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>ZSTD_NOBENCH;BUILD_MONOLITHIC;BUILDING_LIBZSTD;ZSTD_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZSTD;ZSTD_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/zstd/lib/common;../../thirdparty/owemdjee/zstd/zlibWrapper;../../thirdparty/owemdjee/zstd/contrib/seekable_format;../../thirdparty/owemdjee/zstd/programs;../../thirdparty/owemdjee/zstd/lib/compress;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/zlib;../../scripts/zlib;../../thirdparty/owemdjee/zstd/build/single_file_libs/examples;../../thirdparty/owemdjee/getopt;../../thirdparty/curl/include;../../thirdparty/owemdjee/zstd/contrib/pzstd;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/zstd/build/single_file_libs/examples/emscripten.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/zstd/build/single_file_libs/examples/roundtrip.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/zstd/build/single_file_libs/examples/simple.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/zstd/build/single_file_libs/zstd-in.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/zstd/build/single_file_libs/zstddeclib-in.c" />
     <ClCompile Include="../../thirdparty/owemdjee/zstd/contrib/diagnose_corruption/check_flipped_bits.c" />
     <ClCompile Include="../../thirdparty/owemdjee/zstd/contrib/externalSequenceProducer/sequence_main.c" />
     <ClCompile Include="../../thirdparty/owemdjee/zstd/contrib/externalSequenceProducer/sequence_producer.c" />
@@ -461,7 +463,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/zstd/zlibWrapper/gzcompatibility.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zstd/zlibWrapper/gzguts.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zstd/zlibWrapper/zstd_zlibwrapper.h" />
-    <Image Include="../../thirdparty/owemdjee/zstd/build/single_file_libs/examples/testcard.png" />
     <Image Include="../../thirdparty/owemdjee/zstd/contrib/pzstd/images/Cspeed.png" />
     <Image Include="../../thirdparty/owemdjee/zstd/contrib/pzstd/images/Dspeed.png" />
     <Image Include="../../thirdparty/owemdjee/zstd/doc/images/CSpeed2.png" />
@@ -520,17 +521,6 @@
     <Text Include="../../thirdparty/owemdjee/zstd/build/meson/README.md" />
     <Text Include="../../thirdparty/owemdjee/zstd/build/meson/meson_options.txt" />
     <Text Include="../../thirdparty/owemdjee/zstd/build/meson/tests/valgrindTest.py" />
-    <Text Include="../../thirdparty/owemdjee/zstd/build/single_file_libs/README.md" />
-    <Text Include="../../thirdparty/owemdjee/zstd/build/single_file_libs/build_decoder_test.sh" />
-    <Text Include="../../thirdparty/owemdjee/zstd/build/single_file_libs/build_library_test.sh" />
-    <Text Include="../../thirdparty/owemdjee/zstd/build/single_file_libs/combine.py" />
-    <Text Include="../../thirdparty/owemdjee/zstd/build/single_file_libs/combine.sh" />
-    <Text Include="../../thirdparty/owemdjee/zstd/build/single_file_libs/create_single_file_decoder.sh" />
-    <Text Include="../../thirdparty/owemdjee/zstd/build/single_file_libs/create_single_file_library.sh" />
-    <Text Include="../../thirdparty/owemdjee/zstd/build/single_file_libs/examples/README.md" />
-    <Text Include="../../thirdparty/owemdjee/zstd/build/single_file_libs/examples/shell.html" />
-    <Text Include="../../thirdparty/owemdjee/zstd/build/single_file_libs/examples/testcard-dxt1.inl" />
-    <Text Include="../../thirdparty/owemdjee/zstd/build/single_file_libs/examples/testcard-zstd.inl" />
     <Text Include="../../thirdparty/owemdjee/zstd/contrib/VS2005/README.md" />
     <Text Include="../../thirdparty/owemdjee/zstd/contrib/cleanTabs" />
     <Text Include="../../thirdparty/owemdjee/zstd/contrib/diagnose_corruption/Makefile" />
