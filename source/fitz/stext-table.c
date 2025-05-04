@@ -24,6 +24,8 @@
 
 #include <assert.h>
 
+#if FZ_ENABLE_RENDER_CORE 
+
 /* #define DEBUG_WRITE_AS_PS */
 
 static fz_stext_block *
@@ -1024,3 +1026,6 @@ fz_table_hunt(fz_context *ctx, fz_stext_page *page)
 
 	do_table_hunt(ctx, page, NULL);
 }
+
+#endif // FZ_ENABLE_RENDER_CORE 
+

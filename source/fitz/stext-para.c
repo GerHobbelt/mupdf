@@ -24,6 +24,8 @@
 
 #include <assert.h>
 
+#if FZ_ENABLE_RENDER_CORE 
+
 /* #define DEBUG_SPLITS */
 
 static void
@@ -1229,3 +1231,6 @@ fz_paragraph_break(fz_context *ctx, fz_stext_page *page)
 {
 	do_para_break(ctx, page, &page->first_block, &page->last_block, NULL);
 }
+
+#endif // FZ_ENABLE_RENDER_CORE 
+
