@@ -1,0 +1,4 @@
+
+directories:
+	../../scripts/frozen/
+	
