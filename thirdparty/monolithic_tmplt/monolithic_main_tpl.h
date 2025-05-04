@@ -511,7 +511,7 @@ static int ambig_parse_one_command_from_set(const char* source, const struct cmd
 			argv_list[argc_count] = NULL;
 
 #ifdef __cplusplus
-			int rv = -1;
+			rv = -1;
 			try {
 				rv = el.f.fa(argc_count, argv_list);
 			}
@@ -524,7 +524,7 @@ static int ambig_parse_one_command_from_set(const char* source, const struct cmd
 				rv = 666;
 			}
 #else
-			int rv = el.f.fa(argc_count, argv_list);
+			rv = el.f.fa(argc_count, argv_list);
 #endif
 			free((void *)argv_list);
 			free(argv_strbuf);
