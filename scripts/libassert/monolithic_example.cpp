@@ -20,7 +20,6 @@ MONOLITHIC_CMD_TABLE_START()
 { "findpackage_integration_test", { .f = assert_findpackage_integration_test_main } },
 { "integration", { .f = assert_integration_main } },
 { "literals", { .f = assert_literals_main } },
-{ "stringify_test", { .f = assert_stringify_test_main } },
 { "test_public_utilities", { .f = assert_test_public_utilities_main } },
 { "test_type_prettier", { .f = assert_test_type_prettier_main } },
 { "tokens_and_highlighting", { .f = assert_tokens_and_highlighting_main } },

@@ -17,7 +17,6 @@ extern "C" {
 	int assert_findpackage_integration_test_main(void);
 	int assert_integration_main(void);
 	int assert_literals_main(void);
-	int assert_stringify_test_main(void);
 	int assert_test_public_utilities_main(void);
 	int assert_test_type_prettier_main(void);
 	int assert_tokens_and_highlighting_main(void);

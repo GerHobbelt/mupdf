@@ -1,0 +1,27 @@
+// Hint files help the Visual Studio IDE interpret Visual C++ identifiers
+// such as names of functions and macros.
+// For more information see https://go.microsoft.com/fwlink/?linkid=865984
+#define CATCH_TEST_CASE(__VA_ARGS__) INTERNAL_CATCH_TESTCASE( __VA_ARGS__ )
+#define CATCH_TEST_CASE(__VA_ARGS__) INTERNAL_CATCH_TESTCASE_NO_REGISTRATION(INTERNAL_CATCH_UNIQUE_NAME( C_A_T_C_H_T_E_S_T_ ))
+#define CATCH_TEST_CASE(__VA_ARGS__) INTERNAL_CATCH_TESTCASE_NO_REGISTRATION(INTERNAL_CATCH_UNIQUE_NAME( CATCH2_INTERNAL_TEST_ ))
+#define CATCH_TEST_CASE(name, description) INTERNAL_CATCH_TESTCASE( name, description )
+#define CATCH_TEST_CASE(__VA_ARGS__) INTERNAL_CATCH_TESTCASE_NO_REGISTRATION(INTERNAL_CATCH_UNIQUE_NAME( ____C_A_T_C_H____T_E_S_T____ ))
+#define CATCH_TEST_CASE(__VA_ARGS__) INTERNAL_CATCH_TESTCASE(__VA_ARGS__)
+#define CATCH_TEST_CASE(__VA_ARGS__) INTERNAL_CATCH_TESTCASE_NO_REGISTRATION( INTERNAL_CATCH_UNIQUE_NAME(____C_A_T_C_H____T_E_S_T____))
+// Hint files help the Visual Studio IDE interpret Visual C++ identifiers
+// such as names of functions and macros.
+// For more information see https://go.microsoft.com/fwlink/?linkid=865984
+#define REQUIRE_ASSERT(expr) do { auto handler = ::libassert::get_failure_handler(); ::libassert::set_failure_handler([] (const ::libassert::assertion_info& info) { throw info; }); bool did_assert = false; try { (expr); } catch(const ::libassert::assertion_info& info) { did_assert = true; SUCCEED(); } if(!did_assert) { FAIL("Expected assertion failure from " #expr " however none happened"); } ::libassert::set_failure_handler(handler); } while(false)
+// Hint files help the Visual Studio IDE interpret Visual C++ identifiers
+// such as names of functions and macros.
+// For more information see https://go.microsoft.com/fwlink/?linkid=865984
+#define _UCRT_DISABLE_CLANG_WARNINGS
+#define _UCRT_DISABLE_CLANG_WARNINGS _Pragma("clang diagnostic push") _Pragma("clang diagnostic ignored \"-Wdeprecated-declarations\"") _Pragma("clang diagnostic ignored \"-Wignored-attributes\"") _Pragma("clang diagnostic ignored \"-Wignored-pragma-optimize\"") _Pragma("clang diagnostic ignored \"-Wunknown-pragmas\"")
+// Hint files help the Visual Studio IDE interpret Visual C++ identifiers
+// such as names of functions and macros.
+// For more information see https://go.microsoft.com/fwlink/?linkid=865984
+#define _CRT_BEGIN_C_HEADER __pragma(pack(push, _CRT_PACKING)) extern "C" {
+#define _CRT_BEGIN_C_HEADER extern "C" {
+#define _CRT_BEGIN_C_HEADER __pragma(pack(push, _CRT_PACKING))
+#define _CRT_BEGIN_C_HEADER
+#define _CRT_BEGIN_C_HEADER cpp_quote("__pragma(pack(push, _CRT_PACKING))") cpp_quote("extern \"C\" {")

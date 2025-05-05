@@ -63,7 +63,7 @@ struct cmd_info
 	} f;
 };
 
-#define MONOLITHIC_CMD_TABLE_START()				\
+#define MONOLITHIC_CMD_TABLE_START()		\
 static const struct cmd_info commands[] = 	\
 {
 
