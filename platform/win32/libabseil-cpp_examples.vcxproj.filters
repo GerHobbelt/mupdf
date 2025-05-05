@@ -366,32 +366,35 @@
     <Filter Include="Source Files\absl\random\internal">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0118}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\absl\strings">
+    <Filter Include="Source Files\absl\status">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0119}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\absl\strings\internal">
+    <Filter Include="Source Files\absl\strings">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0120}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\absl\synchronization">
+    <Filter Include="Source Files\absl\strings\internal">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0121}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\absl\synchronization\internal">
+    <Filter Include="Source Files\absl\synchronization">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0122}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\absl\time">
+    <Filter Include="Source Files\absl\synchronization\internal">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0123}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\absl\time\internal">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0126}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\absl\time\internal\cctz">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0125}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\absl\time\internal\cctz\src">
+    <Filter Include="Source Files\absl\time">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0124}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\test_package">
+    <Filter Include="Source Files\absl\time\internal">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0127}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\absl\time\internal\cctz">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0126}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\absl\time\internal\cctz\src">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0125}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\test_package">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0128}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -470,6 +473,12 @@
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/random/internal/randen_benchmarks.cc">
       <Filter>Source Files\absl\random\internal</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/status/status_benchmark.cc">
+      <Filter>Source Files\absl\status</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/status/statusor_benchmark.cc">
+      <Filter>Source Files\absl\status</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/strings/ascii_benchmark.cc">
       <Filter>Source Files\absl\strings</Filter>
     </ClCompile>
@@ -481,6 +490,9 @@
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/strings/escaping_benchmark.cc">
       <Filter>Source Files\absl\strings</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/strings/internal/damerau_levenshtein_distance_benchmark.cc">
+      <Filter>Source Files\absl\strings\internal</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/strings/internal/memutil_benchmark.cc">
       <Filter>Source Files\absl\strings\internal</Filter>
@@ -504,6 +516,9 @@
       <Filter>Source Files\absl\strings</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/strings/string_view_benchmark.cc">
+      <Filter>Source Files\absl\strings</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/strings/substitute_benchmark.cc">
       <Filter>Source Files\absl\strings</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/synchronization/blocking_counter_benchmark.cc">
@@ -560,6 +575,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/dynamic_annotations.h">
       <Filter>Header Files\absl\base</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/fast_type_id.h">
+      <Filter>Header Files\absl\base</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/atomic_hook.h">
       <Filter>Header Files\absl\base\internal</Filter>
     </ClInclude>
@@ -590,9 +608,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/exception_testing.h">
       <Filter>Header Files\absl\base\internal</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/fast_type_id.h">
-      <Filter>Header Files\absl\base\internal</Filter>
-    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/hide_ptr.h">
       <Filter>Header Files\absl\base\internal</Filter>
     </ClInclude>
@@ -611,7 +626,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/low_level_scheduling.h">
       <Filter>Header Files\absl\base\internal</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/nullability_impl.h">
+    <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/nullability_deprecated.h">
       <Filter>Header Files\absl\base\internal</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/per_thread_tls.h">
@@ -792,6 +807,9 @@
       <Filter>Header Files\absl\container\internal</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/container/internal/raw_hash_set.h">
+      <Filter>Header Files\absl\container\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/container/internal/raw_hash_set_resize_impl.h">
       <Filter>Header Files\absl\container\internal</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/container/internal/test_allocator.h">
@@ -1053,6 +1071,9 @@
       <Filter>Header Files\absl\hash\internal</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/hash/internal/spy_hash_state.h">
+      <Filter>Header Files\absl\hash\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/hash/internal/weakly_mixed_integer.h">
       <Filter>Header Files\absl\hash\internal</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/log/absl_check.h">
@@ -2190,6 +2211,9 @@
       <Filter>Misc Files\absl\time\internal\cctz\testdata\zoneinfo\America</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/abseil-cpp/absl/time/internal/cctz/testdata/zoneinfo/America/Costa_Rica">
+      <Filter>Misc Files\absl\time\internal\cctz\testdata\zoneinfo\America</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/abseil-cpp/absl/time/internal/cctz/testdata/zoneinfo/America/Coyhaique">
       <Filter>Misc Files\absl\time\internal\cctz\testdata\zoneinfo\America</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/abseil-cpp/absl/time/internal/cctz/testdata/zoneinfo/America/Creston">

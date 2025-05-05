@@ -6,6 +6,6 @@
 
 pushd "$( dirname "$0" )"
 
-find ../../ -type f -a ! -ipath '*/tmp/*' > filelist.lst &
+find ../../ -type f -a ! -ipath '*/tmp/*' -a ! -ipath '*/.git/*' > filelist.lst &
 
 popd
