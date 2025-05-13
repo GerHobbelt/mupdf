@@ -1,0 +1,1332 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{00811970-815B-4F64-BC9D-21907839B902}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_PCCTS;PCCTS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_PCCTS;PCCTS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <TargetMachine>MachineX64</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_PCCTS;PCCTS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_PCCTS;PCCTS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+      <TargetMachine>MachineX64</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectReference Include="cryptlib.vcxproj">
+      <Project>{424334e5-addf-490d-ba7b-46cf3686b48d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libarchive.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff18377f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libbzip2_alt.vcxproj">
+      <Project>{4a3e6970-9110-46f5-bd12-b73218cca406}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcpp-terminal.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff2367fa}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libhighway.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff021a57}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libiconv.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff6d43ac}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libicu.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fff6b65d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libnanosvg.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-751bff971987}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpthread-win32.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff8df2c2}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsqlite_tools.vcxproj">
+      <Project>{6e890463-3eeb-4cce-b8bd-5aa89148c35a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsystem_override.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8318-7518ff7ef82f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libxz.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa34896}</Project>
+    </ProjectReference>
+    <ProjectReference Include="MuPDFLib_static.vcxproj">
+      <Project>{a60d8644-5815-4d29-8970-7518ff518d62}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libbase58x.vcxproj">
+      <Project>{0501bedf-3191-46a9-9997-288466675b82}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libBLAKE3.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dc1880387f83}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfmt.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffaf3a53}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfreetype.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-a58957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libgumbo-parser.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-358957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libharfbuzz.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-258957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjbig2dec.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-958957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjpeg-turbo.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff92ba30}</Project>
+    </ProjectReference>
+    <ProjectReference Include="liblcms2.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-158957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmuhelpers.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dce88099485a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmujs.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-858957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmupdf.vcxproj">
+      <Project>{5f615f91-dff8-4f05-bf48-6222b7d86519}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libbrotli.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffd7760d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcrow.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fff84e35}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcurl.vcxproj">
+      <Project>{87ee9da4-de1e-4448-8324-183c98dca588}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libextract.vcxproj">
+      <Project>{da38ca0b-89b9-4703-a77d-8049ac3a0d04}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfreeglut.vcxproj">
+      <Project>{a1b75d29-9f5c-4a0f-b368-322a10477d0c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libgif.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffddd6be}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjpeg-xl.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa838c1}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libleptonica.vcxproj">
+      <Project>{ca0bda38-89b9-4703-a77d-8049ac3a0d04}</Project>
+    </ProjectReference>
+    <ProjectReference Include="liblz4.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff50b44d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmupdf_default_handlers.vcxproj">
+      <Project>{5f615f91-dff8-4f05-bf48-1222b7d86519}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmuthreads.vcxproj">
+      <Project>{de21fa8a-fc8a-47e0-87e4-dce8808bfc9b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmutool.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dce8808bfc9b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libopenjpeg.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-758957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpkcs7.vcxproj">
+      <Project>{22462382-b30d-42a5-bf07-ee1a35e25d21}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpng.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-658957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libqiqqatool.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dc18808bfc9b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libQuickJS.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0e57ba}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libresources.vcxproj">
+      <Project>{52dcab29-c8ee-4422-954c-29afa6b33e22}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsqlite-amalgamation.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffe3a7bc}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsvgcharter.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff7fcf79}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtesseract.vcxproj">
+      <Project>{ac0bda38-89b9-4703-a77d-8049ac3a0d04}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtiff.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-558957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtinyexpr.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff33b1b5}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libupskirt.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff789ba9}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libwebp.vcxproj">
+      <Project>{105f884a-c170-4c30-a810-c7da2103002f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libxml2.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa57a44}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libzlib.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-458957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libzopfli.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff03e6ca}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libzstd.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fffeb6e4}</Project>
+    </ProjectReference>
+    <ProjectReference Include="lib_nas_lockfile.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0a15c6}</Project>
+    </ProjectReference>
+    <ProjectReference Include="png-pmt-tools-lib.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff1147a4}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/cperf-2.1a/src/boolarray.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/cperf-2.1a/src/getopt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/cperf-2.1a/src/hashtable.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/cperf-2.1a/src/iterator.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/cperf-2.1a/src/keylist.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/cperf-2.1a/src/listnode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/cperf-2.1a/src/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/cperf-2.1a/src/options.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/cperf-2.1a/src/perfect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/cperf-2.1a/src/readline.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/cperf-2.1a/src/stderr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/cperf-2.1a/src/version.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/cperf-2.1a/src/xmalloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/cperf-2.1a/tests/test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/lib/getopt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/lib/getopt1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/lib/hash.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/src/bool-array.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/src/gen-perf.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/src/hash-table.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/src/iterator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/src/key-list.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/src/list-node.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/src/main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/src/new.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/src/options.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/src/read-line.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/src/trace.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/src/vectors.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/src/version.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/tests/test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/tests/test2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/src/boolarray.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/src/getopt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/src/hashtable.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/src/iterator.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/src/keylist.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/src/listnode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/src/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/src/options.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/src/perfect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/src/readline.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/src/stderr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/src/version.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/src/xmalloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/tests/adainset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/tests/c++inset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/tests/cinset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/tests/m3inset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/tests/pinset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/tests/preinset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/tests/test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/antlr/antlr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/antlr/bits.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/antlr/build.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/antlr/dumpcycles.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/antlr/dumpnode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/antlr/egman.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/antlr/err.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/antlr/fcache.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/antlr/fset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/antlr/fset2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/antlr/gen.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/antlr/globals.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/antlr/hash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/antlr/lex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/antlr/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/antlr/misc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/antlr/mrhoist.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/antlr/pred.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/antlr/scan.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/AST/DLGLexer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/AST/EvalPoly.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/AST/PolyParser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/AST/eval.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/AST/poly.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/rewrite/DLGLexer.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/rewrite/DLGLexer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/rewrite/DiffPoly.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/rewrite/DiffPoly.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/rewrite/PolyParser.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/rewrite/PolyParser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/rewrite/PrintPoly.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/rewrite/PrintPoly.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/rewrite/SimplifyPoly.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/rewrite/SimplifyPoly.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/rewrite/diff.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/rewrite/diff.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/rewrite/poly.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/rewrite/poly.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/rewrite/print.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/rewrite/print.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/rewrite/simplify.C" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/rewrite/simplify.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/simple/DLGLexer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/simple/PolyParser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/simple/poly.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/testAST/DLGLexer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/testAST/PolyParser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/testAST/poly.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTS.Example.Using.Two.Parsers/TwoParsers/InvokeA.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTS.Example.Using.Two.Parsers/TwoParsers/InvokeB.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTS.Example.Using.Two.Parsers/TwoParsers/PA/A.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTS.Example.Using.Two.Parsers/TwoParsers/PA/DlgA.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTS.Example.Using.Two.Parsers/TwoParsers/PA/ParserA.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTS.Example.Using.Two.Parsers/TwoParsers/Pb/B.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTS.Example.Using.Two.Parsers/TwoParsers/Pb/DlgB.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTS.Example.Using.Two.Parsers/TwoParsers/Pb/ParserB.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTS.Example.Using.Two.Parsers/TwoParsers/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/ast.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/code_gen.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/dis.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/err.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/go.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/scan.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/sym.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/xl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/xl.support.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/recog1/DLGLexer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/recog1/XLParser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/recog1/xl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/recog2/DLGLexer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/recog2/XLParser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/recog2/xl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/contrib/samples/f77/bintree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/contrib/samples/f77/decl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/contrib/samples/f77/err.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/contrib/samples/f77/expr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/contrib/samples/f77/f77.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/contrib/samples/f77/f77out.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/contrib/samples/f77/f77print.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/contrib/samples/f77/f77trans.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/contrib/samples/f77/i_a_kludge.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/contrib/samples/f77/io.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/contrib/samples/f77/myclass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/contrib/samples/f77/scan.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/dlg/automata.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/dlg/dlg_a.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/dlg/dlg_p.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/dlg/err.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/dlg/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/dlg/output.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/dlg/relabel.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/dlg/scan.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/dlg/support.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/example/calcAST/DLGLexer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/example/calcAST/P.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/example/calcAST/calcex2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/example/calcAST/mathAST.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/example/calcAST/myAST.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/example/calcAST/myPanic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/example/calcAST/mySyn.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/example/calcAST/myTokenBuffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/example/calcAST/noleakAST.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/example/calcAST/numToken.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/example/calcAST/simpleToken.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/example/simple/DLGLexer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/example/simple/P.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/example/simple/simple.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/h/AParser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/h/ASTBase.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/h/ATokPtr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/h/ATokenBuffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/h/BufFileInput.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/h/DLexer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/h/DLexerBase.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/h/PCCTSAST.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/h/ast.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/h/charptr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/h/slist.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/cpp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/err.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/gen.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/globals.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/hash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/lib/STreeParser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/lib/astlib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/lib/errsupport.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/lib/sintstack.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/lib/sorcerer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/lib/sorlist.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/lib/sstack.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/look.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/scan.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/sor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/test/test6.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/test/test7/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/test/test7/test7.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/testcpp/test4/SimpleTreeParser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/testcpp/test4/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/support/DECmms/genmms.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/support/genmk/genmk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/support/genmk/genmk_old.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/support/rexpr/rexpr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/support/rexpr/test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/support/set/set.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/support/sym/sym.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/testcpp/2/MyLexer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/testcpp/3/MyLexer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/testcpp/6/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/testcpp/8/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/pccts/workshop95/Mitchell/tkAppInit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/scripting/debug.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/scripting/err.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/scripting/keywords.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/scripting/lexer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/scripting/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/scripting/scan.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/scripting/script.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/scripting/support.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/testcase/debug.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/testcase/err.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/testcase/keywords.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/testcase/lexer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/testcase/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/testcase/scan.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/testcase/script.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pccts/testcase/support.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/cperf-2.1a/src/boolarray.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/cperf-2.1a/src/hashtable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/cperf-2.1a/src/iterator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/cperf-2.1a/src/keylist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/cperf-2.1a/src/listnode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/cperf-2.1a/src/options.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/cperf-2.1a/src/perfect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/cperf-2.1a/src/prototype.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/cperf-2.1a/src/readline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/cperf-2.1a/src/stderr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/acconfig.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/lib/getopt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/lib/hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/src/bool-array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/src/bool-array.icc" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/src/gen-perf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/src/hash-table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/src/iterator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/src/key-list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/src/list-node.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/src/options.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/src/options.icc" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/src/read-line.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/src/read-line.icc" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/src/trace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/src/vectors.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/src/version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/src/boolarray.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/src/hashtable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/src/iterator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/src/keylist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/src/listnode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/src/options.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/src/perfect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/src/prototype.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/src/readline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/src/stderr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/IBM_VISUAL_AGE_PROJECTS/antlr.icc" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/IBM_VISUAL_AGE_PROJECTS/dlg.icc" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/IBM_VISUAL_AGE_PROJECTS/sorcerer.icc" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/antlr/generic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/antlr/hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/antlr/mode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/antlr/proto.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/antlr/stdpccts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/antlr/syn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/antlr/tokens.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/AST/AST.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/AST/DLGLexer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/AST/EvalPoly.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/AST/MyEvalPoly.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/AST/PolyParser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/AST/tokens.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/rewrite/AST.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/rewrite/DLGLexer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/rewrite/DiffPoly.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/rewrite/PolyParser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/rewrite/PrintPoly.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/rewrite/SimplifyPoly.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/rewrite/tokens.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/simple/DLGLexer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/simple/PolyParser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/simple/tokens.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/testAST/AST.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/testAST/DLGLexer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/testAST/MyEvalPoly.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/testAST/PolyParser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/testAST/tokens.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTS.Example.Using.Two.Parsers/TwoParsers/PA/DlgA.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTS.Example.Using.Two.Parsers/TwoParsers/PA/ParserA.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTS.Example.Using.Two.Parsers/TwoParsers/PA/tokens.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTS.Example.Using.Two.Parsers/TwoParsers/Pb/DlgB.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTS.Example.Using.Two.Parsers/TwoParsers/Pb/ParserB.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTS.Example.Using.Two.Parsers/TwoParsers/Pb/tokens.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/antlr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/ast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/charbuf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/dlgauto.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/dlgdef.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/err.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/mode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/opcodes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/opnames.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/sym.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/tokens.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/xl.ast_defs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/xl.pccts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/recog1/DLGLexer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/recog1/XLParser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/recog1/tokens.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/recog2/DLGLexer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/recog2/XLParser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/recog2/tokens.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/contrib/antlr.and.flex/lexer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/contrib/antlr.and.flex/token.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/contrib/samples/f77/f77out.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/contrib/samples/f77/f77trans.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/contrib/samples/f77/lookup.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/contrib/samples/f77/mode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/contrib/samples/f77/myclass.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/contrib/samples/f77/stdpccts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/contrib/samples/f77/tokens.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/dlg/dlg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/dlg/mode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/dlg/stdpccts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/dlg/tokens.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/example/calcAST/DLGLexer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/example/calcAST/P.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/example/calcAST/mathAST.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/example/calcAST/myAST.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/example/calcAST/myPanic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/example/calcAST/myToken.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/example/calcAST/myTokenBuffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/example/calcAST/noleakAST.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/example/calcAST/numToken.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/example/calcAST/simpleToken.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/example/calcAST/tokens.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/example/simple/DLGLexer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/example/simple/P.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/example/simple/stdpccts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/example/simple/tokens.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/h/AParser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/h/ASTBase.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/h/ATokPtr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/h/ATokPtrImpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/h/AToken.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/h/ATokenBuffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/h/ATokenStream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/h/AToken_traditional.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/h/BufFileInput.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/h/DLG_stream_input.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/h/DLexer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/h/DLexerBase.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/h/PBlackBox.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/h/PCCTSAST.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/h/SList.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/h/antlr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/h/ast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/h/ast.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/h/charbuf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/h/charptr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/h/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/h/dlgauto.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/h/dlgdef.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/h/err.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/h/int.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/h/pccts_assert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/h/pccts_iostream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/h/pccts_istream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/h/pccts_setjmp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/h/pccts_stdarg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/h/pccts_stdio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/h/pccts_stdlib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/h/pccts_string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/h/pcctscfg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/h/SASTBase.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/h/SCommonAST.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/h/STreeParser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/h/astlib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/h/sintstack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/h/sorcerer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/h/sorlist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/h/sstack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/lib/CASTBase.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/mode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/proto.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/sor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/stdpccts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/sym.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/test/test7/stdpccts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/test/tokens6.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/testcpp/test4/AST.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/testcpp/test4/SimpleTreeParser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/testcpp/token3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/tokens.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/support/rexpr/rexpr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/support/set/set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/support/sym/template.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/testcpp/11/input.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/testcpp/2/MyLexer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/testcpp/3/MyLexer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/testcpp/3/mytokens.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/testcpp/4/mytokens.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/pccts/testcpp/5/input.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/scripting/attrib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/scripting/mode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/scripting/stdpccts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/scripting/sym.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/scripting/tokens.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/testcase/attrib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/testcase/mode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/testcase/stdpccts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/testcase/sym.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pccts/testcase/tokens.h" />
+    <Image Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/_derived/back_cmp_expeditn000_back.gif" />
+    <Image Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/_derived/home_cmp_expeditn000_home.gif" />
+    <Image Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/_derived/next_cmp_expeditn000_next.gif" />
+    <Image Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/_derived/up_cmp_expeditn000_up.gif" />
+    <Image Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/_themes/expeditn/expbul1d.gif" />
+    <Image Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/_themes/expeditn/expbul2d.gif" />
+    <Image Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/_themes/expeditn/expbul3d.gif" />
+    <Image Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/_themes/expeditn/exphorsd.gif" />
+    <Image Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/_themes/expeditn/exptextb.jpg" />
+    <Image Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/pcctstut/_derived/index.htm_cmp_expeditn000_hbtn.gif" />
+    <Image Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/pcctstut/_derived/pccts2.htm_cmp_expeditn000_hbtn.gif" />
+    <Image Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/pcctstut/_derived/pccts3.htm_cmp_expeditn000_hbtn.gif" />
+    <Image Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/pcctstut/_derived/pccts4.htm_cmp_expeditn000_hbtn.gif" />
+    <Image Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/pcctstut/_derived/pccts5.htm_cmp_expeditn000_hbtn.gif" />
+    <Image Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/pcctstut/_derived/pccts6.htm_cmp_expeditn000_hbtn.gif" />
+    <Image Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/pcctstut/_derived/pccts7.htm_cmp_expeditn000_hbtn.gif" />
+    <Image Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/pcctstut/_derived/pccts8.htm_cmp_expeditn000_hbtn.gif" />
+    <Image Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/pcctstut/_derived/pccts9.htm_cmp_expeditn000_hbtn.gif" />
+    <Image Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/pcctstut/_overlay/index.htm_nav_expeditn000_hbtn.gif" />
+    <Image Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/pcctstut/_overlay/pccts2.htm_nav_expeditn000_hbtn.gif" />
+    <Image Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/pcctstut/_overlay/pccts3.htm_nav_expeditn000_hbtn.gif" />
+    <Image Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/pcctstut/_overlay/pccts4.htm_nav_expeditn000_hbtn.gif" />
+    <Image Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/pcctstut/_overlay/pccts5.htm_nav_expeditn000_hbtn.gif" />
+    <Image Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/pcctstut/_overlay/pccts6.htm_nav_expeditn000_hbtn.gif" />
+    <Image Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/pcctstut/_overlay/pccts7.htm_nav_expeditn000_hbtn.gif" />
+    <Image Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/pcctstut/_overlay/pccts8.htm_nav_expeditn000_hbtn.gif" />
+    <Image Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/pcctstut/_overlay/pccts9.htm_nav_expeditn000_hbtn.gif" />
+    <Text Include="../../thirdparty/owemdjee/pccts/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/pccts/README-PCCTS-1.33IA-MR33.TXT" />
+    <Text Include="../../thirdparty/owemdjee/pccts/README.md" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/AUTHORS-gperf2.7.2.txt" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/COPYING" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/ChangeLog-gperf2.7.2.txt" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/INSTALL-gperf2.7.2.txt" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/NEWS-gperf2.7.2.txt" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/README" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/README-FIRST" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/README-gperf2.7.2.txt" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/TODO-i_a.txt" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/cperf2.7.2.cmdoptions.txt" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/doc/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/doc/configure" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/doc/configure.in" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/doc/gperf.1" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/doc/gperf.html" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/doc/gperf.info" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/doc/gperf.pdf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/doc/gperf.ps" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/doc/gperf.texi" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/doc/gperf_1.html" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/doc/gperf_10.html" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/doc/gperf_11.html" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/doc/gperf_2.html" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/doc/gperf_3.html" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/doc/gperf_4.html" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/doc/gperf_5.html" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/doc/gperf_6.html" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/doc/gperf_7.html" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/doc/gperf_8.html" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/doc/gperf_9.html" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/doc/gperf_toc.html" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/doc/gpl.texinfo" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/doc/help2man" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/doc/texinfo.tex" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/gperf.1" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/gperf.texinfo" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/cperf-2.1a/COPYING" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/cperf-2.1a/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/cperf-2.1a/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/cperf-2.1a/README" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/cperf-2.1a/README-FIRST" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/cperf-2.1a/gperf.1" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/cperf-2.1a/gperf.texinfo" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/cperf-2.1a/src/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/cperf-2.1a/src/gperf-to-do" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/cperf-2.1a/tests/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/cperf-2.1a/tests/ada.gperf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/cperf-2.1a/tests/adapredefined.gperf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/cperf-2.1a/tests/c++.gperf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/cperf-2.1a/tests/c-parse.gperf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/cperf-2.1a/tests/c.gperf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/cperf-2.1a/tests/gpc.gperf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/cperf-2.1a/tests/gplus.gperf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/cperf-2.1a/tests/modula2.gperf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/cperf-2.1a/tests/modula3.gperf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/cperf-2.1a/tests/pascal.gperf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/AUTHORS-gperf2.7.2" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/COPYING" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/ChangeLog-gperf2.7.2" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/INSTALL-gperf2.7.2" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/Makefile.devel" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/NEWS-gperf2.7.2" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/README-gperf2.7.2" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/aclocal.m4" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/configure" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/configure.in" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/doc/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/doc/configure" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/doc/configure.in" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/doc/gperf.1" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/doc/gperf.html" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/doc/gperf.info" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/doc/gperf.ps" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/doc/gperf.texi" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/doc/gperf_1.html" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/doc/gperf_10.html" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/doc/gperf_11.html" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/doc/gperf_2.html" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/doc/gperf_3.html" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/doc/gperf_4.html" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/doc/gperf_5.html" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/doc/gperf_6.html" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/doc/gperf_7.html" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/doc/gperf_8.html" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/doc/gperf_9.html" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/doc/gperf_toc.html" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/doc/gpl.texinfo" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/doc/help2man" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/doc/texinfo.tex" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/lib/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/lib/configure" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/lib/configure.in" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/mkinstalldirs" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/src/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/src/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/src/configure" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/src/configure.in" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/tests/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/tests/ada.gperf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/tests/adadefs.gperf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/tests/c++.gperf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/tests/c-parse.gperf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/tests/c.gperf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/tests/chill.gperf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/tests/configure" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/tests/configure.in" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/tests/cplusplus.gperf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/tests/gpc.gperf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/tests/irc.gperf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/tests/java.gperf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/tests/jscript.gperf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/tests/jstest1.gperf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/tests/jstest2.gperf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/tests/jstest3.gperf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/tests/lang-ucs2.gperf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/tests/lang-ucs2.in" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/tests/lang-utf8.gperf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/tests/makeinfo.gperf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/tests/modula2.gperf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/tests/modula3.gperf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/tests/objc.gperf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/tests/pascal.gperf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/research/gperf-2.7.2/tests/validate" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/src/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/src/gperf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/src/gperf-to-do" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/tests/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/tests/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/tests/ada.gperf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/tests/adadefs.gperf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/tests/adapredefined.gperf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/tests/c++.gperf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/tests/c-parse.gperf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/tests/c.gperf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/tests/chill.gperf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/tests/configure" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/tests/configure.in" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/tests/cplusplus.gperf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/tests/gpc.gperf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/tests/gplus.gperf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/tests/irc.gperf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/tests/java.gperf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/tests/jscript.gperf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/tests/jstest1.gperf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/tests/jstest2.gperf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/tests/jstest3.gperf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/tests/lang-ucs2.gperf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/tests/lang-ucs2.in" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/tests/lang-utf8.gperf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/tests/makeinfo.gperf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/tests/modula2.gperf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/tests/modula3.gperf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/tests/objc.gperf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/tests/pascal.gperf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/cperf-2.1a/tests/validate" />
+    <Text Include="../../thirdparty/owemdjee/pccts/create-distribs.bat" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/CHANGES_FROM_1.31" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/CHANGES_FROM_1.33" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/CHANGES_FROM_131.txt" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/CHANGES_FROM_133.txt" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/CHANGES_FROM_133_BEFORE_MR13.txt" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/CHANGES_SUMMARY.txt" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/KNOWN_PROBLEMS.txt" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/MPW_Read_Me" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/NOTES.OS2" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/NOTES.bcc" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/NOTES.msvc" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/PCCTSMSVC50.dsw" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/PCCTSMSVC60-minimal.dsw" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/PCCTSMSVC60.dsw" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/Part1.pdf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/Part1.ps" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/Part2.pdf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/Part2.ps" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/README" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/RIGHTS" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/SERVICES" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/antlr.pdf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/antlr.ps" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/antlr/AntlrMSVC50.dsw" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/antlr/AntlrMSVC60.dsw" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/antlr/README" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/antlr/antlr.1" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/antlr/antlr.dsc.MR33.txt" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/antlr/antlr.mpw.r" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/antlr/antlr.r" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/antlr/antlr1.txt" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/antlr/makefile" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/antlr/makefile.VMS" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/antlr/makefile.mpw" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/antlr/makefile1" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/archives/NOTES.flex.txt" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/archives/faq-pccts.htm" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/archives/pccts.book.errata.txt" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/bin/empty.txt" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/book/pccts.pdf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/book/pccts.ps" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/AST/eval.sor" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/AST/makefile" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/rewrite/diff.sor" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/rewrite/j" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/rewrite/j2" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/rewrite/makefile" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/rewrite/print.sor" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/rewrite/reference" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/rewrite/simplify.sor" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/simple/makefile" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/simple/poly" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/testAST/eval.sor" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/testAST/makefile" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/book/tutorial/testAST/poly" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTS.Example.Using.Two.Parsers/TwoParsers/TwoParsersMSVC50.dsw" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTS.Example.Using.Two.Parsers/TwoParsers/TwoParsersMSVC60.dsw" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/index.html" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/pcctstut/index.htm" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/pcctstut/pccts2.htm" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/pcctstut/pccts3.htm" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/pcctstut/pccts4.htm" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/pcctstut/pccts5.htm" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/pcctstut/pccts6.htm" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/pcctstut/pccts7.htm" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/pcctstut/pccts8.htm" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/pcctstut/pccts9.htm" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/twc-1011.css" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/SCOPTIONS" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/loadngo" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/makefile" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/b1.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/b10.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/b11.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/b12.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/b13.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/b2.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/b3.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/b4.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/b5.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/b6.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/b7.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/b8.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/b9.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/badloop.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/dis/t1.dis" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/dis/t10.dis" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/dis/t11.dis" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/dis/t12.dis" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/dis/t2.dis" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/dis/t3.dis" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/dis/t4.dis" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/dis/t5.dis" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/dis/t6.dis" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/dis/t7.dis" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/dis/t7c.dis" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/dis/t8.dis" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/dis/t9.dis" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/dis/tarr.dis" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/dis/tbool.dis" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/dis/tif.dis" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/dis/trec.dis" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/err/b1.err" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/err/b10.err" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/err/b11.err" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/err/b12.err" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/err/b13.err" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/err/b2.err" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/err/b3.err" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/err/b4.err" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/err/b5.err" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/err/b6.err" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/err/b7.err" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/err/b8.err" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/err/b9.err" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/err/badloop.err" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/err/t7a.err" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/err/t7b.err" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/t1.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/t10.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/t11.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/t12.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/t2.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/t3.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/t4.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/t5.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/t6.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/t7.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/t7a.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/t7b.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/t7c.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/t8.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/t9.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/tarr.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/tbool.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/tif.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/test/trec.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/xl.grammar" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/comp/xl.pccts" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/recog1/MAKEFILE" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/recog1/README" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/recog1/xl.dsw" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/recog2/MAKEFILE" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/recog2/README" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/recog2/xl.dsw" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/tests/bad01.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/tests/bad02.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/tests/bad03.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/tests/bad04.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/tests/bad05.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/tests/bad06.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/tests/bad07.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/tests/bad08.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/tests/bad09.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/tests/bad10.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/tests/bad11.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/tests/bad12.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/tests/bad13.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/tests/sample1.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/tests/sample10.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/tests/sample11.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/tests/sample12.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/tests/sample2.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/tests/sample3.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/tests/sample4.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/tests/sample5.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/tests/sample6.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/tests/sample7.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/tests/sample7a.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/tests/sample7b.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/tests/sample7c.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/tests/sample8.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/PCCTSTutorial/xl/tests/sample9.xl" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/antlr.and.flex/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/antlr.and.flex/README" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/antlr.and.flex/lexer.flex" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/antlr.and.flex/test.in" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/samples/f77/dnssumry.f77" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/samples/f77/f77.dsw" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/samples/f77/f77.prj" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/samples/f77/f77out.sor" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/samples/f77/f77trans.sor" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/samples/f77/mssccprj.scc" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/samples/f77/readme.doc" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/contrib/samples/f77/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/dlg/DlgMSVC50.dsw" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/dlg/DlgMSVC60.dsw" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/dlg/dlg.1" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/dlg/dlg.mpw.r" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/dlg/dlg.r" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/dlg/dlg1.txt" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/dlg/makefile" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/dlg/makefile.VMS" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/dlg/makefile.mpw" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/dlg/makefile1" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/example/calcAST/COPYING.TXT" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/example/calcAST/CalcAST50.dsw" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/example/calcAST/CalcAST60.dsw" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/example/calcAST/DISCLAIMER.TXT" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/example/calcAST/makefile" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/example/simple/COPYING.TXT" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/example/simple/DISCLAIMER.TXT" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/example/simple/simple50.dsw" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/example/simple/simple60.dsw" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/h/pcctslib.dsw" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/h/pcctslib50.dsw" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/h/pcctslib60.dsw" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/h/pcnames.bat" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/history.pdf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/history.ps" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/history.txt" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/install68K.mpw" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/installPPC.mpw" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/makefile" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/makefile.vms" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/needlook.pdf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/needlook.ps" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/notesv1.txt" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/old_KNOWN_PROBLEMS" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/old_README" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/parr.phd.thesis.pdf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/parr.phd.thesis.ps" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/pccts.1" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/pccts.faq.htm" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/pccts.manual.pdf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/pccts.manual.ps" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/pccts.manual.update-v1.06.pdf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/pccts.manual.update-v1.06.ps" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/pccts.manual.update-v1.10.pdf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/pccts.manual.update-v1.10.ps" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/pccts.manual.update-v1.20.pdf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/pccts.manual.update-v1.20.ps" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/pccts.manual.update-v1.21.pdf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/pccts.manual.update-v1.21.ps" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/predicates.pdf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/predicates.ps" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer.pdf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer.ps" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/NOTES.Mac" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/README" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/SorcererMSVC50.dsw" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/SorcererMSVC60.dsw" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/UPDATES" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/lib/makefile" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/makefile" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/makefile.VMS" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/makefile1" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/msvc.dsw" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/sor.r" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/test/makefile" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/test/test.sor" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/test/test2.sor" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/test/test3.sor" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/test/test3.tokens" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/test/test4.sor" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/test/test5.sor" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/test/test6.sor" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/test/test7/makefile" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/test/test7/test7.sor" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/testcpp/makefile" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/testcpp/test.sor" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/testcpp/test2.sor" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/testcpp/test3.sor" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/testcpp/test4/makefile" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/testcpp/test4/test4.sor" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/sorcerer/testcpp/test5.sor" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/support/DECmms/makefile.VMS" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/support/genmk/makefile" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/support/rexpr/makefile" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/support/support_msvc60.dsw" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/testcpp/1/makefile" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/testcpp/10/makefile" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/testcpp/11/makefile" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/testcpp/12/makefile" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/testcpp/13/makefile" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/testcpp/2/makefile" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/testcpp/3/makefile" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/testcpp/4/makefile" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/testcpp/5/makefile" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/testcpp/6/file1" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/testcpp/6/file2" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/testcpp/6/makefile" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/testcpp/6/makefile2" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/testcpp/7/makefile" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/testcpp/8/makefile" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/testcpp/9/makefile" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/testcpp/makefile" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop94/AST.ps" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop94/FP.ps" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop94/LLk.ps" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop94/ast.pdf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop94/call.pdf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop94/call.ps" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop94/compsim.pdf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop94/compsim.ps" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop94/cover.pdf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop94/cover.ps" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop94/fp.pdf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop94/future.pdf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop94/future.ps" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop94/intro.pdf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop94/intro.ps" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop94/llk.pdf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop94/oberon.pdf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop94/oberon.ps" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop94/sor.pdf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop94/sor.ps" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop94/syn.pdf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop94/syn.ps" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop94/truth.pdf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop94/truth.ps" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop95/Craymer/craymer.pdf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop95/Craymer/craymer.ps" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop95/Hamel/hamel.pdf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop95/Hamel/hamel.ps" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop95/Helzermn/helzermn.pdf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop95/Helzermn/helzermn.ps" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop95/Mitchell/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop95/Mitchell/README" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop95/Mitchell/parser" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop95/Mitchell/parserd" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop95/Parr/antlr.pdf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop95/Parr/antlr.ps" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop95/Parr/combosyn.pdf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop95/Parr/combosyn.ps" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop95/Parr/cppparse.pdf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop95/Parr/cppparse.ps" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop95/Parr/llk.pdf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop95/Parr/llk.ps" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop95/Parr/llkparse.pdf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop95/Parr/llkparse.ps" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop95/Parr/needlook.pdf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop95/Parr/needlook.ps" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop95/Parr/sor.pdf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop95/Parr/sor.ps" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop95/Parr/tokengc.pdf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop95/Parr/tokengc.ps" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop95/Quong/qexn.pdf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop95/Quong/qexn.ps" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop95/Quong/qlook.pdf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop95/Quong/qlook.ps" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop95/Readme.1st" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop95/Robenalt/robenalt.pdf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop95/Robenalt/robenalt.ps" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop95/Yoder/yoder.pdf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop95/Yoder/yoder.ps" />
+    <Text Include="../../thirdparty/owemdjee/pccts/pccts/workshop95/readme" />
+    <Text Include="../../thirdparty/owemdjee/pccts/scripting/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/pccts/scripting/My_Notes_During_Development.txt" />
+    <Text Include="../../thirdparty/owemdjee/pccts/scripting/README" />
+    <Text Include="../../thirdparty/owemdjee/pccts/scripting/i_a_script.gperf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/scripting/mak/SC_VC152.VCW" />
+    <Text Include="../../thirdparty/owemdjee/pccts/scripting/mak/sc_bc5.DSW" />
+    <Text Include="../../thirdparty/owemdjee/pccts/scripting/prof.bat" />
+    <Text Include="../../thirdparty/owemdjee/pccts/scripting/scripting.txt" />
+    <Text Include="../../thirdparty/owemdjee/pccts/testcase/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/pccts/testcase/My_Notes_During_Development.txt" />
+    <Text Include="../../thirdparty/owemdjee/pccts/testcase/README" />
+    <Text Include="../../thirdparty/owemdjee/pccts/testcase/i_a_script.gperf" />
+    <Text Include="../../thirdparty/owemdjee/pccts/testcase/prof.bat" />
+    <Text Include="../../thirdparty/owemdjee/pccts/testcase/scripting.txt" />
+  </ItemGroup>
+  <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+</Project>
+  

@@ -1673,6 +1673,7 @@ hashtable-bench
 0__scratch
 
 msvc_sln_cleaner
+pccts
 
 EOT
 ) | grep -e "$FILTER"
