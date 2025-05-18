@@ -55,6 +55,7 @@ void glutLeaveMainLoop(void)
 }
 #endif
 
+fz_cookie gl_cookie = { 0 };
 fz_context *ctx = NULL;
 fz_colorspace *profile = NULL;
 pdf_document *pdf = NULL;
@@ -1083,7 +1084,7 @@ void render_page(void)
 	if (page_contents_changed)
 	{
 		fz_drop_pixmap(ctx, page_contents);
-		fz_cookie cookie = { 0 };
+		//fz_cookie cookie = { 0 };
 		page_contents = NULL;
 
 		bbox = fz_round_rect(fz_transform_rect(fz_bound_page_box(ctx, fzpage, currentbox), draw_page_ctm));
@@ -1094,28 +1095,33 @@ void render_page(void)
 
 		fz_try(ctx)
 		{
-			fz_run_page_contents(ctx, fzpage, dev, fz_identity, &cookie);
+			fz_run_page_contents(ctx, fzpage, dev, fz_identity);
 			fz_close_device(ctx, dev);
 		}
 		fz_always(ctx)
+		{
+			page_rendering_error = ctx->cookie->d.errors;
 			fz_drop_device(ctx, dev);
+		}
 		fz_catch(ctx)
 			fz_rethrow(ctx);
-		page_rendering_error = cookie.errors;
+		//page_rendering_error = cookie.d.errors;
 	}
 
 	pix = fz_clone_pixmap_area_with_different_seps(ctx, page_contents, NULL, profile, NULL, fz_default_color_params, NULL);
 	{
-		fz_cookie cookie = { 0 };
 		dev = fz_new_draw_device(ctx, draw_page_ctm, pix);
 		fz_try(ctx)
 		{
-			fz_run_page_annots(ctx, fzpage, dev, fz_identity, &cookie);
-			page_rendering_error |= cookie.errors;
+			fz_run_page_annots(ctx, fzpage, dev, fz_identity);
+			//page_rendering_error |= cookie.d.errors;
 			fz_close_device(ctx, dev);
 		}
 		fz_always(ctx)
+		{
+			page_rendering_error |= ctx->cookie->d.errors;
 			fz_drop_device(ctx, dev);
+		}
 		fz_catch(ctx)
 			fz_rethrow(ctx);
 	}
@@ -3264,6 +3270,8 @@ int main(int argc, const char** argv)
 		return EXIT_FAILURE;
 	}
 
+	fz_attach_cookie_to_context(ctx, &gl_cookie);
+
 	console_init();
 
 	fz_register_document_handlers(ctx);
@@ -3385,7 +3393,9 @@ int main(int argc, const char** argv)
 
 	cleanup();
 
-	// WARNING: we defered dropping rothe context ctx till the very end of the application run here.
+	fz_detach_cookie_from_context(ctx);
+
+	// WARNING: we defered dropping of the context ctx till the very end of the application run here.
 	// See also the comment in the cleanup code section.
 	fz_drop_context(ctx);
 	ctx = NULL;
