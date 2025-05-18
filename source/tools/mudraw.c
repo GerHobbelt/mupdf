@@ -1483,7 +1483,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 				}
 				fz_info(ctx, " MD5:%s", buf);
 			}
-			if (cookie->errors)
+			if (ctx->cookie->d.errors)
 				fz_warn(ctx, "Page rendering reports errors");
 		}
 		fz_always(ctx)
@@ -2156,6 +2156,7 @@ static void bgprint_worker(void *arg)
 		if (pagenum >= 0)
 		{
 			int start = gettime();
+			// TODO [GHo]: umm, doesn't this nuke the info that is copied from the ctx master cookie elsewhere in this sourcefile?
 			fz_clean_cookie(ctx, &bgprint.cookie);
 			fz_try(bgprint.ctx)
 			{
@@ -2666,7 +2667,7 @@ parse_render_options(fz_context* ctx, fz_cookie* cookie, const char* spec)
 		else
 		{
 			// check if the item matches any of the annotation types:
-			enum fz_annot_type type = pdf_annot_type_from_string(ctx, arg);
+			enum pdf_annot_type type = pdf_annot_type_from_string(ctx, arg);
 			if (type == PDF_ANNOT_UNKNOWN)
 			{
 				fz_error(ctx, "Unrecognized annotation type '%s' specified as part of the render filter. Treating it as UNKNOWN annotation type.\n", arg);

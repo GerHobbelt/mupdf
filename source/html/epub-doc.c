@@ -580,8 +580,8 @@ epub_run_page(fz_context *ctx, fz_page *page_, fz_device *dev, fz_matrix ctm)
 
 	if (page->html->error)
 	{
-		if (cookie)
-			cookie->errors++;
+		if (ctx->cookie)
+			ctx->cookie->d.errors++;
 		else
 			fz_throw(ctx, FZ_ERROR_FORMAT, "Bad or missing chapter");
 	}

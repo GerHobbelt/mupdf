@@ -538,8 +538,9 @@ static int may_add_space(int lastchar)
 
 #define FAKEBOLD_THRESHOLD_RECIP 10
 
+// fix error C2491 : 'close' : definition of dllimport function not allowed
 static int
-close(float a, float b, float size)
+vec_close(float a, float b, float size)
 {
 	a -= b;
 	if (a < 0)
@@ -587,7 +588,7 @@ check_for_fake_bold(fz_context *ctx, fz_stext_block *block, fz_font *font, int c
 				for (ch = line->first_char; ch != NULL; ch = ch->next)
 				{
 					/* Not perfect, but it'll do! */
-					if (ch->c == c && close(ch->origin.x, p.x, size) && close(ch->origin.y, p.y, size) && font_equiv(ctx, ch->font, font))
+					if (ch->c == c && vec_close(ch->origin.x, p.x, size) && vec_close(ch->origin.y, p.y, size) && font_equiv(ctx, ch->font, font))
 					{
 						/* Overlaying spaces is tricksy. How can that count as boldening when it doesn't mark? We only accept these
 						 * as boldening if either the char before, or the char after were also boldened. */
@@ -2534,7 +2535,7 @@ fz_new_stext_device(fz_context *ctx, fz_stext_page *page, const fz_stext_options
 			dev->super.begin_structure = fz_stext_begin_structure;
 			dev->super.end_structure = fz_stext_end_structure;
 		}
-		if (opts->opts.flags & (FZ_STEXT_COLLECT_VECTORS | FZ_STEXT_COLLECT_FLAGS))
+		if (dev->opts.flags & (FZ_STEXT_COLLECT_VECTORS | FZ_STEXT_COLLECT_FLAGS))
 		{
 			dev->super.fill_path = fz_stext_fill_path;
 			dev->super.stroke_path = fz_stext_stroke_path;

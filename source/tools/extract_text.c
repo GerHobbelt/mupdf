@@ -654,7 +654,7 @@ static stext_dev_and_page spans_to_stext_device(fz_context* ctx, const char* pat
 				const int bidi = FALSE;
 				const int force_new_line = FALSE;
 
-                fz_add_stext_char(ctx, dev_page.dev, font, ucs, gid, trm2, adv, wmode, bidi, force_new_line);
+                fz_add_stext_char(ctx, dev_page.dev, font, ucs, gid, trm2, adv, wmode, bidi, force_new_line, 0);
 
                 /* As of 2020-07-17, fz_add_stext_char() doesn't keep <font>
                 so we leak font here. We could keep track of fonts, but prob
