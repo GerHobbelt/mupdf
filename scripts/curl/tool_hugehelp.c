@@ -6,7 +6,7 @@
 
 #ifdef USE_MANUAL
 
-void hugehelp(void)
+void Curl_hugehelp(void)
 {
    fputs(
 "                                  _   _ ____  _\n"
@@ -2077,4 +2077,23 @@ void hugehelp(void)
 "\n"
 , stdout) ;
 }
+
+
+/* Show the help text for the 'arg' curl argument on stdout */
+void Curl_showhelp(const char* trigger, const char* arg, const char* endarg)
+{
+#if 0 // TODO
+	int i = 0;
+	struct scan_ctx ctx;
+	inithelpscan(&ctx, trigger, arg, endarg);
+	while (curlman[i]) {
+		size_t len = strlen(curlman[i]);
+		if (!helpscan((unsigned char*)curlman[i], len, &ctx) ||
+			!helpscan((unsigned char*)"\n", 1, &ctx))
+			break;
+		i++;
+	}
+#endif
+}
+
 #endif /* USE_MANUAL */
