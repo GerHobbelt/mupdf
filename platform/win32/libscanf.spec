@@ -2,5 +2,6 @@
 also-ignore:
 	/benchmark/
 	/examples/
-	/test/
+	/tests/
+	/cmake/
 	

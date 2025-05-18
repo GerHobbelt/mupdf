@@ -52,16 +52,16 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -74,7 +74,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -108,8 +108,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBICU;ICU_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -976,7 +976,10 @@
     <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/text2cpp/Generate_DataResource.cpp.sh" />
     <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/xml2cpp/CMakeLists.txt" />
     <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/dictionary/inflectional_ar.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/dictionary/inflectional_da.xml" />
     <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/dictionary/inflectional_de.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/dictionary/inflectional_en.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/dictionary/inflectional_es.xml" />
     <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/dictionary/inflectional_fr.xml" />
     <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/dictionary/inflectional_he.xml" />
     <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/dictionary/inflectional_hi.xml" />
@@ -986,6 +989,7 @@
     <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/dictionary/inflectional_pt.xml" />
     <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/dictionary/inflectional_ru.xml" />
     <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/dictionary/inflectional_sr.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/dictionary/inflectional_sv.xml" />
     <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/dictionary/inflectional_tr.xml" />
     <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/features/grammar.xml" />
     <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/format/en_US.xml" />
@@ -1042,3 +1046,4 @@
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
+  

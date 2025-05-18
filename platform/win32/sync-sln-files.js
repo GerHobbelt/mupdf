@@ -17,16 +17,17 @@ let dest_sln_files = [].concat(process.argv).toSpliced(0, 4);
 //console.log({ argv: process.argv, command, source_sln_file, dest_sln_files });
 
 // extra DUPLICATE project which will be appended to each SLN file so MSVC is forced to recognize a SLN change upon loading the file and have that one rewrite a *fresh, clean* SLN afterwards:
+//
+// since MSVC2022 may 2025 all we need are a few extra (bogus) EndProject lines; adding a bogus/duplicate project line like we did before will now be seen as an abortive error by MSVC2022!
+//
 const bogus_extra_project = `
 
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libabseil-cpp", "libabseil-cpp.vcxproj", "{A60D8644-5A1C-4D29-8970-101000000001}"
 EndProject
-    
-
-
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libabseil-cpp", "libabseil-cpp.vcxproj", "{A60D8644-5A1C-4D29-8970-101000000001}"
 EndProject
-    
+EndProject
+EndProject
+EndProject
+EndProject
 
 `;
 

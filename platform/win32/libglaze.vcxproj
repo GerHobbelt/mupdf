@@ -231,6 +231,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/glaze/tests/cli_menu_test/cli_menu_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/glaze/tests/compare_test/compare_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/glaze/tests/csv_test/csv_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/glaze/tests/eetf_test/eetf_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/glaze/tests/eigen_test/eigen_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/glaze/tests/example_json/example_json.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/glaze/tests/exceptions_test/exceptions_test.cpp" />
@@ -250,6 +251,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/glaze/tests/repe_test/repe_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/glaze/tests/roundtrip/roundtrip.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/glaze/tests/stencil/stencil_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/glaze/tests/threading_test/threading_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/glaze/tests/toml_test/toml_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/glaze/tests/utility_formats/utility_formats.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/api/api.hpp" />
@@ -289,6 +291,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/compare/compare.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/concepts/container_concepts.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/containers/flat_map.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/core/array_apply.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/core/common.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/core/context.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/core/convert_struct.hpp" />
@@ -308,6 +311,15 @@
     <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/csv.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/csv/read.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/csv/write.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/eetf.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/eetf/cmp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/eetf/defs.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/eetf/ei.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/eetf/opts.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/eetf/read.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/eetf/types.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/eetf/wrappers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/eetf/write.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/exceptions/binary_exceptions.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/exceptions/core_exceptions.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/exceptions/csv_exceptions.hpp" />
@@ -356,7 +368,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/stencil/stencilcount.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/thread/async.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/thread/async_string.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/thread/async_vector.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/thread/atomic.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/thread/guard.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/thread/shared_async_map.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/thread/shared_async_vector.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/thread/threadpool.hpp" />
@@ -391,12 +405,14 @@
     <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/util/utility.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/util/validate.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/util/variant.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glaze/include/glaze/version.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/glaze/tests/find_package/include/example.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/glaze/tests/lib_test/interface.hpp" />
     <Text Include="../../thirdparty/owemdjee/glaze/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/glaze/CMakePresets.json" />
     <Text Include="../../thirdparty/owemdjee/glaze/LICENSE" />
     <Text Include="../../thirdparty/owemdjee/glaze/README.md" />
+    <Text Include="../../thirdparty/owemdjee/glaze/cmake/FindErlang.cmake" />
     <Text Include="../../thirdparty/owemdjee/glaze/cmake/code-coverage.cmake" />
     <Text Include="../../thirdparty/owemdjee/glaze/cmake/dev-mode.cmake" />
     <Text Include="../../thirdparty/owemdjee/glaze/cmake/install-config.cmake" />
@@ -404,6 +420,7 @@
     <Text Include="../../thirdparty/owemdjee/glaze/cmake/prelude.cmake" />
     <Text Include="../../thirdparty/owemdjee/glaze/cmake/project-is-top-level.cmake" />
     <Text Include="../../thirdparty/owemdjee/glaze/cmake/variables.cmake" />
+    <Text Include="../../thirdparty/owemdjee/glaze/docs/EETF/erlang-external-term-format.md" />
     <Text Include="../../thirdparty/owemdjee/glaze/docs/FAQ.md" />
     <Text Include="../../thirdparty/owemdjee/glaze/docs/JMESPath.md" />
     <Text Include="../../thirdparty/owemdjee/glaze/docs/JSON/json-integer-parsing.md" />
@@ -449,6 +466,7 @@
     <Text Include="../../thirdparty/owemdjee/glaze/tests/compare_test/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/glaze/tests/csv_test/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/glaze/tests/csv_test/currency.csv" />
+    <Text Include="../../thirdparty/owemdjee/glaze/tests/eetf_test/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/glaze/tests/eigen_test/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/glaze/tests/example_json/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/glaze/tests/exceptions_test/CMakeLists.txt" />
@@ -470,6 +488,7 @@
     <Text Include="../../thirdparty/owemdjee/glaze/tests/repe_test/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/glaze/tests/roundtrip/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/glaze/tests/stencil/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/glaze/tests/threading_test/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/glaze/tests/toml_test/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/glaze/tests/utility_formats/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/glaze/util/run_clang-format.sh" />

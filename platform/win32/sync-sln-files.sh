@@ -15,5 +15,9 @@ node ./sync-sln-files.js 3 m-dev-list.sln  *failed-ideas*.sln *may-matter*.sln
 
 for f in $( find . -maxdepth 1 -type f -name '*.sln' | grep -v failed-ideas ) ; do
 	./add-vcxproj-dependencies-to-sln.sh $f
-	node ./sort-sln-file.js $f 
+done
+
+for f in *.sln ; do 
+	node ./sort-sln-file.js  $f 
+	./msvc_sln_cleaner.exe $f 
 done

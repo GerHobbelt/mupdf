@@ -335,6 +335,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/events/windows/etw/etw_post_processing_pipeline.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/events/windows/etw/etw_provider_config.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/events/windows/etw/etw_publisher.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/events/windows/etw/etw_publisher_dns.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/events/windows/etw/etw_publisher_processes.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/events/windows/etw/etw_user_session.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/events/windows/evtsubscription.cpp" />
@@ -492,6 +493,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/events/tests/windows/etw_process_events_tests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/events/tests/windows/powershell_events_tests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/events/tests/windows/windows_events_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/events/windows/dns_lookup_events.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/events/windows/etw_process_events.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/events/windows/ntfs_journal_events.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/events/windows/powershell_events.cpp" />
@@ -667,7 +669,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/tests/posix/sudoers_tests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/tests/system_tables_tests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/tests/windows/certificates_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/tests/windows/programs_tests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/tests/windows/registry_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/tests/windows/startup_items_tests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/tests/windows/windows_eventlog_tests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/tests/windows/windows_optional_features_tests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/tests/windows/windows_update_history_tests.cpp" />
@@ -738,6 +742,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/utility/osquery.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/utility/time.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/yara/tests/yara_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/yara/windows/yara_events.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/yara/yara.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/yara/yara_events.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/yara/yara_utils.cpp" />
@@ -811,6 +816,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/utils/system/uptime.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/utils/system/windows/env.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/utils/system/windows/errno.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/utils/system/windows/etw_helpers.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/utils/system/windows/system.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/utils/system/windows/time.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/utils/system/windows/users_groups_helpers.cpp" />
@@ -934,6 +940,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/osquery/tests/integration/tables/disk_encryption.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/tests/integration/tables/disk_events.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/tests/integration/tables/disk_info.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/osquery/tests/integration/tables/dns_lookup_events.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/tests/integration/tables/dns_resolvers.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/tests/integration/tables/docker_container_envs.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/tests/integration/tables/docker_container_labels.cpp" />
@@ -1230,6 +1237,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/events/windows/etw/etw_post_processing_pipeline.h" />
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/events/windows/etw/etw_provider_config.h" />
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/events/windows/etw/etw_publisher.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/events/windows/etw/etw_publisher_dns.h" />
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/events/windows/etw/etw_publisher_processes.h" />
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/events/windows/etw/etw_user_session.h" />
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/events/windows/evtsubscription.h" />
@@ -1298,6 +1306,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/tables/events/linux/seccomp_events.h" />
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/tables/events/linux/selinux_events.h" />
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/tables/events/linux/socket_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/tables/events/windows/dns_lookup_events.h" />
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/tables/events/windows/etw_process_events.h" />
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/tables/events/windows/ntfs_journal_events.h" />
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/tables/events/windows/powershell_events.h" />
@@ -1341,8 +1350,10 @@
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/system_utils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/user_groups.h" />
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/windows/certificates.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/windows/programs.h" />
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/windows/registry.h" />
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/windows/security_profile_info_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/windows/startup_items.h" />
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/windows/windows_eventlog.h" />
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/windows/windows_update_history.h" />
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/tables/yara/yara_utils.h" />
@@ -1407,6 +1418,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/utils/system/system.h" />
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/utils/system/time.h" />
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/utils/system/uptime.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/utils/system/windows/etw_helpers.h" />
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/utils/system/windows/system.h" />
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/utils/system/windows/users_groups_helpers.h" />
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/utils/windows/lzxpress.h" />

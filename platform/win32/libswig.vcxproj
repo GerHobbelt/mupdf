@@ -315,9 +315,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/lua/pointer/example.c" />
     <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/lua/simple/example.c" />
     <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/lua/variables/example.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/mzscheme/class/example.cxx" />
-    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/mzscheme/multimap/example.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/mzscheme/simple/example.c" />
     <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/ocaml/argout_ref/example.c" />
     <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/ocaml/callback/example.c" />
     <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/ocaml/class/example.c" />
@@ -368,6 +365,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/python/doxygen/example.cxx" />
     <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/python/enum/example.cxx" />
     <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/python/extend/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/python/external_runtime/example.cxx" />
     <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/python/funcptr/example.c" />
     <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/python/funcptr2/example.c" />
     <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/python/multimap/example.c" />
@@ -474,7 +472,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Modules/lang.cxx" />
     <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Modules/lua.cxx" />
     <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Modules/main.cxx" />
-    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Modules/mzscheme.cxx" />
     <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Modules/nested.cxx" />
     <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Modules/ocaml.cxx" />
     <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Modules/octave.cxx" />
@@ -580,8 +577,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/lua/nspace/example.h" />
     <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/lua/owner/example.h" />
     <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/lua/variables/example.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/mzscheme/class/example.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/mzscheme/std_vector/example.h" />
     <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/ocaml/callback/example.h" />
     <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/ocaml/class/example.h" />
     <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/ocaml/scoped_enum/foo.h" />
@@ -634,6 +629,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/exception/example.h" />
     <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/exceptproxy/example.h" />
     <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/extend/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/external_runtime/example.h" />
     <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/funcptr/example.h" />
     <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/funcptr2/example.h" />
     <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/import/bar.h" />
@@ -858,7 +854,6 @@
     <Text Include="../../thirdparty/owemdjee/swig/Doc/Manual/Lua.html" />
     <Text Include="../../thirdparty/owemdjee/swig/Doc/Manual/Makefile" />
     <Text Include="../../thirdparty/owemdjee/swig/Doc/Manual/Modules.html" />
-    <Text Include="../../thirdparty/owemdjee/swig/Doc/Manual/Mzscheme.html" />
     <Text Include="../../thirdparty/owemdjee/swig/Doc/Manual/Ocaml.html" />
     <Text Include="../../thirdparty/owemdjee/swig/Doc/Manual/Octave.html" />
     <Text Include="../../thirdparty/owemdjee/swig/Doc/Manual/Perl5.html" />
@@ -1126,10 +1121,6 @@
     <Text Include="../../thirdparty/owemdjee/swig/Examples/lua/simple/runme.lua" />
     <Text Include="../../thirdparty/owemdjee/swig/Examples/lua/variables/Makefile" />
     <Text Include="../../thirdparty/owemdjee/swig/Examples/lua/variables/runme.lua" />
-    <Text Include="../../thirdparty/owemdjee/swig/Examples/mzscheme/class/Makefile" />
-    <Text Include="../../thirdparty/owemdjee/swig/Examples/mzscheme/multimap/Makefile" />
-    <Text Include="../../thirdparty/owemdjee/swig/Examples/mzscheme/simple/Makefile" />
-    <Text Include="../../thirdparty/owemdjee/swig/Examples/mzscheme/std_vector/Makefile" />
     <Text Include="../../thirdparty/owemdjee/swig/Examples/ocaml/argout_ref/Makefile" />
     <Text Include="../../thirdparty/owemdjee/swig/Examples/ocaml/argout_ref/runme.ml" />
     <Text Include="../../thirdparty/owemdjee/swig/Examples/ocaml/callback/Makefile" />
@@ -1263,6 +1254,8 @@
     <Text Include="../../thirdparty/owemdjee/swig/Examples/python/extend/Makefile" />
     <Text Include="../../thirdparty/owemdjee/swig/Examples/python/extend/index.html" />
     <Text Include="../../thirdparty/owemdjee/swig/Examples/python/extend/runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/external_runtime/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/external_runtime/runme.py" />
     <Text Include="../../thirdparty/owemdjee/swig/Examples/python/funcptr/Makefile" />
     <Text Include="../../thirdparty/owemdjee/swig/Examples/python/funcptr/index.html" />
     <Text Include="../../thirdparty/owemdjee/swig/Examples/python/funcptr/runme.py" />
@@ -2419,8 +2412,6 @@
     <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/valuewrapper_runme.lua" />
     <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/varargs_runme.lua" />
     <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/voidtest_runme.lua" />
-    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/mzscheme/Makefile.in" />
-    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/mzscheme/README" />
     <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/ocaml/Makefile.in" />
     <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/ocaml/README" />
     <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/ocaml/abstract_access_runme.ml" />
@@ -3094,7 +3085,6 @@
     <Text Include="../../thirdparty/owemdjee/swig/LICENSE-GPL" />
     <Text Include="../../thirdparty/owemdjee/swig/LICENSE-UNIVERSITIES" />
     <Text Include="../../thirdparty/owemdjee/swig/Lib/guile/Makefile" />
-    <Text Include="../../thirdparty/owemdjee/swig/Lib/mzscheme/Makefile" />
     <Text Include="../../thirdparty/owemdjee/swig/Lib/ocaml/swig.ml" />
     <Text Include="../../thirdparty/owemdjee/swig/Lib/ocaml/swigp4.ml" />
     <Text Include="../../thirdparty/owemdjee/swig/Lib/perl5/Makefile.in" />

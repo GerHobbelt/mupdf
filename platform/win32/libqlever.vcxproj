@@ -225,7 +225,6 @@
   <ItemGroup>
     <ClCompile Include="../../thirdparty/owemdjee/qlever/benchmark/BenchmarkExamples.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/benchmark/GroupByHashMapBenchmark.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/qlever/benchmark/IdTableCompressedWriterBenchmark.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/benchmark/JoinAlgorithmBenchmark.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/benchmark/ParallelMergeBenchmark.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/benchmark/infrastructure/Benchmark.cpp" />
@@ -258,6 +257,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/qlever/src/engine/LocalVocab.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/src/engine/Minus.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/src/engine/MultiColumnJoin.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qlever/src/engine/NeutralOptional.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/src/engine/Operation.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/src/engine/OptionalJoin.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/src/engine/OrderBy.cpp" />
@@ -286,6 +286,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/qlever/src/engine/Values.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/src/engine/VariableToColumnMap.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/src/engine/sparqlExpressions/AggregateExpression.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qlever/src/engine/sparqlExpressions/BlankNodeExpression.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/src/engine/sparqlExpressions/ConditionalExpressions.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/src/engine/sparqlExpressions/ConvertToDtypeConstructor.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/src/engine/sparqlExpressions/CountStarExpression.cpp" />
@@ -307,6 +308,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/qlever/src/engine/sparqlExpressions/SparqlExpressionValueGetters.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/src/engine/sparqlExpressions/StdevExpression.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/src/engine/sparqlExpressions/StringExpressions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qlever/src/global/DummyCompilation.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/src/index/CompressedRelation.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/src/index/DeltaTriples.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/src/index/DocsDB.cpp" />
@@ -323,11 +325,13 @@
     <ClCompile Include="../../thirdparty/owemdjee/qlever/src/index/ScanSpecification.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/src/index/TextIndexReadWrite.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/src/index/TextMetaData.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qlever/src/index/TextScoring.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qlever/src/index/TextScoringEnum.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/src/index/Vocabulary.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/qlever/src/index/VocabularyOnDisk.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/src/index/vocabulary/VocabularyInMemory.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/src/index/vocabulary/VocabularyInMemoryBinSearch.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/src/index/vocabulary/VocabularyInternalExternal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qlever/src/index/vocabulary/VocabularyOnDisk.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/src/parser/Bzip2Wrapper.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/src/parser/DatasetClauses.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/src/parser/GeoPoint.cpp" />
@@ -342,12 +346,14 @@
     <ClCompile Include="../../thirdparty/owemdjee/qlever/src/parser/PathQuery.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/src/parser/PayloadVariables.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/src/parser/PropertyPath.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qlever/src/parser/Quads.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/src/parser/RdfEscaping.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/src/parser/RdfParser.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/src/parser/SelectClause.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/src/parser/SparqlParser.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/src/parser/SparqlParserHelpers.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/src/parser/SpatialQuery.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qlever/src/parser/TextSearchQuery.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/src/parser/Tokenizer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/src/parser/TripleComponent.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/src/parser/WordsAndDocsFileParser.cpp" />
@@ -392,6 +398,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/qlever/src/util/http/HttpParser/generated/AcceptHeaderListener.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/src/util/http/HttpParser/generated/AcceptHeaderParser.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/src/util/http/HttpParser/generated/AcceptHeaderVisitor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qlever/src/util/http/HttpServer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/src/util/http/HttpUtils.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/src/util/http/MediaTypes.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/src/util/http/UrlParser.cpp" />
@@ -407,7 +414,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/AllocatorWithLimitTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/AsioHelpersTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/AsyncStreamTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/qlever/test/BackgroundStxxlSorterTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/BatchedPipelineTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/BenchmarkMeasurementContainerTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/BitUtilsTest.cpp" />
@@ -466,6 +472,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/IdTripleTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/IndexMetaDataTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/IndexTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qlever/test/InputRangeUtilsTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/IteratorTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/JThreadTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/JoinAlgorithmsTest.cpp" />
@@ -478,6 +485,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/LimitOffsetClauseTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/LocalVocabTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/LocatedTriplesTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qlever/test/LruCacheTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/MemorySizeTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/MessageSenderTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/MinusTest.cpp" />
@@ -541,6 +549,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/TransitivePathTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/TransparentFunctorsTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/TripleComponentTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qlever/test/TripleSerializerTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/TupleHelpersTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/TypeTraitsTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/UnionTest.cpp" />
@@ -548,6 +557,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/UpdateFetcherTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/UrlParserTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/ValidatorTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qlever/test/ValueGetterTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/ValueIdComparatorsTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/ValueIdTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/ValuesForTestingTest.cpp" />
@@ -571,12 +581,14 @@
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/engine/GroupByHashMapOptimizationTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/engine/IndexScanTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/engine/LazyGroupByTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qlever/test/engine/NeutralOptionalTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/engine/QueryExecutionTreeTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/engine/SpatialJoinAlgorithmsTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/engine/SpatialJoinTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/engine/TextIndexScanForEntityTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/engine/TextIndexScanForWordTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/engine/idTable/CompressedExternalIdTableTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qlever/test/index/KeyOrderTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/index/PatternCreatorTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/index/ScanSpecificationTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/index/vocabulary/CompressedVocabularyTest.cpp" />
@@ -585,9 +597,11 @@
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/index/vocabulary/VocabularyInMemoryTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/index/vocabulary/VocabularyInternalExternalTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/index/vocabulary/VocabularyOnDiskTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qlever/test/parser/BlankNodeExpressionTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/parser/LiteralOrIriTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/parser/ParallelBufferTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/parser/PayloadVariablesTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/qlever/test/parser/QuadTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/parser/data/VariableTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/util/BenchmarkMeasurementContainerHelpers.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/util/IdTableHelpers.cpp" />
@@ -604,6 +618,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/backports/algorithm.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/backports/concepts.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/backports/cppTemplate2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/qlever/src/backports/span.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/engine/AddCombinedRowToTable.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/engine/Bind.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/engine/CallFixedSize.h" />
@@ -630,6 +645,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/engine/Minus.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/engine/MultiColumnJoin.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/engine/NeutralElementOperation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/qlever/src/engine/NeutralOptional.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/engine/Operation.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/engine/OptionalJoin.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/engine/OrderBy.h" />
@@ -647,6 +663,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/engine/Service.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/engine/Sort.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/engine/SortPerformanceEstimator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/qlever/src/engine/SortedUnionImpl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/engine/SpatialJoin.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/engine/SpatialJoinAlgorithms.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/engine/TextIndexScanForEntity.h" />
@@ -664,6 +681,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/engine/idTable/IdTableRow.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/engine/idTable/VectorWithElementwiseMove.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/engine/sparqlExpressions/AggregateExpression.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/qlever/src/engine/sparqlExpressions/BlankNodeExpression.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/engine/sparqlExpressions/CountStarExpression.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/engine/sparqlExpressions/ExistsExpression.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/engine/sparqlExpressions/GroupConcatExpression.h" />
@@ -684,6 +702,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/engine/sparqlExpressions/SparqlExpressionTypes.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/engine/sparqlExpressions/SparqlExpressionValueGetters.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/engine/sparqlExpressions/StdevExpression.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/qlever/src/engine/sparqlExpressions/StringExpressionsHelper.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/engine/sparqlExpressions/UuidExpressions.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/engine/sparqlExpressions/VariadicExpression.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/global/Constants.h" />
@@ -702,6 +721,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/index/ConstantsIndexBuilding.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/index/DeltaTriples.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/index/DocsDB.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/qlever/src/index/ExternalSortFunctors.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/index/FTSAlgorithms.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/index/Index.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/index/IndexBuilderTypes.h" />
@@ -710,6 +730,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/index/IndexMetaData.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/index/IndexMetaDataImpl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/index/InputFileSpecification.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/qlever/src/index/KeyOrder.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/index/LocalVocabEntry.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/index/LocatedTriples.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/index/MetaDataHandler.h" />
@@ -719,13 +740,13 @@
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/index/PrefixHeuristic.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/index/ScanSpecification.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/index/StringSortComparator.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/qlever/src/index/StxxlSortFunctors.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/index/TextIndexReadWrite.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/index/TextMetaData.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/qlever/src/index/TextScoring.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/qlever/src/index/TextScoringEnum.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/index/Vocabulary.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/index/VocabularyMerger.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/index/VocabularyMergerImpl.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/qlever/src/index/VocabularyOnDisk.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/index/vocabulary/CompressedVocabulary.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/index/vocabulary/CompressionWrappers.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/index/vocabulary/PrefixCompressor.h" />
@@ -734,6 +755,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/index/vocabulary/VocabularyInMemory.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/index/vocabulary/VocabularyInMemoryBinSearch.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/index/vocabulary/VocabularyInternalExternal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/qlever/src/index/vocabulary/VocabularyOnDisk.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/index/vocabulary/VocabularyTypes.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/parser/Alias.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/parser/ConstructClause.h" />
@@ -753,6 +775,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/parser/PathQuery.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/parser/PayloadVariables.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/parser/PropertyPath.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/qlever/src/parser/Quads.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/parser/RdfEscaping.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/parser/RdfParser.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/parser/SelectClause.h" />
@@ -760,6 +783,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/parser/SparqlParserHelpers.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/parser/SparqlTriple.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/parser/SpatialQuery.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/qlever/src/parser/TextSearchQuery.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/parser/Tokenizer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/parser/TokenizerCtre.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/parser/TripleComponent.h" />
@@ -791,7 +815,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/AllocatorWithLimit.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/AsioHelpers.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/AsyncStream.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/BackgroundStxxlSorter.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/BatchedPipeline.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/BitUtils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/BlankNodeManager.h" />
@@ -839,6 +862,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/GeoSparqlHelpers.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/HashMap.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/HashSet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/InputRangeUtils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/Iterators.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/JoinAlgorithms/FindUndefRanges.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/JoinAlgorithms/JoinAlgorithms.h" />
@@ -846,6 +870,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/LambdaHelpers.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/LazyJsonParser.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/Log.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/LruCache.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/MemorySize/MemorySize.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/MmapVector.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/MmapVectorImpl.h" />
@@ -860,7 +885,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/ProgramOptionsHelpers.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/ProgressBar.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/Random.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/ReadableNumberFact.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/ReadableNumberFacet.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/ResetWhenMoved.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/Serializer/ByteBufferSerializer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/Serializer/FileSerializer.h" />
@@ -871,6 +896,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/Serializer/SerializeString.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/Serializer/SerializeVector.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/Serializer/Serializer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/Serializer/TripleSerializer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/Simple8bCode.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/SourceLocation.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/StringUtils.h" />
@@ -930,6 +956,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/qlever/test/engine/ValuesForTesting.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/test/index/vocabulary/VocabularyTestHelpers.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/test/printers/PayloadVariablePrinters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/qlever/test/printers/UnitOfMeasurementPrinters.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/test/printers/VariablePrinters.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/test/printers/VariableToColumnMapPrinters.h" />
     <ClInclude Include="../../thirdparty/owemdjee/qlever/test/util/AllocatorTestHelpers.h" />
@@ -973,6 +1000,7 @@
     <Text Include="../../thirdparty/owemdjee/qlever/docs/path_search.md" />
     <Text Include="../../thirdparty/owemdjee/qlever/docs/quickstart.md" />
     <Text Include="../../thirdparty/owemdjee/qlever/docs/sparql_plus_text.md" />
+    <Text Include="../../thirdparty/owemdjee/qlever/docs/text_search.md" />
     <Text Include="../../thirdparty/owemdjee/qlever/docs/troubleshooting.md" />
     <Text Include="../../thirdparty/owemdjee/qlever/e2e/e2e-build-settings.json" />
     <Text Include="../../thirdparty/owemdjee/qlever/e2e/e2e.sh" />
@@ -1031,10 +1059,12 @@
     <Text Include="../../thirdparty/owemdjee/qlever/misc/words-and-docs-file-from-nt.py" />
     <Text Include="../../thirdparty/owemdjee/qlever/misc/wordsfile_to_context_literals.py" />
     <Text Include="../../thirdparty/owemdjee/qlever/misc/wordsfile_to_nt.py" />
+    <Text Include="../../thirdparty/owemdjee/qlever/replace_pragma_once.py" />
     <Text Include="../../thirdparty/owemdjee/qlever/sonar-project.properties" />
     <Text Include="../../thirdparty/owemdjee/qlever/src/engine/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/qlever/src/engine/raw_thoughts.txt" />
     <Text Include="../../thirdparty/owemdjee/qlever/src/engine/sparqlExpressions/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/qlever/src/global/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/qlever/src/index/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/qlever/src/index/vocabulary/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/qlever/src/parser/CMakeLists.txt" />

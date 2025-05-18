@@ -15,47 +15,62 @@
     <Filter Include="Header Files\glass">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0001}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\glass\hnsw">
+    <Filter Include="Header Files\glass\algorithms">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0002}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\glass\hnswlib">
+    <Filter Include="Header Files\glass\hnsw">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0003}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\glass\nsg">
+    <Filter Include="Header Files\glass\hnswlib">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0004}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\glass\quant">
+    <Filter Include="Header Files\glass\nsg">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0005}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\glass\simd">
+    <Filter Include="Header Files\glass\quant">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0006}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\examples">
+    <Filter Include="Header Files\glass\searcher">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0007}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\python">
+    <Filter Include="Header Files\glass\simd">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0008}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\python\ann_dataset">
+    <Filter Include="Header Files\glass\storage">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0009}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files">
+    <Filter Include="Misc Files\examples">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0010}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files\docs">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0012}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource Files\docs\figures">
+    <Filter Include="Misc Files\examples\datasets">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0011}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\python">
+    <Filter Include="Misc Files\python">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0012}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Misc Files\python\ann_dataset">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0013}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0014}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\docs">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0016}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\docs\figures">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0015}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\python">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0017}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="../../thirdparty/owemdjee/pyglass/python/bindings.cc">
       <Filter>Source Files\python</Filter>
     </ClCompile>
+    <ClInclude Include="../../thirdparty/owemdjee/pyglass/glass/algorithms/clustering.hpp">
+      <Filter>Header Files\glass\algorithms</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/pyglass/glass/builder.hpp">
       <Filter>Header Files\glass</Filter>
     </ClInclude>
@@ -63,6 +78,9 @@
       <Filter>Header Files\glass</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/pyglass/glass/graph.hpp">
+      <Filter>Header Files\glass</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/pyglass/glass/graph_statistic.hpp">
       <Filter>Header Files\glass</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/pyglass/glass/hnsw/HNSWInitializer.hpp">
@@ -92,37 +110,121 @@
     <ClInclude Include="../../thirdparty/owemdjee/pyglass/glass/neighbor.hpp">
       <Filter>Header Files\glass</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/pyglass/glass/nsg/nhood.hpp">
+      <Filter>Header Files\glass\nsg</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/pyglass/glass/nsg/nndescent.hpp">
       <Filter>Header Files\glass\nsg</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/pyglass/glass/nsg/nsg.hpp">
       <Filter>Header Files\glass\nsg</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/pyglass/glass/nsg/rnndescent.hpp">
+      <Filter>Header Files\glass\nsg</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/pyglass/glass/quant/bf16_quant.hpp">
+      <Filter>Header Files\glass\quant</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/pyglass/glass/quant/calibrator.hpp">
+      <Filter>Header Files\glass\quant</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/pyglass/glass/quant/computer.hpp">
+      <Filter>Header Files\glass\quant</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/pyglass/glass/quant/e5m2_quant.hpp">
+      <Filter>Header Files\glass\quant</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/pyglass/glass/quant/fp16_quant.hpp">
+      <Filter>Header Files\glass\quant</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/pyglass/glass/quant/fp32_quant.hpp">
+      <Filter>Header Files\glass\quant</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/pyglass/glass/quant/product_quant.hpp">
       <Filter>Header Files\glass\quant</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/pyglass/glass/quant/quant.hpp">
       <Filter>Header Files\glass\quant</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/pyglass/glass/quant/quant_base.hpp">
+      <Filter>Header Files\glass\quant</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/pyglass/glass/quant/sq1_quant.hpp">
+      <Filter>Header Files\glass\quant</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/pyglass/glass/quant/sq2u_quant.hpp">
+      <Filter>Header Files\glass\quant</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/pyglass/glass/quant/sq4_quant.hpp">
+      <Filter>Header Files\glass\quant</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/pyglass/glass/quant/sq4u_quant.hpp">
+      <Filter>Header Files\glass\quant</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/pyglass/glass/quant/sq4ua_quant.hpp">
+      <Filter>Header Files\glass\quant</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/pyglass/glass/quant/sq6_quant.hpp">
       <Filter>Header Files\glass\quant</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/pyglass/glass/quant/sq8_quant.hpp">
       <Filter>Header Files\glass\quant</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/pyglass/glass/quant/sq8p_quant.hpp">
+      <Filter>Header Files\glass\quant</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/pyglass/glass/quant/sq8u_quant.hpp">
+      <Filter>Header Files\glass\quant</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/pyglass/glass/quant/utils.hpp">
+      <Filter>Header Files\glass\quant</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/pyglass/glass/searcher.hpp">
       <Filter>Header Files\glass</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/pyglass/glass/searcher/graph_searcher.hpp">
+      <Filter>Header Files\glass\searcher</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/pyglass/glass/searcher/refiner.hpp">
+      <Filter>Header Files\glass\searcher</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/pyglass/glass/searcher/searcher_base.hpp">
+      <Filter>Header Files\glass\searcher</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/pyglass/glass/simd/avx2.hpp">
+      <Filter>Header Files\glass\simd</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/pyglass/glass/simd/avx2_utils.hpp">
       <Filter>Header Files\glass\simd</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/pyglass/glass/simd/avx512.hpp">
       <Filter>Header Files\glass\simd</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/pyglass/glass/simd/avx512_utils.hpp">
+      <Filter>Header Files\glass\simd</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/pyglass/glass/simd/common.hpp">
+      <Filter>Header Files\glass\simd</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/pyglass/glass/simd/distance.hpp">
       <Filter>Header Files\glass\simd</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/pyglass/glass/simd/neon.hpp">
+      <Filter>Header Files\glass\simd</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/pyglass/glass/simd/prefetch.hpp">
+      <Filter>Header Files\glass\simd</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/pyglass/glass/simd/scalar.hpp">
+      <Filter>Header Files\glass\simd</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/pyglass/glass/storage/tensor.hpp">
+      <Filter>Header Files\glass\storage</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/pyglass/glass/thread_pool.hpp">
+      <Filter>Header Files\glass</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/pyglass/glass/types.hpp">
       <Filter>Header Files\glass</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/pyglass/glass/utils.hpp">
@@ -151,6 +253,9 @@
     </Text>
     <Text Include="../../thirdparty/owemdjee/pyglass/examples/config.json">
       <Filter>Misc Files\examples</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/pyglass/examples/datasets/sift-128-euclidean.hdf5">
+      <Filter>Misc Files\examples\datasets</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/pyglass/examples/main.py">
       <Filter>Misc Files\examples</Filter>

@@ -246,6 +246,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/tink-cc/examples/walkthrough/write_cleartext_keyset_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tink-cc/examples/walkthrough/write_keyset.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tink-cc/examples/walkthrough/write_keyset_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aead_benchmarks.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aead_config.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aead_config_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/aead/aead_factory.cc" />
@@ -457,6 +458,15 @@
     <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/cecpq2_hybrid_config_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/cecpq2_hybrid_key_templates.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/cecpq2_hybrid_key_templates_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/cecpq2_parameters.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/cecpq2_parameters_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/cecpq2_private_key.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/cecpq2_private_key_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/cecpq2_proto_serialization_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/cecpq2_public_key.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/cecpq2_public_key_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/internal/cecpq2_proto_serialization_impl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/internal/cecpq2_proto_serialization_impl_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/internal/ml_kem_decapsulate_aes_gcm.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/internal/ml_kem_decapsulate_aes_gcm_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/internal/ml_kem_encapsulate_aes_gcm.cc" />
@@ -609,6 +619,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/configuration_impl_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/ec_util.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/ec_util_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/endian_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/err_util.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/err_util_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/fips_utils.cc" />
@@ -652,7 +663,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/proto_parser_message_field_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/proto_parser_message_field_with_presence_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/proto_parser_presence_fields_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/proto_parser_secret_data_with_crc_field_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/proto_parser_repeated_secret_data_field_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/proto_parser_secret_data_field_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/proto_parser_state.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/proto_parser_state_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/proto_parser_test.cc" />
@@ -667,8 +679,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/safe_stringops_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/sanitizing_allocator_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/secret_buffer_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/secret_data_with_crc.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/secret_data_with_crc_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/serialization_registry.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/serialization_registry_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/internal/serialization_test_util_test.cc" />
@@ -896,6 +906,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/prf/prf_set_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/prf/prf_set_wrapper.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/prf/prf_set_wrapper_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/secret_data_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/config_v0.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/config_v0_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tink-cc/tink/signature/ecdsa_parameters.cc" />
@@ -1289,6 +1300,11 @@
     <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/cecpq2_aead_hkdf_public_key_manager.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/cecpq2_hybrid_config.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/cecpq2_hybrid_key_templates.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/cecpq2_parameters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/cecpq2_private_key.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/cecpq2_proto_serialization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/cecpq2_public_key.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/internal/cecpq2_proto_serialization_impl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/internal/ml_kem_decapsulate_aes_gcm.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/internal/ml_kem_encapsulate_aes_gcm.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/experimental/pqcrypto/kem/internal/ml_kem_raw_decapsulate_boringssl.h" />
@@ -1384,6 +1400,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/configuration_impl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/dfsan_forwarders.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/ec_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/endian.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/err_util.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/fips_utils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/global_serialization_registry.h" />
@@ -1401,6 +1418,8 @@
     <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/legacy_proto_key.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/legacy_proto_parameters.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/md_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/monitoring.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/monitoring_client_mocks.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/monitoring_util.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/mutable_serialization_registry.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/output_prefix_util.h" />
@@ -1416,7 +1435,8 @@
     <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/proto_parser_message_field_with_presence.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/proto_parser_options.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/proto_parser_presence_fields.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/proto_parser_secret_data_with_crc_field.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/proto_parser_repeated_secret_data_field.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/proto_parser_secret_data_field.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/proto_parser_state.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/proto_parser_uint64_field.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/proto_parsing_helpers.h" />
@@ -1426,7 +1446,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/safe_stringops.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/sanitizing_allocator.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/secret_buffer.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/secret_data_with_crc.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/serialization.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/serialization_registry.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/internal/serialization_test_util.h" />
@@ -1571,8 +1590,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/mac_config.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/mac_factory.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/mac_key_templates.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/monitoring/monitoring.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/monitoring/monitoring_client_mocks.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/output_stream.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/output_stream_with_result.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/parameters.h" />
@@ -1617,6 +1634,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/registry.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/restricted_big_integer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/restricted_data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/secret_data.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/secret_key_access.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/secret_key_access_token.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tink-cc/tink/signature/config_v0.h" />
@@ -1931,8 +1949,6 @@
     <Text Include="../../thirdparty/owemdjee/tink-cc/tink/mac/internal/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/tink-cc/tink/mac/subtle/BUILD.bazel" />
     <Text Include="../../thirdparty/owemdjee/tink-cc/tink/mac/subtle/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/monitoring/BUILD.bazel" />
-    <Text Include="../../thirdparty/owemdjee/tink-cc/tink/monitoring/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/tink-cc/tink/prf/BUILD.bazel" />
     <Text Include="../../thirdparty/owemdjee/tink-cc/tink/prf/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/tink-cc/tink/prf/internal/BUILD.bazel" />

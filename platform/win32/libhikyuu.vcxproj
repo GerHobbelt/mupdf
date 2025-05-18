@@ -393,6 +393,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/hikyuu/hikyuu_cpp/hikyuu/indicator_talib/imp/TaUltosc.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/hikyuu/hikyuu_cpp/hikyuu/indicator_talib/imp/TaVar.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/hikyuu/hikyuu_cpp/hikyuu/indicator_talib/imp/ta_imp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hikyuu/hikyuu_cpp/hikyuu/plugin/backtest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hikyuu/hikyuu_cpp/hikyuu/plugin/dataserver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hikyuu/hikyuu_cpp/hikyuu/plugin/device.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/hikyuu/hikyuu_cpp/hikyuu/serialization/serialization.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/hikyuu/hikyuu_cpp/hikyuu/strategy/BrokerTradeManager.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/hikyuu/hikyuu_cpp/hikyuu/strategy/RunPortfolioInStrategy.cpp" />
@@ -799,6 +802,10 @@
     <ClCompile Include="../../thirdparty/owemdjee/hikyuu/hikyuu_pywrap/indicator/indicator_main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/hikyuu/hikyuu_pywrap/ioredirect.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/hikyuu/hikyuu_pywrap/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hikyuu/hikyuu_pywrap/plugin/_backtest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hikyuu/hikyuu_pywrap/plugin/_dataserver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hikyuu/hikyuu_pywrap/plugin/_device.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hikyuu/hikyuu_pywrap/plugin/_plugin_main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/hikyuu/hikyuu_pywrap/strategy/_Strategy.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/hikyuu/hikyuu_pywrap/strategy/_strategy_main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/hikyuu/hikyuu_pywrap/trade_manage/_BorrowRecord.cpp" />
@@ -1127,6 +1134,13 @@
     <ClInclude Include="../../thirdparty/owemdjee/hikyuu/hikyuu_cpp/hikyuu/indicator_talib/imp/ta_defines.h" />
     <ClInclude Include="../../thirdparty/owemdjee/hikyuu/hikyuu_cpp/hikyuu/indicator_talib/imp/ta_imp.h" />
     <ClInclude Include="../../thirdparty/owemdjee/hikyuu/hikyuu_cpp/hikyuu/indicator_talib/ta_crt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hikyuu/hikyuu_cpp/hikyuu/plugin/backtest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hikyuu/hikyuu_cpp/hikyuu/plugin/dataserver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hikyuu/hikyuu_cpp/hikyuu/plugin/device.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hikyuu/hikyuu_cpp/hikyuu/plugin/interface/BackTestPluginInterface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hikyuu/hikyuu_cpp/hikyuu/plugin/interface/DataServerPluginInterface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hikyuu/hikyuu_cpp/hikyuu/plugin/interface/DevicePluginInterface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hikyuu/hikyuu_cpp/hikyuu/plugin/interface/plugins.h" />
     <ClInclude Include="../../thirdparty/owemdjee/hikyuu/hikyuu_cpp/hikyuu/serialization/Block_serialization.h" />
     <ClInclude Include="../../thirdparty/owemdjee/hikyuu/hikyuu_cpp/hikyuu/serialization/Datetime_serialization.h" />
     <ClInclude Include="../../thirdparty/owemdjee/hikyuu/hikyuu_cpp/hikyuu/serialization/KData_serialization.h" />
@@ -1381,6 +1395,10 @@
     <ClInclude Include="../../thirdparty/owemdjee/hikyuu/hikyuu_cpp/hikyuu/utilities/node/NodeServer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/hikyuu/hikyuu_cpp/hikyuu/utilities/os.h" />
     <ClInclude Include="../../thirdparty/owemdjee/hikyuu/hikyuu_cpp/hikyuu/utilities/osdef.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hikyuu/hikyuu_cpp/hikyuu/utilities/plugin/PluginBase.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hikyuu/hikyuu_cpp/hikyuu/utilities/plugin/PluginClient.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hikyuu/hikyuu_cpp/hikyuu/utilities/plugin/PluginLoader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hikyuu/hikyuu_cpp/hikyuu/utilities/plugin/PluginManager.h" />
     <ClInclude Include="../../thirdparty/owemdjee/hikyuu/hikyuu_cpp/hikyuu/utilities/runtimeinfo.h" />
     <ClInclude Include="../../thirdparty/owemdjee/hikyuu/hikyuu_cpp/hikyuu/utilities/snowflake.h" />
     <ClInclude Include="../../thirdparty/owemdjee/hikyuu/hikyuu_cpp/hikyuu/utilities/string_view.h" />
@@ -1419,6 +1437,8 @@
     <Image Include="../../thirdparty/owemdjee/hikyuu/docs/source/_static/20004-install-importdata-err.png" />
     <Image Include="../../thirdparty/owemdjee/hikyuu/docs/source/_static/20005-install-config3.png" />
     <Image Include="../../thirdparty/owemdjee/hikyuu/docs/source/_static/20006-install-config4.png" />
+    <Image Include="../../thirdparty/owemdjee/hikyuu/docs/source/_static/dataserver_01.png" />
+    <Image Include="../../thirdparty/owemdjee/hikyuu/docs/source/_static/dataserver_02.png" />
     <Image Include="../../thirdparty/owemdjee/hikyuu/docs/source/_static/dev-001.jpg" />
     <Image Include="../../thirdparty/owemdjee/hikyuu/docs/source/_static/dev-002.jpg" />
     <Image Include="../../thirdparty/owemdjee/hikyuu/docs/source/_static/favicon.ico" />
@@ -1495,7 +1515,8 @@
     <Image Include="../../thirdparty/owemdjee/hikyuu/hikyuu/examples/notebook/images/008_02_tocsv_look.png" />
     <Image Include="../../thirdparty/owemdjee/hikyuu/hikyuu/examples/notebook/images/008_03_pickle.png" />
     <Image Include="../../thirdparty/owemdjee/hikyuu/hikyuu/gui/hikyuu.ico" />
-    <Image Include="../../thirdparty/owemdjee/hikyuu/hikyuu/gui/hikyuu_small.png" />
+    <Image Include="../../thirdparty/owemdjee/hikyuu/hikyuu/gui/images/hikyuu_small.png" />
+    <Image Include="../../thirdparty/owemdjee/hikyuu/hikyuu/gui/images/star.png" />
     <Text Include="../../thirdparty/owemdjee/hikyuu/LICENSE" />
     <Text Include="../../thirdparty/owemdjee/hikyuu/config.h.in" />
     <Text Include="../../thirdparty/owemdjee/hikyuu/config_utils.h.in" />
@@ -1550,6 +1571,9 @@
     <Text Include="../../thirdparty/owemdjee/hikyuu/docs/source/trade_sys/system.rst" />
     <Text Include="../../thirdparty/owemdjee/hikyuu/docs/source/trade_sys/trade_sys.rst" />
     <Text Include="../../thirdparty/owemdjee/hikyuu/docs/source/trade_sys/walkforward.rst" />
+    <Text Include="../../thirdparty/owemdjee/hikyuu/docs/source/vip/backtest.rst" />
+    <Text Include="../../thirdparty/owemdjee/hikyuu/docs/source/vip/dataserver.rst" />
+    <Text Include="../../thirdparty/owemdjee/hikyuu/docs/source/vip/index.rst" />
     <Text Include="../../thirdparty/owemdjee/hikyuu/hikyuu/LICENSE.txt" />
     <Text Include="../../thirdparty/owemdjee/hikyuu/hikyuu/__init__.py" />
     <Text Include="../../thirdparty/owemdjee/hikyuu/hikyuu/analysis/__init__.py" />
@@ -1703,6 +1727,7 @@
     <Text Include="../../thirdparty/owemdjee/hikyuu/hikyuu/gui/data/UseTdxImportToH5Thread.py" />
     <Text Include="../../thirdparty/owemdjee/hikyuu/hikyuu/gui/data/__init__.py" />
     <Text Include="../../thirdparty/owemdjee/hikyuu/hikyuu/gui/data/tool.py" />
+    <Text Include="../../thirdparty/owemdjee/hikyuu/hikyuu/gui/dataserver.py" />
     <Text Include="../../thirdparty/owemdjee/hikyuu/hikyuu/gui/importdata.py" />
     <Text Include="../../thirdparty/owemdjee/hikyuu/hikyuu/gui/spot_server.py" />
     <Text Include="../../thirdparty/owemdjee/hikyuu/hikyuu/gui/start_huatai_insight.py" />
@@ -1714,6 +1739,7 @@
     <Text Include="../../thirdparty/owemdjee/hikyuu/hikyuu/indicator/talib_wrap.py" />
     <Text Include="../../thirdparty/owemdjee/hikyuu/hikyuu/interactive.py" />
     <Text Include="../../thirdparty/owemdjee/hikyuu/hikyuu/matplotlibrc" />
+    <Text Include="../../thirdparty/owemdjee/hikyuu/hikyuu/plugin/__init__.py" />
     <Text Include="../../thirdparty/owemdjee/hikyuu/hikyuu/setup.py" />
     <Text Include="../../thirdparty/owemdjee/hikyuu/hikyuu/shell/__init__.py" />
     <Text Include="../../thirdparty/owemdjee/hikyuu/hikyuu/shell/cmdserver.py" />
@@ -1807,6 +1833,7 @@
     <Text Include="../../thirdparty/owemdjee/hikyuu/test_data/test_day_data.csv" />
     <Text Include="../../thirdparty/owemdjee/hikyuu/test_data/test_min_data.csv" />
     <Text Include="../../thirdparty/owemdjee/hikyuu/version.h.in" />
+    <Text Include="../../thirdparty/owemdjee/hikyuu/vip-plan.md" />
     <Text Include="../../thirdparty/owemdjee/hikyuu/xmake.lua" />
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />

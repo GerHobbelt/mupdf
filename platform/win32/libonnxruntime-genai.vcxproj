@@ -246,6 +246,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/cuda/beam_search_scorer_cuda.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/cuda/interface.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/cuda/search_cuda.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/dll_load_error.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/dml/dml_adapter_info.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/dml/dml_adapter_selection.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/dml/dml_command_queue.cpp" />
@@ -276,7 +277,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/json.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/logging.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/adapters.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/captured_graph_pool.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/debugging.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/decoder_only.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/decoder_only_pipeline.cpp" />
@@ -284,6 +284,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/env_utils.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/extra_inputs.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/extra_outputs.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/gemma_image_processor.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/gpt.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/input_ids.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/kv_cache.cpp" />
@@ -295,12 +296,12 @@
     <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/phi_multimodal_processor.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/position_inputs.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/processor.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/static_buffer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/threadpool.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/utils.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/whisper.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/whisper_processor.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/windowed_kv_cache.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/openvino/interface.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/ort_genai_c.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/python/python.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/qnn/interface.cpp" />
@@ -308,6 +309,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/search.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/sequences.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/softmax_cpu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/tensor.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/src/webgpu/interface.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/test/c_api_tests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-genai/test/main.cpp" />
@@ -329,6 +331,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/cuda/interface.h" />
     <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/cuda/kernels.h" />
     <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/cuda/search_cuda.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/dll_load_error.h" />
     <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/dml/dml_adapter_info.h" />
     <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/dml/dml_adapter_selection.h" />
     <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/dml/dml_command_allocator_ring.h" />
@@ -355,7 +358,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/logging.h" />
     <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/make_string.h" />
     <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/adapters.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/captured_graph_pool.h" />
     <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/debugging.h" />
     <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/decoder_only.h" />
     <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/decoder_only_pipeline.h" />
@@ -363,6 +365,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/env_utils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/extra_inputs.h" />
     <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/extra_outputs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/gemma_image_processor.h" />
     <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/gpt.h" />
     <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/input_ids.h" />
     <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/kv_cache.h" />
@@ -376,7 +379,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/phi_multimodal_processor.h" />
     <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/position_inputs.h" />
     <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/processor.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/static_buffer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/threadpool.h" />
     <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/utils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/models/whisper.h" />
@@ -387,6 +389,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/objectivec/include/ort_genai_objc.h" />
     <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/objectivec/oga_internal.h" />
     <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/objectivec/test/assertion_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/openvino/interface.h" />
     <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/ort_genai.h" />
     <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/ort_genai_c.h" />
     <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-genai/src/qnn/interface.h" />
@@ -522,12 +525,12 @@
     <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/python/model-chat.py" />
     <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/python/model-generate.py" />
     <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/python/model-qa.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/python/model-vision.py" />
     <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/python/phi-3-tutorial.md" />
     <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/python/phi-3-vision.md" />
     <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/python/phi-3.5-vision.md" />
     <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/python/phi-4-multi-modal.md" />
     <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/python/phi3-qa.py" />
-    <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/python/phi3v.py" />
     <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/python/phi4-mm.py" />
     <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/python/qa-e2e-example.sh" />
     <Text Include="../../thirdparty/owemdjee/onnxruntime-genai/examples/python/whisper.py" />

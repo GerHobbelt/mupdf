@@ -224,6 +224,7 @@
   </ImportGroup>
   <ItemGroup>
     <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/abi_self_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/aes/aes.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/asn1/a_bitstr.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/asn1/a_bool.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/asn1/a_d2i_fp.cc" />
@@ -270,6 +271,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/blake2/blake2_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/bn/bn_asn1.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/bn/convert.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/bn/div.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/bn/exponentiation.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/bn/sqrt.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/buf/buf.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/buf/buf_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/bytestring/asn1_compat.cc" />
@@ -284,6 +288,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/cipher/cipher_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/cipher/derive_key.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/cipher/e_aesctrhmac.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/cipher/e_aeseax.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/cipher/e_aesgcmsiv.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/cipher/e_chacha20poly1305.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/cipher/e_des.cc" />
@@ -293,6 +298,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/cipher/e_tls.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/cipher/get_cipher.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/cipher/tls_cbc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/cms/cms.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/cms/cms_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/compiler_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/conf/conf.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/conf/conf_test.cc" />
@@ -330,6 +337,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/ecdh/ecdh.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/ecdh/ecdh_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/ecdsa/ecdsa_asn1.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/ecdsa/ecdsa_p1363.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/ecdsa/ecdsa_p1363_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/engine/engine.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/err/err.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/err/err_test.cc" />
@@ -386,6 +395,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/md5/md5.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/md5/md5_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/mem.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/mem_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/mldsa/mldsa.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/mldsa/mldsa_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/mlkem/mlkem.cc" />
@@ -733,7 +743,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/aes/key_wrap.cc.inc" />
     <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/aes/mode_wrappers.cc.inc" />
     <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/aes/ofb.cc.inc" />
-    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/aes/polyval.cc.inc" />
     <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/bcm_interface.h" />
     <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/bn/add.cc.inc" />
     <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/bn/asm/x86_64-gcc.cc.inc" />
@@ -837,6 +846,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/kyber/internal.h" />
     <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/lhash/internal.h" />
     <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/md5/internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/mem_internal.h" />
     <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/obj/obj_dat.h" />
     <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/pem/internal.h" />
     <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/pkcs7/internal.h" />
@@ -844,7 +854,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/poly1305/internal.h" />
     <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/pool/internal.h" />
     <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/rand/getrandom_fillin.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/rand/sysrand_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/rand/internal.h" />
     <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/rsa/internal.h" />
     <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/spake2plus/internal.h" />
     <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/test/abi_test.h" />
@@ -880,6 +890,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/chacha.h" />
     <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/cipher.h" />
     <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/cmac.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/cms.h" />
     <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/conf.h" />
     <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/cpu.h" />
     <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/crypto.h" />
@@ -1010,8 +1021,8 @@
     <Image Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/intcheck1.png" />
     <Image Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/intcheck2.png" />
     <Image Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/intcheck3.png" />
-    <NASM Include="../../thirdparty/owemdjee/boringssl/gen/bcm/aes-gcm-avx10-x86_64-win.asm" />
     <NASM Include="../../thirdparty/owemdjee/boringssl/gen/bcm/aes-gcm-avx2-x86_64-win.asm" />
+    <NASM Include="../../thirdparty/owemdjee/boringssl/gen/bcm/aes-gcm-avx512-x86_64-win.asm" />
     <NASM Include="../../thirdparty/owemdjee/boringssl/gen/bcm/aesni-gcm-x86_64-win.asm" />
     <NASM Include="../../thirdparty/owemdjee/boringssl/gen/bcm/aesni-x86-win.asm" />
     <NASM Include="../../thirdparty/owemdjee/boringssl/gen/bcm/aesni-x86_64-win.asm" />
@@ -1079,6 +1090,7 @@
     <Text Include="../../thirdparty/owemdjee/boringssl/crypto/cipher/test/aes_128_ccm_bluetooth_tests.txt" />
     <Text Include="../../thirdparty/owemdjee/boringssl/crypto/cipher/test/aes_128_ccm_matter_tests.txt" />
     <Text Include="../../thirdparty/owemdjee/boringssl/crypto/cipher/test/aes_128_ctr_hmac_sha256.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/cipher/test/aes_128_eax_test.txt" />
     <Text Include="../../thirdparty/owemdjee/boringssl/crypto/cipher/test/aes_128_gcm_randnonce_tests.txt" />
     <Text Include="../../thirdparty/owemdjee/boringssl/crypto/cipher/test/aes_128_gcm_siv_tests.txt" />
     <Text Include="../../thirdparty/owemdjee/boringssl/crypto/cipher/test/aes_128_gcm_tests.txt" />
@@ -1086,6 +1098,7 @@
     <Text Include="../../thirdparty/owemdjee/boringssl/crypto/cipher/test/aes_256_cbc_sha1_tls_implicit_iv_tests.txt" />
     <Text Include="../../thirdparty/owemdjee/boringssl/crypto/cipher/test/aes_256_cbc_sha1_tls_tests.txt" />
     <Text Include="../../thirdparty/owemdjee/boringssl/crypto/cipher/test/aes_256_ctr_hmac_sha256.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/cipher/test/aes_256_eax_test.txt" />
     <Text Include="../../thirdparty/owemdjee/boringssl/crypto/cipher/test/aes_256_gcm_randnonce_tests.txt" />
     <Text Include="../../thirdparty/owemdjee/boringssl/crypto/cipher/test/aes_256_gcm_siv_tests.txt" />
     <Text Include="../../thirdparty/owemdjee/boringssl/crypto/cipher/test/aes_256_gcm_tests.txt" />
@@ -1113,8 +1126,8 @@
     <Text Include="../../thirdparty/owemdjee/boringssl/crypto/evp/scrypt_tests.txt" />
     <Text Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/FIPS.md" />
     <Text Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/aes/aes_tests.txt" />
-    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/aes/asm/aes-gcm-avx10-x86_64.pl" />
     <Text Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/aes/asm/aes-gcm-avx2-x86_64.pl" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/aes/asm/aes-gcm-avx512-x86_64.pl" />
     <Text Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/aes/asm/aesni-gcm-x86_64.pl" />
     <Text Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/aes/asm/aesni-x86.pl" />
     <Text Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/aes/asm/aesni-x86_64.pl" />
@@ -1216,6 +1229,10 @@
     <Text Include="../../thirdparty/owemdjee/boringssl/crypto/perlasm/x86gas.pl" />
     <Text Include="../../thirdparty/owemdjee/boringssl/crypto/perlasm/x86masm.pl" />
     <Text Include="../../thirdparty/owemdjee/boringssl/crypto/perlasm/x86nasm.pl" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/pkcs7/test/sign_sha1.p7s" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/pkcs7/test/sign_sha1_key_id.p7s" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/pkcs7/test/sign_sha256.p7s" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/pkcs7/test/sign_sha256_key_id.p7s" />
     <Text Include="../../thirdparty/owemdjee/boringssl/crypto/pkcs8/test/bad1.p12" />
     <Text Include="../../thirdparty/owemdjee/boringssl/crypto/pkcs8/test/bad2.p12" />
     <Text Include="../../thirdparty/owemdjee/boringssl/crypto/pkcs8/test/bad3.p12" />
@@ -1243,10 +1260,10 @@
     <Text Include="../../thirdparty/owemdjee/boringssl/crypto/test/asm/trampoline-x86_64.pl" />
     <Text Include="../../thirdparty/owemdjee/boringssl/docs/releasing.md" />
     <Text Include="../../thirdparty/owemdjee/boringssl/gen/README.md" />
-    <Text Include="../../thirdparty/owemdjee/boringssl/gen/bcm/aes-gcm-avx10-x86_64-apple.S" />
-    <Text Include="../../thirdparty/owemdjee/boringssl/gen/bcm/aes-gcm-avx10-x86_64-linux.S" />
     <Text Include="../../thirdparty/owemdjee/boringssl/gen/bcm/aes-gcm-avx2-x86_64-apple.S" />
     <Text Include="../../thirdparty/owemdjee/boringssl/gen/bcm/aes-gcm-avx2-x86_64-linux.S" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/gen/bcm/aes-gcm-avx512-x86_64-apple.S" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/gen/bcm/aes-gcm-avx512-x86_64-linux.S" />
     <Text Include="../../thirdparty/owemdjee/boringssl/gen/bcm/aesni-gcm-x86_64-apple.S" />
     <Text Include="../../thirdparty/owemdjee/boringssl/gen/bcm/aesni-gcm-x86_64-linux.S" />
     <Text Include="../../thirdparty/owemdjee/boringssl/gen/bcm/aesni-x86-apple.S" />
@@ -1398,7 +1415,7 @@
     <Text Include="../../thirdparty/owemdjee/boringssl/pki/testdata/certificate_policies_unittest/generate_policies.py" />
     <Text Include="../../thirdparty/owemdjee/boringssl/pki/testdata/crl_unittest/generate_crl_test_data.py" />
     <Text Include="../../thirdparty/owemdjee/boringssl/pki/testdata/name_constraints_unittest/generate_name_constraints.py" />
-    <Text Include="../../thirdparty/owemdjee/boringssl/pki/testdata/nist-pkits/README.chromium" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/pki/testdata/nist-pkits/README.md" />
     <Text Include="../../thirdparty/owemdjee/boringssl/pki/testdata/nist-pkits/crls/BadCRLIssuerNameCACRL.crl" />
     <Text Include="../../thirdparty/owemdjee/boringssl/pki/testdata/nist-pkits/crls/BadCRLSignatureCACRL.crl" />
     <Text Include="../../thirdparty/owemdjee/boringssl/pki/testdata/nist-pkits/crls/BadSignedCACRL.crl" />
@@ -2020,10 +2037,8 @@
     <Text Include="../../thirdparty/owemdjee/boringssl/util/bot/sde-linux64.tar.xz.sha1" />
     <Text Include="../../thirdparty/owemdjee/boringssl/util/bot/sde-win32.tar.xz.sha1" />
     <Text Include="../../thirdparty/owemdjee/boringssl/util/bot/vs_env.py" />
-    <Text Include="../../thirdparty/owemdjee/boringssl/util/bot/vs_toolchain.py" />
     <Text Include="../../thirdparty/owemdjee/boringssl/util/doc.config" />
     <Text Include="../../thirdparty/owemdjee/boringssl/util/doc.css" />
-    <Text Include="../../thirdparty/owemdjee/boringssl/util/fipstools/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/boringssl/util/fipstools/acvp/ACVP.md" />
     <Text Include="../../thirdparty/owemdjee/boringssl/util/fipstools/acvp/acvptool/test/expected/ACVP-AES-CBC-CS3.bz2" />
     <Text Include="../../thirdparty/owemdjee/boringssl/util/fipstools/acvp/acvptool/test/expected/ACVP-AES-CBC.bz2" />
@@ -2111,7 +2126,6 @@
     <Text Include="../../thirdparty/owemdjee/boringssl/util/fipstools/acvp/acvptool/test/vectors/ctrDRBG.bz2" />
     <Text Include="../../thirdparty/owemdjee/boringssl/util/fipstools/acvp/acvptool/test/vectors/hmacDRBG.bz2" />
     <Text Include="../../thirdparty/owemdjee/boringssl/util/fipstools/acvp/acvptool/test/vectors/kdf-components.bz2" />
-    <Text Include="../../thirdparty/owemdjee/boringssl/util/fipstools/acvp/modulewrapper/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/boringssl/util/fipstools/break-tests.sh" />
     <Text Include="../../thirdparty/owemdjee/boringssl/util/fipstools/delocate/testdata/aarch64-Basic/in.s" />
     <Text Include="../../thirdparty/owemdjee/boringssl/util/fipstools/delocate/testdata/aarch64-Basic/out.s" />

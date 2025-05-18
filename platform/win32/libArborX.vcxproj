@@ -227,6 +227,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/benchmarks/bvh_driver/bvh_driver.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/benchmarks/cluster/data.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/benchmarks/cluster/dbscan.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/benchmarks/cluster/distributed_dbscan.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/benchmarks/cluster/hdbscan.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/benchmarks/cluster/mst.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/benchmarks/cluster/print_timers.cpp" />
@@ -298,6 +299,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstMinimumSpanningTree.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstMinimumSpanningTreeGoldenTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstNeighborList.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstPredicateHelpers.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstPriorityQueueMiscellaneous.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstQueryTreeCallbackQueryPerThread.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstQueryTreeCallbacks.cpp" />
@@ -317,6 +319,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/benchmarks/cluster/ArborX_DBSCANVerification.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/benchmarks/cluster/data.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/benchmarks/cluster/data_timpl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/benchmarks/cluster/distributed_data.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/benchmarks/cluster/parameters.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/benchmarks/cluster/print_timers.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/benchmarks/triangulated_surface_distance/generator.hpp" />
@@ -325,11 +328,13 @@
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/ArborX.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/cluster/ArborX_DBSCAN.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/cluster/ArborX_Dendrogram.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/cluster/ArborX_DistributedDBSCAN.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/cluster/ArborX_HDBSCAN.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/cluster/ArborX_MinimumSpanningTree.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/cluster/detail/ArborX_BoruvkaHelpers.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/cluster/detail/ArborX_CartesianGrid.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/cluster/detail/ArborX_DendrogramHelpers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/cluster/detail/ArborX_DistributedDBSCANHelpers.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/cluster/detail/ArborX_FDBSCAN.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/cluster/detail/ArborX_FDBSCANDenseBox.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/cluster/detail/ArborX_MutualReachabilityDistance.hpp" />
@@ -343,6 +348,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/distributed/detail/ArborX_DistributedTreeUtils.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/distributed/detail/ArborX_Distributor.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/geometry/ArborX_Box.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/geometry/ArborX_Ellipsoid.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/geometry/ArborX_GeometryTraits.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/geometry/ArborX_KDOP.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/geometry/ArborX_Point.hpp" />
@@ -435,6 +441,7 @@
     <Text Include="../../thirdparty/owemdjee/ArborX/benchmarks/bvh_driver/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/ArborX/benchmarks/cluster/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/ArborX/benchmarks/cluster/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ArborX/benchmarks/cluster/input.arborx" />
     <Text Include="../../thirdparty/owemdjee/ArborX/benchmarks/cluster/input.txt" />
     <Text Include="../../thirdparty/owemdjee/ArborX/benchmarks/develop/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/ArborX/benchmarks/distributed_tree_driver/CMakeLists.txt" />
@@ -446,6 +453,7 @@
     <Text Include="../../thirdparty/owemdjee/ArborX/cmake/SetupVersion.cmake" />
     <Text Include="../../thirdparty/owemdjee/ArborX/docker/Dockerfile" />
     <Text Include="../../thirdparty/owemdjee/ArborX/docker/Dockerfile.hipcc" />
+    <Text Include="../../thirdparty/owemdjee/ArborX/docker/Dockerfile.nvcc" />
     <Text Include="../../thirdparty/owemdjee/ArborX/docker/Dockerfile.sycl" />
     <Text Include="../../thirdparty/owemdjee/ArborX/docker/README.md" />
     <Text Include="../../thirdparty/owemdjee/ArborX/docker/docker-compose.yml" />

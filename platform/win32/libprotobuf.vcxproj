@@ -291,6 +291,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/generated_message_util.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/implicit_weak_message.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/inlined_string_field.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/internal_feature_helper.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/io/coded_stream.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/io/gzip_stream.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/io/io_win32.cc" />
@@ -314,6 +315,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/map_probe_benchmark.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/message.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/message_lite.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/micro_string.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/parse_context.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/port.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/raw_ptr.cc" />
@@ -333,6 +335,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/field_comparator.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/field_mask_util.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/message_differencer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/python/field_mask_util_clif_aux.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/time_util.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/type_resolver_util.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/wire_format.cc" />
@@ -407,9 +410,13 @@
     <ClCompile Include="../../thirdparty/owemdjee/protobuf/upb/util/required_fields.c" />
     <ClCompile Include="../../thirdparty/owemdjee/protobuf/upb/wire/byte_size.c" />
     <ClCompile Include="../../thirdparty/owemdjee/protobuf/upb/wire/decode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/upb/wire/decode_fast/field_fixed.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/upb/wire/decode_fast/field_message.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/upb/wire/decode_fast/field_string.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/upb/wire/decode_fast/field_varint.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/upb/wire/decode_fast/select.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/protobuf/upb/wire/encode.c" />
     <ClCompile Include="../../thirdparty/owemdjee/protobuf/upb/wire/eps_copy_input_stream.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/protobuf/upb/wire/internal/decode_fast.c" />
     <ClCompile Include="../../thirdparty/owemdjee/protobuf/upb/wire/reader.c" />
     <ClCompile Include="../../thirdparty/owemdjee/protobuf/upb_generator/c/generator.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/protobuf/upb_generator/c/names.cc" />
@@ -418,15 +425,17 @@
     <ClCompile Include="../../thirdparty/owemdjee/protobuf/upb_generator/common/cpp_to_upb_def.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/protobuf/upb_generator/common/names.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/protobuf/upb_generator/file_layout.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/protobuf/upb_generator/minitable/fasttable.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/protobuf/upb_generator/minitable/generator.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/protobuf/upb_generator/minitable/main.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/protobuf/upb_generator/minitable/names.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/protobuf/upb_generator/minitable/names_internal.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/protobuf/upb_generator/plugin.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/protobuf/upb_generator/reflection/generator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/upb_generator/reflection/header.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/protobuf/upb_generator/reflection/names.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/upb_generator/reflection/source.cc" />
     <ClInclude Include="../../thirdparty/owemdjee/protobuf/hpb/arena.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/hpb/backend/cpp/cpp.h" />
     <ClInclude Include="../../thirdparty/owemdjee/protobuf/hpb/backend/upb/interop.h" />
     <ClInclude Include="../../thirdparty/owemdjee/protobuf/hpb/backend/upb/upb.h" />
     <ClInclude Include="../../thirdparty/owemdjee/protobuf/hpb/extension.h" />
@@ -544,6 +553,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/has_bits.h" />
     <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/implicit_weak_message.h" />
     <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/inlined_string_field.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/internal_feature_helper.h" />
     <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/internal_visibility.h" />
     <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/internal_visibility_for_testing.h" />
     <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/io/coded_stream.h" />
@@ -579,6 +589,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/message_lite.h" />
     <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/metadata.h" />
     <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/metadata_lite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/micro_string.h" />
     <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/package_info.h" />
     <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/parse_context.h" />
     <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/port.h" />
@@ -616,9 +627,11 @@
     <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/delimited_message_util.h" />
     <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/field_comparator.h" />
     <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/field_mask_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/internal_timeval.h" />
     <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/json_util.h" />
     <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/message_differencer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/package_info.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/python/field_mask_util_clif_aux.h" />
     <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/time_util.h" />
     <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/type_resolver.h" />
     <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/type_resolver_util.h" />
@@ -753,10 +766,13 @@
     <ClInclude Include="../../thirdparty/owemdjee/protobuf/upb/util/required_fields.h" />
     <ClInclude Include="../../thirdparty/owemdjee/protobuf/upb/wire/byte_size.h" />
     <ClInclude Include="../../thirdparty/owemdjee/protobuf/upb/wire/decode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/upb/wire/decode_fast/cardinality.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/upb/wire/decode_fast/dispatch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/upb/wire/decode_fast/field_parsers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/upb/wire/decode_fast/select.h" />
     <ClInclude Include="../../thirdparty/owemdjee/protobuf/upb/wire/encode.h" />
     <ClInclude Include="../../thirdparty/owemdjee/protobuf/upb/wire/eps_copy_input_stream.h" />
     <ClInclude Include="../../thirdparty/owemdjee/protobuf/upb/wire/internal/constants.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/protobuf/upb/wire/internal/decode_fast.h" />
     <ClInclude Include="../../thirdparty/owemdjee/protobuf/upb/wire/internal/decoder.h" />
     <ClInclude Include="../../thirdparty/owemdjee/protobuf/upb/wire/internal/reader.h" />
     <ClInclude Include="../../thirdparty/owemdjee/protobuf/upb/wire/reader.h" />
@@ -767,13 +783,15 @@
     <ClInclude Include="../../thirdparty/owemdjee/protobuf/upb_generator/common/cpp_to_upb_def.h" />
     <ClInclude Include="../../thirdparty/owemdjee/protobuf/upb_generator/common/names.h" />
     <ClInclude Include="../../thirdparty/owemdjee/protobuf/upb_generator/file_layout.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/protobuf/upb_generator/minitable/fasttable.h" />
     <ClInclude Include="../../thirdparty/owemdjee/protobuf/upb_generator/minitable/generator.h" />
     <ClInclude Include="../../thirdparty/owemdjee/protobuf/upb_generator/minitable/names.h" />
     <ClInclude Include="../../thirdparty/owemdjee/protobuf/upb_generator/minitable/names_internal.h" />
     <ClInclude Include="../../thirdparty/owemdjee/protobuf/upb_generator/plugin.h" />
     <ClInclude Include="../../thirdparty/owemdjee/protobuf/upb_generator/plugin_bootstrap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/upb_generator/reflection/context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/upb_generator/reflection/header.h" />
     <ClInclude Include="../../thirdparty/owemdjee/protobuf/upb_generator/reflection/names.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/upb_generator/reflection/source.h" />
     <Image Include="../../thirdparty/owemdjee/protobuf/docs/design/editions/images/editions-life-of-a-featureset-image-01.png" />
     <Image Include="../../thirdparty/owemdjee/protobuf/docs/design/editions/images/editions-life-of-a-featureset-image-03.png" />
     <Image Include="../../thirdparty/owemdjee/protobuf/docs/design/editions/images/editions-life-of-a-featureset-image-04.png" />
@@ -802,7 +820,6 @@
     <Text Include="../../thirdparty/owemdjee/protobuf/bazel/private/BUILD" />
     <Text Include="../../thirdparty/owemdjee/protobuf/bazel/private/bazel_cc_proto_library.bzl" />
     <Text Include="../../thirdparty/owemdjee/protobuf/bazel/private/bazel_java_proto_library_rule.bzl" />
-    <Text Include="../../thirdparty/owemdjee/protobuf/bazel/private/bazel_proto_library_rule.bzl" />
     <Text Include="../../thirdparty/owemdjee/protobuf/bazel/private/cc_proto_aspect.bzl" />
     <Text Include="../../thirdparty/owemdjee/protobuf/bazel/private/cc_proto_support.bzl" />
     <Text Include="../../thirdparty/owemdjee/protobuf/bazel/private/java_lite_proto_library.bzl" />
@@ -812,6 +829,7 @@
     <Text Include="../../thirdparty/owemdjee/protobuf/bazel/private/proto_bazel_features.bzl" />
     <Text Include="../../thirdparty/owemdjee/protobuf/bazel/private/proto_info.bzl" />
     <Text Include="../../thirdparty/owemdjee/protobuf/bazel/private/proto_lang_toolchain_rule.bzl" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/bazel/private/proto_library_rule.bzl" />
     <Text Include="../../thirdparty/owemdjee/protobuf/bazel/private/proto_toolchain_rule.bzl" />
     <Text Include="../../thirdparty/owemdjee/protobuf/bazel/private/toolchain_helpers.bzl" />
     <Text Include="../../thirdparty/owemdjee/protobuf/bazel/private/toolchains/BUILD.bazel" />
@@ -823,11 +841,13 @@
     <Text Include="../../thirdparty/owemdjee/protobuf/bazel/py_proto_library.bzl" />
     <Text Include="../../thirdparty/owemdjee/protobuf/bazel/tests/BUILD" />
     <Text Include="../../thirdparty/owemdjee/protobuf/bazel/tests/java_proto_library_tests.bzl" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/bazel/tests/proto_common_check_collocated_tests.bzl" />
     <Text Include="../../thirdparty/owemdjee/protobuf/bazel/tests/proto_common_compile_tests.bzl" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/bazel/tests/proto_common_declare_generated_files_tests.bzl" />
     <Text Include="../../thirdparty/owemdjee/protobuf/bazel/tests/proto_common_should_generate_tests.bzl" />
     <Text Include="../../thirdparty/owemdjee/protobuf/bazel/tests/testdata/BUILD" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/bazel/tests/testdata/collect_java_info_rule.bzl" />
     <Text Include="../../thirdparty/owemdjee/protobuf/bazel/tests/testdata/compile_rule.bzl" />
-    <Text Include="../../thirdparty/owemdjee/protobuf/bazel/tests/testdata/my_rule_with_aspect.bzl" />
     <Text Include="../../thirdparty/owemdjee/protobuf/bazel/tests/testdata/should_generate.bzl" />
     <Text Include="../../thirdparty/owemdjee/protobuf/bazel/toolchains/BUILD" />
     <Text Include="../../thirdparty/owemdjee/protobuf/bazel/toolchains/proto_lang_toolchain.bzl" />
@@ -1221,6 +1241,7 @@
     <Text Include="../../thirdparty/owemdjee/protobuf/java/core/src/main/java/com/google/protobuf/FieldSet.java" />
     <Text Include="../../thirdparty/owemdjee/protobuf/java/core/src/main/java/com/google/protobuf/FieldType.java" />
     <Text Include="../../thirdparty/owemdjee/protobuf/java/core/src/main/java/com/google/protobuf/FloatArrayList.java" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/java/core/src/main/java/com/google/protobuf/Generated.java" />
     <Text Include="../../thirdparty/owemdjee/protobuf/java/core/src/main/java/com/google/protobuf/GeneratedMessage.java" />
     <Text Include="../../thirdparty/owemdjee/protobuf/java/core/src/main/java/com/google/protobuf/GeneratedMessageInfoFactory.java" />
     <Text Include="../../thirdparty/owemdjee/protobuf/java/core/src/main/java/com/google/protobuf/GeneratedMessageLite.java" />
@@ -1333,6 +1354,7 @@
     <Text Include="../../thirdparty/owemdjee/protobuf/java/core/src/test/java/com/google/protobuf/CodedAdapterTest.java" />
     <Text Include="../../thirdparty/owemdjee/protobuf/java/core/src/test/java/com/google/protobuf/CodedInputStreamTest.java" />
     <Text Include="../../thirdparty/owemdjee/protobuf/java/core/src/test/java/com/google/protobuf/CodedOutputStreamTest.java" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/java/core/src/test/java/com/google/protobuf/ConcurrentDescriptorsTest.java" />
     <Text Include="../../thirdparty/owemdjee/protobuf/java/core/src/test/java/com/google/protobuf/DebugFormatTest.java" />
     <Text Include="../../thirdparty/owemdjee/protobuf/java/core/src/test/java/com/google/protobuf/DecodeUtf8Test.java" />
     <Text Include="../../thirdparty/owemdjee/protobuf/java/core/src/test/java/com/google/protobuf/DeprecatedFieldTest.java" />
@@ -1353,6 +1375,8 @@
     <Text Include="../../thirdparty/owemdjee/protobuf/java/core/src/test/java/com/google/protobuf/IsValidUtf8Test.java" />
     <Text Include="../../thirdparty/owemdjee/protobuf/java/core/src/test/java/com/google/protobuf/IsValidUtf8TestUtil.java" />
     <Text Include="../../thirdparty/owemdjee/protobuf/java/core/src/test/java/com/google/protobuf/IterableByteBufferInputStreamTest.java" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/java/core/src/test/java/com/google/protobuf/LargeEnumLiteTest.java" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/java/core/src/test/java/com/google/protobuf/LargeEnumTest.java" />
     <Text Include="../../thirdparty/owemdjee/protobuf/java/core/src/test/java/com/google/protobuf/LazilyParsedMessageSetTest.java" />
     <Text Include="../../thirdparty/owemdjee/protobuf/java/core/src/test/java/com/google/protobuf/LazyFieldLiteTest.java" />
     <Text Include="../../thirdparty/owemdjee/protobuf/java/core/src/test/java/com/google/protobuf/LazyFieldTest.java" />
@@ -1572,6 +1596,7 @@
     <Text Include="../../thirdparty/owemdjee/protobuf/ruby/src/main/java/com/google/protobuf/jruby/Utils.java" />
     <Text Include="../../thirdparty/owemdjee/protobuf/ruby/src/main/java/google/ProtobufJavaService.java" />
     <Text Include="../../thirdparty/owemdjee/protobuf/ruby/tests/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/ruby/tests/golden-ruby_ffi_bindings.txt" />
     <Text Include="../../thirdparty/owemdjee/protobuf/rust/BUILD" />
     <Text Include="../../thirdparty/owemdjee/protobuf/rust/bazel/BUILD" />
     <Text Include="../../thirdparty/owemdjee/protobuf/rust/bazel/aspects.bzl" />
@@ -1619,7 +1644,6 @@
     <Text Include="../../thirdparty/owemdjee/protobuf/rust/release_crates/protobuf_well_known_types/README.md" />
     <Text Include="../../thirdparty/owemdjee/protobuf/rust/release_crates/protobuf_well_known_types/build.rs" />
     <Text Include="../../thirdparty/owemdjee/protobuf/rust/release_crates/protobuf_well_known_types/src/lib.rs" />
-    <Text Include="../../thirdparty/owemdjee/protobuf/rust/release_crates/publish_release.sh" />
     <Text Include="../../thirdparty/owemdjee/protobuf/rust/release_crates/substitute_rust_release_version.bzl" />
     <Text Include="../../thirdparty/owemdjee/protobuf/rust/repeated.rs" />
     <Text Include="../../thirdparty/owemdjee/protobuf/rust/shared.rs" />
@@ -1652,7 +1676,6 @@
     <Text Include="../../thirdparty/owemdjee/protobuf/rust/test/shared/package_disambiguation_test.rs" />
     <Text Include="../../thirdparty/owemdjee/protobuf/rust/test/shared/package_test.rs" />
     <Text Include="../../thirdparty/owemdjee/protobuf/rust/test/shared/proto_macro_test.rs" />
-    <Text Include="../../thirdparty/owemdjee/protobuf/rust/test/shared/proto_proc_macro_test.rs" />
     <Text Include="../../thirdparty/owemdjee/protobuf/rust/test/shared/serialization_test.rs" />
     <Text Include="../../thirdparty/owemdjee/protobuf/rust/test/shared/simple_nested_test.rs" />
     <Text Include="../../thirdparty/owemdjee/protobuf/rust/test/shared/utf8/BUILD" />
@@ -1691,6 +1714,10 @@
     <Text Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/testdata/bad_utf8_string" />
     <Text Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/testdata/map_test_data.txt" />
     <Text Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/python/README.md" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/python/field_mask_util.clif" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/python/field_mask_util.py" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/python/field_mask_util_test.py" />
     <Text Include="../../thirdparty/owemdjee/protobuf/toolchain/BUILD.bazel" />
     <Text Include="../../thirdparty/owemdjee/protobuf/toolchain/cc_toolchain_config.bzl" />
     <Text Include="../../thirdparty/owemdjee/protobuf/upb/BUILD" />
@@ -1720,6 +1747,7 @@
     <Text Include="../../thirdparty/owemdjee/protobuf/upb/util/BUILD" />
     <Text Include="../../thirdparty/owemdjee/protobuf/upb/util/README.md" />
     <Text Include="../../thirdparty/owemdjee/protobuf/upb/wire/BUILD" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/upb/wire/decode_fast/BUILD" />
     <Text Include="../../thirdparty/owemdjee/protobuf/upb_generator/BUILD" />
     <Text Include="../../thirdparty/owemdjee/protobuf/upb_generator/bootstrap_compiler.bzl" />
     <Text Include="../../thirdparty/owemdjee/protobuf/upb_generator/c/BUILD" />

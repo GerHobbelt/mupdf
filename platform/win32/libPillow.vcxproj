@@ -224,6 +224,7 @@
   </ImportGroup>
   <ItemGroup>
     <ClCompile Include="../../thirdparty/owemdjee/Pillow/src/Tk/tkImaging.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Pillow/src/_avif.c" />
     <ClCompile Include="../../thirdparty/owemdjee/Pillow/src/_imaging.c" />
     <ClCompile Include="../../thirdparty/owemdjee/Pillow/src/_imagingcms.c" />
     <ClCompile Include="../../thirdparty/owemdjee/Pillow/src/_imagingft.c" />
@@ -236,8 +237,10 @@
     <ClCompile Include="../../thirdparty/owemdjee/Pillow/src/encode.c" />
     <ClCompile Include="../../thirdparty/owemdjee/Pillow/src/libImaging/Access.c" />
     <ClCompile Include="../../thirdparty/owemdjee/Pillow/src/libImaging/AlphaComposite.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Pillow/src/libImaging/Arrow.c" />
     <ClCompile Include="../../thirdparty/owemdjee/Pillow/src/libImaging/Bands.c" />
     <ClCompile Include="../../thirdparty/owemdjee/Pillow/src/libImaging/BcnDecode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Pillow/src/libImaging/BcnEncode.c" />
     <ClCompile Include="../../thirdparty/owemdjee/Pillow/src/libImaging/BitDecode.c" />
     <ClCompile Include="../../thirdparty/owemdjee/Pillow/src/libImaging/Blend.c" />
     <ClCompile Include="../../thirdparty/owemdjee/Pillow/src/libImaging/BoxBlur.c" />
@@ -308,6 +311,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/Pillow/Tests/icc/sRGB_IEC61966-2-1_black_scaled.icc" />
     <ClInclude Include="../../thirdparty/owemdjee/Pillow/Tests/icc/sRGB_v4_ICC_preference.icc" />
     <ClInclude Include="../../thirdparty/owemdjee/Pillow/src/Tk/_tkmini.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Pillow/src/libImaging/Arrow.h" />
     <ClInclude Include="../../thirdparty/owemdjee/Pillow/src/libImaging/Bcn.h" />
     <ClInclude Include="../../thirdparty/owemdjee/Pillow/src/libImaging/Bit.h" />
     <ClInclude Include="../../thirdparty/owemdjee/Pillow/src/libImaging/Convert.h" />
@@ -410,6 +414,9 @@
     <Image Include="../../thirdparty/owemdjee/Pillow/Tests/images/app13.jpg" />
     <Image Include="../../thirdparty/owemdjee/Pillow/Tests/images/argb-32bpp_MipMaps-1.png" />
     <Image Include="../../thirdparty/owemdjee/Pillow/Tests/images/ati1.png" />
+    <Image Include="../../thirdparty/owemdjee/Pillow/Tests/images/avif/hopper_avif_write.png" />
+    <Image Include="../../thirdparty/owemdjee/Pillow/Tests/images/avif/star.gif" />
+    <Image Include="../../thirdparty/owemdjee/Pillow/Tests/images/avif/star.png" />
     <Image Include="../../thirdparty/owemdjee/Pillow/Tests/images/background_outside_palette.gif" />
     <Image Include="../../thirdparty/owemdjee/Pillow/Tests/images/bc4_unorm.png" />
     <Image Include="../../thirdparty/owemdjee/Pillow/Tests/images/bc5_unorm.png" />
@@ -556,6 +563,7 @@
     <Image Include="../../thirdparty/owemdjee/Pillow/Tests/images/dispose_prev_first_frame.gif" />
     <Image Include="../../thirdparty/owemdjee/Pillow/Tests/images/dispose_prev_first_frame_seeked.png" />
     <Image Include="../../thirdparty/owemdjee/Pillow/Tests/images/drawing_emf_ref.png" />
+    <Image Include="../../thirdparty/owemdjee/Pillow/Tests/images/drawing_emf_ref_72_144.png" />
     <Image Include="../../thirdparty/owemdjee/Pillow/Tests/images/drawing_wmf_ref.png" />
     <Image Include="../../thirdparty/owemdjee/Pillow/Tests/images/drawing_wmf_ref_144.png" />
     <Image Include="../../thirdparty/owemdjee/Pillow/Tests/images/duplicate_frame.gif" />
@@ -1013,6 +1021,23 @@
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/argb-32bpp_MipMaps-1.dds" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/ati1.dds" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/ati2.dds" />
+    <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/avif/exif.avif" />
+    <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/avif/hopper-missing-pixi.avif" />
+    <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/avif/hopper.avif" />
+    <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/avif/hopper.heif" />
+    <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/avif/icc_profile.avif" />
+    <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/avif/icc_profile_none.avif" />
+    <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/avif/rot0mir0.avif" />
+    <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/avif/rot0mir1.avif" />
+    <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/avif/rot1mir0.avif" />
+    <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/avif/rot1mir1.avif" />
+    <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/avif/rot2mir0.avif" />
+    <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/avif/rot2mir1.avif" />
+    <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/avif/rot3mir0.avif" />
+    <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/avif/rot3mir1.avif" />
+    <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/avif/star.avifs" />
+    <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/avif/transparency.avif" />
+    <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/avif/xmp_tags_orientation.avif" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/bad_palette_entry.gpl" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/bad_palette_file.gpl" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/balloon.jpf" />
@@ -1099,6 +1124,7 @@
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/frozenpond.mpo" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/ftex_dxt1.ftc" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/fujifilm.mpo" />
+    <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/full_gimp_palette.gpl" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/g4-fillorder-test.tif" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/g4-multi.tiff" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/g4_orientation_1.tif" />
@@ -1248,6 +1274,7 @@
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/unsupported_bitcount.dds" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/zero_dpi.jp2" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/test_000_sanity.py" />
+    <Text Include="../../thirdparty/owemdjee/Pillow/Tests/test_arrow.py" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/test_binary.py" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/test_bmp_reference.py" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/test_box_blur.py" />
@@ -1257,6 +1284,7 @@
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/test_deprecate.py" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/test_features.py" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/test_file_apng.py" />
+    <Text Include="../../thirdparty/owemdjee/Pillow/Tests/test_file_avif.py" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/test_file_blp.py" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/test_file_bmp.py" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/test_file_bufrstub.py" />
@@ -1397,6 +1425,7 @@
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/test_pdfparser.py" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/test_pickle.py" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/test_psdraw.py" />
+    <Text Include="../../thirdparty/owemdjee/Pillow/Tests/test_pyarrow.py" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/test_pyroma.py" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/test_qt_image_qapplication.py" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/test_qt_image_toqimage.py" />
@@ -1414,13 +1443,13 @@
     <Text Include="../../thirdparty/owemdjee/Pillow/depends/download-and-extract.sh" />
     <Text Include="../../thirdparty/owemdjee/Pillow/depends/install_extra_test_images.sh" />
     <Text Include="../../thirdparty/owemdjee/Pillow/depends/install_imagequant.sh" />
+    <Text Include="../../thirdparty/owemdjee/Pillow/depends/install_libavif.sh" />
     <Text Include="../../thirdparty/owemdjee/Pillow/depends/install_openjpeg.sh" />
     <Text Include="../../thirdparty/owemdjee/Pillow/depends/install_raqm.sh" />
     <Text Include="../../thirdparty/owemdjee/Pillow/depends/install_raqm_cmake.sh" />
     <Text Include="../../thirdparty/owemdjee/Pillow/depends/install_webp.sh" />
     <Text Include="../../thirdparty/owemdjee/Pillow/depends/termux.sh" />
     <Text Include="../../thirdparty/owemdjee/Pillow/docs/COPYING" />
-    <Text Include="../../thirdparty/owemdjee/Pillow/docs/Guardfile" />
     <Text Include="../../thirdparty/owemdjee/Pillow/docs/Makefile" />
     <Text Include="../../thirdparty/owemdjee/Pillow/docs/PIL.rst" />
     <Text Include="../../thirdparty/owemdjee/Pillow/docs/about.rst" />
@@ -1435,6 +1464,7 @@
     <Text Include="../../thirdparty/owemdjee/Pillow/docs/handbook/index.rst" />
     <Text Include="../../thirdparty/owemdjee/Pillow/docs/handbook/overview.rst" />
     <Text Include="../../thirdparty/owemdjee/Pillow/docs/handbook/text-anchors.rst" />
+    <Text Include="../../thirdparty/owemdjee/Pillow/docs/handbook/third-party-plugins.rst" />
     <Text Include="../../thirdparty/owemdjee/Pillow/docs/handbook/tutorial.rst" />
     <Text Include="../../thirdparty/owemdjee/Pillow/docs/handbook/writing-your-own-image-plugin.rst" />
     <Text Include="../../thirdparty/owemdjee/Pillow/docs/index.rst" />
@@ -1475,6 +1505,7 @@
     <Text Include="../../thirdparty/owemdjee/Pillow/docs/reference/PSDraw.rst" />
     <Text Include="../../thirdparty/owemdjee/Pillow/docs/reference/PixelAccess.rst" />
     <Text Include="../../thirdparty/owemdjee/Pillow/docs/reference/TiffTags.rst" />
+    <Text Include="../../thirdparty/owemdjee/Pillow/docs/reference/arrow_support.rst" />
     <Text Include="../../thirdparty/owemdjee/Pillow/docs/reference/block_allocator.rst" />
     <Text Include="../../thirdparty/owemdjee/Pillow/docs/reference/c_extension_debugging.rst" />
     <Text Include="../../thirdparty/owemdjee/Pillow/docs/reference/features.rst" />
@@ -1492,7 +1523,7 @@
     <Text Include="../../thirdparty/owemdjee/Pillow/docs/releasenotes/10.4.0.rst" />
     <Text Include="../../thirdparty/owemdjee/Pillow/docs/releasenotes/11.0.0.rst" />
     <Text Include="../../thirdparty/owemdjee/Pillow/docs/releasenotes/11.1.0.rst" />
-    <Text Include="../../thirdparty/owemdjee/Pillow/docs/releasenotes/11.2.0.rst" />
+    <Text Include="../../thirdparty/owemdjee/Pillow/docs/releasenotes/11.2.1.rst" />
     <Text Include="../../thirdparty/owemdjee/Pillow/docs/releasenotes/2.3.1.rst" />
     <Text Include="../../thirdparty/owemdjee/Pillow/docs/releasenotes/2.3.2.rst" />
     <Text Include="../../thirdparty/owemdjee/Pillow/docs/releasenotes/2.5.2.rst" />
@@ -1557,6 +1588,7 @@
     <Text Include="../../thirdparty/owemdjee/Pillow/pyproject.toml" />
     <Text Include="../../thirdparty/owemdjee/Pillow/selftest.py" />
     <Text Include="../../thirdparty/owemdjee/Pillow/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/Pillow/src/PIL/AvifImagePlugin.py" />
     <Text Include="../../thirdparty/owemdjee/Pillow/src/PIL/BdfFontFile.py" />
     <Text Include="../../thirdparty/owemdjee/Pillow/src/PIL/BlpImagePlugin.py" />
     <Text Include="../../thirdparty/owemdjee/Pillow/src/PIL/BmpImagePlugin.py" />

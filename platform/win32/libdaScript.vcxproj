@@ -229,6 +229,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/daScript/examples/profile/main_aot.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/daScript/examples/profile/test_profile.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/daScript/examples/profile/tests/cs/addOne/addOne.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/daScript/examples/test/bytecode.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/daScript/examples/test/main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/daScript/examples/test/test_enum.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/daScript/examples/test/test_handles.cpp" />
@@ -238,6 +239,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/daScript/examples/tutorial/tutorial01.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/daScript/examples/tutorial/tutorial02.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/daScript/examples/tutorial/tutorial02_dasaot.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/daScript/examples/tutorial/tutorial02_standalone_ctx.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/daScript/examples/tutorial/tutorial02aot.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/daScript/examples/tutorial/tutorial02module.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/daScript/examples/tutorial/tutorial03.cpp" />
@@ -345,6 +347,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/daScript/src/builtin/module_builtin_vector_ctor.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/daScript/src/builtin/module_file_access.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/daScript/src/builtin/module_jit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/daScript/src/das/ast/_standalone_ctx_generated/ast_print.das.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/daScript/src/hal/debug_break.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/daScript/src/hal/performance_time.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/daScript/src/hal/project_specific.cpp" />
@@ -403,6 +406,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/daScript/src/simulate/simulate_print.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/daScript/src/simulate/simulate_tracking.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/daScript/src/simulate/simulate_visit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/daScript/src/simulate/standalone_ctx_utils.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/daScript/utils/daScript/aot_stub.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/daScript/utils/daScript/main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/daScript/utils/dasFormatter/ds_parser.cpp" />
@@ -411,6 +415,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/daScript/utils/dasFormatter/helpers.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/daScript/utils/dasFormatter/main.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/daScript/examples/profile/test_profile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/daScript/examples/test/bytecode.h" />
     <ClInclude Include="../../thirdparty/owemdjee/daScript/examples/test/module/include/sample.inc" />
     <ClInclude Include="../../thirdparty/owemdjee/daScript/examples/test/module_unitTest.h" />
     <ClInclude Include="../../thirdparty/owemdjee/daScript/examples/test/unitTest.h" />
@@ -420,7 +425,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/daScript/examples/tutorial/tutorial02aot.h" />
     <ClInclude Include="../../thirdparty/owemdjee/daScript/examples/tutorial/tutorial04_gen.inc" />
     <ClInclude Include="../../thirdparty/owemdjee/daScript/examples/tutorial/tutorial04module.das.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/daScript/include/daScript/ast/aot_templates.h" />
     <ClInclude Include="../../thirdparty/owemdjee/daScript/include/daScript/ast/ast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/daScript/include/daScript/ast/ast_aot_cpp.h" />
     <ClInclude Include="../../thirdparty/owemdjee/daScript/include/daScript/ast/ast_expressions.h" />
     <ClInclude Include="../../thirdparty/owemdjee/daScript/include/daScript/ast/ast_generate.h" />
     <ClInclude Include="../../thirdparty/owemdjee/daScript/include/daScript/ast/ast_handle.h" />
@@ -434,10 +441,13 @@
     <ClInclude Include="../../thirdparty/owemdjee/daScript/include/daScript/ast/ast_typefactory_bind.h" />
     <ClInclude Include="../../thirdparty/owemdjee/daScript/include/daScript/ast/ast_visitor.h" />
     <ClInclude Include="../../thirdparty/owemdjee/daScript/include/daScript/ast/compilation_errors.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/daScript/include/daScript/builtin/ast_gen.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/daScript/include/daScript/builtin/debugapi_gen.inc" />
     <ClInclude Include="../../thirdparty/owemdjee/daScript/include/daScript/daScript.h" />
     <ClInclude Include="../../thirdparty/owemdjee/daScript/include/daScript/daScriptBind.h" />
     <ClInclude Include="../../thirdparty/owemdjee/daScript/include/daScript/daScriptC.h" />
     <ClInclude Include="../../thirdparty/owemdjee/daScript/include/daScript/daScriptModule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/daScript/include/daScript/das_common.h" />
     <ClInclude Include="../../thirdparty/owemdjee/daScript/include/daScript/das_config.h" />
     <ClInclude Include="../../thirdparty/owemdjee/daScript/include/daScript/das_project_specific.h" />
     <ClInclude Include="../../thirdparty/owemdjee/daScript/include/daScript/misc/anyhash.h" />
@@ -521,6 +531,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/daScript/include/daScript/simulate/simulate_visit.h" />
     <ClInclude Include="../../thirdparty/owemdjee/daScript/include/daScript/simulate/simulate_visit_op.h" />
     <ClInclude Include="../../thirdparty/owemdjee/daScript/include/daScript/simulate/simulate_visit_op_undef.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/daScript/include/daScript/simulate/standalone_ctx_utils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/daScript/include/dag_noise/dag_uint_noise.h" />
     <ClInclude Include="../../thirdparty/owemdjee/daScript/include/fast_float/fast_float.h" />
     <ClInclude Include="../../thirdparty/owemdjee/daScript/include/misc/include_fmt.h" />
@@ -602,10 +613,8 @@
     <ClInclude Include="../../thirdparty/owemdjee/daScript/modules/dasStbTrueType/src/stb_truetype.h" />
     <ClInclude Include="../../thirdparty/owemdjee/daScript/modules/dasStdDlg/src/dasStdDlg.h" />
     <ClInclude Include="../../thirdparty/owemdjee/daScript/src/builtin/ast.das.inc" />
-    <ClInclude Include="../../thirdparty/owemdjee/daScript/src/builtin/ast_gen.inc" />
     <ClInclude Include="../../thirdparty/owemdjee/daScript/src/builtin/builtin.das.inc" />
     <ClInclude Include="../../thirdparty/owemdjee/daScript/src/builtin/das_qsort_r.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/daScript/src/builtin/debugapi_gen.inc" />
     <ClInclude Include="../../thirdparty/owemdjee/daScript/src/builtin/debugger.das.inc" />
     <ClInclude Include="../../thirdparty/owemdjee/daScript/src/builtin/fio.das.inc" />
     <ClInclude Include="../../thirdparty/owemdjee/daScript/src/builtin/module_builtin.h" />
@@ -617,6 +626,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/daScript/src/builtin/systemV_64_extra_wrapper.inc" />
     <ClInclude Include="../../thirdparty/owemdjee/daScript/src/builtin/systemV_64_wrapper.inc" />
     <ClInclude Include="../../thirdparty/owemdjee/daScript/src/builtin/win_x86_64_wrapper.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/daScript/src/das/ast/_standalone_ctx_generated/ast_print.das.h" />
     <ClInclude Include="../../thirdparty/owemdjee/daScript/src/parser/ds2_parser.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/daScript/src/parser/ds_parser.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/daScript/src/parser/lex.yy.h" />
@@ -1685,6 +1695,7 @@
     <Text Include="../../thirdparty/owemdjee/daScript/examples/test/misc/async_example.das" />
     <Text Include="../../thirdparty/owemdjee/daScript/examples/test/misc/b.das" />
     <Text Include="../../thirdparty/owemdjee/daScript/examples/test/misc/base64.das" />
+    <Text Include="../../thirdparty/owemdjee/daScript/examples/test/misc/bytecode_test.das" />
     <Text Include="../../thirdparty/owemdjee/daScript/examples/test/misc/check_type_info.das" />
     <Text Include="../../thirdparty/owemdjee/daScript/examples/test/misc/clone_to_field_set.das" />
     <Text Include="../../thirdparty/owemdjee/daScript/examples/test/misc/clone_value_type.das" />
@@ -2133,6 +2144,7 @@
     <Text Include="../../thirdparty/owemdjee/daScript/src/builtin/generate_x86_64_calls.das" />
     <Text Include="../../thirdparty/owemdjee/daScript/src/builtin/network.das" />
     <Text Include="../../thirdparty/owemdjee/daScript/src/builtin/rtti.das" />
+    <Text Include="../../thirdparty/owemdjee/daScript/src/das/ast/ast_print.das" />
     <Text Include="../../thirdparty/owemdjee/daScript/sync.bat" />
     <Text Include="../../thirdparty/owemdjee/daScript/sync_folder.bat" />
     <Text Include="../../thirdparty/owemdjee/daScript/tests/algorithm/sets.das" />

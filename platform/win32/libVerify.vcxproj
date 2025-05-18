@@ -275,6 +275,7 @@
     <Text Include="../../thirdparty/owemdjee/Verify/docs/compared-to-assertion.md" />
     <Text Include="../../thirdparty/owemdjee/Verify/docs/comparer.md" />
     <Text Include="../../thirdparty/owemdjee/Verify/docs/converter.md" />
+    <Text Include="../../thirdparty/owemdjee/Verify/docs/dangling-files.md" />
     <Text Include="../../thirdparty/owemdjee/Verify/docs/dates.md" />
     <Text Include="../../thirdparty/owemdjee/Verify/docs/encoding.md" />
     <Text Include="../../thirdparty/owemdjee/Verify/docs/explicit-targets.md" />
@@ -294,6 +295,7 @@
     <Text Include="../../thirdparty/owemdjee/Verify/docs/mdsource/compared-to-assertion.source.md" />
     <Text Include="../../thirdparty/owemdjee/Verify/docs/mdsource/comparer.source.md" />
     <Text Include="../../thirdparty/owemdjee/Verify/docs/mdsource/converter.source.md" />
+    <Text Include="../../thirdparty/owemdjee/Verify/docs/mdsource/dangling-files.source.md" />
     <Text Include="../../thirdparty/owemdjee/Verify/docs/mdsource/dates.source.md" />
     <Text Include="../../thirdparty/owemdjee/Verify/docs/mdsource/doc-index.include.md" />
     <Text Include="../../thirdparty/owemdjee/Verify/docs/mdsource/encoding.source.md" />
@@ -302,7 +304,6 @@
     <Text Include="../../thirdparty/owemdjee/Verify/docs/mdsource/fixie-convention.include.md" />
     <Text Include="../../thirdparty/owemdjee/Verify/docs/mdsource/fsharp.source.md" />
     <Text Include="../../thirdparty/owemdjee/Verify/docs/mdsource/guids.source.md" />
-    <Text Include="../../thirdparty/owemdjee/Verify/docs/mdsource/hashing-parameters.include.md" />
     <Text Include="../../thirdparty/owemdjee/Verify/docs/mdsource/ignore-parameters.include.md" />
     <Text Include="../../thirdparty/owemdjee/Verify/docs/mdsource/implicit-usings.include.md" />
     <Text Include="../../thirdparty/owemdjee/Verify/docs/mdsource/include-exclude.include.md" />
@@ -333,6 +334,7 @@
     <Text Include="../../thirdparty/owemdjee/Verify/docs/mdsource/test-context-attachments.include.md" />
     <Text Include="../../thirdparty/owemdjee/Verify/docs/mdsource/text-file-settings.include.md" />
     <Text Include="../../thirdparty/owemdjee/Verify/docs/mdsource/throws.source.md" />
+    <Text Include="../../thirdparty/owemdjee/Verify/docs/mdsource/type-to-string-mapping.source.md" />
     <Text Include="../../thirdparty/owemdjee/Verify/docs/mdsource/verify-directory.source.md" />
     <Text Include="../../thirdparty/owemdjee/Verify/docs/mdsource/verify-file.source.md" />
     <Text Include="../../thirdparty/owemdjee/Verify/docs/mdsource/verify-options.source.md" />
@@ -945,6 +947,7 @@
     <Text Include="../../thirdparty/owemdjee/Verify/docs/scrubbers.md" />
     <Text Include="../../thirdparty/owemdjee/Verify/docs/serializer-settings.md" />
     <Text Include="../../thirdparty/owemdjee/Verify/docs/throws.md" />
+    <Text Include="../../thirdparty/owemdjee/Verify/docs/type-to-string-mapping.md" />
     <Text Include="../../thirdparty/owemdjee/Verify/docs/verify-directory.md" />
     <Text Include="../../thirdparty/owemdjee/Verify/docs/verify-file.md" />
     <Text Include="../../thirdparty/owemdjee/Verify/docs/verify-options.md" />
@@ -1616,6 +1619,7 @@
     <Text Include="../../thirdparty/owemdjee/Verify/src/StaticSettingsTests/CombinationTests.ExceptionCallbackResults.verified.txt" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/StaticSettingsTests/CombinationTests.ExceptionCallbacksTest.verified.txt" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/StaticSettingsTests/CombinationTests.WithCaptureExceptions.verified.txt" />
+    <Text Include="../../thirdparty/owemdjee/Verify/src/StaticSettingsTests/CombinationTests.WithGlobalHeaders.verified.txt" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/StaticSettingsTests/CombinationTests.cs" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/StaticSettingsTests/CustomDateCompareTests.Run.verified.txt" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/StaticSettingsTests/CustomDateCompareTests.cs" />
@@ -2045,6 +2049,7 @@
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Expecto.Tests/Tests.withTargets#00.verified.txt" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Expecto.Tests/Tests.withTargets#01.verified.txt" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Expecto.Tests/VerifyChecksTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Expecto/DanglingSnapshots.cs" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Expecto/DerivePaths/DerivePathInfo.cs" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Expecto/DerivePaths/Verifier.cs" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Expecto/GlobalUsings.cs" />
@@ -2104,7 +2109,6 @@
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Fixie.Tests/Scrubbers/ScrubbersSample.RemoveOrReplace.verified.txt" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Fixie.Tests/Scrubbers/ScrubbersSample.cs" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Fixie.Tests/Snippets/ExtensionSample.cs" />
-    <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Fixie.Tests/Snippets/ParametersHashSample.cs" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Fixie.Tests/Snippets/ParametersSample.Decimal_arg=1.1.verified.txt" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Fixie.Tests/Snippets/ParametersSample.Double_arg=1.1.verified.txt" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Fixie.Tests/Snippets/ParametersSample.Float_arg=1.1.verified.txt" />
@@ -2165,6 +2169,7 @@
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Fixie.Tests/VerifyObjectSamples.cs" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Fixie.Tests/VerifyTextSample.Simple.verified.txt" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Fixie.Tests/VerifyTextSample.cs" />
+    <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Fixie/DanglingSnapshots.cs" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Fixie/DerivePaths/DerivePathInfo.cs" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Fixie/DerivePaths/Verifier.cs" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Fixie/Execution/Cleanup.cs" />
@@ -2205,7 +2210,9 @@
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.MSTest.SourceGenerator.Tests/InheritanceTests.HasAttributeOnBaseAndDerivedClasses.verified.txt" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.MSTest.SourceGenerator.Tests/InheritanceTests.HasAttributeOnBaseClass.verified.txt" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.MSTest.SourceGenerator.Tests/InheritanceTests.HasAttributeOnDerivedClass.verified.txt" />
+    <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.MSTest.SourceGenerator.Tests/InheritanceTests.HasAttributeOnDerivedClassAndAbstractPropertyManuallyDefinedInBase.verified.txt" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.MSTest.SourceGenerator.Tests/InheritanceTests.HasAttributeOnDerivedClassAndPropertyManuallyDefinedInBase.verified.txt" />
+    <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.MSTest.SourceGenerator.Tests/InheritanceTests.HasAttributeOnDerivedClassAndVirtualPropertyManuallyDefinedInBase.verified.txt" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.MSTest.SourceGenerator.Tests/InheritanceTests.cs" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.MSTest.SourceGenerator.Tests/NamespaceTests.HasAttributeOnClass.verified.txt" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.MSTest.SourceGenerator.Tests/NamespaceTests.HasAttributeOnClassWithGenericsInNestedNamespace.verified.txt" />
@@ -2222,7 +2229,6 @@
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.MSTest.SourceGenerator/Emitter.cs" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.MSTest.SourceGenerator/Extensions.cs" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.MSTest.SourceGenerator/GlobalUsings.cs" />
-    <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.MSTest.SourceGenerator/IndentedStringBuilder.cs" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.MSTest.SourceGenerator/ParentClass.cs" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.MSTest.SourceGenerator/Parser.cs" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.MSTest.SourceGenerator/TrackingNames.cs" />
@@ -2264,11 +2270,6 @@
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.MSTest.Tests/Scrubbers/ScrubbersSample.RemoveOrReplace.verified.txt" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.MSTest.Tests/Scrubbers/ScrubbersSample.cs" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.MSTest.Tests/Snippets/ExtensionSample.cs" />
-    <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.MSTest.Tests/Snippets/ParametersHashSample.HashParametersUsageFluent_25a91d2c54f27235.verified.txt" />
-    <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.MSTest.Tests/Snippets/ParametersHashSample.HashParametersUsageFluent_80cceeb56ef4cffc.verified.txt" />
-    <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.MSTest.Tests/Snippets/ParametersHashSample.HashParametersUsage_25a91d2c54f27235.verified.txt" />
-    <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.MSTest.Tests/Snippets/ParametersHashSample.HashParametersUsage_80cceeb56ef4cffc.verified.txt" />
-    <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.MSTest.Tests/Snippets/ParametersHashSample.cs" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.MSTest.Tests/Snippets/ParametersSample.DataRowUsage_arg=Value1.verified.txt" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.MSTest.Tests/Snippets/ParametersSample.DataRowUsage_arg=Value2.verified.txt" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.MSTest.Tests/Snippets/ParametersSample.IgnoreParameters.verified.txt" />
@@ -2440,11 +2441,6 @@
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.NUnit.Tests/Snippets/ComplexParametersSample.ComplexTestCaseSource_arg=Value2.verified.txt" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.NUnit.Tests/Snippets/ComplexParametersSample.cs" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.NUnit.Tests/Snippets/ExtensionSample.cs" />
-    <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.NUnit.Tests/Snippets/ParametersHashSample.HashParametersUsageFluent_25a91d2c54f27235.verified.txt" />
-    <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.NUnit.Tests/Snippets/ParametersHashSample.HashParametersUsageFluent_80cceeb56ef4cffc.verified.txt" />
-    <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.NUnit.Tests/Snippets/ParametersHashSample.HashParametersUsage_25a91d2c54f27235.verified.txt" />
-    <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.NUnit.Tests/Snippets/ParametersHashSample.HashParametersUsage_80cceeb56ef4cffc.verified.txt" />
-    <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.NUnit.Tests/Snippets/ParametersHashSample.cs" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.NUnit.Tests/Snippets/ParametersSample.Decimal_arg=1.1.verified.txt" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.NUnit.Tests/Snippets/ParametersSample.Double_arg=1.1.verified.txt" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.NUnit.Tests/Snippets/ParametersSample.Float_arg=1.1.verified.txt" />
@@ -2621,15 +2617,6 @@
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.TUnit.Tests/Snippets/ClassLevelParams.WithMethodLevel_arg1=2_arg2=4.verified.txt" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.TUnit.Tests/Snippets/ClassLevelParams.cs" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.TUnit.Tests/Snippets/ExtensionSample.cs" />
-    <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.TUnit.Tests/Snippets/ParametersHashSample.HashParametersFluent_25a91d2c54f27235.verified.txt" />
-    <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.TUnit.Tests/Snippets/ParametersHashSample.HashParametersFluent_80cceeb56ef4cffc.verified.txt" />
-    <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.TUnit.Tests/Snippets/ParametersHashSample.HashParametersUsageFluent_25a91d2c54f27235.verified.txt" />
-    <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.TUnit.Tests/Snippets/ParametersHashSample.HashParametersUsageFluent_80cceeb56ef4cffc.verified.txt" />
-    <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.TUnit.Tests/Snippets/ParametersHashSample.HashParametersUsage_25a91d2c54f27235.verified.txt" />
-    <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.TUnit.Tests/Snippets/ParametersHashSample.HashParametersUsage_80cceeb56ef4cffc.verified.txt" />
-    <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.TUnit.Tests/Snippets/ParametersHashSample.HashParameters_25a91d2c54f27235.verified.txt" />
-    <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.TUnit.Tests/Snippets/ParametersHashSample.HashParameters_80cceeb56ef4cffc.verified.txt" />
-    <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.TUnit.Tests/Snippets/ParametersHashSample.cs" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.TUnit.Tests/Snippets/ParametersSample.Decimal_arg=1.1.verified.txt" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.TUnit.Tests/Snippets/ParametersSample.Double(1.1d)_arg=1.1.verified.txt" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.TUnit.Tests/Snippets/ParametersSample.Double_arg=1.1.verified.txt" />
@@ -2719,6 +2706,7 @@
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.TUnit.Tests/VerifyObjectSamples.cs" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.TUnit.Tests/VerifyTextSample.Simple.verified.txt" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.TUnit.Tests/VerifyTextSample.cs" />
+    <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.TUnit/DanglingSnapshots.cs" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.TUnit/DerivePaths/DerivePathInfo.cs" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.TUnit/DerivePaths/Verifier.cs" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.TUnit/GlobalUsings.cs" />
@@ -2745,7 +2733,10 @@
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Tests/CircularTests.cs" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Tests/CombinationSample.BuildAddressExceptionsTest.verified.txt" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Tests/CombinationSample.BuildAddressTest.verified.txt" />
+    <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Tests/CombinationSample.BuildAddressWithHeaderOverridesTest.verified.txt" />
+    <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Tests/CombinationSample.BuildAddressWithHeaderTest.verified.txt" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Tests/CombinationSample.CombinationAlignment.verified.txt" />
+    <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Tests/CombinationSample.InlineValues.verified.txt" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Tests/CombinationSample.cs" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Tests/CombinationTests.AsyncEnumerableTest.verified.txt" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Tests/CombinationTests.EnumerableTest.verified.txt" />
@@ -2765,6 +2756,7 @@
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Tests/Comparer/ComparerTests.Static_with_message.verified.txt" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Tests/Comparer/ComparerTests.cs" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Tests/Converters/ExtensionConverterTests.AsyncExtensionConversion.verified.txt" />
+    <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Tests/Converters/ExtensionConverterTests.EnsureInputs.verified.txt" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Tests/Converters/ExtensionConverterTests.ExtensionConversion.verified.txt" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Tests/Converters/ExtensionConverterTests.ExtensionConversionMultipleTargets#00.verified.txt" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Tests/Converters/ExtensionConverterTests.ExtensionConversionMultipleTargets#01.verified.txt" />
@@ -2885,6 +2877,7 @@
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Tests/DateScrubberTests.Dates_trailing.verified.txt" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Tests/DateScrubberTests.Dates_wrapped.verified.txt" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Tests/DateScrubberTests.GetCultureDates.verified.txt" />
+    <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Tests/DateScrubberTests.InferredNamedDateFluent.verified.txt" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Tests/DateScrubberTests.NamedDateFluent.verified.txt" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Tests/DateScrubberTests.NamedDateInstance.verified.txt" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Tests/DateScrubberTests.NamedDateTimeFluent.verified.txt" />
@@ -2930,6 +2923,7 @@
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Tests/FileEx.cs" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Tests/FileHelperTests.cs" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Tests/GlobalUsings.cs" />
+    <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Tests/GuidScrubberTests.InferredNamedGuidFluent.verified.txt" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Tests/GuidScrubberTests.NamedGuidFluent.verified.txt" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Tests/GuidScrubberTests.NamedGuidInstance.verified.txt" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Tests/GuidScrubberTests.NamedGuidTopLevelFluent.verified.txt" />
@@ -3075,10 +3069,6 @@
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Tests/Naming/NamerTests.GetRuntimeAndVersion.DotNet8_0.verified.txt" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Tests/Naming/NamerTests.GetRuntimeAndVersion.DotNet9_0.verified.txt" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Tests/Naming/NamerTests.GetRuntimeAndVersion.Net4_8.verified.txt" />
-    <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Tests/Naming/NamerTests.HashParametersFluent_c909f3b471e25f5d.verified.txt" />
-    <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Tests/Naming/NamerTests.HashParametersFluent_e6e995e0045bebb6.verified.txt" />
-    <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Tests/Naming/NamerTests.HashParameters_c909f3b471e25f5d.verified.txt" />
-    <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Tests/Naming/NamerTests.HashParameters_e6e995e0045bebb6.verified.txt" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Tests/Naming/NamerTests.IgnoreParametersForVerified.verified.txt" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Tests/Naming/NamerTests.IgnoreParametersForVerifiedFluent.verified.txt" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Tests/Naming/NamerTests.MultipleCalls_1.verified.txt" />
@@ -3714,11 +3704,6 @@
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Xunit.Tests/Snippets/ComplexParametersSample.ComplexMemberStructData_arg=Value2.verified.txt" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Xunit.Tests/Snippets/ComplexParametersSample.cs" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Xunit.Tests/Snippets/ExtensionSample.cs" />
-    <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Xunit.Tests/Snippets/ParametersHashSample.HashParametersUsageFluent_25a91d2c54f27235.verified.txt" />
-    <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Xunit.Tests/Snippets/ParametersHashSample.HashParametersUsageFluent_80cceeb56ef4cffc.verified.txt" />
-    <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Xunit.Tests/Snippets/ParametersHashSample.HashParametersUsage_25a91d2c54f27235.verified.txt" />
-    <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Xunit.Tests/Snippets/ParametersHashSample.HashParametersUsage_80cceeb56ef4cffc.verified.txt" />
-    <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Xunit.Tests/Snippets/ParametersHashSample.cs" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Xunit.Tests/Snippets/ParametersSample.Decimal_arg=1.1.verified.txt" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Xunit.Tests/Snippets/ParametersSample.Double_arg=1.1.verified.txt" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.Xunit.Tests/Snippets/ParametersSample.Float_arg=1.1.verified.txt" />
@@ -3912,13 +3897,6 @@
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.XunitV3.Tests/Snippets/ComplexParametersSample.ComplexMemberStructData_arg=Value2.verified.txt" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.XunitV3.Tests/Snippets/ComplexParametersSample.cs" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.XunitV3.Tests/Snippets/ExtensionSample.cs" />
-    <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.XunitV3.Tests/Snippets/ParametersHashSample.HashParametersUsage.verified.txt" />
-    <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.XunitV3.Tests/Snippets/ParametersHashSample.HashParametersUsageFluent.verified.txt" />
-    <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.XunitV3.Tests/Snippets/ParametersHashSample.HashParametersUsageFluent_25a91d2c54f27235.verified.txt" />
-    <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.XunitV3.Tests/Snippets/ParametersHashSample.HashParametersUsageFluent_80cceeb56ef4cffc.verified.txt" />
-    <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.XunitV3.Tests/Snippets/ParametersHashSample.HashParametersUsage_25a91d2c54f27235.verified.txt" />
-    <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.XunitV3.Tests/Snippets/ParametersHashSample.HashParametersUsage_80cceeb56ef4cffc.verified.txt" />
-    <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.XunitV3.Tests/Snippets/ParametersHashSample.cs" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.XunitV3.Tests/Snippets/ParametersSample.Decimal.verified.txt" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.XunitV3.Tests/Snippets/ParametersSample.Decimal_arg=1.1.verified.txt" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify.XunitV3.Tests/Snippets/ParametersSample.Double.verified.txt" />
@@ -4168,7 +4146,8 @@
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify/Serialization/CustomContractResolver.cs" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify/Serialization/CustomContractResolver_Dictionary.cs" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify/Serialization/CustomValueProvider.cs" />
-    <Text Include="../../thirdparty/owemdjee/Verify/src/Verify/Serialization/DateFormatter.cs" />
+    <Text Include="../../thirdparty/owemdjee/Verify/src/Verify/Serialization/DateFormatter_DateTime.cs" />
+    <Text Include="../../thirdparty/owemdjee/Verify/src/Verify/Serialization/DateFormatter_DateTimeOffset.cs" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify/Serialization/ExpressionExtensions.cs" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify/Serialization/InfoBuilder.cs" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify/Serialization/JsonFormatter.cs" />
@@ -4228,6 +4207,7 @@
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify/Splitters/Delegates/Conversion.cs" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify/Splitters/Delegates/FileAppender.cs" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify/Splitters/Delegates/JsonAppender.cs" />
+    <Text Include="../../thirdparty/owemdjee/Verify/src/Verify/Splitters/Delegates/StreamConversion.cs" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify/Splitters/Settings_Extension.cs" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify/Splitters/Settings_FileAppender.cs" />
     <Text Include="../../thirdparty/owemdjee/Verify/src/Verify/Splitters/Settings_JsonAppender.cs" />

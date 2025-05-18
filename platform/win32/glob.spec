@@ -1,4 +1,5 @@
 
 also-ignore:
 	/source/
+	/test/
 	

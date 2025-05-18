@@ -71,13 +71,19 @@ slnstr = header_section + prjarr.map((el) => el.l).join('\n') + global_section;
 slnstr = slnstr.replace(/    /g, '\t');
 
 // make sure we duplicate one project so the next time the solution is loaded MSVC will complain and then ensure the solution file is rewritten once the user takes any action:
-let projline = slnstr.match(/^\s*Project.*?8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942.*?$/m);
-if (projline && projline[0]) {
-	slnstr += `
-${projline}
+//
+// since MSVC2022 may 2025 all we need are a few extra (bogus) EndProject lines; adding a bogus/duplicate project line like we did before will now be seen as an abortive error by MSVC2022!
+//
+slnstr += `
+
 EndProject
-	`;	
-}
+EndProject
+EndProject
+EndProject
+EndProject
+EndProject
+
+`;	
 
 if (debug) console.log({slnstr});
 
