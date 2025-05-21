@@ -2,8 +2,8 @@
 also-ignore:
 	/clients/
 	/contrib/
-	/doc/
-	/libraries/libldap/
+	/doc/devel/
 	/servers/
 	/tests/
+	/libraries/libldap/
 	

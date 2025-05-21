@@ -1,0 +1,638 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF7AF5E9}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDATAFRAME;DATAFRAME_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDATAFRAME;DATAFRAME_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDATAFRAME;DATAFRAME_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDATAFRAME;DATAFRAME_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDATAFRAME;DATAFRAME_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDATAFRAME;DATAFRAME_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDATAFRAME;DATAFRAME_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDATAFRAME;DATAFRAME_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDATAFRAME;DATAFRAME_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDATAFRAME;DATAFRAME_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/DataFrame/include;../../thirdparty/owemdjee/libassert/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDATAFRAME;DATAFRAME_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDATAFRAME;DATAFRAME_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/DataFrame/benchmarks/dataframe_performance.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/DataFrame/benchmarks/dataframe_performance_2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/DataFrame/benchmarks/dataframe_read_large_file.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/DataFrame/benchmarks/linkedin_benchmark.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/DataFrame/examples/hello_world.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/DataFrame/src/Utils/DateTime.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/DataFrame/test/allocator_tester.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/DataFrame/test/dataframe_tester.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/DataFrame/test/dataframe_tester_2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/DataFrame/test/dataframe_tester_3.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/DataFrame/test/dataframe_tester_4.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/DataFrame/test/dataframe_tester_schema.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/DataFrame/test/dataframe_thread_safety.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/DataFrame/test/date_time_tester.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/DataFrame/test/gen_rand_tester.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/DataFrame/test/iso_tree_tester.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/DataFrame/test/matrix_tester.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/DataFrame/test/meta_prog_tester.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/DataFrame/test/vector_ptr_view_tester.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/DataFrame/test/vectors_tester.cc" />
+    <ClInclude Include="../../thirdparty/owemdjee/DataFrame/include/DataFrame/DataFrame.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/DataFrame/include/DataFrame/DataFrameExports.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/DataFrame/include/DataFrame/DataFrameFinancialVisitors.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/DataFrame/include/DataFrame/DataFrameMLVisitors.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/DataFrame/include/DataFrame/DataFrameOperators.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/DataFrame/include/DataFrame/DataFrameStatsVisitors.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/DataFrame/include/DataFrame/DataFrameTransformVisitors.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/DataFrame/include/DataFrame/DataFrameTypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/DataFrame/include/DataFrame/Internals/DataFrame_functors.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/DataFrame/include/DataFrame/Internals/DataFrame_private_decl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/DataFrame/include/DataFrame/RandGen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/DataFrame/include/DataFrame/Utils/AlignedAllocator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/DataFrame/include/DataFrame/Utils/Concepts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/DataFrame/include/DataFrame/Utils/DateTime.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/DataFrame/include/DataFrame/Utils/Endianness.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/DataFrame/include/DataFrame/Utils/FixedSizeAllocator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/DataFrame/include/DataFrame/Utils/FixedSizePriorityQueue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/DataFrame/include/DataFrame/Utils/FixedSizeString.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/DataFrame/include/DataFrame/Utils/IsolationTree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/DataFrame/include/DataFrame/Utils/Matrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/DataFrame/include/DataFrame/Utils/MetaProg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/DataFrame/include/DataFrame/Utils/Threads/SharedQueue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/DataFrame/include/DataFrame/Utils/Threads/ThreadGranularity.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/DataFrame/include/DataFrame/Utils/Threads/ThreadPool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/DataFrame/include/DataFrame/Utils/Utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/DataFrame/include/DataFrame/Vectors/HeteroConstPtrView.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/DataFrame/include/DataFrame/Vectors/HeteroConstView.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/DataFrame/include/DataFrame/Vectors/HeteroPtrView.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/DataFrame/include/DataFrame/Vectors/HeteroVector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/DataFrame/include/DataFrame/Vectors/HeteroView.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/DataFrame/include/DataFrame/Vectors/VectorPtrView.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/DataFrame/include/DataFrame/Vectors/VectorView.h" />
+    <Image Include="../../thirdparty/owemdjee/DataFrame/docs/LionLookingUp.jpg" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/License" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/README.md" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/appveyor.yml" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/benchmarks/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/benchmarks/linkedin_benchmark.py" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/benchmarks/pandas_performance.py" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/benchmarks/pandas_performance_2.py" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/benchmarks/pandas_read_large_file.py" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/benchmarks/polars_performance.py" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/benchmarks/polars_read_large_file.py" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/cmake/DataFrame.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/cmake/DataFrameConfig.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/data/AAPL_10dBucketWithMaps.csv" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/data/AAPL_10dBucketWithMaps_small.csv" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/data/AAPL_10dBucketWithVector.csv" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/data/DT_AAPL.csv" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/data/DT_IBM.csv" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/data/DT_Intraday.csv" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/data/FORD.csv" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/data/IBM.csv" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/data/IcecreamProduction.csv" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/data/SHORT_IBM.csv" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/data/SchemaWithHeader.csv" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/data/SchemaWithoutHeader.csv" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/data/client_data.csv" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/data/csv2_format_data.csv" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/data/csv2_format_data_2.csv" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/data/csv2_format_data_no_index.csv" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/data/sample_data.csv" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/data/sample_data.json" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/data/sample_data_2.csv" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/data/sample_data_2.json" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/data/sample_data_dt_index.csv" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/data/sample_data_no_index.csv" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/data/sample_data_no_index.json" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/data/sample_data_string_index.csv" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/data/strings.csv" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/data/strings2.csv" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/AbsVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/AccumDistVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/AffinityPropVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/AnomalyDetectByFFTVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/AnomalyDetectByIQRVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/AnomalyDetectByLOFVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/AnomalyDetectByZScoreVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/ArnaudLegouxMAVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/AutoCorrVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/AvgDirMovIdxVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/BalanceOfPowerVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/BetaVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/BiasVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/BollingerBand.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/BoxCoxVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/CCIVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/CategoryVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/CenterOfGravityVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/ChaikinMoneyFlowVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/ChandeKrollStopVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/ChopIndexVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/ClipVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/CoppockCurveVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/CorrVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/CountVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/CovVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/CumMaxVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/CumProdVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/CumSumVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/DBSCANVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/DataFrame.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/DataFrameTypes.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/DateTime.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/DecayVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/DecomposeVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/DetrendPriceOsciVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/DiffVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/DotProdVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/DoubleCrossOver.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/DrawdownVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/DynamicTimeWarpVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/EBSineWaveVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/EaseOfMovementVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/EhlerSuperSmootherVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/EhlersHighPassFilterVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/ElderRayIndexVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/EldersForceIndexVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/EldersThermometerVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/EntropyVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/ExpandingRollAdopter.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/ExpoSmootherVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/ExponentiallyWeightedMeanVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/FactorizeVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/FastFourierTransVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/FirstVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/FisherTransVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/GarmanKlassVolVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/HampelFilterVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/HeikinAshiCndlVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/HodgesTompkinsVolVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/HoltWinterChannelVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/HullRollingMeanVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/HurstExponentVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/Index2D.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/InertiaVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/KMeansVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/KamaVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/KeltnerChannelsVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/KolmoSmirnovTestVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/KthValueVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/LinregMovingMeanVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/LossFuncVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/LowessVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/MACDVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/MADVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/MC_station_dist.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/MannWhitneyUTestVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/MassIndexVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/Matrix.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/MaxSubArrayVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/MaxVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/MeanShiftVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/MeanVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/MedianVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/ModeVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/NLargestVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/NonZeroRangeVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/NormalizeVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/OnBalanceVolumeVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/PSLVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/ParabolicSARVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/ParkinsonVolVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/PeaksAndValleysVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/PercentPriceOSCIVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/PivotPointSRVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/PolicyLearningLossVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/PolyFitVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/PrettyGoodOsciVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/PriceDistanceVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/ProdVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/QuantQualEstimationVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/QuantileVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/RSIVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/RandGenParams.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/RankVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/RateOfChangeVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/RelativeVigorIndexVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/ReturnVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/RollingMidValueVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/SEMVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/SLRegressionVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/SampleZScoreVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/SeasonalPeriodVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/SharpeRatioVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/SigmoidVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/SimpleRollAdopter.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/SlopeVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/SpectralClusteringVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/StationaryCheckVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/StatsVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/StdVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/StepRollAdopter.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/SumVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/SymmTriangleMovingMeanVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/T3MovingMeanVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/TTMTrendVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/TTestVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/TrackingErrorVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/TrixVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/TrueRangeVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/UlcerIndexVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/UltimateOSCIVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/VWAPVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/VWBASVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/VarIdxDynAvgVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/VarVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/VectorSimilarityVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/VertHorizFilterVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/VirtualString.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/VortexVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/WilliamPrcRVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/YangZhangVolVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/ZScoreVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/ZeroLagMovingMeanVisitor.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/any_type.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/append_column.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/append_index.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/append_row.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/apply.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/assign.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/bucketize.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/canon_corr.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/change_freq.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/col_name_to_idx.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/combine.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/concat.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/consolidate.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/contiguous_memory.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/copying_data.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/covariance_matrix.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/create_column.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/describe.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/detect_and_change.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/detect_method.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/difference.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/drop_missing.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/duplication_mask.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/empty.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/explode.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/file_dtypes.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/from_string.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/garbage_in_garbage_out.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/gen_bernoulli_dist.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/gen_binomial_dist.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/gen_cauchy_dist.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/gen_chi_squared_dist.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/gen_datetime_index.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/gen_exponential_dist.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/gen_extreme_value_dist.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/gen_fisher_f_dist.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/gen_gamma_dist.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/gen_geometric_dist.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/gen_log_space_nums.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/gen_lognormal_dist.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/gen_negative_binomial_dist.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/gen_normal_dist.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/gen_poisson_dist.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/gen_sequence_index.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/gen_student_t_dist.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/gen_uniform_int_dist.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/gen_uniform_real_dist.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/gen_weibull_dist.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/get_above_quantile_data.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/get_col_unique_values.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/get_column.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/get_columns_info.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/get_data.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/get_data_after_times.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/get_data_at_times.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/get_data_before_times.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/get_data_between_times.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/get_data_by_affin.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/get_data_by_dbscan.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/get_data_by_idx.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/get_data_by_kmeans.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/get_data_by_like.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/get_data_by_loc.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/get_data_by_mshift.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/get_data_by_rand.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/get_data_by_sel.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/get_data_by_spectral.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/get_data_by_stdev.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/get_data_in_months.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/get_data_on_days.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/get_data_on_days_in_month.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/get_index.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/get_memory_usage.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/get_reindexed.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/get_row.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/get_str_col_stats.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/get_top_n_data.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/global_operators.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/groupby.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/has_column.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/how_to_write_visitors.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/in_between.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/inversion_count.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/io_format.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/is_equal.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/join_by_column.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/knn.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/load_column.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/load_data.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/load_index.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/load_indicators.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/load_result_as_column.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/make_consistent.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/make_stationary.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/mask.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/mean_type.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/modify_by_idx.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/multi_visit.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/multithreading.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/nan_policy.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/pattern_spec.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/pca_by_eigen.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/peaks.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/pointers.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/read.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/remove_above_quantile_data.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/remove_column.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/remove_data_by_fft.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/remove_data_by_hampel.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/remove_data_by_idx.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/remove_data_by_iqr.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/remove_data_by_like.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/remove_data_by_loc.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/remove_data_by_sel.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/remove_data_by_stdev.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/remove_data_by_zscore.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/remove_duplicates.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/remove_lock.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/remove_top_n_data.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/rename_column.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/replace.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/retype_column.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/roll_policy.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/rotate.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/self_contained.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/self_shift.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/shape.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/shrink_to_fit.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/shuffle.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/single_act_visit.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/sort.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/sort_state.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/starts_with.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/std_variant.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/threads.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/time_frequency.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/to_string.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/transpose.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/truncate.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/value_counts.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/visit.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/docs/HTML/write.html" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/include/DataFrame/Internals/DataFrame.tcc" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/include/DataFrame/Internals/DataFrame_get.tcc" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/include/DataFrame/Internals/DataFrame_join.tcc" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/include/DataFrame/Internals/DataFrame_misc.tcc" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/include/DataFrame/Internals/DataFrame_opt.tcc" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/include/DataFrame/Internals/DataFrame_read.tcc" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/include/DataFrame/Internals/DataFrame_remove.tcc" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/include/DataFrame/Internals/DataFrame_set.tcc" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/include/DataFrame/Internals/DataFrame_shift.tcc" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/include/DataFrame/Internals/DataFrame_slice.tcc" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/include/DataFrame/Internals/DataFrame_sort.tcc" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/include/DataFrame/Internals/DataFrame_standalone.tcc" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/include/DataFrame/Internals/DataFrame_visit.tcc" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/include/DataFrame/Internals/DataFrame_write.tcc" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/include/DataFrame/Internals/RandGen.tcc" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/include/DataFrame/Utils/IsolationTree.tcc" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/include/DataFrame/Utils/Matrix.tcc" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/include/DataFrame/Utils/Threads/SharedQueue.tcc" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/include/DataFrame/Utils/Threads/ThreadPool.tcc" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/include/DataFrame/Vectors/HeteroConstPtrView.tcc" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/include/DataFrame/Vectors/HeteroConstView.tcc" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/include/DataFrame/Vectors/HeteroPtrView.tcc" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/include/DataFrame/Vectors/HeteroVector.tcc" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/include/DataFrame/Vectors/HeteroView.tcc" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/package.json" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/src/CommonMakefile.mk" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/src/Makefile.Linux.GCC64" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/src/build_all.sh" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/DataFrame/test/dataframe_tester_output.txt" />
+  </ItemGroup>
+  <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+</Project>

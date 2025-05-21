@@ -1589,6 +1589,7 @@ poisson-disc-distribution-bridson
 OpenRAND
 fast_io
 libinflection
+DataFrame
 
 EOT
 ) | grep -e "$FILTER"

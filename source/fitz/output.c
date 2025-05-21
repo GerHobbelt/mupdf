@@ -152,12 +152,16 @@ file_write(fz_context *ctx, fz_output* out, const void *buffer, size_t count)
 
 #if defined(_WIN32) 
 
+static int caller_is_aborted = 0;
+
 static int
 stdio_write(fz_context* ctx, DWORD channel, const void* buffer, size_t count)
 {
 	// Windows: https://docs.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-writefile#pipes
 	// > "When writing to a non-blocking, byte-mode pipe handle with insufficient buffer space,
 	// > WriteFile returns TRUE with *lpNumberOfBytesWritten < nNumberOfBytesToWrite."
+
+	// P.S: someone with seemingly similar issues: https://github.com/dstahlke/gnuplot-iostream/issues/30 
 
 	ASSERT(channel == STD_OUTPUT_HANDLE || channel == STD_ERROR_HANDLE);
 	ASSERT(buffer);
@@ -170,9 +174,8 @@ stdio_write(fz_context* ctx, DWORD channel, const void* buffer, size_t count)
 	size_t n = count;
 	const int PIPE_MAX_NONBLOCK_BUFFER_SIZE = 65536 / 2; // Modern Win10 has a nonblocking buffer of 64K, old systems and old UNIXes (Linux kernel 2.6.11 and below IIRC) used only a single memory page: 4K
 	clock_t tick = 0;
-	static int caller_is_aborted = 0;
 	// when a previous call to this function already discovered that the caller has aborted, don't even bother to try:
-	if (caller_is_aborted)
+	if (caller_is_aborted == 2)
 	{
 		fz_throw(ctx, FZ_ERROR_GENERIC, "Cannot write to %s: previous timeout while waiting for FileWrite() API signaled caller has aborted already.", (channel == STD_OUTPUT_HANDLE ? "STDOUT" : "STDERR"));
 	}
@@ -267,7 +270,7 @@ stdio_write(fz_context* ctx, DWORD channel, const void* buffer, size_t count)
 			}
 			else if (clock() - tick >= 15 * CLOCKS_PER_SEC)
 			{
-				caller_is_aborted = 1;
+				caller_is_aborted = 2;
 				fz_enable_dbg_output_on_stdio_unreachable();
 				fz_throw(ctx, FZ_ERROR_GENERIC, "Cannot write to %s: timeout (15 seconds) while waiting for FileWrite() API to accept a byte to write (written %zu of %zu bytes)", (channel == STD_OUTPUT_HANDLE ? "STDOUT" : "STDERR"), count - n, count);
 			}
@@ -295,6 +298,8 @@ stdout_flush_on_close(fz_context* ctx, fz_output *out)
 {
 	fz_flush_output(ctx, out);
 #ifndef _WIN32
+	if (caller_is_aborted == 2)
+		caller_is_aborted = 1;
 	fflush(stdout);
 #endif
 }
@@ -304,6 +309,8 @@ stdout_flush_on_drop(fz_context* ctx, fz_output* out)
 {
 	fz_flush_output_no_lock(ctx, out);
 #ifndef _WIN32
+	if (caller_is_aborted == 2)
+		caller_is_aborted = 1;
 	fflush(stdout);
 #endif
 }
@@ -337,6 +344,8 @@ stderr_flush_on_close(fz_context* ctx, fz_output* out)
 {
 	fz_flush_output(ctx, out);
 #ifndef _WIN32
+	if (caller_is_aborted == 2)
+		caller_is_aborted = 1;
 	fflush(stderr);
 #endif
 }
@@ -346,6 +355,8 @@ stderr_flush_on_drop(fz_context* ctx, fz_output* out)
 {
 	fz_flush_output_no_lock(ctx, out);
 #ifndef _WIN32
+	if (caller_is_aborted == 2)
+		caller_is_aborted = 1;
 	fflush(stderr);
 #endif
 }
