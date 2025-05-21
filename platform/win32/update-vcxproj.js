@@ -660,6 +660,7 @@ for (;;) {
 include_paths = `;${include_paths.trim()};`
     .replace(/\\/g, '/')
     .replace(/;..\/..\/include\/system-override;/g, ';')
+	.replace(/;..\/..\/thirdparty\/owemdjee\/libassert\/include;/g, ';')
     .replace(/;%\(AdditionalIncludeDirectories\);/g, ';')
     .replace(/;.;/g, ';')
 
@@ -1002,7 +1003,7 @@ else if (/\/abseil-cpp\b/.test(include_paths)) {
     .replace(/\s+/g, '');
 }
 
-include_paths = `../../include/system-override;.;${include_paths};`;
+include_paths = `../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;${include_paths};`;
 
 
 // deduplicate the include paths set:
