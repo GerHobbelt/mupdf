@@ -95,12 +95,13 @@ src = src
 	.replace(/\\/g, '/')
 	.replace(/..\/..\/include\/system-override;/g, '')
 	.replace(/..\/..\/thirdparty\/owemdjee\/libassert\/include;/g, '')
+	.replace(/..\/..\/thirdparty\/owemdjee\/magic_enum\/include;/g, '')
 	.replace(/;%\(AdditionalIncludeDirectories\)/g, '')
 	
 	if (p1.length == 0)
 		p1 = ".";
 
-	return `<AdditionalIncludeDirectories>../../include/system-override;../../thirdparty/owemdjee/libassert/include;${p1};%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>`;
+	return `<AdditionalIncludeDirectories>../../include/system-override;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;${p1};%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>`;
 })
 
 const sections_to_remove = [
