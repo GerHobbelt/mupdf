@@ -23,6 +23,8 @@
 #include "mupdf/fitz.h"
 #include "mupdf/helpers/dir.h"
 
+#if BUILDING_MUPDF_MINIMAL_CORE <= 1
+
 // special exception for when we compile this code for a monolithic tesseract stand-alone app: ALWAYS offer the leptonica_malloc/free APIs availalbe in here!
 //#if FZ_ENABLE_OCR 
 
@@ -376,3 +378,6 @@ void ocr_recognise(fz_context *ctx,
 #endif // FZ_ENABLE_OCR 
 
 }
+
+#endif // BUILDING_MUPDF_MINIMAL_CORE
+
