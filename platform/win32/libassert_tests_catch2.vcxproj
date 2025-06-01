@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFAB2CB1}</ProjectGuid>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-101000000008}</ProjectGuid>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -229,6 +229,9 @@
     <ProjectReference Include="libassert.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518fffea6c7}</Project>
     </ProjectReference>
+    <ProjectReference Include="libCatch2.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff4f227d}</Project>
+    </ProjectReference>
     <ProjectReference Include="libcpptrace.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff39d5ad}</Project>
     </ProjectReference>
@@ -243,34 +246,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/libassert/tests/add_subdirectory-integration/asi_main.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libassert/tests/binaries/basic_demo.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libassert/tests/binaries/basic_primitive_demo.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libassert/tests/binaries/basic_primitive_test.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libassert/tests/binaries/basic_test.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libassert/tests/binaries/tokens_and_highlighting.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libassert/tests/c-code/assert_h-primitive-test.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libassert/tests/c-code/assert_h-test.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libassert/tests/c-code/c-code-main.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libassert/tests/c-code/c-code-primitive-main.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libassert/tests/c-code/cassert-primitive-test.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libassert/tests/c-code/cassert-test.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libassert/tests/demo/bar.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libassert/tests/demo/baz/baz_demo.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libassert/tests/demo/demo.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libassert/tests/demo/foo.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libassert/tests/demo/primitive_demo.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libassert/tests/fetchcontent-integration/fci_main.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libassert/tests/findpackage-integration/fpi_main.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libassert/tests/integration/a.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libassert/tests/integration/integration.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libassert/tests/integration/x/b.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libassert/tests/unit/constexpr_contexts.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libassert/tests/unit/disambiguation.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libassert/tests/unit/literals.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libassert/tests/unit/test_public_utilities.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libassert/tests/unit/test_type_prettier.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libassert/tests/unit/type_handling.cpp" />
+    <ClInclude Include="../../scripts/libassert/include/libassert/version.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/libassert/tests/binaries/catch2-demo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libassert/tests/catch2-driver/catch2-test-runner.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/libassert/include/assert.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libassert/include/libassert/assert-catch2.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/libassert/include/libassert/assert-gtest.hpp" />
@@ -280,7 +260,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/libassert/include/libassert/platform.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/libassert/include/libassert/stringification.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/libassert/include/libassert/utilities.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/libassert/tests/c-code/c-code-test.h" />
     <Image Include="../../thirdparty/owemdjee/libassert/screenshots/assert_val_opt.png" />
     <Image Include="../../thirdparty/owemdjee/libassert/screenshots/breakpoint.png" />
     <Image Include="../../thirdparty/owemdjee/libassert/screenshots/catch2.png" />
@@ -312,26 +291,8 @@
     <Text Include="../../thirdparty/owemdjee/libassert/lint.sh" />
     <Text Include="../../thirdparty/owemdjee/libassert/sonar-project.properties" />
     <Text Include="../../thirdparty/owemdjee/libassert/tests/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/libassert/tests/add_subdirectory-integration/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libassert/tests/ci-wrapper.py" />
-    <Text Include="../../thirdparty/owemdjee/libassert/tests/fetchcontent-integration/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/libassert/tests/findpackage-integration/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/libassert/tests/integration/expected/clang.macos.txt" />
-    <Text Include="../../thirdparty/owemdjee/libassert/tests/integration/expected/clang.txt" />
-    <Text Include="../../thirdparty/owemdjee/libassert/tests/integration/expected/clang.windows.txt" />
-    <Text Include="../../thirdparty/owemdjee/libassert/tests/integration/expected/gnu.macos.txt" />
-    <Text Include="../../thirdparty/owemdjee/libassert/tests/integration/expected/gnu.txt" />
-    <Text Include="../../thirdparty/owemdjee/libassert/tests/integration/expected/gnu.windows.txt" />
-    <Text Include="../../thirdparty/owemdjee/libassert/tests/integration/expected/msvc.txt" />
-    <Text Include="../../thirdparty/owemdjee/libassert/tests/pyutils/__init__.py" />
-    <Text Include="../../thirdparty/owemdjee/libassert/tests/pyutils/utils.py" />
     <Text Include="../../thirdparty/owemdjee/libassert/tests/run-tests.py" />
-    <Text Include="../../thirdparty/owemdjee/libassert/tests/unit/test_files/test_program._cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="../../scripts/libassert/monolithic_example.cpp" />
-    <ClInclude Include="../../scripts/libassert/include/libassert/version.hpp" />
-    <ClInclude Include="../../scripts/libassert/include/monolithic_examples.h" />
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>

@@ -22,6 +22,10 @@ extern "C" {
 	int assert_tokens_and_highlighting_main(void);
 	int assert_type_handling_main(void);
 
+	int assert_basic_primitive_demo_test_main(void);
+	int assert_basic_primitive_test_main(void);
+	int assert_primitive_demo_main(void);
+
 #ifdef __cplusplus
 }
 #endif

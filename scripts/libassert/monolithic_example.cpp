@@ -25,6 +25,10 @@ MONOLITHIC_CMD_TABLE_START()
 { "tokens_and_highlighting", { .f = assert_tokens_and_highlighting_main } },
 { "type_handling", { .f = assert_type_handling_main } },
 
+{"basic_primitive_demo_test", { .f = assert_basic_primitive_demo_test_main }},
+{"basic_primitive_test", { .f = assert_basic_primitive_test_main }},
+{"primitive_demo", { .f = assert_primitive_demo_main }},
+
 MONOLITHIC_CMD_TABLE_END();
 
 // load the monolithic core dispatcher

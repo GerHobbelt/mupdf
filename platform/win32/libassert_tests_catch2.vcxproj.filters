@@ -13,21 +13,34 @@
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files\include">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0002}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\include\libassert">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0001}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="../../scripts/libassert/include/libassert/version.hpp">
+      <Filter>Header Files\include\libassert</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files\include">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0001}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\include\libassert">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0002}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\src">
+    <Filter Include="Misc Files\cmake">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0003}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\cmake">
+    <Filter Include="Misc Files\cmake\in">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0004}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\cmake\in">
+    <Filter Include="Misc Files\include">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0005}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\include">
+    <Filter Include="Misc Files\tests">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0006}</UniqueIdentifier>
     </Filter>
     <Filter Include="Resource Files">
@@ -36,34 +49,22 @@
     <Filter Include="Resource Files\screenshots">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0008}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\src">
+    <Filter Include="Source Files\tests">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0010}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\tests\binaries">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0009}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\tests\catch2-driver">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0011}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/libassert/src/analysis.cpp">
-      <Filter>Source Files\src</Filter>
+    <ClCompile Include="../../thirdparty/owemdjee/libassert/tests/binaries/catch2-demo.cpp">
+      <Filter>Source Files\tests\binaries</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/libassert/src/assert.cpp">
-      <Filter>Source Files\src</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/libassert/src/paths.cpp">
-      <Filter>Source Files\src</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/libassert/src/platform.cpp">
-      <Filter>Source Files\src</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/libassert/src/printing.cpp">
-      <Filter>Source Files\src</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/libassert/src/stringification.cpp">
-      <Filter>Source Files\src</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/libassert/src/tokenizer.cpp">
-      <Filter>Source Files\src</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/libassert/src/utils.cpp">
-      <Filter>Source Files\src</Filter>
+    <ClCompile Include="../../thirdparty/owemdjee/libassert/tests/catch2-driver/catch2-test-runner.cpp">
+      <Filter>Source Files\tests\catch2-driver</Filter>
     </ClCompile>
     <ClInclude Include="../../thirdparty/owemdjee/libassert/include/assert.h">
       <Filter>Header Files\include</Filter>
@@ -91,30 +92,6 @@
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/libassert/include/libassert/utilities.hpp">
       <Filter>Header Files\include\libassert</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/libassert/src/analysis.hpp">
-      <Filter>Header Files\src</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/libassert/src/common.hpp">
-      <Filter>Header Files\src</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/libassert/src/microfmt.hpp">
-      <Filter>Header Files\src</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/libassert/src/paths.hpp">
-      <Filter>Header Files\src</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/libassert/src/platform.hpp">
-      <Filter>Header Files\src</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/libassert/src/printing.hpp">
-      <Filter>Header Files\src</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/libassert/src/tokenizer.hpp">
-      <Filter>Header Files\src</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/libassert/src/utils.hpp">
-      <Filter>Header Files\src</Filter>
     </ClInclude>
     <Image Include="../../thirdparty/owemdjee/libassert/screenshots/assert_val_opt.png">
       <Filter>Resource Files\screenshots</Filter>
@@ -205,6 +182,15 @@
     </Text>
     <Text Include="../../thirdparty/owemdjee/libassert/sonar-project.properties">
       <Filter>Misc Files</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/libassert/tests/CMakeLists.txt">
+      <Filter>Misc Files\tests</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/libassert/tests/ci-wrapper.py">
+      <Filter>Misc Files\tests</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/libassert/tests/run-tests.py">
+      <Filter>Misc Files\tests</Filter>
     </Text>
   </ItemGroup>
 </Project>

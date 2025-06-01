@@ -662,6 +662,7 @@ include_paths = `;${include_paths.trim()};`
     .replace(/;..\/..\/include\/system-override;/g, ';')
 	.replace(/;..\/..\/thirdparty\/owemdjee\/libassert\/include;/g, ';')
 	.replace(/;..\/..\/thirdparty\/owemdjee\/magic_enum\/include;/g, ';')
+	.replace(/;..\/..\/thirdparty\/owemdjee\/cpptrace\/include;/g, ';')
 	.replace(/;..\/..\/thirdparty\/owemdjee\/fmt\/include;/g, ';')
     .replace(/;%\(AdditionalIncludeDirectories\);/g, ';')
     .replace(/;.;/g, ';')
@@ -1005,7 +1006,7 @@ else if (/\/abseil-cpp\b/.test(include_paths)) {
     .replace(/\s+/g, '');
 }
 
-include_paths = `../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;${include_paths};`;
+include_paths = `../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;${include_paths};`;
 
 
 // deduplicate the include paths set:
