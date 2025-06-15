@@ -20,7 +20,7 @@ all: utilities
 # cp $(SRCDIR32)/*.exe $(DSTDIR)
 # cp $(SRCDIR64)/*.exe $(DSTDIR)
 
-utilities: bin2coff msvc_sln_cleaner
+utilities: bin2coff msvc_sln_cleaner buffered_tee
 	@echo "Utilities copied to $(DSTDIR)"
 
 bin2coff:
@@ -30,6 +30,11 @@ bin2coff:
 msvc_sln_cleaner:
 	@echo "copy msvc_sln_cleaner.exe to $(DSTDIR)"
 	-robocopy /NP /IM /IS /COPY:DAT /DCOPY:DAT $(SRCDIR32) $(DSTDIR) msvc_sln_cleaner.exe
+
+buffered_tee:
+	@echo "copy buffered_tee.exe to $(DSTDIR)"
+	-robocopy /NP /IM /IS /COPY:DAT /DCOPY:DAT $(SRCDIR32) $(DSTDIR) buffered_tee.exe
+	-robocopy /NP /IM /IS /COPY:DAT /DCOPY:DAT $(SRCDIR64) $(DSTDIR) buffered_tee.exe
 
 forced-rebuild: clean all
 	@echo "forced-rebuild"
