@@ -28,8 +28,10 @@
 #define WITH_SIMD  1
 
 /* Disable GETENV */
-#undef NO_GETENV
+#define NO_GETENV 1    // Disable getenv() function, i.e. don't listen to the "JPEGMEM" environment variable to adjust memory usage choices at run-time. See commit: f713b13593bfd323b3d56b0b7fd6e266e8c3cde4
+
 /* Support 3DNow */
+#undef WITH_3DNOW		// AMD dropped 3DNow support about 8 years ago; see commit 84ca5c34907870a98cdff3e9900fe241d452cf06
 
 /* Enable full tracing */
 #ifndef JPEGLIB_WITH_FULLTRACING
