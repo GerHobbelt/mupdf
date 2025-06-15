@@ -52,16 +52,16 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -74,7 +74,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -108,8 +108,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDIAGNOSTICS;DIAGNOSTICS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -223,10 +223,33 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/libdiagnostics/src/assertions-driver-c-section.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libdiagnostics/src/assertions-driver.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libdiagnostics/src/diagnostics.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdiagnostics/src/assertions-support.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdiagnostics/src/core-sqlite-IO.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdiagnostics/src/core-support.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdiagnostics/src/deserialization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdiagnostics/src/diagnostics-driver-BLOB.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdiagnostics/src/diagnostics-driver-c-section.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdiagnostics/src/diagnostics-driver-image-OpenCV.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdiagnostics/src/diagnostics-driver-image-OpenImageIO.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdiagnostics/src/diagnostics-driver-image-leptonica.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdiagnostics/src/diagnostics-driver-image-raw-2D-vector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdiagnostics/src/diagnostics-driver-image-tesseractOCR.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdiagnostics/src/diagnostics-driver-image-vips.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdiagnostics/src/diagnostics-driver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdiagnostics/src/diagnostics-support.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdiagnostics/src/log-filtering.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdiagnostics/src/logging-support.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdiagnostics/src/serialization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdiagnostics/src/telemetry-support.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libdiagnostics/src/test-assertions-C.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libdiagnostics/src/test-assertions-CPP.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdiagnostics/src/test-diagnostics-advanced-html-integrale.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdiagnostics/src/test-diagnostics-advanced-images.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\libdiagnostics\src\test-diagnostics-basic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdiagnostics/src/test-logging-basic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdiagnostics/src/test-telemetry-basic.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libdiagnostics/src/x/assert.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libdiagnostics/src/x/brassert.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libdiagnostics/src/x/fz_assert.c" />
@@ -234,6 +257,20 @@
     <ClInclude Include="../../thirdparty/owemdjee/libdiagnostics/include/diagnostics/assertions.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdiagnostics/include/diagnostics/c_interface.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdiagnostics/include/diagnostics/diagnostics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdiagnostics/include/diagnostics/implementation/assertions-C.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdiagnostics/include/diagnostics/implementation/assertions-common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdiagnostics/include/diagnostics/implementation/assertions-cpp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdiagnostics/include/diagnostics/implementation/diagnostics-C.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdiagnostics/include/diagnostics/implementation/diagnostics-common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdiagnostics/include/diagnostics/implementation/diagnostics-cpp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdiagnostics/include/diagnostics/implementation/logging-C.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdiagnostics/include/diagnostics/implementation/logging-common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdiagnostics/include/diagnostics/implementation/logging-cpp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdiagnostics/include/diagnostics/implementation/telemetry-C.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdiagnostics/include/diagnostics/implementation/telemetry-common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdiagnostics/include/diagnostics/implementation/telemetry-cpp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdiagnostics/include/diagnostics/logging.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdiagnostics/include/diagnostics/telemetry.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdiagnostics/src/x/SDL_assert.1.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdiagnostics/src/x/SDL_assert.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdiagnostics/src/x/XAssert.h" />
@@ -257,4 +294,3 @@
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
-  

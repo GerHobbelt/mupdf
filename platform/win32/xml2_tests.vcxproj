@@ -48,16 +48,16 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -70,7 +70,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -104,11 +104,11 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/libxml2/include;../../thirdparty/zlib;../../scripts/zlib;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../scripts/libxml2;../../thirdparty/owemdjee/libxml2/include;../../thirdparty/zlib;../../scripts/zlib;../../thirdparty/monolithic_tmplt;../../thirdparty/owemdjee/libxml2;../../thirdparty/owemdjee/unicode-icu/icu4c/source/common;../../thirdparty/owemdjee/libiconv/include;../../thirdparty/owemdjee/xz/src/liblzma/api;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_XML2_TESTS;XML2_TESTS_STATICLIB;CLIPP_CLIPP_CLIPP_WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -121,7 +121,7 @@
       <EnableCOMDATFolding>false</EnableCOMDATFolding>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/libxml2/include;../../thirdparty/zlib;../../scripts/zlib;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../scripts/libxml2;../../thirdparty/owemdjee/libxml2/include;../../thirdparty/zlib;../../scripts/zlib;../../thirdparty/monolithic_tmplt;../../thirdparty/owemdjee/libxml2;../../thirdparty/owemdjee/unicode-icu/icu4c/source/common;../../thirdparty/owemdjee/libiconv/include;../../thirdparty/owemdjee/xz/src/liblzma/api;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -130,7 +130,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/libxml2/include;../../thirdparty/zlib;../../scripts/zlib;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../scripts/libxml2;../../thirdparty/owemdjee/libxml2/include;../../thirdparty/zlib;../../scripts/zlib;../../thirdparty/monolithic_tmplt;../../thirdparty/owemdjee/libxml2;../../thirdparty/owemdjee/unicode-icu/icu4c/source/common;../../thirdparty/owemdjee/libiconv/include;../../thirdparty/owemdjee/xz/src/liblzma/api;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_XML2_TESTS;XML2_TESTS_STATICLIB;CLIPP_CLIPP_CLIPP_WIN64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -143,14 +143,14 @@
       <EnableCOMDATFolding>false</EnableCOMDATFolding>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/libxml2/include;../../thirdparty/zlib;../../scripts/zlib;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../scripts/libxml2;../../thirdparty/owemdjee/libxml2/include;../../thirdparty/zlib;../../scripts/zlib;../../thirdparty/monolithic_tmplt;../../thirdparty/owemdjee/libxml2;../../thirdparty/owemdjee/unicode-icu/icu4c/source/common;../../thirdparty/owemdjee/libiconv/include;../../thirdparty/owemdjee/xz/src/liblzma/api;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/libxml2/include;../../thirdparty/zlib;../../scripts/zlib;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../scripts/libxml2;../../thirdparty/owemdjee/libxml2/include;../../thirdparty/zlib;../../scripts/zlib;../../thirdparty/monolithic_tmplt;../../thirdparty/owemdjee/libxml2;../../thirdparty/owemdjee/unicode-icu/icu4c/source/common;../../thirdparty/owemdjee/libiconv/include;../../thirdparty/owemdjee/xz/src/liblzma/api;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_XML2_TESTS;XML2_TESTS_STATICLIB;CLIPP_CLIPP_CLIPP_WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -162,7 +162,7 @@
       <AdditionalDependencies>ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/libxml2/include;../../thirdparty/zlib;../../scripts/zlib;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../scripts/libxml2;../../thirdparty/owemdjee/libxml2/include;../../thirdparty/zlib;../../scripts/zlib;../../thirdparty/monolithic_tmplt;../../thirdparty/owemdjee/libxml2;../../thirdparty/owemdjee/unicode-icu/icu4c/source/common;../../thirdparty/owemdjee/libiconv/include;../../thirdparty/owemdjee/xz/src/liblzma/api;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -172,7 +172,7 @@
     <ClCompile>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/libxml2/include;../../thirdparty/zlib;../../scripts/zlib;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../scripts/libxml2;../../thirdparty/owemdjee/libxml2/include;../../thirdparty/zlib;../../scripts/zlib;../../thirdparty/monolithic_tmplt;../../thirdparty/owemdjee/libxml2;../../thirdparty/owemdjee/unicode-icu/icu4c/source/common;../../thirdparty/owemdjee/libiconv/include;../../thirdparty/owemdjee/xz/src/liblzma/api;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_XML2_TESTS;XML2_TESTS_STATICLIB;CLIPP_CLIPP_CLIPP_WIN64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -184,12 +184,33 @@
       <AdditionalDependencies>ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/libxml2/include;../../thirdparty/zlib;../../scripts/zlib;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../scripts/libxml2;../../thirdparty/owemdjee/libxml2/include;../../thirdparty/zlib;../../scripts/zlib;../../thirdparty/monolithic_tmplt;../../thirdparty/owemdjee/libxml2;../../thirdparty/owemdjee/unicode-icu/icu4c/source/common;../../thirdparty/owemdjee/libiconv/include;../../thirdparty/owemdjee/xz/src/liblzma/api;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ProjectReference Include="libassert.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fffea6c7}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcpptrace.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff39d5ad}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libiconv.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff6d43ac}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libicu.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fff6b65d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="liblzma.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff1de71f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsystem_override.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8318-7518ff7ef82f}</Project>
+    </ProjectReference>
     <ProjectReference Include="libxml2.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffa57a44}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libxz.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa34896}</Project>
     </ProjectReference>
     <ProjectReference Include="libzlib.vcxproj">
       <Project>{5edcf4fd-0291-4fb9-8d96-458957ca5e3c}</Project>
@@ -236,8 +257,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/libxml2/parser.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libxml2/parserInternals.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libxml2/pattern.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libxml2/python/libxml.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libxml2/python/types.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libxml2/relaxng.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libxml2/runsuite.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libxml2/runtest.c" />
@@ -278,12 +297,15 @@
     <ClCompile Include="../../thirdparty/owemdjee/libxml2/xmlschemas.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libxml2/xmlschemastypes.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libxml2/xmlstring.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libxml2/xmlunicode.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libxml2/xmlwriter.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libxml2/xpath.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libxml2/xpointer.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libxml2/xzlib.c" />
-    <ClInclude Include="../../thirdparty/owemdjee/libxml2/html5ent.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxml2/codegen/charset.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxml2/codegen/escape.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxml2/codegen/html5ent.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxml2/codegen/ranges.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxml2/codegen/unicode.inc" />
     <ClInclude Include="../../thirdparty/owemdjee/libxml2/include/libxml/HTMLparser.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libxml2/include/libxml/HTMLtree.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libxml2/include/libxml/SAX.h" />
@@ -348,13 +370,10 @@
     <ClInclude Include="../../thirdparty/owemdjee/libxml2/include/private/string.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libxml2/include/private/threads.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libxml2/include/private/tree.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libxml2/include/private/unicode.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libxml2/include/private/xinclude.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libxml2/include/private/xpath.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libxml2/include/private/xzlib.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libxml2/iso8859x.inc" />
     <ClInclude Include="../../thirdparty/owemdjee/libxml2/libxml.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libxml2/python/libxml_wrap.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libxml2/test/relaxng/include0.inc" />
     <ClInclude Include="../../thirdparty/owemdjee/libxml2/test/relaxng/include1-0.inc" />
     <ClInclude Include="../../thirdparty/owemdjee/libxml2/test/relaxng/include1-1.inc" />
@@ -365,10 +384,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/libxml2/win32/config.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libxml2/win32/rcVersion.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libxml2/win32/win32config.h" />
-    <Image Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/home.png" />
-    <Image Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/left.png" />
-    <Image Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/right.png" />
-    <Image Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/up.png" />
     <ResourceCompile Include="../../thirdparty/owemdjee/libxml2/win32/libxml2.rc" />
     <Text Include="../../thirdparty/owemdjee/libxml2/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libxml2/CleanSpec.mk" />
@@ -384,140 +399,24 @@
     <Text Include="../../thirdparty/owemdjee/libxml2/README.zOS" />
     <Text Include="../../thirdparty/owemdjee/libxml2/VERSION" />
     <Text Include="../../thirdparty/owemdjee/libxml2/autogen.sh" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2010/_props/libiconv-testapp.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2010/_props/libiconv.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2010/_props/libxml2-static.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2010/_props/libxml2.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2010/_props/testapp-static.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2010/_props/testapp.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2010/_props/vs_common.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2010/_props/win-build.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2010/_props/zlib-testapp.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2010/_props/zlib.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2013/_props/libiconv-testapp.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2013/_props/libiconv.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2013/_props/liblzma-testapp.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2013/_props/liblzma.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2013/_props/libxml2-static.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2013/_props/libxml2.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2013/_props/testapp-static.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2013/_props/testapp.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2013/_props/vs_common.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2013/_props/win-build.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2013/_props/zlib-testapp.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2013/_props/zlib.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2015/_props/libiconv-testapp.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2015/_props/libiconv.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2015/_props/liblzma-testapp.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2015/_props/liblzma.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2015/_props/libxml2-static.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2015/_props/libxml2.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2015/_props/testapp-static.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2015/_props/testapp.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2015/_props/vs_common.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2015/_props/win-build.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2015/_props/zlib-testapp.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2015/_props/zlib.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2017/_props/libiconv-testapp.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2017/_props/libiconv.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2017/_props/liblzma-testapp.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2017/_props/liblzma.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2017/_props/libxml2-static.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2017/_props/libxml2.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2017/_props/testapp-static.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2017/_props/testapp.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2017/_props/vs_common.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2017/_props/win-build.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2017/_props/zlib-testapp.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2017/_props/zlib.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2019/_props/libiconv-testapp.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2019/_props/libiconv.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2019/_props/liblzma-testapp.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2019/_props/liblzma.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2019/_props/libxml2-static.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2019/_props/libxml2.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2019/_props/testapp-static.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2019/_props/testapp.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2019/_props/vs_common.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2019/_props/win-build.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2019/_props/zlib-testapp.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2019/_props/zlib.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2022/_props/libiconv-testapp.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2022/_props/libiconv.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2022/_props/liblzma-testapp.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2022/_props/liblzma.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2022/_props/libxml2-static.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2022/_props/libxml2.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2022/_props/testapp-static.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2022/_props/testapp.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2022/_props/vs_common.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2022/_props/win-build.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2022/_props/zlib-testapp.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/build-VS2022/_props/zlib.props" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/chvalid.def" />
+    <Text Include="../../thirdparty/owemdjee/libxml2/codegen/genCharset.py" />
+    <Text Include="../../thirdparty/owemdjee/libxml2/codegen/genEscape.py" />
+    <Text Include="../../thirdparty/owemdjee/libxml2/codegen/genHtml5Ent.py" />
+    <Text Include="../../thirdparty/owemdjee/libxml2/codegen/genHtml5LibTests.py" />
+    <Text Include="../../thirdparty/owemdjee/libxml2/codegen/genRanges.py" />
+    <Text Include="../../thirdparty/owemdjee/libxml2/codegen/genTestApi.py" />
+    <Text Include="../../thirdparty/owemdjee/libxml2/codegen/genUnicode.py" />
+    <Text Include="../../thirdparty/owemdjee/libxml2/codegen/ranges.def" />
+    <Text Include="../../thirdparty/owemdjee/libxml2/codegen/rangetab.py" />
+    <Text Include="../../thirdparty/owemdjee/libxml2/codegen/xmlmod.py" />
     <Text Include="../../thirdparty/owemdjee/libxml2/config.h.cmake.in" />
     <Text Include="../../thirdparty/owemdjee/libxml2/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/libxml2/doc/Doxyfile" />
     <Text Include="../../thirdparty/owemdjee/libxml2/doc/Makefile.am" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/apibuild.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/Makefile.am" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/devhelp2.xsl" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/general.html" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/html.xsl" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/index.html" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/libxml2-HTMLparser.html" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/libxml2-HTMLtree.html" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/libxml2-SAX.html" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/libxml2-SAX2.html" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/libxml2-c14n.html" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/libxml2-catalog.html" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/libxml2-chvalid.html" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/libxml2-debugXML.html" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/libxml2-dict.html" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/libxml2-encoding.html" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/libxml2-entities.html" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/libxml2-globals.html" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/libxml2-hash.html" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/libxml2-list.html" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/libxml2-nanoftp.html" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/libxml2-nanohttp.html" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/libxml2-parser.html" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/libxml2-parserInternals.html" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/libxml2-pattern.html" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/libxml2-relaxng.html" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/libxml2-schemasInternals.html" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/libxml2-schematron.html" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/libxml2-threads.html" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/libxml2-tree.html" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/libxml2-uri.html" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/libxml2-valid.html" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/libxml2-xinclude.html" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/libxml2-xlink.html" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/libxml2-xmlIO.html" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/libxml2-xmlautomata.html" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/libxml2-xmlerror.html" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/libxml2-xmlexports.html" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/libxml2-xmlmemory.html" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/libxml2-xmlmodule.html" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/libxml2-xmlreader.html" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/libxml2-xmlregexp.html" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/libxml2-xmlsave.html" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/libxml2-xmlschemas.html" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/libxml2-xmlschemastypes.html" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/libxml2-xmlstring.html" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/libxml2-xmlunicode.html" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/libxml2-xmlversion.html" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/libxml2-xmlwriter.html" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/libxml2-xpath.html" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/libxml2-xpathInternals.html" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/libxml2-xpointer.html" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/libxml2-xzlib.html" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/libxml2.devhelp2" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/devhelp/style.css" />
+    <Text Include="../../thirdparty/owemdjee/libxml2/doc/_redirects" />
+    <Text Include="../../thirdparty/owemdjee/libxml2/doc/libxml2.css" />
+    <Text Include="../../thirdparty/owemdjee/libxml2/doc/mainpage.md" />
     <Text Include="../../thirdparty/owemdjee/libxml2/doc/xml2-config.1" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/xmlcatalog.1" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/xmlcatalog.html" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/xmllint.1" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/doc/xmllint.html" />
     <Text Include="../../thirdparty/owemdjee/libxml2/example/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/libxml2/include/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/libxml2/include/libxml/Makefile.am" />
@@ -531,64 +430,6 @@
     <Text Include="../../thirdparty/owemdjee/libxml2/m4/ax_recursive_eval.m4" />
     <Text Include="../../thirdparty/owemdjee/libxml2/meson_options.txt" />
     <Text Include="../../thirdparty/owemdjee/libxml2/post_update.sh" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/Makefile.am" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/README" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/drv_libxml2.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/generator.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/libxml.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/pyproject.toml" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/setup.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/setup.py.in" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/tests/Makefile.am" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/tests/attribs.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/tests/build.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/tests/compareNodes.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/tests/ctxterror.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/tests/cutnpaste.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/tests/dtdvalid.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/tests/error.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/tests/inbuf.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/tests/indexes.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/tests/input_callback.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/tests/nsdel.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/tests/outbuf.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/tests/push.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/tests/pushSAX.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/tests/pushSAXhtml.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/tests/reader.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/tests/reader2.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/tests/reader3.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/tests/reader4.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/tests/reader5.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/tests/reader6.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/tests/reader7.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/tests/reader8.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/tests/readererr.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/tests/readernext.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/tests/regexp.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/tests/relaxng.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/tests/resolver.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/tests/schema.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/tests/serialize.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/tests/setup_test.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/tests/sync.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/tests/thread2.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/tests/tst.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/tests/tstLastError.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/tests/tstURI.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/tests/tstmem.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/tests/tstxpath.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/tests/unicode.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/tests/validDTD.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/tests/validRNG.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/tests/validSchemas.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/tests/validate.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/tests/walker.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/tests/xpath.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/tests/xpathext.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/tests/xpathleak.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/tests/xpathns.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/python/tests/xpathret.py" />
     <Text Include="../../thirdparty/owemdjee/libxml2/result/HTML/53867.html" />
     <Text Include="../../thirdparty/owemdjee/libxml2/result/HTML/53867.html.sax" />
     <Text Include="../../thirdparty/owemdjee/libxml2/result/HTML/758518-entity.html" />
@@ -1199,8 +1040,6 @@
     <Text Include="../../thirdparty/owemdjee/libxml2/result/errors/attr1.xml.str" />
     <Text Include="../../thirdparty/owemdjee/libxml2/result/errors/attr2.xml.err" />
     <Text Include="../../thirdparty/owemdjee/libxml2/result/errors/attr2.xml.str" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/result/errors/attr3.xml.err" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/result/errors/attr3.xml.str" />
     <Text Include="../../thirdparty/owemdjee/libxml2/result/errors/attr4.xml.err" />
     <Text Include="../../thirdparty/owemdjee/libxml2/result/errors/attr4.xml.str" />
     <Text Include="../../thirdparty/owemdjee/libxml2/result/errors/attr5.xml.err" />
@@ -2594,15 +2433,6 @@
     <Text Include="../../thirdparty/owemdjee/libxml2/test/xml1" />
     <Text Include="../../thirdparty/owemdjee/libxml2/test/xml2" />
     <Text Include="../../thirdparty/owemdjee/libxml2/test/xsdtest/xsdtest.xsl" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/tools/genChRanges.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/tools/genEscape.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/tools/genHtml5LibTests.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/tools/genHtmlEnt.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/tools/genUnicode.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/tools/gentest.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/tools/xmlmod.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/win32.msvc2008/libxml.def" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/win32.msvc2010/libxml.def" />
     <Text Include="../../thirdparty/owemdjee/libxml2/win32/Makefile.mingw" />
     <Text Include="../../thirdparty/owemdjee/libxml2/win32/Makefile.msvc" />
     <Text Include="../../thirdparty/owemdjee/libxml2/win32/Readme.txt" />
@@ -2610,11 +2440,8 @@
     <Text Include="../../thirdparty/owemdjee/libxml2/win32/libxml.def" />
     <Text Include="../../thirdparty/owemdjee/libxml2/xml2-config-meson" />
     <Text Include="../../thirdparty/owemdjee/libxml2/xml2-config.in" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/xstc/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxml2/xstc/fetch-xstc.sh" />
     <Text Include="../../thirdparty/owemdjee/libxml2/xstc/fixup-tests.py" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/xstc/xstc-to-python.xsl" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/xstc/xstc.py" />
-    <Xml Include="../../thirdparty/owemdjee/libxml2/doc/libxml2-api.xml" />
     <Xml Include="../../thirdparty/owemdjee/libxml2/doc/libxml2-refs.xml" />
     <Xml Include="../../thirdparty/owemdjee/libxml2/doc/xmlcatalog.xml" />
     <Xml Include="../../thirdparty/owemdjee/libxml2/doc/xmllint.xml" />
@@ -2622,10 +2449,6 @@
     <Xml Include="../../thirdparty/owemdjee/libxml2/example/test1.xml" />
     <Xml Include="../../thirdparty/owemdjee/libxml2/example/test2.xml" />
     <Xml Include="../../thirdparty/owemdjee/libxml2/example/test3.xml" />
-    <Xml Include="../../thirdparty/owemdjee/libxml2/python/libxml2-python-api.xml" />
-    <Xml Include="../../thirdparty/owemdjee/libxml2/python/tests/invalid.xml" />
-    <Xml Include="../../thirdparty/owemdjee/libxml2/python/tests/tst.xml" />
-    <Xml Include="../../thirdparty/owemdjee/libxml2/python/tests/valid.xml" />
     <Xml Include="../../thirdparty/owemdjee/libxml2/result/SVG/4rects.xml" />
     <Xml Include="../../thirdparty/owemdjee/libxml2/result/SVG/a-valid.xml" />
     <Xml Include="../../thirdparty/owemdjee/libxml2/result/SVG/a-wf.xml" />
@@ -3308,6 +3131,7 @@
     <Xml Include="../../thirdparty/owemdjee/libxml2/test/relaxng/tutor9_7_1.xml" />
     <Xml Include="../../thirdparty/owemdjee/libxml2/test/relaxng/tutor9_8_1.xml" />
     <Xml Include="../../thirdparty/owemdjee/libxml2/test/relaxng/tutor9_9_1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxml2/test/relaxng/useless_group.xml" />
     <Xml Include="../../thirdparty/owemdjee/libxml2/test/schemas/570702_0.xml" />
     <Xml Include="../../thirdparty/owemdjee/libxml2/test/schemas/579746_0.xml" />
     <Xml Include="../../thirdparty/owemdjee/libxml2/test/schemas/579746_1.xml" />
@@ -3601,4 +3425,3 @@
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
-  
