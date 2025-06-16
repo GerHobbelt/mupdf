@@ -29,6 +29,7 @@ MONOLITHIC_CMD_TABLE_START()
 	{ "clipp_numbers", {.fa = clipp_numbers_main } },
 	{ "clipp_options", {.fa = clipp_options_main } },
 	{ "clipp_options_values", {.fa = clipp_options_values_main } },
+	{ "clipp_optionals", {.fa = clipp_optionals_main } },
 	{ "clipp_parsing", {.fa = clipp_parsing_main } },
 	{ "clipp_positional_values", {.fa = clipp_positional_values_main } },
 	{ "clipp_repeatable", {.fa = clipp_repeatable_main } },
@@ -43,7 +44,7 @@ MONOLITHIC_CMD_TABLE_START()
 
 	{ "clipp_sanity", {.f = clipp_sanity_main } },
 
-	{ "clipp_run_all_tests", {.f = clipp_run_all_tests_main } },
+	{ "run_all_tests", {.f = clipp_run_all_tests_main } },
 
 	{ "test_actions", {.f = clipp_actions_test_main } },
 	{ "test_alternative_groups", {.f = clipp_alternative_groups_test_main } },
