@@ -3,7 +3,7 @@ also-ignore:
 	/app/
 	/python/
 	monolithic_main.c
-	benchmark.cc
+	regexp_benchmark.cc
 	testinstall.cc
 	/util/
 
