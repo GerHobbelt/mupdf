@@ -78,8 +78,8 @@
 #include <boost/algorithm/string/sequence_traits.hpp>
 #include <boost/algorithm/string/split.hpp>
 #include <boost/algorithm/string/std/list_traits.hpp>
-#include <boost/algorithm/string/std/rope_traits.hpp>
-#include <boost/algorithm/string/std/slist_traits.hpp>
+//#include <boost/algorithm/string/std/rope_traits.hpp>
+//#include <boost/algorithm/string/std/slist_traits.hpp>
 #include <boost/algorithm/string/std/string_traits.hpp>
 #include <boost/algorithm/string/std_containers_traits.hpp>
 #include <boost/algorithm/string/trim.hpp>
