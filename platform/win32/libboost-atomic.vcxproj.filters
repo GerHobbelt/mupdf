@@ -67,9 +67,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/atomic/src/lock_pool.cpp">
       <Filter>Source Files\src</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/boost/libs/atomic/src/wait_on_address.cpp">
-      <Filter>Source Files\src</Filter>
-    </ClCompile>
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/atomic/include/boost/atomic.hpp">
       <Filter>Header Files\include\boost</Filter>
     </ClInclude>
@@ -149,6 +146,9 @@
       <Filter>Header Files\include\boost\atomic\detail</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/atomic/include/boost/atomic/detail/cas_based_exchange.hpp">
+      <Filter>Header Files\include\boost\atomic\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/atomic/include/boost/atomic/detail/chrono.hpp">
       <Filter>Header Files\include\boost\atomic\detail</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/atomic/include/boost/atomic/detail/classify.hpp">
@@ -343,6 +343,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/atomic/include/boost/atomic/detail/gcc_ppc_asm_common.hpp">
       <Filter>Header Files\include\boost\atomic\detail</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/atomic/include/boost/atomic/detail/has_posix_clock_traits.hpp">
+      <Filter>Header Files\include\boost\atomic\detail</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/atomic/include/boost/atomic/detail/header.hpp">
       <Filter>Header Files\include\boost\atomic\detail</Filter>
     </ClInclude>
@@ -385,9 +388,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/atomic/include/boost/atomic/detail/ops_msvc_common.hpp">
       <Filter>Header Files\include\boost\atomic\detail</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/atomic/include/boost/atomic/detail/pause.hpp">
-      <Filter>Header Files\include\boost\atomic\detail</Filter>
-    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/atomic/include/boost/atomic/detail/platform.hpp">
       <Filter>Header Files\include\boost\atomic\detail</Filter>
     </ClInclude>
@@ -400,22 +400,10 @@
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/atomic/include/boost/atomic/detail/type_traits/alignment_of.hpp">
       <Filter>Header Files\include\boost\atomic\detail\type_traits</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/atomic/include/boost/atomic/detail/type_traits/conditional.hpp">
-      <Filter>Header Files\include\boost\atomic\detail\type_traits</Filter>
-    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/atomic/include/boost/atomic/detail/type_traits/has_unique_object_representations.hpp">
       <Filter>Header Files\include\boost\atomic\detail\type_traits</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/atomic/include/boost/atomic/detail/type_traits/integral_constant.hpp">
-      <Filter>Header Files\include\boost\atomic\detail\type_traits</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/atomic/include/boost/atomic/detail/type_traits/is_enum.hpp">
-      <Filter>Header Files\include\boost\atomic\detail\type_traits</Filter>
-    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/atomic/include/boost/atomic/detail/type_traits/is_floating_point.hpp">
-      <Filter>Header Files\include\boost\atomic\detail\type_traits</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/atomic/include/boost/atomic/detail/type_traits/is_function.hpp">
       <Filter>Header Files\include\boost\atomic\detail\type_traits</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/atomic/include/boost/atomic/detail/type_traits/is_iec559.hpp">
@@ -424,25 +412,13 @@
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/atomic/include/boost/atomic/detail/type_traits/is_integral.hpp">
       <Filter>Header Files\include\boost\atomic\detail\type_traits</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/atomic/include/boost/atomic/detail/type_traits/is_nothrow_default_constructible.hpp">
-      <Filter>Header Files\include\boost\atomic\detail\type_traits</Filter>
-    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/atomic/include/boost/atomic/detail/type_traits/is_signed.hpp">
-      <Filter>Header Files\include\boost\atomic\detail\type_traits</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/atomic/include/boost/atomic/detail/type_traits/is_trivially_copyable.hpp">
-      <Filter>Header Files\include\boost\atomic\detail\type_traits</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/atomic/include/boost/atomic/detail/type_traits/is_trivially_default_constructible.hpp">
       <Filter>Header Files\include\boost\atomic\detail\type_traits</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/atomic/include/boost/atomic/detail/type_traits/make_signed.hpp">
       <Filter>Header Files\include\boost\atomic\detail\type_traits</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/atomic/include/boost/atomic/detail/type_traits/make_unsigned.hpp">
-      <Filter>Header Files\include\boost\atomic\detail\type_traits</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/atomic/include/boost/atomic/detail/type_traits/remove_cv.hpp">
       <Filter>Header Files\include\boost\atomic\detail\type_traits</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/atomic/include/boost/atomic/detail/wait_capabilities.hpp">
@@ -461,9 +437,6 @@
       <Filter>Header Files\include\boost\atomic\detail</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/atomic/include/boost/atomic/detail/wait_caps_windows.hpp">
-      <Filter>Header Files\include\boost\atomic\detail</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/atomic/include/boost/atomic/detail/wait_on_address.hpp">
       <Filter>Header Files\include\boost\atomic\detail</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/atomic/include/boost/atomic/detail/wait_operations.hpp">
@@ -503,6 +476,15 @@
       <Filter>Header Files\include\boost\atomic</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/atomic/include/boost/atomic/ipc_atomic_ref.hpp">
+      <Filter>Header Files\include\boost\atomic</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/atomic/include/boost/atomic/posix_clock_traits_fwd.hpp">
+      <Filter>Header Files\include\boost\atomic</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/atomic/include/boost/atomic/thread_pause.hpp">
+      <Filter>Header Files\include\boost\atomic</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/atomic/include/boost/atomic/wait_result.hpp">
       <Filter>Header Files\include\boost\atomic</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/atomic/include/boost/memory_order.hpp">

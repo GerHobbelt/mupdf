@@ -170,6 +170,7 @@ also-ignore:
 	/libs/wave/tool/
 	
 	/doc/test/stub.cpp
+	/libs/hash2/test/cmake_subdir_test/main.cpp
 
 sources:
     ../../scripts/boost/libboost-dummy.cpp
