@@ -30,7 +30,7 @@
 #include <boost/core/identity.hpp>
 #include <boost/core/ignore_unused.hpp>
 #include <boost/core/invoke_swap.hpp>
-#include <boost/core/is_same.hpp>
+//#include <boost/core/is_same.hpp>
 #include <boost/core/launder.hpp>
 #include <boost/core/lightweight_test.hpp>
 #include <boost/core/lightweight_test_trait.hpp>
@@ -51,7 +51,7 @@
 #include <boost/core/size.hpp>
 #include <boost/core/snprintf.hpp>
 #include <boost/core/span.hpp>
-#include <boost/core/swap.hpp>
+//#include <boost/core/swap.hpp>
 #include <boost/core/type_name.hpp>
 #include <boost/core/typeinfo.hpp>
 #include <boost/core/uncaught_exceptions.hpp>
@@ -59,13 +59,13 @@
 #include <boost/core/use_default.hpp>
 #include <boost/core/verbose_terminate_handler.hpp>
 #include <boost/core/yield_primitives.hpp>
-#include <boost/detail/iterator.hpp>
+//#include <boost/detail/iterator.hpp>
 #include <boost/detail/lightweight_test.hpp>
-#include <boost/detail/no_exceptions_support.hpp>
-#include <boost/detail/scoped_enum_emulation.hpp>
-#include <boost/detail/sp_typeinfo.hpp>
+//#include <boost/detail/no_exceptions_support.hpp>
+//#include <boost/detail/scoped_enum_emulation.hpp>
+//#include <boost/detail/sp_typeinfo.hpp>
 #include <boost/get_pointer.hpp>
-#include <boost/iterator.hpp>
+//#include <boost/iterator.hpp>
 #include <boost/non_type.hpp>
 #include <boost/noncopyable.hpp>
 #include <boost/ref.hpp>
@@ -74,6 +74,6 @@
 #include <boost/utility/addressof.hpp>
 #include <boost/utility/enable_if.hpp>
 #include <boost/utility/explicit_operator_bool.hpp>
-#include <boost/utility/swap.hpp>
+//#include <boost/utility/swap.hpp>
 #include <boost/visit_each.hpp>
 

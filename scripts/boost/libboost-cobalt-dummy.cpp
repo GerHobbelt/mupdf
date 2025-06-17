@@ -10,7 +10,6 @@
 #include <boost/cobalt/generator.hpp>
 #include <boost/cobalt/impl/channel.hpp>
 #include <boost/cobalt/join.hpp>
-#include <boost/cobalt/leaf.hpp>
 #include <boost/cobalt/main.hpp>
 #include <boost/cobalt/noop.hpp>
 #include <boost/cobalt/op.hpp>
