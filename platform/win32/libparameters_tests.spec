@@ -1,4 +1,5 @@
 
 also-ignore:
 	/src/
+	/examples/
 	

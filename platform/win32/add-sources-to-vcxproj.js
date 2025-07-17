@@ -399,9 +399,9 @@ function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
     let f4f = '/' + f;
     if (spec.ignores.length > 0) {
       for (const sp of spec.ignores) {
-        //if (DEBUG > 2) console.log('??IGNORE??:', {f, f4f, sp, DO_IGNORE: sp.test(f4f)});
+        if (DEBUG > 2) console.log('??IGNORE??:', {f, f4f, sp, DO_IGNORE: sp.test(f4f)});
         if (sp.test(f4f)) {
-          if (DEBUG > 1) console.log('EXPLICITLY IGNORE:', {f, f4f, sp});
+          if (DEBUG >= 1) console.log('EXPLICITLY IGNORE:', {f, f4f, sp});
           ignoreCount++;
           return false;
         }
