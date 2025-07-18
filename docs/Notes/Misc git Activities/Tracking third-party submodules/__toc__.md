@@ -11,6 +11,6 @@
 - xxx
 - xxx
 
-Also do check the [../../../../thirdparty/owemdjee/README.md|`thirdparty/owemdjee` README] for some info on the purpose and intended use of the submodules we selected for R&D.
+Also do check the [`thirdparty/owemdjee` README](../../../../thirdparty/owemdjee/README.md) for some info on the purpose and intended use of the submodules we selected for R&D.
 
 

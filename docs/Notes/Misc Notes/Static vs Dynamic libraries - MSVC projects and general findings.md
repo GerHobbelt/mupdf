@@ -4,6 +4,7 @@
 Default is to build a monolithic DLL for this bunch, which includes the MuPDF, tesseract and many image format libraries.
 
 ### TODO
+
 At the time of this writing, we also bundle tool and test code in these and export those `xyz_lib_named_tool_main()` functions. We need to separate those out into separate projects and a separate monolithic tool and monolithic test/samples/demos DLL to ensure our production DLL (MuPDFLib itself) will be minimal sized.
 
 ### The MSVC projects

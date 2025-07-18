@@ -1,7 +1,7 @@
 
 # For developers
 
-Currently supported: MSVC 2019 (Microsoft Visual Studio 2019) :: `/platform/win32/mupdf.sln`
+Currently supported: MSVC 2022 (Microsoft Visual Studio 2022) :: `/platform/win32/mupdf.sln`
 
 This Visual Studio solution includes all submodules / projects requires to build the mupdf/tesseract/qiqqa tool set.
 

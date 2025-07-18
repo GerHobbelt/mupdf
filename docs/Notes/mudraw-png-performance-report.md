@@ -475,11 +475,11 @@ total 8639ms (1ms layout) / 10 pages for an average of 863ms   - mode 8
 total 18831ms (1ms layout) / 10 pages for an average of 1883ms - mode 9
 ```
 
-At compression level 2, funnily enough the total time spent is even less than in mode 1, while the output sizes are near identical.
+At compression level 2, funnily enough, the total time spent is even less than in mode 1, while the output sizes are near identical.
 
-While the absolute bottom time, hence *optimum*, for this sample is at compression level 2, we aim for the **potentially best, while fast** compression level: level 5, which is only 447/409 ~ less than 10% slower than the raw optimum, while the storage costs are noticably better: 1797559/2254918 ~ slightly more than 20% reduction in storage cost. 
+While the absolute bottom time, hence *optimum*, for this sample is at compression level 2, we aim for the **potentially best, while fast** compression level: level 5, which is only 447/409 ~ less than 10% slower than the raw optimum, while the storage costs are noticeably better: 1797559/2254918 ~ slightly more than 20% reduction in storage cost. 
 
-Mode 6 might look like another viable candidate, but we pick level 5 as level 6 clearly is at the start of the CPU cost "knee" in the time cost curve and we should keep a little bit of margin for our conclusion and decision-making process is based on a single PDF sample right now, so there's plenty opportunity for mistakes through the large potential variance.
+Mode 6 might look like another viable candidate, but we pick level 5 as level 6 clearly is at the start of the CPU cost "knee" in the time cost curve: we should keep a little bit of margin for our conclusion as the decision-making process is based on a single PDF sample right now, so there's plenty opportunity for mistakes through the large potential variance.
 
 
 ## Quick check with another PDF?
@@ -547,9 +547,9 @@ slowest page 9: 469ms
 16432 -rw-r--r-- 1 Ger 197121 40001644 Jun 13 13:48 page.0010.muraw
 ```
 
-which takes 25% more disk space than *no compression* PNG, *probably* because we dump the raw C `struct`ures directly to disk, with some header info for each chunk, without any regard for disk space savings.
+which takes 25% more disk space than *no compression* PNG, *probably* because we dump the raw C `struct`-ures directly to disk, with some header info for each chunk, without any regard for disk space savings.
 
-Remarkable though is the time this takes: while it's taking up a *lot* of disk space per file, there's some obvious gains we should look into as the time this takes (which I/O to the same fast SSD as before) is less than *any* of the PNG modes: the quick conclusion there would be that we apparently have some significant costs in the PNG format itself -- or more probably in the unmultiplying and related work done on the image data in the PNG output driver in MuPDF?
+Remarkable though is the time this takes: while it's taking up a *lot* of disk space per file, there's some obvious gains we should look into as the time this takes (which is I/O to the same fast SSD as before) is less than *any* of the PNG modes: the quick conclusion there would be that we apparently have some significant costs in the PNG format itself -- or more probably in the unmultiplying and related work done on the image data in the PNG output driver in MuPDF?
 
 Next up would be running this again **without any disk I/O cost at all** for the output: write this to `/dev/null`:
 
@@ -609,12 +609,12 @@ which means the actual disk I/O cost (to fast SSD) is negligible as the timing i
 
 While the instrumented profiler does not suffer from the instabilities of the regular sample-based MSVC profiler (see git commits for links about this trouble) it significantly loads the binary and thus will produce skewed results with very high probability: a single page render now takes roughly 4..8 **seconds** which is a factor of 10(ten!) slow-down compared to the regular binary run.
 
-Meanwhile, given that caveat, the results are enlightening still: while previously the PNG output module was hogging the charts, it's now time for `do_ft_render_glyph()` to bath in the spotlights, clocking in 43% of the CPU costs.
+Meanwhile, given that caveat, the results are enlightening still: while previously the PNG output module was hogging the charts, it's now time for `do_ft_render_glyph()` to bath in the spotlights, clocking in at 43% of the total CPU cost.
 
-While this call is (much higher up the call tree) a child of `do_draw_page()`, which takes 75% all around, that call still shown the same cost ratio to `fz_run_page()`, which now clocks in at near 20% cost.
+While this call is (much higher up the call tree) a child of `do_draw_page()`, which takes 75% all around, that call still shows the same cost ratio to `fz_run_page()`, which now clocks in at near 20% cost.
 Meanwhile the start of the sharp drop-off in cost percentages now happens inside `do_page_page()` (obviously!) at the next call depth level: `drawband()` vs `fz_write_band()` split up at 62%/13%. Digging down to the `do_ft_render_glyph()` level, there's another split (obvious when you consider what we're feeding the machine: a PDF containing a published paper) at `fz_fill_text()` vs `fz_stroke_path()`-plus-others at 53% / 8% (making up the total cost of `fz_run_display_list()` at little over 61%.
 
-Meanwhile, `do_ft_render_glyph()` splits up into `FT_Load_Glyph()` and `FT_Render_Glyph_Internal()` at 28% / 16% (both rounded up), where the latter, upon closer inspection, unravels into `FT_Outline_Decompose()` via `ft_smooth_render()`, spending almost all it's 16% of CPU cost in there. Not a good place to go looking for speed improvements, I believe.
+Meanwhile, `do_ft_render_glyph()` splits up into `FT_Load_Glyph()` and `FT_Render_Glyph_Internal()` at 28% / 16% (both rounded up), where the latter, upon closer inspection, unravels into `FT_Outline_Decompose()` via `ft_smooth_render()`, spending almost all its 16% of CPU cost in there. Not a good place to go looking for speed improvements, I believe.
 
 Then we look at the other branch, `fz_write_band()`, which unravels into `fz_write_data()` taking all the cake (13% --> 11%), while the `file_write()` internal to that one only takes nearly 4%, so apparently `fz_write_data()` is still doing some things that cost, if only a little less than 10% of total application costs. Code inspection shows this must be all in `memcpy()` buffer manipulation then, as that's the only thing I can see that could getting us a cost like that (if the amount of data shuffled is significant, as it is in our case, handling near 40MByte per page image).
 

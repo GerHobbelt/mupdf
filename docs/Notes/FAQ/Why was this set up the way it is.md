@@ -4,7 +4,7 @@ Partly due to history, part intentional by design.
 
 It all started with us picking `mupdf` as the library we were going to use to help us with *any and all* PDF work: page rendering, text and metadata extraction, annotation extraction and PDF(+annotations) (re)generation.
 
-Besides, our main (highest priority) development platform is MSWindows (Win10/64) with Microsoft Developer Studio (was MSVC2019, now MSVC2022).
+Besides, our main (highest priority) development platform is MSWindows (Win10/64) with Microsoft Developer Studio (MSVC2022).
 
 `mupdf` already had a decent project/solution organization, where all projects and their bundling MSVC solutions are located in `mupdf/platforms/win32/`: we liked that choice and stuck with it. Now that we have added various other libraries and tools (from the realm of C & C++ codebases), the number of `.vcxproj` files in there has grown significantly, but the same principles remain.
 

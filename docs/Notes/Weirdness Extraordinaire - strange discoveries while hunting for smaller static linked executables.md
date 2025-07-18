@@ -32,7 +32,7 @@ Long-ish story short: turns out that once we arrived at `fz_new_xhtml_document_f
 
 *WTF*?!?!
 
-Yup, code inspection reveals that absolutely *nobody* is using `fz_new_xhtml_document_from_document` so that's okay, but **why** did the linker previously decide to include it in the first place?! And only (I didn't mention this before) once we edit the `wxw-samplees-console` demo code back to have at least *one* wxWidgets-related statement in there -- you get a clean executable when you do `printf("hello world\n")` but *Heaven forbid* if you use so much as a `wxPrintf` or `wxString` to accomplish the same feat -- while having all the old `wxw-samples-console` code still `#if 0 ... [[endif]]` disabled.
+Yup, code inspection reveals that absolutely *nobody* is using `fz_new_xhtml_document_from_document` so that's okay, but **why** did the linker previously decide to include it in the first place?! And only (I didn't mention this before) once we edit the `wxw-samplees-console` demo code back to have at least *one* wxWidgets-related statement in there -- you get a clean executable when you do `printf("hello world\n")` but *Heaven forbid* if you use so much as a `wxPrintf` or `wxString` to accomplish the same feat -- while having all the old `wxw-samples-console` code still `#if 0 ... #endif` disabled.
 
 Is there some glitch that's helped along by a dependency cycle in the MuPDF library there? What about all the other stuff being included by the linker for no good reason what-so-ever?!
 

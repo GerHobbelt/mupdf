@@ -8,7 +8,7 @@ Quoting the relevant chunk (emphasis in bold is mine):
 
 > The MSVC compiler’s definition of the `__cplusplus` predefined macro leaps ahead 20 years in Visual Studio 2017 version 15.7 Preview 3. This macro has stubbornly remained at the value “199711L”, indicating (erroneously!) that the compiler conformed to the C++98 Standard. Now that [our conformance catch-up work is drawing to a close](https://devblogs.microsoft.com/vcblog//07/c-standards-conformance-from-microsoft) we’re updating the `__cplusplus` macro to reflect the true state of our implementation. The value of the `__cplusplus` macro doesn’t imply that we no longer have any conformance bugs. It’s just that the new value is much more accurate than always reporting “199711L”.
 > 
-> ### /Zc:__cplusplus[](https://devblogs.microsoft.com/cppblog/msvc-now-correctly-reports-__cplusplus/#zc__cplusplus)
+> ### [`/Zc:__cplusplus`](https://devblogs.microsoft.com/cppblog/msvc-now-correctly-reports-__cplusplus/#zc__cplusplus)
 > 
 > **You need to compile with the `/Zc:__cplusplus` switch to see the updated value of the `__cplusplus` macro**. We tried updating the macro by default and discovered that a lot of code doesn’t compile correctly when we change the value of `__cplusplus`. **We’ll continue to require use of the `/Zc:__cplusplus` switch for all minor versions of MSVC in the 19.xx family.**
 > 
@@ -25,7 +25,7 @@ Quoting the relevant chunk (emphasis in bold is mine):
 > | `Zc:__cplusplus` not specified    | Any value    | 199711L |
 > | ----------------- | ------------------- | ------------------- |
 >
-> Note that the MSVC compiler does not, and never will, support a C++11, C++03, or C++98 standards version switch. Also, the value of the `__cplusplus` macro is not affected by [the /permissive- switch](https://blogs.msdn.microsoft.com/vcblog/2016/11/16/permissive-switch).
+> Note that the MSVC compiler does not, and never will, support a C++11, C++03, or C++98 standards version switch. Also, the value of the `__cplusplus` macro is not affected by [the `/permissive-` switch](https://blogs.msdn.microsoft.com/vcblog/2016/11/16/permissive-switch).
 > 
 > We’re updating IntelliSense to correctly reflect the value of `__cplusplus` when compiling with MSVC. We expect IntelliSense to be correct in the next preview of 15.7.
 > 

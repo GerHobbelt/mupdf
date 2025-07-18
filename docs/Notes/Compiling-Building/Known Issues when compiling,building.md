@@ -63,7 +63,7 @@ See [[#MSVC Visual Studio build errors some executables are not produced Failed 
 
 ### Cause
 
-The JSCALC and REPL scripts are *compiled* by QuickJS in the libQuickJS project's Custom Build step. For this step to succeed, you a good (working) `mutool` binary to be present already, which won't happen until you have a succesful `mupdf.sln` build. Sounds a bit like chicken & egg and, in a way, it is. However, the build can succeeed without these JS scripts having been (re)compiled as their pre-compiled versions are provided in the git repository.
+The JSCALC and REPL scripts are *compiled* by QuickJS in the libQuickJS project's Custom Build step. For this step to succeed, you a good (working) `mutool` binary to be present already, which won't happen until you have a successful `mupdf.sln` build. Sounds a bit like chicken & egg and, in a way, it is. However, the build can succeed without these JS scripts having been (re)compiled as their pre-compiled versions are provided in the git repository.
 
 This is one of the reasons you may need to *Build Twice*: the first Build action produces a sane `mutool.exe`, then the second round will be able to recompile these QuickJS scripts to their equivalent C files and thus generate an *updated* `mutool` binary.
 
