@@ -715,7 +715,7 @@ const char* EncodeBase58X(char* dst, size_t dstsize, uint8_t* src, size_t srcsiz
 		{
 			if (srcsize > 0)
 			{
-				// get 64 new bits: that the bits we've got plus some zero padding.
+				// get 64 new bits: that's the bits we've still got to process, plus some zero padding.
 				// little endian, arbitrary memory alignment, so decode the bytes into a binary 64-bit value here:
 				uint8_t src8[8];
 
@@ -740,20 +740,30 @@ const char* EncodeBase58X(char* dst, size_t dstsize, uint8_t* src, size_t srcsiz
 				v &= N41_MASK;
 				// and store the remaining bits in the temporary buffer;
 				prevbitsbuf = word >> (41 - bitpos);
+				// WARNING:
+				// (feedbits - 41) is done in unsigned (size_t) type and will probable *wrap* --> UB (undefined behaviour)
+				//
+				// the way to deal with this is to break up the statement into two statements which do *signed* integer calculus
+				// and thus won't suffer from UB/integer wrap:
+#if 0
 				bitpos += feedbits - 41;
+				//#else:
+#endif
+				bitpos += feedbits;
 				// before we go and treat v as a full (non-truncated) number,
 				// we quickly check if we're on our last legs, i.e. if we've reached the end
 				// and have only a few more bits to encode.
 				// We'll do that *outside* the loop as we won't need to print all those 7
 				// base58 digits, won't we?
-				if (bitpos < 0)
+				if (bitpos < 41)
 				{
 					ASSERT0(prevbitsbuf == 0);
 					last_legs_value = v;
-					last_legs_bitcount = bitpos + 41;
+					last_legs_bitcount = bitpos;
 					ASSERT0(last_legs_bitcount >= 0);
 					break;
 				}
+				bitpos -= 41;
 			}
 			else
 			{
@@ -861,7 +871,7 @@ const uint8_t* DecodeBase58X(uint8_t* dst, size_t dstsize, size_t* targetsize_re
 		return NULL;
 
 	// Consume `src` in 7-digit chunks; when the `src` is not sufficiently large
-	// for such a "41-bit encoded number", that's an error.
+	// for such a "41-bit encoded number", that's the tail end of our input base58X value.
 	// Treat every 7-digit Base58X chunk as a big endian number and decode that into a 41-bit binary number.
 	uint8_t* rv = dst;
 	uint64_t prevbitsbuf = 0;
@@ -888,7 +898,9 @@ const uint8_t* DecodeBase58X(uint8_t* dst, size_t dstsize, size_t* targetsize_re
 		{									\
 			uint8_t c = *src++;				\
 			int d = mapBase58[c];			\
+			/* sanity check */              \
 			if (d < 0)						\
+				/* erroneous input */       \
 				return NULL;				\
 			word *= 58;						\
 			word += d;						\
