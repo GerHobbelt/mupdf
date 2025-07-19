@@ -8,3 +8,4 @@ also-ignore:
 	/tests/binaries/gtest.*
 	/tests/.*-test-runner.*
 	/tests/unit_gtest/
+	/tests/unit/catch2.*
