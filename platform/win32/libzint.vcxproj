@@ -52,16 +52,16 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -74,7 +74,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -108,8 +108,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZINT;ZINT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -121,14 +121,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/libzint/backend;../../thirdparty/owemdjee/libzint/backend/tests;../../thirdparty/libpng;../../scripts/zlib;../../thirdparty/zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZINT;ZINT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZINT;ZINT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/libzint/backend;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -147,7 +147,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/libzint/backend;../../thirdparty/owemdjee/libzint/backend/tests;../../thirdparty/libpng;../../scripts/zlib;../../thirdparty/zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZINT;ZINT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -155,7 +155,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZINT;ZINT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/libzint/backend;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -176,14 +176,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/libzint/backend;../../thirdparty/owemdjee/libzint/backend/tests;../../thirdparty/libpng;../../scripts/zlib;../../thirdparty/zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZINT;ZINT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZINT;ZINT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/libzint/backend;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -202,7 +202,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/libzint/backend;../../thirdparty/owemdjee/libzint/backend/tests;../../thirdparty/libpng;../../scripts/zlib;../../thirdparty/zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZINT;ZINT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -210,7 +210,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZINT;ZINT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/libzint/backend;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -338,10 +338,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/ultra.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/upcean.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libzint/backend/vector.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend_qt/qzint.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend_qt/tests/test_qzint.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend_tcl/win/nmakehlp.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libzint/backend_tcl/zint.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libzint/extras/cuecat.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libzint/extras/daft.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libzint/extras/ida_2d.c" />
@@ -351,16 +347,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/libzint/extras/zebu_pdf.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libzint/frontend/main.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libzint/frontend/tests/test_args.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libzint/frontend_qt/barcodeitem.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libzint/frontend_qt/cliwindow.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libzint/frontend_qt/datawindow.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libzint/frontend_qt/exportwindow.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libzint/frontend_qt/main.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libzint/frontend_qt/mainwindow.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libzint/frontend_qt/scalewindow.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libzint/frontend_qt/sequencewindow.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libzint/getopt/getopt.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libzint/getopt/getopt1.c" />
     <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/aztec.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/big5.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/bmp.h" />
@@ -416,15 +402,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/zfiletypes.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/zint.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libzint/backend/zintconfig.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libzint/backend_qt/qzint.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libzint/frontend_qt/barcodeitem.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libzint/frontend_qt/cliwindow.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libzint/frontend_qt/datawindow.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libzint/frontend_qt/exportwindow.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libzint/frontend_qt/mainwindow.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libzint/frontend_qt/scalewindow.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libzint/frontend_qt/sequencewindow.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libzint/getopt/getopt.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libzint/win32/zint_cmdline_vc6/resource.h" />
     <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/bmp/pdf417_fg_bg.bmp" />
     <Image Include="../../thirdparty/owemdjee/libzint/backend/tests/data/bmp/pdf417comp_hvwsp2.bmp" />
@@ -601,13 +578,10 @@
     <Image Include="../../thirdparty/owemdjee/libzint/docs/images/zint-qt.png" />
     <Image Include="../../thirdparty/owemdjee/libzint/docs/images/zint.png" />
     <Image Include="../../thirdparty/owemdjee/libzint/frontend/zint_black.ico" />
-    <Image Include="../../thirdparty/owemdjee/libzint/frontend_qt/res/zint-qt.ico" />
-    <Image Include="../../thirdparty/owemdjee/libzint/frontend_qt/res/zint_black.ico" />
     <Image Include="../../thirdparty/owemdjee/libzint/win32/zint_cmdline_vc6/zint_black_vc6.ico" />
     <Image Include="../../thirdparty/owemdjee/libzint/zint-qt.png" />
     <ResourceCompile Include="../../thirdparty/owemdjee/libzint/backend/libzint.rc" />
     <ResourceCompile Include="../../thirdparty/owemdjee/libzint/frontend/zint.rc" />
-    <ResourceCompile Include="../../thirdparty/owemdjee/libzint/frontend_qt/res/qtZint.rc" />
     <ResourceCompile Include="../../thirdparty/owemdjee/libzint/win32/zint_cmdline_vc6/zint.rc" />
     <Text Include="../../thirdparty/owemdjee/libzint/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libzint/ChangeLog" />
@@ -871,28 +845,6 @@
     <Text Include="../../thirdparty/owemdjee/libzint/backend/tests/tools/run_zxingcpp_tests.sh" />
     <Text Include="../../thirdparty/owemdjee/libzint/backend/tools/data/GB18030.TXT.README" />
     <Text Include="../../thirdparty/owemdjee/libzint/backend/tools/data/GB2312.TXT.README" />
-    <Text Include="../../thirdparty/owemdjee/libzint/backend_qt/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/libzint/backend_qt/COPYING" />
-    <Text Include="../../thirdparty/owemdjee/libzint/backend_qt/tests/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/libzint/backend_tcl/Makefile.in" />
-    <Text Include="../../thirdparty/owemdjee/libzint/backend_tcl/aclocal.m4" />
-    <Text Include="../../thirdparty/owemdjee/libzint/backend_tcl/configure" />
-    <Text Include="../../thirdparty/owemdjee/libzint/backend_tcl/configure.ac" />
-    <Text Include="../../thirdparty/owemdjee/libzint/backend_tcl/demo/demo.tcl" />
-    <Text Include="../../thirdparty/owemdjee/libzint/backend_tcl/lib/zint/pkgIndex.tcl" />
-    <Text Include="../../thirdparty/owemdjee/libzint/backend_tcl/licence.txt" />
-    <Text Include="../../thirdparty/owemdjee/libzint/backend_tcl/pkgIndex.tcl.in" />
-    <Text Include="../../thirdparty/owemdjee/libzint/backend_tcl/readme.txt" />
-    <Text Include="../../thirdparty/owemdjee/libzint/backend_tcl/tclconfig/README.txt" />
-    <Text Include="../../thirdparty/owemdjee/libzint/backend_tcl/tclconfig/install-sh" />
-    <Text Include="../../thirdparty/owemdjee/libzint/backend_tcl/tclconfig/tcl.m4" />
-    <Text Include="../../thirdparty/owemdjee/libzint/backend_tcl/win/README.txt" />
-    <Text Include="../../thirdparty/owemdjee/libzint/backend_tcl/win/gitmanifest.in" />
-    <Text Include="../../thirdparty/owemdjee/libzint/backend_tcl/win/makefile.vc" />
-    <Text Include="../../thirdparty/owemdjee/libzint/backend_tcl/win/rules-ext.vc" />
-    <Text Include="../../thirdparty/owemdjee/libzint/backend_tcl/win/rules.vc" />
-    <Text Include="../../thirdparty/owemdjee/libzint/backend_tcl/win/targets.vc" />
-    <Text Include="../../thirdparty/owemdjee/libzint/backend_tcl/win/zintUuid.h.in" />
     <Text Include="../../thirdparty/owemdjee/libzint/cmake/zint_add_test.cmake" />
     <Text Include="../../thirdparty/owemdjee/libzint/cmake_uninstall.cmake.in" />
     <Text Include="../../thirdparty/owemdjee/libzint/debian/changelog" />
@@ -1045,30 +997,6 @@
     <Text Include="../../thirdparty/owemdjee/libzint/frontend/tests/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libzint/frontend/tests/README" />
     <Text Include="../../thirdparty/owemdjee/libzint/frontend/tests/cmake/Modules/FindLibZint.cmake" />
-    <Text Include="../../thirdparty/owemdjee/libzint/frontend_qt/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/libzint/frontend_qt/COPYING" />
-    <Text Include="../../thirdparty/owemdjee/libzint/frontend_qt/Inno_Setup_qtzint.iss" />
-    <Text Include="../../thirdparty/owemdjee/libzint/frontend_qt/howto_build_qzint_using_msvs2015.txt" />
-    <Text Include="../../thirdparty/owemdjee/libzint/frontend_qt/images/scalable/zint-qt.svg" />
-    <Text Include="../../thirdparty/owemdjee/libzint/frontend_qt/mac_icons.sh" />
-    <Text Include="../../thirdparty/owemdjee/libzint/frontend_qt/res/LICENSE_feathericons" />
-    <Text Include="../../thirdparty/owemdjee/libzint/frontend_qt/res/LICENSE_lucide" />
-    <Text Include="../../thirdparty/owemdjee/libzint/frontend_qt/res/black-eye.svg" />
-    <Text Include="../../thirdparty/owemdjee/libzint/frontend_qt/res/check.svg" />
-    <Text Include="../../thirdparty/owemdjee/libzint/frontend_qt/res/copy.svg" />
-    <Text Include="../../thirdparty/owemdjee/libzint/frontend_qt/res/delete.svg" />
-    <Text Include="../../thirdparty/owemdjee/libzint/frontend_qt/res/download.svg" />
-    <Text Include="../../thirdparty/owemdjee/libzint/frontend_qt/res/folder.svg" />
-    <Text Include="../../thirdparty/owemdjee/libzint/frontend_qt/res/help-circle.svg" />
-    <Text Include="../../thirdparty/owemdjee/libzint/frontend_qt/res/menu.svg" />
-    <Text Include="../../thirdparty/owemdjee/libzint/frontend_qt/res/monitor-bg.svg" />
-    <Text Include="../../thirdparty/owemdjee/libzint/frontend_qt/res/scaling.svg" />
-    <Text Include="../../thirdparty/owemdjee/libzint/frontend_qt/res/shuffle.svg" />
-    <Text Include="../../thirdparty/owemdjee/libzint/frontend_qt/res/white-eye.svg" />
-    <Text Include="../../thirdparty/owemdjee/libzint/frontend_qt/res/x.svg" />
-    <Text Include="../../thirdparty/owemdjee/libzint/frontend_qt/res/zap.svg" />
-    <Text Include="../../thirdparty/owemdjee/libzint/frontend_qt/zint-qt.icns" />
-    <Text Include="../../thirdparty/owemdjee/libzint/getopt/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libzint/win32/README" />
     <Text Include="../../thirdparty/owemdjee/libzint/win32/test.bat" />
     <Text Include="../../thirdparty/owemdjee/libzint/win32/vs2017/SetWindowsTargetPlatformVersion.props" />
@@ -1081,4 +1009,3 @@
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
-  
