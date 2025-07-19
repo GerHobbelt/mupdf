@@ -543,7 +543,7 @@ static inline unsigned int fz_read_bits(fz_context *ctx, fz_stream *stm, int n)
 {
 	int x;
 
-	assert(n > 1 && n < 8 * (int) sizeof(int));
+	ASSERT0(n > 1 && n < 8 * (int) sizeof(int));
 
 	if (n <= stm->avail)
 	{
