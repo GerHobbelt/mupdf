@@ -557,7 +557,7 @@ Given that we revisited the above and did the more thorough check, wouldn't the 
 
 After all, we realize that 'human reading' of these hashes is a rare occasion on the one hand, and the arithmetic
 required to encode the number becomes very much simpler (and potentially *faster*) as we now would use a power-of-2
-base (base=64) for our encoding, meaning and division and remainder operations become very cheap bit shift operations
+base (base=64) for our encoding, meaning any division and remainder operations become very cheap bit shift operations
 instead.
 
 However, base64 means we assume a 27(!) character alphabet and thus have to drop another of our original design criteria:
