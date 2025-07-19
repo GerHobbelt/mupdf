@@ -52,16 +52,16 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -74,7 +74,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -108,8 +108,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBOOST;BOOST_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -227,61 +227,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="../../thirdparty/owemdjee/boost/doc/test/weighted_tail_quantile.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/parser/example/json.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/parser/example/json_fwd.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/parser/include/boost/parser/concepts.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/parser/include/boost/parser/config.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/parser/include/boost/parser/detail/aggr_to_tuple_generated.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/parser/include/boost/parser/detail/case_fold.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/parser/include/boost/parser/detail/case_fold_data_generated.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/parser/include/boost/parser/detail/debug_assert.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/parser/include/boost/parser/detail/detection.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/parser/include/boost/parser/detail/hl.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/parser/include/boost/parser/detail/numeric.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/parser/include/boost/parser/detail/pp_for_each.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/parser/include/boost/parser/detail/pp_utilities.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/parser/include/boost/parser/detail/printing.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/parser/include/boost/parser/detail/printing_impl.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/parser/include/boost/parser/detail/stl_interfaces/config.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/parser/include/boost/parser/detail/stl_interfaces/detail/pipeable_view.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/parser/include/boost/parser/detail/stl_interfaces/detail/view_closure.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/parser/include/boost/parser/detail/stl_interfaces/fwd.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/parser/include/boost/parser/detail/stl_interfaces/iterator_interface.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/parser/include/boost/parser/detail/stl_interfaces/reverse_iterator.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/parser/include/boost/parser/detail/stl_interfaces/view_adaptor.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/parser/include/boost/parser/detail/stl_interfaces/view_interface.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/parser/include/boost/parser/detail/text/algorithm.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/parser/include/boost/parser/detail/text/concepts.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/parser/include/boost/parser/detail/text/config.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/parser/include/boost/parser/detail/text/detail/algorithm.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/parser/include/boost/parser/detail/text/detail/all_t.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/parser/include/boost/parser/detail/text/detail/begin_end.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/parser/include/boost/parser/detail/text/detail/iterator.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/parser/include/boost/parser/detail/text/detail/sentinel_tag.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/parser/include/boost/parser/detail/text/in_out_result.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/parser/include/boost/parser/detail/text/transcode_algorithm.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/parser/include/boost/parser/detail/text/transcode_iterator.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/parser/include/boost/parser/detail/text/transcode_iterator_fwd.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/parser/include/boost/parser/detail/text/transcode_view.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/parser/include/boost/parser/detail/text/trie.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/parser/include/boost/parser/detail/text/trie_fwd.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/parser/include/boost/parser/detail/text/trie_map.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/parser/include/boost/parser/detail/text/unpack.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/parser/include/boost/parser/detail/text/utf.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/parser/include/boost/parser/detail/unicode_char_sets.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/parser/include/boost/parser/detail/vs_output_stream.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/parser/include/boost/parser/error_handling.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/parser/include/boost/parser/error_handling_fwd.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/parser/include/boost/parser/parser.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/parser/include/boost/parser/parser_fwd.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/parser/include/boost/parser/replace.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/parser/include/boost/parser/search.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/parser/include/boost/parser/split.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/parser/include/boost/parser/subrange.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/parser/include/boost/parser/transcode_view.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/parser/include/boost/parser/transform_replace.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/parser/include/boost/parser/tuple.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/parser/test/ill_formed.hpp" />
     <Image Include="../../thirdparty/owemdjee/boost/boost.png" />
     <Image Include="../../thirdparty/owemdjee/boost/doc/html/images/blank.png" />
     <Image Include="../../thirdparty/owemdjee/boost/doc/html/images/caution.png" />
@@ -492,22 +437,6 @@
     <Text Include="../../thirdparty/owemdjee/boost/libs/index.html" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/libraries.htm" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/maintainers.txt" />
-    <Text Include="../../thirdparty/owemdjee/boost/libs/parser/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/boost/libs/parser/CMakePresets.json" />
-    <Text Include="../../thirdparty/owemdjee/boost/libs/parser/LICENSE_1_0.txt" />
-    <Text Include="../../thirdparty/owemdjee/boost/libs/parser/README.md" />
-    <Text Include="../../thirdparty/owemdjee/boost/libs/parser/cmake/dependencies.cmake" />
-    <Text Include="../../thirdparty/owemdjee/boost/libs/parser/doc/Jamfile.v2" />
-    <Text Include="../../thirdparty/owemdjee/boost/libs/parser/doc/build_boost_docs.sh" />
-    <Text Include="../../thirdparty/owemdjee/boost/libs/parser/doc/parser.idx" />
-    <Text Include="../../thirdparty/owemdjee/boost/libs/parser/example/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/boost/libs/parser/index.html" />
-    <Text Include="../../thirdparty/owemdjee/boost/libs/parser/meta/libraries.json" />
-    <Text Include="../../thirdparty/owemdjee/boost/libs/parser/misc/generate_aggr_to_tuple.py" />
-    <Text Include="../../thirdparty/owemdjee/boost/libs/parser/misc/generate_case_fold_data.py" />
-    <Text Include="../../thirdparty/owemdjee/boost/libs/parser/misc/generate_case_fold_tests.py" />
-    <Text Include="../../thirdparty/owemdjee/boost/libs/parser/test/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/boost/libs/parser/test/Jamfile.v2" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/platform_maintainers.txt" />
     <Text Include="../../thirdparty/owemdjee/boost/more/BoostSponsorshipAgreement.pdf" />
     <Text Include="../../thirdparty/owemdjee/boost/more/blanket-permission.txt" />
@@ -564,9 +493,9 @@
     <Xml Include="../../thirdparty/owemdjee/boost/doc/test/array2.xml" />
     <Xml Include="../../thirdparty/owemdjee/boost/doc/test/array3.xml" />
     <Xml Include="../../thirdparty/owemdjee/boost/doc/test/array4.xml" />
-    <Xml Include="../../thirdparty/owemdjee/boost/libs/parser/doc/parser_reference.xml" />
     <Xml Include="../../thirdparty/owemdjee/boost/status/expected_results.xml" />
     <Xml Include="../../thirdparty/owemdjee/boost/status/explicit-failures-markup.xml" />
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
+  

@@ -35,23 +35,44 @@
     <Filter Include="Header Files\include\boost\redis\detail">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0006}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\include\boost\redis\resp3">
+    <Filter Include="Header Files\include\boost\redis\impl">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0007}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\doc">
+    <Filter Include="Header Files\include\boost\redis\resp3">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0008}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\meta">
+    <Filter Include="Misc Files\doc">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0009}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\tools">
+    <Filter Include="Misc Files\doc\modules">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0011}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Misc Files\doc\modules\ROOT">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0010}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\tools\tls">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0011}</UniqueIdentifier>
+    <Filter Include="Misc Files\doc\modules\ROOT\pages">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0012}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Misc Files\meta">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0013}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Misc Files\tools">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0014}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Misc Files\tools\docker">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0015}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Misc Files\tools\docker\tls">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0016}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\doc">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0017}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/boost/libs/redis/doc/mrdocs.cpp">
+      <Filter>Source Files\doc</Filter>
+    </ClCompile>
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis.hpp">
       <Filter>Header Files\include\boost</Filter>
     </ClInclude>
@@ -82,7 +103,13 @@
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/connection.hpp">
       <Filter>Header Files\include\boost\redis</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/detail/connector.hpp">
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/detail/connection_logger.hpp">
+      <Filter>Header Files\include\boost\redis\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/detail/coroutine.hpp">
+      <Filter>Header Files\include\boost\redis\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/detail/exec_fsm.hpp">
       <Filter>Header Files\include\boost\redis\detail</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/detail/health_checker.hpp">
@@ -91,13 +118,16 @@
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/detail/helper.hpp">
       <Filter>Header Files\include\boost\redis\detail</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/detail/resolver.hpp">
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/detail/multiplexer.hpp">
+      <Filter>Header Files\include\boost\redis\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/detail/reader_fsm.hpp">
+      <Filter>Header Files\include\boost\redis\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/detail/redis_stream.hpp">
       <Filter>Header Files\include\boost\redis\detail</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/detail/resp3_handshaker.hpp">
-      <Filter>Header Files\include\boost\redis\detail</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/detail/runner.hpp">
       <Filter>Header Files\include\boost\redis\detail</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/detail/write.hpp">
@@ -108,6 +138,9 @@
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/ignore.hpp">
       <Filter>Header Files\include\boost\redis</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/impl/log_to_file.hpp">
+      <Filter>Header Files\include\boost\redis\impl</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/logger.hpp">
       <Filter>Header Files\include\boost\redis</Filter>
@@ -157,22 +190,64 @@
     <Text Include="../../thirdparty/owemdjee/boost/libs/redis/build.jam">
       <Filter>Misc Files</Filter>
     </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/doc/CMakeLists.txt">
+      <Filter>Misc Files\doc</Filter>
+    </Text>
     <Text Include="../../thirdparty/owemdjee/boost/libs/redis/doc/Jamfile">
       <Filter>Misc Files\doc</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/doc/doxygen-awesome-sidebar-only.css">
+    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/doc/antora.yml">
       <Filter>Misc Files\doc</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/doc/doxygen-awesome.css">
+    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/doc/build_antora.sh">
       <Filter>Misc Files\doc</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/doc/footer.html">
-      <Filter>Misc Files\doc</Filter>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/doc/modules/ROOT/nav.adoc">
+      <Filter>Misc Files\doc\modules\ROOT</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/doc/header.html">
+    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/doc/modules/ROOT/pages/acknowledgements.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/doc/modules/ROOT/pages/benchmarks.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/doc/modules/ROOT/pages/changelog.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/doc/modules/ROOT/pages/comparison.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/doc/modules/ROOT/pages/examples.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/doc/modules/ROOT/pages/index.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/doc/modules/ROOT/pages/logging.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/doc/modules/ROOT/pages/reference.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/doc/modules/ROOT/pages/requests_responses.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/doc/modules/ROOT/pages/serialization.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/doc/mrdocs.yml">
       <Filter>Misc Files\doc</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/boost/libs/redis/doc/on-the-costs-of-async-abstractions.md">
+      <Filter>Misc Files\doc</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/doc/package-lock.json">
+      <Filter>Misc Files\doc</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/doc/package.json">
+      <Filter>Misc Files\doc</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/doc/redis-playbook.yml">
       <Filter>Misc Files\doc</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/boost/libs/redis/index.html">
@@ -187,17 +262,20 @@
     <Text Include="../../thirdparty/owemdjee/boost/libs/redis/tools/docker-compose.yml">
       <Filter>Misc Files\tools</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/tools/tls/ca.key">
-      <Filter>Misc Files\tools\tls</Filter>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/tools/docker/entrypoint.sh">
+      <Filter>Misc Files\tools\docker</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/tools/tls/server-key.key">
-      <Filter>Misc Files\tools\tls</Filter>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/tools/docker/tls/ca.key">
+      <Filter>Misc Files\tools\docker\tls</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/tools/docker/tls/server.key">
+      <Filter>Misc Files\tools\docker\tls</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/tools/gen-certificates.sh">
+      <Filter>Misc Files\tools</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/boost/libs/redis/tools/user-config.jam">
       <Filter>Misc Files\tools</Filter>
     </Text>
-    <Xml Include="../../thirdparty/owemdjee/boost/libs/redis/doc/DoxygenLayout.xml">
-      <Filter>Misc Files\doc</Filter>
-    </Xml>
   </ItemGroup>
 </Project>

@@ -52,16 +52,16 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -74,7 +74,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -108,8 +108,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCNTK;CNTK_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -121,14 +121,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/CNTK/Source/CNTKv2LibraryDll/API;../../thirdparty/owemdjee/CNTK/Source/Common/Include;../../thirdparty/owemdjee/CNTK/Source/Math;../../thirdparty/owemdjee/CNTK/Source/ComputationNetworkLib;../../thirdparty/owemdjee/onnxruntime/onnxruntime;../../thirdparty/owemdjee/CNTK/Source/CNTKv2LibraryDll/API/Internals;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/CNTK/Source/CNTKv2LibraryDll/API;../../thirdparty/owemdjee/CNTK/Source/Common/Include;../../thirdparty/owemdjee/CNTK/Source/Math;../../thirdparty/owemdjee/CNTK/Source/ComputationNetworkLib;../../thirdparty/owemdjee/onnxruntime/onnxruntime;../../thirdparty/owemdjee/CNTK/Source/CNTKv2LibraryDll/API/Internals;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCNTK;CNTK_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCNTK;CNTK_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/CNTK/Source/CNTKv2LibraryDll/API;../../thirdparty/owemdjee/CNTK/Source/Common/Include;../../thirdparty/owemdjee/CNTK/Source/Math;../../thirdparty/owemdjee/CNTK/Source/ComputationNetworkLib;../../thirdparty/owemdjee/onnxruntime/onnxruntime;../../thirdparty/owemdjee/CNTK/Source/CNTKv2LibraryDll/API/Internals;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -147,7 +147,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/CNTK/Source/CNTKv2LibraryDll/API;../../thirdparty/owemdjee/CNTK/Source/Common/Include;../../thirdparty/owemdjee/CNTK/Source/Math;../../thirdparty/owemdjee/CNTK/Source/ComputationNetworkLib;../../thirdparty/owemdjee/onnxruntime/onnxruntime;../../thirdparty/owemdjee/CNTK/Source/CNTKv2LibraryDll/API/Internals;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/CNTK/Source/CNTKv2LibraryDll/API;../../thirdparty/owemdjee/CNTK/Source/Common/Include;../../thirdparty/owemdjee/CNTK/Source/Math;../../thirdparty/owemdjee/CNTK/Source/ComputationNetworkLib;../../thirdparty/owemdjee/onnxruntime/onnxruntime;../../thirdparty/owemdjee/CNTK/Source/CNTKv2LibraryDll/API/Internals;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCNTK;CNTK_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -155,7 +155,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCNTK;CNTK_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/CNTK/Source/CNTKv2LibraryDll/API;../../thirdparty/owemdjee/CNTK/Source/Common/Include;../../thirdparty/owemdjee/CNTK/Source/Math;../../thirdparty/owemdjee/CNTK/Source/ComputationNetworkLib;../../thirdparty/owemdjee/onnxruntime/onnxruntime;../../thirdparty/owemdjee/CNTK/Source/CNTKv2LibraryDll/API/Internals;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -176,14 +176,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/CNTK/Source/CNTKv2LibraryDll/API;../../thirdparty/owemdjee/CNTK/Source/Common/Include;../../thirdparty/owemdjee/CNTK/Source/Math;../../thirdparty/owemdjee/CNTK/Source/ComputationNetworkLib;../../thirdparty/owemdjee/onnxruntime/onnxruntime;../../thirdparty/owemdjee/CNTK/Source/CNTKv2LibraryDll/API/Internals;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/CNTK/Source/CNTKv2LibraryDll/API;../../thirdparty/owemdjee/CNTK/Source/Common/Include;../../thirdparty/owemdjee/CNTK/Source/Math;../../thirdparty/owemdjee/CNTK/Source/ComputationNetworkLib;../../thirdparty/owemdjee/onnxruntime/onnxruntime;../../thirdparty/owemdjee/CNTK/Source/CNTKv2LibraryDll/API/Internals;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCNTK;CNTK_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCNTK;CNTK_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/CNTK/Source/CNTKv2LibraryDll/API;../../thirdparty/owemdjee/CNTK/Source/Common/Include;../../thirdparty/owemdjee/CNTK/Source/Math;../../thirdparty/owemdjee/CNTK/Source/ComputationNetworkLib;../../thirdparty/owemdjee/onnxruntime/onnxruntime;../../thirdparty/owemdjee/CNTK/Source/CNTKv2LibraryDll/API/Internals;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -202,7 +202,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/CNTK/Source/CNTKv2LibraryDll/API;../../thirdparty/owemdjee/CNTK/Source/Common/Include;../../thirdparty/owemdjee/CNTK/Source/Math;../../thirdparty/owemdjee/CNTK/Source/ComputationNetworkLib;../../thirdparty/owemdjee/onnxruntime/onnxruntime;../../thirdparty/owemdjee/CNTK/Source/CNTKv2LibraryDll/API/Internals;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/CNTK/Source/CNTKv2LibraryDll/API;../../thirdparty/owemdjee/CNTK/Source/Common/Include;../../thirdparty/owemdjee/CNTK/Source/Math;../../thirdparty/owemdjee/CNTK/Source/ComputationNetworkLib;../../thirdparty/owemdjee/onnxruntime/onnxruntime;../../thirdparty/owemdjee/CNTK/Source/CNTKv2LibraryDll/API/Internals;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCNTK;CNTK_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -210,7 +210,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCNTK;CNTK_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/CNTK/Source/CNTKv2LibraryDll/API;../../thirdparty/owemdjee/CNTK/Source/Common/Include;../../thirdparty/owemdjee/CNTK/Source/Math;../../thirdparty/owemdjee/CNTK/Source/ComputationNetworkLib;../../thirdparty/owemdjee/onnxruntime/onnxruntime;../../thirdparty/owemdjee/CNTK/Source/CNTKv2LibraryDll/API/Internals;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -274,6 +274,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/CNTK/Source/CNTKv2LibraryDll/Value.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/CNTK/Source/CNTKv2LibraryDll/Variable.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/CNTK/Source/CNTKv2LibraryDll/dllmain.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CNTK/Source/CNTKv2LibraryDll/proto/CNTK.pb.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/CNTK/Source/CNTKv2LibraryDll/proto/CNTK.pb.cc.VS_wrapper.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/CNTK/Source/CNTKv2LibraryDll/proto/onnx/CNTKToONNX.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/CNTK/Source/CNTKv2LibraryDll/proto/onnx/ONNX.cpp" />
@@ -553,6 +554,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/CNTK/Tests/UnitTests/V2LibraryTests/UserDefinedFunctionTests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/CNTK/Tests/UnitTests/V2LibraryTests/ValueTests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/CNTK/Tests/UnitTests/V2LibraryTests/stdafx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/cntk_cs_wrap.cxx" />
     <ClInclude Include="../../thirdparty/owemdjee/CNTK/Examples/Evaluation/UWPImageRecognition/ImageRecognizerLib/CNTKImageRecognizer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/CNTK/Examples/Evaluation/UWPImageRecognition/ImageRecognizerLib/pch.h" />
     <ClInclude Include="../../thirdparty/owemdjee/CNTK/Examples/Extensibility/CPP/UserMatrixMultiplicationOp.h" />
@@ -560,6 +562,17 @@
     <ClInclude Include="../../thirdparty/owemdjee/CNTK/Examples/Extensibility/ProposalLayer/ProposalLayerLib/ProposalLayerLib.h" />
     <ClInclude Include="../../thirdparty/owemdjee/CNTK/Examples/Extensibility/ProposalLayer/ProposalLayerLib/Rectangle2D.h" />
     <ClInclude Include="../../thirdparty/owemdjee/CNTK/Examples/Extensibility/ProposalLayer/ProposalLayerLib/RpnUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CNTK/PackageSpecs/nietras.cntk.gpu/build/native/include/CNTKLibrary.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CNTK/PackageSpecs/nietras.cntk.gpu/build/native/include/CNTKLibraryC.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CNTK/PackageSpecs/nietras.cntk.gpu/build/native/include/CNTKLibraryExperimental.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CNTK/PackageSpecs/nietras.cntk.gpu/build/native/include/CNTKLibraryInternals.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CNTK/PackageSpecs/nietras.cntk.gpu/build/native/include/HalfConverter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/CNTK/PackageSpecs/nietras.cntk.gpu/build/native/include/Internals/ComputationGraphAlgorithms.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CNTK/PackageSpecs/nietras.cntk.gpu/build/native/include/Internals/EvaluatorWrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CNTK/PackageSpecs/nietras.cntk.gpu/build/native/include/Internals/PrimitiveFunction.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CNTK/PackageSpecs/nietras.cntk.gpu/build/native/include/Internals/PrimitiveFunctionAttribute.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CNTK/PackageSpecs/nietras.cntk.gpu/build/native/include/Internals/PrimitiveOpType.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CNTK/PackageSpecs/nietras.cntk.gpu/build/non-supported/include/CNTKLibrary.h" />
     <ClInclude Include="../../thirdparty/owemdjee/CNTK/Source/1BitSGD/AllReduceDistGradAggregator.h" />
     <ClInclude Include="../../thirdparty/owemdjee/CNTK/Source/1BitSGD/BlockMomentumDistributedLearner.h" />
     <ClInclude Include="../../thirdparty/owemdjee/CNTK/Source/1BitSGD/BlockMomentumSGD.h" />
@@ -604,6 +617,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/CNTK/Source/CNTKv2LibraryDll/Utils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/CNTK/Source/CNTKv2LibraryDll/Value.h" />
     <ClInclude Include="../../thirdparty/owemdjee/CNTK/Source/CNTKv2LibraryDll/Variable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CNTK/Source/CNTKv2LibraryDll/proto/CNTK.pb.h" />
     <ClInclude Include="../../thirdparty/owemdjee/CNTK/Source/CNTKv2LibraryDll/proto/onnx/CNTKToONNX.h" />
     <ClInclude Include="../../thirdparty/owemdjee/CNTK/Source/CNTKv2LibraryDll/proto/onnx/ControlFlowHelper.h" />
     <ClInclude Include="../../thirdparty/owemdjee/CNTK/Source/CNTKv2LibraryDll/proto/onnx/ONNX.h" />
@@ -927,6 +941,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/CNTK/Tests/UnitTests/V2LibraryTests/Common.h" />
     <ClInclude Include="../../thirdparty/owemdjee/CNTK/Tests/UnitTests/V2LibraryTests/stdafx.h" />
     <ClInclude Include="../../thirdparty/owemdjee/CNTK/Tests/UnitTests/V2LibraryTests/targetver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/cntk_cs_wrap.h" />
     <ClInclude Include="../../thirdparty/owemdjee/CNTK/bindings/python/cntk/SwigDeserializer.h" />
     <Image Include="../../thirdparty/owemdjee/CNTK/Documentation/CNTK-TechReport/figures/CN+TrainingCriterion.png" />
     <Image Include="../../thirdparty/owemdjee/CNTK/Documentation/CNTK-TechReport/figures/CN-1HiddenNN.png" />
@@ -993,6 +1008,7 @@
     <Image Include="../../thirdparty/owemdjee/CNTK/Tests/UnitTests/ReaderTests/Data/images/red.jpg" />
     <Image Include="../../thirdparty/owemdjee/CNTK/bindings/python/doc/images/lstm_cell.png" />
     <Image Include="../../thirdparty/owemdjee/CNTK/bindings/python/doc/images/nn_layers.png" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/BUILD-Windows.md" />
     <Text Include="../../thirdparty/owemdjee/CNTK/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/CNTK/CNTK.Common.props" />
     <Text Include="../../thirdparty/owemdjee/CNTK/CNTK.Cpp.props" />
@@ -1418,6 +1434,32 @@
     <Text Include="../../thirdparty/owemdjee/CNTK/Examples/Video/GettingStarted/README.md" />
     <Text Include="../../thirdparty/owemdjee/CNTK/LICENSE.md" />
     <Text Include="../../thirdparty/owemdjee/CNTK/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/PackageSpecs/nietras.cntk.deps.cuda.cublasLt/build/native/nietras.CNTK.Deps.Cuda.cublasLt.targets" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/PackageSpecs/nietras.cntk.deps.cuda.cublasLt/build/netstandard2.0/nietras.CNTK.Deps.Cuda.cublasLt.targets" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/PackageSpecs/nietras.cntk.deps.cuda.cublasLt/nietras.CNTK.Deps.Cuda.cublasLt.nuspec" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/PackageSpecs/nietras.cntk.deps.cuda/build/native/nietras.CNTK.Deps.Cuda.targets" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/PackageSpecs/nietras.cntk.deps.cuda/build/netstandard2.0/nietras.CNTK.Deps.Cuda.targets" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/PackageSpecs/nietras.cntk.deps.cuda/nietras.CNTK.Deps.Cuda.nuspec" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/PackageSpecs/nietras.cntk.deps.cudnn.cnn/build/native/nietras.CNTK.Deps.cuDNN.CNN.targets" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/PackageSpecs/nietras.cntk.deps.cudnn.cnn/build/netstandard2.0/nietras.CNTK.Deps.cuDNN.CNN.targets" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/PackageSpecs/nietras.cntk.deps.cudnn.cnn/nietras.CNTK.Deps.cuDNN.CNN.nuspec" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/PackageSpecs/nietras.cntk.deps.cudnn/build/native/nietras.CNTK.Deps.cuDNN.targets" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/PackageSpecs/nietras.cntk.deps.cudnn/build/netstandard2.0/nietras.CNTK.Deps.cuDNN.targets" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/PackageSpecs/nietras.cntk.deps.cudnn/nietras.CNTK.Deps.cuDNN.nuspec" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/PackageSpecs/nietras.cntk.deps.mkl/build/native/nietras.CNTK.Deps.MKL.targets" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/PackageSpecs/nietras.cntk.deps.mkl/build/netstandard2.0/nietras.CNTK.Deps.MKL.targets" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/PackageSpecs/nietras.cntk.deps.mkl/nietras.CNTK.Deps.MKL.nuspec" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/PackageSpecs/nietras.cntk.deps.opencv.zip/build/native/nietras.CNTK.Deps.OpenCV.Zip.targets" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/PackageSpecs/nietras.cntk.deps.opencv.zip/build/netstandard2.0/nietras.CNTK.Deps.OpenCV.Zip.targets" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/PackageSpecs/nietras.cntk.deps.opencv.zip/nietras.CNTK.Deps.OpenCV.Zip.nuspec" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/PackageSpecs/nietras.cntk.gpu/build/native/nietras.CNTK.GPU.targets" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/PackageSpecs/nietras.cntk.gpu/build/netstandard2.0/nietras.CNTK.GPU.targets" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/PackageSpecs/nietras.cntk.gpu/nietras.CNTK.GPU.nuspec" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/PackageSpecs/pack.ps1" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/PackageSpecs/push-azure.ps1" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/PackageSpecs/push-github.ps1" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/PackageSpecs/push-nuget.ps1" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/PackageSpecs/tree.ps1" />
     <Text Include="../../thirdparty/owemdjee/CNTK/PretrainedModels/Image.md" />
     <Text Include="../../thirdparty/owemdjee/CNTK/PretrainedModels/README.md" />
     <Text Include="../../thirdparty/owemdjee/CNTK/PretrainedModels/download_model.py" />
@@ -1454,6 +1496,7 @@
     <Text Include="../../thirdparty/owemdjee/CNTK/Source/CNTK/NdlScript.txt" />
     <Text Include="../../thirdparty/owemdjee/CNTK/Source/CNTK/modelEditor.txt" />
     <Text Include="../../thirdparty/owemdjee/CNTK/Source/CNTK/modelEditorFromScratch.txt" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/Source/CNTKv2LibraryDll/packages.config" />
     <Text Include="../../thirdparty/owemdjee/CNTK/Source/CNTKv2LibraryDll/prebuild.bat" />
     <Text Include="../../thirdparty/owemdjee/CNTK/Source/Readers/DataReader_v2.txt" />
     <Text Include="../../thirdparty/owemdjee/CNTK/Source/Readers/HTKMLFReader/ReadMe.txt" />
@@ -2562,8 +2605,172 @@
     <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Linux/Debug/Readme.txt" />
     <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Linux/Release/Readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/AdditionalLearningOptions.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/Axis.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/AxisVector.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/BoolVector.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/CNTKDictionary.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/CNTKLib.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/CNTKLibPINVOKE.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/CharVector.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/Constant.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/ConstantVector.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/DataType.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/DataUnit.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/DeviceDescriptor.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/DeviceDescriptorVector.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/DeviceKind.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/DictionaryValue.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/DictionaryVector.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/DoubleVector.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/DoubleVectorVector.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/Evaluator.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/FloatVector.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/FloatVectorVector.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/Function.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/FunctionPtrVector.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/HTKFeatureConfiguration.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/HTKFeatureConfigurationVector.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/IntVector.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/Learner.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/LearnerVector.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/MaskKind.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/MinibatchData.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/MinibatchInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/MinibatchSource.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/MinibatchSourceConfig.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/ModelFormat.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/NDArrayView.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/NDArrayViewPtrVector.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/NDMask.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/NDShape.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/PaddingMode.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/PairDoubleDouble.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/PairFloatFloat.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/PairIntInt.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/PairNDArrayViewPtrNDArrayViewPtr.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/PairSizeTDouble.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/PairSizeTInt.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/PairSizeTSizeT.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/Parameter.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/ParameterCloningMethod.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/ParameterVector.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/PoolingType.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/ProgressWriter.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/ProgressWriterVector.cs" />
     <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/Readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/SWIGTYPE_p_int16_t.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/SWIGTYPE_p_int8_t.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/SWIGTYPE_p_void.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/SizeTVector.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/SizeTVectorVector.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/StorageFormat.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/StreamConfiguration.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/StreamConfigurationVector.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/StreamInformation.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/StringVector.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/TraceLevel.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/Trainer.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/TrainingParameterScheduleDouble.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/UnorderedMapParameterNDArrayViewPtr.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/UnorderedMapStreamInformationMinibatchData.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/UnorderedMapStreamInformationPairNDArrayViewPtrNDArrayViewPtr.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/UnorderedMapStringDictionaryValue.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/UnorderedMapVariableMinibatchData.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/UnorderedMapVariableValuePtr.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/UnorderedMapVariableVariable.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/UnsignedCharVector.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/Value.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/Variable.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/VariableKind.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/VariablePair.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/VariablePairVector.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/VariableVector.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/VectorPairSizeTDouble.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Debug/float16.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/AdditionalLearningOptions.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/Axis.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/AxisVector.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/BoolVector.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/CNTKDictionary.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/CNTKLib.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/CNTKLibPINVOKE.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/CharVector.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/Constant.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/ConstantVector.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/DataType.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/DataUnit.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/DeviceDescriptor.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/DeviceDescriptorVector.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/DeviceKind.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/DictionaryValue.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/DictionaryVector.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/DoubleVector.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/DoubleVectorVector.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/Evaluator.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/FloatVector.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/FloatVectorVector.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/Function.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/FunctionPtrVector.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/HTKFeatureConfiguration.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/HTKFeatureConfigurationVector.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/IntVector.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/Learner.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/LearnerVector.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/MaskKind.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/MinibatchData.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/MinibatchInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/MinibatchSource.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/MinibatchSourceConfig.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/ModelFormat.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/NDArrayView.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/NDArrayViewPtrVector.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/NDMask.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/NDShape.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/PaddingMode.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/PairDoubleDouble.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/PairFloatFloat.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/PairIntInt.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/PairNDArrayViewPtrNDArrayViewPtr.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/PairSizeTDouble.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/PairSizeTInt.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/PairSizeTSizeT.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/Parameter.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/ParameterCloningMethod.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/ParameterVector.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/PoolingType.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/ProgressWriter.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/ProgressWriterVector.cs" />
     <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/Readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/SWIGTYPE_p_int16_t.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/SWIGTYPE_p_int8_t.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/SWIGTYPE_p_void.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/SizeTVector.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/SizeTVectorVector.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/StorageFormat.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/StreamConfiguration.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/StreamConfigurationVector.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/StreamInformation.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/StringVector.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/TraceLevel.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/Trainer.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/TrainingParameterScheduleDouble.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/UnorderedMapParameterNDArrayViewPtr.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/UnorderedMapStreamInformationMinibatchData.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/UnorderedMapStreamInformationPairNDArrayViewPtrNDArrayViewPtr.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/UnorderedMapStringDictionaryValue.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/UnorderedMapVariableMinibatchData.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/UnorderedMapVariableValuePtr.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/UnorderedMapVariableVariable.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/UnsignedCharVector.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/Value.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/Variable.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/VariableKind.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/VariablePair.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/VariablePairVector.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/VariableVector.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/VectorPairSizeTDouble.cs" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/bindings/csharp/Swig/Generated/Windows/Release/float16.cs" />
     <Text Include="../../thirdparty/owemdjee/CNTK/bindings/java/Swig/CNTKNativeUtils.java" />
     <Text Include="../../thirdparty/owemdjee/CNTK/bindings/java/Swig/README.md" />
     <Text Include="../../thirdparty/owemdjee/CNTK/bindings/java/Swig/generate-java-bindings.cmd" />
@@ -2814,7 +3021,11 @@
     <Text Include="../../thirdparty/owemdjee/CNTK/bindings/python/swig_install.sh" />
     <Text Include="../../thirdparty/owemdjee/CNTK/bindings/python/test.bat" />
     <Text Include="../../thirdparty/owemdjee/CNTK/bindings/python/vsbuild.bat" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/build-debug.ps1" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/build-release.ps1" />
     <Text Include="../../thirdparty/owemdjee/CNTK/configure" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/generate-proto-code.ps1" />
+    <Text Include="../../thirdparty/owemdjee/CNTK/vcpkg.json" />
     <Xml Include="../../thirdparty/owemdjee/CNTK/Examples/Evaluation/UWPImageRecognition/App/Properties/Default.rd.xml" />
     <Xml Include="../../thirdparty/owemdjee/CNTK/Examples/Image/DataSets/CIFAR-10/CIFAR-10_mean.xml" />
     <Xml Include="../../thirdparty/owemdjee/CNTK/Examples/Image/DataSets/ImageNet/ImageNet1K_intensity.xml" />
@@ -2826,3 +3037,4 @@
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
+  

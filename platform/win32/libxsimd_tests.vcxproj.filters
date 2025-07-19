@@ -21,7 +21,7 @@
     <Filter Include="Header Files\include\xsimd\arch">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0003}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\include\xsimd\arch\generic">
+    <Filter Include="Header Files\include\xsimd\arch\common">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0004}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\include\xsimd\config">
@@ -224,29 +224,29 @@
     <ClCompile Include="../../thirdparty/owemdjee/xsimd/test/test_xsimd_api.cpp">
       <Filter>Source Files\test</Filter>
     </ClCompile>
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/generic/xsimd_generic_arithmetic.hpp">
-      <Filter>Header Files\include\xsimd\arch\generic</Filter>
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/common/xsimd_common_arithmetic.hpp">
+      <Filter>Header Files\include\xsimd\arch\common</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/generic/xsimd_generic_complex.hpp">
-      <Filter>Header Files\include\xsimd\arch\generic</Filter>
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/common/xsimd_common_complex.hpp">
+      <Filter>Header Files\include\xsimd\arch\common</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/generic/xsimd_generic_details.hpp">
-      <Filter>Header Files\include\xsimd\arch\generic</Filter>
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/common/xsimd_common_details.hpp">
+      <Filter>Header Files\include\xsimd\arch\common</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/generic/xsimd_generic_logical.hpp">
-      <Filter>Header Files\include\xsimd\arch\generic</Filter>
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/common/xsimd_common_logical.hpp">
+      <Filter>Header Files\include\xsimd\arch\common</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/generic/xsimd_generic_math.hpp">
-      <Filter>Header Files\include\xsimd\arch\generic</Filter>
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/common/xsimd_common_math.hpp">
+      <Filter>Header Files\include\xsimd\arch\common</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/generic/xsimd_generic_memory.hpp">
-      <Filter>Header Files\include\xsimd\arch\generic</Filter>
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/common/xsimd_common_memory.hpp">
+      <Filter>Header Files\include\xsimd\arch\common</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/generic/xsimd_generic_rounding.hpp">
-      <Filter>Header Files\include\xsimd\arch\generic</Filter>
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/common/xsimd_common_rounding.hpp">
+      <Filter>Header Files\include\xsimd\arch\common</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/generic/xsimd_generic_trigo.hpp">
-      <Filter>Header Files\include\xsimd\arch\generic</Filter>
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/common/xsimd_common_trigo.hpp">
+      <Filter>Header Files\include\xsimd\arch\common</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_avx.hpp">
       <Filter>Header Files\include\xsimd\arch</Filter>
@@ -290,6 +290,12 @@
     <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_avxvnni.hpp">
       <Filter>Header Files\include\xsimd\arch</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_common.hpp">
+      <Filter>Header Files\include\xsimd\arch</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_common_fwd.hpp">
+      <Filter>Header Files\include\xsimd\arch</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_constants.hpp">
       <Filter>Header Files\include\xsimd\arch</Filter>
     </ClInclude>
@@ -306,12 +312,6 @@
       <Filter>Header Files\include\xsimd\arch</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_fma4.hpp">
-      <Filter>Header Files\include\xsimd\arch</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_generic.hpp">
-      <Filter>Header Files\include\xsimd\arch</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_generic_fwd.hpp">
       <Filter>Header Files\include\xsimd\arch</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/arch/xsimd_i8mm_neon64.hpp">
@@ -428,6 +428,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_batch_constant.hpp">
       <Filter>Header Files\include\xsimd\types</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_common_arch.hpp">
+      <Filter>Header Files\include\xsimd\types</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_emulated_register.hpp">
       <Filter>Header Files\include\xsimd\types</Filter>
     </ClInclude>
@@ -441,9 +444,6 @@
       <Filter>Header Files\include\xsimd\types</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_fma4_register.hpp">
-      <Filter>Header Files\include\xsimd\types</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_generic_arch.hpp">
       <Filter>Header Files\include\xsimd\types</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/xsimd/include/xsimd/types/xsimd_i8mm_neon64_register.hpp">

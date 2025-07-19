@@ -226,6 +226,7 @@
     <ClCompile Include="../../scripts/boost/libboost-redis-dummy.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/boost/libs/redis/doc/mrdocs.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/adapter/adapt.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/adapter/any_adapter.hpp" />
@@ -236,15 +237,19 @@
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/adapter/result.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/config.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/connection.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/detail/connector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/detail/connection_logger.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/detail/coroutine.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/detail/exec_fsm.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/detail/health_checker.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/detail/helper.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/detail/resolver.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/detail/multiplexer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/detail/reader_fsm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/detail/redis_stream.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/detail/resp3_handshaker.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/detail/runner.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/detail/write.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/error.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/ignore.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/impl/log_to_file.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/logger.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/operation.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/request.hpp" />
@@ -261,20 +266,35 @@
     <Text Include="../../thirdparty/owemdjee/boost/libs/redis/LICENSE.txt" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/redis/README.md" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/redis/build.jam" />
+    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/doc/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/redis/doc/Jamfile" />
-    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/doc/doxygen-awesome-sidebar-only.css" />
-    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/doc/doxygen-awesome.css" />
-    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/doc/footer.html" />
-    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/doc/header.html" />
+    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/doc/antora.yml" />
+    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/doc/build_antora.sh" />
+    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/doc/modules/ROOT/nav.adoc" />
+    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/doc/modules/ROOT/pages/acknowledgements.adoc" />
+    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/doc/modules/ROOT/pages/benchmarks.adoc" />
+    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/doc/modules/ROOT/pages/changelog.adoc" />
+    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/doc/modules/ROOT/pages/comparison.adoc" />
+    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/doc/modules/ROOT/pages/examples.adoc" />
+    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/doc/modules/ROOT/pages/index.adoc" />
+    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/doc/modules/ROOT/pages/logging.adoc" />
+    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/doc/modules/ROOT/pages/reference.adoc" />
+    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/doc/modules/ROOT/pages/requests_responses.adoc" />
+    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/doc/modules/ROOT/pages/serialization.adoc" />
+    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/doc/mrdocs.yml" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/redis/doc/on-the-costs-of-async-abstractions.md" />
+    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/doc/package-lock.json" />
+    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/doc/package.json" />
+    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/doc/redis-playbook.yml" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/redis/index.html" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/redis/meta/libraries.json" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/redis/tools/ci.py" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/redis/tools/docker-compose.yml" />
-    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/tools/tls/ca.key" />
-    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/tools/tls/server-key.key" />
+    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/tools/docker/entrypoint.sh" />
+    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/tools/docker/tls/ca.key" />
+    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/tools/docker/tls/server.key" />
+    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/tools/gen-certificates.sh" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/redis/tools/user-config.jam" />
-    <Xml Include="../../thirdparty/owemdjee/boost/libs/redis/doc/DoxygenLayout.xml" />
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>

@@ -272,7 +272,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/mysql/include/boost/mysql/detail/format_sql.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/mysql/include/boost/mysql/detail/initiation_base.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/mysql/include/boost/mysql/detail/intermediate_handler.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/mysql/include/boost/mysql/detail/make_string_view.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/mysql/include/boost/mysql/detail/next_action.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/mysql/include/boost/mysql/detail/ok_view.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/mysql/include/boost/mysql/detail/output_string.hpp" />
@@ -306,7 +305,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/mysql/include/boost/mysql/handshake_params.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/mysql/include/boost/mysql/impl/field_view.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/mysql/include/boost/mysql/impl/format_sql.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/mysql/include/boost/mysql/impl/internal/auth/auth.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/mysql/include/boost/mysql/impl/internal/byte_to_hex.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/mysql/include/boost/mysql/impl/internal/call_next_char.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/mysql/include/boost/mysql/impl/internal/connection_pool/connection_node.hpp" />
@@ -331,14 +329,18 @@
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/mysql/include/boost/mysql/impl/internal/protocol/impl/text_protocol.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/mysql/include/boost/mysql/impl/internal/protocol/serialization.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/mysql/include/boost/mysql/impl/internal/protocol/static_buffer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/mysql/include/boost/mysql/impl/internal/sansio/auth_plugin_common.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/mysql/include/boost/mysql/impl/internal/sansio/caching_sha2_password.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/mysql/include/boost/mysql/impl/internal/sansio/close_connection.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/mysql/include/boost/mysql/impl/internal/sansio/close_statement.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/mysql/include/boost/mysql/impl/internal/sansio/connect.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/mysql/include/boost/mysql/impl/internal/sansio/connection_state.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/mysql/include/boost/mysql/impl/internal/sansio/connection_state_data.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/mysql/include/boost/mysql/impl/internal/sansio/csha2p_encrypt_password.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/mysql/include/boost/mysql/impl/internal/sansio/execute.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/mysql/include/boost/mysql/impl/internal/sansio/handshake.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/mysql/include/boost/mysql/impl/internal/sansio/message_reader.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/mysql/include/boost/mysql/impl/internal/sansio/mysql_native_password.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/mysql/include/boost/mysql/impl/internal/sansio/ping.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/mysql/include/boost/mysql/impl/internal/sansio/prepare_statement.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/mysql/include/boost/mysql/impl/internal/sansio/quit_connection.hpp" />
@@ -391,11 +393,12 @@
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/mysql/include/boost/mysql/unix_ssl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/mysql/include/boost/mysql/with_diagnostics.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/mysql/include/boost/mysql/with_params.hpp" />
+    <Image Include="../../thirdparty/owemdjee/boost/libs/mysql/doc/images/bench-protocol.png" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/mysql/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/mysql/LICENSE_1_0.txt" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/mysql/README.md" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/mysql/build.jam" />
-    <Text Include="../../thirdparty/owemdjee/boost/libs/mysql/cmake/test_utils.cmake" />
+    <Text Include="../../thirdparty/owemdjee/boost/libs/mysql/cmake/utils.cmake" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/mysql/doc/Jamfile" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/mysql/doc/config.json" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/mysql/doc/images/connection_pool_bench.svg" />
@@ -409,6 +412,7 @@
     <Text Include="../../thirdparty/owemdjee/boost/libs/mysql/meta/libraries.json" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/mysql/tools/ci/ci_util/__init__.py" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/mysql/tools/ci/ci_util/b2.py" />
+    <Text Include="../../thirdparty/owemdjee/boost/libs/mysql/tools/ci/ci_util/bench.py" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/mysql/tools/ci/ci_util/cmake.py" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/mysql/tools/ci/ci_util/common.py" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/mysql/tools/ci/ci_util/db_setup.py" />
@@ -417,7 +421,9 @@
     <Text Include="../../thirdparty/owemdjee/boost/libs/mysql/tools/ci/ci_util/main.py" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/mysql/tools/ci/ci_util/seed_corpus.py" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/mysql/tools/ci/main.py" />
+    <Text Include="../../thirdparty/owemdjee/boost/libs/mysql/tools/ci/run_benchmarks.py" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/mysql/tools/ci/seed_corpus.py" />
+    <Text Include="../../thirdparty/owemdjee/boost/libs/mysql/tools/docker/build-bench.dockerfile" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/mysql/tools/docker/build-clang11.dockerfile" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/mysql/tools/docker/build-clang14.dockerfile" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/mysql/tools/docker/build-clang16-i386.dockerfile" />

@@ -110,6 +110,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/logger_benchmarks/benchmarks/backend_total_time/quill_backend_total_time.cpp">
       <Filter>Source Files\benchmarks\backend_total_time</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/logger_benchmarks/benchmarks/backend_total_time/quill_with_functions_backend_total_time.cpp">
+      <Filter>Source Files\benchmarks\backend_total_time</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/logger_benchmarks/benchmarks/backend_total_time/reckless_backend_total_time.cpp">
       <Filter>Source Files\benchmarks\backend_total_time</Filter>
     </ClCompile>
@@ -137,7 +140,10 @@
     <ClCompile Include="../../thirdparty/owemdjee/logger_benchmarks/benchmarks/call_site_latency/benchmark_platformlab_nanolog_call_site_latency.cpp">
       <Filter>Source Files\benchmarks\call_site_latency</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/logger_benchmarks/benchmarks/call_site_latency/benchmark_quill_unbounded_call_site_latency.cpp">
+    <ClCompile Include="../../thirdparty/owemdjee/logger_benchmarks/benchmarks/call_site_latency/benchmark_quill_call_site_latency.cpp">
+      <Filter>Source Files\benchmarks\call_site_latency</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/logger_benchmarks/benchmarks/call_site_latency/benchmark_quill_with_functions_call_site_latency.cpp">
       <Filter>Source Files\benchmarks\call_site_latency</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/logger_benchmarks/benchmarks/call_site_latency/benchmark_reckless_call_site_latency.cpp">
@@ -167,7 +173,16 @@
     <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/CsvWriter.h">
       <Filter>Header Files\quill\include\quill</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/DeferredFormatCodec.h">
+      <Filter>Header Files\quill\include\quill</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/DirectFormatCodec.h">
+      <Filter>Header Files\quill\include\quill</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/Frontend.h">
+      <Filter>Header Files\quill\include\quill</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/LogFunctions.h">
       <Filter>Header Files\quill\include\quill</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/LogMacros.h">
@@ -176,10 +191,10 @@
     <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/Logger.h">
       <Filter>Header Files\quill\include\quill</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/StringRef.h">
+    <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/StopWatch.h">
       <Filter>Header Files\quill\include\quill</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/TriviallyCopyableCodec.h">
+    <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/StringRef.h">
       <Filter>Header Files\quill\include\quill</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/UserClockSource.h">
@@ -200,6 +215,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/backend/BackendWorker.h">
       <Filter>Header Files\quill\include\quill\backend</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/backend/BackendWorkerLock.h">
+      <Filter>Header Files\quill\include\quill\backend</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/backend/BacktraceStorage.h">
       <Filter>Header Files\quill\include\quill\backend</Filter>
     </ClInclude>
@@ -218,6 +236,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/backend/StringFromTime.h">
       <Filter>Header Files\quill\include\quill\backend</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/backend/ThreadUtilities.h">
+      <Filter>Header Files\quill\include\quill\backend</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/backend/TimestampFormatter.h">
       <Filter>Header Files\quill\include\quill\backend</Filter>
     </ClInclude>
@@ -225,6 +246,9 @@
       <Filter>Header Files\quill\include\quill\backend</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/backend/TransitEventBuffer.h">
+      <Filter>Header Files\quill\include\quill\backend</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/backend/Utf8Conv.h">
       <Filter>Header Files\quill\include\quill\backend</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/bundled/fmt/args.h">
@@ -272,6 +296,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/core/BoundedSPSCQueue.h">
       <Filter>Header Files\quill\include\quill\core</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/core/ChronoTimeUtils.h">
+      <Filter>Header Files\quill\include\quill\core</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/core/Codec.h">
       <Filter>Header Files\quill\include\quill\core</Filter>
     </ClInclude>
@@ -317,13 +344,13 @@
     <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/core/SinkManager.h">
       <Filter>Header Files\quill\include\quill\core</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/core/SourceLocation.h">
+      <Filter>Header Files\quill\include\quill\core</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/core/Spinlock.h">
       <Filter>Header Files\quill\include\quill\core</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/core/ThreadContextManager.h">
-      <Filter>Header Files\quill\include\quill\core</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/core/ThreadUtilities.h">
       <Filter>Header Files\quill\include\quill\core</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/core/TimeUtilities.h">
@@ -332,11 +359,11 @@
     <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/core/UnboundedSPSCQueue.h">
       <Filter>Header Files\quill\include\quill\core</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/core/Utf8Conv.h">
-      <Filter>Header Files\quill\include\quill\core</Filter>
-    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/filters/Filter.h">
       <Filter>Header Files\quill\include\quill\filters</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/sinks/AndroidSink.h">
+      <Filter>Header Files\quill\include\quill\sinks</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/sinks/ConsoleSink.h">
       <Filter>Header Files\quill\include\quill\sinks</Filter>
@@ -344,10 +371,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/sinks/FileSink.h">
       <Filter>Header Files\quill\include\quill\sinks</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/sinks/JsonConsoleSink.h">
-      <Filter>Header Files\quill\include\quill\sinks</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/sinks/JsonFileSink.h">
+    <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/sinks/JsonSink.h">
       <Filter>Header Files\quill\include\quill\sinks</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/sinks/NullSink.h">
@@ -356,10 +380,22 @@
     <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/sinks/RotatingFileSink.h">
       <Filter>Header Files\quill\include\quill\sinks</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/sinks/RotatingJsonFileSink.h">
+      <Filter>Header Files\quill\include\quill\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/sinks/RotatingSink.h">
+      <Filter>Header Files\quill\include\quill\sinks</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/sinks/Sink.h">
       <Filter>Header Files\quill\include\quill\sinks</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/sinks/StreamSink.h">
+      <Filter>Header Files\quill\include\quill\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/sinks/SyslogSink.h">
+      <Filter>Header Files\quill\include\quill\sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/sinks/SystemdSink.h">
       <Filter>Header Files\quill\include\quill\sinks</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/std/Array.h">
