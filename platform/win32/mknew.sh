@@ -1591,6 +1591,25 @@ fast_io
 libinflection
 DataFrame
 
+Celero
+LibRaw
+Lyra
+QuickJS-C++-Wrapper
+QuickJS-C++-Wrapper2
+convert_floating_point_to_fraction
+cpp.react
+krabsetw
+pyTsetlinMachine
+pystring
+raylib
+simde
+the-yabbering-politician
+unicode-inflection
+units_cpp
+ut
+
+Win32.mmap
+
 EOT
 ) | grep -e "$FILTER"
 )
@@ -1601,6 +1620,8 @@ myapplist=$(
 (
 grep -v '#' <<EOT
 
+colormap-tools
+buffered_tee
 ocr-evaluation-tools
 StringViewTests
 map_benchmark
@@ -1686,6 +1707,7 @@ misclist=$(
 (
 grep -v '#' <<EOT
 
+test262
 archive-hocr-tools
 awesome-c
 Awesome-Document-Image-Rectification
@@ -1926,4 +1948,3 @@ if [[ "$ARG" =~ [0] ]] ; then
 	  delnewproj2 $f
 	done
 fi
-
