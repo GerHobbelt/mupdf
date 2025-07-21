@@ -2,5 +2,6 @@
 also-ignore:
 	src/
 	benchmark/
-	test/
+	tests/clang-tidy/
+	tests/unittests/
 	
