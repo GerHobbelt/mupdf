@@ -1,12 +1,26 @@
 *sigh* ... it's been a while since I saw this last; not because because everybody has smartened up but because I was on a hiatus of C/C++ coding...
 
+
+>
+> **NOTICE**: in one Open Source library, I've seen mention of using the `WIN32_LEAN_AND_MEAN` define to prevent these `winsock2.h`/`windows.h` compile-time clashes... which MAY be true.
+> (Plenty codebases have the define but don't mention *any reason why*.)
+> 
+> ***However***, I've found using `WIN32_LEAN_AND_MEAN` to have all sorts of *tiny* consequences that bite you in the ass, *hard & painfully*, down the road: those pesky WTF moments when your mind is on the task at hand and *not* focused on the `WIN32_LEAN_AND_MEAN` trick you once pulled way back when in your codebase. So getting that bit of total recall about this stunt you pulled... might take a while.
+> Worse yet, it *just might have been* 'a' team member *whodunnit*, rather than your bloody self!
+> 
+> Moral of this story: don't blatantly copy what everyone else seems to be doing, *have a think* about this stuff instead, before you move. 
+> (If I was looking for that kind of unquestioning conformity in my teams, I'ld have you swapped out for AI by yesterday already anyway!)
+> 
+
+
+
 # Notice about clashes in `ws2def.h`, `winsock2.h`, `windows.h`, `winsock.h` and what you and your library designers should NEVER do
 
 Here's the rant straight from today's git commit that fixes this type of crap, **once again**:
 
 ----
 
-... the patch below fixes some extremely obnoxious and hard-to-diagnose errors (this time, we dug them out using the /P render-to-preprocessed-file compiler mode plus a few grep incantations to find the starting point of this crap, which recurs again and again because all eedjits follow MS advice about `LEAN_AND_MEAN` and let userland cope with the mess; ditto for `#include <windows.h>` in your library header file and NOT loading `winsock2.h` (duh!), but then userland code loads the latter one after as, hey, it's all part of some bigger scheme now!  !@#\$%^&*(*&^%@#\$#!!!
+... the patch below fixes some extremely obnoxious and hard-to-diagnose errors (this time, we dug them out using the /P render-to-preprocessed-file compiler mode plus a few grep incantations to find the starting point of this crap, which recurs again and again because all eedjits follow MS advice about `WIN32_LEAN_AND_MEAN` and let userland cope with the mess; ditto for `#include <windows.h>` in your library header file and NOT loading `winsock2.h` (duh!), but then userland code loads the latter one after as, hey, it's all part of some bigger scheme now!  !@#\$%^&*(*&^%@#\$#!!!
 
 ```
 #if 0	// [GHo: WIN32_LEAN_AND_MEAN is cute, but no cigar: when header files such as these do this and are themselves loaded in sourcefiles of larger applications/userland code, things can break in very hard-to-diagnose ways! So... DON'T!
