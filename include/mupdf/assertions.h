@@ -23,7 +23,7 @@
 #undef assert
 #undef ASSERT
 
-#include <libassert/assert.hpp>
+#include <libassert/assert.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -40,7 +40,7 @@ typedef struct fz_context fz_context;
 // --------------------------------------------------------------------------------------------------------------------------------------
 
 #ifndef FZ_WARN_ABOUT_ASSERT_COLLISION_WITH_STD_RTL
-#define assert(expression)				ASSERT0(expression)
+//#define assert(expression)				...
 #else
 // make sure this expands to a compiler error:
 #define assert(expression)       							                        \
@@ -86,7 +86,7 @@ void fz_check_and_report_failed_assertion_and_continue(fz_context *ctx, int expr
 #pragma message("You are compiling a binary with assertions removed. Be aware that this MAY only be a good thing for high quality, previously tested, production binaries that must produce the highest possible throughput. Cave canem!")
 
 #ifndef FZ_WARN_ABOUT_ASSERT_COLLISION_WITH_STD_RTL
-#define assert(expression)				((void)0)
+//#define assert(expression)				((void)0)
 #else
 	// make sure this expands to a compiler error:
 #define assert(expression)       							                        \
