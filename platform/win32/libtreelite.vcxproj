@@ -52,16 +52,16 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -74,7 +74,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -108,8 +108,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTREELITE;TREELITE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -121,14 +121,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/treelite/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/treelite/include;../../thirdparty/owemdjee/rapidJSON/include;../../scripts/treelite/include;../../thirdparty/owemdjee/json/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;../../thirdparty/owemdjee/treelite/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTREELITE;TREELITE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTREELITE;TREELITE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/treelite/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/treelite/include;../../thirdparty/owemdjee/rapidJSON/include;../../scripts/treelite/include;../../thirdparty/owemdjee/json/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -147,7 +147,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/treelite/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/treelite/include;../../thirdparty/owemdjee/rapidJSON/include;../../scripts/treelite/include;../../thirdparty/owemdjee/json/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;../../thirdparty/owemdjee/treelite/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTREELITE;TREELITE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -155,7 +155,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTREELITE;TREELITE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/treelite/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/treelite/include;../../thirdparty/owemdjee/rapidJSON/include;../../scripts/treelite/include;../../thirdparty/owemdjee/json/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -176,14 +176,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/treelite/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/treelite/include;../../thirdparty/owemdjee/rapidJSON/include;../../scripts/treelite/include;../../thirdparty/owemdjee/json/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;../../thirdparty/owemdjee/treelite/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTREELITE;TREELITE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTREELITE;TREELITE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/treelite/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/treelite/include;../../thirdparty/owemdjee/rapidJSON/include;../../scripts/treelite/include;../../thirdparty/owemdjee/json/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -202,7 +202,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/treelite/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/treelite/include;../../thirdparty/owemdjee/rapidJSON/include;../../scripts/treelite/include;../../thirdparty/owemdjee/json/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;../../thirdparty/owemdjee/treelite/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTREELITE;TREELITE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -210,7 +210,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTREELITE;TREELITE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/treelite/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/treelite/include;../../thirdparty/owemdjee/rapidJSON/include;../../scripts/treelite/include;../../thirdparty/owemdjee/json/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -224,17 +224,19 @@
   </ImportGroup>
   <ItemGroup>
     <ClCompile Include="../../thirdparty/owemdjee/treelite/src/c_api/c_api_error.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/treelite/src/c_api/gtil.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/treelite/src/c_api/logging.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/treelite/src/c_api/model.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/treelite/src/c_api/model_builder.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/treelite/src/c_api/model_loader.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/treelite/src/c_api/serializer.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/treelite/src/c_api/sklearn.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/treelite/src/c_api/c_api_field_accessor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/treelite/src/c_api/c_api_gtil.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/treelite/src/c_api/c_api_logging.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/treelite/src/c_api/c_api_model.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/treelite/src/c_api/c_api_model_builder.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/treelite/src/c_api/c_api_model_loader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/treelite/src/c_api/c_api_serializer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/treelite/src/c_api/c_api_sklearn.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/treelite/src/enum/operator.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/treelite/src/enum/task_type.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/treelite/src/enum/tree_node_type.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/treelite/src/enum/typeinfo.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/treelite/src/field_accessor.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/treelite/src/gtil/config.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/treelite/src/gtil/output_shape.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/treelite/src/gtil/postprocessor.cc" />
@@ -245,10 +247,14 @@
     <ClCompile Include="../../thirdparty/owemdjee/treelite/src/model_builder/model_builder.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/treelite/src/model_concat.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/treelite/src/model_loader/detail/xgboost.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/treelite/src/model_loader/detail/xgboost_json/delegated_handler.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/treelite/src/model_loader/detail/xgboost_json/sax_adapters.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/treelite/src/model_loader/lightgbm.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/treelite/src/model_loader/sklearn.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/treelite/src/model_loader/xgboost_json.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/treelite/src/model_loader/xgboost_legacy.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/treelite/src/model_loader/xgboost_ubjson.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/treelite/src/model_query.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/treelite/src/serializer.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/treelite/tests/cpp/test_gtil.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/treelite/tests/cpp/test_main.cc" />
@@ -287,7 +293,8 @@
     <ClInclude Include="../../thirdparty/owemdjee/treelite/src/model_loader/detail/lightgbm.h" />
     <ClInclude Include="../../thirdparty/owemdjee/treelite/src/model_loader/detail/string_utils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/treelite/src/model_loader/detail/xgboost.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/treelite/src/model_loader/detail/xgboost_json.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/treelite/src/model_loader/detail/xgboost_json/delegated_handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/treelite/src/model_loader/detail/xgboost_json/sax_adapters.h" />
     <Image Include="../../thirdparty/owemdjee/treelite/docs/_static/deployment.png" />
     <Text Include="../../thirdparty/owemdjee/treelite/ACKNOWLEDGMENTS.md" />
     <Text Include="../../thirdparty/owemdjee/treelite/CMakeLists.txt" />
@@ -312,6 +319,8 @@
     <Text Include="../../thirdparty/owemdjee/treelite/docs/conf.py" />
     <Text Include="../../thirdparty/owemdjee/treelite/docs/index.rst" />
     <Text Include="../../thirdparty/owemdjee/treelite/docs/install.rst" />
+    <Text Include="../../thirdparty/owemdjee/treelite/docs/knobs/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/treelite/docs/knobs/postprocessor.rst" />
     <Text Include="../../thirdparty/owemdjee/treelite/docs/make.bat" />
     <Text Include="../../thirdparty/owemdjee/treelite/docs/requirements.txt" />
     <Text Include="../../thirdparty/owemdjee/treelite/docs/serialization/index.rst" />
@@ -321,11 +330,17 @@
     <Text Include="../../thirdparty/owemdjee/treelite/docs/treelite-c-api.rst" />
     <Text Include="../../thirdparty/owemdjee/treelite/docs/treelite-doxygen.rst" />
     <Text Include="../../thirdparty/owemdjee/treelite/docs/treelite-gtil-api.rst" />
+    <Text Include="../../thirdparty/owemdjee/treelite/docs/tutorials/builder.rst" />
+    <Text Include="../../thirdparty/owemdjee/treelite/docs/tutorials/edit.rst" />
+    <Text Include="../../thirdparty/owemdjee/treelite/docs/tutorials/import.rst" />
+    <Text Include="../../thirdparty/owemdjee/treelite/docs/tutorials/index.rst" />
     <Text Include="../../thirdparty/owemdjee/treelite/ops/build-cpack.sh" />
+    <Text Include="../../thirdparty/owemdjee/treelite/ops/build-linux-aarch64.sh" />
     <Text Include="../../thirdparty/owemdjee/treelite/ops/build-linux.sh" />
     <Text Include="../../thirdparty/owemdjee/treelite/ops/build-macos.sh" />
     <Text Include="../../thirdparty/owemdjee/treelite/ops/build-windows.bat" />
     <Text Include="../../thirdparty/owemdjee/treelite/ops/conda_env/dev.yml" />
+    <Text Include="../../thirdparty/owemdjee/treelite/ops/conda_env/pre-commit.yml" />
     <Text Include="../../thirdparty/owemdjee/treelite/ops/cpp-python-coverage.sh" />
     <Text Include="../../thirdparty/owemdjee/treelite/ops/macos-python-coverage.sh" />
     <Text Include="../../thirdparty/owemdjee/treelite/ops/test-cmake-import.sh" />
@@ -354,43 +369,43 @@
     <Text Include="../../thirdparty/owemdjee/treelite/python/treelite/libpath.py" />
     <Text Include="../../thirdparty/owemdjee/treelite/python/treelite/model.py" />
     <Text Include="../../thirdparty/owemdjee/treelite/python/treelite/model_builder.py" />
+    <Text Include="../../thirdparty/owemdjee/treelite/python/treelite/model_builder_legacy.py" />
+    <Text Include="../../thirdparty/owemdjee/treelite/python/treelite/path_config.py" />
     <Text Include="../../thirdparty/owemdjee/treelite/python/treelite/sklearn/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/treelite/python/treelite/sklearn/exporter.py" />
     <Text Include="../../thirdparty/owemdjee/treelite/python/treelite/sklearn/importer.py" />
     <Text Include="../../thirdparty/owemdjee/treelite/python/treelite/sklearn/isolation_forest.py" />
     <Text Include="../../thirdparty/owemdjee/treelite/python/treelite/util.py" />
     <Text Include="../../thirdparty/owemdjee/treelite/src/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/treelite/tests/ci_build/Dockerfile.auditwheel_x86_64" />
-    <Text Include="../../thirdparty/owemdjee/treelite/tests/ci_build/Dockerfile.centos7" />
-    <Text Include="../../thirdparty/owemdjee/treelite/tests/ci_build/Dockerfile.ubuntu20" />
     <Text Include="../../thirdparty/owemdjee/treelite/tests/ci_build/Dockerfile.ubuntu20_aarch64" />
+    <Text Include="../../thirdparty/owemdjee/treelite/tests/ci_build/Dockerfile.ubuntu20_amd64" />
     <Text Include="../../thirdparty/owemdjee/treelite/tests/ci_build/build_macos_python_wheels.sh" />
     <Text Include="../../thirdparty/owemdjee/treelite/tests/ci_build/build_via_cmake.sh" />
     <Text Include="../../thirdparty/owemdjee/treelite/tests/ci_build/ci_build.sh" />
     <Text Include="../../thirdparty/owemdjee/treelite/tests/ci_build/entrypoint.sh" />
     <Text Include="../../thirdparty/owemdjee/treelite/tests/ci_build/rename_whl.py" />
     <Text Include="../../thirdparty/owemdjee/treelite/tests/cpp/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/treelite/tests/cython/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/treelite/tests/cython/compatibility_tester.py" />
-    <Text Include="../../thirdparty/owemdjee/treelite/tests/cython/frame_inspector.py" />
-    <Text Include="../../thirdparty/owemdjee/treelite/tests/cython/pyproject.toml" />
-    <Text Include="../../thirdparty/owemdjee/treelite/tests/cython/serializer.pyx" />
-    <Text Include="../../thirdparty/owemdjee/treelite/tests/cython/test_serializer.py" />
     <Text Include="../../thirdparty/owemdjee/treelite/tests/example_app/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/treelite/tests/examples/deep_lightgbm/model.txt" />
+    <Text Include="../../thirdparty/owemdjee/treelite/tests/examples/mushroom/mushroom.model" />
     <Text Include="../../thirdparty/owemdjee/treelite/tests/examples/sparse_categorical/sparse_categorical.test.margin" />
     <Text Include="../../thirdparty/owemdjee/treelite/tests/examples/sparse_categorical/sparse_categorical_model.txt" />
     <Text Include="../../thirdparty/owemdjee/treelite/tests/examples/toy_categorical/toy_categorical_model.txt" />
     <Text Include="../../thirdparty/owemdjee/treelite/tests/python/__init__.py" />
     <Text Include="../../thirdparty/owemdjee/treelite/tests/python/hypothesis_util.py" />
     <Text Include="../../thirdparty/owemdjee/treelite/tests/python/metadata.py" />
+    <Text Include="../../thirdparty/owemdjee/treelite/tests/python/test_field_accessor.py" />
     <Text Include="../../thirdparty/owemdjee/treelite/tests/python/test_gtil.py" />
     <Text Include="../../thirdparty/owemdjee/treelite/tests/python/test_lightgbm_integration.py" />
     <Text Include="../../thirdparty/owemdjee/treelite/tests/python/test_model_builder.py" />
+    <Text Include="../../thirdparty/owemdjee/treelite/tests/python/test_model_builder_legacy.py" />
     <Text Include="../../thirdparty/owemdjee/treelite/tests/python/test_model_concat.py" />
     <Text Include="../../thirdparty/owemdjee/treelite/tests/python/test_serializer.py" />
     <Text Include="../../thirdparty/owemdjee/treelite/tests/python/test_sklearn_integration.py" />
     <Text Include="../../thirdparty/owemdjee/treelite/tests/python/test_xgboost_integration.py" />
     <Text Include="../../thirdparty/owemdjee/treelite/tests/python/util.py" />
+    <Text Include="../../thirdparty/owemdjee/treelite/tests/serializer/compatibility_tester.py" />
+    <Text Include="../../thirdparty/owemdjee/treelite/tests/serializer/test_serializer.py" />
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
-  

@@ -52,16 +52,16 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -74,7 +74,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -108,8 +108,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSPLINTER;SPLINTER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -128,7 +128,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSPLINTER;SPLINTER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/splinter/include;../../thirdparty/owemdjee/libeigen;../../thirdparty/owemdjee/splinter/test;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -155,7 +155,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSPLINTER;SPLINTER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/splinter/include;../../thirdparty/owemdjee/libeigen;../../thirdparty/owemdjee/splinter/test;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -183,7 +183,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSPLINTER;SPLINTER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/splinter/include;../../thirdparty/owemdjee/libeigen;../../thirdparty/owemdjee/splinter/test;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -210,7 +210,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSPLINTER;SPLINTER_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/splinter/include;../../thirdparty/owemdjee/libeigen;../../thirdparty/owemdjee/splinter/test;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -224,62 +224,79 @@
   </ImportGroup>
   <ItemGroup>
     <ClCompile Include="../../thirdparty/owemdjee/splinter/src/bspline.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/splinter/src/bsplinebasis.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/splinter/src/bsplinebasis1d.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/splinter/src/bsplinebuilder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/splinter/src/bspline_basis.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/splinter/src/bspline_basis_1d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/splinter/src/bspline_builders.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/splinter/src/bspline_utils.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/splinter/src/cinterface/bspline.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/splinter/src/cinterface/bsplinebuilder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/splinter/src/cinterface/bspline_builders.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/splinter/src/cinterface/cinterface.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/splinter/src/cinterface/datatable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/splinter/src/cinterface/data_table.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/splinter/src/cinterface/utilities.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/splinter/src/datapoint.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/splinter/src/datatable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/splinter/src/data_point.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/splinter/src/data_table.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/splinter/src/function.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/splinter/src/knots.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/splinter/src/mykroneckerproduct.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/splinter/src/serializer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/splinter/src/json_parser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/splinter/src/knot_builders.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/splinter/src/knot_vector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/splinter/src/kronecker_product.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/splinter/src/utilities.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/splinter/test/approximation/bspline.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/splinter/test/approximation/bspline_wls.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/splinter/test/approximation/pspline.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/splinter/test/bsplinetestingutilities.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/splinter/test/examples/approximation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/splinter/test/examples/batch_eval_2d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/splinter/test/examples/fit_random_1d_spline.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/splinter/test/general/bspline.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/splinter/test/general/datatable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/splinter/test/general/bspline_builder.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/splinter/test/general/utilities.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/splinter/test/main.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/splinter/test/operatoroverloads.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/splinter/test/serialization/bspline.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/splinter/test/serialization/datatable.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/splinter/test/serialization/eigentypes.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/splinter/test/testfunction.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/splinter/test/testfunctions.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/splinter/test/testingutilities.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/splinter/test/unit/bsplinebasis1d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/splinter/test/unit/bspline_basis_1d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/splinter/test/unit/bspline_hessian.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/splinter/test/unit/bspline_utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/splinter/test/unit/data_table.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/splinter/test/unit/json_parser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/splinter/test/unit/knot_vector.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/splinter/test/unit/knots.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/splinter/test/utils/bspline_collection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/splinter/test/utils/bspline_test_utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/splinter/test/utils/data_table_collection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/splinter/test/utils/op_overloads.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/splinter/test/utils/test_function.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/splinter/test/utils/test_function_collection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/splinter/test/utils/test_function_utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/splinter/test/utils/test_utils.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/splinter/include/bspline.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/splinter/include/bsplinebasis.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/splinter/include/bsplinebasis1d.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/splinter/include/bsplinebuilder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/splinter/include/bspline_basis.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/splinter/include/bspline_basis_1d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/splinter/include/bspline_builders.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/splinter/include/bspline_utils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/splinter/include/cinterface/cinterface.h" />
     <ClInclude Include="../../thirdparty/owemdjee/splinter/include/cinterface/utilities.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/splinter/include/datapoint.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/splinter/include/datatable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/splinter/include/data_point.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/splinter/include/data_table.h" />
     <ClInclude Include="../../thirdparty/owemdjee/splinter/include/definitions.h" />
     <ClInclude Include="../../thirdparty/owemdjee/splinter/include/function.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/splinter/include/knots.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/splinter/include/linearsolvers.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/splinter/include/mykroneckerproduct.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/splinter/include/saveable.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/splinter/include/serializer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/splinter/include/json_parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/splinter/include/knot_builders.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/splinter/include/knot_vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/splinter/include/kronecker_product.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/splinter/include/linear_solvers.h" />
     <ClInclude Include="../../thirdparty/owemdjee/splinter/include/utilities.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/splinter/test/bsplinetestingutilities.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/splinter/test/operatoroverloads.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/splinter/test/testfunction.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/splinter/test/testfunctions.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/splinter/test/testingutilities.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/splinter/test/utils/bspline_collection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/splinter/test/utils/bspline_test_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/splinter/test/utils/data_table_collection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/splinter/test/utils/op_overloads.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/splinter/test/utils/test_function.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/splinter/test/utils/test_function_collection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/splinter/test/utils/test_function_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/splinter/test/utils/test_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/splinter/test/utils/timer.h" />
     <Image Include="../../thirdparty/owemdjee/splinter/assets/bspline.png" />
     <Image Include="../../thirdparty/owemdjee/splinter/assets/bspline_degrees.png" />
     <Image Include="../../thirdparty/owemdjee/splinter/assets/bspline_regularization.png" />
     <Image Include="../../thirdparty/owemdjee/splinter/assets/workflow.png" />
+    <Image Include="../../thirdparty/owemdjee/splinter/python/examples/lenna.png" />
     <Text Include="../../thirdparty/owemdjee/splinter/CHANGELOG.md" />
     <Text Include="../../thirdparty/owemdjee/splinter/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/splinter/CREDITS.md" />
@@ -293,24 +310,63 @@
     <Text Include="../../thirdparty/owemdjee/splinter/docs/c_interface.md" />
     <Text Include="../../thirdparty/owemdjee/splinter/docs/compile.md" />
     <Text Include="../../thirdparty/owemdjee/splinter/docs/cpp_interface.md" />
-    <Text Include="../../thirdparty/owemdjee/splinter/docs/matlab_interface.md" />
     <Text Include="../../thirdparty/owemdjee/splinter/docs/python_interface.md" />
-    <Text Include="../../thirdparty/owemdjee/splinter/python/examples/bspline.py" />
+    <Text Include="../../thirdparty/owemdjee/splinter/docs/user_guide.pdf" />
+    <Text Include="../../thirdparty/owemdjee/splinter/python/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/splinter/python/MANIFEST.in" />
+    <Text Include="../../thirdparty/owemdjee/splinter/python/examples/bspline_boosting_ex1.py" />
+    <Text Include="../../thirdparty/owemdjee/splinter/python/examples/bspline_boosting_ex2.py" />
+    <Text Include="../../thirdparty/owemdjee/splinter/python/examples/bspline_curve.py" />
+    <Text Include="../../thirdparty/owemdjee/splinter/python/examples/bspline_derivative.py" />
     <Text Include="../../thirdparty/owemdjee/splinter/python/examples/bspline_multivariate.py" />
+    <Text Include="../../thirdparty/owemdjee/splinter/python/examples/bspline_param_multivariate.py" />
+    <Text Include="../../thirdparty/owemdjee/splinter/python/examples/bspline_param_univariate.py" />
     <Text Include="../../thirdparty/owemdjee/splinter/python/examples/bspline_pickle.py" />
     <Text Include="../../thirdparty/owemdjee/splinter/python/examples/bspline_regularization.py" />
+    <Text Include="../../thirdparty/owemdjee/splinter/python/examples/bspline_scattered_data.py" />
+    <Text Include="../../thirdparty/owemdjee/splinter/python/examples/bspline_smoothing.py" />
+    <Text Include="../../thirdparty/owemdjee/splinter/python/examples/bspline_surface.py" />
+    <Text Include="../../thirdparty/owemdjee/splinter/python/examples/bspline_weighted_least_squares.py" />
+    <Text Include="../../thirdparty/owemdjee/splinter/python/examples/huge_bspline.py" />
+    <Text Include="../../thirdparty/owemdjee/splinter/python/examples/image_resampling.py" />
+    <Text Include="../../thirdparty/owemdjee/splinter/python/examples/mobius_strip.py" />
+    <Text Include="../../thirdparty/owemdjee/splinter/python/examples/picassos_dog.py" />
+    <Text Include="../../thirdparty/owemdjee/splinter/python/examples/pspline_linear.py" />
+    <Text Include="../../thirdparty/owemdjee/splinter/python/examples/test.json" />
     <Text Include="../../thirdparty/owemdjee/splinter/python/setup.py" />
-    <Text Include="../../thirdparty/owemdjee/splinter/python/splinter/__init__.py" />
-    <Text Include="../../thirdparty/owemdjee/splinter/python/splinter/bspline.py" />
-    <Text Include="../../thirdparty/owemdjee/splinter/python/splinter/bsplinebuilder.py" />
-    <Text Include="../../thirdparty/owemdjee/splinter/python/splinter/datatable.py" />
-    <Text Include="../../thirdparty/owemdjee/splinter/python/splinter/function.py" />
-    <Text Include="../../thirdparty/owemdjee/splinter/python/splinter/splinter.py" />
-    <Text Include="../../thirdparty/owemdjee/splinter/python/splinter/utilities.py" />
+    <Text Include="../../thirdparty/owemdjee/splinter/python/splinterpy/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/splinter/python/splinterpy/bspline.py" />
+    <Text Include="../../thirdparty/owemdjee/splinter/python/splinterpy/bsplineboosting.py" />
+    <Text Include="../../thirdparty/owemdjee/splinter/python/splinterpy/bsplinebuilders.py" />
+    <Text Include="../../thirdparty/owemdjee/splinter/python/splinterpy/datatable.py" />
+    <Text Include="../../thirdparty/owemdjee/splinter/python/splinterpy/function.py" />
+    <Text Include="../../thirdparty/owemdjee/splinter/python/splinterpy/splinter_backend.py" />
+    <Text Include="../../thirdparty/owemdjee/splinter/python/splinterpy/utilities.py" />
+    <Text Include="../../thirdparty/owemdjee/splinter/python/test/test_bspline.py" />
     <Text Include="../../thirdparty/owemdjee/splinter/scripts/LICENSE_HEADER" />
     <Text Include="../../thirdparty/owemdjee/splinter/scripts/build_release.sh" />
     <Text Include="../../thirdparty/owemdjee/splinter/scripts/check_license.sh" />
+    <Text Include="../../thirdparty/owemdjee/splinter/scripts/publish.sh" />
+    <Text Include="../../thirdparty/owemdjee/splinter/test/resources/data_tables/data_table_1_1.json" />
+    <Text Include="../../thirdparty/owemdjee/splinter/test/resources/data_tables/data_table_1_2.json" />
+    <Text Include="../../thirdparty/owemdjee/splinter/test/resources/data_tables/data_table_1_3.json" />
+    <Text Include="../../thirdparty/owemdjee/splinter/test/resources/data_tables/data_table_2_1.json" />
+    <Text Include="../../thirdparty/owemdjee/splinter/test/resources/data_tables/data_table_2_2.json" />
+    <Text Include="../../thirdparty/owemdjee/splinter/test/resources/data_tables/data_table_2_3.json" />
+    <Text Include="../../thirdparty/owemdjee/splinter/test/resources/data_tables/data_table_3_1.json" />
+    <Text Include="../../thirdparty/owemdjee/splinter/test/resources/data_tables/data_table_3_2.json" />
+    <Text Include="../../thirdparty/owemdjee/splinter/test/resources/data_tables/data_table_3_3.json" />
+    <Text Include="../../thirdparty/owemdjee/splinter/test/resources/data_tables_old_format/data_table_1_1.json" />
+    <Text Include="../../thirdparty/owemdjee/splinter/test/resources/data_tables_old_format/data_table_1_2.json" />
+    <Text Include="../../thirdparty/owemdjee/splinter/test/resources/data_tables_old_format/data_table_1_3.json" />
+    <Text Include="../../thirdparty/owemdjee/splinter/test/resources/data_tables_old_format/data_table_2_1.json" />
+    <Text Include="../../thirdparty/owemdjee/splinter/test/resources/data_tables_old_format/data_table_2_2.json" />
+    <Text Include="../../thirdparty/owemdjee/splinter/test/resources/data_tables_old_format/data_table_2_3.json" />
+    <Text Include="../../thirdparty/owemdjee/splinter/test/resources/data_tables_old_format/data_table_3_1.json" />
+    <Text Include="../../thirdparty/owemdjee/splinter/test/resources/data_tables_old_format/data_table_3_2.json" />
+    <Text Include="../../thirdparty/owemdjee/splinter/test/resources/data_tables_old_format/data_table_3_3.json" />
     <Text Include="../../thirdparty/owemdjee/splinter/version" />
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
+  

@@ -52,16 +52,16 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -74,7 +74,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -108,8 +108,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCANF;SCANF_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -121,14 +121,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/libscanf/include;../../thirdparty/monolithic_tmplt;../../thirdparty/owemdjee/fast_float/include;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/cxxtest_catch_2_gtest/includes;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/libscanf/benchmark/runtime/common;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/libscanf/src;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/libscanf/include;../../thirdparty/monolithic_tmplt;../../thirdparty/owemdjee/fast_float/include;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/cxxtest_catch_2_gtest/includes;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/libscanf/benchmark/runtime/common;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/libscanf/src;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCANF;SCANF_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCANF;SCANF_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/libscanf/include;../../thirdparty/monolithic_tmplt;../../thirdparty/owemdjee/fast_float/include;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/cxxtest_catch_2_gtest/includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/libscanf/include;../../thirdparty/monolithic_tmplt;../../thirdparty/owemdjee/fast_float/include;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/cxxtest_catch_2_gtest/includes;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/libscanf/benchmark/runtime/common;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/libscanf/src;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -147,7 +147,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/libscanf/include;../../thirdparty/monolithic_tmplt;../../thirdparty/owemdjee/fast_float/include;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/cxxtest_catch_2_gtest/includes;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/libscanf/benchmark/runtime/common;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/libscanf/src;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/libscanf/include;../../thirdparty/monolithic_tmplt;../../thirdparty/owemdjee/fast_float/include;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/cxxtest_catch_2_gtest/includes;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/libscanf/benchmark/runtime/common;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/libscanf/src;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCANF;SCANF_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -155,7 +155,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCANF;SCANF_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/libscanf/include;../../thirdparty/monolithic_tmplt;../../thirdparty/owemdjee/fast_float/include;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/cxxtest_catch_2_gtest/includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/libscanf/include;../../thirdparty/monolithic_tmplt;../../thirdparty/owemdjee/fast_float/include;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/cxxtest_catch_2_gtest/includes;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/libscanf/benchmark/runtime/common;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/libscanf/src;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -176,14 +176,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/libscanf/include;../../thirdparty/monolithic_tmplt;../../thirdparty/owemdjee/fast_float/include;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/cxxtest_catch_2_gtest/includes;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/libscanf/benchmark/runtime/common;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/libscanf/src;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/libscanf/include;../../thirdparty/monolithic_tmplt;../../thirdparty/owemdjee/fast_float/include;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/cxxtest_catch_2_gtest/includes;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/libscanf/benchmark/runtime/common;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/libscanf/src;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCANF;SCANF_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCANF;SCANF_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/libscanf/include;../../thirdparty/monolithic_tmplt;../../thirdparty/owemdjee/fast_float/include;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/cxxtest_catch_2_gtest/includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/libscanf/include;../../thirdparty/monolithic_tmplt;../../thirdparty/owemdjee/fast_float/include;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/cxxtest_catch_2_gtest/includes;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/libscanf/benchmark/runtime/common;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/libscanf/src;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -202,7 +202,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/libscanf/include;../../thirdparty/monolithic_tmplt;../../thirdparty/owemdjee/fast_float/include;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/cxxtest_catch_2_gtest/includes;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/libscanf/benchmark/runtime/common;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/libscanf/src;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/libscanf/include;../../thirdparty/monolithic_tmplt;../../thirdparty/owemdjee/fast_float/include;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/cxxtest_catch_2_gtest/includes;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/libscanf/benchmark/runtime/common;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/libscanf/src;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCANF;SCANF_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -210,7 +210,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCANF;SCANF_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/libscanf/include;../../thirdparty/monolithic_tmplt;../../thirdparty/owemdjee/fast_float/include;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/cxxtest_catch_2_gtest/includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/libscanf/include;../../thirdparty/monolithic_tmplt;../../thirdparty/owemdjee/fast_float/include;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/cxxtest_catch_2_gtest/includes;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/libscanf/benchmark/runtime/common;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/libscanf/src;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -229,7 +229,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="../../thirdparty/owemdjee/libscanf/cmake/charconv_compile_test.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libscanf/tests/consumer-test/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/tests/consumer-test/library/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/tests/consumer-test/module/main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libscanf/tests/unittests/align_and_fill_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libscanf/tests/unittests/args_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libscanf/tests/unittests/buffer_test.cpp" />
@@ -285,6 +286,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/libscanf/tests/unittests/localized_tests/localized_chrono_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libscanf/tests/unittests/main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libscanf/tests/unittests/memory_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscanf/tests/unittests/module_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libscanf/tests/unittests/ranges_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libscanf/tests/unittests/regex_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libscanf/tests/unittests/result_test.cpp" />
@@ -299,6 +301,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/libscanf/include/scn/chrono.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libscanf/include/scn/fwd.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libscanf/include/scn/istream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libscanf/include/scn/macros.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libscanf/include/scn/ranges.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libscanf/include/scn/regex.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libscanf/include/scn/scan.h" />
@@ -317,6 +320,7 @@
     <Text Include="../../thirdparty/owemdjee/libscanf/cmake/icm_build_failure_parse_and_run.cmake" />
     <Text Include="../../thirdparty/owemdjee/libscanf/cmake/icm_build_failure_testing.cmake" />
     <Text Include="../../thirdparty/owemdjee/libscanf/cmake/install.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libscanf/cmake/modules.cmake" />
     <Text Include="../../thirdparty/owemdjee/libscanf/cmake/options.cmake" />
     <Text Include="../../thirdparty/owemdjee/libscanf/cmake/sanitizers.cmake" />
     <Text Include="../../thirdparty/owemdjee/libscanf/cmake/scn-config.cmake.in" />
@@ -332,7 +336,8 @@
     <Text Include="../../thirdparty/owemdjee/libscanf/scripts/coverage.sh" />
     <Text Include="../../thirdparty/owemdjee/libscanf/scripts/version.py" />
     <Text Include="../../thirdparty/owemdjee/libscanf/tests/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/libscanf/tests/consumer-test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libscanf/tests/consumer-test/library/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libscanf/tests/consumer-test/module/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libscanf/tests/unittests/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libscanf/tests/unittests/compilefail_tests/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libscanf/tests/unittests/examples_test_runner.py" />
@@ -341,3 +346,4 @@
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
+  

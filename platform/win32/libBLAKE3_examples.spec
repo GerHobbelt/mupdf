@@ -1,0 +1,4 @@
+
+also-ignore:
+	/c/[b].*
+	

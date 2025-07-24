@@ -52,16 +52,16 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -74,7 +74,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -88,7 +88,7 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4264;4263;4068;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <LanguageStandard_C>stdclatest</LanguageStandard_C>
       <SupportJustMyCode>false</SupportJustMyCode>
@@ -108,8 +108,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSPATIALINDEX;SPATIALINDEX_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -121,14 +121,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/libspatialindex/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/libspatialindex/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;../../thirdparty/owemdjee/googletest/googletest;../../scripts/boost/include;../../thirdparty/owemdjee/boost/libs/date_time/include;../../thirdparty/owemdjee/boost/libs/asio/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSPATIALINDEX;SPATIALINDEX_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSPATIALINDEX;SPATIALINDEX_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/libspatialindex/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/libspatialindex/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;../../thirdparty/owemdjee/googletest/googletest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -147,7 +147,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/libspatialindex/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/libspatialindex/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;../../thirdparty/owemdjee/googletest/googletest;../../scripts/boost/include;../../thirdparty/owemdjee/boost/libs/date_time/include;../../thirdparty/owemdjee/boost/libs/asio/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSPATIALINDEX;SPATIALINDEX_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -155,7 +155,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSPATIALINDEX;SPATIALINDEX_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/libspatialindex/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/libspatialindex/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;../../thirdparty/owemdjee/googletest/googletest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -176,14 +176,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/libspatialindex/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/libspatialindex/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;../../thirdparty/owemdjee/googletest/googletest;../../scripts/boost/include;../../thirdparty/owemdjee/boost/libs/date_time/include;../../thirdparty/owemdjee/boost/libs/asio/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSPATIALINDEX;SPATIALINDEX_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSPATIALINDEX;SPATIALINDEX_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/libspatialindex/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/libspatialindex/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;../../thirdparty/owemdjee/googletest/googletest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -202,7 +202,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/libspatialindex/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/libspatialindex/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;../../thirdparty/owemdjee/googletest/googletest;../../scripts/boost/include;../../thirdparty/owemdjee/boost/libs/date_time/include;../../thirdparty/owemdjee/boost/libs/asio/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSPATIALINDEX;SPATIALINDEX_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -210,7 +210,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSPATIALINDEX;SPATIALINDEX_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/libspatialindex/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/libspatialindex/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;../../thirdparty/owemdjee/googletest/googletest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -234,17 +234,17 @@
     <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/src/capi/ObjVisitor.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/src/capi/Utility.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/src/capi/sidx_api.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/src/mvrtree/Index.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/src/mvrtree/Leaf.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/src/mvrtree/MVRTree.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/src/mvrtree/Node.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/src/mvrtree/Statistics.cc" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\libspatialindex\src\mvrtree\mvr-Index.cc" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\libspatialindex\src\mvrtree\mvr-Leaf.cc" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\libspatialindex\src\mvrtree\MVRTree.cc" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\libspatialindex\src\mvrtree\mvr-Node.cc" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\libspatialindex\src\mvrtree\mvr-Statistics.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/src/rtree/BulkLoader.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/src/rtree/Index.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/src/rtree/Leaf.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/src/rtree/Node.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/src/rtree/RTree.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/src/rtree/Statistics.cc" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\libspatialindex\src\rtree\r-Index.cc" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\libspatialindex\src\rtree\r-Leaf.cc" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\libspatialindex\src\rtree\r-Node.cc" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\libspatialindex\src\rtree\RTree.cc" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\libspatialindex\src\rtree\r-Statistics.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/src/spatialindex/Ball.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/src/spatialindex/LineSegment.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/src/spatialindex/MovingPoint.cc" />
@@ -260,106 +260,29 @@
     <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/src/storagemanager/RandomEvictionsBuffer.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/src/tools/Tools.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/src/tools/rand48.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/src/tprtree/Index.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/src/tprtree/Leaf.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/src/tprtree/Node.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/src/tprtree/Statistics.cc" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\libspatialindex\src\tprtree\tpr-Index.cc" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\libspatialindex\src\tprtree\tpr-Leaf.cc" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\libspatialindex\src\tprtree\tpr-Node.cc" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\libspatialindex\src\tprtree\tpr-Statistics.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/src/tprtree/TPRTree.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/geometry/Intersection.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/samples/sample1.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/samples/sample10_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/samples/sample1_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/samples/sample2.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/samples/sample2_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/samples/sample3_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/samples/sample4.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/samples/sample4_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/samples/sample5_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/samples/sample6_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/samples/sample7_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/samples/sample8_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/samples/sample9_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/src/gtest-all.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/src/gtest-assertion-result.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/src/gtest-death-test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/src/gtest-filepath.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/src/gtest-matchers.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/src/gtest-port.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/src/gtest-printers.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/src/gtest-test-part.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/src/gtest-typed-test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/src/gtest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/src/gtest_main.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/googletest-break-on-failure-unittest_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/googletest-catch-exceptions-test_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/googletest-color-test_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/googletest-death-test-test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/googletest-death-test_ex_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/googletest-env-var-test_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/googletest-failfast-unittest_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/googletest-filepath-test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/googletest-filter-unittest_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/googletest-global-environment-unittest_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/googletest-list-tests-unittest_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/googletest-listener-test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/googletest-message-test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/googletest-options-test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/googletest-output-test_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/googletest-param-test-invalid-name1-test_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/googletest-param-test-invalid-name2-test_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/googletest-param-test-test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/googletest-param-test2-test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/googletest-port-test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/googletest-printers-test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/googletest-setuptestsuite-test_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/googletest-shuffle-test_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/googletest-test-part-test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/googletest-throw-on-failure-test_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/googletest-uninitialized-test_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/gtest-typed-test2_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/gtest-typed-test_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/gtest-unittest-api_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/gtest_all_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/gtest_assert_by_exception_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/gtest_dirs_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/gtest_environment_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/gtest_help_test_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/gtest_list_output_unittest_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/gtest_main_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/gtest_no_test_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/gtest_pred_impl_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/gtest_premature_exit_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/gtest_prod_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/gtest_repeat_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/gtest_skip_in_environment_setup_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/gtest_skip_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/gtest_sole_header_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/gtest_stress_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/gtest_test_macro_stack_footprint_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/gtest_testbridge_test_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/gtest_throw_on_failure_ex_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/gtest_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/gtest_xml_outfile1_test_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/gtest_xml_outfile2_test_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/gtest_xml_output_unittest_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/production.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/main.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/mvrtree/Exhaustive.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/mvrtree/Generator.cc" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\libspatialindex\test\mvrtree\mvr-Exhaustive.cc" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\libspatialindex\test\mvrtree\mvr-Generator.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/mvrtree/MVRTreeLoad.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/mvrtree/MVRTreeQuery.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/postinstall/test_c/test_c.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/postinstall/test_cc/test_cc.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/rtree/CRTree.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/rtree/Exhaustive.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/rtree/Generator.cc" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\libspatialindex\test\rtree\r-Exhaustive.cc" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\libspatialindex\test\rtree\r-Generator.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/rtree/RTreeBulkLoad.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/rtree/RTreeLoad.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/rtree/RTreeParallel.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/rtree/RTreeQuery.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/tools/TemporaryFile.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/tprtree/Exhaustive.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/tprtree/Generator.cc" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\libspatialindex\test\tprtree\tpr-Exhaustive.cc" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\libspatialindex\test\tprtree\tpr-Generator.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/tprtree/RandomGenerator.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/tprtree/TPRTreeLoad.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libspatialindex/test/tprtree/TPRTreeQuery.cc" />
@@ -417,38 +340,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/libspatialindex/src/tprtree/PointerPoolNode.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libspatialindex/src/tprtree/Statistics.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libspatialindex/src/tprtree/TPRTree.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/include/gtest/gtest-assertion-result.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/include/gtest/gtest-death-test.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/include/gtest/gtest-matchers.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/include/gtest/gtest-message.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/include/gtest/gtest-param-test.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/include/gtest/gtest-printers.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/include/gtest/gtest-spi.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/include/gtest/gtest-test-part.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/include/gtest/gtest-typed-test.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/include/gtest/gtest.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/include/gtest/gtest_pred_impl.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/include/gtest/gtest_prod.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/include/gtest/internal/custom/gtest-port.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/include/gtest/internal/custom/gtest-printers.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/include/gtest/internal/custom/gtest.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/include/gtest/internal/gtest-death-test-internal.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/include/gtest/internal/gtest-filepath.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/include/gtest/internal/gtest-internal.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/include/gtest/internal/gtest-param-util.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/include/gtest/internal/gtest-port-arch.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/include/gtest/internal/gtest-port.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/include/gtest/internal/gtest-string.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/include/gtest/internal/gtest-type-util.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/samples/prime_tables.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/samples/sample1.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/samples/sample2.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/samples/sample3-inl.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/samples/sample4.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/src/gtest-internal-inl.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/googletest-param-test-test.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/gtest-typed-test_test.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/production.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/sidx_api_test.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/test.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libspatialindex/test/tprtree/RandomGenerator.h" />
@@ -483,43 +374,6 @@
     <Text Include="../../thirdparty/owemdjee/libspatialindex/test/cleanup-test-output.sh" />
     <Text Include="../../thirdparty/owemdjee/libspatialindex/test/geometry/test1/run" />
     <Text Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/README.md" />
-    <Text Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/cmake/Config.cmake.in" />
-    <Text Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/cmake/gtest.pc.in" />
-    <Text Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/cmake/gtest_main.pc.in" />
-    <Text Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/cmake/internal_utils.cmake" />
-    <Text Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/cmake/libgtest.la.in" />
-    <Text Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/docs/README.md" />
-    <Text Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/include/gtest/internal/custom/README.md" />
-    <Text Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/googletest-break-on-failure-unittest.py" />
-    <Text Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/googletest-catch-exceptions-test.py" />
-    <Text Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/googletest-color-test.py" />
-    <Text Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/googletest-env-var-test.py" />
-    <Text Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/googletest-failfast-unittest.py" />
-    <Text Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/googletest-filter-unittest.py" />
-    <Text Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/googletest-global-environment-unittest.py" />
-    <Text Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/googletest-json-outfiles-test.py" />
-    <Text Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/googletest-json-output-unittest.py" />
-    <Text Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/googletest-list-tests-unittest.py" />
-    <Text Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/googletest-output-test-golden-lin.txt" />
-    <Text Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/googletest-output-test.py" />
-    <Text Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/googletest-param-test-invalid-name1-test.py" />
-    <Text Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/googletest-param-test-invalid-name2-test.py" />
-    <Text Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/googletest-setuptestsuite-test.py" />
-    <Text Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/googletest-shuffle-test.py" />
-    <Text Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/googletest-throw-on-failure-test.py" />
-    <Text Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/googletest-uninitialized-test.py" />
-    <Text Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/gtest_help_test.py" />
-    <Text Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/gtest_json_test_utils.py" />
-    <Text Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/gtest_list_output_unittest.py" />
-    <Text Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/gtest_skip_check_output_test.py" />
-    <Text Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/gtest_skip_environment_check_output_test.py" />
-    <Text Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/gtest_test_utils.py" />
-    <Text Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/gtest_testbridge_test.py" />
-    <Text Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/gtest_xml_outfiles_test.py" />
-    <Text Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/gtest_xml_output_unittest.py" />
-    <Text Include="../../thirdparty/owemdjee/libspatialindex/test/gtest/gtest-1.14.0/test/gtest_xml_test_utils.py" />
     <Text Include="../../thirdparty/owemdjee/libspatialindex/test/index-tests.sh" />
     <Text Include="../../thirdparty/owemdjee/libspatialindex/test/mvrtree/test1/run" />
     <Text Include="../../thirdparty/owemdjee/libspatialindex/test/mvrtree/test2/run" />
@@ -539,4 +393,3 @@
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
-  
