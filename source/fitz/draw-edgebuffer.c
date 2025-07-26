@@ -451,7 +451,7 @@ static void fz_insert_edgebuffer(fz_context *ctx, fz_rasterizer *ras, float fsx,
 }
 
 static inline void
-cursor_output(fz_edgebuffer * FZ_RESTRICT eb, int rev, int iy)
+cursor_output(fz_context* ctx, fz_edgebuffer * FZ_RESTRICT eb, int rev, int iy)
 {
 	int *row;
 	int count;
@@ -481,7 +481,7 @@ cursor_output(fz_edgebuffer * FZ_RESTRICT eb, int rev, int iy)
 				*row = count = (*row)+1; /* Increment the count */
 #ifdef DEBUG_SCAN_CONVERTER
 				if (debugging_scan_converter)
-					fprintf(stderr, "row: %x: %x->%x %c\n", iy, cr->left, cr->right, (cr->d^rev) == DIRN_UP ? '^' : (cr->d^rev) == DIRN_DOWN ? 'v' : '-');
+					fz_write_printf(ctx, fz_stderr(ctx), "row: %x: %x->%x %c\n", iy, cr->left, cr->right, (cr->d^rev) == DIRN_UP ? '^' : (cr->d^rev) == DIRN_DOWN ? 'v' : '-');
 #endif
 				assert(count <= (eb->index[iy+1] - eb->index[iy] - 1)/2);
 				row[2 * count - 1] = (cr->left&~1) | (cr->d ^ rev);
@@ -493,7 +493,7 @@ cursor_output(fz_edgebuffer * FZ_RESTRICT eb, int rev, int iy)
 }
 
 static inline void
-cursor_output_inrange(fz_edgebuffer * FZ_RESTRICT eb, int rev, int iy)
+cursor_output_inrange(fz_context* ctx, fz_edgebuffer * FZ_RESTRICT eb, int rev, int iy)
 {
 	int *row;
 	int count;
@@ -527,7 +527,7 @@ cursor_output_inrange(fz_edgebuffer * FZ_RESTRICT eb, int rev, int iy)
 
 /* Step the cursor in y, allowing for maybe crossing a scanline */
 static inline void
-cursor_step(fz_edgebuffer * FZ_RESTRICT eb, int rev, fixed dy, fixed x)
+cursor_step(fz_context* ctx, fz_edgebuffer * FZ_RESTRICT eb, int rev, fixed dy, fixed x)
 {
 	cursor_t * FZ_RESTRICT cr = &eb->cursor[rev];
 	int new_iy;
@@ -537,7 +537,7 @@ cursor_step(fz_edgebuffer * FZ_RESTRICT eb, int rev, fixed dy, fixed x)
 	cr->y += dy;
 	new_iy = fixed2int(cr->y) - base;
 	if (new_iy != iy) {
-		cursor_output(eb, rev, iy);
+		cursor_output(ctx, eb, rev, iy);
 		cr->left = x;
 		cr->right = x;
 	} else {
@@ -591,13 +591,13 @@ cursor_never_step_right(fz_edgebuffer * FZ_RESTRICT eb, int rev, fixed dy, fixed
 
 /* Step the cursor in y, always by enough to cross a scanline. */
 static inline void
-cursor_always_step(fz_edgebuffer * FZ_RESTRICT eb, int rev, fixed dy, fixed x)
+cursor_always_step(fz_context* ctx, fz_edgebuffer * FZ_RESTRICT eb, int rev, fixed dy, fixed x)
 {
 	cursor_t * FZ_RESTRICT cr = &eb->cursor[rev];
 	int base = eb->super.clip.y0;
 	int iy = fixed2int(cr->y) - base;
 
-	cursor_output(eb, rev, iy);
+	cursor_output(ctx, eb, rev, iy);
 	cr->y += dy;
 	cr->left = x;
 	cr->right = x;
@@ -607,13 +607,13 @@ cursor_always_step(fz_edgebuffer * FZ_RESTRICT eb, int rev, fixed dy, fixed x)
  * part of a vertical line, knowing that we are moving from a
  * position guaranteed to be in the valid y range. */
 static inline void
-cursor_always_step_inrange_vertical(fz_edgebuffer * FZ_RESTRICT eb, int rev, fixed dy, fixed x)
+cursor_always_step_inrange_vertical(fz_context* ctx, fz_edgebuffer * FZ_RESTRICT eb, int rev, fixed dy, fixed x)
 {
 	cursor_t * FZ_RESTRICT cr = &eb->cursor[rev];
 	int base = eb->super.clip.y0;
 	int iy = fixed2int(cr->y) - base;
 
-	cursor_output(eb, rev, iy);
+	cursor_output(ctx, eb, rev, iy);
 	cr->y += dy;
 }
 
@@ -621,14 +621,14 @@ cursor_always_step_inrange_vertical(fz_edgebuffer * FZ_RESTRICT eb, int rev, fix
  * part of a left moving line, knowing that we are moving from a
  * position guaranteed to be in the valid y range. */
 static inline void
-cursor_always_inrange_step_left(fz_edgebuffer * FZ_RESTRICT eb, int rev, fixed dy, fixed x)
+cursor_always_inrange_step_left(fz_context* ctx, fz_edgebuffer * FZ_RESTRICT eb, int rev, fixed dy, fixed x)
 {
 	cursor_t * FZ_RESTRICT cr = &eb->cursor[rev];
 	int base = eb->super.clip.y0;
 	int iy = fixed2int(cr->y) - base;
 
 	cr->y += dy;
-	cursor_output_inrange(eb, rev, iy);
+	cursor_output_inrange(ctx, eb, rev, iy);
 	cr->right = x;
 }
 
@@ -636,14 +636,14 @@ cursor_always_inrange_step_left(fz_edgebuffer * FZ_RESTRICT eb, int rev, fixed d
  * part of a right moving line, knowing that we are moving from a
  * position guaranteed to be in the valid y range. */
 static inline void
-cursor_always_inrange_step_right(fz_edgebuffer * FZ_RESTRICT eb, int rev, fixed dy, fixed x)
+cursor_always_inrange_step_right(fz_context* ctx, fz_edgebuffer * FZ_RESTRICT eb, int rev, fixed dy, fixed x)
 {
 	cursor_t * FZ_RESTRICT cr = &eb->cursor[rev];
 	int base = eb->super.clip.y0;
 	int iy = fixed2int(cr->y) - base;
 
 	cr->y += dy;
-	cursor_output_inrange(eb, rev, iy);
+	cursor_output_inrange(ctx, eb, rev, iy);
 	cr->left = x;
 }
 
@@ -689,28 +689,28 @@ static inline void cursor_right(fz_edgebuffer * FZ_RESTRICT eb, int rev, fixed x
 	cr->right = x;
 }
 
-static inline void cursor_down(fz_edgebuffer * FZ_RESTRICT eb, int rev, fixed x)
+static inline void cursor_down(fz_context* ctx, fz_edgebuffer * FZ_RESTRICT eb, int rev, fixed x)
 {
 	cursor_t * FZ_RESTRICT cr = &eb->cursor[rev];
 	int base = eb->super.clip.y0;
 
 	if (cr->d == DIRN_UP)
 	{
-		cursor_output(eb, rev, fixed2int(cr->y) - base);
+		cursor_output(ctx, eb, rev, fixed2int(cr->y) - base);
 		cr->left = x;
 		cr->right = x;
 	}
 	cr->d = DIRN_DOWN;
 }
 
-static inline void cursor_up(fz_edgebuffer * FZ_RESTRICT eb, int rev, fixed x)
+static inline void cursor_up(fz_context* ctx, fz_edgebuffer * FZ_RESTRICT eb, int rev, fixed x)
 {
 	cursor_t * FZ_RESTRICT cr = &eb->cursor[rev];
 	int base = eb->super.clip.y0;
 
 	if (cr->d == DIRN_DOWN)
 	{
-		cursor_output(eb, rev, fixed2int(cr->y) - base);
+		cursor_output(ctx, eb, rev, fixed2int(cr->y) - base);
 		cr->left = x;
 		cr->right = x;
 	}
@@ -736,7 +736,7 @@ static inline int dirns_merge(int d0, int d1)
 }
 
 static void
-cursor_flush(fz_edgebuffer * FZ_RESTRICT eb)
+cursor_flush(fz_context* ctx, fz_edgebuffer * FZ_RESTRICT eb)
 {
 	int base = eb->super.clip.y0;
 	int iy0, iy1, iy2;
@@ -919,31 +919,31 @@ cursor_flush(fz_edgebuffer * FZ_RESTRICT eb)
 	}
 
 	if (!cr0->unset)
-		cursor_output(eb, 0, iy0);
+		cursor_output(ctx, eb, 0, iy0);
 	if (cr0->saved)
 	{
 		cr0->left = cr0->save_left;
 		cr0->right = cr0->save_right;
 		cr0->d = cr0->save_d;
-		cursor_output(eb, 0, cr0->save_iy);
+		cursor_output(ctx, eb, 0, cr0->save_iy);
 	}
 	if (!cr1->unset)
-		cursor_output(eb, 1, iy1);
+		cursor_output(ctx, eb, 1, iy1);
 	if (cr1->saved)
 	{
 		cr1->left = cr1->save_left;
 		cr1->right = cr1->save_right;
 		cr1->d = cr1->save_d;
-		cursor_output(eb, 1, cr1->save_iy);
+		cursor_output(ctx, eb, 1, cr1->save_iy);
 	}
 	if (!cr2->unset)
-		cursor_output(eb, 2, iy2);
+		cursor_output(ctx, eb, 2, iy2);
 	if (cr2->saved)
 	{
 		cr2->left = cr2->save_left;
 		cr2->right = cr2->save_right;
 		cr2->d = cr2->save_d;
-		cursor_output(eb, 2, cr2->save_iy);
+		cursor_output(ctx, eb, 2, cr2->save_iy);
 	}
 }
 
@@ -1075,10 +1075,10 @@ static void do_mark_line_app(fz_context *ctx, fz_edgebuffer *eb, fixed sx, fixed
 			/* Horizontal line. Don't change cr->d, don't flush. */
 		} else if (save_sy > save_ey) {
 			/* Falling line, flush if previous was rising */
-			cursor_down(eb, rev, sx);
+			cursor_down(ctx, eb, rev, sx);
 		} else {
 			/* Rising line, flush if previous was falling */
-			cursor_up(eb, rev, sx);
+			cursor_up(ctx, eb, rev, sx);
 		}
 		if (sx <= ex) {
 			cursor_left_merge(eb, rev, sx);
@@ -1106,7 +1106,7 @@ static void do_mark_line_app(fz_context *ctx, fz_edgebuffer *eb, fixed sx, fixed
 		int phase1_y_steps = (-sy) & (fixed_1 - 1);
 		int phase3_y_steps = ey & (fixed_1 - 1);
 
-		cursor_up(eb, rev, sx);
+		cursor_up(ctx, eb, rev, sx);
 
 		if (sx == ex) {
 			/* Vertical line. (Rising) */
@@ -1117,7 +1117,7 @@ static void do_mark_line_app(fz_context *ctx, fz_edgebuffer *eb, fixed sx, fixed
 			if (phase1_y_steps) {
 				/* If phase 1 will move us into a new scanline, then we must
 				 * flush it before we move. */
-				cursor_step(eb, rev, phase1_y_steps, sx);
+				cursor_step(ctx, eb, rev, phase1_y_steps, sx);
 				sy += phase1_y_steps;
 				(void) sy;
 				y_steps -= phase1_y_steps;
@@ -1132,10 +1132,10 @@ static void do_mark_line_app(fz_context *ctx, fz_edgebuffer *eb, fixed sx, fixed
 			y_steps = fixed2int(y_steps);
 			assert(y_steps >= 0);
 			if (y_steps > 0) {
-				cursor_always_step(eb, rev, fixed_1, sx);
+				cursor_always_step(ctx, eb, rev, fixed_1, sx);
 				y_steps--;
 				while (y_steps) {
-					cursor_always_step_inrange_vertical(eb, rev, fixed_1, sx);
+					cursor_always_step_inrange_vertical(ctx, eb, rev, fixed_1, sx);
 					y_steps--;
 				}
 			}
@@ -1155,7 +1155,7 @@ static void do_mark_line_app(fz_context *ctx, fz_edgebuffer *eb, fixed sx, fixed
 				sx += phase1_x_steps;
 				cursor_right_merge(eb, rev, sx);
 				x_steps -= phase1_x_steps;
-				cursor_step(eb, rev, phase1_y_steps, sx);
+				cursor_step(ctx, eb, rev, phase1_y_steps, sx);
 				sy += phase1_y_steps;
 				(void) sy;
 				y_steps -= phase1_y_steps;
@@ -1187,7 +1187,7 @@ static void do_mark_line_app(fz_context *ctx, fz_edgebuffer *eb, fixed sx, fixed
 				if (f < 0)
 					f += d, sx++;
 				cursor_right_merge(eb, rev, sx);
-				cursor_always_step(eb, rev, fixed_1, sx);
+				cursor_always_step(ctx, eb, rev, fixed_1, sx);
 				y_steps--;
 
 				while (y_steps) {
@@ -1196,7 +1196,7 @@ static void do_mark_line_app(fz_context *ctx, fz_edgebuffer *eb, fixed sx, fixed
 					if (f < 0)
 						f += d, sx++;
 					cursor_right(eb, rev, sx);
-					cursor_always_inrange_step_right(eb, rev, fixed_1, sx);
+					cursor_always_inrange_step_right(ctx, eb, rev, fixed_1, sx);
 					y_steps--;
 				};
 			}
@@ -1217,7 +1217,7 @@ static void do_mark_line_app(fz_context *ctx, fz_edgebuffer *eb, fixed sx, fixed
 				x_steps -= phase1_x_steps;
 				sx -= phase1_x_steps;
 				cursor_left_merge(eb, rev, sx);
-				cursor_step(eb, rev, phase1_y_steps, sx);
+				cursor_step(ctx, eb, rev, phase1_y_steps, sx);
 				sy += phase1_y_steps;
 				(void) sy;
 				y_steps -= phase1_y_steps;
@@ -1249,7 +1249,7 @@ static void do_mark_line_app(fz_context *ctx, fz_edgebuffer *eb, fixed sx, fixed
 				if (f < 0)
 					f += d, sx--;
 				cursor_left_merge(eb, rev, sx);
-				cursor_always_step(eb, rev, fixed_1, sx);
+				cursor_always_step(ctx, eb, rev, fixed_1, sx);
 				y_steps--;
 
 				while (y_steps) {
@@ -1258,7 +1258,7 @@ static void do_mark_line_app(fz_context *ctx, fz_edgebuffer *eb, fixed sx, fixed
 					if (f < 0)
 						f += d, sx--;
 					cursor_left(eb, rev, sx);
-					cursor_always_inrange_step_left(eb, rev, fixed_1, sx);
+					cursor_always_inrange_step_left(ctx, eb, rev, fixed_1, sx);
 					y_steps--;
 				}
 			}
@@ -1293,7 +1293,7 @@ static void do_mark_line_app(fz_context *ctx, fz_edgebuffer *eb, fixed sx, fixed
 			return;
 		}
 
-		cursor_down(eb, rev, sx);
+		cursor_down(ctx, eb, rev, sx);
 
 		if (sx == ex) {
 			/* Vertical line. (Falling) */
@@ -1319,17 +1319,17 @@ static void do_mark_line_app(fz_context *ctx, fz_edgebuffer *eb, fixed sx, fixed
 			y_steps = fixed2int(y_steps);
 			assert(y_steps >= 0);
 			if (y_steps) {
-				cursor_always_step(eb, rev, -fixed_1, sx);
+				cursor_always_step(ctx, eb, rev, -fixed_1, sx);
 				y_steps--;
 				while (y_steps) {
-					cursor_always_step_inrange_vertical(eb, rev, -fixed_1, sx);
+					cursor_always_step_inrange_vertical(ctx, eb, rev, -fixed_1, sx);
 					y_steps--;
 				}
 			}
 
 			/* Phase 3 */
 			if (phase3_y_steps > 0) {
-				cursor_step(eb, rev, -phase3_y_steps, sx);
+				cursor_step(ctx, eb, rev, -phase3_y_steps, sx);
 				assert(cr->left == sx && cr->right == sx);
 			}
 		}
@@ -1372,7 +1372,7 @@ static void do_mark_line_app(fz_context *ctx, fz_edgebuffer *eb, fixed sx, fixed
 				int f = y_steps / 2;
 				int d = y_steps;
 
-				cursor_always_step(eb, rev, -fixed_1, sx);
+				cursor_always_step(ctx, eb, rev, -fixed_1, sx);
 				sx += x_inc;
 				f -= n_inc;
 				if (f < 0)
@@ -1381,7 +1381,7 @@ static void do_mark_line_app(fz_context *ctx, fz_edgebuffer *eb, fixed sx, fixed
 				y_steps--;
 
 				while (y_steps) {
-					cursor_always_inrange_step_right(eb, rev, -fixed_1, sx);
+					cursor_always_inrange_step_right(ctx, eb, rev, -fixed_1, sx);
 					sx += x_inc;
 					f -= n_inc;
 					if (f < 0)
@@ -1393,7 +1393,7 @@ static void do_mark_line_app(fz_context *ctx, fz_edgebuffer *eb, fixed sx, fixed
 
 			/* Phase 3 */
 			if (phase3_y_steps > 0) {
-				cursor_step(eb, rev, -phase3_y_steps, sx);
+				cursor_step(ctx, eb, rev, -phase3_y_steps, sx);
 				cursor_right(eb, rev, ex);
 				assert(cr->left == sx && cr->right == ex);
 			}
@@ -1437,7 +1437,7 @@ static void do_mark_line_app(fz_context *ctx, fz_edgebuffer *eb, fixed sx, fixed
 				int f = y_steps / 2;
 				int d = y_steps;
 
-				cursor_always_step(eb, rev, -fixed_1, sx);
+				cursor_always_step(ctx, eb, rev, -fixed_1, sx);
 				sx -= x_inc;
 				f -= n_inc;
 				if (f < 0)
@@ -1446,7 +1446,7 @@ static void do_mark_line_app(fz_context *ctx, fz_edgebuffer *eb, fixed sx, fixed
 				y_steps--;
 
 				while (y_steps) {
-					cursor_always_inrange_step_left(eb, rev, -fixed_1, sx);
+					cursor_always_inrange_step_left(ctx, eb, rev, -fixed_1, sx);
 					sx -= x_inc;
 					f -= n_inc;
 					if (f < 0)
@@ -1458,7 +1458,7 @@ static void do_mark_line_app(fz_context *ctx, fz_edgebuffer *eb, fixed sx, fixed
 
 			/* Phase 3 */
 			if (phase3_y_steps > 0) {
-				cursor_step(eb, rev, -phase3_y_steps, sx);
+				cursor_step(ctx, eb, rev, -phase3_y_steps, sx);
 				cursor_left(eb, rev, ex);
 				assert(cr->left == ex && cr->right == sx);
 			}
@@ -1466,7 +1466,7 @@ static void do_mark_line_app(fz_context *ctx, fz_edgebuffer *eb, fixed sx, fixed
 		}
 endFalling:
 		if (truncated)
-			cursor_output(eb, rev, fixed2int(cr->y) - base_y);
+			cursor_output(ctx, eb, rev, fixed2int(cr->y) - base_y);
 	}
 
 end:
@@ -1878,7 +1878,7 @@ static void fz_gap_edgebuffer(fz_context *ctx, fz_rasterizer *ras)
 			fz_edgebuffer_print_app(ctx, err, eb);
 		}
 #endif
-		cursor_flush(eb);
+		cursor_flush(ctx, eb);
 		eb->cursor[0].saved = 0;
 		eb->cursor[0].unset = 1;
 		eb->cursor[0].can_save = 1;
