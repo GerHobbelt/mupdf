@@ -140,7 +140,7 @@ void *ocr_init(fz_context *ctx, const char *language, const char *datadir)
 	if (language == NULL || language[0] == 0)
 		language = "eng";  // "eng+rus+chi_sim+chi_tra+deu+fra+por+jpn+hin+urd+vie+osd"
 
-	if (api->InitOem(datadir,
+	if (api->Init(datadir,
 		language,
 		tesseract::OcrEngineMode::OEM_DEFAULT,
 		&tess_file_reader))
