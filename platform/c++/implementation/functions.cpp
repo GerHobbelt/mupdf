@@ -54824,7 +54824,7 @@ FZ_FUNCTION int ll_pdf_field_type(::pdf_obj *field)
 			stack0 = auto_ctx->error.top - auto_ctx->error.stack_base;
 		}
 	#endif
-	int ret;
+	enum pdf_widget_type ret;
 	fz_try(auto_ctx) {
 		ret = ::pdf_field_type(auto_ctx, field);
 	}

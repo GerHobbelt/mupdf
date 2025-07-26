@@ -68,7 +68,7 @@ int pdf_field_flags(fz_context *ctx, pdf_obj *obj)
 	return pdf_dict_get_inheritable_int(ctx, obj, PDF_NAME(Ff));
 }
 
-int pdf_field_type(fz_context *ctx, pdf_obj *obj)
+enum pdf_widget_type pdf_field_type(fz_context *ctx, pdf_obj *obj)
 {
 	pdf_obj *type = pdf_dict_get_inheritable(ctx, obj, PDF_NAME(FT));
 	int flags = pdf_field_flags(ctx, obj);
@@ -647,7 +647,7 @@ pdf_update_page(fz_context *ctx, pdf_page *page)
 
 enum pdf_widget_type pdf_widget_type(fz_context *ctx, pdf_annot *widget)
 {
-	enum pdf_annot_type ret = PDF_WIDGET_TYPE_BUTTON;
+	enum pdf_widget_type ret = PDF_WIDGET_TYPE_BUTTON;
 
 	pdf_annot_push_local_xref(ctx, widget);
 

@@ -16809,7 +16809,7 @@ FZ_FUNCTION void pdf_field_set_text_color(const PdfObj& field, const PdfObj& col
 
 
 /* Class-aware wrapper for `::pdf_field_type()`.  */
-FZ_FUNCTION int pdf_field_type(const PdfObj& field)
+FZ_FUNCTION enum pdf_widget_type pdf_field_type(const PdfObj& field)
 {
 	#ifndef NDEBUG
 	if (s_trace) {
