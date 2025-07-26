@@ -416,7 +416,7 @@ fz_irect_width(fz_irect r)
 	 * if it does, it's pretty likely an indication of a severe
 	 * problem. */
 	w = (unsigned int)r.x1 - r.x0;
-	ASSERT_AND_CONTINUE0((int)w >= 0);
+	assert((int)w >= 0);
 	if ((int)w < 0)
 		return 0;
 	return (int)w;
@@ -435,8 +435,8 @@ fz_irect_height(fz_irect r)
 	 * if it does, it's pretty likely an indication of a severe
 	 * problem. */
 	h = (unsigned int)(r.y1 - r.y0);
-	ASSERT_AND_CONTINUE0(((int)h) >= 0);
-	if (((int)h) < 0)
+	assert((int)h >= 0);
+	if ((int)h < 0)
 		return 0;
 	return (int)h;
 }

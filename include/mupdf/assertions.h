@@ -23,6 +23,8 @@
 #undef assert
 #undef ASSERT
 
+// see our clone/fork of libassert repo/submodule for more...
+#define LIBASSERT_OFFER_SYSTEM_ASSERT_REPLACEMENT    1
 #include <libassert/assert.h>
 
 #ifdef __cplusplus
@@ -33,19 +35,19 @@ extern "C" {
 struct fz_context;
 typedef struct fz_context fz_context;
 
-// LIBASSERT_PREFIX_ASSERTIONS
 
 #if !defined(NO_ASSERTIONS)
 
 // --------------------------------------------------------------------------------------------------------------------------------------
 
-#ifndef FZ_WARN_ABOUT_ASSERT_COLLISION_WITH_STD_RTL
-//#define assert(expression)				...
+#if !defined(assert)
+#if !defined(FZ_WARN_ABOUT_ASSERT_COLLISION_WITH_STD_RTL)
 #else
-// make sure this expands to a compiler error:
+	// make sure this expands to a compiler error:
 #define assert(expression)       							                        \
   ;WARNING:: %% "do not use assert() but ASSERT() et al to prevent potential mishaps due to header files' load order picking the undesirable system/compiler assert.h implementation after all" %% ;
 #endif
+#endif // !assert
 
 #define ASSERT(expression)              LIBASSERT_ASSERT(expression)
 #define ASSERT_AND_CONTINUE(expression) LIBASSERT_DEBUG_ASSERT(expression)
@@ -85,13 +87,14 @@ void fz_check_and_report_failed_assertion_and_continue(fz_context *ctx, int expr
 
 #pragma message("You are compiling a binary with assertions removed. Be aware that this MAY only be a good thing for high quality, previously tested, production binaries that must produce the highest possible throughput. Cave canem!")
 
-#ifndef FZ_WARN_ABOUT_ASSERT_COLLISION_WITH_STD_RTL
-//#define assert(expression)				((void)0)
+#if !defined(assert)
+#if !defined(FZ_WARN_ABOUT_ASSERT_COLLISION_WITH_STD_RTL)
 #else
 	// make sure this expands to a compiler error:
 #define assert(expression)       							                        \
   ;WARNING:: %% "do not use assert() but ASSERT() et al to prevent potential mishaps due to header files' load order picking the undesirable system/compiler assert.h implementation after all" %% ;
 #endif
+#endif // !assert
 
 #define ASSERT(expression)				((void)0)
 #define ASSERT_AND_CONTINUE(expression) ((void)0)
