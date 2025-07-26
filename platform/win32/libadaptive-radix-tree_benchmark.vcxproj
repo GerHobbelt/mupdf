@@ -18,47 +18,33 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="libassert.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518fffea6c7}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libcpptrace.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff39d5ad}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libglob.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff518d62}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libsystem_override.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8318-7518ff7ef82f}</Project>
-    </ProjectReference>
-  </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF17062E}</ProjectGuid>
+    <ProjectGuid>{A653F119-69E6-48BA-895B-553ABBE7C451}</ProjectGuid>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
@@ -102,7 +88,7 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <DisableSpecificWarnings>4913;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <LanguageStandard_C>stdclatest</LanguageStandard_C>
       <SupportJustMyCode>false</SupportJustMyCode>
@@ -125,7 +111,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_GLOB;GLOB_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBADAPTIVE_RADIX_TREE;ADAPTIVE_RADIX_TREE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -135,14 +121,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/glob/include;../../scripts/libglob;../../thirdparty/owemdjee/clipp/include;../../thirdparty/owemdjee/filesystem/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILDING_GLOB;GLOB_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/adaptive-radix-tree/include;../../thirdparty/owemdjee/doctest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBADAPTIVE_RADIX_TREE;ADAPTIVE_RADIX_TREE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_GLOB;GLOB_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBADAPTIVE_RADIX_TREE;ADAPTIVE_RADIX_TREE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/glob/include;../../scripts/libglob;../../thirdparty/owemdjee/clipp/include;../../thirdparty/owemdjee/filesystem/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/adaptive-radix-tree/include;../../thirdparty/owemdjee/doctest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -150,17 +136,10 @@
     <Bscmake>
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
-    <Link>
-      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
-      <OptimizeReferences>true</OptimizeReferences>
-      <EnableCOMDATFolding>false</EnableCOMDATFolding>
-      <TargetMachine>MachineX86</TargetMachine>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_GLOB;GLOB_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBADAPTIVE_RADIX_TREE;ADAPTIVE_RADIX_TREE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -168,15 +147,15 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/glob/include;../../scripts/libglob;../../thirdparty/owemdjee/clipp/include;../../thirdparty/owemdjee/filesystem/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILDING_GLOB;GLOB_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/adaptive-radix-tree/include;../../thirdparty/owemdjee/doctest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBADAPTIVE_RADIX_TREE;ADAPTIVE_RADIX_TREE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_GLOB;GLOB_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBADAPTIVE_RADIX_TREE;ADAPTIVE_RADIX_TREE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/glob/include;../../scripts/libglob;../../thirdparty/owemdjee/clipp/include;../../thirdparty/owemdjee/filesystem/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/adaptive-radix-tree/include;../../thirdparty/owemdjee/doctest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -184,17 +163,10 @@
     <Bscmake>
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
-    <Link>
-      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
-      <TargetMachine>MachineX86</TargetMachine>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-      <OptimizeReferences>true</OptimizeReferences>
-      <EnableCOMDATFolding>false</EnableCOMDATFolding>
-    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_GLOB;GLOB_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBADAPTIVE_RADIX_TREE;ADAPTIVE_RADIX_TREE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -204,14 +176,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/glob/include;../../scripts/libglob;../../thirdparty/owemdjee/clipp/include;../../thirdparty/owemdjee/filesystem/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILDING_GLOB;GLOB_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/adaptive-radix-tree/include;../../thirdparty/owemdjee/doctest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBADAPTIVE_RADIX_TREE;ADAPTIVE_RADIX_TREE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_GLOB;GLOB_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBADAPTIVE_RADIX_TREE;ADAPTIVE_RADIX_TREE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/glob/include;../../scripts/libglob;../../thirdparty/owemdjee/clipp/include;../../thirdparty/owemdjee/filesystem/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/adaptive-radix-tree/include;../../thirdparty/owemdjee/doctest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -219,17 +191,10 @@
     <Bscmake>
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
-    <Link>
-      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
-      <OptimizeReferences>true</OptimizeReferences>
-      <EnableCOMDATFolding>false</EnableCOMDATFolding>
-      <TargetMachine>MachineX64</TargetMachine>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_GLOB;GLOB_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBADAPTIVE_RADIX_TREE;ADAPTIVE_RADIX_TREE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -237,15 +202,15 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/glob/include;../../scripts/libglob;../../thirdparty/owemdjee/clipp/include;../../thirdparty/owemdjee/filesystem/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILDING_GLOB;GLOB_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/adaptive-radix-tree/include;../../thirdparty/owemdjee/doctest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBADAPTIVE_RADIX_TREE;ADAPTIVE_RADIX_TREE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_GLOB;GLOB_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBADAPTIVE_RADIX_TREE;ADAPTIVE_RADIX_TREE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/glob/include;../../scripts/libglob;../../thirdparty/owemdjee/clipp/include;../../thirdparty/owemdjee/filesystem/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/adaptive-radix-tree/include;../../thirdparty/owemdjee/doctest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -253,32 +218,50 @@
     <Bscmake>
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
-    <Link>
-      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
-      <TargetMachine>MachineX64</TargetMachine>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-      <OptimizeReferences>true</OptimizeReferences>
-      <EnableCOMDATFolding>false</EnableCOMDATFolding>
-    </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/glob/standalone/source/main.cpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/glob/include/glob/glob.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/glob/single_include/glob/glob.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/glob/standalone/source/monolithic_examples.h" />
-    <Image Include="../../thirdparty/owemdjee/glob/img/logo.png" />
-    <Text Include="../../thirdparty/owemdjee/glob/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/glob/CONTRIBUTING.md" />
-    <Text Include="../../thirdparty/owemdjee/glob/LICENSE" />
-    <Text Include="../../thirdparty/owemdjee/glob/README.md" />
-    <Text Include="../../thirdparty/owemdjee/glob/all/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/glob/build_and_run.sh" />
-    <Text Include="../../thirdparty/owemdjee/glob/cmake/CPM.cmake" />
-    <Text Include="../../thirdparty/owemdjee/glob/cmake/tools.cmake" />
-    <Text Include="../../thirdparty/owemdjee/glob/standalone/CMakeLists.txt" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptive-radix-tree/bench/delete.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptive-radix-tree/bench/insert.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptive-radix-tree/bench/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptive-radix-tree/bench/mixed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptive-radix-tree/bench/mixed_dense.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptive-radix-tree/bench/node_16.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptive-radix-tree/bench/node_256.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptive-radix-tree/bench/node_4.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptive-radix-tree/bench/node_48.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptive-radix-tree/bench/query_iteration.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptive-radix-tree/bench/query_sparse_uniform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptive-radix-tree/bench/query_sparse_uniform_64.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptive-radix-tree/bench/query_sparse_zipf.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptive-radix-tree/include/art.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptive-radix-tree/include/art/art.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptive-radix-tree/include/art/child_it.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptive-radix-tree/include/art/inner_node.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptive-radix-tree/include/art/leaf_node.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptive-radix-tree/include/art/node.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptive-radix-tree/include/art/node_16.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptive-radix-tree/include/art/node_256.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptive-radix-tree/include/art/node_4.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptive-radix-tree/include/art/node_48.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptive-radix-tree/include/art/tree_it.hpp" />
+    <Text Include="../../thirdparty/owemdjee/adaptive-radix-tree/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/adaptive-radix-tree/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/adaptive-radix-tree/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/adaptive-radix-tree/README.md" />
+    <Text Include="../../thirdparty/owemdjee/adaptive-radix-tree/report/art.tex" />
+    <Text Include="../../thirdparty/owemdjee/adaptive-radix-tree/report/images/IFIlogo-eps-converted-to.pdf" />
+    <Text Include="../../thirdparty/owemdjee/adaptive-radix-tree/report/images/IFIlogo.eps" />
+    <Text Include="../../thirdparty/owemdjee/adaptive-radix-tree/report/images/art_nodes_draw-eps-converted-to.pdf" />
+    <Text Include="../../thirdparty/owemdjee/adaptive-radix-tree/report/images/art_nodes_draw.eps" />
+    <Text Include="../../thirdparty/owemdjee/adaptive-radix-tree/report/images/dbtgBW-eps-converted-to.pdf" />
+    <Text Include="../../thirdparty/owemdjee/adaptive-radix-tree/report/images/dbtgBW.eps" />
+    <Text Include="../../thirdparty/owemdjee/adaptive-radix-tree/report/images/trie_s1_draw-eps-converted-to.pdf" />
+    <Text Include="../../thirdparty/owemdjee/adaptive-radix-tree/report/images/trie_s1_draw.eps" />
+    <Text Include="../../thirdparty/owemdjee/adaptive-radix-tree/report/images/trie_s2_draw-eps-converted-to.pdf" />
+    <Text Include="../../thirdparty/owemdjee/adaptive-radix-tree/report/images/trie_s2_draw.eps" />
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>

@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF46A940}</ProjectGuid>
+    <ProjectGuid>{E182C8B5-3455-4150-AD62-63C709B0A960}</ProjectGuid>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -111,7 +111,7 @@
 </ItemDefinitionGroup>
 <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFARMHASH;FARMHASH_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDECISION_TREE;DECISION_TREE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -121,14 +121,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFARMHASH;FARMHASH_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDECISION_TREE;DECISION_TREE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFARMHASH;FARMHASH_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDECISION_TREE;DECISION_TREE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -139,7 +139,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFARMHASH;FARMHASH_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDECISION_TREE;DECISION_TREE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -147,15 +147,15 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFARMHASH;FARMHASH_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDECISION_TREE;DECISION_TREE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFARMHASH;FARMHASH_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDECISION_TREE;DECISION_TREE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -166,7 +166,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFARMHASH;FARMHASH_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDECISION_TREE;DECISION_TREE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -176,14 +176,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFARMHASH;FARMHASH_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDECISION_TREE;DECISION_TREE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFARMHASH;FARMHASH_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDECISION_TREE;DECISION_TREE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -194,7 +194,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFARMHASH;FARMHASH_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDECISION_TREE;DECISION_TREE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -202,15 +202,15 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFARMHASH;FARMHASH_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDECISION_TREE;DECISION_TREE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFARMHASH;FARMHASH_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDECISION_TREE;DECISION_TREE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -223,60 +223,35 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/farmhash/dev/basics.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/farmhash/dev/builder.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/farmhash/dev/f.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/farmhash/dev/farmhashcc.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/farmhash/dev/farmhashmk.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/farmhash/dev/farmhashna.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/farmhash/dev/farmhashns.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/farmhash/dev/farmhashnt.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/farmhash/dev/farmhashsa.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/farmhash/dev/farmhashsu.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/farmhash/dev/farmhashte.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/farmhash/dev/farmhashuo.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/farmhash/dev/farmhashxo.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/farmhash/dev/platform.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/farmhash/dev/self-test-skeleton.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/farmhash/src/farm-test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/farmhash/src/farmhash.cc" />
-    <ClInclude Include="../../thirdparty/owemdjee/farmhash/dev/farmhash.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/farmhash/src/farmhash.h" />
-    <Text Include="../../thirdparty/owemdjee/farmhash/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/farmhash/COPYING" />
-    <Text Include="../../thirdparty/owemdjee/farmhash/Makefile.am" />
-    <Text Include="../../thirdparty/owemdjee/farmhash/NEWS" />
-    <Text Include="../../thirdparty/owemdjee/farmhash/README.md" />
-    <Text Include="../../thirdparty/owemdjee/farmhash/Understanding_Hash_Functions" />
-    <Text Include="../../thirdparty/owemdjee/farmhash/configure.ac" />
-    <Text Include="../../thirdparty/owemdjee/farmhash/configure.m4" />
-    <Text Include="../../thirdparty/owemdjee/farmhash/dev/INSTRUCTIONS" />
-    <Text Include="../../thirdparty/owemdjee/farmhash/dev/PATCH" />
-    <Text Include="../../thirdparty/owemdjee/farmhash/dev/SELFTESTCityHash128WithSeed" />
-    <Text Include="../../thirdparty/owemdjee/farmhash/dev/SELFTESTFingerprint128" />
-    <Text Include="../../thirdparty/owemdjee/farmhash/dev/SELFTESTHash32" />
-    <Text Include="../../thirdparty/owemdjee/farmhash/dev/SELFTESTHash32WithSeed" />
-    <Text Include="../../thirdparty/owemdjee/farmhash/dev/SELFTESTHash64" />
-    <Text Include="../../thirdparty/owemdjee/farmhash/dev/SELFTESTHash64WithSeed" />
-    <Text Include="../../thirdparty/owemdjee/farmhash/dev/SELFTESTHash64WithSeeds" />
-    <Text Include="../../thirdparty/owemdjee/farmhash/dev/TESTBOILERPLATEHash32" />
-    <Text Include="../../thirdparty/owemdjee/farmhash/dev/TESTBOILERPLATEHash32WithSeed" />
-    <Text Include="../../thirdparty/owemdjee/farmhash/dev/TESTBOILERPLATEHash64" />
-    <Text Include="../../thirdparty/owemdjee/farmhash/dev/TESTBOILERPLATEHash64WithSeed" />
-    <Text Include="../../thirdparty/owemdjee/farmhash/dev/TESTBOILERPLATEHash64WithSeeds" />
-    <Text Include="../../thirdparty/owemdjee/farmhash/dev/WRAPPERuint32tconstcharssizetlen" />
-    <Text Include="../../thirdparty/owemdjee/farmhash/dev/WRAPPERuint32tconstcharssizetlenuint32tseed" />
-    <Text Include="../../thirdparty/owemdjee/farmhash/dev/WRAPPERuint32tconstcharssizetlenuint64tseed" />
-    <Text Include="../../thirdparty/owemdjee/farmhash/dev/WRAPPERuint32tconstcharssizetlenuint64tseed0uint64tseed1" />
-    <Text Include="../../thirdparty/owemdjee/farmhash/dev/WRAPPERuint64tconstcharssizetlen" />
-    <Text Include="../../thirdparty/owemdjee/farmhash/dev/WRAPPERuint64tconstcharssizetlenuint64tseed" />
-    <Text Include="../../thirdparty/owemdjee/farmhash/dev/WRAPPERuint64tconstcharssizetlenuint64tseed0uint64tseed1" />
-    <Text Include="../../thirdparty/owemdjee/farmhash/dev/cmake_m32" />
-    <Text Include="../../thirdparty/owemdjee/farmhash/dev/create-self-test" />
-    <Text Include="../../thirdparty/owemdjee/farmhash/dev/do-in-parallel" />
-    <Text Include="../../thirdparty/owemdjee/farmhash/dev/fix-copyright" />
-    <Text Include="../../thirdparty/owemdjee/farmhash/dev/remove-from-to" />
-    <Text Include="../../thirdparty/owemdjee/farmhash/src/Makefile.am" />
+    <ClCompile Include="../../thirdparty/owemdjee/decision-tree/test/CSVReaderTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/decision-tree/test/DecisionTreeTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/decision-tree/test/NodeTests.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/decision-tree/CSVReader.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/decision-tree/DecisionTree.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/decision-tree/Node.hpp" />
+    <Image Include="../../thirdparty/owemdjee/decision-tree/presentations/assets/DecisionTree.png" />
+    <Image Include="../../thirdparty/owemdjee/decision-tree/presentations/assets/PythonvsCpp.jpg" />
+    <Image Include="../../thirdparty/owemdjee/decision-tree/presentations/assets/cpp_python_stack.png" />
+    <Image Include="../../thirdparty/owemdjee/decision-tree/presentations/assets/deleted_variable.png" />
+    <Image Include="../../thirdparty/owemdjee/decision-tree/presentations/assets/iris.png" />
+    <Image Include="../../thirdparty/owemdjee/decision-tree/presentations/assets/pythonvscpp.png" />
+    <Image Include="../../thirdparty/owemdjee/decision-tree/presentations/assets/testing.png" />
+    <Image Include="../../thirdparty/owemdjee/decision-tree/presentations/assets/type_compiler_error.png" />
+    <Text Include="../../thirdparty/owemdjee/decision-tree/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/decision-tree/README.md" />
+    <Text Include="../../thirdparty/owemdjee/decision-tree/decision_tree.py" />
+    <Text Include="../../thirdparty/owemdjee/decision-tree/notebooks/titanic/gender_submission.csv" />
+    <Text Include="../../thirdparty/owemdjee/decision-tree/notebooks/titanic/test.csv" />
+    <Text Include="../../thirdparty/owemdjee/decision-tree/notebooks/titanic/train.csv" />
+    <Text Include="../../thirdparty/owemdjee/decision-tree/presentations/PythonMeetup.md" />
+    <Text Include="../../thirdparty/owemdjee/decision-tree/presentations/PythonMeetup.pdf" />
+    <Text Include="../../thirdparty/owemdjee/decision-tree/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/decision-tree/test/resources/bigTest.csv" />
+    <Text Include="../../thirdparty/owemdjee/decision-tree/test/resources/bigTrain.csv" />
+    <Text Include="../../thirdparty/owemdjee/decision-tree/test/resources/test.csv" />
+    <Text Include="../../thirdparty/owemdjee/decision-tree/test/resources/titanicTest.csv" />
+    <Text Include="../../thirdparty/owemdjee/decision-tree/test/resources/titanicTrain.csv" />
+    <Text Include="../../thirdparty/owemdjee/decision-tree/test/resources/train.csv" />
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
