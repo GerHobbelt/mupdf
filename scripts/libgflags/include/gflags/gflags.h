@@ -259,6 +259,8 @@ enum FlagSettingMode {
 extern GFLAGS_DLL_DECL std::string SetCommandLineOption        (const char* name, const char* value);
 extern GFLAGS_DLL_DECL std::string SetCommandLineOptionWithMode(const char* name, const char* value, FlagSettingMode set_mode);
 
+extern GFLAGS_DLL_DECL bool ValidateCommandLineOption(const char* name, const char* value, std::string* err_msg);
+
 
 // --------------------------------------------------------------------
 // Saves the states (value, default value, whether the user has set

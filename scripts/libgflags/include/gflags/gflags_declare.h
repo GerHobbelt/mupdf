@@ -78,6 +78,8 @@
 
 // ---------------------------------------------------------------------------
 // Flag types
+#include <atomic>
+#include <shared_mutex>
 #include <string>
 #if 1
 #  include <stdint.h>                   // the normal place uint32_t is defined
@@ -107,6 +109,102 @@ typedef unsigned __int64 uint64;
 #else
 #  error Do not know how to define a 32-bit integer quantity on your system
 #endif
+
+template <typename AT, typename T>
+class AtomicType : public AT {
+ public:
+  AtomicType() : AT() {}
+  AtomicType(const T& value) : AT(value) {}
+  operator T() const { return AT::load(std::memory_order_acquire); }
+
+ private:
+  friend void SetFlagValue(AtomicType<AT, T>* var, const T& value) {
+    var->store(value, std::memory_order_release);
+  }
+
+  T operator=(const T value) {
+    AT::store(value, std::memory_order_release);
+    return value;
+  }
+};
+
+class AtomicString {
+ public:
+  AtomicString() : value_() {}
+  AtomicString(const std::string& value) : value_(value) {}
+  AtomicString(const AtomicString& value) : value_(value) {}
+  operator std::string() const {
+    std::shared_lock l(mutex_);
+    return value_;
+  }
+
+  bool operator==(const std::string& value) const {
+    std::shared_lock l(mutex_);
+    return value_ == value;
+  }
+
+  bool operator==(const AtomicString& rhs) const {
+    std::shared_lock l(mutex_);
+    return value_ == (std::string)(rhs);
+  }
+
+  bool operator==(const char* rhs) const {
+    std::shared_lock l(mutex_);
+    return value_ == rhs;
+  }
+
+ private:
+  friend void SetFlagValue(AtomicString* var, const char* value) { *var = value; }
+  friend void SetFlagValue(AtomicString* var, const std::string& value) { *var = value; }
+  friend void SetFlagValue(AtomicString* var, const AtomicString& value) { *var = value; }
+
+  const std::string& operator=(const std::string& value) {
+    std::lock_guard l(mutex_);
+    value_ = value;
+    return value;
+  }
+
+  const std::string& operator=(std::string&& value) {
+    std::lock_guard l(mutex_);
+    value_ = value;
+    return value;
+  }
+
+  const char* operator=(const char* value) {
+    std::lock_guard l(mutex_);
+    value_ = value;
+    return value;
+  }
+
+  const char* operator=(char*&& value) {
+    std::lock_guard l(mutex_);
+    value_ = value;
+    return value;
+  }
+
+  const AtomicString& operator=(const AtomicString& rhs) {
+    std::lock_guard l(mutex_);
+    value_ = (std::string)rhs;
+    return rhs;
+  }
+
+  const AtomicString& operator=(AtomicString&& rhs) {
+    std::lock_guard l(mutex_);
+    value_ = (std::string)rhs;
+    return rhs;
+  }
+
+  mutable std::shared_mutex mutex_;
+  std::string value_;
+};
+
+typedef AtomicType<std::atomic<bool>, bool> atomic_bool;
+typedef AtomicType<std::atomic<int32>, int32> atomic_int32;
+typedef AtomicType<std::atomic<uint32>, uint32> atomic_uint32;
+typedef AtomicType<std::atomic<int64>, int64> atomic_int64;
+typedef AtomicType<std::atomic<uint64>, uint64> atomic_uint64;
+typedef AtomicType<std::atomic<double>, double> atomic_double;
+typedef AtomicString atomic_string;
 
 } // namespace GFLAGS_NAMESPACE
 
@@ -151,6 +249,27 @@ typedef std::string clstring;
   extern GFLAGS_DLL_DECLARE_FLAG ::fLS::clstring& FLAGS_##name; \
   } \
   using fLS::FLAGS_##name
+
+#define DECLARE_ATOMIC_bool(name) \
+  DECLARE_VARIABLE(::GFLAGS_NAMESPACE::atomic_bool, B, name)
+
+#define DECLARE_ATOMIC_int32(name) \
+  DECLARE_VARIABLE(::GFLAGS_NAMESPACE::atomic_int32, I, name)
+
+#define DECLARE_ATOMIC_uint32(name) \
+  DECLARE_VARIABLE(::GFLAGS_NAMESPACE::atomic_uint32, U, name)
+
+#define DECLARE_ATOMIC_int64(name) \
+  DECLARE_VARIABLE(::GFLAGS_NAMESPACE::atomic_int64, I64, name)
+
+#define DECLARE_ATOMIC_uint64(name) \
+  DECLARE_VARIABLE(::GFLAGS_NAMESPACE::atomic_uint64, U64, name)
+
+#define DECLARE_ATOMIC_double(name) \
+  DECLARE_VARIABLE(::GFLAGS_NAMESPACE::atomic_double, D, name)
+
+#define DECLARE_ATOMIC_string(name) \
+  DECLARE_VARIABLE(::GFLAGS_NAMESPACE::atomic_string, S, name)
 
 
 #endif  // GFLAGS_DECLARE_H_

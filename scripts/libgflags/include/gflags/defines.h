@@ -44,5 +44,6 @@
 // Define if your pthread library defines the type pthread_rwlock_t
 #define HAVE_RWLOCK
 
+#undef STRIP_INTERNAL_FLAG_HELP
 
 #endif // GFLAGS_DEFINES_H_
