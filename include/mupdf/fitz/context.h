@@ -133,7 +133,7 @@ typedef struct
 	This assumes an enclosing fz_try() block within the callstack.
 */
 FZ_NORETURN void fz_vthrow(fz_context *ctx, int errcode, const char *fmt, va_list ap);
-FZ_NORETURN void fz_throw(fz_context *ctx, int errcode, const char *fmt, ...);
+FZ_NORETURN void fz_throw(fz_context *ctx, int errcode, FZ_FORMAT_STRING(const char *fmt), ...) FZ_PRINTFLIKE(3,4);
 FZ_NORETURN void fz_rethrow(fz_context *ctx);
 
 /**
@@ -151,7 +151,7 @@ void fz_morph_error(fz_context *ctx, int fromcode, int tocode);
 	default).
 */
 void fz_verror(fz_context* ctx, const char* fmt, va_list ap);
-void fz_error(fz_context* ctx, const char* fmt, ...);
+void fz_error(fz_context* ctx, FZ_FORMAT_STRING(const char* fmt), ...) FZ_PRINTFLIKE(2,3);
 void fz_write_error_line(fz_context* ctx, const char* line);
 
 /**
@@ -161,7 +161,7 @@ void fz_write_error_line(fz_context* ctx, const char* line);
 	default).
 */
 void fz_vwarn(fz_context *ctx, const char *fmt, va_list ap);
-void fz_warn(fz_context *ctx, const char *fmt, ...);
+void fz_warn(fz_context *ctx, FZ_FORMAT_STRING(const char *fmt), ...) FZ_PRINTFLIKE(2,3);
 void fz_write_warn_line(fz_context* ctx, const char* line);
 
 /**
@@ -171,7 +171,7 @@ void fz_write_warn_line(fz_context* ctx, const char* line);
 	default).
 */
 void fz_vinfo(fz_context* ctx, const char* fmt, va_list ap);
-void fz_info(fz_context* ctx, const char* fmt, ...);
+void fz_info(fz_context* ctx, FZ_FORMAT_STRING(const char* fmt), ...) FZ_PRINTFLIKE(2,3);
 void fz_write_info_line(fz_context* ctx, const char* line);
 
 /**
@@ -181,7 +181,7 @@ void fz_write_info_line(fz_context* ctx, const char* line);
 	default).
 */
 void fz_vdebug(fz_context* ctx, const char* fmt, va_list ap);
-void fz_debug(fz_context* ctx, const char* fmt, ...);
+void fz_debug(fz_context* ctx, FZ_FORMAT_STRING(const char* fmt), ...) FZ_PRINTFLIKE(2,3);
 void fz_write_debug_line(fz_context* ctx, const char* line);
 
 /**
@@ -223,14 +223,14 @@ void fz_rethrow_unless(fz_context *ctx, int errcode);
 	Format an error message, and log it to the registered
 	error stream (stderr by default).
 */
-void fz_log_error_printf(fz_context *ctx, const char *fmt, ...) FZ_PRINTFLIKE(2,3);
+void fz_log_error_printf(fz_context *ctx, FZ_FORMAT_STRING(const char *fmt), ...) FZ_PRINTFLIKE(2,3);
 void fz_vlog_error_printf(fz_context *ctx, const char *fmt, va_list ap);
 
 /**
 	Format a warning message, and log it to the registered
 	warning stream (stderr by default).
 */
-void fz_log_warning_printf(fz_context *ctx, const char *fmt, ...) FZ_PRINTFLIKE(2, 3);
+void fz_log_warning_printf(fz_context *ctx, FZ_FORMAT_STRING(const char *fmt), ...) FZ_PRINTFLIKE(2, 3);
 void fz_vlog_warning_printf(fz_context *ctx, const char *fmt, va_list ap);
 
 /**
@@ -271,17 +271,17 @@ void fz_end_throw_on_repair(fz_context *ctx);
 #define fz_log_warning(CTX, STR) fz_log_warning_printfFL(CTX, __FILE__, __LINE__, STR)
 #define fz_do_catch(CTX) fz_do_catchFL(CTX, __FILE__, __LINE__)
 FZ_NORETURN void fz_vthrowFL(fz_context *ctx, const char *file, int line, int errcode, const char *fmt, va_list ap);
-FZ_NORETURN void fz_throwFL(fz_context *ctx, const char *file, int line, int errcode, const char *fmt, ...) FZ_PRINTFLIKE(5,6);
+FZ_NORETURN void fz_throwFL(fz_context *ctx, const char *file, int line, int errcode, FZ_FORMAT_STRING(const char *fmt), ...) FZ_PRINTFLIKE(5,6);
 FZ_NORETURN void fz_rethrowFL(fz_context *ctx, const char *file, int line);
 void fz_morph_errorFL(fz_context *ctx, const char *file, int line, int fromcode, int tocode);
 void fz_vwarnFL(fz_context *ctx, const char *file, int line, const char *fmt, va_list ap);
-void fz_warnFL(fz_context *ctx, const char *file, int line, const char *fmt, ...) FZ_PRINTFLIKE(4,5);
+void fz_warnFL(fz_context *ctx, const char *file, int line, FZ_FORMAT_STRING(const char *fmt), ...) FZ_PRINTFLIKE(4,5);
 void fz_rethrow_ifFL(fz_context *ctx, const char *file, int line, int errcode);
 void fz_rethrow_unlessFL(fz_context *ctx, const char *file, int line, int errcode);
-void fz_log_error_printfFL(fz_context *ctx, const char *file, int line, const char *fmt, ...) FZ_PRINTFLIKE(4,5);
+void fz_log_error_printfFL(fz_context *ctx, const char *file, int line, FZ_FORMAT_STRING(const char *fmt), ...) FZ_PRINTFLIKE(4,5);
 void fz_vlog_error_printfFL(fz_context *ctx, const char *file, int line, const char *fmt, va_list ap);
 void fz_log_errorFL(fz_context *ctx, const char *file, int line, const char *str);
-void fz_log_warning_printfFL(fz_context *ctx, const char *file, int line, const char *fmt, ...) FZ_PRINTFLIKE(4, 5);
+void fz_log_warning_printfFL(fz_context *ctx, const char *file, int line, FZ_FORMAT_STRING(const char *fmt), ...) FZ_PRINTFLIKE(4, 5);
 void fz_vlog_warning_printfFL(fz_context *ctx, const char *file, int line, const char *fmt, va_list ap);
 void fz_log_warningFL(fz_context *ctx, const char *file, int line, const char *str);
 int fz_do_catchFL(fz_context *ctx, const char *file, int line);
