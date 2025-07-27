@@ -59,6 +59,7 @@ also-ignore:
 	/libs/graph/
 	/libs/graph_parallel/
 	/libs/hana/
+	/libs/hash2/
 	/libs/headers/
 	/libs/heap/
 	/libs/histogram/
@@ -86,6 +87,7 @@ also-ignore:
 	/libs/mp11/
 	/libs/mpi/
 	/libs/mpl/
+	/libs/mqtt5/
 	/libs/msm/
 	/libs/multiprecision/
 	/libs/multi_array/
@@ -97,6 +99,7 @@ also-ignore:
 	/libs/outcome/
 	/libs/parameter/
 	/libs/parameter_python/
+	/libs/parser/
 	/libs/pfr/
 	/libs/phoenix/
 	/libs/polygon/
@@ -132,6 +135,7 @@ also-ignore:
 	/libs/static_assert/
 	/libs/static_string/
 	/libs/stl_interfaces/
+	/libs/sync/
 	/libs/system/
 #	/libs/test/
 	/libs/thread/
