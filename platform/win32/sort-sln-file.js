@@ -74,6 +74,17 @@ slnstr = slnstr.replace(/    /g, '\t');
 //
 // since MSVC2022 may 2025 all we need are a few extra (bogus) EndProject lines; adding a bogus/duplicate project line like we did before will now be seen as an abortive error by MSVC2022!
 //
+// Note: as of July 2025 the old behaviour of MSVC2022 has been restored by Microsoft. Yay!
+//
+let projline = slnstr.match(/^\s*Project.*?8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942.*?$/m);
+if (projline && projline[0]) {
+	slnstr += `
+EndProject
+${projline}
+EndProject
+	`;	
+}
+
 slnstr += `
 
 EndProject
