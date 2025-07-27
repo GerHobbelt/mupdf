@@ -760,7 +760,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "owemdjee", "owemdjee", "{A1
 		..\..\thirdparty\owemdjee\update-README.js = ..\..\thirdparty\owemdjee\update-README.js
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "0__scratch", "0__scratch.vcxproj", "{A60D8644-5A1C-4D29-8970-101000000001}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "0__scratch", "0__scratch.vcxproj", "{A60D8644-5A1C-4D29-8970-101000000000}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1D-RGB-color-gradient", "1D-RGB-color-gradient.vcxproj", "{3644E12D-D934-41FD-BF7E-83745A17E226}"
 EndProject
@@ -825,6 +825,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "breakpad", "breakpad.vcxproj", "{A60D8644-5A1C-4D29-8970-7518FFBEE2B9}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "brotli", "brotli.vcxproj", "{A60D8644-5A1C-4D29-8970-7518FFB3B08F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "buffered_tee", "buffered_tee.vcxproj", "{9430F9F5-FA73-46C8-BD90-C5C1016B8C72}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "bulktest", "bulktest.vcxproj", "{8156C20C-DD56-4200-B4A6-40C056EB0A45}"
 EndProject
@@ -3170,6 +3172,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libopenGA_examples", "libop
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libOpenImageIO", "libOpenImageIO.vcxproj", "{A60D8644-5A1C-4D29-8970-7518FF4EDC48}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libopenimageio-mupdf", "libopenimageio-mupdf.vcxproj", "{A60D8644-5A1C-4D29-8970-7518FF4A240E}"
+EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libopenjpeg", "libopenjpeg.vcxproj", "{5EDCF4FD-0291-4FB9-8D96-758957CA5E3C}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libopenjpeg_tools", "libopenjpeg_tools.vcxproj", "{5EDCF4FD-0291-4FB9-8D96-75895703BE01}"
@@ -4836,14 +4840,14 @@ Global
 		{8E506476-FFAE-46B2-977D-45EB25ECF394}.Release|x64.Build.0 = Release|x64
 		{8E506476-FFAE-46B2-977D-45EB25ECF394}.Release|x86.ActiveCfg = Release|x86
 		{8E506476-FFAE-46B2-977D-45EB25ECF394}.Release|x86.Build.0 = Release|x86
-		{A60D8644-5A1C-4D29-8970-101000000001}.Debug|x64.ActiveCfg = Debug|x64
-		{A60D8644-5A1C-4D29-8970-101000000001}.Debug|x64.Build.0 = Debug|x64
-		{A60D8644-5A1C-4D29-8970-101000000001}.Debug|x86.ActiveCfg = Debug|Win32
-		{A60D8644-5A1C-4D29-8970-101000000001}.Debug|x86.Build.0 = Debug|Win32
-		{A60D8644-5A1C-4D29-8970-101000000001}.Release|x64.ActiveCfg = Release|x64
-		{A60D8644-5A1C-4D29-8970-101000000001}.Release|x64.Build.0 = Release|x64
-		{A60D8644-5A1C-4D29-8970-101000000001}.Release|x86.ActiveCfg = Release|Win32
-		{A60D8644-5A1C-4D29-8970-101000000001}.Release|x86.Build.0 = Release|Win32
+		{A60D8644-5A1C-4D29-8970-101000000000}.Debug|x64.ActiveCfg = Debug|x64
+		{A60D8644-5A1C-4D29-8970-101000000000}.Debug|x64.Build.0 = Debug|x64
+		{A60D8644-5A1C-4D29-8970-101000000000}.Debug|x86.ActiveCfg = Debug|Win32
+		{A60D8644-5A1C-4D29-8970-101000000000}.Debug|x86.Build.0 = Debug|Win32
+		{A60D8644-5A1C-4D29-8970-101000000000}.Release|x64.ActiveCfg = Release|x64
+		{A60D8644-5A1C-4D29-8970-101000000000}.Release|x64.Build.0 = Release|x64
+		{A60D8644-5A1C-4D29-8970-101000000000}.Release|x86.ActiveCfg = Release|Win32
+		{A60D8644-5A1C-4D29-8970-101000000000}.Release|x86.Build.0 = Release|Win32
 		{3644E12D-D934-41FD-BF7E-83745A17E226}.Debug|x64.ActiveCfg = Debug|x64
 		{3644E12D-D934-41FD-BF7E-83745A17E226}.Debug|x64.Build.0 = Debug|x64
 		{3644E12D-D934-41FD-BF7E-83745A17E226}.Debug|x86.ActiveCfg = Debug|Win32
@@ -20916,6 +20920,22 @@ Global
 		{A60D8644-5A1C-4D29-8970-7518FF528E77}.Release|x64.Build.0 = Release|x64
 		{A60D8644-5A1C-4D29-8970-7518FF528E77}.Release|x86.ActiveCfg = Release|Win32
 		{A60D8644-5A1C-4D29-8970-7518FF528E77}.Release|x86.Build.0 = Release|Win32
+		{9430F9F5-FA73-46C8-BD90-C5C1016B8C72}.Debug|x64.ActiveCfg = Debug|x64
+		{9430F9F5-FA73-46C8-BD90-C5C1016B8C72}.Debug|x64.Build.0 = Debug|x64
+		{9430F9F5-FA73-46C8-BD90-C5C1016B8C72}.Debug|x86.ActiveCfg = Debug|Win32
+		{9430F9F5-FA73-46C8-BD90-C5C1016B8C72}.Debug|x86.Build.0 = Debug|Win32
+		{9430F9F5-FA73-46C8-BD90-C5C1016B8C72}.Release|x64.ActiveCfg = Release|x64
+		{9430F9F5-FA73-46C8-BD90-C5C1016B8C72}.Release|x64.Build.0 = Release|x64
+		{9430F9F5-FA73-46C8-BD90-C5C1016B8C72}.Release|x86.ActiveCfg = Release|Win32
+		{9430F9F5-FA73-46C8-BD90-C5C1016B8C72}.Release|x86.Build.0 = Release|Win32
+		{A60D8644-5A1C-4D29-8970-7518FF4A240E}.Debug|x64.ActiveCfg = Debug|x64
+		{A60D8644-5A1C-4D29-8970-7518FF4A240E}.Debug|x64.Build.0 = Debug|x64
+		{A60D8644-5A1C-4D29-8970-7518FF4A240E}.Debug|x86.ActiveCfg = Debug|Win32
+		{A60D8644-5A1C-4D29-8970-7518FF4A240E}.Debug|x86.Build.0 = Debug|Win32
+		{A60D8644-5A1C-4D29-8970-7518FF4A240E}.Release|x64.ActiveCfg = Release|x64
+		{A60D8644-5A1C-4D29-8970-7518FF4A240E}.Release|x64.Build.0 = Release|x64
+		{A60D8644-5A1C-4D29-8970-7518FF4A240E}.Release|x86.ActiveCfg = Release|Win32
+		{A60D8644-5A1C-4D29-8970-7518FF4A240E}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -20945,6 +20965,23 @@ Global
 	EndGlobalSection
 EndGlobal
 
+EndProject
+	
+
+EndProject
+EndProject
+EndProject
+EndProject
+EndProject
+EndProject
+
+
+
+EndProject
+
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NTFS ADS Viewer", "..\..\..\thirdparty\DirScanner\NTFS ADS Viewer\NTFS ADS Viewer.vcxproj", "{28E9E026-5E87-4248-BA0B-07813DCD8DB1}"
+EndProject
+	
 
 EndProject
 EndProject
