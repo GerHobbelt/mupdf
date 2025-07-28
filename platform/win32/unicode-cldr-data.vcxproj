@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="Release|Win32">
-      <Configuration>Release</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
     <ProjectConfiguration Include="Debug|x64">
       <Configuration>Debug</Configuration>
       <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
     </ProjectConfiguration>
     <ProjectConfiguration Include="Release|x64">
       <Configuration>Release</Configuration>
@@ -19,34 +19,35 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <VCProjectVersion>17.0</VCProjectVersion>
     <ProjectGuid>{3644E12D-D934-41FD-BF7E-83745ACBA0F0}</ProjectGuid>
-    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Utility</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Utility</ConfigurationType>
-    <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Utility</ConfigurationType>
-    <UseDebugLibraries>true</UseDebugLibraries>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Utility</ConfigurationType>
-    <UseDebugLibraries>false</UseDebugLibraries>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
@@ -64,39 +65,9 @@
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
-  <ImportGroup Label="Shared">
-  </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <NMakeOutput></NMakeOutput>
-    <NMakePreprocessorDefinitions>NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
-    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
-    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
-    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
-    <LinkIncremental>false</LinkIncremental>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <NMakeOutput></NMakeOutput>
-    <NMakePreprocessorDefinitions>WIN32;_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
-    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
-    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
-    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
-    <LinkIncremental>false</LinkIncremental>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <NMakeOutput></NMakeOutput>
-    <NMakePreprocessorDefinitions>_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
-    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
-    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
-    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
-    <LinkIncremental>false</LinkIncremental>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <NMakeOutput></NMakeOutput>
-    <NMakePreprocessorDefinitions>WIN32;NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
@@ -138,10 +109,119 @@
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
 </ItemDefinitionGroup>
-<ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_UNICODE_CLDR;UNICODE_CLDR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/unicode-icu/icu4c/source/common;../../thirdparty/owemdjee/unicode-icu/icu4c/source/i18n;../../thirdparty/owemdjee/unicode-icu/icu4c/source/io;../../thirdparty/owemdjee/unicode-icu/icu4c/source/tools/toolutil;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_UNICODE_CLDR;UNICODE_CLDR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_UNICODE_CLDR;UNICODE_CLDR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/unicode-icu/icu4c/source/common;../../thirdparty/owemdjee/unicode-icu/icu4c/source/i18n;../../thirdparty/owemdjee/unicode-icu/icu4c/source/io;../../thirdparty/owemdjee/unicode-icu/icu4c/source/tools/toolutil;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_UNICODE_CLDR;UNICODE_CLDR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/unicode-icu/icu4c/source/common;../../thirdparty/owemdjee/unicode-icu/icu4c/source/i18n;../../thirdparty/owemdjee/unicode-icu/icu4c/source/io;../../thirdparty/owemdjee/unicode-icu/icu4c/source/tools/toolutil;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_UNICODE_CLDR;UNICODE_CLDR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_UNICODE_CLDR;UNICODE_CLDR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/unicode-icu/icu4c/source/common;../../thirdparty/owemdjee/unicode-icu/icu4c/source/i18n;../../thirdparty/owemdjee/unicode-icu/icu4c/source/io;../../thirdparty/owemdjee/unicode-icu/icu4c/source/tools/toolutil;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_UNICODE_CLDR;UNICODE_CLDR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/unicode-icu/icu4c/source/common;../../thirdparty/owemdjee/unicode-icu/icu4c/source/i18n;../../thirdparty/owemdjee/unicode-icu/icu4c/source/io;../../thirdparty/owemdjee/unicode-icu/icu4c/source/tools/toolutil;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_UNICODE_CLDR;UNICODE_CLDR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_UNICODE_CLDR;UNICODE_CLDR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/unicode-icu/icu4c/source/common;../../thirdparty/owemdjee/unicode-icu/icu4c/source/i18n;../../thirdparty/owemdjee/unicode-icu/icu4c/source/io;../../thirdparty/owemdjee/unicode-icu/icu4c/source/tools/toolutil;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_UNICODE_CLDR;UNICODE_CLDR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/unicode-icu/icu4c/source/common;../../thirdparty/owemdjee/unicode-icu/icu4c/source/i18n;../../thirdparty/owemdjee/unicode-icu/icu4c/source/io;../../thirdparty/owemdjee/unicode-icu/icu4c/source/tools/toolutil;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_UNICODE_CLDR;UNICODE_CLDR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_UNICODE_CLDR;UNICODE_CLDR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/unicode-icu/icu4c/source/common;../../thirdparty/owemdjee/unicode-icu/icu4c/source/i18n;../../thirdparty/owemdjee/unicode-icu/icu4c/source/io;../../thirdparty/owemdjee/unicode-icu/icu4c/source/tools/toolutil;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
-  <ImportGroup Label="ExtensionTargets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
   <ItemGroup>
     <Text Include="../../thirdparty/owemdjee/unicode-cldr-data/LICENSE" />
     <Text Include="../../thirdparty/owemdjee/unicode-cldr-data/PACKAGES.md" />

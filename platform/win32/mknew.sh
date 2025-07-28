@@ -1691,6 +1691,8 @@ logger_benchmarks
 politician
 win32-fileapi-demo
 hashtable-bench
+unicode-icu-data
+unicode-icu-demos
 
 0__scratch
 
@@ -1756,8 +1758,6 @@ tesseract_langdata
 tesseract_ocr_test
 tesstrain
 unicode-cldr-data
-unicode-icu-data
-unicode-icu-demos
 UnofficialLeptDocs
 wesanderson
 wordfreq

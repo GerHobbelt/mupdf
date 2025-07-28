@@ -6,3 +6,5 @@ also-ignore:
 	/test/applications/
 	/test/informational
 	
+	FuzzFailTest
+	

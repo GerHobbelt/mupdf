@@ -88,7 +88,7 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <DisableSpecificWarnings>5204;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <LanguageStandard_C>stdclatest</LanguageStandard_C>
       <SupportJustMyCode>false</SupportJustMyCode>
@@ -283,20 +283,25 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ProjectReference Include="libcxxtest_catch2_2_gtest.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff2b8fc2}</Project>
+    <ProjectReference Include="libassert.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fffea6c7}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libCatch2.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff4f227d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcpptrace.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff39d5ad}</Project>
     </ProjectReference>
     <ProjectReference Include="libfilesystem.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff38a587}</Project>
     </ProjectReference>
+    <ProjectReference Include="libsystem_override.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8318-7518ff7ef82f}</Project>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/filesystem/test/exception.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/filesystem/test/filesystem_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/filesystem/test/fwd_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/filesystem/test/impl_test.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/filesystem/test/multi1.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/filesystem/test/multi2.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/filesystem/test/catch.hpp" />
     <Text Include="../../thirdparty/owemdjee/filesystem/test/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/filesystem/test/cmake/ParseAndAddCatchTests.cmake" />
