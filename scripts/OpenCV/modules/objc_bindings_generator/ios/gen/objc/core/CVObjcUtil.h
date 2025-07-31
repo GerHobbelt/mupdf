@@ -7,8 +7,8 @@
 #pragma once
 
 #ifndef CV_EXPORTS
-#ifdef __cplusplus
-#define CV_EXPORTS __attribute__ ((visibility ("default")))
+#if defined(__cplusplus) && ( ( defined( __GNUC__ ) && __GNUC__ >= 4 ) || defined( __clang__ ) || defined( HAVE___ATTRIBUTE__ ) )
+#define CV_EXPORTS __attribute__((visibility ("default")))
 #else
 #define CV_EXPORTS
 #endif
