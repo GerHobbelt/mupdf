@@ -2,6 +2,13 @@
 #include "pch.h"
 
 
+
+// better to use the test-local (testsuite class based) approach instead, as demonstrated in googlelog/src/exception_handling_test.cc:
+// that approach is far less error-prone and should work well with googletest features such as running test **subsets** from
+// the commandline, etc., without causing "weird shit" to happen; the code below
+// would exhibit those problems under such (and other slightly out of the ordinary) circumstances and is therefor ill-advised
+// to be copied!
+
 class ExpectNFailuresListener : public testing::EmptyTestEventListener {
 public:
 	ExpectNFailuresListener(int n) :

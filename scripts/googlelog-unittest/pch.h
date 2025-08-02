@@ -8,6 +8,10 @@
 #include "gtest/gtest.h"
 #include <glog/logging.h>
 
+#include <iostream>
+#include <sstream>
+#include <stdexcept>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
