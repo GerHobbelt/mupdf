@@ -1,4 +1,5 @@
 
 also-ignore:
-	single_file_libs/
+	build/single_file_libs/
+	doc/educational_decoder/
 	

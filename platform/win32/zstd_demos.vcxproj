@@ -48,16 +48,16 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -70,7 +70,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -104,8 +104,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/zstd;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/zstd/lib/compress;../../thirdparty/owemdjee/zstd/programs;../../thirdparty/monolithic_tmplt;../../thirdparty/owemdjee/zstd/zlibWrapper;../../thirdparty/zlib;../../thirdparty/owemdjee/pthread-win32;../../scripts/zlib;../../thirdparty/owemdjee/getopt;../../thirdparty/owemdjee/zstd/lib/common;../../thirdparty/owemdjee/zstd/contrib/seekable_format;../../thirdparty/owemdjee/zstd/contrib/pzstd;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -123,7 +123,7 @@
       </ForceFileOutput>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/zstd;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/zstd/lib/compress;../../thirdparty/owemdjee/zstd/programs;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/zstd;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/zstd/lib/compress;../../thirdparty/owemdjee/zstd/programs;../../thirdparty/monolithic_tmplt;../../thirdparty/owemdjee/zstd/zlibWrapper;../../thirdparty/zlib;../../thirdparty/owemdjee/pthread-win32;../../scripts/zlib;../../thirdparty/owemdjee/getopt;../../thirdparty/owemdjee/zstd/lib/common;../../thirdparty/owemdjee/zstd/contrib/seekable_format;../../thirdparty/owemdjee/zstd/contrib/pzstd;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -147,7 +147,7 @@
       </ForceFileOutput>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/zstd;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/zstd/lib/compress;../../thirdparty/owemdjee/zstd/programs;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/zstd;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/zstd/lib/compress;../../thirdparty/owemdjee/zstd/programs;../../thirdparty/monolithic_tmplt;../../thirdparty/owemdjee/zstd/zlibWrapper;../../thirdparty/zlib;../../thirdparty/owemdjee/pthread-win32;../../scripts/zlib;../../thirdparty/owemdjee/getopt;../../thirdparty/owemdjee/zstd/lib/common;../../thirdparty/owemdjee/zstd/contrib/seekable_format;../../thirdparty/owemdjee/zstd/contrib/pzstd;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -168,7 +168,7 @@
       </ForceFileOutput>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/zstd;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/zstd/lib/compress;../../thirdparty/owemdjee/zstd/programs;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/zstd;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/zstd/lib/compress;../../thirdparty/owemdjee/zstd/programs;../../thirdparty/monolithic_tmplt;../../thirdparty/owemdjee/zstd/zlibWrapper;../../thirdparty/zlib;../../thirdparty/owemdjee/pthread-win32;../../scripts/zlib;../../thirdparty/owemdjee/getopt;../../thirdparty/owemdjee/zstd/lib/common;../../thirdparty/owemdjee/zstd/contrib/seekable_format;../../thirdparty/owemdjee/zstd/contrib/pzstd;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -192,7 +192,7 @@
       </ForceFileOutput>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/zstd;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/zstd/lib/compress;../../thirdparty/owemdjee/zstd/programs;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/zstd;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/zstd/lib/compress;../../thirdparty/owemdjee/zstd/programs;../../thirdparty/monolithic_tmplt;../../thirdparty/owemdjee/zstd/zlibWrapper;../../thirdparty/zlib;../../thirdparty/owemdjee/pthread-win32;../../scripts/zlib;../../thirdparty/owemdjee/getopt;../../thirdparty/owemdjee/zstd/lib/common;../../thirdparty/owemdjee/zstd/contrib/seekable_format;../../thirdparty/owemdjee/zstd/contrib/pzstd;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -323,6 +323,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/zstd/tests/bigdict.c" />
     <ClCompile Include="../../thirdparty/owemdjee/zstd/tests/checkTag.c" />
     <ClCompile Include="../../thirdparty/owemdjee/zstd/tests/datagencli.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/zstd/tests/decodecorpus.c" />
     <ClCompile Include="../../thirdparty/owemdjee/zstd/tests/external_matchfinder.c" />
     <ClCompile Include="../../thirdparty/owemdjee/zstd/tests/fullbench.c" />
     <ClCompile Include="../../thirdparty/owemdjee/zstd/tests/invalidDictionaries.c" />
@@ -385,7 +386,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/zstd/contrib/pzstd/utils/ThreadPool.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zstd/contrib/pzstd/utils/WorkQueue.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zstd/contrib/seekable_format/zstd_seekable.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/zstd/doc/educational_decoder/zstd_decompress.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zstd/examples/common.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zstd/lib/common/allocations.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zstd/lib/common/bits.h" />
@@ -462,7 +462,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/zstd/zlibWrapper/gzcompatibility.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zstd/zlibWrapper/gzguts.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zstd/zlibWrapper/zstd_zlibwrapper.h" />
-    <Image Include="../../thirdparty/owemdjee/zstd/build/single_file_libs/examples/testcard.png" />
     <Image Include="../../thirdparty/owemdjee/zstd/contrib/pzstd/images/Cspeed.png" />
     <Image Include="../../thirdparty/owemdjee/zstd/contrib/pzstd/images/Dspeed.png" />
     <Image Include="../../thirdparty/owemdjee/zstd/doc/images/CSpeed2.png" />
@@ -521,17 +520,6 @@
     <Text Include="../../thirdparty/owemdjee/zstd/build/meson/README.md" />
     <Text Include="../../thirdparty/owemdjee/zstd/build/meson/meson_options.txt" />
     <Text Include="../../thirdparty/owemdjee/zstd/build/meson/tests/valgrindTest.py" />
-    <Text Include="../../thirdparty/owemdjee/zstd/build/single_file_libs/README.md" />
-    <Text Include="../../thirdparty/owemdjee/zstd/build/single_file_libs/build_decoder_test.sh" />
-    <Text Include="../../thirdparty/owemdjee/zstd/build/single_file_libs/build_library_test.sh" />
-    <Text Include="../../thirdparty/owemdjee/zstd/build/single_file_libs/combine.py" />
-    <Text Include="../../thirdparty/owemdjee/zstd/build/single_file_libs/combine.sh" />
-    <Text Include="../../thirdparty/owemdjee/zstd/build/single_file_libs/create_single_file_decoder.sh" />
-    <Text Include="../../thirdparty/owemdjee/zstd/build/single_file_libs/create_single_file_library.sh" />
-    <Text Include="../../thirdparty/owemdjee/zstd/build/single_file_libs/examples/README.md" />
-    <Text Include="../../thirdparty/owemdjee/zstd/build/single_file_libs/examples/shell.html" />
-    <Text Include="../../thirdparty/owemdjee/zstd/build/single_file_libs/examples/testcard-dxt1.inl" />
-    <Text Include="../../thirdparty/owemdjee/zstd/build/single_file_libs/examples/testcard-zstd.inl" />
     <Text Include="../../thirdparty/owemdjee/zstd/contrib/VS2005/README.md" />
     <Text Include="../../thirdparty/owemdjee/zstd/contrib/cleanTabs" />
     <Text Include="../../thirdparty/owemdjee/zstd/contrib/diagnose_corruption/Makefile" />
@@ -572,8 +560,6 @@
     <Text Include="../../thirdparty/owemdjee/zstd/doc/README.md" />
     <Text Include="../../thirdparty/owemdjee/zstd/doc/decompressor_errata.md" />
     <Text Include="../../thirdparty/owemdjee/zstd/doc/decompressor_permissive.md" />
-    <Text Include="../../thirdparty/owemdjee/zstd/doc/educational_decoder/Makefile" />
-    <Text Include="../../thirdparty/owemdjee/zstd/doc/educational_decoder/README.md" />
     <Text Include="../../thirdparty/owemdjee/zstd/doc/zstd_compression_format.md" />
     <Text Include="../../thirdparty/owemdjee/zstd/doc/zstd_manual.html" />
     <Text Include="../../thirdparty/owemdjee/zstd/examples/Makefile" />
@@ -713,3 +699,4 @@
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
+  

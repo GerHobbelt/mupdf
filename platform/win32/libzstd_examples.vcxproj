@@ -52,16 +52,16 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -74,7 +74,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -108,8 +108,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZSTD;ZSTD_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -248,8 +248,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/zstd/contrib/seekable_format/zstdseek_compress.c" />
     <ClCompile Include="../../thirdparty/owemdjee/zstd/contrib/seekable_format/zstdseek_decompress.c" />
     <ClCompile Include="../../thirdparty/owemdjee/zstd/contrib/seqBench/seqBench.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/zstd/doc/educational_decoder/harness.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/zstd/doc/educational_decoder/zstd_decompress_edu.c" />
     <ClCompile Include="../../thirdparty/owemdjee/zstd/examples/dictionary_compression.c" />
     <ClCompile Include="../../thirdparty/owemdjee/zstd/examples/dictionary_decompression.c" />
     <ClCompile Include="../../thirdparty/owemdjee/zstd/examples/multiple_simple_compression.c" />
@@ -314,6 +312,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/zstd/tests/bigdict.c" />
     <ClCompile Include="../../thirdparty/owemdjee/zstd/tests/checkTag.c" />
     <ClCompile Include="../../thirdparty/owemdjee/zstd/tests/datagencli.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/zstd/tests/decodecorpus.c" />
     <ClCompile Include="../../thirdparty/owemdjee/zstd/tests/external_matchfinder.c" />
     <ClCompile Include="../../thirdparty/owemdjee/zstd/tests/fullbench.c" />
     <ClCompile Include="../../thirdparty/owemdjee/zstd/tests/invalidDictionaries.c" />
@@ -365,7 +364,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/zstd/contrib/pzstd/Options.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zstd/contrib/pzstd/Pzstd.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zstd/contrib/pzstd/SkippableFrame.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/zstd/contrib/pzstd/test/RoundTrip.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zstd/contrib/pzstd/utils/Buffer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zstd/contrib/pzstd/utils/FileSystem.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zstd/contrib/pzstd/utils/Likely.h" />
@@ -376,7 +374,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/zstd/contrib/pzstd/utils/ThreadPool.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zstd/contrib/pzstd/utils/WorkQueue.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zstd/contrib/seekable_format/zstd_seekable.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/zstd/doc/educational_decoder/zstd_decompress.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zstd/examples/common.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zstd/lib/common/allocations.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zstd/lib/common/bits.h" />
@@ -538,9 +535,7 @@
     <Text Include="../../thirdparty/owemdjee/zstd/contrib/pzstd/BUCK" />
     <Text Include="../../thirdparty/owemdjee/zstd/contrib/pzstd/Makefile" />
     <Text Include="../../thirdparty/owemdjee/zstd/contrib/pzstd/README.md" />
-    <Text Include="../../thirdparty/owemdjee/zstd/contrib/pzstd/test/BUCK" />
     <Text Include="../../thirdparty/owemdjee/zstd/contrib/pzstd/utils/BUCK" />
-    <Text Include="../../thirdparty/owemdjee/zstd/contrib/pzstd/utils/test/BUCK" />
     <Text Include="../../thirdparty/owemdjee/zstd/contrib/recovery/Makefile" />
     <Text Include="../../thirdparty/owemdjee/zstd/contrib/seekable_format/README.md" />
     <Text Include="../../thirdparty/owemdjee/zstd/contrib/seekable_format/examples/Makefile" />
@@ -551,8 +546,6 @@
     <Text Include="../../thirdparty/owemdjee/zstd/doc/README.md" />
     <Text Include="../../thirdparty/owemdjee/zstd/doc/decompressor_errata.md" />
     <Text Include="../../thirdparty/owemdjee/zstd/doc/decompressor_permissive.md" />
-    <Text Include="../../thirdparty/owemdjee/zstd/doc/educational_decoder/Makefile" />
-    <Text Include="../../thirdparty/owemdjee/zstd/doc/educational_decoder/README.md" />
     <Text Include="../../thirdparty/owemdjee/zstd/doc/zstd_compression_format.md" />
     <Text Include="../../thirdparty/owemdjee/zstd/doc/zstd_manual.html" />
     <Text Include="../../thirdparty/owemdjee/zstd/examples/Makefile" />
@@ -692,3 +685,4 @@
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
+  
