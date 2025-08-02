@@ -165,6 +165,7 @@ const projectMap = {
 	"googletest-demos": "googletest/googletest/test",
 	"googlegtest-demos": "googletest/googletest/test",
 	"googlelog-unittest": "glog",
+	"googlelog-unittest-exceptions": "glog",
 	//googlemock-demos
 	//googletest-demo-invalid-param-name1
 	//googletest-demo-invalid-param-name2

@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{90C2D402-786E-4635-AC77-72A3C5CFF450}</ProjectGuid>
+    <ProjectGuid>{E77DB2A4-2A2A-4E47-9F2F-A07B84DC6651}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <ConfigurationType>Application</ConfigurationType>
@@ -40,16 +40,16 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings" />
   <ImportGroup Label="Shared" />
@@ -114,7 +114,7 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -148,8 +148,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -255,57 +255,10 @@
     <ClCompile Include="../../scripts/googlelog-unittest/main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="../../scripts/googlelog-unittest/test_glog.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <Text Include="../../scripts/googlelog-unittest/packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/glog/src/cleanup_immediately_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/glog/src/cleanup_with_absolute_prefix_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/glog/src/cleanup_with_relative_prefix_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/glog/src/demangle.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/glog/src/demangle_unittest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/glog/src/exception_handling_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/glog/src/glog_statics_single_instance.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/glog/src/logging.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/glog/src/logging_striptest10.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/glog/src/logging_striptest2.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/glog/src/logging_striptest_main.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/glog/src/logging_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/glog/src/mock-log_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/glog/src/package_config_unittest/working_config/glog_package_config.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/glog/src/raw_logging.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/glog/src/signalhandler.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/glog/src/signalhandler_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/glog/src/stacktrace_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/glog/src/stl_logging_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/glog/src/symbolize.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/glog/src/symbolize_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/glog/src/utilities.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/glog/src/utilities_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/glog/src/vlog_is_on.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/glog/src/windows/port.cc" />
-    <ClInclude Include="../../thirdparty/owemdjee/glog/src/base/commandlineflags.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/glog/src/base/googleinit.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/glog/src/base/mutex.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/glog/src/demangle.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/glog/src/glog/log_severity.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/glog/src/glog/platform.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/glog/src/googletest.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/glog/src/mock-log.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/glog/src/stacktrace.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/glog/src/stacktrace_generic-inl.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/glog/src/stacktrace_libunwind-inl.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/glog/src/stacktrace_powerpc-inl.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/glog/src/stacktrace_unwind-inl.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/glog/src/stacktrace_windows-inl.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/glog/src/stacktrace_x86-inl.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/glog/src/symbolize.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/glog/src/testing.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/glog/src/utilities.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/glog/src/windows/dirent.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/glog/src/windows/port.h" />
     <Text Include="../../thirdparty/owemdjee/glog/AUTHORS" />
     <Text Include="../../thirdparty/owemdjee/glog/BUILD.bazel" />
     <Text Include="../../thirdparty/owemdjee/glog/CMakeLists.txt" />
@@ -332,18 +285,6 @@
     <Text Include="../../thirdparty/owemdjee/glog/glog-config.cmake.in" />
     <Text Include="../../thirdparty/owemdjee/glog/glog-modules.cmake.in" />
     <Text Include="../../thirdparty/owemdjee/glog/libglog.pc.in" />
-    <Text Include="../../thirdparty/owemdjee/glog/src/config.h.cmake.in" />
-    <Text Include="../../thirdparty/owemdjee/glog/src/demangle_unittest.sh" />
-    <Text Include="../../thirdparty/owemdjee/glog/src/demangle_unittest.txt" />
-    <Text Include="../../thirdparty/owemdjee/glog/src/glog/logging.h.in" />
-    <Text Include="../../thirdparty/owemdjee/glog/src/glog/raw_logging.h.in" />
-    <Text Include="../../thirdparty/owemdjee/glog/src/glog/stl_logging.h.in" />
-    <Text Include="../../thirdparty/owemdjee/glog/src/glog/vlog_is_on.h.in" />
-    <Text Include="../../thirdparty/owemdjee/glog/src/logging_striplog_test.sh" />
-    <Text Include="../../thirdparty/owemdjee/glog/src/logging_unittest.err" />
-    <Text Include="../../thirdparty/owemdjee/glog/src/package_config_unittest/working_config/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/glog/src/signalhandler_unittest.sh" />
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
-  
