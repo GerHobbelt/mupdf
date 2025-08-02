@@ -72,7 +72,7 @@
 // Note: these commands below may look like "#if 1" or "#if 0", but
 // that's because they were constructed that way at ./configure time.
 // Look at logging.h.in to see how they're calculated (based on your config).
-#include <stdint.h>             // the normal place uint16_t is defined
+#include <cstdint>              // the normal place uint16_t is defined
 #include <sys/types.h>          // the normal place u_int16_t is defined
 #include <inttypes.h>           // a third place for uint16_t or u_int16_t
 
@@ -91,7 +91,7 @@
 #ifdef HAVE_CXX11_ATOMIC
 #include <atomic>
 #elif defined(GLOG_OS_WINDOWS)
-#include <Windows.h>
+#include <windows.h>
 #endif
 
 namespace google {
@@ -216,7 +216,7 @@ typedef void(*CustomPrefixCallback)(std::ostream& s, const LogMessageInfo& l, vo
 //   vector<string> errors;
 //   LOG_STRING(ERROR, &errors) << "Couldn't parse cookie #" << cookie_num;
 //
-// This pushes back the new error onto 'errors'; if given a NULL pointer,
+// This pushes back the new error onto 'errors'; if given a nullptr pointer,
 // it reports the error via LOG(ERROR).
 //
 // You can also do conditional logging:
@@ -483,6 +483,13 @@ DECLARE_string(vmodule); // also in vlog_is_on.cc
 // Sets the maximum log file size (in MB).
 DECLARE_uint32(max_log_size);
 
+// Set maximum log file num after rolling
+DECLARE_uint32(max_logfile_num);
+
+// Set log file rolling policy, support size-based and time-based
+// The available values are size, day and hour
+DECLARE_string(log_rolling_policy);
+
 // Sets whether to avoid logging to the disk if the disk is full.
 DECLARE_bool(stop_logging_if_full_disk);
 
@@ -605,12 +612,12 @@ DECLARE_string(logmailer);
 // A very useful logging macro to log windows errors:
 #define LOG_SYSRESULT(result) \
   if (FAILED(HRESULT_FROM_WIN32(result))) { \
-    LPSTR message = NULL; \
+    LPSTR message = nullptr; \
     LPSTR msg = reinterpret_cast<LPSTR>(&message); \
     DWORD message_length = FormatMessageA(FORMAT_MESSAGE_ALLOCATE_BUFFER | \
                          FORMAT_MESSAGE_FROM_SYSTEM | \
                          FORMAT_MESSAGE_IGNORE_INSERTS, \
-                         0, result, 0, msg, 100, NULL); \
+                         0, result, 0, msg, 100, nullptr); \
     if (message_length > 0) { \
       google::LogMessage(__FILE__, __LINE__, google::GLOG_ERROR, 0, \
           &google::LogMessage::SendToLog).stream() \
@@ -643,7 +650,7 @@ GOOGLE_GLOG_DLL_DECL void InitGoogleLogging(const char* argv0);
 
 GOOGLE_GLOG_DLL_DECL void InitGoogleLogging(const char* argv0,
                                             CustomPrefixCallback prefix_callback,
-                                            void* prefix_callback_data = NULL);
+                                            void* prefix_callback_data = nullptr);
 
 // Check if google's logging library has been initialized.
 GOOGLE_GLOG_DLL_DECL bool IsGoogleLoggingInitialized();
@@ -668,14 +675,14 @@ GOOGLE_GLOG_DLL_DECL void SetApplicationFingerprint(const std::string& fingerpri
 
 class LogSink;  // defined below
 
-// If a non-NULL sink pointer is given, we push this message to that sink.
+// If a non-nullptr sink pointer is given, we push this message to that sink.
 // For LOG_TO_SINK we then do normal LOG(severity) logging as well.
 // This is useful for capturing messages and passing/storing them
 // somewhere more specific than the global log of the process.
 // Argument types:
 //   LogSink* sink;
 //   LogSeverity severity;
-// The cast is to disambiguate NULL arguments.
+// The cast is to disambiguate nullptr arguments.
 #define LOG_TO_SINK(sink, severity) \
   google::LogMessage(                                    \
       __FILE__, __LINE__,                                               \
@@ -687,27 +694,27 @@ class LogSink;  // defined below
       google::GLOG_ ## severity,                         \
       static_cast<google::LogSink*>(sink), false).stream()
 
-// If a non-NULL string pointer is given, we write this message to that string.
+// If a non-nullptr string pointer is given, we write this message to that string.
 // We then do normal LOG(severity) logging as well.
 // This is useful for capturing messages and storing them somewhere more
 // specific than the global log of the process.
 // Argument types:
 //   string* message;
 //   LogSeverity severity;
-// The cast is to disambiguate NULL arguments.
+// The cast is to disambiguate nullptr arguments.
 // NOTE: LOG(severity) expands to LogMessage().stream() for the specified
 // severity.
 #define LOG_TO_STRING(severity, message) \
   LOG_TO_STRING_##severity(static_cast<std::string*>(message)).stream()
 
-// If a non-NULL pointer is given, we push the message onto the end
+// If a non-nullptr pointer is given, we push the message onto the end
 // of a vector of strings; otherwise, we report it with LOG(severity).
 // This is handy for capturing messages and perhaps passing them back
 // to the caller, rather than reporting them immediately.
 // Argument types:
 //   LogSeverity severity;
 //   vector<string> *outvec;
-// The cast is to disambiguate NULL arguments.
+// The cast is to disambiguate nullptr arguments.
 #define LOG_STRING(severity, outvec) \
   LOG_TO_STRING_##severity(static_cast<std::vector<std::string>*>(outvec)).stream()
 
@@ -732,13 +739,13 @@ class LogSink;  // defined below
              << "Check failed: " #condition " "
 
 // A container for a string pointer which can be evaluated to a bool -
-// true iff the pointer is NULL.
+// true iff the pointer is nullptr.
 struct CheckOpString {
   CheckOpString(std::string* str) : str_(str) { }
-  // No destructor: if str_ is non-NULL, we're about to LOG(FATAL),
+  // No destructor: if str_ is non-nullptr, we're about to LOG(FATAL),
   // so there's no point in cleaning up str_.
   operator bool() const {
-    return GOOGLE_PREDICT_BRANCH_NOT_TAKEN(str_ != NULL);
+    return GOOGLE_PREDICT_BRANCH_NOT_TAKEN(str_ != nullptr);
   }
   std::string* str_;
 };
@@ -799,7 +806,10 @@ void MakeCheckOpValueString(std::ostream* os, const std::nullptr_t& v);
 
 // Build the error message string. Specify no inlining for code size.
 template <typename T1, typename T2>
-__declspec(noinline) std::string* MakeCheckOpString(const T1& v1, const T2& v2, const char* exprtext);
+#if defined(_MSC_VER)
+__declspec(noinline)
+#endif
+std::string* MakeCheckOpString(const T1& v1, const T2& v2, const char* exprtext);
 
 namespace base {
 namespace internal {
@@ -852,7 +862,7 @@ std::string* MakeCheckOpString(const T1& v1, const T2& v2, const char* exprtext)
   template <typename T1, typename T2> \
   inline std::string* name##Impl(const T1& v1, const T2& v2,    \
                             const char* exprtext) { \
-    if (GOOGLE_PREDICT_TRUE(v1 op v2)) return NULL; \
+    if (GOOGLE_PREDICT_TRUE(v1 op v2)) return nullptr; \
     else return MakeCheckOpString(v1, v2, exprtext); \
   } \
   inline std::string* name##Impl(int v1, int v2, const char* exprtext) { \
@@ -863,8 +873,8 @@ std::string* MakeCheckOpString(const T1& v1, const T2& v2, const char* exprtext)
 // base/logging.h provides its own #defines for the simpler names EQ, NE, etc.
 // This happens if, for example, those are used as token names in a
 // yacc grammar.
-DEFINE_CHECK_OP_IMPL(Check_EQ, ==)  // Compilation error with CHECK_EQ(NULL, x)?
-DEFINE_CHECK_OP_IMPL(Check_NE, !=)  // Use CHECK(x == NULL) instead.
+DEFINE_CHECK_OP_IMPL(Check_EQ, ==)  // Compilation error with CHECK_EQ(nullptr, x)?
+DEFINE_CHECK_OP_IMPL(Check_NE, !=)  // Use CHECK(x == nullptr) instead.
 DEFINE_CHECK_OP_IMPL(Check_LE, <=)
 DEFINE_CHECK_OP_IMPL(Check_LT, < )
 DEFINE_CHECK_OP_IMPL(Check_GE, >=)
@@ -931,7 +941,7 @@ typedef std::string _Check_string;
 //   CHECK_EQ(string("abc")[1], 'b');
 //
 // WARNING: These don't compile correctly if one of the arguments is a pointer
-// and the other is NULL. To work around this, simply static_cast NULL to the
+// and the other is nullptr. To work around this, simply static_cast nullptr to the
 // type of the desired pointer.
 
 #define CHECK_EQ(val1, val2) CHECK_OP(_EQ, ==, val1, val2)
@@ -941,7 +951,7 @@ typedef std::string _Check_string;
 #define CHECK_GE(val1, val2) CHECK_OP(_GE, >=, val1, val2)
 #define CHECK_GT(val1, val2) CHECK_OP(_GT, > , val1, val2)
 
-// Check that the input is non NULL.  This very useful in constructor
+// Check that the input is non nullptr.  This very useful in constructor
 // initializer lists.
 
 #define CHECK_NOTNULL(val) \
@@ -1209,6 +1219,8 @@ const LogSeverity GLOG_0 = GLOG_ERROR;
 #define DLOG_EVERY_N(severity, n) LOG_EVERY_N(severity, n)
 #define DLOG_IF_EVERY_N(severity, condition, n) \
   LOG_IF_EVERY_N(severity, condition, n)
+#define DLOG_FIRST_N(severity, n) LOG_FIRST_N(severity, n)
+#define DLOG_EVERY_T(severity, T) LOG_EVERY_T(severity, T)
 #define DLOG_ASSERT(condition) LOG_ASSERT(condition)
 
 // debug-only checking.  executed if DCHECK_IS_ON().
@@ -1247,6 +1259,14 @@ const LogSeverity GLOG_0 = GLOG_ERROR;
 #define DLOG_IF_EVERY_N(severity, condition, n) \
   static_cast<void>(0),                         \
   (true || !(condition))? (void) 0 : google::LogMessageVoidify() & LOG(severity)
+
+#define DLOG_FIRST_N(severity, n) \
+  static_cast<void>(0),            \
+  true ? (void) 0 : google::LogMessageVoidify() & LOG(severity)
+
+#define DLOG_EVERY_T(severity, T) \
+  static_cast<void>(0),           \
+  true ? (void) 0 : google::LogMessageVoidify() & LOG(severity)
 
 #define DLOG_ASSERT(condition) \
   static_cast<void>(0),        \
@@ -1391,7 +1411,7 @@ public:
 #  endif
 #endif
     LogStream(char *buf, int len, uint64 ctr)
-        : std::ostream(NULL),
+        : std::ostream(nullptr),
           streambuf_(buf, len),
           ctr_(ctr),
           self_(this) {
@@ -1439,20 +1459,20 @@ public:
   // saves 17 bytes per call site.
   LogMessage(const char* file, int line, LogSeverity severity);
 
-  // Constructor to log this message to a specified sink (if not NULL).
+  // Constructor to log this message to a specified sink (if not nullptr).
   // Implied are: ctr = 0, send_method = &LogMessage::SendToSinkAndLog if
   // also_send_to_log is true, send_method = &LogMessage::SendToSink otherwise.
   LogMessage(const char* file, int line, LogSeverity severity, LogSink* sink,
              bool also_send_to_log);
 
   // Constructor where we also give a vector<string> pointer
-  // for storing the messages (if the pointer is not NULL).
+  // for storing the messages (if the pointer is not nullptr).
   // Implied are: ctr = 0, send_method = &LogMessage::SaveOrSendToLog.
   LogMessage(const char* file, int line, LogSeverity severity,
              std::vector<std::string>* outvec);
 
   // Constructor where we also give a string pointer for storing the
-  // message (if the pointer is not NULL).  Implied are: ctr = 0,
+  // message (if the pointer is not nullptr).  Implied are: ctr = 0,
   // send_method = &LogMessage::WriteToStringAndLog.
   LogMessage(const char* file, int line, LogSeverity severity,
              std::string* message);
@@ -1460,9 +1480,9 @@ public:
   // A special constructor used for check failures
   LogMessage(const char* file, int line, const CheckOpString& result);
 
-  void __FlushAndFailAtEnd();
+  void __FlushAndFailAtEnd() noexcept(false);
 
-  ~LogMessage();
+  ~LogMessage() noexcept(false);
 
   // Flush a buffered message to the sink set in the constructor.  Always
   // called by the destructor, it may also be called from elsewhere if
@@ -1530,9 +1550,11 @@ class GOOGLE_GLOG_DLL_DECL LogMessageFatal : public LogMessage {
  public:
   LogMessageFatal(const char* file, int line);
   LogMessageFatal(const char* file, int line, const CheckOpString& result);
-  [[noreturn]] ~LogMessageFatal();
+  // fix warning C4297: 'google::LogMessageFatal::~LogMessageFatal': function assumed not to throw an exception but does;
+  // destructor or deallocator has a (possibly implicit) non-throwing exception specification
+  [[noreturn]] ~LogMessageFatal() noexcept(false);
  protected:
-  [[noreturn]] void __FlushAndFailAtEnd();
+  [[noreturn]] void __FlushAndFailAtEnd() noexcept(false);
 };
 
 // A non-macro interface to the log facility; (useful
@@ -1738,7 +1760,7 @@ GOOGLE_GLOG_DLL_DECL void TruncateStdoutStderr();
 // Thread-safe.
 GOOGLE_GLOG_DLL_DECL const char* GetLogSeverityName(LogSeverity severity);
 
-GOOGLE_GLOG_DLL_DECL [[noreturn]] void logging_fail();
+GOOGLE_GLOG_DLL_DECL [[noreturn]] void logging_fail() noexcept(false);
 
 
 // ---------------------------------------------------------------------
@@ -1777,7 +1799,7 @@ class GOOGLE_GLOG_DLL_DECL Logger {
   // Get the current LOG file size.
   // The returned value is approximate since some
   // logged data may not have been flushed to disk yet.
-  virtual size_t LogSize() = 0;
+  virtual std::size_t LogSize() = 0;
 };
 
 // Get the logger for the specified severity level.  The logger
@@ -1810,24 +1832,25 @@ GOOGLE_GLOG_DLL_DECL int posix_strerror_r(int err, char *buf, size_t len);
 GOOGLE_GLOG_DLL_DECL std::string StrError(int err);
 
 // A class for which we define operator<<, which does nothing.
-class GOOGLE_GLOG_DLL_DECL NullStream : public LogMessage::LogStream {
+class GOOGLE_GLOG_DLL_DECL NullStreamBase {
  public:
   // Initialize the LogStream so the messages can be written somewhere
   // (they'll never be actually displayed). This will be needed if a
   // NullStream& is implicitly converted to LogStream&, in which case
   // the overloaded NullStream::operator<< will not be invoked.
-  NullStream() : LogMessage::LogStream(message_buffer_, 1, 0) { }
-  NullStream(const char* /*file*/, int /*line*/,
-             const CheckOpString& /*result*/) :
-      LogMessage::LogStream(message_buffer_, 1, 0) { }
-  NullStream &stream() { return *this; }
+  NullStreamBase() noexcept;
+  NullStreamBase(const char* /*file*/, int /*line*/,
+                 const CheckOpString& /*result*/) noexcept;
+  NullStreamBase(const NullStreamBase& other) = delete;
+  NullStreamBase& operator=(const NullStreamBase& other) = delete;
+  NullStreamBase& stream() noexcept;
 
- private:
-  // A very short buffer for messages (which we discard anyway). This
-  // will be needed if NullStream& converted to LogStream& (e.g. as a
-  // result of a conditional expression).
-  char message_buffer_[2];
+ protected:
+  // Prevent the class to be deleted through a base class pointer
+  ~NullStreamBase();
 };
+
+class GOOGLE_GLOG_DLL_DECL NullStream final : public NullStreamBase {};
 
 // Do nothing. This operator is inline, allowing the message to be
 // compiled away. The message will not be compiled away if we do
@@ -1835,23 +1858,30 @@ class GOOGLE_GLOG_DLL_DECL NullStream : public LogMessage::LogStream {
 // SKIP_LOG=WARNING. In those cases, NullStream will be implicitly
 // converted to LogStream and the message will be computed and then
 // quietly discarded.
-template<class T>
-inline NullStream& operator<<(NullStream &str, const T &) { return str; }
+template <class T>
+inline NullStreamBase& operator<<(NullStreamBase& str, const T&) noexcept {
+  return str;
+}
+inline NullStreamBase& operator<<(
+    NullStreamBase& str, std::ostream& (* /*unused*/)(std::ostream&)) noexcept {
+  return str;
+}
 
 // Similar to NullStream, but aborts the program (without stack
 // trace), like LogMessageFatal.
-class GOOGLE_GLOG_DLL_DECL NullStreamFatal : public NullStream {
+class GOOGLE_GLOG_DLL_DECL NullStreamFatal final : public NullStreamBase {
  public:
-  using NullStream::NullStream;
- 
-  NullStreamFatal() { }
-  NullStreamFatal(const char* file, int line, const CheckOpString& result) :
-      NullStream(file, line, result) { }
-  [[noreturn]] ~NullStreamFatal() {
-	  __Fail();
+  using NullStreamBase::NullStreamBase;
+  [[noreturn]]
+#if defined(__GNUG__)
+  // Avoid optimizing the destructor away
+  [[gnu::used]]
+#endif  // defined(__GNUG__)
+  ~NullStreamFatal() noexcept(false) {
+    __Fail();
   }
  protected:
-  [[noreturn]] void __Fail();
+  [[noreturn]] void __Fail() noexcept(false);
 };
 
 // Install a signal handler that will dump signal information and a stack
