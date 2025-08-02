@@ -9,9 +9,9 @@ also-ignore:
 	/src/kms-message/
 	
 	/tools/.*[.]c
-	
+
 	examples/
 	
-	libbson/tests/
-	common/tests/
+	src/common/src/
+	src/libbson/src/
 	

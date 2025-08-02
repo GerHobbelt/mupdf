@@ -10,8 +10,11 @@ also-ignore:
 	
 	/tools/.*[.]c
 	
-	examples/
-	
-	libbson/tests/
+	/tests/
 	common/tests/
+	libbson/tests/
+	
+	src/common/src/
+	src/libbson/src/
+	
 	

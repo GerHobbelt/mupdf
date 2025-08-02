@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF196074}</ProjectGuid>
+    <ProjectGuid>{087E49F6-02A7-4E32-BB8C-DD8D212BAAF3}</ProjectGuid>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -52,16 +52,16 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -74,7 +74,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -108,8 +108,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREFLECT_CPP;REFLECT_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -128,7 +128,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREFLECT_CPP;REFLECT_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/reflect-cpp/include;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/rapidJSON/include;../../thirdparty/owemdjee/simdjson/include;../../thirdparty/owemdjee/libbson/src/libbson/src;../../thirdparty/owemdjee/json/include;../../scripts/libbson/include;../../thirdparty/owemdjee/tinycbor/src;../../thirdparty/owemdjee/flatbuffers/include;../../thirdparty/owemdjee/msgpack-c/include;../../scripts/msgpack/include;../../thirdparty/owemdjee/tomlpp/include;../../thirdparty/owemdjee/xml-pugixml/src;../../thirdparty/owemdjee/yaml-cpp/include;../../thirdparty/owemdjee/yyjson/src;../../thirdparty/owemdjee/jsoncons/include;../../scripts/tinycbor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/reflect-cpp/include;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/rapidJSON/include;../../thirdparty/owemdjee/simdjson/include;../../thirdparty/owemdjee/libbson/src/libbson/src;../../thirdparty/owemdjee/json/include;../../scripts/libbson/include;../../thirdparty/owemdjee/tinycbor/src;../../thirdparty/owemdjee/flatbuffers/include;../../thirdparty/owemdjee/msgpack-c/include;../../scripts/msgpack/include;../../thirdparty/owemdjee/tomlpp/include;../../thirdparty/owemdjee/xml-pugixml/src;../../thirdparty/owemdjee/yaml-cpp/include;../../thirdparty/owemdjee/yyjson/src;../../thirdparty/owemdjee/jsoncons/include;../../scripts/tinycbor;../../thirdparty/owemdjee/capnproto/c++/src;../../thirdparty/owemdjee/avro/lang/c/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -155,7 +155,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREFLECT_CPP;REFLECT_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/reflect-cpp/include;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/rapidJSON/include;../../thirdparty/owemdjee/simdjson/include;../../thirdparty/owemdjee/libbson/src/libbson/src;../../thirdparty/owemdjee/json/include;../../scripts/libbson/include;../../thirdparty/owemdjee/tinycbor/src;../../thirdparty/owemdjee/flatbuffers/include;../../thirdparty/owemdjee/msgpack-c/include;../../scripts/msgpack/include;../../thirdparty/owemdjee/tomlpp/include;../../thirdparty/owemdjee/xml-pugixml/src;../../thirdparty/owemdjee/yaml-cpp/include;../../thirdparty/owemdjee/yyjson/src;../../thirdparty/owemdjee/jsoncons/include;../../scripts/tinycbor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/reflect-cpp/include;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/rapidJSON/include;../../thirdparty/owemdjee/simdjson/include;../../thirdparty/owemdjee/libbson/src/libbson/src;../../thirdparty/owemdjee/json/include;../../scripts/libbson/include;../../thirdparty/owemdjee/tinycbor/src;../../thirdparty/owemdjee/flatbuffers/include;../../thirdparty/owemdjee/msgpack-c/include;../../scripts/msgpack/include;../../thirdparty/owemdjee/tomlpp/include;../../thirdparty/owemdjee/xml-pugixml/src;../../thirdparty/owemdjee/yaml-cpp/include;../../thirdparty/owemdjee/yyjson/src;../../thirdparty/owemdjee/jsoncons/include;../../scripts/tinycbor;../../thirdparty/owemdjee/capnproto/c++/src;../../thirdparty/owemdjee/avro/lang/c/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -183,7 +183,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREFLECT_CPP;REFLECT_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/reflect-cpp/include;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/rapidJSON/include;../../thirdparty/owemdjee/simdjson/include;../../thirdparty/owemdjee/libbson/src/libbson/src;../../thirdparty/owemdjee/json/include;../../scripts/libbson/include;../../thirdparty/owemdjee/tinycbor/src;../../thirdparty/owemdjee/flatbuffers/include;../../thirdparty/owemdjee/msgpack-c/include;../../scripts/msgpack/include;../../thirdparty/owemdjee/tomlpp/include;../../thirdparty/owemdjee/xml-pugixml/src;../../thirdparty/owemdjee/yaml-cpp/include;../../thirdparty/owemdjee/yyjson/src;../../thirdparty/owemdjee/jsoncons/include;../../scripts/tinycbor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/reflect-cpp/include;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/rapidJSON/include;../../thirdparty/owemdjee/simdjson/include;../../thirdparty/owemdjee/libbson/src/libbson/src;../../thirdparty/owemdjee/json/include;../../scripts/libbson/include;../../thirdparty/owemdjee/tinycbor/src;../../thirdparty/owemdjee/flatbuffers/include;../../thirdparty/owemdjee/msgpack-c/include;../../scripts/msgpack/include;../../thirdparty/owemdjee/tomlpp/include;../../thirdparty/owemdjee/xml-pugixml/src;../../thirdparty/owemdjee/yaml-cpp/include;../../thirdparty/owemdjee/yyjson/src;../../thirdparty/owemdjee/jsoncons/include;../../scripts/tinycbor;../../thirdparty/owemdjee/capnproto/c++/src;../../thirdparty/owemdjee/avro/lang/c/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -210,7 +210,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBREFLECT_CPP;REFLECT_CPP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/reflect-cpp/include;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/rapidJSON/include;../../thirdparty/owemdjee/simdjson/include;../../thirdparty/owemdjee/libbson/src/libbson/src;../../thirdparty/owemdjee/json/include;../../scripts/libbson/include;../../thirdparty/owemdjee/tinycbor/src;../../thirdparty/owemdjee/flatbuffers/include;../../thirdparty/owemdjee/msgpack-c/include;../../scripts/msgpack/include;../../thirdparty/owemdjee/tomlpp/include;../../thirdparty/owemdjee/xml-pugixml/src;../../thirdparty/owemdjee/yaml-cpp/include;../../thirdparty/owemdjee/yyjson/src;../../thirdparty/owemdjee/jsoncons/include;../../scripts/tinycbor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/reflect-cpp/include;../../thirdparty/owemdjee/gbenchmark/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/rapidJSON/include;../../thirdparty/owemdjee/simdjson/include;../../thirdparty/owemdjee/libbson/src/libbson/src;../../thirdparty/owemdjee/json/include;../../scripts/libbson/include;../../thirdparty/owemdjee/tinycbor/src;../../thirdparty/owemdjee/flatbuffers/include;../../thirdparty/owemdjee/msgpack-c/include;../../scripts/msgpack/include;../../thirdparty/owemdjee/tomlpp/include;../../thirdparty/owemdjee/xml-pugixml/src;../../thirdparty/owemdjee/yaml-cpp/include;../../thirdparty/owemdjee/yyjson/src;../../thirdparty/owemdjee/jsoncons/include;../../scripts/tinycbor;../../thirdparty/owemdjee/capnproto/c++/src;../../thirdparty/owemdjee/avro/lang/c/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -223,16 +223,30 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/src/reflectcpp.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/src/reflectcpp_bson.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/src/reflectcpp_cbor.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/src/reflectcpp_flexbuf.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/src/reflectcpp_json.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/src/reflectcpp_msgpack.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/src/reflectcpp_toml.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/src/reflectcpp_ubjson.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/src/reflectcpp_xml.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/src/reflectcpp_yaml.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/src/rfl/Generic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/src/rfl/avro/avro-SchemaImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/src/rfl/avro/avro-Type.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/src/rfl/avro/avro-Writer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/src/rfl/avro/avro-to_schema.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/src/rfl/bson/bson-Writer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/src/rfl/capnproto/capn-Reader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/src/rfl/capnproto/capn-SchemaImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/src/rfl/capnproto/capn-Type.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/src/rfl/capnproto/capn-Writer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/src/rfl/capnproto/capn-to_schema.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/src/rfl/cbor/cbor-Writer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/src/rfl/flexbuf/flexbuf-Writer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/src/rfl/generic/generic-Writer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/src/rfl/internal/strings/strings.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/src/rfl/json/json-Writer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/src/rfl/json/json-to_schema.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/src/rfl/msgpack/msgpack-Writer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/src/rfl/parsing/schema/schema-Type.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/src/rfl/parsing/schemaful/schema-tuple_to_object.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/src/rfl/toml/toml-Writer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/src/rfl/ubjson/ubjson-Writer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/src/rfl/xml/xml-Writer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reflect-cpp/src/rfl/yaml/yaml-Writer.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/AddStructName.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/AddTagsToVariants.hpp" />
@@ -608,12 +622,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/yaml/save.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/reflect-cpp/include/rfl/yaml/write.hpp" />
     <Image Include="../../thirdparty/owemdjee/reflect-cpp/banner1.png" />
-    <Image Include="../../thirdparty/owemdjee/reflect-cpp/benchmarks/img/canada_read.png" />
-    <Image Include="../../thirdparty/owemdjee/reflect-cpp/benchmarks/img/canada_write.png" />
-    <Image Include="../../thirdparty/owemdjee/reflect-cpp/benchmarks/img/licenses_read.png" />
-    <Image Include="../../thirdparty/owemdjee/reflect-cpp/benchmarks/img/licenses_write.png" />
-    <Image Include="../../thirdparty/owemdjee/reflect-cpp/benchmarks/img/person_read.png" />
-    <Image Include="../../thirdparty/owemdjee/reflect-cpp/benchmarks/img/person_write.png" />
     <Image Include="../../thirdparty/owemdjee/reflect-cpp/docs/assets/images/reflectcpp.png" />
     <Image Include="../../thirdparty/owemdjee/reflect-cpp/docs/assets/images/rfl-favicon-square.png" />
     <Image Include="../../thirdparty/owemdjee/reflect-cpp/docs/assets/images/rfl-favicon.png" />
@@ -622,12 +630,6 @@
     <Text Include="../../thirdparty/owemdjee/reflect-cpp/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/reflect-cpp/LICENSE" />
     <Text Include="../../thirdparty/owemdjee/reflect-cpp/README.md" />
-    <Text Include="../../thirdparty/owemdjee/reflect-cpp/benchmarks/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/reflect-cpp/benchmarks/README.md" />
-    <Text Include="../../thirdparty/owemdjee/reflect-cpp/benchmarks/all/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/reflect-cpp/benchmarks/data/canada.json" />
-    <Text Include="../../thirdparty/owemdjee/reflect-cpp/benchmarks/data/licenses.json" />
-    <Text Include="../../thirdparty/owemdjee/reflect-cpp/benchmarks/json/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/reflect-cpp/conanfile.py" />
     <Text Include="../../thirdparty/owemdjee/reflect-cpp/docs/CNAME" />
     <Text Include="../../thirdparty/owemdjee/reflect-cpp/docs/as.md" />
@@ -687,3 +689,4 @@
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
+  
