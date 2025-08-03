@@ -238,7 +238,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/imgproc/src/color_yuv.dispatch.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/imgproc/src/colormap.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/imgproc/src/connectedcomponents.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/imgproc/src/contours.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/imgproc/src/contours_approx.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/imgproc/src/contours_common.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/imgproc/src/contours_link.cpp" />
@@ -251,7 +250,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/imgproc/src/deriv.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/imgproc/src/distransform.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/imgproc/src/drawing.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/imgproc/src/emd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/imgproc/src/drawing_text.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/imgproc/src/emd_new.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/imgproc/src/featureselect.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/imgproc/src/filter.dispatch.cpp" />
@@ -260,7 +259,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/imgproc/src/generalized_hough.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/imgproc/src/geometry.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/imgproc/src/grabcut.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/imgproc/src/hershey_fonts.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/imgproc/src/histogram.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/imgproc/src/hough.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/imgproc/src/imgwarp.avx2.cpp" />
@@ -290,6 +288,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/imgproc/src/smooth.dispatch.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/imgproc/src/spatialgradient.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/imgproc/src/stackblur.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/imgproc/src/stb_truetype.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/imgproc/src/subdivision2d.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/imgproc/src/sumpixels.dispatch.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/imgproc/src/tables.cpp" />
@@ -299,15 +298,12 @@
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/imgproc/include/opencv2/imgproc.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/imgproc/include/opencv2/imgproc/bindings.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/imgproc/include/opencv2/imgproc/detail/gcgraph.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/imgproc/include/opencv2/imgproc/detail/legacy.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/imgproc/include/opencv2/imgproc/hal/hal.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/imgproc/include/opencv2/imgproc/hal/interface.h" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/imgproc/include/opencv2/imgproc/imgproc.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/imgproc/include/opencv2/imgproc/imgproc_c.h" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/imgproc/include/opencv2/imgproc/segmentation.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/imgproc/include/opencv2/imgproc/types_c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/imgproc/misc/objc/common/FontFace.h" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/imgproc/misc/objc/common/Moments.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/imgproc/src/_geom.h" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/imgproc/src/accum.simd.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/imgproc/src/bilateral_filter.simd.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/imgproc/src/box_filter.simd.hpp" />
@@ -334,8 +330,13 @@
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/imgproc/src/precomp.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/imgproc/src/resize.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/imgproc/src/smooth.simd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/imgproc/src/stb_truetype.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/imgproc/src/sumpixels.avx512_skx.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/imgproc/src/sumpixels.simd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/imgproc/src/warp_common.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/imgproc/src/warp_common.scalar.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/imgproc/src/warp_common.vector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/imgproc/src/warp_kernels.simd.hpp" />
     <Image Include="../../thirdparty/owemdjee/opencv/modules/imgproc/doc/pics/Bayer_patterns.png" />
     <Image Include="../../thirdparty/owemdjee/opencv/modules/imgproc/doc/pics/backprojectpatch.png" />
     <Image Include="../../thirdparty/owemdjee/opencv/modules/imgproc/doc/pics/bayer.png" />
@@ -386,6 +387,7 @@
     <Text Include="../../thirdparty/owemdjee/opencv/modules/imgproc/doc/colors.markdown" />
     <Text Include="../../thirdparty/owemdjee/opencv/modules/imgproc/doc/pics/ellipse.svg" />
     <Text Include="../../thirdparty/owemdjee/opencv/modules/imgproc/doc/pics/polar_remap_doc.svg" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/imgproc/fonts/Rubik_OFL.txt" />
     <Text Include="../../thirdparty/owemdjee/opencv/modules/imgproc/misc/js/gen_dict.json" />
     <Text Include="../../thirdparty/owemdjee/opencv/modules/imgproc/misc/objc/gen_dict.json" />
     <Text Include="../../thirdparty/owemdjee/opencv/modules/imgproc/src/opencl/accumulate.cl" />
@@ -416,8 +418,6 @@
     <Text Include="../../thirdparty/owemdjee/opencv/modules/imgproc/src/opencl/integral_sum.cl" />
     <Text Include="../../thirdparty/owemdjee/opencv/modules/imgproc/src/opencl/laplacian3.cl" />
     <Text Include="../../thirdparty/owemdjee/opencv/modules/imgproc/src/opencl/laplacian5.cl" />
-    <Text Include="../../thirdparty/owemdjee/opencv/modules/imgproc/src/opencl/linearPolar.cl" />
-    <Text Include="../../thirdparty/owemdjee/opencv/modules/imgproc/src/opencl/logPolar.cl" />
     <Text Include="../../thirdparty/owemdjee/opencv/modules/imgproc/src/opencl/match_template.cl" />
     <Text Include="../../thirdparty/owemdjee/opencv/modules/imgproc/src/opencl/medianFilter.cl" />
     <Text Include="../../thirdparty/owemdjee/opencv/modules/imgproc/src/opencl/moments.cl" />
