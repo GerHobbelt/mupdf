@@ -24,23 +24,23 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseDebugLibraries>true</UseDebugLibraries>
@@ -151,8 +151,41 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/libtiff/build/test_cmake/test.c" />
-    <ClCompile Include="../../thirdparty/libtiff/build/test_cmake_no_target/test.c" />
+    <ProjectReference Include="libassert.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fffea6c7}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcpptrace.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff39d5ad}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjpeg-turbo.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff92ba30}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjpeg-xl.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa838c1}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjpeg_default_handlers.vcxproj">
+      <Project>{5f615f91-dff8-4f05-bf48-1222b72071a8}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpng.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-658957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsystem_override.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8318-7518ff7ef82f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtiff.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-558957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libwebp.vcxproj">
+      <Project>{105f884a-c170-4c30-a810-c7da2103002f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libzlib.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-458957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libzstd.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fffeb6e4}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="../../thirdparty/libtiff/test/DoubleToRational_test.cpp" />
     <ClCompile Include="../../thirdparty/libtiff/test/ElapseTimer.cpp" />
     <ClCompile Include="../../thirdparty/libtiff/test/ascii_tag.c" />
@@ -169,6 +202,7 @@
     <ClCompile Include="../../thirdparty/libtiff/test/strip.c" />
     <ClCompile Include="../../thirdparty/libtiff/test/strip_rw.c" />
     <ClCompile Include="../../thirdparty/libtiff/test/test_IFD_enlargement.c" />
+    <ClCompile Include="../../thirdparty/libtiff/test/test_RGBAImage.c" />
     <ClCompile Include="../../thirdparty/libtiff/test/test_append_to_strip.c" />
     <ClCompile Include="../../thirdparty/libtiff/test/test_arrays.c" />
     <ClCompile Include="../../thirdparty/libtiff/test/test_directory.c" />
@@ -232,13 +266,6 @@
     <Text Include="../../thirdparty/libtiff/archive/man/sgi2tiff.1" />
     <Text Include="../../thirdparty/libtiff/archive/man/tiffsv.1" />
     <Text Include="../../thirdparty/libtiff/autogen.sh" />
-    <Text Include="../../thirdparty/libtiff/build/CMakeLists.txt" />
-    <Text Include="../../thirdparty/libtiff/build/Makefile.am" />
-    <Text Include="../../thirdparty/libtiff/build/Makefile.in" />
-    <Text Include="../../thirdparty/libtiff/build/README" />
-    <Text Include="../../thirdparty/libtiff/build/gitlab-ci" />
-    <Text Include="../../thirdparty/libtiff/build/test_cmake/CMakeLists.txt" />
-    <Text Include="../../thirdparty/libtiff/build/test_cmake_no_target/CMakeLists.txt" />
     <Text Include="../../thirdparty/libtiff/cmake/AutotoolsCompat.cmake" />
     <Text Include="../../thirdparty/libtiff/cmake/AutotoolsVersion.cmake" />
     <Text Include="../../thirdparty/libtiff/cmake/CXXLibrary.cmake" />

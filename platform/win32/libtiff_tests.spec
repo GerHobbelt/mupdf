@@ -5,4 +5,5 @@ also-ignore:
 	/libtiff/
 	/port/
 	/tools/
+	/build/
 	
