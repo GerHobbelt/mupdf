@@ -52,16 +52,16 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -74,7 +74,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -108,8 +108,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEXIF;EXIF_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -121,14 +121,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../scripts/libexif/include;../../scripts/libexif/include/libexif;../../thirdparty/owemdjee/libexif;../../thirdparty/owemdjee/libexif/libexif;../../thirdparty/owemdjee/libexif/libexif;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEXIF;EXIF_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEXIF;EXIF_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../scripts/libexif/include;../../scripts/libexif/include/libexif;../../thirdparty/owemdjee/libexif;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -147,7 +147,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../scripts/libexif/include;../../scripts/libexif/include/libexif;../../thirdparty/owemdjee/libexif;../../thirdparty/owemdjee/libexif/libexif;../../thirdparty/owemdjee/libexif/libexif;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEXIF;EXIF_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -155,7 +155,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEXIF;EXIF_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../scripts/libexif/include;../../scripts/libexif/include/libexif;../../thirdparty/owemdjee/libexif;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -176,14 +176,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../scripts/libexif/include;../../scripts/libexif/include/libexif;../../thirdparty/owemdjee/libexif;../../thirdparty/owemdjee/libexif/libexif;../../thirdparty/owemdjee/libexif/libexif;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEXIF;EXIF_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEXIF;EXIF_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../scripts/libexif/include;../../scripts/libexif/include/libexif;../../thirdparty/owemdjee/libexif;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -202,7 +202,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../scripts/libexif/include;../../scripts/libexif/include/libexif;../../thirdparty/owemdjee/libexif;../../thirdparty/owemdjee/libexif/libexif;../../thirdparty/owemdjee/libexif/libexif;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEXIF;EXIF_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -210,7 +210,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEXIF;EXIF_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../scripts/libexif/include;../../scripts/libexif/include/libexif;../../thirdparty/owemdjee/libexif;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -223,84 +223,180 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/exif/exif/actions.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/exif/exif/exif-i18n.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/exif/exif/main.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/exif/exif/utils.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/exif/libjpeg/jpeg-data.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/exif/libjpeg/jpeg-marker.c" />
-    <ClInclude Include="../../thirdparty/owemdjee/exif/exif/actions.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/exif/exif/exif-i18n.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/exif/exif/utils.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/exif/libjpeg/jpeg-data.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/exif/libjpeg/jpeg-marker.h" />
-    <Image Include="../../thirdparty/owemdjee/exif/test/testdata/no-exif.jpg" />
-    <Text Include="../../thirdparty/owemdjee/exif/AUTHORS" />
-    <Text Include="../../thirdparty/owemdjee/exif/COPYING" />
-    <Text Include="../../thirdparty/owemdjee/exif/ChangeLog" />
-    <Text Include="../../thirdparty/owemdjee/exif/Makefile.am" />
-    <Text Include="../../thirdparty/owemdjee/exif/NEWS" />
-    <Text Include="../../thirdparty/owemdjee/exif/README" />
-    <Text Include="../../thirdparty/owemdjee/exif/SECURITY.md" />
-    <Text Include="../../thirdparty/owemdjee/exif/configure.ac" />
-    <Text Include="../../thirdparty/owemdjee/exif/exif.1" />
-    <Text Include="../../thirdparty/owemdjee/exif/exif.spec.in" />
-    <Text Include="../../thirdparty/owemdjee/exif/exif/Makefile.am" />
-    <Text Include="../../thirdparty/owemdjee/exif/libjpeg/Makefile.am" />
-    <Text Include="../../thirdparty/owemdjee/exif/m4/Makefile.am" />
-    <Text Include="../../thirdparty/owemdjee/exif/m4m/Makefile.am" />
-    <Text Include="../../thirdparty/owemdjee/exif/m4m/gp-check-library.m4" />
-    <Text Include="../../thirdparty/owemdjee/exif/m4m/gp-check-shell-environment.m4" />
-    <Text Include="../../thirdparty/owemdjee/exif/m4m/gp-config-msg.m4" />
-    <Text Include="../../thirdparty/owemdjee/exif/m4m/gp-gettext-hack.m4" />
-    <Text Include="../../thirdparty/owemdjee/exif/po/POTFILES.in" />
-    <Text Include="../../thirdparty/owemdjee/exif/po/ast.po" />
-    <Text Include="../../thirdparty/owemdjee/exif/po/cs.po" />
-    <Text Include="../../thirdparty/owemdjee/exif/po/da.po" />
-    <Text Include="../../thirdparty/owemdjee/exif/po/de.po" />
-    <Text Include="../../thirdparty/owemdjee/exif/po/eo.po" />
-    <Text Include="../../thirdparty/owemdjee/exif/po/es.po" />
-    <Text Include="../../thirdparty/owemdjee/exif/po/fi.po" />
-    <Text Include="../../thirdparty/owemdjee/exif/po/fr.po" />
-    <Text Include="../../thirdparty/owemdjee/exif/po/fur.po" />
-    <Text Include="../../thirdparty/owemdjee/exif/po/gl.po" />
-    <Text Include="../../thirdparty/owemdjee/exif/po/hr.po" />
-    <Text Include="../../thirdparty/owemdjee/exif/po/hu.po" />
-    <Text Include="../../thirdparty/owemdjee/exif/po/id.po" />
-    <Text Include="../../thirdparty/owemdjee/exif/po/is.po" />
-    <Text Include="../../thirdparty/owemdjee/exif/po/it.po" />
-    <Text Include="../../thirdparty/owemdjee/exif/po/ja.po" />
-    <Text Include="../../thirdparty/owemdjee/exif/po/ko.po" />
-    <Text Include="../../thirdparty/owemdjee/exif/po/lv.po" />
-    <Text Include="../../thirdparty/owemdjee/exif/po/ms.po" />
-    <Text Include="../../thirdparty/owemdjee/exif/po/nl.po" />
-    <Text Include="../../thirdparty/owemdjee/exif/po/pl.po" />
-    <Text Include="../../thirdparty/owemdjee/exif/po/pt.po" />
-    <Text Include="../../thirdparty/owemdjee/exif/po/pt_BR.po" />
-    <Text Include="../../thirdparty/owemdjee/exif/po/ro.po" />
-    <Text Include="../../thirdparty/owemdjee/exif/po/ru.po" />
-    <Text Include="../../thirdparty/owemdjee/exif/po/sk.po" />
-    <Text Include="../../thirdparty/owemdjee/exif/po/sr.po" />
-    <Text Include="../../thirdparty/owemdjee/exif/po/sv.po" />
-    <Text Include="../../thirdparty/owemdjee/exif/po/tr.po" />
-    <Text Include="../../thirdparty/owemdjee/exif/po/uk.po" />
-    <Text Include="../../thirdparty/owemdjee/exif/po/vi.po" />
-    <Text Include="../../thirdparty/owemdjee/exif/po/zh_CN.po" />
-    <Text Include="../../thirdparty/owemdjee/exif/test/Makefile.am" />
-    <Text Include="../../thirdparty/owemdjee/exif/test/check-add-tags.sh" />
-    <Text Include="../../thirdparty/owemdjee/exif/test/check-create-tags.sh" />
-    <Text Include="../../thirdparty/owemdjee/exif/test/check-help.sh" />
-    <Text Include="../../thirdparty/owemdjee/exif/test/check-init-mandatory-tags.sh" />
-    <Text Include="../../thirdparty/owemdjee/exif/test/check-no-seek.sh" />
-    <Text Include="../../thirdparty/owemdjee/exif/test/check-param-validity.sh" />
-    <Text Include="../../thirdparty/owemdjee/exif/test/check-required-file.sh" />
-    <Text Include="../../thirdparty/owemdjee/exif/test/check-show-description.sh" />
-    <Text Include="../../thirdparty/owemdjee/exif/test/check-show-tag.sh" />
-    <Text Include="../../thirdparty/owemdjee/exif/test/check-tag-description.sh" />
-    <Text Include="../../thirdparty/owemdjee/exif/test/check-thumbnail.sh" />
-    <Text Include="../../thirdparty/owemdjee/exif/test/check-vars.sh.in" />
-    <Text Include="../../thirdparty/owemdjee/exif/test/check-version.sh" />
+    <ClInclude Include="../../scripts/libexif/include/libexif/_stdint.h" />
+    <ClInclude Include="../../scripts/libexif/include/libexif/config.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/libexif/contrib/examples/photographer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libexif/contrib/examples/thumbnail.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libexif/contrib/examples/write-exif.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libexif/libexif/apple/exif-mnote-data-apple.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libexif/libexif/apple/mnote-apple-entry.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libexif/libexif/apple/mnote-apple-tag.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libexif/libexif/canon/exif-mnote-data-canon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libexif/libexif/canon/mnote-canon-entry.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libexif/libexif/canon/mnote-canon-tag.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libexif/libexif/exif-byte-order.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libexif/libexif/exif-content.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libexif/libexif/exif-data.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libexif/libexif/exif-entry.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libexif/libexif/exif-format.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libexif/libexif/exif-gps-ifd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libexif/libexif/exif-ifd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libexif/libexif/exif-loader.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libexif/libexif/exif-log.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libexif/libexif/exif-mem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libexif/libexif/exif-mnote-data.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libexif/libexif/exif-tag.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libexif/libexif/exif-utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libexif/libexif/fuji/exif-mnote-data-fuji.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libexif/libexif/fuji/mnote-fuji-entry.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libexif/libexif/fuji/mnote-fuji-tag.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libexif/libexif/olympus/exif-mnote-data-olympus.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libexif/libexif/olympus/mnote-olympus-entry.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libexif/libexif/olympus/mnote-olympus-tag.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libexif/libexif/pentax/exif-mnote-data-pentax.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libexif/libexif/pentax/mnote-pentax-entry.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libexif/libexif/pentax/mnote-pentax-tag.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libexif/test/nls/print-localedir.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libexif/test/nls/test-codeset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libexif/test/nls/test-nls.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libexif/test/test-extract.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libexif/test/test-gps.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libexif/test/test-integers.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libexif/test/test-mem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libexif/test/test-mnote.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libexif/test/test-null.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libexif/test/test-parse-from-data.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libexif/test/test-parse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libexif/test/test-sorted.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libexif/test/test-tagtable.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libexif/test/test-value.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/libexif/contrib/watcom/_stdint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libexif/libexif/apple/exif-mnote-data-apple.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libexif/libexif/apple/mnote-apple-entry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libexif/libexif/apple/mnote-apple-tag.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libexif/libexif/canon/exif-mnote-data-canon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libexif/libexif/canon/mnote-canon-entry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libexif/libexif/canon/mnote-canon-tag.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libexif/libexif/exif-byte-order.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libexif/libexif/exif-content.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libexif/libexif/exif-data-type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libexif/libexif/exif-data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libexif/libexif/exif-entry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libexif/libexif/exif-format.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libexif/libexif/exif-gps-ifd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libexif/libexif/exif-ifd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libexif/libexif/exif-loader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libexif/libexif/exif-log.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libexif/libexif/exif-mem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libexif/libexif/exif-mnote-data-priv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libexif/libexif/exif-mnote-data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libexif/libexif/exif-system.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libexif/libexif/exif-tag.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libexif/libexif/exif-utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libexif/libexif/exif.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libexif/libexif/fuji/exif-mnote-data-fuji.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libexif/libexif/fuji/mnote-fuji-entry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libexif/libexif/fuji/mnote-fuji-tag.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libexif/libexif/i18n.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libexif/libexif/olympus/exif-mnote-data-olympus.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libexif/libexif/olympus/mnote-olympus-entry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libexif/libexif/olympus/mnote-olympus-tag.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libexif/libexif/pentax/exif-mnote-data-pentax.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libexif/libexif/pentax/mnote-pentax-entry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libexif/libexif/pentax/mnote-pentax-tag.h" />
+    <Image Include="../../thirdparty/owemdjee/libexif/test/testdata/canon_makernote_variant_1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libexif/test/testdata/fuji_makernote_variant_1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libexif/test/testdata/olympus_makernote_variant_2.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libexif/test/testdata/olympus_makernote_variant_3.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libexif/test/testdata/olympus_makernote_variant_4.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libexif/test/testdata/olympus_makernote_variant_5.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libexif/test/testdata/pentax_makernote_variant_2.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libexif/test/testdata/pentax_makernote_variant_3.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libexif/test/testdata/pentax_makernote_variant_4.jpg" />
+    <Text Include="../../thirdparty/owemdjee/libexif/AUTHORS" />
+    <Text Include="../../thirdparty/owemdjee/libexif/COPYING" />
+    <Text Include="../../thirdparty/owemdjee/libexif/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/libexif/LICENSES/BSD-3-Clause.txt" />
+    <Text Include="../../thirdparty/owemdjee/libexif/LICENSES/CC0-1.0.txt" />
+    <Text Include="../../thirdparty/owemdjee/libexif/LICENSES/GPL-2.0-only.txt" />
+    <Text Include="../../thirdparty/owemdjee/libexif/LICENSES/LGPL-2.0-or-later.txt" />
+    <Text Include="../../thirdparty/owemdjee/libexif/LICENSES/LGPL-2.1-or-later.txt" />
+    <Text Include="../../thirdparty/owemdjee/libexif/LICENSES/LicenseRef-Wrobel.txt" />
+    <Text Include="../../thirdparty/owemdjee/libexif/LICENSES/MIT.txt" />
+    <Text Include="../../thirdparty/owemdjee/libexif/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libexif/NEWS" />
+    <Text Include="../../thirdparty/owemdjee/libexif/README" />
+    <Text Include="../../thirdparty/owemdjee/libexif/README-Win32.txt" />
+    <Text Include="../../thirdparty/owemdjee/libexif/SECURITY.md" />
+    <Text Include="../../thirdparty/owemdjee/libexif/TODO" />
+    <Text Include="../../thirdparty/owemdjee/libexif/binary-dist/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libexif/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/libexif/contrib/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libexif/contrib/examples/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libexif/contrib/watcom/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libexif/doc/Doxyfile-internals.in" />
+    <Text Include="../../thirdparty/owemdjee/libexif/doc/Doxyfile.in" />
+    <Text Include="../../thirdparty/owemdjee/libexif/doc/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libexif/doc/README.apidocs" />
+    <Text Include="../../thirdparty/owemdjee/libexif/doc/footer.html" />
+    <Text Include="../../thirdparty/owemdjee/libexif/libexif-uninstalled.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/libexif/libexif.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/libexif/libexif.spec.in" />
+    <Text Include="../../thirdparty/owemdjee/libexif/libexif/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libexif/libexif/apple/Makefile-files" />
+    <Text Include="../../thirdparty/owemdjee/libexif/libexif/canon/Makefile-files" />
+    <Text Include="../../thirdparty/owemdjee/libexif/libexif/fuji/Makefile-files" />
+    <Text Include="../../thirdparty/owemdjee/libexif/libexif/olympus/Makefile-files" />
+    <Text Include="../../thirdparty/owemdjee/libexif/libexif/pentax/Makefile-files" />
+    <Text Include="../../thirdparty/owemdjee/libexif/m4m/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libexif/m4m/failmalloc.m4" />
+    <Text Include="../../thirdparty/owemdjee/libexif/m4m/gp-check-shell-environment.m4" />
+    <Text Include="../../thirdparty/owemdjee/libexif/m4m/gp-config-msg.m4" />
+    <Text Include="../../thirdparty/owemdjee/libexif/m4m/gp-documentation.m4" />
+    <Text Include="../../thirdparty/owemdjee/libexif/m4m/gp-gettext-hack.m4" />
+    <Text Include="../../thirdparty/owemdjee/libexif/m4m/stdint.m4" />
+    <Text Include="../../thirdparty/owemdjee/libexif/po/POTFILES.in" />
+    <Text Include="../../thirdparty/owemdjee/libexif/po/be.po" />
+    <Text Include="../../thirdparty/owemdjee/libexif/po/bs.po" />
+    <Text Include="../../thirdparty/owemdjee/libexif/po/cs.po" />
+    <Text Include="../../thirdparty/owemdjee/libexif/po/da.po" />
+    <Text Include="../../thirdparty/owemdjee/libexif/po/de.po" />
+    <Text Include="../../thirdparty/owemdjee/libexif/po/en_AU.po" />
+    <Text Include="../../thirdparty/owemdjee/libexif/po/en_CA.po" />
+    <Text Include="../../thirdparty/owemdjee/libexif/po/en_GB.po" />
+    <Text Include="../../thirdparty/owemdjee/libexif/po/es.po" />
+    <Text Include="../../thirdparty/owemdjee/libexif/po/fr.po" />
+    <Text Include="../../thirdparty/owemdjee/libexif/po/it.po" />
+    <Text Include="../../thirdparty/owemdjee/libexif/po/ja.po" />
+    <Text Include="../../thirdparty/owemdjee/libexif/po/ka.po" />
+    <Text Include="../../thirdparty/owemdjee/libexif/po/ms.po" />
+    <Text Include="../../thirdparty/owemdjee/libexif/po/nl.po" />
+    <Text Include="../../thirdparty/owemdjee/libexif/po/pl.po" />
+    <Text Include="../../thirdparty/owemdjee/libexif/po/pt.po" />
+    <Text Include="../../thirdparty/owemdjee/libexif/po/pt_BR.po" />
+    <Text Include="../../thirdparty/owemdjee/libexif/po/ro.po" />
+    <Text Include="../../thirdparty/owemdjee/libexif/po/ru.po" />
+    <Text Include="../../thirdparty/owemdjee/libexif/po/sk.po" />
+    <Text Include="../../thirdparty/owemdjee/libexif/po/sq.po" />
+    <Text Include="../../thirdparty/owemdjee/libexif/po/sr.po" />
+    <Text Include="../../thirdparty/owemdjee/libexif/po/sv.po" />
+    <Text Include="../../thirdparty/owemdjee/libexif/po/tr.po" />
+    <Text Include="../../thirdparty/owemdjee/libexif/po/uk.po" />
+    <Text Include="../../thirdparty/owemdjee/libexif/po/vi.po" />
+    <Text Include="../../thirdparty/owemdjee/libexif/po/zh_CN.po" />
+    <Text Include="../../thirdparty/owemdjee/libexif/test/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libexif/test/check-failmalloc.sh" />
+    <Text Include="../../thirdparty/owemdjee/libexif/test/check-mnote.sh" />
+    <Text Include="../../thirdparty/owemdjee/libexif/test/extract-parse.sh" />
+    <Text Include="../../thirdparty/owemdjee/libexif/test/inc-comparetool.sh" />
+    <Text Include="../../thirdparty/owemdjee/libexif/test/nls/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libexif/test/nls/check-codeset.in" />
+    <Text Include="../../thirdparty/owemdjee/libexif/test/nls/check-localedir.in" />
+    <Text Include="../../thirdparty/owemdjee/libexif/test/nls/check-nls.in" />
+    <Text Include="../../thirdparty/owemdjee/libexif/test/parse-regression.sh" />
+    <Text Include="../../thirdparty/owemdjee/libexif/test/swap-byte-order.sh" />
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
-  

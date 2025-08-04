@@ -108,6 +108,8 @@ const projectMap = {
 	"libatlas": "math-atlas",
 	"libblosc": "c-blosc2",
 	"libbtree": "cpp-btree",
+//	"libexif": "libexif",         // to help force libexif project to point at libexif submodule dir  
+//	"exif": "exif",               // ditto for exif, which is the (demo) application repo that sits alongside libexif
 	"binlog_bread": "binlog",
 	"binlog_brecovery": "binlog",
 	"libCHM": "CHM-lib",

@@ -407,7 +407,7 @@ function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
         }
         if (DEBUG > 1) console.log('NOT-MATCHED:', {f, f4f, sp});
       }
-      if (DEBUG >= 1) console.log('PASS: testing:', f);
+      if (DEBUG >= 1) console.log('PASS: testing:', {f, f4f});
     }
     return true;
   })
