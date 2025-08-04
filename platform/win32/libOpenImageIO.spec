@@ -1,11 +1,15 @@
 
+directories:
+	../../scripts/OpenImageIO/
+
 also-ignore:
 	/src/iv/
 	/src/nuke/
 	/src/python/
-	/src/openvdb.imageio/
-	/src/ptex.imageio/
-	/src/r3d.imageio/
+	
+	/testsuite/
 	
 	cmake-consumer/
+	
+	monolithic-main.cpp
 	

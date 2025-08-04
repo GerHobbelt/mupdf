@@ -1,0 +1,8 @@
+
+directories:
+	../../scripts/OpenImageIO/
+	
+also-ignore:
+	/src/
+	
+	cmake-consumer/

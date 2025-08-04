@@ -175,13 +175,21 @@ namespace OIIO = OIIO_v2;
 #define OIIO_PLUGIN_NAMESPACE_BEGIN OIIO_NAMESPACE_BEGIN
 #define OIIO_PLUGIN_NAMESPACE_END OIIO_NAMESPACE_END
 
-#ifdef EMBED_PLUGINS
-#define OIIO_PLUGIN_EXPORTS_BEGIN
-#define OIIO_PLUGIN_EXPORTS_END
-#else
+
+
+
+#define EMBED_PLUGINS
+
+
+
+
+//#ifdef EMBED_PLUGINS
+//#define OIIO_PLUGIN_EXPORTS_BEGIN
+//#define OIIO_PLUGIN_EXPORTS_END
+//#else
 #define OIIO_PLUGIN_EXPORTS_BEGIN extern "C" {
 #define OIIO_PLUGIN_EXPORTS_END }
-#endif
+//#endif
 
 // Which version of Imath is used in the OIIO API?
 #define OIIO_USING_IMATH_VERSION_MAJOR IMATH_VERSION_MAJOR
@@ -198,10 +206,62 @@ namespace OIIO = OIIO_v2;
 
 
 // Was the project built with TBB support?
+#if 0
 #define OIIO_TBB   1  // HAVE_LIBTBB=1 (oneTBB repo from Intel)
+#endif
 
+#define OIIO_DISABLE_OCIO   1
+#define OIIO_DISABLE_BUILTIN_OCIO_CONFIGS   1
 
 
 #define OIIO_FFMPEG_VERSION "7.0"
+
+
+#define EMBED_PLUGINS
+
+//#if !defined(DISABLE_OPENEXR)
+//#if !defined(DISABLE_TIFF)
+//#if !defined(DISABLE_JPEG)
+
+// Now all the less common formats, in alphabetical order.
+//#if !defined(DISABLE_BMP)
+//#if !defined(DISABLE_CINEON)
+//#if !defined(DISABLE_DDS)
+//#if defined(USE_DCMTK) && !defined(DISABLE_DICOM)
+//#if !defined(DISABLE_DPX)
+//#if defined(USE_FFMPEG) && !defined(DISABLE_FFMPEG)
+#define DISABLE_FFMPEG
+//#if !defined(DISABLE_FITS)
+//#if defined(USE_GIF) && !defined(DISABLE_GIF)
+#define USE_GIF
+//#if defined(USE_HEIF) && !defined(DISABLE_HEIF)
+//#if !defined(DISABLE_HDR)
+//#if !defined(DISABLE_ICO)
+//#if !defined(DISABLE_IFF)
+//#if defined(USE_OPENJPEG) && !defined(DISABLE_JPEG2000)
+#define USE_OPENJPEG
+//#if defined(USE_JXL)
+#define USE_JXL
+//#if !defined(DISABLE_NULL)
+//#if defined(USE_OPENVDB) && !defined(DISABLE_OPENVDB)
+#define DISABLE_OPENVDB
+//#if !defined(DISABLE_PNG)
+//#if !defined(DISABLE_PNM)
+//#if !defined(DISABLE_PSD)
+//#if defined(USE_PTEX) && !defined(DISABLE_PTEX)
+#define DISABLE_PTEX
+//#if defined(USE_R3DSDK) && !defined(DISABLE_R3D)
+#define DISABLE_R3D
+//#if defined(USE_LIBRAW) && !defined(DISABLE_RAW)
+//#if !defined(DISABLE_RLA)
+//#if !defined(DISABLE_SGI)
+//#if !defined(DISABLE_SOFTIMAGE)
+//#if !defined(DISABLE_TARGA)
+//#if !defined(DISABLE_TERM)
+//#if defined(USE_WEBP) && !defined(DISABLE_WEBP)
+#define USE_WEBP
+//#if !defined(DISABLE_ZFILE)
+
+
 
 #endif  /* defined(OPENIMAGEIO_VERSION_H) */

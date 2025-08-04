@@ -121,6 +121,7 @@ const projectMap = {
 	"libmarl_tests": "google-marl",
 	"libmegamime": "mime-mega",
 	"libOpenImageIO": "oiio",
+	"libOpenImageIO_examples": "oiio",
 	"libprocess": "subprocess",
 	"libpromise": "promise-cpp",
 	"librobust-bibtex": "bibtex-robust-decoder",
