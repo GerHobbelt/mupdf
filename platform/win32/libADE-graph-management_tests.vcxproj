@@ -19,32 +19,32 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF32C823}</ProjectGuid>
+    <ProjectGuid>{CABE4C65-C2EC-45B1-B4EA-30442470E9DA}</ProjectGuid>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
@@ -52,16 +52,16 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -74,7 +74,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -88,7 +88,7 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <DisableSpecificWarnings>5204;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <LanguageStandard_C>stdclatest</LanguageStandard_C>
       <SupportJustMyCode>false</SupportJustMyCode>
@@ -108,8 +108,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBADE_GRAPH_MANAGEMENT;ADE_GRAPH_MANAGEMENT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -223,90 +223,60 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/source/alloc.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/source/assert.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/source/check_cycles.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/source/edge.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/source/execution_engine.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/source/graph.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/source/memory_accessor.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/source/memory_descriptor.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/source/memory_descriptor_ref.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/source/memory_descriptor_view.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/source/metadata.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/source/metatypes.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/source/node.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/source/passes/communications.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/source/search.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/source/subgraphs.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/source/topological_sort.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ADE-graph-management/tutorial/01_hello.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ADE-graph-management/tutorial/02_add_link_remove.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ADE-graph-management/tutorial/03_meta.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ADE-graph-management/tutorial/04_passes.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ADE-graph-management/tutorial/05_backend.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ADE-graph-management/tutorial/06_hierarchy.cpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include/ade/communication/callback_connector.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include/ade/communication/comm_buffer.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include/ade/communication/comm_interface.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include/ade/edge.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include/ade/execution_engine/backend.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include/ade/execution_engine/executable.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include/ade/execution_engine/execution_engine.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include/ade/graph.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include/ade/graph_listener.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include/ade/handle.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include/ade/helpers/search.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include/ade/helpers/subgraphs.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include/ade/memory/alloc.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include/ade/memory/memory_access_listener.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include/ade/memory/memory_accessor.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include/ade/memory/memory_descriptor.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include/ade/memory/memory_descriptor_ref.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include/ade/memory/memory_descriptor_view.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include/ade/memory/memory_types.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include/ade/metatypes/metatypes.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include/ade/node.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include/ade/passes/check_cycles.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include/ade/passes/communications.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include/ade/passes/pass_base.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include/ade/passes/topological_sort.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include/ade/passmanager.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include/ade/typed_graph.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include/ade/typed_metadata.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include/ade/util/algorithm.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include/ade/util/assert.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include/ade/util/chain_range.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include/ade/util/checked_cast.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include/ade/util/container_helper.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include/ade/util/filter_range.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include/ade/util/func_ref.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include/ade/util/hash.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include/ade/util/intrusive_list.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include/ade/util/iota_range.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include/ade/util/map_range.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include/ade/util/math.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include/ade/util/md_cast.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include/ade/util/md_io.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include/ade/util/md_size.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include/ade/util/md_span.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include/ade/util/md_view.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include/ade/util/memory_range.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include/ade/util/range.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include/ade/util/range_iterator.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include/ade/util/tuple.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include/ade/util/type_traits.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include/ade/util/zip_range.hpp" />
+    <ProjectReference Include="libabseil-cpp.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff3d0c57}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libADE-graph-management.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff32c823}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libassert.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fffea6c7}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcpptrace.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff39d5ad}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libgoogletest.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffd7a17e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libre2.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff49f979}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsystem_override_4_googletests.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8318-7518ff7ef82e}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/ADE-graph-management/sources/tests/ade/check_cycles_pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ADE-graph-management/sources/tests/ade/comm_buffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ADE-graph-management/sources/tests/ade/communications.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ADE-graph-management/sources/tests/ade/communications_pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ADE-graph-management/sources/tests/ade/execution_engine.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ADE-graph-management/sources/tests/ade/execution_engine_backend.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ADE-graph-management/sources/tests/ade/graph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ADE-graph-management/sources/tests/ade/node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ADE-graph-management/sources/tests/ade/passmanager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ADE-graph-management/sources/tests/ade/search.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ADE-graph-management/sources/tests/ade/subgraphs.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ADE-graph-management/sources/tests/ade/topological_sort_pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ADE-graph-management/sources/tests/ade/typed_graph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ADE-graph-management/sources/tests/common/algo_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ADE-graph-management/sources/tests/common/chain_range_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ADE-graph-management/sources/tests/common/checkedcast_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ADE-graph-management/sources/tests/common/filter_range_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ADE-graph-management/sources/tests/common/func_ref_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ADE-graph-management/sources/tests/common/intrusive_list_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ADE-graph-management/sources/tests/common/map_range_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ADE-graph-management/sources/tests/common/md_view_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ADE-graph-management/sources/tests/common/range_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ADE-graph-management/sources/tests/common/tuple_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ADE-graph-management/sources/tests/common/zip_range_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ADE-graph-management/sources/tests/test-runner-main.cpp" />
     <Text Include="../../thirdparty/owemdjee/ADE-graph-management/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/ADE-graph-management/LICENSE" />
     <Text Include="../../thirdparty/owemdjee/ADE-graph-management/README.md" />
-    <Text Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/cmake/adeConfig.cmake.in" />
-    <Text Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/doc/Doxyfile.in" />
-    <Text Include="../../thirdparty/owemdjee/ADE-graph-management/sources/ade/manifest.cmake" />
-    <Text Include="../../thirdparty/owemdjee/ADE-graph-management/tutorial/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/ADE-graph-management/tutorial/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ADE-graph-management/sources/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ADE-graph-management/sources/tests/ade/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ADE-graph-management/sources/tests/common/CMakeLists.txt" />
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
-  
