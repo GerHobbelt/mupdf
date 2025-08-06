@@ -24,27 +24,27 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
@@ -52,16 +52,16 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -74,7 +74,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -108,8 +108,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENIMAGEIO;OPENIMAGEIO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -222,74 +222,6 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  <ItemGroup>
-    <ProjectReference Include="libassert.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518fffea6c7}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libbrotli.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ffd7760d}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libcpptrace.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff39d5ad}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libdeflate.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff726764}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libfmt.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ffaf3a53}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libgif.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ffddd6be}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libhighway.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff021a57}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libImath.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ffbba437}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libjpeg-turbo.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff92ba30}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libjpeg-xl.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ffa838c1}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libjpeg_default_handlers.vcxproj">
-      <Project>{5f615f91-dff8-4f05-bf48-1222b72071a8}</Project>
-    </ProjectReference>
-    <ProjectReference Include="liblcms2.vcxproj">
-      <Project>{5edcf4fd-0291-4fb9-8d96-158957ca5e3c}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libmupdf_minimal_core.vcxproj">
-      <Project>{6f1ee8ba-ccb7-4f76-b9da-337c41dd6fc0}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libOpenEXR.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff4a0867}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libOpenImageIO.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff4edc48}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libopenjpeg.vcxproj">
-      <Project>{5edcf4fd-0291-4fb9-8d96-758957ca5e3c}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libpng.vcxproj">
-      <Project>{5edcf4fd-0291-4fb9-8d96-658957ca5e3c}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libsystem_override.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8318-7518ff7ef82f}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libtiff.vcxproj">
-      <Project>{5edcf4fd-0291-4fb9-8d96-558957ca5e3c}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libwebp.vcxproj">
-      <Project>{105f884a-c170-4c30-a810-c7da2103002f}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libzlib.vcxproj">
-      <Project>{5edcf4fd-0291-4fb9-8d96-458957ca5e3c}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libzstd.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518fffeb6e4}</Project>
-    </ProjectReference>
-  </ItemGroup>
   <ItemGroup>
     <ClCompile Include="../../thirdparty/owemdjee/oiio/testsuite/docs-examples-cpp/src/docs-examples-imagebuf.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/oiio/testsuite/docs-examples-cpp/src/docs-examples-imagebufalgo.cpp" />
@@ -1173,7 +1105,6 @@
     <Text Include="../../thirdparty/owemdjee/oiio/testsuite/zfile/run.py" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="../../scripts/OpenImageIO/monolithic-main.cpp" />
     <ClInclude Include="../../scripts/OpenImageIO/OpenEXR/ImfTimeCode.h" />
     <ClInclude Include="../../scripts/OpenImageIO/OpenImageIO/Imath.h" />
     <ClInclude Include="../../scripts/OpenImageIO/OpenImageIO/oiioversion.h" />
@@ -1184,3 +1115,4 @@
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
+  

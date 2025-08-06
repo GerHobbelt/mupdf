@@ -55,7 +55,7 @@
 #include "../../thirdparty/owemdjee/tesslinesplit/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/uchardet/src/tools/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/tvision/include/tvision/monolithic_examples.h"
-//#include "../../thirdparty/owemdjee/cpp-terminal/examples/monolithic_examples.h"
+#include "../../thirdparty/owemdjee/cpp-terminal/examples/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/libbf/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/libcsv2/include/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/nanosvg/example/monolithic_examples.h"
@@ -85,6 +85,8 @@
 #include "../../thirdparty/owemdjee/half/include/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/OpenEXR/src/bin/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/dcmtk/dcmapps/include/monolithic_examples.h"
+#include "../../thirdparty/owemdjee/oiio/src/include/monolithic_examples.h"
+
 #undef BUILD_MONOLITHIC
 
 #include "../../scripts/MuPDFLib/versions-api.h"
@@ -160,7 +162,7 @@ static struct tool_spec {
 	{ {.fa = mupdf_cffdump_main }, "cffdump", "muPDF cffdump font info dump tool" },
 #endif
 
-#if defined(MUTOOL_EX)
+#if defined(MUTOOL_EX) && FZ_ENABLE_OCR
 	// DO NOT use tesseract_main() for this as that one does not set up the mupdf/fitz+leptonica+jpeg environments the way we need & expect in monolithic build mode.
 	{ {.fa = tesseract_tool_main }, "tesseract", "OCR given image or PDF" },
 	{ {.fa = tesseract_basic_example_main }, "tess_basic_example", "tesseract::basic_example demo app" },
@@ -1020,7 +1022,7 @@ static struct tool_spec {
 	{ {.fa = gumbo_libxml_example_main }, "gumbo_libxml_example", "gumbo-libxml example" },
 #endif
 
-#if 0 
+#if 01 
 #if defined(MUTOOL_EX)
 	{ {.f = cppterminal_args_example_main }, "cppterm_args", "cpp-terminal args demo" },
 	{ {.f = cppterminal_attach_console_example_main }, "cppterm_attach_console", "cpp-terminal attach_console demo" },
@@ -1193,6 +1195,52 @@ static struct tool_spec {
 	{ {.fa = xslt_runtest_main }, "xslt_runtest", "libxslt runtest demo/tool" },
 	{ {.f = xslt_test_threads_main }, "xslt_test_threads", "libxslt test_threads demo/tool" },
 	{ {.fa = xsltproc_main }, "xsltproc", "libxslt xsltproc tool" },
+#endif
+
+#if defined(MUTOOL_EX)
+	{ {.fa = oiio_iconvert_main }, "oiio_iconvert", "OpenImageIO iconvert tool" },
+	{ {.fa = oiio_idiff_main }, "oiio_idiff", "OpenImageIO idiff tool" },
+	{ {.fa = oiio_igrep_main }, "oiio_igrep", "OpenImageIO igrep tool" },
+	{ {.fa = oiio_iinfo_main }, "oiio_iinfo", "OpenImageIO iinfo tool" },
+	{ {.fa = oiio_color_test_main }, "oiio_color_test", "OpenImageIO color_test tool" },
+	{ {.fa = oiio_compute_test_main }, "oiio_compute_test", "OpenImageIO compute_test tool" },
+	{ {.fa = oiio_imagebufalgo_test_main }, "oiio_imagebufalgo_test", "OpenImageIO imagebufalgo_test tool" },
+	{ {.f = oiio_imagebuf_test_main }, "oiio_imagebuf_test", "OpenImageIO imagebuf_test tool" },
+	{ {.f = oiio_imagecache_test_main }, "oiio_imagecache_test", "OpenImageIO imagecache_test tool" },
+	{ {.fa = oiio_imageinout_test_main }, "oiio_imageinout_test", "OpenImageIO imageinout_test tool" },
+	{ {.f = oiio_imagespec_test_main }, "oiio_imagespec_test", "OpenImageIO imagespec_test tool" },
+	{ {.fa = oiio_imagespeed_test_main }, "oiio_imagespeed_test", "OpenImageIO imagespeed_test tool" },
+	{ {.fa = oiio_argparse_test_main }, "oiio_argparse_test", "OpenImageIO argparse_test tool" },
+	{ {.fa = oiio_atomic_test_main }, "oiio_atomic_test", "OpenImageIO atomic_test tool" },
+	{ {.f = oiio_filesystem_test_main }, "oiio_filesystem_test", "OpenImageIO filesystem_test tool" },
+	{ {.fa = oiio_filter_test_main }, "oiio_filter_test", "OpenImageIO filter_test tool" },
+	{ {.fa = oiio_fmath_test_main }, "oiio_fmath_test", "OpenImageIO fmath_test tool" },
+	{ {.fa = oiio_hash_test_main }, "oiio_hash_test", "OpenImageIO hash_test tool" },
+	{ {.f = oiio_optparser_test_main }, "oiio_optparser_test", "OpenImageIO optparser_test tool" },
+	{ {.fa = oiio_parallel_test_main }, "oiio_parallel_test", "OpenImageIO parallel_test tool" },
+	{ {.fa = oiio_paramlist_test_main }, "oiio_paramlist_test", "OpenImageIO paramlist_test tool" },
+	{ {.fa = oiio_simd_test_main }, "oiio_simd_test", "OpenImageIO simd_test tool" },
+	{ {.fa = oiio_span_test_main }, "oiio_span_test", "OpenImageIO span_test tool" },
+	{ {.fa = oiio_spinlock_test_main }, "oiio_spinlock_test", "OpenImageIO spinlock_test tool" },
+	{ {.fa = oiio_spin_rw_test_main }, "oiio_spin_rw_test", "OpenImageIO spin_rw_test tool" },
+	{ {.f = oiio_strongparam_test_main }, "oiio_strongparam_test", "OpenImageIO strongparam_test tool" },
+	{ {.f = oiio_strutil_test_main }, "oiio_strutil_test", "OpenImageIO strutil_test tool" },
+	{ {.fa = oiio_thread_test_main }, "oiio_thread_test", "OpenImageIO thread_test tool" },
+	{ {.fa = oiio_timer_test_main }, "oiio_timer_test", "OpenImageIO timer_test tool" },
+	{ {.f = oiio_typedesc_test_main }, "oiio_typedesc_test", "OpenImageIO typedesc_test tool" },
+	{ {.f = oiio_type_traits_test_main }, "oiio_type_traits_test", "OpenImageIO type_traits_test tool" },
+	{ {.fa = oiio_ustring_test_main }, "oiio_ustring_test", "OpenImageIO ustring_test tool" },
+	{ {.fa = oiio_maketx_main }, "oiio_maketx", "OpenImageIO maketx tool" },
+	{ {.fa = oiio_oiiotool_main }, "oiio_oiiotool", "OpenImageIO oiiotool tool" },
+	{ {.fa = oiio_testtex_main }, "oiio_testtex", "OpenImageIO testtex tool" },
+	{ {.f = oiio_imagebuf_main }, "oiio_imagebuf", "OpenImageIO imagebuf tool" },
+	{ {.f = oiio_imagebufalgo_main }, "oiio_imagebufalgo", "OpenImageIO imagebufalgo tool" },
+	{ {.f = oiio_imagecache_main }, "oiio_imagecache", "OpenImageIO imagecache tool" },
+	{ {.f = oiio_imageinput_main }, "oiio_imageinput", "OpenImageIO imageinput tool" },
+	{ {.f = oiio_imageioapi_main }, "oiio_imageioapi", "OpenImageIO imageioapi tool" },
+	{ {.f = oiio_imageoutput_main }, "oiio_imageoutput", "OpenImageIO imageoutput tool" },
+	{ {.f = oiio_texturesys_main }, "oiio_texturesys", "OpenImageIO texturesys tool" },
+	{ {.f = oiio_writingplugins_main }, "oiio_writingplugins", "OpenImageIO writingplugins tool" },
 #endif
 
 	{ {.fa = report_version }, "version", "report version of this build / tools" },

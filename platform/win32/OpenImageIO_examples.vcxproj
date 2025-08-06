@@ -1,0 +1,1174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{F8278CBE-9457-4ECF-9087-3729261A0204}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4266;4574;4800;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENIMAGEIO;OPENIMAGEIO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/oiio/src/include;../../scripts/OpenImageIO;../../scripts;../../thirdparty/owemdjee/Imath/src;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/robin-map/include;../../thirdparty/openjpeg/src/lib/openjp2;../../thirdparty/owemdjee/OpenColorIO/include;../../scripts/zlib;../../thirdparty/owemdjee/libgif;../../scripts/libtiff;../../thirdparty/owemdjee/FFmpeg;../../thirdparty;../../thirdparty/zlib;../../scripts/OpenColorIO/include/OpenColorIO;../../scripts/Imath;../../thirdparty/owemdjee/oneTBB/include;../../thirdparty/owemdjee/libwebp/src;../../scripts/FFmpeg;../../thirdparty/owemdjee/libheif-alt/libheif/api;../../thirdparty/owemdjee/libjpeg-turbo/src;../../thirdparty/owemdjee/jpeg-xl/lib/include;../../thirdparty/owemdjee/OpenEXR/src/lib;../../thirdparty/owemdjee/LibRaw;../../scripts/OpenEXR/include;../../thirdparty/owemdjee/dcmtk/config/include;../../scripts/dcmtk/include;../../thirdparty/owemdjee/dcmtk/dcmdata/include;../../thirdparty/owemdjee/dcmtk/oflog/include;../../scripts/libheif-alt;../../scripts/libjpeg-turbo;../../thirdparty/owemdjee/dcmtk/ofstd/include;../../thirdparty/owemdjee/dcmtk/dcmimage/include;../../thirdparty/owemdjee/Imath/src/Imath;../../thirdparty/owemdjee/dcmtk/dcmect/include;../../thirdparty/owemdjee/dcmtk/dcmfg/include;../../thirdparty/owemdjee/dcmtk/dcmimgle/include;../../thirdparty/owemdjee/dcmtk/dcmiod/include;../../thirdparty/owemdjee/dcmtk/dcmjpeg/include;../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg12;../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg16;../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8;../../thirdparty/owemdjee/dcmtk/dcmjpls/include;../../thirdparty/owemdjee/dcmtk/dcmjpls/libcharls;../../thirdparty/owemdjee/dcmtk/dcmnet/include;../../thirdparty/owemdjee/dcmtk/dcmpmap/include;../../thirdparty/owemdjee/dcmtk/dcmpstat/include;../../thirdparty/owemdjee/dcmtk/dcmqrdb/include;../../thirdparty/owemdjee/dcmtk/dcmrt/include;../../thirdparty/owemdjee/dcmtk/dcmseg/include;../../thirdparty/owemdjee/dcmtk/dcmsign/include;../../thirdparty/owemdjee/dcmtk/dcmsr/include;../../thirdparty/owemdjee/dcmtk/dcmtls/include;../../thirdparty/owemdjee/dcmtk/dcmtract/include;../../thirdparty/owemdjee/dcmtk/dcmwlm/include;../../thirdparty/owemdjee/dcmtk/oficonv/include;../../thirdparty/owemdjee/dcmtk/oficonv/libsrc;../../thirdparty/owemdjee/dcmtk/dcmapps/include;../../thirdparty/owemdjee/OpenEXR/src/bin;../../thirdparty/owemdjee/OpenEXR/src/bin/exrenvmap;../../thirdparty/owemdjee/OpenEXR/src/lib/Iex;../../thirdparty/owemdjee/OpenEXR/src/lib/IlmThread;../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXR;../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXRCore;../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXRUtil;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>IFF_IO_WITHOUT_PROXY=0;OIIO_STATIC_DEFINE;BUILD_MONOLITHIC;BUILDING_LIBOPENIMAGEIO;OPENIMAGEIO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENIMAGEIO;OPENIMAGEIO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/oiio/src/include;../../scripts/OpenImageIO;../../scripts;../../thirdparty/owemdjee/Imath/src;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/robin-map/include;../../thirdparty/openjpeg/src/lib/openjp2;../../thirdparty/owemdjee/OpenColorIO/include;../../scripts/zlib;../../thirdparty/owemdjee/libgif;../../scripts/libtiff;../../thirdparty/owemdjee/FFmpeg;../../thirdparty;../../thirdparty/zlib;../../scripts/OpenColorIO/include/OpenColorIO;../../scripts/Imath;../../thirdparty/owemdjee/oneTBB/include;../../thirdparty/owemdjee/libwebp/src;../../scripts/FFmpeg;../../thirdparty/owemdjee/libheif-alt/libheif/api;../../thirdparty/owemdjee/libjpeg-turbo/src;../../thirdparty/owemdjee/jpeg-xl/lib/include;../../thirdparty/owemdjee/OpenEXR/src/lib;../../thirdparty/owemdjee/LibRaw;../../scripts/OpenEXR/include;../../thirdparty/owemdjee/dcmtk/config/include;../../scripts/dcmtk/include;../../thirdparty/owemdjee/dcmtk/dcmdata/include;../../thirdparty/owemdjee/dcmtk/oflog/include;../../scripts/libheif-alt;../../scripts/libjpeg-turbo;../../thirdparty/owemdjee/dcmtk/ofstd/include;../../thirdparty/owemdjee/dcmtk/dcmimage/include;../../thirdparty/owemdjee/Imath/src/Imath;../../thirdparty/owemdjee/dcmtk/dcmect/include;../../thirdparty/owemdjee/dcmtk/dcmfg/include;../../thirdparty/owemdjee/dcmtk/dcmimgle/include;../../thirdparty/owemdjee/dcmtk/dcmiod/include;../../thirdparty/owemdjee/dcmtk/dcmjpeg/include;../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg12;../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg16;../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8;../../thirdparty/owemdjee/dcmtk/dcmjpls/include;../../thirdparty/owemdjee/dcmtk/dcmjpls/libcharls;../../thirdparty/owemdjee/dcmtk/dcmnet/include;../../thirdparty/owemdjee/dcmtk/dcmpmap/include;../../thirdparty/owemdjee/dcmtk/dcmpstat/include;../../thirdparty/owemdjee/dcmtk/dcmqrdb/include;../../thirdparty/owemdjee/dcmtk/dcmrt/include;../../thirdparty/owemdjee/dcmtk/dcmseg/include;../../thirdparty/owemdjee/dcmtk/dcmsign/include;../../thirdparty/owemdjee/dcmtk/dcmsr/include;../../thirdparty/owemdjee/dcmtk/dcmtls/include;../../thirdparty/owemdjee/dcmtk/dcmtract/include;../../thirdparty/owemdjee/dcmtk/dcmwlm/include;../../thirdparty/owemdjee/dcmtk/oficonv/include;../../thirdparty/owemdjee/dcmtk/oficonv/libsrc;../../thirdparty/owemdjee/dcmtk/dcmapps/include;../../thirdparty/owemdjee/OpenEXR/src/bin;../../thirdparty/owemdjee/OpenEXR/src/bin/exrenvmap;../../thirdparty/owemdjee/OpenEXR/src/lib/Iex;../../thirdparty/owemdjee/OpenEXR/src/lib/IlmThread;../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXR;../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXRCore;../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXRUtil;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENIMAGEIO;OPENIMAGEIO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/oiio/src/include;../../scripts/OpenImageIO;../../scripts;../../thirdparty/owemdjee/Imath/src;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/robin-map/include;../../thirdparty/openjpeg/src/lib/openjp2;../../thirdparty/owemdjee/OpenColorIO/include;../../scripts/zlib;../../thirdparty/owemdjee/libgif;../../scripts/libtiff;../../thirdparty/owemdjee/FFmpeg;../../thirdparty;../../thirdparty/zlib;../../scripts/OpenColorIO/include/OpenColorIO;../../scripts/Imath;../../thirdparty/owemdjee/oneTBB/include;../../thirdparty/owemdjee/libwebp/src;../../scripts/FFmpeg;../../thirdparty/owemdjee/libheif-alt/libheif/api;../../thirdparty/owemdjee/libjpeg-turbo/src;../../thirdparty/owemdjee/jpeg-xl/lib/include;../../thirdparty/owemdjee/OpenEXR/src/lib;../../thirdparty/owemdjee/LibRaw;../../scripts/OpenEXR/include;../../thirdparty/owemdjee/dcmtk/config/include;../../scripts/dcmtk/include;../../thirdparty/owemdjee/dcmtk/dcmdata/include;../../thirdparty/owemdjee/dcmtk/oflog/include;../../scripts/libheif-alt;../../scripts/libjpeg-turbo;../../thirdparty/owemdjee/dcmtk/ofstd/include;../../thirdparty/owemdjee/dcmtk/dcmimage/include;../../thirdparty/owemdjee/Imath/src/Imath;../../thirdparty/owemdjee/dcmtk/dcmect/include;../../thirdparty/owemdjee/dcmtk/dcmfg/include;../../thirdparty/owemdjee/dcmtk/dcmimgle/include;../../thirdparty/owemdjee/dcmtk/dcmiod/include;../../thirdparty/owemdjee/dcmtk/dcmjpeg/include;../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg12;../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg16;../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8;../../thirdparty/owemdjee/dcmtk/dcmjpls/include;../../thirdparty/owemdjee/dcmtk/dcmjpls/libcharls;../../thirdparty/owemdjee/dcmtk/dcmnet/include;../../thirdparty/owemdjee/dcmtk/dcmpmap/include;../../thirdparty/owemdjee/dcmtk/dcmpstat/include;../../thirdparty/owemdjee/dcmtk/dcmqrdb/include;../../thirdparty/owemdjee/dcmtk/dcmrt/include;../../thirdparty/owemdjee/dcmtk/dcmseg/include;../../thirdparty/owemdjee/dcmtk/dcmsign/include;../../thirdparty/owemdjee/dcmtk/dcmsr/include;../../thirdparty/owemdjee/dcmtk/dcmtls/include;../../thirdparty/owemdjee/dcmtk/dcmtract/include;../../thirdparty/owemdjee/dcmtk/dcmwlm/include;../../thirdparty/owemdjee/dcmtk/oficonv/include;../../thirdparty/owemdjee/dcmtk/oficonv/libsrc;../../thirdparty/owemdjee/dcmtk/dcmapps/include;../../thirdparty/owemdjee/OpenEXR/src/bin;../../thirdparty/owemdjee/OpenEXR/src/bin/exrenvmap;../../thirdparty/owemdjee/OpenEXR/src/lib/Iex;../../thirdparty/owemdjee/OpenEXR/src/lib/IlmThread;../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXR;../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXRCore;../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXRUtil;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>IFF_IO_WITHOUT_PROXY=0;OIIO_STATIC_DEFINE;BUILD_MONOLITHIC;BUILDING_LIBOPENIMAGEIO;OPENIMAGEIO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENIMAGEIO;OPENIMAGEIO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/oiio/src/include;../../scripts/OpenImageIO;../../scripts;../../thirdparty/owemdjee/Imath/src;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/robin-map/include;../../thirdparty/openjpeg/src/lib/openjp2;../../thirdparty/owemdjee/OpenColorIO/include;../../scripts/zlib;../../thirdparty/owemdjee/libgif;../../scripts/libtiff;../../thirdparty/owemdjee/FFmpeg;../../thirdparty;../../thirdparty/zlib;../../scripts/OpenColorIO/include/OpenColorIO;../../scripts/Imath;../../thirdparty/owemdjee/oneTBB/include;../../thirdparty/owemdjee/libwebp/src;../../scripts/FFmpeg;../../thirdparty/owemdjee/libheif-alt/libheif/api;../../thirdparty/owemdjee/libjpeg-turbo/src;../../thirdparty/owemdjee/jpeg-xl/lib/include;../../thirdparty/owemdjee/OpenEXR/src/lib;../../thirdparty/owemdjee/LibRaw;../../scripts/OpenEXR/include;../../thirdparty/owemdjee/dcmtk/config/include;../../scripts/dcmtk/include;../../thirdparty/owemdjee/dcmtk/dcmdata/include;../../thirdparty/owemdjee/dcmtk/oflog/include;../../scripts/libheif-alt;../../scripts/libjpeg-turbo;../../thirdparty/owemdjee/dcmtk/ofstd/include;../../thirdparty/owemdjee/dcmtk/dcmimage/include;../../thirdparty/owemdjee/Imath/src/Imath;../../thirdparty/owemdjee/dcmtk/dcmect/include;../../thirdparty/owemdjee/dcmtk/dcmfg/include;../../thirdparty/owemdjee/dcmtk/dcmimgle/include;../../thirdparty/owemdjee/dcmtk/dcmiod/include;../../thirdparty/owemdjee/dcmtk/dcmjpeg/include;../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg12;../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg16;../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8;../../thirdparty/owemdjee/dcmtk/dcmjpls/include;../../thirdparty/owemdjee/dcmtk/dcmjpls/libcharls;../../thirdparty/owemdjee/dcmtk/dcmnet/include;../../thirdparty/owemdjee/dcmtk/dcmpmap/include;../../thirdparty/owemdjee/dcmtk/dcmpstat/include;../../thirdparty/owemdjee/dcmtk/dcmqrdb/include;../../thirdparty/owemdjee/dcmtk/dcmrt/include;../../thirdparty/owemdjee/dcmtk/dcmseg/include;../../thirdparty/owemdjee/dcmtk/dcmsign/include;../../thirdparty/owemdjee/dcmtk/dcmsr/include;../../thirdparty/owemdjee/dcmtk/dcmtls/include;../../thirdparty/owemdjee/dcmtk/dcmtract/include;../../thirdparty/owemdjee/dcmtk/dcmwlm/include;../../thirdparty/owemdjee/dcmtk/oficonv/include;../../thirdparty/owemdjee/dcmtk/oficonv/libsrc;../../thirdparty/owemdjee/dcmtk/dcmapps/include;../../thirdparty/owemdjee/OpenEXR/src/bin;../../thirdparty/owemdjee/OpenEXR/src/bin/exrenvmap;../../thirdparty/owemdjee/OpenEXR/src/lib/Iex;../../thirdparty/owemdjee/OpenEXR/src/lib/IlmThread;../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXR;../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXRCore;../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXRUtil;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENIMAGEIO;OPENIMAGEIO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/oiio/src/include;../../scripts/OpenImageIO;../../scripts;../../thirdparty/owemdjee/Imath/src;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/robin-map/include;../../thirdparty/openjpeg/src/lib/openjp2;../../thirdparty/owemdjee/OpenColorIO/include;../../scripts/zlib;../../thirdparty/owemdjee/libgif;../../scripts/libtiff;../../thirdparty/owemdjee/FFmpeg;../../thirdparty;../../thirdparty/zlib;../../scripts/OpenColorIO/include/OpenColorIO;../../scripts/Imath;../../thirdparty/owemdjee/oneTBB/include;../../thirdparty/owemdjee/libwebp/src;../../scripts/FFmpeg;../../thirdparty/owemdjee/libheif-alt/libheif/api;../../thirdparty/owemdjee/libjpeg-turbo/src;../../thirdparty/owemdjee/jpeg-xl/lib/include;../../thirdparty/owemdjee/OpenEXR/src/lib;../../thirdparty/owemdjee/LibRaw;../../scripts/OpenEXR/include;../../thirdparty/owemdjee/dcmtk/config/include;../../scripts/dcmtk/include;../../thirdparty/owemdjee/dcmtk/dcmdata/include;../../thirdparty/owemdjee/dcmtk/oflog/include;../../scripts/libheif-alt;../../scripts/libjpeg-turbo;../../thirdparty/owemdjee/dcmtk/ofstd/include;../../thirdparty/owemdjee/dcmtk/dcmimage/include;../../thirdparty/owemdjee/Imath/src/Imath;../../thirdparty/owemdjee/dcmtk/dcmect/include;../../thirdparty/owemdjee/dcmtk/dcmfg/include;../../thirdparty/owemdjee/dcmtk/dcmimgle/include;../../thirdparty/owemdjee/dcmtk/dcmiod/include;../../thirdparty/owemdjee/dcmtk/dcmjpeg/include;../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg12;../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg16;../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8;../../thirdparty/owemdjee/dcmtk/dcmjpls/include;../../thirdparty/owemdjee/dcmtk/dcmjpls/libcharls;../../thirdparty/owemdjee/dcmtk/dcmnet/include;../../thirdparty/owemdjee/dcmtk/dcmpmap/include;../../thirdparty/owemdjee/dcmtk/dcmpstat/include;../../thirdparty/owemdjee/dcmtk/dcmqrdb/include;../../thirdparty/owemdjee/dcmtk/dcmrt/include;../../thirdparty/owemdjee/dcmtk/dcmseg/include;../../thirdparty/owemdjee/dcmtk/dcmsign/include;../../thirdparty/owemdjee/dcmtk/dcmsr/include;../../thirdparty/owemdjee/dcmtk/dcmtls/include;../../thirdparty/owemdjee/dcmtk/dcmtract/include;../../thirdparty/owemdjee/dcmtk/dcmwlm/include;../../thirdparty/owemdjee/dcmtk/oficonv/include;../../thirdparty/owemdjee/dcmtk/oficonv/libsrc;../../thirdparty/owemdjee/dcmtk/dcmapps/include;../../thirdparty/owemdjee/OpenEXR/src/bin;../../thirdparty/owemdjee/OpenEXR/src/bin/exrenvmap;../../thirdparty/owemdjee/OpenEXR/src/lib/Iex;../../thirdparty/owemdjee/OpenEXR/src/lib/IlmThread;../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXR;../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXRCore;../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXRUtil;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>IFF_IO_WITHOUT_PROXY=0;OIIO_STATIC_DEFINE;BUILD_MONOLITHIC;BUILDING_LIBOPENIMAGEIO;OPENIMAGEIO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENIMAGEIO;OPENIMAGEIO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/oiio/src/include;../../scripts/OpenImageIO;../../scripts;../../thirdparty/owemdjee/Imath/src;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/robin-map/include;../../thirdparty/openjpeg/src/lib/openjp2;../../thirdparty/owemdjee/OpenColorIO/include;../../scripts/zlib;../../thirdparty/owemdjee/libgif;../../scripts/libtiff;../../thirdparty/owemdjee/FFmpeg;../../thirdparty;../../thirdparty/zlib;../../scripts/OpenColorIO/include/OpenColorIO;../../scripts/Imath;../../thirdparty/owemdjee/oneTBB/include;../../thirdparty/owemdjee/libwebp/src;../../scripts/FFmpeg;../../thirdparty/owemdjee/libheif-alt/libheif/api;../../thirdparty/owemdjee/libjpeg-turbo/src;../../thirdparty/owemdjee/jpeg-xl/lib/include;../../thirdparty/owemdjee/OpenEXR/src/lib;../../thirdparty/owemdjee/LibRaw;../../scripts/OpenEXR/include;../../thirdparty/owemdjee/dcmtk/config/include;../../scripts/dcmtk/include;../../thirdparty/owemdjee/dcmtk/dcmdata/include;../../thirdparty/owemdjee/dcmtk/oflog/include;../../scripts/libheif-alt;../../scripts/libjpeg-turbo;../../thirdparty/owemdjee/dcmtk/ofstd/include;../../thirdparty/owemdjee/dcmtk/dcmimage/include;../../thirdparty/owemdjee/Imath/src/Imath;../../thirdparty/owemdjee/dcmtk/dcmect/include;../../thirdparty/owemdjee/dcmtk/dcmfg/include;../../thirdparty/owemdjee/dcmtk/dcmimgle/include;../../thirdparty/owemdjee/dcmtk/dcmiod/include;../../thirdparty/owemdjee/dcmtk/dcmjpeg/include;../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg12;../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg16;../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8;../../thirdparty/owemdjee/dcmtk/dcmjpls/include;../../thirdparty/owemdjee/dcmtk/dcmjpls/libcharls;../../thirdparty/owemdjee/dcmtk/dcmnet/include;../../thirdparty/owemdjee/dcmtk/dcmpmap/include;../../thirdparty/owemdjee/dcmtk/dcmpstat/include;../../thirdparty/owemdjee/dcmtk/dcmqrdb/include;../../thirdparty/owemdjee/dcmtk/dcmrt/include;../../thirdparty/owemdjee/dcmtk/dcmseg/include;../../thirdparty/owemdjee/dcmtk/dcmsign/include;../../thirdparty/owemdjee/dcmtk/dcmsr/include;../../thirdparty/owemdjee/dcmtk/dcmtls/include;../../thirdparty/owemdjee/dcmtk/dcmtract/include;../../thirdparty/owemdjee/dcmtk/dcmwlm/include;../../thirdparty/owemdjee/dcmtk/oficonv/include;../../thirdparty/owemdjee/dcmtk/oficonv/libsrc;../../thirdparty/owemdjee/dcmtk/dcmapps/include;../../thirdparty/owemdjee/OpenEXR/src/bin;../../thirdparty/owemdjee/OpenEXR/src/bin/exrenvmap;../../thirdparty/owemdjee/OpenEXR/src/lib/Iex;../../thirdparty/owemdjee/OpenEXR/src/lib/IlmThread;../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXR;../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXRCore;../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXRUtil;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENIMAGEIO;OPENIMAGEIO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/oiio/src/include;../../scripts/OpenImageIO;../../scripts;../../thirdparty/owemdjee/Imath/src;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/robin-map/include;../../thirdparty/openjpeg/src/lib/openjp2;../../thirdparty/owemdjee/OpenColorIO/include;../../scripts/zlib;../../thirdparty/owemdjee/libgif;../../scripts/libtiff;../../thirdparty/owemdjee/FFmpeg;../../thirdparty;../../thirdparty/zlib;../../scripts/OpenColorIO/include/OpenColorIO;../../scripts/Imath;../../thirdparty/owemdjee/oneTBB/include;../../thirdparty/owemdjee/libwebp/src;../../scripts/FFmpeg;../../thirdparty/owemdjee/libheif-alt/libheif/api;../../thirdparty/owemdjee/libjpeg-turbo/src;../../thirdparty/owemdjee/jpeg-xl/lib/include;../../thirdparty/owemdjee/OpenEXR/src/lib;../../thirdparty/owemdjee/LibRaw;../../scripts/OpenEXR/include;../../thirdparty/owemdjee/dcmtk/config/include;../../scripts/dcmtk/include;../../thirdparty/owemdjee/dcmtk/dcmdata/include;../../thirdparty/owemdjee/dcmtk/oflog/include;../../scripts/libheif-alt;../../scripts/libjpeg-turbo;../../thirdparty/owemdjee/dcmtk/ofstd/include;../../thirdparty/owemdjee/dcmtk/dcmimage/include;../../thirdparty/owemdjee/Imath/src/Imath;../../thirdparty/owemdjee/dcmtk/dcmect/include;../../thirdparty/owemdjee/dcmtk/dcmfg/include;../../thirdparty/owemdjee/dcmtk/dcmimgle/include;../../thirdparty/owemdjee/dcmtk/dcmiod/include;../../thirdparty/owemdjee/dcmtk/dcmjpeg/include;../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg12;../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg16;../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8;../../thirdparty/owemdjee/dcmtk/dcmjpls/include;../../thirdparty/owemdjee/dcmtk/dcmjpls/libcharls;../../thirdparty/owemdjee/dcmtk/dcmnet/include;../../thirdparty/owemdjee/dcmtk/dcmpmap/include;../../thirdparty/owemdjee/dcmtk/dcmpstat/include;../../thirdparty/owemdjee/dcmtk/dcmqrdb/include;../../thirdparty/owemdjee/dcmtk/dcmrt/include;../../thirdparty/owemdjee/dcmtk/dcmseg/include;../../thirdparty/owemdjee/dcmtk/dcmsign/include;../../thirdparty/owemdjee/dcmtk/dcmsr/include;../../thirdparty/owemdjee/dcmtk/dcmtls/include;../../thirdparty/owemdjee/dcmtk/dcmtract/include;../../thirdparty/owemdjee/dcmtk/dcmwlm/include;../../thirdparty/owemdjee/dcmtk/oficonv/include;../../thirdparty/owemdjee/dcmtk/oficonv/libsrc;../../thirdparty/owemdjee/dcmtk/dcmapps/include;../../thirdparty/owemdjee/OpenEXR/src/bin;../../thirdparty/owemdjee/OpenEXR/src/bin/exrenvmap;../../thirdparty/owemdjee/OpenEXR/src/lib/Iex;../../thirdparty/owemdjee/OpenEXR/src/lib/IlmThread;../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXR;../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXRCore;../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXRUtil;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>IFF_IO_WITHOUT_PROXY=0;OIIO_STATIC_DEFINE;BUILD_MONOLITHIC;BUILDING_LIBOPENIMAGEIO;OPENIMAGEIO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENIMAGEIO;OPENIMAGEIO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/oiio/src/include;../../scripts/OpenImageIO;../../scripts;../../thirdparty/owemdjee/Imath/src;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/robin-map/include;../../thirdparty/openjpeg/src/lib/openjp2;../../thirdparty/owemdjee/OpenColorIO/include;../../scripts/zlib;../../thirdparty/owemdjee/libgif;../../scripts/libtiff;../../thirdparty/owemdjee/FFmpeg;../../thirdparty;../../thirdparty/zlib;../../scripts/OpenColorIO/include/OpenColorIO;../../scripts/Imath;../../thirdparty/owemdjee/oneTBB/include;../../thirdparty/owemdjee/libwebp/src;../../scripts/FFmpeg;../../thirdparty/owemdjee/libheif-alt/libheif/api;../../thirdparty/owemdjee/libjpeg-turbo/src;../../thirdparty/owemdjee/jpeg-xl/lib/include;../../thirdparty/owemdjee/OpenEXR/src/lib;../../thirdparty/owemdjee/LibRaw;../../scripts/OpenEXR/include;../../thirdparty/owemdjee/dcmtk/config/include;../../scripts/dcmtk/include;../../thirdparty/owemdjee/dcmtk/dcmdata/include;../../thirdparty/owemdjee/dcmtk/oflog/include;../../scripts/libheif-alt;../../scripts/libjpeg-turbo;../../thirdparty/owemdjee/dcmtk/ofstd/include;../../thirdparty/owemdjee/dcmtk/dcmimage/include;../../thirdparty/owemdjee/Imath/src/Imath;../../thirdparty/owemdjee/dcmtk/dcmect/include;../../thirdparty/owemdjee/dcmtk/dcmfg/include;../../thirdparty/owemdjee/dcmtk/dcmimgle/include;../../thirdparty/owemdjee/dcmtk/dcmiod/include;../../thirdparty/owemdjee/dcmtk/dcmjpeg/include;../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg12;../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg16;../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8;../../thirdparty/owemdjee/dcmtk/dcmjpls/include;../../thirdparty/owemdjee/dcmtk/dcmjpls/libcharls;../../thirdparty/owemdjee/dcmtk/dcmnet/include;../../thirdparty/owemdjee/dcmtk/dcmpmap/include;../../thirdparty/owemdjee/dcmtk/dcmpstat/include;../../thirdparty/owemdjee/dcmtk/dcmqrdb/include;../../thirdparty/owemdjee/dcmtk/dcmrt/include;../../thirdparty/owemdjee/dcmtk/dcmseg/include;../../thirdparty/owemdjee/dcmtk/dcmsign/include;../../thirdparty/owemdjee/dcmtk/dcmsr/include;../../thirdparty/owemdjee/dcmtk/dcmtls/include;../../thirdparty/owemdjee/dcmtk/dcmtract/include;../../thirdparty/owemdjee/dcmtk/dcmwlm/include;../../thirdparty/owemdjee/dcmtk/oficonv/include;../../thirdparty/owemdjee/dcmtk/oficonv/libsrc;../../thirdparty/owemdjee/dcmtk/dcmapps/include;../../thirdparty/owemdjee/OpenEXR/src/bin;../../thirdparty/owemdjee/OpenEXR/src/bin/exrenvmap;../../thirdparty/owemdjee/OpenEXR/src/lib/Iex;../../thirdparty/owemdjee/OpenEXR/src/lib/IlmThread;../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXR;../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXRCore;../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXRUtil;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ProjectReference Include="libassert.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fffea6c7}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libbrotli.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffd7760d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcpptrace.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff39d5ad}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libdeflate.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff726764}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfmt.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffaf3a53}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libgif.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffddd6be}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libhighway.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff021a57}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libImath.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffbba437}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjpeg-turbo.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff92ba30}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjpeg-xl.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa838c1}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjpeg_default_handlers.vcxproj">
+      <Project>{5f615f91-dff8-4f05-bf48-1222b72071a8}</Project>
+    </ProjectReference>
+    <ProjectReference Include="liblcms2.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-158957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmupdf_minimal_core.vcxproj">
+      <Project>{6f1ee8ba-ccb7-4f76-b9da-337c41dd6fc0}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libOpenEXR.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff4a0867}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libOpenImageIO.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff4edc48}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libOpenImageIO_examples.vcxproj">
+      <Project>{a8692b9d-c630-4ef6-89d3-1fc4dc103138}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libopenjpeg.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-758957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpng.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-658957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsystem_override.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8318-7518ff7ef82f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtiff.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-558957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libwebp.vcxproj">
+      <Project>{105f884a-c170-4c30-a810-c7da2103002f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libzlib.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-458957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libzstd.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fffeb6e4}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-attribs/ref/test.icc" />
+    <Image Include="../../thirdparty/owemdjee/oiio/ASWF/logos/openimageio-acronym-gradient-light.png" />
+    <Image Include="../../thirdparty/owemdjee/oiio/ASWF/logos/openimageio-acronym-gradient.png" />
+    <Image Include="../../thirdparty/owemdjee/oiio/ASWF/logos/openimageio-horizontal-gradient.png" />
+    <Image Include="../../thirdparty/owemdjee/oiio/ASWF/logos/openimageio-icon-gradient.png" />
+    <Image Include="../../thirdparty/owemdjee/oiio/ASWF/logos/openimageio-stacked-gradient-light.png" />
+    <Image Include="../../thirdparty/owemdjee/oiio/ASWF/logos/openimageio-stacked-gradient.png" />
+    <Image Include="../../thirdparty/owemdjee/oiio/testsuite/bmp/src/PRINTER.BMP" />
+    <Image Include="../../thirdparty/owemdjee/oiio/testsuite/bmp/src/bad-y.bmp" />
+    <Image Include="../../thirdparty/owemdjee/oiio/testsuite/bmp/src/decodecolormap-corrupt.bmp" />
+    <Image Include="../../thirdparty/owemdjee/oiio/testsuite/bmp/src/g01bg2-v5.bmp" />
+    <Image Include="../../thirdparty/owemdjee/oiio/testsuite/common/bayer.png" />
+    <Image Include="../../thirdparty/owemdjee/oiio/testsuite/gif/ref/tahoe-tiny.gif" />
+    <Image Include="../../thirdparty/owemdjee/oiio/testsuite/ico/src/bad1.ico" />
+    <Image Include="../../thirdparty/owemdjee/oiio/testsuite/jpeg-corrupt/src/corrupt-exif-1626.jpg" />
+    <Image Include="../../thirdparty/owemdjee/oiio/testsuite/jpeg-corrupt/src/corrupt-exif.jpg" />
+    <Image Include="../../thirdparty/owemdjee/oiio/testsuite/jpeg-corrupt/src/corrupt-icc-4551.jpg" />
+    <Image Include="../../thirdparty/owemdjee/oiio/testsuite/jpeg-corrupt/src/corrupt-icc-4552.jpg" />
+    <Image Include="../../thirdparty/owemdjee/oiio/testsuite/jpeg-metadata/src/blender-render.jpg" />
+    <Image Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-color/ref/rgbfromtga.png" />
+    <Image Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/histogram_input.png" />
+    <Image Include="../../thirdparty/owemdjee/oiio/testsuite/png/ref/test16.png" />
+    <Image Include="../../thirdparty/owemdjee/oiio/testsuite/png/src/alphagamma.png" />
+    <Image Include="../../thirdparty/owemdjee/oiio/testsuite/png/src/gimp_gradient.png" />
+    <Image Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagebuf/ref/invalid_repr_png.png" />
+    <Image Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagebuf/ref/valid_repr_png.png" />
+    <Image Include="../../thirdparty/owemdjee/oiio/testsuite/texture-fill/src/gray.png" />
+    <Image Include="../../thirdparty/owemdjee/oiio/testsuite/texture-gray/src/gray.png" />
+    <Text Include="../../thirdparty/owemdjee/oiio/ASWF/CLA-corporate.md" />
+    <Text Include="../../thirdparty/owemdjee/oiio/ASWF/CLA-individual.md" />
+    <Text Include="../../thirdparty/owemdjee/oiio/ASWF/Technical-Charter.md" />
+    <Text Include="../../thirdparty/owemdjee/oiio/CHANGES.md" />
+    <Text Include="../../thirdparty/owemdjee/oiio/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/oiio/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/oiio/CREDITS.md" />
+    <Text Include="../../thirdparty/owemdjee/oiio/GOVERNANCE.md" />
+    <Text Include="../../thirdparty/owemdjee/oiio/INSTALL.md" />
+    <Text Include="../../thirdparty/owemdjee/oiio/LICENSE.md" />
+    <Text Include="../../thirdparty/owemdjee/oiio/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/oiio/README.md" />
+    <Text Include="../../thirdparty/owemdjee/oiio/RELICENSING.md" />
+    <Text Include="../../thirdparty/owemdjee/oiio/SECURITY.md" />
+    <Text Include="../../thirdparty/owemdjee/oiio/THIRD-PARTY.md" />
+    <Text Include="../../thirdparty/owemdjee/oiio/conanfile.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/docs/CHANGES-0.x.md" />
+    <Text Include="../../thirdparty/owemdjee/oiio/docs/CHANGES-1.x.md" />
+    <Text Include="../../thirdparty/owemdjee/oiio/docs/CHANGES-2.x.md" />
+    <Text Include="../../thirdparty/owemdjee/oiio/docs/Deprecations-3.0.md" />
+    <Text Include="../../thirdparty/owemdjee/oiio/docs/QuickStart.md" />
+    <Text Include="../../thirdparty/owemdjee/oiio/docs/ROADMAP.md" />
+    <Text Include="../../thirdparty/owemdjee/oiio/docs/dev/Architecture.md" />
+    <Text Include="../../thirdparty/owemdjee/oiio/docs/dev/Build_Profiling.md" />
+    <Text Include="../../thirdparty/owemdjee/oiio/docs/dev/Changes-skeleton-major.md" />
+    <Text Include="../../thirdparty/owemdjee/oiio/docs/dev/Changes-skeleton-patch.md" />
+    <Text Include="../../thirdparty/owemdjee/oiio/docs/dev/CodeReview.md" />
+    <Text Include="../../thirdparty/owemdjee/oiio/docs/dev/RELEASING.md" />
+    <Text Include="../../thirdparty/owemdjee/oiio/pyproject.toml" />
+    <Text Include="../../thirdparty/owemdjee/oiio/sonar-project.properties" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/TESTSUITE-README.md" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/bmp/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/bmp/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/cineon/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/cineon/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/common/checker_with_alpha.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/common/grid-small.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/common/grid.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/common/tahoe-small.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/common/tahoe-tiny.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/common/textures/checker.tx" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/common/textures/grid.tx" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/common/unpremult.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/common/with_nans.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/cryptomatte/ref/cmcolors.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/cryptomatte/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/cryptomatte/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/cryptomatte/src/cryptoasset.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/dds/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/dds/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/dds/src/crash-1634.dds" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/dds/src/crash-1635.dds" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/dds/src/crash-3950.dds" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/diff/ref/out-fmt6.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/diff/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/diff/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/dither/ref/bad.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/dither/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/dither/ref/ramp.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/dither/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/dither/src/copybug-input.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/docs-examples-python/ref/out-arm.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/docs-examples-python/ref/out-linuxarm.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/docs-examples-python/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/docs-examples-python/ref/tiles.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/docs-examples-python/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/docs-examples-python/src/docs-examples-imagebuf.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/docs-examples-python/src/docs-examples-imagebufalgo.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/docs-examples-python/src/docs-examples-imagecache.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/docs-examples-python/src/docs-examples-imageinput.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/docs-examples-python/src/docs-examples-imageioapi.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/docs-examples-python/src/docs-examples-imageoutput.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/docs-examples-python/src/docs-examples-texturesys.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/docs-examples-python/src/docs-examples-writingplugins.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/dpx/ref/L.dpx" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/dpx/ref/R.dpx" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/dpx/ref/grey.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/dpx/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/dpx/ref/stereo.dpx" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/dpx/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/dpx/src/input_rgb_mattes.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/dup-channels/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/dup-channels/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/filters/ref/blackman-harris.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/filters/ref/box.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/filters/ref/bspline.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/filters/ref/catmull-rom.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/filters/ref/cubic.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/filters/ref/disk.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/filters/ref/gaussian.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/filters/ref/keys.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/filters/ref/lanczos3.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/filters/ref/mitchell.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/filters/ref/nuke-lanczos6.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/filters/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/filters/ref/radial-lanczos3.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/filters/ref/rifman.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/filters/ref/sharp-gaussian.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/filters/ref/simon.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/filters/ref/sinc.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/filters/ref/triangle.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/filters/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/fits/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/fits/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/gif/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/gif/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/gpsread/ref/out-alt.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/gpsread/ref/out-jpeg9d.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/gpsread/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/gpsread/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/hdr/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/hdr/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/heif/ref/Chimera-AV1-8bit-162.avif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/heif/ref/out-libheif1.12-orient.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/heif/ref/out-libheif1.4.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/heif/ref/out-libheif1.5.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/heif/ref/out-libheif1.9-alt2.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/heif/ref/out-libheif1.9-with-av1-alt2.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/heif/ref/out-libheif1.9-with-av1.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/heif/ref/out-libheif1.9.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/heif/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/htj2k/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/htj2k/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/ico/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/ico/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/iff/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/iff/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/igrep/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/igrep/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/iinfo/ref/out-fmt6.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/iinfo/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/iinfo/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/iinfo/src/mip.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/iinfo/src/subimage.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/iinfo/src/tiny-az.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/iinfo/src/tinydeep.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/jpeg-corrupt/ref/out-alt.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/jpeg-corrupt/ref/out-alt2.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/jpeg-corrupt/ref/out-alt3.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/jpeg-corrupt/ref/out-alt4.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/jpeg-corrupt/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/jpeg-corrupt/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/jpeg-metadata/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/jpeg-metadata/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/jpeg-ultrahdr/ref/out-macarm.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/jpeg-ultrahdr/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/jpeg-ultrahdr/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/jpeg2000-j2kp4files/ref/out-alt.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/jpeg2000-j2kp4files/ref/out-spinux.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/jpeg2000-j2kp4files/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/jpeg2000-j2kp4files/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/jpeg2000/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/jpeg2000/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/maketx/ref/bumpslope.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/maketx/ref/out-macarm.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/maketx/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/maketx/ref/uffizi_latlong_env-128.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/maketx/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/maketx/src/bump.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/maketx/src/uffizi_probe-128.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/misnamed-file/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/misnamed-file/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/missingcolor/ref/missing.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/missingcolor/ref/out.err-openexrcore.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/missingcolor/ref/out.err.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/missingcolor/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/missingcolor/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/missingcolor/src/makepartialexr.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/missingcolor/src/partial.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/nonwhole-tiles/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/nonwhole-tiles/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/null/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/null/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-attribs/ref/out-jpeg9d.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-attribs/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-attribs/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-attribs/src/regex_list.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-color/ref/cmap-blue-red.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-color/ref/cmap-heat.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-color/ref/cmap-inferno.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-color/ref/cmap-magma.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-color/ref/cmap-plasma.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-color/ref/cmap-spectrum.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-color/ref/cmap-turbo.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-color/ref/cmap-viridis.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-color/ref/colormap-custom.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-color/ref/colormap-inferno.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-color/ref/contrast-inverse.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-color/ref/contrast-shrink.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-color/ref/contrast-sigmoid5.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-color/ref/contrast-stretch.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-color/ref/contrast-threshold.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-color/ref/display-sRGB.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-color/ref/grey_sRGB.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-color/ref/grey_sRGB_un.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-color/ref/greyalpha_Cineon.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-color/ref/greyalpha_Cineon_un.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-color/ref/greyalpha_sRGB.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-color/ref/greyalpha_sRGB_un-ocio22.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-color/ref/greyalpha_sRGB_un.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-color/ref/look-default.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-color/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-color/ref/premult.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-color/ref/tahoe-ccmatrix.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-color/ref/tahoe-sat0.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-color/ref/tahoe-sat2.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-color/ref/unpremult.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-color/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-composite/ref/a_over_b.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-composite/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-composite/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-composite/src/a.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-composite/src/b.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-control/ref/exprcropped.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-control/ref/exprgradient.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-control/ref/exprstrcatlzw.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-control/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-control/ref/tahoe-contraststretch.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-control/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-copy/ref/allhalf.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-copy/ref/ch-err.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-copy/ref/ch-err2.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-copy/ref/ch-rgba.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-copy/ref/ch-z.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-copy/ref/chanshuffle.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-copy/ref/chappend-3images.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-copy/ref/chappend-rgbaz.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-copy/ref/chname.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-copy/ref/crop.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-copy/ref/cut.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-copy/ref/greenmeta-replace.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-copy/ref/mosaic.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-copy/ref/mosaicfit.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-copy/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-copy/ref/pasted.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-copy/ref/rgbahalf-zfloat.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-copy/ref/rgonly.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-copy/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-copy/src/rgbaz.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-deep/ref/ch.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-deep/ref/crop1.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-deep/ref/crop2.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-deep/ref/deep_addc.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-deep/ref/deep_divc.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-deep/ref/deep_mulc.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-deep/ref/deep_subc.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-deep/ref/deepen.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-deep/ref/deepmerge.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-deep/ref/flat.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-deep/ref/out-fmt6.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-deep/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-deep/ref/resampled-balls.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-deep/ref/trim1.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-deep/ref/trim2.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-deep/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-deep/src/az.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-deep/src/deep-nosamples.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-deep/src/deep-onesample.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-deep/src/deepalpha.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-demosaic/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-demosaic/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-fixnan/ref/black.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-fixnan/ref/box3.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-fixnan/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-fixnan/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-fixnan/src/bad.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-layers/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-layers/ref/parts.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-layers/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-layers/src/layers.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-maketx/ref/out-macarm.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-maketx/ref/out-rhel7.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-maketx/ref/out-win.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-maketx/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-maketx/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-pattern/ref/box.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-pattern/ref/fill4.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-pattern/ref/filled.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-pattern/ref/fillh.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-pattern/ref/fillv.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-pattern/ref/lines.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-pattern/ref/noise-gauss.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-pattern/ref/noise-salt.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-pattern/ref/noise-uniform3.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-pattern/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-pattern/ref/pattern-const.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-pattern/ref/pattern-gradient4.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-pattern/ref/pattern-gradienth.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-pattern/ref/pattern-gradientv.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-pattern/ref/points.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-pattern/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-readerror/TRAVIS_SKIP_LSAN" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-readerror/ref/out.err-alt.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-readerror/ref/out.err-alt2.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-readerror/ref/out.err-debug.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-readerror/ref/out.err-openexrcore.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-readerror/ref/out.err.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-readerror/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-readerror/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-readerror/src/incomplete.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-spi/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-spi/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-subimage/ref/mip4.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-subimage/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-subimage/ref/subimage1.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-subimage/ref/subimage2.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-subimage/ref/subimageB1.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-subimage/ref/subimageD3.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-subimage/ref/subimages-2.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-subimage/ref/subimages-4.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-subimage/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-text/ref/aligned.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-text/ref/fontbyfamily.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-text/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-text/ref/text-alt.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-text/ref/text-freetype2.7.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-text/ref/text.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-text/ref/textalpha.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-text/ref/textshadowed-freetype2.4.11.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-text/ref/textshadowed.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-text/ref/unicode-freetype2.13.4.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-text/ref/unicode-freetype2.8.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-text/ref/unicode.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-text/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-xform/ref/cshift.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-xform/ref/fit.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-xform/ref/fit2.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-xform/ref/fit3.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-xform/ref/fit4.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-xform/ref/fith-height-200x200.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-xform/ref/fith-height-300x300.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-xform/ref/fith-letterbox-200x200.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-xform/ref/fith-letterbox-300x300.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-xform/ref/fith-width-200x200.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-xform/ref/fith-width-300x300.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-xform/ref/fitw-height-200x200.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-xform/ref/fitw-height-300x300.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-xform/ref/fitw-letterbox-200x200.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-xform/ref/fitw-letterbox-300x300.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-xform/ref/fitw-width-200x200.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-xform/ref/fitw-width-300x300.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-xform/ref/flip-crop.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-xform/ref/flip.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-xform/ref/flipflop-crop.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-xform/ref/flipflop.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-xform/ref/flop-crop.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-xform/ref/flop.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-xform/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-xform/ref/pixelaspect.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-xform/ref/reorient1.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-xform/ref/reorient2.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-xform/ref/reorient3.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-xform/ref/resample.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-xform/ref/resize.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-xform/ref/resize2.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-xform/ref/resize512.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-xform/ref/resize64.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-xform/ref/resized-offset.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-xform/ref/resizefrom.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-xform/ref/resizefromto.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-xform/ref/resizefromtooffset.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-xform/ref/rotate270-crop.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-xform/ref/rotate270.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-xform/ref/rotate90-crop.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-xform/ref/rotate90.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-xform/ref/rotated-offcenter.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-xform/ref/rotated.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-xform/ref/rotated360.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-xform/ref/st_warped.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-xform/ref/transpose-crop.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-xform/ref/transpose.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-xform/ref/warped.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-xform/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool-xform/src/target1.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/abs.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/absdiff.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/absdiffc.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/add.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/allhalf.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/autotrim.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/box_over_missing2.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/box_over_missing3.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/bspline-blur.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/bsplinekernel.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/cadd1.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/cadd2.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/chsum.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/cmax1.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/cmax2.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/cmin1.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/cmin2.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/cmul1.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/cmul2.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/const5-rgb.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/cpow1.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/cpow2.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/dilate.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/div.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/divc1.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/divc2.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/erode.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/fft.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/filled.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/gauss5x5-blur.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/grid-clamped.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/growholes.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/histogram_cumulative.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/histogram_regular.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/hole.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/ifft.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/invert.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/labeladd.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/mad.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/max.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/maxchan.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/min.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/minchan.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/mul.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/normalize.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/normalize_in.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/normalize_offsetin.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/normalize_offsetscale.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/normalize_offsetscaleout.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/normalize_scale.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/polar.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/rangecompress-luma.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/rangecompress.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/rangeexpand-luma.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/rangeexpand.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/rotate180.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/sub.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/subc.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/subimage-individual.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/subimage-noB.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/subimage1.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/subimage2.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/subimageB1.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/subimageD3.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/subimages-2.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/subimages-4.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/tahoe-filled.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/tahoe-laplacian.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/tahoe-median.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/trim.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/trimsubimages.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/unpolar.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/unsharp-median.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/ref/unsharp.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/src/image.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/src/morphsource.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/src/norm.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/oiiotool/src/normoffset.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/openexr-chroma/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/openexr-chroma/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/openexr-compression/ref/out-b44.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/openexr-compression/ref/out-dwaa.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/openexr-compression/ref/out-zip.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/openexr-compression/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/openexr-compression/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/openexr-copy/ref/compressed-b44.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/openexr-copy/ref/compressed-b44a.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/openexr-copy/ref/compressed-dwaa.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/openexr-copy/ref/compressed-dwab.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/openexr-copy/ref/compressed-pxr24.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/openexr-copy/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/openexr-copy/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/openexr-copy/src/test_recompression.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/openexr-damaged/ref/out-exr3.0-clang-ptex.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/openexr-damaged/ref/out-exr3.0.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/openexr-damaged/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/openexr-decreasingy/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/openexr-decreasingy/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/openexr-luminance-chroma/ref/out-macarm.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/openexr-luminance-chroma/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/openexr-luminance-chroma/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/openexr-multires/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/openexr-multires/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/openexr-suite/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/openexr-suite/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/openexr-v2/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/openexr-v2/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/openexr-window/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/openexr-window/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/openvdb/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/openvdb/ref/sphere.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/openvdb/ref/sphereCd.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/openvdb/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/perchannel/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/perchannel/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/png-damaged/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/png-damaged/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/png/ref/out-libpng15.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/png/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/png/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/pnm/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/pnm/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/psd-colormodes/ref/cmyk-with-alpha.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/psd-colormodes/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/psd-colormodes/ref/pattern2-16-cmyk.psd.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/psd-colormodes/ref/pattern2-16-grayscale.psd.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/psd-colormodes/ref/pattern2-8-cmyk.psd.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/psd-colormodes/ref/pattern2-8-grayscale.psd.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/psd-colormodes/ref/pattern2-alpha.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/psd-colormodes/ref/pattern2.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/psd-colormodes/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/psd/ref/out-linuxarm.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/psd/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/psd/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/ptex/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/ptex/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/ptex/src/triangle.ptx" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-colorconfig/ref/out-ocio23.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-colorconfig/ref/out-ocio24.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-colorconfig/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-colorconfig/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-colorconfig/src/test_colorconfig.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-deep/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-deep/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-deep/src/test_deep.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagebuf/ref/multipart.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagebuf/ref/out-alt-python3.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagebuf/ref/out-alt.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagebuf/ref/out-python3.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagebuf/ref/out.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagebuf/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagebuf/ref/outarray.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagebuf/ref/outarrayB.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagebuf/ref/outarrayH.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagebuf/ref/outtuple.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagebuf/ref/perchan.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagebuf/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagebuf/src/AllHalfValues.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagebuf/src/test_imagebuf.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagebufalgo/ref/black.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagebufalgo/ref/bluenoise_image3.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagebufalgo/ref/checker.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagebufalgo/ref/clamped-with-float.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagebufalgo/ref/crop.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagebufalgo/ref/csub2.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagebufalgo/ref/mad2.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagebufalgo/ref/mad3.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagebufalgo/ref/maxchan.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagebufalgo/ref/maximg.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagebufalgo/ref/maxval.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagebufalgo/ref/minchan.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagebufalgo/ref/minimg.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagebufalgo/ref/minval.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagebufalgo/ref/noise-blue3.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagebufalgo/ref/norm.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagebufalgo/ref/normalize.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagebufalgo/ref/normalize_in.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagebufalgo/ref/normalize_offsetin.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagebufalgo/ref/normalize_offsetscale.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagebufalgo/ref/normalize_offsetscaleout.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagebufalgo/ref/normalize_scale.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagebufalgo/ref/normoffset.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagebufalgo/ref/out-freetype2.4.11.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagebufalgo/ref/out-macarm.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagebufalgo/ref/out-python3-freetype2.4.11.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagebufalgo/ref/out-python3.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagebufalgo/ref/out.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagebufalgo/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagebufalgo/ref/saturate-0.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagebufalgo/ref/saturate-2.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagebufalgo/ref/tahoe-small.tx" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagebufalgo/ref/textcentered-freetype2.4.11.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagebufalgo/ref/textcentered.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagebufalgo/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagebufalgo/src/test_imagebufalgo.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagecache/ref/out-win.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagecache/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagecache/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagecache/src/test_imagecache.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imageinput/ref/out-alt.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imageinput/ref/out-alt2.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imageinput/ref/out-py37-jpeg9d.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imageinput/ref/out-python3-win-2.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imageinput/ref/out-python3-win.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imageinput/ref/out-python3.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imageinput/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imageinput/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imageinput/src/test_imageinput.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imageoutput/ref/multipart.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imageoutput/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imageoutput/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imageoutput/src/test_imageoutput.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagespec/ref/out-python3.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagespec/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagespec/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-imagespec/src/test_imagespec.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-paramlist/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-paramlist/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-paramlist/src/test_paramlist.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-roi/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-roi/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-roi/src/test_roi.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-texturesys/ref/out-windows.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-texturesys/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-texturesys/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-texturesys/src/test_texture_sys.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-typedesc/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-typedesc/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/python-typedesc/src/test_typedesc.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/rational/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/rational/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/rational/src/test.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/raw/ref/RAW_CANON_EOS_7D.CR2-libraw0.20.0.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/raw/ref/RAW_CANON_EOS_7D.CR2.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/raw/ref/RAW_FUJI_F700.RAF-libraw0.20.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/raw/ref/RAW_FUJI_F700.RAF-libraw0.21.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/raw/ref/RAW_FUJI_F700.RAF.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/raw/ref/RAW_NIKON_D3X.NEF.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/raw/ref/RAW_OLYMPUS_E3.ORF-libraw0.20.0.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/raw/ref/RAW_OLYMPUS_E3.ORF.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/raw/ref/RAW_PANASONIC_G1.RW2.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/raw/ref/RAW_PENTAX_K200D.PEF.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/raw/ref/RAW_SONY_A300.ARW.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/raw/ref/out-libraw-0.20.2-gh.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/raw/ref/out-libraw0.20.0-gh.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/raw/ref/out-libraw0.20.0.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/raw/ref/out-libraw0.21.0-gh.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/raw/ref/out-libraw0.21.0-mac.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/raw/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/raw/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/rla/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/rla/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/runtest.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/sgi/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/sgi/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/softimage/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/softimage/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/targa-thumbnail/ref/CBW8.TGA.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/targa-thumbnail/ref/CCM8.TGA.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/targa-thumbnail/ref/CTC16.TGA.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/targa-thumbnail/ref/CTC24.TGA.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/targa-thumbnail/ref/CTC32.TGA.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/targa-thumbnail/ref/UBW8.TGA.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/targa-thumbnail/ref/UCM8.TGA.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/targa-thumbnail/ref/UTC16.TGA.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/targa-thumbnail/ref/UTC24.TGA.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/targa-thumbnail/ref/UTC32.TGA.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/targa-thumbnail/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/targa-thumbnail/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/targa-thumbnail/src/extractthumb.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/targa/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/targa/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/term/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/term/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-blurtube/ref/checker-0.00.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-blurtube/ref/checker-0.02.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-blurtube/ref/checker-0.05.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-blurtube/ref/checker-0.10.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-blurtube/ref/checker-0.20.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-blurtube/ref/grid-0.00.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-blurtube/ref/grid-0.02.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-blurtube/ref/grid-0.05.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-blurtube/ref/grid-0.10.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-blurtube/ref/grid-0.20.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-blurtube/ref/out.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-blurtube/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-blurtube/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-colorspace/ref/cc.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-colorspace/ref/nocc.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-colorspace/ref/out-batch.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-colorspace/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-colorspace/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-crop/ref/out.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-crop/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-cropover/ref/out.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-cropover/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-derivs/ref/out.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-derivs/ref/out.exr-ds.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-derivs/ref/out.exr-dt.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-derivs/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-derivs/src/ramp.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-env/ref/5chan.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-env/ref/bicubic-trilinear.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-env/ref/bilinear-onelevel.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-env/ref/closest-nomip.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-env/ref/env-handle.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-env/ref/env-handle.exr-ds.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-env/ref/env-handle.exr-dt.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-env/ref/env.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-env/ref/out-batch.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-env/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-env/ref/subimage0.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-env/ref/subimagefred.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-env/ref/subimagemissing.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-env/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-fat/ref/out.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-fat/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-fat/src/horizgrid.tx" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-fill/ref/out.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-fill/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-fill/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-filtersize-stochastic/ref/out.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-filtersize-stochastic/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-filtersize/ref/out.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-filtersize/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-flipt/ref/out.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-flipt/ref/out.exr-ds.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-flipt/ref/out.exr-dt.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-flipt/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-gettexels/ref/postage.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-gettexels/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-gray/ref/out.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-gray/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-half/ref/out-macarm.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-half/ref/out.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-half/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-icwrite/ref/out1.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-icwrite/ref/out2.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-icwrite/ref/out3.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-icwrite/ref/out4.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-icwrite/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-interp-bicubic/ref/out.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-interp-bicubic/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-interp-bilinear/ref/out.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-interp-bilinear/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-interp-closest/ref/out-macarm.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-interp-closest/ref/out.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-interp-closest/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-levels-stochaniso/ref/out-macarm.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-levels-stochaniso/ref/out.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-levels-stochaniso/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-levels-stochmip/ref/out-macarm.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-levels-stochmip/ref/out.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-levels-stochmip/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-maxres/ref/out.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-maxres/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-maxres/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-mip-nomip/ref/out.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-mip-nomip/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-mip-onelevel/ref/out-macarm.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-mip-onelevel/ref/out.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-mip-onelevel/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-mip-stochasticaniso/ref/out-macarm.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-mip-stochasticaniso/ref/out.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-mip-stochasticaniso/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-mip-stochastictrilinear/ref/out-macarm.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-mip-stochastictrilinear/ref/out.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-mip-stochastictrilinear/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-mip-trilinear/ref/out.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-mip-trilinear/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-missing/TRAVIS_SKIP_LSAN" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-missing/ref/out.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-missing/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-overscan/ref/out-exact.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-overscan/ref/out-over.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-overscan/ref/out-overclamp.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-overscan/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-pointsample/ref/out.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-pointsample/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-res/README" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-res/ref/out.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-res/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-skinny/ref/out.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-skinny/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-skinny/src/vertgrid.tx" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-stats/ref/out.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-stats/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-texture3d/ref/closest.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-texture3d/ref/out-5chan.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-texture3d/ref/out-batch.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-texture3d/ref/out-handle.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-texture3d/ref/out-subimage0.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-texture3d/ref/out-subimagedensity.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-texture3d/ref/out-subimagemissing.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-texture3d/ref/out.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-texture3d/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-texture3d/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-threadtimes/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-threadtimes/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-udim/TRAVIS_SKIP_LSAN" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-udim/ref/out-batched.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-udim/ref/out-freetype2.7.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-udim/ref/out.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-udim/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-udim/ref/out2-freetype2.7.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-udim/ref/out2.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-udim/ref/out3.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-udim/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-udim2/TRAVIS_SKIP_LSAN" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-udim2/ref/out-batched.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-udim2/ref/out-freetype2.7.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-udim2/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-udim2/ref/out2-freetype2.7.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-udim2/ref/out3-freetype2.7.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-udim2/ref/out4-freetype2.7.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-udim2/ref/out5-freetype2.7.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-udim2/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-uint16/ref/out-macarm.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-uint16/ref/out.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-uint16/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-uint8/ref/out.exr" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-uint8/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-width0blur/ref/out.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-width0blur/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-wrapfill/ref/out1.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-wrapfill/ref/out3.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/texture-wrapfill/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/tiff-depths/ref/cmyk_as_cmyk.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/tiff-depths/ref/out-icc.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/tiff-depths/ref/out-linuxarm.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/tiff-depths/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/tiff-depths/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/tiff-misc/crash-1633.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/tiff-misc/crash-1643.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/tiff-misc/ref/check1.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/tiff-misc/ref/out-libtiff403-b.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/tiff-misc/ref/out-libtiff403-c.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/tiff-misc/ref/out-libtiff403.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/tiff-misc/ref/out-libtiff410.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/tiff-misc/ref/out-libtiff430.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/tiff-misc/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/tiff-misc/ref/separate.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/tiff-misc/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/tiff-misc/separate.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/tiff-misc/src/corrupt1.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/tiff-misc/src/crash-1709.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/tiff-misc/src/separate.tif" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/tiff-suite/ref/out-alt.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/tiff-suite/ref/out-alt2.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/tiff-suite/ref/out-jpeg9b.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/tiff-suite/ref/out-jpeg9d-alt.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/tiff-suite/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/tiff-suite/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/webp/ref/out-webp1.1.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/webp/run.py" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/win32/version_check.ps1" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/zfile/ref/out-macarm.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/zfile/ref/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/oiio/testsuite/zfile/run.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../scripts/OpenImageIO/monolithic-main.cpp" />
+    <ClInclude Include="../../scripts/OpenImageIO/OpenEXR/ImfTimeCode.h" />
+    <ClInclude Include="../../scripts/OpenImageIO/OpenImageIO/Imath.h" />
+    <ClInclude Include="../../scripts/OpenImageIO/OpenImageIO/oiioversion.h" />
+    <ClInclude Include="../../scripts/OpenImageIO/buildopts.h" />
+    <ClInclude Include="../../scripts/OpenImageIO/detail/fmt/format.h" />
+    <ClInclude Include="../../scripts/OpenImageIO/detail/fmt/ostream.h" />
+    <ClInclude Include="../../scripts/OpenImageIO/detail/fmt/printf.h" />
+  </ItemGroup>
+  <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+</Project>
+  

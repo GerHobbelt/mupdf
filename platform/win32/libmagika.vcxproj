@@ -1,0 +1,529 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-101000000006}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIFOPT;IFOPT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/ifopt/ifopt_core/include;../../thirdparty/owemdjee/ifopt/ifopt_ipopt/include;../../thirdparty/owemdjee/ifopt/ifopt_snopt/include;../../thirdparty/owemdjee/Ipopt/src/Interfaces;../../thirdparty/owemdjee/Ipopt/src/Common;../../thirdparty/owemdjee/ifopt/ifopt_core/test;../../thirdparty/owemdjee/libeigen;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/Ipopt/src/LinAlg;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;../../thirdparty/owemdjee/ifopt/ifopt_nlopt/include;../../thirdparty/owemdjee/nlopt/src/api;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIFOPT;IFOPT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIFOPT;IFOPT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/ifopt/ifopt_core/include;../../thirdparty/owemdjee/ifopt/ifopt_ipopt/include;../../thirdparty/owemdjee/ifopt/ifopt_snopt/include;../../thirdparty/owemdjee/Ipopt/src/Interfaces;../../thirdparty/owemdjee/Ipopt/src/Common;../../thirdparty/owemdjee/ifopt/ifopt_core/test;../../thirdparty/owemdjee/libeigen;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/Ipopt/src/LinAlg;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;../../thirdparty/owemdjee/ifopt/ifopt_nlopt/include;../../thirdparty/owemdjee/nlopt/src/api;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIFOPT;IFOPT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/ifopt/ifopt_core/include;../../thirdparty/owemdjee/ifopt/ifopt_ipopt/include;../../thirdparty/owemdjee/ifopt/ifopt_snopt/include;../../thirdparty/owemdjee/Ipopt/src/Interfaces;../../thirdparty/owemdjee/Ipopt/src/Common;../../thirdparty/owemdjee/ifopt/ifopt_core/test;../../thirdparty/owemdjee/libeigen;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/Ipopt/src/LinAlg;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;../../thirdparty/owemdjee/ifopt/ifopt_nlopt/include;../../thirdparty/owemdjee/nlopt/src/api;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIFOPT;IFOPT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIFOPT;IFOPT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/ifopt/ifopt_core/include;../../thirdparty/owemdjee/ifopt/ifopt_ipopt/include;../../thirdparty/owemdjee/ifopt/ifopt_snopt/include;../../thirdparty/owemdjee/Ipopt/src/Interfaces;../../thirdparty/owemdjee/Ipopt/src/Common;../../thirdparty/owemdjee/ifopt/ifopt_core/test;../../thirdparty/owemdjee/libeigen;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/Ipopt/src/LinAlg;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;../../thirdparty/owemdjee/ifopt/ifopt_nlopt/include;../../thirdparty/owemdjee/nlopt/src/api;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIFOPT;IFOPT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/ifopt/ifopt_core/include;../../thirdparty/owemdjee/ifopt/ifopt_ipopt/include;../../thirdparty/owemdjee/ifopt/ifopt_snopt/include;../../thirdparty/owemdjee/Ipopt/src/Interfaces;../../thirdparty/owemdjee/Ipopt/src/Common;../../thirdparty/owemdjee/ifopt/ifopt_core/test;../../thirdparty/owemdjee/libeigen;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/Ipopt/src/LinAlg;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;../../thirdparty/owemdjee/ifopt/ifopt_nlopt/include;../../thirdparty/owemdjee/nlopt/src/api;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIFOPT;IFOPT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIFOPT;IFOPT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/ifopt/ifopt_core/include;../../thirdparty/owemdjee/ifopt/ifopt_ipopt/include;../../thirdparty/owemdjee/ifopt/ifopt_snopt/include;../../thirdparty/owemdjee/Ipopt/src/Interfaces;../../thirdparty/owemdjee/Ipopt/src/Common;../../thirdparty/owemdjee/ifopt/ifopt_core/test;../../thirdparty/owemdjee/libeigen;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/Ipopt/src/LinAlg;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;../../thirdparty/owemdjee/ifopt/ifopt_nlopt/include;../../thirdparty/owemdjee/nlopt/src/api;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIFOPT;IFOPT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/ifopt/ifopt_core/include;../../thirdparty/owemdjee/ifopt/ifopt_ipopt/include;../../thirdparty/owemdjee/ifopt/ifopt_snopt/include;../../thirdparty/owemdjee/Ipopt/src/Interfaces;../../thirdparty/owemdjee/Ipopt/src/Common;../../thirdparty/owemdjee/ifopt/ifopt_core/test;../../thirdparty/owemdjee/libeigen;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/Ipopt/src/LinAlg;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;../../thirdparty/owemdjee/ifopt/ifopt_nlopt/include;../../thirdparty/owemdjee/nlopt/src/api;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIFOPT;IFOPT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIFOPT;IFOPT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/ifopt/ifopt_core/include;../../thirdparty/owemdjee/ifopt/ifopt_ipopt/include;../../thirdparty/owemdjee/ifopt/ifopt_snopt/include;../../thirdparty/owemdjee/Ipopt/src/Interfaces;../../thirdparty/owemdjee/Ipopt/src/Common;../../thirdparty/owemdjee/ifopt/ifopt_core/test;../../thirdparty/owemdjee/libeigen;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/Ipopt/src/LinAlg;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/re2;../../thirdparty/owemdjee/ifopt/ifopt_nlopt/include;../../thirdparty/owemdjee/nlopt/src/api;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/magika/tests_data/basic/c/code.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/magika/go/onnx/onnx_runtime.h" />
+    <Image Include="../../thirdparty/owemdjee/magika/assets/magika-abusech.png" />
+    <Image Include="../../thirdparty/owemdjee/magika/assets/magika-screenshot.png" />
+    <Image Include="../../thirdparty/owemdjee/magika/assets/magika-vt.png" />
+    <Image Include="../../thirdparty/owemdjee/magika/tests_data/basic/jpeg/magika_test.jpg" />
+    <Image Include="../../thirdparty/owemdjee/magika/tests_data/basic/png/magika_test.png" />
+    <Image Include="../../thirdparty/owemdjee/magika/tests_data/mitra/bmp/bmp.bmp" />
+    <Image Include="../../thirdparty/owemdjee/magika/tests_data/mitra/gif/gif87.gif" />
+    <Image Include="../../thirdparty/owemdjee/magika/tests_data/mitra/gif/gif89.gif" />
+    <Image Include="../../thirdparty/owemdjee/magika/tests_data/mitra/jpeg/jpg.jpg" />
+    <Image Include="../../thirdparty/owemdjee/magika/tests_data/mitra/png/cgbi.png" />
+    <Image Include="../../thirdparty/owemdjee/magika/tests_data/mitra/png/png.png" />
+    <Image Include="../../thirdparty/owemdjee/magika/tests_data/mitra_candidates/ico.ico" />
+    <Image Include="../../thirdparty/owemdjee/magika/website/assets/paper.png" />
+    <NASM Include="../../thirdparty/owemdjee/magika/tests_data/basic/asm/code.asm" />
+    <Text Include="../../thirdparty/owemdjee/magika/CITATION.cff" />
+    <Text Include="../../thirdparty/owemdjee/magika/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/magika/Dockerfile" />
+    <Text Include="../../thirdparty/owemdjee/magika/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/magika/README.md" />
+    <Text Include="../../thirdparty/owemdjee/magika/assets/2025_icse_magika.pdf" />
+    <Text Include="../../thirdparty/owemdjee/magika/assets/content_types_kb.min.json" />
+    <Text Include="../../thirdparty/owemdjee/magika/assets/models/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/magika/assets/models/begonly_v2_1/config.min.json" />
+    <Text Include="../../thirdparty/owemdjee/magika/assets/models/begonly_v2_1/metadata.json" />
+    <Text Include="../../thirdparty/owemdjee/magika/assets/models/begonly_v2_1/model.keras" />
+    <Text Include="../../thirdparty/owemdjee/magika/assets/models/begonly_v2_1/model.onnx" />
+    <Text Include="../../thirdparty/owemdjee/magika/assets/models/fast_v2_1/config.min.json" />
+    <Text Include="../../thirdparty/owemdjee/magika/assets/models/fast_v2_1/metadata.json" />
+    <Text Include="../../thirdparty/owemdjee/magika/assets/models/fast_v2_1/model.keras" />
+    <Text Include="../../thirdparty/owemdjee/magika/assets/models/fast_v2_1/model.onnx" />
+    <Text Include="../../thirdparty/owemdjee/magika/assets/models/standard_v1/README.md" />
+    <Text Include="../../thirdparty/owemdjee/magika/assets/models/standard_v1/content_types_config.json" />
+    <Text Include="../../thirdparty/owemdjee/magika/assets/models/standard_v1/magika_config.json" />
+    <Text Include="../../thirdparty/owemdjee/magika/assets/models/standard_v1/model.h5" />
+    <Text Include="../../thirdparty/owemdjee/magika/assets/models/standard_v1/model_config.json" />
+    <Text Include="../../thirdparty/owemdjee/magika/assets/models/standard_v1/thresholds.json" />
+    <Text Include="../../thirdparty/owemdjee/magika/assets/models/standard_v2_0/README.md" />
+    <Text Include="../../thirdparty/owemdjee/magika/assets/models/standard_v2_0/config.min.json" />
+    <Text Include="../../thirdparty/owemdjee/magika/assets/models/standard_v2_0/metadata.json" />
+    <Text Include="../../thirdparty/owemdjee/magika/assets/models/standard_v2_0/model.keras" />
+    <Text Include="../../thirdparty/owemdjee/magika/assets/models/standard_v2_0/model.onnx" />
+    <Text Include="../../thirdparty/owemdjee/magika/assets/models/standard_v2_1/README.md" />
+    <Text Include="../../thirdparty/owemdjee/magika/assets/models/standard_v2_1/config.min.json" />
+    <Text Include="../../thirdparty/owemdjee/magika/assets/models/standard_v2_1/metadata.json" />
+    <Text Include="../../thirdparty/owemdjee/magika/assets/models/standard_v2_1/model.keras" />
+    <Text Include="../../thirdparty/owemdjee/magika/assets/models/standard_v2_1/model.onnx" />
+    <Text Include="../../thirdparty/owemdjee/magika/assets/models/standard_v3_0/README.md" />
+    <Text Include="../../thirdparty/owemdjee/magika/assets/models/standard_v3_0/config.min.json" />
+    <Text Include="../../thirdparty/owemdjee/magika/assets/models/standard_v3_0/metadata.json" />
+    <Text Include="../../thirdparty/owemdjee/magika/assets/models/standard_v3_0/model.onnx" />
+    <Text Include="../../thirdparty/owemdjee/magika/assets/models/standard_v3_1/README.md" />
+    <Text Include="../../thirdparty/owemdjee/magika/assets/models/standard_v3_1/config.min.json" />
+    <Text Include="../../thirdparty/owemdjee/magika/assets/models/standard_v3_1/metadata.json" />
+    <Text Include="../../thirdparty/owemdjee/magika/assets/models/standard_v3_1/model.onnx" />
+    <Text Include="../../thirdparty/owemdjee/magika/assets/models/standard_v3_2/README.md" />
+    <Text Include="../../thirdparty/owemdjee/magika/assets/models/standard_v3_2/config.min.json" />
+    <Text Include="../../thirdparty/owemdjee/magika/assets/models/standard_v3_2/metadata.json" />
+    <Text Include="../../thirdparty/owemdjee/magika/assets/models/standard_v3_2/model.onnx" />
+    <Text Include="../../thirdparty/owemdjee/magika/assets/models/standard_v3_3/README.md" />
+    <Text Include="../../thirdparty/owemdjee/magika/assets/models/standard_v3_3/config.min.json" />
+    <Text Include="../../thirdparty/owemdjee/magika/assets/models/standard_v3_3/metadata.json" />
+    <Text Include="../../thirdparty/owemdjee/magika/assets/models/standard_v3_3/model.onnx" />
+    <Text Include="../../thirdparty/owemdjee/magika/docs/concepts.md" />
+    <Text Include="../../thirdparty/owemdjee/magika/docs/dev-notes.md" />
+    <Text Include="../../thirdparty/owemdjee/magika/docs/faq.md" />
+    <Text Include="../../thirdparty/owemdjee/magika/docs/js.md" />
+    <Text Include="../../thirdparty/owemdjee/magika/go/README.md" />
+    <Text Include="../../thirdparty/owemdjee/magika/go/cli/tests_data/magika_test_pptx.txt" />
+    <Text Include="../../thirdparty/owemdjee/magika/go/docker/Dockerfile" />
+    <Text Include="../../thirdparty/owemdjee/magika/go/go.sum" />
+    <Text Include="../../thirdparty/owemdjee/magika/js/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/magika/js/README.md" />
+    <Text Include="../../thirdparty/owemdjee/magika/js/magika-cli.ts" />
+    <Text Include="../../thirdparty/owemdjee/magika/js/magika-node.ts" />
+    <Text Include="../../thirdparty/owemdjee/magika/js/magika.ts" />
+    <Text Include="../../thirdparty/owemdjee/magika/js/package.json" />
+    <Text Include="../../thirdparty/owemdjee/magika/js/postBuild.js" />
+    <Text Include="../../thirdparty/owemdjee/magika/js/src/content-type-info.ts" />
+    <Text Include="../../thirdparty/owemdjee/magika/js/src/content-type-label.ts" />
+    <Text Include="../../thirdparty/owemdjee/magika/js/src/content-types-infos.ts" />
+    <Text Include="../../thirdparty/owemdjee/magika/js/src/magika-options.ts" />
+    <Text Include="../../thirdparty/owemdjee/magika/js/src/magika-prediction.ts" />
+    <Text Include="../../thirdparty/owemdjee/magika/js/src/magika-result.ts" />
+    <Text Include="../../thirdparty/owemdjee/magika/js/src/model-config-node.ts" />
+    <Text Include="../../thirdparty/owemdjee/magika/js/src/model-config.ts" />
+    <Text Include="../../thirdparty/owemdjee/magika/js/src/model-features.ts" />
+    <Text Include="../../thirdparty/owemdjee/magika/js/src/model-node.ts" />
+    <Text Include="../../thirdparty/owemdjee/magika/js/src/model-prediction.ts" />
+    <Text Include="../../thirdparty/owemdjee/magika/js/src/model.ts" />
+    <Text Include="../../thirdparty/owemdjee/magika/js/src/overwrite-reason.ts" />
+    <Text Include="../../thirdparty/owemdjee/magika/js/src/prediction-mode.ts" />
+    <Text Include="../../thirdparty/owemdjee/magika/js/src/status.ts" />
+    <Text Include="../../thirdparty/owemdjee/magika/js/test/features-extraction-vs-reference.test.ts" />
+    <Text Include="../../thirdparty/owemdjee/magika/js/test/inference-vs-reference.test.ts" />
+    <Text Include="../../thirdparty/owemdjee/magika/js/test/magika-cli.test.ts" />
+    <Text Include="../../thirdparty/owemdjee/magika/js/test/magika.test.ts" />
+    <Text Include="../../thirdparty/owemdjee/magika/js/test/tfnHook.ts" />
+    <Text Include="../../thirdparty/owemdjee/magika/js/test/utils.ts" />
+    <Text Include="../../thirdparty/owemdjee/magika/js/tsconfig.cjs.json" />
+    <Text Include="../../thirdparty/owemdjee/magika/js/tsconfig.esm.json" />
+    <Text Include="../../thirdparty/owemdjee/magika/js/tsconfig.json" />
+    <Text Include="../../thirdparty/owemdjee/magika/python/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/magika/python/README.md" />
+    <Text Include="../../thirdparty/owemdjee/magika/python/mypy.ini" />
+    <Text Include="../../thirdparty/owemdjee/magika/python/pyproject.toml" />
+    <Text Include="../../thirdparty/owemdjee/magika/python/pytest.ini" />
+    <Text Include="../../thirdparty/owemdjee/magika/python/scripts/check_copyright.sh" />
+    <Text Include="../../thirdparty/owemdjee/magika/python/scripts/check_documentation.py" />
+    <Text Include="../../thirdparty/owemdjee/magika/python/scripts/check_release_candidate_python_package.py" />
+    <Text Include="../../thirdparty/owemdjee/magika/python/scripts/check_source.sh" />
+    <Text Include="../../thirdparty/owemdjee/magika/python/scripts/fix_package_version.py" />
+    <Text Include="../../thirdparty/owemdjee/magika/python/scripts/generate_reference.py" />
+    <Text Include="../../thirdparty/owemdjee/magika/python/scripts/prepare_pyproject_for_pure_python_wheel.py" />
+    <Text Include="../../thirdparty/owemdjee/magika/python/scripts/run_quick_test_magika_cli.py" />
+    <Text Include="../../thirdparty/owemdjee/magika/python/scripts/run_quick_test_magika_module.py" />
+    <Text Include="../../thirdparty/owemdjee/magika/python/scripts/sync.py" />
+    <Text Include="../../thirdparty/owemdjee/magika/python/scripts/test_magika_model.py" />
+    <Text Include="../../thirdparty/owemdjee/magika/python/src/magika/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/magika/python/src/magika/cli/magika_client.py" />
+    <Text Include="../../thirdparty/owemdjee/magika/python/src/magika/cli/magika_rust_client_not_found_warning.py" />
+    <Text Include="../../thirdparty/owemdjee/magika/python/src/magika/colors.py" />
+    <Text Include="../../thirdparty/owemdjee/magika/python/src/magika/config/content_types_kb.min.json" />
+    <Text Include="../../thirdparty/owemdjee/magika/python/src/magika/logger.py" />
+    <Text Include="../../thirdparty/owemdjee/magika/python/src/magika/magika.py" />
+    <Text Include="../../thirdparty/owemdjee/magika/python/src/magika/models/standard_v3_3/README.md" />
+    <Text Include="../../thirdparty/owemdjee/magika/python/src/magika/models/standard_v3_3/config.min.json" />
+    <Text Include="../../thirdparty/owemdjee/magika/python/src/magika/models/standard_v3_3/metadata.json" />
+    <Text Include="../../thirdparty/owemdjee/magika/python/src/magika/models/standard_v3_3/model.onnx" />
+    <Text Include="../../thirdparty/owemdjee/magika/python/src/magika/types/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/magika/python/src/magika/types/content_type_info.py" />
+    <Text Include="../../thirdparty/owemdjee/magika/python/src/magika/types/content_type_label.py" />
+    <Text Include="../../thirdparty/owemdjee/magika/python/src/magika/types/magika_error.py" />
+    <Text Include="../../thirdparty/owemdjee/magika/python/src/magika/types/magika_prediction.py" />
+    <Text Include="../../thirdparty/owemdjee/magika/python/src/magika/types/magika_result.py" />
+    <Text Include="../../thirdparty/owemdjee/magika/python/src/magika/types/model.py" />
+    <Text Include="../../thirdparty/owemdjee/magika/python/src/magika/types/overwrite_reason.py" />
+    <Text Include="../../thirdparty/owemdjee/magika/python/src/magika/types/prediction_mode.py" />
+    <Text Include="../../thirdparty/owemdjee/magika/python/src/magika/types/seekable.py" />
+    <Text Include="../../thirdparty/owemdjee/magika/python/src/magika/types/status.py" />
+    <Text Include="../../thirdparty/owemdjee/magika/python/src/magika/types/strenum.py" />
+    <Text Include="../../thirdparty/owemdjee/magika/python/tests/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/magika/python/tests/test_features_extraction_vs_reference.py" />
+    <Text Include="../../thirdparty/owemdjee/magika/python/tests/test_inference_vs_reference.py" />
+    <Text Include="../../thirdparty/owemdjee/magika/python/tests/test_magika_python_module.py" />
+    <Text Include="../../thirdparty/owemdjee/magika/python/tests/test_python_magika_client.py" />
+    <Text Include="../../thirdparty/owemdjee/magika/python/tests/utils.py" />
+    <Text Include="../../thirdparty/owemdjee/magika/rust/README.md" />
+    <Text Include="../../thirdparty/owemdjee/magika/rust/changelog.sh" />
+    <Text Include="../../thirdparty/owemdjee/magika/rust/cli/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/magika/rust/cli/Cargo.toml" />
+    <Text Include="../../thirdparty/owemdjee/magika/rust/cli/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/magika/rust/cli/README.md" />
+    <Text Include="../../thirdparty/owemdjee/magika/rust/cli/deb/extended-description" />
+    <Text Include="../../thirdparty/owemdjee/magika/rust/cli/output" />
+    <Text Include="../../thirdparty/owemdjee/magika/rust/cli/src/main.rs" />
+    <Text Include="../../thirdparty/owemdjee/magika/rust/cli/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/magika/rust/color.sh" />
+    <Text Include="../../thirdparty/owemdjee/magika/rust/gen/Cargo.toml" />
+    <Text Include="../../thirdparty/owemdjee/magika/rust/gen/README.md" />
+    <Text Include="../../thirdparty/owemdjee/magika/rust/gen/content_types" />
+    <Text Include="../../thirdparty/owemdjee/magika/rust/gen/model" />
+    <Text Include="../../thirdparty/owemdjee/magika/rust/gen/src/main.rs" />
+    <Text Include="../../thirdparty/owemdjee/magika/rust/gen/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/magika/rust/lib/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/magika/rust/lib/Cargo.toml" />
+    <Text Include="../../thirdparty/owemdjee/magika/rust/lib/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/magika/rust/lib/README.md" />
+    <Text Include="../../thirdparty/owemdjee/magika/rust/lib/src/builder.rs" />
+    <Text Include="../../thirdparty/owemdjee/magika/rust/lib/src/config.rs" />
+    <Text Include="../../thirdparty/owemdjee/magika/rust/lib/src/content.rs" />
+    <Text Include="../../thirdparty/owemdjee/magika/rust/lib/src/error.rs" />
+    <Text Include="../../thirdparty/owemdjee/magika/rust/lib/src/file.rs" />
+    <Text Include="../../thirdparty/owemdjee/magika/rust/lib/src/future.rs" />
+    <Text Include="../../thirdparty/owemdjee/magika/rust/lib/src/input.rs" />
+    <Text Include="../../thirdparty/owemdjee/magika/rust/lib/src/lib.rs" />
+    <Text Include="../../thirdparty/owemdjee/magika/rust/lib/src/model.onnx" />
+    <Text Include="../../thirdparty/owemdjee/magika/rust/lib/src/model.rs" />
+    <Text Include="../../thirdparty/owemdjee/magika/rust/lib/src/session.rs" />
+    <Text Include="../../thirdparty/owemdjee/magika/rust/lib/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/magika/rust/onnx/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/magika/rust/onnx/maturin.sh" />
+    <Text Include="../../thirdparty/owemdjee/magika/rust/publish.sh" />
+    <Text Include="../../thirdparty/owemdjee/magika/rust/rustfmt.toml" />
+    <Text Include="../../thirdparty/owemdjee/magika/rust/sync.sh" />
+    <Text Include="../../thirdparty/owemdjee/magika/rust/taplo.toml" />
+    <Text Include="../../thirdparty/owemdjee/magika/rust/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/README.md" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/basic/batch/simple.bat" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/basic/css/code.css" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/basic/csv/magika_test.csv" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/basic/dockerfile/Dockerfile" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/basic/docx/doc.docx" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/basic/docx/magika_test.docx" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/basic/eml/sample.eml" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/basic/empty/empty_file" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/basic/flac/test.flac" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/basic/handlebars/example.handlebars" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/basic/html/doc.html" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/basic/ini/doc.ini" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/basic/javascript/code.js" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/basic/jinja/example.j2" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/basic/json/doc.json" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/basic/latex/sample.tex" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/basic/makefile/simple.Makefile" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/basic/markdown/README.md" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/basic/markdown/magika_test.md" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/basic/markdown/simple.md" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/basic/mp3/test.mp3" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/basic/ods/magika_test.ods" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/basic/odt/doc.odt" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/basic/odt/magika_test.odt" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/basic/outlook/sample.msg" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/basic/pdf/magika_test.pdf" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/basic/pdf/magika_test_pptx.pdf" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/basic/pdf/magika_test_xlsx.pdf" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/basic/pptx/magika_test.pptx" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/basic/python/code.py" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/basic/rtf/doc.rtf" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/basic/rtf/magika_test.rtf" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/basic/rust/asm.rs" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/basic/rust/code.rs" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/basic/rust/test_case1.rs" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/basic/rust/test_case2.rs" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/basic/srt/code.srt" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/basic/svg/magika_test.svg" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/basic/toml/doc.toml" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/basic/txt/complex-sentence.txt" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/basic/txt/few-words.txt" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/basic/txt/lorem-big.txt" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/basic/txt/lorem-small.txt" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/basic/txt/magika_test_pptx.txt" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/basic/txt/many-words.txt" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/basic/txt/one-sentence-with-newline.txt" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/basic/txt/one-sentence.txt" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/basic/txt/random-ascii.txt" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/basic/typescript/code.ts" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/basic/xlsx/magika_test.xlsx" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/basic/yaml/dependabot.yml" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/basic/yaml/python-test.yml" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/basic/yara/rule.yar" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/basic/zig/code.zig" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/current_missdetections/html/malformed-html-gh-521.html" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/current_missdetections/xls/password-protected-example.xls" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/mitra/bzip/bzip2.bz2" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/mitra/elf/elf.elf" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/mitra/elf/elf64.elf" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/mitra/flac/flac.flac" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/mitra/flac/tiny.flac" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/mitra/javabytecode/java.class" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/mitra/mp3/id3v1.mp3" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/mitra/mp3/id3v2.mp3" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/mitra/mp4/mp4.mp4" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/mitra/pdf/pdf.pdf" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/mitra/rar/rar4.rar" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/mitra/rar/rar5.rar" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/mitra/rtf/rich.rtf" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/mitra/svg/svg.svg" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/mitra/tar/hello-gnu.tar" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/mitra/tar/hello-pax.tar" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/mitra/tar/hello-ustar.tar" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/mitra/tar/tar.tar" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/mitra/tiff/tiff-be.tif" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/mitra/tiff/tiff-le.tif" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/mitra/xar/hello-world.xar" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/mitra/xar/mini.xar" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/mitra_candidates/DS_Store" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/mitra_candidates/hdf5.h5" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/mitra_candidates/html.htm" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/mitra_candidates/jp2-stream.jp2" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/mitra_candidates/jp2.jp2" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/mitra_candidates/mini.protobuf" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/mitra_candidates/pcapng.pcapng" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/mitra_candidates/rar14.rar" />
+    <Text Include="../../thirdparty/owemdjee/magika/tests_data/mitra_candidates/wasm.wasm" />
+    <Text Include="../../thirdparty/owemdjee/magika/website/README.md" />
+    <Text Include="../../thirdparty/owemdjee/magika/website/assets/custom.scss" />
+    <Text Include="../../thirdparty/owemdjee/magika/website/assets/logo.svg" />
+    <Text Include="../../thirdparty/owemdjee/magika/website/assets/model_card.html" />
+    <Text Include="../../thirdparty/owemdjee/magika/website/index.html" />
+    <Text Include="../../thirdparty/owemdjee/magika/website/jsconfig.json" />
+    <Text Include="../../thirdparty/owemdjee/magika/website/package.json" />
+    <Text Include="../../thirdparty/owemdjee/magika/website/public/model/config.json" />
+    <Text Include="../../thirdparty/owemdjee/magika/website/public/model/group1-shard1of1.bin" />
+    <Text Include="../../thirdparty/owemdjee/magika/website/public/model/model.json" />
+    <Text Include="../../thirdparty/owemdjee/magika/website/public/models/standard_v3_2/config.min.json" />
+    <Text Include="../../thirdparty/owemdjee/magika/website/public/models/standard_v3_2/group1-shard1of1.bin" />
+    <Text Include="../../thirdparty/owemdjee/magika/website/public/models/standard_v3_2/metadata.json" />
+    <Text Include="../../thirdparty/owemdjee/magika/website/public/models/standard_v3_2/model.json" />
+    <Text Include="../../thirdparty/owemdjee/magika/website/public/models/standard_v3_3/README.md" />
+    <Text Include="../../thirdparty/owemdjee/magika/website/public/models/standard_v3_3/config.min.json" />
+    <Text Include="../../thirdparty/owemdjee/magika/website/public/models/standard_v3_3/group1-shard1of1.bin" />
+    <Text Include="../../thirdparty/owemdjee/magika/website/public/models/standard_v3_3/metadata.json" />
+    <Text Include="../../thirdparty/owemdjee/magika/website/public/models/standard_v3_3/model.json" />
+    <Text Include="../../thirdparty/owemdjee/magika/website/src/main.js" />
+    <Text Include="../../thirdparty/owemdjee/magika/website/src/plugins/index.js" />
+    <Text Include="../../thirdparty/owemdjee/magika/website/src/plugins/router.js" />
+    <Text Include="../../thirdparty/owemdjee/magika/website/src/plugins/vuetify.js" />
+    <Text Include="../../thirdparty/owemdjee/magika/website/vite.config.js" />
+  </ItemGroup>
+  <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+</Project>
+  

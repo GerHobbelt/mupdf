@@ -4,4 +4,9 @@ also-ignore:
 	pzstd/test/
 	pzstd/utils/test/
 	doc/educational_decoder/
+
+	/programs/
+	/tests/
+	/zlibWrapper/
+	/lib/
 	

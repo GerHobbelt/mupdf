@@ -48,16 +48,16 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -70,7 +70,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -104,8 +104,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -527,32 +527,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/lcms2/include/lcms2.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libavif/include/avif/avif.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libavif/include/avif/internal.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libheif/include/libheif/api_structs.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libheif/include/libheif/avif.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libheif/include/libheif/bitstream.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libheif/include/libheif/box.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libheif/include/libheif/common_utils.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libheif/include/libheif/context.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libheif/include/libheif/error.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libheif/include/libheif/exif.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libheif/include/libheif/file.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libheif/include/libheif/heif.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libheif/include/libheif/heif_cxx.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libheif/include/libheif/heif_emscripten.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libheif/include/libheif/heif_plugin.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libheif/include/libheif/heif_version.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libheif/include/libheif/hevc.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libheif/include/libheif/init.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libheif/include/libheif/logging.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libheif/include/libheif/metadata_compression.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libheif/include/libheif/nclx.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libheif/include/libheif/pixelimage.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libheif/include/libheif/plugin_registry.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libheif/include/libheif/plugins_unix.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libheif/include/libheif/plugins_windows.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libheif/include/libheif/region.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libheif/include/libheif/security_limits.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libheif/include/libheif/uncompressed_image.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libjpeg-turbo/include/jconfig.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libjpeg-turbo/include/jerror.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpegview/src/JPEGView/libjpeg-turbo/include/jmorecfg.h" />
@@ -702,3 +679,4 @@
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
+  

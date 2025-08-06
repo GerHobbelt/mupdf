@@ -52,16 +52,16 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -74,7 +74,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -108,8 +108,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCOLORIO;OPENCOLORIO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -128,7 +128,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCOLORIO;OPENCOLORIO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/OpenColorIO/include;../../thirdparty/owemdjee/OpenColorIO/vendor/aftereffects/vc/vc15;../../thirdparty/owemdjee/OpenColorIO/src/utils;../../thirdparty/owemdjee/OpenColorIO/src;../../scripts/Imath;../../thirdparty/owemdjee/Imath/src;../../scripts/OpenColorIO/faked;../../scripts/OpenColorIO/src/OpenColorIO;../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO;../../thirdparty/owemdjee/OpenColorIO/ext/sampleicc/src/include;../../thirdparty/owemdjee/xxHash;../../thirdparty/owemdjee/yaml-cpp/include;../../thirdparty/owemdjee/libexpat/expat/lib;../../thirdparty/owemdjee/minizip-ng;../../scripts/lcms2/include;../../thirdparty/owemdjee/OpenColorIO/include/OpenColorIO;../../thirdparty/owemdjee/oiio/src/include;../../thirdparty/owemdjee/OpenColorIO/src/libutils/imageioapphelpers;../../scripts/OpenColorIO/include/OpenColorIO;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/OpenColorIO/include;../../thirdparty/owemdjee/OpenColorIO/vendor/aftereffects/vc/vc15;../../thirdparty/owemdjee/OpenColorIO/src/utils;../../thirdparty/owemdjee/OpenColorIO/src;../../scripts/Imath;../../thirdparty/owemdjee/Imath/src;../../scripts/OpenColorIO/faked;../../scripts/OpenColorIO/src/OpenColorIO;../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO;../../thirdparty/owemdjee/OpenColorIO/ext/sampleicc/src/include;../../thirdparty/owemdjee/xxHash;../../thirdparty/owemdjee/yaml-cpp/include;../../thirdparty/owemdjee/libexpat/expat/lib;../../thirdparty/owemdjee/minizip-ng;../../scripts/lcms2/include;../../thirdparty/owemdjee/OpenColorIO/include/OpenColorIO;../../thirdparty/owemdjee/oiio/src/include;../../thirdparty/owemdjee/OpenColorIO/src/libutils/imageioapphelpers;../../scripts/OpenColorIO/include/OpenColorIO;../../scripts/OpenColorIO/generated_include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -155,7 +155,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCOLORIO;OPENCOLORIO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/OpenColorIO/include;../../thirdparty/owemdjee/OpenColorIO/vendor/aftereffects/vc/vc15;../../thirdparty/owemdjee/OpenColorIO/src/utils;../../thirdparty/owemdjee/OpenColorIO/src;../../scripts/Imath;../../thirdparty/owemdjee/Imath/src;../../scripts/OpenColorIO/faked;../../scripts/OpenColorIO/src/OpenColorIO;../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO;../../thirdparty/owemdjee/OpenColorIO/ext/sampleicc/src/include;../../thirdparty/owemdjee/xxHash;../../thirdparty/owemdjee/yaml-cpp/include;../../thirdparty/owemdjee/libexpat/expat/lib;../../thirdparty/owemdjee/minizip-ng;../../scripts/lcms2/include;../../thirdparty/owemdjee/OpenColorIO/include/OpenColorIO;../../thirdparty/owemdjee/oiio/src/include;../../thirdparty/owemdjee/OpenColorIO/src/libutils/imageioapphelpers;../../scripts/OpenColorIO/include/OpenColorIO;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/OpenColorIO/include;../../thirdparty/owemdjee/OpenColorIO/vendor/aftereffects/vc/vc15;../../thirdparty/owemdjee/OpenColorIO/src/utils;../../thirdparty/owemdjee/OpenColorIO/src;../../scripts/Imath;../../thirdparty/owemdjee/Imath/src;../../scripts/OpenColorIO/faked;../../scripts/OpenColorIO/src/OpenColorIO;../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO;../../thirdparty/owemdjee/OpenColorIO/ext/sampleicc/src/include;../../thirdparty/owemdjee/xxHash;../../thirdparty/owemdjee/yaml-cpp/include;../../thirdparty/owemdjee/libexpat/expat/lib;../../thirdparty/owemdjee/minizip-ng;../../scripts/lcms2/include;../../thirdparty/owemdjee/OpenColorIO/include/OpenColorIO;../../thirdparty/owemdjee/oiio/src/include;../../thirdparty/owemdjee/OpenColorIO/src/libutils/imageioapphelpers;../../scripts/OpenColorIO/include/OpenColorIO;../../scripts/OpenColorIO/generated_include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -183,7 +183,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCOLORIO;OPENCOLORIO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/OpenColorIO/include;../../thirdparty/owemdjee/OpenColorIO/vendor/aftereffects/vc/vc15;../../thirdparty/owemdjee/OpenColorIO/src/utils;../../thirdparty/owemdjee/OpenColorIO/src;../../scripts/Imath;../../thirdparty/owemdjee/Imath/src;../../scripts/OpenColorIO/faked;../../scripts/OpenColorIO/src/OpenColorIO;../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO;../../thirdparty/owemdjee/OpenColorIO/ext/sampleicc/src/include;../../thirdparty/owemdjee/xxHash;../../thirdparty/owemdjee/yaml-cpp/include;../../thirdparty/owemdjee/libexpat/expat/lib;../../thirdparty/owemdjee/minizip-ng;../../scripts/lcms2/include;../../thirdparty/owemdjee/OpenColorIO/include/OpenColorIO;../../thirdparty/owemdjee/oiio/src/include;../../thirdparty/owemdjee/OpenColorIO/src/libutils/imageioapphelpers;../../scripts/OpenColorIO/include/OpenColorIO;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/OpenColorIO/include;../../thirdparty/owemdjee/OpenColorIO/vendor/aftereffects/vc/vc15;../../thirdparty/owemdjee/OpenColorIO/src/utils;../../thirdparty/owemdjee/OpenColorIO/src;../../scripts/Imath;../../thirdparty/owemdjee/Imath/src;../../scripts/OpenColorIO/faked;../../scripts/OpenColorIO/src/OpenColorIO;../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO;../../thirdparty/owemdjee/OpenColorIO/ext/sampleicc/src/include;../../thirdparty/owemdjee/xxHash;../../thirdparty/owemdjee/yaml-cpp/include;../../thirdparty/owemdjee/libexpat/expat/lib;../../thirdparty/owemdjee/minizip-ng;../../scripts/lcms2/include;../../thirdparty/owemdjee/OpenColorIO/include/OpenColorIO;../../thirdparty/owemdjee/oiio/src/include;../../thirdparty/owemdjee/OpenColorIO/src/libutils/imageioapphelpers;../../scripts/OpenColorIO/include/OpenColorIO;../../scripts/OpenColorIO/generated_include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -210,7 +210,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCOLORIO;OPENCOLORIO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/OpenColorIO/include;../../thirdparty/owemdjee/OpenColorIO/vendor/aftereffects/vc/vc15;../../thirdparty/owemdjee/OpenColorIO/src/utils;../../thirdparty/owemdjee/OpenColorIO/src;../../scripts/Imath;../../thirdparty/owemdjee/Imath/src;../../scripts/OpenColorIO/faked;../../scripts/OpenColorIO/src/OpenColorIO;../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO;../../thirdparty/owemdjee/OpenColorIO/ext/sampleicc/src/include;../../thirdparty/owemdjee/xxHash;../../thirdparty/owemdjee/yaml-cpp/include;../../thirdparty/owemdjee/libexpat/expat/lib;../../thirdparty/owemdjee/minizip-ng;../../scripts/lcms2/include;../../thirdparty/owemdjee/OpenColorIO/include/OpenColorIO;../../thirdparty/owemdjee/oiio/src/include;../../thirdparty/owemdjee/OpenColorIO/src/libutils/imageioapphelpers;../../scripts/OpenColorIO/include/OpenColorIO;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/OpenColorIO/include;../../thirdparty/owemdjee/OpenColorIO/vendor/aftereffects/vc/vc15;../../thirdparty/owemdjee/OpenColorIO/src/utils;../../thirdparty/owemdjee/OpenColorIO/src;../../scripts/Imath;../../thirdparty/owemdjee/Imath/src;../../scripts/OpenColorIO/faked;../../scripts/OpenColorIO/src/OpenColorIO;../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO;../../thirdparty/owemdjee/OpenColorIO/ext/sampleicc/src/include;../../thirdparty/owemdjee/xxHash;../../thirdparty/owemdjee/yaml-cpp/include;../../thirdparty/owemdjee/libexpat/expat/lib;../../thirdparty/owemdjee/minizip-ng;../../scripts/lcms2/include;../../thirdparty/owemdjee/OpenColorIO/include/OpenColorIO;../../thirdparty/owemdjee/oiio/src/include;../../thirdparty/owemdjee/OpenColorIO/src/libutils/imageioapphelpers;../../scripts/OpenColorIO/include/OpenColorIO;../../scripts/OpenColorIO/generated_include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -317,7 +317,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/exposurecontrast/ExposureContrastOpCPU.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/exposurecontrast/ExposureContrastOpData.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/exposurecontrast/ExposureContrastOpGPU.cpp" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\OpenColorIO\src\OpenColorIO\ops\fixedfunction\ACES2\aces-Transform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/fixedfunction/ACES2/aces-Transform.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/fixedfunction/FixedFunctionOp.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/fixedfunction/FixedFunctionOpCPU.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/fixedfunction/FixedFunctionOpData.cpp" />
@@ -612,7 +612,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/utils/StringUtils.h" />
     <Font Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/static/plugins/slick/fonts/slick.ttf" />
     <Font Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/static/plugins/themify-icons/fonts/themify.ttf" />
-    <Image Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/static/images/SpiderVerse_pmm014.1014_lm_v1_opt.jpg" />
     <Image Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/static/images/aswf_aqua.png" />
     <Image Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/static/images/blog/blog-post-1.jpg" />
     <Image Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/static/images/blog/blog-post-2.jpg" />
@@ -1095,7 +1094,6 @@
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/aswf/cla_dco.rst" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/aswf/license.rst" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/concepts/_index.rst" />
-    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/concepts/overview/configuration_files.rst" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/concepts/overview/glossary.rst" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/concepts/overview/internal_architecture.rst" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/concepts/overview/introduction.rst" />
@@ -1450,3 +1448,4 @@
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
+  

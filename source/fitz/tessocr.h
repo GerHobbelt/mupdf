@@ -29,6 +29,8 @@
 extern "C" {
 #endif
 
+#if FZ_ENABLE_OCR 
+
 void *ocr_init(fz_context *ctx, const char *language, const char *datadir);
 
 void ocr_fin(fz_context *ctx, void *api);
@@ -48,6 +50,8 @@ void ocr_recognise(fz_context *ctx,
 				void *arg,
 				int progress),
 		void *arg);
+
+#endif // FZ_ENABLE_OCR 
 
 // --------
 

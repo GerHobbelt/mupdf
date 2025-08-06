@@ -288,6 +288,8 @@ const projectMap = {
 	"libopencv-contrib-ximgproc": "opencv_contrib/modules/ximgproc",
 	"libopencv-contrib-xobjdetect": "opencv_contrib/modules/xobjdetect",
 	"libopencv-contrib-xphoto": "opencv_contrib/modules/xphoto",
+
+	"libopencv_samples": "opencv",
 	
 	"libdlfcn-win32-testmain": "dlfcn-win32",
 	"libdlfcn-win32-testdll1": "dlfcn-win32",
@@ -310,6 +312,8 @@ const projectMap = {
 	"uni": "unilib",
 	"ray": "raylib",
 	"politician": "the-yabbering-politician",
+	"zstd_demos": "zstd",
+	"libzstd_zlibwrap": "zstd/zlibWrapper",
 };
 
 testpath = `${scriptpath}/../../thirdparty/owemdjee/${projname_alt}`;

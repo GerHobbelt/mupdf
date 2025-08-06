@@ -4,3 +4,9 @@ also-ignore:
 	/src/
 	/tools/
 	
+	/test/mock/
+	/test/name/android.*
+	/test/name/ro-.*
+	/test/arm-.*
+	
+	
