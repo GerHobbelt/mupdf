@@ -18,5 +18,7 @@ also-ignore:
 	
 	/12-bits/
 	/16-bits/
-	
+
+	/src/wrapper/template.c
+	/src/wrapper/.*-8.c
 	

@@ -54,7 +54,7 @@
 #define BITS_IN_JSAMPLE  8      /* use 8 or 12 */
 #endif
 
-#undef HAVE_JPEGTURBO_DUAL_MODE_8_12  
+#define HAVE_JPEGTURBO_DUAL_MODE_8_12    1
 
 /* Define to 1 if you have the <locale.h> header file. */
 #undef HAVE_LOCALE_H
