@@ -233,7 +233,7 @@ static int fz_exec_cpp_code(const char *file)
 	}
 	catch (cv::Exception &ex)
 	{
-		std::string msg = ex.what();
+		std::string msg = std::format("{} :: {}", ex.codeMessage(), ex.what());
 		fz_throw(ctx, FZ_ERROR_GENERIC, msg.c_str());
 	}
 	catch (std::exception &ex)
@@ -241,7 +241,13 @@ static int fz_exec_cpp_code(const char *file)
 		std::string msg = ex.what();
 		fz_throw(ctx, FZ_ERROR_GENERIC, msg.c_str());
 	}
-	catch (const std::string& ex) 
+	catch (const std::exception *ex)
+	{
+		std::string msg = ex->what();
+		fz_throw(ctx, FZ_ERROR_GENERIC, msg.c_str());
+		delete ex;
+	}
+	catch (const std::string& ex)
 	{
 		std::string msg = ex;
 		fz_throw(ctx, FZ_ERROR_GENERIC, msg.c_str());
