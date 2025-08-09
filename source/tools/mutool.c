@@ -1022,7 +1022,7 @@ static struct tool_spec {
 	{ {.fa = gumbo_libxml_example_main }, "gumbo_libxml_example", "gumbo-libxml example" },
 #endif
 
-#if 01 
+#if 0
 #if defined(MUTOOL_EX)
 	{ {.f = cppterminal_args_example_main }, "cppterm_args", "cpp-terminal args demo" },
 	{ {.f = cppterminal_attach_console_example_main }, "cppterm_attach_console", "cpp-terminal attach_console demo" },
