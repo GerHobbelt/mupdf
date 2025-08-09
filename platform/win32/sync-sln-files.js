@@ -14,7 +14,7 @@ const command = +process.argv[2];
 const source_sln_file = process.argv[3];
 let dest_sln_files = [].concat(process.argv).toSpliced(0, 4);
 
-//console.log({ argv: process.argv, command, source_sln_file, dest_sln_files });
+console.log({ argv: process.argv, command, source_sln_file, dest_sln_files });
 
 // extra DUPLICATE project which will be appended to each SLN file so MSVC is forced to recognize a SLN change upon loading the file and have that one rewrite a *fresh, clean* SLN afterwards:
 //
@@ -51,6 +51,22 @@ function getAllProjectsFromSln(sln_src) {
     return prj_lst;
 }
 
+// Return SLN content with *one* project repeated so MSVC will alert and **always have to rewrite the SLN file on application close**, thus 'cleaning up' our work:
+function appendBogusExtra(sln_src) {
+    // e.g. Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1D-RGB-color-gradient", "1D-RGB-color-gradient.vcxproj", "{3644E12D-D934-41FD-BF7E-83745A17E226}"
+    let prj_re = /^(Project[^=]*?8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942[^=]*= "([^"]+)", "([^"]+?[.]vcxproj)".*?)$/gm;
+
+	let m = prj_re.exec(sln_src);
+	//console.log({ m });
+	if (m) {
+		return sln_src + bogus_extra_project + m[1];
+	}
+	else {
+		return sln_src + bogus_extra_project;
+	}
+}
+
+
 
 // make sure all chars in `src` are treated as literals in any regex constructed from this string.
 function protect4RE(src) {
@@ -60,6 +76,18 @@ function protect4RE(src) {
     //  console.log("protect4RE --> ", { src, rv });
     return rv;
 }
+
+let unwanted_sln_list = [];
+
+function filterOutUnwantedSolutions(sln) {
+	let pass = true;
+	unwanted_sln_list.foreach((l) => {
+        if (path.basename(sln) === path.basename(l))
+			pass = false;
+	});
+    return pass;
+}
+
 
 switch (command) {
 default:
@@ -85,11 +113,11 @@ case 1:
 
     //console.log({ folder_re, prefix_str, postfix_str });
 
-    //console.log({ dest_sln_files });
-    dest_sln_files.forEach((l) => {
+	unwanted_sln_list = [ source_sln_file ];
+
+    console.log({ dest_sln_files: dest_sln_files.filter(filterOutUnwantedSolutions) });
+    dest_sln_files.filter(filterOutUnwantedSolutions).forEach((l) => {
         let dest_sln_file = l;
-        if (dest_sln_file === source_sln_file || dest_sln_file === './' + source_sln_file)
-            return;
         let dest_src = fs.readFileSync(dest_sln_file, 'utf8');
         if (debug)  console.log({ dest_sln_file, size: dest_src.length });
 
@@ -108,24 +136,28 @@ case 1:
                 //console.log({ dest_sln_file, m3, dest_tail_str });
 
                 // slice the sln and prepend the prefix_str:
-                dest_src = prefix_str + dest_src.slice(dest_prefix_str.length, dest_postfix_index) + postfix_str + dest_tail_str + bogus_extra_project;
+                dest_src = prefix_str + dest_src.slice(dest_prefix_str.length, dest_postfix_index) + postfix_str + dest_tail_str;
 
                 console.log(`Updating ${ dest_sln_file }.`);
-                fs.writeFileSync(dest_sln_file, dest_src, 'utf8');
+                fs.writeFileSync(dest_sln_file, appendBogusExtra(dest_src), 'utf8');
             }
         }
     });
 
 	console.log(`Updating ${ source_sln_file }.`);
-	fs.writeFileSync(source_sln_file, list_src + bogus_extra_project, 'utf8');
+	fs.writeFileSync(source_sln_file, appendBogusExtra(list_src), 'utf8');
 }
     break;
 
 
 case 2:
 {
-    // copy the directory structure and the bottom chunk to the target sln file (if it is not the source).
+	// anything listed in failed-ideas does not need to show up in any of the m-dev-*.sln files any more -- except in m-dev-misc.sln!
+	// ditto for obnoxious-to-be-evaluated!
     let list_src = fs.readFileSync(source_sln_file, 'utf8');
+
+    let failed_sln_file = dest_sln_files.filter((l) => /failed-ideas/.test(l))[0];
+    let obnoxious_sln_file = dest_sln_files.filter((l) => /obnoxious/.test(l))[0];
 
     let list_prjs = getAllProjectsFromSln(list_src);
     //console.log({ list_prjs });
@@ -142,13 +174,17 @@ case 2:
 
     let misc_src = fs.readFileSync(misc_sln_file, 'utf8');
 
-    list_prjs = list_prjs.map((l) => { l.in_main_sln = true; l.occur_count = 0; return l; });
+    list_prjs = list_prjs.map((l) => { 
+		l.in_main_sln = true; 
+		l.occur_count = 0; 
+		return l; 
+	});
 
-    //console.log({ dest_sln_files });
-    dest_sln_files.forEach((l) => {
+	unwanted_sln_list = [ source_sln_file, misc_sln_file, obnoxious_sln_file, failed_sln_file ];
+
+    console.log({ dest_sln_files: dest_sln_files.filter(filterOutUnwantedSolutions) });
+    dest_sln_files.filter(filterOutUnwantedSolutions).forEach((l) => {
         let dest_sln_file = l;
-        if (dest_sln_file === source_sln_file || dest_sln_file === './' + source_sln_file)
-            return;
         let dest_src = fs.readFileSync(dest_sln_file, 'utf8');
         if (debug)  console.log({ dest_sln_file, size: dest_src.length });
 
@@ -210,7 +246,7 @@ case 3:
     let failed_sln_file = dest_sln_files.filter((l) => /failed-ideas/.test(l))[0];
     let maymatter_sln_file = dest_sln_files.filter((l) => /may-matter/.test(l))[0];
 
-    //console.log({ failed_sln_file, maymatter_sln_file, length: dest_sln_files.length });
+    console.log({ failed_sln_file, maymatter_sln_file, length: dest_sln_files.length });
 
     if (!failed_sln_file || !maymatter_sln_file || dest_sln_files.length !== 2) {
         console.log(`Expected two extra SLN files only: a failed-ideas and may-matter one, nothing else. Aborting.\n`);
