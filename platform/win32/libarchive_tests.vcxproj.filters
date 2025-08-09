@@ -301,6 +301,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/cpio/test/test_extract_cpio_Z.c">
       <Filter>Source Files\cpio\test</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/libarchive/cpio/test/test_extract_cpio_absolute_paths.c">
+      <Filter>Source Files\cpio\test</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/cpio/test/test_extract_cpio_bz2.c">
       <Filter>Source Files\cpio\test</Filter>
     </ClCompile>
@@ -499,9 +502,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/archive_entry_xattr.c">
       <Filter>Source Files\libarchive</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/archive_getdate.c">
-      <Filter>Source Files\libarchive</Filter>
-    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/archive_hmac.c">
       <Filter>Source Files\libarchive</Filter>
     </ClCompile>
@@ -512,6 +512,9 @@
       <Filter>Source Files\libarchive</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/archive_pack_dev.c">
+      <Filter>Source Files\libarchive</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/archive_parse_date.c">
       <Filter>Source Files\libarchive</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/archive_pathmatch.c">
@@ -679,6 +682,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/archive_string_sprintf.c">
       <Filter>Source Files\libarchive</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/archive_time.c">
+      <Filter>Source Files\libarchive</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/archive_util.c">
       <Filter>Source Files\libarchive</Filter>
     </ClCompile>
@@ -835,6 +841,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/read_open_memory.c">
       <Filter>Source Files\libarchive\test</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_7zip_filename_encoding.c">
+      <Filter>Source Files\libarchive\test</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_acl_nfs4.c">
       <Filter>Source Files\libarchive\test</Filter>
     </ClCompile>
@@ -868,9 +877,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_archive_digest.c">
       <Filter>Source Files\libarchive\test</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_archive_getdate.c">
-      <Filter>Source Files\libarchive\test</Filter>
-    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_archive_match_owner.c">
       <Filter>Source Files\libarchive\test</Filter>
     </ClCompile>
@@ -878,6 +884,9 @@
       <Filter>Source Files\libarchive\test</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_archive_match_time.c">
+      <Filter>Source Files\libarchive\test</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_archive_parse_date.c">
       <Filter>Source Files\libarchive\test</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_archive_pathmatch.c">
@@ -968,6 +977,9 @@
       <Filter>Source Files\libarchive\test</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_compat_gtar.c">
+      <Filter>Source Files\libarchive\test</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_compat_gtar_large.c">
       <Filter>Source Files\libarchive\test</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_compat_gzip.c">
@@ -1087,6 +1099,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_read_filter_grzip.c">
       <Filter>Source Files\libarchive\test</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_read_filter_gzip_recursive.c">
+      <Filter>Source Files\libarchive\test</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_read_filter_lrzip.c">
       <Filter>Source Files\libarchive\test</Filter>
     </ClCompile>
@@ -1195,7 +1210,13 @@
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_read_format_gtar_lzma.c">
       <Filter>Source Files\libarchive\test</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_read_format_gtar_redundant_L.c">
+      <Filter>Source Files\libarchive\test</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_read_format_gtar_sparse.c">
+      <Filter>Source Files\libarchive\test</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_read_format_gtar_sparse_length.c">
       <Filter>Source Files\libarchive\test</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_read_format_gtar_sparse_skip_entry.c">
@@ -1267,6 +1288,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_read_format_rar5.c">
       <Filter>Source Files\libarchive\test</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_read_format_rar_encryption.c">
+      <Filter>Source Files\libarchive\test</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_read_format_rar_encryption_data.c">
       <Filter>Source Files\libarchive\test</Filter>
     </ClCompile>
@@ -1280,6 +1304,9 @@
       <Filter>Source Files\libarchive\test</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_read_format_rar_invalid1.c">
+      <Filter>Source Files\libarchive\test</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_read_format_rar_overflow.c">
       <Filter>Source Files\libarchive\test</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_read_format_raw.c">
@@ -1306,7 +1333,16 @@
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_read_format_tar_invalid_pax_size.c">
       <Filter>Source Files\libarchive\test</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_read_format_tar_mac_metadata.c">
+      <Filter>Source Files\libarchive\test</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_read_format_tar_pax_g_large.c">
+      <Filter>Source Files\libarchive\test</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_read_format_tar_pax_large_attr.c">
+      <Filter>Source Files\libarchive\test</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_read_format_tar_pax_negative_time.c">
       <Filter>Source Files\libarchive\test</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_read_format_tbz.c">
@@ -1405,6 +1441,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_read_large.c">
       <Filter>Source Files\libarchive\test</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_read_pax_empty_val_no_nl.c">
+      <Filter>Source Files\libarchive\test</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_read_pax_truncated.c">
       <Filter>Source Files\libarchive\test</Filter>
     </ClCompile>
@@ -1490,6 +1529,9 @@
       <Filter>Source Files\libarchive\test</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_write_disk_secure746.c">
+      <Filter>Source Files\libarchive\test</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_write_disk_secure_noabsolutepaths.c">
       <Filter>Source Files\libarchive\test</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_write_disk_sparse.c">
@@ -1606,6 +1648,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_write_format_mtree_no_separator.c">
       <Filter>Source Files\libarchive\test</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_write_format_mtree_preset_digests.c">
+      <Filter>Source Files\libarchive\test</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_write_format_mtree_quoted_filename.c">
       <Filter>Source Files\libarchive\test</Filter>
     </ClCompile>
@@ -1654,7 +1699,16 @@
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_write_format_zip64_stream.c">
       <Filter>Source Files\libarchive\test</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_write_format_zip_compression_bzip2.c">
+      <Filter>Source Files\libarchive\test</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_write_format_zip_compression_lzmaxz.c">
+      <Filter>Source Files\libarchive\test</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_write_format_zip_compression_store.c">
+      <Filter>Source Files\libarchive\test</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_write_format_zip_compression_zstd.c">
       <Filter>Source Files\libarchive\test</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_write_format_zip_empty.c">
@@ -1676,6 +1730,9 @@
       <Filter>Source Files\libarchive\test</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_write_format_zip_stream.c">
+      <Filter>Source Files\libarchive\test</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_write_format_zip_windows_path.c">
       <Filter>Source Files\libarchive\test</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_write_format_zip_zip64.c">
@@ -1777,6 +1834,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/tar/test/test_leading_slash.c">
       <Filter>Source Files\tar\test</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/libarchive/tar/test/test_list_item.c">
+      <Filter>Source Files\tar\test</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/tar/test/test_missing_file.c">
       <Filter>Source Files\tar\test</Filter>
     </ClCompile>
@@ -1793,6 +1853,9 @@
       <Filter>Source Files\tar\test</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/tar/test/test_option_O_upper.c">
+      <Filter>Source Files\tar\test</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/libarchive/tar/test/test_option_P_upper.c">
       <Filter>Source Files\tar\test</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/tar/test/test_option_T_upper.c">
@@ -1856,6 +1919,9 @@
       <Filter>Source Files\tar\test</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/tar/test/test_option_lzop.c">
+      <Filter>Source Files\tar\test</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/libarchive/tar/test/test_option_mtime.c">
       <Filter>Source Files\tar\test</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/tar/test/test_option_n.c">
@@ -2098,9 +2164,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/libarchive/libarchive/archive_entry_private.h">
       <Filter>Header Files\libarchive</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/libarchive/libarchive/archive_getdate.h">
-      <Filter>Header Files\libarchive</Filter>
-    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/libarchive/libarchive/archive_hmac_private.h">
       <Filter>Header Files\libarchive</Filter>
     </ClInclude>
@@ -2156,6 +2219,9 @@
       <Filter>Header Files\libarchive</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/libarchive/libarchive/archive_string_composition.h">
+      <Filter>Header Files\libarchive</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/libarchive/libarchive/archive_time_private.h">
       <Filter>Header Files\libarchive</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/libarchive/libarchive/archive_windows.h">
@@ -2219,6 +2285,9 @@
       <Filter>Header Files\unzip</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/libarchive/unzip/bsdunzip_platform.h">
+      <Filter>Header Files\unzip</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/libarchive/unzip/la_getline.h">
       <Filter>Header Files\unzip</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/libarchive/unzip/la_queue.h">
@@ -2323,13 +2392,10 @@
     <Text Include="../../thirdparty/owemdjee/libarchive/build/ci/github_actions/ci.cmd">
       <Filter>Misc Files\build\ci\github_actions</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/libarchive/build/ci/github_actions/macos.sh">
+    <Text Include="../../thirdparty/owemdjee/libarchive/build/ci/github_actions/install-macos-dependencies.sh">
       <Filter>Misc Files\build\ci\github_actions</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/libarchive/build/ci/test_driver">
-      <Filter>Misc Files\build\ci</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/libarchive/build/ci/travis_ci.sh">
       <Filter>Misc Files\build\ci</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/libarchive/build/clean.sh">
