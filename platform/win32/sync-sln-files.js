@@ -2,7 +2,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const debug = false;
+const debug = true;
 
 //
 // 1. Using m-dev-list.sln as the base/driver, update all SLN files.
@@ -14,7 +14,7 @@ const command = +process.argv[2];
 const source_sln_file = process.argv[3];
 let dest_sln_files = [].concat(process.argv).toSpliced(0, 4);
 
-console.log({ argv: process.argv, command, source_sln_file, dest_sln_files });
+if (debug)  console.log({ argv: process.argv, command, source_sln_file, dest_sln_files });
 
 // extra DUPLICATE project which will be appended to each SLN file so MSVC is forced to recognize a SLN change upon loading the file and have that one rewrite a *fresh, clean* SLN afterwards:
 //
@@ -81,10 +81,12 @@ let unwanted_sln_list = [];
 
 function filterOutUnwantedSolutions(sln) {
 	let pass = true;
-	unwanted_sln_list.foreach((l) => {
+	unwanted_sln_list.forEach((l) => {
+		if (debug)  console.log(`check: ${ sln } --> ${ path.basename(sln) } === ${ path.basename(l) }? --> ${ path.basename(sln) === path.basename(l) ? 'TRUE' : 'FALSE' }`);
         if (path.basename(sln) === path.basename(l))
 			pass = false;
 	});
+	if (debug)  console.log(`filterOutUnwantedSolutions: ${ sln } --> ${ (pass ? 'ACCEPT' : '**REJECT**') }`);
     return pass;
 }
 
@@ -115,7 +117,7 @@ case 1:
 
 	unwanted_sln_list = [ source_sln_file ];
 
-    console.log({ dest_sln_files: dest_sln_files.filter(filterOutUnwantedSolutions) });
+    if (debug)  console.log({ dest_sln_files: dest_sln_files.filter(filterOutUnwantedSolutions) });
     dest_sln_files.filter(filterOutUnwantedSolutions).forEach((l) => {
         let dest_sln_file = l;
         let dest_src = fs.readFileSync(dest_sln_file, 'utf8');
@@ -157,7 +159,13 @@ case 2:
     let list_src = fs.readFileSync(source_sln_file, 'utf8');
 
     let failed_sln_file = dest_sln_files.filter((l) => /failed-ideas/.test(l))[0];
+    let maymatter_sln_file = dest_sln_files.filter((l) => /may-matter/.test(l))[0];
     let obnoxious_sln_file = dest_sln_files.filter((l) => /obnoxious/.test(l))[0];
+
+    if (!failed_sln_file || !maymatter_sln_file || !obnoxious_sln_file) {
+        console.log(`Expected at least three extra SLN files: a failed-ideas, obnoxious and may-matter one. Aborting.\n`);
+        process.exit(1);
+    }
 
     let list_prjs = getAllProjectsFromSln(list_src);
     //console.log({ list_prjs });
@@ -172,17 +180,92 @@ case 2:
         misc_sln_file = sln_dir + '/m-dev-misc.sln';
     }
 
+    let failed_src = fs.readFileSync(failed_sln_file, 'utf8');
+    let obnoxious_src = fs.readFileSync(obnoxious_sln_file, 'utf8');
+    let maymatter_src = fs.readFileSync(maymatter_sln_file, 'utf8');
     let misc_src = fs.readFileSync(misc_sln_file, 'utf8');
 
+    let failed_prjs = getAllProjectsFromSln(failed_src);
+    let obnoxious_prjs = getAllProjectsFromSln(obnoxious_src);
+    let maymatter_prjs = getAllProjectsFromSln(maymatter_src);
+    let misc_prjs = getAllProjectsFromSln(misc_src);
+
+
     list_prjs = list_prjs.map((l) => { 
-		l.in_main_sln = true; 
+		l.in_main_sln = true;    //X
+        l.in_failed_sln = false;
+        l.in_maymatter_sln = false;
+        l.in_obnoxious_sln = false;
+        l.in_misc_sln = false;
 		l.occur_count = 0; 
+		console.log(`list_prj: ${ l.file }`);
 		return l; 
 	});
 
+    failed_prjs.forEach((l) => {
+        let idx = list_prjs.findIndex((r) => r.file === l.file );
+        if (idx < 0) {
+			l.in_main_sln = false; 
+			l.in_failed_sln = true;    //X
+			l.in_maymatter_sln = false;
+			l.in_obnoxious_sln = false;
+			l.in_misc_sln = false;
+			l.occur_count = 0; 
+			console.log(`failed_prj: ${ l.file }`);
+            list_prjs.push(l);
+        } else {
+            list_prjs[idx].in_failed_sln = true;
+        }
+    });
+    maymatter_prjs.forEach((l) => {
+        let idx = list_prjs.findIndex((r) => r.file === l.file );
+        if (idx < 0) {
+			l.in_main_sln = false; 
+			l.in_failed_sln = false;
+			l.in_maymatter_sln = true;    //X
+			l.in_obnoxious_sln = false;
+			l.in_misc_sln = false;
+			l.occur_count = 0; 
+			console.log(`maymatter_prj: ${ l.file }`);
+            list_prjs.push(l);
+        } else {
+            list_prjs[idx].in_maymatter_sln = true;
+        }
+    });
+    obnoxious_prjs.forEach((l) => {
+        let idx = list_prjs.findIndex((r) => r.file === l.file );
+        if (idx < 0) {
+			l.in_main_sln = false; 
+			l.in_failed_sln = false;
+			l.in_maymatter_sln = false;
+			l.in_obnoxious_sln = true;    //X
+			l.in_misc_sln = false;
+			l.occur_count = 0; 
+			console.log(`obnoxious_prj: ${ l.file }`);
+            list_prjs.push(l);
+        } else {
+            list_prjs[idx].in_obnoxious_sln = true;
+        }
+    });
+    misc_prjs.forEach((l) => {
+        let idx = list_prjs.findIndex((r) => r.file === l.file );
+        if (idx < 0) {
+			l.in_main_sln = false; 
+			l.in_failed_sln = false;
+			l.in_maymatter_sln = false;
+			l.in_obnoxious_sln = false;
+			l.in_misc_sln = true;       //X 
+			l.occur_count = 0;   
+			console.log(`misc_prj: ${ l.file }`);
+            list_prjs.push(l);
+        } else {
+            list_prjs[idx].in_misc_sln = true;
+        }
+    });
+
 	unwanted_sln_list = [ source_sln_file, misc_sln_file, obnoxious_sln_file, failed_sln_file ];
 
-    console.log({ dest_sln_files: dest_sln_files.filter(filterOutUnwantedSolutions) });
+    if (debug)  console.log({ dest_sln_files: dest_sln_files.filter(filterOutUnwantedSolutions) });
     dest_sln_files.filter(filterOutUnwantedSolutions).forEach((l) => {
         let dest_sln_file = l;
         let dest_src = fs.readFileSync(dest_sln_file, 'utf8');
@@ -198,6 +281,10 @@ case 2:
             let idx = list_prjs.findIndex((r) => r.file === l.file );
             if (idx < 0) {
                 l.in_main_sln = false;
+				l.in_failed_sln = false;
+				l.in_maymatter_sln = false;
+				l.in_obnoxious_sln = false;
+				l.in_misc_sln = false;
                 l.occur_count = 1;
                 list_prjs.push(l);
             } else {
@@ -206,8 +293,13 @@ case 2:
         });
     });
 
-    let list_edited = false;
-    let misc_edited = false;
+    let has_been_edited = {};
+	unwanted_sln_list.forEach((l) => {
+		has_been_edited[l] = false;
+	});
+    dest_sln_files.forEach((l) => {
+		has_been_edited[l] = false;
+	});
 
     list_prjs.forEach((l) => {
         if ( !l.in_main_sln ) {
@@ -216,129 +308,116 @@ case 2:
 ${ l.line }
 EndProject
             `;
-            list_edited = true;
+            has_been_edited[source_sln_file] = true;
         }
-        if ( l.occur_count === 0 ) {
+        if ( l.occur_count === 0 && l.in_failed_sln === false) {
             console.log(`Project ${ l.name } is not used in any of the m-dev-* solutions; adding it to the m-dev-misc SLN.\n`);
             misc_src += `
 ${ l.line }
 EndProject
             `;
-            misc_edited = true;
+            has_been_edited[misc_sln_file] = true;
         }
-    });
-
-    if (list_edited) {
-        fs.writeFileSync(source_sln_file, list_src, 'utf8');
-    }
-    if (misc_edited) {
-        fs.writeFileSync(misc_sln_file, misc_src, 'utf8');
-    }
-    if (list_edited || misc_edited) {
-        console.log("NOTE: solution files have been updated.\n");
-    }
-}
-    break;
-
-
-case 3:
-{
-    let failed_sln_file = dest_sln_files.filter((l) => /failed-ideas/.test(l))[0];
-    let maymatter_sln_file = dest_sln_files.filter((l) => /may-matter/.test(l))[0];
-
-    console.log({ failed_sln_file, maymatter_sln_file, length: dest_sln_files.length });
-
-    if (!failed_sln_file || !maymatter_sln_file || dest_sln_files.length !== 2) {
-        console.log(`Expected two extra SLN files only: a failed-ideas and may-matter one, nothing else. Aborting.\n`);
-        process.exit(1);
-    }
-
-    let list_src = fs.readFileSync(source_sln_file, 'utf8');
-
-    let list_prjs = getAllProjectsFromSln(list_src);
-    //console.log({ list_prjs });
-
-    let failed_src = fs.readFileSync(failed_sln_file, 'utf8');
-    let maymatter_src = fs.readFileSync(maymatter_sln_file, 'utf8');
-
-    let failed_prjs = getAllProjectsFromSln(failed_src);
-    let maymatter_prjs = getAllProjectsFromSln(maymatter_src);
-
-    list_prjs = list_prjs.map((l) => { l.in_main_sln = true; return l; });
-    failed_prjs.forEach((l) => {
-        let idx = list_prjs.findIndex((r) => r.file === l.file );
-        if (idx < 0) {
-            l.in_failed_sln = true;
-            list_prjs.push(l);
-        } else {
-            list_prjs[idx].in_failed_sln = true;
-        }
-    });
-    maymatter_prjs.forEach((l) => {
-        let idx = list_prjs.findIndex((r) => r.file === l.file );
-        if (idx < 0) {
-            l.in_maymatter_sln = true;
-            list_prjs.push(l);
-        } else {
-            list_prjs[idx].in_maymatter_sln = true;
-        }
-    });
-    //console.log({ list_prjs });
-
-    let list_edited = false;
-    let failed_edited = false;
-    let maymatter_edited = false;
-
-    list_prjs.forEach((l) => {
-        if ( !l.in_main_sln ) {
-            console.log(`Project ${ l.name } is missing from the main solution: adding it there.\n`);
-            list_src += `
-${ l.line }
-EndProject
-            `;
-            list_edited = true;
-        }
-        if ( !l.in_maymatter_sln && !l.in_failed_sln ) {
-            console.log(`Project ${ l.name } is missing from both the FAILED-IDEAS and MAY-MATTER solutions: adding it to the latter.\n`);
+        if ( !l.in_maymatter_sln && !l.in_failed_sln && !l.in_obnoxious_sln ) {
+            console.log(`Project ${ l.name } is missing from both the FAILED-IDEAS, OBNOXIOUS and MAY-MATTER solutions: adding it to the latter.\n`);
             maymatter_src += `
 ${ l.line }
 EndProject
             `;
-            maymatter_edited = true;
+            has_been_edited[maymatter_sln_file] = true;
         }
-        if (false) {
-            if ( l.in_maymatter_sln && l.in_failed_sln ) {
-                console.log(`Project ${ l.name } is present in *both* the FAILED-IDEAS and MAY-MATTER solutions: removing it from the FAILED-IDEAS solution.\n`);
 
-                // e.g. Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1D-RGB-color-gradient", "1D-RGB-color-gradient.vcxproj", "{3644E12D-D934-41FD-BF7E-83745A17E226}"
-                let remo_re = new RegExp(`^Project.*?= "${ protect4RE(l.name) }".*?$`, 'gm');
+		if ( l.in_maymatter_sln && l.in_failed_sln ) {
+			console.log(`Project ${ l.name } is present in *both* the FAILED-IDEAS and MAY-MATTER solutions: removing it from the MAY-MATTER solution.\n`);
 
-                failed_src = failed_src.replace(remo_re, '');
-                failed_edited = true;
-            }
-        } else {
-            if ( l.in_maymatter_sln && l.in_failed_sln ) {
-                console.log(`Project ${ l.name } is present in *both* the FAILED-IDEAS and MAY-MATTER solutions: removing it from the MAY-MATTER solution.\n`);
+			// e.g. Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1D-RGB-color-gradient", "1D-RGB-color-gradient.vcxproj", "{3644E12D-D934-41FD-BF7E-83745A17E226}"
+			let remo_re = new RegExp(`^Project.*?", "${ protect4RE(l.file) }".*?$`, 'gm');
 
-                // e.g. Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1D-RGB-color-gradient", "1D-RGB-color-gradient.vcxproj", "{3644E12D-D934-41FD-BF7E-83745A17E226}"
-                let remo_re = new RegExp(`^Project.*?= "${ protect4RE(l.name) }".*?$`, 'gm');
+			maymatter_src = maymatter_src.replace(remo_re, '');
+            has_been_edited[maymatter_sln_file] = true;
+		}
+		if ( l.in_maymatter_sln && l.in_obnoxious_sln ) {
+			console.log(`Project ${ l.name } is present in *both* the OBNOXIOUS and MAY-MATTER solutions: removing it from the MAY-MATTER solution.\n`);
 
-                maymatter_src = maymatter_src.replace(remo_re, '');
-                maymatter_edited = true;
-            }
-        }
+			// e.g. Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1D-RGB-color-gradient", "1D-RGB-color-gradient.vcxproj", "{3644E12D-D934-41FD-BF7E-83745A17E226}"
+			let remo_re = new RegExp(`^Project.*?", "${ protect4RE(l.file) }".*?$`, 'gm');
+
+			maymatter_src = maymatter_src.replace(remo_re, '');
+            has_been_edited[maymatter_sln_file] = true;
+		}
+		if ( l.in_obnoxious_sln && l.in_failed_sln ) {
+			console.log(`Project ${ l.name } is present in *both* the FAILED-IDEAS and OBNOXIOUS solutions: removing it from the OBNOXIOUS solution.\n`);
+
+			// e.g. Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1D-RGB-color-gradient", "1D-RGB-color-gradient.vcxproj", "{3644E12D-D934-41FD-BF7E-83745A17E226}"
+			let remo_re = new RegExp(`^Project.*?", "${ protect4RE(l.file) }".*?$`, 'gm');
+
+			obnoxious_src = obnoxious_src.replace(remo_re, '');
+            has_been_edited[obnoxious_sln_file] = true;
+		}
+
+		if ( l.in_misc_sln && l.in_failed_sln ) {
+			console.log(`Project ${ l.name } is present in *both* the FAILED-IDEAS and MISC solutions: removing it from the MISC solution.\n`);
+
+			// e.g. Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1D-RGB-color-gradient", "1D-RGB-color-gradient.vcxproj", "{3644E12D-D934-41FD-BF7E-83745A17E226}"
+			let remo_re = new RegExp(`^Project.*?", "${ protect4RE(l.file) }".*?$`, 'gm');
+
+			misc_src = misc_src.replace(remo_re, '');
+            has_been_edited[misc_sln_file] = true;
+		}
     });
 
-    if (list_edited) {
-        fs.writeFileSync(source_sln_file, list_src, 'utf8');
-    }
-    if (failed_edited) {
-        fs.writeFileSync(failed_sln_file, failed_src, 'utf8');
-    }
-    if (maymatter_edited) {
-        fs.writeFileSync(maymatter_sln_file, maymatter_src, 'utf8');
-    }
-    if (list_edited || failed_edited || maymatter_edited) {
+	let updated = false;
+	
+    dest_sln_files.filter(filterOutUnwantedSolutions).forEach((l) => {
+        let dest_sln_file = l;
+        let dest_src = fs.readFileSync(dest_sln_file, 'utf8');
+        if (debug)  console.log({ dest_sln_file, size: dest_src.length });
+
+        let dest_prjs = getAllProjectsFromSln(dest_src);
+        //console.log({ dest_prjs });
+
+        dest_prjs.forEach((d) => {
+            // DO NOT check `l.name === r.name` as a project may have its name updated in one solution but not the other.
+            //
+            // The safe way is to compare file paths instead:
+            let idx = list_prjs.findIndex((r) => r.file === d.file );
+            if (idx >= 0) {
+                let prj = list_prjs[idx];
+
+				if ( prj.in_failed_sln ) {
+					console.log(`Project ${ d.name } is present in *both* the FAILED-IDEAS and ${ dest_sln_file } solutions: removing it from the ${ dest_sln_file } solution.\n`);
+
+					// e.g. Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1D-RGB-color-gradient", "1D-RGB-color-gradient.vcxproj", "{3644E12D-D934-41FD-BF7E-83745A17E226}"
+					let remo_re = new RegExp(`^Project.*?", "${ protect4RE(d.file) }".*?$`, 'gm');
+
+					dest_src = dest_src.replace(remo_re, '');
+					has_been_edited[dest_sln_file] = true;
+				}
+            }
+        });
+
+		if (has_been_edited[dest_sln_file]) {
+			console.log(`Updating ${ dest_sln_file }.`);
+			fs.writeFileSync(dest_sln_file, appendBogusExtra(dest_src), 'utf8');
+			updated = true;
+		}
+    });
+
+	let sln_list = [ source_sln_file, misc_sln_file, obnoxious_sln_file, failed_sln_file, maymatter_sln_file ];
+
+	let sln_srcs = [ list_src, misc_src, obnoxious_src, failed_src, maymatter_src ];
+
+	sln_list.forEach((l, idx) => {
+        let dest_sln_file = l;
+		let dest_src = sln_srcs[idx];
+		if (has_been_edited[dest_sln_file]) {
+			console.log(`Updating ${ dest_sln_file }.`);
+			fs.writeFileSync(dest_sln_file, appendBogusExtra(dest_src), 'utf8');
+			updated = true;
+		}
+	});
+
+	if (updated) {
         console.log("NOTE: solution files have been updated.\n");
     }
 }
