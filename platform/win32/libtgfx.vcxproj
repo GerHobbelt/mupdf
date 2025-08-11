@@ -1,0 +1,1571 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-101000000001}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSKIA;SKIA_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSKIA;SKIA_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSKIA;SKIA_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSKIA;SKIA_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSKIA;SKIA_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSKIA;SKIA_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSKIA;SKIA_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSKIA;SKIA_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSKIA;SKIA_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSKIA;SKIA_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSKIA;SKIA_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSKIA;SKIA_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/android/app/src/main/cpp/JNIHelper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/android/app/src/main/cpp/JTGFXView.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/drawers/src/ConicGradient.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/drawers/src/GridBackground.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/drawers/src/ImageWithMipmap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/drawers/src/ImageWithShadow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/drawers/src/SimpleText.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/drawers/src/base/AppHost.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/drawers/src/base/Drawer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/drawers/src/base/LayerTreeDrawer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/drawers/src/layertree/CustomLayer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/drawers/src/layertree/SimpleLayerTree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/inspector/client/src/LayerProfiler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/inspector/client/src/TCPPortProvider.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/inspector/common/ProcessUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/inspector/common/Socket.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/linux/src/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/ohos/hello2d/src/main/cpp/DisplayLink.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/ohos/hello2d/src/main/cpp/napi_init.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/qt/src/TGFXView.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/qt/src/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/AdaptiveDashEffect.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/Atlas.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/AtlasCellDecodeTask.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/AtlasManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/AtlasTypes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/Bitmap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/BoxFilterDownsample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/BoxFilterDownsampleSIMD.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/Canvas.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/CanvasState.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/Color.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/CustomTypeface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/Data.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/Fill.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/Font.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/GlyphRasterizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/GlyphRunList.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/HitTestContext.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/ImageBuffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/ImageCodec.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/ImageFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/ImageInfo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/ImageSource.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/ImageUserTypeface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/Matrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/MatrixSIMD.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/MeasureContext.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/Orientation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/Paint.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/Path.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/PathEffect.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/PathMeasure.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/PathProvider.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/PathRasterizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/PathRef.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/PathTriangulator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/PathUserTypeface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/Picture.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/PixelBuffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/PixelBufferCodec.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/PixelRef.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/Pixmap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/PlaybackContext.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/RRect.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/RawPixelCodec.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/Recorder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/RecordingContext.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/Rect.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/RectPackSkyline.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/RectSIMD.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/ScaledImageGenerator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/ScalerContext.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/Shader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/ShapeRasterizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/Stroke.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/TextBlob.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/TrimPathEffect.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/Typeface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/YUVColorSpace.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/YUVData.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/codecs/jpeg/JpegCodec.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/codecs/png/PngCodec.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/codecs/webp/WebpCodec.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/codecs/webp/WebpUtility.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/filters/AlphaThresholdColorFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/filters/BlurImageFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/filters/ColorImageFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/filters/ComposeColorFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/filters/ComposeImageFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/filters/DropShadowImageFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/filters/DualBlurImageFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/filters/GaussianBlurImageFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/filters/InnerShadowImageFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/filters/LumaColorFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/filters/MatrixColorFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/filters/ModeColorFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/filters/RuntimeImageFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/filters/ShaderMaskFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/images/BufferImage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/images/CodecImage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/images/DecodedImage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/images/FilterImage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/images/GeneratorImage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/images/Image.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/images/OrientImage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/images/PictureImage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/images/PixelImage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/images/RGBAAAImage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/images/RasterizedImage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/images/ScaledImage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/images/SubsetImage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/images/TextureImage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/images/TransformImage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/shaders/BlendShader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/shaders/ColorFilterShader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/shaders/ColorShader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/shaders/GradientShader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/shaders/ImageShader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/shaders/MatrixShader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/shapes/AppendShape.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/shapes/EffectShape.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/shapes/GlyphShape.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/shapes/InverseShape.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/shapes/MatrixShape.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/shapes/MergeShape.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/shapes/PathShape.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/shapes/ProviderShape.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/shapes/StrokeShape.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/shapes/TextShape.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/utils/BlockBuffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/utils/Buffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/utils/BytesKey.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/utils/ClearPixels.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/utils/Clock.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/utils/DataView.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/utils/DecomposeRects.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/utils/FauxBoldScale.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/utils/GammaCorrection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/utils/GlyphConverter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/utils/HashRange.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/utils/LazyBounds.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/utils/MathExtra.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/utils/PixelFormatUtil.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/utils/RectToRectMatrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/utils/SlidingWindowTracker.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/utils/Stream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/utils/StrokeUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/utils/Task.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/utils/TaskGroup.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/utils/UTF.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/utils/UniqueID.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/utils/WriteStream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/vectors/coregraphics/CGPathRasterizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/vectors/coregraphics/CGScalerContext.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/vectors/coregraphics/CGTypeface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/vectors/freetype/FTLibrary.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/vectors/freetype/FTPath.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/vectors/freetype/FTPathRasterizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/vectors/freetype/FTRasterTarget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/vectors/freetype/FTScalerContext.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/vectors/freetype/FTTypeface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/vectors/freetype/SystemFont.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/vectors/web/ReadPixelsFromCanvasImage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/vectors/web/WebPathRasterizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/vectors/web/WebScalerContext.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/core/vectors/web/WebTypeface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/Backend.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/Blend.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/CommandEncoder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/Context.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/CoordTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/DefaultTextureView.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/Device.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/DrawingManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/FragmentShaderBuilder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/GlobalCache.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/GradientGenerator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/OpsCompositor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/Pipeline.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/ProgramBuilder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/ProxyProvider.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/Quad.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/RRectsVertexProvider.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/RectsVertexProvider.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/RenderContext.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/RenderPass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/Resource.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/ResourceCache.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/ResourceKey.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/RuntimeProgramCreator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/RuntimeProgramWrapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/SamplerState.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/ShaderBuilder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/Surface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/Swizzle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/TextureView.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/UniformBuffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/UniformHandler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/UniqueDomain.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/VaryingHandler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/VertexProvider.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/VertexShaderBuilder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/Window.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/YUVTextureView.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/GLAssembledGLESInterface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/GLAssembledGLInterface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/GLAssembledWebGLInterface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/GLBackendRenderTarget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/GLBlend.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/GLBuffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/GLCaps.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/GLCommandEncoder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/GLCommandQueue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/GLDevice.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/GLFragmentShaderBuilder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/GLFunctions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/GLGPU.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/GLInterface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/GLProgram.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/GLProgramBuilder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/GLRenderPass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/GLRenderTarget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/GLSemaphore.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/GLTexture.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/GLTextureRenderTarget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/GLUniformBuffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/GLUniformHandler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/GLUtil.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/GLVertexArray.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/GLVertexShaderBuilder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/egl/EGLDevice.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/egl/EGLDisplayWrapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/egl/EGLGlobals.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/egl/EGLHardware.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/egl/EGLHardwareTexture.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/egl/EGLProcGetter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/egl/EGLWindow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/processors/GLAARectEffect.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/processors/GLAlphaThresholdFragmentProcessor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/processors/GLAtlasTextGeometryProcessor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/processors/GLClampedGradientEffect.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/processors/GLColorMatrixFragmentProcessor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/processors/GLComposeFragmentProcessor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/processors/GLConicGradientLayout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/processors/GLConstColorProcessor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/processors/GLDefaultGeometryProcessor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/processors/GLDeviceSpaceTextureEffect.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/processors/GLDiamondGradientLayout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/processors/GLDualBlurFragmentProcessor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/processors/GLDualIntervalGradientColorizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/processors/GLEllipseGeometryProcessor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/processors/GLEmptyXferProcessor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/processors/GLGaussianBlur1DFragmentProcessor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/processors/GLLinearGradientLayout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/processors/GLLumaFragmentProcessor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/processors/GLPorterDuffXferProcessor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/processors/GLQuadPerEdgeAAGeometryProcessor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/processors/GLRadialGradientLayout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/processors/GLSingleIntervalGradientColorizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/processors/GLTextureEffect.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/processors/GLTextureGradientColorizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/processors/GLTiledTextureEffect.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/processors/GLUnrolledBinaryGradientColorizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/processors/GLXfermodeFragmentProcessor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/qt/QGLDevice.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/qt/QGLHardwareBuffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/qt/QGLProcGetter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/qt/QGLWindow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/webgl/WebGLDevice.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/webgl/WebGLHardwareBuffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/webgl/WebGLProcGetter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/webgl/WebGLWindow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/wgl/WGLDevice.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/wgl/WGLHardwareBuffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/wgl/WGLInterface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/wgl/WGLPbufferDevice.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/wgl/WGLProcGetter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/wgl/WGLUtil.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/wgl/WGLWindow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/wgl/WGLWindowDevice.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/ops/AtlasTextOp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/ops/ClearOp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/ops/DrawOp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/ops/RRectDrawOp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/ops/RectDrawOp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/ops/ShapeDrawOp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/processors/AtlasTextGeometryProcessor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/processors/ClampedGradientEffect.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/processors/ComposeFragmentProcessor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/processors/ConicGradientLayout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/processors/ConstColorProcessor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/processors/DefaultGeometryProcessor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/processors/DeviceSpaceTextureEffect.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/processors/DiamondGradientLayout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/processors/DualBlurFragmentProcessor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/processors/EllipseGeometryProcessor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/processors/EmptyXferProcessor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/processors/FragmentProcessor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/processors/GaussianBlur1DFragmentProcessor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/processors/GeometryProcessor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/processors/LinearGradientLayout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/processors/LumaFragmentProcessor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/processors/PorterDuffXferProcessor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/processors/QuadPerEdgeAAGeometryProcessor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/processors/RadialGradientLayout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/processors/TextureEffect.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/processors/TiledTextureEffect.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/processors/UnrolledBinaryGradientColorizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/processors/XfermodeFragmentProcessor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/proxies/BackendTextureRenderTargetProxy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/proxies/DefaultTextureProxy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/proxies/HardwareRenderTargetProxy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/proxies/RenderTargetProxy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/proxies/TextureRenderTargetProxy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/tasks/GPUBufferUploadTask.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/tasks/GenerateMipmapsTask.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/tasks/OpsRenderTask.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/tasks/RenderTargetCopyTask.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/tasks/ResourceTask.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/tasks/RuntimeDrawTask.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/tasks/ShapeBufferUploadTask.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/gpu/tasks/TextureUploadTask.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/layers/BackgroundContext.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/layers/DisplayList.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/layers/Gradient.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/layers/ImageLayer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/layers/ImagePattern.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/layers/Layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/layers/LayerProperty.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/layers/LayerRecorder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/layers/LayerViewer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/layers/LayerViewerManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/layers/RegionTransformer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/layers/RootLayer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/layers/ShapeLayer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/layers/ShapeStyle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/layers/SolidColor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/layers/SolidLayer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/layers/TextLayer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/layers/TileCache.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/layers/TileCacheSIMD.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/layers/contents/ForegroundContent.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/layers/contents/RasterizedContent.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/layers/filters/BlendFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/layers/filters/BlurFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/layers/filters/ColorMatrixFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/layers/filters/DropShadowFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/layers/filters/InnerShadowFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/layers/filters/LayerFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/layers/layerstyles/BackgroundBlurStyle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/layers/layerstyles/DropShadowStyle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/layers/layerstyles/InnerShadowStyle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/layers/layerstyles/LayerStyle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/platform/ImageReader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/platform/Print.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/platform/android/AHardwareBufferFunctions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/platform/android/AndroidBitmap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/platform/android/HandlerThread.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/platform/android/HardwareBuffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/platform/android/JNIEnvironment.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/platform/android/JNIInit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/platform/android/JNIUtil.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/platform/android/NativeCodec.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/platform/android/NativeImageBuffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/platform/android/Print.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/platform/android/SurfaceTexture.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/platform/android/SurfaceTextureReader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/platform/mock/HardwareBuffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/platform/mock/NativeCodec.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/platform/ohos/ExternalOESBuffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/platform/ohos/HardwareBuffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/platform/ohos/NativeCodec.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/platform/ohos/OHOSImageInfo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/platform/ohos/OHOSPixelMap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/platform/ohos/Print.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/platform/web/HardwareBuffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/platform/web/NativeCodec.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/platform/web/TGFXWasmBindings.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/platform/web/VideoElement.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/platform/web/VideoElementReader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/platform/web/WebImageBuffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/platform/web/WebImageInfo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/serialization/ColorSerialization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/serialization/LayerFilterSerialization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/serialization/LayerSerialization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/serialization/LayerStyleSerialization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/serialization/MatrixSerialization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/serialization/PictureSerialization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/serialization/PointSerialization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/serialization/RecordedContentSerialization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/serialization/RectSerialization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/serialization/SerilaizationUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/svg/ElementWriter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/svg/SVGAttribute.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/svg/SVGAttributeParser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/svg/SVGDOM.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/svg/SVGExportContext.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/svg/SVGExporter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/svg/SVGFilterContext.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/svg/SVGLengthContext.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/svg/SVGNodeConstructor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/svg/SVGParseColor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/svg/SVGPathParser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/svg/SVGRenderContext.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/svg/SVGTextBuilder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/svg/SVGUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/svg/TextShaper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/svg/node/SVGCircle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/svg/node/SVGClipPath.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/svg/node/SVGContainer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/svg/node/SVGEllipse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/svg/node/SVGFe.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/svg/node/SVGFeBlend.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/svg/node/SVGFeColorMatrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/svg/node/SVGFeComponentTransfer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/svg/node/SVGFeComposite.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/svg/node/SVGFeDisplacementMap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/svg/node/SVGFeGaussianBlur.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/svg/node/SVGFeImage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/svg/node/SVGFeLightSource.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/svg/node/SVGFeLighting.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/svg/node/SVGFeMerge.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/svg/node/SVGFeMorphology.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/svg/node/SVGFeOffset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/svg/node/SVGFeTurbulence.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/svg/node/SVGFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/svg/node/SVGGradient.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/svg/node/SVGImage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/svg/node/SVGLine.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/svg/node/SVGLinearGradient.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/svg/node/SVGMask.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/svg/node/SVGNode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/svg/node/SVGPath.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/svg/node/SVGPattern.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/svg/node/SVGPoly.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/svg/node/SVGRadialGradient.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/svg/node/SVGRect.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/svg/node/SVGRoot.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/svg/node/SVGShape.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/svg/node/SVGStop.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/svg/node/SVGText.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/svg/node/SVGTransformableNode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/svg/node/SVGUse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/svg/xml/DOMParser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/svg/xml/XMLDOM.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/svg/xml/XMLParser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/src/svg/xml/XMLWriter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/test/src/CanvasTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/test/src/CornerPinEffect.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/test/src/DataViewTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/test/src/DrawersTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/test/src/DstTextureTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/test/src/FilterTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/test/src/GLUtilTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/test/src/LayerTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/test/src/MaskTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/test/src/ReadPixelsTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/test/src/ResourceCacheTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/test/src/SVGExportTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/test/src/SVGRenderTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/test/src/SurfaceTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/test/src/TaskTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/test/src/TextAlignTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/test/src/TypefaceTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/test/src/base/TGFXTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/test/src/base/TestEnvironment.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/test/src/base/TestMain.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/test/src/utils/Baseline.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/test/src/utils/ContextScope.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/test/src/utils/DevicePool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/test/src/utils/FilterProgram.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/test/src/utils/ProjectPath.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/test/src/utils/Semaphore.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/test/src/utils/TestUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/test/src/utils/TextShaper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/web/demo/src/TGFXBaseView.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/web/demo/src/TGFXThreadsView.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/web/demo/src/TGFXView.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/web/demo/src/binding.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/win/src/TGFXWindow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tgfx/win/src/main.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/android/app/src/main/cpp/JTGFXView.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/drawers/include/drawers/AppHost.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/drawers/include/drawers/Drawer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/drawers/src/base/Drawers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/drawers/src/base/LayerTreeDrawer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/drawers/src/base/LayerTreeDrawers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/drawers/src/layertree/CustomLayer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/drawers/src/layertree/SimpleLayerTree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/AlphaType.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/Bitmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/BlendMode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/Buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/BytesKey.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/Canvas.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/Clock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/Color.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/ColorFilter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/ColorType.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/CustomTypeface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/Data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/DataView.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/EncodedFormat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/Fill.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/FillModifier.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/Font.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/FontMetrics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/FontStyle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/GlyphRun.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/GradientType.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/Image.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/ImageBuffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/ImageCodec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/ImageFilter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/ImageGenerator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/ImageInfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/MaskFilter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/Matrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/Orientation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/Paint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/Path.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/PathEffect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/PathMeasure.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/PathProvider.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/PathTypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/Picture.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/Pixmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/Point.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/RRect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/Recorder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/Rect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/RenderFlags.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/SamplingOptions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/Shader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/Shape.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/Size.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/Stream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/Stroke.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/Surface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/Task.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/TextBlob.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/TileMode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/Typeface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/UTF.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/WriteStream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/YUVColorSpace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/core/YUVData.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/debug/LayerViewer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/gpu/Backend.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/gpu/Caps.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/gpu/Context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/gpu/Device.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/gpu/ImageOrigin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/gpu/PixelFormat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/gpu/RuntimeEffect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/gpu/RuntimeProgram.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/gpu/Window.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/gpu/metal/MtlTypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/gpu/opengl/GLDefines.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/gpu/opengl/GLDevice.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/gpu/opengl/GLFunctions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/gpu/opengl/GLTypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/gpu/opengl/cgl/CGLDevice.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/gpu/opengl/cgl/CGLWindow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/gpu/opengl/eagl/EAGLDevice.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/gpu/opengl/eagl/EAGLWindow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/gpu/opengl/egl/EGLDevice.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/gpu/opengl/egl/EGLGlobals.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/gpu/opengl/egl/EGLWindow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/gpu/opengl/qt/QGLDevice.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/gpu/opengl/qt/QGLWindow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/gpu/opengl/webgl/WebGLDevice.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/gpu/opengl/webgl/WebGLWindow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/gpu/opengl/wgl/WGLDevice.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/gpu/opengl/wgl/WGLWindow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/layers/DisplayList.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/layers/Gradient.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/layers/ImageLayer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/layers/ImagePattern.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/layers/Layer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/layers/LayerMaskType.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/layers/LayerProperty.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/layers/LayerRecorder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/layers/LayerType.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/layers/ShapeLayer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/layers/ShapeStyle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/layers/SolidColor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/layers/SolidLayer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/layers/TextAlign.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/layers/TextLayer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/layers/filters/BlendFilter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/layers/filters/BlurFilter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/layers/filters/ColorMatrixFilter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/layers/filters/DropShadowFilter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/layers/filters/InnerShadowFilter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/layers/filters/LayerFilter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/layers/layerstyles/BackgroundBlurStyle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/layers/layerstyles/DropShadowStyle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/layers/layerstyles/InnerShadowStyle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/layers/layerstyles/LayerStyle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/platform/HardwareBuffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/platform/ImageReader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/platform/NativeImage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/platform/Print.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/platform/android/AndroidBitmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/platform/android/Global.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/platform/android/HardwareBufferJNI.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/platform/android/JNIEnvironment.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/platform/android/SurfaceTextureReader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/platform/apple/CTTypeface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/platform/ohos/OHOSPixelMap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/platform/web/VideoElementReader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/svg/SVGAttribute.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/svg/SVGDOM.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/svg/SVGExporter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/svg/SVGLengthContext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/svg/SVGPathParser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/svg/SVGTypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/svg/SVGValue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/svg/TextShaper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/svg/node/SVGCircle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/svg/node/SVGClipPath.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/svg/node/SVGContainer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/svg/node/SVGDefs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/svg/node/SVGEllipse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/svg/node/SVGFe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/svg/node/SVGFeBlend.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/svg/node/SVGFeColorMatrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/svg/node/SVGFeComponentTransfer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/svg/node/SVGFeComposite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/svg/node/SVGFeDisplacementMap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/svg/node/SVGFeFlood.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/svg/node/SVGFeGaussianBlur.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/svg/node/SVGFeImage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/svg/node/SVGFeLightSource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/svg/node/SVGFeLighting.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/svg/node/SVGFeMerge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/svg/node/SVGFeMorphology.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/svg/node/SVGFeOffset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/svg/node/SVGFeTurbulence.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/svg/node/SVGFilter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/svg/node/SVGGradient.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/svg/node/SVGGroup.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/svg/node/SVGHiddenContainer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/svg/node/SVGImage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/svg/node/SVGLine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/svg/node/SVGLinearGradient.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/svg/node/SVGMask.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/svg/node/SVGNode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/svg/node/SVGPath.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/svg/node/SVGPattern.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/svg/node/SVGPoly.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/svg/node/SVGRadialGradient.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/svg/node/SVGRect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/svg/node/SVGRoot.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/svg/node/SVGShape.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/svg/node/SVGStop.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/svg/node/SVGText.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/svg/node/SVGTransformableNode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/svg/node/SVGUse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/include/tgfx/svg/xml/XMLDOM.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/inspector/client/include/Define.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/inspector/client/src/LayerProfiler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/inspector/client/src/TCPPortProvider.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/inspector/common/LayerInspectorProtocol.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/inspector/common/ProcessUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/inspector/common/Protocol.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/inspector/common/Socket.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/inspector/common/TimeUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/ios/Hello2D/AppDelegate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/ios/Hello2D/SceneDelegate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/ios/Hello2D/TGFXView.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/ios/Hello2D/ViewController.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/mac/Hello2D/AppDelegate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/mac/Hello2D/TGFXView.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/mac/Hello2D/ViewController.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/mac/Hello2D/WindowController.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/ohos/hello2d/src/main/cpp/DisplayLink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/qt/src/TGFXView.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/AdaptiveDashEffect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/Atlas.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/AtlasCell.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/AtlasCellDecodeTask.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/AtlasManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/AtlasTypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/BoxFilterDownsample.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/BoxFilterDownsampleSIMD.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/CanvasState.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/DataSource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/DrawContext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/GlyphRasterizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/GlyphRunList.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/HitTestContext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/ImageSource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/ImageUserTypeface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/MCState.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/MeasureContext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/PathRasterizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/PathRef.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/PathTriangulator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/PathUserTypeface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/PixelBuffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/PixelBufferCodec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/PixelRef.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/PlaybackContext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/RawPixelCodec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/RecordingContext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/Records.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/RectPackSkyline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/ScaledImageGenerator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/ScalerContext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/ShapeRasterizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/TrimPathEffect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/UserScalerContext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/UserTypeface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/codecs/jpeg/JpegCodec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/codecs/png/PngCodec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/codecs/webp/WebpCodec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/codecs/webp/WebpUtility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/filters/AlphaThresholdColorFilter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/filters/BlurImageFilter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/filters/ColorImageFilter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/filters/ComposeColorFilter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/filters/ComposeImageFilter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/filters/DropShadowImageFilter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/filters/DualBlurImageFilter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/filters/GaussianBlurImageFilter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/filters/InnerShadowImageFilter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/filters/LumaColorFilter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/filters/MatrixColorFilter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/filters/ModeColorFilter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/filters/RuntimeImageFilter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/filters/ShaderMaskFilter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/images/BufferImage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/images/CodecImage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/images/DecodedImage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/images/FilterImage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/images/GeneratorImage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/images/OrientImage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/images/PictureImage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/images/PixelImage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/images/RGBAAAImage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/images/RasterizedImage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/images/ScaledImage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/images/SubsetImage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/images/TextureImage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/images/TransformImage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/shaders/BlendShader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/shaders/ColorFilterShader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/shaders/ColorShader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/shaders/GradientShader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/shaders/ImageShader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/shaders/MatrixShader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/shapes/AppendShape.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/shapes/EffectShape.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/shapes/GlyphShape.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/shapes/InverseShape.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/shapes/MatrixShape.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/shapes/MergeShape.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/shapes/PathShape.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/shapes/ProviderShape.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/shapes/StrokeShape.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/shapes/TextShape.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/shapes/UniqueKeyShape.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/utils/AddressOf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/utils/Algin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/utils/ApplyStrokeToBounds.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/utils/BlockBuffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/utils/ClearPixels.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/utils/DecomposeRects.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/utils/EnumHasher.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/utils/FauxBoldScale.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/utils/GammaCorrection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/utils/GlyphConverter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/utils/HashRange.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/utils/LazyBounds.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/utils/Log.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/utils/MathExtra.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/utils/OrientationHelper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/utils/PixelFormatUtil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/utils/PlacementArray.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/utils/PlacementPtr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/utils/Profiling.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/utils/RectToRectMatrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/utils/SlidingWindowTracker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/utils/TaskGroup.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/utils/Types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/utils/USE.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/utils/UniqueID.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/utils/WeakMap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/vectors/coregraphics/CGPathRasterizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/vectors/coregraphics/CGScalerContext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/vectors/coregraphics/CGTypeface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/vectors/freetype/FTFontData.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/vectors/freetype/FTLibrary.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/vectors/freetype/FTPath.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/vectors/freetype/FTPathRasterizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/vectors/freetype/FTRasterTarget.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/vectors/freetype/FTScalerContext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/vectors/freetype/FTTypeface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/vectors/freetype/FTUtil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/vectors/freetype/SystemFont.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/vectors/web/ReadPixelsFromCanvasImage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/vectors/web/WebPathRasterizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/vectors/web/WebScalerContext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/core/vectors/web/WebTypeface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/AAType.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/BackingFit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/BitmaskOperators.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/Blend.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/CommandBuffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/CommandEncoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/CommandQueue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/CoordTransform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/DefaultTextureView.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/DrawingManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/FragmentShaderBuilder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/GPU.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/GPUBuffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/GPUTexture.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/GlobalCache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/GradientGenerator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/IndexBuffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/OpsCompositor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/Pipeline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/Program.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/ProgramBuilder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/ProgramCreator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/ProxyProvider.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/Quad.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/RRectsVertexProvider.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/RectsVertexProvider.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/RenderContext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/RenderPass.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/RenderTarget.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/Resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/ResourceCache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/ResourceKey.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/RuntimeProgramCreator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/RuntimeProgramWrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/SLType.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/SamplerHandle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/SamplerState.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/SamplingArgs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/Semaphore.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/ShaderBuilder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/ShaderVar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/Swizzle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/TPArgs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/TextureView.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/UniformBuffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/UniformHandler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/UniqueDomain.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/VaryingHandler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/VertexBuffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/VertexProvider.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/VertexShaderBuilder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/YUVFormat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/YUVTextureView.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/GLAssembledGLESInterface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/GLAssembledGLInterface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/GLAssembledWebGLInterface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/GLBackendRenderTarget.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/GLBlend.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/GLBuffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/GLCaps.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/GLCommandEncoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/GLCommandQueue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/GLFragmentShaderBuilder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/GLGPU.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/GLInterface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/GLProcGetter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/GLProgram.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/GLProgramBuilder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/GLRenderPass.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/GLRenderTarget.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/GLSemaphore.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/GLStandard.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/GLTexture.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/GLTextureRenderTarget.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/GLUniformBuffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/GLUniformHandler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/GLUtil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/GLVertexArray.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/GLVertexShaderBuilder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/cgl/CGLHardwareTexture.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/cgl/CGLProcGetter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/eagl/EAGLHardwareTexture.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/eagl/EAGLProcGetter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/egl/EGLDisplayWrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/egl/EGLHardwareTexture.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/egl/EGLProcGetter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/processors/GLAARectEffect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/processors/GLAlphaThresholdFragmentProcessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/processors/GLAtlasTextGeometryProcessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/processors/GLClampedGradientEffect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/processors/GLColorMatrixFragmentProcessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/processors/GLComposeFragmentProcessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/processors/GLConicGradientLayout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/processors/GLConstColorProcessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/processors/GLDefaultGeometryProcessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/processors/GLDeviceSpaceTextureEffect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/processors/GLDiamondGradientLayout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/processors/GLDualBlurFragmentProcessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/processors/GLDualIntervalGradientColorizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/processors/GLEllipseGeometryProcessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/processors/GLEmptyXferProcessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/processors/GLGaussianBlur1DFragmentProcessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/processors/GLLinearGradientLayout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/processors/GLLumaFragmentProcessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/processors/GLPorterDuffXferProcessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/processors/GLQuadPerEdgeAAGeometryProcessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/processors/GLRadialGradientLayout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/processors/GLSingleIntervalGradientColorizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/processors/GLTextureEffect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/processors/GLTextureGradientColorizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/processors/GLTiledTextureEffect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/processors/GLUnrolledBinaryGradientColorizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/processors/GLXfermodeFragmentProcessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/qt/QGLProcGetter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/webgl/WebGLProcGetter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/wgl/WGLInterface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/wgl/WGLPbufferDevice.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/wgl/WGLProcGetter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/wgl/WGLUtil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/opengl/wgl/WGLWindowDevice.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/ops/AtlasTextOp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/ops/ClearOp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/ops/DrawOp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/ops/Op.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/ops/RRectDrawOp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/ops/RectDrawOp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/ops/ShapeDrawOp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/processors/AARectEffect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/processors/AlphaThresholdFragmentProcessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/processors/AtlasTextGeometryProcessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/processors/ClampedGradientEffect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/processors/ColorMatrixFragmentProcessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/processors/ComposeFragmentProcessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/processors/ConicGradientLayout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/processors/ConstColorProcessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/processors/DefaultGeometryProcessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/processors/DeviceSpaceTextureEffect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/processors/DiamondGradientLayout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/processors/DualBlurFragmentProcessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/processors/DualIntervalGradientColorizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/processors/EllipseGeometryProcessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/processors/EmptyXferProcessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/processors/FragmentProcessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/processors/GaussianBlur1DFragmentProcessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/processors/GeometryProcessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/processors/LinearGradientLayout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/processors/LumaFragmentProcessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/processors/PorterDuffXferProcessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/processors/Processor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/processors/QuadPerEdgeAAGeometryProcessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/processors/RadialGradientLayout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/processors/SingleIntervalGradientColorizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/processors/TextureEffect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/processors/TextureGradientColorizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/processors/TiledTextureEffect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/processors/UnrolledBinaryGradientColorizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/processors/XferProcessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/processors/XfermodeFragmentProcessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/proxies/BackendTextureRenderTargetProxy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/proxies/DefaultTextureProxy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/proxies/GPUShapeProxy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/proxies/HardwareRenderTargetProxy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/proxies/IndexBufferProxy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/proxies/RenderTargetProxy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/proxies/ResourceProxy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/proxies/TextureProxy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/proxies/TextureRenderTargetProxy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/proxies/VertexBufferProxy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/proxies/VertexBufferProxyView.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/tasks/GPUBufferUploadTask.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/tasks/GenerateMipmapsTask.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/tasks/OpsRenderTask.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/tasks/RenderTargetCopyTask.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/tasks/RenderTask.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/tasks/ResourceTask.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/tasks/RuntimeDrawTask.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/tasks/SemaphoreWaitTask.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/tasks/ShapeBufferUploadTask.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/gpu/tasks/TextureUploadTask.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/layers/BackgroundContext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/layers/DrawArgs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/layers/LayerViewerManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/layers/OpaqueThreshold.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/layers/RegionTransformer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/layers/RootLayer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/layers/TileCache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/layers/contents/ContourContent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/layers/contents/DefaultContent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/layers/contents/ForegroundContent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/layers/contents/LayerContent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/layers/contents/RasterizedContent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/platform/ImageStream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/platform/android/AHardwareBufferFunctions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/platform/android/HandlerThread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/platform/android/JNIInit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/platform/android/JNIUtil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/platform/android/NativeCodec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/platform/android/NativeImageBuffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/platform/android/SurfaceTexture.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/platform/apple/BitmapContextUtil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/platform/apple/NV12HardwareBuffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/platform/apple/NativeCodec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/platform/ohos/ExternalOESBuffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/platform/ohos/NativeCodec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/platform/ohos/OHOSImageInfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/platform/web/NativeCodec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/platform/web/TGFXWasmBindings.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/platform/web/VideoElement.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/platform/web/WebImageBuffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/platform/web/WebImageInfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/serialization/ColorSerialization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/serialization/LayerFilterSerialization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/serialization/LayerSerialization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/serialization/LayerStyleSerialization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/serialization/MatrixSerialization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/serialization/PictureSerialization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/serialization/PointSerialization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/serialization/RecordedContentSerialization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/serialization/RectSerialization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/serialization/SerializationUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/svg/ElementWriter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/svg/ResourceStore.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/svg/SVGAttributeParser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/svg/SVGExportContext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/svg/SVGFilterContext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/svg/SVGNodeConstructor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/svg/SVGRenderContext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/svg/SVGTextBuilder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/svg/SVGUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/svg/xml/DOMParser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/svg/xml/XMLParser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/src/svg/xml/XMLWriter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/test/src/CornerPinEffect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/test/src/base/TGFXTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/test/src/base/TestEnvironment.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/test/src/utils/Baseline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/test/src/utils/ContextScope.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/test/src/utils/DevicePool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/test/src/utils/FilterProgram.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/test/src/utils/ProjectPath.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/test/src/utils/Semaphore.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/test/src/utils/TestUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/test/src/utils/TextShaper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/test/src/utils/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/CL/cl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/CL/cl_d3d10.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/CL/cl_d3d11.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/CL/cl_dx9_media_sharing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/CL/cl_dx9_media_sharing_intel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/CL/cl_egl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/CL/cl_ext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/CL/cl_ext_intel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/CL/cl_function_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/CL/cl_gl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/CL/cl_gl_ext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/CL/cl_half.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/CL/cl_icd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/CL/cl_layer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/CL/cl_platform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/CL/cl_va_api_media_sharing_intel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/CL/cl_version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/CL/opencl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/EGL/egl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/EGL/eglext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/EGL/eglext_angle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/EGL/eglplatform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/GLES/egl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/GLES/gl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/GLES/glext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/GLES/glplatform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/GLES2/gl2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/GLES2/gl2ext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/GLES2/gl2ext_angle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/GLES2/gl2platform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/GLES3/gl3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/GLES3/gl31.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/GLES3/gl32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/GLES3/gl3platform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/GLSLANG/ShaderLang.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/GLSLANG/ShaderVars.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/GLX/glxext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/KHR/khrplatform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/WGL/wgl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/angle_cl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/angle_gl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/angle_windowsstore.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/export.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/platform/Feature.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/platform/PlatformMethods.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/platform/autogen/FeaturesD3D_autogen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/platform/autogen/FeaturesGL_autogen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/platform/autogen/FeaturesMtl_autogen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/platform/autogen/FeaturesVk_autogen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/platform/autogen/FrontendFeatures_autogen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/vulkan/vulkan_fuchsia_ext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/swiftshader/include/Android/android/api-level.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/swiftshader/include/Android/android/sync.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/swiftshader/include/Android/cutils/native_handle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/swiftshader/include/Android/hardware/gralloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/swiftshader/include/Android/hardware/gralloc1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/swiftshader/include/Android/hardware/hardware.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/swiftshader/include/Android/nativebase/nativebase.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/swiftshader/include/Android/sync/sync.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/swiftshader/include/Android/system/graphics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/swiftshader/include/Android/vndk/window.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/swiftshader/include/EGL/egl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/swiftshader/include/EGL/eglext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/swiftshader/include/EGL/eglplatform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/swiftshader/include/GL/glcorearb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/swiftshader/include/GL/glext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/swiftshader/include/GL/glxext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/swiftshader/include/GL/wglext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/swiftshader/include/GLES/gl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/swiftshader/include/GLES/glext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/swiftshader/include/GLES/glplatform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/swiftshader/include/GLES2/gl2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/swiftshader/include/GLES2/gl2ext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/swiftshader/include/GLES2/gl2platform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/swiftshader/include/GLES3/gl3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/swiftshader/include/GLES3/gl3platform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/swiftshader/include/KHR/khrplatform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/swiftshader/include/vulkan/vk_google_filtering_precision.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/swiftshader/include/vulkan/vk_icd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/swiftshader/include/vulkan/vk_layer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/swiftshader/include/vulkan/vk_platform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/swiftshader/include/vulkan/vk_sdk_platform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/swiftshader/include/vulkan/vulkan.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/swiftshader/include/vulkan/vulkan.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/swiftshader/include/vulkan/vulkan_android.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/swiftshader/include/vulkan/vulkan_beta.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/swiftshader/include/vulkan/vulkan_core.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/swiftshader/include/vulkan/vulkan_directfb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/swiftshader/include/vulkan/vulkan_fuchsia.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/swiftshader/include/vulkan/vulkan_fuchsia_extras.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/swiftshader/include/vulkan/vulkan_ggp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/swiftshader/include/vulkan/vulkan_ios.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/swiftshader/include/vulkan/vulkan_macos.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/swiftshader/include/vulkan/vulkan_metal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/swiftshader/include/vulkan/vulkan_screen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/swiftshader/include/vulkan/vulkan_vi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/swiftshader/include/vulkan/vulkan_wayland.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/swiftshader/include/vulkan/vulkan_win32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/swiftshader/include/vulkan/vulkan_xcb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/swiftshader/include/vulkan/vulkan_xlib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/vendor/swiftshader/include/vulkan/vulkan_xlib_xrandr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/web/demo/src/TGFXBaseView.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/web/demo/src/TGFXThreadsView.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/web/demo/src/TGFXView.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tgfx/win/src/TGFXWindow.h" />
+    <Font Include="../../thirdparty/owemdjee/tgfx/resources/font/NotoColorEmoji.ttf" />
+    <Font Include="../../thirdparty/owemdjee/tgfx/resources/font/NotoSansSC-Regular.otf" />
+    <Font Include="../../thirdparty/owemdjee/tgfx/resources/font/NotoSerifSC-Regular.otf" />
+    <Image Include="../../thirdparty/owemdjee/tgfx/android/app/src/main/ic_launcher-playstore.png" />
+    <Image Include="../../thirdparty/owemdjee/tgfx/ios/Hello2D/Assets.xcassets/AppIcon.appiconset/tgfx.png" />
+    <Image Include="../../thirdparty/owemdjee/tgfx/mac/Hello2D/Assets.xcassets/AppIcon.appiconset/tgfx.png" />
+    <Image Include="../../thirdparty/owemdjee/tgfx/ohos/AppScope/resources/base/media/app_icon.png" />
+    <Image Include="../../thirdparty/owemdjee/tgfx/ohos/hello2d/src/main/resources/base/media/background.png" />
+    <Image Include="../../thirdparty/owemdjee/tgfx/ohos/hello2d/src/main/resources/base/media/foreground.png" />
+    <Image Include="../../thirdparty/owemdjee/tgfx/ohos/hello2d/src/main/resources/base/media/startIcon.png" />
+    <Image Include="../../thirdparty/owemdjee/tgfx/ohos/hello2d/src/main/resources/base/media/tgfx.png" />
+    <Image Include="../../thirdparty/owemdjee/tgfx/ohos/hello2d/src/main/resources/rawfile/bridge.jpg" />
+    <Image Include="../../thirdparty/owemdjee/tgfx/qt/images/tgfx.png" />
+    <Image Include="../../thirdparty/owemdjee/tgfx/resources/apitest/cmyk.jpg" />
+    <Image Include="../../thirdparty/owemdjee/tgfx/resources/apitest/imageReplacement.jpg" />
+    <Image Include="../../thirdparty/owemdjee/tgfx/resources/apitest/imageReplacement.png" />
+    <Image Include="../../thirdparty/owemdjee/tgfx/resources/apitest/image_as_mask.png" />
+    <Image Include="../../thirdparty/owemdjee/tgfx/resources/apitest/rgbaaa.png" />
+    <Image Include="../../thirdparty/owemdjee/tgfx/resources/apitest/rotation.jpg" />
+    <Image Include="../../thirdparty/owemdjee/tgfx/resources/apitest/test_timestretch.png" />
+    <Image Include="../../thirdparty/owemdjee/tgfx/resources/assets/GenMesh.png" />
+    <Image Include="../../thirdparty/owemdjee/tgfx/resources/assets/HappyNewYear.png" />
+    <Image Include="../../thirdparty/owemdjee/tgfx/resources/assets/bridge.jpg" />
+    <Image Include="../../thirdparty/owemdjee/tgfx/resources/assets/glyph1.png" />
+    <Image Include="../../thirdparty/owemdjee/tgfx/resources/assets/glyph2.png" />
+    <Image Include="../../thirdparty/owemdjee/tgfx/resources/assets/glyph3.png" />
+    <Image Include="../../thirdparty/owemdjee/tgfx/resources/readme/TGFX.jpg" />
+    <Image Include="../../thirdparty/owemdjee/tgfx/win/images/tgfx.ico" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/tgfx/win/app.rc" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/CODEOWNERS" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/CPPLINT.cfg" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/DEPS" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/android/app/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/android/app/build.gradle.kts" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/android/build.gradle.kts" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/android/gradle.properties" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/android/gradle/wrapper/gradle-wrapper.jar" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/android/gradle/wrapper/gradle-wrapper.properties" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/android/gradlew" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/android/gradlew.bat" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/android/settings.gradle.kts" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/autotest.sh" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/build_tgfx" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/build_vendor" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/codecov.sh" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/codeformat.sh" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/inspector/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/install_tools.sh" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/ios/Hello2D/Assets.xcassets/AccentColor.colorset/Contents.json" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/ios/Hello2D/Assets.xcassets/AppIcon.appiconset/Contents.json" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/ios/Hello2D/Assets.xcassets/Contents.json" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/ios/gen_ios" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/ios/gen_simulator" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/linux/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/mac/Hello2D/Assets.xcassets/AppIcon.appiconset/Contents.json" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/mac/Hello2D/Assets.xcassets/Contents.json" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/mac/Hello2D/Hello2D.entitlements" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/mac/gen_mac" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/ohos/AppScope/app.json5" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/ohos/AppScope/resources/base/element/string.json" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/ohos/build-profile.json5" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/ohos/hello2d/build-profile.json5" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/ohos/hello2d/hvigorfile.ts" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/ohos/hello2d/obfuscation-rules.txt" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/ohos/hello2d/oh-package-lock.json5" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/ohos/hello2d/oh-package.json5" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/ohos/hello2d/src/main/cpp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/ohos/hello2d/src/main/cpp/types/libhello2d/Index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/ohos/hello2d/src/main/cpp/types/libhello2d/oh-package.json5" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/ohos/hello2d/src/main/ets/hello2dability/Hello2dAbility.ets" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/ohos/hello2d/src/main/ets/hello2dbackupability/Hello2dBackupAbility.ets" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/ohos/hello2d/src/main/ets/pages/Index.ets" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/ohos/hello2d/src/main/module.json5" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/ohos/hello2d/src/main/resources/base/element/color.json" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/ohos/hello2d/src/main/resources/base/element/string.json" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/ohos/hello2d/src/main/resources/base/media/layered_image.json" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/ohos/hello2d/src/main/resources/base/profile/backup_config.json" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/ohos/hello2d/src/main/resources/base/profile/main_pages.json" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/ohos/hello2d/src/main/resources/en_US/element/string.json" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/ohos/hello2d/src/main/resources/zh_CN/element/string.json" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/ohos/hello2d/src/mock/Libhello2d.mock.ets" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/ohos/hello2d/src/mock/mock-config.json5" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/ohos/hello2d/src/ohosTest/ets/test/Ability.test.ets" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/ohos/hello2d/src/ohosTest/ets/test/List.test.ets" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/ohos/hello2d/src/ohosTest/module.json5" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/ohos/hello2d/src/test/List.test.ets" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/ohos/hello2d/src/test/LocalUnit.test.ets" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/ohos/hvigor/hvigor-config.json5" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/ohos/hvigorfile.ts" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/ohos/oh-package-lock.json5" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/ohos/oh-package.json5" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/qt/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/qt/qml/Main.qml" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/resources/apitest/SVG/blur.svg" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/resources/apitest/SVG/complex1.svg" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/resources/apitest/SVG/complex2.svg" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/resources/apitest/SVG/complex3.svg" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/resources/apitest/SVG/complex4.svg" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/resources/apitest/SVG/complex5.svg" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/resources/apitest/SVG/complex6.svg" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/resources/apitest/SVG/complex7.svg" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/resources/apitest/SVG/drawImageRect.svg" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/resources/apitest/SVG/emoji.svg" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/resources/apitest/SVG/jpg.svg" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/resources/apitest/SVG/mask.svg" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/resources/apitest/SVG/path.svg" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/resources/apitest/SVG/png.svg" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/resources/apitest/SVG/radialGradient.svg" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/resources/apitest/SVG/refStyle.svg" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/resources/apitest/SVG/text.svg" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/resources/apitest/SVG/textFont.svg" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/resources/apitest/mask_gradient.svg" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/resources/apitest/mask_image.svg" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/resources/apitest/mask_invert_picture_image.svg" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/resources/apitest/mask_picture_image.svg" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/sync_deps.sh" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/test/baseline/version.json" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/tgfx.hash" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/update_baseline.sh" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/vendor.json" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/CL/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/GLES/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/platform/d3d_features.json" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/platform/frontend_features.json" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/platform/gen_features.py" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/platform/gl_features.json" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/platform/mtl_features.json" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/vendor/angle/include/platform/vk_features.json" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/vendor/angle/win/x64/libEGL.dll" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/vendor/angle/win/x64/libGLESv2.dll" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/vendor/angle/win/x86/libEGL.dll" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/vendor/angle/win/x86/libGLESv2.dll" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/vendor/swiftshader/win/x64/libEGL.dll" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/vendor/swiftshader/win/x64/libGLESv2.dll" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/vendor/swiftshader/win/x86/libEGL.dll" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/vendor/swiftshader/win/x86/libGLESv2.dll" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/web/demo/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/web/demo/common.ts" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/web/demo/hello2d.hash" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/web/demo/index-st.html" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/web/demo/index-st.ts" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/web/demo/index.css" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/web/demo/index.html" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/web/demo/index.ts" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/web/package.json" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/web/script/cmake.demo.js" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/web/script/rollup.demo.js" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/web/script/rollup.dev.js" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/web/script/rollup.tgfx.js" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/web/server.js" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/web/src/binding.ts" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/web/src/constant.ts" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/web/src/core/bitmap-image.ts" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/web/src/core/matrix.ts" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/web/src/core/path-rasterizer.ts" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/web/src/core/scaler-context.ts" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/web/src/tgfx-module.ts" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/web/src/tgfx.ts" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/web/src/types.ts" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/web/src/utils/canvas.ts" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/web/src/utils/decorators.ts" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/web/src/utils/font-family.ts" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/web/src/utils/measure-text.ts" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/web/src/utils/type-utils.ts" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/web/src/utils/ua.ts" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/web/src/wechat/array-buffer-image.ts" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/web/src/wechat/binding.ts" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/web/src/wechat/canvas.ts" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/web/src/wechat/interfaces.ts" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/web/src/wechat/tgfx.ts" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/web/tsconfig.json" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/web/tsconfig.type.json" />
+    <Text Include="../../thirdparty/owemdjee/tgfx/win/CMakeLists.txt" />
+    <Xml Include="../../thirdparty/owemdjee/tgfx/android/app/src/main/AndroidManifest.xml" />
+    <Xml Include="../../thirdparty/owemdjee/tgfx/android/app/src/main/res/drawable/ic_launcher_background.xml" />
+    <Xml Include="../../thirdparty/owemdjee/tgfx/android/app/src/main/res/layout/activity_main.xml" />
+    <Xml Include="../../thirdparty/owemdjee/tgfx/android/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" />
+    <Xml Include="../../thirdparty/owemdjee/tgfx/android/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" />
+    <Xml Include="../../thirdparty/owemdjee/tgfx/android/app/src/main/res/values/colors.xml" />
+    <Xml Include="../../thirdparty/owemdjee/tgfx/android/app/src/main/res/values/strings.xml" />
+    <Xml Include="../../thirdparty/owemdjee/tgfx/android/app/src/main/res/values/themes.xml" />
+    <Xml Include="../../thirdparty/owemdjee/tgfx/android/app/src/main/res/xml/backup_rules.xml" />
+    <Xml Include="../../thirdparty/owemdjee/tgfx/android/app/src/main/res/xml/data_extraction_rules.xml" />
+  </ItemGroup>
+  <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+</Project>

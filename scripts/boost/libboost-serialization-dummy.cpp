@@ -1,4 +1,16 @@
 
+// fix ubiquitous warning C5204: 'boost::blah::blah<Blah>': class has virtual functions, but its trivial destructor is not virtual; instances of objects derived from this class may not be destructed correctly
+//
+// while this generally CAN/MAY be an issue, we brutally assume that the Boost Boys know their shit and NEVER make this mistake, i.e. the classes/structs in question are *implicitly `final`*!
+// To play it kinda safe, we apply this 'please shut up' fix to this dummy=see-if-we-can-compile-Ev'ryTing source file only:
+
+#if defined(_MSC_VER)
+#pragma warning(disable: 5204)
+
+// fix/shut up warning C4266: 'void boost::blah::blah::blah(...)': no override available for virtual member function from base 'boost::blah::blah'; function is hidden
+#pragma warning(disable: 4266)
+#endif
+
 #include <boost/archive/archive_exception.hpp>
 #include <boost/archive/basic_archive.hpp>
 #include <boost/archive/basic_binary_iarchive.hpp>
@@ -20,6 +32,7 @@
 #include <boost/archive/binary_wiarchive.hpp>
 #include <boost/archive/binary_woarchive.hpp>
 #include <boost/archive/codecvt_null.hpp>
+#include <boost/archive/dinkumware.hpp>
 #include <boost/archive/iterators/base64_exception.hpp>
 #include <boost/archive/iterators/base64_from_binary.hpp>
 #include <boost/archive/iterators/binary_from_base64.hpp>
@@ -71,8 +84,12 @@
 #include <boost/serialization/binary_object.hpp>
 #include <boost/serialization/bitset.hpp>
 #include <boost/serialization/boost_array.hpp>
+#include <boost/serialization/boost_unordered_map.hpp>
+#include <boost/serialization/boost_unordered_set.hpp>
 #include <boost/serialization/collection_size_type.hpp>
 #include <boost/serialization/collection_traits.hpp>
+#include <boost/serialization/collections_load_imp.hpp>
+#include <boost/serialization/collections_save_imp.hpp>
 #include <boost/serialization/complex.hpp>
 #include <boost/serialization/config.hpp>
 #include <boost/serialization/deque.hpp>
@@ -121,13 +138,18 @@
 #include <boost/serialization/traits.hpp>
 #include <boost/serialization/type_info_implementation.hpp>
 #include <boost/serialization/unique_ptr.hpp>
+#include <boost/serialization/unordered_collections_load_imp.hpp>
+#include <boost/serialization/unordered_collections_save_imp.hpp>
 #include <boost/serialization/unordered_map.hpp>
 #include <boost/serialization/unordered_set.hpp>
 #include <boost/serialization/utility.hpp>
 #include <boost/serialization/valarray.hpp>
+#include <boost/serialization/variant.hpp>
+#include <boost/serialization/variant2.hpp>
 #include <boost/serialization/vector.hpp>
-#include <boost/serialization/version.hpp>
+#include <boost/serialization/vector_135.hpp>
 #include <boost/serialization/void_cast.hpp>
+#include <boost/serialization/void_cast_fwd.hpp>
 #include <boost/serialization/weak_ptr.hpp>
 #include <boost/serialization/wrapper.hpp>
 

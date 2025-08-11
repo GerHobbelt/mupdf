@@ -1,4 +1,16 @@
 
+// fix ubiquitous warning C5204: 'boost::blah::blah<Blah>': class has virtual functions, but its trivial destructor is not virtual; instances of objects derived from this class may not be destructed correctly
+//
+// while this generally CAN/MAY be an issue, we brutally assume that the Boost Boys know their shit and NEVER make this mistake, i.e. the classes/structs in question are *implicitly `final`*!
+// To play it kinda safe, we apply this 'please shut up' fix to this dummy=see-if-we-can-compile-Ev'ryTing source file only:
+
+#if defined(_MSC_VER)
+#pragma warning(disable: 5204)
+
+// fix/shut up warning C4266: 'void boost::blah::blah::blah(...)': no override available for virtual member function from base 'boost::blah::blah'; function is hidden
+#pragma warning(disable: 4266)
+#endif
+
 #include <boost/graph/adj_list_serialize.hpp>
 #include <boost/graph/adjacency_iterator.hpp>
 #include <boost/graph/adjacency_list.hpp>
@@ -34,12 +46,14 @@
 #include <boost/graph/dijkstra_shortest_paths_no_color_map.hpp>
 #include <boost/graph/dimacs.hpp>
 #include <boost/graph/directed_graph.hpp>
+#include <boost/graph/dll_import_export.hpp>
 #include <boost/graph/dominator_tree.hpp>
 #include <boost/graph/eccentricity.hpp>
 #include <boost/graph/edge_coloring.hpp>
 #include <boost/graph/edge_connectivity.hpp>
 #include <boost/graph/edge_list.hpp>
 #include <boost/graph/edmonds_karp_max_flow.hpp>
+#include <boost/graph/edmunds_karp_max_flow.hpp>
 #include <boost/graph/erdos_renyi_generator.hpp>
 #include <boost/graph/exception.hpp>
 #include <boost/graph/exterior_property.hpp>
@@ -73,11 +87,7 @@
 #include <boost/graph/king_ordering.hpp>
 #include <boost/graph/kruskal_min_spanning_tree.hpp>
 #include <boost/graph/labeled_graph.hpp>
-
-#if __has_include(<LEDA/graph/graph.h>)
 #include <boost/graph/leda_graph.hpp>
-#endif
-
 #include <boost/graph/lookup_edge.hpp>
 #include <boost/graph/loop_erased_random_walk.hpp>
 #include <boost/graph/make_biconnected_planar.hpp>
@@ -100,6 +110,11 @@
 #include <boost/graph/overloading.hpp>
 #include <boost/graph/page_rank.hpp>
 #include <boost/graph/planar_canonical_ordering.hpp>
+#include <boost/graph/planar_detail/add_edge_visitors.hpp>
+#include <boost/graph/planar_detail/boyer_myrvold_impl.hpp>
+#include <boost/graph/planar_detail/bucket_sort.hpp>
+#include <boost/graph/planar_detail/face_handles.hpp>
+#include <boost/graph/planar_detail/face_iterators.hpp>
 #include <boost/graph/planar_face_traversal.hpp>
 #include <boost/graph/plod_generator.hpp>
 #include <boost/graph/point_traits.hpp>
@@ -127,11 +142,7 @@
 #include <boost/graph/smallest_last_ordering.hpp>
 #include <boost/graph/ssca_graph_generator.hpp>
 #include <boost/graph/st_connected.hpp>
-
-#if __has_include(<gb_graph.h>)
 #include <boost/graph/stanford_graph.hpp>
-#endif
-
 #include <boost/graph/stoer_wagner_min_cut.hpp>
 #include <boost/graph/strong_components.hpp>
 #include <boost/graph/subgraph.hpp>

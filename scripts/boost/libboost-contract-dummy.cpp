@@ -1,4 +1,16 @@
 
+// fix ubiquitous warning C5204: 'boost::blah::blah<Blah>': class has virtual functions, but its trivial destructor is not virtual; instances of objects derived from this class may not be destructed correctly
+//
+// while this generally CAN/MAY be an issue, we brutally assume that the Boost Boys know their shit and NEVER make this mistake, i.e. the classes/structs in question are *implicitly `final`*!
+// To play it kinda safe, we apply this 'please shut up' fix to this dummy=see-if-we-can-compile-Ev'ryTing source file only:
+
+#if defined(_MSC_VER)
+#pragma warning(disable: 5204)
+
+// fix/shut up warning C4266: 'void boost::blah::blah::blah(...)': no override available for virtual member function from base 'boost::blah::blah'; function is hidden
+#pragma warning(disable: 4266)
+#endif
+
 #include <boost/contract.hpp>
 #include <boost/contract/assert.hpp>
 #include <boost/contract/base_types.hpp>
@@ -13,42 +25,6 @@
 #include <boost/contract/core/specify.hpp>
 #include <boost/contract/core/virtual.hpp>
 #include <boost/contract/destructor.hpp>
-#include <boost/contract/detail/assert.hpp>
-#include <boost/contract/detail/auto_ptr.hpp>
-#include <boost/contract/detail/check.hpp>
-#include <boost/contract/detail/checking.hpp>
-#include <boost/contract/detail/condition/cond_base.hpp>
-#include <boost/contract/detail/condition/cond_inv.hpp>
-#include <boost/contract/detail/condition/cond_post.hpp>
-#include <boost/contract/detail/condition/cond_subcontracting.hpp>
-#include <boost/contract/detail/config.hpp>
-#include <boost/contract/detail/debug.hpp>
-#include <boost/contract/detail/decl.hpp>
-#include <boost/contract/detail/declspec.hpp>
-#include <boost/contract/detail/exception.hpp>
-#include <boost/contract/detail/inlined.hpp>
-#include <boost/contract/detail/inlined/core/exception.hpp>
-#include <boost/contract/detail/inlined/detail/checking.hpp>
-#include <boost/contract/detail/inlined/old.hpp>
-#include <boost/contract/detail/name.hpp>
-#include <boost/contract/detail/none.hpp>
-#include <boost/contract/detail/noop.hpp>
-#include <boost/contract/detail/operation/constructor.hpp>
-#include <boost/contract/detail/operation/destructor.hpp>
-#include <boost/contract/detail/operation/function.hpp>
-#include <boost/contract/detail/operation/public_function.hpp>
-#include <boost/contract/detail/operation/static_public_function.hpp>
-#include <boost/contract/detail/operator_safe_bool.hpp>
-#include <boost/contract/detail/preprocessor/keyword/private.hpp>
-#include <boost/contract/detail/preprocessor/keyword/protected.hpp>
-#include <boost/contract/detail/preprocessor/keyword/public.hpp>
-#include <boost/contract/detail/preprocessor/keyword/utility/is.hpp>
-#include <boost/contract/detail/preprocessor/keyword/virtual.hpp>
-#include <boost/contract/detail/static_local_var.hpp>
-#include <boost/contract/detail/tvariadic.hpp>
-#include <boost/contract/detail/type_traits/member_function_types.hpp>
-#include <boost/contract/detail/type_traits/mirror.hpp>
-#include <boost/contract/detail/type_traits/optional.hpp>
 #include <boost/contract/function.hpp>
 #include <boost/contract/old.hpp>
 #include <boost/contract/override.hpp>

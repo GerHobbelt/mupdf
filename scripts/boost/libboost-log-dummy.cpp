@@ -1,10 +1,23 @@
 
+// fix ubiquitous warning C5204: 'boost::blah::blah<Blah>': class has virtual functions, but its trivial destructor is not virtual; instances of objects derived from this class may not be destructed correctly
+//
+// while this generally CAN/MAY be an issue, we brutally assume that the Boost Boys know their shit and NEVER make this mistake, i.e. the classes/structs in question are *implicitly `final`*!
+// To play it kinda safe, we apply this 'please shut up' fix to this dummy=see-if-we-can-compile-Ev'ryTing source file only:
+
+#if defined(_MSC_VER)
+#pragma warning(disable: 5204)
+
+// fix/shut up warning C4266: 'void boost::blah::blah::blah(...)': no override available for virtual member function from base 'boost::blah::blah'; function is hidden
+#pragma warning(disable: 4266)
+#endif
+
 #include <boost/log/attributes.hpp>
 #include <boost/log/attributes/attribute.hpp>
 #include <boost/log/attributes/attribute_cast.hpp>
 #include <boost/log/attributes/attribute_name.hpp>
 #include <boost/log/attributes/attribute_set.hpp>
 #include <boost/log/attributes/attribute_value.hpp>
+#include <boost/log/attributes/attribute_value_impl.hpp>
 #include <boost/log/attributes/attribute_value_set.hpp>
 #include <boost/log/attributes/clock.hpp>
 #include <boost/log/attributes/constant.hpp>
@@ -13,6 +26,7 @@
 #include <boost/log/attributes/current_process_name.hpp>
 #include <boost/log/attributes/current_thread_id.hpp>
 #include <boost/log/attributes/fallback_policy.hpp>
+#include <boost/log/attributes/fallback_policy_fwd.hpp>
 #include <boost/log/attributes/function.hpp>
 #include <boost/log/attributes/mutable_constant.hpp>
 #include <boost/log/attributes/named_scope.hpp>
@@ -20,7 +34,9 @@
 #include <boost/log/attributes/time_traits.hpp>
 #include <boost/log/attributes/timer.hpp>
 #include <boost/log/attributes/value_extraction.hpp>
+#include <boost/log/attributes/value_extraction_fwd.hpp>
 #include <boost/log/attributes/value_visitation.hpp>
+#include <boost/log/attributes/value_visitation_fwd.hpp>
 #include <boost/log/common.hpp>
 #include <boost/log/core.hpp>
 #include <boost/log/core/core.hpp>
@@ -29,6 +45,7 @@
 #include <boost/log/exceptions.hpp>
 #include <boost/log/expressions.hpp>
 #include <boost/log/expressions/attr.hpp>
+#include <boost/log/expressions/attr_fwd.hpp>
 #include <boost/log/expressions/filter.hpp>
 #include <boost/log/expressions/formatter.hpp>
 #include <boost/log/expressions/formatters.hpp>
@@ -46,6 +63,7 @@
 #include <boost/log/expressions/formatters/xml_decorator.hpp>
 #include <boost/log/expressions/is_keyword_descriptor.hpp>
 #include <boost/log/expressions/keyword.hpp>
+#include <boost/log/expressions/keyword_fwd.hpp>
 #include <boost/log/expressions/message.hpp>
 #include <boost/log/expressions/predicates.hpp>
 #include <boost/log/expressions/predicates/begins_with.hpp>
@@ -56,6 +74,7 @@
 #include <boost/log/expressions/predicates/is_debugger_present.hpp>
 #include <boost/log/expressions/predicates/is_in_range.hpp>
 #include <boost/log/expressions/predicates/matches.hpp>
+#include <boost/log/expressions/predicates/wrap_filter.hpp>
 #include <boost/log/expressions/record.hpp>
 #include <boost/log/keywords/auto_flush.hpp>
 #include <boost/log/keywords/auto_newline_mode.hpp>
@@ -72,7 +91,6 @@
 #include <boost/log/keywords/format.hpp>
 #include <boost/log/keywords/ident.hpp>
 #include <boost/log/keywords/incomplete_marker.hpp>
-#include <boost/log/keywords/ip_version.hpp>
 #include <boost/log/keywords/iteration.hpp>
 #include <boost/log/keywords/log_name.hpp>
 #include <boost/log/keywords/log_source.hpp>
@@ -94,6 +112,7 @@
 #include <boost/log/keywords/target.hpp>
 #include <boost/log/keywords/target_file_name.hpp>
 #include <boost/log/keywords/time_based_rotation.hpp>
+#include <boost/log/keywords/use_impl.hpp>
 #include <boost/log/sinks.hpp>
 #include <boost/log/sinks/async_frontend.hpp>
 #include <boost/log/sinks/attribute_mapping.hpp>
@@ -131,16 +150,10 @@
 #include <boost/log/sources/severity_feature.hpp>
 #include <boost/log/sources/severity_logger.hpp>
 #include <boost/log/sources/threading_models.hpp>
-#include <boost/log/support/date_time.hpp>
-#include <boost/log/support/exception.hpp>
-#include <boost/log/support/regex.hpp>
-#include <boost/log/support/spirit_classic.hpp>
-#include <boost/log/support/spirit_qi.hpp>
-#include <boost/log/support/std_regex.hpp>
-#include <boost/log/support/xpressive.hpp>
 #include <boost/log/trivial.hpp>
 #include <boost/log/utility/exception_handler.hpp>
 #include <boost/log/utility/formatting_ostream.hpp>
+#include <boost/log/utility/formatting_ostream_fwd.hpp>
 #include <boost/log/utility/functional.hpp>
 #include <boost/log/utility/functional/as_action.hpp>
 #include <boost/log/utility/functional/begins_with.hpp>
@@ -183,6 +196,7 @@
 #include <boost/log/utility/setup/settings_parser.hpp>
 #include <boost/log/utility/strictest_lock.hpp>
 #include <boost/log/utility/string_literal.hpp>
+#include <boost/log/utility/string_literal_fwd.hpp>
 #include <boost/log/utility/type_dispatch/date_time_types.hpp>
 #include <boost/log/utility/type_dispatch/dynamic_type_dispatcher.hpp>
 #include <boost/log/utility/type_dispatch/standard_types.hpp>
@@ -192,3 +206,5 @@
 #include <boost/log/utility/unused_variable.hpp>
 #include <boost/log/utility/use_std_allocator.hpp>
 #include <boost/log/utility/value_ref.hpp>
+#include <boost/log/utility/value_ref_fwd.hpp>
+

@@ -1,6 +1,19 @@
 
+// fix ubiquitous warning C5204: 'boost::blah::blah<Blah>': class has virtual functions, but its trivial destructor is not virtual; instances of objects derived from this class may not be destructed correctly
+//
+// while this generally CAN/MAY be an issue, we brutally assume that the Boost Boys know their shit and NEVER make this mistake, i.e. the classes/structs in question are *implicitly `final`*!
+// To play it kinda safe, we apply this 'please shut up' fix to this dummy=see-if-we-can-compile-Ev'ryTing source file only:
+
+#if defined(_MSC_VER)
+#pragma warning(disable: 5204)
+
+// fix/shut up warning C4266: 'void boost::blah::blah::blah(...)': no override available for virtual member function from base 'boost::blah::blah'; function is hidden
+#pragma warning(disable: 4266)
+#endif
+
 #include <boost/range.hpp>
 #include <boost/range/adaptor/adjacent_filtered.hpp>
+#include <boost/range/adaptor/argument_fwd.hpp>
 #include <boost/range/adaptor/copied.hpp>
 #include <boost/range/adaptor/define_adaptor.hpp>
 #include <boost/range/adaptor/filtered.hpp>
@@ -86,12 +99,14 @@
 #include <boost/range/any_range.hpp>
 #include <boost/range/as_array.hpp>
 #include <boost/range/as_literal.hpp>
+#include <boost/range/atl.hpp>
 #include <boost/range/begin.hpp>
 #include <boost/range/category.hpp>
 #include <boost/range/combine.hpp>
 #include <boost/range/concepts.hpp>
 #include <boost/range/config.hpp>
 #include <boost/range/const_iterator.hpp>
+#include <boost/range/const_reverse_iterator.hpp>
 #include <boost/range/counting_range.hpp>
 #include <boost/range/difference_type.hpp>
 #include <boost/range/distance.hpp>
@@ -108,13 +123,18 @@
 #include <boost/range/iterator_range_io.hpp>
 #include <boost/range/join.hpp>
 #include <boost/range/metafunctions.hpp>
+#include <boost/range/mfc.hpp>
+#include <boost/range/mfc_map.hpp>
 #include <boost/range/mutable_iterator.hpp>
 #include <boost/range/numeric.hpp>
 #include <boost/range/pointer.hpp>
+#include <boost/range/range_fwd.hpp>
 #include <boost/range/rbegin.hpp>
 #include <boost/range/reference.hpp>
 #include <boost/range/rend.hpp>
+#include <boost/range/result_iterator.hpp>
 #include <boost/range/reverse_iterator.hpp>
+#include <boost/range/reverse_result_iterator.hpp>
 #include <boost/range/size.hpp>
 #include <boost/range/size_type.hpp>
 #include <boost/range/sub_range.hpp>

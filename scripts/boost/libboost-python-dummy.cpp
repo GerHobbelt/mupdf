@@ -1,5 +1,15 @@
 
-#if __has_include(<pyconfig.h>)
+// fix ubiquitous warning C5204: 'boost::blah::blah<Blah>': class has virtual functions, but its trivial destructor is not virtual; instances of objects derived from this class may not be destructed correctly
+//
+// while this generally CAN/MAY be an issue, we brutally assume that the Boost Boys know their shit and NEVER make this mistake, i.e. the classes/structs in question are *implicitly `final`*!
+// To play it kinda safe, we apply this 'please shut up' fix to this dummy=see-if-we-can-compile-Ev'ryTing source file only:
+
+#if defined(_MSC_VER)
+#pragma warning(disable: 5204)
+
+// fix/shut up warning C4266: 'void boost::blah::blah::blah(...)': no override available for virtual member function from base 'boost::blah::blah'; function is hidden
+#pragma warning(disable: 4266)
+#endif
 
 #include <boost/python.hpp>
 #include <boost/python/arg_from_python.hpp>
@@ -14,11 +24,39 @@
 #include <boost/python/cast.hpp>
 #include <boost/python/class.hpp>
 #include <boost/python/class_fwd.hpp>
+#include <boost/python/converter/arg_from_python.hpp>
+#include <boost/python/converter/arg_to_python.hpp>
+#include <boost/python/converter/arg_to_python_base.hpp>
+#include <boost/python/converter/as_to_python_function.hpp>
+#include <boost/python/converter/builtin_converters.hpp>
+#include <boost/python/converter/constructor_function.hpp>
+#include <boost/python/converter/context_result_converter.hpp>
+#include <boost/python/converter/convertible_function.hpp>
+#include <boost/python/converter/from_python.hpp>
+#include <boost/python/converter/implicit.hpp>
+#include <boost/python/converter/obj_mgr_arg_from_python.hpp>
+#include <boost/python/converter/object_manager.hpp>
+#include <boost/python/converter/pointer_type_id.hpp>
+#include <boost/python/converter/pyobject_traits.hpp>
+#include <boost/python/converter/pyobject_type.hpp>
+#include <boost/python/converter/pytype_function.hpp>
+#include <boost/python/converter/pytype_object_mgr_traits.hpp>
+#include <boost/python/converter/registered.hpp>
+#include <boost/python/converter/registered_pointee.hpp>
+#include <boost/python/converter/registrations.hpp>
+#include <boost/python/converter/registry.hpp>
+#include <boost/python/converter/return_from_python.hpp>
+#include <boost/python/converter/rvalue_from_python_data.hpp>
+#include <boost/python/converter/shared_ptr_deleter.hpp>
+#include <boost/python/converter/shared_ptr_from_python.hpp>
+#include <boost/python/converter/shared_ptr_to_python.hpp>
+#include <boost/python/converter/to_python_function_type.hpp>
 #include <boost/python/copy_const_reference.hpp>
 #include <boost/python/copy_non_const_reference.hpp>
 #include <boost/python/data_members.hpp>
 #include <boost/python/def.hpp>
 #include <boost/python/def_visitor.hpp>
+#include <boost/python/default_call_policies.hpp>
 #include <boost/python/dict.hpp>
 #include <boost/python/docstring_options.hpp>
 #include <boost/python/enum.hpp>
@@ -43,7 +81,43 @@
 #include <boost/python/module.hpp>
 #include <boost/python/module_init.hpp>
 #include <boost/python/numpy.hpp>
+#include <boost/python/numpy/config.hpp>
+#include <boost/python/numpy/dtype.hpp>
+#include <boost/python/numpy/internal.hpp>
+#include <boost/python/numpy/invoke_matching.hpp>
+#include <boost/python/numpy/matrix.hpp>
+#include <boost/python/numpy/ndarray.hpp>
+#include <boost/python/numpy/numpy_object_mgr_traits.hpp>
+#include <boost/python/numpy/scalars.hpp>
+#include <boost/python/numpy/ufunc.hpp>
 #include <boost/python/object.hpp>
+#include <boost/python/object/add_to_namespace.hpp>
+#include <boost/python/object/class.hpp>
+#include <boost/python/object/class_detail.hpp>
+#include <boost/python/object/class_metadata.hpp>
+#include <boost/python/object/class_wrapper.hpp>
+#include <boost/python/object/enum_base.hpp>
+#include <boost/python/object/find_instance.hpp>
+#include <boost/python/object/forward.hpp>
+#include <boost/python/object/function.hpp>
+#include <boost/python/object/function_doc_signature.hpp>
+#include <boost/python/object/function_handle.hpp>
+#include <boost/python/object/function_object.hpp>
+#include <boost/python/object/inheritance.hpp>
+#include <boost/python/object/inheritance_query.hpp>
+#include <boost/python/object/instance.hpp>
+#include <boost/python/object/iterator.hpp>
+#include <boost/python/object/iterator_core.hpp>
+#include <boost/python/object/life_support.hpp>
+#include <boost/python/object/make_holder.hpp>
+#include <boost/python/object/make_instance.hpp>
+#include <boost/python/object/make_ptr_instance.hpp>
+#include <boost/python/object/pickle_support.hpp>
+#include <boost/python/object/pointer_holder.hpp>
+#include <boost/python/object/py_function.hpp>
+#include <boost/python/object/stl_iterator_core.hpp>
+#include <boost/python/object/value_holder.hpp>
+#include <boost/python/object/value_holder_fwd.hpp>
 #include <boost/python/object_attributes.hpp>
 #include <boost/python/object_call.hpp>
 #include <boost/python/object_core.hpp>
@@ -79,6 +153,10 @@
 #include <boost/python/ssize_t.hpp>
 #include <boost/python/stl_iterator.hpp>
 #include <boost/python/str.hpp>
+#include <boost/python/suite/indexing/container_utils.hpp>
+#include <boost/python/suite/indexing/indexing_suite.hpp>
+#include <boost/python/suite/indexing/map_indexing_suite.hpp>
+#include <boost/python/suite/indexing/vector_indexing_suite.hpp>
 #include <boost/python/tag.hpp>
 #include <boost/python/to_python_converter.hpp>
 #include <boost/python/to_python_indirect.hpp>
@@ -88,4 +166,3 @@
 #include <boost/python/with_custodian_and_ward.hpp>
 #include <boost/python/wrapper.hpp>
 
-#endif

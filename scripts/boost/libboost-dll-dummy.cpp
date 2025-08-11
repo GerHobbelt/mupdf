@@ -1,25 +1,19 @@
 
+// fix ubiquitous warning C5204: 'boost::blah::blah<Blah>': class has virtual functions, but its trivial destructor is not virtual; instances of objects derived from this class may not be destructed correctly
+//
+// while this generally CAN/MAY be an issue, we brutally assume that the Boost Boys know their shit and NEVER make this mistake, i.e. the classes/structs in question are *implicitly `final`*!
+// To play it kinda safe, we apply this 'please shut up' fix to this dummy=see-if-we-can-compile-Ev'ryTing source file only:
+
+#if defined(_MSC_VER)
+#pragma warning(disable: 5204)
+
+// fix/shut up warning C4266: 'void boost::blah::blah::blah(...)': no override available for virtual member function from base 'boost::blah::blah'; function is hidden
+#pragma warning(disable: 4266)
+#endif
+
 #include <boost/dll.hpp>
 #include <boost/dll/alias.hpp>
 #include <boost/dll/config.hpp>
-#include <boost/dll/detail/aggressive_ptr_cast.hpp>
-#include <boost/dll/detail/ctor_dtor.hpp>
-#include <boost/dll/detail/demangling/demangle_symbol.hpp>
-#include <boost/dll/detail/demangling/itanium.hpp>
-#include <boost/dll/detail/demangling/mangled_storage_base.hpp>
-#include <boost/dll/detail/demangling/msvc.hpp>
-#include <boost/dll/detail/elf_info.hpp>
-#include <boost/dll/detail/get_mem_fn_type.hpp>
-#include <boost/dll/detail/import_mangled_helpers.hpp>
-#include <boost/dll/detail/macho_info.hpp>
-#include <boost/dll/detail/pe_info.hpp>
-#include <boost/dll/detail/posix/path_from_handle.hpp>
-#include <boost/dll/detail/posix/program_location_impl.hpp>
-#include <boost/dll/detail/posix/shared_library_impl.hpp>
-#include <boost/dll/detail/system_error.hpp>
-#include <boost/dll/detail/type_info.hpp>
-#include <boost/dll/detail/windows/path_from_handle.hpp>
-#include <boost/dll/detail/windows/shared_library_impl.hpp>
 #include <boost/dll/import.hpp>
 #include <boost/dll/import_class.hpp>
 #include <boost/dll/import_mangled.hpp>

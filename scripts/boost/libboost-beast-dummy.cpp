@@ -1,5 +1,29 @@
 
+// fix ubiquitous warning C5204: 'boost::blah::blah<Blah>': class has virtual functions, but its trivial destructor is not virtual; instances of objects derived from this class may not be destructed correctly
+//
+// while this generally CAN/MAY be an issue, we brutally assume that the Boost Boys know their shit and NEVER make this mistake, i.e. the classes/structs in question are *implicitly `final`*!
+// To play it kinda safe, we apply this 'please shut up' fix to this dummy=see-if-we-can-compile-Ev'ryTing source file only:
+
+#if defined(_MSC_VER)
+#pragma warning(disable: 5204)
+
+// fix/shut up warning C4266: 'void boost::blah::blah::blah(...)': no override available for virtual member function from base 'boost::blah::blah'; function is hidden
+#pragma warning(disable: 4266)
+#endif
+
 #include <boost/beast.hpp>
+#include <boost/beast/_experimental/http/icy_stream.hpp>
+#include <boost/beast/_experimental/unit_test/amount.hpp>
+#include <boost/beast/_experimental/unit_test/dstream.hpp>
+#include <boost/beast/_experimental/unit_test/global_suites.hpp>
+#include <boost/beast/_experimental/unit_test/match.hpp>
+#include <boost/beast/_experimental/unit_test/recorder.hpp>
+#include <boost/beast/_experimental/unit_test/reporter.hpp>
+#include <boost/beast/_experimental/unit_test/results.hpp>
+#include <boost/beast/_experimental/unit_test/runner.hpp>
+#include <boost/beast/_experimental/unit_test/suite.hpp>
+#include <boost/beast/_experimental/unit_test/suite_info.hpp>
+#include <boost/beast/_experimental/unit_test/suite_list.hpp>
 #include <boost/beast/core.hpp>
 #include <boost/beast/core/async_base.hpp>
 #include <boost/beast/core/basic_stream.hpp>
@@ -48,11 +72,6 @@
 #include <boost/beast/http/buffer_body.hpp>
 #include <boost/beast/http/buffer_body_fwd.hpp>
 #include <boost/beast/http/chunk_encode.hpp>
-#include <boost/beast/http/detail/basic_parsed_list.hpp>
-#include <boost/beast/http/detail/basic_parser.hpp>
-#include <boost/beast/http/detail/chunk_encode.hpp>
-#include <boost/beast/http/detail/rfc7230.hpp>
-#include <boost/beast/http/detail/type_traits.hpp>
 #include <boost/beast/http/dynamic_body.hpp>
 #include <boost/beast/http/dynamic_body_fwd.hpp>
 #include <boost/beast/http/empty_body.hpp>
@@ -63,18 +82,6 @@
 #include <boost/beast/http/fields_fwd.hpp>
 #include <boost/beast/http/file_body.hpp>
 #include <boost/beast/http/file_body_fwd.hpp>
-#include <boost/beast/http/impl/basic_parser.hpp>
-#include <boost/beast/http/impl/chunk_encode.hpp>
-#include <boost/beast/http/impl/error.hpp>
-#include <boost/beast/http/impl/fields.hpp>
-#include <boost/beast/http/impl/file_body_win32.hpp>
-#include <boost/beast/http/impl/message.hpp>
-#include <boost/beast/http/impl/message_generator.hpp>
-#include <boost/beast/http/impl/parser.hpp>
-#include <boost/beast/http/impl/read.hpp>
-#include <boost/beast/http/impl/rfc7230.hpp>
-#include <boost/beast/http/impl/serializer.hpp>
-#include <boost/beast/http/impl/write.hpp>
 #include <boost/beast/http/message.hpp>
 #include <boost/beast/http/message_fwd.hpp>
 #include <boost/beast/http/message_generator.hpp>
@@ -98,19 +105,7 @@
 #include <boost/beast/src.hpp>
 #include <boost/beast/ssl.hpp>
 #include <boost/beast/ssl/ssl_stream.hpp>
-#include <boost/beast/version.hpp>
 #include <boost/beast/websocket.hpp>
-#include <boost/beast/websocket/detail/decorator.hpp>
-#include <boost/beast/websocket/detail/frame.hpp>
-#include <boost/beast/websocket/detail/hybi13.hpp>
-#include <boost/beast/websocket/detail/impl_base.hpp>
-#include <boost/beast/websocket/detail/mask.hpp>
-#include <boost/beast/websocket/detail/pmd_extension.hpp>
-#include <boost/beast/websocket/detail/prng.hpp>
-#include <boost/beast/websocket/detail/service.hpp>
-#include <boost/beast/websocket/detail/soft_mutex.hpp>
-#include <boost/beast/websocket/detail/type_traits.hpp>
-#include <boost/beast/websocket/detail/utf8_checker.hpp>
 #include <boost/beast/websocket/error.hpp>
 #include <boost/beast/websocket/option.hpp>
 #include <boost/beast/websocket/rfc6455.hpp>
@@ -121,13 +116,7 @@
 #include <boost/beast/websocket/teardown.hpp>
 #include <boost/beast/zlib.hpp>
 #include <boost/beast/zlib/deflate_stream.hpp>
-#include <boost/beast/zlib/detail/bitstream.hpp>
-#include <boost/beast/zlib/detail/deflate_stream.hpp>
-#include <boost/beast/zlib/detail/inflate_stream.hpp>
-#include <boost/beast/zlib/detail/ranges.hpp>
-#include <boost/beast/zlib/detail/window.hpp>
 #include <boost/beast/zlib/error.hpp>
-#include <boost/beast/zlib/impl/error.hpp>
 #include <boost/beast/zlib/inflate_stream.hpp>
 #include <boost/beast/zlib/zlib.hpp>
 

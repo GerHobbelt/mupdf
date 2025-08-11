@@ -1,4 +1,16 @@
 
+// fix ubiquitous warning C5204: 'boost::blah::blah<Blah>': class has virtual functions, but its trivial destructor is not virtual; instances of objects derived from this class may not be destructed correctly
+//
+// while this generally CAN/MAY be an issue, we brutally assume that the Boost Boys know their shit and NEVER make this mistake, i.e. the classes/structs in question are *implicitly `final`*!
+// To play it kinda safe, we apply this 'please shut up' fix to this dummy=see-if-we-can-compile-Ev'ryTing source file only:
+
+#if defined(_MSC_VER)
+#pragma warning(disable: 5204)
+
+// fix/shut up warning C4266: 'void boost::blah::blah::blah(...)': no override available for virtual member function from base 'boost::blah::blah'; function is hidden
+#pragma warning(disable: 4266)
+#endif
+
 #include <boost/fiber/algo/algorithm.hpp>
 #include <boost/fiber/algo/round_robin.hpp>
 #include <boost/fiber/algo/shared_work.hpp>
@@ -10,37 +22,12 @@
 #include <boost/fiber/condition_variable.hpp>
 #include <boost/fiber/context.hpp>
 #include <boost/fiber/cuda/waitfor.hpp>
-#include <boost/fiber/detail/config.hpp>
-#include <boost/fiber/detail/context_spinlock_queue.hpp>
-#include <boost/fiber/detail/context_spmc_queue.hpp>
-#include <boost/fiber/detail/convert.hpp>
-#include <boost/fiber/detail/cpu_relax.hpp>
-#include <boost/fiber/detail/data.hpp>
-#include <boost/fiber/detail/decay_copy.hpp>
-#include <boost/fiber/detail/disable_overload.hpp>
-#include <boost/fiber/detail/exchange.hpp>
-#include <boost/fiber/detail/fss.hpp>
-#include <boost/fiber/detail/futex.hpp>
-#include <boost/fiber/detail/is_all_same.hpp>
-#include <boost/fiber/detail/rtm.hpp>
-#include <boost/fiber/detail/spinlock.hpp>
-#include <boost/fiber/detail/spinlock_rtm.hpp>
-#include <boost/fiber/detail/spinlock_status.hpp>
-#include <boost/fiber/detail/spinlock_ttas.hpp>
-#include <boost/fiber/detail/spinlock_ttas_adaptive.hpp>
-#include <boost/fiber/detail/spinlock_ttas_adaptive_futex.hpp>
-#include <boost/fiber/detail/spinlock_ttas_futex.hpp>
-#include <boost/fiber/detail/thread_barrier.hpp>
 #include <boost/fiber/exceptions.hpp>
 #include <boost/fiber/fiber.hpp>
 #include <boost/fiber/fixedsize_stack.hpp>
 #include <boost/fiber/fss.hpp>
 #include <boost/fiber/future.hpp>
 #include <boost/fiber/future/async.hpp>
-#include <boost/fiber/future/detail/shared_state.hpp>
-#include <boost/fiber/future/detail/shared_state_object.hpp>
-#include <boost/fiber/future/detail/task_base.hpp>
-#include <boost/fiber/future/detail/task_object.hpp>
 #include <boost/fiber/future/future.hpp>
 #include <boost/fiber/future/future_status.hpp>
 #include <boost/fiber/future/packaged_task.hpp>

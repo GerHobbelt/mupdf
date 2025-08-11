@@ -1,4 +1,16 @@
 
+// fix ubiquitous warning C5204: 'boost::blah::blah<Blah>': class has virtual functions, but its trivial destructor is not virtual; instances of objects derived from this class may not be destructed correctly
+//
+// while this generally CAN/MAY be an issue, we brutally assume that the Boost Boys know their shit and NEVER make this mistake, i.e. the classes/structs in question are *implicitly `final`*!
+// To play it kinda safe, we apply this 'please shut up' fix to this dummy=see-if-we-can-compile-Ev'ryTing source file only:
+
+#if defined(_MSC_VER)
+#pragma warning(disable: 5204)
+
+// fix/shut up warning C4266: 'void boost::blah::blah::blah(...)': no override available for virtual member function from base 'boost::blah::blah'; function is hidden
+#pragma warning(disable: 4266)
+#endif
+
 #include <boost/compute.hpp>
 #include <boost/compute/algorithm.hpp>
 #include <boost/compute/algorithm/accumulate.hpp>
@@ -96,7 +108,6 @@
 #include <boost/compute/container.hpp>
 #include <boost/compute/container/array.hpp>
 #include <boost/compute/container/basic_string.hpp>
-#include <boost/compute/container/detail/scalar.hpp>
 #include <boost/compute/container/dynamic_bitset.hpp>
 #include <boost/compute/container/flat_map.hpp>
 #include <boost/compute/container/flat_set.hpp>
@@ -114,11 +125,8 @@
 #include <boost/compute/exception/no_device_found.hpp>
 #include <boost/compute/exception/opencl_error.hpp>
 #include <boost/compute/exception/program_build_failure.hpp>
+#include <boost/compute/exception/set_default_queue_error.hpp>
 #include <boost/compute/exception/unsupported_extension_error.hpp>
-#include <boost/compute/experimental/clamp_range.hpp>
-#include <boost/compute/experimental/malloc.hpp>
-#include <boost/compute/experimental/sort_by_transform.hpp>
-#include <boost/compute/experimental/tabulate.hpp>
 #include <boost/compute/function.hpp>
 #include <boost/compute/functional.hpp>
 #include <boost/compute/functional/as.hpp>
@@ -126,10 +134,6 @@
 #include <boost/compute/functional/bind.hpp>
 #include <boost/compute/functional/common.hpp>
 #include <boost/compute/functional/convert.hpp>
-#include <boost/compute/functional/detail/macros.hpp>
-#include <boost/compute/functional/detail/nvidia_ballot.hpp>
-#include <boost/compute/functional/detail/nvidia_popcount.hpp>
-#include <boost/compute/functional/detail/unpack.hpp>
 #include <boost/compute/functional/field.hpp>
 #include <boost/compute/functional/geometry.hpp>
 #include <boost/compute/functional/get.hpp>
@@ -184,8 +188,6 @@
 #include <boost/compute/iterator/constant_buffer_iterator.hpp>
 #include <boost/compute/iterator/constant_iterator.hpp>
 #include <boost/compute/iterator/counting_iterator.hpp>
-#include <boost/compute/iterator/detail/get_base_iterator_buffer.hpp>
-#include <boost/compute/iterator/detail/swizzle_iterator.hpp>
 #include <boost/compute/iterator/discard_iterator.hpp>
 #include <boost/compute/iterator/function_input_iterator.hpp>
 #include <boost/compute/iterator/permutation_iterator.hpp>
@@ -224,7 +226,6 @@
 #include <boost/compute/system.hpp>
 #include <boost/compute/type_traits.hpp>
 #include <boost/compute/type_traits/common_type.hpp>
-#include <boost/compute/type_traits/detail/capture_traits.hpp>
 #include <boost/compute/type_traits/is_device_iterator.hpp>
 #include <boost/compute/type_traits/is_fundamental.hpp>
 #include <boost/compute/type_traits/is_vector_type.hpp>
@@ -250,6 +251,5 @@
 #include <boost/compute/utility/program_cache.hpp>
 #include <boost/compute/utility/source.hpp>
 #include <boost/compute/utility/wait_list.hpp>
-#include <boost/compute/version.hpp>
 #include <boost/compute/wait_list.hpp>
 

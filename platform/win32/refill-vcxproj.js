@@ -314,6 +314,7 @@ const projectMap = {
 	"politician": "the-yabbering-politician",
 	"zstd_demos": "zstd",
 	"libzstd_zlibwrap": "zstd/zlibWrapper",
+	"civetweb_testclient": "civetweb",
 };
 
 testpath = `${scriptpath}/../../thirdparty/owemdjee/${projname_alt}`;

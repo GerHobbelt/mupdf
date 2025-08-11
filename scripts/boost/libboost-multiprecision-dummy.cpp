@@ -1,4 +1,16 @@
 
+// fix ubiquitous warning C5204: 'boost::blah::blah<Blah>': class has virtual functions, but its trivial destructor is not virtual; instances of objects derived from this class may not be destructed correctly
+//
+// while this generally CAN/MAY be an issue, we brutally assume that the Boost Boys know their shit and NEVER make this mistake, i.e. the classes/structs in question are *implicitly `final`*!
+// To play it kinda safe, we apply this 'please shut up' fix to this dummy=see-if-we-can-compile-Ev'ryTing source file only:
+
+#if defined(_MSC_VER)
+#pragma warning(disable: 5204)
+
+// fix/shut up warning C4266: 'void boost::blah::blah::blah(...)': no override available for virtual member function from base 'boost::blah::blah'; function is hidden
+#pragma warning(disable: 4266)
+#endif
+
 #include <boost/multiprecision/complex128.hpp>
 #include <boost/multiprecision/complex_adaptor.hpp>
 #include <boost/multiprecision/concepts/mp_number_archetypes.hpp>
@@ -7,6 +19,21 @@
 #include <boost/multiprecision/cpp_bin_float/transcendental.hpp>
 #include <boost/multiprecision/cpp_complex.hpp>
 #include <boost/multiprecision/cpp_dec_float.hpp>
+#include <boost/multiprecision/cpp_df_qf/cpp_df_qf_detail.hpp>
+#include <boost/multiprecision/cpp_df_qf/cpp_df_qf_detail_ccmath.hpp>
+#include <boost/multiprecision/cpp_df_qf/cpp_df_qf_detail_ccmath_fabs.hpp>
+#include <boost/multiprecision/cpp_df_qf/cpp_df_qf_detail_ccmath_floor.hpp>
+#include <boost/multiprecision/cpp_df_qf/cpp_df_qf_detail_ccmath_fma.hpp>
+#include <boost/multiprecision/cpp_df_qf/cpp_df_qf_detail_ccmath_fpclassify.hpp>
+#include <boost/multiprecision/cpp_df_qf/cpp_df_qf_detail_ccmath_frexp.hpp>
+#include <boost/multiprecision/cpp_df_qf/cpp_df_qf_detail_ccmath_isinf.hpp>
+#include <boost/multiprecision/cpp_df_qf/cpp_df_qf_detail_ccmath_isnan.hpp>
+#include <boost/multiprecision/cpp_df_qf/cpp_df_qf_detail_ccmath_ldexp.hpp>
+#include <boost/multiprecision/cpp_df_qf/cpp_df_qf_detail_ccmath_limits.hpp>
+#include <boost/multiprecision/cpp_df_qf/cpp_df_qf_detail_ccmath_log.hpp>
+#include <boost/multiprecision/cpp_df_qf/cpp_df_qf_detail_ccmath_sqrt.hpp>
+#include <boost/multiprecision/cpp_df_qf/cpp_df_qf_detail_constants.hpp>
+#include <boost/multiprecision/cpp_double_fp.hpp>
 #include <boost/multiprecision/cpp_int.hpp>
 #include <boost/multiprecision/cpp_int/add.hpp>
 #include <boost/multiprecision/cpp_int/add_unsigned.hpp>
@@ -38,13 +65,11 @@
 #include <boost/multiprecision/random.hpp>
 #include <boost/multiprecision/rational_adaptor.hpp>
 #include <boost/multiprecision/tommath.hpp>
-#include <boost/multiprecision/traits/explicit_conversion.hpp>
 #include <boost/multiprecision/traits/extract_exponent_type.hpp>
 #include <boost/multiprecision/traits/is_backend.hpp>
 #include <boost/multiprecision/traits/is_byte_container.hpp>
 #include <boost/multiprecision/traits/is_complex.hpp>
 #include <boost/multiprecision/traits/is_convertible_arithmetic.hpp>
-#include <boost/multiprecision/traits/is_restricted_conversion.hpp>
 #include <boost/multiprecision/traits/is_variable_precision.hpp>
 #include <boost/multiprecision/traits/max_digits10.hpp>
 #include <boost/multiprecision/traits/std_integer_traits.hpp>

@@ -1,0 +1,647 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-101000000004}</ProjectGuid>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CIVETWEB;CIVETWEB_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/civetweb/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CIVETWEB;CIVETWEB_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CIVETWEB;CIVETWEB_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/civetweb/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CIVETWEB;CIVETWEB_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/civetweb/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CIVETWEB;CIVETWEB_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CIVETWEB;CIVETWEB_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/civetweb/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CIVETWEB;CIVETWEB_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/civetweb/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CIVETWEB;CIVETWEB_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CIVETWEB;CIVETWEB_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/civetweb/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CIVETWEB;CIVETWEB_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/civetweb/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CIVETWEB;CIVETWEB_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CIVETWEB;CIVETWEB_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/civetweb/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/testclient/testclient.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/unittest/cgi_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/unittest/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/unittest/private.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/unittest/private_exe.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/unittest/public_func.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/unittest/public_server.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/unittest/shared.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/unittest/timertest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/unittest/unittestclient.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/civetweb/VisualStudio/resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/civetweb/include/CivetServer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/civetweb/include/civetweb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/civetweb/include/civetweb_ex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/civetweb/include/civetweb_legacy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/civetweb/include/civetweb_private_lua.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/civetweb/include/civetweb_sys_porting.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/civetweb/unittest/civetweb_check.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/civetweb/unittest/private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/civetweb/unittest/private_exe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/civetweb/unittest/public_func.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/civetweb/unittest/public_server.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/civetweb/unittest/shared.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/civetweb/unittest/timertest.h" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/VisualStudio/favicon.ico" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/VisualStudio/systray.ico" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/docs/images/leftphoto.jpg" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/resources/civetweb_16x16.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/resources/civetweb_16x16@2.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/resources/civetweb_22x22.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/resources/civetweb_22x22@2.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/resources/civetweb_32x32.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/resources/civetweb_32x32@2.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/resources/civetweb_64x64.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/resources/civetweb_64x64@2.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/resources/duktape-logo.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/resources/lua-logo.jpg" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/resources/luafilesystem-logo.jpg" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/resources/luasqlite-logo.jpg" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/resources/luaxml-logo.jpg" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/resources/sqlite3-logo.jpg" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/resources/systray.ico" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/Image_2kB.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/00.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/01.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/02.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/03.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/04.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/05.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/06.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/07.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/08.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/09.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/10.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/11.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/12.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/13.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/14.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/15.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/16.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/17.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/18.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/19.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/20.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/21.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/22.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/23.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/24.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/25.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/26.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/27.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/28.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/29.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/30.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/31.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/32.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/33.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/34.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/35.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/36.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/37.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/38.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/39.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/40.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/41.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/42.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/43.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/44.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/45.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/46.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/47.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/48.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/49.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/50.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/51.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/52.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/53.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/54.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/55.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/56.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/57.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/58.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/59.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/60.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/61.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/62.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/63.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/64.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/65.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/66.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/67.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/68.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/69.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/70.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/71.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/72.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/73.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/74.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/75.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/76.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/77.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/78.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/79.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/80.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/81.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/82.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/83.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/84.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/85.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/86.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/87.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/88.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/89.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/90.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/91.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/92.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/93.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/94.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/95.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/96.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/97.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/98.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/imagetest/99.png" />
+    <Image Include="../../thirdparty/owemdjee/civetweb/test/test.ico" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/civetweb/VisualStudio/res.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/civetweb/resources/res.rc" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/CREDITS.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/Dockerfile" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/LICENSE.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/Makefile.osx" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/README.markdown" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/README.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/RELEASE_NOTES.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/SECURITY.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/VisualStudio/buildRelease.pl" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/VisualStudio/civetweb_book_samples_server/civetweb_book_samples_server.vcxproj.user" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/_config.yml" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/appveyor.yml" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/build.cmd" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/ci/test/01_basic/basic_spec.lua" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/ci/test/01_basic/docroot/01_basic_test_dir/git_keep_empty_dir" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/ci/test/01_basic/docroot/01_basic_test_file" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/ci/test/README.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/ci/test/civet.lua" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/ci/travis/install_rocks.sh" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/ci/travis/lua_env.sh" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/ci/travis/platform.sh" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/ci/travis/run_ci_tests.sh" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/ci/travis/setup_lua.sh" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/cmake/AddCCompilerFlag.cmake" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/cmake/AddCXXCompilerFlag.cmake" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/cmake/DetermineTargetArchitecture.cmake" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/cmake/FindLibDl.cmake" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/cmake/FindLibM.cmake" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/cmake/FindLibRt.cmake" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/cmake/FindWinSock.cmake" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/cmake/civetweb-config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/cmake/civetweb-cpp.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/cmake/civetweb.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/codecov.yml" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/contrib/buildroot/Config.in" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/contrib/buildroot/civetweb.mk" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/APIReference.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/BuildOnAndroid.html" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/BuildOnAndroid.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/Building.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/CivetWebManual.html" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/CivetWebManual.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/ConfigurationProblems.html" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/ConfigurationProblems.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/Contribution.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/Docker.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/Embedding.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/Features.html" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/Features.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/Installing.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/OpenSSL.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/README.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/UsefulResources.html" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/UsefulResources.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/UserManual.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/WindowsUsage.html" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/WindowsUsage.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/WritingWebApplications.html" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/WritingWebApplications.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/_config.yml" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_base64_X.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_callbacks.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_check_digest_access_authentication.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_check_feature.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_client_cert.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_client_options.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_close_connection.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_connect_client.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_connect_client_secure.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_connect_websocket_client.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_cry.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_download.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_error_data.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_exit_library.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_form_data_handler.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_get_builtin_mime_type.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_get_connection_info.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_get_context.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_get_context_info.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_get_cookie.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_get_header.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_get_option.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_get_ports.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_get_request_info.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_get_request_link.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_get_response.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_get_response_code_text.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_get_response_info.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_get_server_ports.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_get_system_info.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_get_thread_pointer.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_get_user_connection_data.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_get_user_data.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_get_valid_option_names.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_get_valid_options.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_get_var.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_get_var2.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_handle_form_request.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_header.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_init_data.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_init_library.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_lock_connection.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_lock_context.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_match.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_md5.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_modify_passwords_file.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_modify_passwords_file_ha1.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_option.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_printf.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_read.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_request_info.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_response_header_X.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_response_info.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_send_chunk.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_send_digest_access_authentication_request.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_send_file.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_send_file_body.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_send_http_error.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_send_http_ok.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_send_http_redirect.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_send_mime_file.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_send_mime_file2.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_server_port.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_set_auth_handler.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_set_request_handler.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_set_user_connection_data.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_set_websocket_handler.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_set_websocket_handler_with_subprotocols.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_split_form_urlencoded.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_start.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_start_thread.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_stop.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_store_body.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_strcasecmp.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_strncasecmp.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_unlock_connection.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_unlock_context.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_upload.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_url_decode.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_url_encode.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_version.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_websocket_client_write.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_websocket_subprotocols.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_websocket_write.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_write.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/default.html" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/development-info.html" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/gnutls.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/icon.svg" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/mbedtls.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/styles/layout.css" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/styles/style0.css" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/styles/style1.css" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/styles/style2.css" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/styles/style3.css" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/yaSSL.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/format.bat" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/mingw.cmd" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/resources/Makefile.in-lua" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/resources/Makefile.in-os" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/resources/cert/client.csr" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/resources/cert/client.key" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/resources/cert/client.pfx" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/resources/cert/make_certs.bat" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/resources/cert/make_certs.sh" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/resources/cert/server.csr" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/resources/cert/server.key" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/resources/cert/server.pin" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/resources/cert/server_bkup.csr" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/resources/cert/server_bkup.key" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/resources/cert/server_bkup.pin" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/resources/check_defines.lua" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/resources/civetweb.conf" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/resources/civetweb.icns" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/resources/complete.lua" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/resources/coverity_check.sh" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/resources/itworks.html" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/resources/jni/Android.mk" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/resources/mingw.bat" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/resources/used_defines.txt" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/1000images.lua" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/100images.htm" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/HugeText.lua" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/MakefileTest.mk" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/MethodTest.xhtml" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/README.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/ajax/echo.lua" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/ajax/jquery.js" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/ajax/test-18.html" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/ajax/test.html" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/bad_script.lua" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/canvasdir/canvas.js" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/canvasdir/index.xhtml" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/canvasdir/style.css" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/cgi_test.html" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/cors.html" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/cors.reply.html" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/cors.reply.lua" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/cors.reply.shtml" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/dir with spaces/file with spaces.txt" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/dir with spaces/r&amp;d.txt" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/echo.lua" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/error.lua" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/error/404.shtml" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/error/error.shtml" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/error404.htm" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/exit.lua" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/filehandler.lua" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/form.html" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/handle_form.lua" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/hello.shtml" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/hello.txt" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/hello_gz_unzipped.txt" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/html_esc.lua" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/htmldir/index.html" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/htmldir/script.js" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/htmldir/style.css" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/images/biohazard-red-bg.svg" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/json.lua" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/lua_backbround_script_logging.lua" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/lua_backbround_script_timer.lua" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/lua_preload_file.lua" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/luarest/api/1/sensors/index.lua" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/nonlatin/这是一个示例文本.html" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/nonlatin/𞤀𞤣𞤤𞤢𞤥 𞤆𞤵𞤤𞤢𞤪.txt" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/page.lua" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/page.ssjs" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/page1.lua" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/page2.lua" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/page2.ssjs" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/page3.lua" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/page3.ssjs" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/page3a.lua" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/page4.lua" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/page5.lua" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/page6.lua" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/page7.lua" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/page_error.lua" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/page_keep_alive.lua" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/page_keep_alive_chunked.lua" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/page_shared.lua" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/page_status.lua" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/passfile" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/preload.lua" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/prime.ssjs" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/protected/content.txt" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/require_test.lua" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/resource_script_demo.lua" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/response_header.lua" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/scriptdir/index.lua" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/ssi_test.shtml" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/svgdir/index.xhtml" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/syntax_error.ssjs" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/websocket.lua" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/websocket.xhtml" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/websocket2.lua" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/websocket2.xhtml" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/websocket_wrong_url.xhtml" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/windows.cgi.cmd" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/windows_fail.cgi.cmd" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/windows_fail_silent.cgi.cmd" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/ws_status.lua" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/unittest/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/unittest/build_and_test_default.sh" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/unittest/build_and_test_full.sh" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/unittest/build_and_test_minimal.sh" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/util/checkout_to_known_git_branches_recursive.sh" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/util/register_git_remotes_recursive.sh" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/util/rm_cesanta_git_branches.sh" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/zephyr/module.yml" />
+  </ItemGroup>
+  <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+</Project>

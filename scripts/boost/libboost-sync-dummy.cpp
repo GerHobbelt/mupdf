@@ -1,9 +1,49 @@
 
+// fix ubiquitous warning C5204: 'boost::blah::blah<Blah>': class has virtual functions, but its trivial destructor is not virtual; instances of objects derived from this class may not be destructed correctly
+//
+// while this generally CAN/MAY be an issue, we brutally assume that the Boost Boys know their shit and NEVER make this mistake, i.e. the classes/structs in question are *implicitly `final`*!
+// To play it kinda safe, we apply this 'please shut up' fix to this dummy=see-if-we-can-compile-Ev'ryTing source file only:
+
+#if defined(_MSC_VER)
+#pragma warning(disable: 5204)
+
+// fix/shut up warning C4266: 'void boost::blah::blah::blah(...)': no override available for virtual member function from base 'boost::blah::blah'; function is hidden
+#pragma warning(disable: 4266)
+#endif
+
 #include <boost/sync/condition_variables.hpp>
+#include <boost/sync/condition_variables/condition_variable.hpp>
+#include <boost/sync/condition_variables/condition_variable_any.hpp>
+#include <boost/sync/condition_variables/cv_status.hpp>
+#include <boost/sync/condition_variables/notify_all_at_thread_exit.hpp>
 #include <boost/sync/events.hpp>
+#include <boost/sync/events/auto_reset_event.hpp>
+#include <boost/sync/events/manual_reset_event.hpp>
 #include <boost/sync/exceptions.hpp>
+#include <boost/sync/exceptions/lock_error.hpp>
+#include <boost/sync/exceptions/overflow_error.hpp>
+#include <boost/sync/exceptions/resource_error.hpp>
+#include <boost/sync/exceptions/runtime_exception.hpp>
+#include <boost/sync/exceptions/wait_error.hpp>
 #include <boost/sync/locks.hpp>
+#include <boost/sync/locks/lock_guard.hpp>
+#include <boost/sync/locks/lock_guard_fwd.hpp>
+#include <boost/sync/locks/lock_options.hpp>
+#include <boost/sync/locks/shared_lock.hpp>
+#include <boost/sync/locks/shared_lock_fwd.hpp>
+#include <boost/sync/locks/shared_lock_guard.hpp>
+#include <boost/sync/locks/shared_lock_guard_fwd.hpp>
+#include <boost/sync/locks/unique_lock.hpp>
+#include <boost/sync/locks/unique_lock_fwd.hpp>
+#include <boost/sync/locks/unlock_guard.hpp>
+#include <boost/sync/locks/unlock_guard_fwd.hpp>
+#include <boost/sync/locks/upgrade_lock.hpp>
+#include <boost/sync/locks/upgrade_lock_fwd.hpp>
 #include <boost/sync/mutexes.hpp>
+#include <boost/sync/mutexes/mutex.hpp>
+#include <boost/sync/mutexes/shared_spin_mutex.hpp>
+#include <boost/sync/mutexes/spin_mutex.hpp>
+#include <boost/sync/mutexes/timed_mutex.hpp>
 #include <boost/sync/semaphore.hpp>
 #include <boost/sync/thread_specific/at_thread_exit.hpp>
 #include <boost/sync/thread_specific/thread_specific_ptr.hpp>

@@ -1,14 +1,18 @@
 
+// fix ubiquitous warning C5204: 'boost::blah::blah<Blah>': class has virtual functions, but its trivial destructor is not virtual; instances of objects derived from this class may not be destructed correctly
+//
+// while this generally CAN/MAY be an issue, we brutally assume that the Boost Boys know their shit and NEVER make this mistake, i.e. the classes/structs in question are *implicitly `final`*!
+// To play it kinda safe, we apply this 'please shut up' fix to this dummy=see-if-we-can-compile-Ev'ryTing source file only:
+
+#if defined(_MSC_VER)
+#pragma warning(disable: 5204)
+
+// fix/shut up warning C4266: 'void boost::blah::blah::blah(...)': no override available for virtual member function from base 'boost::blah::blah'; function is hidden
+#pragma warning(disable: 4266)
+#endif
+
 #include <boost/exception/all.hpp>
 #include <boost/exception/current_exception_cast.hpp>
-#include <boost/exception/detail/clone_current_exception.hpp>
-#include <boost/exception/detail/error_info_impl.hpp>
-#include <boost/exception/detail/exception_ptr.hpp>
-#include <boost/exception/detail/is_output_streamable.hpp>
-#include <boost/exception/detail/object_hex_dump.hpp>
-#include <boost/exception/detail/requires_cxx11.hpp>
-#include <boost/exception/detail/shared_ptr.hpp>
-#include <boost/exception/detail/type_info.hpp>
 #include <boost/exception/diagnostic_information.hpp>
 #include <boost/exception/enable_current_exception.hpp>
 #include <boost/exception/enable_error_info.hpp>

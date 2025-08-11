@@ -1,63 +1,20 @@
 
+// fix ubiquitous warning C5204: 'boost::blah::blah<Blah>': class has virtual functions, but its trivial destructor is not virtual; instances of objects derived from this class may not be destructed correctly
+//
+// while this generally CAN/MAY be an issue, we brutally assume that the Boost Boys know their shit and NEVER make this mistake, i.e. the classes/structs in question are *implicitly `final`*!
+// To play it kinda safe, we apply this 'please shut up' fix to this dummy=see-if-we-can-compile-Ev'ryTing source file only:
+
+#if defined(_MSC_VER)
+#pragma warning(disable: 5204)
+
+// fix/shut up warning C4266: 'void boost::blah::blah::blah(...)': no override available for virtual member function from base 'boost::blah::blah'; function is hidden
+#pragma warning(disable: 4266)
+#endif
+
 #include <boost/function_types/components.hpp>
 #include <boost/function_types/config/cc_names.hpp>
 #include <boost/function_types/config/compiler.hpp>
 #include <boost/function_types/config/config.hpp>
-#include <boost/function_types/detail/class_transform.hpp>
-#include <boost/function_types/detail/classifier.hpp>
-#include <boost/function_types/detail/classifier_impl/arity10_0.hpp>
-#include <boost/function_types/detail/classifier_impl/arity10_1.hpp>
-#include <boost/function_types/detail/classifier_impl/arity20_0.hpp>
-#include <boost/function_types/detail/classifier_impl/arity20_1.hpp>
-#include <boost/function_types/detail/classifier_impl/arity30_0.hpp>
-#include <boost/function_types/detail/classifier_impl/arity30_1.hpp>
-#include <boost/function_types/detail/classifier_impl/arity40_0.hpp>
-#include <boost/function_types/detail/classifier_impl/arity40_1.hpp>
-#include <boost/function_types/detail/classifier_impl/arity50_0.hpp>
-#include <boost/function_types/detail/classifier_impl/arity50_1.hpp>
-#include <boost/function_types/detail/classifier_impl/master.hpp>
-#include <boost/function_types/detail/components_as_mpl_sequence.hpp>
-#include <boost/function_types/detail/components_impl/arity10_0.hpp>
-#include <boost/function_types/detail/components_impl/arity10_1.hpp>
-#include <boost/function_types/detail/components_impl/arity20_0.hpp>
-#include <boost/function_types/detail/components_impl/arity20_1.hpp>
-#include <boost/function_types/detail/components_impl/arity30_0.hpp>
-#include <boost/function_types/detail/components_impl/arity30_1.hpp>
-#include <boost/function_types/detail/components_impl/arity40_0.hpp>
-#include <boost/function_types/detail/components_impl/arity40_1.hpp>
-#include <boost/function_types/detail/components_impl/arity50_0.hpp>
-#include <boost/function_types/detail/components_impl/arity50_1.hpp>
-#include <boost/function_types/detail/components_impl/master.hpp>
-#include <boost/function_types/detail/cv_traits.hpp>
-#include <boost/function_types/detail/encoding/aliases_def.hpp>
-#include <boost/function_types/detail/encoding/aliases_undef.hpp>
-#include <boost/function_types/detail/encoding/def.hpp>
-#include <boost/function_types/detail/encoding/undef.hpp>
-#include <boost/function_types/detail/pp_arity_loop.hpp>
-#include <boost/function_types/detail/pp_cc_loop/master.hpp>
-#include <boost/function_types/detail/pp_cc_loop/preprocessed.hpp>
-#include <boost/function_types/detail/pp_loop.hpp>
-#include <boost/function_types/detail/pp_retag_default_cc/master.hpp>
-#include <boost/function_types/detail/pp_retag_default_cc/preprocessed.hpp>
-#include <boost/function_types/detail/pp_tags/cc_tag.hpp>
-#include <boost/function_types/detail/pp_tags/master.hpp>
-#include <boost/function_types/detail/pp_tags/preprocessed.hpp>
-#include <boost/function_types/detail/pp_variate_loop/master.hpp>
-#include <boost/function_types/detail/pp_variate_loop/preprocessed.hpp>
-#include <boost/function_types/detail/retag_default_cc.hpp>
-#include <boost/function_types/detail/synthesize.hpp>
-#include <boost/function_types/detail/synthesize_impl/arity10_0.hpp>
-#include <boost/function_types/detail/synthesize_impl/arity10_1.hpp>
-#include <boost/function_types/detail/synthesize_impl/arity20_0.hpp>
-#include <boost/function_types/detail/synthesize_impl/arity20_1.hpp>
-#include <boost/function_types/detail/synthesize_impl/arity30_0.hpp>
-#include <boost/function_types/detail/synthesize_impl/arity30_1.hpp>
-#include <boost/function_types/detail/synthesize_impl/arity40_0.hpp>
-#include <boost/function_types/detail/synthesize_impl/arity40_1.hpp>
-#include <boost/function_types/detail/synthesize_impl/arity50_0.hpp>
-#include <boost/function_types/detail/synthesize_impl/arity50_1.hpp>
-#include <boost/function_types/detail/synthesize_impl/master.hpp>
-#include <boost/function_types/detail/to_sequence.hpp>
 #include <boost/function_types/function_arity.hpp>
 #include <boost/function_types/function_pointer.hpp>
 #include <boost/function_types/function_reference.hpp>

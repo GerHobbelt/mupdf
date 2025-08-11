@@ -6,17 +6,33 @@
 # 4. all 'obnoxious' projects that are still of interest should end up in the 'misc' sln so we can work on them from there, when we decide to address their issues.
 #
 
-node ./sync-sln-files.js 1 m-dev-list.sln  $( find . -maxdepth 1 -type f -name '*.sln' )
+#node ./sync-sln-files.js 1 m-dev-list.sln  $( find . -maxdepth 1 -type f -name '*.sln' )
 
 # mode 2: anything listed in failed-ideas or obnoxious-to-be-evaluated does not need to show up in any of the m-dev-*.sln files any more!
-node ./sync-sln-files.js 2 m-dev-list.sln  $( find . -maxdepth 1 -type f -name '*.sln' )
+#node ./sync-sln-files.js 2 m-dev-list.sln  $( find . -maxdepth 1 -type f -name '*.sln' )
+
+# cope with node error: Argument list too long
+cat > __tmp_sln_vcproj_list__ <<EOF
+m-dev-list.sln  
+
+$( find . -maxdepth 1 -type f -name '*.sln' )  
+$( find . -maxdepth 1 -type f -name '*.vcxproj' )  
+$( find . -maxdepth 1 -type f -name '*.csproj' )  
+$( find . -maxdepth 1 -type f -name '*.vcxitems' )
+
+EOF
 
 
+node ./sync-sln-files.js 3 __tmp_sln_vcproj_list__
+
+exit 1;
 
 
-for f in $( find . -maxdepth 1 -type f -name '*.sln' | grep -v -E -e 'failed-ideas|obnoxious-to-be-evaluated' ) ; do
-	./add-vcxproj-dependencies-to-sln.sh $f
-done
+if false ; then
+	for f in $( find . -maxdepth 1 -type f -name '*.sln' | grep -v -E -e 'failed-ideas|obnoxious-to-be-evaluated' ) ; do
+		./add-vcxproj-dependencies-to-sln.sh $f
+	done
+fi
 
 for f in *.sln ; do 
 	node ./sort-sln-file.js  $f 

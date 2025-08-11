@@ -1,19 +1,18 @@
 
+// fix ubiquitous warning C5204: 'boost::blah::blah<Blah>': class has virtual functions, but its trivial destructor is not virtual; instances of objects derived from this class may not be destructed correctly
+//
+// while this generally CAN/MAY be an issue, we brutally assume that the Boost Boys know their shit and NEVER make this mistake, i.e. the classes/structs in question are *implicitly `final`*!
+// To play it kinda safe, we apply this 'please shut up' fix to this dummy=see-if-we-can-compile-Ev'ryTing source file only:
+
+#if defined(_MSC_VER)
+#pragma warning(disable: 5204)
+
+// fix/shut up warning C4266: 'void boost::blah::blah::blah(...)': no override available for virtual member function from base 'boost::blah::blah'; function is hidden
+#pragma warning(disable: 4266)
+#endif
+
 #include <boost/endian.hpp>
 #include <boost/endian/arithmetic.hpp>
 #include <boost/endian/buffers.hpp>
-#include <boost/endian/conversion.hpp>
-#include <boost/endian/detail/disable_warnings.hpp>
-#include <boost/endian/detail/disable_warnings_pop.hpp>
-#include <boost/endian/detail/endian_load.hpp>
-#include <boost/endian/detail/endian_reverse.hpp>
-#include <boost/endian/detail/endian_store.hpp>
-#include <boost/endian/detail/integral_by_size.hpp>
-#include <boost/endian/detail/intrinsic.hpp>
-#include <boost/endian/detail/is_integral.hpp>
-#include <boost/endian/detail/is_scoped_enum.hpp>
-#include <boost/endian/detail/is_trivially_copyable.hpp>
-#include <boost/endian/detail/order.hpp>
-#include <boost/endian/detail/static_assert.hpp>
 #include <boost/endian/endian.hpp>
 

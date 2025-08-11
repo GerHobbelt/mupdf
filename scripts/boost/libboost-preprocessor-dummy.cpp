@@ -1,10 +1,28 @@
 
+// fix ubiquitous warning C5204: 'boost::blah::blah<Blah>': class has virtual functions, but its trivial destructor is not virtual; instances of objects derived from this class may not be destructed correctly
+//
+// while this generally CAN/MAY be an issue, we brutally assume that the Boost Boys know their shit and NEVER make this mistake, i.e. the classes/structs in question are *implicitly `final`*!
+// To play it kinda safe, we apply this 'please shut up' fix to this dummy=see-if-we-can-compile-Ev'ryTing source file only:
+
+#if defined(_MSC_VER)
+#pragma warning(disable: 5204)
+
+// fix/shut up warning C4266: 'void boost::blah::blah::blah(...)': no override available for virtual member function from base 'boost::blah::blah'; function is hidden
+#pragma warning(disable: 4266)
+#endif
+
 #include <boost/preprocessor.hpp>
 #include <boost/preprocessor/arithmetic.hpp>
 #include <boost/preprocessor/arithmetic/add.hpp>
 #include <boost/preprocessor/arithmetic/dec.hpp>
 #include <boost/preprocessor/arithmetic/div.hpp>
 #include <boost/preprocessor/arithmetic/inc.hpp>
+#include <boost/preprocessor/arithmetic/limits/dec_1024.hpp>
+#include <boost/preprocessor/arithmetic/limits/dec_256.hpp>
+#include <boost/preprocessor/arithmetic/limits/dec_512.hpp>
+#include <boost/preprocessor/arithmetic/limits/inc_1024.hpp>
+#include <boost/preprocessor/arithmetic/limits/inc_256.hpp>
+#include <boost/preprocessor/arithmetic/limits/inc_512.hpp>
 #include <boost/preprocessor/arithmetic/mod.hpp>
 #include <boost/preprocessor/arithmetic/mul.hpp>
 #include <boost/preprocessor/arithmetic/sub.hpp>
@@ -34,6 +52,9 @@
 #include <boost/preprocessor/comparison/greater_equal.hpp>
 #include <boost/preprocessor/comparison/less.hpp>
 #include <boost/preprocessor/comparison/less_equal.hpp>
+#include <boost/preprocessor/comparison/limits/not_equal_1024.hpp>
+#include <boost/preprocessor/comparison/limits/not_equal_256.hpp>
+#include <boost/preprocessor/comparison/limits/not_equal_512.hpp>
 #include <boost/preprocessor/comparison/not_equal.hpp>
 #include <boost/preprocessor/config/config.hpp>
 #include <boost/preprocessor/config/limits.hpp>
@@ -43,19 +64,15 @@
 #include <boost/preprocessor/control/expr_iif.hpp>
 #include <boost/preprocessor/control/if.hpp>
 #include <boost/preprocessor/control/iif.hpp>
+#include <boost/preprocessor/control/limits/while_1024.hpp>
+#include <boost/preprocessor/control/limits/while_256.hpp>
+#include <boost/preprocessor/control/limits/while_512.hpp>
 #include <boost/preprocessor/control/while.hpp>
 #include <boost/preprocessor/debug.hpp>
 #include <boost/preprocessor/debug/assert.hpp>
 #include <boost/preprocessor/debug/error.hpp>
 #include <boost/preprocessor/debug/line.hpp>
 #include <boost/preprocessor/dec.hpp>
-#include <boost/preprocessor/detail/auto_rec.hpp>
-#include <boost/preprocessor/detail/check.hpp>
-#include <boost/preprocessor/detail/is_binary.hpp>
-#include <boost/preprocessor/detail/is_nullary.hpp>
-#include <boost/preprocessor/detail/is_unary.hpp>
-#include <boost/preprocessor/detail/null.hpp>
-#include <boost/preprocessor/detail/split.hpp>
 #include <boost/preprocessor/empty.hpp>
 #include <boost/preprocessor/enum.hpp>
 #include <boost/preprocessor/enum_params.hpp>
@@ -68,7 +85,6 @@
 #include <boost/preprocessor/facilities.hpp>
 #include <boost/preprocessor/facilities/apply.hpp>
 #include <boost/preprocessor/facilities/check_empty.hpp>
-#include <boost/preprocessor/facilities/detail/is_empty.hpp>
 #include <boost/preprocessor/facilities/empty.hpp>
 #include <boost/preprocessor/facilities/expand.hpp>
 #include <boost/preprocessor/facilities/identity.hpp>
@@ -77,6 +93,9 @@
 #include <boost/preprocessor/facilities/is_empty.hpp>
 #include <boost/preprocessor/facilities/is_empty_or_1.hpp>
 #include <boost/preprocessor/facilities/is_empty_variadic.hpp>
+#include <boost/preprocessor/facilities/limits/intercept_1024.hpp>
+#include <boost/preprocessor/facilities/limits/intercept_256.hpp>
+#include <boost/preprocessor/facilities/limits/intercept_512.hpp>
 #include <boost/preprocessor/facilities/overload.hpp>
 #include <boost/preprocessor/facilities/va_opt.hpp>
 #include <boost/preprocessor/for.hpp>
@@ -103,6 +122,9 @@
 #include <boost/preprocessor/list/for_each.hpp>
 #include <boost/preprocessor/list/for_each_i.hpp>
 #include <boost/preprocessor/list/for_each_product.hpp>
+#include <boost/preprocessor/list/limits/fold_left_1024.hpp>
+#include <boost/preprocessor/list/limits/fold_left_256.hpp>
+#include <boost/preprocessor/list/limits/fold_left_512.hpp>
 #include <boost/preprocessor/list/rest_n.hpp>
 #include <boost/preprocessor/list/reverse.hpp>
 #include <boost/preprocessor/list/size.hpp>
@@ -118,6 +140,9 @@
 #include <boost/preprocessor/logical/bitxor.hpp>
 #include <boost/preprocessor/logical/bool.hpp>
 #include <boost/preprocessor/logical/compl.hpp>
+#include <boost/preprocessor/logical/limits/bool_1024.hpp>
+#include <boost/preprocessor/logical/limits/bool_256.hpp>
+#include <boost/preprocessor/logical/limits/bool_512.hpp>
 #include <boost/preprocessor/logical/nor.hpp>
 #include <boost/preprocessor/logical/not.hpp>
 #include <boost/preprocessor/logical/or.hpp>
@@ -152,6 +177,12 @@
 #include <boost/preprocessor/repetition/enum_trailing_binary_params.hpp>
 #include <boost/preprocessor/repetition/enum_trailing_params.hpp>
 #include <boost/preprocessor/repetition/for.hpp>
+#include <boost/preprocessor/repetition/limits/for_1024.hpp>
+#include <boost/preprocessor/repetition/limits/for_256.hpp>
+#include <boost/preprocessor/repetition/limits/for_512.hpp>
+#include <boost/preprocessor/repetition/limits/repeat_1024.hpp>
+#include <boost/preprocessor/repetition/limits/repeat_256.hpp>
+#include <boost/preprocessor/repetition/limits/repeat_512.hpp>
 #include <boost/preprocessor/repetition/repeat.hpp>
 #include <boost/preprocessor/repetition/repeat_from_to.hpp>
 #include <boost/preprocessor/selection.hpp>
@@ -159,10 +190,6 @@
 #include <boost/preprocessor/selection/min.hpp>
 #include <boost/preprocessor/seq.hpp>
 #include <boost/preprocessor/seq/cat.hpp>
-#include <boost/preprocessor/seq/detail/binary_transform.hpp>
-#include <boost/preprocessor/seq/detail/is_empty.hpp>
-#include <boost/preprocessor/seq/detail/split.hpp>
-#include <boost/preprocessor/seq/detail/to_list_msvc.hpp>
 #include <boost/preprocessor/seq/elem.hpp>
 #include <boost/preprocessor/seq/enum.hpp>
 #include <boost/preprocessor/seq/filter.hpp>
@@ -173,6 +200,21 @@
 #include <boost/preprocessor/seq/for_each_i.hpp>
 #include <boost/preprocessor/seq/for_each_product.hpp>
 #include <boost/preprocessor/seq/insert.hpp>
+#include <boost/preprocessor/seq/limits/elem_1024.hpp>
+#include <boost/preprocessor/seq/limits/elem_256.hpp>
+#include <boost/preprocessor/seq/limits/elem_512.hpp>
+#include <boost/preprocessor/seq/limits/enum_1024.hpp>
+#include <boost/preprocessor/seq/limits/enum_256.hpp>
+#include <boost/preprocessor/seq/limits/enum_512.hpp>
+#include <boost/preprocessor/seq/limits/fold_left_1024.hpp>
+#include <boost/preprocessor/seq/limits/fold_left_256.hpp>
+#include <boost/preprocessor/seq/limits/fold_left_512.hpp>
+#include <boost/preprocessor/seq/limits/fold_right_1024.hpp>
+#include <boost/preprocessor/seq/limits/fold_right_256.hpp>
+#include <boost/preprocessor/seq/limits/fold_right_512.hpp>
+#include <boost/preprocessor/seq/limits/size_1024.hpp>
+#include <boost/preprocessor/seq/limits/size_256.hpp>
+#include <boost/preprocessor/seq/limits/size_512.hpp>
 #include <boost/preprocessor/seq/pop_back.hpp>
 #include <boost/preprocessor/seq/pop_front.hpp>
 #include <boost/preprocessor/seq/push_back.hpp>
@@ -198,6 +240,15 @@
 #include <boost/preprocessor/tuple/elem.hpp>
 #include <boost/preprocessor/tuple/enum.hpp>
 #include <boost/preprocessor/tuple/insert.hpp>
+#include <boost/preprocessor/tuple/limits/reverse_128.hpp>
+#include <boost/preprocessor/tuple/limits/reverse_256.hpp>
+#include <boost/preprocessor/tuple/limits/reverse_64.hpp>
+#include <boost/preprocessor/tuple/limits/to_list_128.hpp>
+#include <boost/preprocessor/tuple/limits/to_list_256.hpp>
+#include <boost/preprocessor/tuple/limits/to_list_64.hpp>
+#include <boost/preprocessor/tuple/limits/to_seq_128.hpp>
+#include <boost/preprocessor/tuple/limits/to_seq_256.hpp>
+#include <boost/preprocessor/tuple/limits/to_seq_64.hpp>
 #include <boost/preprocessor/tuple/pop_back.hpp>
 #include <boost/preprocessor/tuple/pop_front.hpp>
 #include <boost/preprocessor/tuple/push_back.hpp>
@@ -213,6 +264,12 @@
 #include <boost/preprocessor/variadic.hpp>
 #include <boost/preprocessor/variadic/elem.hpp>
 #include <boost/preprocessor/variadic/has_opt.hpp>
+#include <boost/preprocessor/variadic/limits/elem_128.hpp>
+#include <boost/preprocessor/variadic/limits/elem_256.hpp>
+#include <boost/preprocessor/variadic/limits/elem_64.hpp>
+#include <boost/preprocessor/variadic/limits/size_128.hpp>
+#include <boost/preprocessor/variadic/limits/size_256.hpp>
+#include <boost/preprocessor/variadic/limits/size_64.hpp>
 #include <boost/preprocessor/variadic/size.hpp>
 #include <boost/preprocessor/variadic/to_array.hpp>
 #include <boost/preprocessor/variadic/to_list.hpp>

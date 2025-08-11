@@ -2,7 +2,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const debug = true;
+const debug = false;
 
 //
 // 1. Using m-dev-list.sln as the base/driver, update all SLN files.
@@ -198,7 +198,8 @@ case 2:
         l.in_obnoxious_sln = false;
         l.in_misc_sln = false;
 		l.occur_count = 0; 
-		console.log(`list_prj: ${ l.file }`);
+        l.ignore = l.file.includes('../../');
+		if (debug)  console.log(`list_prj: ${ l.file }`);
 		return l; 
 	});
 
@@ -211,7 +212,8 @@ case 2:
 			l.in_obnoxious_sln = false;
 			l.in_misc_sln = false;
 			l.occur_count = 0; 
-			console.log(`failed_prj: ${ l.file }`);
+			l.ignore = l.file.includes('../../');
+			if (debug)  console.log(`failed_prj: ${ l.file }`);
             list_prjs.push(l);
         } else {
             list_prjs[idx].in_failed_sln = true;
@@ -226,7 +228,8 @@ case 2:
 			l.in_obnoxious_sln = false;
 			l.in_misc_sln = false;
 			l.occur_count = 0; 
-			console.log(`maymatter_prj: ${ l.file }`);
+			l.ignore = l.file.includes('../../');
+			if (debug)  console.log(`maymatter_prj: ${ l.file }`);
             list_prjs.push(l);
         } else {
             list_prjs[idx].in_maymatter_sln = true;
@@ -241,7 +244,8 @@ case 2:
 			l.in_obnoxious_sln = true;    //X
 			l.in_misc_sln = false;
 			l.occur_count = 0; 
-			console.log(`obnoxious_prj: ${ l.file }`);
+			l.ignore = l.file.includes('../../');
+			if (debug)  console.log(`obnoxious_prj: ${ l.file }`);
             list_prjs.push(l);
         } else {
             list_prjs[idx].in_obnoxious_sln = true;
@@ -256,7 +260,8 @@ case 2:
 			l.in_obnoxious_sln = false;
 			l.in_misc_sln = true;       //X 
 			l.occur_count = 0;   
-			console.log(`misc_prj: ${ l.file }`);
+			l.ignore = l.file.includes('../../');
+			if (debug)  console.log(`misc_prj: ${ l.file }`);
             list_prjs.push(l);
         } else {
             list_prjs[idx].in_misc_sln = true;
@@ -286,6 +291,7 @@ case 2:
 				l.in_obnoxious_sln = false;
 				l.in_misc_sln = false;
                 l.occur_count = 1;
+				l.ignore = l.file.includes('../../');
                 list_prjs.push(l);
             } else {
                 list_prjs[idx].occur_count++;
@@ -326,6 +332,10 @@ EndProject
             `;
             has_been_edited[maymatter_sln_file] = true;
         }
+		
+		// 'ignore'-flagged projects are to be included everywhere, so NO REMOVAL!
+		if ( l.ignore )
+			return;
 
 		if ( l.in_maymatter_sln && l.in_failed_sln ) {
 			console.log(`Project ${ l.name } is present in *both* the FAILED-IDEAS and MAY-MATTER solutions: removing it from the MAY-MATTER solution.\n`);
@@ -384,6 +394,10 @@ EndProject
             if (idx >= 0) {
                 let prj = list_prjs[idx];
 
+				// 'ignore'-flagged projects are to be included everywhere, so NO REMOVAL!
+				if ( prj.ignore )
+					return;
+
 				if ( prj.in_failed_sln ) {
 					console.log(`Project ${ d.name } is present in *both* the FAILED-IDEAS and ${ dest_sln_file } solutions: removing it from the ${ dest_sln_file } solution.\n`);
 
@@ -422,5 +436,114 @@ EndProject
     }
 }
     break;
+	
+case 3:
+{
+	// sync the UUIDs for all projects: assign them final UUIDs, if they haven't already.
+	//
+	// <ProjectGuid>{BFD01D9C-AC53-64D2-BC7B-9C711B129D59}</ProjectGuid>
+	
+	// as we expected a lot of file paths, Win32 bash b0rked, so we're down to using an @ file instead: grab all file paths from there!
+	let dest_files = fs.readFileSync(source_sln_file, 'utf8')
+	.split('\n')
+	.map((l) => l.trim())
+	.filter((l) => l.length > 0);
+	console.log({ dest_files });
+
+	let uuid_map = {};
+	
+	dest_files.forEach((l) => {
+		let file_src = fs.readFileSync(l, 'utf8');
+
+		// e.g. Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1D-RGB-color-gradient", "1D-RGB-color-gradient.vcxproj", "{3644E12D-D934-41FD-BF7E-83745A17E226}"
+		//      Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libmupdf_CarvedSubset", "libmupdf_CarvedSubset.vcxitems", "{08FF3748-F1BD-40A1-9322-F93FD04C2350}"
+		//      Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MuPDFSharp", "..\..\MupdfSharp\MuPDFSharp.csproj", "{8E506476-FFAE-46B2-977D-45EB25ECF394}"
+	    let prj_re = /^Project[^=]*?8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942[^=]*= "([^"]+)", "([^"]+?[.]vcx(?:proj|items))", "[{]([^}"]+?)[}]".*?$/gm;
+
+		let m = prj_re.exec(file_src);
+		let mx = { ...m };
+		delete mx.input;
+		console.log({ prj_re, mx });
+		while (m) {
+			let info = {
+				name: m[1],
+				file: path.basename(m[2]),
+				filepath: m[2],
+				uuid: m[3],
+				is_project_ref: true
+			};
+			console.log({line: m[0], info});
+			
+			m = prj_re.exec(file_src);
+		}
+		
+		// e.g.    <ProjectGuid>{BFD01D9C-AC53-64D2-BC7B-9C711B129D59}</ProjectGuid>
+		//         <ProjectGuid>{8E506476-FFAE-46B2-977D-45EB25ECF394}</ProjectGuid>
+		//         <ItemsProjectGuid>{08ff3748-f1bd-40a1-9322-f93fd04c2350}</ItemsProjectGuid>
+		//
+		//         <ProjectReference Include="libabseil-cpp.vcxproj">
+		//           <Project>{a60d8644-5a1c-4d29-8970-7518ff3d0c57}</Project>
+		//         </ProjectReference>
+
+	    prj_re = /^\s*<ProjectGuid>[{]([^}]+?)[}]<\/ProjectGuid>.*?$/gm;
+
+		m = prj_re.exec(file_src);
+		mx = { ...m };
+		delete mx.input;
+		console.log({ prj_re, mx });
+		while (m) {
+			let info = {
+				name: null,
+				file: path.basename(l),
+				filepath: l,
+				uuid: m[1],
+				is_project_spec: true
+			};
+			console.log({line: m[0], info});
+			
+			m = prj_re.exec(file_src);
+		}
+
+	    prj_re = /^\s*<ItemsProjectGuid>[{]([^}]+?)[}]<\/ItemsProjectGuid>.*?$/gm;
+
+		m = prj_re.exec(file_src);
+		mx = { ...m };
+		delete mx.input;
+		console.log({ prj_re, mx });
+		while (m) {
+			let info = {
+				name: null,
+				file: path.basename(l),
+				filepath: l,
+				uuid: m[1],
+				is_collection_spec: true
+			};
+			console.log({line: m[0], info});
+			
+			m = prj_re.exec(file_src);
+		}
+
+	    prj_re = /<ProjectReference\s+Include="([^"]+)">[\s\r\n]*<Project>[{]([^}]+?)[}]<\/Project>[\s\r\n]*<\/ProjectReference>/g;
+
+		m = prj_re.exec(file_src);
+		mx = { ...m };
+		delete mx.input;
+		console.log({ prj_re, mx });
+		while (m) {
+			let info = {
+				name: null,
+				file: path.basename(m[1]),
+				filepath: m[1],
+				uuid: m[2],
+				is_crossref: true
+			};
+			console.log({line: m[0], info});
+			
+			m = prj_re.exec(file_src);
+		}
+	});
+
+}
+	break;
 }
 

@@ -1,4 +1,16 @@
 
+// fix ubiquitous warning C5204: 'boost::blah::blah<Blah>': class has virtual functions, but its trivial destructor is not virtual; instances of objects derived from this class may not be destructed correctly
+//
+// while this generally CAN/MAY be an issue, we brutally assume that the Boost Boys know their shit and NEVER make this mistake, i.e. the classes/structs in question are *implicitly `final`*!
+// To play it kinda safe, we apply this 'please shut up' fix to this dummy=see-if-we-can-compile-Ev'ryTing source file only:
+
+#if defined(_MSC_VER)
+#pragma warning(disable: 5204)
+
+// fix/shut up warning C4266: 'void boost::blah::blah::blah(...)': no override available for virtual member function from base 'boost::blah::blah'; function is hidden
+#pragma warning(disable: 4266)
+#endif
+
 #include <boost/interprocess/allocators/adaptive_pool.hpp>
 #include <boost/interprocess/allocators/allocator.hpp>
 #include <boost/interprocess/allocators/cached_adaptive_pool.hpp>
@@ -8,6 +20,7 @@
 #include <boost/interprocess/allocators/private_node_allocator.hpp>
 #include <boost/interprocess/anonymous_shared_memory.hpp>
 #include <boost/interprocess/containers/allocation_type.hpp>
+#include <boost/interprocess/containers/containers_fwd.hpp>
 #include <boost/interprocess/containers/deque.hpp>
 #include <boost/interprocess/containers/flat_map.hpp>
 #include <boost/interprocess/containers/flat_set.hpp>
@@ -29,15 +42,16 @@
 #include <boost/interprocess/indexes/iunordered_set_index.hpp>
 #include <boost/interprocess/indexes/map_index.hpp>
 #include <boost/interprocess/indexes/null_index.hpp>
+#include <boost/interprocess/interprocess_fwd.hpp>
 #include <boost/interprocess/interprocess_printers.hpp>
 #include <boost/interprocess/ipc/message_queue.hpp>
 #include <boost/interprocess/managed_external_buffer.hpp>
 #include <boost/interprocess/managed_heap_memory.hpp>
 #include <boost/interprocess/managed_mapped_file.hpp>
 #include <boost/interprocess/managed_shared_memory.hpp>
+#include <boost/interprocess/managed_windows_shared_memory.hpp>
+#include <boost/interprocess/managed_xsi_shared_memory.hpp>
 #include <boost/interprocess/mapped_region.hpp>
-#include <boost/interprocess/mem_algo/detail/mem_algo_common.hpp>
-#include <boost/interprocess/mem_algo/detail/simple_seq_fit_impl.hpp>
 #include <boost/interprocess/mem_algo/rbtree_best_fit.hpp>
 #include <boost/interprocess/mem_algo/simple_seq_fit.hpp>
 #include <boost/interprocess/offset_ptr.hpp>
@@ -72,15 +86,6 @@
 #include <boost/interprocess/sync/named_sharable_mutex.hpp>
 #include <boost/interprocess/sync/named_upgradable_mutex.hpp>
 #include <boost/interprocess/sync/null_mutex.hpp>
-#include <boost/interprocess/sync/posix/condition.hpp>
-#include <boost/interprocess/sync/posix/mutex.hpp>
-#include <boost/interprocess/sync/posix/named_mutex.hpp>
-#include <boost/interprocess/sync/posix/named_semaphore.hpp>
-#include <boost/interprocess/sync/posix/pthread_helpers.hpp>
-#include <boost/interprocess/sync/posix/recursive_mutex.hpp>
-#include <boost/interprocess/sync/posix/semaphore.hpp>
-#include <boost/interprocess/sync/posix/semaphore_wrapper.hpp>
-#include <boost/interprocess/sync/posix/timepoint_to_timespec.hpp>
 #include <boost/interprocess/sync/scoped_lock.hpp>
 #include <boost/interprocess/sync/sharable_lock.hpp>
 #include <boost/interprocess/sync/shm/named_condition.hpp>
@@ -97,20 +102,6 @@
 #include <boost/interprocess/sync/spin/semaphore.hpp>
 #include <boost/interprocess/sync/spin/wait.hpp>
 #include <boost/interprocess/sync/upgradable_lock.hpp>
-#include <boost/interprocess/sync/windows/condition.hpp>
-#include <boost/interprocess/sync/windows/mutex.hpp>
-#include <boost/interprocess/sync/windows/named_condition.hpp>
-#include <boost/interprocess/sync/windows/named_condition_any.hpp>
-#include <boost/interprocess/sync/windows/named_mutex.hpp>
-#include <boost/interprocess/sync/windows/named_recursive_mutex.hpp>
-#include <boost/interprocess/sync/windows/named_semaphore.hpp>
-#include <boost/interprocess/sync/windows/named_sync.hpp>
-#include <boost/interprocess/sync/windows/recursive_mutex.hpp>
-#include <boost/interprocess/sync/windows/semaphore.hpp>
-#include <boost/interprocess/sync/windows/sync_utils.hpp>
-#include <boost/interprocess/sync/windows/winapi_mutex_wrapper.hpp>
-#include <boost/interprocess/sync/windows/winapi_semaphore_wrapper.hpp>
-#include <boost/interprocess/sync/windows/winapi_wrapper_common.hpp>
 #include <boost/interprocess/timed_utils.hpp>
 #include <boost/interprocess/windows_shared_memory.hpp>
 #include <boost/interprocess/xsi_key.hpp>

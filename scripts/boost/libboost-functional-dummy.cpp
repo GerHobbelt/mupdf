@@ -1,4 +1,16 @@
 
+// fix ubiquitous warning C5204: 'boost::blah::blah<Blah>': class has virtual functions, but its trivial destructor is not virtual; instances of objects derived from this class may not be destructed correctly
+//
+// while this generally CAN/MAY be an issue, we brutally assume that the Boost Boys know their shit and NEVER make this mistake, i.e. the classes/structs in question are *implicitly `final`*!
+// To play it kinda safe, we apply this 'please shut up' fix to this dummy=see-if-we-can-compile-Ev'ryTing source file only:
+
+#if defined(_MSC_VER)
+#pragma warning(disable: 5204)
+
+// fix/shut up warning C4266: 'void boost::blah::blah::blah(...)': no override available for virtual member function from base 'boost::blah::blah'; function is hidden
+#pragma warning(disable: 4266)
+#endif
+
 #include <boost/functional.hpp>
 #include <boost/functional/factory.hpp>
 #include <boost/functional/forward_adapter.hpp>
@@ -6,7 +18,5 @@
 #include <boost/functional/lightweight_forward_adapter.hpp>
 #include <boost/functional/overloaded_function.hpp>
 #include <boost/functional/overloaded_function/config.hpp>
-#include <boost/functional/overloaded_function/detail/base.hpp>
-#include <boost/functional/overloaded_function/detail/function_type.hpp>
 #include <boost/functional/value_factory.hpp>
 

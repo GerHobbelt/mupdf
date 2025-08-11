@@ -1,4 +1,16 @@
 
+// fix ubiquitous warning C5204: 'boost::blah::blah<Blah>': class has virtual functions, but its trivial destructor is not virtual; instances of objects derived from this class may not be destructed correctly
+//
+// while this generally CAN/MAY be an issue, we brutally assume that the Boost Boys know their shit and NEVER make this mistake, i.e. the classes/structs in question are *implicitly `final`*!
+// To play it kinda safe, we apply this 'please shut up' fix to this dummy=see-if-we-can-compile-Ev'ryTing source file only:
+
+#if defined(_MSC_VER)
+#pragma warning(disable: 5204)
+
+// fix/shut up warning C4266: 'void boost::blah::blah::blah(...)': no override available for virtual member function from base 'boost::blah::blah'; function is hidden
+#pragma warning(disable: 4266)
+#endif
+
 #include <boost/checked_delete.hpp>
 #include <boost/core/addressof.hpp>
 #include <boost/core/alignof.hpp>
@@ -11,15 +23,6 @@
 #include <boost/core/data.hpp>
 #include <boost/core/default_allocator.hpp>
 #include <boost/core/demangle.hpp>
-#include <boost/core/detail/is_same.hpp>
-#include <boost/core/detail/lwt_unattended.hpp>
-#include <boost/core/detail/minstd_rand.hpp>
-#include <boost/core/detail/sp_thread_pause.hpp>
-#include <boost/core/detail/sp_thread_sleep.hpp>
-#include <boost/core/detail/sp_thread_yield.hpp>
-#include <boost/core/detail/sp_win32_sleep.hpp>
-#include <boost/core/detail/splitmix64.hpp>
-#include <boost/core/detail/string_view.hpp>
 #include <boost/core/empty_value.hpp>
 #include <boost/core/enable_if.hpp>
 #include <boost/core/exchange.hpp>
@@ -30,7 +33,7 @@
 #include <boost/core/identity.hpp>
 #include <boost/core/ignore_unused.hpp>
 #include <boost/core/invoke_swap.hpp>
-//#include <boost/core/is_same.hpp>
+#include <boost/core/is_same.hpp>
 #include <boost/core/launder.hpp>
 #include <boost/core/lightweight_test.hpp>
 #include <boost/core/lightweight_test_trait.hpp>
@@ -51,7 +54,7 @@
 #include <boost/core/size.hpp>
 #include <boost/core/snprintf.hpp>
 #include <boost/core/span.hpp>
-//#include <boost/core/swap.hpp>
+#include <boost/core/swap.hpp>
 #include <boost/core/type_name.hpp>
 #include <boost/core/typeinfo.hpp>
 #include <boost/core/uncaught_exceptions.hpp>
@@ -59,13 +62,8 @@
 #include <boost/core/use_default.hpp>
 #include <boost/core/verbose_terminate_handler.hpp>
 #include <boost/core/yield_primitives.hpp>
-//#include <boost/detail/iterator.hpp>
-#include <boost/detail/lightweight_test.hpp>
-//#include <boost/detail/no_exceptions_support.hpp>
-//#include <boost/detail/scoped_enum_emulation.hpp>
-//#include <boost/detail/sp_typeinfo.hpp>
 #include <boost/get_pointer.hpp>
-//#include <boost/iterator.hpp>
+#include <boost/iterator.hpp>
 #include <boost/non_type.hpp>
 #include <boost/noncopyable.hpp>
 #include <boost/ref.hpp>
@@ -74,6 +72,6 @@
 #include <boost/utility/addressof.hpp>
 #include <boost/utility/enable_if.hpp>
 #include <boost/utility/explicit_operator_bool.hpp>
-//#include <boost/utility/swap.hpp>
+#include <boost/utility/swap.hpp>
 #include <boost/visit_each.hpp>
 

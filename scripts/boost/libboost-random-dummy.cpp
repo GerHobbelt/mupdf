@@ -1,4 +1,16 @@
 
+// fix ubiquitous warning C5204: 'boost::blah::blah<Blah>': class has virtual functions, but its trivial destructor is not virtual; instances of objects derived from this class may not be destructed correctly
+//
+// while this generally CAN/MAY be an issue, we brutally assume that the Boost Boys know their shit and NEVER make this mistake, i.e. the classes/structs in question are *implicitly `final`*!
+// To play it kinda safe, we apply this 'please shut up' fix to this dummy=see-if-we-can-compile-Ev'ryTing source file only:
+
+#if defined(_MSC_VER)
+#pragma warning(disable: 5204)
+
+// fix/shut up warning C4266: 'void boost::blah::blah::blah(...)': no override available for virtual member function from base 'boost::blah::blah'; function is hidden
+#pragma warning(disable: 4266)
+#endif
+
 #include <boost/nondet_random.hpp>
 #include <boost/random.hpp>
 #include <boost/random/additive_combine.hpp>
@@ -14,10 +26,12 @@
 #include <boost/random/faure.hpp>
 #include <boost/random/fisher_f_distribution.hpp>
 #include <boost/random/gamma_distribution.hpp>
+#include <boost/random/generalized_inverse_gaussian_distribution.hpp>
 #include <boost/random/generate_canonical.hpp>
 #include <boost/random/geometric_distribution.hpp>
 #include <boost/random/hyperexponential_distribution.hpp>
 #include <boost/random/independent_bits.hpp>
+#include <boost/random/inverse_gaussian_distribution.hpp>
 #include <boost/random/inversive_congruential.hpp>
 #include <boost/random/lagged_fibonacci.hpp>
 #include <boost/random/laplace_distribution.hpp>
@@ -56,4 +70,5 @@
 #include <boost/random/variate_generator.hpp>
 #include <boost/random/weibull_distribution.hpp>
 #include <boost/random/xor_combine.hpp>
+#include <boost/random/xoshiro.hpp>
 

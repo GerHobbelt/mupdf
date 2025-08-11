@@ -1,5 +1,20 @@
 
+// fix ubiquitous warning C5204: 'boost::blah::blah<Blah>': class has virtual functions, but its trivial destructor is not virtual; instances of objects derived from this class may not be destructed correctly
+//
+// while this generally CAN/MAY be an issue, we brutally assume that the Boost Boys know their shit and NEVER make this mistake, i.e. the classes/structs in question are *implicitly `final`*!
+// To play it kinda safe, we apply this 'please shut up' fix to this dummy=see-if-we-can-compile-Ev'ryTing source file only:
+
+#if defined(_MSC_VER)
+#pragma warning(disable: 5204)
+
+// fix/shut up warning C4266: 'void boost::blah::blah::blah(...)': no override available for virtual member function from base 'boost::blah::blah'; function is hidden
+#pragma warning(disable: 4266)
+#endif
+
 #include <boost/cstdfloat.hpp>
+#include <boost/math/bindings/mpfr.hpp>
+#include <boost/math/bindings/mpreal.hpp>
+#include <boost/math/bindings/rr.hpp>
 #include <boost/math/ccmath/abs.hpp>
 #include <boost/math/ccmath/ccmath.hpp>
 #include <boost/math/ccmath/ceil.hpp>
@@ -36,6 +51,9 @@
 #include <boost/math/ccmath/signbit.hpp>
 #include <boost/math/ccmath/sqrt.hpp>
 #include <boost/math/ccmath/trunc.hpp>
+#include <boost/math/common_factor.hpp>
+#include <boost/math/common_factor_ct.hpp>
+#include <boost/math/common_factor_rt.hpp>
 #include <boost/math/complex.hpp>
 #include <boost/math/complex/acos.hpp>
 #include <boost/math/complex/acosh.hpp>
@@ -52,7 +70,14 @@
 #include <boost/math/constants/calculate_constants.hpp>
 #include <boost/math/constants/constants.hpp>
 #include <boost/math/constants/info.hpp>
+#include <boost/math/cstdfloat/cstdfloat_cmath.hpp>
+#include <boost/math/cstdfloat/cstdfloat_complex.hpp>
+#include <boost/math/cstdfloat/cstdfloat_complex_std.hpp>
+#include <boost/math/cstdfloat/cstdfloat_iostream.hpp>
+#include <boost/math/cstdfloat/cstdfloat_limits.hpp>
+#include <boost/math/cstdfloat/cstdfloat_types.hpp>
 #include <boost/math/differentiation/autodiff.hpp>
+#include <boost/math/differentiation/autodiff_cpp11.hpp>
 #include <boost/math/differentiation/finite_difference.hpp>
 #include <boost/math/differentiation/lanczos_smoothing.hpp>
 #include <boost/math/distributions.hpp>
@@ -191,6 +216,7 @@
 #include <boost/math/special_functions/log1p.hpp>
 #include <boost/math/special_functions/logaddexp.hpp>
 #include <boost/math/special_functions/logsumexp.hpp>
+#include <boost/math/special_functions/math_fwd.hpp>
 #include <boost/math/special_functions/modf.hpp>
 #include <boost/math/special_functions/next.hpp>
 #include <boost/math/special_functions/nonfinite_num_facets.hpp>
@@ -215,8 +241,6 @@
 #include <boost/math/statistics/anderson_darling.hpp>
 #include <boost/math/statistics/bivariate_statistics.hpp>
 #include <boost/math/statistics/chatterjee_correlation.hpp>
-#include <boost/math/statistics/detail/rank.hpp>
-#include <boost/math/statistics/detail/single_pass.hpp>
 #include <boost/math/statistics/linear_regression.hpp>
 #include <boost/math/statistics/ljung_box.hpp>
 #include <boost/math/statistics/runs_test.hpp>
@@ -225,3 +249,5 @@
 #include <boost/math/statistics/univariate_statistics.hpp>
 #include <boost/math/statistics/z_test.hpp>
 #include <boost/math/tr1.hpp>
+#include <boost/math_fwd.hpp>
+

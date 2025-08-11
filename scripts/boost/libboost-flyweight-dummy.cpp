@@ -1,21 +1,21 @@
 
+// fix ubiquitous warning C5204: 'boost::blah::blah<Blah>': class has virtual functions, but its trivial destructor is not virtual; instances of objects derived from this class may not be destructed correctly
+//
+// while this generally CAN/MAY be an issue, we brutally assume that the Boost Boys know their shit and NEVER make this mistake, i.e. the classes/structs in question are *implicitly `final`*!
+// To play it kinda safe, we apply this 'please shut up' fix to this dummy=see-if-we-can-compile-Ev'ryTing source file only:
+
+#if defined(_MSC_VER)
+#pragma warning(disable: 5204)
+
+// fix/shut up warning C4266: 'void boost::blah::blah::blah(...)': no override available for virtual member function from base 'boost::blah::blah'; function is hidden
+#pragma warning(disable: 4266)
+#endif
+
 #include <boost/flyweight.hpp>
 #include <boost/flyweight/assoc_container_factory.hpp>
 #include <boost/flyweight/assoc_container_factory_fwd.hpp>
 #include <boost/flyweight/concurrent_factory.hpp>
 #include <boost/flyweight/concurrent_factory_fwd.hpp>
-#include <boost/flyweight/detail/archive_constructed.hpp>
-#include <boost/flyweight/detail/default_value_policy.hpp>
-#include <boost/flyweight/detail/dyn_perfect_fwd.hpp>
-#include <boost/flyweight/detail/flyweight_core.hpp>
-#include <boost/flyweight/detail/is_placeholder_expr.hpp>
-#include <boost/flyweight/detail/nested_xxx_if_not_ph.hpp>
-#include <boost/flyweight/detail/not_placeholder_expr.hpp>
-#include <boost/flyweight/detail/perfect_fwd.hpp>
-#include <boost/flyweight/detail/pp_perfect_fwd.hpp>
-#include <boost/flyweight/detail/recursive_lw_mutex.hpp>
-#include <boost/flyweight/detail/serialization_helper.hpp>
-#include <boost/flyweight/detail/value_tag.hpp>
 #include <boost/flyweight/factory_tag.hpp>
 #include <boost/flyweight/flyweight.hpp>
 #include <boost/flyweight/flyweight_fwd.hpp>

@@ -1,4 +1,16 @@
 
+// fix ubiquitous warning C5204: 'boost::blah::blah<Blah>': class has virtual functions, but its trivial destructor is not virtual; instances of objects derived from this class may not be destructed correctly
+//
+// while this generally CAN/MAY be an issue, we brutally assume that the Boost Boys know their shit and NEVER make this mistake, i.e. the classes/structs in question are *implicitly `final`*!
+// To play it kinda safe, we apply this 'please shut up' fix to this dummy=see-if-we-can-compile-Ev'ryTing source file only:
+
+#if defined(_MSC_VER)
+#pragma warning(disable: 5204)
+
+// fix/shut up warning C4266: 'void boost::blah::blah::blah(...)': no override available for virtual member function from base 'boost::blah::blah'; function is hidden
+#pragma warning(disable: 4266)
+#endif
+
 #include <boost/date_time.hpp>
 #include <boost/date_time/adjust_functors.hpp>
 #include <boost/date_time/c_local_time_adjustor.hpp>
@@ -26,9 +38,8 @@
 #include <boost/date_time/filetime_functions.hpp>
 #include <boost/date_time/find_match.hpp>
 #include <boost/date_time/format_date_parser.hpp>
-#include <boost/date_time/gregorian/conversion.hpp>
 #include <boost/date_time/gregorian/formatters.hpp>
-//#include <boost/date_time/gregorian/formatters_limited.hpp>
+#include <boost/date_time/gregorian/formatters_limited.hpp>
 #include <boost/date_time/gregorian/greg_calendar.hpp>
 #include <boost/date_time/gregorian/greg_date.hpp>
 #include <boost/date_time/gregorian/greg_day.hpp>
@@ -48,7 +59,6 @@
 #include <boost/date_time/gregorian_calendar.hpp>
 #include <boost/date_time/int_adapter.hpp>
 #include <boost/date_time/iso_format.hpp>
-#include <boost/date_time/local_time/conversion.hpp>
 #include <boost/date_time/local_time/custom_time_zone.hpp>
 #include <boost/date_time/local_time/date_duration_operators.hpp>
 #include <boost/date_time/local_time/dst_transition_day_rules.hpp>
@@ -66,7 +76,6 @@
 #include <boost/date_time/period.hpp>
 #include <boost/date_time/period_formatter.hpp>
 #include <boost/date_time/period_parser.hpp>
-#include <boost/date_time/posix_time/conversion.hpp>
 #include <boost/date_time/posix_time/date_duration_operators.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include <boost/date_time/posix_time/posix_time_config.hpp>
@@ -103,6 +112,4 @@
 #include <boost/date_time/tz_db_base.hpp>
 #include <boost/date_time/wrapping_int.hpp>
 #include <boost/date_time/year_month_day.hpp>
-#include <boost/date_time/src/gregorian/greg_names.hpp>
-
 

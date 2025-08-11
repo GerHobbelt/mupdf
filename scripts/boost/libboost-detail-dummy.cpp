@@ -1,25 +1,17 @@
 
+// fix ubiquitous warning C5204: 'boost::blah::blah<Blah>': class has virtual functions, but its trivial destructor is not virtual; instances of objects derived from this class may not be destructed correctly
+//
+// while this generally CAN/MAY be an issue, we brutally assume that the Boost Boys know their shit and NEVER make this mistake, i.e. the classes/structs in question are *implicitly `final`*!
+// To play it kinda safe, we apply this 'please shut up' fix to this dummy=see-if-we-can-compile-Ev'ryTing source file only:
+
+#if defined(_MSC_VER)
+#pragma warning(disable: 5204)
+
+// fix/shut up warning C4266: 'void boost::blah::blah::blah(...)': no override available for virtual member function from base 'boost::blah::blah'; function is hidden
+#pragma warning(disable: 4266)
+#endif
+
 #include <boost/blank.hpp>
 #include <boost/blank_fwd.hpp>
 #include <boost/cstdlib.hpp>
-#include <boost/detail/allocator_utilities.hpp>
-#include <boost/detail/binary_search.hpp>
-#include <boost/detail/bitmask.hpp>
-#include <boost/detail/catch_exceptions.hpp>
-#include <boost/detail/container_fwd.hpp>
-#include <boost/detail/fenv.hpp>
-#include <boost/detail/has_default_constructor.hpp>
-#include <boost/detail/identifier.hpp>
-#include <boost/detail/indirect_traits.hpp>
-#include <boost/detail/is_incrementable.hpp>
-#include <boost/detail/is_sorted.hpp>
-#include <boost/detail/is_xxx.hpp>
-#include <boost/detail/lightweight_main.hpp>
-#include <boost/detail/lightweight_test_report.hpp>
-#include <boost/detail/named_template_params.hpp>
-#include <boost/detail/numeric_traits.hpp>
-#include <boost/detail/reference_content.hpp>
-#include <boost/detail/select_type.hpp>
-#include <boost/detail/templated_streams.hpp>
-#include <boost/detail/utf8_codecvt_facet.hpp>
 

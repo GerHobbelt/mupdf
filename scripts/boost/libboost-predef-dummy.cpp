@@ -1,120 +1,26 @@
 
+// fix ubiquitous warning C5204: 'boost::blah::blah<Blah>': class has virtual functions, but its trivial destructor is not virtual; instances of objects derived from this class may not be destructed correctly
+//
+// while this generally CAN/MAY be an issue, we brutally assume that the Boost Boys know their shit and NEVER make this mistake, i.e. the classes/structs in question are *implicitly `final`*!
+// To play it kinda safe, we apply this 'please shut up' fix to this dummy=see-if-we-can-compile-Ev'ryTing source file only:
+
+#if defined(_MSC_VER)
+#pragma warning(disable: 5204)
+
+// fix/shut up warning C4266: 'void boost::blah::blah::blah(...)': no override available for virtual member function from base 'boost::blah::blah'; function is hidden
+#pragma warning(disable: 4266)
+#endif
+
 #include <boost/predef.h>
 #include <boost/predef/architecture.h>
-#include <boost/predef/architecture/alpha.h>
-#include <boost/predef/architecture/arm.h>
-#include <boost/predef/architecture/blackfin.h>
-#include <boost/predef/architecture/convex.h>
-#include <boost/predef/architecture/e2k.h>
-#include <boost/predef/architecture/ia64.h>
-#include <boost/predef/architecture/loongarch.h>
-#include <boost/predef/architecture/m68k.h>
-#include <boost/predef/architecture/mips.h>
-#include <boost/predef/architecture/parisc.h>
-#include <boost/predef/architecture/ppc.h>
-#include <boost/predef/architecture/ptx.h>
-#include <boost/predef/architecture/pyramid.h>
-#include <boost/predef/architecture/riscv.h>
-#include <boost/predef/architecture/rs6k.h>
-#include <boost/predef/architecture/sparc.h>
-#include <boost/predef/architecture/superh.h>
-#include <boost/predef/architecture/sys370.h>
-#include <boost/predef/architecture/sys390.h>
-#include <boost/predef/architecture/x86.h>
-#include <boost/predef/architecture/x86/32.h>
-#include <boost/predef/architecture/x86/64.h>
-#include <boost/predef/architecture/z.h>
 #include <boost/predef/compiler.h>
-#include <boost/predef/compiler/borland.h>
-#include <boost/predef/compiler/clang.h>
-#include <boost/predef/compiler/comeau.h>
-#include <boost/predef/compiler/compaq.h>
-#include <boost/predef/compiler/diab.h>
-#include <boost/predef/compiler/digitalmars.h>
-#include <boost/predef/compiler/dignus.h>
-#include <boost/predef/compiler/edg.h>
-#include <boost/predef/compiler/ekopath.h>
-#include <boost/predef/compiler/gcc.h>
-#include <boost/predef/compiler/gcc_xml.h>
-#include <boost/predef/compiler/greenhills.h>
-#include <boost/predef/compiler/hp_acc.h>
-#include <boost/predef/compiler/iar.h>
-#include <boost/predef/compiler/ibm.h>
-#include <boost/predef/compiler/intel.h>
-#include <boost/predef/compiler/kai.h>
-#include <boost/predef/compiler/llvm.h>
-#include <boost/predef/compiler/metaware.h>
-#include <boost/predef/compiler/metrowerks.h>
-#include <boost/predef/compiler/microtec.h>
-#include <boost/predef/compiler/mpw.h>
-#include <boost/predef/compiler/nvcc.h>
-#include <boost/predef/compiler/palm.h>
-#include <boost/predef/compiler/pgi.h>
-#include <boost/predef/compiler/sgi_mipspro.h>
-#include <boost/predef/compiler/sunpro.h>
-#include <boost/predef/compiler/tendra.h>
-#include <boost/predef/compiler/visualc.h>
-#include <boost/predef/compiler/watcom.h>
 #include <boost/predef/hardware.h>
-#include <boost/predef/hardware/simd.h>
-#include <boost/predef/hardware/simd/arm.h>
-#include <boost/predef/hardware/simd/arm/versions.h>
-#include <boost/predef/hardware/simd/ppc.h>
-#include <boost/predef/hardware/simd/ppc/versions.h>
-#include <boost/predef/hardware/simd/x86.h>
-#include <boost/predef/hardware/simd/x86/versions.h>
-#include <boost/predef/hardware/simd/x86_amd.h>
-#include <boost/predef/hardware/simd/x86_amd/versions.h>
 #include <boost/predef/language.h>
-#include <boost/predef/language/cuda.h>
-#include <boost/predef/language/objc.h>
-#include <boost/predef/language/stdc.h>
-#include <boost/predef/language/stdcpp.h>
 #include <boost/predef/library.h>
-#include <boost/predef/library/c.h>
-#include <boost/predef/library/std.h>
 #include <boost/predef/make.h>
 #include <boost/predef/os.h>
-#include <boost/predef/os/aix.h>
-#include <boost/predef/os/amigaos.h>
-#include <boost/predef/os/beos.h>
-#include <boost/predef/os/bsd.h>
-#include <boost/predef/os/bsd/bsdi.h>
-#include <boost/predef/os/bsd/dragonfly.h>
-#include <boost/predef/os/bsd/free.h>
-#include <boost/predef/os/bsd/net.h>
-#include <boost/predef/os/bsd/open.h>
-#include <boost/predef/os/cygwin.h>
-#include <boost/predef/os/haiku.h>
-#include <boost/predef/os/hpux.h>
-#include <boost/predef/os/ios.h>
-#include <boost/predef/os/irix.h>
-#include <boost/predef/os/linux.h>
-#include <boost/predef/os/macos.h>
-#include <boost/predef/os/os400.h>
-#include <boost/predef/os/qnxnto.h>
-#include <boost/predef/os/solaris.h>
-#include <boost/predef/os/unix.h>
-#include <boost/predef/os/vms.h>
-#include <boost/predef/os/windows.h>
 #include <boost/predef/other.h>
-#include <boost/predef/other/endian.h>
-#include <boost/predef/other/wordsize.h>
-#include <boost/predef/other/workaround.h>
 #include <boost/predef/platform.h>
-#include <boost/predef/platform/android.h>
-#include <boost/predef/platform/cloudabi.h>
-#include <boost/predef/platform/ios.h>
-#include <boost/predef/platform/mingw.h>
-#include <boost/predef/platform/mingw32.h>
-#include <boost/predef/platform/mingw64.h>
-#include <boost/predef/platform/windows_desktop.h>
-#include <boost/predef/platform/windows_phone.h>
-#include <boost/predef/platform/windows_runtime.h>
-#include <boost/predef/platform/windows_server.h>
-#include <boost/predef/platform/windows_store.h>
-#include <boost/predef/platform/windows_system.h>
-#include <boost/predef/platform/windows_uwp.h>
 #include <boost/predef/version.h>
 #include <boost/predef/version_number.h>
 

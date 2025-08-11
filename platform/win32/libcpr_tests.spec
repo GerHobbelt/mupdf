@@ -1,4 +1,5 @@
 
 also-ignore:
 	/cpr/
+	/cmake/
 	

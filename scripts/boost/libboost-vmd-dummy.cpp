@@ -1,4 +1,16 @@
 
+// fix ubiquitous warning C5204: 'boost::blah::blah<Blah>': class has virtual functions, but its trivial destructor is not virtual; instances of objects derived from this class may not be destructed correctly
+//
+// while this generally CAN/MAY be an issue, we brutally assume that the Boost Boys know their shit and NEVER make this mistake, i.e. the classes/structs in question are *implicitly `final`*!
+// To play it kinda safe, we apply this 'please shut up' fix to this dummy=see-if-we-can-compile-Ev'ryTing source file only:
+
+#if defined(_MSC_VER)
+#pragma warning(disable: 5204)
+
+// fix/shut up warning C4266: 'void boost::blah::blah::blah(...)': no override available for virtual member function from base 'boost::blah::blah'; function is hidden
+#pragma warning(disable: 4266)
+#endif
+
 #include <boost/vmd/array.hpp>
 #include <boost/vmd/array/to_seq.hpp>
 #include <boost/vmd/array/to_tuple.hpp>
@@ -11,96 +23,6 @@
 #include <boost/vmd/assert_is_seq.hpp>
 #include <boost/vmd/assert_is_tuple.hpp>
 #include <boost/vmd/assert_is_type.hpp>
-#include <boost/vmd/detail/adjust_tuple_type.hpp>
-#include <boost/vmd/detail/array.hpp>
-#include <boost/vmd/detail/assert.hpp>
-#include <boost/vmd/detail/data_equal.hpp>
-#include <boost/vmd/detail/data_equal_common.hpp>
-#include <boost/vmd/detail/empty_result.hpp>
-#include <boost/vmd/detail/equal.hpp>
-#include <boost/vmd/detail/equal_common.hpp>
-#include <boost/vmd/detail/equal_type.hpp>
-#include <boost/vmd/detail/identifier.hpp>
-#include <boost/vmd/detail/identifier_concat.hpp>
-#include <boost/vmd/detail/identifier_type.hpp>
-#include <boost/vmd/detail/idprefix.hpp>
-#include <boost/vmd/detail/is_array.hpp>
-#include <boost/vmd/detail/is_array_common.hpp>
-#include <boost/vmd/detail/is_empty.hpp>
-#include <boost/vmd/detail/is_empty_array.hpp>
-#include <boost/vmd/detail/is_empty_tuple.hpp>
-#include <boost/vmd/detail/is_entire.hpp>
-#include <boost/vmd/detail/is_general_identifier.hpp>
-#include <boost/vmd/detail/is_identifier.hpp>
-#include <boost/vmd/detail/is_list.hpp>
-#include <boost/vmd/detail/is_number.hpp>
-#include <boost/vmd/detail/is_seq.hpp>
-#include <boost/vmd/detail/is_tuple.hpp>
-#include <boost/vmd/detail/is_type.hpp>
-#include <boost/vmd/detail/is_type_type.hpp>
-#include <boost/vmd/detail/list.hpp>
-#include <boost/vmd/detail/match_identifier.hpp>
-#include <boost/vmd/detail/match_identifier_common.hpp>
-#include <boost/vmd/detail/match_single_identifier.hpp>
-#include <boost/vmd/detail/modifiers.hpp>
-#include <boost/vmd/detail/mods.hpp>
-#include <boost/vmd/detail/nil_registration.hpp>
-#include <boost/vmd/detail/not_empty.hpp>
-#include <boost/vmd/detail/number_registration.hpp>
-#include <boost/vmd/detail/only_after.hpp>
-#include <boost/vmd/detail/parens.hpp>
-#include <boost/vmd/detail/parens_common.hpp>
-#include <boost/vmd/detail/parens_split.hpp>
-#include <boost/vmd/detail/recurse/data_equal/data_equal_1.hpp>
-#include <boost/vmd/detail/recurse/data_equal/data_equal_10.hpp>
-#include <boost/vmd/detail/recurse/data_equal/data_equal_11.hpp>
-#include <boost/vmd/detail/recurse/data_equal/data_equal_12.hpp>
-#include <boost/vmd/detail/recurse/data_equal/data_equal_13.hpp>
-#include <boost/vmd/detail/recurse/data_equal/data_equal_14.hpp>
-#include <boost/vmd/detail/recurse/data_equal/data_equal_15.hpp>
-#include <boost/vmd/detail/recurse/data_equal/data_equal_16.hpp>
-#include <boost/vmd/detail/recurse/data_equal/data_equal_2.hpp>
-#include <boost/vmd/detail/recurse/data_equal/data_equal_3.hpp>
-#include <boost/vmd/detail/recurse/data_equal/data_equal_4.hpp>
-#include <boost/vmd/detail/recurse/data_equal/data_equal_5.hpp>
-#include <boost/vmd/detail/recurse/data_equal/data_equal_6.hpp>
-#include <boost/vmd/detail/recurse/data_equal/data_equal_7.hpp>
-#include <boost/vmd/detail/recurse/data_equal/data_equal_8.hpp>
-#include <boost/vmd/detail/recurse/data_equal/data_equal_9.hpp>
-#include <boost/vmd/detail/recurse/data_equal/data_equal_headers.hpp>
-#include <boost/vmd/detail/recurse/data_equal/data_equal_specific.hpp>
-#include <boost/vmd/detail/recurse/equal/equal_1.hpp>
-#include <boost/vmd/detail/recurse/equal/equal_10.hpp>
-#include <boost/vmd/detail/recurse/equal/equal_11.hpp>
-#include <boost/vmd/detail/recurse/equal/equal_12.hpp>
-#include <boost/vmd/detail/recurse/equal/equal_13.hpp>
-#include <boost/vmd/detail/recurse/equal/equal_14.hpp>
-#include <boost/vmd/detail/recurse/equal/equal_15.hpp>
-#include <boost/vmd/detail/recurse/equal/equal_16.hpp>
-#include <boost/vmd/detail/recurse/equal/equal_2.hpp>
-#include <boost/vmd/detail/recurse/equal/equal_3.hpp>
-#include <boost/vmd/detail/recurse/equal/equal_4.hpp>
-#include <boost/vmd/detail/recurse/equal/equal_5.hpp>
-#include <boost/vmd/detail/recurse/equal/equal_6.hpp>
-#include <boost/vmd/detail/recurse/equal/equal_7.hpp>
-#include <boost/vmd/detail/recurse/equal/equal_8.hpp>
-#include <boost/vmd/detail/recurse/equal/equal_9.hpp>
-#include <boost/vmd/detail/recurse/equal/equal_headers.hpp>
-#include <boost/vmd/detail/seq.hpp>
-#include <boost/vmd/detail/sequence_arity.hpp>
-#include <boost/vmd/detail/sequence_common.hpp>
-#include <boost/vmd/detail/sequence_elem.hpp>
-#include <boost/vmd/detail/sequence_enum.hpp>
-#include <boost/vmd/detail/sequence_size.hpp>
-#include <boost/vmd/detail/sequence_to_array.hpp>
-#include <boost/vmd/detail/sequence_to_list.hpp>
-#include <boost/vmd/detail/sequence_to_seq.hpp>
-#include <boost/vmd/detail/sequence_to_tuple.hpp>
-#include <boost/vmd/detail/sequence_type.hpp>
-#include <boost/vmd/detail/setup.hpp>
-#include <boost/vmd/detail/tuple.hpp>
-#include <boost/vmd/detail/type_registration.hpp>
-#include <boost/vmd/detail/variadic_pop_front.hpp>
 #include <boost/vmd/elem.hpp>
 #include <boost/vmd/empty.hpp>
 #include <boost/vmd/enum.hpp>

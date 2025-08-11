@@ -1,31 +1,20 @@
 
+// fix ubiquitous warning C5204: 'boost::blah::blah<Blah>': class has virtual functions, but its trivial destructor is not virtual; instances of objects derived from this class may not be destructed correctly
+//
+// while this generally CAN/MAY be an issue, we brutally assume that the Boost Boys know their shit and NEVER make this mistake, i.e. the classes/structs in question are *implicitly `final`*!
+// To play it kinda safe, we apply this 'please shut up' fix to this dummy=see-if-we-can-compile-Ev'ryTing source file only:
+
+#if defined(_MSC_VER)
+#pragma warning(disable: 5204)
+
+// fix/shut up warning C4266: 'void boost::blah::blah::blah(...)': no override available for virtual member function from base 'boost::blah::blah'; function is hidden
+#pragma warning(disable: 4266)
+#endif
+
 #include <boost/cerrno.hpp>
 #include <boost/system.hpp>
 #include <boost/system/api_config.hpp>
 #include <boost/system/config.hpp>
-#include <boost/system/detail/append_int.hpp>
-#include <boost/system/detail/cerrno.hpp>
-#include <boost/system/detail/config.hpp>
-#include <boost/system/detail/enable_if.hpp>
-#include <boost/system/detail/errc.hpp>
-#include <boost/system/detail/error_category.hpp>
-#include <boost/system/detail/error_category_impl.hpp>
-#include <boost/system/detail/error_code.hpp>
-#include <boost/system/detail/error_condition.hpp>
-#include <boost/system/detail/generic_category.hpp>
-#include <boost/system/detail/generic_category_message.hpp>
-#include <boost/system/detail/interop_category.hpp>
-#include <boost/system/detail/is_same.hpp>
-#include <boost/system/detail/mutex.hpp>
-#include <boost/system/detail/snprintf.hpp>
-#include <boost/system/detail/std_category.hpp>
-#include <boost/system/detail/std_category_impl.hpp>
-#include <boost/system/detail/system_category.hpp>
-#include <boost/system/detail/system_category_condition_win32.hpp>
-#include <boost/system/detail/system_category_impl.hpp>
-#include <boost/system/detail/system_category_message.hpp>
-#include <boost/system/detail/system_category_message_win32.hpp>
-#include <boost/system/detail/throws.hpp>
 #include <boost/system/errc.hpp>
 #include <boost/system/error_category.hpp>
 #include <boost/system/error_code.hpp>

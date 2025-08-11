@@ -768,6 +768,8 @@ typedef uint64_t uintmax_t;
 /* Define to 1 if you have the <libxml/xmlwriter.h> header file. */
 #define HAVE_LIBXML_XMLWRITER_H 1
 
+#define HAVE_LIBXML_XMLVERSION_H 1
+
 /* Define to 1 if you have the `z' library (-lz). */
 #define HAVE_LIBZ  1
 

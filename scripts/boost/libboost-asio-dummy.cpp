@@ -1,4 +1,16 @@
 
+// fix ubiquitous warning C5204: 'boost::blah::blah<Blah>': class has virtual functions, but its trivial destructor is not virtual; instances of objects derived from this class may not be destructed correctly
+//
+// while this generally CAN/MAY be an issue, we brutally assume that the Boost Boys know their shit and NEVER make this mistake, i.e. the classes/structs in question are *implicitly `final`*!
+// To play it kinda safe, we apply this 'please shut up' fix to this dummy=see-if-we-can-compile-Ev'ryTing source file only:
+
+#if defined(_MSC_VER)
+#pragma warning(disable: 5204)
+
+// fix/shut up warning C4266: 'void boost::blah::blah::blah(...)': no override available for virtual member function from base 'boost::blah::blah'; function is hidden
+#pragma warning(disable: 4266)
+#endif
+
 #include <boost/asio.hpp>
 #include <boost/asio/any_completion_executor.hpp>
 #include <boost/asio/any_completion_handler.hpp>
@@ -86,43 +98,9 @@
 #include <boost/asio/execution_context.hpp>
 #include <boost/asio/executor.hpp>
 #include <boost/asio/executor_work_guard.hpp>
-#include <boost/asio/experimental/as_single.hpp>
-#include <boost/asio/experimental/awaitable_operators.hpp>
-#include <boost/asio/experimental/basic_channel.hpp>
-#include <boost/asio/experimental/basic_concurrent_channel.hpp>
-#include <boost/asio/experimental/cancellation_condition.hpp>
-#include <boost/asio/experimental/channel.hpp>
-#include <boost/asio/experimental/channel_error.hpp>
-#include <boost/asio/experimental/channel_traits.hpp>
-#include <boost/asio/experimental/co_composed.hpp>
-#include <boost/asio/experimental/co_spawn.hpp>
-#include <boost/asio/experimental/concurrent_channel.hpp>
-#include <boost/asio/experimental/coro.hpp>
-#include <boost/asio/experimental/coro_traits.hpp>
-#include <boost/asio/experimental/detail/channel_operation.hpp>
-#include <boost/asio/experimental/detail/channel_receive_op.hpp>
-#include <boost/asio/experimental/detail/channel_send_functions.hpp>
-#include <boost/asio/experimental/detail/channel_send_op.hpp>
-#include <boost/asio/experimental/detail/channel_service.hpp>
-#include <boost/asio/experimental/detail/coro_completion_handler.hpp>
-#include <boost/asio/experimental/detail/coro_promise_allocator.hpp>
-#include <boost/asio/experimental/detail/has_signature.hpp>
-#include <boost/asio/experimental/detail/impl/channel_service.hpp>
-#include <boost/asio/experimental/detail/partial_promise.hpp>
-#include <boost/asio/experimental/impl/as_single.hpp>
-#include <boost/asio/experimental/impl/coro.hpp>
-#include <boost/asio/experimental/impl/parallel_group.hpp>
-#include <boost/asio/experimental/impl/promise.hpp>
-#include <boost/asio/experimental/impl/use_coro.hpp>
-#include <boost/asio/experimental/impl/use_promise.hpp>
-#include <boost/asio/experimental/parallel_group.hpp>
-#include <boost/asio/experimental/promise.hpp>
-#include <boost/asio/experimental/use_coro.hpp>
-#include <boost/asio/experimental/use_promise.hpp>
 #include <boost/asio/file_base.hpp>
 #include <boost/asio/generic/basic_endpoint.hpp>
 #include <boost/asio/generic/datagram_protocol.hpp>
-#include <boost/asio/generic/detail/endpoint.hpp>
 #include <boost/asio/generic/raw_protocol.hpp>
 #include <boost/asio/generic/seq_packet_protocol.hpp>
 #include <boost/asio/generic/stream_protocol.hpp>
@@ -145,16 +123,8 @@
 #include <boost/asio/ip/basic_resolver_iterator.hpp>
 #include <boost/asio/ip/basic_resolver_query.hpp>
 #include <boost/asio/ip/basic_resolver_results.hpp>
-#include <boost/asio/ip/detail/endpoint.hpp>
-#include <boost/asio/ip/detail/socket_option.hpp>
 #include <boost/asio/ip/host_name.hpp>
 #include <boost/asio/ip/icmp.hpp>
-#include <boost/asio/ip/impl/address.hpp>
-#include <boost/asio/ip/impl/address_v4.hpp>
-#include <boost/asio/ip/impl/address_v6.hpp>
-#include <boost/asio/ip/impl/basic_endpoint.hpp>
-#include <boost/asio/ip/impl/network_v4.hpp>
-#include <boost/asio/ip/impl/network_v6.hpp>
 #include <boost/asio/ip/multicast.hpp>
 #include <boost/asio/ip/network_v4.hpp>
 #include <boost/asio/ip/network_v6.hpp>
@@ -172,7 +142,6 @@
 #include <boost/asio/local/basic_endpoint.hpp>
 #include <boost/asio/local/connect_pair.hpp>
 #include <boost/asio/local/datagram_protocol.hpp>
-#include <boost/asio/local/detail/endpoint.hpp>
 #include <boost/asio/local/seq_packet_protocol.hpp>
 #include <boost/asio/local/stream_protocol.hpp>
 #include <boost/asio/multiple_exceptions.hpp>
@@ -203,8 +172,6 @@
 #include <boost/asio/ssl/context_base.hpp>
 #include <boost/asio/ssl/error.hpp>
 #include <boost/asio/ssl/host_name_verification.hpp>
-#include <boost/asio/ssl/impl/context.hpp>
-#include <boost/asio/ssl/impl/src.hpp>
 #include <boost/asio/ssl/stream.hpp>
 #include <boost/asio/ssl/stream_base.hpp>
 #include <boost/asio/ssl/verify_context.hpp>
@@ -246,7 +213,6 @@
 #include <boost/asio/use_awaitable.hpp>
 #include <boost/asio/use_future.hpp>
 #include <boost/asio/uses_executor.hpp>
-#include <boost/asio/version.hpp>
 #include <boost/asio/wait_traits.hpp>
 #include <boost/asio/writable_pipe.hpp>
 #include <boost/asio/write.hpp>
