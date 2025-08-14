@@ -108,25 +108,57 @@ function collectProjectUUID(info) {
 	//		is_project_ref: true
 	//	};
 	let must_reprocess = info.uuid.includes("A60D8644-5A1C-4D29-8970-10100000");
+
+	if (info.file.includes('zstd_tests'))  console.log("Collect: ", { info });
 	
 	if (!projectPath_map[info.filepath]) {
 		projectPath_map[info.filepath] = info;
 	}
+	else if (projectPath_map[info.filepath].uuid !== info.uuid) {
+		if (debug)  console.log("Duplicate Project UUID: ", {tableSlot: projectPath_map[info.filepath], info });
+		else        console.log(`Duplicate Project UUID for ${ projectPath_map[info.filepath].file } // ${ info.file }`);
+		must_reprocess = true;
+
+		let el = projectPath_map[info.filepath];
+		let idx = `${ el.filepath }::${ el.uuid }`;
+		if (!ToDo_uuid_dedup_map[idx]) {
+			if (debug)  console.log("TODO   Project UUID: ", { idx, el });
+
+			ToDo_uuid_list.push(el);
+			ToDo_uuid_dedup_map[idx] = el;
+		}
+	}
+
 	if (!projectName_map[info.file]) {
 		projectName_map[info.file] = info;
+	}
+	else if (projectName_map[info.file].uuid !== info.uuid) {
+		if (debug)  console.log("Duplicate Project UUID: ", {tableSlot: projectName_map[info.file], info });
+		else        console.log(`Duplicate Project UUID for ${ projectName_map[info.file].file } // ${ info.file }`);
+		must_reprocess = true;
+
+		let el = projectName_map[info.file];
+		let idx = `${ el.filepath }::${ el.uuid }`;
+		if (!ToDo_uuid_dedup_map[idx]) {
+			if (debug)  console.log("TODO   Project UUID: ", { idx, el });
+
+			ToDo_uuid_list.push(el);
+			ToDo_uuid_dedup_map[idx] = el;
+		}
 	}
 	
 	if (!uuid_map[info.uuid]) {
 		uuid_map[info.uuid] = info;
 	}
 	else if (uuid_map[info.uuid].uuid !== info.uuid) {
-		console.log("Duplicate Project UUID: ", {tableSlot: uuid_map[info.uuid], info });
+		if (debug)  console.log("Duplicate Project UUID: ", {tableSlot: uuid_map[info.uuid], info });
+		else        console.log(`Duplicate Project UUID for ${ uuid_map[info.uuid].file } // ${ info.file }`);
 		must_reprocess = true;
 
 		let el = uuid_map[info.uuid];
 		let idx = `${ el.filepath }::${ el.uuid }`;
 		if (!ToDo_uuid_dedup_map[idx]) {
-			console.log("TODO   Project UUID: ", { idx, el });
+			if (debug)  console.log("TODO   Project UUID: ", { idx, el });
 
 			ToDo_uuid_list.push(el);
 			ToDo_uuid_dedup_map[idx] = el;
@@ -137,7 +169,8 @@ function collectProjectUUID(info) {
 		let el = info;
 		let idx = `${ el.filepath }::${ el.uuid }`;
 		if (!ToDo_uuid_dedup_map[idx]) {
-			console.log("TODO   Project UUID: ", { idx, el });
+			if (debug)  console.log("TODO   Project UUID: ", { idx, el });
+			else        console.log(`Must re-assign Project UUID for ${ el.file }`);
 
 			ToDo_uuid_list.push(el);
 			ToDo_uuid_dedup_map[idx] = el;
@@ -618,8 +651,119 @@ case 3:
 		}
 	});
 
-	console.log({ uuid_map });
+	if (debug)  console.log({ uuid_map });
 	
+	// now all the uuid/project data collecting has been done, we still need to run an extra check:
+	// are there any projects which are known under DIFFERENT UUIDs in various places, i.e. is there
+	// any project which has more than ONE UUID?!
+	for (const idx in projectPath_map) {
+		let el = projectPath_map[idx];
+		let uuid_slot = uuid_map[el.uuid];
+		if (uuid_slot && uuid_slot.uuid !== el.uuid) {
+			console.log(`Project ${ el.file } is known under multiple UUIDs and requires resyncing: ${ uuid_slot.uuid } !== ${ el.uuid }`);
+			let idx = `${ el.filepath }::${ el.uuid }`;
+			if (!ToDo_uuid_dedup_map[idx]) {
+				if (debug)  console.log("TODO   Project UUID: ", { idx, el });
+
+				ToDo_uuid_list.push(el);
+				ToDo_uuid_dedup_map[idx] = el;
+			}
+			idx = `${ uuid_slot.filepath }::${ uuid_slot.uuid }`;
+			if (!ToDo_uuid_dedup_map[idx]) {
+				if (debug)  console.log("TODO   Project UUID: ", { idx, uuid_slot });
+
+				ToDo_uuid_list.push(uuid_slot);
+				ToDo_uuid_dedup_map[idx] = uuid_slot;
+			}
+		}
+		else if (!uuid_slot) {
+			console.log({ el });
+			console.log(`Project ${ el.file } is known under multiple UUIDs and requires resyncing.`);
+			let idx = `${ el.filepath }::${ el.uuid }`;
+			if (!ToDo_uuid_dedup_map[idx]) {
+				if (debug)  console.log("TODO   Project UUID: ", { idx, el });
+
+				ToDo_uuid_list.push(el);
+				ToDo_uuid_dedup_map[idx] = el;
+			}
+		}
+	}
+	
+	for (const idx in projectName_map) {
+		let el = projectName_map[idx];
+		let uuid_slot = uuid_map[el.uuid];
+		if (uuid_slot && uuid_slot.uuid !== el.uuid) {
+			console.log(`Project ${ el.file } is known under multiple UUIDs and requires resyncing: ${ uuid_slot.uuid } !== ${ el.uuid }`);
+			let idx = `${ el.filepath }::${ el.uuid }`;
+			if (!ToDo_uuid_dedup_map[idx]) {
+				if (debug)  console.log("TODO   Project UUID: ", { idx, el });
+
+				ToDo_uuid_list.push(el);
+				ToDo_uuid_dedup_map[idx] = el;
+			}
+			idx = `${ uuid_slot.filepath }::${ uuid_slot.uuid }`;
+			if (!ToDo_uuid_dedup_map[idx]) {
+				if (debug)  console.log("TODO   Project UUID: ", { idx, uuid_slot });
+
+				ToDo_uuid_list.push(uuid_slot);
+				ToDo_uuid_dedup_map[idx] = uuid_slot;
+			}
+		}
+		else if (!uuid_slot) {
+			console.log({ el });
+			console.log(`Project ${ el.file } is known under multiple UUIDs and requires resyncing.`);
+			let idx = `${ el.filepath }::${ el.uuid }`;
+			if (!ToDo_uuid_dedup_map[idx]) {
+				if (debug)  console.log("TODO   Project UUID: ", { idx, el });
+
+				ToDo_uuid_list.push(el);
+				ToDo_uuid_dedup_map[idx] = el;
+			}
+		}
+	}
+	
+	for (const idx in uuid_map) {
+		let el = uuid_map[idx];
+		let uuid_slot = projectPath_map[el.filepath];
+		if (uuid_slot.file !== el.file) {
+			console.log(`UUID has been assigned to multiple projects which require resyncing: ${ uuid_slot.file } !== ${ el.file }`);
+			let idx = `${ el.filepath }::${ el.uuid }`;
+			if (!ToDo_uuid_dedup_map[idx]) {
+				if (debug)  console.log("TODO   Project UUID: ", { idx, el });
+
+				ToDo_uuid_list.push(el);
+				ToDo_uuid_dedup_map[idx] = el;
+			}
+			idx = `${ uuid_slot.filepath }::${ uuid_slot.uuid }`;
+			if (!ToDo_uuid_dedup_map[idx]) {
+				if (debug)  console.log("TODO   Project UUID: ", { idx, uuid_slot });
+
+				ToDo_uuid_list.push(uuid_slot);
+				ToDo_uuid_dedup_map[idx] = uuid_slot;
+			}
+		}
+		uuid_slot = projectName_map[el.file];
+		if (uuid_slot.file !== el.file) {
+			console.log(`UUID has been assigned to multiple projects which require resyncing: ${ uuid_slot.file } !== ${ el.file }`);
+			let idx = `${ el.filepath }::${ el.uuid }`;
+			if (!ToDo_uuid_dedup_map[idx]) {
+				if (debug)  console.log("TODO   Project UUID: ", { idx, el });
+
+				ToDo_uuid_list.push(el);
+				ToDo_uuid_dedup_map[idx] = el;
+			}
+			idx = `${ uuid_slot.filepath }::${ uuid_slot.uuid }`;
+			if (!ToDo_uuid_dedup_map[idx]) {
+				if (debug)  console.log("TODO   Project UUID: ", { idx, uuid_slot });
+
+				ToDo_uuid_list.push(uuid_slot);
+				ToDo_uuid_dedup_map[idx] = uuid_slot;
+			}
+		}
+	}
+	
+	// Next: produce fresh unique UUIDs for each project that needs resyncing...
+	let uniq_uuid_block_map = {};
 	ToDo_uuid_list = ToDo_uuid_list.map((el) => {
 		// e.g. el.uuid = 'A60D8644-5A1C-4D29-8970-101000000001'
 		//            --> '0B51171B-B10E-4EAC-8FFA-19226Axxxxxx'
@@ -638,29 +782,43 @@ case 3:
 				++n;
 				continue;
 			}
+			if (uniq_uuid_block_map[uuid]) {
+				++n;
+				continue;
+			}
 			break;
 		}
 		
 		el.map_to_uuid = uuid;
 		
+		uniq_uuid_block_map[uuid] = uuid;
+		
 		return el;
 	});
 
-	console.log({ ToDo_uuid_list });
+	if (debug)  console.log({ ToDo_uuid_list });
 	
 	// construct the remap dictionary now that we have all the old info PLUS sufficient unique remapping UUIDs
 	// (in fact we may have a few too many as we didn't deduplicate on filepath/filename, but that will be resolved by our remapping map setup approach: last unique entry wins!)
 	let remap_to_uuid = {};
 	
 	ToDo_uuid_list.forEach((el) => {
+		if (el.file.includes('zstd_tests'))  console.log("Todo:uniquify phase 1: ", { el });
 		remap_to_uuid[el.file] = el;
-		remap_to_uuid[el.filepath] = el;
-		remap_to_uuid[el.uuid] = el;
+	});
+	ToDo_uuid_list.forEach((el) => {
+		// as we now have a unique SINGLE UUID per file, we MUST use that one, which is not per sé the new uuid listed in our current `el` record -- we can have multiple TODO records per project file!
+		let must_remap_to = remap_to_uuid[el.file];
+		if (el.file.includes('zstd_tests'))  console.log("Todo:uniquify phase 2: ", { el, must_remap_to });
+		remap_to_uuid[el.file] = must_remap_to;
+		remap_to_uuid[el.filepath] = must_remap_to;
+		remap_to_uuid[el.uuid] = must_remap_to;
 	});
 
 	// run the remapping:
 	dest_files.forEach((l) => {
 		let file_src = fs.readFileSync(l, 'utf8');
+		let rewritten = false;
 
 		// e.g. Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1D-RGB-color-gradient", "1D-RGB-color-gradient.vcxproj", "{3644E12D-D934-41FD-BF7E-83745A17E226}"
 		//      Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libmupdf_CarvedSubset", "libmupdf_CarvedSubset.vcxitems", "{08FF3748-F1BD-40A1-9322-F93FD04C2350}"
@@ -681,20 +839,23 @@ case 3:
 			};
 			if (debug)  console.log({line: m[0], info});
 
-			let must_remap_to = (remap_to_uuid[info.uuid] || remap_to_uuid[info.file] || remap_to_uuid[info.filepath]);
+			let must_remap_to = (remap_to_uuid[info.file] || remap_to_uuid[info.filepath]);
 			
 			if (must_remap_to) {
 				// regex info still points at the matching place...
 				m.input = null;
 				let line_pos = m.index;
 				let old_line = m[0];
-				let new_line = old_line.replace(new RegExp(must_remap_to.uuid, 'g'), must_remap_to.remap_to_uuid);
-				console.log("REMAPPING: ", { must_remap_to, info, prj_re, m });
+				let repl_re = new RegExp(info.uuid, 'ig');
+				let new_line = old_line.replace(repl_re, must_remap_to.map_to_uuid);
+				if (debug || info.file.includes('zstd_tests'))  console.log("REMAPPING: ", { must_remap_to, info, prj_re, m, old_line, repl_re, new_line });
+				else        console.log(`Must remap ${ info.file }...`);
 				
 				file_src = file_src.substring(0, line_pos) + new_line + file_src.substring(line_pos + old_line.length);
 				
 				// no need to reset the /prj_re/.lastIndex as we didn't change the length of the underlying content...
 				//prj_re.lstIndex = 0;
+				rewritten = true;
 			}
 			
 			m = prj_re.exec(file_src);
@@ -724,20 +885,23 @@ case 3:
 			};
 			if (debug)  console.log({line: m[0], info});
 
-			let must_remap_to = (remap_to_uuid[info.uuid] || remap_to_uuid[info.file] || remap_to_uuid[info.filepath]);
+			let must_remap_to = (remap_to_uuid[info.file] || remap_to_uuid[info.filepath]);
 			
 			if (must_remap_to) {
 				// regex info still points at the matching place...
 				m.input = null;
 				let line_pos = m.index;
 				let old_line = m[0];
-				let new_line = old_line.replace(new RegExp(must_remap_to.uuid, 'g'), must_remap_to.remap_to_uuid);
-				console.log("REMAPPING: ", { must_remap_to, info, prj_re, m });
+				let repl_re = new RegExp(info.uuid, 'ig');
+				let new_line = old_line.replace(repl_re, must_remap_to.map_to_uuid);
+				if (debug || info.file.includes('zstd_tests'))  console.log("REMAPPING: ", { must_remap_to, info, prj_re, m, old_line, repl_re, new_line });
+				else        console.log(`Must remap ${ info.file }...`);
 				
 				file_src = file_src.substring(0, line_pos) + new_line + file_src.substring(line_pos + old_line.length);
 				
 				// no need to reset the /prj_re/.lastIndex as we didn't change the length of the underlying content...
 				//prj_re.lstIndex = 0;
+				rewritten = true;
 			}
 			
 			m = prj_re.exec(file_src);
@@ -759,20 +923,23 @@ case 3:
 			};
 			if (debug)  console.log({line: m[0], info});
 
-			let must_remap_to = (remap_to_uuid[info.uuid] || remap_to_uuid[info.file] || remap_to_uuid[info.filepath]);
+			let must_remap_to = (remap_to_uuid[info.file] || remap_to_uuid[info.filepath]);
 			
 			if (must_remap_to) {
 				// regex info still points at the matching place...
 				m.input = null;
 				let line_pos = m.index;
 				let old_line = m[0];
-				let new_line = old_line.replace(new RegExp(must_remap_to.uuid, 'g'), must_remap_to.remap_to_uuid);
-				console.log("REMAPPING: ", { must_remap_to, info, prj_re, m });
+				let repl_re = new RegExp(info.uuid, 'ig');
+				let new_line = old_line.replace(repl_re, must_remap_to.map_to_uuid);
+				if (debug || info.file.includes('zstd_tests'))  console.log("REMAPPING: ", { must_remap_to, info, prj_re, m, old_line, repl_re, new_line });
+				else        console.log(`Must remap ${ info.file }...`);
 				
 				file_src = file_src.substring(0, line_pos) + new_line + file_src.substring(line_pos + old_line.length);
 				
 				// no need to reset the /prj_re/.lastIndex as we didn't change the length of the underlying content...
 				//prj_re.lstIndex = 0;
+				rewritten = true;
 			}
 			
 			m = prj_re.exec(file_src);
@@ -794,28 +961,36 @@ case 3:
 			};
 			if (debug)  console.log({line: m[0], info});
 
-			let must_remap_to = (remap_to_uuid[info.uuid] || remap_to_uuid[info.file] || remap_to_uuid[info.filepath]);
+			let must_remap_to = (remap_to_uuid[info.file] || remap_to_uuid[info.filepath]);
 			
 			if (must_remap_to) {
 				// regex info still points at the matching place...
 				m.input = null;
 				let line_pos = m.index;
 				let old_line = m[0];
-				let new_line = old_line.replace(new RegExp(must_remap_to.uuid, 'g'), must_remap_to.remap_to_uuid);
-				console.log("REMAPPING: ", { must_remap_to, info, prj_re, m });
+				let repl_re = new RegExp(info.uuid, 'ig');
+				let new_line = old_line.replace(repl_re, must_remap_to.map_to_uuid);
+				if (debug || info.file.includes('zstd_tests'))  console.log("REMAPPING: ", { must_remap_to, info, prj_re, m, old_line, repl_re, new_line });
+				else        console.log(`Must remap ${ info.file }...`);
 				
 				file_src = file_src.substring(0, line_pos) + new_line + file_src.substring(line_pos + old_line.length);
 				
 				// no need to reset the /prj_re/.lastIndex as we didn't change the length of the underlying content...
 				//prj_re.lstIndex = 0;
+				rewritten = true;
 			}
 			
 			m = prj_re.exec(file_src);
 		}
+		
+		// have we updated the project/solution file? if so, rewrite the corrected/synced result:
+		if (rewritten) {
+			console.log(`Updating ${ l }.`);
+			fs.writeFileSync(l, file_src, 'utf8');
+		}
 	});
 
-	
-
+	console.log(`\n\n${ ToDo_uuid_list.length } project entries were re-assigned a UUID and/or resynced with their dependencies.\n\n`);
 }
 	break;
 }
