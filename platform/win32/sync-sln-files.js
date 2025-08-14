@@ -91,6 +91,67 @@ function filterOutUnwantedSolutions(sln) {
 }
 
 
+let uuid_map = {};
+let projectPath_map = {};
+let projectName_map = {};
+
+// e.g.     Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "zstd_tests", "zstd_tests.vcxproj", "{A60D8644-5A1C-4D29-8970-10100000003F}"
+let ToDo_uuid_list = [];
+let ToDo_uuid_dedup_map = {};
+
+function collectProjectUUID(info) {
+	// let info = {
+	//		name: m[1],
+	//		file: path.basename(m[2]),
+	//		filepath: m[2],
+	//		uuid: m[3].toUpperCase(),
+	//		is_project_ref: true
+	//	};
+	let must_reprocess = info.uuid.includes("A60D8644-5A1C-4D29-8970-10100000");
+	
+	if (!projectPath_map[info.filepath]) {
+		projectPath_map[info.filepath] = info;
+	}
+	if (!projectName_map[info.file]) {
+		projectName_map[info.file] = info;
+	}
+	
+	if (!uuid_map[info.uuid]) {
+		uuid_map[info.uuid] = info;
+	}
+	else if (uuid_map[info.uuid].uuid !== info.uuid) {
+		console.log("Duplicate Project UUID: ", {tableSlot: uuid_map[info.uuid], info });
+		must_reprocess = true;
+
+		let el = uuid_map[info.uuid];
+		let idx = `${ el.filepath }::${ el.uuid }`;
+		if (!ToDo_uuid_dedup_map[idx]) {
+			console.log("TODO   Project UUID: ", { idx, el });
+
+			ToDo_uuid_list.push(el);
+			ToDo_uuid_dedup_map[idx] = el;
+		}
+	}
+	
+	if (must_reprocess) {
+		let el = info;
+		let idx = `${ el.filepath }::${ el.uuid }`;
+		if (!ToDo_uuid_dedup_map[idx]) {
+			console.log("TODO   Project UUID: ", { idx, el });
+
+			ToDo_uuid_list.push(el);
+			ToDo_uuid_dedup_map[idx] = el;
+		}
+	}
+	
+	if (path.isAbsolute(info.filepath)) {
+		// --> I:\\Projects\\sites\\library.visyond.gov\\80\\lib\\tooling\\qiqqa\\MuPDF\\platform\\win32\\.........
+		console.log("WARNING: ABSOLUTE PATH for Project: ", { info });
+	}
+}
+
+
+
 switch (command) {
 default:
     console.log(`Unknown/unsupported command '${command}'. Aborting.\n`);
@@ -448,9 +509,15 @@ case 3:
 	.split('\n')
 	.map((l) => l.trim())
 	.filter((l) => l.length > 0);
-	console.log({ dest_files });
+	if (debug)  console.log({ dest_files });
 
-	let uuid_map = {};
+	uuid_map = {};
+    projectPath_map = {};
+    projectName_map = {};
+	
+	// e.g.     Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "zstd_tests", "zstd_tests.vcxproj", "{A60D8644-5A1C-4D29-8970-10100000003F}"
+	ToDo_uuid_list = [];
+    ToDo_uuid_dedup_map = {};
 	
 	dest_files.forEach((l) => {
 		let file_src = fs.readFileSync(l, 'utf8');
@@ -463,16 +530,18 @@ case 3:
 		let m = prj_re.exec(file_src);
 		let mx = { ...m };
 		delete mx.input;
-		console.log({ prj_re, mx });
+		if (debug)  console.log({ prj_re, mx });
 		while (m) {
 			let info = {
 				name: m[1],
-				file: path.basename(m[2]),
-				filepath: m[2],
-				uuid: m[3],
+				file: path.basename(path.normalize(m[2])),
+				filepath: path.normalize(m[2]),
+				uuid: m[3].toUpperCase(),
 				is_project_ref: true
 			};
-			console.log({line: m[0], info});
+			if (debug)  console.log({line: m[0], info});
+
+			collectProjectUUID(info);
 			
 			m = prj_re.exec(file_src);
 		}
@@ -490,16 +559,18 @@ case 3:
 		m = prj_re.exec(file_src);
 		mx = { ...m };
 		delete mx.input;
-		console.log({ prj_re, mx });
+		if (debug)  console.log({ prj_re, mx });
 		while (m) {
 			let info = {
 				name: null,
-				file: path.basename(l),
-				filepath: l,
-				uuid: m[1],
+				file: path.basename(path.normalize(l)),
+				filepath: path.normalize(l),
+				uuid: m[1].toUpperCase(),
 				is_project_spec: true
 			};
-			console.log({line: m[0], info});
+			if (debug)  console.log({line: m[0], info});
+
+			collectProjectUUID(info);
 			
 			m = prj_re.exec(file_src);
 		}
@@ -509,16 +580,18 @@ case 3:
 		m = prj_re.exec(file_src);
 		mx = { ...m };
 		delete mx.input;
-		console.log({ prj_re, mx });
+		if (debug)  console.log({ prj_re, mx });
 		while (m) {
 			let info = {
 				name: null,
-				file: path.basename(l),
-				filepath: l,
-				uuid: m[1],
+				file: path.basename(path.normalize(l)),
+				filepath: path.normalize(l),
+				uuid: m[1].toUpperCase(),
 				is_collection_spec: true
 			};
-			console.log({line: m[0], info});
+			if (debug)  console.log({line: m[0], info});
+
+			collectProjectUUID(info);
 			
 			m = prj_re.exec(file_src);
 		}
@@ -528,20 +601,220 @@ case 3:
 		m = prj_re.exec(file_src);
 		mx = { ...m };
 		delete mx.input;
-		console.log({ prj_re, mx });
+		if (debug)  console.log({ prj_re, mx });
 		while (m) {
 			let info = {
 				name: null,
-				file: path.basename(m[1]),
-				filepath: m[1],
-				uuid: m[2],
+				file: path.basename(path.normalize(m[1])),
+				filepath: path.normalize(m[1]),
+				uuid: m[2].toUpperCase(),
 				is_crossref: true
 			};
-			console.log({line: m[0], info});
+			if (debug)  console.log({line: m[0], info});
+
+			collectProjectUUID(info);
 			
 			m = prj_re.exec(file_src);
 		}
 	});
+
+	console.log({ uuid_map });
+	
+	ToDo_uuid_list = ToDo_uuid_list.map((el) => {
+		// e.g. el.uuid = 'A60D8644-5A1C-4D29-8970-101000000001'
+		//            --> '0B51171B-B10E-4EAC-8FFA-19226Axxxxxx'
+		
+		// generate unique new UUID:
+		let n = Math.floor(Math.random() * 1E7);
+		let uuid = '';
+		
+		for(;;) {
+			let suffix = n.toString(16) + "010203";
+			suffix = suffix.substring(0, 6);
+			uuid = '0B51171B-B10E-4EAC-8FFA-19226A' + suffix;
+			uuid = uuid.toUpperCase();
+			
+			if (uuid_map[uuid]) {
+				++n;
+				continue;
+			}
+			break;
+		}
+		
+		el.map_to_uuid = uuid;
+		
+		return el;
+	});
+
+	console.log({ ToDo_uuid_list });
+	
+	// construct the remap dictionary now that we have all the old info PLUS sufficient unique remapping UUIDs
+	// (in fact we may have a few too many as we didn't deduplicate on filepath/filename, but that will be resolved by our remapping map setup approach: last unique entry wins!)
+	let remap_to_uuid = {};
+	
+	ToDo_uuid_list.forEach((el) => {
+		remap_to_uuid[el.file] = el;
+		remap_to_uuid[el.filepath] = el;
+		remap_to_uuid[el.uuid] = el;
+	});
+
+	// run the remapping:
+	dest_files.forEach((l) => {
+		let file_src = fs.readFileSync(l, 'utf8');
+
+		// e.g. Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1D-RGB-color-gradient", "1D-RGB-color-gradient.vcxproj", "{3644E12D-D934-41FD-BF7E-83745A17E226}"
+		//      Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libmupdf_CarvedSubset", "libmupdf_CarvedSubset.vcxitems", "{08FF3748-F1BD-40A1-9322-F93FD04C2350}"
+		//      Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MuPDFSharp", "..\..\MupdfSharp\MuPDFSharp.csproj", "{8E506476-FFAE-46B2-977D-45EB25ECF394}"
+	    let prj_re = /^Project[^=]*?8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942[^=]*= "([^"]+)", "([^"]+?[.]vcx(?:proj|items))", "[{]([^}"]+?)[}]".*?$/gm;
+
+		let m = prj_re.exec(file_src);
+		let mx = { ...m };
+		delete mx.input;
+		if (debug)  console.log({ prj_re, mx });
+		while (m) {
+			let info = {
+				name: m[1],
+				file: path.basename(path.normalize(m[2])),
+				filepath: path.normalize(m[2]),
+				uuid: m[3].toUpperCase(),
+				is_project_ref: true
+			};
+			if (debug)  console.log({line: m[0], info});
+
+			let must_remap_to = (remap_to_uuid[info.uuid] || remap_to_uuid[info.file] || remap_to_uuid[info.filepath]);
+			
+			if (must_remap_to) {
+				// regex info still points at the matching place...
+				m.input = null;
+				let line_pos = m.index;
+				let old_line = m[0];
+				let new_line = old_line.replace(new RegExp(must_remap_to.uuid, 'g'), must_remap_to.remap_to_uuid);
+				console.log("REMAPPING: ", { must_remap_to, info, prj_re, m });
+				
+				file_src = file_src.substring(0, line_pos) + new_line + file_src.substring(line_pos + old_line.length);
+				
+				// no need to reset the /prj_re/.lastIndex as we didn't change the length of the underlying content...
+				//prj_re.lstIndex = 0;
+			}
+			
+			m = prj_re.exec(file_src);
+		}
+		
+		// e.g.    <ProjectGuid>{BFD01D9C-AC53-64D2-BC7B-9C711B129D59}</ProjectGuid>
+		//         <ProjectGuid>{8E506476-FFAE-46B2-977D-45EB25ECF394}</ProjectGuid>
+		//         <ItemsProjectGuid>{08ff3748-f1bd-40a1-9322-f93fd04c2350}</ItemsProjectGuid>
+		//
+		//         <ProjectReference Include="libabseil-cpp.vcxproj">
+		//           <Project>{a60d8644-5a1c-4d29-8970-7518ff3d0c57}</Project>
+		//         </ProjectReference>
+
+	    prj_re = /^\s*<ProjectGuid>[{]([^}]+?)[}]<\/ProjectGuid>.*?$/gm;
+
+		m = prj_re.exec(file_src);
+		mx = { ...m };
+		delete mx.input;
+		if (debug)  console.log({ prj_re, mx });
+		while (m) {
+			let info = {
+				name: null,
+				file: path.basename(path.normalize(l)),
+				filepath: path.normalize(l),
+				uuid: m[1].toUpperCase(),
+				is_project_spec: true
+			};
+			if (debug)  console.log({line: m[0], info});
+
+			let must_remap_to = (remap_to_uuid[info.uuid] || remap_to_uuid[info.file] || remap_to_uuid[info.filepath]);
+			
+			if (must_remap_to) {
+				// regex info still points at the matching place...
+				m.input = null;
+				let line_pos = m.index;
+				let old_line = m[0];
+				let new_line = old_line.replace(new RegExp(must_remap_to.uuid, 'g'), must_remap_to.remap_to_uuid);
+				console.log("REMAPPING: ", { must_remap_to, info, prj_re, m });
+				
+				file_src = file_src.substring(0, line_pos) + new_line + file_src.substring(line_pos + old_line.length);
+				
+				// no need to reset the /prj_re/.lastIndex as we didn't change the length of the underlying content...
+				//prj_re.lstIndex = 0;
+			}
+			
+			m = prj_re.exec(file_src);
+		}
+
+	    prj_re = /^\s*<ItemsProjectGuid>[{]([^}]+?)[}]<\/ItemsProjectGuid>.*?$/gm;
+
+		m = prj_re.exec(file_src);
+		mx = { ...m };
+		delete mx.input;
+		if (debug)  console.log({ prj_re, mx });
+		while (m) {
+			let info = {
+				name: null,
+				file: path.basename(path.normalize(l)),
+				filepath: path.normalize(l),
+				uuid: m[1].toUpperCase(),
+				is_collection_spec: true
+			};
+			if (debug)  console.log({line: m[0], info});
+
+			let must_remap_to = (remap_to_uuid[info.uuid] || remap_to_uuid[info.file] || remap_to_uuid[info.filepath]);
+			
+			if (must_remap_to) {
+				// regex info still points at the matching place...
+				m.input = null;
+				let line_pos = m.index;
+				let old_line = m[0];
+				let new_line = old_line.replace(new RegExp(must_remap_to.uuid, 'g'), must_remap_to.remap_to_uuid);
+				console.log("REMAPPING: ", { must_remap_to, info, prj_re, m });
+				
+				file_src = file_src.substring(0, line_pos) + new_line + file_src.substring(line_pos + old_line.length);
+				
+				// no need to reset the /prj_re/.lastIndex as we didn't change the length of the underlying content...
+				//prj_re.lstIndex = 0;
+			}
+			
+			m = prj_re.exec(file_src);
+		}
+
+	    prj_re = /<ProjectReference\s+Include="([^"]+)">[\s\r\n]*<Project>[{]([^}]+?)[}]<\/Project>[\s\r\n]*<\/ProjectReference>/g;
+
+		m = prj_re.exec(file_src);
+		mx = { ...m };
+		delete mx.input;
+		if (debug)  console.log({ prj_re, mx });
+		while (m) {
+			let info = {
+				name: null,
+				file: path.basename(path.normalize(m[1])),
+				filepath: path.normalize(m[1]),
+				uuid: m[2].toUpperCase(),
+				is_crossref: true
+			};
+			if (debug)  console.log({line: m[0], info});
+
+			let must_remap_to = (remap_to_uuid[info.uuid] || remap_to_uuid[info.file] || remap_to_uuid[info.filepath]);
+			
+			if (must_remap_to) {
+				// regex info still points at the matching place...
+				m.input = null;
+				let line_pos = m.index;
+				let old_line = m[0];
+				let new_line = old_line.replace(new RegExp(must_remap_to.uuid, 'g'), must_remap_to.remap_to_uuid);
+				console.log("REMAPPING: ", { must_remap_to, info, prj_re, m });
+				
+				file_src = file_src.substring(0, line_pos) + new_line + file_src.substring(line_pos + old_line.length);
+				
+				// no need to reset the /prj_re/.lastIndex as we didn't change the length of the underlying content...
+				//prj_re.lstIndex = 0;
+			}
+			
+			m = prj_re.exec(file_src);
+		}
+	});
+
+	
 
 }
 	break;
