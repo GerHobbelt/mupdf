@@ -52,16 +52,16 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -109,7 +109,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -143,8 +143,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Technology.Tests\forking cleans up memory leaks\forking cleans up memory leaks.vcxproj">
@@ -240,6 +240,18 @@
     <ProjectReference Include="libassert.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518fffea6c7}</Project>
     </ProjectReference>
+    <ProjectReference Include="libassert_demo.vcxproj">
+      <Project>{66c22698-c49a-4992-be74-c559ce5ecc01}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libassert_tests.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffab2cb1}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libassert_tests_catch2.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-101000000008}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libassert_tests_gtest.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-10100000000a}</Project>
+    </ProjectReference>
     <ProjectReference Include="libbase58x.vcxproj">
       <Project>{0501bedf-3191-46a9-9997-288466675b82}</Project>
     </ProjectReference>
@@ -252,6 +264,21 @@
     <ProjectReference Include="libbitsery.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff0cc246}</Project>
     </ProjectReference>
+    <ProjectReference Include="libBLAKE3.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dc1880387f83}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libBLAKE3_examples.vcxproj">
+      <Project>{33c08a37-798c-4f18-b5b2-9c918d609535}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libCatch2.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff4f227d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcli11-examples.vcxproj">
+      <Project>{89a30750-1f70-45a8-945f-e8461b0c3d7e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcli11.vcxproj">
+      <Project>{82a39750-1f70-45a8-945f-e8461b0c3d7e}</Project>
+    </ProjectReference>
     <ProjectReference Include="libcpp-terminal.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff2367fa}</Project>
     </ProjectReference>
@@ -260,6 +287,12 @@
     </ProjectReference>
     <ProjectReference Include="libcpuinfo.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff24f32d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcrow.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fff84e35}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcrow_examples.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-8518fff84e35}</Project>
     </ProjectReference>
     <ProjectReference Include="libdcmtk-iconv-csmapper-app.vcxproj">
       <Project>{9f85d805-d504-4d94-a33e-a51183137bbb}</Project>
@@ -318,8 +351,17 @@
     <ProjectReference Include="libgibbs-lda.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff43a863}</Project>
     </ProjectReference>
+    <ProjectReference Include="libgif.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffddd6be}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libgiflib-turbo.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff998589}</Project>
+    </ProjectReference>
     <ProjectReference Include="libglfw.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff878bbf}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libglob.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff518d62}</Project>
     </ProjectReference>
     <ProjectReference Include="libgumbo-parser.vcxproj">
       <Project>{5edcf4fd-0291-4fb9-8d96-358957ca5e3c}</Project>
@@ -333,6 +375,9 @@
     <ProjectReference Include="libgumbo-query.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff51b60c}</Project>
     </ProjectReference>
+    <ProjectReference Include="libharfbuzz.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-258957ca5e3c}</Project>
+    </ProjectReference>
     <ProjectReference Include="libhog.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff129e7a}</Project>
     </ProjectReference>
@@ -342,8 +387,29 @@
     <ProjectReference Include="libimagedistance.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff992f89}</Project>
     </ProjectReference>
+    <ProjectReference Include="libJasPer.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa3f9a5}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjpeg-turbo.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff92ba30}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjpeg-xl.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa838c1}</Project>
+    </ProjectReference>
     <ProjectReference Include="libjpeg_default_handlers.vcxproj">
       <Project>{5f615f91-dff8-4f05-bf48-1222b72071a8}</Project>
+    </ProjectReference>
+    <ProjectReference Include="liblcms2.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-158957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libleptonica-test-prep.vcxproj">
+      <Project>{5c7e17ff-c529-46b8-b358-de27b8efe464}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libleptonica.vcxproj">
+      <Project>{ca0bda38-89b9-4703-a77d-8049ac3a0d04}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libleptonica_tools.vcxproj">
+      <Project>{ca0bda38-89b9-4703-a77d-8049acf23027}</Project>
     </ProjectReference>
     <ProjectReference Include="libmcmc.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffc2f503}</Project>
@@ -360,6 +426,12 @@
     <ProjectReference Include="libmupdf_default_handlers.vcxproj">
       <Project>{5f615f91-dff8-4f05-bf48-1222b7d86519}</Project>
     </ProjectReference>
+    <ProjectReference Include="libmupdf_minimal_core.vcxproj">
+      <Project>{6f1ee8ba-ccb7-4f76-b9da-337c41dd6fc0}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmupdf_sans_tesseract.vcxproj">
+      <Project>{26b92352-70ed-4bec-ba5f-9b6a07e073fd}</Project>
+    </ProjectReference>
     <ProjectReference Include="libmutool.vcxproj">
       <Project>{fa8ade21-fc8a-47e0-87e4-dce8808bfc9b}</Project>
     </ProjectReference>
@@ -368,6 +440,9 @@
     </ProjectReference>
     <ProjectReference Include="libnanosvg.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-751bff971987}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libOpenImageIO.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff4edc48}</Project>
     </ProjectReference>
     <ProjectReference Include="libplf_nanotimer.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffe7ea82}</Project>
@@ -405,11 +480,26 @@
     <ProjectReference Include="libre2.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff49f979}</Project>
     </ProjectReference>
+    <ProjectReference Include="libreplxx.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518f0fe817a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libreplxx_examples.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518111e817a}</Project>
+    </ProjectReference>
     <ProjectReference Include="libspdlog.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff35655c}</Project>
     </ProjectReference>
     <ProjectReference Include="libspdlog_tests.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8979-7518ff356959}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsqlite-amalgamation.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffe3a7bc}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsystem_override.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8318-7518ff7ef82f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsystem_override_4_googletests.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8318-7518ff7ef82e}</Project>
     </ProjectReference>
     <ProjectReference Include="libtag.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff2daf08}</Project>
@@ -615,4 +705,3 @@
   </ImportGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
-  

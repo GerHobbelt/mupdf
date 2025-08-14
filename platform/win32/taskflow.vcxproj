@@ -52,16 +52,16 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -74,7 +74,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -108,8 +108,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TASKFLOW;TASKFLOW_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -128,7 +128,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TASKFLOW;TASKFLOW_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/taskflow;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -155,7 +155,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TASKFLOW;TASKFLOW_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/taskflow;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -183,7 +183,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TASKFLOW;TASKFLOW_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/taskflow;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -210,7 +210,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TASKFLOW;TASKFLOW_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/taskflow;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -243,6 +243,10 @@
     <ClCompile Include="../../thirdparty/owemdjee/taskflow/benchmarks/deferred_pipeline/main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/taskflow/benchmarks/deferred_pipeline/pthread.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/taskflow/benchmarks/deferred_pipeline/taskflow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taskflow/benchmarks/fibonacci/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taskflow/benchmarks/fibonacci/omp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taskflow/benchmarks/fibonacci/taskflow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taskflow/benchmarks/fibonacci/tbb.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/taskflow/benchmarks/for_each/main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/taskflow/benchmarks/for_each/omp.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/taskflow/benchmarks/for_each/taskflow.cpp" />
@@ -258,6 +262,10 @@
     <ClCompile Include="../../thirdparty/owemdjee/taskflow/benchmarks/graph_traversal/seq.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/taskflow/benchmarks/graph_traversal/taskflow.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/taskflow/benchmarks/graph_traversal/tbb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taskflow/benchmarks/integrate/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taskflow/benchmarks/integrate/omp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taskflow/benchmarks/integrate/taskflow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taskflow/benchmarks/integrate/tbb.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/taskflow/benchmarks/linear_chain/main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/taskflow/benchmarks/linear_chain/omp.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/taskflow/benchmarks/linear_chain/taskflow.cpp" />
@@ -280,6 +288,14 @@
     <ClCompile Include="../../thirdparty/owemdjee/taskflow/benchmarks/mnist/seq.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/taskflow/benchmarks/mnist/taskflow.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/taskflow/benchmarks/mnist/tbb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taskflow/benchmarks/nqueens/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taskflow/benchmarks/nqueens/omp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taskflow/benchmarks/nqueens/taskflow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taskflow/benchmarks/nqueens/tbb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taskflow/benchmarks/primes/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taskflow/benchmarks/primes/omp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taskflow/benchmarks/primes/taskflow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taskflow/benchmarks/primes/tbb.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/taskflow/benchmarks/reduce_sum/main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/taskflow/benchmarks/reduce_sum/omp.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/taskflow/benchmarks/reduce_sum/taskflow.cpp" />
@@ -288,6 +304,10 @@
     <ClCompile Include="../../thirdparty/owemdjee/taskflow/benchmarks/scan/omp.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/taskflow/benchmarks/scan/taskflow.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/taskflow/benchmarks/scan/tbb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taskflow/benchmarks/skynet/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taskflow/benchmarks/skynet/omp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taskflow/benchmarks/skynet/taskflow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taskflow/benchmarks/skynet/tbb.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/taskflow/benchmarks/sort/main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/taskflow/benchmarks/sort/omp.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/taskflow/benchmarks/sort/taskflow.cpp" />
@@ -337,6 +357,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/taskflow/examples/subflow.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/taskflow/examples/subflow_exception.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/taskflow/examples/switch_case.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taskflow/examples/task_visitor.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/taskflow/examples/taskflow_pipeline.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/taskflow/examples/text_pipeline.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/taskflow/examples/visualization.cpp" />
@@ -493,17 +514,22 @@
     <ClInclude Include="../../thirdparty/owemdjee/taskflow/benchmarks/black_scholes/common.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/taskflow/benchmarks/data_pipeline/data_pipeline.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/taskflow/benchmarks/deferred_pipeline/deferred_pipeline.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/taskflow/benchmarks/fibonacci/fibonacci.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/taskflow/benchmarks/for_each/for_each.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/taskflow/benchmarks/graph_pipeline/levelgraph.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/taskflow/benchmarks/graph_traversal/levelgraph.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/taskflow/benchmarks/hetero_traversal/graph.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/taskflow/benchmarks/integrate/integrate.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/taskflow/benchmarks/linear_chain/linear_chain.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/taskflow/benchmarks/linear_pipeline/linear_pipeline.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/taskflow/benchmarks/mandelbrot/mandel.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/taskflow/benchmarks/matrix_multiplication/matrix_multiplication.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/taskflow/benchmarks/mnist/dnn.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/taskflow/benchmarks/nqueens/nqueens.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/taskflow/benchmarks/primes/primes.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/taskflow/benchmarks/reduce_sum/reduce_sum.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/taskflow/benchmarks/scan/scan.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/taskflow/benchmarks/skynet/skynet.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/taskflow/benchmarks/sort/sort.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/taskflow/benchmarks/thread_pool/ThreadPool.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/taskflow/benchmarks/wavefront/matrix.hpp" />
@@ -766,11 +792,7 @@
     <Text Include="../../thirdparty/owemdjee/taskflow/benchmarks/hetero_traversal/run.sh" />
     <Text Include="../../thirdparty/owemdjee/taskflow/benchmarks/mnist/readme.md" />
     <Text Include="../../thirdparty/owemdjee/taskflow/cmake/Atomic/CheckAtomic.cmake" />
-    <Text Include="../../thirdparty/owemdjee/taskflow/cmake/ComputeCpp/Modules/ComputeCppCompilerChecks.cmake" />
-    <Text Include="../../thirdparty/owemdjee/taskflow/cmake/ComputeCpp/Modules/ComputeCppIRMap.cmake" />
-    <Text Include="../../thirdparty/owemdjee/taskflow/cmake/ComputeCpp/Modules/FindComputeCpp.cmake" />
-    <Text Include="../../thirdparty/owemdjee/taskflow/cmake/ComputeCpp/toolchains/arm-gcc-poky.cmake" />
-    <Text Include="../../thirdparty/owemdjee/taskflow/cmake/ComputeCpp/toolchains/gcc-generic.cmake" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/cmake/Atomic/LICENSE" />
     <Text Include="../../thirdparty/owemdjee/taskflow/cmake/cuda/modules/FindcuBLAS.cmake" />
     <Text Include="../../thirdparty/owemdjee/taskflow/docs/2004.10908v2.pdf" />
     <Text Include="../../thirdparty/owemdjee/taskflow/docs/Algorithms.html" />
@@ -818,9 +840,12 @@
     <Text Include="../../thirdparty/owemdjee/taskflow/docs/async__task_8hpp.html" />
     <Text Include="../../thirdparty/owemdjee/taskflow/docs/classtf_1_1AsyncTask.html" />
     <Text Include="../../thirdparty/owemdjee/taskflow/docs/classtf_1_1BoundedTaskQueue.html" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/classtf_1_1CachelineAligned.html" />
     <Text Include="../../thirdparty/owemdjee/taskflow/docs/classtf_1_1ChromeObserver.html" />
     <Text Include="../../thirdparty/owemdjee/taskflow/docs/classtf_1_1DataPipe.html" />
     <Text Include="../../thirdparty/owemdjee/taskflow/docs/classtf_1_1DataPipeline.html" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/classtf_1_1DefaultClosureWrapper.html" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/classtf_1_1DefaultTaskParams.html" />
     <Text Include="../../thirdparty/owemdjee/taskflow/docs/classtf_1_1DynamicPartitioner.html" />
     <Text Include="../../thirdparty/owemdjee/taskflow/docs/classtf_1_1Executor.html" />
     <Text Include="../../thirdparty/owemdjee/taskflow/docs/classtf_1_1FlowBuilder.html" />
@@ -842,20 +867,27 @@
     <Text Include="../../thirdparty/owemdjee/taskflow/docs/classtf_1_1Subflow.html" />
     <Text Include="../../thirdparty/owemdjee/taskflow/docs/classtf_1_1TFProfObserver.html" />
     <Text Include="../../thirdparty/owemdjee/taskflow/docs/classtf_1_1Task.html" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/classtf_1_1TaskParams.html" />
     <Text Include="../../thirdparty/owemdjee/taskflow/docs/classtf_1_1TaskView.html" />
     <Text Include="../../thirdparty/owemdjee/taskflow/docs/classtf_1_1Taskflow.html" />
     <Text Include="../../thirdparty/owemdjee/taskflow/docs/classtf_1_1UnboundedTaskQueue.html" />
     <Text Include="../../thirdparty/owemdjee/taskflow/docs/classtf_1_1Worker.html" />
     <Text Include="../../thirdparty/owemdjee/taskflow/docs/classtf_1_1WorkerInterface.html" />
     <Text Include="../../thirdparty/owemdjee/taskflow/docs/classtf_1_1WorkerView.html" />
-    <Text Include="../../thirdparty/owemdjee/taskflow/docs/classtf_1_1cudaDeviceAllocator.html" />
     <Text Include="../../thirdparty/owemdjee/taskflow/docs/classtf_1_1cudaEventBase.html" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/classtf_1_1cudaEventCreator.html" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/classtf_1_1cudaEventDeleter.html" />
     <Text Include="../../thirdparty/owemdjee/taskflow/docs/classtf_1_1cudaGraphBase.html" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/classtf_1_1cudaGraphCreator.html" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/classtf_1_1cudaGraphDeleter.html" />
     <Text Include="../../thirdparty/owemdjee/taskflow/docs/classtf_1_1cudaGraphExecBase.html" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/classtf_1_1cudaGraphExecCreator.html" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/classtf_1_1cudaGraphExecDeleter.html" />
     <Text Include="../../thirdparty/owemdjee/taskflow/docs/classtf_1_1cudaScopedDevice.html" />
     <Text Include="../../thirdparty/owemdjee/taskflow/docs/classtf_1_1cudaStreamBase.html" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/classtf_1_1cudaStreamCreator.html" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/classtf_1_1cudaStreamDeleter.html" />
     <Text Include="../../thirdparty/owemdjee/taskflow/docs/classtf_1_1cudaTask.html" />
-    <Text Include="../../thirdparty/owemdjee/taskflow/docs/classtf_1_1cudaUSMAllocator.html" />
     <Text Include="../../thirdparty/owemdjee/taskflow/docs/codeofconduct.html" />
     <Text Include="../../thirdparty/owemdjee/taskflow/docs/contributors.html" />
     <Text Include="../../thirdparty/owemdjee/taskflow/docs/core_2taskflow_8hpp.html" />
@@ -925,19 +957,7 @@
     <Text Include="../../thirdparty/owemdjee/taskflow/docs/searchdata-v2.js" />
     <Text Include="../../thirdparty/owemdjee/taskflow/docs/semaphore_8hpp.html" />
     <Text Include="../../thirdparty/owemdjee/taskflow/docs/small__vector_8hpp.html" />
-    <Text Include="../../thirdparty/owemdjee/taskflow/docs/structtf_1_1CachelineAligned.html" />
-    <Text Include="../../thirdparty/owemdjee/taskflow/docs/structtf_1_1DefaultClosureWrapper.html" />
-    <Text Include="../../thirdparty/owemdjee/taskflow/docs/structtf_1_1DefaultTaskParams.html" />
-    <Text Include="../../thirdparty/owemdjee/taskflow/docs/structtf_1_1TaskParams.html" />
     <Text Include="../../thirdparty/owemdjee/taskflow/docs/structtf_1_1cudaDeviceAllocator_1_1rebind.html" />
-    <Text Include="../../thirdparty/owemdjee/taskflow/docs/structtf_1_1cudaEventCreator.html" />
-    <Text Include="../../thirdparty/owemdjee/taskflow/docs/structtf_1_1cudaEventDeleter.html" />
-    <Text Include="../../thirdparty/owemdjee/taskflow/docs/structtf_1_1cudaGraphCreator.html" />
-    <Text Include="../../thirdparty/owemdjee/taskflow/docs/structtf_1_1cudaGraphDeleter.html" />
-    <Text Include="../../thirdparty/owemdjee/taskflow/docs/structtf_1_1cudaGraphExecCreator.html" />
-    <Text Include="../../thirdparty/owemdjee/taskflow/docs/structtf_1_1cudaGraphExecDeleter.html" />
-    <Text Include="../../thirdparty/owemdjee/taskflow/docs/structtf_1_1cudaStreamCreator.html" />
-    <Text Include="../../thirdparty/owemdjee/taskflow/docs/structtf_1_1cudaStreamDeleter.html" />
     <Text Include="../../thirdparty/owemdjee/taskflow/docs/structtf_1_1cudaUSMAllocator_1_1rebind.html" />
     <Text Include="../../thirdparty/owemdjee/taskflow/docs/task_8hpp.html" />
     <Text Include="../../thirdparty/owemdjee/taskflow/docs/taskflow_8hpp.html" />
@@ -949,8 +969,71 @@
     <Text Include="../../thirdparty/owemdjee/taskflow/docs/wavefront.html" />
     <Text Include="../../thirdparty/owemdjee/taskflow/docs/worker_8hpp.html" />
     <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/combine.xslt" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/composition.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/composition_static_1.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/composition_static_2.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/composition_static_invalid.dot" />
     <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/compound.xsd" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/conditional-tasking-1.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/conditional-tasking-2.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/conditional-tasking-do-while.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/conditional-tasking-if-else.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/conditional-tasking-nested-if-else.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/conditional-tasking-pitfalls.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/conditional-tasking-switch-wrong.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/conditional-tasking-switch.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/conditional-tasking-while-wrong.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/conditional-tasking-while.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/doxyfile.xsd" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/dreamplace_3.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/fibonacci_4.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/fibonacci_4_tail_optimized.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/fibonacci_7.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/flipcoins_1.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/flipcoins_2.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/flipcoins_3.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/graph_pipeline_1.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/graph_pipeline_2.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/graph_pipeline_3.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/graph_pipeline_4.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/graph_traversal_1.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/graph_traversal_2.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/graphviz.dot" />
     <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/index.xsd" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/kmeans_2.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/kmeans_3.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/matrix_multiplication_5.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/matrix_multiplication_6.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/module_task_1.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/module_task_2.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/multi-condition-task-1.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/nested_subflow.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/opentimer_4.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/parallel_for_1.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/pipeline_basic_dependency_graph.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/pipeline_example1.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/pipeline_example2.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/pipeline_example3.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/pipeline_memory_layout.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/pipeline_our_structure.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/runtime_task_1.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/saxpy.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/saxpy_1_cudaflow.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/scalable_pipeline_1.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/scalable_pipeline_2.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/scalable_pipeline_3.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/semaphore1.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/semaphore2.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/semaphore3.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/simple.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/subflow-join.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/task-level-parallelism.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/task_level_scheduling.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/taskflow_processing_pipeline_1.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/taskflow_processing_pipeline_2.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/taskflow_processing_pipeline_3.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/text_processing_pipeline.dot" />
+    <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/wavefront_2.dot" />
     <Text Include="../../thirdparty/owemdjee/taskflow/docs/xml/xml.xsd" />
     <Text Include="../../thirdparty/owemdjee/taskflow/doxygen/Doxyfile" />
     <Text Include="../../thirdparty/owemdjee/taskflow/doxygen/Doxyfile-mcss" />
@@ -1257,6 +1340,7 @@
     <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/Cookbook_8dox.xml" />
     <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/DataParallelPipeline.xml" />
     <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/DependentAsyncTasking.xml" />
+    <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/Doxyfile.xml" />
     <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/Examples.xml" />
     <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/ExceptionHandling.xml" />
     <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/ExecuteTaskflow.xml" />
@@ -1298,9 +1382,12 @@
     <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/classtf_1_1AnchorGuard.xml" />
     <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/classtf_1_1AsyncTask.xml" />
     <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/classtf_1_1BoundedTaskQueue.xml" />
+    <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/classtf_1_1CachelineAligned.xml" />
     <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/classtf_1_1ChromeObserver.xml" />
     <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/classtf_1_1DataPipe.xml" />
     <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/classtf_1_1DataPipeline.xml" />
+    <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/classtf_1_1DefaultClosureWrapper.xml" />
+    <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/classtf_1_1DefaultTaskParams.xml" />
     <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/classtf_1_1DeferredPipeflow.xml" />
     <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/classtf_1_1DynamicPartitioner.xml" />
     <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/classtf_1_1Executor.xml" />
@@ -1331,6 +1418,7 @@
     <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/classtf_1_1TFProfManager.xml" />
     <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/classtf_1_1TFProfObserver.xml" />
     <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/classtf_1_1Task.xml" />
+    <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/classtf_1_1TaskParams.xml" />
     <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/classtf_1_1TaskView.xml" />
     <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/classtf_1_1Taskflow.xml" />
     <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/classtf_1_1UnboundedTaskQueue.xml" />
@@ -1340,10 +1428,18 @@
     <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/classtf_1_1cudaDeviceAllocator.xml" />
     <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/classtf_1_1cudaDeviceVector.xml" />
     <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/classtf_1_1cudaEventBase.xml" />
+    <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/classtf_1_1cudaEventCreator.xml" />
+    <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/classtf_1_1cudaEventDeleter.xml" />
     <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/classtf_1_1cudaGraphBase.xml" />
+    <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/classtf_1_1cudaGraphCreator.xml" />
+    <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/classtf_1_1cudaGraphDeleter.xml" />
     <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/classtf_1_1cudaGraphExecBase.xml" />
+    <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/classtf_1_1cudaGraphExecCreator.xml" />
+    <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/classtf_1_1cudaGraphExecDeleter.xml" />
     <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/classtf_1_1cudaScopedDevice.xml" />
     <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/classtf_1_1cudaStreamBase.xml" />
+    <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/classtf_1_1cudaStreamCreator.xml" />
+    <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/classtf_1_1cudaStreamDeleter.xml" />
     <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/classtf_1_1cudaTask.xml" />
     <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/classtf_1_1cudaUSMAllocator.xml" />
     <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/codeofconduct.xml" />
@@ -1492,13 +1588,10 @@
     <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/small__vector_8hpp.xml" />
     <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/sort_8dox.xml" />
     <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/static__tasking_8dox.xml" />
-    <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/structtf_1_1CachelineAligned.xml" />
     <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/structtf_1_1ChromeObserver_1_1Segment.xml" />
     <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/structtf_1_1ChromeObserver_1_1Timeline.xml" />
     <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/structtf_1_1DataPipeline_1_1Line.xml" />
     <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/structtf_1_1DataPipeline_1_1PipeMeta.xml" />
-    <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/structtf_1_1DefaultClosureWrapper.xml" />
-    <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/structtf_1_1DefaultTaskParams.xml" />
     <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/structtf_1_1IsPartitioner.xml" />
     <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/structtf_1_1IsPod.xml" />
     <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/structtf_1_1Node_1_1Async.xml" />
@@ -1522,17 +1615,10 @@
     <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/structtf_1_1TFProfObserver_1_1Summary.xml" />
     <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/structtf_1_1TFProfObserver_1_1TaskSummary.xml" />
     <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/structtf_1_1TFProfObserver_1_1WorkerSummary.xml" />
-    <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/structtf_1_1TaskParams.xml" />
     <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/structtf_1_1Taskflow_1_1Dumper.xml" />
     <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/structtf_1_1Timeline.xml" />
     <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/structtf_1_1UnboundedTaskQueue_1_1Array.xml" />
     <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/structtf_1_1cudaDeviceAllocator_1_1rebind.xml" />
-    <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/structtf_1_1cudaEventCreator.xml" />
-    <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/structtf_1_1cudaEventDeleter.xml" />
-    <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/structtf_1_1cudaGraphCreator.xml" />
-    <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/structtf_1_1cudaGraphDeleter.xml" />
-    <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/structtf_1_1cudaGraphExecCreator.xml" />
-    <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/structtf_1_1cudaGraphExecDeleter.xml" />
     <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/structtf_1_1cudaSharedMemory.xml" />
     <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/structtf_1_1cudaSharedMemory_3_01bool_01_4.xml" />
     <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/structtf_1_1cudaSharedMemory_3_01char_01_4.xml" />
@@ -1545,8 +1631,6 @@
     <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/structtf_1_1cudaSharedMemory_3_01unsigned_01int_01_4.xml" />
     <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/structtf_1_1cudaSharedMemory_3_01unsigned_01long_01_4.xml" />
     <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/structtf_1_1cudaSharedMemory_3_01unsigned_01short_01_4.xml" />
-    <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/structtf_1_1cudaStreamCreator.xml" />
-    <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/structtf_1_1cudaStreamDeleter.xml" />
     <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/structtf_1_1cudaUSMAllocator_1_1rebind.xml" />
     <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/structtf_1_1has__graph.xml" />
     <Xml Include="../../thirdparty/owemdjee/taskflow/docs/xml/structtf_1_1is__runtime__task.xml" />
@@ -1571,3 +1655,4 @@
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
+  
