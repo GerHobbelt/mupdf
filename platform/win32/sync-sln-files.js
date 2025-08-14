@@ -109,8 +109,6 @@ function collectProjectUUID(info) {
 	//	};
 	let must_reprocess = info.uuid.includes("A60D8644-5A1C-4D29-8970-10100000");
 
-	if (info.file.includes('zstd_tests'))  console.log("Collect: ", { info });
-	
 	if (!projectPath_map[info.filepath]) {
 		projectPath_map[info.filepath] = info;
 	}
@@ -803,13 +801,11 @@ case 3:
 	let remap_to_uuid = {};
 	
 	ToDo_uuid_list.forEach((el) => {
-		if (el.file.includes('zstd_tests'))  console.log("Todo:uniquify phase 1: ", { el });
 		remap_to_uuid[el.file] = el;
 	});
 	ToDo_uuid_list.forEach((el) => {
 		// as we now have a unique SINGLE UUID per file, we MUST use that one, which is not per sé the new uuid listed in our current `el` record -- we can have multiple TODO records per project file!
 		let must_remap_to = remap_to_uuid[el.file];
-		if (el.file.includes('zstd_tests'))  console.log("Todo:uniquify phase 2: ", { el, must_remap_to });
 		remap_to_uuid[el.file] = must_remap_to;
 		remap_to_uuid[el.filepath] = must_remap_to;
 		remap_to_uuid[el.uuid] = must_remap_to;
@@ -848,7 +844,7 @@ case 3:
 				let old_line = m[0];
 				let repl_re = new RegExp(info.uuid, 'ig');
 				let new_line = old_line.replace(repl_re, must_remap_to.map_to_uuid);
-				if (debug || info.file.includes('zstd_tests'))  console.log("REMAPPING: ", { must_remap_to, info, prj_re, m, old_line, repl_re, new_line });
+				if (debug)  console.log("REMAPPING: ", { must_remap_to, info, prj_re, m, old_line, repl_re, new_line });
 				else        console.log(`Must remap ${ info.file }...`);
 				
 				file_src = file_src.substring(0, line_pos) + new_line + file_src.substring(line_pos + old_line.length);
@@ -894,7 +890,7 @@ case 3:
 				let old_line = m[0];
 				let repl_re = new RegExp(info.uuid, 'ig');
 				let new_line = old_line.replace(repl_re, must_remap_to.map_to_uuid);
-				if (debug || info.file.includes('zstd_tests'))  console.log("REMAPPING: ", { must_remap_to, info, prj_re, m, old_line, repl_re, new_line });
+				if (debug)  console.log("REMAPPING: ", { must_remap_to, info, prj_re, m, old_line, repl_re, new_line });
 				else        console.log(`Must remap ${ info.file }...`);
 				
 				file_src = file_src.substring(0, line_pos) + new_line + file_src.substring(line_pos + old_line.length);
@@ -932,7 +928,7 @@ case 3:
 				let old_line = m[0];
 				let repl_re = new RegExp(info.uuid, 'ig');
 				let new_line = old_line.replace(repl_re, must_remap_to.map_to_uuid);
-				if (debug || info.file.includes('zstd_tests'))  console.log("REMAPPING: ", { must_remap_to, info, prj_re, m, old_line, repl_re, new_line });
+				if (debug)  console.log("REMAPPING: ", { must_remap_to, info, prj_re, m, old_line, repl_re, new_line });
 				else        console.log(`Must remap ${ info.file }...`);
 				
 				file_src = file_src.substring(0, line_pos) + new_line + file_src.substring(line_pos + old_line.length);
@@ -970,7 +966,7 @@ case 3:
 				let old_line = m[0];
 				let repl_re = new RegExp(info.uuid, 'ig');
 				let new_line = old_line.replace(repl_re, must_remap_to.map_to_uuid);
-				if (debug || info.file.includes('zstd_tests'))  console.log("REMAPPING: ", { must_remap_to, info, prj_re, m, old_line, repl_re, new_line });
+				if (debug)  console.log("REMAPPING: ", { must_remap_to, info, prj_re, m, old_line, repl_re, new_line });
 				else        console.log(`Must remap ${ info.file }...`);
 				
 				file_src = file_src.substring(0, line_pos) + new_line + file_src.substring(line_pos + old_line.length);
