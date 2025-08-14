@@ -290,7 +290,7 @@ case 2:
         l.in_obnoxious_sln = false;
         l.in_misc_sln = false;
 		l.occur_count = 0; 
-        l.ignore = l.file.includes('../../');
+        l.ignore = (l.file.includes('../../') || l.file.includes('..\\..\\'));
 		if (debug)  console.log(`list_prj: ${ l.file }`);
 		return l; 
 	});
@@ -304,7 +304,7 @@ case 2:
 			l.in_obnoxious_sln = false;
 			l.in_misc_sln = false;
 			l.occur_count = 0; 
-			l.ignore = l.file.includes('../../');
+            l.ignore = (l.file.includes('../../') || l.file.includes('..\\..\\'));
 			if (debug)  console.log(`failed_prj: ${ l.file }`);
             list_prjs.push(l);
         } else {
@@ -320,7 +320,7 @@ case 2:
 			l.in_obnoxious_sln = false;
 			l.in_misc_sln = false;
 			l.occur_count = 0; 
-			l.ignore = l.file.includes('../../');
+            l.ignore = (l.file.includes('../../') || l.file.includes('..\\..\\'));
 			if (debug)  console.log(`maymatter_prj: ${ l.file }`);
             list_prjs.push(l);
         } else {
@@ -336,7 +336,7 @@ case 2:
 			l.in_obnoxious_sln = true;    //X
 			l.in_misc_sln = false;
 			l.occur_count = 0; 
-			l.ignore = l.file.includes('../../');
+            l.ignore = (l.file.includes('../../') || l.file.includes('..\\..\\'));
 			if (debug)  console.log(`obnoxious_prj: ${ l.file }`);
             list_prjs.push(l);
         } else {
@@ -352,7 +352,7 @@ case 2:
 			l.in_obnoxious_sln = false;
 			l.in_misc_sln = true;       //X 
 			l.occur_count = 0;   
-			l.ignore = l.file.includes('../../');
+            l.ignore = (l.file.includes('../../') || l.file.includes('..\\..\\'));
 			if (debug)  console.log(`misc_prj: ${ l.file }`);
             list_prjs.push(l);
         } else {
@@ -383,7 +383,7 @@ case 2:
 				l.in_obnoxious_sln = false;
 				l.in_misc_sln = false;
                 l.occur_count = 1;
-				l.ignore = l.file.includes('../../');
+                l.ignore = (l.file.includes('../../') || l.file.includes('..\\..\\'));
                 list_prjs.push(l);
             } else {
                 list_prjs[idx].occur_count++;
