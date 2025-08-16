@@ -4,6 +4,6 @@ also-ignore:
 	rust/
 	python/
 	
-	.*/bench_[^/]+cpp
-	.*/test_[^/]+cpp
+	c/stringzilla.c
+	.*/(?!bench_)[^/]+cpp
 	

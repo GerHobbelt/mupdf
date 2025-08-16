@@ -442,6 +442,7 @@ function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
     case '.h++':
     case '.hxx':
     case '.hpp':
+    case '.cuh':
     case '.icc':
     case '.inc':
         filterDirs.add('Header Files');
@@ -645,6 +646,7 @@ function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
     case '.h++':
     case '.hxx':
     case '.hpp':
+    case '.cuh':
     case '.icc':
     case '.inc':
         base = path.dirname(item);

@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF374A24}</ProjectGuid>
+    <ProjectGuid>{937578F7-D02B-47D1-AAC1-72868B5A85A2}</ProjectGuid>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -111,7 +111,7 @@
 </ItemDefinitionGroup>
 <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHEWING_TEXT_CUD;CHEWING_TEXT_CUD_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -121,14 +121,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/cli11/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/filesystem/include;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHEWING_TEXT_CUD;CHEWING_TEXT_CUD_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/fork_union/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>IDN2_STATIC;IDN2_BUILDING;BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHEWING_TEXT_CUD;CHEWING_TEXT_CUD_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/cli11/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/filesystem/include;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/fork_union/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -139,7 +139,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHEWING_TEXT_CUD;CHEWING_TEXT_CUD_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -147,15 +147,15 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/cli11/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/filesystem/include;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHEWING_TEXT_CUD;CHEWING_TEXT_CUD_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/fork_union/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>IDN2_STATIC;IDN2_BUILDING;BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHEWING_TEXT_CUD;CHEWING_TEXT_CUD_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/cli11/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/filesystem/include;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/fork_union/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -166,7 +166,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHEWING_TEXT_CUD;CHEWING_TEXT_CUD_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -176,14 +176,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/cli11/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/filesystem/include;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHEWING_TEXT_CUD;CHEWING_TEXT_CUD_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/fork_union/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>IDN2_STATIC;IDN2_BUILDING;BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHEWING_TEXT_CUD;CHEWING_TEXT_CUD_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/cli11/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/filesystem/include;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/fork_union/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -194,7 +194,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHEWING_TEXT_CUD;CHEWING_TEXT_CUD_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -202,15 +202,15 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/cli11/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/filesystem/include;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHEWING_TEXT_CUD;CHEWING_TEXT_CUD_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/fork_union/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>IDN2_STATIC;IDN2_BUILDING;BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHEWING_TEXT_CUD;CHEWING_TEXT_CUD_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/cli11/include;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/filesystem/include;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/fork_union/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -223,38 +223,23 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/chewing_text_cud/ContentSplitting.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/chewing_text_cud/LocateFile.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/chewing_text_cud/ReadFileContents.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/chewing_text_cud/ResponseFileHandling.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/chewing_text_cud/TextBuffer.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/chewing_text_cud/ToAbsoluteNormalizedPath.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/chewing_text_cud/ToRelativePath.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/chewing_text_cud/codestripper.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/chewing_text_cud/strings3.cpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/chewing_text_cud/Base.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/chewing_text_cud/ContentSplitting.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/chewing_text_cud/PrivateIntrinsics.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/chewing_text_cud/PrivateUtilities.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/chewing_text_cud/ReadFileContents.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/chewing_text_cud/ResponseFileHandling.hpp" />
-    <Image Include="../../thirdparty/owemdjee/chewing_text_cud/assets/0-856797.png" />
-    <Image Include="../../thirdparty/owemdjee/chewing_text_cud/assets/0-856797_highland cow chewing long grass cud with many colo_xl-1024-v1-0.png" />
-    <Image Include="../../thirdparty/owemdjee/chewing_text_cud/assets/0-856797_highland cow chewing long grass cud with many colo_xl-1024-v1-1.png" />
-    <Image Include="../../thirdparty/owemdjee/chewing_text_cud/assets/188431_crazy mad highland cow chewing long grass cud with_xl-1024-v1-0.png" />
-    <Image Include="../../thirdparty/owemdjee/chewing_text_cud/assets/1_highland cow chewing long grass cud with many colo_esrgan-v1-x2plus.png" />
-    <Image Include="../../thirdparty/owemdjee/chewing_text_cud/assets/21bee22a-0ee7-441b-97c6-17320dc927f7.jpg" />
-    <Image Include="../../thirdparty/owemdjee/chewing_text_cud/assets/467135_mad highland cow chewing long grass cud with many _xl-1024-v1-0 (1).png" />
-    <Image Include="../../thirdparty/owemdjee/chewing_text_cud/assets/467135_mad highland cow chewing long grass cud with many _xl-1024-v1-0.png" />
-    <Image Include="../../thirdparty/owemdjee/chewing_text_cud/assets/483410_crazy mad highland cow chewing long grass cud with_xl-1024-v1-0.png" />
-    <Image Include="../../thirdparty/owemdjee/chewing_text_cud/assets/520584_crazy mad highland cow chewing long grass cud with_xl-1024-v1-0.png" />
-    <Image Include="../../thirdparty/owemdjee/chewing_text_cud/assets/970992_highland cow chewing long grass cud with many colo_xl-1024-v1-0 (1).png" />
-    <Image Include="../../thirdparty/owemdjee/chewing_text_cud/assets/970993_highland cow chewing long grass cud with many colo_xl-1024-v1-0.png" />
-    <Image Include="../../thirdparty/owemdjee/chewing_text_cud/assets/afx7_ms__342_by_aphexse7en_dgcw48q-250t.jpg" />
-    <Image Include="../../thirdparty/owemdjee/chewing_text_cud/assets/ee0d243e-0f87-4a22-a1a4-085cd2ba15b3.jpg" />
-    <Image Include="../../thirdparty/owemdjee/chewing_text_cud/assets/istockphoto-1198213022-612x612.jpg" />
-    <Text Include="../../thirdparty/owemdjee/chewing_text_cud/LICENSE" />
-    <Text Include="../../thirdparty/owemdjee/chewing_text_cud/README.md" />
+    <ClCompile Include="../../thirdparty/owemdjee/fork_union/c/lib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fork_union/scripts/nbody.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fork_union/scripts/test.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fork_union/include/fork_union.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fork_union/include/fork_union.hpp" />
+    <Text Include="../../thirdparty/owemdjee/fork_union/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/fork_union/Cargo.toml" />
+    <Text Include="../../thirdparty/owemdjee/fork_union/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/fork_union/README.md" />
+    <Text Include="../../thirdparty/owemdjee/fork_union/VERSION" />
+    <Text Include="../../thirdparty/owemdjee/fork_union/build.rs" />
+    <Text Include="../../thirdparty/owemdjee/fork_union/cmake/fork_unionConfig.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/fork_union/rust-toolchain.toml" />
+    <Text Include="../../thirdparty/owemdjee/fork_union/rust/lib.rs" />
+    <Text Include="../../thirdparty/owemdjee/fork_union/scripts/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/fork_union/scripts/nbody.rs" />
+    <Text Include="../../thirdparty/owemdjee/fork_union/scripts/search.rs" />
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
