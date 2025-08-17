@@ -161,29 +161,29 @@ src = src
   </PropertyGroup>
 */
 .replace(/<PropertyGroup Condition="[^<>]*>[\s\S]*?<\/PropertyGroup>/gm, function (m) {
-	let rv = m;
+    let rv = m;
 
-	// do not patch the sections that come *before* the .props file imports:
-	if (/ Label="Configuration"/.test(rv))
-		return rv;
-	
-	if (!/<OutDir>/.test(rv)) {
-		rv = rv
-		.replace(/<\/PropertyGroup>/, `
+    // do not patch the sections that come *before* the .props file imports:
+    if (/ Label="Configuration"/.test(rv))
+        return rv;
+
+    if (!/<OutDir>/.test(rv)) {
+        rv = rv
+        .replace(/<\/PropertyGroup>/, `
     <OutDir>xxx</OutDir>
     <IntDir>xxx</IntDir>
   </PropertyGroup>
-		`).trim();
-	}
-	if (!/<IntDir>/.test(rv)) {
-		rv = rv
-		.replace(/<\/PropertyGroup>/, `
+        `).trim();
+    }
+    if (!/<IntDir>/.test(rv)) {
+        rv = rv
+        .replace(/<\/PropertyGroup>/, `
     <IntDir>xxx</IntDir>
   </PropertyGroup>
-		`).trim();
-	}
-	
-	return rv;
+        `).trim();
+    }
+
+    return rv;
 })
 // make sure every debug/release PropertyGroup carries these OutDir and IntDir settings; this prevents MSVC from producing weird-named intermediate build directories directly inside the .../win32/ base directory.
 /*
@@ -360,7 +360,7 @@ src = src.replace(/<ResourceCompile>([^]*?)<\/ResourceCompile>/g, (m, p1) => {
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
-	
+
 With /WAll (all warnings enabled) we need to kill a few very obnoxious ones that didn't show at warning Level 4. Examples:
 
 - warning C4820: 'opj_poc': '3' bytes padding added after data member 'progorder'
@@ -372,9 +372,9 @@ With /WAll (all warnings enabled) we need to kill a few very obnoxious ones that
 - warning C4514: 'icu::UnicodeString::reverse': unreferenced inline function has been removed
 
    -->
- 
+
       <DisableSpecificWarnings>4514;4464;4061;4668;5045;4820;4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
- 
+
 while we keep these:
 
 - warning C4255: 'opj_procedure_list_create': no function prototype given: converting '()' to '(void)'
@@ -448,15 +448,15 @@ while we keep these:
 - warning C4866: compiler may not enforce left-to-right evaluation order for call to 'absl::lts_20240722::log_internal::LogMessage::operator<<<23>'
 
 lest we want to ignore most of these too:
- 
+
       <DisableSpecificWarnings>4774;4711;4295;4152;4200;4355;5246;5267;4866;4868;5220;4582;4583;4435;4619;5029;5266;4371;5031;4946;5250;5262;5038;5219;4710;4388;4324;4242;4365;4623;4626;5026;5027;4625;4514;4464;4061;4668;5045;4820;4180;4244;4018;4267;5105;4100;4127;4206;4102;4146;4189;4245;4334;4389;4457;4458;4456;4459;4701;4702;4706;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-	
+
 
 ------------------------------------------------------------------------------------------------------------------------------------------------
 
-**NOTE/WARNING**: 
+**NOTE/WARNING**:
 
-these warning numbers should be set in the `common-project.props` file to ensure all our projects receive the same base disable set. 
+these warning numbers should be set in the `common-project.props` file to ensure all our projects receive the same base disable set.
 The DisableSpecificWarnings entry in the project files themselves is only intended to set ADDITIONAL PROJECT-SPECIFIC overrides!
 
 */
@@ -562,7 +562,7 @@ src = src
     .replace(/<AdditionalOptions>\/utf-8 %\(AdditionalOptions\)<\/AdditionalOptions>/g, '')
     .replace(/<AdditionalOptions>\/Zc:__cplusplus \/utf-8 %\(AdditionalOptions\)<\/AdditionalOptions>/g, '')
 
-	// remove <Link> fields which are defined in common-project.props
+    // remove <Link> fields which are defined in common-project.props
     p2 = p2
     .replace(/<GenerateMapFile>[^]*?<\/GenerateMapFile>/g, '')
     .replace(/<MapFileName>[^]*?<\/MapFileName>/g, '')
@@ -592,7 +592,7 @@ warnings = warnings.filter(function flt(el, i, arr) {
         return false;
     if (el[0] === '%')
         return false;
-	if (common_warnings.includes(el))
+    if (common_warnings.includes(el))
         return false;
     return true;
 });
@@ -660,18 +660,30 @@ for (;;) {
 include_paths = `;${include_paths.trim()};`
     .replace(/\\/g, '/')
     .replace(/;..\/..\/include\/system-override;/g, ';')
-	.replace(/;..\/..\/thirdparty\/owemdjee\/libassert\/include;/g, ';')
-	.replace(/;..\/..\/thirdparty\/owemdjee\/magic_enum\/include;/g, ';')
-	.replace(/;..\/..\/thirdparty\/owemdjee\/cpptrace\/include;/g, ';')
-	.replace(/;..\/..\/thirdparty\/owemdjee\/fmt\/include;/g, ';')
+    .replace(/;..\/..\/thirdparty\/owemdjee\/libassert\/include;/g, ';')
+    .replace(/;..\/..\/thirdparty\/owemdjee\/magic_enum\/include;/g, ';')
+    .replace(/;..\/..\/thirdparty\/owemdjee\/cpptrace\/include;/g, ';')
+    .replace(/;..\/..\/thirdparty\/owemdjee\/fmt\/include;/g, ';')
     .replace(/;%\(AdditionalIncludeDirectories\);/g, ';')
     .replace(/;.;/g, ';')
+
+//
+// DEV NOTE:
+// the bulk of the include paths below is collected/generated using a few simple BASH shell script lines,
+// after which this JS script is edited to include these properly:
+//
+//     find ../../thirdparty/owemdjee/boost/libs -type d -name 'include' >> update-vcxproj.js
+//
+//     find ../../thirdparty/owemdjee/opencv/modules -type d -name 'include' >> update-vcxproj.js
+//     find ../../thirdparty/owemdjee/opencv_contrib/modules -type d -name 'include'
+//
 
 // patch: when there's a single /boost/ reference in there, get the whole damn bunch:
 if (/\/owemdjee\/boost\b/.test(include_paths) || /\/scripts\/boost\b/.test(include_paths)) {
     include_paths = `${include_paths}
     ../../scripts/boost/include
     ../../thirdparty/owemdjee/boost
+
     ../../thirdparty/owemdjee/boost/libs/accumulators/include
     ../../thirdparty/owemdjee/boost/libs/algorithm/include
     ../../thirdparty/owemdjee/boost/libs/align/include
@@ -717,14 +729,15 @@ if (/\/owemdjee\/boost\b/.test(include_paths) || /\/scripts\/boost\b/.test(inclu
     ../../thirdparty/owemdjee/boost/libs/foreach/include
     ../../thirdparty/owemdjee/boost/libs/format/include
     ../../thirdparty/owemdjee/boost/libs/function/include
-    ../../thirdparty/owemdjee/boost/libs/function_types/include
     ../../thirdparty/owemdjee/boost/libs/functional/include
+    ../../thirdparty/owemdjee/boost/libs/function_types/include
     ../../thirdparty/owemdjee/boost/libs/fusion/include
     ../../thirdparty/owemdjee/boost/libs/geometry/include
     ../../thirdparty/owemdjee/boost/libs/gil/include
     ../../thirdparty/owemdjee/boost/libs/graph/include
     ../../thirdparty/owemdjee/boost/libs/graph_parallel/include
     ../../thirdparty/owemdjee/boost/libs/hana/include
+    ../../thirdparty/owemdjee/boost/libs/hash2/include
     ../../thirdparty/owemdjee/boost/libs/headers/include
     ../../thirdparty/owemdjee/boost/libs/heap/include
     ../../thirdparty/owemdjee/boost/libs/histogram/include
@@ -741,8 +754,8 @@ if (/\/owemdjee\/boost\b/.test(include_paths) || /\/scripts\/boost\b/.test(inclu
     ../../thirdparty/owemdjee/boost/libs/lambda2/include
     ../../thirdparty/owemdjee/boost/libs/leaf/include
     ../../thirdparty/owemdjee/boost/libs/lexical_cast/include
-    ../../thirdparty/owemdjee/boost/libs/local_function/include
     ../../thirdparty/owemdjee/boost/libs/locale/include
+    ../../thirdparty/owemdjee/boost/libs/local_function/include
     ../../thirdparty/owemdjee/boost/libs/lockfree/include
     ../../thirdparty/owemdjee/boost/libs/log/include
     ../../thirdparty/owemdjee/boost/libs/logic/include
@@ -750,14 +763,14 @@ if (/\/owemdjee\/boost\b/.test(include_paths) || /\/scripts\/boost\b/.test(inclu
     ../../thirdparty/owemdjee/boost/libs/metaparse/include
     ../../thirdparty/owemdjee/boost/libs/move/include
     ../../thirdparty/owemdjee/boost/libs/mp11/include
-    ../../thirdparty/owemdjee/boost/libs/mp11/include/
     ../../thirdparty/owemdjee/boost/libs/mpi/include
     ../../thirdparty/owemdjee/boost/libs/mpl/include
     ../../thirdparty/owemdjee/boost/libs/mpl/preprocessed/include
+    ../../thirdparty/owemdjee/boost/libs/mqtt5/include
     ../../thirdparty/owemdjee/boost/libs/msm/include
+    ../../thirdparty/owemdjee/boost/libs/multiprecision/include
     ../../thirdparty/owemdjee/boost/libs/multi_array/include
     ../../thirdparty/owemdjee/boost/libs/multi_index/include
-    ../../thirdparty/owemdjee/boost/libs/multiprecision/include
     ../../thirdparty/owemdjee/boost/libs/mysql/include
     ../../thirdparty/owemdjee/boost/libs/nowide/include
     ../../thirdparty/owemdjee/boost/libs/numeric/conversion/include
@@ -768,11 +781,11 @@ if (/\/owemdjee\/boost\b/.test(include_paths) || /\/scripts\/boost\b/.test(inclu
     ../../thirdparty/owemdjee/boost/libs/outcome/include
     ../../thirdparty/owemdjee/boost/libs/parameter/include
     ../../thirdparty/owemdjee/boost/libs/parameter_python/include
-    ../../thirdparty/owemdjee/boost/libs/parser/include	
+    ../../thirdparty/owemdjee/boost/libs/parser/include
     ../../thirdparty/owemdjee/boost/libs/pfr/include
     ../../thirdparty/owemdjee/boost/libs/phoenix/include
-    ../../thirdparty/owemdjee/boost/libs/poly_collection/include
     ../../thirdparty/owemdjee/boost/libs/polygon/include
+    ../../thirdparty/owemdjee/boost/libs/poly_collection/include
     ../../thirdparty/owemdjee/boost/libs/pool/include
     ../../thirdparty/owemdjee/boost/libs/predef/include
     ../../thirdparty/owemdjee/boost/libs/preprocessor/include
@@ -804,6 +817,7 @@ if (/\/owemdjee\/boost\b/.test(include_paths) || /\/scripts\/boost\b/.test(inclu
     ../../thirdparty/owemdjee/boost/libs/static_assert/include
     ../../thirdparty/owemdjee/boost/libs/static_string/include
     ../../thirdparty/owemdjee/boost/libs/stl_interfaces/include
+    ../../thirdparty/owemdjee/boost/libs/sync/include
     ../../thirdparty/owemdjee/boost/libs/system/include
     ../../thirdparty/owemdjee/boost/libs/test/include
     ../../thirdparty/owemdjee/boost/libs/thread/include
@@ -812,10 +826,10 @@ if (/\/owemdjee\/boost\b/.test(include_paths) || /\/scripts\/boost\b/.test(inclu
     ../../thirdparty/owemdjee/boost/libs/tokenizer/include
     ../../thirdparty/owemdjee/boost/libs/tti/include
     ../../thirdparty/owemdjee/boost/libs/tuple/include
+    ../../thirdparty/owemdjee/boost/libs/typeof/include
     ../../thirdparty/owemdjee/boost/libs/type_erasure/include
     ../../thirdparty/owemdjee/boost/libs/type_index/include
     ../../thirdparty/owemdjee/boost/libs/type_traits/include
-    ../../thirdparty/owemdjee/boost/libs/typeof/include
     ../../thirdparty/owemdjee/boost/libs/units/include
     ../../thirdparty/owemdjee/boost/libs/unordered/include
     ../../thirdparty/owemdjee/boost/libs/url/include
@@ -828,9 +842,25 @@ if (/\/owemdjee\/boost\b/.test(include_paths) || /\/scripts\/boost\b/.test(inclu
     ../../thirdparty/owemdjee/boost/libs/winapi/include
     ../../thirdparty/owemdjee/boost/libs/xpressive/include
     ../../thirdparty/owemdjee/boost/libs/yap/include
+
     ../../thirdparty/owemdjee/boost/tools/auto_index/include
     ../../thirdparty/owemdjee/boost/tools/cmake/include
     ../../thirdparty/owemdjee/boost/tools/docca/include
+
+    ../../thirdparty/owemdjee/boost/libs/fusion/include/boost/fusion/include
+    ../../thirdparty/owemdjee/boost/libs/spirit/include/boost/spirit/include
+    ../../thirdparty/owemdjee/boost/libs/spirit/include/boost/spirit/repository/include
+
+    ../../thirdparty/owemdjee/boost/libs/metaparse/tools/benchmark/include
+
+    ../../thirdparty/owemdjee/boost/libs/beast/test/extras/include
+    ../../thirdparty/owemdjee/boost/libs/mqtt5/test/include
+    ../../thirdparty/owemdjee/boost/libs/mysql/test/common/include
+    ../../thirdparty/owemdjee/boost/libs/mysql/test/integration/include
+    ../../thirdparty/owemdjee/boost/libs/mysql/test/unit/include
+    ../../thirdparty/owemdjee/boost/libs/phoenix/test/include
+
+    ../../thirdparty/owemdjee/boost/libs/numeric/ublas/IDEs/qtcreator/include
     `.replace(/\n/g, ';')
     .replace(/\s+/g, '');
 }
@@ -842,28 +872,32 @@ if (/\/owemdjee\/opencv\b/.test(include_paths) || /\/scripts\/OpenCV\b/.test(inc
     ../../scripts/OpenCV/modules/core
     ../../scripts/OpenCV/modules/imgproc
     ../../scripts/OpenCV/modules/stitching
-	../../scripts/OpenCV/modules/objdetect
-	../../scripts/OpenCV/modules/photo
+    ../../scripts/OpenCV/modules/objdetect
+    ../../scripts/OpenCV/modules/photo
     ../../thirdparty/owemdjee/libeigen
-	../../thirdparty/owemdjee/quirc/include
+    ../../thirdparty/owemdjee/quirc/include
     ../../thirdparty/owemdjee/opencv/3rdparty/openvx/include
     ../../thirdparty/owemdjee/opencv/include
-    ../../thirdparty/owemdjee/opencv/modules/calib3d/include
-    ../../thirdparty/owemdjee/opencv/modules/core/include
+
     ../../thirdparty/owemdjee/opencv/modules/dnn
+    ../../thirdparty/owemdjee/opencv/modules/gapi/src
+
+    ../../thirdparty/owemdjee/opencv/modules/3d/include
+    ../../thirdparty/owemdjee/opencv/modules/calib/include
+    ../../thirdparty/owemdjee/opencv/modules/core/include
     ../../thirdparty/owemdjee/opencv/modules/dnn/include
     ../../thirdparty/owemdjee/opencv/modules/dnn/src/ocl4dnn/include
     ../../thirdparty/owemdjee/opencv/modules/dnn/src/vkcom/include
-    ../../thirdparty/owemdjee/opencv/modules/features2d/include
+    ../../thirdparty/owemdjee/opencv/modules/features/include
     ../../thirdparty/owemdjee/opencv/modules/flann/include
     ../../thirdparty/owemdjee/opencv/modules/gapi/include
-    ../../thirdparty/owemdjee/opencv/modules/gapi/src
+    ../../thirdparty/owemdjee/opencv/modules/gapi/src/3rdparty/vasot/include
     ../../thirdparty/owemdjee/opencv/modules/highgui/include
     ../../thirdparty/owemdjee/opencv/modules/imgcodecs/include
     ../../thirdparty/owemdjee/opencv/modules/imgproc/include
-    ../../thirdparty/owemdjee/opencv/modules/ml/include
     ../../thirdparty/owemdjee/opencv/modules/objdetect/include
     ../../thirdparty/owemdjee/opencv/modules/photo/include
+    ../../thirdparty/owemdjee/opencv/modules/stereo/include
     ../../thirdparty/owemdjee/opencv/modules/stitching/include
     ../../thirdparty/owemdjee/opencv/modules/ts/include
     ../../thirdparty/owemdjee/opencv/modules/video/include
@@ -895,6 +929,7 @@ if (/\/owemdjee\/opencv\b/.test(include_paths) || /\/scripts\/OpenCV\b/.test(inc
     ../../thirdparty/owemdjee/opencv_contrib/modules/dnn_superres/include
     ../../thirdparty/owemdjee/opencv_contrib/modules/dpm/include
     ../../thirdparty/owemdjee/opencv_contrib/modules/face/include
+    ../../thirdparty/owemdjee/opencv_contrib/modules/fastcv/include
     ../../thirdparty/owemdjee/opencv_contrib/modules/freetype/include
     ../../thirdparty/owemdjee/opencv_contrib/modules/fuzzy/include
     ../../thirdparty/owemdjee/opencv_contrib/modules/hdf/include
@@ -916,7 +951,6 @@ if (/\/owemdjee\/opencv\b/.test(include_paths) || /\/scripts\/OpenCV\b/.test(inc
     ../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/include
     ../../thirdparty/owemdjee/opencv_contrib/modules/saliency/include
     ../../thirdparty/owemdjee/opencv_contrib/modules/sfm/include
-    ../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light
     ../../thirdparty/owemdjee/opencv_contrib/modules/shape/include
     ../../thirdparty/owemdjee/opencv_contrib/modules/signal/include
     ../../thirdparty/owemdjee/opencv_contrib/modules/structured_light/include
@@ -932,6 +966,8 @@ if (/\/owemdjee\/opencv\b/.test(include_paths) || /\/scripts\/OpenCV\b/.test(inc
     ../../thirdparty/owemdjee/opencv_contrib/modules/xobjdetect/include
     ../../thirdparty/owemdjee/opencv_contrib/modules/xphoto/include
     ../../thirdparty/owemdjee/opencv_contrib/modules/xstereo/include
+
+    ../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light
     `.replace(/\n/g, ';')
     .replace(/\s+/g, '');
 }
@@ -939,35 +975,35 @@ if (/\/owemdjee\/opencv\b/.test(include_paths) || /\/scripts\/OpenCV\b/.test(inc
 // patch: when there's a single /DCMTK/ reference in there, get the whole damn bunch:
 if (/\/owemdjee\/dcmtk\b/.test(include_paths) || /\/scripts\/dcmtk\b/.test(include_paths)) {
     include_paths = `${include_paths}
-	../../scripts/dcmtk/include
-	../../thirdparty/owemdjee/dcmtk/dcmdata/include
-	../../thirdparty/owemdjee/dcmtk/dcmect/include
-	../../thirdparty/owemdjee/dcmtk/dcmfg/include
-	../../thirdparty/owemdjee/dcmtk/dcmimage/include
-	../../thirdparty/owemdjee/dcmtk/dcmimgle/include
-	../../thirdparty/owemdjee/dcmtk/dcmiod/include
-	../../thirdparty/owemdjee/dcmtk/dcmjpeg/include
-	../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg12
-	../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg16
-	../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8
-	../../thirdparty/owemdjee/dcmtk/dcmjpls/include
-	../../thirdparty/owemdjee/dcmtk/dcmjpls/libcharls
-	../../thirdparty/owemdjee/dcmtk/dcmnet/include
-	../../thirdparty/owemdjee/dcmtk/dcmpmap/include
-	../../thirdparty/owemdjee/dcmtk/dcmpstat/include
-	../../thirdparty/owemdjee/dcmtk/dcmqrdb/include
-	../../thirdparty/owemdjee/dcmtk/dcmrt/include
-	../../thirdparty/owemdjee/dcmtk/dcmseg/include
-	../../thirdparty/owemdjee/dcmtk/dcmsign/include
-	../../thirdparty/owemdjee/dcmtk/dcmsr/include
-	../../thirdparty/owemdjee/dcmtk/dcmtls/include
-	../../thirdparty/owemdjee/dcmtk/dcmtract/include
-	../../thirdparty/owemdjee/dcmtk/dcmwlm/include
-	../../thirdparty/owemdjee/dcmtk/oficonv/include
-	../../thirdparty/owemdjee/dcmtk/oficonv/libsrc
-	../../thirdparty/owemdjee/dcmtk/oflog/include
-	../../thirdparty/owemdjee/dcmtk/ofstd/include
-	../../thirdparty/owemdjee/dcmtk/dcmapps/include
+    ../../scripts/dcmtk/include
+    ../../thirdparty/owemdjee/dcmtk/dcmdata/include
+    ../../thirdparty/owemdjee/dcmtk/dcmect/include
+    ../../thirdparty/owemdjee/dcmtk/dcmfg/include
+    ../../thirdparty/owemdjee/dcmtk/dcmimage/include
+    ../../thirdparty/owemdjee/dcmtk/dcmimgle/include
+    ../../thirdparty/owemdjee/dcmtk/dcmiod/include
+    ../../thirdparty/owemdjee/dcmtk/dcmjpeg/include
+    ../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg12
+    ../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg16
+    ../../thirdparty/owemdjee/dcmtk/dcmjpeg/libijg8
+    ../../thirdparty/owemdjee/dcmtk/dcmjpls/include
+    ../../thirdparty/owemdjee/dcmtk/dcmjpls/libcharls
+    ../../thirdparty/owemdjee/dcmtk/dcmnet/include
+    ../../thirdparty/owemdjee/dcmtk/dcmpmap/include
+    ../../thirdparty/owemdjee/dcmtk/dcmpstat/include
+    ../../thirdparty/owemdjee/dcmtk/dcmqrdb/include
+    ../../thirdparty/owemdjee/dcmtk/dcmrt/include
+    ../../thirdparty/owemdjee/dcmtk/dcmseg/include
+    ../../thirdparty/owemdjee/dcmtk/dcmsign/include
+    ../../thirdparty/owemdjee/dcmtk/dcmsr/include
+    ../../thirdparty/owemdjee/dcmtk/dcmtls/include
+    ../../thirdparty/owemdjee/dcmtk/dcmtract/include
+    ../../thirdparty/owemdjee/dcmtk/dcmwlm/include
+    ../../thirdparty/owemdjee/dcmtk/oficonv/include
+    ../../thirdparty/owemdjee/dcmtk/oficonv/libsrc
+    ../../thirdparty/owemdjee/dcmtk/oflog/include
+    ../../thirdparty/owemdjee/dcmtk/ofstd/include
+    ../../thirdparty/owemdjee/dcmtk/dcmapps/include
     `.replace(/\n/g, ';')
     .replace(/\s+/g, '');
 }
@@ -975,16 +1011,16 @@ if (/\/owemdjee\/dcmtk\b/.test(include_paths) || /\/scripts\/dcmtk\b/.test(inclu
 // patch: when there's a single /OpenEXR/ reference in there, get the whole damn bunch:
 if (/\/owemdjee\/OpenEXR\b/.test(include_paths) || /\/scripts\/OpenEXR\b/.test(include_paths)) {
     include_paths = `${include_paths}
-	../../scripts/Imath
-	../../scripts/OpenEXR/include
-	../../thirdparty/owemdjee/Imath/src/Imath
-	../../thirdparty/owemdjee/OpenEXR/src/bin
-	../../thirdparty/owemdjee/OpenEXR/src/bin/exrenvmap
-	../../thirdparty/owemdjee/OpenEXR/src/lib/Iex
-	../../thirdparty/owemdjee/OpenEXR/src/lib/IlmThread
-	../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXR
-	../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXRCore
-	../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXRUtil
+    ../../scripts/Imath
+    ../../scripts/OpenEXR/include
+    ../../thirdparty/owemdjee/Imath/src/Imath
+    ../../thirdparty/owemdjee/OpenEXR/src/bin
+    ../../thirdparty/owemdjee/OpenEXR/src/bin/exrenvmap
+    ../../thirdparty/owemdjee/OpenEXR/src/lib/Iex
+    ../../thirdparty/owemdjee/OpenEXR/src/lib/IlmThread
+    ../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXR
+    ../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXRCore
+    ../../thirdparty/owemdjee/OpenEXR/src/lib/OpenEXRUtil
     `.replace(/\n/g, ';')
     .replace(/\s+/g, '');
 }
@@ -995,13 +1031,13 @@ if (/\/owemdjee\/OpenEXR\b/.test(include_paths) || /\/scripts\/OpenEXR\b/.test(i
 if (/\/googletest\//.test(include_paths)) {
     include_paths = `${include_paths}
     ../../thirdparty/owemdjee/abseil-cpp
-	../../thirdparty/owemdjee/re2
+    ../../thirdparty/owemdjee/re2
     `.replace(/\n/g, ';')
     .replace(/\s+/g, '');
 }
 else if (/\/abseil-cpp\b/.test(include_paths)) {
     include_paths = `${include_paths}
-	../../thirdparty/owemdjee/re2
+    ../../thirdparty/owemdjee/re2
     `.replace(/\n/g, ';')
     .replace(/\s+/g, '');
 }
@@ -1072,4 +1108,5 @@ src = src
 
 
 fs.writeFileSync(filepath, src, 'utf8');
+
 
