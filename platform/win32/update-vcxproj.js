@@ -879,6 +879,12 @@ if (/\/owemdjee\/opencv\b/.test(include_paths) || /\/scripts\/OpenCV\b/.test(inc
     ../../thirdparty/owemdjee/opencv/3rdparty/openvx/include
     ../../thirdparty/owemdjee/opencv/include
 
+    ../../thirdparty/owemdjee/opencv/hal/carotene/include
+    ../../thirdparty/owemdjee/opencv/hal/fastcv/include
+    ../../thirdparty/owemdjee/opencv/hal/ipp/include
+    ../../thirdparty/owemdjee/opencv/hal/ndsrvp/include
+    ../../thirdparty/owemdjee/opencv/hal/riscv-rvv/include
+
     ../../thirdparty/owemdjee/opencv/modules/dnn
     ../../thirdparty/owemdjee/opencv/modules/gapi/src
 

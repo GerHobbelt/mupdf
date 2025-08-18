@@ -1,0 +1,527 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{D1D8A26B-70F1-45EC-B49E-AD1D90F6BC44}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>IDN2_STATIC;IDN2_BUILDING;BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>IDN2_STATIC;IDN2_BUILDING;BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>IDN2_STATIC;IDN2_BUILDING;BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>IDN2_STATIC;IDN2_BUILDING;BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/benchmark/binary_trees.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/benchmark/malloc_bench.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/benchmark/run_benchmark.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/base/atomicops-internals-x86.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/base/dynamic_annotations.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/base/elf_mem_image.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/base/linuxthreads.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/base/logging.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/base/low_level_alloc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/base/spinlock.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/base/spinlock_internal.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/base/sysinfo.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/base/thread_lister.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/base/vdso_support.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/central_freelist.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/common.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/debugallocation.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/emergency_malloc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/emergency_malloc_for_stacktrace.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/fake_stacktrace_scope.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/heap-checker-bcad.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/heap-checker.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/heap-profile-table.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/heap-profiler.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/internal_logging.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/malloc_extension.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/malloc_hook.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/maybe_threads.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/memfs_malloc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/memory_region_map.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/page_heap.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/profile-handler.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/profiledata.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/profiler.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/raw_printer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/sampler.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/span.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/stack_trace_table.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/stacktrace.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/static_vars.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/symbolize.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/system-alloc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/tcmalloc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/tests/addressmap_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/tests/atomicops_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/tests/current_allocated_bytes_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/tests/debugallocation_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/tests/frag_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/tests/getpc_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/tests/heap-checker_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/tests/heap-profiler_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/tests/large_heap_fragmentation_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/tests/low_level_alloc_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/tests/malloc_extension_c_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/tests/malloc_extension_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/tests/malloc_hook_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/tests/markidle_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/tests/memalign_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/tests/packed-cache_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/tests/page_heap_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/tests/pagemap_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/tests/profile-handler_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/tests/profiledata_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/tests/profiler_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/tests/raw_printer_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/tests/realloc_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/tests/sampler_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/tests/sampling_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/tests/simple_compat_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/tests/stack_trace_table_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/tests/stacktrace_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/tests/system-alloc_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/tests/tcmalloc_large_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/tests/tcmalloc_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/tests/testutil.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/tests/thread_dealloc_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/thread_cache.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/windows/addr2line-pdb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/windows/get_mangled_names.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/windows/ia32_modrm_map.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/windows/ia32_opcode_map.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/windows/mini_disassembler.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/windows/nm-pdb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/windows/override_functions.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/windows/patch_functions.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/windows/port.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/windows/preamble_patcher.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/windows/preamble_patcher_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/windows/preamble_patcher_with_stub.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperftools/src/windows/system-alloc.cc" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/benchmark/run_benchmark.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/addressmap-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/base/arm_instruction_set_select.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/base/atomicops-internals-arm-generic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/base/atomicops-internals-arm-v6plus.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/base/atomicops-internals-gcc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/base/atomicops-internals-linuxppc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/base/atomicops-internals-macosx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/base/atomicops-internals-mips.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/base/atomicops-internals-windows.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/base/atomicops-internals-x86.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/base/atomicops.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/base/basictypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/base/commandlineflags.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/base/dynamic_annotations.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/base/elf_mem_image.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/base/elfcore.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/base/googleinit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/base/linux_syscall_support.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/base/linuxthreads.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/base/logging.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/base/low_level_alloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/base/simple_mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/base/spinlock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/base/spinlock_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/base/spinlock_linux-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/base/spinlock_posix-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/base/spinlock_win32-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/base/stl_allocator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/base/sysinfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/base/thread_annotations.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/base/thread_lister.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/base/vdso_support.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/central_freelist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/config_for_unittests.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/emergency_malloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/getenv_safe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/getpc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/google/heap-checker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/google/heap-profiler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/google/malloc_extension.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/google/malloc_extension_c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/google/malloc_hook.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/google/malloc_hook_c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/google/profiler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/google/stacktrace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/google/tcmalloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/gperftools/heap-checker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/gperftools/heap-profiler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/gperftools/malloc_extension.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/gperftools/malloc_extension_c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/gperftools/malloc_hook.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/gperftools/malloc_hook_c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/gperftools/nallocx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/gperftools/profiler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/gperftools/stacktrace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/heap-profile-stats.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/heap-profile-table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/internal_logging.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/libc_override.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/libc_override_gcc_and_weak.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/libc_override_glibc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/libc_override_osx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/libc_override_redefine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/linked_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/malloc_hook-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/malloc_hook_mmap_freebsd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/malloc_hook_mmap_linux.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/maybe_emergency_malloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/maybe_threads.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/memory_region_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/packed-cache-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/page_heap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/page_heap_allocator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/pagemap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/profile-handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/profiledata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/raw_printer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/sampler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/span.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/stack_trace_table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/stacktrace_arm-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/stacktrace_generic-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/stacktrace_generic_fp-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/stacktrace_impl_setup-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/stacktrace_instrument-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/stacktrace_libgcc-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/stacktrace_libunwind-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/stacktrace_powerpc-darwin-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/stacktrace_powerpc-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/stacktrace_powerpc-linux-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/stacktrace_win32-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/stacktrace_x86-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/static_vars.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/symbolize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/system-alloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/tcmalloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/tcmalloc_guard.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/tests/testutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/thread_cache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/windows/auto_testing_hook.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/windows/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/windows/google/tcmalloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/windows/gperftools/tcmalloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/windows/mingw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/windows/mini_disassembler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/windows/mini_disassembler_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/windows/port.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperftools/src/windows/preamble_patcher.h" />
+    <Image Include="../../thirdparty/owemdjee/gperftools/docs/heap-example1.png" />
+    <Image Include="../../thirdparty/owemdjee/gperftools/docs/overview.gif" />
+    <Image Include="../../thirdparty/owemdjee/gperftools/docs/pageheap.gif" />
+    <Image Include="../../thirdparty/owemdjee/gperftools/docs/pprof-test-big.gif" />
+    <Image Include="../../thirdparty/owemdjee/gperftools/docs/pprof-test.gif" />
+    <Image Include="../../thirdparty/owemdjee/gperftools/docs/pprof-vsnprintf-big.gif" />
+    <Image Include="../../thirdparty/owemdjee/gperftools/docs/pprof-vsnprintf.gif" />
+    <Image Include="../../thirdparty/owemdjee/gperftools/docs/spanmap.gif" />
+    <Image Include="../../thirdparty/owemdjee/gperftools/docs/tcmalloc-opspercpusec.vs.threads.1024.bytes.png" />
+    <Image Include="../../thirdparty/owemdjee/gperftools/docs/tcmalloc-opspercpusec.vs.threads.128.bytes.png" />
+    <Image Include="../../thirdparty/owemdjee/gperftools/docs/tcmalloc-opspercpusec.vs.threads.131072.bytes.png" />
+    <Image Include="../../thirdparty/owemdjee/gperftools/docs/tcmalloc-opspercpusec.vs.threads.16384.bytes.png" />
+    <Image Include="../../thirdparty/owemdjee/gperftools/docs/tcmalloc-opspercpusec.vs.threads.2048.bytes.png" />
+    <Image Include="../../thirdparty/owemdjee/gperftools/docs/tcmalloc-opspercpusec.vs.threads.256.bytes.png" />
+    <Image Include="../../thirdparty/owemdjee/gperftools/docs/tcmalloc-opspercpusec.vs.threads.32768.bytes.png" />
+    <Image Include="../../thirdparty/owemdjee/gperftools/docs/tcmalloc-opspercpusec.vs.threads.4096.bytes.png" />
+    <Image Include="../../thirdparty/owemdjee/gperftools/docs/tcmalloc-opspercpusec.vs.threads.512.bytes.png" />
+    <Image Include="../../thirdparty/owemdjee/gperftools/docs/tcmalloc-opspercpusec.vs.threads.64.bytes.png" />
+    <Image Include="../../thirdparty/owemdjee/gperftools/docs/tcmalloc-opspercpusec.vs.threads.65536.bytes.png" />
+    <Image Include="../../thirdparty/owemdjee/gperftools/docs/tcmalloc-opspercpusec.vs.threads.8192.bytes.png" />
+    <Image Include="../../thirdparty/owemdjee/gperftools/docs/tcmalloc-opspersec.vs.size.1.threads.png" />
+    <Image Include="../../thirdparty/owemdjee/gperftools/docs/tcmalloc-opspersec.vs.size.12.threads.png" />
+    <Image Include="../../thirdparty/owemdjee/gperftools/docs/tcmalloc-opspersec.vs.size.16.threads.png" />
+    <Image Include="../../thirdparty/owemdjee/gperftools/docs/tcmalloc-opspersec.vs.size.2.threads.png" />
+    <Image Include="../../thirdparty/owemdjee/gperftools/docs/tcmalloc-opspersec.vs.size.20.threads.png" />
+    <Image Include="../../thirdparty/owemdjee/gperftools/docs/tcmalloc-opspersec.vs.size.3.threads.png" />
+    <Image Include="../../thirdparty/owemdjee/gperftools/docs/tcmalloc-opspersec.vs.size.4.threads.png" />
+    <Image Include="../../thirdparty/owemdjee/gperftools/docs/tcmalloc-opspersec.vs.size.5.threads.png" />
+    <Image Include="../../thirdparty/owemdjee/gperftools/docs/tcmalloc-opspersec.vs.size.8.threads.png" />
+    <Image Include="../../thirdparty/owemdjee/gperftools/docs/threadheap.gif" />
+    <NASM Include="../../thirdparty/owemdjee/gperftools/src/windows/shortproc.asm" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/AUTHORS" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/COPYING" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/ChangeLog.old" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/INSTALL" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/NEWS" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/README" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/README_windows.txt" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/TODO" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/cmake/DefineTargetVariables.cmake" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/cmake/FindObjcopyWithWeaken.cmake" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/cmake/PCFromUContext.cmake" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/cmake/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/cmake/tcmalloc.h.in" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/docs/cpuprofile-fileformat.html" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/docs/cpuprofile.html" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/docs/designstyle.css" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/docs/heap_checker.html" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/docs/heapprofile.html" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/docs/index.html" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/docs/overview.dot" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/docs/pageheap.dot" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/docs/pprof.1" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/docs/pprof_remote_servers.html" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/docs/spanmap.dot" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/docs/t-test1.times.txt" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/docs/tcmalloc.html" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/docs/threadheap.dot" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/m4/ac_have_attribute.m4" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/m4/acx_nanosleep.m4" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/m4/acx_pthread.m4" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/m4/ax_cxx_compile_stdcxx.m4" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/m4/ax_generate_changelog.m4" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/m4/install_prefix.m4" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/m4/pc_from_ucontext.m4" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/m4/program_invocation_name.m4" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/packages/deb.sh" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/packages/deb/README" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/packages/deb/changelog" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/packages/deb/compat" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/packages/deb/control" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/packages/deb/copyright" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/packages/deb/docs" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/packages/deb/libgperftools-dev.dirs" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/packages/deb/libgperftools-dev.install" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/packages/deb/libgperftools0.dirs" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/packages/deb/libgperftools0.install" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/packages/deb/libgperftools0.manpages" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/packages/deb/rules" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/packages/rpm.sh" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/packages/rpm/rpm.spec" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/src/gperftools/tcmalloc.h.in" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/src/pprof" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/src/tests/debugallocation_test.sh" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/src/tests/heap-checker-death_unittest.sh" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/src/tests/heap-checker_unittest.sh" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/src/tests/heap-profiler_unittest.sh" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/src/tests/maybe_threads_unittest.sh" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/src/tests/profiler_unittest.sh" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/src/tests/sampling_test.sh" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/src/tests/tcmalloc_unittest.sh" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/src/windows/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/src/windows/TODO" />
+    <Text Include="../../thirdparty/owemdjee/gperftools/src/windows/gperftools/tcmalloc.h.in" />
+  </ItemGroup>
+  <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+</Project>

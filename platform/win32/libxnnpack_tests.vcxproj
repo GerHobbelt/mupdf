@@ -1,0 +1,1091 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{F0C374DA-273F-48F1-8D20-4BEB0DD92A85}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXNNPACK;XNNPACK_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXNNPACK;XNNPACK_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXNNPACK;XNNPACK_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXNNPACK;XNNPACK_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXNNPACK;XNNPACK_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXNNPACK;XNNPACK_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXNNPACK;XNNPACK_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXNNPACK;XNNPACK_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXNNPACK;XNNPACK_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXNNPACK;XNNPACK_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXNNPACK;XNNPACK_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXNNPACK;XNNPACK_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/avgpool-minmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/bf16-f32-gemm-minmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/bf16-gemm-minmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/buffer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/build-identifier.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/dwconv-microkernel-tester.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-conv-hwc2chw.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-dwconv-minmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-dwconv2d-chw.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-f32-vcvt.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-f32acc-gemm-minmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-f32acc-igemm-minmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-f32acc-rdsum.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-f32acc-rsum.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-gemm-minmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-ibilinear-chw.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-ibilinear.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-igemm-minmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-qs8-vcvt.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-qu8-vcvt.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-raddstoreexpminusmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-rdmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-rdmin.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-rmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-rmin.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-rminmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-rsum.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-spmm-minmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-vabs.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-vadd.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-vaddc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-vapproxgelu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-vclamp.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-vcmul.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-vcos.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-vdiv.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-vdivc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-velu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-vexp.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-vgelu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-vhswish.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-vlrelu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-vmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-vmaxc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-vmin.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-vminc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-vmul.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-vmulc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-vmulcaddc-minmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-vneg.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-vprelu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-vpreluc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-vrdivc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-vrndd.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-vrndne.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-vrndu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-vrndz.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-vrpreluc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-vrsqrt.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-vrsubc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-vsigmoid.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-vsin.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-vsqr.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-vsqrdiff.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-vsqrdiffc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-vsqrt.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-vsub.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-vsubc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f16-vtanh.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-argmaxpool.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-conv-hwc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-conv-hwc2chw.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-dwconv-minmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-dwconv.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-dwconv2d-chw.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-f16-vcvt.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-gemm-2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-gemm-goi-minmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-gemm-minmax-2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-gemm-minmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-gemm-relu-2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-gemm-relu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-gemm.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-gemminc-minmax-2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-gemminc-minmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-ibilinear-chw.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-ibilinear.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-igemm-2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-igemm-minmax-2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-igemm-minmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-igemm-relu-2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-igemm-relu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-igemm.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-ppmm-minmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-qc4w-gemm-minmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-qc8w-gemm-minmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-qc8w-gemm-relu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-qc8w-gemm.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-qs8-vcvt.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-qu8-vcvt.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-raddexpminusmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-raddextexp.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-raddstoreexpminusmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-rdmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-rdmin.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-rdsum.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-rmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-rmin.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-rminmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-rsum.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-spmm-minmax-2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-spmm-minmax-3.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-spmm-minmax-4.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-spmm-minmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-vabs.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-vadd.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-vaddc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-vapproxgelu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-vclamp.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-vcmul.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-vcopysign.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-vcopysignc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-vcos.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-vdiv.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-vdivc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-velu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-vexp.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-vgelu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-vhswish.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-vlog.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-vlrelu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-vmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-vmaxc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-vmin.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-vminc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-vmul.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-vmulc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-vmulcaddc-minmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-vneg.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-vprelu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-vpreluc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-vrcopysignc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-vrdivc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-vrelu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-vrndd.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-vrndne.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-vrndu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-vrndz.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-vrpreluc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-vrsqrt.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-vrsubc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-vscaleexpminusmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-vscaleextexp.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-vsigmoid.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-vsin.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-vsqr.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-vsqrdiff.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-vsqrdiffc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-vsqrt.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-vsub.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-vsubc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/f32-vtanh.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/gemm-microkernel-tester.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/indirection.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/maxpool-minmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/microkernel-utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/mutex.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/next_prime.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/operators/argmax-pooling-nhwc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/operators/average-pooling-nhwc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/operators/batch-matrix-multiply-nc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/operators/binary-elementwise-nd.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/operators/constant-pad-nd-eager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/operators/constant-pad-nd.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/operators/convert-nc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/operators/convolution-nchw.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/operators/convolution-nhwc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/operators/convolution-test-helpers.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/operators/copy-nc-eager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/operators/copy-nc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/operators/deconvolution-nhwc-qd8-f32-qc8w.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/operators/deconvolution-nhwc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/operators/depth-to-space-nchw2nhwc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/operators/depth-to-space-nhwc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/operators/dynamic-fully-connected-nc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/operators/fully-connected-nc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/operators/max-pooling-nhwc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/operators/operator-utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/operators/reduce-nd.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/operators/reduce-normalization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/operators/resize-bilinear-nchw.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/operators/resize-bilinear-nhwc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/operators/rope-nthc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/operators/slice-nd-eager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/operators/slice-nd.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/operators/slice-normalization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/operators/softmax-nc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/operators/space-to-depth-nhwc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/operators/transpose-nd-eager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/operators/transpose-nd.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/operators/transpose-normalization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/operators/unary-elementwise-nc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/operators/unpooling-nhwc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/packing.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/packq-microkernel-tester.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/pf32-gemm-minmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/pqs8-qc8w-gemm-minmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qd8-f16-qb4w-gemm-minmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qd8-f16-qc4w-gemm-minmax-2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qd8-f16-qc4w-gemm-minmax-3.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qd8-f16-qc4w-gemm-minmax-4.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qd8-f16-qc4w-gemm-minmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qd8-f16-qc8w-gemm-minmax-2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qd8-f16-qc8w-gemm-minmax-3.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qd8-f16-qc8w-gemm-minmax-4.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qd8-f16-qc8w-gemm-minmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qd8-f16-qc8w-igemm-minmax-2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qd8-f16-qc8w-igemm-minmax-3.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qd8-f16-qc8w-igemm-minmax-4.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qd8-f16-qc8w-igemm-minmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qd8-f32-qb4w-gemm-minmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qd8-f32-qc4w-gemm-minmax-2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qd8-f32-qc4w-gemm-minmax-3.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qd8-f32-qc4w-gemm-minmax-4.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qd8-f32-qc4w-gemm-minmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qd8-f32-qc8w-gemm-minmax-2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qd8-f32-qc8w-gemm-minmax-3.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qd8-f32-qc8w-gemm-minmax-4.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qd8-f32-qc8w-gemm-minmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qd8-f32-qc8w-igemm-minmax-2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qd8-f32-qc8w-igemm-minmax-3.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qd8-f32-qc8w-igemm-minmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qp8-f32-qb4w-gemm-minmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qp8-f32-qc4w-gemm-minmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qp8-f32-qc8w-gemm-minmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qs8-dwconv-minmax-fp32.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qs8-dwconv-minmax-rndnu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qs8-f16-vcvt.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qs8-f32-vcvt.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qs8-packw.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qs8-qc4w-gemm-minmax-fp32.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qs8-qc4w-packw.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qs8-qc8w-dwconv-minmax-fp32.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qs8-qc8w-gemm-minmax-fp32-2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qs8-qc8w-gemm-minmax-fp32-3.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qs8-qc8w-gemm-minmax-fp32.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qs8-qc8w-igemm-minmax-fp32-2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qs8-qc8w-igemm-minmax-fp32-3.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qs8-qc8w-igemm-minmax-fp32.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qs8-rdsum-minmax-fp32.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qs8-rsum.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qs8-vadd-minmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qs8-vaddc-minmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qs8-vcvt.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qs8-vlrelu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qs8-vmul-minmax-fp32.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qs8-vmul-minmax-rndnu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qs8-vmulc-minmax-fp32.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qs8-vmulc-minmax-rndnu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qs8-vprelu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qs8-vpreluc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qs8-vrpreluc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qu8-dwconv-minmax-fp32.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qu8-dwconv-minmax-rndnu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qu8-f32-vcvt.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qu8-gemm-minmax-fp32-2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qu8-gemm-minmax-fp32.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qu8-gemm-minmax-rndnu-2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qu8-gemm-minmax-rndnu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qu8-gemm-minmax-rndnu16.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qu8-igemm-minmax-fp32-2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qu8-igemm-minmax-fp32.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qu8-igemm-minmax-rndnu-2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qu8-igemm-minmax-rndnu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qu8-rdsum.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qu8-rsum.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qu8-vadd-minmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qu8-vaddc-minmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qu8-vcvt.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qu8-vlrelu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qu8-vmul-minmax-fp32.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qu8-vmul-minmax-rndnu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qu8-vmulc-minmax-fp32.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qu8-vmulc-minmax-rndnu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qu8-vprelu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qu8-vpreluc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/qu8-vrpreluc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/s8-ibilinear.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/s8-rdmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/s8-rdmin.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/s8-rmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/s8-rmin.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/s8-rminmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/s8-vclamp.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/simd/f16-simd-avx512fp16.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/simd/f16-simd-neonfp16arith.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/simd/f16-simd-scalar.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/simd/f32-simd-avx.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/simd/f32-simd-avx2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/simd/f32-simd-avx512f.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/simd/f32-simd-fma3.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/simd/f32-simd-hvx.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/simd/f32-simd-neon.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/simd/f32-simd-scalar.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/simd/f32-simd-sse2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/simd/f32-simd-wasmrelaxedsimd.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/simd/f32-simd-wasmsimd.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/simd/f32-simd.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/simd/s16-simd-avx2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/simd/s16-simd-avx512skx.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/simd/s16-simd-neon.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/simd/s16-simd-scalar.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/simd/s16-simd-sse41.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/simd/s16-simd-wasmsimd.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/simd/s32-simd-avx2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/simd/s32-simd-avx512f.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/simd/s32-simd-hvx.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/simd/s32-simd-neon.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/simd/s32-simd-scalar.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/simd/s32-simd-sse41.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/simd/s32-simd-wasmsimd.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/simd/s8-simd-hvx.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/simd/s8-simd-neon.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/simd/s8-simd-scalar.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/simd/s8-simd-sse41.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/simd/s8-simd-wasmsimd.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/simd/u8-simd-hvx.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/simd/u8-simd-neon.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/simd/u8-simd-scalar.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/simd/u8-simd-sse2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/simd/u8-simd-wasmsimd.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/subgraph/argmax-pooling-2d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/subgraph/average-pooling-2d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/subgraph/batch-matrix-multiply.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/subgraph/binary.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/subgraph/concatenate.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/subgraph/convolution-2d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/subgraph/copy.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/subgraph/deconvolution-2d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/subgraph/depth-to-space-2d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/subgraph/depthwise-convolution-2d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/subgraph/even-split.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/subgraph/fully-connected.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/subgraph/fusion.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/subgraph/max-pooling-2d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/subgraph/memory-planner.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/subgraph/persistent.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/subgraph/rope.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/subgraph/runtime-flags.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/subgraph/runtime.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/subgraph/softmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/subgraph/space-to-depth-2d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/subgraph/split-fuse.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/subgraph/static-constant-pad.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/subgraph/static-expand-dims.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/subgraph/static-reduce.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/subgraph/static-reshape.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/subgraph/static-resize-bilinear-2d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/subgraph/static-slice.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/subgraph/static-transpose.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/subgraph/stencil.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/subgraph/subgraph-fp16.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/subgraph/subgraph-nchw.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/subgraph/subgraph-size.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/subgraph/subgraph-tester.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/subgraph/subgraph.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/subgraph/unary.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/subgraph/unpooling-2d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/subgraph/workspace.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/u8-ibilinear.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/u8-lut32norm.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/u8-rdmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/u8-rdmin.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/u8-rmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/u8-rmin.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/u8-rminmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/u8-vclamp.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/unary-ops.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/vbinary-microkernel-tester.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/weights-cache.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/x16-packw.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/x16-x32-packw.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/x32-packw.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/x32-packx.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/x32-unpool.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/x8-lut.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/x8-packq.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/x8-packw.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/xN-transpose.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/xx-fill.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/test/xx-pad.cc" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/include/xnnpack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/test/argmaxpool-microkernel-tester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/test/conv-hwc-microkernel-tester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/test/conv-hwc2chw-microkernel-tester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/test/dwconv-microkernel-tester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/test/dwconv2d-microkernel-tester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/test/gemm-microkernel-tester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/test/ibilinear-microkernel-tester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/test/lut-microkernel-tester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/test/lut-norm-microkernel-tester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/test/maxpool-microkernel-tester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/test/next_prime.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/test/operators/argmax-pooling-operator-tester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/test/operators/average-pooling-operator-tester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/test/operators/batch-matrix-multiply-operator-tester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/test/operators/constant-pad-operator-tester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/test/operators/convolution-operator-tester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/test/operators/convolution-test-helpers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/test/operators/copy-operator-tester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/test/operators/deconvolution-operator-tester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/test/operators/depth-to-space-operator-tester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/test/operators/dynamic-fully-connected-operator-tester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/test/operators/fully-connected-operator-tester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/test/operators/max-pooling-operator-tester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/test/operators/operator-test-utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/test/operators/reduce-normalization-tester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/test/operators/resize-bilinear-operator-tester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/test/operators/rope-operator-tester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/test/operators/slice-normalization-tester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/test/operators/slice-operator-tester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/test/operators/softmax-operator-tester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/test/operators/space-to-depth-operator-tester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/test/operators/transpose-normalization-tester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/test/operators/transpose-operator-tester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/test/operators/unpooling-operator-tester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/test/pack-microkernel-tester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/test/packb-microkernel-tester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/test/packq-microkernel-tester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/test/packw-microkernel-tester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/test/raddexpminusmax-microkernel-tester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/test/raddstoreexpminusmax-microkernel-tester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/test/rdsum-microkernel-tester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/test/reduce-microkernel-tester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/test/replicable_random_device.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/test/rsum-microkernel-tester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/test/spmm-microkernel-tester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/test/subgraph/mock-allocator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/test/subgraph/runtime-flags.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/test/subgraph/runtime-tester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/test/subgraph/stencil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/test/subgraph/subgraph-tester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/test/unary-ops.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/test/unpool-microkernel-tester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/test/vbinary-microkernel-tester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/test/vcmul-microkernel-tester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/test/vmulcaddc-microkernel-tester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/test/vunary-microkernel-tester.h" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/MODULE.bazel" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/README.md" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/WORKSPACE" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/build_config/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/build_defs.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/build_params.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/build_srcs.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/DownloadCpuinfo.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/DownloadFXdiv.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/DownloadGoogleBenchmark.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/DownloadGoogleTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/DownloadKleidiAI.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/DownloadPThreadPool.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/aarch64.toolchain" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/armhf.toolchain" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/gen/aarch32_microkernels.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/gen/aarch64_microkernels.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/gen/amd64_microkernels.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/gen/armsimd32_microkernels.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/gen/avx256skx_microkernels.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/gen/avx256vnni_microkernels.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/gen/avx256vnnigfni_microkernels.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/gen/avx2_microkernels.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/gen/avx512amx_microkernels.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/gen/avx512f_microkernels.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/gen/avx512fp16_microkernels.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/gen/avx512skx_microkernels.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/gen/avx512vbmi_microkernels.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/gen/avx512vnni_microkernels.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/gen/avx512vnnigfni_microkernels.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/gen/avx_microkernels.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/gen/avxvnni_microkernels.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/gen/avxvnniint8_microkernels.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/gen/f16c_microkernels.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/gen/fma3_microkernels.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/gen/fp16arith_microkernels.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/gen/hexagon_microkernels.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/gen/hvx_microkernels.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/gen/microkernels.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/gen/neon_aarch64_microkernels.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/gen/neon_microkernels.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/gen/neonbf16_microkernels.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/gen/neondot_aarch64_microkernels.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/gen/neondot_microkernels.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/gen/neondotfp16arith_microkernels.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/gen/neonfma_aarch64_microkernels.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/gen/neonfma_microkernels.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/gen/neonfp16_microkernels.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/gen/neonfp16arith_aarch64_microkernels.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/gen/neonfp16arith_microkernels.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/gen/neoni8mm_microkernels.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/gen/neonsme2_microkernels.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/gen/neonsme_microkernels.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/gen/neonv8_microkernels.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/gen/rvv_microkernels.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/gen/rvvfp16arith_microkernels.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/gen/scalar_microkernels.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/gen/sme_aarch64_microkernels.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/gen/sme_microkernels.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/gen/sse2_microkernels.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/gen/sse41_microkernels.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/gen/sse_microkernels.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/gen/ssse3_microkernels.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/gen/wasm32_microkernels.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/gen/wasm_microkernels.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/gen/wasmrelaxedsimd32_microkernels.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/gen/wasmrelaxedsimd_microkernels.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/gen/wasmsimd32_microkernels.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/gen/wasmsimd_microkernels.cmake" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/hexagon.toolchain" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/riscv64.toolchain" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/cmake/x64_arm64.toolchain" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/doc/dwconv.md" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/doc/microkernel-enumerators.md" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/doc/microkernel-naming-conventions.md" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/emscripten.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gemm_compiler/BUILD" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gemm_compiler/aarch32_template.py" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gemm_compiler/aarch64_template.py" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gemm_compiler/arm_template.py" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gemm_compiler/avx512bf16_template.py" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gemm_compiler/avx512f_template.py" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gemm_compiler/avx512vnni_template.py" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gemm_compiler/base_architecture.py" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gemm_compiler/fma3_template.py" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gemm_compiler/generate.py" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gemm_compiler/generate_bf16_f32_gemm_microkernels.py" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gemm_compiler/generate_f32_gemm_microkernels.py" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gemm_compiler/generate_gemm_microkernels_main.py" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gemm_compiler/generate_qd8_f32_qc4w_gemm_microkernels.py" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gemm_compiler/generate_qd8_f32_qc8w_gemm_microkernels.py" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gemm_compiler/generate_qs8_qc4w_gemm_microkernels.py" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gemm_compiler/generate_qs8_qc8w_gemm_microkernels.py" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gemm_compiler/neondot_template.py" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gemm_compiler/neonfma_template.py" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gemm_compiler/neonmlal_aarch32_template.py" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gemm_compiler/x64_template.py" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gen/BUILD" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gen/aarch32_microkernels.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gen/aarch64_microkernels.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gen/amd64_microkernels.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gen/armsimd32_microkernels.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gen/avx256skx_microkernels.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gen/avx256vnni_microkernels.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gen/avx256vnnigfni_microkernels.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gen/avx2_microkernels.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gen/avx512amx_microkernels.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gen/avx512f_microkernels.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gen/avx512fp16_microkernels.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gen/avx512skx_microkernels.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gen/avx512vbmi_microkernels.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gen/avx512vnni_microkernels.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gen/avx512vnnigfni_microkernels.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gen/avx_microkernels.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gen/avxvnni_microkernels.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gen/avxvnniint8_microkernels.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gen/f16c_microkernels.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gen/fma3_microkernels.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gen/fp16arith_microkernels.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gen/hexagon_microkernels.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gen/hvx_microkernels.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gen/microkernels.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gen/neon_aarch64_microkernels.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gen/neon_microkernels.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gen/neonbf16_microkernels.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gen/neondot_aarch64_microkernels.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gen/neondot_microkernels.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gen/neondotfp16arith_microkernels.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gen/neonfma_aarch64_microkernels.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gen/neonfma_microkernels.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gen/neonfp16_microkernels.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gen/neonfp16arith_aarch64_microkernels.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gen/neonfp16arith_microkernels.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gen/neoni8mm_microkernels.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gen/neonsme2_microkernels.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gen/neonsme_microkernels.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gen/neonv8_microkernels.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gen/rvv_microkernels.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gen/rvvfp16arith_microkernels.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gen/scalar_microkernels.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gen/sme_aarch64_microkernels.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gen/sme_microkernels.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gen/sse2_microkernels.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gen/sse41_microkernels.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gen/sse_microkernels.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gen/ssse3_microkernels.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gen/wasm32_microkernels.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gen/wasm_microkernels.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gen/wasmrelaxedsimd32_microkernels.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gen/wasmrelaxedsimd_microkernels.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gen/wasmsimd32_microkernels.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/gen/wasmsimd_microkernels.bzl" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/preamble.js.lds" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/build-android-arm64.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/build-android-armv7.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/build-android-x86.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/build-linux-aarch64.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/build-linux-armhf.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/build-linux-riscv64.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/build-local.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/build-qurt-v68.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/build-windows-arm64.cmd" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/build-windows-x64.cmd" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/build-windows-x86.cmd" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/check_config.py" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/check_files_changed.py" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-benchmarks.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-bf16-gemm.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-build-identifier.py" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f16-avgpool.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f16-dwconv.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f16-dwconv2d-chw.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f16-f32-vcvt.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f16-f32acc-rdsum.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f16-f32acc-rsum.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f16-gemm.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f16-ibilinear-chw.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f16-ibilinear.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f16-igemm.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f16-maxpool.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f16-raddstoreexpminusmax.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f16-rdminmax.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f16-rminmax.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f16-rsum.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f16-spmm.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f16-vapproxgelu.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f16-vbinary.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f16-vclamp.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f16-vcos.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f16-velu.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f16-vexp.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f16-vgelu.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f16-vhswish.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f16-vlrelu.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f16-vmulcaddc.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f16-vrnd.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f16-vrsqrt.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f16-vsigmoid.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f16-vsin.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f16-vsqrt.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f16-vtanh.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f16-vunary.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f32-avgpool.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f32-conv-hwc.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f32-dwconv.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f32-dwconv2d-chw.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f32-f16-vcvt.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f32-gemm.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f32-ibilinear-chw.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f32-ibilinear.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f32-igemm.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f32-maxpool.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f32-ppmm.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f32-qc4w-gemm.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f32-qc8w-gemm.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f32-qc8w-spmm.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f32-qs8-vcvt.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f32-raddexpminusmax.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f32-raddextexp.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f32-raddstoreexpminusmax.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f32-rdminmax.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f32-rdsum.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f32-rminmax.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f32-rsum.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f32-spmm.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f32-vapproxgelu.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f32-vbinary.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f32-vclamp.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f32-vcmul.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f32-vcopysign.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f32-vcos.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f32-velu.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f32-vexp.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f32-vgelu.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f32-vhswish.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f32-vlog.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f32-vlrelu.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f32-vmulcaddc.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f32-vrelu.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f32-vrnd.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f32-vrsqrt.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f32-vscaleexpminusmax.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f32-vscaleextexp.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f32-vsigmoid.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f32-vsin.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f32-vsqrt.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f32-vtanh.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-f32-vunary.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-qs8-dwconv.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-qs8-f16-vcvt.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-qs8-f32-vcvt.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-qs8-gemm.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-qs8-igemm.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-qs8-rdsum.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-qs8-rsum.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-qs8-vadd.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-qs8-vcvt.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-qs8-vlrelu.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-qs8-vmul.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-qs8-vprelu.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-qs8-vpreluc.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-qs8-vrpreluc.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-qu8-rdsum.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-qu8-rsum.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-s8-ibilinear.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-s8-maxpool.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-s8-rdminmax.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-s8-rminmax.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-tests-and-benchmarks.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-tests.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-u8-maxpool.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-u8-rdminmax.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-u8-rminmax.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-x16-packw.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-x16-x32-packw.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-x32-packb.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-x32-packw.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-x32-packx.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-x4-packw.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-x8-lut.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-x8-packw.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-x8-vclamp.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/generate-xN-transpose.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/genxnn" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/run-on-hexagon-device.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/run-on-hexagon-sim.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/scripts/sort-filenames.py" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/bf16-f32-gemm-minmax.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/bf16-gemm-minmax.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/f16-conv-hwc2chw.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/f16-dwconv2d-chw.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/f16-f32acc-gemm-minmax.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/f16-f32acc-igemm-minmax.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/f16-f32acc-rdsum.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/f16-f32acc-rsum.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/f16-gemm-minmax.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/f16-ibilinear-chw.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/f16-ibilinear.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/f16-igemm-minmax.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/f16-raddstoreexpminusmax.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/f16-rdmax.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/f16-rdmin.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/f16-rmax.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/f16-rmin.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/f16-rminmax.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/f16-rsum.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/f16-spmm-minmax.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/f32-argmaxpool.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/f32-conv-hwc2chw.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/f32-dwconv2d-chw.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/f32-gemm-goi-minmax.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/f32-gemm-minmax.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/f32-gemm-relu.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/f32-gemm.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/f32-gemminc-minmax.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/f32-ibilinear-chw.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/f32-ibilinear.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/f32-igemm-minmax.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/f32-igemm-relu.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/f32-igemm.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/f32-ppmm-minmax.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/f32-qc4w-gemm-minmax.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/f32-qc8w-gemm-minmax.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/f32-qc8w-gemm-relu.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/f32-qc8w-gemm.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/f32-raddexpminusmax.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/f32-raddstoreexpminusmax.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/f32-rdmax.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/f32-rdmin.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/f32-rdsum.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/f32-rmax.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/f32-rmin.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/f32-rminmax.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/f32-rsum.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/f32-spmm-minmax.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/microkernel_lists_test.sh" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/operators/BUILD" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/operators/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/pf32-gemm-minmax.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/pqs8-qc8w-gemm-minmax.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/qd8-f16-qb4w-gemm-minmax.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/qd8-f16-qc4w-gemm-minmax.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/qd8-f16-qc8w-gemm-minmax.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/qd8-f16-qc8w-igemm-minmax.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/qd8-f32-qb4w-gemm-minmax.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/qd8-f32-qc4w-gemm-minmax.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/qd8-f32-qc8w-gemm-minmax.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/qd8-f32-qc8w-igemm-minmax.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/qp8-f32-qb4w-gemm-minmax.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/qp8-f32-qc4w-gemm-minmax.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/qp8-f32-qc8w-gemm-minmax.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/qs8-qc4w-gemm-minmax-fp32.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/qs8-qc8w-gemm-minmax-fp32.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/qs8-qc8w-igemm-minmax-fp32.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/qs8-rdsum-minmax-fp32.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/qs8-rsum.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/qu8-gemm-minmax-fp32.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/qu8-gemm-minmax-rndnu.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/qu8-igemm-minmax-fp32.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/qu8-igemm-minmax-rndnu.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/qu8-rdsum.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/qu8-rsum.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/s8-ibilinear.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/s8-rdmax.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/s8-rdmin.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/s8-rmax.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/s8-rmin.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/s8-rminmax.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/simd/BUILD" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/simd/f16-simd.cc.in" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/simd/f32-simd.cc.in" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/simd/s16-simd.cc.in" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/simd/s32-simd.cc.in" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/simd/s8-simd.cc.in" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/simd/u8-simd.cc.in" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/subgraph/BUILD" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/subgraph/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/u8-ibilinear.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/u8-lut32norm.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/u8-rdmax.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/u8-rdmin.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/u8-rmax.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/u8-rmin.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/u8-rminmax.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/test/x8-lut.yaml" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/tools/BUILD" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/tools/generate-argmaxpool-test.py" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/tools/generate-conv-hwc-test.py" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/tools/generate-conv-hwc2chw-test.py" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/tools/generate-dwconv-test.py" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/tools/generate-dwconv2d-chw-test.py" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/tools/generate-gemm-test.py" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/tools/generate-ibilinear-chw-test.py" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/tools/generate-ibilinear-test.py" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/tools/generate-lut-norm-test.py" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/tools/generate-lut-test.py" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/tools/generate-raddexpminusmax-test.py" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/tools/generate-raddstoreexpminusmax-test.py" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/tools/generate-reduce-discontiguous-benchmark.py" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/tools/generate-reduce-discontiguous-test.py" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/tools/generate-reduce-test.py" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/tools/generate-spmm-test.py" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/tools/generate-vbinary-test.py" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/tools/generate-vunary-test.py" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/tools/parse-microkernel-bench.py" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/tools/primes.py" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/tools/update-microkernels.py" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/tools/xngen.py" />
+    <Text Include="../../thirdparty/owemdjee/xnnpack/tools/xnncommon.py" />
+  </ItemGroup>
+  <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+</Project>

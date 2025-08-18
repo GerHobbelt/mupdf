@@ -205,10 +205,12 @@ const projectMap = {
 	"wxw-utils-helpview-client": "wxWidgets/utils/helpview",
 	"wxw-utils-mk-ctable": "wxWidgets/misc/unictabl",
 	
-	"libopencv-calib3d": "opencv/modules/calib3d",
+	"libopencv-calib3d": "opencv/modules/calib",
+	"libopencv-calib3d_tests": "opencv/modules/calib",
 	"libopencv-core": "opencv/modules/core",
 	"libopencv-dnn": "opencv/modules/dnn",
-	"libopencv-features2d": "opencv/modules/features2d",
+	"libopencv-features2d": "opencv/modules/features",
+	"libopencv-features2d_tests": "opencv/modules/features",
 	"libopencv-flann": "opencv/modules/flann",
 	"libopencv-gapi": "opencv/modules/gapi",
 	"libopencv-highgui": "opencv/modules/highgui",
@@ -216,7 +218,10 @@ const projectMap = {
 	"libopencv-imgproc": "opencv/modules/imgproc",
 	"libopencv-java": "opencv/modules/java",
 	"libopencv-js": "opencv/modules/js",
-	"libopencv-ml": "opencv/modules/ml",
+	
+	"libopencv-ml": "opencv_contrib/modules/ml",
+	"libopencv-ml_tests": "opencv_contrib/modules/ml",
+	
 	"libopencv-objc": "opencv/modules/objc",
 	"libopencv-objdetect": "opencv/modules/objdetect",
 	"libopencv-photo": "opencv/modules/photo",
@@ -275,7 +280,10 @@ const projectMap = {
 	"libopencv-contrib-saliency": "opencv_contrib/modules/saliency",
 	"libopencv-contrib-sfm": "opencv_contrib/modules/sfm",
 	"libopencv-contrib-shape": "opencv_contrib/modules/shape",
-	"libopencv-contrib-stereo": "opencv_contrib/modules/stereo",
+	
+	"libopencv-contrib-stereo": "opencv/modules/stereo",
+	"libopencv-contrib-stereo_tests": "opencv/modules/stereo",
+	
 	"libopencv-contrib-structured_light": "opencv_contrib/modules/structured_light",
 	"libopencv-contrib-superres": "opencv_contrib/modules/superres",
 	"libopencv-contrib-surface_matching": "opencv_contrib/modules/surface_matching",
@@ -363,5 +371,5 @@ if (projname.endsWith("_DLL")) {
 
 
 // no mapping found.
-console.error(`No known mapping for ${projname}.`);
+console.error(`\n### WARNING: No known mapping for ${projname}.\n`);
 process.exit(1);
