@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{115530E4-17EF-4195-92B3-6D182D0C2EFB}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>IDN2_STATIC;IDN2_BUILDING;BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>IDN2_STATIC;IDN2_BUILDING;BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>IDN2_STATIC;IDN2_BUILDING;BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>IDN2_STATIC;IDN2_BUILDING;BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/src/fonttest/font_engine.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/src/fonttest/freestack_engine.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/src/fonttest/freestack_font.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/src/fonttest/freestack_line.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/src/fonttest/freestack_path.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/src/fonttest/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/src/fonttest/tehreerstack_engine.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/src/fonttest/tehreerstack_line.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/src/fonttest/test_harness.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/src/fonttest/coretext_engine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/src/fonttest/coretext_font.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/src/fonttest/coretext_line.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/src/fonttest/coretext_path.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/src/fonttest/font.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/src/fonttest/font_engine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/src/fonttest/freestack_engine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/src/fonttest/freestack_font.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/src/fonttest/freestack_line.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/src/fonttest/freestack_path.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/src/fonttest/tehreerstack_engine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/src/fonttest/tehreerstack_line.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/src/fonttest/test_harness.h" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/AdobeVFPrototype-Subset.otf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/FDArrayTest257.otf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/FDArrayTest65535.otf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/NotoSansBalinese-Regular.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/NotoSansKannada-Regular.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/NotoSerifKannada-Regular.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/Selawik-variable.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestAVAR.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestCFFThree.otf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestCMAP13.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestCMAP14.otf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestCMAPMacTurkish.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestCVARGVAROne.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestCVARGVARTwo.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestGLYFOne.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestGPOSFour.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestGPOSOne.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestGPOSThree.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestGPOSTwo.otf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestGSUBOne.otf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestGSUBThree.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestGVAR-Composite-0.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestGVAR-Composite-Missing.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestGVAREight.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestGVARFour.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestGVARNine.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestGVAROne.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestGVARThree.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestGVARTwo.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestHVAROne.otf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestHVARTwo.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestKERNOne.otf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestMORXEight.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestMORXEighteen.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestMORXEleven.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestMORXForty.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestMORXFour.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestMORXFourteen.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestMORXFourtyone.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestMORXNine.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestMORXOne.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestMORXSeventeen.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestMORXSixteen.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestMORXTen.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestMORXThirteen.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestMORXThirtyeight.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestMORXThirtyfive.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestMORXThirtyfour.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestMORXThirtynine.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestMORXThirtyone.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestMORXThirtyseven.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestMORXThirtysix.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestMORXThirtythree.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestMORXThirtytwo.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestMORXThree.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestMORXTwelve.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestMORXTwenty.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestMORXTwentyeight.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestMORXTwentyfive.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestMORXTwentyfour.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestMORXTwentynine.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestMORXTwentyone.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestMORXTwentyseven.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestMORXTwentysix.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestMORXTwentythree.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestMORXTwentytwo.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestMORXTwo.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestRVRN-CFF2.otf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestRVRN.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestSFNTOne.otf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestSFNTTwo.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestSVGgradientTransform.otf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestSVGgzip.otf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestSVGmultiGlyphs.otf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestShapeAran.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestShapeEthi.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestShapeKndaV3.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestShapeLana.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestTRAKOne.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestVRTR-CID-Regular.otf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestVRTR-Regular.otf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/TestVRTR-TTF-Regular.ttf" />
+    <Font Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/Zycon.ttf" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/README.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/check.py" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/fonts/Selawik-README.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/package.json" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/reports/Allsorts.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/reports/CoreText.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/reports/FreeStack.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/reports/OpenType.js.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/reports/Swash.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/reports/TehreerStack.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/reports/fontkit.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/src/fonttest-swash-harness/Cargo.toml" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/src/fonttest-swash-harness/src/main.rs" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/src/fonttest/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/svgutil.py" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/svgutil_test.py" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/AVAR-1.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/CFF-1.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/CFF-2.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/CFF-3.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/CFF2-1.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/CMAP-1.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/CMAP-2.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/CMAP-3.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/CMAP-4.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/CVAR-1.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/CVAR-2.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/GLYF-1.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/GPOS-1.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/GPOS-2.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/GPOS-3.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/GPOS-4.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/GPOS-5.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/GSUB-1.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/GSUB-2.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/GSUB-3.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/GVAR-1.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/GVAR-2.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/GVAR-3.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/GVAR-4.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/GVAR-5.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/GVAR-6.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/GVAR-7.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/GVAR-8.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/GVAR-9.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/HVAR-1.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/HVAR-2.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/KERN-1.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/KERN-2.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/MORX-1.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/MORX-10.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/MORX-11.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/MORX-12.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/MORX-13.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/MORX-14.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/MORX-16.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/MORX-17.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/MORX-18.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/MORX-19.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/MORX-2.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/MORX-20.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/MORX-21.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/MORX-22.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/MORX-23.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/MORX-24.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/MORX-25.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/MORX-26.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/MORX-27.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/MORX-28.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/MORX-29.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/MORX-3.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/MORX-30.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/MORX-31.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/MORX-32.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/MORX-33.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/MORX-34.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/MORX-35.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/MORX-36.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/MORX-37.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/MORX-38.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/MORX-39.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/MORX-4.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/MORX-40.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/MORX-41.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/MORX-5.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/MORX-6.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/MORX-7.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/MORX-8.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/MORX-9.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/SFNT-1.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/SFNT-2.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/SHARAN-1.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/SHBALI-1.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/SHBALI-2.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/SHBALI-3.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/SHKNDA-1.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/SHKNDA-2.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/SHKNDA-3.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/SHLANA-1.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/SHLANA-10.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/SHLANA-2.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/SHLANA-3.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/SHLANA-4.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/SHLANA-5.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/SHLANA-6.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/SHLANA-7.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/SHLANA-8.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/SHLANA-9.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/index.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-text-rendering-tests/testcases/style.css" />
+  </ItemGroup>
+  <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+</Project>

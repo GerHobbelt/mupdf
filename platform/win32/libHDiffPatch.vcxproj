@@ -243,6 +243,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/HDiffPatch/hpatchz.c" />
     <ClCompile Include="../../thirdparty/owemdjee/HDiffPatch/libHDiffPatch/HDiff/diff.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/HDiffPatch/libHDiffPatch/HDiff/match_block.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HDiffPatch/libHDiffPatch/HDiff/match_inplace.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/HDiffPatch/libHDiffPatch/HDiff/private_diff/bytes_rle.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/HDiffPatch/libHDiffPatch/HDiff/private_diff/compress_detect.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/HDiffPatch/libHDiffPatch/HDiff/private_diff/libdivsufsort/divsufsort.cpp" />
@@ -255,6 +256,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/HDiffPatch/libHDiffPatch/HPatchLite/hpatch_lite.c" />
     <ClCompile Include="../../thirdparty/owemdjee/HDiffPatch/libParallel/parallel_channel.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/HDiffPatch/libParallel/parallel_import.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HDiffPatch/libhsync/sign_diff/_match_in_old_sign.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HDiffPatch/libhsync/sign_diff/sign_diff.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/HDiffPatch/libhsync/sync_client/dir_sync_client.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/HDiffPatch/libhsync/sync_client/match_in_old.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/HDiffPatch/libhsync/sync_client/sync_client.cpp" />
@@ -264,6 +267,11 @@
     <ClCompile Include="../../thirdparty/owemdjee/HDiffPatch/libhsync/sync_make/match_in_new.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/HDiffPatch/libhsync/sync_make/sync_info_make.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/HDiffPatch/libhsync/sync_make/sync_make.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HDiffPatch/libhsync/zsync_client_wrapper/zsync_client_wrapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HDiffPatch/libhsync/zsync_client_wrapper/zsync_info_client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HDiffPatch/libhsync/zsync_client_wrapper/zsync_match_in_old.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HDiffPatch/libhsync/zsync_make_wrapper/zsync_info_make.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HDiffPatch/libhsync/zsync_make_wrapper/zsync_make_wrapper.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/HDiffPatch/test/_private_searchBestParams.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/HDiffPatch/test/hpatchz_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/HDiffPatch/test/testHashClash.cpp" />
@@ -273,6 +281,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/_atosize.h" />
     <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/_clock_for_demo.h" />
     <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/_dir_ignore.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/_hextobytes.h" />
     <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/bsdiff_wrapper/bsdiff_wrapper.h" />
     <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/bsdiff_wrapper/bspatch_wrapper.h" />
     <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/builds/android_ndk_jni_mk/hpatch.h" />
@@ -300,6 +309,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libHDiffPatch/HDiff/diff_for_hpatch_lite.h" />
     <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libHDiffPatch/HDiff/diff_types.h" />
     <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libHDiffPatch/HDiff/match_block.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libHDiffPatch/HDiff/match_inplace.h" />
     <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libHDiffPatch/HDiff/private_diff/bytes_rle.h" />
     <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libHDiffPatch/HDiff/private_diff/compress_detect.h" />
     <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libHDiffPatch/HDiff/private_diff/libdivsufsort/config.h" />
@@ -327,9 +337,13 @@
     <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libHDiffPatch/HPatchLite/hpatch_lite_types.h" />
     <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libParallel/parallel_channel.h" />
     <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libParallel/parallel_import.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libhsync/sign_diff/_match_in_old_sign.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libhsync/sign_diff/_sign_diff_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libhsync/sign_diff/sign_diff.h" />
     <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libhsync/sync_client/dict_decompress_plugin.h" />
     <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libhsync/sync_client/dir_sync_client.h" />
     <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libhsync/sync_client/match_in_old.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libhsync/sync_client/match_in_types.h" />
     <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libhsync/sync_client/sync_client.h" />
     <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libhsync/sync_client/sync_client_private.h" />
     <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libhsync/sync_client/sync_client_type.h" />
@@ -343,6 +357,14 @@
     <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libhsync/sync_make/sync_info_make.h" />
     <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libhsync/sync_make/sync_make.h" />
     <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libhsync/sync_make/sync_make_hash_clash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libhsync/sync_make/sync_make_private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libhsync/zsync_client_wrapper/zsync_client_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libhsync/zsync_client_wrapper/zsync_client_type_private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libhsync/zsync_client_wrapper/zsync_client_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libhsync/zsync_client_wrapper/zsync_info_client.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libhsync/zsync_client_wrapper/zsync_match_in_old.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libhsync/zsync_make_wrapper/zsync_info_make.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libhsync/zsync_make_wrapper/zsync_make_wrapper.h" />
     <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/vcdiff_wrapper/vcdiff_wrapper.h" />
     <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/vcdiff_wrapper/vcpatch_code_table.h" />
     <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/vcdiff_wrapper/vcpatch_wrapper.h" />

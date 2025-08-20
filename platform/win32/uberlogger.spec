@@ -1,0 +1,4 @@
+
+also-ignore:
+	/(?!uberlogger).*[.]cpp
+	

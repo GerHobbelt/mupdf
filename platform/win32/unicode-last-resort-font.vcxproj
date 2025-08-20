@@ -1,0 +1,616 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{E7056090-CF54-445B-B00E-26D84211121C}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>IDN2_STATIC;IDN2_BUILDING;BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>IDN2_STATIC;IDN2_BUILDING;BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>IDN2_STATIC;IDN2_BUILDING;BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>IDN2_STATIC;IDN2_BUILDING;BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <Image Include="../../thirdparty/owemdjee/unicode-last-resort-font/images/LREgyptianHieroglyphs.gif" />
+    <Image Include="../../thirdparty/owemdjee/unicode-last-resort-font/images/LRHiragana.gif" />
+    <Image Include="../../thirdparty/owemdjee/unicode-last-resort-font/images/LRNoncharacterBMP1.gif" />
+    <Image Include="../../thirdparty/owemdjee/unicode-last-resort-font/images/LRNoncharacterBMP2.gif" />
+    <Image Include="../../thirdparty/owemdjee/unicode-last-resort-font/images/LRSinhala.gif" />
+    <Image Include="../../thirdparty/owemdjee/unicode-last-resort-font/images/LRTransportMapSymbols.gif" />
+    <Image Include="../../thirdparty/owemdjee/unicode-last-resort-font/images/LRUndefinedBMP.gif" />
+    <Image Include="../../thirdparty/owemdjee/unicode-last-resort-font/images/LRUndefinedPlane3.gif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/FontMenuNameDB" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/GlyphOrderAndAliasDB" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/README.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/cmap-f13.ttx" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/_notdef.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortadlam.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortaegeannumbers.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortahom.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortalchemicalsym.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortalphamathsymbols.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortalphapresentation.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortanatolianhieroglyphs.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortancientsymbols.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortarabic.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortarabicexta.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortarabicextb.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortarabicextc.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortarabicmathalphasym.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortarabicpresentationa.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortarabicpresentationb.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortarabicsup.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortarmenian.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortarrows.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortarrowssupplementa.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortarrowssupplementb.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortavestan.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortbalinese.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortbamum.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortbamumsuppl.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortbassavah.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortbatak.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortbengali.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortbhaiksuki.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortblockelements.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortbopomofo.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortbopomofoext.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortboxdrawing.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortbrahmi.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortbraillesymbols.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortbuginese.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortbuhid.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortbyzantinemusic.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortcanadiansyllabics.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortcarian.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortcaucasianalbanian.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortchakma.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortcham.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortcherokee.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortcherokeesupplement.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortchesssymbols.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortchorasmian.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortcjkcompatibility.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortcjkcompatibilityform.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortcjkexta.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortcjkextb.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortcjkextc.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortcjkextd.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortcjkexte.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortcjkextf.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortcjkextg.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortcjkexth.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortcjkexti.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortcjkideocompatsup.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortcjkideograph.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortcjkideographcompat.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortcjkradicalssup.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortcjkstrokes.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortcjksymbolspunct.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortcmbdiacriticalmarksext.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortcombiningdiacritics.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortcombiningdiacriticssup.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortcombininghalfforms.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortcombiningsymbols.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortcommonindicnumforms.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortcompatibilityjamo.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortcontrolpictures.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortcoptic.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortcopticepactnumbers.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortcountingrods.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortcuneiform.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortcuneiformnumbers.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortcurrency.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortcypriot.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortcyprominoan.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortcyrillic.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortcyrillicexta.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortcyrillicextb.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortcyrillicextc.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortcyrillicextd.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortcyrillicsupplement.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortdeseret.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortdevanagari.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortdevanagariext.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortdevanagariexta.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortdingbats.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortdivesakuru.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortdogra.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortdominotiles.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortduployan.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortearlydynasticcuneiform.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortegypthiercontrols.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortegyptianhieroglyphs.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortegyptianhieroglyphsexta.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortelbasan.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortelymaic.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortemoticons.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortenclalphasuppl.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortenclideographicsuppl.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortenclosedalphanum.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortenclosedcjk.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortethiopic.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortethiopicext.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortethiopicexta.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortethiopicextb.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortethiopicsup.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortgaray.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortgeneralpunctuation.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortgeometricshapes.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortgeometricshapesext.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortgeorgian.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortgeorgianext.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortgeorgiansup.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortglagolitic.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortglagoliticsupplement.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortgothic.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortgrantha.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortgreek.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortgreekext.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortgreekmusic.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortgreeknumbers.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortgujarati.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortgunjalagondi.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortgurmukhi.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortgurungkhema.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresorthalffullwidthforms.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresorthanguljamo.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresorthanguljamoexta.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresorthanguljamoextb.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresorthangulsyllables.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresorthanifirohingya.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresorthanunoo.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresorthatran.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresorthebrew.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresorthighprivatesurrogate.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresorthighsurrogate.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresorthiragana.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortideographicdescript.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortideographicsymbolsandpunctuation.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortimperialaramaic.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortindicsiyaqnumbers.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortinscrpahlavi.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortinscrparthian.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortipaextensions.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortjavanese.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortkaithi.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortkaktoviknumerals.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortkanaexta.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortkanaextb.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortkanasuppl.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortkanbun.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortkangxiradicals.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortkannada.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortkatakana.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortkatakanaext.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortkawi.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortkayahli.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortkharoshthi.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortkhitansmallscript.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortkhmer.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortkhmersymbols.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortkhojki.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortkhudawadi.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortkiratrai.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortlao.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortlatin.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortlatin1.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortlatina.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortlatinb.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortlatinc.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortlatind.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortlatine.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortlatinext.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortlatinf.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortlating.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortlegacycomputingsymb.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortlegacycomputingsymbsupp.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortlepcha.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortletterlikesymbols.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortlimbu.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortlineara.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortlinearbideograms.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortlinearbsyllabary.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortlisu.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortlisusupplement.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortlowsurrogate.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortlycian.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortlydian.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortmahajani.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortmahjongtiles.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortmakasar.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortmalayalam.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortmandaic.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortmanichaean.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortmarchen.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortmasaramgondi.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortmathoperators.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortmathoperatorssup.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortmayannumerals.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortmedefaidrin.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortmeeteimayek.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortmeeteimayekext.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortmendekikakui.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortmeroiticcursive.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortmeroitichieroglyphs.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortmiao.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortmiscmathsymbolsa.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortmiscmathsymbolsb.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortmiscsymandpict.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortmiscsymbols.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortmiscsymbolsarrows.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortmisctechnical.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortmodi.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortmodifiertones.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortmongolian.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortmongoliansupplement.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortmro.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortmultani.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortmusicalsymbols.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortmyanmar.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortmyanmarexta.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortmyanmarextb.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortmyanmarextc.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortnabataean.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortnagmundari.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortnandinagari.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortnewa.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortnewtailue.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortnko.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortnotaunicode.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortnotaunicode1.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortnotaunicode10.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortnotaunicode11.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortnotaunicode12.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortnotaunicode13.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortnotaunicode14.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortnotaunicode15.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortnotaunicode16.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortnotaunicode2.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortnotaunicode3.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortnotaunicode4.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortnotaunicode5.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortnotaunicode6.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortnotaunicode7.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortnotaunicode8.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortnotaunicode9.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortnotaunicodearabic.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortnotdefplaneeight.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortnotdefplaneeleven.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortnotdefplanefive.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortnotdefplanefour.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortnotdefplanefourteen.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortnotdefplanenine.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortnotdefplaneone.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortnotdefplaneseven.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortnotdefplanesix.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortnotdefplaneten.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortnotdefplanethirteen.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortnotdefplanethree.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortnotdefplanetwelve.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortnotdefplanetwo.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortnotdefplanezero.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortnumberforms.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortnushu.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortnyiakengpuachuehmong.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortogham.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortolchiki.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortoldhungarian.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortolditalic.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortoldnortharabian.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortoldpermic.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortoldpersian.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortoldsogdian.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortoldsoutharabian.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortoldturkic.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortolduyghur.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortolonal.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortopticalrecognition.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortoriya.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortornamentaldingbats.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortosage.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortosmanya.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortottomansiyaqnumbers.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortpahawhhmong.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortpalmyrene.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortpaucinhau.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortphagspa.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortphaistosdisc.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortphoenician.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortphoneticext.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortphoneticextsup.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortplayingcards.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortprivateplane15.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortprivateplane16.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortprivateuse.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortpsalterpahlavi.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortpunctuationsup.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortrejang.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortruminumeralsym.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortrunic.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortsamaritan.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortsaurashtra.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortsharada.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortshavian.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortshorthandformatcntrls.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortsiddham.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortsinhala.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortsinhalaarchaicnumbers.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortsmallforms.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortsmallkanaextension.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortsogdian.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortsorasompeng.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortsoyombo.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortspacingmodifiers.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortspecials.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortsundanese.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortsundanesesuppl.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortsunuwar.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortsupersubscripts.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortsupplementalarrowsc.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortsupplementalsymbpict.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortsuttonsignwriting.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortsylotinagri.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortsymbpictexta.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortsyriac.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortsyriacsupplement.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresorttagalog.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresorttagbanwa.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresorttags.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresorttaile.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresorttaitham.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresorttaiviet.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresorttaixuanjing.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresorttakri.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresorttamil.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresorttamilsupplement.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresorttangsa.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresorttangut.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresorttangutcomponents.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresorttangutsupplement.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresorttelugu.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortthaana.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortthai.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresorttibetan.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresorttifinagh.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresorttirhuta.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresorttodhri.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresorttoto.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresorttransportandmapsym.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresorttulutigalari.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortucasext.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortucasexta.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortugaritic.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortvai.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortvariationselectors.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortvariationselectorssupplement.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortvedicext.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortverticalforms.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortvithkuqi.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortwancho.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortwarangciti.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortyezidi.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortyi.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortyijinghexagram.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortyiradicals.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortzanabazarsquare.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/font.ufo/glyphs/lastresortznamennymusic.glif" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/scripts/lastresort13to12.py" />
+    <Text Include="../../thirdparty/owemdjee/unicode-last-resort-font/tables.ttx" />
+  </ItemGroup>
+  <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+</Project>

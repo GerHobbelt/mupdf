@@ -323,6 +323,8 @@ const projectMap = {
 	"zstd_demos": "zstd",
 	"libzstd_zlibwrap": "zstd/zlibWrapper",
 	"civetweb_testclient": "civetweb",
+	"upscaledb_hamzilla": "upscaledb",
+	"upscaledb_server": "upscaledb",
 };
 
 testpath = `${scriptpath}/../../thirdparty/owemdjee/${projname_alt}`;
