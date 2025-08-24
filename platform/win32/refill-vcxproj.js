@@ -325,6 +325,9 @@ const projectMap = {
 	"civetweb_testclient": "civetweb",
 	"upscaledb_hamzilla": "upscaledb",
 	"upscaledb_server": "upscaledb",
+	"libut_tests_ut": "ut",
+	"libut_tests_ft": "ut",
+	"libut_tests_win_compat": "ut",
 };
 
 testpath = `${scriptpath}/../../thirdparty/owemdjee/${projname_alt}`;

@@ -19,32 +19,32 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFA77909}</ProjectGuid>
+    <ProjectGuid>{5B9A9665-5F12-4469-AC3E-AEA9E9227F34}</ProjectGuid>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
@@ -223,17 +223,70 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/ut/benchmark/expect.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ut/benchmark/include.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ut/benchmark/suite.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ut/benchmark/test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ut/example/BDD.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ut/example/abort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ut/example/attr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ut/example/benchmark.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ut/example/cfg/parallel_runner.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ut/example/cfg/printer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ut/example/cfg/reporter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ut/example/cfg/runner.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ut/example/cli.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ut/example/exception.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ut/example/expect.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ut/example/fatal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ut/example/filter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ut/example/gherkin.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ut/example/hello_world.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ut/example/log.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ut/example/macro.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ut/example/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ut/example/matcher.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ut/example/minimal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ut/example/module.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ut/example/mut.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ut/example/parameterized.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ut/example/run.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ut/example/run_report.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ut/example/section.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ut/example/should.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ut/example/skip.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ut/example/sl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ut/example/spec.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ut/example/suite.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ut/example/tag.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ut/example/terse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ut/example/test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ut/example/tmp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ut/example/tuple.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ut/example/using.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ut/test/ft/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ut/test/ft/test_suite_1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ut/test/ft/test_suite_2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ut/test/ft/test_suite_3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ut/test/ut/ut.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ut/test/ut/win_compat_test.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ut/include/boost/ut.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ut/test/ft/include/test.hpp" />
     <Text Include="../../thirdparty/owemdjee/ut/BUILD.bazel" />
     <Text Include="../../thirdparty/owemdjee/ut/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/ut/LICENSE.md" />
     <Text Include="../../thirdparty/owemdjee/ut/MODULE.bazel" />
     <Text Include="../../thirdparty/owemdjee/ut/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ut/benchmark/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/ut/cmake/AddCustomCommandOrTest.cmake" />
     <Text Include="../../thirdparty/owemdjee/ut/cmake/WarningsAsErrors.cmake" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="../../scripts/ut/dummy.cpp" />
+    <Text Include="../../thirdparty/owemdjee/ut/example/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/ut/example/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ut/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ut/test/ft/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ut/test/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/ut/test/test_download_all.sh" />
+    <Text Include="../../thirdparty/owemdjee/ut/test/ut/CMakeLists.txt" />
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
