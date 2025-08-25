@@ -12,10 +12,6 @@ else
 	STAGE=
 fi
 
-if [ -z $STAGE ] || [ $STAGE -eq 1 ] ; then
-	node ./sync-sln-files.js 1 m-dev-list.sln  $( find . -maxdepth 1 -type f -name '*.sln' )
-fi
-
 # mode 2: anything listed in failed-ideas or obnoxious-to-be-evaluated does not need to show up in any of the m-dev-*.sln files any more!
 if [ -z $STAGE ] || [ $STAGE -eq 2 ] ; then
 	node ./sync-sln-files.js 2 m-dev-list.sln  $( find . -maxdepth 1 -type f -name '*.sln' )
@@ -42,6 +38,11 @@ if [ -z $STAGE ] || [ $STAGE -eq 4 ] ; then
 	for f in $( find . -maxdepth 1 -type f -name '*.sln' | grep -v -E -e 'failed-ideas|obnoxious-to-be-evaluated' ) ; do
 		./add-vcxproj-dependencies-to-sln.sh $f
 	done
+fi
+
+# mode 1: copy the same Win32/Win64 debug/release build list chunk from m-dev-list to all the others: Sync Solutions (SLN)
+if [ -z $STAGE ] || [ $STAGE -eq 1 ] ; then
+	node ./sync-sln-files.js 1 m-dev-list.sln  $( find . -maxdepth 1 -type f -name '*.sln' )
 fi
 
 # mode 5: clean up / sort project files listed in each Solution (SLN)
