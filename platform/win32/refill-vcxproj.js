@@ -328,6 +328,7 @@ const projectMap = {
 	"libut_tests_ut": "ut",
 	"libut_tests_ft": "ut",
 	"libut_tests_win_compat": "ut",
+	"libcpp-unicode": "cpp-unicodelib",
 };
 
 testpath = `${scriptpath}/../../thirdparty/owemdjee/${projname_alt}`;

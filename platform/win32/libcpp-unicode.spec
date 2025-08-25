@@ -1,4 +1,3 @@
 
-directories:
-	../../thirdparty/owemdjee/cpp-unicodelib/
+also-ignore:
 	
