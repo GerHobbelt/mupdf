@@ -250,6 +250,10 @@ case 2:
 	// ditto for obnoxious-to-be-evaluated!
     let list_src = fs.readFileSync(source_sln_file, 'utf8');
 
+    let dest_vcxproj_files = dest_sln_files.filter((l) => /[.]vcxproj/.test(l));
+    
+	dest_sln_files = dest_sln_files.filter((l) => /[.]sln/.test(l));
+
     let failed_sln_file = dest_sln_files.filter((l) => /failed-ideas/.test(l))[0];
     let maymatter_sln_file = dest_sln_files.filter((l) => /may-matter/.test(l))[0];
     let obnoxious_sln_file = dest_sln_files.filter((l) => /obnoxious/.test(l))[0];
@@ -523,6 +527,36 @@ EndProject
 		}
 	});
 
+	// also filter FAILED-IDEAS from any given VCXPROJ project's dependencies:
+    dest_vcxproj_files.forEach((l) => {
+        let dest_vcxproj_file = l;
+		let dest_src = fs.readFileSync(dest_vcxproj_file, 'utf8');
+		let has_been_edited = false;
+
+		list_prjs.forEach((l) => {
+			// 'ignore'-flagged projects are to be included everywhere, so NO REMOVAL!
+			if ( l.ignore )
+				return;
+
+			if ( l.in_failed_sln ) {
+				// <ProjectReference Include="mu-office-test.vcxproj">
+				let re = new RegExp(`<ProjectReference Include="${ l.file.replace(/[.]/g, "[.]") }">[\s\S]*?</ProjectReference>`, "g");
+				console.log({l, re});
+				dest_src = dest_src.replace(re, function (m) {
+					console.log(`Project ${ l.name } is listed in FAILED-IDEAS: removing it as a dependency from project ${dest_vcxproj_file}\n`);
+					has_been_edited = true;
+					return "";
+				});
+			}
+		});
+
+		if (has_been_edited) {
+			console.log(`Updating ${ dest_vcxproj_file }.`);
+			fs.writeFileSync(dest_vcxproj_file, dest_src, 'utf8');
+			updated = true;
+		}
+	});
+	
 	if (updated) {
         console.log("NOTE: solution files have been updated.\n");
     }

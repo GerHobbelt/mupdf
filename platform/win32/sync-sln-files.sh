@@ -12,9 +12,35 @@ else
 	STAGE=
 fi
 
+if [ -z "$2" ] ; then
+	FILTER=.
+else
+	# WARNING: this is used as a regex, so reckon with special behaviour for $^.*+?[]
+	#
+	# The brutal fix we employ here is to nuke everything at or after the first regex operator
+	#
+	#echo "$2" | sed -E -e 's/[ \t\r\n.*+\[\]\(\)?].*$//'    -- somehow barfs on the ] in the [..] set no matter what I try for escapes   :-S
+	FILTER=$( echo "$2" | sed -E -e 'sX[.*+?()\[].*$XX' -e 's/-?lib$//i' )
+fi
+
+if [ "$FILTER" = "." ] ; then
+	WILDCARD="*"
+else
+	WILDCARD="*$FILTER*"
+fi
+
+
+# debugging:
+if true ; then
+	echo "FILTER: $FILTER"
+	echo "WILDCARD: $WILDCARD"
+	echo "STAGE: $STAGE"
+fi
+
+
 # mode 2: anything listed in failed-ideas or obnoxious-to-be-evaluated does not need to show up in any of the m-dev-*.sln files any more!
 if [ -z $STAGE ] || [ $STAGE -eq 2 ] ; then
-	node ./sync-sln-files.js 2 m-dev-list.sln  $( find . -maxdepth 1 -type f -name '*.sln' )
+	node ./sync-sln-files.js 2 m-dev-list.sln  $( find . -maxdepth 1 -type f -name '*.sln' )  $( find . -maxdepth 1 -type f -name '__build*.vcxproj' )
 fi
 
 # mode 3: synchronize all projects' UUIDs everywhere.
@@ -35,19 +61,32 @@ fi
 
 # mode 4: update SLN dependencies, i.e. make sure all projects referenced in any other project included in a Solution (SLN) is indeed present in the Solution.
 if [ -z $STAGE ] || [ $STAGE -eq 4 ] ; then
-	for f in $( find . -maxdepth 1 -type f -name '*.sln' | grep -v -E -e 'failed-ideas|obnoxious-to-be-evaluated' ) ; do
+	for f in $( find . -maxdepth 1 -type f -name '*.sln' | grep -v -E -e 'failed-ideas|obnoxious-to-be-evaluated' | grep -i -e "$FILTER" ) ; do
 		./add-vcxproj-dependencies-to-sln.sh $f
 	done
 fi
 
 # mode 1: copy the same Win32/Win64 debug/release build list chunk from m-dev-list to all the others: Sync Solutions (SLN)
 if [ -z $STAGE ] || [ $STAGE -eq 1 ] ; then
-	node ./sync-sln-files.js 1 m-dev-list.sln  $( find . -maxdepth 1 -type f -name '*.sln' )
+	node ./sync-sln-files.js 1 m-dev-list.sln  $( find . -maxdepth 1 -type f -name '*.sln' | grep -i -e "$FILTER" )
 fi
 
 # mode 5: clean up / sort project files listed in each Solution (SLN)
 if [ -z $STAGE ] || [ $STAGE -eq 5 ] ; then
-	for f in *.sln ; do 
+	# add all project files to the overview solution!
+	# we do this brute-force by simply adding ALL projects to that solution again; the next
+	# load by Visual Studio will clean up the .sln file for us.
+	echo "augment MSVC solution 'm-dev-list.sln' by adding all known projects..."
+	for f in $( ls *.vcxproj | tr -d '\r' ) ; do
+		LINECOUNT=$( grep -w $f m-dev-list.sln | wc -l )
+		echo "$LINECOUNT :: $f"
+		if test $LINECOUNT -lt 1 ; then 
+			echo "ADDING:::: $f" 
+			node ./mk_project_line_for_sln.js $f >> m-dev-list.sln 
+		fi 
+	done
+
+	for f in $( ls *.sln | tr -d '\r' | grep -i -e "$FILTER" ) ; do 
 		node ./sort-sln-file.js  $f 
 		./msvc_sln_cleaner.exe $f 
 		node ./tweak-sln-file.js  $f
