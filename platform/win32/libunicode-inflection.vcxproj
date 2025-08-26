@@ -52,16 +52,16 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -74,7 +74,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -108,8 +108,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUNICODE_INFLECTION;UNICODE_INFLECTION_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -128,7 +128,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUNICODE_INFLECTION;UNICODE_INFLECTION_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/unicode-unicode-inflection/unicode-inflection/src;../../scripts/unicode-inflection/include;../../thirdparty/owemdjee/libxml2/include;../../thirdparty/owemdjee/unicode-unicode-inflection/unicode-inflection/test/src;../../thirdparty/owemdjee/Catch2/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../scripts/inflection/include;../../scripts/unicode-inflection/include;../../thirdparty/owemdjee/unicode-unicode-inflection/unicode-inflection/src;../../thirdparty/owemdjee/unicode-inflection/inflection/src;../../thirdparty/owemdjee/unicode-unicode-inflection/unicode-inflection/test/src;../../thirdparty/owemdjee/libxml2/include;../../thirdparty/owemdjee/Catch2/src;../../thirdparty/owemdjee/unicode-icu/icu4c/source/common;../../thirdparty/owemdjee/unicode-icu/icu4c/source/i18n;../../thirdparty/owemdjee/marisa-trie/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -155,7 +155,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUNICODE_INFLECTION;UNICODE_INFLECTION_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/unicode-unicode-inflection/unicode-inflection/src;../../scripts/unicode-inflection/include;../../thirdparty/owemdjee/libxml2/include;../../thirdparty/owemdjee/unicode-unicode-inflection/unicode-inflection/test/src;../../thirdparty/owemdjee/Catch2/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../scripts/inflection/include;../../scripts/unicode-inflection/include;../../thirdparty/owemdjee/unicode-unicode-inflection/unicode-inflection/src;../../thirdparty/owemdjee/unicode-inflection/inflection/src;../../thirdparty/owemdjee/unicode-unicode-inflection/unicode-inflection/test/src;../../thirdparty/owemdjee/libxml2/include;../../thirdparty/owemdjee/Catch2/src;../../thirdparty/owemdjee/unicode-icu/icu4c/source/common;../../thirdparty/owemdjee/unicode-icu/icu4c/source/i18n;../../thirdparty/owemdjee/marisa-trie/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -183,7 +183,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUNICODE_INFLECTION;UNICODE_INFLECTION_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/unicode-unicode-inflection/unicode-inflection/src;../../scripts/unicode-inflection/include;../../thirdparty/owemdjee/libxml2/include;../../thirdparty/owemdjee/unicode-unicode-inflection/unicode-inflection/test/src;../../thirdparty/owemdjee/Catch2/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../scripts/inflection/include;../../scripts/unicode-inflection/include;../../thirdparty/owemdjee/unicode-unicode-inflection/unicode-inflection/src;../../thirdparty/owemdjee/unicode-inflection/inflection/src;../../thirdparty/owemdjee/unicode-unicode-inflection/unicode-inflection/test/src;../../thirdparty/owemdjee/libxml2/include;../../thirdparty/owemdjee/Catch2/src;../../thirdparty/owemdjee/unicode-icu/icu4c/source/common;../../thirdparty/owemdjee/unicode-icu/icu4c/source/i18n;../../thirdparty/owemdjee/marisa-trie/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -210,7 +210,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUNICODE_INFLECTION;UNICODE_INFLECTION_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/unicode-unicode-inflection/unicode-inflection/src;../../scripts/unicode-inflection/include;../../thirdparty/owemdjee/libxml2/include;../../thirdparty/owemdjee/unicode-unicode-inflection/unicode-inflection/test/src;../../thirdparty/owemdjee/Catch2/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../scripts/inflection/include;../../scripts/unicode-inflection/include;../../thirdparty/owemdjee/unicode-unicode-inflection/unicode-inflection/src;../../thirdparty/owemdjee/unicode-inflection/inflection/src;../../thirdparty/owemdjee/unicode-unicode-inflection/unicode-inflection/test/src;../../thirdparty/owemdjee/libxml2/include;../../thirdparty/owemdjee/Catch2/src;../../thirdparty/owemdjee/unicode-icu/icu4c/source/common;../../thirdparty/owemdjee/unicode-icu/icu4c/source/i18n;../../thirdparty/owemdjee/marisa-trie/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -280,6 +280,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/JaCommonConceptFactory.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/KoCommonConceptFactory.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/KoCommonConceptFactory_KoAndList.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/MlCommonConceptFactory.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/MsCommonConceptFactory.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/NbCommonConceptFactory.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/NlCommonConceptFactory.cpp" />
@@ -371,6 +372,11 @@
     <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/KoGrammarSynthesizer_KoDisplayFunction.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/KoGrammarSynthesizer_ParticleLookupFunction.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/KoGrammarSynthesizer_ParticleResolver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/MlGrammarSynthesizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/MlGrammarSynthesizer_CaseLookupFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/MlGrammarSynthesizer_GenderLookupFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/MlGrammarSynthesizer_MlDisplayFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/MlGrammarSynthesizer_NumberLookupFunction.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/NbGrammarSynthesizer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/NbGrammarSynthesizer_ArticleLookupFunction.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/NbGrammarSynthesizer_NbDisplayFunction.cpp" />
@@ -590,6 +596,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/JaCommonConceptFactory.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/KoCommonConceptFactory.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/KoCommonConceptFactory_KoAndList.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/MlCommonConceptFactory.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/MsCommonConceptFactory.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/NbCommonConceptFactory.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/dialog/language/NlCommonConceptFactory.hpp" />
@@ -690,6 +697,11 @@
     <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/KoGrammarSynthesizer_KoDisplayFunction.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/KoGrammarSynthesizer_ParticleLookupFunction.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/KoGrammarSynthesizer_ParticleResolver.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/MlGrammarSynthesizer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/MlGrammarSynthesizer_CaseLookupFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/MlGrammarSynthesizer_GenderLookupFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/MlGrammarSynthesizer_MlDisplayFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/MlGrammarSynthesizer_NumberLookupFunction.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/NbGrammarSynthesizer.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/NbGrammarSynthesizer_ArticleLookupFunction.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/grammar/synthesis/NbGrammarSynthesizer_NbDisplayFunction.hpp" />
@@ -731,6 +743,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/lang/features/fwd.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/lang/fwd.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/message2/MF2Factory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/message2/fwd.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/npc.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/resources/DataRegistrationService.h" />
     <ClInclude Include="../../thirdparty/owemdjee/unicode-inflection/inflection/src/inflection/resources/DataRegistrationService.hpp" />
@@ -853,12 +866,12 @@
     <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/cmake/versions.mk" />
     <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/docs/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/docs/Doxyfile" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/docs/images/README.md" />
     <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/ext/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/ext/README.md" />
     <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/ext/lib/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/ext/lib/Catch2/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/ext/lib/Marisa/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/ext/lib/Marisa/patch.sh" />
     <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/gradle.properties" />
     <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/gradle/wrapper/gradle-wrapper.properties" />
     <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/gradlew" />
@@ -882,6 +895,7 @@
     <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/inflection/pronoun_it.csv" />
     <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/inflection/pronoun_ja.csv" />
     <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/inflection/pronoun_ko.csv" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/inflection/pronoun_ml.csv" />
     <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/inflection/pronoun_ms.csv" />
     <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/inflection/pronoun_nb.csv" />
     <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/inflection/pronoun_nl.csv" />
@@ -914,6 +928,7 @@
     <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/tokenizer/config_iw.properties" />
     <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/tokenizer/config_ja.properties" />
     <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/tokenizer/config_ko.properties" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/tokenizer/config_ml.properties" />
     <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/tokenizer/config_ms.properties" />
     <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/tokenizer/config_nb.properties" />
     <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/tokenizer/config_nl.properties" />
@@ -930,6 +945,7 @@
     <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/tokenizer/config_zh.properties" />
     <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/tokenizer/da/tokenizer.dictionary" />
     <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/tokenizer/he/nondecompound.tok" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/tokenizer/ml/nondecompound.tok" />
     <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/tokenizer/nl/tokenizer.dictionary" />
     <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/tokenizer/no/tokenizer.dictionary" />
     <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/tokenizer/sv/tokenizer.dictionary" />
@@ -963,7 +979,9 @@
     <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/dictionary-parser/src/main/resources/org/unicode/wikidata/filter_de.properties" />
     <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/dictionary-parser/src/main/resources/org/unicode/wikidata/filter_en.properties" />
     <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/dictionary-parser/src/main/resources/org/unicode/wikidata/filter_es.properties" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/dictionary-parser/src/main/resources/org/unicode/wikidata/filter_he.properties" />
     <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/dictionary-parser/src/main/resources/org/unicode/wikidata/filter_it.properties" />
+    <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/dictionary-parser/src/main/resources/org/unicode/wikidata/filter_nl.properties" />
     <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/dictionary-parser/src/main/resources/org/unicode/wikidata/filter_ru.properties" />
     <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/dictionary-parser/src/test/java/org/unicode/wikidata/ParseWikidataTest.java" />
     <Text Include="../../thirdparty/owemdjee/unicode-inflection/inflection/tools/dictionary-parser/src/test/resources/lexiconCorrectOut.txt" />
@@ -987,6 +1005,7 @@
     <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/dictionary/inflectional_he.xml" />
     <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/dictionary/inflectional_hi.xml" />
     <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/dictionary/inflectional_it.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/dictionary/inflectional_ml.xml" />
     <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/dictionary/inflectional_nb.xml" />
     <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/dictionary/inflectional_nl.xml" />
     <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/resources/org/unicode/inflection/dictionary/inflectional_pt.xml" />
@@ -1008,6 +1027,7 @@
     <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/inflection/hi.xml" />
     <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/inflection/it.xml" />
     <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/inflection/ko.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/inflection/ml.xml" />
     <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/inflection/nb.xml" />
     <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/inflection/nl.xml" />
     <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/inflection/pt.xml" />
@@ -1026,6 +1046,7 @@
     <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/pronoun/it.xml" />
     <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/pronoun/ja.xml" />
     <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/pronoun/ko.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/pronoun/ml.xml" />
     <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/pronoun/ms.xml" />
     <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/pronoun/nb.xml" />
     <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/dialog/pronoun/nl.xml" />
@@ -1043,9 +1064,11 @@
     <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/tokenizer/da.xml" />
     <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/tokenizer/en.xml" />
     <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/tokenizer/he.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/tokenizer/ml.xml" />
     <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/tokenizer/nb.xml" />
     <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/tokenizer/nl.xml" />
     <Xml Include="../../thirdparty/owemdjee/unicode-inflection/inflection/test/resources/inflection/tokenizer/sv.xml" />
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
+  
