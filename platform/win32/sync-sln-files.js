@@ -540,8 +540,8 @@ EndProject
 
 			if ( l.in_failed_sln ) {
 				// <ProjectReference Include="mu-office-test.vcxproj">
-				let re = new RegExp(`<ProjectReference Include="${ l.file.replace(/[.]/g, "[.]") }">[\s\S]*?</ProjectReference>`, "g");
-				console.log({l, re});
+				let re = new RegExp(`<ProjectReference Include="${ l.file.replace(/[.]/g, "[.]") }">[\\s\\S]*?</ProjectReference>`, "g");
+				//console.log({l, re});
 				dest_src = dest_src.replace(re, function (m) {
 					console.log(`Project ${ l.name } is listed in FAILED-IDEAS: removing it as a dependency from project ${dest_vcxproj_file}\n`);
 					has_been_edited = true;
