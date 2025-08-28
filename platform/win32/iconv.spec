@@ -2,7 +2,7 @@
 extra-sources:
 	../../scripts/libiconv/config.h
 	
-	../../thirdparty/owemdjee/libiconv/src/monolithic_main.c
+	../../thirdparty/owemdjee/libiconv/src/monolithic_main_4_iconv.c
 	
 	
 also-ignore:
@@ -24,6 +24,7 @@ also-ignore:
 
 	/tools/
 	/tests/
+	/install-tests/
 	
 	[a-z0-9_-]*[.]rc
 	

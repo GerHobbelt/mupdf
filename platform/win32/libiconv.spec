@@ -11,7 +11,8 @@ also-ignore:
 	
 	lib/iconv.c
 	
-	src/monolithic_main.c
+	/src/monolithic_main_4_iconv.c
+	/src/monolithic_main_4_tools.c
 	
     libcharset/tools/locale_codeset.c
     libcharset/tools/locale_monthnames.c

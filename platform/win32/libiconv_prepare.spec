@@ -2,6 +2,8 @@
 extra-sources:
 	../../scripts/libiconv/config.h
 	
+	../../scripts/libiconv/Makefile
+	
 also-ignore:
 	.*[.]filters
 	.*[.]vcxproj
@@ -9,21 +11,19 @@ also-ignore:
 	gnulib-local/
 	relocatable-stub.c
 	
-	lib/iconv.c
-	
-	src/monolithic_main.c
-	
-    libcharset/tools/locale_codeset.c
-    libcharset/tools/locale_monthnames.c
-    libcharset/tools/locale_x11encoding.c
+    /libcharset/
 	
 	/woe32dll/
 
-	srclib/[a-z0-9_-]*[.]c
+	/srclib/
+	
+	/extras/
+	/lib/
+	/src/
 
 	/tools/
-	
-	/srclib/malloc/.*[.]c
+	/tests/
+	/install-tests/
 	
 	[a-z0-9_-]*[.]rc
 	
