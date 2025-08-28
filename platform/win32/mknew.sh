@@ -24,7 +24,7 @@ mknewproj() {
 	if ! test -f $1.vcxproj ; then
 		if ! test -f $libname.vcxproj ; then
 			echo "mknewproj: $libname"
-			cp -n libcpuid.vcxproj $libname.vcxproj
+			cp -n libdummy.vcxproj $libname.vcxproj
 			node ./patch-vcxproj.js $libname.vcxproj
 			./update-vcxproj.sh $libname.vcxproj
 			./refill-vcxproj.sh $libname.vcxproj
@@ -1588,7 +1588,6 @@ Arduino-KalmanFilter
 poisson-disc-distribution-bridson
 OpenRAND
 fast_io
-libinflection
 DataFrame
 
 Celero

@@ -71,9 +71,8 @@ if [ -z $STAGE ] || [ $STAGE -eq 1 ] ; then
 	node ./sync-sln-files.js 1 m-dev-list.sln  $( find . -maxdepth 1 -type f -name '*.sln' | grep -i -e "$FILTER" )
 fi
 
-# mode 5: clean up / sort project files listed in each Solution (SLN)
+# mode 5: add all project files to the overview solution!
 if [ -z $STAGE ] || [ $STAGE -eq 5 ] ; then
-	# add all project files to the overview solution!
 	# we do this brute-force by simply adding ALL projects to that solution again; the next
 	# load by Visual Studio will clean up the .sln file for us.
 	echo "augment MSVC solution 'm-dev-list.sln' by adding all known projects..."
@@ -85,7 +84,10 @@ if [ -z $STAGE ] || [ $STAGE -eq 5 ] ; then
 			node ./mk_project_line_for_sln.js $f >> m-dev-list.sln 
 		fi 
 	done
+fi
 
+# mode 6: clean up / sort project files listed in each Solution (SLN)
+if [ -z $STAGE ] || [ $STAGE -eq 6 ] ; then
 	for f in $( ls *.sln | tr -d '\r' | grep -i -e "$FILTER" ) ; do 
 		node ./sort-sln-file.js  $f 
 		./msvc_sln_cleaner.exe $f 

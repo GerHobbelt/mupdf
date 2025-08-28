@@ -331,6 +331,7 @@ const projectMap = {
 	"libcpp-unicode": "cpp-unicodelib",
 	"libbloom": "bloom",
 	"libbloomd": "libbloom",
+	"libiconv_prepare": "libiconv",
 };
 
 testpath = `${scriptpath}/../../thirdparty/owemdjee/${projname_alt}`;

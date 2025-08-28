@@ -272,7 +272,7 @@ const specialFilenames = [
   "CUSTOMIZE",
   "DOCGUIDE",
   "INSTALL",
-  "Makefile",
+  "Makefile[^/]*",
   "Jamfile",
   "Doxyfile",
   "PROBLEMS",
@@ -483,6 +483,26 @@ function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
 
     case '':
 		// files without any extension are always 'special' and will be added to the project:
+        filterDirs.add('Misc Files');
+        base = path.dirname(f);
+        if (base === '.') {
+          base = '';
+        }
+        if (base.length > 0) {
+          base = 'Misc Files/' + base;
+          filterDirs.add(base);
+        }
+        return true;
+
+    case '.def':
+    case '.am':
+    case '.in':
+    case '.devel':
+    case '.lisp':
+    case '.json':
+    case '.yaml':
+    case '.toml':
+    case '.ini':
         filterDirs.add('Misc Files');
         base = path.dirname(f);
         if (base === '.') {
