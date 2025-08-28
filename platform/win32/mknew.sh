@@ -1577,8 +1577,6 @@ lyra
 celero
 gtest-tap-listener
 
-0__scratch
-	
 lwlog
 Jungle
 data_tamer
@@ -1602,12 +1600,37 @@ pyTsetlinMachine
 pystring
 raylib
 simde
-the-yabbering-politician
+politician
 unicode-inflection
 units_cpp
 ut
 
+perfetto
 Win32.mmap
+inih
+magika
+marisa-trie
+EASTL
+bestline
+tgfx
+fork_union
+cista
+gperftools
+unicode-lstm_word_segmentation
+unicode-UK-source-ideographs
+unicode-cjk-symbols
+unicode-icu-docs
+unicode-last-resort-font
+unicode-unihan-database
+unicode-conformance
+unicode-test-corpora
+unicode-ml-confusables-generator
+unicode-text-rendering-tests
+unicode-cldr-staging
+unicodetools
+unicode-icu-perf
+unicode-unilex
+atomic_queue
 
 EOT
 ) | grep -e "$FILTER"
@@ -1839,7 +1862,6 @@ zotero-zotfile
 monolith
 djvulibre
 sumatrapdf
-EASTL
 krita
 
 EOT
