@@ -8,6 +8,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <process.h>    // exit(), abort(), ...
 #include <assert.h>
 #include <cassert>
 #include <atomic>

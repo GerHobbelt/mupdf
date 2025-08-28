@@ -5,7 +5,6 @@
 directories:
 	../../include/system-override
 	../../source/system_override
-
+						  
 also-ignore:
-	test_.*
-	
+	[/](?!test_cpp[.])[^/]+$

@@ -5,4 +5,7 @@
 directories:
 	../../include/system-override
 	../../source/system_override
+
+also-ignore:
+	test_.*
 	

@@ -7,5 +7,5 @@ directories:
 	../../source/system_override
 
 also-ignore:
-	test_.*
+	[/](?!test_c[.])[^/]+$
 	

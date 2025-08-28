@@ -75,24 +75,24 @@
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <NMakeBuildCommandLine>nmake -f $(ProjectDir)../../scripts/libiconv/Makefile regenerate PROJDIR=$(ProjectDir)</NMakeBuildCommandLine>
-    <NMakeReBuildCommandLine>nmake -f $(ProjectDir)../../scripts/libiconv/Makefile regenerate PROJDIR=$(ProjectDir)</NMakeReBuildCommandLine>
-    <NMakeCleanCommandLine>nmake -f $(ProjectDir)../../scripts/libiconv/Makefile clean PROJDIR=$(ProjectDir)</NMakeCleanCommandLine>
+    <NMakeBuildCommandLine>pushd "$(ProjectDir)" &amp;&amp; bash -c "../../scripts/libiconv/regenerate.sh" &amp; popd</NMakeBuildCommandLine>
+    <NMakeReBuildCommandLine>pushd "$(ProjectDir)" &amp;&amp; bash -c "../../scripts/libiconv/regenerate.sh" &amp; popd</NMakeReBuildCommandLine>
+    <NMakeCleanCommandLine>pushd "$(ProjectDir)" &amp;&amp; bash -c "../../scripts/libiconv/clean.sh" &amp; popd</NMakeCleanCommandLine>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <NMakeBuildCommandLine>nmake -f $(ProjectDir)../../scripts/libiconv/Makefile regenerate PROJDIR=$(ProjectDir)</NMakeBuildCommandLine>
-    <NMakeReBuildCommandLine>nmake -f $(ProjectDir)../../scripts/libiconv/Makefile regenerate PROJDIR=$(ProjectDir)</NMakeReBuildCommandLine>
-    <NMakeCleanCommandLine>nmake -f $(ProjectDir)../../scripts/libiconv/Makefile clean PROJDIR=$(ProjectDir)</NMakeCleanCommandLine>
+    <NMakeBuildCommandLine>pushd "$(ProjectDir)" &amp;&amp; bash -c "../../scripts/libiconv/regenerate.sh" &amp; popd</NMakeBuildCommandLine>
+    <NMakeReBuildCommandLine>pushd "$(ProjectDir)" &amp;&amp; bash -c "../../scripts/libiconv/regenerate.sh" &amp; popd</NMakeReBuildCommandLine>
+    <NMakeCleanCommandLine>pushd "$(ProjectDir)" &amp;&amp; bash -c "../../scripts/libiconv/clean.sh" &amp; popd</NMakeCleanCommandLine>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <NMakeBuildCommandLine>nmake -f $(ProjectDir)../../scripts/libiconv/Makefile regenerate PROJDIR=$(ProjectDir)</NMakeBuildCommandLine>
-    <NMakeReBuildCommandLine>nmake -f $(ProjectDir)../../scripts/libiconv/Makefile regenerate PROJDIR=$(ProjectDir)</NMakeReBuildCommandLine>
-    <NMakeCleanCommandLine>nmake -f $(ProjectDir)../../scripts/libiconv/Makefile clean PROJDIR=$(ProjectDir)</NMakeCleanCommandLine>
+    <NMakeBuildCommandLine>pushd "$(ProjectDir)" &amp;&amp; bash -c "../../scripts/libiconv/regenerate.sh" &amp; popd</NMakeBuildCommandLine>
+    <NMakeReBuildCommandLine>pushd "$(ProjectDir)" &amp;&amp; bash -c "../../scripts/libiconv/regenerate.sh" &amp; popd</NMakeReBuildCommandLine>
+    <NMakeCleanCommandLine>pushd "$(ProjectDir)" &amp;&amp; bash -c "../../scripts/libiconv/clean.sh" &amp; popd</NMakeCleanCommandLine>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <NMakeBuildCommandLine>nmake -f $(ProjectDir)../../scripts/libiconv/Makefile regenerate PROJDIR=$(ProjectDir)</NMakeBuildCommandLine>
-    <NMakeReBuildCommandLine>nmake -f $(ProjectDir)../../scripts/libiconv/Makefile regenerate PROJDIR=$(ProjectDir)</NMakeReBuildCommandLine>
-    <NMakeCleanCommandLine>nmake -f $(ProjectDir)../../scripts/libiconv/Makefile clean PROJDIR=$(ProjectDir)</NMakeCleanCommandLine>
+    <NMakeBuildCommandLine>pushd "$(ProjectDir)" &amp;&amp; bash -c "../../scripts/libiconv/regenerate.sh" &amp; popd</NMakeBuildCommandLine>
+    <NMakeReBuildCommandLine>pushd "$(ProjectDir)" &amp;&amp; bash -c "../../scripts/libiconv/regenerate.sh" &amp; popd</NMakeReBuildCommandLine>
+    <NMakeCleanCommandLine>pushd "$(ProjectDir)" &amp;&amp; bash -c "../../scripts/libiconv/clean.sh" &amp; popd</NMakeCleanCommandLine>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
@@ -156,6 +156,12 @@
     <Bscmake>
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
+    <PreBuildEvent>
+      <Command>pushd "$(ProjectDir)" &amp;&amp; bash -c "../../scripts/libiconv/regenerate.sh" &amp; popd</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>regenerate the iconv aliases, etc. C source files from def.</Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
@@ -183,6 +189,12 @@
     <Bscmake>
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
+    <PreBuildEvent>
+      <Command>pushd "$(ProjectDir)" &amp;&amp; bash -c "../../scripts/libiconv/regenerate.sh" &amp; popd</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>regenerate the iconv aliases, etc. C source files from def.</Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
@@ -211,6 +223,12 @@
     <Bscmake>
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
+    <PreBuildEvent>
+      <Command>pushd "$(ProjectDir)" &amp;&amp; bash -c "../../scripts/libiconv/regenerate.sh" &amp; popd</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>regenerate the iconv aliases, etc. C source files from def.</Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
@@ -238,6 +256,12 @@
     <Bscmake>
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
+    <PreBuildEvent>
+      <Command>pushd "$(ProjectDir)" &amp;&amp; bash -c "../../scripts/libiconv/regenerate.sh" &amp; popd</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>regenerate the iconv aliases, etc. C source files from def.</Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
@@ -496,6 +520,9 @@
     <Text Include="../../thirdparty/owemdjee/libiconv/windows/windres-options" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="gperf.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff5fc8ac}</Project>
+    </ProjectReference>
     <ProjectReference Include="libiconv_tools.vcxproj">
       <Project>{5089504c-1bce-4a8a-b747-5b3e280a1893}</Project>
     </ProjectReference>
