@@ -29,12 +29,12 @@
 #endif
 
 
-#undef assert
+#undef TEST_ASSERT
 
-#define assert(expr)										\
+#define TEST_ASSERT(expr)										\
 	LIBASSERT_INVOKE(expr, "assert", assertion, LIBASSERT_EMPTY_ACTION, NULL)
 
-#define assert_msg(expr, ...)                               \
+#define TEST_ASSERT_MSG(expr, ...)                               \
 	LIBASSERT_INVOKE(expr, "assert", assertion, LIBASSERT_EMPTY_ACTION __VA_OPT__(,) __VA_ARGS__)
 
 
@@ -79,7 +79,7 @@ static void fill_bindstbuf_with_1_bits(uint8_t* buf, size_t size, size_t number_
 	fast_rand();
 
 	size_t n = number_of_bits / 64;
-	assert(size > n);
+	TEST_ASSERT(size > n);
 	for (size_t i = 0; i < n; i++)
 	{
 		*p++ = ~((uint64_t)0ULL);
@@ -94,7 +94,7 @@ static void fill_bindstbuf_with_1_bits(uint8_t* buf, size_t size, size_t number_
 	fill_bindstbuf_with_random((uint8_t *)p, size);
 
 	size_t n8 = number_of_bits / 8;
-	assert(size > n8);
+	TEST_ASSERT(size > n8);
 	buf = (uint8_t*)p;
 	for (size_t i = 0; i < n8; i++)
 	{
@@ -104,8 +104,8 @@ static void fill_bindstbuf_with_1_bits(uint8_t* buf, size_t size, size_t number_
 	number_of_bits -= n8 * 8;
 	size -= n8;
 
-	assert_msg(number_of_bits == 0, "fill_bindstbuf_with_1_bits invoke fail; internal test error");
-	assert_msg(size > 0, "fill_bindstbuf_with_1_bits invoke fail; internal test error");
+	TEST_ASSERT_MSG(number_of_bits == 0, "fill_bindstbuf_with_1_bits invoke fail; internal test error");
+	TEST_ASSERT_MSG(size > 0, "fill_bindstbuf_with_1_bits invoke fail; internal test error");
 
 	*buf++ = 0;
 }
@@ -127,7 +127,7 @@ static void fill_bindstbuf_with_0_bits(uint8_t* buf, size_t size, size_t number_
 	fast_rand();
 
 	size_t n = number_of_bits / 64;
-	assert(size > n);
+	TEST_ASSERT(size > n);
 	for (size_t i = 0; i < n; i++)
 	{
 		*p++ = 0;
@@ -142,7 +142,7 @@ static void fill_bindstbuf_with_0_bits(uint8_t* buf, size_t size, size_t number_
 	fill_bindstbuf_with_random((uint8_t *)p, size);
 
 	size_t n8 = number_of_bits / 8;
-	assert(size > n8);
+	TEST_ASSERT(size > n8);
 	buf = (uint8_t*)p;
 	for (size_t i = 0; i < n8; i++)
 	{
@@ -152,8 +152,8 @@ static void fill_bindstbuf_with_0_bits(uint8_t* buf, size_t size, size_t number_
 	number_of_bits -= n8 * 8;
 	size -= n8;
 
-	assert_msg(number_of_bits == 0, "fill_bindstbuf_with_0_bits invoke fail; internal test error");
-	assert_msg(size > 0, "fill_bindstbuf_with_0_bits invoke fail; internal test error");
+	TEST_ASSERT_MSG(number_of_bits == 0, "fill_bindstbuf_with_0_bits invoke fail; internal test error");
+	TEST_ASSERT_MSG(size > 0, "fill_bindstbuf_with_0_bits invoke fail; internal test error");
 
 	*buf++ = ~0;
 }
@@ -168,7 +168,7 @@ static void fill_encbuf_with_1s_base58x(char* encbuf, size_t size, size_t enc_le
 	fill_bindstbuf_with_anti_touch((uint8_t *)encbuf, size);
 
 	// the highest digit in base58x, i.e. the 'all-1s' digit, is 'z':
-	assert(enc_length + 1 < size);
+	TEST_ASSERT(enc_length + 1 < size);
 	for (size_t i = 0; i < enc_length; i++)
 	{
 		*encbuf++ = c;
@@ -252,7 +252,7 @@ static int check_base58x_near_match(const char* second, const char* master)
 			}
 		}
 	}
-	assert(second[i] == 0);
+	TEST_ASSERT(second[i] == 0);
 	return 1;
 }
 
@@ -274,33 +274,33 @@ int main(void)
 	fprintf(stderr, "API sanity checks:\n");
 
 	encrv = EncodeBase58X(encbuf, sizeof(encbuf), bindstbuf, 0);
-	assert_msg(encrv == NULL, "src size is NIL");
+	TEST_ASSERT_MSG(encrv == NULL, "src size is NIL");
 	encrv = EncodeBase58X(encbuf, sizeof(encbuf), NULL, 1);
-	assert_msg(encrv == NULL, "src is NULL");
+	TEST_ASSERT_MSG(encrv == NULL, "src is NULL");
 	encrv = EncodeBase58X(encbuf, 0, bindstbuf, 1);
-	assert_msg(encrv == NULL, "dst size is NIL");
+	TEST_ASSERT_MSG(encrv == NULL, "dst size is NIL");
 	encrv = EncodeBase58X(NULL, sizeof(encbuf), bindstbuf, 1);
-	assert_msg(encrv == NULL, "dst is NULL");
+	TEST_ASSERT_MSG(encrv == NULL, "dst is NULL");
 
 	const char* dummy_enc_str = "12345671234567";
 	targetsize = 1;
 	binrv = DecodeBase58X(bindstbuf, sizeof(bindstbuf), &targetsize, NULL);
-	assert_msg(binrv == NULL, "src is NULL");
-	assert(targetsize == 0);
+	TEST_ASSERT_MSG(binrv == NULL, "src is NULL");
+	TEST_ASSERT(targetsize == 0);
 	targetsize = 1;
 	binrv = DecodeBase58X(bindstbuf, sizeof(bindstbuf), &targetsize, "");
-	assert_msg(binrv == NULL, "src is NIL");
-	assert(targetsize == 0);
+	TEST_ASSERT_MSG(binrv == NULL, "src is NIL");
+	TEST_ASSERT(targetsize == 0);
 	binrv = DecodeBase58X(bindstbuf, sizeof(bindstbuf), NULL, dummy_enc_str);
-	assert_msg(binrv == NULL, "targetsize_ref is NULL");
+	TEST_ASSERT_MSG(binrv == NULL, "targetsize_ref is NULL");
 	targetsize = 1;
 	binrv = DecodeBase58X(bindstbuf, 0, &targetsize, dummy_enc_str);
-	assert_msg(binrv == NULL, "dst size is NIL");
-	assert(targetsize == 0);
+	TEST_ASSERT_MSG(binrv == NULL, "dst size is NIL");
+	TEST_ASSERT(targetsize == 0);
 	targetsize = 1;
 	binrv = DecodeBase58X(NULL, sizeof(bindstbuf), &targetsize, dummy_enc_str);
-	assert_msg(binrv == NULL, "dst is NULL");
-	assert(targetsize == 0);
+	TEST_ASSERT_MSG(binrv == NULL, "dst is NULL");
+	TEST_ASSERT(targetsize == 0);
 
 	// now test encode+decode for various binary input sizes.
 	for (i = 1; i < sizeof(bindstbuf); i++)
@@ -327,32 +327,32 @@ int main(void)
 
 			// encode + decode + verify a random binary number of i bytes:
 			encrv = EncodeBase58X(encbuf, sizeof(encbuf), binsrcbuf, i);
-			assert(encrv != NULL);
-			assert(encrv == encbuf);
+			TEST_ASSERT(encrv != NULL);
+			TEST_ASSERT(encrv == encbuf);
 
 			size_t enclen = strlen(encbuf);
-			assert(enclen > 0);
-			assert(enclen + 1 < sizeof(encbuf));
-			assert(check_anti_touch((uint8_t *)encbuf, sizeof(encbuf), enclen + 1 /* NUL sentinel byte of string */));
+			TEST_ASSERT(enclen > 0);
+			TEST_ASSERT(enclen + 1 < sizeof(encbuf));
+			TEST_ASSERT(check_anti_touch((uint8_t *)encbuf, sizeof(encbuf), enclen + 1 /* NUL sentinel byte of string */));
 
 			if (!enclen_base)
 				enclen_base = enclen;
 			else
 			{
-				assert_msg(enclen == enclen_base, "all encodings of the same binary length are supposed to produce same-size base58x encodings");
+				TEST_ASSERT_MSG(enclen == enclen_base, "all encodings of the same binary length are supposed to produce same-size base58x encodings");
 			}
 
 
 			targetsize = 0;
 
 			binrv = DecodeBase58X(bindstbuf, sizeof(bindstbuf), &targetsize, encrv);
-			assert(binrv != NULL);
-			assert(binrv == bindstbuf);
+			TEST_ASSERT(binrv != NULL);
+			TEST_ASSERT(binrv == bindstbuf);
 
-			assert_msg(targetsize == i, "encode+decode is supposed to produce same-length binary code.");
-			assert(check_anti_touch(bindstbuf, sizeof(bindstbuf), targetsize));
+			TEST_ASSERT_MSG(targetsize == i, "encode+decode is supposed to produce same-length binary code.");
+			TEST_ASSERT(check_anti_touch(bindstbuf, sizeof(bindstbuf), targetsize));
 
-			assert_msg(check_binary_match(bindstbuf, binsrcbuf, targetsize), "encode+decode is supposed to REproduce the original binary input data.");
+			TEST_ASSERT_MSG(check_binary_match(bindstbuf, binsrcbuf, targetsize), "encode+decode is supposed to REproduce the original binary input data.");
 
 			// -----------------------------------------------------------------------------------------
 			// and the same thing, now with limited buffer size:
@@ -362,24 +362,24 @@ int main(void)
 
 			// encode + decode + verify a random binary number of i bytes:
 			encrv = EncodeBase58X(encbuf, enclen + 1, binsrcbuf, i);
-			assert(encrv != NULL);
-			assert(encrv == encbuf);
+			TEST_ASSERT(encrv != NULL);
+			TEST_ASSERT(encrv == encbuf);
 
 			size_t enclen2 = strlen(encbuf);
-			assert(enclen2 > 0);
-			assert_msg(enclen2 == enclen, "destination buffer size should never impact this way");
-			assert(check_anti_touch((uint8_t *)encbuf, sizeof(encbuf), enclen + 1 /* NUL sentinel byte of string */));
+			TEST_ASSERT(enclen2 > 0);
+			TEST_ASSERT_MSG(enclen2 == enclen, "destination buffer size should never impact this way");
+			TEST_ASSERT(check_anti_touch((uint8_t *)encbuf, sizeof(encbuf), enclen + 1 /* NUL sentinel byte of string */));
 
 			targetsize = 0;
 
 			binrv = DecodeBase58X(bindstbuf, i, &targetsize, encrv);
-			assert(binrv != NULL);
-			assert(binrv == bindstbuf);
+			TEST_ASSERT(binrv != NULL);
+			TEST_ASSERT(binrv == bindstbuf);
 
-			assert_msg(targetsize == i, "encode+decode is supposed to produce same-length binary code.");
-			assert(check_anti_touch(bindstbuf, sizeof(bindstbuf), targetsize));
+			TEST_ASSERT_MSG(targetsize == i, "encode+decode is supposed to produce same-length binary code.");
+			TEST_ASSERT(check_anti_touch(bindstbuf, sizeof(bindstbuf), targetsize));
 
-			assert_msg(check_binary_match(bindstbuf, binsrcbuf, targetsize), "encode+decode is supposed to REproduce the original binary input data.");
+			TEST_ASSERT_MSG(check_binary_match(bindstbuf, binsrcbuf, targetsize), "encode+decode is supposed to REproduce the original binary input data.");
 		}
 
 		// explicit test for all-1 and all-0 bit inputs
@@ -391,24 +391,24 @@ int main(void)
 
 			// encode + decode + verify a random binary number of i bytes:
 			encrv = EncodeBase58X(encbuf, sizeof(encbuf), binsrcbuf, i);
-			assert(encrv != NULL);
-			assert(encrv == encbuf);
+			TEST_ASSERT(encrv != NULL);
+			TEST_ASSERT(encrv == encbuf);
 
 			size_t enclen = strlen(encbuf);
-			assert(enclen > 0);
-			assert(enclen + 1 < sizeof(encbuf));
-			assert(check_anti_touch((uint8_t *)encbuf, sizeof(encbuf), enclen + 1));
-			assert_msg(enclen == enclen_base, "all encodings of the same binary length are supposed to produce same-size base58x encodings");
+			TEST_ASSERT(enclen > 0);
+			TEST_ASSERT(enclen + 1 < sizeof(encbuf));
+			TEST_ASSERT(check_anti_touch((uint8_t *)encbuf, sizeof(encbuf), enclen + 1));
+			TEST_ASSERT_MSG(enclen == enclen_base, "all encodings of the same binary length are supposed to produce same-size base58x encodings");
 
 			targetsize = 0;
 			binrv = DecodeBase58X(bindstbuf, sizeof(bindstbuf), &targetsize, encrv);
-			assert(binrv != NULL);
-			assert(binrv == bindstbuf);
+			TEST_ASSERT(binrv != NULL);
+			TEST_ASSERT(binrv == bindstbuf);
 
-			assert_msg(targetsize == i, "encode + decode is supposed to produce same - length binary code.");
-			assert(check_anti_touch(bindstbuf, sizeof(bindstbuf), targetsize));
+			TEST_ASSERT_MSG(targetsize == i, "encode + decode is supposed to produce same - length binary code.");
+			TEST_ASSERT(check_anti_touch(bindstbuf, sizeof(bindstbuf), targetsize));
 
-			assert_msg(check_binary_match(bindstbuf, binsrcbuf, targetsize), "encode+decode is supposed to REproduce the original binary input data.");
+			TEST_ASSERT_MSG(check_binary_match(bindstbuf, binsrcbuf, targetsize), "encode+decode is supposed to REproduce the original binary input data.");
 
 			// -----------------------------------------------------------------------------------------
 			// and the same thing, now with limited buffer size:
@@ -420,23 +420,23 @@ int main(void)
 
 			// encode + decode + verify a random binary number of i bytes:
 			encrv = EncodeBase58X(encbuf, enclen + 1, binsrcbuf, i);
-			assert(encrv != NULL);
-			assert(encrv == encbuf);
+			TEST_ASSERT(encrv != NULL);
+			TEST_ASSERT(encrv == encbuf);
 
 			size_t enclen2 = strlen(encbuf);
-			assert(enclen2 > 0);
-			assert(enclen2 == enclen);
-			assert(check_anti_touch((uint8_t *)encbuf, sizeof(encbuf), enclen + 1));
+			TEST_ASSERT(enclen2 > 0);
+			TEST_ASSERT(enclen2 == enclen);
+			TEST_ASSERT(check_anti_touch((uint8_t *)encbuf, sizeof(encbuf), enclen + 1));
 
 			targetsize = 0;
 			binrv = DecodeBase58X(bindstbuf, i, &targetsize, encrv);
-			assert(binrv != NULL);
-			assert(binrv == bindstbuf);
+			TEST_ASSERT(binrv != NULL);
+			TEST_ASSERT(binrv == bindstbuf);
 
-			assert_msg(targetsize == i, "encode+decode is supposed to produce same-length binary code.");
-			assert(check_anti_touch(bindstbuf, sizeof(bindstbuf), targetsize));
+			TEST_ASSERT_MSG(targetsize == i, "encode+decode is supposed to produce same-length binary code.");
+			TEST_ASSERT(check_anti_touch(bindstbuf, sizeof(bindstbuf), targetsize));
 
-			assert_msg(check_binary_match(bindstbuf, binsrcbuf, targetsize), "encode+decode is supposed to REproduce the original binary input data.");
+			TEST_ASSERT_MSG(check_binary_match(bindstbuf, binsrcbuf, targetsize), "encode+decode is supposed to REproduce the original binary input data.");
 		}
 		{
 			fill_bindstbuf_with_0_bits(binsrcbuf, sizeof(binsrcbuf), i * 8);
@@ -446,24 +446,24 @@ int main(void)
 
 			// encode + decode + verify a random binary number of i bytes:
 			encrv = EncodeBase58X(encbuf, sizeof(encbuf), binsrcbuf, i);
-			assert(encrv != NULL);
-			assert(encrv == encbuf);
+			TEST_ASSERT(encrv != NULL);
+			TEST_ASSERT(encrv == encbuf);
 
 			size_t enclen = strlen(encbuf);
-			assert(enclen > 0);
-			assert(enclen + 1 < sizeof(encbuf));
-			assert(check_anti_touch((uint8_t *)encbuf, sizeof(encbuf), enclen + 1));
-			assert_msg(enclen == enclen_base, "all encodings of the same binary length are supposed to produce same-size base58x encodings");
+			TEST_ASSERT(enclen > 0);
+			TEST_ASSERT(enclen + 1 < sizeof(encbuf));
+			TEST_ASSERT(check_anti_touch((uint8_t *)encbuf, sizeof(encbuf), enclen + 1));
+			TEST_ASSERT_MSG(enclen == enclen_base, "all encodings of the same binary length are supposed to produce same-size base58x encodings");
 
 			targetsize = 0;
 			binrv = DecodeBase58X(bindstbuf, sizeof(bindstbuf), &targetsize, encrv);
-			assert(binrv != NULL);
-			assert(binrv == bindstbuf);
+			TEST_ASSERT(binrv != NULL);
+			TEST_ASSERT(binrv == bindstbuf);
 
-			assert_msg(targetsize == i, "encode+decode is supposed to produce same-length binary code.");
-			assert(check_anti_touch(bindstbuf, sizeof(bindstbuf), targetsize));
+			TEST_ASSERT_MSG(targetsize == i, "encode+decode is supposed to produce same-length binary code.");
+			TEST_ASSERT(check_anti_touch(bindstbuf, sizeof(bindstbuf), targetsize));
 
-			assert_msg(check_binary_match(bindstbuf, binsrcbuf, targetsize), "encode+decode is supposed to REproduce the original binary input data.");
+			TEST_ASSERT_MSG(check_binary_match(bindstbuf, binsrcbuf, targetsize), "encode+decode is supposed to REproduce the original binary input data.");
 
 			// -----------------------------------------------------------------------------------------
 			// and the same thing, now with limited buffer size:
@@ -475,23 +475,23 @@ int main(void)
 
 			// encode + decode + verify a random binary number of i bytes:
 			encrv = EncodeBase58X(encbuf, enclen + 1, binsrcbuf, i);
-			assert(encrv != NULL);
-			assert(encrv == encbuf);
+			TEST_ASSERT(encrv != NULL);
+			TEST_ASSERT(encrv == encbuf);
 
 			size_t enclen2 = strlen(encbuf);
-			assert(enclen2 > 0);
-			assert(enclen2 == enclen);
-			assert(check_anti_touch((uint8_t *)encbuf, sizeof(encbuf), enclen + 1));
+			TEST_ASSERT(enclen2 > 0);
+			TEST_ASSERT(enclen2 == enclen);
+			TEST_ASSERT(check_anti_touch((uint8_t *)encbuf, sizeof(encbuf), enclen + 1));
 
 			targetsize = 0;
 			binrv = DecodeBase58X(bindstbuf, i, &targetsize, encrv);
-			assert(binrv != NULL);
-			assert(binrv == bindstbuf);
+			TEST_ASSERT(binrv != NULL);
+			TEST_ASSERT(binrv == bindstbuf);
 
-			assert_msg(targetsize == i, "encode+decode is supposed to produce same-length binary code.");
-			assert(check_anti_touch(bindstbuf, sizeof(bindstbuf), targetsize));
+			TEST_ASSERT_MSG(targetsize == i, "encode+decode is supposed to produce same-length binary code.");
+			TEST_ASSERT(check_anti_touch(bindstbuf, sizeof(bindstbuf), targetsize));
 
-			assert_msg(check_binary_match(bindstbuf, binsrcbuf, targetsize), "encode+decode is supposed to REproduce the original binary input data.");
+			TEST_ASSERT_MSG(check_binary_match(bindstbuf, binsrcbuf, targetsize), "encode+decode is supposed to REproduce the original binary input data.");
 		}
 
 		// also check that feeding 'all-1' base58X digits into the decoder don't mess us up:
@@ -525,8 +525,8 @@ int main(void)
 			fill_bindstbuf_with_anti_touch(bindstbuf, sizeof(bindstbuf));
 
 			size_t enclen = strlen(encbuf);
-			assert(enclen > 0);
-			assert(enclen + 1 < sizeof(encbuf));
+			TEST_ASSERT(enclen > 0);
+			TEST_ASSERT(enclen + 1 < sizeof(encbuf));
 
 			targetsize = 1;
 			binrv = DecodeBase58X(bindstbuf, sizeof(bindstbuf), &targetsize, encbuf);
@@ -534,11 +534,11 @@ int main(void)
 			// only when the base58x size is larger than 1 do we expect sane decodings; otherwise we expect a failure feedback (binrv = NULL):
 			if (i > 1)
 			{
-				assert(binrv != NULL);
-				assert(binrv == bindstbuf);
+				TEST_ASSERT(binrv != NULL);
+				TEST_ASSERT(binrv == bindstbuf);
 
-				assert(targetsize > 0);
-				assert(check_anti_touch(bindstbuf, sizeof(bindstbuf), targetsize));
+				TEST_ASSERT(targetsize > 0);
+				TEST_ASSERT(check_anti_touch(bindstbuf, sizeof(bindstbuf), targetsize));
 
 				// now go and re-encode the binary output: the resulting base58x re-encode must be
 				// same size or 1 smaller and only different at the tail end.
@@ -546,21 +546,21 @@ int main(void)
 				fill_bindstbuf_with_anti_touch((uint8_t *)re_encbuf, sizeof(re_encbuf));
 
 				encrv = EncodeBase58X(re_encbuf, enclen + 1, bindstbuf, targetsize);
-				assert(encrv != NULL);
-				assert(encrv == re_encbuf);
+				TEST_ASSERT(encrv != NULL);
+				TEST_ASSERT(encrv == re_encbuf);
 
 				size_t enclen2 = strlen(re_encbuf);
-				assert(enclen2 > 0);
-				assert(enclen2 == enclen || enclen2 == enclen - 1);
-				assert(check_anti_touch((uint8_t *)re_encbuf, sizeof(re_encbuf), enclen2 + 1));
+				TEST_ASSERT(enclen2 > 0);
+				TEST_ASSERT(enclen2 == enclen || enclen2 == enclen - 1);
+				TEST_ASSERT(check_anti_touch((uint8_t *)re_encbuf, sizeof(re_encbuf), enclen2 + 1));
 
-				//assert(check_base58x_near_match(re_encbuf, encbuf) && "decode+encode is supposed to REproduce the original binary input data. See the test notes above this section for caveats");
+				//TEST_ASSERT(check_base58x_near_match(re_encbuf, encbuf) && "decode+encode is supposed to REproduce the original binary input data. See the test notes above this section for caveats");
 			}
 			else
 			{
 				// can't have a decent decode with only 1 character wide base58x input: you at least need 2 base58x 'digits' to encode a single byte!
-				assert(binrv == NULL);
-				assert(targetsize == 0);
+				TEST_ASSERT(binrv == NULL);
+				TEST_ASSERT(targetsize == 0);
 			}
 
 			// -----------------------------------------------------------------------------------------
@@ -571,17 +571,17 @@ int main(void)
 			fill_bindstbuf_with_anti_touch(bindstbuf, sizeof(bindstbuf));
 
 			size_t enclen2 = strlen(encbuf);
-			assert(enclen2 > 0);
-			assert(enclen2 + 1 < sizeof(encbuf));
-			assert(enclen2 == enclen_base);
+			TEST_ASSERT(enclen2 > 0);
+			TEST_ASSERT(enclen2 + 1 < sizeof(encbuf));
+			TEST_ASSERT(enclen2 == enclen_base);
 
 			targetsize = 0;
 			binrv = DecodeBase58X(bindstbuf, sizeof(bindstbuf), &targetsize, encbuf);
-			assert(binrv != NULL);
-			assert(binrv == bindstbuf);
+			TEST_ASSERT(binrv != NULL);
+			TEST_ASSERT(binrv == bindstbuf);
 
-			assert(targetsize == i);
-			assert(check_anti_touch(bindstbuf, sizeof(bindstbuf), targetsize));
+			TEST_ASSERT(targetsize == i);
+			TEST_ASSERT(check_anti_touch(bindstbuf, sizeof(bindstbuf), targetsize));
 		}
 
 		// ... and re-run the above all-'z' test with all-0s, where an all-0 base58x digit is a legal representation of a 41-bit binary value:
@@ -593,8 +593,8 @@ int main(void)
 			fill_bindstbuf_with_anti_touch(bindstbuf, sizeof(bindstbuf));
 
 			size_t enclen = strlen(encbuf);
-			assert(enclen > 0);
-			assert(enclen + 1 < sizeof(encbuf));
+			TEST_ASSERT(enclen > 0);
+			TEST_ASSERT(enclen + 1 < sizeof(encbuf));
 
 			targetsize = 1;
 			binrv = DecodeBase58X(bindstbuf, sizeof(bindstbuf), &targetsize, encbuf);
@@ -602,11 +602,11 @@ int main(void)
 			// only when the base58x size is larger than 1 do we expect sane decodings; otherwise we expect a failure feedback (binrv = NULL):
 			if (i > 1)
 			{
-				assert(binrv != NULL);
-				assert(binrv == bindstbuf);
+				TEST_ASSERT(binrv != NULL);
+				TEST_ASSERT(binrv == bindstbuf);
 
-				assert(targetsize > 0);
-				assert(check_anti_touch(bindstbuf, sizeof(bindstbuf), targetsize));
+				TEST_ASSERT(targetsize > 0);
+				TEST_ASSERT(check_anti_touch(bindstbuf, sizeof(bindstbuf), targetsize));
 
 				// now go and re-encode the binary output: the resulting base58x re-encode must be
 				// same size or 1 smaller and only different at the tail end.
@@ -614,21 +614,21 @@ int main(void)
 				fill_bindstbuf_with_anti_touch((uint8_t *)re_encbuf, sizeof(re_encbuf));
 
 				encrv = EncodeBase58X(re_encbuf, enclen + 1, bindstbuf, targetsize);
-				assert(encrv != NULL);
-				assert(encrv == re_encbuf);
+				TEST_ASSERT(encrv != NULL);
+				TEST_ASSERT(encrv == re_encbuf);
 
 				size_t enclen2 = strlen(re_encbuf);
-				assert(enclen2 > 0);
-				assert(enclen2 == enclen || enclen2 == enclen - 1);
-				assert(check_anti_touch((uint8_t *)re_encbuf, sizeof(re_encbuf), enclen2 + 1));
+				TEST_ASSERT(enclen2 > 0);
+				TEST_ASSERT(enclen2 == enclen || enclen2 == enclen - 1);
+				TEST_ASSERT(check_anti_touch((uint8_t *)re_encbuf, sizeof(re_encbuf), enclen2 + 1));
 
-				assert_msg(check_base58x_near_match(re_encbuf, encbuf), "decode+encode is supposed to REproduce the original binary input data. See the test notes above this section for caveats");
+				TEST_ASSERT_MSG(check_base58x_near_match(re_encbuf, encbuf), "decode+encode is supposed to REproduce the original binary input data. See the test notes above this section for caveats");
 			}
 			else
 			{
 				// can't have a decent decode with only 1 character wide base58x input: you at least need 2 base58x 'digits' to encode a single byte!
-				assert(binrv == NULL);
-				assert(targetsize == 0);
+				TEST_ASSERT(binrv == NULL);
+				TEST_ASSERT(targetsize == 0);
 			}
 
 			// -----------------------------------------------------------------------------------------
@@ -639,32 +639,32 @@ int main(void)
 			fill_bindstbuf_with_anti_touch(bindstbuf, sizeof(bindstbuf));
 
 			size_t enclen2 = strlen(encbuf);
-			assert(enclen2 > 0);
-			assert(enclen2 + 1 < sizeof(encbuf));
-			assert(enclen2 == enclen_base);
+			TEST_ASSERT(enclen2 > 0);
+			TEST_ASSERT(enclen2 + 1 < sizeof(encbuf));
+			TEST_ASSERT(enclen2 == enclen_base);
 
 			targetsize = 0;
 			binrv = DecodeBase58X(bindstbuf, sizeof(bindstbuf), &targetsize, encbuf);
-			assert(binrv != NULL);
-			assert(binrv == bindstbuf);
+			TEST_ASSERT(binrv != NULL);
+			TEST_ASSERT(binrv == bindstbuf);
 
-			assert(targetsize == i);
-			assert(check_anti_touch(bindstbuf, sizeof(bindstbuf), targetsize));
+			TEST_ASSERT(targetsize == i);
+			TEST_ASSERT(check_anti_touch(bindstbuf, sizeof(bindstbuf), targetsize));
 
 			// re-encode to test length, etc.
 
 			fill_bindstbuf_with_anti_touch((uint8_t *)re_encbuf, sizeof(re_encbuf));
 
 			encrv = EncodeBase58X(re_encbuf, enclen2 + 1, bindstbuf, targetsize);
-			assert(encrv != NULL);
-			assert(encrv == re_encbuf);
+			TEST_ASSERT(encrv != NULL);
+			TEST_ASSERT(encrv == re_encbuf);
 
 			size_t enclen3 = strlen(re_encbuf);
-			assert(enclen3 > 0);
-			assert(enclen3 == enclen2);
-			assert(check_anti_touch((uint8_t *)re_encbuf, sizeof(re_encbuf), enclen2 + 1));
+			TEST_ASSERT(enclen3 > 0);
+			TEST_ASSERT(enclen3 == enclen2);
+			TEST_ASSERT(check_anti_touch((uint8_t *)re_encbuf, sizeof(re_encbuf), enclen2 + 1));
 
-			assert_msg(check_base58x_near_match(re_encbuf, encbuf), "decode+encode is supposed to REproduce the original binary input data. See the test notes above this section for caveats");
+			TEST_ASSERT_MSG(check_base58x_near_match(re_encbuf, encbuf), "decode+encode is supposed to REproduce the original binary input data. See the test notes above this section for caveats");
 		}
 	}
 
