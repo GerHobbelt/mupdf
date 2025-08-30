@@ -20,6 +20,10 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+#if 0
+
+
+
 
 
 #if defined(_MSC_VER)
@@ -57,7 +61,7 @@
 
 
 // warning C4273: 'exit': inconsistent dll linkage
-#pragma warning(disable: 4273)
+//#pragma warning(disable: 4273)
 
 _ACRTIMP __declspec(noreturn) void __cdecl abort(void);
 _ACRTIMP __declspec(noreturn) void __cdecl exit(_In_ int _Code);
@@ -67,12 +71,14 @@ _ACRTIMP __declspec(noreturn) void __cdecl exit(_In_ int _Code);
 
 extern "C" __declspec(noreturn) void __cdecl __imp_qiqqa_abort_application(void)
 {
+	init_the_global_override();
 	invoke_abort();
 }
 
 namespace std {
 	__declspec(noreturn) void __imp_qiqqa_abort_application()
 	{
+		init_the_global_override();
 		invoke_abort();
 	}
 }
@@ -82,6 +88,7 @@ namespace std {
 
 extern "C" __declspec(noreturn) void __cdecl __imp_qiqqa_exit_application(int _Code)
 {
+	init_the_global_override();
 	invoke_exit(_Code);
 }
 
@@ -89,6 +96,7 @@ extern "C" __declspec(noreturn) void __cdecl __imp_qiqqa_exit_application(int _C
 namespace std {
 	__declspec(noreturn) void __imp_qiqqa_exit_application(int _Code)
 	{
+		init_the_global_override();
 		invoke_exit(_Code);
 	}
 }
@@ -118,11 +126,13 @@ namespace std {
 
 extern "C" /* _ACRTEXP */ __declspec(noreturn) void __cdecl _imp__qiqqa_abort_application(void)
 {
+	init_the_global_override();
 	invoke_abort();
 }
 
 extern "C" /* _ACRTEXP */ __declspec(noreturn) void __cdecl _imp__qiqqa_exit_application(int _Code)
 {
+	init_the_global_override();
 	invoke_exit(_Code);
 }
 
@@ -131,4 +141,10 @@ extern "C" /* _ACRTEXP */ __declspec(noreturn) void __cdecl _imp__qiqqa_exit_app
 
 #endif
 
+
+
+
+
+
+#endif
 

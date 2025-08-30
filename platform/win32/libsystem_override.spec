@@ -7,4 +7,5 @@ directories:
 
 also-ignore:
 	test_.*
+	force_link_dependency_helper.cpp
 	

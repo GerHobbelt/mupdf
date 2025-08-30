@@ -60,6 +60,11 @@ function collect_warning_codes(src) {
 }
 let warnings = collect_warning_codes(src);
 
+// our NEW dependency forcing hack for making sure the libsystem_override material
+// is linked into each and every EXE:
+//
+// <ConfigurationType>Application</ConfigurationType>
+let is_exe_target = /<ConfigurationType>Application<\/ConfigurationType>/.test(src);
 
 src = src
 //    <ProjectName>libcurl</ProjectName>
@@ -634,7 +639,59 @@ src = src
 
 ${m}
   `;
+})
+// patch all EXE project files to ensure they include the mandatory libraries to suit the Detours-based abort+exit hooking/wrapping 
+// we do -- see also add-sources-to-vcxproj.js for other parts of this hack action.
+// --> check the section where the project dependencies are listed and add any that's mandatory but we don't mention yet.
+.replace(/<ItemGroup>[^<]*<ProjectReference[^]*?<\/ItemGroup>/g, (m) => {
+	if (!is_exe_target) {
+	  return m;
+	}
+
+	// our NEW dependency forcing hack for making sure the libsystem_override material
+	// is linked into each and every EXE:
+	//
+	// <ConfigurationType>Application</ConfigurationType>
+	let additions = "";
+	if (! /Include="Detours[.]vcxproj"/.test(m)) {
+	  additions += `
+    <ProjectReference Include="Detours.vcxproj">
+      <Project>{4c2a66ce-a3c0-4f63-abd9-65e3e728040b}</Project>
+    </ProjectReference>
+	  `;
+	}
+	if (! /Include="libassert[.]vcxproj"/.test(m)) {
+	  additions += `
+    <ProjectReference Include="libassert.vcxproj">
+      <Project>{0b51171b-b10e-4eac-8ffa-19226ad14240}</Project>
+    </ProjectReference>
+	  `;
+	}
+	if (! /Include="libcpptrace[.]vcxproj"/.test(m)) {
+	  additions += `
+    <ProjectReference Include="libcpptrace.vcxproj">
+      <Project>{0b51171b-b10e-4eac-8ffa-19226a59d404}</Project>
+    </ProjectReference>
+	  `;
+	}
+	if (! /Include="libdebugbreak[.]vcxproj"/.test(m)) {
+	  additions += `
+    <ProjectReference Include="libdebugbreak.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0f0f12}</Project>
+    </ProjectReference>
+	  `;
+	}
+	// Cannot auto-add the libsystem_override dependency as there's at least two flavours of that one out there:
+	// one for regular apps and one for GoogleTest-based test apps. The developer will need to add the proper
+	// one by hand, alas.
+	
+	m = m.replace(/<\/ItemGroup>/, (m) => {
+		return additions + m;
+	});
+	
+	return m;
 });
+
 
 // make sure all include path sets are the same: pick up the set from the largest entry and copy it around:
 //

@@ -235,6 +235,17 @@ if (spec.sources.length + spec.directories.length === 0) {
 
 let src = fs.readFileSync(filepath, 'utf8');
 
+// our NEW dependency forcing hack for making sure the libsystem_override material
+// is linked into each and every EXE:
+//
+// <ConfigurationType>Application</ConfigurationType>
+if (/<ConfigurationType>Application<\/ConfigurationType>/.test(src)) {
+    spec.sources = spec.sources.concat([
+        "../../source/system_override/force_link_dependency_helper.cpp"
+    ]);
+    spec.is_exe_target = true;
+}
+
 let filterSrc = '';
 let filterFilepath = filepath + '.filters';
 if (fs.existsSync(filterFilepath)) {
@@ -397,6 +408,19 @@ function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
   })
   .filter((f) => {
     let f4f = '/' + f;
+
+    // make sure our forced addition for EXE projects is NOT discarded by any ignore rules:
+    if (spec.is_exe_target) {
+      if (/\/force_link_dependency_helper[.]cpp$/.test(f4f)) {
+        if (DEBUG >= 1) console.log('EXPLICITLY PASS for EXE target tweaking:', {f, f4f});
+		// make sure it is not accepted a second time around, IFF that happens, as duplicate
+		// source lines in project files makes MSVC2022 b0rk b0rk b0rk.
+		spec.is_exe_target = false;
+		spec.ignores.push(/[\/]force_link_dependency_helper[.]cpp$/);
+        return true;
+      }
+    }
+
     if (spec.ignores.length > 0) {
       for (const sp of spec.ignores) {
         if (DEBUG > 2) console.log('??IGNORE??:', {f, f4f, sp, DO_IGNORE: sp.test(f4f)});
@@ -413,11 +437,11 @@ function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
   })
   .filter((f) => {
     if (DEBUG > 2) console.error("files.filter:", {f, ext: path.extname(f).toLowerCase()})
-		
-	// skip directory entries here
-	if (f.endsWith('/'))
-		return false;
-	
+
+    // skip directory entries here
+    if (f.endsWith('/'))
+        return false;
+
     let base;
     switch (path.extname(f).toLowerCase()) {
     case '.c':
@@ -482,7 +506,7 @@ function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
         return true;
 
     case '':
-		// files without any extension are always 'special' and will be added to the project:
+        // files without any extension are always 'special' and will be added to the project:
         filterDirs.add('Misc Files');
         base = path.dirname(f);
         if (base === '.') {
@@ -517,17 +541,17 @@ function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
     case '.vcxproj':
     case '.sln':
     case '.filters':
-		// these are MSVC project files and should be ignored as source files.
-		if (DEBUG > 1) console.log('IGNORE BY (MSVC) EXTENSION:', {f, f4f, sp});
-		ignoreCount++;
-		return false;
+        // these are MSVC project files and should be ignored as source files.
+        if (DEBUG > 1) console.log('IGNORE BY (MSVC) EXTENSION:', {f, f4f, sp});
+        ignoreCount++;
+        return false;
 
     default:
-		if (DEBUG > 2) console.error("files.filter:", {f, ext: path.extname(f).toLowerCase(), isSpecial: isSpecialMiscFile(f)})
+        if (DEBUG > 2) console.error("files.filter:", {f, ext: path.extname(f).toLowerCase(), isSpecial: isSpecialMiscFile(f)})
         if (!isSpecialMiscFile(f)) {
-		  if (DEBUG > 1) console.error("MISC. IGNORE:", {f, ext: path.extname(f).toLowerCase()})
+          if (DEBUG > 1) console.error("MISC. IGNORE:", {f, ext: path.extname(f).toLowerCase()})
           return false;
-	    }
+        }
 
         filterDirs.add('Misc Files');
         base = path.dirname(f);

@@ -1,13 +1,33 @@
 
+// discard the global (defined in the build rig itself) overrides for exit & abort:
+// only in *this* source file do we want access to the REAL system abort and exit calls@
+//
+// At the bottom we have special function which is invoked as soon as possible in the
+// run-time to get to the abort & exit function pointers (thanks to MSVCRTL being linked
+// as DLL (flag /MD); Detours magic is employed to do a proper hooking
+// of those system calls.
+//
+// Meanwhile we have these abort+exit overriding defines living elsewhere as functions,
+// ............................
+
+#ifdef abort
+#error "Expected abort to be the system call, not the OLD override hack..."
+#endif
+#ifdef exit
+#error "Expected exit to be the system call, not the OLD override hack..."
+#endif
+
+#undef exit
+#undef abort
+
 #include "system_override_internal.h"
 
-#include <stdint.h>
-#include <stdio.h>
-#include <stdlib.h>   // abort(), exit()
+#include <detours.h>
 
+#include <cstdint>
+#include <cstdio>
+#include <cstdlib>   // abort(), exit()
 
-// Mandatory or MSVC will optimize this entire endeavour to Kingdom Come and we won't have our debugger breakpoints at start and end...
-#pragma optimize("", off)
 
 
 
@@ -41,50 +61,25 @@
 #endif
 
 
-#ifndef abort
-#error "Expected abort to be redefined to point at our override function(s) below..."
-#endif
-#ifndef exit
-#error "Expected exit to be redefined to point at our override function(s) below..."
-#endif
+/*
+	abort=qiqqa_abort_application;exit=qiqqa_exit_application
+	^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+	These two defines 'brute force' a global override of the standard abort and exit function calls anywhere in our compiled source tree. We do this, this way, so we are able to catch (i.e. overload of sorts) these application termination calls wherever they may exist in the (open source) libraries we use and thus be able to easily place a debugger breakpoint in any application termination/exit code flow paths to help us diagnose otherwise tough to debug scenarios when thirdparty source code we use in our applications happens to decide to invoke abort() or exit(); the latter is particularly noteworthy and ubiquitous in any source code using the default (= compiler/devenv-provided) `assert()` implementation as-is, thanks to a `#include <cassert>` or `#include <assert.h>` somewhere.
 
+	The alternative we'd have would be to go through all thirdparty source code and kill=replace every spot where exit() or abort() may be invoked in either debug or release builds: while we do code reviews of the source code we use, this particular detail is dealt with more easily, swifter and more thoroughly (machine rule application vs. human error/oversight  opportunity) using these 'non-obvious' system calls overrides.
 
-// warning C4273: 'exit': inconsistent dll linkage
-#pragma warning(disable: 4273)
+	As we *want* to be extremely thorough in applying these overrides (which, themselves, will invoke the standard `::abort()` and `::exit(n)` calls repectively), we apply this override in this applied-to-all-projects MSVC build property file, rather than have our project update/rewrite tool scripts replicate this in every `*.vcxproj` project file we eschew: DRY. Plus special build targets "automagically" receive these generally-applied compiler settings immediately, so that took care of another (rare) human error possibility when constructing specialized builds.
 
-_ACRTIMP __declspec(noreturn) void __cdecl abort(void);
-_ACRTIMP __declspec(noreturn) void __cdecl exit(_In_ int _Code);
+	============================================================
+
+	Meanwhile, the accompanying code for these function overrides lives in our 'XYZ_override' projects/libraries; the appropriate one is then added to the link/build dependency set of every executable target producing project.
+	For Linux/other platforms, i.e. non-MSVC targets, a similar approach is done in the applicable CMake/meson/foobar build scripts.
+
+	-->
+*/
 
 // qiqqa_abort_application
-
-extern "C" _ACRTEXP __declspec(noreturn) void __cdecl abort(void)
-{
-	invoke_abort();
-}
-
-namespace std {
-	_ACRTEXP __declspec(noreturn) void abort()
-	{
-		invoke_abort();
-	}
-}
-
-
 // qiqqa_exit_application
-
-extern "C" _ACRTEXP __declspec(noreturn) void __cdecl exit(int _Code)
-{
-	invoke_exit(_Code);
-}
-
-
-namespace std {
-	_ACRTEXP __declspec(noreturn) void exit(int _Code)
-	{
-		invoke_exit(_Code);
-	}
-}
-
 
 #endif
 
@@ -497,33 +492,28 @@ _ACRTIMP errno_t __cdecl _get_fmode  (_Out_             int*      _PMode);
 
 
 
+#if 0
 
 // and finally a few functions which will be able to call the original runtime library functions we did override...
 
-
 #if defined(_MSC_VER)
-
 
 __declspec(noreturn) void invoke_original_abort(void);
 __declspec(noreturn) void invoke_original_exit(int code);
 
-
-// now blow away our overrides; as we do that we must re-introduce the original system prototypes, so we better make sure we agree with the current compiler here!
-
-#undef abort
-#undef exit
-
-extern "C" _ACRTIMP __declspec(noreturn) void __cdecl abort(void);
-extern "C" _ACRTIMP __declspec(noreturn) void __cdecl exit(int _Code);
-namespace std {
-	_ACRTIMP __declspec(noreturn) void abort();
-	_ACRTIMP __declspec(noreturn) void exit(int _Code);
-}
+typedef void __cdecl system_abort_ref_t(void);
+typedef void __cdecl system_exit_ref_t(int _Code);
 
 
+static system_abort_ref_t* system_abort_ref = abort;
+static system_exit_ref_t* system_exit_ref = exit;
 
-// warning C4273: 'exit': inconsistent dll linkage
-#pragma warning(disable: 4273)
+// namespace std::
+typedef void system_std_abort_ref_t(void);
+typedef void system_std_exit_ref_t(int _Code);
+
+static system_std_abort_ref_t* system_std_abort_ref = std::abort;
+static system_std_exit_ref_t* system_std_exit_ref = std::exit;
 
 /**
 * Replacement for the C standard `abort` that returns to the `setjmp` call for
@@ -531,15 +521,47 @@ namespace std {
 */
 __declspec(noreturn) void invoke_original_abort(void)
 {
-	abort();
+	(*system_abort_ref)();
 }
 
 __declspec(noreturn) void invoke_original_exit(int code)
 {
-	exit(code);
+	(*system_exit_ref)(code);
+}
+
+//////////////////////////////////////////////////////////////////////////////
+
+static __declspec(noreturn) void my_abort_hook(void)
+{
+	invoke_abort();
+}
+
+static __declspec(noreturn) void my_exit_hook(int code)
+{
+	invoke_exit(code);
 }
 
 
+
+void override_the_abort_and_exit_system_calls_0000(void)
+{
+	static bool system_overrides_done = false;
+
+	if (!system_overrides_done)
+	{
+		DetourTransactionBegin();
+		DetourUpdateThread(GetCurrentThread());
+		DetourAttach(&(PVOID&)system_abort_ref, my_abort_hook);
+		DetourAttach(&(PVOID&)system_std_abort_ref, my_abort_hook);
+		DetourAttach(&(PVOID&)system_exit_ref, my_exit_hook);
+		DetourAttach(&(PVOID&)system_std_exit_ref, my_exit_hook);
+		DetourTransactionCommit();
+
+		system_overrides_done = true;
+	}
+}
+
 #endif
 
+#endif
 

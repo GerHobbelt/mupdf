@@ -13,5 +13,5 @@ static __declspec(noinline) void foo(void) {
 int main(void) {
 	fprintf(stderr, "testing abort...\n");
 	foo();
-	abort();
+	quick_exit(0);
 }

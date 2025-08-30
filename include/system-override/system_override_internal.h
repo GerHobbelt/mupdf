@@ -25,6 +25,14 @@ void SystemOverride_KickInTheDoor(void);
 
 __declspec(noreturn) void invoke_abort(void);
 __declspec(noreturn) void invoke_exit(int code);
+__declspec(noreturn) void invoke__exit(int code);
+__declspec(noreturn) void invoke__Exit(int code);
+__declspec(noreturn) void invoke_quick_exit(int code);
+__declspec(noreturn) void invoke_terminate(void) throw();
+
+void override_the_abort_and_exit_system_calls(void);
+
+void init_the_global_override(void);
 
 // WARNING @ user-land code: call system_override::SystemOverrideClass::KickInTheDoor() instead, or its C equivalent SystemOverride_KickInTheDoor().
 #if 0
