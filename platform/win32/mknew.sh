@@ -1632,6 +1632,8 @@ unicode-icu-perf
 unicode-unilex
 atomic_queue
 Detours
+plutovg
+genann
 
 EOT
 ) | grep -e "$FILTER"

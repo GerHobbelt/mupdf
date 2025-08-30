@@ -98,6 +98,20 @@ if (projname.startsWith("wxCharts-sample-")) {
 	checkDirAndReportPlusExitOnSuccess(testpath);
 }
 
+if (projname.startsWith("Detours_sample_")) {
+	let wx_projname = projname.replace(/^Detours_sample_/, '');
+	testpath = `${scriptpath}/../../thirdparty/owemdjee/Detours/samples/${wx_projname}`;
+
+	checkDirAndReportPlusExitOnSuccess(testpath);
+}
+
+if (projname.startsWith("system_override")) {
+	let wx_projname = projname.replace(/^system_override/, '');
+	testpath = `${scriptpath}/../../source/system_override`;
+
+	checkDirAndReportPlusExitOnSuccess(testpath);
+}
+
 
 
 // now things get a little hairier: we need to MAP to projectname to a submodule directory path...

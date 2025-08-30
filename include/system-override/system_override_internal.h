@@ -7,10 +7,12 @@
 #if defined(_WIN32)
 #define _CRT_FUNCTIONS_REQUIRED  1
 #define _CRT_INTERNAL_NONSTDC_NAMES  1
+#include <process.h>
 #include <crtdbg.h>
 #include <windows.h>
 #endif
 
+#include <debugbreak.h>  // debug_break(), as defined by the debugbreak module/subrepo.
 
 #ifdef __cplusplus
 extern "C" {
@@ -24,7 +26,15 @@ void SystemOverride_KickInTheDoor(void);
 __declspec(noreturn) void invoke_abort(void);
 __declspec(noreturn) void invoke_exit(int code);
 
-void BreakIntoDebugger(void);   // WARNING @ user-land code: call system_override::SystemOverrideClass::KickInTheDoor() instead, or its C equivalent SystemOverride_KickInTheDoor().
+// WARNING @ user-land code: call system_override::SystemOverrideClass::KickInTheDoor() instead, or its C equivalent SystemOverride_KickInTheDoor().
+#if 0
+static inline void BreakIntoDebugger(void)
+{
+	debug_break();
+}
+#else
+#define BreakIntoDebugger()  debug_break()
+#endif
 
 #ifdef __cplusplus
 }
