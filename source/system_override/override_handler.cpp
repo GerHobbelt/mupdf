@@ -150,7 +150,6 @@ using namespace system_override;
 
 
 
-#if !defined(abort) && !defined(exit)
 
 // and finally a few functions which will be able to call the original runtime library functions we did override...
 
@@ -285,7 +284,7 @@ void override_the_abort_and_exit_system_calls(void)
 
 #endif
 
-#endif
+
 
 
 
