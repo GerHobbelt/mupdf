@@ -67,7 +67,13 @@
     <ProjectReference Include="libzstd.vcxproj">
       <Project>{0B51171B-B10E-4EAC-8FFA-19226AD21EA0}</Project>
     </ProjectReference>
-  </ItemGroup>
+    <ProjectReference Include="Detours.vcxproj">
+      <Project>{4c2a66ce-a3c0-4f63-abd9-65e3e728040b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libdebugbreak.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0f0f12}</Project>
+    </ProjectReference>
+      </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFD03C63}</ProjectGuid>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
@@ -102,16 +108,16 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -124,7 +130,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -158,8 +164,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBARCHIVE_TOOLS;ARCHIVE_TOOLS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -171,14 +177,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../scripts/libarchive;../../thirdparty/owemdjee/libarchive/libarchive;../../thirdparty/owemdjee/libarchive/libarchive_fe;../../thirdparty/owemdjee/dirent/include;../../thirdparty/owemdjee/libarchive/contrib;../../thirdparty/monolithic_tmplt;../../include;../../thirdparty/owemdjee/pcre/src;../../thirdparty/owemdjee/fnmatch/include;../../thirdparty/owemdjee/fnmatch/src/mem/include;../../thirdparty/owemdjee/libexpat/expat/lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../scripts/libarchive;../../thirdparty/owemdjee/libarchive/libarchive;../../thirdparty/owemdjee/libarchive/libarchive_fe;../../thirdparty/owemdjee/dirent/include;../../thirdparty/owemdjee/libarchive/contrib;../../thirdparty/monolithic_tmplt;../../include;../../thirdparty/owemdjee/pcre/src;../../thirdparty/owemdjee/fnmatch/include;../../thirdparty/owemdjee/fnmatch/src/mem/include;../../thirdparty/owemdjee/libexpat/expat/lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>LIBARCHIVE_STATIC;PLATFORM_CONFIG_H="libarchive_config.h";BUILD_MONOLITHIC;BUILDING_LIBARCHIVE_TOOLS;ARCHIVE_TOOLS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBARCHIVE_TOOLS;ARCHIVE_TOOLS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../scripts/libarchive;../../thirdparty/owemdjee/libarchive/libarchive;../../thirdparty/owemdjee/libarchive/libarchive_fe;../../thirdparty/owemdjee/dirent/include;../../thirdparty/owemdjee/libarchive/contrib;../../thirdparty/monolithic_tmplt;../../include;../../thirdparty/owemdjee/pcre/src;../../thirdparty/owemdjee/fnmatch/include;../../thirdparty/owemdjee/fnmatch/src/mem/include;../../thirdparty/owemdjee/libexpat/expat/lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../scripts/libarchive;../../thirdparty/owemdjee/libarchive/libarchive;../../thirdparty/owemdjee/libarchive/libarchive_fe;../../thirdparty/owemdjee/dirent/include;../../thirdparty/owemdjee/libarchive/contrib;../../thirdparty/monolithic_tmplt;../../include;../../thirdparty/owemdjee/pcre/src;../../thirdparty/owemdjee/fnmatch/include;../../thirdparty/owemdjee/fnmatch/src/mem/include;../../thirdparty/owemdjee/libexpat/expat/lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -203,7 +209,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../scripts/libarchive;../../thirdparty/owemdjee/libarchive/libarchive;../../thirdparty/owemdjee/libarchive/libarchive_fe;../../thirdparty/owemdjee/dirent/include;../../thirdparty/owemdjee/libarchive/contrib;../../thirdparty/monolithic_tmplt;../../include;../../thirdparty/owemdjee/pcre/src;../../thirdparty/owemdjee/fnmatch/include;../../thirdparty/owemdjee/fnmatch/src/mem/include;../../thirdparty/owemdjee/libexpat/expat/lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../scripts/libarchive;../../thirdparty/owemdjee/libarchive/libarchive;../../thirdparty/owemdjee/libarchive/libarchive_fe;../../thirdparty/owemdjee/dirent/include;../../thirdparty/owemdjee/libarchive/contrib;../../thirdparty/monolithic_tmplt;../../include;../../thirdparty/owemdjee/pcre/src;../../thirdparty/owemdjee/fnmatch/include;../../thirdparty/owemdjee/fnmatch/src/mem/include;../../thirdparty/owemdjee/libexpat/expat/lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>LIBARCHIVE_STATIC;PLATFORM_CONFIG_H="libarchive_config.h";BUILD_MONOLITHIC;BUILDING_LIBARCHIVE_TOOLS;ARCHIVE_TOOLS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -211,7 +217,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBARCHIVE_TOOLS;ARCHIVE_TOOLS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../scripts/libarchive;../../thirdparty/owemdjee/libarchive/libarchive;../../thirdparty/owemdjee/libarchive/libarchive_fe;../../thirdparty/owemdjee/dirent/include;../../thirdparty/owemdjee/libarchive/contrib;../../thirdparty/monolithic_tmplt;../../include;../../thirdparty/owemdjee/pcre/src;../../thirdparty/owemdjee/fnmatch/include;../../thirdparty/owemdjee/fnmatch/src/mem/include;../../thirdparty/owemdjee/libexpat/expat/lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../scripts/libarchive;../../thirdparty/owemdjee/libarchive/libarchive;../../thirdparty/owemdjee/libarchive/libarchive_fe;../../thirdparty/owemdjee/dirent/include;../../thirdparty/owemdjee/libarchive/contrib;../../thirdparty/monolithic_tmplt;../../include;../../thirdparty/owemdjee/pcre/src;../../thirdparty/owemdjee/fnmatch/include;../../thirdparty/owemdjee/fnmatch/src/mem/include;../../thirdparty/owemdjee/libexpat/expat/lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -238,14 +244,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../scripts/libarchive;../../thirdparty/owemdjee/libarchive/libarchive;../../thirdparty/owemdjee/libarchive/libarchive_fe;../../thirdparty/owemdjee/dirent/include;../../thirdparty/owemdjee/libarchive/contrib;../../thirdparty/monolithic_tmplt;../../include;../../thirdparty/owemdjee/pcre/src;../../thirdparty/owemdjee/fnmatch/include;../../thirdparty/owemdjee/fnmatch/src/mem/include;../../thirdparty/owemdjee/libexpat/expat/lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../scripts/libarchive;../../thirdparty/owemdjee/libarchive/libarchive;../../thirdparty/owemdjee/libarchive/libarchive_fe;../../thirdparty/owemdjee/dirent/include;../../thirdparty/owemdjee/libarchive/contrib;../../thirdparty/monolithic_tmplt;../../include;../../thirdparty/owemdjee/pcre/src;../../thirdparty/owemdjee/fnmatch/include;../../thirdparty/owemdjee/fnmatch/src/mem/include;../../thirdparty/owemdjee/libexpat/expat/lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>LIBARCHIVE_STATIC;PLATFORM_CONFIG_H="libarchive_config.h";BUILD_MONOLITHIC;BUILDING_LIBARCHIVE_TOOLS;ARCHIVE_TOOLS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBARCHIVE_TOOLS;ARCHIVE_TOOLS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../scripts/libarchive;../../thirdparty/owemdjee/libarchive/libarchive;../../thirdparty/owemdjee/libarchive/libarchive_fe;../../thirdparty/owemdjee/dirent/include;../../thirdparty/owemdjee/libarchive/contrib;../../thirdparty/monolithic_tmplt;../../include;../../thirdparty/owemdjee/pcre/src;../../thirdparty/owemdjee/fnmatch/include;../../thirdparty/owemdjee/fnmatch/src/mem/include;../../thirdparty/owemdjee/libexpat/expat/lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../scripts/libarchive;../../thirdparty/owemdjee/libarchive/libarchive;../../thirdparty/owemdjee/libarchive/libarchive_fe;../../thirdparty/owemdjee/dirent/include;../../thirdparty/owemdjee/libarchive/contrib;../../thirdparty/monolithic_tmplt;../../include;../../thirdparty/owemdjee/pcre/src;../../thirdparty/owemdjee/fnmatch/include;../../thirdparty/owemdjee/fnmatch/src/mem/include;../../thirdparty/owemdjee/libexpat/expat/lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -270,7 +276,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../scripts/libarchive;../../thirdparty/owemdjee/libarchive/libarchive;../../thirdparty/owemdjee/libarchive/libarchive_fe;../../thirdparty/owemdjee/dirent/include;../../thirdparty/owemdjee/libarchive/contrib;../../thirdparty/monolithic_tmplt;../../include;../../thirdparty/owemdjee/pcre/src;../../thirdparty/owemdjee/fnmatch/include;../../thirdparty/owemdjee/fnmatch/src/mem/include;../../thirdparty/owemdjee/libexpat/expat/lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../scripts/libarchive;../../thirdparty/owemdjee/libarchive/libarchive;../../thirdparty/owemdjee/libarchive/libarchive_fe;../../thirdparty/owemdjee/dirent/include;../../thirdparty/owemdjee/libarchive/contrib;../../thirdparty/monolithic_tmplt;../../include;../../thirdparty/owemdjee/pcre/src;../../thirdparty/owemdjee/fnmatch/include;../../thirdparty/owemdjee/fnmatch/src/mem/include;../../thirdparty/owemdjee/libexpat/expat/lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>LIBARCHIVE_STATIC;PLATFORM_CONFIG_H="libarchive_config.h";BUILD_MONOLITHIC;BUILDING_LIBARCHIVE_TOOLS;ARCHIVE_TOOLS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -278,7 +284,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBARCHIVE_TOOLS;ARCHIVE_TOOLS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../scripts/libarchive;../../thirdparty/owemdjee/libarchive/libarchive;../../thirdparty/owemdjee/libarchive/libarchive_fe;../../thirdparty/owemdjee/dirent/include;../../thirdparty/owemdjee/libarchive/contrib;../../thirdparty/monolithic_tmplt;../../include;../../thirdparty/owemdjee/pcre/src;../../thirdparty/owemdjee/fnmatch/include;../../thirdparty/owemdjee/fnmatch/src/mem/include;../../thirdparty/owemdjee/libexpat/expat/lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../scripts/libarchive;../../thirdparty/owemdjee/libarchive/libarchive;../../thirdparty/owemdjee/libarchive/libarchive_fe;../../thirdparty/owemdjee/dirent/include;../../thirdparty/owemdjee/libarchive/contrib;../../thirdparty/monolithic_tmplt;../../include;../../thirdparty/owemdjee/pcre/src;../../thirdparty/owemdjee/fnmatch/include;../../thirdparty/owemdjee/fnmatch/src/mem/include;../../thirdparty/owemdjee/libexpat/expat/lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -298,6 +304,9 @@
   </ImportGroup>
   <ItemGroup>
     <ClInclude Include="../../scripts/libarchive/libarchive_config.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../source/system_override/force_link_dependency_helper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/cat/bsdcat.c" />
@@ -455,3 +464,4 @@
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
+  

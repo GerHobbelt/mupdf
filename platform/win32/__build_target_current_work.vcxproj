@@ -52,16 +52,16 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -109,7 +109,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -143,8 +143,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ProjectReference Include="0__scratch.vcxproj">
@@ -245,6 +245,123 @@
     </ProjectReference>
     <ProjectReference Include="DCF-cuckoo-index.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff31d10e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Detours.vcxproj">
+      <Project>{4c2a66ce-a3c0-4f63-abd9-65e3e728040b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Detours_examples.vcxproj">
+      <Project>{2da2c25f-84fa-40fd-8cc0-6182818c0dce}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Detours_sample_comeasy.vcxproj">
+      <Project>{e513ac24-d151-46d3-a1de-7047afdd3b26}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Detours_sample_commem.vcxproj">
+      <Project>{f2cbdfb7-9c17-4105-afba-c1665bcf2c92}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Detours_sample_cping.vcxproj">
+      <Project>{90ab7027-f900-4a3e-a8de-8952ccc84e5a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Detours_sample_disas.vcxproj">
+      <Project>{e5c17ee9-ed53-4d23-b23f-039f111beddd}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Detours_sample_dtest.vcxproj">
+      <Project>{a2d0b8c0-e9a3-42a3-89d4-30aceaba6afe}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Detours_sample_dumpe.vcxproj">
+      <Project>{d1d11f39-266f-4a10-95cc-99b172868e94}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Detours_sample_dumpi.vcxproj">
+      <Project>{0ec1b2af-cf02-4e2e-997b-497962632945}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Detours_sample_dynamic_alloc.vcxproj">
+      <Project>{88d1cb21-1c56-4102-bcc3-9006edd7bd8a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Detours_sample_echo.vcxproj">
+      <Project>{db29a411-5f90-436d-8f40-da8dc8260beb}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Detours_sample_einst.vcxproj">
+      <Project>{f683f299-c40f-4aca-9fd6-934474e9a591}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Detours_sample_excep.vcxproj">
+      <Project>{44d05872-8c7c-46b9-92a0-e70fd87e5403}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Detours_sample_findfunc.vcxproj">
+      <Project>{546ad94d-56e4-4016-9dbd-7ef906f2257e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Detours_sample_impmunge.vcxproj">
+      <Project>{96087756-e9dc-423b-8fe1-1af8939e642a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Detours_sample_member.vcxproj">
+      <Project>{fd11ee41-4033-4a49-bdd0-8789d729c02e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Detours_sample_opengl.vcxproj">
+      <Project>{0abeac0d-5abd-4e65-b57f-9ddd460a035c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Detours_sample_payload.vcxproj">
+      <Project>{392055e0-3ec1-439d-a350-ed33f801214b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Detours_sample_region.vcxproj">
+      <Project>{bba04faa-9bcf-478b-95d6-7ee2c3897627}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Detours_sample_setdll.vcxproj">
+      <Project>{110391d7-2ff9-4b85-9cea-97b9240e48eb}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Detours_sample_simple.vcxproj">
+      <Project>{c555255d-d6df-4e47-a221-774a16f08244}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Detours_sample_simple_safe.vcxproj">
+      <Project>{2d1afad0-a868-4ad5-9d89-1a2a753f946a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Detours_sample_SleepDetours.vcxproj">
+      <Project>{99469515-0df7-4898-bcd4-50e5a425b747}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Detours_sample_SleepDetours_DLL.vcxproj">
+      <Project>{e2463139-b344-4883-9fbb-92f5ecb027aa}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Detours_sample_slept.vcxproj">
+      <Project>{797a0c18-ad87-449f-ab40-786eee1a7ceb}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Detours_sample_static.vcxproj">
+      <Project>{2d7ec3a5-c318-4182-be3e-ae0cefe2b0e0}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Detours_sample_syelog.vcxproj">
+      <Project>{943e92bf-7525-46e8-8047-ee9cf20c48f6}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Detours_sample_talloc.vcxproj">
+      <Project>{1e15aa4d-9bcc-4d67-97f2-0e8637145a68}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Detours_sample_traceapi.vcxproj">
+      <Project>{4a8766e7-810d-4ee9-8bf4-ea7058b3bc08}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Detours_sample_tracebld.vcxproj">
+      <Project>{720e550b-8134-41fd-ad24-0bbaf883f2c9}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Detours_sample_tracelnk.vcxproj">
+      <Project>{63494dcb-0d9f-48a8-bb47-f65a2852e168}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Detours_sample_tracemem.vcxproj">
+      <Project>{9c001ec0-673f-4f84-b21f-94440a662fdf}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Detours_sample_tracereg.vcxproj">
+      <Project>{ba4762cc-21ac-443a-a5b3-6ad49f66c68a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Detours_sample_traceser.vcxproj">
+      <Project>{55a92914-35e5-4a58-94a1-76f58aa4607b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Detours_sample_tracessl.vcxproj">
+      <Project>{1fc4b5ea-a8d9-442a-9d25-db1731149cb7}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Detours_sample_tracetcp.vcxproj">
+      <Project>{e8ca2804-3d7c-4154-9c37-9fe166e23b2a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Detours_sample_tryman.vcxproj">
+      <Project>{1a6dcebe-ca98-473a-b968-d92e27e0d072}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Detours_sample_withdll.vcxproj">
+      <Project>{5605ea10-239d-4ccd-b608-2d0e48e84741}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Detours_tests.vcxproj">
+      <Project>{4c170fa2-8e2c-4ca0-9207-d3cb7765457b}</Project>
     </ProjectReference>
     <ProjectReference Include="edit-distance.vcxproj">
       <Project>{c6c9ae3e-c524-4c80-b118-3b648ec9c74f}</Project>
@@ -1269,7 +1386,6 @@
     <ProjectReference Include="libdesign-patterns-cpp.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffbb29e7}</Project>
     </ProjectReference>
-    
     <ProjectReference Include="libdi-dependency-injection.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff400b84}</Project>
     </ProjectReference>
@@ -1960,7 +2076,6 @@
     <ProjectReference Include="libicu_tools.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff8c51fa}</Project>
     </ProjectReference>
-    
     <ProjectReference Include="libifopt.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff4a239e}</Project>
     </ProjectReference>
@@ -4166,4 +4281,3 @@
   </ImportGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
-  
