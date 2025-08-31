@@ -364,7 +364,7 @@ case 2:
         }
     });
 
-	unwanted_sln_list = [ source_sln_file, misc_sln_file, obnoxious_sln_file, failed_sln_file ];
+	unwanted_sln_list = [ source_sln_file, misc_sln_file, obnoxious_sln_file, failed_sln_file, maymatter_sln_file ];
 
     if (debug)  console.log({ dest_sln_files: dest_sln_files.filter(filterOutUnwantedSolutions) });
     dest_sln_files.filter(filterOutUnwantedSolutions).forEach((l) => {
