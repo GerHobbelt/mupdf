@@ -59,7 +59,10 @@ function appendBogusExtra(sln_src) {
 	let m = prj_re.exec(sln_src);
 	//console.log({ m });
 	if (m) {
-		return sln_src + bogus_extra_project + m[1];
+		// duplicate one project; make sure it is a complete 'record' from `Project`...to...`EndProject`!
+		return sln_src + bogus_extra_project + m[1] + `
+EndProject
+			`;
 	}
 	else {
 		return sln_src + bogus_extra_project;

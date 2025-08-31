@@ -25,7 +25,7 @@ slnstr = slnstr.split('\n')
 .map((l) => l.replace(/\s+$/, '').replace(/\t/g, '    '))
 .join('\n');
 
-let global_section = slnstr.replace(/^[^]+?\nGlobal\n/, '\nGlobal\n').replace(/\nEndGlobal\n[\s\S]+$/, '\nEndGlobal\n');
+let global_section = slnstr.replace(/^[\s\S]+?\nGlobal\n/, '\nGlobal\n').replace(/\nEndGlobal\n[\s\S]+$/, '\nEndGlobal\n');
 let header_section = slnstr.replace(/\nProject[(][\s\S]+$/, '\n');
 
 let projects_section = slnstr
