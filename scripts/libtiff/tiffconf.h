@@ -76,7 +76,7 @@
 #define JPEG_SUPPORT 1
 
 /* Support JBIG compression (requires JBIG-KIT library) */
-#undef JBIG_SUPPORT
+#define JBIG_SUPPORT 1
 
 /* Support LERC compression */
 #define LERC_SUPPORT 1
@@ -90,7 +90,7 @@
 /* Support NeXT 2-bit RLE algorithm */
 #define NEXT_SUPPORT 1
 
-/* Support Old JPEG compresson (read contrib/ojpeg/README first! Compilation
+/* Support Old JPEG compression (read contrib/ojpeg/README first! Compilation
    fails with unpatched IJG JPEG library) */
 /* #undef OJPEG_SUPPORT */
 

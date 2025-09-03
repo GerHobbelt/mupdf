@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFA6A9E1}</ProjectGuid>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-101000000001}</ProjectGuid>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -111,7 +111,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLINEAR;LINEAR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLOGURU;LOGURU_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -121,14 +121,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/liblinear;../../include/fake;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLINEAR;LINEAR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../scripts/libglog;../../thirdparty/owemdjee/glog/src;../../scripts/libgflags/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>GLOG_NO_ABBREVIATED_SEVERITIES;BUILD_MONOLITHIC;BUILDING_LIBLOGURU;LOGURU_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLINEAR;LINEAR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLOGURU;LOGURU_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../scripts/libglog;../../thirdparty/owemdjee/glog/src;../../scripts/libgflags/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -139,7 +139,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLINEAR;LINEAR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLOGURU;LOGURU_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -147,15 +147,15 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/liblinear;../../include/fake;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLINEAR;LINEAR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../scripts/libglog;../../thirdparty/owemdjee/glog/src;../../scripts/libgflags/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>GLOG_NO_ABBREVIATED_SEVERITIES;BUILD_MONOLITHIC;BUILDING_LIBLOGURU;LOGURU_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLINEAR;LINEAR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLOGURU;LOGURU_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../scripts/libglog;../../thirdparty/owemdjee/glog/src;../../scripts/libgflags/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -166,7 +166,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLINEAR;LINEAR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLOGURU;LOGURU_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -176,14 +176,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/liblinear;../../include/fake;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLINEAR;LINEAR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../scripts/libglog;../../thirdparty/owemdjee/glog/src;../../scripts/libgflags/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>GLOG_NO_ABBREVIATED_SEVERITIES;BUILD_MONOLITHIC;BUILDING_LIBLOGURU;LOGURU_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLINEAR;LINEAR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLOGURU;LOGURU_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../scripts/libglog;../../thirdparty/owemdjee/glog/src;../../scripts/libgflags/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -194,7 +194,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLINEAR;LINEAR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLOGURU;LOGURU_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -202,15 +202,15 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/liblinear;../../include/fake;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLINEAR;LINEAR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../scripts/libglog;../../thirdparty/owemdjee/glog/src;../../scripts/libgflags/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>GLOG_NO_ABBREVIATED_SEVERITIES;BUILD_MONOLITHIC;BUILDING_LIBLOGURU;LOGURU_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLINEAR;LINEAR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLOGURU;LOGURU_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../scripts/libglog;../../thirdparty/owemdjee/glog/src;../../scripts/libgflags/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -223,43 +223,36 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/liblinear/blas/daxpy.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/liblinear/blas/ddot.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/liblinear/blas/dnrm2.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/liblinear/blas/dscal.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/liblinear/linear.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/liblinear/matlab/libsvmread.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/liblinear/matlab/libsvmwrite.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/liblinear/matlab/linear_model_matlab.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/liblinear/matlab/predict.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/liblinear/matlab/train.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/liblinear/newton.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/liblinear/predict.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/liblinear/svm-scale.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/liblinear/train.c" />
-    <ClInclude Include="../../thirdparty/owemdjee/liblinear/blas/blas.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/liblinear/blas/blasp.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/liblinear/linear.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/liblinear/matlab/linear_model_matlab.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/liblinear/newton.h" />
-    <Text Include="../../thirdparty/owemdjee/liblinear/COPYRIGHT" />
-    <Text Include="../../thirdparty/owemdjee/liblinear/Makefile" />
-    <Text Include="../../thirdparty/owemdjee/liblinear/Makefile.win" />
-    <Text Include="../../thirdparty/owemdjee/liblinear/README" />
-    <Text Include="../../thirdparty/owemdjee/liblinear/blas/Makefile" />
-    <Text Include="../../thirdparty/owemdjee/liblinear/heart_scale" />
-    <Text Include="../../thirdparty/owemdjee/liblinear/linear.def" />
-    <Text Include="../../thirdparty/owemdjee/liblinear/matlab/Makefile" />
-    <Text Include="../../thirdparty/owemdjee/liblinear/matlab/README" />
-    <Text Include="../../thirdparty/owemdjee/liblinear/python/MANIFEST.in" />
-    <Text Include="../../thirdparty/owemdjee/liblinear/python/Makefile" />
-    <Text Include="../../thirdparty/owemdjee/liblinear/python/README" />
-    <Text Include="../../thirdparty/owemdjee/liblinear/python/liblinear/__init__.py" />
-    <Text Include="../../thirdparty/owemdjee/liblinear/python/liblinear/commonutil.py" />
-    <Text Include="../../thirdparty/owemdjee/liblinear/python/liblinear/liblinear.py" />
-    <Text Include="../../thirdparty/owemdjee/liblinear/python/liblinear/liblinearutil.py" />
-    <Text Include="../../thirdparty/owemdjee/liblinear/python/setup.py" />
-    <Text Include="../../thirdparty/owemdjee/liblinear/windows/README" />
+    <ClCompile Include="../../thirdparty/owemdjee/loguru/test/loguru_test.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/loguru/glog_example/glog_example.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/loguru/loguru.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/loguru/loguru_example/loguru_example.hpp" />
+    <Image Include="../../thirdparty/owemdjee/loguru/docs/terminal_colors.png" />
+    <Text Include="../../thirdparty/owemdjee/loguru/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/loguru/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/loguru/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loguru/appveyor.yml" />
+    <Text Include="../../thirdparty/owemdjee/loguru/cmake/loguru-config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/loguru/cmake/loguru-cpack.cmake" />
+    <Text Include="../../thirdparty/owemdjee/loguru/cmake/loguru.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/loguru/cmake/utilities.cmake" />
+    <Text Include="../../thirdparty/owemdjee/loguru/docs/index.html" />
+    <Text Include="../../thirdparty/owemdjee/loguru/glog_bench/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/loguru/glog_bench/build_and_run.sh" />
+    <Text Include="../../thirdparty/owemdjee/loguru/glog_example/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/loguru/glog_example/build_and_run.sh" />
+    <Text Include="../../thirdparty/owemdjee/loguru/lnav_format_loguru_cpp.json" />
+    <Text Include="../../thirdparty/owemdjee/loguru/loguru_bench/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/loguru/loguru_bench/build_and_run.sh" />
+    <Text Include="../../thirdparty/owemdjee/loguru/loguru_cmake_example/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/loguru/loguru_example/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/loguru/loguru_example/build_and_run.sh" />
+    <Text Include="../../thirdparty/owemdjee/loguru/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/loguru/test/appveyor.cmake" />
+    <Text Include="../../thirdparty/owemdjee/loguru/test/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/loguru/test/build_and_run.cmake" />
+    <Text Include="../../thirdparty/owemdjee/loguru/test/build_and_run.sh" />
+    <Text Include="../../thirdparty/owemdjee/loguru/test/fail_test_wrapper.cmake" />
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>

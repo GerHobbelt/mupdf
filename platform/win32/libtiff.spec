@@ -1,4 +1,7 @@
 
+directories:
+	../../scripts/libtiff/
+	 
 also-ignore:
 	/archive/tools/
 	/contrib/
