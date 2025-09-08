@@ -1,0 +1,584 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{E247EF44-6727-4787-B439-FE9348F27345}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPHOTOSHOPAPI;PHOTOSHOPAPI_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPHOTOSHOPAPI;PHOTOSHOPAPI_STATICLIB;IDN2_STATIC;IDN2_BUILDING;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPHOTOSHOPAPI;PHOTOSHOPAPI_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPHOTOSHOPAPI;PHOTOSHOPAPI_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPHOTOSHOPAPI;PHOTOSHOPAPI_STATICLIB;IDN2_STATIC;IDN2_BUILDING;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPHOTOSHOPAPI;PHOTOSHOPAPI_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPHOTOSHOPAPI;PHOTOSHOPAPI_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPHOTOSHOPAPI;PHOTOSHOPAPI_STATICLIB;IDN2_STATIC;IDN2_BUILDING;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPHOTOSHOPAPI;PHOTOSHOPAPI_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPHOTOSHOPAPI;PHOTOSHOPAPI_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPHOTOSHOPAPI;PHOTOSHOPAPI_STATICLIB;IDN2_STATIC;IDN2_BUILDING;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPHOTOSHOPAPI;PHOTOSHOPAPI_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/Geometry/GeometryInstantiations.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/Struct/ByteStream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/Struct/DescriptorStructure.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/Struct/File.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/Struct/ICCProfile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/Struct/PascalString.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/Struct/ResourceBlock.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/Struct/Signature.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/Struct/UnicodeString.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/TaggedBlocks/LinkedLayerTaggedBlock.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/TaggedBlocks/Lr16TaggedBlock.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/TaggedBlocks/Lr32TaggedBlock.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/TaggedBlocks/LrSectionTaggedBlock.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/TaggedBlocks/PlacedLayerTaggedBlock.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/TaggedBlocks/ProtectedSettingTaggedBlock.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/TaggedBlocks/ReferencePointTaggedBlock.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/TaggedBlocks/TaggedBlock.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/TaggedBlocks/TaggedBlockStorage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/TaggedBlocks/UnicodeLayerNameTaggedBlock.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/Warp/SmartObjectWarp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/LayeredFile/Impl/LayeredFileImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/LayeredFile/LayerTypes/LayerInstantiations.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/LayeredFile/LinkedData/LinkedLayerData.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/LayeredFile/Util/GenerateLayerMaskInfo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/PhotoshopFile/AdditionalLayerInfo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/PhotoshopFile/ColorModeData.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/PhotoshopFile/FileHeader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/PhotoshopFile/ImageResources.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/PhotoshopFile/LayerAndMaskInformation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/PhotoshopFile/PhotoshopFile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopBenchmark/src/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopExamples/AddLayerMasks/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopExamples/CreateGroups/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopExamples/CreateSimpleDocument/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopExamples/ExtendedSignature/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopExamples/ExtractImageData/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopExamples/ModifyLayerStructure/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopExamples/ProgressCallbacks/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopExamples/ReplaceImageData/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopExamples/SmartObjects/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/src/TestCMYK/TestCMYK.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/src/TestCompression/TestRLECompression.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/src/TestCompression/TestZipCompression.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/src/TestCompression/TestZipPredictionCompression.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/src/TestCompression/Utility.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/src/TestDecompression/TestRLEDecompression.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/src/TestDecompression/TestZIPPredictionDecompression.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/src/TestDecompression/Utility.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/src/TestDescriptorStructure/TestDescriptorStructure.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/src/TestDescriptorStructure/TestPlacedLayerDescriptor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/src/TestEndianConversion/TestEndian.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/src/TestGeometry/TestGeometry.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/src/TestGrayscale/TestGrayscale.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/src/TestGroups/TestLayerDetection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/src/TestImageExtraction/TestImageExtraction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/src/TestImageLayer/TestImageLayer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/src/TestImageResources/TestDPIRead.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/src/TestImageResources/TestDPIWrite.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/src/TestImageResources/TestICCProfileRead.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/src/TestImageResources/TestICCProfileWrite.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/src/TestLayer/TestLayer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/src/TestLockedLayer/TestLockedLayer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/src/TestPredictionEncode/TestPredictionEncodeRoundtrip.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/src/TestRendering/TestDeinterleave.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/src/TestRendering/TestInterleave.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/src/TestRoundtripping/TestRoundtripping.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/src/TestSmartObjects/TestPlacedLayerTaggedBlocks.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/src/TestSmartObjects/TestSmartObjectLayer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/src/TestUnicodeLayerNames/TestUnicodeLayerNames.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/src/TestUtil/TestCoordinateUtil.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/src/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/PhotoshopAPI/python/src/main.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/include/PhotoshopAPI.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/Compression/Compress_RLE.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/Compression/Compress_ZIP.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/Compression/Compression.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/Compression/CompressionUtil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/Compression/Decompress_RLE.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/Compression/Decompress_RLE_AVX2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/Compression/Decompress_ZIP.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/Compression/InterleavedToPlanar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/Endian/AVX2EndianByteSwap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/Endian/EndianByteSwap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/Endian/EndianByteSwapArr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/FileIO/BytesIO.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/FileIO/LengthMarkers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/FileIO/Read.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/FileIO/Util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/FileIO/Write.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/Geometry/BezierSurface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/Geometry/BoundingBox.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/Geometry/Mesh.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/Geometry/MeshOperations.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/Geometry/Point.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/Render/Composite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/Render/Deinterleave.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/Render/ImageBuffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/Render/Interleave.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/Render/Render.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/Struct/BidirectionalMap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/Struct/ByteStream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/Struct/DescriptorStructure.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/Struct/File.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/Struct/ICCProfile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/Struct/ImageChannel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/Struct/PascalString.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/Struct/PhotoshopTypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/Struct/ResourceBlock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/Struct/Section.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/Struct/Signature.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/Struct/ThreadPool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/Struct/UnicodeString.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/TaggedBlocks/LinkedLayerTaggedBlock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/TaggedBlocks/Lr16TaggedBlock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/TaggedBlocks/Lr32TaggedBlock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/TaggedBlocks/LrSectionTaggedBlock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/TaggedBlocks/PlacedLayerTaggedBlock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/TaggedBlocks/ProtectedSettingTaggedBlock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/TaggedBlocks/ReferencePointTaggedBlock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/TaggedBlocks/TaggedBlock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/TaggedBlocks/TaggedBlockStorage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/TaggedBlocks/UnicodeLayerNameTaggedBlock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Core/Warp/SmartObjectWarp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/LayeredFile/Impl/LayeredFileImpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/LayeredFile/LayerTypes/AdjustmentLayer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/LayeredFile/LayerTypes/ArtboardLayer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/LayeredFile/LayerTypes/GroupLayer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/LayeredFile/LayerTypes/ImageDataMixins.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/LayeredFile/LayerTypes/ImageLayer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/LayeredFile/LayerTypes/Layer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/LayeredFile/LayerTypes/MaskDataMixin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/LayeredFile/LayerTypes/SectionDividerLayer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/LayeredFile/LayerTypes/ShapeLayer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/LayeredFile/LayerTypes/SmartObjectLayer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/LayeredFile/LayerTypes/TextLayer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/LayeredFile/LayeredFile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/LayeredFile/LinkedData/LinkedLayerData.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/LayeredFile/LinkedData/PsdPsbReader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/LayeredFile/Util/ClearLinkedLayers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/LayeredFile/Util/GenerateColorModeData.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/LayeredFile/Util/GenerateHeader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/LayeredFile/Util/GenerateImageResources.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/LayeredFile/Util/GenerateLayerMaskInfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/LayeredFile/concepts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/LayeredFile/fwd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/PhotoshopFile/AdditionalLayerInfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/PhotoshopFile/ColorModeData.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/PhotoshopFile/FileHeader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/PhotoshopFile/ImageData.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/PhotoshopFile/ImageResources.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/PhotoshopFile/LayerAndMaskInformation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/PhotoshopFile/PhotoshopFile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Util/CoordinateUtil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Util/DescriptorUtil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Util/Enum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Util/FileUtil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Util/Logger.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Util/Profiling/Memory/CompressionTracker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Util/Profiling/Perf/Instrumentor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Util/ProgressCallback.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/src/Util/StringUtil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopBenchmark/src/Profiler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/documents/ICCProfiles/AdobeRGB1998.icc" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/documents/ICCProfiles/AppleRGB.icc" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/documents/ICCProfiles/CIERGB.icc" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/src/DetectArmMac.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/src/TestCompression/Utility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/src/TestDecompression/Utility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/src/TestMacros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/python/src/DeclareEnums.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/python/src/DeclareGeometry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/python/src/DeclareLayeredFile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/python/src/DeclarePhotoshopFile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/python/src/DeclareSmartObjectWarp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/python/src/DeclareUtil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/python/src/Implementation/GroupLayer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/python/src/Implementation/ImageLayer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/python/src/Layers/DeclareGroupLayer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/python/src/Layers/DeclareImageLayer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/python/src/Layers/DeclareLayer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/python/src/Layers/DeclareSmartObjectLayer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/python/src/Mixins/DeclareImageDataMixin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/python/src/Mixins/DeclareMaskMixin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/python/src/Mixins/DeclareWritableImageDataMixin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/python/src/PyUtil/ImageConversion.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/PhotoshopAPI/python/src/PyUtil/Transformation.h" />
+    <Image Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopExamples/SmartObjects/uv_grid.jpg" />
+    <Image Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/documents/SmartObjects/reference/control.png" />
+    <Image Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/documents/SmartObjects/reference/perspective_transform.png" />
+    <Image Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/documents/SmartObjects/reference/quilt_warp/bbox_change.png" />
+    <Image Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/documents/SmartObjects/reference/quilt_warp/bbox_change_perspective_transform.png" />
+    <Image Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/documents/SmartObjects/reference/quilt_warp/no_bbox_change.png" />
+    <Image Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/documents/SmartObjects/reference/quilt_warp/no_bbox_change_perspective_transform.png" />
+    <Image Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/documents/SmartObjects/reference/rotation.png" />
+    <Image Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/documents/SmartObjects/reference/simple_warp/bbox_change.png" />
+    <Image Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/documents/SmartObjects/reference/simple_warp/bbox_change_perspective_warp.png" />
+    <Image Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/documents/SmartObjects/reference/simple_warp/no_bbox_change.png" />
+    <Image Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/documents/SmartObjects/reference/simple_warp/no_bbox_change_perspective_warp.png" />
+    <Image Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/documents/image_data/ImageStackerImage.jpg" />
+    <Image Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/documents/image_data/uv_grid.jpg" />
+    <Image Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/images/benchmarks/FileSizes/Automotive_Data_(16-bit)_combined_plot.png" />
+    <Image Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/images/benchmarks/FileSizes/Automotive_Data_(32-bit)_combined_plot.png" />
+    <Image Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/images/benchmarks/FileSizes/Automotive_Data_(8-bit)_combined_plot.png" />
+    <Image Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/images/benchmarks/FileSizes/Deep_Nested_Layers_(8-bit)_combined_plot.png" />
+    <Image Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/images/benchmarks/FileSizes/Glacious_Hyundai_Sample_(8-bit)_combined_plot.png" />
+    <Image Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/images/benchmarks/FileSizes/SingleLayer_(16-bit)_combined_plot.png" />
+    <Image Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/images/benchmarks/FileSizes/SingleLayer_(32-bit)_combined_plot.png" />
+    <Image Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/images/benchmarks/Ryzen_9_5950x/16-bit_graphs.png" />
+    <Image Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/images/benchmarks/Ryzen_9_5950x/32-bit_graphs.png" />
+    <Image Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/images/benchmarks/Ryzen_9_5950x/8-bit_graphs.png" />
+    <Image Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/images/benchmarks/Ryzen_9_5950x/Automotive_Data_(16-bit)_1.97GB_combined_plot.png" />
+    <Image Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/images/benchmarks/Ryzen_9_5950x/Automotive_Data_(32-bit)_3.65GB_combined_plot.png" />
+    <Image Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/images/benchmarks/Ryzen_9_5950x/Automotive_Data_(8-bit)_1.27GB_combined_plot.png" />
+    <Image Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/images/benchmarks/Ryzen_9_5950x/Automotive_Data_Zip_(8-bit)_1.27GB_psapi_plot.png" />
+    <Image Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/images/benchmarks/Ryzen_9_5950x/Deep_Nested_Layers_(8-bit)_.5GB_combined_plot.png" />
+    <Image Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/images/benchmarks/Ryzen_9_5950x/Glacius_Hyundai_Sample_(8-bit)_.75GB_combined_plot.png" />
+    <Image Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/images/benchmarks/Ryzen_9_5950x/Glacius_Hyundai_Sample_Zip_(8-bit)_.75GB_psapi_plot.png" />
+    <Image Include="../../thirdparty/owemdjee/PhotoshopAPI/python/psapi-test/image_data/ImageStackerImage_lowres.png" />
+    <Image Include="../../thirdparty/owemdjee/PhotoshopAPI/python/psapi-test/image_data/uv_grid.jpg" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/CMakePresets.json" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopAPI/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopBenchmark/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopBenchmark/README.md" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopBenchmark/documents/README.md" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopBenchmark/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopBenchmark/src/benchmarkStatisticsPSAPI.txt" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopBenchmark/src/benchmarkStatisticsPhotoshop.txt" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopBenchmark/src/benchmark_photoshop.py" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopBenchmark/src/benchmark_util.py" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopBenchmark/src/create_plots.py" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopExamples/AddLayerMasks/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopExamples/AddLayerMasks/add_layer_masks.py" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopExamples/CreateGroups/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopExamples/CreateGroups/create_groups.py" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopExamples/CreateSimpleDocument/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopExamples/CreateSimpleDocument/create_simple_document.py" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopExamples/ExtendedSignature/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopExamples/ExtractImageData/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopExamples/ExtractImageData/extract_image_data.py" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopExamples/GraftLayer/graft_files.py" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopExamples/ModifyLayerStructure/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopExamples/ModifyLayerStructure/modify_layer_structure.py" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopExamples/ProgressCallbacks/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopExamples/ReplaceImageData/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopExamples/ReplaceImageData/replace_image_data.py" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopExamples/RescaleCanvas/rescale_canvas.py" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopExamples/SmartObjects/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopExamples/SmartObjects/smart_objects.py" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/documents/Compression/README.md" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/documents/README.md" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/documents/SmartObjects/README.md" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/documents/binary_data/Descriptor/DistortWarp_PlacedLayerBlock.bin" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/documents/binary_data/Descriptor/FXPerspectiveWarp_PlacedLayerBlock.bin" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/documents/binary_data/Descriptor/FXPuppetWarp_PlacedLayerBlock.bin" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/documents/binary_data/Descriptor/PerspectiveWarp_PlacedLayerBlock.bin" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/documents/binary_data/Descriptor/QuiltWarp_PlacedLayerBlock.bin" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/documents/binary_data/Descriptor/SkewWarp_PlacedLayerBlock.bin" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/documents/binary_data/Descriptor/Warp_PlacedLayerBlock.bin" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/PhotoshopTest/documents/binary_data/Descriptor/placed_layer_taggedblock.bin" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/README.md" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/cmake/FindSphinx.cmake" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/DOCS.md" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/PhotoshopFileFormat/ColorModeData.md" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/PhotoshopFileFormat/FileHeader.md" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/PhotoshopFileFormat/ImageData.md" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/PhotoshopFileFormat/ImageResources.md" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/PhotoshopFileFormat/LayerAndMaskInformation.md" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/PhotoshopFileFormat/README.md" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/PhotoshopFileFormat/Structures/ColorStructure.md" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/PhotoshopFileFormat/Structures/PascalString.md" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/PhotoshopFileFormat/Structures/TransferFunction.md" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/Doxyfile.in" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/benchmarks.rst" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/building.rst" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/code/codestructures.rst" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/code/geometry/bezier.rst" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/code/geometry/geometry.rst" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/code/geometry/mesh.rst" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/code/geometry/operations.rst" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/code/geometry/smartobjectwarp.rst" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/code/layeredfile.rst" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/code/layers/baselayer.rst" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/code/layers/group.rst" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/code/layers/image.rst" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/code/layers/sectiondivider.rst" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/code/layers/smartobject.rst" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/code/photoshopfile.rst" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/code/photoshopsections/additionallayerinfo.rst" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/code/photoshopsections/colormodedata.rst" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/code/photoshopsections/header.rst" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/code/photoshopsections/imagedata.rst" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/code/photoshopsections/imageresources.rst" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/code/photoshopsections/layerandmaskinformation.rst" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/code/util/bit_depth.rst" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/code/util/enums.rst" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/code/util/file.rst" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/code/util/filesection.rst" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/code/util/imagechannel.rst" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/code/util/linked_layer_data.rst" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/code/util/progresscallback.rst" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/concepts/compression.rst" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/concepts/in-memory-compression.rst" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/concepts/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/conf.py" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/examples/add_layer_masks.rst" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/examples/create_groups.rst" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/examples/create_simple_document.rst" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/examples/extended_signature.rst" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/examples/extract_image_data.rst" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/examples/graft_layer.rst" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/examples/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/examples/modify_layer_structure.rst" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/examples/progress_callbacks.rst" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/examples/replace_image_data.rst" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/examples/rescale_canvas.rst" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/examples/smart_objects.rst" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/images/benchmarks/FileSizes/FileSizeBench.txt" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/images/benchmarks/FileSizes/FileSizeBenchSingleLayer.txt" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/images/benchmarks/Ryzen_9_5950x/benchmarkStatisticsPSAPI.txt" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/images/benchmarks/Ryzen_9_5950x/benchmarkStatisticsPhotoshop.txt" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/make.bat" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/python/bindings.rst" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/python/enums.rst" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/python/layeredfile.rst" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/python/layers/group.rst" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/python/layers/image.rst" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/python/layers/layer.rst" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/python/layers/smart_object.rst" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/python/photoshopfile.rst" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/python/utility.rst" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/docs/doxygen/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/pyproject.toml" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/python/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/python/psapi-test/bin_data/monza_npy.bin" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/python/psapi-test/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/python/psapi-test/test_grouplayer.py" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/python/psapi-test/test_imagelayer.py" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/python/psapi-test/test_mask_mixin.py" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/python/psapi-test/test_mesh_operations.py" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/python/psapi-test/test_point2d.py" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/python/psapi-test/test_smartobjectlayer.py" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/python/py_module/photoshopapi/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/python/py_module/photoshopapi/enum/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/python/py_module/photoshopapi/geometry/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/python/py_module/photoshopapi/util/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/scripts/generate_release.py" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/scripts/hexdump_section.py" />
+    <Text Include="../../thirdparty/owemdjee/PhotoshopAPI/vcpkg.json" />
+  </ItemGroup>
+  <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+</Project>
+  

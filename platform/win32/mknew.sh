@@ -1634,6 +1634,11 @@ atomic_queue
 Detours
 plutovg
 genann
+PhotoshopAPI
+libco
+libgo
+cppserdes
+
 
 EOT
 ) | grep -e "$FILTER"

@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF8A9A2A}</ProjectGuid>
+    <ProjectGuid>{E247EF44-6727-4787-B439-FE9348F3331F}</ProjectGuid>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -111,7 +111,7 @@
 </ItemDefinitionGroup>
 <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCONCAT;CONCAT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPPSERDES;CPPSERDES_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -122,11 +122,11 @@
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCONCAT;CONCAT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPPSERDES;CPPSERDES_STATICLIB;IDN2_STATIC;IDN2_BUILDING;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCONCAT;CONCAT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPPSERDES;CPPSERDES_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
       <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
@@ -139,7 +139,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCONCAT;CONCAT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPPSERDES;CPPSERDES_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -148,12 +148,12 @@
     <ClCompile>
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCONCAT;CONCAT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPPSERDES;CPPSERDES_STATICLIB;IDN2_STATIC;IDN2_BUILDING;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCONCAT;CONCAT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPPSERDES;CPPSERDES_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
       <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
@@ -166,7 +166,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCONCAT;CONCAT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPPSERDES;CPPSERDES_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -177,11 +177,11 @@
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCONCAT;CONCAT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPPSERDES;CPPSERDES_STATICLIB;IDN2_STATIC;IDN2_BUILDING;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCONCAT;CONCAT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPPSERDES;CPPSERDES_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
       <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
@@ -194,7 +194,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCONCAT;CONCAT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPPSERDES;CPPSERDES_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -203,12 +203,12 @@
     <ClCompile>
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCONCAT;CONCAT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPPSERDES;CPPSERDES_STATICLIB;IDN2_STATIC;IDN2_BUILDING;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCONCAT;CONCAT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPPSERDES;CPPSERDES_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
       <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
@@ -223,17 +223,52 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/concat/tests/compile.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/concat/tests/file1.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/concat/tests/file2.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/concat/tests/unit.cpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/concat/concat.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/concat/tests/catch.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/concat/tests/header.h" />
-    <Text Include="../../thirdparty/owemdjee/concat/LICENSE_1_0.txt" />
-    <Text Include="../../thirdparty/owemdjee/concat/README.md" />
-    <Text Include="../../thirdparty/owemdjee/concat/tests/compile_tester.sh" />
-    <Text Include="../../thirdparty/owemdjee/concat/tests/run.sh" />
+    <ClCompile Include="../../thirdparty/owemdjee/cppserdes/examples/01_simple_example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cppserdes/examples/02_bitcpy_usage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cppserdes/examples/03_serial_usage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cppserdes/examples/04_object_oriented_serial.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cppserdes/examples/05_nested_object_oriented_serial.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cppserdes/examples/06_variable_length_formats.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cppserdes/examples/07_delimited_arrays.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cppserdes/examples/08_error_handling.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cppserdes/examples/09_runtime_edittable_formats.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cppserdes/examples/10_virtual_fields.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cppserdes/examples/11_using_atomics_with_bitcpy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cppserdes/examples/12_compile_time_bitcpy_evaluation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cppserdes/examples/13_arrays_of_packets.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cppserdes/examples/14_custom_types.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cppserdes/test/test_all.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cppserdes/test/test_bitcpy_from_array.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cppserdes/test/test_bitcpy_to_array.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cppserdes/test/test_custom_types.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cppserdes/test/test_multiple_cpp_files.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cppserdes/test/test_serdes.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cppserdes/include/bitcpy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cppserdes/include/bitcpy_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cppserdes/include/bitcpy_from_array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cppserdes/include/bitcpy_sized_pointer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cppserdes/include/bitcpy_to_array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cppserdes/include/bitliterals.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cppserdes/include/bitprint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cppserdes/include/cppcrc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cppserdes/include/serdes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cppserdes/include/serdes_byte_iterator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cppserdes/include/serdes_errors.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cppserdes/include/serdes_format_modifiers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cppserdes/include/serdes_formatter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cppserdes/include/serdes_fwd_declarations.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cppserdes/include/serdes_validator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cppserdes/test/notify_when_dynamic_allocation_used.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cppserdes/test/test_multiple_cpp_files.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cppserdes/test/test_utilities.h" />
+    <Image Include="../../thirdparty/owemdjee/cppserdes/images/cppserdes_icon.png" />
+    <Image Include="../../thirdparty/owemdjee/cppserdes/images/cppserdes_logo.png" />
+    <Text Include="../../thirdparty/owemdjee/cppserdes/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cppserdes/Doxyfile" />
+    <Text Include="../../thirdparty/owemdjee/cppserdes/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/cppserdes/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cppserdes/images/cppserdes_icon.svg" />
+    <Text Include="../../thirdparty/owemdjee/cppserdes/test/Makefile" />
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
