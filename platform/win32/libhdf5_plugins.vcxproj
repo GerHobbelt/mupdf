@@ -1,0 +1,1707 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{0F9F0B24-22F9-4AC3-83C2-71260E8701C6}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>IDN2_STATIC;IDN2_BUILDING;BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>IDN2_STATIC;IDN2_BUILDING;BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>IDN2_STATIC;IDN2_BUILDING;BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>IDN2_STATIC;IDN2_BUILDING;BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/cmake/H5PLTests.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/cmake/binex/example/h5ex_d_bitgroom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/example/h5ex_d_bitgroom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/src/H5Zbitgroom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/cmake/H5PLTests.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/cmake/binex/example/h5ex_d_granularbr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/example/h5ex_d_granularbr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/src/H5Zgranularbr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/cmake/H5PLTests.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/cmake/binex/example/h5ex_d_blosc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/example/h5ex_d_blosc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/src/H5Zblosc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/cmake/H5PLTests.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/cmake/binex/example/h5ex_d_blosc2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/example/h5ex_d_blosc2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/src/H5Zblosc2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/cmake/H5PLTests.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/cmake/binex/example/h5ex_d_bshuf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/example/h5ex_d_bshuf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/src/H5Zbshuf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/src/bitshuffle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/src/bitshuffle_core.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/src/iochain.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/src/lib/lz4/lz4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/src/lib/lzf/lzf_c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/src/lib/lzf/lzf_d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/cmake/H5PLTests.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/cmake/binex/example/h5ex_d_bzip2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/example/h5ex_d_bzip2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/src/H5Zbzip2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/cmake/H5PLTests.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/cmake/binex/example/h5ex_d_jpeg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/example/h5ex_d_jpeg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/src/H5Zjpeg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/cmake/H5PLTests.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/cmake/binex/example/h5ex_d_lz4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/example/h5ex_d_lz4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/src/H5Zlz4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/cmake/H5PLTests.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/cmake/binex/example/h5ex_d_lzf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/example/h5ex_d_lzf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/src/H5Zlzf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/cmake/H5PLTests.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/cmake/binex/example/h5ex_d_zfp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/example/h5ex_d_zfp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/src/H5Zzfp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/src/H5Zzfp_props.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/cmake/H5PLTests.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/cmake/binex/example/h5ex_d_zstd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/example/h5ex_d_zstd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/src/H5Zzstd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/config/cmake/H5PLTests.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/config/cmake/binex/example/h5ex_d_mafisc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/example/h5ex_d_mafisc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/adaptive-filter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/bit-sorter-filter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/combined-filter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/difference-filter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/filter-cascade-filter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/filter-test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/check/check.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/check/crc32_fast.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/check/crc32_small.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/check/crc32_table.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/check/crc32_tablegen.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/check/crc64_fast.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/check/crc64_small.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/check/crc64_table.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/check/crc64_tablegen.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/check/sha256.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/alone_decoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/alone_encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/auto_decoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/block_buffer_decoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/block_buffer_encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/block_decoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/block_encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/block_header_decoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/block_header_encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/block_util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/common.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/easy_buffer_encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/easy_decoder_memusage.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/easy_encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/easy_encoder_memusage.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/easy_preset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/filter_buffer_decoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/filter_buffer_encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/filter_common.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/filter_decoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/filter_encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/filter_flags_decoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/filter_flags_encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/hardware_physmem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/index.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/index_decoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/index_encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/index_hash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/stream_buffer_decoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/stream_buffer_encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/stream_decoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/stream_encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/stream_flags_common.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/stream_flags_decoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/stream_flags_encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/tuklib_physmem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/vli_decoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/vli_encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/vli_size.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/delta/delta_common.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/delta/delta_decoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/delta/delta_encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/lz/lz_decoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/lz/lz_encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/lz/lz_encoder_mf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/lzma/fastpos_table.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/lzma/fastpos_tablegen.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/lzma/lzma2_decoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/lzma/lzma2_encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/lzma/lzma_decoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/lzma/lzma_encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/lzma/lzma_encoder_optimum_fast.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/lzma/lzma_encoder_optimum_normal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/lzma/lzma_encoder_presets.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/rangecoder/price_table.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/rangecoder/price_tablegen.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/simple/arm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/simple/armthumb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/simple/ia64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/simple/powerpc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/simple/simple_coder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/simple/simple_decoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/simple/simple_encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/simple/sparc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/simple/x86.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/lorenzo-filter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/mafisc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/sign-filter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/simple-hash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/time-filter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/variable-filter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/config/cmake/H5PLTests.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/config/cmake/binex/example/h5ex_d_sz.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/example/h5ex_d_sz.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/src/H5Zszf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/example/h5ex_d_bitgroom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/example/h5ex_d_blosc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/example/h5ex_d_blosc2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/example/h5ex_d_bshuf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/example/h5ex_d_bzip2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/example/h5ex_d_granularbr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/example/h5ex_d_jpeg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/example/h5ex_d_lz4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/example/h5ex_d_lzf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/example/h5ex_d_pl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/example/h5ex_d_zfp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/example/h5ex_d_zstd.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/blosc_version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/blosc2_version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/src/bitshuffle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/src/bitshuffle_core.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/src/bitshuffle_internals.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/src/iochain.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/src/lib/lz4/lz4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/src/lib/lzf/lzf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/src/lib/lzf/lzfP.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/src/H5Zzfp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/src/H5Zzfp_lib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/src/H5Zzfp_plugin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/src/H5Zzfp_props.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/src/H5Zzfp_props_private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/src/H5Zzfp_version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/adaptive-filter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/bit-sorter-filter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/combined-filter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/difference-filter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/filter-cascade-filter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/filter-test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/api/lzma.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/api/lzma/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/api/lzma/bcj.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/api/lzma/block.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/api/lzma/check.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/api/lzma/container.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/api/lzma/delta.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/api/lzma/filter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/api/lzma/hardware.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/api/lzma/index.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/api/lzma/index_hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/api/lzma/lzma.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/api/lzma/stream_flags.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/api/lzma/version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/api/lzma/vli.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/check/Makefile.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/check/check.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/check/crc32_table_be.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/check/crc32_table_le.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/check/crc64_table_be.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/check/crc64_table_le.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/check/crc_macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/Makefile.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/alone_decoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/block_decoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/block_encoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/easy_preset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/filter_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/filter_decoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/filter_encoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/index.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/index_encoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/mythread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/stream_decoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/stream_encoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/stream_flags_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/sysdefs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/tuklib_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/tuklib_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/tuklib_cpucores.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/tuklib_exit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/tuklib_gettext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/tuklib_integer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/tuklib_mbstr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/tuklib_open_stdxxx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/tuklib_physmem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/common/tuklib_progname.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/delta/Makefile.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/delta/delta_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/delta/delta_decoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/delta/delta_encoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/delta/delta_private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/lz/Makefile.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/lz/lz_decoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/lz/lz_encoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/lz/lz_encoder_hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/lz/lz_encoder_hash_table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/lzma/Makefile.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/lzma/fastpos.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/lzma/lzma2_decoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/lzma/lzma2_encoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/lzma/lzma_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/lzma/lzma_decoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/lzma/lzma_encoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/lzma/lzma_encoder_private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/rangecoder/Makefile.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/rangecoder/price.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/rangecoder/range_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/rangecoder/range_decoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/rangecoder/range_encoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/simple/Makefile.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/simple/simple_coder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/simple/simple_decoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/simple/simple_encoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/simple/simple_private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/lorenzo-filter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/mafisc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/sign-filter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/simple-hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/time-filter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/variable-filter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/src/H5Zszf.h" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/api/common_w32res.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/liblzma_w32res.rc" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/Additional_Legal/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/CTestConfig.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/bin/config.guess" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/bin/depcomp" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/bin/install-sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/bin/ltmain.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/bin/missing" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/bin/mkinstalldirs" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/bin/reconfigure" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/CacheURLs.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/cmake-presets/hidden-presets.json" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/cmake/CTestCustom.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/cmake/CTestScript.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/cmake/ConfigureChecks.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/cmake/H5BITGROOMMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/cmake/H5PL_Examples.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/cmake/HDFMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/cmake/HDFPLoptions.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/cmake/HDFPluginMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/cmake/NSIS.InstallOptions.ini.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/cmake/NSIS.template.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/cmake/README.txt.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/cmake/SignPackageFiles.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/cmake/binex/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/cmake/binex/CMakePresets.json" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/cmake/binex/CTestConfig.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/cmake/binex/Using_CMake.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/cmake/binex/config/cmake-presets/hidden-presets.json" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/cmake/binex/config/cmake/CTestCustom.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/cmake/binex/config/cmake/HDFMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/cmake/binex/config/cmake/HDFPluginMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/cmake/binex/config/cmake/cacheinit.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/cmake/binex/config/cmake/grepTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/cmake/binex/config/cmake/runTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/cmake/binex/config/toolchain/aarch64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/cmake/binex/config/toolchain/build32.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/cmake/binex/config/toolchain/clang.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/cmake/binex/config/toolchain/crayle.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/cmake/binex/config/toolchain/gcc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/cmake/binex/config/toolchain/icc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/cmake/binex/config/toolchain/mingw64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/cmake/binex/config/toolchain/pgi.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/cmake/binex/example/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/cmake/binex/example/test/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/cmake/binex/example/test/testCM.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/cmake/binex/example/testfiles/h5ex_d_bitgroom.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/cmake/binex/example/testfiles/h5ex_d_bitgroom.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/cmake/binex/example/testfiles/h5repack_layout.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/cmake/binex/example/testfiles/h5repack_layout.h5-ud_convert.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/cmake/cacheinit.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/cmake/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/cmake/distribution.entitlements" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/cmake/grepTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/cmake/h5bitgroom-config-version.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/cmake/h5bitgroom-config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/cmake/runTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/toolchain/aarch64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/toolchain/build32.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/toolchain/clang.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/toolchain/crayle.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/toolchain/gcc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/toolchain/icc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/toolchain/intel.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/toolchain/mingw64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/config/toolchain/pgi.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/example/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/example/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/example/test/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/example/test/testCM.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/example/testfiles/h5ex_d_bitgroom.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/example/testfiles/h5ex_d_bitgroom.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/example/testfiles/h5repack_layout.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/example/testfiles/h5repack_layout.h5-ud_convert.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITGROOM/src/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/Additional_Legal/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/CTestConfig.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/bin/config.guess" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/bin/depcomp" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/bin/install-sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/bin/ltmain.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/bin/missing" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/bin/mkinstalldirs" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/bin/reconfigure" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/CacheURLs.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/cmake-presets/hidden-presets.json" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/cmake/CTestCustom.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/cmake/CTestScript.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/cmake/ConfigureChecks.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/cmake/H5BITROUNDMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/cmake/H5PL_Examples.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/cmake/HDFMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/cmake/HDFPLoptions.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/cmake/HDFPluginMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/cmake/NSIS.InstallOptions.ini.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/cmake/NSIS.template.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/cmake/README.txt.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/cmake/SignPackageFiles.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/cmake/binex/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/cmake/binex/CMakePresets.json" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/cmake/binex/CTestConfig.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/cmake/binex/Using_CMake.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/cmake/binex/config/cmake-presets/hidden-presets.json" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/cmake/binex/config/cmake/CTestCustom.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/cmake/binex/config/cmake/HDFMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/cmake/binex/config/cmake/HDFPluginMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/cmake/binex/config/cmake/cacheinit.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/cmake/binex/config/cmake/grepTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/cmake/binex/config/cmake/runTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/cmake/binex/config/toolchain/aarch64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/cmake/binex/config/toolchain/build32.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/cmake/binex/config/toolchain/clang.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/cmake/binex/config/toolchain/crayle.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/cmake/binex/config/toolchain/gcc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/cmake/binex/config/toolchain/icc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/cmake/binex/config/toolchain/mingw64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/cmake/binex/config/toolchain/pgi.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/cmake/binex/example/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/cmake/binex/example/test/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/cmake/binex/example/test/testCM.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/cmake/binex/example/testfiles/h5ex_d_granularbr.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/cmake/binex/example/testfiles/h5ex_d_granularbr.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/cmake/binex/example/testfiles/h5repack_layout.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/cmake/binex/example/testfiles/h5repack_layout.h5-ud_convert.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/cmake/cacheinit.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/cmake/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/cmake/distribution.entitlements" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/cmake/grepTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/cmake/h5bitround-config-version.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/cmake/h5bitround-config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/cmake/runTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/toolchain/aarch64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/toolchain/build32.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/toolchain/clang.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/toolchain/crayle.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/toolchain/gcc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/toolchain/icc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/toolchain/intel.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/toolchain/mingw64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/config/toolchain/pgi.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/example/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/example/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/example/test/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/example/test/testCM.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/example/testfiles/h5ex_d_granularbr.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/example/testfiles/h5ex_d_granularbr.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/example/testfiles/h5repack_layout.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/example/testfiles/h5repack_layout.h5-ud_convert.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BITROUND/src/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/Additional_Legal/PyTables_Copyrights_and_Licenses.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/CTestConfig.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/bin/config.guess" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/bin/depcomp" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/bin/install-sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/bin/ltmain.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/bin/missing" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/bin/mkinstalldirs" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/bin/reconfigure" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/bin/test-driver" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/CacheURLs.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/blosc-CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/cmake-presets/hidden-presets.json" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/cmake/CTestCustom.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/cmake/CTestScript.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/cmake/ConfigureChecks.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/cmake/H5BLOSCMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/cmake/H5PL_Examples.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/cmake/HDFMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/cmake/HDFPLoptions.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/cmake/HDFPluginMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/cmake/NSIS.InstallOptions.ini.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/cmake/NSIS.template.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/cmake/README.txt.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/cmake/SignPackageFiles.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/cmake/binex/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/cmake/binex/CMakePresets.json" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/cmake/binex/CTestConfig.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/cmake/binex/Using_CMake.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/cmake/binex/config/cmake-presets/hidden-presets.json" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/cmake/binex/config/cmake/CTestCustom.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/cmake/binex/config/cmake/HDFMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/cmake/binex/config/cmake/HDFPluginMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/cmake/binex/config/cmake/cacheinit.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/cmake/binex/config/cmake/grepTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/cmake/binex/config/cmake/runTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/cmake/binex/config/toolchain/aarch64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/cmake/binex/config/toolchain/build32.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/cmake/binex/config/toolchain/clang.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/cmake/binex/config/toolchain/crayle.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/cmake/binex/config/toolchain/gcc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/cmake/binex/config/toolchain/icc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/cmake/binex/config/toolchain/mingw64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/cmake/binex/config/toolchain/pgi.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/cmake/binex/example/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/cmake/binex/example/test/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/cmake/binex/example/test/testCM.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/cmake/binex/example/testfiles/h5ex_d_blosc.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/cmake/binex/example/testfiles/h5ex_d_blosc.err" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/cmake/binex/example/testfiles/h5ex_d_blosc.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/cmake/binex/example/testfiles/h5repack_layout.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/cmake/binex/example/testfiles/h5repack_layout.h5-ud_convert.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/cmake/cacheinit.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/cmake/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/cmake/distribution.entitlements" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/cmake/grepTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/cmake/h5blosc-config-version.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/cmake/h5blosc-config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/cmake/runTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/toolchain/aarch64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/toolchain/build32.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/toolchain/clang.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/toolchain/crayle.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/toolchain/gcc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/toolchain/icc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/toolchain/intel.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/toolchain/mingw64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/toolchain/pgi.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/zlib-CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/config/zlibdev-CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/example/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/example/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/example/test/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/example/test/testCM.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/example/testfiles/h5ex_d_blosc.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/example/testfiles/h5ex_d_blosc.err" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/example/testfiles/h5ex_d_blosc.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/example/testfiles/h5repack_layout.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/example/testfiles/h5repack_layout.h5-ud_convert.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/example/testfiles/h5repack_layout.h5-ud_convert_lz.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/example/testfiles/h5repack_layout.h5-ud_convert_lz4.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/example/testfiles/h5repack_layout.h5-ud_convert_lz4hc.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/example/testfiles/h5repack_layout.h5-ud_convert_zlib.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/example/testfiles/h5repack_layout.h5-ud_convert_zstd.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/m4/libtool.m4" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/m4/ltoptions.m4" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/m4/ltsugar.m4" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/m4/ltversion.m4" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/m4/lt~obsolete.m4" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC/src/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/Additional_Legal/PyTables_Copyrights_and_Licenses.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/CTestConfig.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/bin/config.guess" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/bin/depcomp" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/bin/install-sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/bin/ltmain.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/bin/missing" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/bin/mkinstalldirs" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/bin/reconfigure" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/bin/test-driver" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/CacheURLs.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/cmake-presets/hidden-presets.json" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/cmake/CTestCustom.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/cmake/CTestScript.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/cmake/ConfigureChecks.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/cmake/H5BLOSC2Macros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/cmake/H5PL_Examples.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/cmake/HDFMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/cmake/HDFPLoptions.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/cmake/HDFPluginMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/cmake/NSIS.InstallOptions.ini.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/cmake/NSIS.template.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/cmake/README.txt.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/cmake/SignPackageFiles.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/cmake/binex/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/cmake/binex/CMakePresets.json" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/cmake/binex/CTestConfig.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/cmake/binex/Using_CMake.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/cmake/binex/config/cmake-presets/hidden-presets.json" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/cmake/binex/config/cmake/CTestCustom.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/cmake/binex/config/cmake/HDFMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/cmake/binex/config/cmake/HDFPluginMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/cmake/binex/config/cmake/cacheinit.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/cmake/binex/config/cmake/grepTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/cmake/binex/config/cmake/runTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/cmake/binex/config/toolchain/aarch64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/cmake/binex/config/toolchain/build32.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/cmake/binex/config/toolchain/clang.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/cmake/binex/config/toolchain/crayle.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/cmake/binex/config/toolchain/gcc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/cmake/binex/config/toolchain/icc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/cmake/binex/config/toolchain/mingw64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/cmake/binex/config/toolchain/pgi.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/cmake/binex/example/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/cmake/binex/example/test/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/cmake/binex/example/test/testCM.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/cmake/binex/example/testfiles/h5ex_d_blosc2.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/cmake/binex/example/testfiles/h5ex_d_blosc2.err" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/cmake/binex/example/testfiles/h5ex_d_blosc2.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/cmake/binex/example/testfiles/h5repack_layout.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/cmake/binex/example/testfiles/h5repack_layout.h5-ud_convert.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/cmake/cacheinit.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/cmake/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/cmake/distribution.entitlements" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/cmake/grepTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/cmake/h5blosc2-config-version.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/cmake/h5blosc2-config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/cmake/runTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/toolchain/aarch64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/toolchain/build32.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/toolchain/clang.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/toolchain/crayle.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/toolchain/gcc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/toolchain/icc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/toolchain/intel.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/toolchain/mingw64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/config/toolchain/pgi.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/example/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/example/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/example/test/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/example/test/testCM.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/example/testfiles/h5ex_d_blosc2.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/example/testfiles/h5ex_d_blosc2.err" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/example/testfiles/h5ex_d_blosc2.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/example/testfiles/h5repack_layout.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/example/testfiles/h5repack_layout.h5-ud_convert.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/example/testfiles/h5repack_layout.h5-ud_convert_lz.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/example/testfiles/h5repack_layout.h5-ud_convert_lz4.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/example/testfiles/h5repack_layout.h5-ud_convert_lz4hc.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/example/testfiles/h5repack_layout.h5-ud_convert_zlib.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/example/testfiles/h5repack_layout.h5-ud_convert_zstd.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/m4/libtool.m4" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/m4/ltoptions.m4" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/m4/ltsugar.m4" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/m4/ltversion.m4" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/m4/lt~obsolete.m4" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BLOSC2/src/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/Additional_Legal/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/Additional_Legal/h5py_Copyrights_and_Licenses.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/CTestConfig.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/README.rst" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/bin/config.guess" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/bin/depcomp" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/bin/install-sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/bin/ltmain.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/bin/missing" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/bin/mkinstalldirs" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/bin/reconfigure" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/CacheURLs.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/cmake-presets/hidden-presets.json" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/cmake/CTestCustom.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/cmake/CTestScript.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/cmake/ConfigureChecks.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/cmake/H5BSHUFMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/cmake/H5PL_Examples.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/cmake/HDFMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/cmake/HDFPLoptions.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/cmake/HDFPluginMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/cmake/NSIS.InstallOptions.ini.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/cmake/NSIS.template.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/cmake/README.txt.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/cmake/SignPackageFiles.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/cmake/binex/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/cmake/binex/CMakePresets.json" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/cmake/binex/CTestConfig.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/cmake/binex/Using_CMake.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/cmake/binex/config/cmake-presets/hidden-presets.json" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/cmake/binex/config/cmake/CTestCustom.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/cmake/binex/config/cmake/HDFMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/cmake/binex/config/cmake/HDFPluginMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/cmake/binex/config/cmake/cacheinit.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/cmake/binex/config/cmake/grepTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/cmake/binex/config/cmake/runTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/cmake/binex/config/toolchain/aarch64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/cmake/binex/config/toolchain/build32.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/cmake/binex/config/toolchain/clang.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/cmake/binex/config/toolchain/crayle.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/cmake/binex/config/toolchain/gcc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/cmake/binex/config/toolchain/icc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/cmake/binex/config/toolchain/mingw64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/cmake/binex/config/toolchain/pgi.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/cmake/binex/example/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/cmake/binex/example/test/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/cmake/binex/example/test/testCM.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/cmake/binex/example/testfiles/h5ex_d_bshuf.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/cmake/binex/example/testfiles/h5ex_d_bshuf.err" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/cmake/binex/example/testfiles/h5ex_d_bshuf.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/cmake/binex/example/testfiles/h5repack_layout.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/cmake/binex/example/testfiles/h5repack_layout.h5-ud_convert.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/cmake/cacheinit.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/cmake/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/cmake/distribution.entitlements" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/cmake/grepTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/cmake/h5bshuf-config-version.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/cmake/h5bshuf-config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/cmake/runTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/toolchain/aarch64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/toolchain/build32.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/toolchain/clang.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/toolchain/crayle.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/toolchain/gcc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/toolchain/icc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/toolchain/intel.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/toolchain/mingw64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/config/toolchain/pgi.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/example/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/example/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/example/test/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/example/test/testCM.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/example/testfiles/h5ex_d_bshuf.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/example/testfiles/h5ex_d_bshuf.err" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/example/testfiles/h5ex_d_bshuf.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/example/testfiles/h5repack_layout.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/example/testfiles/h5repack_layout.h5-ud_convert.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/src/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/src/lib/lz4/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BSHUF/src/lib/lz4/README.md" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/Additional_Legal/PyTables_Copyrights_and_Licenses.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/CTestConfig.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/CacheURLs.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/cmake-presets/hidden-presets.json" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/cmake/CTestCustom.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/cmake/CTestScript.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/cmake/ConfigureChecks.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/cmake/H5BZ2Macros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/cmake/H5PL_Examples.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/cmake/HDFMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/cmake/HDFPLoptions.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/cmake/HDFPluginMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/cmake/NSIS.InstallOptions.ini.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/cmake/NSIS.template.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/cmake/README.txt.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/cmake/SignPackageFiles.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/cmake/binex/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/cmake/binex/CMakePresets.json" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/cmake/binex/CTestConfig.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/cmake/binex/Using_CMake.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/cmake/binex/config/cmake-presets/hidden-presets.json" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/cmake/binex/config/cmake/CTestCustom.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/cmake/binex/config/cmake/HDFMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/cmake/binex/config/cmake/HDFPluginMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/cmake/binex/config/cmake/cacheinit.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/cmake/binex/config/cmake/grepTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/cmake/binex/config/cmake/runTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/cmake/binex/config/toolchain/aarch64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/cmake/binex/config/toolchain/build32.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/cmake/binex/config/toolchain/clang.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/cmake/binex/config/toolchain/crayle.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/cmake/binex/config/toolchain/gcc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/cmake/binex/config/toolchain/icc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/cmake/binex/config/toolchain/mingw64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/cmake/binex/config/toolchain/pgi.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/cmake/binex/example/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/cmake/binex/example/test/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/cmake/binex/example/test/testCM.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/cmake/binex/example/testfiles/h5ex_d_bzip2.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/cmake/binex/example/testfiles/h5ex_d_bzip2.err" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/cmake/binex/example/testfiles/h5ex_d_bzip2.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/cmake/binex/example/testfiles/h5repack_layout.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/cmake/binex/example/testfiles/h5repack_layout.h5-ud_convert.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/cmake/cacheinit.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/cmake/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/cmake/distribution.entitlements" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/cmake/grepTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/cmake/h5bz2-config-version.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/cmake/h5bz2-config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/cmake/runTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/toolchain/aarch64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/toolchain/build32.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/toolchain/clang.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/toolchain/crayle.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/toolchain/gcc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/toolchain/icc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/toolchain/intel.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/toolchain/mingw64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/config/toolchain/pgi.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/example/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/example/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/example/test/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/example/test/testCM.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/example/testfiles/h5ex_d_bzip2.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/example/testfiles/h5ex_d_bzip2.err" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/example/testfiles/h5ex_d_bzip2.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/example/testfiles/h5repack_layout.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/example/testfiles/h5repack_layout.h5-ud_convert.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/m4/libtool.m4" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/m4/ltoptions.m4" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/m4/ltsugar.m4" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/m4/ltversion.m4" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/m4/lt~obsolete.m4" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/BZIP2/src/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/Building.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/CMakePresets.json" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/COPYING" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/CTestConfig.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/Additional_Legal/PyTables_Copyrights_and_Licenses.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/CTestConfig.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/CacheURLs.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/cmake-presets/hidden-presets.json" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/cmake/CTestCustom.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/cmake/CTestScript.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/cmake/ConfigureChecks.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/cmake/H5JPEGMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/cmake/H5PL_Examples.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/cmake/HDFMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/cmake/HDFPLoptions.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/cmake/HDFPluginMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/cmake/NSIS.InstallOptions.ini.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/cmake/NSIS.template.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/cmake/README.txt.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/cmake/SignPackageFiles.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/cmake/binex/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/cmake/binex/CMakePresets.json" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/cmake/binex/CTestConfig.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/cmake/binex/Using_CMake.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/cmake/binex/config/cmake-presets/hidden-presets.json" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/cmake/binex/config/cmake/CTestCustom.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/cmake/binex/config/cmake/HDFMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/cmake/binex/config/cmake/HDFPluginMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/cmake/binex/config/cmake/cacheinit.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/cmake/binex/config/cmake/grepTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/cmake/binex/config/cmake/runTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/cmake/binex/config/toolchain/aarch64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/cmake/binex/config/toolchain/build32.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/cmake/binex/config/toolchain/clang.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/cmake/binex/config/toolchain/crayle.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/cmake/binex/config/toolchain/gcc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/cmake/binex/config/toolchain/icc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/cmake/binex/config/toolchain/mingw64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/cmake/binex/config/toolchain/pgi.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/cmake/binex/example/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/cmake/binex/example/test/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/cmake/binex/example/test/testCM.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/cmake/binex/example/testfiles/h5ex_d_jpeg.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/cmake/binex/example/testfiles/h5ex_d_jpeg.err" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/cmake/binex/example/testfiles/h5ex_d_jpeg.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/cmake/binex/example/testfiles/h5repack_layout.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/cmake/binex/example/testfiles/h5repack_layout.h5-ud_convert.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/cmake/cacheinit.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/cmake/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/cmake/distribution.entitlements" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/cmake/grepTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/cmake/h5jpeg-config-version.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/cmake/h5jpeg-config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/cmake/runTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/jconfig.h.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/toolchain/aarch64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/toolchain/build32.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/toolchain/clang.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/toolchain/crayle.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/toolchain/gcc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/toolchain/icc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/toolchain/intel.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/toolchain/mingw64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/config/toolchain/pgi.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/example/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/example/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/example/test/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/example/test/testCM.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/example/testfiles/h5ex_d_jpeg.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/example/testfiles/h5ex_d_jpeg.err" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/example/testfiles/h5ex_d_jpeg.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/JPEG/src/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/Additional_Legal/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/Additional_Legal/h5py_Copyrights_and_Licenses.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/CTestConfig.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/LZ4_HDF5_format.md" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/CacheURLs.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/cmake-presets/hidden-presets.json" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/cmake/CTestCustom.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/cmake/CTestScript.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/cmake/ConfigureChecks.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/cmake/H5LZ4Macros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/cmake/H5PL_Examples.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/cmake/HDFMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/cmake/HDFPLoptions.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/cmake/HDFPluginMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/cmake/NSIS.InstallOptions.ini.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/cmake/NSIS.template.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/cmake/README.txt.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/cmake/SignPackageFiles.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/cmake/binex/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/cmake/binex/CMakePresets.json" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/cmake/binex/CTestConfig.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/cmake/binex/Using_CMake.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/cmake/binex/config/cmake-presets/hidden-presets.json" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/cmake/binex/config/cmake/CTestCustom.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/cmake/binex/config/cmake/HDFMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/cmake/binex/config/cmake/HDFPluginMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/cmake/binex/config/cmake/cacheinit.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/cmake/binex/config/cmake/grepTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/cmake/binex/config/cmake/runTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/cmake/binex/config/toolchain/aarch64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/cmake/binex/config/toolchain/build32.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/cmake/binex/config/toolchain/clang.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/cmake/binex/config/toolchain/crayle.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/cmake/binex/config/toolchain/gcc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/cmake/binex/config/toolchain/icc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/cmake/binex/config/toolchain/mingw64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/cmake/binex/config/toolchain/pgi.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/cmake/binex/example/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/cmake/binex/example/test/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/cmake/binex/example/test/testCM.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/cmake/binex/example/testfiles/h5ex_d_lz4.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/cmake/binex/example/testfiles/h5ex_d_lz4.err" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/cmake/binex/example/testfiles/h5ex_d_lz4.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/cmake/binex/example/testfiles/h5repack_layout.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/cmake/binex/example/testfiles/h5repack_layout.h5-ud_convert.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/cmake/cacheinit.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/cmake/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/cmake/distribution.entitlements" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/cmake/grepTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/cmake/h5lz4-config-version.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/cmake/h5lz4-config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/cmake/runTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/lz4Config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/toolchain/aarch64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/toolchain/build32.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/toolchain/clang.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/toolchain/crayle.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/toolchain/gcc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/toolchain/icc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/toolchain/intel.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/toolchain/mingw64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/config/toolchain/pgi.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/example/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/example/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/example/test/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/example/test/testCM.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/example/testfiles/h5ex_d_lz4.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/example/testfiles/h5ex_d_lz4.err" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/example/testfiles/h5ex_d_lz4.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/example/testfiles/h5repack_layout.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/example/testfiles/h5repack_layout.h5-ud_convert.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZ4/src/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/Additional_Legal/h5py_Copyrights_and_Licenses.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/CTestConfig.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/bin/config.guess" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/bin/depcomp" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/bin/install-sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/bin/ltmain.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/bin/missing" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/bin/mkinstalldirs" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/bin/reconfigure" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/CacheURLs.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/cmake-presets/hidden-presets.json" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/cmake/CTestCustom.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/cmake/CTestScript.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/cmake/ConfigureChecks.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/cmake/H5LZFMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/cmake/H5PL_Examples.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/cmake/HDFMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/cmake/HDFPLoptions.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/cmake/HDFPluginMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/cmake/NSIS.InstallOptions.ini.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/cmake/NSIS.template.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/cmake/README.txt.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/cmake/SignPackageFiles.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/cmake/binex/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/cmake/binex/CMakePresets.json" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/cmake/binex/CTestConfig.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/cmake/binex/Using_CMake.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/cmake/binex/config/cmake-presets/hidden-presets.json" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/cmake/binex/config/cmake/CTestCustom.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/cmake/binex/config/cmake/HDFMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/cmake/binex/config/cmake/HDFPluginMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/cmake/binex/config/cmake/cacheinit.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/cmake/binex/config/cmake/grepTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/cmake/binex/config/cmake/runTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/cmake/binex/config/toolchain/aarch64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/cmake/binex/config/toolchain/build32.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/cmake/binex/config/toolchain/clang.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/cmake/binex/config/toolchain/crayle.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/cmake/binex/config/toolchain/gcc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/cmake/binex/config/toolchain/icc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/cmake/binex/config/toolchain/mingw64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/cmake/binex/config/toolchain/pgi.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/cmake/binex/example/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/cmake/binex/example/test/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/cmake/binex/example/test/testCM.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/cmake/binex/example/testfiles/h5ex_d_lzf.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/cmake/binex/example/testfiles/h5ex_d_lzf.err" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/cmake/binex/example/testfiles/h5ex_d_lzf.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/cmake/binex/example/testfiles/h5repack_layout.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/cmake/binex/example/testfiles/h5repack_layout.h5-ud_convert.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/cmake/cacheinit.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/cmake/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/cmake/distribution.entitlements" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/cmake/grepTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/cmake/h5lzf-config-version.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/cmake/h5lzf-config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/cmake/runTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/toolchain/aarch64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/toolchain/build32.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/toolchain/clang.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/toolchain/crayle.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/toolchain/gcc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/toolchain/icc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/toolchain/intel.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/toolchain/mingw64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/config/toolchain/pgi.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/example/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/example/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/example/test/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/example/test/testCM.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/example/testfiles/h5ex_d_lzf.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/example/testfiles/h5ex_d_lzf.err" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/example/testfiles/h5ex_d_lzf.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/example/testfiles/h5repack_layout.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/example/testfiles/h5repack_layout.h5-ud_convert.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/LZF/src/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/README.md" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/Additional_Legal/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/CTestConfig.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/README.md" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/CacheURLs.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/cmake-presets/hidden-presets.json" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/cmake/CTestCustom.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/cmake/CTestScript.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/cmake/ConfigureChecks.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/cmake/H5PL_Examples.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/cmake/H5ZFPMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/cmake/HDFMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/cmake/HDFPLoptions.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/cmake/HDFPluginMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/cmake/NSIS.InstallOptions.ini.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/cmake/NSIS.template.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/cmake/README.txt.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/cmake/SignPackageFiles.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/cmake/binex/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/cmake/binex/CMakePresets.json" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/cmake/binex/CTestConfig.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/cmake/binex/Using_CMake.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/cmake/binex/config/cmake-presets/hidden-presets.json" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/cmake/binex/config/cmake/CTestCustom.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/cmake/binex/config/cmake/HDFMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/cmake/binex/config/cmake/HDFPluginMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/cmake/binex/config/cmake/cacheinit.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/cmake/binex/config/cmake/grepTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/cmake/binex/config/cmake/runTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/cmake/binex/config/toolchain/aarch64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/cmake/binex/config/toolchain/build32.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/cmake/binex/config/toolchain/clang.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/cmake/binex/config/toolchain/crayle.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/cmake/binex/config/toolchain/gcc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/cmake/binex/config/toolchain/icc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/cmake/binex/config/toolchain/mingw64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/cmake/binex/config/toolchain/pgi.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/cmake/binex/example/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/cmake/binex/example/test/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/cmake/binex/example/test/testCM.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/cmake/binex/example/testfiles/h5ex_d_zfp.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/cmake/binex/example/testfiles/h5ex_d_zfp.err" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/cmake/binex/example/testfiles/h5ex_d_zfp.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/cmake/binex/example/testfiles/h5repack_layout.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/cmake/binex/example/testfiles/h5repack_layout.h5-ud_convert.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/cmake/cacheinit.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/cmake/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/cmake/distribution.entitlements" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/cmake/grepTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/cmake/h5zfp-config-version.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/cmake/h5zfp-config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/cmake/runTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/srcCMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/toolchain/aarch64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/toolchain/build32.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/toolchain/clang.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/toolchain/crayle.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/toolchain/gcc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/toolchain/icc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/toolchain/intel.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/toolchain/mingw64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/config/toolchain/pgi.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/docs/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/docs/cmake.rst" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/docs/conf.py" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/docs/endian_issues.rst" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/docs/h5repack.rst" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/docs/hdf5_chunking.rst" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/docs/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/docs/installation.rst" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/docs/interfaces.rst" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/docs/tests.rst" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/example/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/example/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/example/test/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/example/test/testCM.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/example/testfiles/h5ex_d_zfp.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/example/testfiles/h5ex_d_zfp.err" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/example/testfiles/h5ex_d_zfp.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/example/testfiles/h5repack_layout.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/example/testfiles/h5repack_layout.h5-ud_convert.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/example/testfiles/mesh.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/example/testfiles/mesh.h5-ud_mesh_convert.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/example/testfiles/ud_mesh_convert.mesh.h5.err" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZFP/src/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/Additional_Legal/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/Additional_Legal/PyTables_Copyrights_and_Licenses.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/CTestConfig.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/CacheURLs.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/cmake-presets/hidden-presets.json" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/cmake/CTestCustom.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/cmake/CTestScript.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/cmake/ConfigureChecks.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/cmake/H5PL_Examples.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/cmake/H5ZSTDMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/cmake/HDFMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/cmake/HDFPLoptions.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/cmake/HDFPluginMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/cmake/NSIS.InstallOptions.ini.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/cmake/NSIS.template.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/cmake/README.txt.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/cmake/SignPackageFiles.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/cmake/binex/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/cmake/binex/CMakePresets.json" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/cmake/binex/CTestConfig.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/cmake/binex/Using_CMake.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/cmake/binex/config/cmake-presets/hidden-presets.json" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/cmake/binex/config/cmake/CTestCustom.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/cmake/binex/config/cmake/HDFMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/cmake/binex/config/cmake/HDFPluginMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/cmake/binex/config/cmake/cacheinit.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/cmake/binex/config/cmake/grepTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/cmake/binex/config/cmake/runTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/cmake/binex/config/toolchain/aarch64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/cmake/binex/config/toolchain/build32.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/cmake/binex/config/toolchain/clang.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/cmake/binex/config/toolchain/crayle.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/cmake/binex/config/toolchain/gcc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/cmake/binex/config/toolchain/icc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/cmake/binex/config/toolchain/mingw64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/cmake/binex/config/toolchain/pgi.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/cmake/binex/example/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/cmake/binex/example/test/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/cmake/binex/example/test/testCM.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/cmake/binex/example/testfiles/h5ex_d_zstd.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/cmake/binex/example/testfiles/h5ex_d_zstd.err" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/cmake/binex/example/testfiles/h5ex_d_zstd.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/cmake/binex/example/testfiles/h5repack_layout.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/cmake/binex/example/testfiles/h5repack_layout.h5-ud_convert.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/cmake/cacheinit.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/cmake/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/cmake/distribution.entitlements" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/cmake/grepTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/cmake/h5zstd-config-version.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/cmake/h5zstd-config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/cmake/runTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/libCMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/toolchain/aarch64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/toolchain/build32.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/toolchain/clang.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/toolchain/crayle.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/toolchain/gcc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/toolchain/icc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/toolchain/intel.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/toolchain/mingw64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/config/toolchain/pgi.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/example/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/example/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/example/test/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/example/test/testCM.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/example/testfiles/h5ex_d_zstd.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/example/testfiles/h5ex_d_zstd.err" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/example/testfiles/h5ex_d_zstd.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/ZSTD/src/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/Additional_Legal/License" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/CTestConfig.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/bin/config.guess" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/bin/depcomp" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/bin/install-sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/bin/ltmain.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/bin/missing" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/bin/mkinstalldirs" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/bin/reconfigure" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/config/cmake/CTestCustom.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/config/cmake/CTestScript.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/config/cmake/ConfigureChecks.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/config/cmake/H5MAFISCMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/config/cmake/H5PL_Examples.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/config/cmake/HDFMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/config/cmake/HDFPluginMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/config/cmake/HDFoptions.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/config/cmake/NSIS.InstallOptions.ini.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/config/cmake/NSIS.template.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/config/cmake/README.txt.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/config/cmake/SignPackageFiles.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/config/cmake/binex/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/config/cmake/binex/CTestConfig.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/config/cmake/binex/Using_CMake.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/config/cmake/binex/config/cmake/CTestCustom.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/config/cmake/binex/config/cmake/HDFMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/config/cmake/binex/config/cmake/HDFPluginMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/config/cmake/binex/config/cmake/cacheinit.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/config/cmake/binex/config/cmake/grepTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/config/cmake/binex/config/cmake/runTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/config/cmake/binex/config/toolchain/aarch64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/config/cmake/binex/config/toolchain/build32.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/config/cmake/binex/config/toolchain/clang.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/config/cmake/binex/config/toolchain/crayle.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/config/cmake/binex/config/toolchain/gcc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/config/cmake/binex/config/toolchain/icc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/config/cmake/binex/config/toolchain/mingw64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/config/cmake/binex/config/toolchain/pgi.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/config/cmake/binex/example/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/config/cmake/binex/example/test/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/config/cmake/binex/example/test/testCM.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/config/cmake/binex/example/testfiles/h5ex_d_mafisc.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/config/cmake/binex/example/testfiles/h5ex_d_mafisc.err" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/config/cmake/binex/example/testfiles/h5ex_d_mafisc.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/config/cmake/binex/example/testfiles/h5repack_layout.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/config/cmake/binex/example/testfiles/h5repack_layout.h5-ud_convert.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/config/cmake/cacheinit.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/config/cmake/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/config/cmake/distribution.entitlements" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/config/cmake/grepTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/config/cmake/h5mafisc-config-version.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/config/cmake/h5mafisc-config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/config/cmake/runTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/config/toolchain/aarch64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/config/toolchain/build32.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/config/toolchain/clang.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/config/toolchain/crayle.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/config/toolchain/gcc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/config/toolchain/icc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/config/toolchain/intel.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/config/toolchain/mingw64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/config/toolchain/pgi.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/example/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/example/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/example/test/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/example/test/testCM.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/example/testfiles/h5ex_d_mafisc.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/example/testfiles/h5ex_d_mafisc.err" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/example/testfiles/h5ex_d_mafisc.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/example/testfiles/h5repack_layout.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/example/testfiles/h5repack_layout.h5-ud_convert.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/api/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/api/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/check/crc32_x86.S" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/check/crc64_x86.S" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/MAFISC/src/liblzma/liblzma.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/README.md" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/Additional_Legal/copyright-and-BSD-license.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/CTestConfig.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/config/cmake/CTestCustom.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/config/cmake/CTestScript.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/config/cmake/ConfigureChecks.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/config/cmake/H5PL_Examples.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/config/cmake/H5SZMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/config/cmake/HDFMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/config/cmake/HDFPluginMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/config/cmake/HDFoptions.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/config/cmake/NSIS.InstallOptions.ini.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/config/cmake/NSIS.template.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/config/cmake/README.txt.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/config/cmake/SignPackageFiles.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/config/cmake/binex/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/config/cmake/binex/CTestConfig.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/config/cmake/binex/Using_CMake.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/config/cmake/binex/config/cmake/CTestCustom.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/config/cmake/binex/config/cmake/HDFMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/config/cmake/binex/config/cmake/HDFPluginMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/config/cmake/binex/config/cmake/cacheinit.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/config/cmake/binex/config/cmake/grepTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/config/cmake/binex/config/cmake/runTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/config/cmake/binex/config/toolchain/aarch64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/config/cmake/binex/config/toolchain/build32.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/config/cmake/binex/config/toolchain/clang.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/config/cmake/binex/config/toolchain/crayle.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/config/cmake/binex/config/toolchain/gcc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/config/cmake/binex/config/toolchain/icc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/config/cmake/binex/config/toolchain/mingw64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/config/cmake/binex/config/toolchain/pgi.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/config/cmake/binex/example/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/config/cmake/binex/example/test/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/config/cmake/binex/example/test/testCM.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/config/cmake/binex/example/testfiles/h5ex_d_sz.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/config/cmake/binex/example/testfiles/h5ex_d_sz.err" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/config/cmake/binex/example/testfiles/h5ex_d_sz.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/config/cmake/binex/example/testfiles/h5repack_layout.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/config/cmake/binex/example/testfiles/h5repack_layout.h5-ud_convert.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/config/cmake/binex/example/testfiles/sz.config" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/config/cmake/cacheinit.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/config/cmake/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/config/cmake/distribution.entitlements" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/config/cmake/grepTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/config/cmake/h5sz-config-version.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/config/cmake/h5sz-config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/config/cmake/runTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/config/toolchain/aarch64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/config/toolchain/build32.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/config/toolchain/clang.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/config/toolchain/crayle.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/config/toolchain/gcc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/config/toolchain/icc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/config/toolchain/intel.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/config/toolchain/mingw64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/config/toolchain/pgi.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/example/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/example/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/example/test/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/example/test/testCM.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/example/testfiles/h5ex_d_sz.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/example/testfiles/h5ex_d_sz.err" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/example/testfiles/h5ex_d_sz.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/example/testfiles/h5repack_layout.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/example/testfiles/h5repack_layout.h5-ud_convert.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/example/testfiles/sz.config" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/m4/libtool.m4" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/m4/ltoptions.m4" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/m4/ltsugar.m4" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/m4/ltversion.m4" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/m4/lt~obsolete.m4" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/src/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/SZ/src/sz.config" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/apax/README.md" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/b3d/README.md" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/bitgroom/README.md" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/cbf/README.md" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/ccsds-123/README.md" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/delta-rice/README.md" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/fapec/README.md" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/fcidecomp/README.md" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/flac/README.md" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/fpzip/README.md" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/gbr/README.md" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/h5z-sperr/README.md" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/jpeg-ls/README.md" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/jpeg-xr/README.md" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/jpeg/README.md" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/lpc-rice/README.md" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/lzo/README.md" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/snappy/README.md" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/spdp/README.md" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/sz3/README.md" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/template/README.md" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/trpx/README.md" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/community/vbz/README.md" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/CacheURLs.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake-presets/hidden-presets.json" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/CTestCustom.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/CTestScript.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/H5PLMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/H5PL_Examples.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/HDF5PLconfig.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/HDFMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/HDFPLoptions.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/HDFPluginMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/NSIS.InstallOptions.ini.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/NSIS.template.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/README.txt.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/SignPackageFiles.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/CMakePresets.json" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/CMakeUserPresets.json" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/CTestConfig.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/Using_CMake.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/config/cmake-presets/hidden-presets.json" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/config/cmake/CTestCustom.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/config/cmake/HDFMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/config/cmake/HDFPluginMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/config/cmake/cacheinit.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/config/cmake/grepTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/config/cmake/runTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/config/toolchain/aarch64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/config/toolchain/build32.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/config/toolchain/clang.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/config/toolchain/crayle.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/config/toolchain/gcc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/config/toolchain/icc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/config/toolchain/mingw64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/config/toolchain/pgi.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/example/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/example/test/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/example/test/testCM.sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/example/testfiles/h5ex_d_bitgroom.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/example/testfiles/h5ex_d_bitgroom.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/example/testfiles/h5ex_d_blosc.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/example/testfiles/h5ex_d_blosc.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/example/testfiles/h5ex_d_blosc2.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/example/testfiles/h5ex_d_blosc2.err" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/example/testfiles/h5ex_d_blosc2.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/example/testfiles/h5ex_d_bshuf.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/example/testfiles/h5ex_d_bshuf.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/example/testfiles/h5ex_d_bzip2.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/example/testfiles/h5ex_d_bzip2.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/example/testfiles/h5ex_d_granularbr.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/example/testfiles/h5ex_d_granularbr.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/example/testfiles/h5ex_d_jpeg.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/example/testfiles/h5ex_d_jpeg.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/example/testfiles/h5ex_d_lz4.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/example/testfiles/h5ex_d_lz4.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/example/testfiles/h5ex_d_lzf.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/example/testfiles/h5ex_d_lzf.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/example/testfiles/h5ex_d_pl.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/example/testfiles/h5ex_d_zfp.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/example/testfiles/h5ex_d_zfp.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/example/testfiles/h5ex_d_zstd.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/example/testfiles/h5ex_d_zstd.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/example/testfiles/h5repack_layout.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/example/testfiles/h5repack_layout.h5-ud_convert.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/example/testfiles/h5repack_layout.h5-ud_pl_blosc_convert.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/example/testfiles/h5repack_layout.h5-ud_pl_bz2_convert.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/example/testfiles/h5repack_layout.h5-ud_pl_convert.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/binex/example/testfiles/h5repack_layout.h5-ud_pl_lz4_convert.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/cacheinit.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/distribution.entitlements" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/h5pl-config-version.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/cmake/h5pl-config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/toolchain/aarch64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/toolchain/build32.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/toolchain/clang.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/toolchain/crayle.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/toolchain/gcc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/toolchain/icc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/toolchain/intel.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/toolchain/mingw64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/config/toolchain/pgi.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/docs/Compression Product.pdf" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/docs/INSTALL_With_CMake.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/docs/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/docs/PluginLibraries.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/docs/RegisteredFilterPlugins.md" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/docs/USING_HDF5_AND_CMake.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/docs/proposal.pdf" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/docs/proposal.tex" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/docs/sz-2.1-user-guide.pdf" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/docs/techrequirements.pdf" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/docs/techrequirements.tex" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/libs/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/testfiles/h5ex_d_npbzip2.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/testfiles/h5ex_d_nplz4.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/testfiles/h5ex_d_nplzf.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5_plugins/testfiles/h5ex_d_npzfp.h5" />
+  </ItemGroup>
+  <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+</Project>
+  

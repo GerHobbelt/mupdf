@@ -48,16 +48,16 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -70,7 +70,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -104,8 +104,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../include;../../scripts/tesseract;../../scripts/leptonica/include;../../thirdparty/tesseract/include;../../thirdparty/tesseract/src/api;../../thirdparty/tesseract/src/arch;../../thirdparty/tesseract/src/ccmain;../../thirdparty/tesseract/src/ccstruct;../../thirdparty/tesseract/src/ccutil;../../thirdparty/tesseract/src/classify;../../thirdparty/tesseract/src/dict;../../thirdparty/tesseract/src/lstm;../../thirdparty/tesseract/src/textord;../../thirdparty/tesseract/src/viewer;../../thirdparty/tesseract/src/wordrec;../../thirdparty/tesseract/src/cutil;../../thirdparty/tesseract/src/training/pango;../../thirdparty/tesseract/src/training/unicharset;../../thirdparty/libtiff/libtiff;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../scripts/libtiff;../../thirdparty/owemdjee/libarchive/libarchive;../../thirdparty/owemdjee/plf_nanotimer;../../thirdparty/owemdjee/pango;../../thirdparty/owemdjee/unicode-icu/icu4c/source/common;../../thirdparty/owemdjee/unicode-icu/icu4c/source/i18n;../../thirdparty/harfbuzz/src;../../thirdparty/owemdjee/fontconfig;../../thirdparty/owemdjee/filesystem/include;../../thirdparty/owemdjee/spdlog/include;../../thirdparty/owemdjee/libdiagnostics/include;../../thirdparty/owemdjee/libparameters/include;../../scripts/result-cpp/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -197,9 +197,39 @@
     <Image Include="../../thirdparty/tesseract_ocr_test/testing/hebrew-nikud-genesis-1-2.png" />
     <Image Include="../../thirdparty/tesseract_ocr_test/testing/hebrew.png" />
     <Image Include="../../thirdparty/tesseract_ocr_test/testing/hebtypo.jpg" />
+    <Image Include="../../thirdparty/tesseract_ocr_test/testing/masking/skin-tones-crayons-packaging.png" />
     <Image Include="../../thirdparty/tesseract_ocr_test/testing/phototest-rotated-180.png" />
     <Image Include="../../thirdparty/tesseract_ocr_test/testing/phototest-rotated-L.png" />
     <Image Include="../../thirdparty/tesseract_ocr_test/testing/phototest-rotated-R.png" />
+    <Image Include="../../thirdparty/tesseract_ocr_test/testing/processing/280313258-2b866cef-9ab8-438e-8421-11f5edf04884.jpg" />
+    <Image Include="../../thirdparty/tesseract_ocr_test/testing/processing/BMAG.jpg" />
+    <Image Include="../../thirdparty/tesseract_ocr_test/testing/processing/Berliner_Maschinenbau-AG_1932.jpg" />
+    <Image Include="../../thirdparty/tesseract_ocr_test/testing/processing/Clapham_Junction_(Windsor_Lines)_Down_milk_empties_geograph-2646794-by-Ben-Brooksbank (1).jpg" />
+    <Image Include="../../thirdparty/tesseract_ocr_test/testing/processing/Feltham_Locomotive_Depot_Q!_Class_geograph-2979665-by-Ben-Brooksbank.jpg" />
+    <Image Include="../../thirdparty/tesseract_ocr_test/testing/processing/Fuehrerstand01008.jpg" />
+    <Image Include="../../thirdparty/tesseract_ocr_test/testing/processing/IMG_20200509_154206.jpg" />
+    <Image Include="../../thirdparty/tesseract_ocr_test/testing/processing/IMG_20211231_105430.jpg" />
+    <Image Include="../../thirdparty/tesseract_ocr_test/testing/processing/IMG_20211231_105628.jpg" />
+    <Image Include="../../thirdparty/tesseract_ocr_test/testing/processing/JUNNJ.jpg" />
+    <Image Include="../../thirdparty/tesseract_ocr_test/testing/processing/Lambregts0001 - cleaned.jpg" />
+    <Image Include="../../thirdparty/tesseract_ocr_test/testing/processing/PortaByCabside1971.jpg" />
+    <Image Include="../../thirdparty/tesseract_ocr_test/testing/processing/SA_1241_small.jpg" />
+    <Image Include="../../thirdparty/tesseract_ocr_test/testing/processing/_DSC3610.jpg" />
+    <Image Include="../../thirdparty/tesseract_ocr_test/testing/processing/_DSC3677.jpg" />
+    <Image Include="../../thirdparty/tesseract_ocr_test/testing/processing/_DSC4298.jpg" />
+    <Image Include="../../thirdparty/tesseract_ocr_test/testing/processing/_DSC4448.jpg" />
+    <Image Include="../../thirdparty/tesseract_ocr_test/testing/processing/akzo.jpg" />
+    <Image Include="../../thirdparty/tesseract_ocr_test/testing/processing/btw0.jpg" />
+    <Image Include="../../thirdparty/tesseract_ocr_test/testing/processing/btw3-Q99.jpg" />
+    <Image Include="../../thirdparty/tesseract_ocr_test/testing/processing/btw3.jpg" />
+    <Image Include="../../thirdparty/tesseract_ocr_test/testing/processing/buurtspoorweg 1917.jpg" />
+    <Image Include="../../thirdparty/tesseract_ocr_test/testing/processing/buurtspoorweg 1927.jpg" />
+    <Image Include="../../thirdparty/tesseract_ocr_test/testing/processing/folder+book.jpg" />
+    <Image Include="../../thirdparty/tesseract_ocr_test/testing/processing/gooische stoomtram 1931.jpg" />
+    <Image Include="../../thirdparty/tesseract_ocr_test/testing/processing/obligatie-akzo.jpg" />
+    <Image Include="../../thirdparty/tesseract_ocr_test/testing/processing/pxfuel (5).jpg" />
+    <Image Include="../../thirdparty/tesseract_ocr_test/testing/processing/pxfuel (9).jpg" />
+    <Text Include="../../thirdparty/tesseract_ocr_test/LICENSE" />
     <Text Include="../../thirdparty/tesseract_ocr_test/README.md" />
     <Text Include="../../thirdparty/tesseract_ocr_test/langtests/README.md" />
     <Text Include="../../thirdparty/tesseract_ocr_test/langtests/counttestset.sh" />
@@ -279,11 +309,14 @@
     <Text Include="../../thirdparty/tesseract_ocr_test/testing/eurotext.tif" />
     <Text Include="../../thirdparty/tesseract_ocr_test/testing/eurotext.txt" />
     <Text Include="../../thirdparty/tesseract_ocr_test/testing/hin_beam.unicharset" />
+    <Text Include="../../thirdparty/tesseract_ocr_test/testing/masking/skin-tones-crayons-packaging.tif" />
+    <Text Include="../../thirdparty/tesseract_ocr_test/testing/masking/skin-tones-crayons-packaging.tiff" />
     <Text Include="../../thirdparty/tesseract_ocr_test/testing/phototest.gold.txt" />
     <Text Include="../../thirdparty/tesseract_ocr_test/testing/phototest.tif" />
     <Text Include="../../thirdparty/tesseract_ocr_test/testing/phototest.txt" />
     <Text Include="../../thirdparty/tesseract_ocr_test/testing/phototest_2.tif" />
     <Text Include="../../thirdparty/tesseract_ocr_test/testing/phototestrot.tif" />
+    <Text Include="../../thirdparty/tesseract_ocr_test/testing/processing/eng.OCR-B_10_BT.exp0.tif" />
     <Text Include="../../thirdparty/tesseract_ocr_test/testing/raaj.tif" />
     <Text Include="../../thirdparty/tesseract_ocr_test/testing/segmodeimg.odt" />
     <Text Include="../../thirdparty/tesseract_ocr_test/testing/segmodeimg.tif" />
@@ -315,4 +348,3 @@
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
-  

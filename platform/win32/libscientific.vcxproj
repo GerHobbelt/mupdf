@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{E247EF44-6727-4787-B439-FE934849B306}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCIENTIFIC;SCIENTIFIC_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCIENTIFIC;SCIENTIFIC_STATICLIB;IDN2_STATIC;IDN2_BUILDING;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCIENTIFIC;SCIENTIFIC_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCIENTIFIC;SCIENTIFIC_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCIENTIFIC;SCIENTIFIC_STATICLIB;IDN2_STATIC;IDN2_BUILDING;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCIENTIFIC;SCIENTIFIC_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCIENTIFIC;SCIENTIFIC_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCIENTIFIC;SCIENTIFIC_STATICLIB;IDN2_STATIC;IDN2_BUILDING;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCIENTIFIC;SCIENTIFIC_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCIENTIFIC;SCIENTIFIC_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCIENTIFIC;SCIENTIFIC_STATICLIB;IDN2_STATIC;IDN2_BUILDING;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCIENTIFIC;SCIENTIFIC_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/docs/c_code_examples/cpcaexample1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/docs/c_code_examples/mxexample1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/docs/c_code_examples/mxexample2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/docs/c_code_examples/mxexample3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/docs/c_code_examples/mxexample4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/docs/c_code_examples/mxexample5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/docs/c_code_examples/mxexample6.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/docs/c_code_examples/mxexample7.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/docs/c_code_examples/pcaexample1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/docs/c_code_examples/plsexample1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/docs/c_code_examples/tnsexample1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/docs/c_code_examples/tnsexample2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/docs/c_code_examples/vexample1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/docs/c_code_examples/vexample2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/performance/cpca_tests.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/performance/mlr_tests.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/performance/pca_tests.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/performance/pls_tests.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/src/algebra.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/src/clustering.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/src/cpca.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/src/datasets.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/src/epls.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/src/graphs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/src/ica.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/src/interpolate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/src/io.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/src/lda.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/src/list.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/src/matrix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/src/memwrapper.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/src/metricspace.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/src/mlr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/src/modelvalidation.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/src/numeric.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/src/optimization.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/src/pca.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/src/pls.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/src/preprocessing.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/src/scientificinfo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/src/statistic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/src/tensor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/src/tests/testalgebra.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/src/tests/testclustering.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/src/tests/testcpca.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/src/tests/testdvector.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/src/tests/testepls.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/src/tests/testgraphs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/src/tests/testica.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/src/tests/testinterpolate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/src/tests/testio.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/src/tests/testivector.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/src/tests/testlda.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/src/tests/testlist.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/src/tests/testmatrix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/src/tests/testmetrics.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/src/tests/testmlr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/src/tests/testmwpca.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/src/tests/testmwpls.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/src/tests/testnumeric.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/src/tests/testoptimization.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/src/tests/testpca.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/src/tests/testpls.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/src/tests/testpreprocess.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/src/tests/testscientificinfo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/src/tests/teststatistic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/src/tests/teststrvector.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/src/tests/testsvd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/src/tests/testtensor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/src/tests/testuivector.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/src/upca.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/src/upls.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/src/variableselection.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/src/vector.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libscientific/src/vectorspace.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/libscientific/src/algebra.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libscientific/src/clustering.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libscientific/src/cpca.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libscientific/src/datasets.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libscientific/src/epls.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libscientific/src/graphs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libscientific/src/ica.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libscientific/src/interpolate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libscientific/src/io.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libscientific/src/lda.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libscientific/src/list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libscientific/src/matrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libscientific/src/memwrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libscientific/src/metricspace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libscientific/src/mlr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libscientific/src/modelvalidation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libscientific/src/numeric.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libscientific/src/optimization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libscientific/src/pca.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libscientific/src/pls.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libscientific/src/preprocessing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libscientific/src/scientific.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libscientific/src/scientificinfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libscientific/src/statistic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libscientific/src/tensor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libscientific/src/upca.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libscientific/src/upls.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libscientific/src/variableselection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libscientific/src/vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libscientific/src/vectorspace.h" />
+    <Image Include="../../thirdparty/owemdjee/libscientific/performance/cpca_input_vs_cputime.png" />
+    <Image Include="../../thirdparty/owemdjee/libscientific/performance/mlr_input_vs_cputime.png" />
+    <Image Include="../../thirdparty/owemdjee/libscientific/performance/pca_input_vs_cputime.png" />
+    <Image Include="../../thirdparty/owemdjee/libscientific/performance/pls_input_vs_cputime.png" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/INSTALL" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/TODO" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/cmake_uninstall.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/docs/C-API.rst" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/docs/GettingStartedInC.rst" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/docs/GettingStartedInPython.rst" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/docs/Install.rst" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/docs/Licensing.rst" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/docs/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/docs/Overview.rst" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/docs/Python-API.rst" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/docs/conf.py" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/docs/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/docs/make.bat" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/docs/python_code_examples/cpcaexample1.py" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/docs/python_code_examples/mxexample1.py" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/docs/python_code_examples/pcaexample1.py" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/docs/python_code_examples/plsexample1.py" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/docs/python_code_examples/tnsexample1.py" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/docs/python_code_examples/vexample1.py" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/docs/python_code_examples/vexample2.py" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/docs/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/paper.md" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/performance/compile.sh" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/performance/cpca_results.csv" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/performance/make_plots.sh" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/performance/mlr_results.csv" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/performance/pca_results.csv" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/performance/plot.py" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/performance/pls_results.csv" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/performance/testcpca.sh" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/performance/testmlr.sh" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/performance/testpca.sh" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/performance/testpls.sh" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/sonar-project.properties" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/src/python_bindings/INSTALL.md" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/src/python_bindings/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/src/python_bindings/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/src/python_bindings/libscientific/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/src/python_bindings/libscientific/clustering.py" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/src/python_bindings/libscientific/cpca.py" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/src/python_bindings/libscientific/info.py" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/src/python_bindings/libscientific/interpolate.py" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/src/python_bindings/libscientific/loadlibrary.py" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/src/python_bindings/libscientific/matrix.py" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/src/python_bindings/libscientific/misc.py" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/src/python_bindings/libscientific/pca.py" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/src/python_bindings/libscientific/pls.py" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/src/python_bindings/libscientific/tensor.py" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/src/python_bindings/libscientific/vectlist.py" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/src/python_bindings/libscientific/vector.py" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/src/python_bindings/pyproject.toml" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/src/python_bindings/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/src/python_bindings/tests/test_clustering.py" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/src/python_bindings/tests/test_cpca.py" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/src/python_bindings/tests/test_interpolate.py" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/src/python_bindings/tests/test_loadlibrary.py" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/src/python_bindings/tests/test_matrix.py" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/src/python_bindings/tests/test_pca.py" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/src/python_bindings/tests/test_pls.py" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/src/python_bindings/tests/test_tensor.py" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/src/python_bindings/tests/test_vectlist.py" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/src/python_bindings/tests/test_vector.py" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/src/python_bindings/tests/utils.py" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/src/python_bindings/tox.ini" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/src/scientificconfig.h.in" />
+    <Text Include="../../thirdparty/owemdjee/libscientific/src/tests/CMakeLists.txt" />
+  </ItemGroup>
+  <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+</Project>
+  

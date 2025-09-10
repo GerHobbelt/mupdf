@@ -1,0 +1,833 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{D1010D24-D621-4F0A-955F-917F7F81533B}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>IDN2_STATIC;IDN2_BUILDING;BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>IDN2_STATIC;IDN2_BUILDING;BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>IDN2_STATIC;IDN2_BUILDING;BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>IDN2_STATIC;IDN2_BUILDING;BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/16/h5ex_d_alloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/16/h5ex_d_checksum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/16/h5ex_d_chunk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/16/h5ex_d_compact.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/16/h5ex_d_extern.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/16/h5ex_d_fillval.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/16/h5ex_d_gzip.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/16/h5ex_d_hyper.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/16/h5ex_d_rdwr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/16/h5ex_d_shuffle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/16/h5ex_d_szip.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/16/h5ex_d_unlimadd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/16/h5ex_d_unlimgzip.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/16/h5ex_d_unlimmod.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/h5ex_d_alloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/h5ex_d_checksum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/h5ex_d_chunk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/h5ex_d_compact.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/h5ex_d_extern.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/h5ex_d_fillval.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/h5ex_d_gzip.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/h5ex_d_hyper.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/h5ex_d_nbit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/h5ex_d_rdwr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/h5ex_d_shuffle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/h5ex_d_sofloat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/h5ex_d_soint.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/h5ex_d_szip.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/h5ex_d_transform.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/h5ex_d_unlimadd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/h5ex_d_unlimgzip.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/h5ex_d_unlimmod.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5FLT/h5ex_d_blosc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5FLT/h5ex_d_bshuf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5FLT/h5ex_d_bzip2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5FLT/h5ex_d_jpeg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5FLT/h5ex_d_lz4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5FLT/h5ex_d_lzf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5FLT/h5ex_d_mafisc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5FLT/h5ex_d_zfp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5FLT/h5ex_d_zstd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5G/16/h5ex_g_create.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5G/16/h5ex_g_iterate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5G/16/h5ex_g_traverse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5G/h5ex_g_compact.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5G/h5ex_g_corder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5G/h5ex_g_create.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5G/h5ex_g_intermediate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5G/h5ex_g_iterate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5G/h5ex_g_phase.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5G/h5ex_g_traverse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5G/h5ex_g_visit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5PAR/ph5_dataset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5PAR/ph5_file_create.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5PAR/ph5_filtered_writes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5PAR/ph5_filtered_writes_no_sel.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5PAR/ph5_hyperslab_by_chunk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5PAR/ph5_hyperslab_by_col.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5PAR/ph5_hyperslab_by_pattern.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5PAR/ph5_hyperslab_by_row.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5PAR/ph5_subfiling.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/16/h5ex_t_array.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/16/h5ex_t_arrayatt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/16/h5ex_t_bit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/16/h5ex_t_bitatt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/16/h5ex_t_cmpd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/16/h5ex_t_cmpdatt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/16/h5ex_t_commit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/16/h5ex_t_convert.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/16/h5ex_t_cpxcmpd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/16/h5ex_t_cpxcmpdatt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/16/h5ex_t_enum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/16/h5ex_t_enumatt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/16/h5ex_t_float.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/16/h5ex_t_floatatt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/16/h5ex_t_int.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/16/h5ex_t_intatt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/16/h5ex_t_objref.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/16/h5ex_t_objrefatt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/16/h5ex_t_opaque.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/16/h5ex_t_opaqueatt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/16/h5ex_t_regref.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/16/h5ex_t_regrefatt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/16/h5ex_t_string.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/16/h5ex_t_stringatt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/16/h5ex_t_vlen.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/16/h5ex_t_vlenatt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/16/h5ex_t_vlstring.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/16/h5ex_t_vlstringatt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/h5ex_t_array.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/h5ex_t_arrayatt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/h5ex_t_bit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/h5ex_t_bitatt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/h5ex_t_cmpd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/h5ex_t_cmpdatt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/h5ex_t_commit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/h5ex_t_convert.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/h5ex_t_cpxcmpd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/h5ex_t_cpxcmpdatt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/h5ex_t_enum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/h5ex_t_enumatt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/h5ex_t_float.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/h5ex_t_floatatt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/h5ex_t_int.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/h5ex_t_intatt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/h5ex_t_objref.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/h5ex_t_objrefatt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/h5ex_t_opaque.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/h5ex_t_opaqueatt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/h5ex_t_regref.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/h5ex_t_regrefatt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/h5ex_t_string.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/h5ex_t_stringatt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/h5ex_t_vlen.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/h5ex_t_vlenatt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/h5ex_t_vlstring.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/h5ex_t_vlstringatt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5VDS/h5ex_vds-eiger.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5VDS/h5ex_vds-exc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5VDS/h5ex_vds-exclim.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5VDS/h5ex_vds-percival-unlim-maxmin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5VDS/h5ex_vds-percival-unlim.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5VDS/h5ex_vds-percival.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5VDS/h5ex_vds-simpleIO.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/H5VDS/h5ex_vds.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/Perf/h5efc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/Perf/h5slabread.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/hdf5-examples/C/Perf/h5slabwrite.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/hdf5-examples/C/Perf/h5slab.h" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/C_sourcefiles.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/test.sh.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/tfiles/110/h5ex_d_nbit07.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/tfiles/16/h5ex_d_alloc.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/tfiles/16/h5ex_d_checksum.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/tfiles/16/h5ex_d_chunk.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/tfiles/16/h5ex_d_compact.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/tfiles/16/h5ex_d_extern.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/tfiles/16/h5ex_d_fillval.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/tfiles/16/h5ex_d_gzip.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/tfiles/16/h5ex_d_hyper.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/tfiles/16/h5ex_d_rdwr.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/tfiles/16/h5ex_d_shuffle.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/tfiles/16/h5ex_d_szip.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/tfiles/16/h5ex_d_unlimadd.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/tfiles/16/h5ex_d_unlimgzip.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/tfiles/16/h5ex_d_unlimmod.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/tfiles/18/h5ex_d_nbit.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/tfiles/18/h5ex_d_nbit07.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/tfiles/18/h5ex_d_nbit22.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/tfiles/18/h5ex_d_sofloat.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/tfiles/18/h5ex_d_soint.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5D/tfiles/18/h5ex_d_transform.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5FLT/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5FLT/tfiles/h5ex_d_blosc.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5FLT/tfiles/h5ex_d_blosc.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5FLT/tfiles/h5ex_d_bshuf.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5FLT/tfiles/h5ex_d_bshuf.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5FLT/tfiles/h5ex_d_bzip2.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5FLT/tfiles/h5ex_d_bzip2.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5FLT/tfiles/h5ex_d_jpeg.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5FLT/tfiles/h5ex_d_jpeg.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5FLT/tfiles/h5ex_d_lz4.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5FLT/tfiles/h5ex_d_lz4.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5FLT/tfiles/h5ex_d_lzf.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5FLT/tfiles/h5ex_d_lzf.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5FLT/tfiles/h5ex_d_mafisc.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5FLT/tfiles/h5ex_d_mafisc.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5FLT/tfiles/h5ex_d_zfp.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5FLT/tfiles/h5ex_d_zfp.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5FLT/tfiles/h5ex_d_zstd.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5FLT/tfiles/h5ex_d_zstd.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5G/16/h5ex_g_iterate.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5G/16/h5ex_g_traverse.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5G/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5G/C_sourcefiles.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5G/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5G/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5G/h5ex_g_iterate.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5G/h5ex_g_traverse.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5G/h5ex_g_visit.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5G/test.sh.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5G/tfiles/16/h5ex_g_create.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5G/tfiles/18/h5ex_g_compact1.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5G/tfiles/18/h5ex_g_compact2.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5PAR/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5PAR/C_sourcefiles.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/C_sourcefiles.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/test.sh.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/110/h5ex_t_objref06.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/110/h5ex_t_objrefatt06.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/110/h5ex_t_regref06.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/110/h5ex_t_regrefatt06.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/112/h5ex_t_objref.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/112/h5ex_t_objrefatt.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/112/h5ex_t_regref.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/112/h5ex_t_regrefatt.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/114/h5ex_t_vlen.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/114/h5ex_t_vlenatt.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/16/112/h5ex_t_objref.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/16/112/h5ex_t_objrefatt.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/16/112/h5ex_t_regref.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/16/112/h5ex_t_regrefatt.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/16/114/h5ex_t_vlenatt.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/16/h5ex_t_array.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/16/h5ex_t_arrayatt.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/16/h5ex_t_bit.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/16/h5ex_t_bitatt.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/16/h5ex_t_cmpd.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/16/h5ex_t_cmpdatt.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/16/h5ex_t_commit.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/16/h5ex_t_cpxcmpd.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/16/h5ex_t_cpxcmpdatt.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/16/h5ex_t_enum.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/16/h5ex_t_enumatt.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/16/h5ex_t_float.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/16/h5ex_t_floatatt.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/16/h5ex_t_int.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/16/h5ex_t_intatt.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/16/h5ex_t_objref.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/16/h5ex_t_objrefatt.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/16/h5ex_t_opaque.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/16/h5ex_t_opaqueatt.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/16/h5ex_t_regref.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/16/h5ex_t_regrefatt.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/16/h5ex_t_string.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/16/h5ex_t_stringatt.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/16/h5ex_t_vlen.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/16/h5ex_t_vlenatt.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/16/h5ex_t_vlstring.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/16/h5ex_t_vlstringatt.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/18/112/h5ex_t_objref.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/18/112/h5ex_t_objrefatt.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/18/112/h5ex_t_regref.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/18/112/h5ex_t_regrefatt.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/18/h5ex_t_array.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/18/h5ex_t_arrayatt.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/18/h5ex_t_bit.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/18/h5ex_t_bitatt.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/18/h5ex_t_cmpd.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/18/h5ex_t_cmpdatt.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/18/h5ex_t_commit.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/18/h5ex_t_cpxcmpd.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/18/h5ex_t_cpxcmpdatt.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/18/h5ex_t_enum.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/18/h5ex_t_enumatt.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/18/h5ex_t_float.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/18/h5ex_t_floatatt.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/18/h5ex_t_int.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/18/h5ex_t_intatt.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/18/h5ex_t_objref.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/18/h5ex_t_objref21.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/18/h5ex_t_objrefatt.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/18/h5ex_t_objrefatt21.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/18/h5ex_t_opaque.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/18/h5ex_t_opaqueatt.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/18/h5ex_t_regref.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/18/h5ex_t_regref21.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/18/h5ex_t_regrefatt.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/18/h5ex_t_regrefatt21.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/18/h5ex_t_string.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/18/h5ex_t_stringatt.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/18/h5ex_t_vlen.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/18/h5ex_t_vlenatt.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/18/h5ex_t_vlstring.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5T/tfiles/18/h5ex_t_vlstringatt.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5VDS/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5VDS/C_sourcefiles.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5VDS/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5VDS/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5VDS/test.sh.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5VDS/tfiles/110/h5ex_vds-eiger.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5VDS/tfiles/110/h5ex_vds-exc.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5VDS/tfiles/110/h5ex_vds-exclim.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5VDS/tfiles/110/h5ex_vds-percival-unlim-maxmin.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5VDS/tfiles/110/h5ex_vds-percival-unlim.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5VDS/tfiles/110/h5ex_vds-percival.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5VDS/tfiles/110/h5ex_vds-simpleIO.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/H5VDS/tfiles/110/h5ex_vds.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/Perf/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/Perf/C_sourcefiles.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/C/Perf/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/CMakePresets.json" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/COPYING" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/CTestConfig.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5D/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5D/Fortran_sourcefiles.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5D/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5D/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5D/h5_version.h.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5D/h5ex_d_alloc.F90" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5D/h5ex_d_checksum.F90" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5D/h5ex_d_chunk.F90" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5D/h5ex_d_compact.F90" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5D/h5ex_d_extern.F90" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5D/h5ex_d_fillval.F90" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5D/h5ex_d_gzip.F90" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5D/h5ex_d_hyper.F90" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5D/h5ex_d_nbit.F90" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5D/h5ex_d_rdwr.F90" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5D/h5ex_d_rdwr_kind.F90" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5D/h5ex_d_rdwr_kind_F03.F90" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5D/h5ex_d_soint.F90" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5D/h5ex_d_szip.F90" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5D/h5ex_d_transform.F90" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5D/h5ex_d_unlimmod.F90" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5D/test.sh.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5D/tfiles/110/h5ex_d_nbit07.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5D/tfiles/18/h5ex_d_alloc.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5D/tfiles/18/h5ex_d_checksum.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5D/tfiles/18/h5ex_d_chunk.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5D/tfiles/18/h5ex_d_compact.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5D/tfiles/18/h5ex_d_extern.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5D/tfiles/18/h5ex_d_fillval.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5D/tfiles/18/h5ex_d_gzip.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5D/tfiles/18/h5ex_d_hyper.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5D/tfiles/18/h5ex_d_nbit.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5D/tfiles/18/h5ex_d_nbit07.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5D/tfiles/18/h5ex_d_nbit22.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5D/tfiles/18/h5ex_d_rdwr.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5D/tfiles/18/h5ex_d_rdwr_kind.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5D/tfiles/18/h5ex_d_rdwr_kind_F03.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5D/tfiles/18/h5ex_d_soint.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5D/tfiles/18/h5ex_d_szip.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5D/tfiles/18/h5ex_d_transform.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5D/tfiles/18/h5ex_d_unlimmod.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5G/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5G/Fortran_sourcefiles.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5G/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5G/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5G/h5ex_g_compact.F90" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5G/h5ex_g_corder.F90" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5G/h5ex_g_create.F90" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5G/h5ex_g_phase.F90" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5G/test.sh.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5G/tfiles/18/h5ex_g_compact1.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5G/tfiles/18/h5ex_g_compact2.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5G/tfiles/18/h5ex_g_create.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5PAR/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5PAR/Fortran_sourcefiles.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5PAR/ph5_f90_dataset.F90" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5PAR/ph5_f90_file_create.F90" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5PAR/ph5_f90_hyperslab_by_chunk.F90" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5PAR/ph5_f90_hyperslab_by_col.F90" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5PAR/ph5_f90_hyperslab_by_pattern.F90" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5PAR/ph5_f90_hyperslab_by_row.F90" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/Fortran_sourcefiles.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/h5ex_t_Cstring_F03.F90" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/h5ex_t_array_F03.F90" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/h5ex_t_arrayatt_F03.F90" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/h5ex_t_bit_F03.F90" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/h5ex_t_bitatt_F03.F90" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/h5ex_t_cmpd_F03.F90" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/h5ex_t_cmpdatt_F03.F90" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/h5ex_t_enum_F03.F90" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/h5ex_t_enumatt_F03.F90" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/h5ex_t_float_F03.F90" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/h5ex_t_floatatt_F03.F90" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/h5ex_t_int_F03.F90" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/h5ex_t_intatt_F03.F90" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/h5ex_t_objref_F03.F90" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/h5ex_t_objrefatt_F03.F90" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/h5ex_t_opaque_F03.F90" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/h5ex_t_opaqueatt_F03.F90" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/h5ex_t_regref_F03.F90" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/h5ex_t_regrefatt_F03.F90" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/h5ex_t_stringC_F03.F90" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/h5ex_t_stringCatt_F03.F90" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/h5ex_t_string_F03.F90" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/h5ex_t_vlen_F03.F90" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/h5ex_t_vlenatt_F03.F90" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/h5ex_t_vlstring.F90" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/h5ex_t_vlstring_F03.F90" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/test.sh.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/tfiles/110/h5ex_t_objref_F0306.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/tfiles/110/h5ex_t_objrefatt_F0306.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/tfiles/110/h5ex_t_regref_F0306.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/tfiles/110/h5ex_t_regrefatt_F0306.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/tfiles/112/h5ex_t_objref_F03.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/tfiles/112/h5ex_t_objrefatt_F03.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/tfiles/112/h5ex_t_regref_F03.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/tfiles/112/h5ex_t_regrefatt_F03.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/tfiles/114/h5ex_t_vlen_F03.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/tfiles/114/h5ex_t_vlen_F0302.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/tfiles/114/h5ex_t_vlenatt_F03.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/tfiles/114/h5ex_t_vlenatt_F0302.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/tfiles/18/h5ex_t_Cstring_F03.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/tfiles/18/h5ex_t_array_F03.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/tfiles/18/h5ex_t_arrayatt_F03.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/tfiles/18/h5ex_t_bit_F03.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/tfiles/18/h5ex_t_bitatt_F03.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/tfiles/18/h5ex_t_cmpd_F03.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/tfiles/18/h5ex_t_cmpdatt_F03.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/tfiles/18/h5ex_t_enum_F03.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/tfiles/18/h5ex_t_enumatt_F03.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/tfiles/18/h5ex_t_float_F03.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/tfiles/18/h5ex_t_floatatt_F03.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/tfiles/18/h5ex_t_int_F03.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/tfiles/18/h5ex_t_intatt_F03.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/tfiles/18/h5ex_t_objref_F03.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/tfiles/18/h5ex_t_objref_F0321.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/tfiles/18/h5ex_t_objrefatt_F03.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/tfiles/18/h5ex_t_objrefatt_F0321.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/tfiles/18/h5ex_t_opaque_F03.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/tfiles/18/h5ex_t_opaqueatt_F03.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/tfiles/18/h5ex_t_regref_F03.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/tfiles/18/h5ex_t_regref_F0321.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/tfiles/18/h5ex_t_regrefatt_F03.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/tfiles/18/h5ex_t_regrefatt_F0321.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/tfiles/18/h5ex_t_stringC_F03.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/tfiles/18/h5ex_t_stringCatt_F03.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/tfiles/18/h5ex_t_string_F03.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/tfiles/18/h5ex_t_vlen_F03.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/tfiles/18/h5ex_t_vlenatt_F03.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/H5T/tfiles/18/h5ex_t_vlstring.ddl" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/FORTRAN/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5D/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5D/H5Ex_D_Alloc.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5D/H5Ex_D_Checksum.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5D/H5Ex_D_Chunk.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5D/H5Ex_D_Compact.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5D/H5Ex_D_External.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5D/H5Ex_D_FillValue.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5D/H5Ex_D_Gzip.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5D/H5Ex_D_Hyperslab.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5D/H5Ex_D_Nbit.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5D/H5Ex_D_ReadWrite.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5D/H5Ex_D_Shuffle.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5D/H5Ex_D_Sofloat.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5D/H5Ex_D_Soint.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5D/H5Ex_D_Szip.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5D/H5Ex_D_Transform.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5D/H5Ex_D_UnlimitedAdd.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5D/H5Ex_D_UnlimitedGzip.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5D/H5Ex_D_UnlimitedMod.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5D/JavaDatasetExample.sh.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5D/Java_sourcefiles.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5D/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5D/tfiles/110/H5Ex_D_Alloc.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5D/tfiles/110/H5Ex_D_Checksum.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5D/tfiles/110/H5Ex_D_Chunk.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5D/tfiles/110/H5Ex_D_Compact.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5D/tfiles/110/H5Ex_D_External.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5D/tfiles/110/H5Ex_D_FillValue.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5D/tfiles/110/H5Ex_D_Gzip.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5D/tfiles/110/H5Ex_D_Hyperslab.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5D/tfiles/110/H5Ex_D_Nbit.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5D/tfiles/110/H5Ex_D_ReadWrite.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5D/tfiles/110/H5Ex_D_Shuffle.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5D/tfiles/110/H5Ex_D_Sofloat.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5D/tfiles/110/H5Ex_D_Soint.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5D/tfiles/110/H5Ex_D_Szip.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5D/tfiles/110/H5Ex_D_Transform.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5D/tfiles/110/H5Ex_D_UnlimitedAdd.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5D/tfiles/110/H5Ex_D_UnlimitedGzip.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5D/tfiles/110/H5Ex_D_UnlimitedMod.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5G/110/H5Ex_G_Intermediate.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5G/110/H5Ex_G_Iterate.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5G/110/H5Ex_G_Traverse.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5G/110/H5Ex_G_Visit.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5G/110/h5ex_g_iterate.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5G/110/h5ex_g_visit.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5G/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5G/H5Ex_G_Compact.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5G/H5Ex_G_Corder.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5G/H5Ex_G_Create.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5G/H5Ex_G_Intermediate.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5G/H5Ex_G_Iterate.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5G/H5Ex_G_Phase.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5G/H5Ex_G_Traverse.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5G/H5Ex_G_Visit.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5G/JavaGroupExample.sh.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5G/Java_sourcefiles.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5G/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5G/h5ex_g_iterate.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5G/h5ex_g_visit.h5" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5G/tfiles/110/H5Ex_G_Compact.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5G/tfiles/110/H5Ex_G_Corder.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5G/tfiles/110/H5Ex_G_Create.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5G/tfiles/110/H5Ex_G_Intermediate.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5G/tfiles/110/H5Ex_G_Iterate.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5G/tfiles/110/H5Ex_G_Phase.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5G/tfiles/110/H5Ex_G_Visit.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5J/110/HDF5FileStructure.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5J/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5J/H5_CreateGroupAbsoluteRelative.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5J/HDF5AttributeCreate.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5J/HDF5DatasetCreate.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5J/HDF5DatasetRead.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5J/HDF5FileCreate.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5J/HDF5FileStructure.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5J/HDF5GroupCreate.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5J/HDF5GroupDatasetCreate.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5J/HDF5SubsetSelect.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5J/Java_sourcefiles.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5J/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5J/runExample.sh.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5J/tfiles/110/HDF5AttributeCreate.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5J/tfiles/110/HDF5DatasetCreate.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5J/tfiles/110/HDF5DatasetRead.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5J/tfiles/110/HDF5FileCreate.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5J/tfiles/110/HDF5FileStructure.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5J/tfiles/110/HDF5GroupCreate.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5J/tfiles/110/HDF5GroupDatasetCreate.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5J/tfiles/110/HDF5SubsetSelect.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5T/110/H5Ex_T_ObjectReference.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5T/110/H5Ex_T_ObjectReferenceAttribute.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5T/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5T/H5Ex_T_Array.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5T/H5Ex_T_ArrayAttribute.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5T/H5Ex_T_Bit.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5T/H5Ex_T_BitAttribute.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5T/H5Ex_T_Commit.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5T/H5Ex_T_Compound.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5T/H5Ex_T_CompoundAttribute.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5T/H5Ex_T_Float.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5T/H5Ex_T_FloatAttribute.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5T/H5Ex_T_Integer.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5T/H5Ex_T_IntegerAttribute.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5T/H5Ex_T_ObjectReference.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5T/H5Ex_T_ObjectReferenceAttribute.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5T/H5Ex_T_Opaque.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5T/H5Ex_T_OpaqueAttribute.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5T/H5Ex_T_RegionReference.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5T/H5Ex_T_RegionReferenceAttribute.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5T/H5Ex_T_String.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5T/H5Ex_T_StringAttribute.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5T/H5Ex_T_VLString.java" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5T/JavaDatatypeExample.sh.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5T/Java_sourcefiles.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5T/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5T/tfiles/110/H5Ex_T_Array.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5T/tfiles/110/H5Ex_T_ArrayAttribute.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5T/tfiles/110/H5Ex_T_Bit.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5T/tfiles/110/H5Ex_T_BitAttribute.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5T/tfiles/110/H5Ex_T_Commit.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5T/tfiles/110/H5Ex_T_Compound.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5T/tfiles/110/H5Ex_T_CompoundAttribute.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5T/tfiles/110/H5Ex_T_Float.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5T/tfiles/110/H5Ex_T_FloatAttribute.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5T/tfiles/110/H5Ex_T_Integer.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5T/tfiles/110/H5Ex_T_IntegerAttribute.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5T/tfiles/110/H5Ex_T_ObjectReference.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5T/tfiles/110/H5Ex_T_ObjectReferenceAttribute.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5T/tfiles/110/H5Ex_T_Opaque.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5T/tfiles/110/H5Ex_T_OpaqueAttribute.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5T/tfiles/110/H5Ex_T_RegionReference.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5T/tfiles/110/H5Ex_T_RegionReferenceAttribute.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5T/tfiles/110/H5Ex_T_String.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5T/tfiles/110/H5Ex_T_StringAttribute.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/H5T/tfiles/110/H5Ex_T_VLString.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/JAVA/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/README.md" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/Using_Autotools.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/Using_CMake.txt" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/aclocal.m4" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/bin/format_source" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/bin/reconfigure" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/compile" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/config/cmake-presets/hidden-presets.json" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/config/cmake/CMakeFindJavaCommon.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/config/cmake/CTestCustom.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/config/cmake/HDFExampleMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/config/cmake/HDFMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/config/cmake/UseJava.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/config/cmake/UseJavaClassFilelist.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/config/cmake/UseJavaSymlinks.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/config/cmake/cacheinit.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/config/cmake/grepTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/config/cmake/jrunTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/config/cmake/runTest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/config/toolchain/aarch64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/config/toolchain/build32.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/config/toolchain/clang.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/config/toolchain/crayle.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/config/toolchain/gcc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/config/toolchain/icc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/config/toolchain/intel.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/config/toolchain/mingw64.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/config/toolchain/pgi.cmake" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/configure" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/depcomp" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/install-sh" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/missing" />
+    <Text Include="../../thirdparty/owemdjee/hdf5-examples/test-driver" />
+  </ItemGroup>
+  <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+</Project>
+  

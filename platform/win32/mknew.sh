@@ -1638,6 +1638,12 @@ PhotoshopAPI
 libco
 libgo
 cppserdes
+hdf5
+hdf5-examples
+hdf5_plugins
+tar2h5
+libscientific
+cleanCppProject
 
 
 EOT
