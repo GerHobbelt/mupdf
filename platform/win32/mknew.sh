@@ -1644,6 +1644,8 @@ hdf5_plugins
 tar2h5
 libscientific
 cleanCppProject
+aocl-blas
+
 
 
 EOT
