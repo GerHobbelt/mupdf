@@ -18,17 +18,20 @@
     <Filter Include="Header Files\include\parameters">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0001}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\src">
+    <Filter Include="Header Files\include\parameters\impl">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0003}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\docs">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0005}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Misc Files\docs\libparameters">
+    <Filter Include="Header Files\src">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0004}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\src">
+    <Filter Include="Misc Files\docs">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0006}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Misc Files\docs\libparameters">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0005}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0007}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -45,6 +48,9 @@
       <Filter>Source Files\src</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/GlobalParams.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/History.cpp">
       <Filter>Source Files\src</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/ParamArrayType.cpp">
@@ -119,13 +125,13 @@
     <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/empty.cpp">
       <Filter>Source Files\src</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/history_stack.cpp">
-      <Filter>Source Files\src</Filter>
-    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/paramsAssist.cpp">
       <Filter>Source Files\src</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/paramsFundamentals.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/test_compile_phase.cpp">
       <Filter>Source Files\src</Filter>
     </ClCompile>
     <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/CString.hpp">
@@ -143,16 +149,55 @@
     <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/fmt-support.h">
       <Filter>Header Files\include\parameters</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/history_stack.h">
+    <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/helpers.h">
       <Filter>Header Files\include\parameters</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/history_stack____tmp.h">
-      <Filter>Header Files\include\parameters</Filter>
+    <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/impl/internal_helpers.h">
+      <Filter>Header Files\include\parameters\impl</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/impl/parameter_class_2nd_wave_impl.h">
+      <Filter>Header Files\include\parameters\impl</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/impl/parameter_class_2nd_wave_impl_genx.h">
+      <Filter>Header Files\include\parameters\impl</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/impl/parameter_class_base_impl.h">
+      <Filter>Header Files\include\parameters\impl</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/impl/parameter_class_event_handlers_impl_genx.h">
+      <Filter>Header Files\include\parameters\impl</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/impl/parameter_class_ref_typed_impl.h">
+      <Filter>Header Files\include\parameters\impl</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/impl/parameter_class_small_value_typed_impl.h">
+      <Filter>Header Files\include\parameters\impl</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/impl/parameter_class_string_impl.h">
+      <Filter>Header Files\include\parameters\impl</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/impl/parameter_class_userdef_impl.h">
+      <Filter>Header Files\include\parameters\impl</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/impl/parameter_class_value_typed_impl.h">
+      <Filter>Header Files\include\parameters\impl</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/impl/parameter_class_vector_base_impl.h">
+      <Filter>Header Files\include\parameters\impl</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/impl/parameter_class_vector_ref_typed_impl.h">
+      <Filter>Header Files\include\parameters\impl</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/impl/parameter_class_vector_value_typed_impl.h">
+      <Filter>Header Files\include\parameters\impl</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/parameter_class_assistant.h">
       <Filter>Header Files\include\parameters</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/parameter_class_base.h">
+      <Filter>Header Files\include\parameters</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/parameter_class_base_template.h">
       <Filter>Header Files\include\parameters</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/parameter_class_fundamentals.h">
@@ -162,6 +207,9 @@
       <Filter>Header Files\include\parameters</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/parameter_class_shorthand.h">
+      <Filter>Header Files\include\parameters</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/parameter_class_shorthand_fmt_helpers.h">
       <Filter>Header Files\include\parameters</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/parameter_class_small_value_typed.h">
@@ -191,10 +239,16 @@
     <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/parameter_globals.h">
       <Filter>Header Files\include\parameters</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/parameter_set_instances.h">
+      <Filter>Header Files\include\parameters</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/parameter_sets.h">
       <Filter>Header Files\include\parameters</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/parameter_snapshots.h">
+      <Filter>Header Files\include\parameters</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/parameter_surplus_sets.h">
       <Filter>Header Files\include\parameters</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/parameters.h">

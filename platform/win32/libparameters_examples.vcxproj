@@ -52,16 +52,16 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -74,7 +74,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -108,8 +108,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPARAMETERS;PARAMETERS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -265,6 +265,11 @@
   </ImportGroup>
   <ItemGroup>
     <ClCompile Include="../../thirdparty/owemdjee/libparameters/examples/activity-callbacks/ac-main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/examples/casting-to-from-parameter-types/casting-dispatching-main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/examples/history-dealing-with-complex-runtime-flows/multi-entry-points-main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/examples/history-for-batched-runs/batched-main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/examples/history-for-experiments-and-autotuning/autotune-main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/examples/history-for-reporting-per-application-section/sectioned-tracking-main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libparameters/examples/reporting-usage-statistics/statrep-main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libparameters/examples/scoped-to-container/sb-main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libparameters/examples/scoped-with-multiple-container-instances/mci-main.cpp" />
@@ -290,13 +295,27 @@
     <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/c_interface.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/configreader.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/fmt-support.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/history_stack.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/history_stack____tmp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/helpers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/impl/internal_helpers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/impl/parameter_class_2nd_wave_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/impl/parameter_class_2nd_wave_impl_genx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/impl/parameter_class_base_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/impl/parameter_class_event_handlers_impl_genx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/impl/parameter_class_ref_typed_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/impl/parameter_class_small_value_typed_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/impl/parameter_class_string_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/impl/parameter_class_userdef_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/impl/parameter_class_value_typed_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/impl/parameter_class_vector_base_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/impl/parameter_class_vector_ref_typed_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/impl/parameter_class_vector_value_typed_impl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/parameter_class_assistant.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/parameter_class_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/parameter_class_base_template.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/parameter_class_fundamentals.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/parameter_class_ref_typed.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/parameter_class_shorthand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/parameter_class_shorthand_fmt_helpers.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/parameter_class_small_value_typed.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/parameter_class_string.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/parameter_class_userdef.h" />
@@ -306,8 +325,10 @@
     <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/parameter_class_vector_value_typed.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/parameter_classes.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/parameter_globals.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/parameter_set_instances.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/parameter_sets.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/parameter_snapshots.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/parameter_surplus_sets.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/parameters.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/reportwriter.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/sourceref_defend.h" />
@@ -324,3 +345,4 @@
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
+  
