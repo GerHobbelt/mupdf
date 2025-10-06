@@ -1242,23 +1242,13 @@ pdf_flush_text(fz_context *ctx, pdf_run_processor *pr)
 		if (dofill || dostroke)
 			gstate = pdf_begin_group(ctx, pr, tb, &softmask);
 
-		if (dofill && dostroke)
-		{
-			/* We may need to push a knockout group */
-			if (gstate->stroke.alpha == 0)
-			{
-				/* No need for group, as stroke won't do anything */
-			}
-			else if (gstate->stroke.alpha == 1.0f && gstate->blendmode == FZ_BLEND_NORMAL)
-			{
-				/* No need for group, as stroke won't show up */
-			}
-			else
-			{
-				knockout_group = 1;
-				fz_begin_group(ctx, pr->dev, tb, NULL, 0, 1, FZ_BLEND_NORMAL, 1);
-			}
-		}
+		if (dofill && gstate->fill.alpha != 0 && (gstate->fill.alpha != 1.0f || gstate->blendmode != FZ_BLEND_NORMAL))
+			knockout_group = 1;
+		else if (dostroke && gstate->stroke.alpha != 0 && (gstate->stroke.alpha != 1.0f || gstate->blendmode != FZ_BLEND_NORMAL))
+			knockout_group = 1;
+
+		if (knockout_group)
+			fz_begin_group(ctx, pr->dev, tb, NULL, 0, 1, FZ_BLEND_NORMAL, 1);
 
 		if (doinvisible)
 			fz_ignore_text(ctx, pr->dev, text, gstate->ctm);
