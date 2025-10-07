@@ -36,12 +36,11 @@
 #include "tesseract/baseapi.h"
 #include "tesseract/capi.h"          // for ETEXT_DESC
 
-
-extern "C" {
-
 #include "leptonica/allheaders.h"
 #include "tessocr.h"
 #include "leptonica-wrap.h"
+
+extern "C" {
 
 #if FZ_ENABLE_OCR 
 
