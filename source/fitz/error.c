@@ -103,13 +103,21 @@ int fz_bundle_str_msg_parts(char* dst, size_t dstsiz, const char* s1, const char
 	return (int)required_size;
 }
 
+static const char* print_if_not_a_msg_prefix(const char* prefix, const char* msg)
+{
+	size_t l = strlen(prefix);
+	if (strncmp(prefix, msg, l) == 0)
+		return "";
+	return prefix;
+}
+
 void fz_default_error_callback(fz_context* ctx, void *user, const char *message)
 {
 	ASSERT(message != NULL);
 
 	if (!(quiet_mode & QUIET_ERROR))
 	{
-		fz_write_strings(ctx, fz_stderr(ctx), "ERROR: ", message, "\n", NULL);
+		fz_write_strings(ctx, fz_stderr(ctx), print_if_not_a_msg_prefix("ERROR: ", message), message, "\n", NULL);
 	}
 
 	if (quiet_mode & (QUIET_DEBUG | QUIET_STDIO_FATALITY))
@@ -119,7 +127,7 @@ void fz_default_error_callback(fz_context* ctx, void *user, const char *message)
 		{
 			fz_output_set_severity_level(ctx, out, FZO_SEVERITY_ERROR);
 
-			fz_write_strings(ctx, out, "ERROR: ", message, "\n", NULL);
+			fz_write_strings(ctx, out, print_if_not_a_msg_prefix("ERROR: ", message), message, "\n", NULL);
 		}
 	}
 }
@@ -130,7 +138,7 @@ void fz_default_warning_callback(fz_context* ctx, void* user, const char* messag
 
 	if (!(quiet_mode & QUIET_WARN))
 	{
-		fz_write_strings(ctx, fz_stderr(ctx), "WARNING: ", message, "\n", NULL);
+		fz_write_strings(ctx, fz_stderr(ctx), print_if_not_a_msg_prefix("WARNING: ", message), message, "\n", NULL);
 	}
 
 	if (quiet_mode & (QUIET_DEBUG | QUIET_STDIO_FATALITY))
@@ -140,7 +148,7 @@ void fz_default_warning_callback(fz_context* ctx, void* user, const char* messag
 		{
 			fz_output_set_severity_level(ctx, out, FZO_SEVERITY_WARNING);
 
-			fz_write_strings(ctx, out, "WARNING: ", message, "\n", NULL);
+			fz_write_strings(ctx, out, print_if_not_a_msg_prefix("WARNING: ", message), message, "\n", NULL);
 		}
 	}
 }

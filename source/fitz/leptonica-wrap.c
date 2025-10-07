@@ -96,7 +96,7 @@ static void lept_stderr_print(const char *msg)
 		return;
 	}
 	if (strncmp(msg, "Warning in ", 11) == 0) {
-		fz_warn(ctx, "WARN: Leptonica::%s", msg + 11);
+		fz_warn(ctx, "WARNING: Leptonica::%s", msg + 11);
 		return;
 	}
 	if (strncmp(msg, "Info in ", 8) == 0) {
