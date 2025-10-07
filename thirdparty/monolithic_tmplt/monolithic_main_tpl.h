@@ -718,6 +718,14 @@ static int usage(void)
 // load the monolithic core init APIs.
 #include "monolithic_main_appinit_tpl.h"
 
+#ifndef MONOLITHIC_SUBCLUSTER_MAIN_INIT
+#define MONOLITHIC_SUBCLUSTER_MAIN_INIT()  ((void)0)
+#endif
+
+#ifndef MONOLITHIC_SUBCLUSTER_MAIN_FINISH
+#define MONOLITHIC_SUBCLUSTER_MAIN_FINISH()  ((void)0)
+#endif
+
 
 #ifdef __cplusplus
 extern "C" {
@@ -729,6 +737,8 @@ int MONOLITHIC_SUBCLUSTER_MAIN(int argc, const char** argv)
 	int status = 0;
 	int interactive = 0;
 	int c;
+
+	MONOLITHIC_SUBCLUSTER_MAIN_INIT();
 
 	while ((c = xgetopt(argc, argv, "ih")) != -1)
 	{
@@ -813,6 +823,8 @@ int MONOLITHIC_SUBCLUSTER_MAIN(int argc, const char** argv)
 			putchar('\n');
 		}
 	}
+
+	MONOLITHIC_SUBCLUSTER_MAIN_FINISH();
 
 	return status;
 }
