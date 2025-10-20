@@ -6753,6 +6753,30 @@ static void ffi_StructuredText_classifyRect(js_State *J)
 		rethrow(J);
 }
 
+static void ffi_StructuredText_tableHunt(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	fz_stext_page *page = js_touserdata(J, 0, "fz_stext_page");
+	fz_rect rect;
+	int do_rect = 0;
+
+	if (js_iscoercible(J, 1))
+	{
+		rect = ffi_torect(J, 1);
+		do_rect = 1;
+	}
+
+	fz_try(ctx)
+	{
+		if (!do_rect)
+			fz_table_hunt(ctx, page);
+		else
+			fz_table_hunt_within_bounds(ctx, page, rect);
+	}
+	fz_catch(ctx)
+		rethrow(J);
+}
+
 static void ffi_new_DisplayListDevice(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
@@ -12540,6 +12564,7 @@ int murun_main(int argc, char **argv)
 		jsB_propfun(J, "StructuredText.asHTML", ffi_StructuredText_asHTML, 1);
 		jsB_propfun(J, "StructuredText.asText", ffi_StructuredText_asText, 0);
 		jsB_propfun(J, "StructuredText.classifyRect", ffi_StructuredText_classifyRect, 2);
+		jsB_propfun(J, "StructuredText.tableHunt", ffi_StructuredText_tableHunt, 0);
 	}
 	js_setregistry(J, "fz_stext_page");
 
