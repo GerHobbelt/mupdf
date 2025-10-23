@@ -6801,6 +6801,19 @@ static void ffi_StructuredText_tableHunt(js_State *J)
 		rethrow(J);
 }
 
+static void ffi_StructuredText_removePageFill(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	fz_stext_page *page = js_touserdata(J, 0, "fz_stext_page");
+
+	fz_try(ctx)
+	{
+		fz_stext_remove_page_fill(ctx, page);
+	}
+	fz_catch(ctx)
+		rethrow(J);
+}
+
 static void ffi_new_DisplayListDevice(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
@@ -12590,6 +12603,7 @@ int murun_main(int argc, char **argv)
 		jsB_propfun(J, "StructuredText.classifyRect", ffi_StructuredText_classifyRect, 2);
 		jsB_propfun(J, "StructuredText.tableHunt", ffi_StructuredText_tableHunt, 0);
 		jsB_propfun(J, "StructuredText.segment", ffi_StructuredText_segment, 0);
+		jsB_propfun(J, "StructuredText.removePageFill", ffi_StructuredText_removePageFill, 0);
 	}
 	js_setregistry(J, "fz_stext_page");
 
