@@ -1,4 +1,4 @@
 
 also-ignore:
-	test/
+	src/
 	

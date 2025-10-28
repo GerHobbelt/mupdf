@@ -4,3 +4,6 @@ also-ignore:
 	/examples/
 	/tmp/
 	
+	/wildmatch/test.*
+	
+	

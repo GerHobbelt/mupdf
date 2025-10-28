@@ -1,5 +1,5 @@
 
 also-ignore:
-	/wildmatch/
+	/wildmatch/[^t].*
 	/tmp/
 	
