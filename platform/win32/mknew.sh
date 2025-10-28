@@ -1647,6 +1647,7 @@ cleanCppProject
 aocl-blas
 Cougar
 libunisani
+xmlwrapp
 
 
 EOT
