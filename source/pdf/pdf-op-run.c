@@ -375,6 +375,47 @@ load_transfer_function(fz_context *ctx, pdf_obj *obj)
 	return (fz_function *)pdf_load_function(ctx, obj, 1, 1);
 }
 
+#define DISPLAYLISTS_FOR_SOFTMASKS
+
+#ifdef DISPLAYLISTS_FOR_SOFTMASKS
+typedef struct
+{
+	fz_storable storable;
+	fz_display_list *list;
+} cached_softmask;
+
+static void
+drop_cached_softmask_imp(fz_context *ctx, fz_storable *stor)
+{
+	cached_softmask *sm = (cached_softmask *)stor;
+
+	if (sm)
+		fz_drop_display_list(ctx, sm->list);
+	fz_free(ctx, sm);
+}
+
+static cached_softmask *
+new_cached_softmask(fz_context *ctx)
+{
+	cached_softmask *sm = fz_malloc_struct(ctx, cached_softmask);
+	FZ_INIT_STORABLE(sm, 1, drop_cached_softmask_imp);
+	return sm;
+}
+
+static cached_softmask *
+keep_cached_softmask(fz_context *ctx, cached_softmask *sm)
+{
+	return fz_keep_storable(ctx, &sm->storable);
+}
+
+/* Could be a macro for speed */
+static void
+drop_cached_softmask(fz_context *ctx, cached_softmask *sm)
+{
+	fz_drop_storable(ctx, &sm->storable);
+}
+#endif
+
 static pdf_gstate *
 begin_softmask(fz_context *ctx, pdf_run_processor *pr, softmask_save *save, fz_rect bbox)
 {
@@ -389,6 +430,16 @@ begin_softmask(fz_context *ctx, pdf_run_processor *pr, softmask_save *save, fz_r
 	fz_function *tr = NULL;
 	float save_alpha_fill;
 	float save_alpha_stroke;
+#ifdef DISPLAYLISTS_FOR_SOFTMASKS
+	fz_device *saved_dev;
+	fz_device *list_dev = NULL;
+	fz_display_list *list = NULL;
+	cached_softmask *csm = NULL;
+
+	fz_var(list_dev);
+	fz_var(list);
+	fz_var(csm);
+#endif
 
 	fz_var(tr);
 
@@ -428,6 +479,9 @@ begin_softmask(fz_context *ctx, pdf_run_processor *pr, softmask_save *save, fz_r
 
 	saved_blendmode = gstate->blendmode;
 
+#ifdef DISPLAYLISTS_FOR_SOFTMASKS
+	saved_dev = pr->dev;
+#endif
 	fz_try(ctx)
 	{
 		if (gstate->softmask_tr)
@@ -439,13 +493,41 @@ begin_softmask(fz_context *ctx, pdf_run_processor *pr, softmask_save *save, fz_r
 
 		fz_begin_mask(ctx, pr->dev, mask_bbox, gstate->luminosity, mask_colorspace, gstate->softmask_bc, gstate->fill.color_params);
 		gstate->blendmode = 0;
-		pdf_run_xobject(ctx, pr, softmask, save->page_resources, fz_identity, 1);
+
+#ifdef DISPLAYLISTS_FOR_SOFTMASKS
+		csm = pdf_find_item(ctx, drop_cached_softmask_imp, softmask);
+
+		if (csm == NULL)
+		{
+			csm = new_cached_softmask(ctx);
+			csm->list = fz_new_display_list(ctx, fz_infinite_rect);
+			list_dev = fz_new_list_device(ctx, csm->list);
+			pr->dev = list_dev;
+#endif
+			pdf_run_xobject(ctx, pr, softmask, save->page_resources, fz_identity, 1);
+
+#ifdef DISPLAYLISTS_FOR_SOFTMASKS
+			fz_close_device(ctx, list_dev);
+			fz_drop_device(ctx, list_dev);
+			list_dev = NULL;
+			pr->dev = saved_dev;
+
+			pdf_store_item(ctx, softmask, csm, sizeof(*csm));
+		}
+
+		fz_run_display_list(ctx, csm->list, pr->dev, fz_identity, mask_bbox, NULL);
+#endif
 		gstate = pr->gstate + pr->gtop;
 		gstate->blendmode = saved_blendmode;
 		fz_end_mask_tr(ctx, pr->dev, tr);
 	}
 	fz_always(ctx)
 	{
+#ifdef DISPLAYLISTS_FOR_SOFTMASKS
+		pr->dev = saved_dev;
+		fz_drop_device(ctx, list_dev);
+		drop_cached_softmask(ctx, csm);
+#endif
 		fz_drop_function(ctx, tr);
 	}
 	fz_catch(ctx)
