@@ -4,5 +4,7 @@
 
 ignore:
 	/prog/
+	/tmp/
+	/test/
 	sw.cpp
 	

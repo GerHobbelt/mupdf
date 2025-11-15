@@ -48,16 +48,16 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -70,7 +70,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -104,8 +104,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/include;../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/src;../../thirdparty/owemdjee/bin2cpp/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -197,9 +197,11 @@
     <ClCompile Include="../../thirdparty/owemdjee/bin2cpp/src/bin2cpp/ArrayGenerator.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bin2cpp/src/bin2cpp/BaseGenerator.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bin2cpp/src/bin2cpp/Context.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bin2cpp/src/bin2cpp/LegacyNameProvider.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bin2cpp/src/bin2cpp/ManagerGenerator.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bin2cpp/src/bin2cpp/SegmentGenerator.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bin2cpp/src/bin2cpp/StringGenerator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bin2cpp/src/bin2cpp/TemplateProcessor.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bin2cpp/src/bin2cpp/Win32ResourceGenerator.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bin2cpp/src/bin2cpp/common.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bin2cpp/src/bin2cpp/crc32.cpp" />
@@ -229,13 +231,18 @@
     <ClInclude Include="../../thirdparty/owemdjee/bin2cpp/src/bin2cpp/BaseGenerator.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bin2cpp/src/bin2cpp/Context.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bin2cpp/src/bin2cpp/IGenerator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bin2cpp/src/bin2cpp/INameProvider.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bin2cpp/src/bin2cpp/ITemplateVariableLookup.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bin2cpp/src/bin2cpp/LegacyNameProvider.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bin2cpp/src/bin2cpp/ManagerGenerator.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bin2cpp/src/bin2cpp/SegmentGenerator.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bin2cpp/src/bin2cpp/StringGenerator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bin2cpp/src/bin2cpp/TemplateProcessor.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bin2cpp/src/bin2cpp/Win32ResourceGenerator.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bin2cpp/src/bin2cpp/common.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bin2cpp/src/bin2cpp/crc32.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bin2cpp/src/bin2cpp/enums.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bin2cpp/src/bin2cpp/types.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bin2cpp/src/bin2cpp/version.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bin2cpp/src/bin2cpp/wildcard.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/LICENSE.h" />
@@ -391,6 +398,16 @@
     <Text Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/src/rapidassist/config.h.in" />
     <Text Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/src/rapidassist/version.h.in" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Detours.vcxproj">
+      <Project>{4c2a66ce-a3c0-4f63-abd9-65e3e728040b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libdebugbreak.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0f0f12}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsystem_override.vcxproj">
+      <Project>{0b51171b-b10e-4eac-8ffa-19226a8bb47b}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
-  

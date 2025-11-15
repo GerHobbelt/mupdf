@@ -1648,6 +1648,7 @@ aocl-blas
 Cougar
 libunisani
 xmlwrapp
+dragonbox
 
 
 EOT
@@ -1738,6 +1739,7 @@ unicode-icu-demos
 
 msvc_sln_cleaner
 pccts
+pikchr-cmd
 
 EOT
 ) | grep -e "$FILTER"

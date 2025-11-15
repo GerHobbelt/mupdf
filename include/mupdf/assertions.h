@@ -55,7 +55,7 @@ typedef struct fz_context fz_context;
 #define VERIFY(expression)              LIBASSERT_ASSERT(expression)
 #define VERIFY_AND_CONTINUE(expression) LIBASSERT_DEBUG_ASSERT(expression)
 
-#if !defined(GTEST_DONT_DEFINE_ASSERT_EQ)
+#if defined(GTEST_DONT_DEFINE_ASSERT_EQ) && !defined(ASSERT_EQ)
 
 #define VERIFY_EQ(expr1, expr2) 															\
             VERIFY((expr1) == (expr2))
