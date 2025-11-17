@@ -25,39 +25,39 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -70,7 +70,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -104,8 +104,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/Algo_Ds_Notes/__include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -215,7 +215,7 @@
     <ProjectReference Include="libdebugbreak.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff0f0f12}</Project>
     </ProjectReference>
-      </ItemGroup>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
@@ -397,8 +397,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Fibonacci_Words/Fibonacci_Words.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Flood_Fill/Flood_Fill.c" />
     <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Flood_Fill/Flood_Fill.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Floyd_Cycle_Detection_Algorithm/Floyd&apos;s_Cycle_Detection.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Floyd_Cycle_Detection_Algorithm/Floyd&apos;s_Cycle_Detection_Algorithm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Floyd_Cycle_Detection_Algorithm/Floyd's_Cycle_Detection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Floyd_Cycle_Detection_Algorithm/Floyd's_Cycle_Detection_Algorithm.c" />
     <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Floyd_Warshall_Algorithm/Floyd_Warshall_Algorithm.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Ford_Fulkerson_Method/Ford-Fulkerson.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Ford_Fulkerson_Method/Ford_Fulkerson_Method.c" />
@@ -1069,8 +1069,8 @@
     <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Floating_Point_Arithmetic/float_divide.py" />
     <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Floating_Point_Arithmetic/float_multiply.py" />
     <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Floating_Point_Arithmetic/float_substract.py" />
-    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Floyd_Cycle_Detection_Algorithm/Floyd&apos;s_Cycle_Detection.java" />
-    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Floyd_Cycle_Detection_Algorithm/Floyd&apos;s_Cycle_Detection.py" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Floyd_Cycle_Detection_Algorithm/Floyd's_Cycle_Detection.java" />
+    <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Floyd_Cycle_Detection_Algorithm/Floyd's_Cycle_Detection.py" />
     <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Floyd_Cycle_Detection_Algorithm/README.md" />
     <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Floyd_Warshall_Algorithm/Floyd_Warshall.js" />
     <Text Include="../../thirdparty/owemdjee/Algo_Ds_Notes/Floyd_Warshall_Algorithm/Floyd_Warshall_Algorithm.java" />
@@ -1566,4 +1566,3 @@
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
-  

@@ -157,7 +157,7 @@ src = src
 /*
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>Unicode</CharacterSet>
     <UseDebugLibraries>true</UseDebugLibraries>
@@ -205,7 +205,7 @@ src = src
 //    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
 .replace(/<IntDir>[^]*?<\/IntDir>/g, `<IntDir>$(SolutionDir)obj\\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\\$(ConfigurationType)-$(ProjectName)\\</IntDir>`)
 .replace(/<CharacterSet>[^]*?<\/CharacterSet>/g, '')
-.replace(/<PlatformToolset>[^]*?<\/PlatformToolset>/g, `<PlatformToolset>v143</PlatformToolset>
+.replace(/<PlatformToolset>[^]*?<\/PlatformToolset>/g, `<PlatformToolset>v145</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>`)
 /*
     <Lib>
