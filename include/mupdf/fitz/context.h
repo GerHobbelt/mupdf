@@ -336,7 +336,7 @@ void fz_ignore_error(fz_context *ctx);
  */
 const char *fz_convert_error(fz_context *ctx, int *code);
 
-enum fz_error_type
+enum fz_error_type : unsigned int /* fix warning C4865: the underlying type will change from 'int' to 'unsigned int' when '/Zc:enumTypes' is specified on the command line */
 {
 	FZ_ERROR_NONE,
 	FZ_ERROR_GENERIC,
