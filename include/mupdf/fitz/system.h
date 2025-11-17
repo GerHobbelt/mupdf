@@ -91,6 +91,14 @@ typedef unsigned __int64 uint64_t;
 #include <stdint.h> /* needed for int64_t */
 #endif
 
+#if !defined(ENUM_IS_UNSIGNED_INT_TYPE)
+#if defined(__cplusplus) && __cplusplus >= 201103L
+#define ENUM_IS_UNSIGNED_INT_TYPE    : unsigned int /* fix warning C4865: the underlying type will change from 'int' to 'unsigned int' when '/Zc:enumTypes' is specified on the command line */
+#else
+#define ENUM_IS_UNSIGNED_INT_TYPE
+#endif
+#endif
+
 
 // See also https://en.cppreference.com/w/c/string/byte/strtok 'Note' section:
 #if defined(_MSC_VER)
