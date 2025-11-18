@@ -2,6 +2,7 @@
 #pragma once
 
 #ifdef _WIN32
+
 #define GLFW_EXPOSE_NATIVE_WIN32
 #define GLFW_EXPOSE_NATIVE_WGL
 #define _GLFW_WIN32
@@ -27,33 +28,18 @@
 // but windows.h assumes no one will define APIENTRY before it does
 #undef APIENTRY
 
-// GLFW on Windows is Unicode only and does not work in MBCS mode
-#ifndef UNICODE
-#define UNICODE
-#endif
-
-// GLFW requires Windows XP or later
-#if WINVER < 0x0501
-#undef WINVER
-#define WINVER 0x0501
-#endif
-#if _WIN32_WINNT < 0x0501
-#undef _WIN32_WINNT
-#define _WIN32_WINNT 0x0501
-#endif
-
 // GLFW uses DirectInput8 interfaces
 #define DIRECTINPUT_VERSION 0x0800
 
 // GLFW uses OEM cursor resources
 #define OEMRESOURCE
 
-#include <windows.h>
-
 #else
+
 #define GLFW_EXPOSE_NATIVE_X11
 #define GLFW_EXPOSE_NATIVE_EGL
 #define GLFW_INCLUDE_NONE
+
 #endif
 
 
