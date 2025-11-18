@@ -146,7 +146,9 @@
 #define PTHREAD_CREATE_JOINABLE
 
 /* Define to 1 if you have the ANSI C header files. */
-#define STDC_HEADERS
+#ifndef STDC_HEADERS
+#define STDC_HEADERS       1
+#endif
 
 /* Version number of package */
 #define VERSION           0x12345678

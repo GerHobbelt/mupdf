@@ -6,6 +6,10 @@
 
 #if defined(MONOLITHIC_SUBCLUSTER_MAIN)
 
+#ifndef MONOLITHIC_SUBCLUSTER_MAIN_INIT
+#error "MONOLITHIC_SUBCLUSTER_MAIN_INIT is already defined: this header file should've been loaded earlier..."
+#endif
+
 #ifdef __cplusplus
 extern "C" {
 #endif
