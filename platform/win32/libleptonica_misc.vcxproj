@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{7CD66B5A-BC34-44C6-9317-A898F35123DF}</ProjectGuid>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-101000000001}</ProjectGuid>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -52,16 +52,16 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -75,7 +75,7 @@
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
   </PropertyGroup>
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -109,8 +109,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <Optimization>Custom</Optimization>
@@ -234,232 +234,11 @@
     <ProjectReference Include="libdebugbreak.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff0f0f12}</Project>
     </ProjectReference>
-      </ItemGroup>
+  </ItemGroup>
   <ItemGroup>
     <ClCompile Include="../../source/system_override/force_link_dependency_helper.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/leptonica/src/adaptmap.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/affine.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/affinecompose.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/arrayaccess.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/bardecode.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/baseline.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/bbuffer.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/bilateral.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/bilinear.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/binarize.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/binarize_alt.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/binexpand.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/binreduce.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/blend.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/bmf.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/bmpio.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/bmpiostub.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/bootnumgen1.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/bootnumgen2.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/bootnumgen3.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/bootnumgen4.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/boxbasic.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/boxfunc1.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/boxfunc2.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/boxfunc3.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/boxfunc4.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/boxfunc5.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/bytearray.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/ccbord.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/ccthin.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/checkerboard.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/classapp.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/colorcontent.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/colorfill.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/coloring.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/colormap.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/colormorph.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/colorquant1.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/colorquant2.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/colorseg.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/colorspace.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/compare.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/conncomp.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/convertfiles.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/convolve.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/correlscore.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/dewarp1.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/dewarp2.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/dewarp3.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/dewarp4.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/dnabasic.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/dnafunc1.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/dnahash.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/dwacomb.2.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/dwacomblow.2.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/edge.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/encoding.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/enhance.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/fhmtauto.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/fhmtgen.1.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/fhmtgenlow.1.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/finditalic.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/flipdetect.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/fmorphauto.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/fmorphgen.1.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/fmorphgenlow.1.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/fpix1.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/fpix2.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/gifio.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/gifiostub.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/gplot.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/graphics.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/graymorph.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/grayquant.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/hashmap.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/heap.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/jbclass.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/jp2kheader.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/jp2kheaderstub.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/jp2kio.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/jp2kiostub.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/jpegio.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/jpegiostub.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/kernel.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/leptwin.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/libversions.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/list.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/map.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/maze.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/morph.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/morphapp.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/morphdwa.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/morphseq.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/numabasic.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/numafunc1.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/numafunc2.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/pageseg.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/paintcmap.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/parseprotos.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/partify.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/partition.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/pdfapp.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/pdfappstub.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/pdfio1.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/pdfio1stub.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/pdfio2.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/pdfio2stub.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/pix1.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/pix2.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/pix3.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/pix4.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/pix5.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/pixabasic.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/pixacc.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/pixafunc1.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/pixafunc2.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/pixalloc.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/pixarith.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/pixcomp.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/pixconv.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/pixlabel.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/pixtiling.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/pngio.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/pngiostub.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/pnmio.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/pnmiostub.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/projective.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/psio1.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/psio1stub.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/psio2.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/psio2stub.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/ptabasic.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/ptafunc1.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/ptafunc2.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/ptra.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/quadtree.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/queue.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/rank.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/rbtree.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/readbarcode.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/readfile.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/recogbasic.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/recogdid.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/recogident.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/recogtrain.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/regutils.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/renderpdf.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/rop.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/roplow.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/rotate.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/rotateam.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/rotateorth.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/rotateshear.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/runlength.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/sarray1.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/sarray2.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/scale1.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/scale2.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/seedfill.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/sel1.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/sel2.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/selgen.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/shear.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/skew.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/spixio.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/stack.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/stringcode.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/strokes.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/sudoku.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/textops.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/tiffio.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/tiffiostub.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/utils1.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/utils2.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/utils3.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/utils4.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/warper.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/watershed.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/webpanimio.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/webpanimiostub.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/webpio.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/webpiostub.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/writefile.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/zlibmem.c" />
-    <ClCompile Include="../../thirdparty/leptonica/src/zlibmemstub.c" />
-    <ClCompile Include="../../thirdparty/leptonica/test/test_utils_paths.cpp" />
-    <ClInclude Include="../../thirdparty/leptonica/src/allheaders.h" />
-    <ClInclude Include="../../thirdparty/leptonica/src/alltypes.h" />
-    <ClInclude Include="../../thirdparty/leptonica/src/array.h" />
-    <ClInclude Include="../../thirdparty/leptonica/src/array_internal.h" />
-    <ClInclude Include="../../thirdparty/leptonica/src/arrayaccess.h" />
-    <ClInclude Include="../../thirdparty/leptonica/src/bbuffer.h" />
-    <ClInclude Include="../../thirdparty/leptonica/src/bilateral.h" />
-    <ClInclude Include="../../thirdparty/leptonica/src/bmf.h" />
-    <ClInclude Include="../../thirdparty/leptonica/src/bmfdata.h" />
-    <ClInclude Include="../../thirdparty/leptonica/src/bmp.h" />
-    <ClInclude Include="../../thirdparty/leptonica/src/ccbord.h" />
-    <ClInclude Include="../../thirdparty/leptonica/src/ccbord_internal.h" />
-    <ClInclude Include="../../thirdparty/leptonica/src/colorfill.h" />
-    <ClInclude Include="../../thirdparty/leptonica/src/dewarp.h" />
-    <ClInclude Include="../../thirdparty/leptonica/src/environ.h" />
-    <ClInclude Include="../../thirdparty/leptonica/src/gplot.h" />
-    <ClInclude Include="../../thirdparty/leptonica/src/hashmap.h" />
-    <ClInclude Include="../../thirdparty/leptonica/src/heap.h" />
-    <ClInclude Include="../../thirdparty/leptonica/src/imageio.h" />
-    <ClInclude Include="../../thirdparty/leptonica/src/jbclass.h" />
-    <ClInclude Include="../../thirdparty/leptonica/src/leptwin.h" />
-    <ClInclude Include="../../thirdparty/leptonica/src/list.h" />
-    <ClInclude Include="../../thirdparty/leptonica/src/morph.h" />
-    <ClInclude Include="../../thirdparty/leptonica/src/pix.h" />
-    <ClInclude Include="../../thirdparty/leptonica/src/pix_internal.h" />
-    <ClInclude Include="../../thirdparty/leptonica/src/ptra.h" />
-    <ClInclude Include="../../thirdparty/leptonica/src/queue.h" />
-    <ClInclude Include="../../thirdparty/leptonica/src/rbtree.h" />
-    <ClInclude Include="../../thirdparty/leptonica/src/readbarcode.h" />
-    <ClInclude Include="../../thirdparty/leptonica/src/recog.h" />
-    <ClInclude Include="../../thirdparty/leptonica/src/regutils.h" />
-    <ClInclude Include="../../thirdparty/leptonica/src/stack.h" />
-    <ClInclude Include="../../thirdparty/leptonica/src/stringcode.h" />
-    <ClInclude Include="../../thirdparty/leptonica/src/sudoku.h" />
-    <ClInclude Include="../../thirdparty/leptonica/src/watershed.h" />
     <Image Include="../../thirdparty/leptonica/moller52.jpg" />
     <Text Include="../../thirdparty/leptonica/CMakeLists.txt" />
     <Text Include="../../thirdparty/leptonica/Doxyfile" />
@@ -481,23 +260,8 @@
     <Text Include="../../thirdparty/leptonica/make-for-auto" />
     <Text Include="../../thirdparty/leptonica/make-for-local" />
     <Text Include="../../thirdparty/leptonica/run_cmake.sh" />
-    <Text Include="../../thirdparty/leptonica/src/CMakeLists.txt" />
-    <Text Include="../../thirdparty/leptonica/src/Makefile.am" />
-    <Text Include="../../thirdparty/leptonica/src/allheaders_bot.txt" />
-    <Text Include="../../thirdparty/leptonica/src/allheaders_top.txt" />
-    <Text Include="../../thirdparty/leptonica/src/endianness.h.in" />
-    <Text Include="../../thirdparty/leptonica/src/hmttemplate1.txt" />
-    <Text Include="../../thirdparty/leptonica/src/hmttemplate2.txt" />
-    <Text Include="../../thirdparty/leptonica/src/leptonica-license.txt" />
-    <Text Include="../../thirdparty/leptonica/src/mainpage.txt" />
-    <Text Include="../../thirdparty/leptonica/src/makefile.static" />
-    <Text Include="../../thirdparty/leptonica/src/morphtemplate1.txt" />
-    <Text Include="../../thirdparty/leptonica/src/morphtemplate2.txt" />
-    <Text Include="../../thirdparty/leptonica/src/stringtemplate1.txt" />
-    <Text Include="../../thirdparty/leptonica/src/stringtemplate2.txt" />
     <Text Include="../../thirdparty/leptonica/style-guide.txt" />
     <Text Include="../../thirdparty/leptonica/version-notes.html" />
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
-  

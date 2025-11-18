@@ -6,9 +6,6 @@ ignore:
 	/src/
 	/tmp/
 	/test/
-	/prog/fuzzing/
-	
+	/prog/
 	sw.cpp
-	/prog/xtractprotos.c
-	/prog/monolithic_main.c
 	
