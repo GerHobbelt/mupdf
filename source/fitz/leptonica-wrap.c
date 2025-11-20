@@ -20,6 +20,10 @@
 // Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
 // CA 94129, USA, for further information.
 
+#include "mupdf/fitz.h"
+
+#if BUILDING_MUPDF_MINIMAL_CORE <= 1
+
 #include "leptonica-wrap.h"
 
 //#ifdef HAVE_LEPTONICA
@@ -169,4 +173,6 @@ fz_clear_leptonica_mem(fz_context *ctx)
 //#error "MUST have leptonica to build mupdf, tesseract, et al"
 
 //#endif /* HAVE_LEPTONICA */
+
+#endif // BUILDING_MUPDF_MINIMAL_CORE
 

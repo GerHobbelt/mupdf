@@ -1689,5 +1689,5 @@ fz_mkdir(fz_context* ctx, const char* path)
 }
 
 
-#pragma message("TODO: code review re ephemeral errorcode handling")
+#pragma message(FZPM_TODO "code review re ephemeral errorcode handling")
 

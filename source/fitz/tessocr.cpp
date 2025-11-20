@@ -25,7 +25,7 @@
 
 #if BUILDING_MUPDF_MINIMAL_CORE <= 1
 
-// special exception for when we compile this code for a monolithic tesseract stand-alone app: ALWAYS offer the leptonica_malloc/free APIs availalbe in here!
+// special exception for when we compile this code for a monolithic tesseract stand-alone app: ALWAYS offer the leptonica_malloc/free APIs available in here!
 //#if FZ_ENABLE_OCR 
 
 // Include tesseract configuration file (which should be available on both autoconf and Windows/MSVC platforms)
