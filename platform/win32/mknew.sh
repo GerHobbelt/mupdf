@@ -1649,6 +1649,10 @@ Cougar
 libunisani
 xmlwrapp
 dragonbox
+BitSerializer
+lemon
+lemon-sliced
+ckdl
 
 
 EOT
@@ -1740,6 +1744,8 @@ unicode-icu-demos
 msvc_sln_cleaner
 pccts
 pikchr-cmd
+lemon
+
 
 EOT
 ) | grep -e "$FILTER"

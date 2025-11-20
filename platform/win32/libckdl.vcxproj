@@ -1,0 +1,1238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{E247EF44-6727-4787-B439-FE9348975E6C}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCKDL;CKDL_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCKDL;CKDL_STATICLIB;IDN2_STATIC;IDN2_BUILDING;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCKDL;CKDL_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCKDL;CKDL_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCKDL;CKDL_STATICLIB;IDN2_STATIC;IDN2_BUILDING;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCKDL;CKDL_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCKDL;CKDL_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCKDL;CKDL_STATICLIB;IDN2_STATIC;IDN2_BUILDING;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCKDL;CKDL_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCKDL;CKDL_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCKDL;CKDL_STATICLIB;IDN2_STATIC;IDN2_BUILDING;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCKDL;CKDL_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/ckdl/bindings/cpp/src/kdlpp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ckdl/bindings/cpp/tests/kdlpp_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ckdl/src/bigint.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ckdl/src/compat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ckdl/src/emitter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ckdl/src/parser.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ckdl/src/str.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ckdl/src/tokenizer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ckdl/src/utf8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ckdl/src/utils/ckdl-cat-main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ckdl/src/utils/ckdl-cat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ckdl/src/utils/ckdl-parse-events.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ckdl/src/utils/ckdl-tokenize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ckdl/tests/emitter_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ckdl/tests/example_doc_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ckdl/tests/fs_util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ckdl/tests/kdlv2_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ckdl/tests/parser_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ckdl/tests/test_util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ckdl/tests/utf8_test.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/ckdl/bindings/cpp/include/kdlpp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ckdl/include/kdl/common-macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ckdl/include/kdl/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ckdl/include/kdl/emitter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ckdl/include/kdl/kdl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ckdl/include/kdl/parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ckdl/include/kdl/tokenizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ckdl/include/kdl/value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ckdl/src/bigint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ckdl/src/compat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ckdl/src/grammar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ckdl/src/str.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ckdl/src/utf8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ckdl/src/utils/ckdl-cat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ckdl/tests/fs_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ckdl/tests/test_util.h" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/COPYING" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/bindings/cpp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/bindings/cpp/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/bindings/python/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/bindings/python/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/bindings/python/src/ckdl/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/bindings/python/src/ckdl/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/bindings/python/src/ckdl/_ckdl.pyx" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/bindings/python/tests/ckdl_test.py" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/doc/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/doc/ckdl-api.rst" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/doc/ckdl-py.rst" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/doc/ckdl-utils.rst" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/doc/conf.py" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/doc/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/doc/kdlpp.rst" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/doc/make.bat" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/doc/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/pyproject.toml" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/src/utils/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/COPYING" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/all_escapes.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/all_node_fields.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/arg_and_prop_same_name.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/arg_false_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/arg_float_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/arg_hex_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/arg_null_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/arg_raw_string_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/arg_string_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/arg_true_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/arg_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/arg_zero_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/asterisk_in_block_comment.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/bare_emoji.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/binary.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/binary_trailing_underscore.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/binary_underscore.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/blank_arg_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/blank_node_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/blank_prop_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/block_comment.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/block_comment_after_node.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/block_comment_before_node.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/block_comment_before_node_no_space.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/block_comment_newline.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/boolean_arg.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/boolean_prop.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/commented_arg.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/commented_child.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/commented_line.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/commented_node.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/commented_prop.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/crlf_between_nodes.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/emoji.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/empty.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/empty_child.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/empty_child_different_lines.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/empty_child_same_line.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/empty_child_whitespace.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/empty_quoted_node_id.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/empty_quoted_prop_key.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/empty_string_arg.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/esc_newline_in_string.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/esc_unicode_in_string.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/escline.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/escline_line_comment.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/escline_node.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/false_prefix_in_bare_id.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/false_prefix_in_prop_key.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/hex.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/hex_int.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/hex_int_underscores.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/hex_leading_zero.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/int_multiple_underscore.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/just_block_comment.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/just_child.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/just_newline.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/just_node_id.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/just_space.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/leading_newline.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/leading_zero_binary.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/leading_zero_int.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/leading_zero_oct.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/multiline_comment.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/multiline_nodes.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/multiline_string.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/negative_exponent.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/negative_float.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/negative_int.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/nested_block_comment.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/nested_children.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/nested_comments.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/nested_multiline_block_comment.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/newline_between_nodes.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/newlines_in_block_comment.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/no_decimal_exponent.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/node_false.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/node_true.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/node_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/null_arg.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/null_prefix_in_bare_id.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/null_prefix_in_prop_key.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/null_prop.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/numeric_arg.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/numeric_prop.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/octal.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/only_cr.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/only_line_comment.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/only_line_comment_crlf.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/only_line_comment_newline.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/parse_all_arg_types.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/positive_exponent.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/positive_int.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/preserve_duplicate_nodes.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/preserve_node_order.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/prop_false_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/prop_float_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/prop_hex_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/prop_null_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/prop_raw_string_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/prop_string_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/prop_true_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/prop_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/prop_zero_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/quoted_arg_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/quoted_node_name.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/quoted_node_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/quoted_numeric.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/quoted_prop_name.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/quoted_prop_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/r_node.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/raw_arg_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/raw_node_name.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/raw_node_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/raw_prop_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/raw_string_arg.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/raw_string_backslash.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/raw_string_hash_no_esc.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/raw_string_just_backslash.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/raw_string_just_quote.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/raw_string_multiple_hash.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/raw_string_newline.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/raw_string_prop.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/raw_string_quote.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/repeated_arg.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/repeated_prop.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/same_args.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/same_name_nodes.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/sci_notation_large.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/sci_notation_small.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/semicolon_after_child.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/semicolon_in_child.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/semicolon_separated.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/semicolon_separated_nodes.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/semicolon_terminated.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/single_arg.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/single_prop.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/slashdash_arg_after_newline_esc.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/slashdash_arg_before_newline_esc.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/slashdash_child.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/slashdash_empty_child.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/slashdash_full_node.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/slashdash_in_slashdash.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/slashdash_negative_number.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/slashdash_node_in_child.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/slashdash_node_with_child.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/slashdash_only_node.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/slashdash_only_node_with_space.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/slashdash_prop.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/slashdash_raw_prop_key.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/slashdash_repeated_prop.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/string_arg.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/string_prop.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/tab_space.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/trailing_crlf.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/trailing_underscore_hex.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/trailing_underscore_octal.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/true_prefix_in_bare_id.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/true_prefix_in_prop_key.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/two_nodes.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/underscore_in_exponent.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/underscore_in_float.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/underscore_in_fraction.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/underscore_in_int.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/underscore_in_octal.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/unusual_bare_id_chars_in_quoted_id.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/unusual_chars_in_bare_id.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/zero_arg.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/zero_float.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/expected_kdl/zero_int.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/all_escapes.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/all_node_fields.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/arg_and_prop_same_name.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/arg_false_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/arg_float_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/arg_hex_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/arg_null_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/arg_raw_string_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/arg_string_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/arg_true_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/arg_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/arg_zero_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/asterisk_in_block_comment.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/backslash_in_bare_id.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/bare_arg.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/bare_emoji.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/binary.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/binary_trailing_underscore.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/binary_underscore.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/blank_arg_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/blank_node_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/blank_prop_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/block_comment.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/block_comment_after_node.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/block_comment_before_node.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/block_comment_before_node_no_space.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/block_comment_newline.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/boolean_arg.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/boolean_prop.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/brackets_in_bare_id.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/chevrons_in_bare_id.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/comma_in_bare_id.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/comment_after_arg_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/comment_after_node_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/comment_after_prop_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/comment_in_arg_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/comment_in_node_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/comment_in_prop_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/commented_arg.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/commented_child.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/commented_line.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/commented_node.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/commented_prop.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/crlf_between_nodes.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/dash_dash.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/dot_but_no_fraction.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/dot_but_no_fraction_before_exponent.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/dot_in_exponent.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/dot_zero.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/emoji.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/empty.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/empty_arg_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/empty_child.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/empty_child_different_lines.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/empty_child_same_line.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/empty_child_whitespace.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/empty_node_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/empty_prop_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/empty_quoted_node_id.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/empty_quoted_prop_key.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/empty_string_arg.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/esc_newline_in_string.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/esc_unicode_in_string.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/escline.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/escline_comment_node.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/escline_line_comment.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/escline_node.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/false_prefix_in_bare_id.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/false_prefix_in_prop_key.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/false_prop_key.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/hex.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/hex_int.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/hex_int_underscores.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/hex_leading_zero.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/illegal_char_in_binary.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/illegal_char_in_hex.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/illegal_char_in_octal.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/int_multiple_underscore.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/just_block_comment.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/just_child.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/just_newline.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/just_node_id.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/just_space.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/just_space_in_arg_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/just_space_in_node_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/just_space_in_prop_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/just_type_no_arg.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/just_type_no_node_id.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/just_type_no_prop.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/leading_newline.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/leading_zero_binary.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/leading_zero_int.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/leading_zero_oct.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/multiline_comment.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/multiline_nodes.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/multiline_string.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/multiple_dots_in_float.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/multiple_dots_in_float_before_exponent.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/multiple_es_in_float.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/multiple_x_in_hex.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/negative_exponent.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/negative_float.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/negative_int.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/nested_block_comment.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/nested_children.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/nested_comments.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/nested_multiline_block_comment.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/newline_between_nodes.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/newlines_in_block_comment.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/no_decimal_exponent.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/no_digits_in_hex.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/node_false.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/node_true.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/node_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/null_arg.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/null_prefix_in_bare_id.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/null_prefix_in_prop_key.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/null_prop.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/null_prop_key.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/numeric_arg.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/numeric_prop.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/octal.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/only_cr.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/only_line_comment.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/only_line_comment_crlf.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/only_line_comment_newline.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/parens_in_bare_id.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/parse_all_arg_types.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/positive_exponent.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/positive_int.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/preserve_duplicate_nodes.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/preserve_node_order.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/prop_false_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/prop_float_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/prop_hex_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/prop_null_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/prop_raw_string_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/prop_string_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/prop_true_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/prop_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/prop_zero_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/question_mark_at_start_of_int.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/question_mark_before_number.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/quote_in_bare_id.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/quoted_arg_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/quoted_node_name.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/quoted_node_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/quoted_numeric.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/quoted_prop_name.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/quoted_prop_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/r_node.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/raw_arg_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/raw_node_name.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/raw_node_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/raw_prop_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/raw_string_arg.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/raw_string_backslash.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/raw_string_hash_no_esc.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/raw_string_just_backslash.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/raw_string_just_quote.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/raw_string_multiple_hash.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/raw_string_newline.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/raw_string_prop.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/raw_string_quote.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/repeated_arg.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/repeated_prop.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/same_args.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/same_name_nodes.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/sci_notation_large.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/sci_notation_small.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/semicolon_after_child.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/semicolon_in_child.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/semicolon_separated.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/semicolon_separated_nodes.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/semicolon_terminated.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/single_arg.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/single_prop.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/slash_in_bare_id.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/slashdash_arg_after_newline_esc.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/slashdash_arg_before_newline_esc.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/slashdash_child.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/slashdash_empty_child.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/slashdash_full_node.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/slashdash_in_slashdash.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/slashdash_negative_number.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/slashdash_node_in_child.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/slashdash_node_with_child.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/slashdash_only_node.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/slashdash_only_node_with_space.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/slashdash_prop.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/slashdash_raw_prop_key.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/slashdash_repeated_prop.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/space_after_arg_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/space_after_node_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/space_after_prop_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/space_in_arg_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/space_in_node_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/space_in_prop_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/square_bracket_in_bare_id.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/string_arg.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/string_prop.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/tab_space.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/trailing_crlf.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/trailing_underscore_hex.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/trailing_underscore_octal.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/true_prefix_in_bare_id.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/true_prefix_in_prop_key.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/true_prop_key.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/two_nodes.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/type_before_prop_key.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/unbalanced_raw_hashes.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/underscore_at_start_of_fraction.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/underscore_at_start_of_hex.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/underscore_at_start_of_int.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/underscore_before_number.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/underscore_in_exponent.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/underscore_in_float.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/underscore_in_fraction.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/underscore_in_int.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/underscore_in_octal.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/unusual_bare_id_chars_in_quoted_id.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/unusual_chars_in_bare_id.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/zero_arg.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/zero_float.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/1.0.0/input/zero_int.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/COPYING" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/all_escapes.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/all_node_fields.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/arg_and_prop_same_name.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/arg_bare.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/arg_false_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/arg_float_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/arg_hex_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/arg_null_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/arg_raw_string_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/arg_string_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/arg_true_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/arg_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/arg_zero_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/asterisk_in_block_comment.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/bare_emoji.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/bare_ident_dot.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/bare_ident_sign.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/bare_ident_sign_dot.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/binary.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/binary_trailing_underscore.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/binary_underscore.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/blank_arg_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/blank_node_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/blank_prop_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/block_comment.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/block_comment_after_node.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/block_comment_before_node.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/block_comment_before_node_no_space.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/block_comment_newline.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/bom_initial.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/boolean_arg.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/boolean_prop.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/chevrons_in_bare_id.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/comma_in_bare_id.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/comment_after_arg_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/comment_after_node_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/comment_after_prop_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/comment_and_newline.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/comment_in_arg_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/comment_in_node_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/comment_in_prop_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/commented_arg.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/commented_child.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/commented_line.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/commented_node.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/commented_prop.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/crlf_between_nodes.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/dash_dash.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/emoji.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/empty.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/empty_child.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/empty_child_different_lines.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/empty_child_same_line.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/empty_child_whitespace.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/empty_line_comment.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/empty_quoted_node_id.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/empty_quoted_prop_key.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/empty_string_arg.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/eof_after_escape.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/esc_multiple_newlines.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/esc_newline_in_string.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/esc_unicode_in_string.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/escaped_whitespace.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/escline.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/escline_after_semicolon.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/escline_alone.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/escline_empty_line.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/escline_end_of_node.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/escline_in_child_block.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/escline_line_comment.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/escline_node.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/escline_node_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/escline_slashdash.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/false_prefix_in_bare_id.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/false_prefix_in_prop_key.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/floating_point_keywords.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/hex.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/hex_int.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/hex_int_underscores.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/hex_leading_zero.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/initial_slashdash.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/int_multiple_underscore.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/just_block_comment.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/just_child.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/just_newline.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/just_node_id.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/just_space.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/leading_newline.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/leading_zero_binary.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/leading_zero_int.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/leading_zero_oct.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/multiline_comment.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/multiline_nodes.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/multiline_raw_string.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/multiline_raw_string_containing_quotes.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/multiline_raw_string_indented.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/multiline_string.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/multiline_string_containing_quotes.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/multiline_string_double_backslash.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/multiline_string_escape_delimiter.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/multiline_string_escape_in_closing_line.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/multiline_string_escape_in_closing_line_shallow.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/multiline_string_escape_newline_at_end.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/multiline_string_indented.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/multiline_string_whitespace_only.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/negative_exponent.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/negative_float.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/negative_int.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/nested_block_comment.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/nested_children.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/nested_comments.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/nested_multiline_block_comment.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/newline_between_nodes.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/newlines_in_block_comment.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/no_decimal_exponent.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/node_false.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/node_true.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/node_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/null_arg.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/null_prefix_in_bare_id.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/null_prefix_in_prop_key.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/null_prop.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/numeric_arg.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/numeric_prop.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/octal.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/only_cr.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/only_line_comment.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/only_line_comment_crlf.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/only_line_comment_newline.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/optional_child_semicolon.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/parse_all_arg_types.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/positive_exponent.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/positive_int.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/preserve_duplicate_nodes.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/preserve_node_order.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/prop_false_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/prop_float_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/prop_hex_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/prop_identifier_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/prop_null_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/prop_raw_string_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/prop_string_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/prop_true_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/prop_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/prop_zero_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/question_mark_before_number.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/quoted_arg_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/quoted_node_name.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/quoted_node_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/quoted_numeric.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/quoted_prop_name.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/quoted_prop_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/r_node.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/raw_arg_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/raw_node_name.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/raw_node_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/raw_prop_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/raw_string_arg.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/raw_string_backslash.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/raw_string_hash_no_esc.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/raw_string_just_backslash.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/raw_string_multiple_hash.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/raw_string_newline.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/raw_string_prop.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/raw_string_quote.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/repeated_arg.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/repeated_prop.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/same_name_nodes.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/sci_notation_large.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/sci_notation_small.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/semicolon_after_child.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/semicolon_in_child.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/semicolon_separated.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/semicolon_separated_nodes.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/semicolon_terminated.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/single_arg.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/single_prop.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/slashdash_arg_after_newline_esc.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/slashdash_arg_before_newline_esc.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/slashdash_child.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/slashdash_empty_child.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/slashdash_escline_before_arg_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/slashdash_escline_before_children.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/slashdash_escline_before_node.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/slashdash_false_node.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/slashdash_full_node.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/slashdash_in_slashdash.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/slashdash_multi_line_comment_entry.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/slashdash_multi_line_comment_inline.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/slashdash_multiple_child_blocks.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/slashdash_negative_number.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/slashdash_newline_before_children.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/slashdash_newline_before_entry.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/slashdash_newline_before_node.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/slashdash_node_in_child.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/slashdash_node_with_child.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/slashdash_only_node.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/slashdash_only_node_with_space.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/slashdash_prop.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/slashdash_raw_prop_key.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/slashdash_repeated_prop.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/slashdash_single_line_comment_entry.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/slashdash_single_line_comment_node.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/space_after_arg_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/space_after_node_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/space_after_prop_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/space_around_prop_marker.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/space_in_arg_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/space_in_node_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/space_in_prop_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/string_arg.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/string_escaped_literal_whitespace.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/string_prop.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/tab_space.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/trailing_crlf.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/trailing_underscore_hex.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/trailing_underscore_octal.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/true_prefix_in_bare_id.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/true_prefix_in_prop_key.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/two_nodes.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/underscore_before_number.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/underscore_in_exponent.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/underscore_in_float.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/underscore_in_fraction.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/underscore_in_int.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/underscore_in_octal.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/unicode_silly.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/unusual_bare_id_chars_in_quoted_id.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/unusual_chars_in_bare_id.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/vertical_tab_whitespace.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/zero_float.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/expected_kdl/zero_int.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/all_escapes.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/all_node_fields.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/arg_and_prop_same_name.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/arg_bare.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/arg_false_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/arg_float_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/arg_hex_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/arg_null_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/arg_raw_string_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/arg_string_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/arg_true_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/arg_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/arg_zero_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/asterisk_in_block_comment.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/bare_emoji.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/bare_ident_dot.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/bare_ident_numeric_dot_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/bare_ident_numeric_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/bare_ident_numeric_sign_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/bare_ident_sign.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/bare_ident_sign_dot.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/binary.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/binary_trailing_underscore.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/binary_underscore.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/blank_arg_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/blank_node_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/blank_prop_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/block_comment.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/block_comment_after_node.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/block_comment_before_node.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/block_comment_before_node_no_space.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/block_comment_newline.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/bom_initial.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/bom_later_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/boolean_arg.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/boolean_prop.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/brackets_in_bare_id_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/chevrons_in_bare_id.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/comma_in_bare_id.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/comment_after_arg_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/comment_after_node_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/comment_after_prop_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/comment_and_newline.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/comment_in_arg_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/comment_in_node_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/comment_in_prop_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/commented_arg.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/commented_child.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/commented_line.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/commented_node.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/commented_prop.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/crlf_between_nodes.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/dash_dash.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/dot_but_no_fraction_before_exponent_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/dot_but_no_fraction_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/dot_in_exponent_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/dot_zero_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/emoji.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/empty.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/empty_arg_type_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/empty_child.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/empty_child_different_lines.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/empty_child_same_line.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/empty_child_whitespace.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/empty_line_comment.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/empty_node_type_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/empty_prop_type_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/empty_quoted_node_id.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/empty_quoted_prop_key.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/empty_string_arg.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/eof_after_escape.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/err_backslash_in_bare_id_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/esc_multiple_newlines.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/esc_newline_in_string.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/esc_unicode_in_string.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/escaped_whitespace.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/escline.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/escline_after_semicolon.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/escline_alone.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/escline_empty_line.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/escline_end_of_node.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/escline_in_child_block.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/escline_line_comment.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/escline_node.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/escline_node_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/escline_slashdash.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/false_prefix_in_bare_id.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/false_prefix_in_prop_key.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/false_prop_key_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/floating_point_keyword_identifier_strings_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/floating_point_keywords.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/hash_in_id_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/hex.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/hex_int.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/hex_int_underscores.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/hex_leading_zero.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/illegal_char_in_binary_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/illegal_char_in_hex_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/illegal_char_in_octal_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/initial_slashdash.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/int_multiple_underscore.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/just_block_comment.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/just_child.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/just_newline.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/just_node_id.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/just_space.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/just_space_in_arg_type_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/just_space_in_node_type_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/just_space_in_prop_type_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/just_type_no_arg_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/just_type_no_node_id_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/just_type_no_prop_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/leading_newline.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/leading_zero_binary.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/leading_zero_int.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/leading_zero_oct.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/legacy_raw_string_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/legacy_raw_string_hash_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/multiline_comment.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/multiline_nodes.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/multiline_raw_string.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/multiline_raw_string_containing_quotes.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/multiline_raw_string_indented.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/multiline_raw_string_non_matching_prefix_character_error_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/multiline_raw_string_non_matching_prefix_count_error_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/multiline_raw_string_single_line_err_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/multiline_raw_string_single_quote_err_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/multiline_string.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/multiline_string_containing_quotes.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/multiline_string_double_backslash.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/multiline_string_escape_delimiter.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/multiline_string_escape_in_closing_line.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/multiline_string_escape_in_closing_line_shallow.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/multiline_string_escape_newline_at_end.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/multiline_string_escape_newline_at_end_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/multiline_string_final_whitespace_escape_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/multiline_string_indented.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/multiline_string_non_literal_prefix_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/multiline_string_non_matching_prefix_character_error_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/multiline_string_non_matching_prefix_count_error_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/multiline_string_single_line_err_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/multiline_string_single_quote_err_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/multiline_string_whitespace_only.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/multiple_dots_in_float_before_exponent_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/multiple_dots_in_float_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/multiple_es_in_float_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/multiple_x_in_hex_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/negative_exponent.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/negative_float.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/negative_int.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/nested_block_comment.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/nested_children.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/nested_comments.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/nested_multiline_block_comment.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/newline_between_nodes.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/newlines_in_block_comment.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/no_decimal_exponent.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/no_digits_in_hex_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/no_integer_digit_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/no_solidus_escape_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/node_false.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/node_true.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/node_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/null_arg.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/null_prefix_in_bare_id.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/null_prefix_in_prop_key.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/null_prop.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/null_prop_key_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/numeric_arg.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/numeric_prop.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/octal.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/only_cr.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/only_line_comment.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/only_line_comment_crlf.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/only_line_comment_newline.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/optional_child_semicolon.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/parens_in_bare_id_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/parse_all_arg_types.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/positive_exponent.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/positive_int.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/preserve_duplicate_nodes.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/preserve_node_order.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/prop_false_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/prop_float_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/prop_hex_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/prop_identifier_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/prop_null_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/prop_raw_string_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/prop_string_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/prop_true_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/prop_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/prop_zero_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/question_mark_before_number.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/quote_in_bare_id_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/quoted_arg_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/quoted_node_name.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/quoted_node_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/quoted_numeric.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/quoted_prop_name.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/quoted_prop_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/r_node.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/raw_arg_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/raw_node_name.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/raw_node_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/raw_prop_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/raw_string_arg.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/raw_string_backslash.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/raw_string_hash_no_esc.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/raw_string_just_backslash.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/raw_string_just_quote_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/raw_string_multiple_hash.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/raw_string_newline.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/raw_string_prop.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/raw_string_quote.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/repeated_arg.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/repeated_prop.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/same_name_nodes.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/sci_notation_large.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/sci_notation_small.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/semicolon_after_child.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/semicolon_in_child.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/semicolon_separated.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/semicolon_separated_nodes.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/semicolon_terminated.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/single_arg.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/single_prop.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/slash_in_bare_id_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/slashdash_after_arg_type_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/slashdash_after_node_type_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/slashdash_after_prop_key_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/slashdash_after_prop_val_type_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/slashdash_after_type_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/slashdash_arg_after_newline_esc.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/slashdash_arg_before_newline_esc.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/slashdash_before_children_end_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/slashdash_before_eof_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/slashdash_before_prop_value_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/slashdash_before_semicolon_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/slashdash_between_child_blocks_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/slashdash_child.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/slashdash_child_block_before_entry_err_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/slashdash_empty_child.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/slashdash_escline_before_arg_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/slashdash_escline_before_children.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/slashdash_escline_before_node.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/slashdash_false_node.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/slashdash_full_node.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/slashdash_in_slashdash.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/slashdash_inside_arg_type_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/slashdash_inside_node_type_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/slashdash_multi_line_comment_entry.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/slashdash_multi_line_comment_inline.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/slashdash_multiple_child_blocks.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/slashdash_negative_number.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/slashdash_newline_before_children.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/slashdash_newline_before_entry.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/slashdash_newline_before_node.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/slashdash_node_in_child.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/slashdash_node_with_child.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/slashdash_only_node.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/slashdash_only_node_with_space.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/slashdash_prop.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/slashdash_raw_prop_key.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/slashdash_repeated_prop.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/slashdash_single_line_comment_entry.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/slashdash_single_line_comment_node.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/space_after_arg_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/space_after_node_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/space_after_prop_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/space_around_prop_marker.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/space_in_arg_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/space_in_node_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/space_in_prop_type.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/square_bracket_in_bare_id_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/string_arg.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/string_escaped_literal_whitespace.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/string_prop.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/tab_space.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/trailing_crlf.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/trailing_underscore_hex.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/trailing_underscore_octal.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/true_prefix_in_bare_id.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/true_prefix_in_prop_key.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/true_prop_key_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/two_nodes.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/type_before_prop_key_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/unbalanced_raw_hashes_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/underscore_at_start_of_fraction_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/underscore_at_start_of_hex_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/underscore_before_number.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/underscore_in_exponent.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/underscore_in_float.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/underscore_in_fraction.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/underscore_in_int.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/underscore_in_octal.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/unicode_delete_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/unicode_fsi_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/unicode_lre_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/unicode_lri_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/unicode_lrm_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/unicode_lro_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/unicode_pdf_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/unicode_pdi_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/unicode_rle_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/unicode_rli_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/unicode_rlm_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/unicode_rlo_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/unicode_silly.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/unicode_under_0x20_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/unterminated_empty_node_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/unusual_bare_id_chars_in_quoted_id.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/unusual_chars_in_bare_id.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/vertical_tab_whitespace.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/zero_float.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/zero_int.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/zero_space_before_first_arg_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/zero_space_before_prop_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/zero_space_before_second_arg_fail.kdl" />
+    <Text Include="../../thirdparty/owemdjee/ckdl/tests/test_documents/upstream/2.0.0/input/zero_space_before_slashdash_arg_fail.kdl" />
+  </ItemGroup>
+  <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+</Project>
+  
