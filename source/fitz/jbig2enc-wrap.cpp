@@ -20,11 +20,19 @@
 // Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
 // CA 94129, USA, for further information.
 
-#ifdef HAVE_JBIG2ENC
+#include "mupdf/fitz.h"
+
+#if BUILDING_MUPDF_MINIMAL_CORE <= 1
+
+//#ifdef HAVE_JBIG2ENC
+
+#include "leptonica/allheaders.h"
+#include "../../thirdparty/leptonica/src/environ.h"  // <-- leptonica_free() + leptonica_malloc() prototypes
 
 #include "jbig2enc.h"
 
-#include "allheaders.h"
+/* For the leptonica memory hacks... */
+#include "leptonica-wrap.h"
 
 extern "C" {
 
@@ -44,11 +52,6 @@ static void horrid_free(void *ptr)
 {
 	free(ptr);
 }
-
-#include "mupdf/fitz.h"
-
-/* For the leptonica memory hacks... */
-#include "leptonica-wrap.h"
 
 typedef struct
 {
@@ -265,4 +268,6 @@ const fz_jbig2_encoder *fz_jbig2enc_encoder(fz_context *ctx)
 
 };
 
-#endif /* HAVE_JBIG2ENC */
+//#endif /* HAVE_JBIG2ENC */
+
+#endif // BUILDING_MUPDF_MINIMAL_CORE
