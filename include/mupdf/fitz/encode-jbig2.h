@@ -28,6 +28,10 @@
 
 #if BUILDING_MUPDF_MINIMAL_CORE < 2
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /*
 	An active instance of a jbig2encode process will be represented by
 	an fz_jbig2e.
@@ -109,6 +113,10 @@ const fz_jbig2_encoder *fz_jbig2enc_encoder(fz_context *ctx);
 	with the system.
 */
 int fz_jbig2e_enabled(fz_context *ctx);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif   // BUILDING_MUPDF_MINIMAL_CORE < 2
 
