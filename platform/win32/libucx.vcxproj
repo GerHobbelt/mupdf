@@ -285,6 +285,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/ucx/src/ucp/am/rndv.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ucx/src/ucp/core/ucp_am.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ucx/src/ucp/core/ucp_context.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ucx/src/ucp/core/ucp_device.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ucx/src/ucp/core/ucp_ep.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ucx/src/ucp/core/ucp_ep_vfs.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ucx/src/ucp/core/ucp_listener.c" />
@@ -442,6 +443,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/ucx/src/uct/base/uct_worker.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ucx/src/uct/cuda/base/cuda_iface.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ucx/src/uct/cuda/base/cuda_md.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ucx/src/uct/cuda/base/cuda_nvml.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ucx/src/uct/cuda/cuda_copy/cuda_copy_ep.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ucx/src/uct/cuda/cuda_copy/cuda_copy_iface.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ucx/src/uct/cuda/cuda_copy/cuda_copy_md.c" />
@@ -465,6 +467,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/ucx/src/uct/ib/mlx5/dc/dc_mlx5_ep.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ucx/src/uct/ib/mlx5/dv/ib_mlx5_dv.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ucx/src/uct/ib/mlx5/dv/ib_mlx5dv_md.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ucx/src/uct/ib/mlx5/gdaki/gdaki.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ucx/src/uct/ib/mlx5/gga/gga_mlx5.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ucx/src/uct/ib/mlx5/ib_mlx5.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ucx/src/uct/ib/mlx5/ib_mlx5_log.c" />
@@ -553,7 +556,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/ucx/test/apps/test_ucp_dlopen.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ucx/test/apps/test_ucs_dlopen.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ucx/test/apps/uct_info/uct_info.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/ucx/test/gtest/common/cuda_context.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/ucx/test/gtest/common/googletest/gtest-death-test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/ucx/test/gtest/common/googletest/gtest-filepath.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/ucx/test/gtest/common/googletest/gtest-matchers.cc" />
@@ -580,6 +582,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/ucx/test/gtest/ucp/test_ucp_am.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/ucx/test/gtest/ucp/test_ucp_atomic.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/ucx/test/gtest/ucp/test_ucp_context.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ucx/test/gtest/ucp/test_ucp_device.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/ucx/test/gtest/ucp/test_ucp_dt.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/ucx/test/gtest/ucp/test_ucp_ep.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/ucx/test/gtest/ucp/test_ucp_ep_reconfig.cc" />
@@ -651,7 +654,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/ucx/test/gtest/ucs/test_type.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/ucx/test/gtest/ucs/test_usage_tracker.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/ucx/test/gtest/ucs/test_vfs.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ucx/test/gtest/uct/cuda/test_cuda_ipc_device.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/ucx/test/gtest/uct/cuda/test_cuda_ipc_md.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ucx/test/gtest/uct/cuda/test_cuda_nvml.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/ucx/test/gtest/uct/cuda/test_switch_cuda_device.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/ucx/test/gtest/uct/ib/test_cq_moderation.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/ucx/test/gtest/uct/ib/test_cqe_zipping.cc" />
@@ -669,6 +674,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/ucx/test/gtest/uct/ib/test_ud_pending.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/ucx/test/gtest/uct/ib/test_ud_timer.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/ucx/test/gtest/uct/ib/ud_base.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ucx/test/gtest/uct/sm/mm/test_mm_fifo_room.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/ucx/test/gtest/uct/tcp/test_tcp.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/ucx/test/gtest/uct/test_amo.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/ucx/test/gtest/uct/test_amo_add_xor.cc" />
@@ -678,6 +684,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/ucx/test/gtest/uct/test_amo_fand_for.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/ucx/test/gtest/uct/test_amo_swap.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/ucx/test/gtest/uct/test_atomic_key_reg_rdma_mem_type.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ucx/test/gtest/uct/test_device.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/ucx/test/gtest/uct/test_event.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/ucx/test/gtest/uct/test_fence.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/ucx/test/gtest/uct/test_flush.cc" />
@@ -705,6 +712,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/ucx/test/mpi/shmem_pingpong.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ucx/test/mpi/test_memhooks.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ucx/test/mpi/test_memhooks_lib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ucx/test/mpi/test_mpi_cuda.c" />
     <ClInclude Include="../../thirdparty/owemdjee/ucx/bindings/go/src/ucx/goucx.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ucx/bindings/go/src/ucx/ucs_constants.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ucx/bindings/java/src/main/native/jucx_common_def.h" />
@@ -719,7 +727,10 @@
     <ClInclude Include="../../thirdparty/owemdjee/ucx/examples/ucp_util.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ucx/src/tools/info/ucx_info.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ucx/src/tools/perf/api/libperf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ucx/src/tools/perf/cuda/cuda_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ucx/src/tools/perf/cuda/cuda_kernel.cuh" />
     <ClInclude Include="../../thirdparty/owemdjee/ucx/src/tools/perf/lib/libperf_int.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ucx/src/tools/perf/lib/ucp_tests.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ucx/src/tools/perf/perftest.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ucx/src/tools/perf/perftest_context.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ucx/src/tools/vfs/vfs_daemon.h" />
@@ -743,6 +754,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/ucx/src/ucm/util/replace.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ucx/src/ucm/util/sys.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ucx/src/ucm/ze/zemem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ucx/src/ucp/api/device/ucp_device_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ucx/src/ucp/api/device/ucp_device_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ucx/src/ucp/api/device/ucp_host.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ucx/src/ucp/api/ucp.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ucx/src/ucp/api/ucp_compat.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ucx/src/ucp/api/ucp_def.h" />
@@ -874,6 +888,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/ucx/src/ucs/sys/checker.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ucx/src/ucs/sys/compiler.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ucx/src/ucs/sys/compiler_def.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ucx/src/ucs/sys/device_code.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ucx/src/ucs/sys/event_set.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ucx/src/ucs/sys/iovec.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ucx/src/ucs/sys/lib.h" />
@@ -897,6 +912,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/ucx/src/ucs/type/float8.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ucx/src/ucs/type/init_once.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ucx/src/ucs/type/param.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ucx/src/ucs/type/rwlock.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ucx/src/ucs/type/serialize.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ucx/src/ucs/type/spinlock.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ucx/src/ucs/type/status.h" />
@@ -904,6 +920,8 @@
     <ClInclude Include="../../thirdparty/owemdjee/ucx/src/ucs/vfs/base/vfs_cb.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ucx/src/ucs/vfs/base/vfs_obj.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ucx/src/ucs/vfs/sock/vfs_sock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ucx/src/uct/api/device/uct_device_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ucx/src/uct/api/device/uct_device_types.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ucx/src/uct/api/tl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ucx/src/uct/api/uct.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ucx/src/uct/api/uct_def.h" />
@@ -917,10 +935,13 @@
     <ClInclude Include="../../thirdparty/owemdjee/ucx/src/uct/base/uct_worker.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ucx/src/uct/cuda/base/cuda_iface.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ucx/src/uct/cuda/base/cuda_md.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ucx/src/uct/cuda/base/cuda_nvml.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ucx/src/uct/cuda/cuda_copy/cuda_copy_ep.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ucx/src/uct/cuda/cuda_copy/cuda_copy_iface.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ucx/src/uct/cuda/cuda_copy/cuda_copy_md.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ucx/src/uct/cuda/cuda_ipc/cuda_ipc.cuh" />
     <ClInclude Include="../../thirdparty/owemdjee/ucx/src/uct/cuda/cuda_ipc/cuda_ipc_cache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ucx/src/uct/cuda/cuda_ipc/cuda_ipc_device.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ucx/src/uct/cuda/cuda_ipc/cuda_ipc_ep.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ucx/src/uct/cuda/cuda_ipc/cuda_ipc_iface.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ucx/src/uct/cuda/cuda_ipc/cuda_ipc_md.h" />
@@ -941,6 +962,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/ucx/src/uct/ib/mlx5/dc/dc_mlx5_ep.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ucx/src/uct/ib/mlx5/dv/ib_mlx5_dv.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ucx/src/uct/ib/mlx5/dv/ib_mlx5_ifc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ucx/src/uct/ib/mlx5/gdaki/gdaki.cuh" />
+    <ClInclude Include="../../thirdparty/owemdjee/ucx/src/uct/ib/mlx5/gdaki/gdaki.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ucx/src/uct/ib/mlx5/gdaki/gdaki_dev.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ucx/src/uct/ib/mlx5/ib_mlx5.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ucx/src/uct/ib/mlx5/ib_mlx5_log.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ucx/src/uct/ib/mlx5/rc/rc_mlx5.h" />
@@ -1008,7 +1032,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/ucx/src/uct/ze/copy/ze_copy_iface.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ucx/src/uct/ze/copy/ze_copy_md.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ucx/test/apps/iodemo/ucx_wrapper.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ucx/test/gtest/common/cuda_context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ucx/test/gtest/common/cuda.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ucx/test/gtest/common/googletest/gtest-death-test.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ucx/test/gtest/common/googletest/gtest-internal-inl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ucx/test/gtest/common/googletest/gtest-matchers.h" />
@@ -1036,10 +1060,13 @@
     <ClInclude Include="../../thirdparty/owemdjee/ucx/test/gtest/common/test.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ucx/test/gtest/common/test_helpers.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ucx/test/gtest/common/test_perf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ucx/test/gtest/ucp/cuda/test_kernels.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ucx/test/gtest/ucp/test_ucp_memheap.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ucx/test/gtest/ucp/test_ucp_tag.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ucx/test/gtest/ucp/ucp_datatype.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ucx/test/gtest/ucp/ucp_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ucx/test/gtest/uct/cuda/test_kernels.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ucx/test/gtest/uct/cuda/test_kernels_uct.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ucx/test/gtest/uct/ib/test_ib.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ucx/test/gtest/uct/ib/test_rc.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ucx/test/gtest/uct/ib/ud_base.h" />
@@ -1125,6 +1152,7 @@
     <Text Include="../../thirdparty/owemdjee/ucx/buildlib/dockers/ubuntu-release.Dockerfile" />
     <Text Include="../../thirdparty/owemdjee/ucx/buildlib/jucx/jucx-build.yml" />
     <Text Include="../../thirdparty/owemdjee/ucx/buildlib/jucx/jucx-test.yml" />
+    <Text Include="../../thirdparty/owemdjee/ucx/buildlib/pr/build_job.yml" />
     <Text Include="../../thirdparty/owemdjee/ucx/buildlib/pr/codestyle.yml" />
     <Text Include="../../thirdparty/owemdjee/ucx/buildlib/pr/coverity.yml" />
     <Text Include="../../thirdparty/owemdjee/ucx/buildlib/pr/cuda/cuda.yml" />
@@ -1162,6 +1190,7 @@
     <Text Include="../../thirdparty/owemdjee/ucx/cmake/ucx-config.cmake.in" />
     <Text Include="../../thirdparty/owemdjee/ucx/cmake/ucx-targets.cmake.in" />
     <Text Include="../../thirdparty/owemdjee/ucx/config/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/ucx/config/cuda.am" />
     <Text Include="../../thirdparty/owemdjee/ucx/config/m4/ax_prog_doxygen.m4" />
     <Text Include="../../thirdparty/owemdjee/ucx/config/m4/compiler.m4" />
     <Text Include="../../thirdparty/owemdjee/ucx/config/m4/cuda.m4" />
@@ -1181,6 +1210,7 @@
     <Text Include="../../thirdparty/owemdjee/ucx/config/m4/ze.m4" />
     <Text Include="../../thirdparty/owemdjee/ucx/config/module-pkg-config.am" />
     <Text Include="../../thirdparty/owemdjee/ucx/config/module.am" />
+    <Text Include="../../thirdparty/owemdjee/ucx/config/nvcc_wrap.sh" />
     <Text Include="../../thirdparty/owemdjee/ucx/config/ucx.conf" />
     <Text Include="../../thirdparty/owemdjee/ucx/configure.ac" />
     <Text Include="../../thirdparty/owemdjee/ucx/contrib/api_update.sh" />
@@ -1215,6 +1245,7 @@
     <Text Include="../../thirdparty/owemdjee/ucx/contrib/ucx_perftest_config/test_types_ucp" />
     <Text Include="../../thirdparty/owemdjee/ucx/contrib/ucx_perftest_config/test_types_ucp_amo" />
     <Text Include="../../thirdparty/owemdjee/ucx/contrib/ucx_perftest_config/test_types_ucp_daemon" />
+    <Text Include="../../thirdparty/owemdjee/ucx/contrib/ucx_perftest_config/test_types_ucp_device_cuda" />
     <Text Include="../../thirdparty/owemdjee/ucx/contrib/ucx_perftest_config/test_types_ucp_rma" />
     <Text Include="../../thirdparty/owemdjee/ucx/contrib/ucx_perftest_config/test_types_uct" />
     <Text Include="../../thirdparty/owemdjee/ucx/contrib/ucx_perftest_config/transports" />
@@ -1229,6 +1260,7 @@
     <Text Include="../../thirdparty/owemdjee/ucx/debian/source/format" />
     <Text Include="../../thirdparty/owemdjee/ucx/debian/ucx-cuda.install" />
     <Text Include="../../thirdparty/owemdjee/ucx/debian/ucx-gdrcopy.install" />
+    <Text Include="../../thirdparty/owemdjee/ucx/debian/ucx-ib-mlx5-gda.install" />
     <Text Include="../../thirdparty/owemdjee/ucx/debian/ucx-xpmem.install" />
     <Text Include="../../thirdparty/owemdjee/ucx/debian/ucx.install" />
     <Text Include="../../thirdparty/owemdjee/ucx/docs/CodeStyle.md" />
@@ -1325,11 +1357,13 @@
     <Text Include="../../thirdparty/owemdjee/ucx/src/uct/configure.m4" />
     <Text Include="../../thirdparty/owemdjee/ucx/src/uct/cuda/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/ucx/src/uct/cuda/configure.m4" />
+    <Text Include="../../thirdparty/owemdjee/ucx/src/uct/cuda/cuda_ipc/cuda_ipc.inl" />
     <Text Include="../../thirdparty/owemdjee/ucx/src/uct/cuda/gdr_copy/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/ucx/src/uct/cuda/gdr_copy/configure.m4" />
     <Text Include="../../thirdparty/owemdjee/ucx/src/uct/cuda/gdr_copy/ucx-gdrcopy.pc.in" />
     <Text Include="../../thirdparty/owemdjee/ucx/src/uct/cuda/ucx-cuda.pc.in" />
     <Text Include="../../thirdparty/owemdjee/ucx/src/uct/ib/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/ucx/src/uct/ib/base/ib_log.inl" />
     <Text Include="../../thirdparty/owemdjee/ucx/src/uct/ib/configure.m4" />
     <Text Include="../../thirdparty/owemdjee/ucx/src/uct/ib/efa/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/ucx/src/uct/ib/efa/configure.m4" />
@@ -1337,6 +1371,9 @@
     <Text Include="../../thirdparty/owemdjee/ucx/src/uct/ib/mlx5/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/ucx/src/uct/ib/mlx5/configure.m4" />
     <Text Include="../../thirdparty/owemdjee/ucx/src/uct/ib/mlx5/dc/dc_mlx5.inl" />
+    <Text Include="../../thirdparty/owemdjee/ucx/src/uct/ib/mlx5/gdaki/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/ucx/src/uct/ib/mlx5/gdaki/configure.m4" />
+    <Text Include="../../thirdparty/owemdjee/ucx/src/uct/ib/mlx5/gdaki/ucx-ib-mlx5-gda.pc.in" />
     <Text Include="../../thirdparty/owemdjee/ucx/src/uct/ib/mlx5/ib_mlx5.inl" />
     <Text Include="../../thirdparty/owemdjee/ucx/src/uct/ib/mlx5/rc/rc_mlx5.inl" />
     <Text Include="../../thirdparty/owemdjee/ucx/src/uct/ib/mlx5/ucx-ib-mlx5.pc.in" />

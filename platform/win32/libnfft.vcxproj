@@ -248,6 +248,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/nfft/applications/mri/mri3d/reconstruct_data_3d.c" />
     <ClCompile Include="../../thirdparty/owemdjee/nfft/applications/mri/mri3d/reconstruct_data_gridding.c" />
     <ClCompile Include="../../thirdparty/owemdjee/nfft/applications/quadratureS2/quadratureS2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/benchmarks/bench_nfft_direct.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/nfft/examples/doxygen.c" />
     <ClCompile Include="../../thirdparty/owemdjee/nfft/examples/fpt/simple_test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/nfft/examples/nfft/flags.c" />
@@ -270,6 +271,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/nfft/julia/fastsum/libfastsumjulia.c" />
     <ClCompile Include="../../thirdparty/owemdjee/nfft/julia/nfct/libnfctjulia.c" />
     <ClCompile Include="../../thirdparty/owemdjee/nfft/julia/nfft/libnfftjulia.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nfft/julia/nfsft/libnfsftjulia.c" />
     <ClCompile Include="../../thirdparty/owemdjee/nfft/julia/nfst/libnfstjulia.c" />
     <ClCompile Include="../../thirdparty/owemdjee/nfft/kernel/fpt/fpt.c" />
     <ClCompile Include="../../thirdparty/owemdjee/nfft/kernel/mri/mri.c" />
@@ -331,6 +333,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/nfft/applications/mri/mri3d/doxygen.h" />
     <ClInclude Include="../../thirdparty/owemdjee/nfft/applications/polarFFT/doxygen.h" />
     <ClInclude Include="../../thirdparty/owemdjee/nfft/applications/quadratureS2/doxygen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nfft/benchmarks/util.h" />
     <ClInclude Include="../../thirdparty/owemdjee/nfft/examples/solver/doxygen.h" />
     <ClInclude Include="../../thirdparty/owemdjee/nfft/include/api.h" />
     <ClInclude Include="../../thirdparty/owemdjee/nfft/include/cycle.h" />
@@ -358,7 +361,6 @@
     <Text Include="../../thirdparty/owemdjee/nfft/ChangeLog" />
     <Text Include="../../thirdparty/owemdjee/nfft/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/nfft/NEWS" />
-    <Text Include="../../thirdparty/owemdjee/nfft/README" />
     <Text Include="../../thirdparty/owemdjee/nfft/README.md" />
     <Text Include="../../thirdparty/owemdjee/nfft/aminclude.am" />
     <Text Include="../../thirdparty/owemdjee/nfft/applications/Makefile.am" />
@@ -388,6 +390,7 @@
     <Text Include="../../thirdparty/owemdjee/nfft/applications/radon/README" />
     <Text Include="../../thirdparty/owemdjee/nfft/applications/radon/inverse_radon.c.in" />
     <Text Include="../../thirdparty/owemdjee/nfft/applications/radon/radon.c.in" />
+    <Text Include="../../thirdparty/owemdjee/nfft/benchmarks/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/nfft/bootstrap.sh" />
     <Text Include="../../thirdparty/owemdjee/nfft/configure.ac" />
     <Text Include="../../thirdparty/owemdjee/nfft/doc/assets/sphere.pdf" />
@@ -440,6 +443,9 @@
     <Text Include="../../thirdparty/owemdjee/nfft/julia/nfft/simple_test_1d.jl" />
     <Text Include="../../thirdparty/owemdjee/nfft/julia/nfft/simple_test_2d.jl" />
     <Text Include="../../thirdparty/owemdjee/nfft/julia/nfft/simple_test_3d.jl" />
+    <Text Include="../../thirdparty/owemdjee/nfft/julia/nfsft/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/nfft/julia/nfsft/NFSFT.jl" />
+    <Text Include="../../thirdparty/owemdjee/nfft/julia/nfsft/simple_test.jl" />
     <Text Include="../../thirdparty/owemdjee/nfft/julia/nfst/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/nfft/julia/nfst/NFST.jl" />
     <Text Include="../../thirdparty/owemdjee/nfft/julia/nfst/simple_test_1d.jl" />
@@ -465,16 +471,19 @@
     <Text Include="../../thirdparty/owemdjee/nfft/m4/ax_check_dir.m4" />
     <Text Include="../../thirdparty/owemdjee/nfft/m4/ax_compiler_vendor.m4" />
     <Text Include="../../thirdparty/owemdjee/nfft/m4/ax_count_cpus.m4" />
-    <Text Include="../../thirdparty/owemdjee/nfft/m4/ax_cunit.m4" />
+    <Text Include="../../thirdparty/owemdjee/nfft/m4/ax_cxx_compile_stdcxx.m4" />
     <Text Include="../../thirdparty/owemdjee/nfft/m4/ax_gcc_aligns_stack.m4" />
     <Text Include="../../thirdparty/owemdjee/nfft/m4/ax_gcc_archflag.m4" />
     <Text Include="../../thirdparty/owemdjee/nfft/m4/ax_gcc_version.m4" />
     <Text Include="../../thirdparty/owemdjee/nfft/m4/ax_gcc_x86_cpuid.m4" />
-    <Text Include="../../thirdparty/owemdjee/nfft/m4/ax_lib_fftw3.m4" />
     <Text Include="../../thirdparty/owemdjee/nfft/m4/ax_nfft_module.m4" />
     <Text Include="../../thirdparty/owemdjee/nfft/m4/ax_openmp.m4" />
     <Text Include="../../thirdparty/owemdjee/nfft/m4/ax_prog_doxygen.m4" />
     <Text Include="../../thirdparty/owemdjee/nfft/m4/ax_prog_matlab.m4" />
+    <Text Include="../../thirdparty/owemdjee/nfft/m4/nfft_lib_codspeed.m4" />
+    <Text Include="../../thirdparty/owemdjee/nfft/m4/nfft_lib_cunit.m4" />
+    <Text Include="../../thirdparty/owemdjee/nfft/m4/nfft_lib_fftw3.m4" />
+    <Text Include="../../thirdparty/owemdjee/nfft/m4/nfft_openmp_atomic_float.m4" />
     <Text Include="../../thirdparty/owemdjee/nfft/macos-build-mex.sh" />
     <Text Include="../../thirdparty/owemdjee/nfft/matlab/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/nfft/matlab/README" />

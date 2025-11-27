@@ -257,6 +257,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestAtomicAsm.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestAtomicBasic.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestAtomicMultiThreaded.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestAtomicRaw.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestBit.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestBitVector.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestBitcast.cpp" />
@@ -264,8 +265,10 @@
     <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestCharTraits.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestChrono.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestConcepts.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestContainerBehaviour.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestCppCXTypeTraits.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestDeque.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestExpected.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestExtra.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestFinally.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestFixedFunction.cpp" />
@@ -277,6 +280,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestFixedString.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestFixedTupleVector.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestFixedVector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestFlags.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestFunctional.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestHash.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/EASTL/test/source/TestHeap.cpp" />
@@ -323,6 +327,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/any.h" />
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/array.h" />
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/atomic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/atomic_raw.h" />
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/bit.h" />
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/bitset.h" />
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/bitvector.h" />
@@ -331,6 +336,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/bonus/compressed_pair.h" />
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/bonus/fixed_ring_buffer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/bonus/fixed_tuple_vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/bonus/flags.h" />
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/bonus/intrusive_sdlist.h" />
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/bonus/intrusive_slist.h" />
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/bonus/list_map.h" />
@@ -344,6 +350,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/core_allocator.h" />
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/core_allocator_adapter.h" />
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/deque.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/expected.h" />
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/finally.h" />
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/fixed_allocator.h" />
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/fixed_function.h" />
@@ -362,6 +369,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/heap.h" />
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/initializer_list.h" />
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/arch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/arch_acquire_fence.h" />
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/arch_add_fetch.h" />
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/arch_and_fetch.h" />
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/arch_cmpxchg_strong.h" />
@@ -383,11 +391,13 @@
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/arch_thread_fence.h" />
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/arch_xor_fetch.h" />
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/arm/arch_arm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/arm/arch_arm_acquire_fence.h" />
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/arm/arch_arm_load.h" />
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/arm/arch_arm_memory_barrier.h" />
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/arm/arch_arm_store.h" />
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/arm/arch_arm_thread_fence.h" />
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/x86/arch_x86.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/x86/arch_x86_acquire_fence.h" />
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/x86/arch_x86_add_fetch.h" />
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/x86/arch_x86_and_fetch.h" />
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/arch/x86/arch_x86_cmpxchg_strong.h" />
@@ -414,6 +424,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/atomic_integral.h" />
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/atomic_macros.h" />
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/atomic_macros/atomic_macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/atomic_macros/atomic_macros_acquire_fence.h" />
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/atomic_macros/atomic_macros_add_fetch.h" />
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/atomic_macros/atomic_macros_and_fetch.h" />
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/atomic_macros/atomic_macros_base.h" />
@@ -440,6 +451,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/atomic_size_aligned.h" />
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/atomic_standalone.h" />
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/compiler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/compiler_acquire_fence.h" />
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/compiler_add_fetch.h" />
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/compiler_and_fetch.h" />
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/atomic/compiler/compiler_barrier.h" />
@@ -515,11 +527,15 @@
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/intrusive_hashtable.h" />
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/mem_fn.h" />
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/memory_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/memory_uses_allocator.h" />
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/move_help.h" />
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/pair_fwd_decls.h" />
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/piecewise_construct_t.h" />
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/red_black_tree.h" />
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/smart_ptr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/special_member_functions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/special_member_functions_expected.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/special_member_functions_variant_optional.h" />
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/thread_support.h" />
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/tuple_fwd_decls.h" />
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/include/EASTL/internal/type_compound.h" />
@@ -581,6 +597,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/test/source/EASTLTestAllocator.h" />
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/test/source/EASTLTestIterators.h" />
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/test/source/GetTypeName.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/EASTL/test/source/TestAssociativeContainers.h" />
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/test/source/TestMap.h" />
     <ClInclude Include="../../thirdparty/owemdjee/EASTL/test/source/TestSet.h" />
     <Text Include="../../thirdparty/owemdjee/EASTL/3RDPARTYLICENSES.TXT" />

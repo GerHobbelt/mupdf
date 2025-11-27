@@ -223,6 +223,7 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/alloc_at_least.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/allocation_sample.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/allocation_sample_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/allocation_sampling.cc" />
@@ -303,6 +304,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/internal/stacktrace_filter_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/internal/sysinfo.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/internal/sysinfo_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/internal/system_allocator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/internal/system_allocator_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/internal/timeseries_tracker_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/internal/util.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/legacy_size_classes.cc" />
@@ -324,7 +327,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/profile_marshaler.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/profile_marshaler_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/profile_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/reuse_size_classes.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/reuse_size_classes_v2.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/sampler.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/segv_handler.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/segv_handler_test.cc" />
@@ -343,9 +346,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/static_vars.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/stats.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/stats_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/system-alloc.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/tcmalloc.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/testing/aligned_new_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/testing/alloc_at_least_test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/testing/background_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/testing/benchmark_main.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/testing/current_allocated_bytes_test.cc" />
@@ -362,6 +365,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/testing/limit_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/testing/malloc_extension_system_malloc_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/testing/malloc_extension_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/testing/malloc_hook_recorder.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/testing/malloc_tracing_extension_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/testing/markidle_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/testing/memalign_test.cc" />
@@ -392,23 +396,22 @@
     <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/testing/thread_ctor_test_lib.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/testing/threadcachesize_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/testing/variants_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/testing/want_disable_dense_trackers_sorted_on_spans_allocated_test_helper.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/testing/want_disable_huge_region_more_often_test_helper.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/testing/want_disable_wider_slabs_test_helper.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/testing/want_hpaa_test_helper.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/testing/want_pow2below64_size_classes_helper.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/testing/want_legacy_size_classes_helper.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/thread_cache.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/thread_cache_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/transfer_cache.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/transfer_cache_benchmark.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/transfer_cache_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/want_disable_dense_trackers_sorted_on_spans_allocated.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/want_disable_dynamic_slabs.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/want_disable_huge_region_more_often.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/want_hpaa.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/want_legacy_size_classes.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/want_legacy_size_classes_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/want_numa_aware.cc" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/alloc_at_least.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/allocation_sample.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/allocation_sampling.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/arena.h" />
@@ -470,6 +473,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/internal/sampled_allocation_recorder.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/internal/stacktrace_filter.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/internal/sysinfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/internal/system_allocator.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/internal/timeseries_tracker.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/internal/util.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/internal_malloc_extension.h" />
@@ -506,9 +510,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/stack_trace_table.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/static_vars.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/stats.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/system-alloc.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/tcmalloc.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/tcmalloc_policy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/testing/malloc_hook_recorder.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/testing/test_allocator_harness.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/testing/testutil.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tcmalloc/tcmalloc/testing/thread_manager.h" />
@@ -529,7 +533,6 @@
     <Text Include="../../thirdparty/owemdjee/tcmalloc/LICENSE" />
     <Text Include="../../thirdparty/owemdjee/tcmalloc/MODULE.bazel" />
     <Text Include="../../thirdparty/owemdjee/tcmalloc/README.md" />
-    <Text Include="../../thirdparty/owemdjee/tcmalloc/WORKSPACE" />
     <Text Include="../../thirdparty/owemdjee/tcmalloc/ci/linux_clang-latest_libcxx_bazel.sh" />
     <Text Include="../../thirdparty/owemdjee/tcmalloc/ci/linux_clang-latest_libstdcxx_bazel.sh" />
     <Text Include="../../thirdparty/owemdjee/tcmalloc/ci/linux_gcc-latest_libstdcxx_bazel.sh" />

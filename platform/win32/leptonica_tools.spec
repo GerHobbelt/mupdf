@@ -1,6 +1,8 @@
 
 ignore:
 	/src/
+	/tmp/
+	/test/
 
 	sw.cpp
 

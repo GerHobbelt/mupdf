@@ -60,59 +60,62 @@
     <Filter Include="Header Files\src\snmalloc\stl\gnu">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0016}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\ci">
+    <Filter Include="Misc Files\benchmark">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0017}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\docs">
+    <Filter Include="Misc Files\ci">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0018}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\docs\release">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0020}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Misc Files\docs\release\0.7">
+    <Filter Include="Misc Files\docs">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0019}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\docs\security">
+    <Filter Include="Misc Files\docs\release">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0021}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\docs\security\data">
+    <Filter Include="Misc Files\docs\release\0.7">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0020}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Misc Files\docs\security">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0022}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\src">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0024}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Misc Files\src\snmalloc">
+    <Filter Include="Misc Files\docs\security\data">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0023}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\src\snmalloc\stl">
+    <Filter Include="Misc Files\src">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0025}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\src\snmalloc\stl\cxx">
+    <Filter Include="Misc Files\src\snmalloc">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0024}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Misc Files\src\snmalloc\stl">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0026}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\src\snmalloc\stl\gnu">
+    <Filter Include="Misc Files\src\snmalloc\stl\cxx">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0027}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files">
+    <Filter Include="Misc Files\src\snmalloc\stl\gnu">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0028}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files\docs">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0031}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource Files\docs\security">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0030}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource Files\docs\security\data">
+    <Filter Include="Resource Files">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0029}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\docs">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0032}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\docs\security">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0031}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\docs\security\data">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0030}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Source Files\src">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0034}</UniqueIdentifier>
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0035}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\src\snmalloc">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0033}</UniqueIdentifier>
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0034}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\src\snmalloc\override">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0032}</UniqueIdentifier>
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0033}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -377,9 +380,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/mem/remotecache.h">
       <Filter>Header Files\src\snmalloc\mem</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/mem/secondary.h">
-      <Filter>Header Files\src\snmalloc\mem</Filter>
-    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/mem/secondary/default.h">
       <Filter>Header Files\src\snmalloc\mem\secondary</Filter>
     </ClInclude>
@@ -524,14 +524,23 @@
     <Image Include="../../thirdparty/owemdjee/snmalloc/docs/security/data/perfgraph.png">
       <Filter>Resource Files\docs\security\data</Filter>
     </Image>
+    <Text Include="../../thirdparty/owemdjee/snmalloc/BUILD.bazel">
+      <Filter>Misc Files</Filter>
+    </Text>
     <Text Include="../../thirdparty/owemdjee/snmalloc/CMakeLists.txt">
       <Filter>Misc Files</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/snmalloc/LICENSE">
       <Filter>Misc Files</Filter>
     </Text>
+    <Text Include="../../thirdparty/owemdjee/snmalloc/MODULE.bazel">
+      <Filter>Misc Files</Filter>
+    </Text>
     <Text Include="../../thirdparty/owemdjee/snmalloc/README.md">
       <Filter>Misc Files</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/snmalloc/benchmark/Dockerfile">
+      <Filter>Misc Files\benchmark</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/snmalloc/ci/README.md">
       <Filter>Misc Files\ci</Filter>

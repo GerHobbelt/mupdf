@@ -191,6 +191,23 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
+    <ProjectReference Include="Detours.vcxproj">
+      <Project>{4c2a66ce-a3c0-4f63-abd9-65e3e728040b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libdebugbreak.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0f0f12}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsystem_override.vcxproj">
+      <Project>{0b51171b-b10e-4eac-8ffa-19226a8bb47b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libassert.vcxproj">
+      <Project>{0b51171b-b10e-4eac-8ffa-19226ad14240}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcpptrace.vcxproj">
+      <Project>{0b51171b-b10e-4eac-8ffa-19226a59d404}</Project>
+    </ProjectReference>
+      </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="../../source/system_override/force_link_dependency_helper.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -398,23 +415,6 @@
     <Text Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/src/rapidassist/config.h.in" />
     <Text Include="../../thirdparty/owemdjee/bin2cpp/thirdparty/RapidAssist/src/rapidassist/version.h.in" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="Detours.vcxproj">
-      <Project>{4c2a66ce-a3c0-4f63-abd9-65e3e728040b}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libdebugbreak.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff0f0f12}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libsystem_override.vcxproj">
-      <Project>{0b51171b-b10e-4eac-8ffa-19226a8bb47b}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libassert.vcxproj">
-      <Project>{0b51171b-b10e-4eac-8ffa-19226ad14240}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libcpptrace.vcxproj">
-      <Project>{0b51171b-b10e-4eac-8ffa-19226a59d404}</Project>
-    </ProjectReference>
-      </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
   

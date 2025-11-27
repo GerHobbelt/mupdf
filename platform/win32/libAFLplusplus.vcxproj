@@ -247,6 +247,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/symcc/test_examples/file_test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/symcc/test_examples/stdin_test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/symqemu/symqemu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/zmq/consumer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/zmq/test_router.c" />
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/addr/addr.c" />
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/hook/frida_hook.c" />
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/hook/qemu_hook.c" />
@@ -334,6 +336,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/instrumentation/afl-gcc-pass.so.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/instrumentation/afl-llvm-common.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/instrumentation/afl-llvm-dict2file.so.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/instrumentation/afl-llvm-ijon-pass.so.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/instrumentation/afl-llvm-lto-instrumentlist.so.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/instrumentation/afl-llvm-pass.so.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/instrumentation/afl-llvm-rt-lto.o.c" />
@@ -370,6 +373,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/src/afl-tmin.c" />
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/src/hashmap.c" />
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/test-instr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/test/ijon-maze.c" />
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/test/test-cmplog.c" />
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/test/test-compcov.c" />
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/test/test-custom-mutator.c" />
@@ -379,6 +383,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/test/test-fp_NaNcases.c" />
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/test/test-fp_cases.c" />
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/test/test-fp_minusZerocases.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/test/test-ijon-complete.c" />
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/test/test-int_cases.c" />
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/test/test-multiple-mutators.c" />
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/test/test-uint_cases.c" />
@@ -448,6 +453,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/include/stalker.h" />
     <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/include/stats.h" />
     <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/include/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/include/afl-ijon-min.h" />
     <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/include/afl-mutations.h" />
     <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/include/afl-persistent-replay.h" />
     <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/include/afl-prealloc.h" />
@@ -499,6 +505,7 @@
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/Dockerfile" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/GNUmakefile" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/GNUmakefile.gcc_plugin" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/GNUmakefile.llvm" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/LICENSE" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/Makefile" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/README.md" />
@@ -584,10 +591,13 @@
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/symcc/README.md" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/symqemu/Makefile" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/symqemu/README.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/zmq/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/zmq/README.md" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/dictionaries/README.md" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/docs/COPYING" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/docs/Changelog.md" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/docs/FAQ.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/docs/IJON.md" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/docs/INSTALL.md" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/docs/README.md" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/docs/SAND.md" />
@@ -729,6 +739,7 @@
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/qemu_mode/unsigaction/README.md" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/qemu_mode/update_ref.sh" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/qemu_mode/util/qemu_get_symbol_addr.sh" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/src/Makefile" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/src/README.md" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/test/checkcommit.sh" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/test/test-all.sh" />
@@ -738,6 +749,7 @@
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/test/test-fpExtra.sh" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/test/test-frida-mode.sh" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/test/test-gcc-plugin.sh" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/test/test-ijon-complete.sh" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/test/test-libextensions.sh" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/test/test-llvm-lto.sh" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/test/test-llvm.sh" />
@@ -764,7 +776,7 @@
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/testcases/others/text/hello_world.txt" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/README.md" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/UNICORNAFL_VERSION" />
-    <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/build_unicorn_support.sh" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/build_unicorn_support.py" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/helper_scripts/ida_context_loader.py" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/helper_scripts/unicorn_dumper_gdb.py" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/helper_scripts/unicorn_dumper_ida.py" />
@@ -816,7 +828,7 @@
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/samples/speedtest/rust/Makefile" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/samples/speedtest/rust/src/main.rs" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/samples/speedtest/sample_inputs/a" />
-    <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/update_uc_ref.sh" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/update_ref.sh" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/README.md" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/afl_network_proxy/GNUmakefile" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/afl_network_proxy/Makefile" />

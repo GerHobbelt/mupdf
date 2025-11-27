@@ -682,6 +682,7 @@
     <Text Include="../../thirdparty/owemdjee/thrift/CHANGES.md" />
     <Text Include="../../thirdparty/owemdjee/thrift/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/thrift/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/FUZZING.md" />
     <Text Include="../../thirdparty/owemdjee/thrift/LANGUAGES.md" />
     <Text Include="../../thirdparty/owemdjee/thrift/LICENSE" />
     <Text Include="../../thirdparty/owemdjee/thrift/Makefile.am" />
@@ -760,6 +761,7 @@
     <Text Include="../../thirdparty/owemdjee/thrift/build/docker/scripts/ubsan.sh" />
     <Text Include="../../thirdparty/owemdjee/thrift/build/docker/ubuntu-focal/Dockerfile" />
     <Text Include="../../thirdparty/owemdjee/thrift/build/docker/ubuntu-jammy/Dockerfile" />
+    <Text Include="../../thirdparty/owemdjee/thrift/build/docker/ubuntu-noble/Dockerfile" />
     <Text Include="../../thirdparty/owemdjee/thrift/build/fixchanges.sh" />
     <Text Include="../../thirdparty/owemdjee/thrift/build/veralign.sh" />
     <Text Include="../../thirdparty/owemdjee/thrift/compiler/cpp/CMakeLists.txt" />
@@ -1082,6 +1084,7 @@
     <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/transport/TFullDuplexHttpClient.hx" />
     <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/transport/THttpClient.hx" />
     <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/transport/TLayeredTransport.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/transport/TMemoryStream.hx" />
     <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/transport/TServerSocket.hx" />
     <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/transport/TServerTransport.hx" />
     <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/transport/TSocket.hx" />
@@ -1102,11 +1105,11 @@
     <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/test/neko.hxml" />
     <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/test/php.hxml" />
     <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/test/python.hxml" />
-    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/test/src/ConstantsTest.hx" />
     <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/test/src/Main.hx" />
-    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/test/src/MultiplexTest.hx" />
-    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/test/src/StreamTest.hx" />
-    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/test/src/TestBase.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/test/src/tests/ConstantsTest.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/test/src/tests/MultiplexTest.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/test/src/tests/StreamTest.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/test/src/tests/TestBase.hx" />
     <Text Include="../../thirdparty/owemdjee/thrift/lib/java/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/thrift/lib/java/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/thrift/lib/java/README.md" />
@@ -1211,6 +1214,7 @@
     <Text Include="../../thirdparty/owemdjee/thrift/lib/java/src/main/java/org/apache/thrift/transport/AutoExpandingBuffer.java" />
     <Text Include="../../thirdparty/owemdjee/thrift/lib/java/src/main/java/org/apache/thrift/transport/AutoExpandingBufferReadTransport.java" />
     <Text Include="../../thirdparty/owemdjee/thrift/lib/java/src/main/java/org/apache/thrift/transport/AutoExpandingBufferWriteTransport.java" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/java/src/main/java/org/apache/thrift/transport/SocketAddressProvider.java" />
     <Text Include="../../thirdparty/owemdjee/thrift/lib/java/src/main/java/org/apache/thrift/transport/TByteBuffer.java" />
     <Text Include="../../thirdparty/owemdjee/thrift/lib/java/src/main/java/org/apache/thrift/transport/TEOFException.java" />
     <Text Include="../../thirdparty/owemdjee/thrift/lib/java/src/main/java/org/apache/thrift/transport/TEndpointTransport.java" />
@@ -1459,7 +1463,9 @@
     <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Tests/Thrift.Compile.Tests/Thrift.Compile.net9/Properties/AssemblyInfo.cs" />
     <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Tests/Thrift.Compile.Tests/Thrift.Compile.netstd2/Impl/Thrift5253/MyService.cs" />
     <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Tests/Thrift.Compile.Tests/Thrift.Compile.netstd2/Properties/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Tests/Thrift.IntegrationTests/Protocols/ProtocolConformityTests.cs" />
     <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Tests/Thrift.IntegrationTests/Protocols/ProtocolsOperationsTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Tests/Thrift.IntegrationTests/Protocols/TestBase.cs" />
     <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Tests/Thrift.Tests/Collections/TCollectionsTests.cs" />
     <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Tests/Thrift.Tests/Collections/THashSetTests.cs" />
     <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Tests/Thrift.Tests/DataModel/DeepCopy.cs" />
@@ -1704,6 +1710,7 @@
     <Text Include="../../thirdparty/owemdjee/thrift/lib/rs/RELEASING.md" />
     <Text Include="../../thirdparty/owemdjee/thrift/lib/rs/release.sh" />
     <Text Include="../../thirdparty/owemdjee/thrift/lib/rs/src/autogen.rs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/rs/src/configuration.rs" />
     <Text Include="../../thirdparty/owemdjee/thrift/lib/rs/src/errors.rs" />
     <Text Include="../../thirdparty/owemdjee/thrift/lib/rs/src/lib.rs" />
     <Text Include="../../thirdparty/owemdjee/thrift/lib/rs/src/protocol/binary.rs" />
@@ -1738,6 +1745,7 @@
     <Text Include="../../thirdparty/owemdjee/thrift/lib/rs/test_recursive/src/transit/services/mod.rs" />
     <Text Include="../../thirdparty/owemdjee/thrift/lib/st/README.md" />
     <Text Include="../../thirdparty/owemdjee/thrift/lib/st/coding_standards.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/swift/FuzzTesting/README.md" />
     <Text Include="../../thirdparty/owemdjee/thrift/lib/swift/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/thrift/lib/swift/README.md" />
     <Text Include="../../thirdparty/owemdjee/thrift/lib/ts/Gruntfile.js" />

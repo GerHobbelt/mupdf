@@ -449,12 +449,14 @@
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/applications/chrome/tests/utils.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/applications/chrome/utils.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/applications/darwin/browser_plugins.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/applications/jetbrains_plugins.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/applications/linux/lxd.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/applications/posix/browser_opera.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/applications/posix/carbon_black.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/applications/posix/docker.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/applications/posix/prometheus_metrics.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/applications/posix/tests/prometheus_metrics_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/applications/tests/jetbrains_plugins_tests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/applications/vscode_extensions.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/applications/windows/carbon_black.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/applications/windows/office_mru.cpp" />
@@ -709,6 +711,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/windows/prefetch.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/windows/processes.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/windows/programs.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/windows/recent_files.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/windows/registry.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/windows/scheduled_tasks.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/windows/secureboot.cpp" />
@@ -746,6 +749,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/yara/yara.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/yara/yara_events.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/yara/yara_utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/utils/affixes.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/utils/aws/aws_util.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/utils/aws/tests/aws_util_tests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/utils/azure/azure_util.cpp" />
@@ -785,6 +789,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/utils/info/version.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/utils/json/json.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/utils/json/tests/json.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/utils/linux/block_device/block_device_enumeration.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/utils/linux/dpkg/dpkgquery.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/utils/linux/dpkg/idpkgquery.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/utils/only_movable.cpp" />
@@ -820,6 +825,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/utils/system/windows/system.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/utils/system/windows/time.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/utils/system/windows/users_groups_helpers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/utils/tests/affixes.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/utils/tests/base64.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/utils/tests/chars.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/utils/tests/map_take.cpp" />
@@ -930,6 +936,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/osquery/tests/integration/tables/cups_jobs.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/tests/integration/tables/curl.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/tests/integration/tables/curl_certificate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/osquery/tests/integration/tables/deb_package_files.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/tests/integration/tables/deb_packages.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/tests/integration/tables/default_environment.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/tests/integration/tables/device_file.cpp" />
@@ -991,6 +998,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/osquery/tests/integration/tables/iokit_devicetree.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/tests/integration/tables/iokit_registry.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/tests/integration/tables/iptables.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/osquery/tests/integration/tables/jetbrains_plugins.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/tests/integration/tables/kernel_extensions.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/tests/integration/tables/kernel_info.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/tests/integration/tables/kernel_keys.cpp" />
@@ -1069,6 +1077,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/osquery/tests/integration/tables/prometheus_metrics.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/tests/integration/tables/python_packages.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/tests/integration/tables/quicklook_cache.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/osquery/tests/integration/tables/recent_files.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/tests/integration/tables/registry.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/tests/integration/tables/routes.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/tests/integration/tables/rpm_package_files.cpp" />
@@ -1103,6 +1112,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/osquery/tests/integration/tables/system_controls.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/tests/integration/tables/system_extensions.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/tests/integration/tables/system_info.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/osquery/tests/integration/tables/system_profiler.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/tests/integration/tables/systemd_units.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/tests/integration/tables/temperature_sensors.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/osquery/tests/integration/tables/time.cpp" />
@@ -1296,6 +1306,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/system/usersgroups/windows/users_groups_cache.h" />
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/system/usersgroups/windows/users_service.h" />
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/tables/applications/chrome/utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/tables/applications/jetbrains_plugins.h" />
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/tables/applications/posix/prometheus_metrics.h" />
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/tables/events/event_utils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/tables/events/linux/apparmor_events.h" />
@@ -1357,6 +1368,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/windows/windows_eventlog.h" />
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/windows/windows_update_history.h" />
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/tables/yara/yara_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/utils/affixes.h" />
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/utils/attribute.h" />
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/utils/aws/aws_util.h" />
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/utils/azure/azure_util.h" />
@@ -1391,6 +1403,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/utils/info/tool_type.h" />
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/utils/info/version.h" />
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/utils/json/json.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/utils/linux/block_device/block_device_enumeration.h" />
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/utils/linux/dpkg/dpkgquery.h" />
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/utils/linux/dpkg/idpkgquery.h" />
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/utils/linux/dpkg/modstatdb.h" />
@@ -1604,6 +1617,7 @@
     <Text Include="../../thirdparty/owemdjee/osquery/osquery/tables/applications/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/osquery/osquery/tables/applications/chrome/tests/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/osquery/osquery/tables/applications/posix/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/osquery/osquery/tables/applications/tests/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/osquery/osquery/tables/cloud/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/osquery/osquery/tables/events/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/osquery/osquery/tables/events/tests/CMakeLists.txt" />

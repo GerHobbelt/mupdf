@@ -103,7 +103,10 @@
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/connection.hpp">
       <Filter>Header Files\include\boost\redis</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/detail/connection_logger.hpp">
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/detail/connect_fsm.hpp">
+      <Filter>Header Files\include\boost\redis\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/detail/connection_state.hpp">
       <Filter>Header Files\include\boost\redis\detail</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/detail/coroutine.hpp">
@@ -112,13 +115,10 @@
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/detail/exec_fsm.hpp">
       <Filter>Header Files\include\boost\redis\detail</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/detail/health_checker.hpp">
-      <Filter>Header Files\include\boost\redis\detail</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/detail/helper.hpp">
-      <Filter>Header Files\include\boost\redis\detail</Filter>
-    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/detail/multiplexer.hpp">
+      <Filter>Header Files\include\boost\redis\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/detail/read_buffer.hpp">
       <Filter>Header Files\include\boost\redis\detail</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/detail/reader_fsm.hpp">
@@ -127,10 +127,16 @@
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/detail/redis_stream.hpp">
       <Filter>Header Files\include\boost\redis\detail</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/detail/resp3_handshaker.hpp">
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/detail/resp3_type_to_error.hpp">
+      <Filter>Header Files\include\boost\redis\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/detail/run_fsm.hpp">
       <Filter>Header Files\include\boost\redis\detail</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/detail/write.hpp">
+      <Filter>Header Files\include\boost\redis\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/detail/writer_fsm.hpp">
       <Filter>Header Files\include\boost\redis\detail</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/error.hpp">
@@ -139,7 +145,16 @@
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/ignore.hpp">
       <Filter>Header Files\include\boost\redis</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/impl/is_terminal_cancel.hpp">
+      <Filter>Header Files\include\boost\redis\impl</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/impl/log_to_file.hpp">
+      <Filter>Header Files\include\boost\redis\impl</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/impl/log_utils.hpp">
+      <Filter>Header Files\include\boost\redis\impl</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/impl/setup_request_utils.hpp">
       <Filter>Header Files\include\boost\redis\impl</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/redis/include/boost/redis/logger.hpp">
@@ -178,9 +193,6 @@
     <Text Include="../../thirdparty/owemdjee/boost/libs/redis/CMakeLists.txt">
       <Filter>Misc Files</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/CMakePresets.json">
-      <Filter>Misc Files</Filter>
-    </Text>
     <Text Include="../../thirdparty/owemdjee/boost/libs/redis/LICENSE.txt">
       <Filter>Misc Files</Filter>
     </Text>
@@ -209,6 +221,9 @@
       <Filter>Misc Files\doc\modules\ROOT\pages</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/boost/libs/redis/doc/modules/ROOT/pages/benchmarks.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/redis/doc/modules/ROOT/pages/cancellation.adoc">
       <Filter>Misc Files\doc\modules\ROOT\pages</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/boost/libs/redis/doc/modules/ROOT/pages/changelog.adoc">

@@ -223,6 +223,7 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/benchmarks/lexbor/selectors/selectors.c" />
     <ClCompile Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/css/StyleSheet.c" />
     <ClCompile Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/css/selectors/list_easy_way.c" />
     <ClCompile Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/css/selectors/list_fast_way.c" />
@@ -400,7 +401,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/progress_element.c" />
     <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/quote_element.c" />
     <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/script_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/search_element.c" />
     <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/select_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/selectedcontent_element.c" />
     <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/slot_element.c" />
     <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/source_element.c" />
     <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/span_element.c" />
@@ -452,8 +455,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tree/insertion_mode/in_head.c" />
     <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tree/insertion_mode/in_head_noscript.c" />
     <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tree/insertion_mode/in_row.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tree/insertion_mode/in_select.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tree/insertion_mode/in_select_in_table.c" />
     <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tree/insertion_mode/in_table.c" />
     <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tree/insertion_mode/in_table_body.c" />
     <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tree/insertion_mode/in_table_text.c" />
@@ -504,6 +505,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/css/syntax/style.c" />
     <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/css/syntax/tokenizer.c" />
     <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/css/syntax/tokenizer_queue.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/dom/exception.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/dom/node.c" />
     <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/buffer/big5.c" />
     <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/buffer/euc_jp.c" />
     <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/buffer/euc_kr.c" />
@@ -578,6 +581,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/html/attributes.c" />
     <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/html/build-cpp.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/html/clone.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/html/dom/document_type.c" />
     <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/html/element_by.c" />
     <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/html/encoding.c" />
     <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/html/inner.c" />
@@ -632,6 +636,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/tag_ns/tmp/interface.c" />
     <ClCompile Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/tag_ns/tmp/test/ns_res.c" />
     <ClCompile Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/tag_ns/tmp/test/tag_res.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/benchmarks/benchmark.h" />
     <ClInclude Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/css/base.h" />
     <ClInclude Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/html/base.h" />
     <ClInclude Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/styles/base.h" />
@@ -795,7 +800,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/progress_element.h" />
     <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/quote_element.h" />
     <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/script_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/search_element.h" />
     <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/select_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/selectedcontent_element.h" />
     <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/slot_element.h" />
     <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/source_element.h" />
     <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/span_element.h" />
@@ -906,12 +913,16 @@
     <ClInclude Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/tag_ns/tmp/ns_res.h" />
     <ClInclude Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/tag_ns/tmp/tag_const.h" />
     <ClInclude Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/tag_ns/tmp/tag_res.h" />
+    <Image Include="../../thirdparty/owemdjee/lexbor/images/neural-logo.png" />
     <Text Include="../../thirdparty/owemdjee/lexbor/CHANGELOG.md" />
     <Text Include="../../thirdparty/owemdjee/lexbor/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/lexbor/INSTALL.md" />
     <Text Include="../../thirdparty/owemdjee/lexbor/LICENSE" />
     <Text Include="../../thirdparty/owemdjee/lexbor/NOTICE" />
     <Text Include="../../thirdparty/owemdjee/lexbor/README.md" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/benchmarks/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/benchmarks/lexbor/selectors/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/benchmarks/lexbor/selectors/files/average.html" />
     <Text Include="../../thirdparty/owemdjee/lexbor/config.cmake" />
     <Text Include="../../thirdparty/owemdjee/lexbor/examples/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/css/CMakeLists.txt" />
@@ -958,6 +969,7 @@
     <Text Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/config.cmake" />
     <Text Include="../../thirdparty/owemdjee/lexbor/source/lexbor/dom/config.cmake" />
     <Text Include="../../thirdparty/owemdjee/lexbor/source/lexbor/encoding/config.cmake" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/source/lexbor/engine/config.cmake" />
     <Text Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/config.cmake" />
     <Text Include="../../thirdparty/owemdjee/lexbor/source/lexbor/ns/config.cmake" />
     <Text Include="../../thirdparty/owemdjee/lexbor/source/lexbor/ports/posix/config.cmake" />
@@ -982,6 +994,7 @@
     <Text Include="../../thirdparty/owemdjee/lexbor/test/files/lexbor/html/lexbor.html" />
     <Text Include="../../thirdparty/owemdjee/lexbor/test/lexbor/core/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/lexbor/test/lexbor/css/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/test/lexbor/dom/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/lexbor/test/lexbor/html/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/lexbor/test/lexbor/ns/CMakeLists.txt" />

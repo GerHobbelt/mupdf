@@ -258,6 +258,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/InverseKinematicsExampleExpressions.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/LocalizationExample.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/METISOrderingExample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/NavStateImuExample.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/OdometryExample.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/PlanarSLAMExample.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/gtsam/examples/Pose2SLAMExample.cpp" />
@@ -393,6 +394,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/Event.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/FundamentalMatrix.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/Gal3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/Kernel.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/Line3.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/OrientedPlane3.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/Point2.cpp" />
@@ -561,10 +563,12 @@
     <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/BarometricFactor.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/CombinedImuFactor.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/GPSFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/Gal3ImuEKF.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/ImuBias.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/ImuFactor.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/ManifoldPreintegration.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/NavState.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/NavStateImuEKF.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/PreintegratedRotation.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/PreintegrationBase.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/PreintegrationParams.cpp" />
@@ -577,10 +581,12 @@
     <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/tests/testCombinedImuFactor.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/tests/testConstantVelocityFactor.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/tests/testGPSFactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/tests/testGal3ImuEKF.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/tests/testGeographicLib.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/tests/testImuBias.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/tests/testImuFactor.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/tests/testInvariantEKF.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/tests/testLeftLinearEKF.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/tests/testLieGroupEKF.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/tests/testMagFactor.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/tests/testMagPoseFactor.cpp" />
@@ -588,6 +594,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/tests/testManifoldPreintegration.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/tests/testNavExpressions.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/tests/testNavState.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/tests/testNavStateImuEKF.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/tests/testPoseVelocityBias.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/tests/testPreintegratedRotation.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/tests/testScenario.cpp" />
@@ -1076,6 +1083,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/Event.h" />
     <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/FundamentalMatrix.h" />
     <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/Gal3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/Kernel.h" />
     <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/Line3.h" />
     <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/OrientedPlane3.h" />
     <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/PinholeCamera.h" />
@@ -1208,15 +1216,18 @@
     <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/CombinedImuFactor.h" />
     <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/ConstantVelocityFactor.h" />
     <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/GPSFactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/Gal3ImuEKF.h" />
     <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/ImuBias.h" />
     <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/ImuFactor.h" />
     <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/InvariantEKF.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/LeftLinearEKF.h" />
     <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/LieGroupEKF.h" />
     <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/MagFactor.h" />
     <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/MagPoseFactor.h" />
     <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/ManifoldEKF.h" />
     <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/ManifoldPreintegration.h" />
     <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/NavState.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/NavStateImuEKF.h" />
     <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/PreintegratedRotation.h" />
     <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/PreintegrationBase.h" />
     <ClInclude Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/PreintegrationCombinedParams.h" />
@@ -1678,6 +1689,7 @@
     <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/dubrovnik-3-7-18-pre.txt" />
     <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/dubrovnik-3-7-pre.txt" />
     <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/example.graph" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/gazebo_ASV.csv" />
     <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/imuAndGPSdata.csv" />
     <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/issue1452.txt" />
     <Text Include="../../thirdparty/owemdjee/gtsam/examples/Data/noisyToyGraph.txt" />
@@ -1714,9 +1726,11 @@
     <Text Include="../../thirdparty/owemdjee/gtsam/gtsam/constrained/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/gtsam/gtsam/constrained/tests/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/discrete.md" />
     <Text Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/tests/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/gtsam/gtsam/discrete/tests/testDiscreteBayesTree.pdf" />
     <Text Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/doc/Jacobians.md" />
     <Text Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/geometry.md" />
     <Text Include="../../thirdparty/owemdjee/gtsam/gtsam/geometry/tests/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/gtsam/gtsam/groups.dox" />
@@ -1732,7 +1746,7 @@
     <Text Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/AttitudeFactor.md" />
     <Text Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/README.md" />
-    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/doc/InvariantEKF.md" />
+    <Text Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/doc/EKF-variants.md" />
     <Text Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/navigation.md" />
     <Text Include="../../thirdparty/owemdjee/gtsam/gtsam/navigation/tests/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/gtsam/gtsam/nonlinear/CMakeLists.txt" />

@@ -644,6 +644,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/dpwssd.c" />
     <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/dpwssds.c" />
     <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/expand.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/expandloadu.c" />
     <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/extract.c" />
     <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/fixupimm.c" />
     <ClCompile Include="../../thirdparty/owemdjee/simde/test/x86/avx512/fixupimm_round.c" />
@@ -1117,6 +1118,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/dpwssd.h" />
     <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/dpwssds.h" />
     <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/expand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/expandloadu.h" />
     <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/extract.h" />
     <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/fixupimm.h" />
     <ClInclude Include="../../thirdparty/owemdjee/simde/simde/x86/avx512/fixupimm_round.h" />
@@ -1290,6 +1292,9 @@
     <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/aarch64-clang-18-ccache.cross" />
     <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/aarch64-clang-18-no-extras-ccache.cross" />
     <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/aarch64-clang-19-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/aarch64-clang-19-no-extras-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/aarch64-clang-20-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/aarch64-clang-20-no-extras-ccache.cross" />
     <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/aarch64-clang-6.cross" />
     <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/aarch64-clang-7.cross" />
     <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/aarch64-clang-8.cross" />
@@ -1311,6 +1316,8 @@
     <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armel-clang-16-ccache.cross" />
     <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armel-clang-17-ccache.cross" />
     <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armel-clang-18-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armel-clang-19-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armel-clang-20-ccache.cross" />
     <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armel-gcc-11-debflags.cross" />
     <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armel-gcc-12-ccache.cross" />
     <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armel-gcc-12-debflags.cross" />
@@ -1327,6 +1334,8 @@
     <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armv7-clang-16-ccache.cross" />
     <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armv7-clang-17-ccache.cross" />
     <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armv7-clang-18-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armv7-clang-19-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armv7-clang-20-ccache.cross" />
     <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armv7-clang-6.cross" />
     <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armv7-gcc-10.cross" />
     <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/armv7-gcc-11.cross" />
@@ -1405,6 +1414,7 @@
     <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/i686-gcc-11-qemu.cross" />
     <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/i686-gcc-11.cross" />
     <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/i686-gcc-12-debflags.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/i686-gcc-12-qemu-ccache.cross" />
     <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/i686-gcc-12.cross" />
     <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/i686-gcc-14.cross" />
     <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/i686-gcc-9.cross" />
@@ -1428,6 +1438,8 @@
     <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/intel-all-icc.cross" />
     <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/intel-all-icx.cross" />
     <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/loongarch64-clang-18-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/loongarch64-clang-19-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/loongarch64-clang-20-ccache.cross" />
     <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/loongarch64-gcc-13-ccache.cross" />
     <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/loongarch64-gcc-13.cross" />
     <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/loongarch64-gcc-14-ccache.cross" />
@@ -1475,6 +1487,8 @@
     <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/ppc64el-clang-16-ccache.cross" />
     <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/ppc64el-clang-17-ccache.cross" />
     <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/ppc64el-clang-18-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/ppc64el-clang-19-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/ppc64el-clang-20-ccache.cross" />
     <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/ppc64el-gcc-10-debflags.cross" />
     <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/ppc64el-gcc-10.cross" />
     <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/ppc64el-gcc-11-debflags.cross" />
@@ -1505,6 +1519,8 @@
     <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/riscv64-clang-17-ccache.cross" />
     <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/riscv64-clang-17.cross" />
     <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/riscv64-clang-18-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/riscv64-clang-19-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/riscv64-clang-20-ccache.cross" />
     <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/riscv64-clang-9.cross" />
     <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/riscv64-gcc-10.cross" />
     <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/riscv64-gcc-11.cross" />
@@ -1524,6 +1540,8 @@
     <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/s390x-clang-16-ccache.cross" />
     <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/s390x-clang-17-ccache.cross" />
     <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/s390x-clang-18-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/s390x-clang-19-ccache.cross" />
+    <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/s390x-clang-20-ccache.cross" />
     <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/s390x-gcc-10.cross" />
     <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/s390x-gcc-11-debflags.cross" />
     <Text Include="../../thirdparty/owemdjee/simde/docker/cross-files/s390x-gcc-11.cross" />

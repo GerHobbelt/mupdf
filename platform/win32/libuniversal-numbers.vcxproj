@@ -252,6 +252,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/universal-numbers/applications/approximation/chebyshev/playground.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/universal-numbers/applications/approximation/chebyshev/skeleton.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/universal-numbers/applications/approximation/taylor/taylor_series.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/universal-numbers/applications/mixed-precision/dnn/conv2d-1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/universal-numbers/applications/mixed-precision/dnn/conv2d-2.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/universal-numbers/applications/mixed-precision/dnn/fit_sin.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/universal-numbers/applications/mixed-precision/dnn/mnist.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/universal-numbers/applications/mixed-precision/dnn/rbf.cpp" />
@@ -537,6 +539,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/universal-numbers/numeric/fpbench/end_of_error.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/universal-numbers/numeric/fpbench/hamming_1987.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/universal-numbers/numeric/fpbench/log_exp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/universal-numbers/numeric/functions/bessel.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/universal-numbers/numeric/functions/factorial.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/universal-numbers/numeric/functions/isrepresentable.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/universal-numbers/numeric/functions/lerp.cpp" />
@@ -597,6 +600,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/universal-numbers/static/bfloat/api/attributes.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/universal-numbers/static/bfloat/api/traits.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/universal-numbers/static/bfloat/arithmetic/arithmetic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/universal-numbers/static/bfloat/math/mathlib.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/universal-numbers/static/bfloat/math/pow.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/universal-numbers/static/cfloat/api/api.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/universal-numbers/static/cfloat/api/attributes.cpp" />
@@ -971,6 +975,8 @@
     <ClInclude Include="../../thirdparty/owemdjee/universal-numbers/applications/approximation/chebyshev/prod.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/universal-numbers/applications/approximation/chebyshev/rpad.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/universal-numbers/applications/approximation/chebyshev/rshift.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/universal-numbers/applications/mixed-precision/dnn/conv2d-1.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/universal-numbers/applications/mixed-precision/dnn/conv2d-2.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/universal-numbers/applications/mixed-precision/dsp/common.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/universal-numbers/applications/mixed-precision/dsp/dsp_utils.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/universal-numbers/applications/performance/ir/configs.hpp" />
@@ -1083,6 +1089,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/universal-numbers/include/sw/math/constants/ieee754_constants.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/universal-numbers/include/sw/math/constants/longdouble_constants.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/universal-numbers/include/sw/math/functions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/universal-numbers/include/sw/math/functions/bessel.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/universal-numbers/include/sw/math/functions/binomial.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/universal-numbers/include/sw/math/functions/cbrt.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/universal-numbers/include/sw/math/functions/factorial.hpp" />
@@ -1197,8 +1204,20 @@
     <ClInclude Include="../../thirdparty/owemdjee/universal-numbers/include/sw/universal/number/bfloat/bfloat16_impl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/universal-numbers/include/sw/universal/number/bfloat/exceptions.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/universal-numbers/include/sw/universal/number/bfloat/manipulators.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/universal-numbers/include/sw/universal/number/bfloat/math/next.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/universal-numbers/include/sw/universal/number/bfloat/math/pow.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/universal-numbers/include/sw/universal/number/bfloat/math/constants/bfloat_constants.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/universal-numbers/include/sw/universal/number/bfloat/math/functions/classify.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/universal-numbers/include/sw/universal/number/bfloat/math/functions/error_and_gamma.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/universal-numbers/include/sw/universal/number/bfloat/math/functions/exponent.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/universal-numbers/include/sw/universal/number/bfloat/math/functions/fractional.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/universal-numbers/include/sw/universal/number/bfloat/math/functions/hyperbolic.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/universal-numbers/include/sw/universal/number/bfloat/math/functions/hypot.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/universal-numbers/include/sw/universal/number/bfloat/math/functions/logarithm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/universal-numbers/include/sw/universal/number/bfloat/math/functions/minmax.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/universal-numbers/include/sw/universal/number/bfloat/math/functions/next.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/universal-numbers/include/sw/universal/number/bfloat/math/functions/pow.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/universal-numbers/include/sw/universal/number/bfloat/math/functions/sqrt.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/universal-numbers/include/sw/universal/number/bfloat/math/functions/trigonometry.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/universal-numbers/include/sw/universal/number/bfloat/math/functions/truncate.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/universal-numbers/include/sw/universal/number/bfloat/mathlib.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/universal-numbers/include/sw/universal/number/bfloat/numeric_limits.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/universal-numbers/include/sw/universal/number/cfloat/attributes.hpp" />
@@ -1691,6 +1710,8 @@
     <Image Include="../../thirdparty/owemdjee/universal-numbers/docs/img/x86-floating-point-special-values-double.png" />
     <Image Include="../../thirdparty/owemdjee/universal-numbers/docs/img/x86-floating-point-special-values-float.png" />
     <Image Include="../../thirdparty/owemdjee/universal-numbers/docs/img/x86-floating-point-special-values-long-double.png" />
+    <Image Include="../../thirdparty/owemdjee/universal-numbers/numeric/functions/Bessel-function-of-the-first-kind-J_0-of-x.png" />
+    <Image Include="../../thirdparty/owemdjee/universal-numbers/numeric/functions/Bessel-functions-overlayed.png" />
     <Text Include="../../thirdparty/owemdjee/universal-numbers/CITATION.cff" />
     <Text Include="../../thirdparty/owemdjee/universal-numbers/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/universal-numbers/CODE-OF-CONDUCT.md" />
@@ -1957,6 +1978,7 @@
     <Text Include="../../thirdparty/owemdjee/universal-numbers/include/sw/blas/serialization/README.md" />
     <Text Include="../../thirdparty/owemdjee/universal-numbers/include/sw/math/README.md" />
     <Text Include="../../thirdparty/owemdjee/universal-numbers/include/sw/math/TODO" />
+    <Text Include="../../thirdparty/owemdjee/universal-numbers/include/sw/math/functions/bessel.md" />
     <Text Include="../../thirdparty/owemdjee/universal-numbers/include/sw/math/math.md" />
     <Text Include="../../thirdparty/owemdjee/universal-numbers/include/sw/universal/README.md" />
     <Text Include="../../thirdparty/owemdjee/universal-numbers/include/sw/universal/SPDX" />

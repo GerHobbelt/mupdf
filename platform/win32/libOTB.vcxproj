@@ -768,6 +768,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/OTB/Modules/Core/Metadata/src/otbOpticalImageMetadataInterfaceFactory.cxx" />
     <ClCompile Include="../../thirdparty/owemdjee/OTB/Modules/Core/Metadata/src/otbPleiadesImageMetadataInterface.cxx" />
     <ClCompile Include="../../thirdparty/owemdjee/OTB/Modules/Core/Metadata/src/otbPleiadesImageMetadataInterfaceFactory.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/OTB/Modules/Core/Metadata/src/otbPleiadesNeoImageMetadataInterface.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/OTB/Modules/Core/Metadata/src/otbPleiadesNeoImageMetadataInterfaceFactory.cxx" />
     <ClCompile Include="../../thirdparty/owemdjee/OTB/Modules/Core/Metadata/src/otbQuickBirdImageMetadataInterface.cxx" />
     <ClCompile Include="../../thirdparty/owemdjee/OTB/Modules/Core/Metadata/src/otbQuickBirdImageMetadataInterfaceFactory.cxx" />
     <ClCompile Include="../../thirdparty/owemdjee/OTB/Modules/Core/Metadata/src/otbRadarsat2ImageMetadataInterface.cxx" />
@@ -2293,6 +2295,8 @@
     <ClInclude Include="../../thirdparty/owemdjee/OTB/Modules/Core/Metadata/include/otbOpticalImageMetadataInterfaceFactory.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OTB/Modules/Core/Metadata/include/otbPleiadesImageMetadataInterface.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OTB/Modules/Core/Metadata/include/otbPleiadesImageMetadataInterfaceFactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OTB/Modules/Core/Metadata/include/otbPleiadesNeoImageMetadataInterface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OTB/Modules/Core/Metadata/include/otbPleiadesNeoImageMetadataInterfaceFactory.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OTB/Modules/Core/Metadata/include/otbQuickBirdImageMetadataInterface.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OTB/Modules/Core/Metadata/include/otbQuickBirdImageMetadataInterfaceFactory.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OTB/Modules/Core/Metadata/include/otbRadarsat2ImageMetadataInterface.h" />
@@ -3830,8 +3834,6 @@
     <Text Include="../../thirdparty/owemdjee/OTB/CMake/OTBModuleTest.cmake" />
     <Text Include="../../thirdparty/owemdjee/OTB/CMake/OTBSetStandardCompilerFlags.cmake" />
     <Text Include="../../thirdparty/owemdjee/OTB/CMake/OTBStandaloneModuleMacros.cmake" />
-    <Text Include="../../thirdparty/owemdjee/OTB/CMake/OTB_CheckCCompilerFlag.cmake" />
-    <Text Include="../../thirdparty/owemdjee/OTB/CMake/OTB_CheckCXXCompilerFlag.cmake" />
     <Text Include="../../thirdparty/owemdjee/OTB/CMake/Packaging_OTB.cmake" />
     <Text Include="../../thirdparty/owemdjee/OTB/CMake/PreventInBuildInstalls.cmake" />
     <Text Include="../../thirdparty/owemdjee/OTB/CMake/PreventInSourceBuilds.cmake" />
@@ -4205,6 +4207,7 @@
     <Text Include="../../thirdparty/owemdjee/OTB/Data/Baseline/OTB/Files/ioTuImageMetadataMergeTest.txt" />
     <Text Include="../../thirdparty/owemdjee/OTB/Data/Baseline/OTB/Files/ioTuImageMetadataSliceTest.txt" />
     <Text Include="../../thirdparty/owemdjee/OTB/Data/Baseline/OTB/Files/ioTuImageMetadataToFromKeywordlistTest.txt" />
+    <Text Include="../../thirdparty/owemdjee/OTB/Data/Baseline/OTB/Files/ioTuMetaDataKeyTest.1.txt" />
     <Text Include="../../thirdparty/owemdjee/OTB/Data/Baseline/OTB/Files/ioTuMetaDataKeyTest.txt" />
     <Text Include="../../thirdparty/owemdjee/OTB/Data/Baseline/OTB/Files/ioTuVectorDataKeywordlist.txt" />
     <Text Include="../../thirdparty/owemdjee/OTB/Data/Baseline/OTB/Files/ioTuotbGeomMetadataSupplierTest.txt" />
@@ -4221,6 +4224,16 @@
     <Text Include="../../thirdparty/owemdjee/OTB/Data/Baseline/OTB/Files/ioTvImageMetadataInterfaceTest_pleiades.txt" />
     <Text Include="../../thirdparty/owemdjee/OTB/Data/Baseline/OTB/Files/ioTvImageMetadataInterfaceTest_pleiades_2.1.txt" />
     <Text Include="../../thirdparty/owemdjee/OTB/Data/Baseline/OTB/Files/ioTvImageMetadataInterfaceTest_pleiades_2.txt" />
+    <Text Include="../../thirdparty/owemdjee/OTB/Data/Baseline/OTB/Files/ioTvImageMetadataInterfaceTest_pleiades_neo_basic_MS.txt" />
+    <Text Include="../../thirdparty/owemdjee/OTB/Data/Baseline/OTB/Files/ioTvImageMetadataInterfaceTest_pleiades_neo_basic_P.txt" />
+    <Text Include="../../thirdparty/owemdjee/OTB/Data/Baseline/OTB/Files/ioTvImageMetadataInterfaceTest_pleiades_neo_basic_PS_3bands.txt" />
+    <Text Include="../../thirdparty/owemdjee/OTB/Data/Baseline/OTB/Files/ioTvImageMetadataInterfaceTest_pleiades_neo_ortho_MS.txt" />
+    <Text Include="../../thirdparty/owemdjee/OTB/Data/Baseline/OTB/Files/ioTvImageMetadataInterfaceTest_pleiades_neo_ortho_P.txt" />
+    <Text Include="../../thirdparty/owemdjee/OTB/Data/Baseline/OTB/Files/ioTvImageMetadataInterfaceTest_pleiades_neo_ortho_PS.txt" />
+    <Text Include="../../thirdparty/owemdjee/OTB/Data/Baseline/OTB/Files/ioTvImageMetadataInterfaceTest_pleiades_neo_ortho_PS_geotiff.txt" />
+    <Text Include="../../thirdparty/owemdjee/OTB/Data/Baseline/OTB/Files/ioTvImageMetadataInterfaceTest_pleiades_neo_reflec_MS.txt" />
+    <Text Include="../../thirdparty/owemdjee/OTB/Data/Baseline/OTB/Files/ioTvImageMetadataInterfaceTest_pleiades_neo_reflec_P.txt" />
+    <Text Include="../../thirdparty/owemdjee/OTB/Data/Baseline/OTB/Files/ioTvImageMetadataInterfaceTest_pleiades_neo_reflec_PS_4bands.txt" />
     <Text Include="../../thirdparty/owemdjee/OTB/Data/Baseline/OTB/Files/ioTvImageMetadataInterfaceTest_quickbird.1.txt" />
     <Text Include="../../thirdparty/owemdjee/OTB/Data/Baseline/OTB/Files/ioTvImageMetadataInterfaceTest_quickbird.txt" />
     <Text Include="../../thirdparty/owemdjee/OTB/Data/Baseline/OTB/Files/ioTvImageMetadataInterfaceTest_spot5.txt" />

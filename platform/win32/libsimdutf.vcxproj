@@ -226,6 +226,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/benchmarks/alignment.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/benchmarks/base64/benchmark_base64.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/benchmarks/benchmark.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/benchmarks/benchmark_to_well_formed_utf16.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/CppCon2018/utf_utils.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/llvm/ConvertUTF.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/u8u16/Profiling/ppc_timer.c" />
@@ -256,6 +257,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utf8lut/src/tests/FileConverter.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utf8lut/src/tests/iconv_sample.c" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utf8sse4/fromutf8-sse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/benchmarks/find/findbenchmark.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/benchmarks/src/benchmark.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/benchmarks/src/benchmark_base.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/benchmarks/src/cmdline.cpp" />
@@ -275,6 +277,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/arm64/arm_convert_utf8_to_latin1.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/arm64/arm_convert_utf8_to_utf16.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/arm64/arm_convert_utf8_to_utf32.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/arm64/arm_find.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/arm64/arm_utf16fix.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/arm64/arm_validate_utf16.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/arm64/arm_validate_utf32le.cpp" />
@@ -313,6 +316,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/icelake/icelake_convert_utf8_to_latin1.inl.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/icelake/icelake_convert_utf8_to_utf16.inl.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/icelake/icelake_convert_valid_utf8_to_latin1.inl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/icelake/icelake_find.inl.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/icelake/icelake_from_utf8.inl.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/icelake/icelake_from_valid_utf8.inl.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/icelake/icelake_macros.inl.cpp" />
@@ -337,6 +341,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/lasx/lasx_convert_utf8_to_latin1.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/lasx/lasx_convert_utf8_to_utf16.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/lasx/lasx_convert_utf8_to_utf32.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/lasx/lasx_find.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/lasx/lasx_validate_utf16.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/lasx/lasx_validate_utf32le.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/lsx/implementation.cpp" />
@@ -353,6 +358,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/lsx/lsx_convert_utf8_to_latin1.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/lsx/lsx_convert_utf8_to_utf16.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/lsx/lsx_convert_utf8_to_utf32.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/lsx/lsx_find.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/lsx/lsx_validate_utf16.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/lsx/lsx_validate_utf32le.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/ppc64/implementation.cpp" />
@@ -374,10 +380,12 @@
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/ppc64/ppc64_validate_utf16.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/ppc64/templates.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/rvv/implementation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/rvv/rvv_find.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/rvv/rvv_helpers.inl.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/rvv/rvv_latin1_to.inl.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/rvv/rvv_length_from.inl.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/rvv/rvv_utf16_to.inl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/rvv/rvv_utf16fix.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/rvv/rvv_utf32_to.inl.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/rvv/rvv_utf8_to.inl.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/rvv/rvv_validate.inl.cpp" />
@@ -407,6 +415,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/convert_latin1_to_utf16le_tests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/convert_latin1_to_utf32_tests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/convert_latin1_to_utf8_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/convert_utf16_to_utf8_safe_tests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/convert_utf16be_to_latin1_tests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/convert_utf16be_to_latin1_tests_with_errors.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/convert_utf16be_to_utf32_tests.cpp" />
@@ -453,6 +462,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/count_utf16le.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/count_utf8.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/detect_encodings_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/find_tests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/helpers/random_int.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/helpers/random_utf16.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/helpers/random_utf32.cpp" />
@@ -544,6 +554,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utfcpp/source/utf8/cpp11.h" />
     <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utfcpp/source/utf8/cpp17.h" />
     <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/competition/utfcpp/source/utf8/unchecked.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/find/findbenchmarker.h" />
     <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/src/apple_arm_events.h" />
     <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/src/benchmark.h" />
     <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/src/benchmark_base.h" />
@@ -563,6 +574,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/generic/ascii_validation.h" />
     <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/generic/base64.h" />
     <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/generic/buf_block_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/generic/find.h" />
     <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/generic/utf16.h" />
     <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/generic/utf16/change_endianness.h" />
     <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/generic/utf16/count_code_points_bytemask.h" />
@@ -723,10 +735,12 @@
     <Image Include="../../thirdparty/owemdjee/simdutf/doc/utf8utf16.png" />
     <Text Include="../../thirdparty/owemdjee/simdutf/AUTHORS" />
     <Text Include="../../thirdparty/owemdjee/simdutf/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/CONTRIBUTING.md" />
     <Text Include="../../thirdparty/owemdjee/simdutf/CONTRIBUTORS" />
     <Text Include="../../thirdparty/owemdjee/simdutf/Doxyfile" />
     <Text Include="../../thirdparty/owemdjee/simdutf/LICENSE-APACHE" />
     <Text Include="../../thirdparty/owemdjee/simdutf/LICENSE-MIT" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/Makefile.crosscompile" />
     <Text Include="../../thirdparty/owemdjee/simdutf/README-RVV.md" />
     <Text Include="../../thirdparty/owemdjee/simdutf/README.md" />
     <Text Include="../../thirdparty/owemdjee/simdutf/SECURITY.md" />
@@ -778,6 +792,7 @@
     <Text Include="../../thirdparty/owemdjee/simdutf/benchmarks/dataset/scripts/utf8type.py" />
     <Text Include="../../thirdparty/owemdjee/simdutf/benchmarks/dataset/wikipedia_mars/Makefile" />
     <Text Include="../../thirdparty/owemdjee/simdutf/benchmarks/dataset/wikipedia_mars/convert_to_utf6.py" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/benchmarks/find/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/simdutf/benchmarks/src/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/simdutf/cmake/CPM.cmake" />
     <Text Include="../../thirdparty/owemdjee/simdutf/cmake/JoinPaths.cmake" />
@@ -810,6 +825,7 @@
     <Text Include="../../thirdparty/owemdjee/simdutf/scripts/base64bench_print.py" />
     <Text Include="../../thirdparty/owemdjee/simdutf/scripts/benchmark-all.py" />
     <Text Include="../../thirdparty/owemdjee/simdutf/scripts/benchmark_print.py" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/scripts/check_feature_macros.py" />
     <Text Include="../../thirdparty/owemdjee/simdutf/scripts/clang_format.sh" />
     <Text Include="../../thirdparty/owemdjee/simdutf/scripts/clang_format_docker.sh" />
     <Text Include="../../thirdparty/owemdjee/simdutf/scripts/common.py" />

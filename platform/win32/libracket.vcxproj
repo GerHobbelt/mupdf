@@ -224,6 +224,7 @@
   </ImportGroup>
   <ItemGroup>
     <ClCompile Include="../../thirdparty/owemdjee/racket/pkgs/compiler-test/tests/compiler/embed/embed-me8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/racket/pkgs/net-test/tests/net/http-client/rst-server-constants.c" />
     <ClCompile Include="../../thirdparty/owemdjee/racket/pkgs/racket-test-core/tests/racket/foreign-test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/racket/pkgs/racket-test-core/tests/racket/unix_check.c" />
     <ClCompile Include="../../thirdparty/owemdjee/racket/pkgs/racket-test/tests/file/glob-test-dir/glob-test-subdir/glob-test-sub-sub-dir/deep.c" />
@@ -1354,6 +1355,7 @@
     <Text Include="../../thirdparty/owemdjee/racket/pkgs/racket-doc/scribblings/guide/other-editors.scrbl" />
     <Text Include="../../thirdparty/owemdjee/racket/pkgs/racket-doc/scribblings/guide/other.scrbl" />
     <Text Include="../../thirdparty/owemdjee/racket/pkgs/racket-doc/scribblings/guide/pairs.scrbl" />
+    <Text Include="../../thirdparty/owemdjee/racket/pkgs/racket-doc/scribblings/guide/parallel-threads.scrbl" />
     <Text Include="../../thirdparty/owemdjee/racket/pkgs/racket-doc/scribblings/guide/parallelism.scrbl" />
     <Text Include="../../thirdparty/owemdjee/racket/pkgs/racket-doc/scribblings/guide/parameterize.scrbl" />
     <Text Include="../../thirdparty/owemdjee/racket/pkgs/racket-doc/scribblings/guide/paths.scrbl" />
@@ -1484,6 +1486,7 @@
     <Text Include="../../thirdparty/owemdjee/racket/pkgs/racket-doc/scribblings/reference/data.scrbl" />
     <Text Include="../../thirdparty/owemdjee/racket/pkgs/racket-doc/scribblings/reference/debugging.scrbl" />
     <Text Include="../../thirdparty/owemdjee/racket/pkgs/racket-doc/scribblings/reference/define-struct.scrbl" />
+    <Text Include="../../thirdparty/owemdjee/racket/pkgs/racket-doc/scribblings/reference/deprecation.scrbl" />
     <Text Include="../../thirdparty/owemdjee/racket/pkgs/racket-doc/scribblings/reference/dicts.scrbl" />
     <Text Include="../../thirdparty/owemdjee/racket/pkgs/racket-doc/scribblings/reference/encodings.scrbl" />
     <Text Include="../../thirdparty/owemdjee/racket/pkgs/racket-doc/scribblings/reference/engine.scrbl" />
@@ -1712,6 +1715,7 @@
     <Text Include="../../thirdparty/owemdjee/racket/pkgs/racket-index/scribblings/main/user/start.scrbl" />
     <Text Include="../../thirdparty/owemdjee/racket/pkgs/racket-lib/LICENSE" />
     <Text Include="../../thirdparty/owemdjee/racket/pkgs/racket-test-core/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/racket/pkgs/racket-test-core/tests/racket/all-parallel.rktl" />
     <Text Include="../../thirdparty/owemdjee/racket/pkgs/racket-test-core/tests/racket/all.rktl" />
     <Text Include="../../thirdparty/owemdjee/racket/pkgs/racket-test-core/tests/racket/async-channel.rktl" />
     <Text Include="../../thirdparty/owemdjee/racket/pkgs/racket-test-core/tests/racket/basic.rktl" />
@@ -2096,6 +2100,7 @@
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/makefiles/Makefile-csug.in" />
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/makefiles/Makefile-release_notes.in" />
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/makefiles/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/makefiles/Makefile.nt" />
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/makefiles/installsh" />
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/maketarball" />
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/mats/3.ms" />
@@ -2171,12 +2176,16 @@
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/nanopass/ReadMe.md" />
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/nanopass/TODO" />
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/nanopass/doc/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/nanopass/doc/language-api.ss" />
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/nanopass/doc/user-guide.pdf" />
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/nanopass/doc/user-guide.stex" />
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/nanopass/nanopass.ss" />
+    <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/nanopass/nanopass/exp-syntax.sls" />
+    <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/nanopass/nanopass/experimental.sls" />
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/nanopass/nanopass/helpers.ss" />
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/nanopass/nanopass/implementation-helpers.chezscheme.sls" />
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/nanopass/nanopass/implementation-helpers.ikarus.ss" />
+    <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/nanopass/nanopass/implementation-helpers.ironscheme.sls" />
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/nanopass/nanopass/implementation-helpers.vicare.sls" />
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/nanopass/nanopass/language-helpers.ss" />
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/nanopass/nanopass/language-node-counter.ss" />
@@ -2186,7 +2195,9 @@
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/nanopass/nanopass/nano-syntax-dispatch.ss" />
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/nanopass/nanopass/parser.ss" />
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/nanopass/nanopass/pass.ss" />
+    <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/nanopass/nanopass/prefix-matcher.ss" />
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/nanopass/nanopass/records.ss" />
+    <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/nanopass/nanopass/syntactic-property.sls" />
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/nanopass/nanopass/syntaxconvert.ss" />
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/nanopass/nanopass/unparser.ss" />
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/nanopass/test-all.ss" />
@@ -2196,6 +2207,7 @@
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/nanopass/tests/helpers.ss" />
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/nanopass/tests/implementation-helpers.chezscheme.sls" />
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/nanopass/tests/implementation-helpers.ikarus.ss" />
+    <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/nanopass/tests/implementation-helpers.ironscheme.sls" />
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/nanopass/tests/implementation-helpers.ss" />
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/nanopass/tests/implementation-helpers.vicare.sls" />
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/nanopass/tests/new-compiler.ss" />
@@ -2203,6 +2215,7 @@
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/nanopass/tests/test-driver.ss" />
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/nanopass/tests/unit-test-helpers-implementation.chezscheme.sls" />
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/nanopass/tests/unit-test-helpers-implementation.ikarus.sls" />
+    <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/nanopass/tests/unit-test-helpers-implementation.ironscheme.sls" />
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/nanopass/tests/unit-test-helpers-implementation.vicare.sls" />
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/nanopass/tests/unit-test-helpers.ss" />
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/nanopass/tests/unit-tests.ss" />
@@ -2340,6 +2353,7 @@
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/s/x86_64.ss" />
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/scheme.1.in" />
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/stex/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/stex/Makefile.template" />
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/stex/Mf-stex" />
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/stex/ReadMe" />
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/stex/doc/Makefile" />
@@ -2412,6 +2426,7 @@
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/zlib/Makefile" />
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/zlib/Makefile.in" />
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/zlib/README" />
+    <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/zlib/amiga/Makefile.pup" />
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/zlib/amiga/Makefile.sas" />
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/zlib/configure" />
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/ChezScheme/zlib/contrib/README.contrib" />
@@ -2510,6 +2525,7 @@
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/LICENSE-libscheme.txt" />
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/LICENSE.txt" />
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/racket/racket/src/Makefile.nt" />
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/README.txt" />
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/ac/Makefile" />
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/ac/add_c_flags.m4" />
@@ -2535,6 +2551,9 @@
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/ac/path_arg.m4" />
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/ac/path_pkgscope.m4" />
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/ac/path_show.m4" />
+    <Text Include="../../thirdparty/owemdjee/racket/racket/src/ac/pkgs.m4" />
+    <Text Include="../../thirdparty/owemdjee/racket/racket/src/ac/pkgs_arg.m4" />
+    <Text Include="../../thirdparty/owemdjee/racket/racket/src/ac/pkgs_show.m4" />
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/ac/portable_arg.m4" />
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/ac/portable_show.m4" />
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/ac/postlink.m4" />
@@ -2860,6 +2879,7 @@
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/native-libs/patches/fonts.conf" />
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/regexp/README.txt" />
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/rktboot/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/racket/racket/src/rktboot/parse-makefile.rkt" />
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/rktio/Makefile.in" />
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/rktio/README.txt" />
     <Text Include="../../thirdparty/owemdjee/racket/racket/src/rktio/configure" />

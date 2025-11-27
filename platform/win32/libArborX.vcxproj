@@ -232,6 +232,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/benchmarks/cluster/mst.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/benchmarks/cluster/print_timers.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/benchmarks/develop/develop.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/benchmarks/distributed_contact/distributed_contact.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/benchmarks/distributed_tree_driver/distributed_tree_driver.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/benchmarks/execution_space_instances/execution_space_instances_driver.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/benchmarks/triangulated_surface_distance/triangulated_surface_distance.cpp" />
@@ -264,7 +265,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstContainerAdaptors.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstDBSCAN.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstDendrogram.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstDetailsAlgorithms.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstDetailsCrsGraphWrapperImpl.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstDetailsDistributedTreeImpl.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstDetailsDistributor.cpp" />
@@ -286,13 +286,18 @@
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstDistributedTreeNearest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstDistributedTreeSpatial.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstException.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstGeometryBarycentricCoordinates.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstGeometryCentroid.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstGeometryDistance.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstGeometryExpand.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstGeometryIntersects.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstGeometryMisc.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstHeapOperations.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstIndexableGetter.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstInterpDetailsCompactRadialBasisFunction.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstInterpDetailsMLSCoefficients.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstInterpDetailsPolyBasis.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstInterpMovingLeastSquares.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstKDOP.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstKokkosToolsAnnotations.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstKokkosToolsDistributedAnnotations.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstKokkosToolsExecutionSpaceInstances.cpp" />
@@ -357,6 +362,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/geometry/ArborX_Sphere.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/geometry/ArborX_Tetrahedron.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/geometry/ArborX_Triangle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/geometry/algorithms/ArborX_BarycentricCoordinates.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/geometry/algorithms/ArborX_Centroid.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/geometry/algorithms/ArborX_Convert.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/geometry/algorithms/ArborX_Distance.hpp" />
@@ -423,6 +429,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/test/ArborX_BoostGeometryAdapters.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/test/ArborX_BoostRTreeHelpers.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/test/ArborX_BoostRangeAdapters.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/test/ArborX_EnableArrayComparison.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/test/ArborX_EnableViewComparison.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/test/BoostTest_CUDA_clang_workarounds.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ArborX/test/Search_UnitTestHelpers.hpp" />
@@ -444,6 +451,8 @@
     <Text Include="../../thirdparty/owemdjee/ArborX/benchmarks/cluster/input.arborx" />
     <Text Include="../../thirdparty/owemdjee/ArborX/benchmarks/cluster/input.txt" />
     <Text Include="../../thirdparty/owemdjee/ArborX/benchmarks/develop/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ArborX/benchmarks/distributed_contact/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ArborX/benchmarks/distributed_contact/unit_sphere.txt" />
     <Text Include="../../thirdparty/owemdjee/ArborX/benchmarks/distributed_tree_driver/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/ArborX/benchmarks/execution_space_instances/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/ArborX/benchmarks/triangulated_surface_distance/CMakeLists.txt" />

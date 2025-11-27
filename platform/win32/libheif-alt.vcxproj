@@ -52,16 +52,16 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -74,7 +74,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -108,8 +108,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHEIF_ALT;HEIF_ALT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -121,14 +121,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/libheif-alt;../../thirdparty/libpng;../../thirdparty/owemdjee/getopt;../../scripts/libheif-alt;../../thirdparty/owemdjee/libjpeg-turbo/src;../../scripts/libjpeg-turbo;../../thirdparty/openjpeg/src/lib/openjp2;../../thirdparty/owemdjee/libaom;../../thirdparty/owemdjee/libde265;../../scripts/libde265;../../thirdparty/owemdjee/libheif-alt/libheif/api;../../thirdparty/libtiff/libtiff;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/libheif-alt;../../thirdparty/libpng;../../thirdparty/owemdjee/getopt;../../scripts/libheif-alt;../../thirdparty/owemdjee/libjpeg-turbo/src;../../scripts/libjpeg-turbo;../../thirdparty/openjpeg/src/lib/openjp2;../../thirdparty/owemdjee/libaom;../../thirdparty/owemdjee/libde265;../../scripts/libde265;../../thirdparty/owemdjee/libheif-alt/libheif/api;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/libheif-alt/libheif;../../scripts/libtiff;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>LIBHEIF_STATIC_BUILD;HAVE_LIBPNG;HAVE_JPEG_WRITE_ICC_PROFILE;BUILD_MONOLITHIC;BUILDING_LIBHEIF_ALT;HEIF_ALT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHEIF_ALT;HEIF_ALT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/libheif-alt;../../thirdparty/libpng;../../thirdparty/owemdjee/getopt;../../scripts/libheif-alt;../../thirdparty/owemdjee/libjpeg-turbo/src;../../scripts/libjpeg-turbo;../../thirdparty/openjpeg/src/lib/openjp2;../../thirdparty/owemdjee/libaom;../../thirdparty/owemdjee/libde265;../../scripts/libde265;../../thirdparty/owemdjee/libheif-alt/libheif/api;../../thirdparty/libtiff/libtiff;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/libheif-alt;../../thirdparty/libpng;../../thirdparty/owemdjee/getopt;../../scripts/libheif-alt;../../thirdparty/owemdjee/libjpeg-turbo/src;../../scripts/libjpeg-turbo;../../thirdparty/openjpeg/src/lib/openjp2;../../thirdparty/owemdjee/libaom;../../thirdparty/owemdjee/libde265;../../scripts/libde265;../../thirdparty/owemdjee/libheif-alt/libheif/api;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/libheif-alt/libheif;../../scripts/libtiff;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -147,7 +147,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/libheif-alt;../../thirdparty/libpng;../../thirdparty/owemdjee/getopt;../../scripts/libheif-alt;../../thirdparty/owemdjee/libjpeg-turbo/src;../../scripts/libjpeg-turbo;../../thirdparty/openjpeg/src/lib/openjp2;../../thirdparty/owemdjee/libaom;../../thirdparty/owemdjee/libde265;../../scripts/libde265;../../thirdparty/owemdjee/libheif-alt/libheif/api;../../thirdparty/libtiff/libtiff;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/libheif-alt;../../thirdparty/libpng;../../thirdparty/owemdjee/getopt;../../scripts/libheif-alt;../../thirdparty/owemdjee/libjpeg-turbo/src;../../scripts/libjpeg-turbo;../../thirdparty/openjpeg/src/lib/openjp2;../../thirdparty/owemdjee/libaom;../../thirdparty/owemdjee/libde265;../../scripts/libde265;../../thirdparty/owemdjee/libheif-alt/libheif/api;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/libheif-alt/libheif;../../scripts/libtiff;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>LIBHEIF_STATIC_BUILD;HAVE_LIBPNG;HAVE_JPEG_WRITE_ICC_PROFILE;BUILD_MONOLITHIC;BUILDING_LIBHEIF_ALT;HEIF_ALT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -155,7 +155,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHEIF_ALT;HEIF_ALT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/libheif-alt;../../thirdparty/libpng;../../thirdparty/owemdjee/getopt;../../scripts/libheif-alt;../../thirdparty/owemdjee/libjpeg-turbo/src;../../scripts/libjpeg-turbo;../../thirdparty/openjpeg/src/lib/openjp2;../../thirdparty/owemdjee/libaom;../../thirdparty/owemdjee/libde265;../../scripts/libde265;../../thirdparty/owemdjee/libheif-alt/libheif/api;../../thirdparty/libtiff/libtiff;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/libheif-alt;../../thirdparty/libpng;../../thirdparty/owemdjee/getopt;../../scripts/libheif-alt;../../thirdparty/owemdjee/libjpeg-turbo/src;../../scripts/libjpeg-turbo;../../thirdparty/openjpeg/src/lib/openjp2;../../thirdparty/owemdjee/libaom;../../thirdparty/owemdjee/libde265;../../scripts/libde265;../../thirdparty/owemdjee/libheif-alt/libheif/api;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/libheif-alt/libheif;../../scripts/libtiff;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -176,14 +176,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/libheif-alt;../../thirdparty/libpng;../../thirdparty/owemdjee/getopt;../../scripts/libheif-alt;../../thirdparty/owemdjee/libjpeg-turbo/src;../../scripts/libjpeg-turbo;../../thirdparty/openjpeg/src/lib/openjp2;../../thirdparty/owemdjee/libaom;../../thirdparty/owemdjee/libde265;../../scripts/libde265;../../thirdparty/owemdjee/libheif-alt/libheif/api;../../thirdparty/libtiff/libtiff;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/libheif-alt;../../thirdparty/libpng;../../thirdparty/owemdjee/getopt;../../scripts/libheif-alt;../../thirdparty/owemdjee/libjpeg-turbo/src;../../scripts/libjpeg-turbo;../../thirdparty/openjpeg/src/lib/openjp2;../../thirdparty/owemdjee/libaom;../../thirdparty/owemdjee/libde265;../../scripts/libde265;../../thirdparty/owemdjee/libheif-alt/libheif/api;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/libheif-alt/libheif;../../scripts/libtiff;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>LIBHEIF_STATIC_BUILD;HAVE_LIBPNG;HAVE_JPEG_WRITE_ICC_PROFILE;BUILD_MONOLITHIC;BUILDING_LIBHEIF_ALT;HEIF_ALT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHEIF_ALT;HEIF_ALT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/libheif-alt;../../thirdparty/libpng;../../thirdparty/owemdjee/getopt;../../scripts/libheif-alt;../../thirdparty/owemdjee/libjpeg-turbo/src;../../scripts/libjpeg-turbo;../../thirdparty/openjpeg/src/lib/openjp2;../../thirdparty/owemdjee/libaom;../../thirdparty/owemdjee/libde265;../../scripts/libde265;../../thirdparty/owemdjee/libheif-alt/libheif/api;../../thirdparty/libtiff/libtiff;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/libheif-alt;../../thirdparty/libpng;../../thirdparty/owemdjee/getopt;../../scripts/libheif-alt;../../thirdparty/owemdjee/libjpeg-turbo/src;../../scripts/libjpeg-turbo;../../thirdparty/openjpeg/src/lib/openjp2;../../thirdparty/owemdjee/libaom;../../thirdparty/owemdjee/libde265;../../scripts/libde265;../../thirdparty/owemdjee/libheif-alt/libheif/api;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/libheif-alt/libheif;../../scripts/libtiff;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -210,7 +210,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHEIF_ALT;HEIF_ALT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/libheif-alt;../../thirdparty/libpng;../../thirdparty/owemdjee/getopt;../../scripts/libheif-alt;../../thirdparty/owemdjee/libjpeg-turbo/src;../../scripts/libjpeg-turbo;../../thirdparty/openjpeg/src/lib/openjp2;../../thirdparty/owemdjee/libaom;../../thirdparty/owemdjee/libde265;../../scripts/libde265;../../thirdparty/owemdjee/libheif-alt/libheif/api;../../thirdparty/libtiff/libtiff;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/libheif-alt;../../thirdparty/libpng;../../thirdparty/owemdjee/getopt;../../scripts/libheif-alt;../../thirdparty/owemdjee/libjpeg-turbo/src;../../scripts/libjpeg-turbo;../../thirdparty/openjpeg/src/lib/openjp2;../../thirdparty/owemdjee/libaom;../../thirdparty/owemdjee/libde265;../../scripts/libde265;../../thirdparty/owemdjee/libheif-alt/libheif/api;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/libheif-alt/libheif;../../scripts/libtiff;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -253,10 +253,15 @@
     <ClCompile Include="../../thirdparty/owemdjee/libheif-alt/libheif/box.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libheif-alt/libheif/codecs/avc.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libheif-alt/libheif/codecs/avif.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libheif-alt/libheif/codecs/grid.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libheif-alt/libheif/codecs/hevc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libheif-alt/libheif/codecs/iden.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libheif-alt/libheif/codecs/image_item.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libheif-alt/libheif/codecs/jpeg.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libheif-alt/libheif/codecs/jpeg2000.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libheif-alt/libheif/codecs/mask_image.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libheif-alt/libheif/codecs/overlay.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libheif-alt/libheif/codecs/tild.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libheif-alt/libheif/codecs/uncompressed_box.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libheif-alt/libheif/codecs/uncompressed_image.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libheif-alt/libheif/codecs/vvc.cc" />
@@ -276,6 +281,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/libheif-alt/libheif/error.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libheif-alt/libheif/exif.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libheif-alt/libheif/file.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libheif-alt/libheif/file_layout.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libheif-alt/libheif/init.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libheif-alt/libheif/logging.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libheif-alt/libheif/nclx.cc" />
@@ -310,10 +316,11 @@
     <ClCompile Include="../../thirdparty/owemdjee/libheif-alt/tests/encode_htj2k.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libheif-alt/tests/encode_jpeg2000.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libheif-alt/tests/extended_type.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libheif-alt/tests/icbr_box.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libheif-alt/tests/file_layout.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libheif-alt/tests/idat.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libheif-alt/tests/jpeg2000.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libheif-alt/tests/main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libheif-alt/tests/pixel_data_types.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libheif-alt/tests/region.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libheif-alt/tests/test_utils.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libheif-alt/tests/uncompressed_box.cc" />
@@ -354,10 +361,15 @@
     <ClInclude Include="../../thirdparty/owemdjee/libheif-alt/libheif/box.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libheif-alt/libheif/codecs/avc.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libheif-alt/libheif/codecs/avif.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libheif-alt/libheif/codecs/grid.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libheif-alt/libheif/codecs/hevc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libheif-alt/libheif/codecs/iden.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libheif-alt/libheif/codecs/image_item.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libheif-alt/libheif/codecs/jpeg.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libheif-alt/libheif/codecs/jpeg2000.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libheif-alt/libheif/codecs/mask_image.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libheif-alt/libheif/codecs/overlay.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libheif-alt/libheif/codecs/tild.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libheif-alt/libheif/codecs/uncompressed.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libheif-alt/libheif/codecs/uncompressed_box.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libheif-alt/libheif/codecs/uncompressed_image.h" />
@@ -377,6 +389,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/libheif-alt/libheif/error.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libheif-alt/libheif/exif.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libheif-alt/libheif/file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libheif-alt/libheif/file_layout.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libheif-alt/libheif/init.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libheif-alt/libheif/logging.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libheif-alt/libheif/nclx.h" />
@@ -414,6 +427,7 @@
     <Text Include="../../thirdparty/owemdjee/libheif-alt/COPYING" />
     <Text Include="../../thirdparty/owemdjee/libheif-alt/CPPLINT.cfg" />
     <Text Include="../../thirdparty/owemdjee/libheif-alt/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libheif-alt/__dst" />
     <Text Include="../../thirdparty/owemdjee/libheif-alt/appveyor.yml" />
     <Text Include="../../thirdparty/owemdjee/libheif-alt/build-emscripten.sh" />
     <Text Include="../../thirdparty/owemdjee/libheif-alt/examples/CMakeLists.txt" />
@@ -542,3 +556,4 @@
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
+  

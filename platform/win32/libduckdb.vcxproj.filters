@@ -5291,6 +5291,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/duckdb/src/execution/operator/helper/physical_vacuum.cpp">
       <Filter>Source Files\src\execution\operator\helper</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/duckdb/src/execution/operator/helper/physical_verify_vector.cpp">
+      <Filter>Source Files\src\execution\operator\helper</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/duckdb/src/execution/operator/join/outer_join_marker.cpp">
       <Filter>Source Files\src\execution\operator\join</Filter>
     </ClCompile>
@@ -5364,9 +5367,6 @@
       <Filter>Source Files\src\execution\operator\persistent</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/duckdb/src/execution/operator/persistent/physical_export.cpp">
-      <Filter>Source Files\src\execution\operator\persistent</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/duckdb/src/execution/operator/persistent/physical_fixed_batch_copy.cpp">
       <Filter>Source Files\src\execution\operator\persistent</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/duckdb/src/execution/operator/persistent/physical_insert.cpp">
@@ -8090,6 +8090,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/duckdb/test/secrets/test_custom_secret_storage.cpp">
       <Filter>Source Files\test\secrets</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/duckdb/test/secrets/test_persistent_secret_permissions.cpp">
+      <Filter>Source Files\test\secrets</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/duckdb/test/serialize/serialization_test.cpp">
       <Filter>Source Files\test\serialize</Filter>
     </ClCompile>
@@ -9674,6 +9677,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/duckdb/src/include/duckdb/common/enums/aggregate_handling.hpp">
       <Filter>Header Files\src\include\duckdb\common\enums</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/duckdb/src/include/duckdb/common/enums/catalog_lookup_behavior.hpp">
+      <Filter>Header Files\src\include\duckdb\common\enums</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/duckdb/src/include/duckdb/common/enums/catalog_type.hpp">
       <Filter>Header Files\src\include\duckdb\common\enums</Filter>
     </ClInclude>
@@ -9741,6 +9747,9 @@
       <Filter>Header Files\src\include\duckdb\common\enums</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/duckdb/src/include/duckdb/common/enums/physical_operator_type.hpp">
+      <Filter>Header Files\src\include\duckdb\common\enums</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/duckdb/src/include/duckdb/common/enums/prepared_statement_mode.hpp">
       <Filter>Header Files\src\include\duckdb\common\enums</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/duckdb/src/include/duckdb/common/enums/profiler_format.hpp">
@@ -10634,6 +10643,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/duckdb/src/include/duckdb/execution/operator/helper/physical_vacuum.hpp">
       <Filter>Header Files\src\include\duckdb\execution\operator\helper</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/duckdb/src/include/duckdb/execution/operator/helper/physical_verify_vector.hpp">
+      <Filter>Header Files\src\include\duckdb\execution\operator\helper</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/duckdb/src/include/duckdb/execution/operator/join/outer_join_marker.hpp">
       <Filter>Header Files\src\include\duckdb\execution\operator\join</Filter>
     </ClInclude>
@@ -10713,9 +10725,6 @@
       <Filter>Header Files\src\include\duckdb\execution\operator\persistent</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/duckdb/src/include/duckdb/execution/operator/persistent/physical_export.hpp">
-      <Filter>Header Files\src\include\duckdb\execution\operator\persistent</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/duckdb/src/include/duckdb/execution/operator/persistent/physical_fixed_batch_copy.hpp">
       <Filter>Header Files\src\include\duckdb\execution\operator\persistent</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/duckdb/src/include/duckdb/execution/operator/persistent/physical_insert.hpp">
@@ -14624,6 +14633,12 @@
     <Text Include="../../thirdparty/owemdjee/duckdb/data/csv/union-by-name/ubn4.csv">
       <Filter>Misc Files\data\csv\union-by-name</Filter>
     </Text>
+    <Text Include="../../thirdparty/owemdjee/duckdb/data/csv/venue_pipe.csv">
+      <Filter>Misc Files\data\csv</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/duckdb/data/csv/venue_pipe_big.csv">
+      <Filter>Misc Files\data\csv</Filter>
+    </Text>
     <Text Include="../../thirdparty/owemdjee/duckdb/data/csv/wrongtype.csv">
       <Filter>Misc Files\data\csv</Filter>
     </Text>
@@ -16383,15 +16398,6 @@
       <Filter>Misc Files\scripts</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/duckdb/scripts/modify_distribution_matrix.py">
-      <Filter>Misc Files\scripts</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/duckdb/scripts/node_build.sh">
-      <Filter>Misc Files\scripts</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/duckdb/scripts/node_build_win.sh">
-      <Filter>Misc Files\scripts</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/duckdb/scripts/node_version.sh">
       <Filter>Misc Files\scripts</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/duckdb/scripts/osx_import_codesign_certificate.sh">

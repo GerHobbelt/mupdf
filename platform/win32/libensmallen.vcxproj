@@ -242,6 +242,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/demon_adam_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/demon_sgd_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/eve_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/fasta_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/fbs_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/fista_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/frankwolfe_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/ftml_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/function_test.cpp" />
@@ -276,6 +279,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/spsa_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/svrg_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/swats_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/test_types.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/wn_grad_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/yogi_test.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen.hpp" />
@@ -334,7 +338,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/cmaes/cmaes.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/cmaes/cmaes_impl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/cmaes/full_selection.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/cmaes/not_empty_transformation.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/cmaes/pop_cmaes.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/cmaes/pop_cmaes_impl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/cmaes/random_selection.hpp" />
@@ -352,6 +355,16 @@
     <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/ens_version.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/eve/eve.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/eve/eve_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/fasta/fasta.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/fasta/fasta_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/fbs/fbs.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/fbs/fbs_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/fbs/l1_constraint.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/fbs/l1_constraint_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/fbs/l1_penalty.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/fbs/l1_penalty_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/fista/fista.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/fista/fista_impl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/ftml/ftml.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/ftml/ftml_impl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/ftml/ftml_update.hpp" />
@@ -463,6 +476,8 @@
     <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/mc_cormick_function.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/mc_cormick_function_impl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/problems.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/quadratic_function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/quadratic_function_impl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/rastrigin_function.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/rastrigin_function_impl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/rosenbrock_function.hpp" />
@@ -550,10 +565,13 @@
     <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/swats/swats_impl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/swats/swats_update.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/utility/any.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/utility/arma_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/utility/detect_callbacks.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/utility/function_traits.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/utility/indicators/epsilon.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/utility/indicators/igd.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/utility/indicators/igd_plus.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/utility/proxies.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/utility/using.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/wn_grad/wn_grad.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/wn_grad/wn_grad_impl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/wn_grad/wn_grad_update.hpp" />
@@ -562,6 +580,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/yogi/yogi_update.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ensmallen/tests/catch.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ensmallen/tests/test_function_tools.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/tests/test_types.hpp" />
     <Text Include="../../thirdparty/owemdjee/ensmallen/CMake/ARMA_FindACML.cmake" />
     <Text Include="../../thirdparty/owemdjee/ensmallen/CMake/ARMA_FindACMLMP.cmake" />
     <Text Include="../../thirdparty/owemdjee/ensmallen/CMake/ARMA_FindARPACK.cmake" />
@@ -571,7 +590,12 @@
     <Text Include="../../thirdparty/owemdjee/ensmallen/CMake/ARMA_FindLAPACK.cmake" />
     <Text Include="../../thirdparty/owemdjee/ensmallen/CMake/ARMA_FindMKL.cmake" />
     <Text Include="../../thirdparty/owemdjee/ensmallen/CMake/ARMA_FindOpenBLAS.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ensmallen/CMake/COOT_FindCLBLAS.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ensmallen/CMake/COOT_FindCLBlast.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ensmallen/CMake/COOT_FindNVRTC.cmake" />
     <Text Include="../../thirdparty/owemdjee/ensmallen/CMake/FindArmadillo.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ensmallen/CMake/FindBandicoot.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ensmallen/CMake/FindCBLAS.cmake" />
     <Text Include="../../thirdparty/owemdjee/ensmallen/CMake/ensmallen-config.cmake.in" />
     <Text Include="../../thirdparty/owemdjee/ensmallen/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/ensmallen/CONTRIBUTING.md" />

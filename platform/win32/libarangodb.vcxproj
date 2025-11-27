@@ -2602,13 +2602,10 @@
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/Aql/VariableGenerator.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/Aql/grammar.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/Aql/tokens.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/AsyncRegistryServer/Feature.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/AsyncRegistryServer/Metrics.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/AsyncRegistryServer/RestHandler.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/Auth/Common.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/Auth/TokenCache.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/Auth/User.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/Auth/UserManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/Auth/UserManagerImpl.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/Cache/BucketState.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/Cache/Cache.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/Cache/CacheManagerFeature.cpp" />
@@ -2636,7 +2633,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/Cluster/CallbackGuard.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/Cluster/ClusterCollectionCreationInfo.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/Cluster/ClusterCollectionMethods.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/Cluster/ClusterEdgeCursor.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/Cluster/ClusterFeature.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/Cluster/ClusterHelpers.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/Cluster/ClusterIndexMethods.cpp" />
@@ -2733,7 +2729,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Cache/RefactoredTraverserCache.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/ClusterGraphDatalake.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/ClusterTraverserCache.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Cursors/RefactoredSingleServerEdgeCursor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Cursors/DBServerIndexCursor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Cursors/SingleServerEdgeCursor.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Enumerators/OneSidedEnumerator.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Enumerators/OneSidedEnumeratorInterface.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Enumerators/TwoSidedEnumerator.cpp" />
@@ -2758,10 +2755,11 @@
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Providers/BaseProviderOptions.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Providers/ClusterProvider.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Providers/ProviderTracer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Providers/SingleServer/NeighbourCache.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Providers/SingleServer/SingleServerNeighbourProvider.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Providers/SingleServerProvider.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Queues/QueueTracer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/ShortestPathOptions.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/SingleServerEdgeCursor.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Steps/ClusterProviderStep.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Steps/SingleServerProviderStep.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/TraverserCache.cpp" />
@@ -3141,6 +3139,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/StorageEngine/TransactionState.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/StorageEngine/VPackSortMigration.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/StorageEngine/WalAccess.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/SystemMonitor/AsyncRegistry/Feature.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/SystemMonitor/AsyncRegistry/Metrics.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/SystemMonitor/AsyncRegistry/RestHandler.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/Transaction/BatchOptions.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/Transaction/ClusterUtils.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/Transaction/Context.cpp" />
@@ -3277,6 +3278,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/lib/ApplicationFeatures/GreetingsFeature.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/lib/ApplicationFeatures/LanguageFeature.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/lib/ApplicationFeatures/OptionsCheckFeature.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arangodb/lib/ApplicationFeatures/ProcessEnvironmentFeature.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/lib/ApplicationFeatures/ShellColorsFeature.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/lib/ApplicationFeatures/ShutdownFeature.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/lib/ApplicationFeatures/TempFeature.cpp" />
@@ -3285,6 +3287,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/lib/Assertions/AssertionLogger.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/lib/Async/Registry/promise.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/lib/Async/Registry/registry_variable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arangodb/lib/Async/src/SuspensionCounter.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/lib/Basics/ArangoGlobalContext.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/lib/Basics/AttributeNameParser.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/lib/Basics/CleanupFunctions.cpp" />
@@ -3418,6 +3421,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/lib/Ssl/SslFeature.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/lib/Ssl/SslInterface.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/lib/Ssl/ssl-helper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arangodb/lib/TaskMonitoring/task.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arangodb/lib/TaskMonitoring/task_registry_variable.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/lib/Utilities/LineEditor.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/lib/Utilities/LinenoiseShell.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/lib/Utilities/NameValidator.cpp" />
@@ -3468,6 +3473,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/Aql/AqlItemBlockTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/Aql/AqlItemRowPrinter.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/Aql/AqlItemRowTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/Aql/AqlMergeTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/Aql/AqlShadowRowTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/Aql/AqlSharedExecutionBlockImplTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/Aql/AqlValueCompare.cpp" />
@@ -3555,7 +3561,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/Async/ExpectedTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/Async/Registry/RegistryTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/AsyncAgencyComm/AsyncAgencyCommTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/AsyncRegistryServer/StacktraceTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/Auth/UserManagerClusterTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/Auth/UserManagerTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/Basics/ApplicationServerTest.cpp" />
@@ -3591,6 +3596,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/Basics/StringUtf8NormalizeTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/Basics/StringUtf8Test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/Basics/StringUtilsTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/Basics/SupervisedBufferTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/Basics/TypeListTests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/Basics/UnshackledMutexTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/Basics/VelocyPackHelperCompareRandomTest.cpp" />
@@ -3627,8 +3633,10 @@
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/Cluster/ShardAutoRebalancerTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/Cluster/ShardIDTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/Containers/Concurrent/ListOfNonOwnedListsTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/Containers/Concurrent/SharedTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/Containers/Concurrent/ThreadOwnedListTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/Containers/EnumerateTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/Containers/ForestTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/Containers/HashSetTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/Containers/MerkleTreeTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/Containers/SmallVectorTest.cpp" />
@@ -3652,6 +3660,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/Geo/ShapeContainerTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/Graph/AllShortestPathsFinderTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/Graph/ClusterTraverserCacheTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/Graph/DBServerEdgeCursorTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/Graph/DFSFinderTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/Graph/FifoQueueTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/Graph/GenericGraphProviderTest.cpp" />
@@ -3662,6 +3671,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/Graph/LifoQueueTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/Graph/PathStoreTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/Graph/PathValidatorTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/Graph/SingleServerNeighbourCacheTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/Graph/SingleServerProviderTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/Graph/TraverserCacheTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/Graph/WeightedQueueTest.cpp" />
@@ -3748,6 +3758,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/Inspection/VPackLoadTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/Inspection/VPackSaveTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/Inspection/ValidateTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/InternalRestHandler/InternalRestTraverserHandlerEdgeTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/Logger/EscaperTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/Logger/LogContextTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/Maintenance/MaintenanceFeatureTest.cpp" />
@@ -3863,6 +3874,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/SimpleHttpClient/ConnectionCacheTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/SimpleHttpClient/HttpResponseCheckerTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/StorageEngine/PhysicalCollectionTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/SystemMonitor/AsyncRegistry/PrettyPrinter/gdb_integration/async_registry_gdb_pretty_printer_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/TaskMonitoring/TaskRegistryTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/Transaction/ContextTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/Transaction/CountCacheTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/Transaction/ManagerTest.cpp" />
@@ -5784,16 +5797,12 @@
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Aql/WalkerWorker.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Aql/grammar.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Aql/types.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/AsyncRegistryServer/Feature.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/AsyncRegistryServer/Metrics.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/AsyncRegistryServer/RestHandler.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/AsyncRegistryServer/Stacktrace/depth_first.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/AsyncRegistryServer/Stacktrace/forest.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Auth/Common.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Auth/Handler.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Auth/TokenCache.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Auth/User.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Auth/UserManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Auth/UserManagerImpl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Cache/BinaryKeyHasher.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Cache/BucketState.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Cache/Cache.h" />
@@ -5827,7 +5836,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Cluster/CallbackGuard.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Cluster/ClusterCollectionCreationInfo.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Cluster/ClusterCollectionMethods.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Cluster/ClusterEdgeCursor.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Cluster/ClusterFeature.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Cluster/ClusterHelpers.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Cluster/ClusterIndexMethods.h" />
@@ -5930,8 +5938,10 @@
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Cache/RefactoredTraverserCache.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/ClusterGraphDatalake.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/ClusterTraverserCache.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Cursors/RefactoredSingleServerEdgeCursor.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/EdgeCursor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Cursors/DBServerEdgeCursor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Cursors/DBServerIndexCursor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Cursors/EdgeCursor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Cursors/SingleServerEdgeCursor.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/EdgeDocumentToken.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Enumerators/OneSidedEnumerator.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Enumerators/OneSidedEnumeratorInterface.h" />
@@ -5958,6 +5968,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Providers/BaseStep.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Providers/ClusterProvider.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Providers/ProviderTracer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Providers/SingleServer/ExpansionInfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Providers/SingleServer/NeighbourCache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Providers/SingleServer/SingleServerNeighbourProvider.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Providers/SingleServerProvider.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Providers/TypeAliases.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Queues/FifoQueue.h" />
@@ -5965,7 +5978,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Queues/QueueTracer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Queues/WeightedQueue.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/ShortestPathOptions.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/SingleServerEdgeCursor.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Steps/ClusterProviderStep.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Steps/SingleServerProviderStep.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Steps/VertexDescription.h" />
@@ -6460,6 +6472,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/StorageEngine/TransactionState.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/StorageEngine/VPackSortMigration.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/StorageEngine/WalAccess.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/SystemMonitor/AsyncRegistry/Feature.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/SystemMonitor/AsyncRegistry/Metrics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/SystemMonitor/AsyncRegistry/RestHandler.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Transaction/BatchOptions.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Transaction/ClusterUtils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Transaction/Context.h" />
@@ -6647,6 +6662,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/lib/ApplicationFeatures/LanguageFeature.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/lib/ApplicationFeatures/LazyApplicationFeatureReference.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/lib/ApplicationFeatures/OptionsCheckFeature.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arangodb/lib/ApplicationFeatures/ProcessEnvironmentFeature.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/lib/ApplicationFeatures/ShellColorsFeature.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/lib/ApplicationFeatures/ShutdownFeature.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/lib/ApplicationFeatures/TempFeature.h" />
@@ -6660,7 +6676,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/lib/Assertions/ProdAssert.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/lib/Async/Registry/promise.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/lib/Async/Registry/registry_variable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arangodb/lib/Async/include/Async/SuspensionCounter.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/lib/Async/include/Async/async.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arangodb/lib/Async/include/Async/context.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/lib/Async/include/Async/coro-utils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/lib/Async/include/Async/expected.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/lib/Basics/ArangoGlobalContext.h" />
@@ -6726,6 +6744,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/lib/Basics/StringBuffer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/lib/Basics/StringHeap.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/lib/Basics/StringUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arangodb/lib/Basics/SupervisedBuffer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/lib/Basics/Thread.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/lib/Basics/ThreadGuard.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/lib/Basics/TimeString.h" />
@@ -6777,11 +6796,15 @@
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/lib/Containers/Concurrent/ListOfNonOwnedLists.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/lib/Containers/Concurrent/ThreadOwnedList.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/lib/Containers/Concurrent/metrics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arangodb/lib/Containers/Concurrent/shared.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/lib/Containers/Concurrent/snapshot.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arangodb/lib/Containers/Concurrent/source_location.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/lib/Containers/Concurrent/thread.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/lib/Containers/Enumerate.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/lib/Containers/FlatHashMap.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/lib/Containers/FlatHashSet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arangodb/lib/Containers/Forest/depth_first.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arangodb/lib/Containers/Forest/forest.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/lib/Containers/HashSet.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/lib/Containers/HashSetFwd.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/lib/Containers/Helpers.h" />
@@ -6903,6 +6926,8 @@
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/lib/Ssl/SslFeature.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/lib/Ssl/SslInterface.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/lib/Ssl/ssl-helper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arangodb/lib/TaskMonitoring/include/TaskMonitoring/task.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arangodb/lib/TaskMonitoring/include/TaskMonitoring/task_registry_variable.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/lib/Utilities/Completer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/lib/Utilities/LineEditor.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/lib/Utilities/LinenoiseShell.h" />
@@ -6973,6 +6998,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/tests/Maintenance/MaintenanceFeatureMock.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/tests/Maintenance/jsonresource.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/tests/Metrics/MetricsFeatureTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arangodb/tests/Mocks/Auth/UserManagerMock.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/tests/Mocks/Death_Test.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/tests/Mocks/FakeScheduler.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/tests/Mocks/IResearchInvertedIndexMock.h" />
@@ -6981,6 +7007,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/tests/Mocks/MockGraph.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/tests/Mocks/MockGraphProvider.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/tests/Mocks/MockQuery.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arangodb/tests/Mocks/MockTcpDummyServer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/tests/Mocks/PhysicalCollectionMock.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/tests/Mocks/PreparedResponseConnectionPool.h" />
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/tests/Mocks/Servers.h" />
@@ -11690,7 +11717,6 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/3rdParty/linenoise-ng/appveyor.yml" />
     <Text Include="../../thirdparty/owemdjee/arangodb/3rdParty/llhttp/LICENSE-MIT" />
     <Text Include="../../thirdparty/owemdjee/arangodb/3rdParty/llhttp/README.md" />
-    <Text Include="../../thirdparty/owemdjee/arangodb/3rdParty/lz4/README.md" />
     <Text Include="../../thirdparty/owemdjee/arangodb/3rdParty/s2geometry/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/arangodb/3rdParty/s2geometry/master/AUTHORS" />
     <Text Include="../../thirdparty/owemdjee/arangodb/3rdParty/s2geometry/master/CMakeLists.txt" />
@@ -11947,6 +11973,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/Documentation/Metrics/arangodb_aql_query_plan_cache_memory_usage.yaml" />
     <Text Include="../../thirdparty/owemdjee/arangodb/Documentation/Metrics/arangodb_aql_query_plan_cache_misses_total.yaml" />
     <Text Include="../../thirdparty/owemdjee/arangodb/Documentation/Metrics/arangodb_aql_query_time.yaml" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/Documentation/Metrics/arangodb_aql_recording_call_time.yaml" />
     <Text Include="../../thirdparty/owemdjee/arangodb/Documentation/Metrics/arangodb_aql_slow_query_time.yaml" />
     <Text Include="../../thirdparty/owemdjee/arangodb/Documentation/Metrics/arangodb_aql_total_query_time_msec_total.yaml" />
     <Text Include="../../thirdparty/owemdjee/arangodb/Documentation/Metrics/arangodb_async_existing_promises.yaml" />
@@ -12225,6 +12252,8 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/Documentation/Metrics/rocksdb_background_errors.yaml" />
     <Text Include="../../thirdparty/owemdjee/arangodb/Documentation/Metrics/rocksdb_base_level.yaml" />
     <Text Include="../../thirdparty/owemdjee/arangodb/Documentation/Metrics/rocksdb_block_cache_capacity.yaml" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/Documentation/Metrics/rocksdb_block_cache_charge_per_entry.yaml" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/Documentation/Metrics/rocksdb_block_cache_entries.yaml" />
     <Text Include="../../thirdparty/owemdjee/arangodb/Documentation/Metrics/rocksdb_block_cache_pinned_usage.yaml" />
     <Text Include="../../thirdparty/owemdjee/arangodb/Documentation/Metrics/rocksdb_block_cache_usage.yaml" />
     <Text Include="../../thirdparty/owemdjee/arangodb/Documentation/Metrics/rocksdb_cache_active_tables.yaml" />
@@ -12267,11 +12296,14 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/Documentation/Metrics/rocksdb_free_inodes.yaml" />
     <Text Include="../../thirdparty/owemdjee/arangodb/Documentation/Metrics/rocksdb_is_file_deletions_enabled.yaml" />
     <Text Include="../../thirdparty/owemdjee/arangodb/Documentation/Metrics/rocksdb_is_write_stopped.yaml" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/Documentation/Metrics/rocksdb_live_blob_file_garbage_size.yaml" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/Documentation/Metrics/rocksdb_live_blob_file_size.yaml" />
     <Text Include="../../thirdparty/owemdjee/arangodb/Documentation/Metrics/rocksdb_live_sst_files_size.yaml" />
     <Text Include="../../thirdparty/owemdjee/arangodb/Documentation/Metrics/rocksdb_live_wal_files.yaml" />
     <Text Include="../../thirdparty/owemdjee/arangodb/Documentation/Metrics/rocksdb_live_wal_files_size.yaml" />
     <Text Include="../../thirdparty/owemdjee/arangodb/Documentation/Metrics/rocksdb_mem_table_flush_pending.yaml" />
     <Text Include="../../thirdparty/owemdjee/arangodb/Documentation/Metrics/rocksdb_min_log_number_to_keep.yaml" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/Documentation/Metrics/rocksdb_num_blob_files.yaml" />
     <Text Include="../../thirdparty/owemdjee/arangodb/Documentation/Metrics/rocksdb_num_deletes_active_mem_table.yaml" />
     <Text Include="../../thirdparty/owemdjee/arangodb/Documentation/Metrics/rocksdb_num_deletes_imm_mem_tables.yaml" />
     <Text Include="../../thirdparty/owemdjee/arangodb/Documentation/Metrics/rocksdb_num_entries_active_mem_table.yaml" />
@@ -12368,18 +12400,6 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/arangod/Aql/Optimizer/Rule/EnumeratePathsFilter/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/arangodb/arangod/Aql/grammar.y" />
     <Text Include="../../thirdparty/owemdjee/arangodb/arangod/Aql/tokens.ll" />
-    <Text Include="../../thirdparty/owemdjee/arangodb/arangod/AsyncRegistryServer/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/arangodb/arangod/AsyncRegistryServer/PrettyPrinter/README.md" />
-    <Text Include="../../thirdparty/owemdjee/arangodb/arangod/AsyncRegistryServer/PrettyPrinter/__init__.py" />
-    <Text Include="../../thirdparty/owemdjee/arangodb/arangod/AsyncRegistryServer/PrettyPrinter/src/asyncregistry/__init__.py" />
-    <Text Include="../../thirdparty/owemdjee/arangodb/arangod/AsyncRegistryServer/PrettyPrinter/src/asyncregistry/gdb_data.py" />
-    <Text Include="../../thirdparty/owemdjee/arangodb/arangod/AsyncRegistryServer/PrettyPrinter/src/asyncregistry/gdb_forest.py" />
-    <Text Include="../../thirdparty/owemdjee/arangodb/arangod/AsyncRegistryServer/PrettyPrinter/src/asyncregistry/gdb_printer.py" />
-    <Text Include="../../thirdparty/owemdjee/arangodb/arangod/AsyncRegistryServer/PrettyPrinter/src/asyncregistry/stacktrace.py" />
-    <Text Include="../../thirdparty/owemdjee/arangodb/arangod/AsyncRegistryServer/PrettyPrinter/src/pretty-printer.py" />
-    <Text Include="../../thirdparty/owemdjee/arangodb/arangod/AsyncRegistryServer/PrettyPrinter/src/tests/__init__.py" />
-    <Text Include="../../thirdparty/owemdjee/arangodb/arangod/AsyncRegistryServer/PrettyPrinter/src/tests/test_forest.py" />
-    <Text Include="../../thirdparty/owemdjee/arangodb/arangod/AsyncRegistryServer/Stacktrace/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/arangodb/arangod/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/arangodb/arangod/Cache/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/arangodb/arangod/Cluster/CMakeLists.txt" />
@@ -12393,6 +12413,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Options/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/PathManagement/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Providers/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Providers/SingleServer/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Queues/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Steps/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Types/CMakeLists.txt" />
@@ -12429,6 +12450,16 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/arangod/RocksDBEngine/Methods/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/arangodb/arangod/Scheduler/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/arangodb/arangod/StorageEngine/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/arangod/SystemMonitor/AsyncRegistry/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/arangod/SystemMonitor/AsyncRegistry/PrettyPrinter/README.md" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/arangod/SystemMonitor/AsyncRegistry/PrettyPrinter/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/arangod/SystemMonitor/AsyncRegistry/PrettyPrinter/src/asyncregistry/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/arangod/SystemMonitor/AsyncRegistry/PrettyPrinter/src/asyncregistry/gdb_data.py" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/arangod/SystemMonitor/AsyncRegistry/PrettyPrinter/src/asyncregistry/gdb_forest.py" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/arangod/SystemMonitor/AsyncRegistry/PrettyPrinter/src/asyncregistry/gdb_printer.py" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/arangod/SystemMonitor/AsyncRegistry/PrettyPrinter/src/asyncregistry/stacktrace.py" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/arangod/SystemMonitor/AsyncRegistry/PrettyPrinter/src/pretty-printer.py" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/arangod/SystemMonitor/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/arangodb/arangod/Utils/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/arangodb/arangod/V8Server/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/arangodb/arangod/VocBase/CMakeLists.txt" />
@@ -12518,6 +12549,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/etc/testing/arangod-activefailover.conf" />
     <Text Include="../../thirdparty/owemdjee/arangodb/etc/testing/arangod-agency.conf" />
     <Text Include="../../thirdparty/owemdjee/arangodb/etc/testing/arangod-agent.conf" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/etc/testing/arangod-auth.conf" />
     <Text Include="../../thirdparty/owemdjee/arangodb/etc/testing/arangod-common.conf" />
     <Text Include="../../thirdparty/owemdjee/arangodb/etc/testing/arangod-coordinator.conf" />
     <Text Include="../../thirdparty/owemdjee/arangodb/etc/testing/arangod-dbserver.conf" />
@@ -13039,6 +13071,8 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/js/apps/system/_admin/aardvark/APP/react/src/views/collections/indices/addIndex/useCreatePersistentIndex.ts" />
     <Text Include="../../thirdparty/owemdjee/arangodb/js/apps/system/_admin/aardvark/APP/react/src/views/collections/indices/addIndex/useCreatePrefixedMDIIndex.ts" />
     <Text Include="../../thirdparty/owemdjee/arangodb/js/apps/system/_admin/aardvark/APP/react/src/views/collections/indices/addIndex/useCreateTTLIndex.ts" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/js/apps/system/_admin/aardvark/APP/react/src/views/collections/indices/addIndex/vectorIndex/VectorIndexForm.tsx" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/js/apps/system/_admin/aardvark/APP/react/src/views/collections/indices/addIndex/vectorIndex/useCreateVectorIndex.ts" />
     <Text Include="../../thirdparty/owemdjee/arangodb/js/apps/system/_admin/aardvark/APP/react/src/views/collections/indices/listIndices/CollectionIndexActionButtons.tsx" />
     <Text Include="../../thirdparty/owemdjee/arangodb/js/apps/system/_admin/aardvark/APP/react/src/views/collections/indices/listIndices/CollectionIndicesTable.tsx" />
     <Text Include="../../thirdparty/owemdjee/arangodb/js/apps/system/_admin/aardvark/APP/react/src/views/collections/indices/useDeleteIndex.ts" />
@@ -13304,6 +13338,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/js/client/modules/@arangodb/arango-transaction.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/js/client/modules/@arangodb/arango-view.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/js/client/modules/@arangodb/arangosh.js" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/js/client/modules/@arangodb/cluster-info.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/js/client/modules/@arangodb/configuration.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/js/client/modules/@arangodb/foxx/manager.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/js/client/modules/@arangodb/general-graph.js" />
@@ -13381,6 +13416,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/js/client/modules/@arangodb/testutils/sutcheckers/failurepoints.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/js/client/modules/@arangodb/testutils/sutcheckers/graphs.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/js/client/modules/@arangodb/testutils/sutcheckers/tasks.js" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/js/client/modules/@arangodb/testutils/sutcheckers/transactions.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/js/client/modules/@arangodb/testutils/sutcheckers/users.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/js/client/modules/@arangodb/testutils/sutcheckers/views.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/js/client/modules/@arangodb/testutils/test-utils.js" />
@@ -13458,6 +13494,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/js/common/modules/@arangodb/testutils/replicated-logs-http-helper.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/js/common/modules/@arangodb/testutils/replicated-logs-predicates.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/js/common/modules/@arangodb/testutils/seededRandom.js" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/js/common/modules/@arangodb/testutils/vector-generator.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/js/common/modules/@arangodb/util.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/js/common/modules/ascii-table.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/js/common/modules/jsunity.js" />
@@ -13584,7 +13621,6 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/lib/Assertions/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/arangodb/lib/Async/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/arangodb/lib/Async/Registry/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/arangodb/lib/Async/include/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/arangodb/lib/Basics/Exceptions.tpp" />
     <Text Include="../../thirdparty/owemdjee/arangodb/lib/Basics/Result.tpp" />
     <Text Include="../../thirdparty/owemdjee/arangodb/lib/Basics/ResultError.tpp" />
@@ -13597,6 +13633,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/lib/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/arangodb/lib/Containers/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/arangodb/lib/Containers/Concurrent/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/lib/Containers/Forest/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/arangodb/lib/CrashHandler/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/arangodb/lib/Futures/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/arangodb/lib/Futures/README.md" />
@@ -13606,6 +13643,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/lib/Geo/karney/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/arangodb/lib/Inspection/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/arangodb/lib/Inspection/include/Inspection/README.md" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/lib/TaskMonitoring/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/arangodb/lib/V8/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/arangodb/lib/VelocypackUtils/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/arangodb/lsan_arangodb_suppressions.txt" />
@@ -13618,6 +13656,8 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/scripts/clang-format.sh" />
     <Text Include="../../thirdparty/owemdjee/arangodb/scripts/cluster-run-common.sh" />
     <Text Include="../../thirdparty/owemdjee/arangodb/scripts/disable-cores.sh" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/scripts/docker/build-image.sh" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/scripts/docker/build-manifest.sh" />
     <Text Include="../../thirdparty/owemdjee/arangodb/scripts/docker/build/README.md" />
     <Text Include="../../thirdparty/owemdjee/arangodb/scripts/docker/build/linux/Dockerfile.arm64" />
     <Text Include="../../thirdparty/owemdjee/arangodb/scripts/docker/build/linux/Dockerfile.x86-64" />
@@ -13643,11 +13683,12 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/scripts/docker/deploy/deploy-alpine.dockerfile" />
     <Text Include="../../thirdparty/owemdjee/arangodb/scripts/docker/deploy/entrypoint.sh" />
     <Text Include="../../thirdparty/owemdjee/arangodb/scripts/docker/deploy/setup.sh" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/scripts/docker/determine-tag.sh" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/scripts/docker/go-test/Dockerfile" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/scripts/docker/java-test/Dockerfile" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/scripts/docker/js-test/Dockerfile" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/scripts/docker/test/Dockerfile" />
     <Text Include="../../thirdparty/owemdjee/arangodb/scripts/docker/test/README.md" />
-    <Text Include="../../thirdparty/owemdjee/arangodb/scripts/docker/test/arangodb-test.Dockerfile" />
-    <Text Include="../../thirdparty/owemdjee/arangodb/scripts/docker/test/build-image.sh" />
-    <Text Include="../../thirdparty/owemdjee/arangodb/scripts/docker/test/build-manifest.sh" />
-    <Text Include="../../thirdparty/owemdjee/arangodb/scripts/docker/test/determine-tag.sh" />
     <Text Include="../../thirdparty/owemdjee/arangodb/scripts/docker/test/llvm.sources" />
     <Text Include="../../thirdparty/owemdjee/arangodb/scripts/dumpAgency.sh" />
     <Text Include="../../thirdparty/owemdjee/arangodb/scripts/examine_results.js" />
@@ -13658,6 +13699,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/scripts/killLocalCluster.sh" />
     <Text Include="../../thirdparty/owemdjee/arangodb/scripts/limitMemory.sh" />
     <Text Include="../../thirdparty/owemdjee/arangodb/scripts/quickieTest.sh" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/scripts/runRTA.sh" />
     <Text Include="../../thirdparty/owemdjee/arangodb/scripts/setupPerfEvents.sh" />
     <Text Include="../../thirdparty/owemdjee/arangodb/scripts/setupPerfEvents_onlyCriticalWrite.sh" />
     <Text Include="../../thirdparty/owemdjee/arangodb/scripts/shutdownLocalCluster.sh" />
@@ -13727,7 +13769,6 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/Async/AsyncTestLineNumbers.tpp" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/Async/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/Async/Registry/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/AsyncRegistryServer/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/Basics/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/Basics/InputProcessorsData.json" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/BuildId/CMakeLists.txt" />
@@ -13741,6 +13782,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/Graph/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/IResearch/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/Inspection/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/InternalRestHandler/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/Maintenance/Current.json" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/Maintenance/DBServer0001.json" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/Maintenance/DBServer0002.json" />
@@ -13750,8 +13792,21 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/README.md" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/Replication2/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/Replication2/Storage/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/SystemMonitor/AsyncRegistry/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/SystemMonitor/AsyncRegistry/PrettyPrinter/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/SystemMonitor/AsyncRegistry/PrettyPrinter/gdb_integration/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/SystemMonitor/AsyncRegistry/PrettyPrinter/gdb_integration/test.gdbscript" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/SystemMonitor/AsyncRegistry/PrettyPrinter/unittests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/SystemMonitor/AsyncRegistry/PrettyPrinter/unittests/tests/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/SystemMonitor/AsyncRegistry/PrettyPrinter/unittests/tests/test_forest.py" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/SystemMonitor/AsyncRegistry/PrettyPrinter/unittests/tests/test_stacktrace.py" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/SystemMonitor/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/TaskMonitoring/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/VocBase/Properties/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/Zkd/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/arangojs-test-definitions.txt" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/go-test-definitions.txt" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/java-test-definitions.txt" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/README" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/agency-restart/few-writes.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/agency-restart/many-writes.js" />
@@ -13817,6 +13872,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-geo-3.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-geo-cluster.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-geo-distance-range.js" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-geo-functions.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-geo-misc.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-graph-all-shortest-path.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-graph-enumerate-path-filter.js" />
@@ -14031,6 +14087,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-queries-stats.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-queries-variables.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-query-cache-noncluster.js" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-query-metrics-fp.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-query-plan-cache.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-range.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-ranges-combined-01.js" />
@@ -14283,7 +14340,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/load-balancing/load-balancing-async-noauth-cluster.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/load-balancing/load-balancing-cursor-auth-cluster.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/load-balancing/load-balancing-cursor-noauth-cluster.js" />
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/load-balancing/load-balancing-foxx-installation-noauth-cluster.js" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/load-balancing/load-balancing-foxx-installation-noauth-cluster-nocov.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/load-balancing/load-balancing-foxx-queues-noauth-cluster.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/load-balancing/load-balancing-key-generator-noauth-cluster.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/load-balancing/load-balancing-queries-noauth-cluster.js" />
@@ -14511,6 +14568,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/resilience/move/moving-shards-cluster-no-data-R1.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/resilience/sharddist/shard-distribution.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/resilience/transactions/resilience-transactions.js" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/restart/test-coordinator-unreachable-cluster.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/restart/test-foxx-selfheal-cluster-nocov.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/restart/test-restart-cluster.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/restart/test-restart-coordinator-transactions.js" />
@@ -14578,6 +14636,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/max-collections-per-query-cluster-fp.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/max-databases-limit.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/max-databases-unlimited.js" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/restore-vector-index.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/statistics-history-off.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/statistics-off.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/statistics-on.js" />
@@ -14679,7 +14738,9 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/abort-long-running-operations-noncluster-fp.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/agency-oneshard-regression-nocluster.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/api-job-different-protocols.js" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/api/aardvark-graphvisualizer.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/api/analyzer.js" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/api/api-cluster-info.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/api/api-gharial-spec.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/api/api-replication.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/api/aql-builtin.js" />
@@ -14756,7 +14817,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-admin-license.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-admin-log.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-admin-status.js" />
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-aql-kill.js" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-aql-kill-nocov.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-aqlfunctions.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-arango-agency-javascript-cluster.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-async-request.js" />
@@ -14805,6 +14866,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-view-arangosearch.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-view-search-alias.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-vpack.js" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/recording.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-abort-replication-cluster.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-admin-cluster-rebalance.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-any-noncluster.js" />
@@ -14823,7 +14885,6 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-babies.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-cache-cleanup-noncluster.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-client.js" />
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-cluster-agency.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-cluster-collection-selectivity.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-cluster-collection.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-cluster-gatherblocks.js" />
@@ -14851,9 +14912,11 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-document-keepnull-cluster.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-document.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-download.js" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-drop-database-with-stopped-server-cluster.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-drop-followers-while-replicating-cluster-fp.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-dropped-followers-elcheapo-commit-cluster-fp.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-dump-integration.js" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-duplicate-collection-names-cluster.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-edge-index-cache.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-edge-index-noncluster.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-edge-index-selectivity-noncluster.js" />
@@ -14899,10 +14962,12 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-iterators-read-standalone.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-iterators-read-transaction.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-iterators-write-standalane.js" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-key-generation-one-shard-cluster.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-keygen.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-leader-resign-cluster-noinstr.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-logger-metrics-cluster.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-med-queue-blocked-cluster-nocov-fp.js" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-move-shard-collection-creation-cluster.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-move-shard-sync-cluster-r2-fp.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-noncluster-edge.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-old-system-collections.js" />
@@ -15191,6 +15256,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/common/test-data/search/texts/chinese_dreams.txt" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/common/test-data/search/texts/north.txt" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/common/test-data/sorting/data.json" />
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/common/test-data/telemetry/telemetrySchema.json" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/common/v8/shell-v8-base64.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/common/v8/shell-v8-buffer-spec.js" />
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/common/v8/shell-v8-crypto.js" />

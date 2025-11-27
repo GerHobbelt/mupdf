@@ -285,9 +285,11 @@
     <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_balloc.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_bbr.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_buf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_callbacks.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_cc.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_cid.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_conn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_conn_info.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_conv.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_crypto.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_dcidtr.c" />
@@ -302,6 +304,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_objalloc.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_opl.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_path.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_pcg.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_pkt.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_pmtud.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_ppe.c" />
@@ -309,6 +312,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_pv.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_qlog.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_range.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_ratelim.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_ringbuf.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_rob.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_rst.c" />
@@ -324,7 +328,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/tests/main.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_acktr_test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_addr_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_callbacks_test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_cc_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_conn_info_test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_conn_test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_conv_test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_dcidtr_test.c" />
@@ -332,12 +338,14 @@
     <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_idtr_test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_ksl_test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_map_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_pcg_test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_pkt_test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_pmtud_test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_ppe_test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_pv_test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_qlog_test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_range_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_ratelim_test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_ringbuf_test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_rob_test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_rtb_test.c" />
@@ -419,9 +427,11 @@
     <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_balloc.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_bbr.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_buf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_callbacks.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_cc.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_cid.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_conn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_conn_info.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_conn_stat.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_conv.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_crypto.h" />
@@ -439,6 +449,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_objalloc.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_opl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_path.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_pcg.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_pkt.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_pktns_id.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_pmtud.h" />
@@ -447,6 +458,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_pv.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_qlog.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_range.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_ratelim.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_rcvry.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_ringbuf.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_rob.h" />
@@ -462,7 +474,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_window_filter.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_acktr_test.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_addr_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_callbacks_test.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_cc_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_conn_info_test.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_conn_test.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_conv_test.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_dcidtr_test.h" />
@@ -470,12 +484,14 @@
     <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_idtr_test.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_ksl_test.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_map_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_pcg_test.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_pkt_test.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_pmtud_test.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_ppe_test.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_pv_test.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_qlog_test.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_range_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_ratelim_test.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_ringbuf_test.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_rob_test.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_rtb_test.h" />
@@ -536,6 +552,7 @@
     <Text Include="../../thirdparty/owemdjee/ngtcp2/crypto/picotls/libngtcp2_crypto_picotls.pc.in" />
     <Text Include="../../thirdparty/owemdjee/ngtcp2/crypto/quictls/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/ngtcp2/crypto/quictls/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/crypto/quictls/libngtcp2_crypto_libressl.pc.in" />
     <Text Include="../../thirdparty/owemdjee/ngtcp2/crypto/quictls/libngtcp2_crypto_quictls.pc.in" />
     <Text Include="../../thirdparty/owemdjee/ngtcp2/crypto/wolfssl/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/ngtcp2/crypto/wolfssl/Makefile.am" />

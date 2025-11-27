@@ -1062,7 +1062,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/ecl/src/bdwgc/libatomic_ops/tests/run_parallel.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ecl/src/bdwgc/libatomic_ops/tests/test_atomic_include.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ecl/src/c/ecl_constants.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ecl/src/c/ecl_features.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ecl/src/c/iso_latin_names.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ecl/src/c/newhash.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ecl/src/c/symbols_list.h" />
@@ -1134,6 +1133,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/ecl/src/h/impl/math_fenv_msvc.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ecl/src/h/internal.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ecl/src/h/legacy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecl/src/h/nucleus.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ecl/src/h/number.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ecl/src/h/object.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ecl/src/h/page.h" />
@@ -1768,12 +1768,14 @@
     <Text Include="../../thirdparty/owemdjee/ecl/src/bdwgc/ChangeLog" />
     <Text Include="../../thirdparty/owemdjee/ecl/src/bdwgc/Config.cmake.in" />
     <Text Include="../../thirdparty/owemdjee/ecl/src/bdwgc/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/ecl/src/bdwgc/Makefile.direct" />
     <Text Include="../../thirdparty/owemdjee/ecl/src/bdwgc/Makefile.in" />
     <Text Include="../../thirdparty/owemdjee/ecl/src/bdwgc/NT_MAKEFILE" />
     <Text Include="../../thirdparty/owemdjee/ecl/src/bdwgc/OS2_MAKEFILE" />
     <Text Include="../../thirdparty/owemdjee/ecl/src/bdwgc/PCR-Makefile" />
     <Text Include="../../thirdparty/owemdjee/ecl/src/bdwgc/README.QUICK" />
     <Text Include="../../thirdparty/owemdjee/ecl/src/bdwgc/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ecl/src/bdwgc/SMakefile.amiga" />
     <Text Include="../../thirdparty/owemdjee/ecl/src/bdwgc/WCC_MAKEFILE" />
     <Text Include="../../thirdparty/owemdjee/ecl/src/bdwgc/aclocal.m4" />
     <Text Include="../../thirdparty/owemdjee/ecl/src/bdwgc/autogen.sh" />
@@ -1855,6 +1857,7 @@
     <Text Include="../../thirdparty/owemdjee/ecl/src/bdwgc/libatomic_ops/pkgconfig/atomic_ops.pc.in" />
     <Text Include="../../thirdparty/owemdjee/ecl/src/bdwgc/libatomic_ops/src/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/ecl/src/bdwgc/libatomic_ops/src/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/ecl/src/bdwgc/libatomic_ops/src/Makefile.msft" />
     <Text Include="../../thirdparty/owemdjee/ecl/src/bdwgc/libatomic_ops/src/atomic_ops/sysdeps/README" />
     <Text Include="../../thirdparty/owemdjee/ecl/src/bdwgc/libatomic_ops/src/atomic_ops/sysdeps/sunc/sparc.S" />
     <Text Include="../../thirdparty/owemdjee/ecl/src/bdwgc/libatomic_ops/src/atomic_ops_sysdeps.S" />
@@ -1876,6 +1879,7 @@
     <Text Include="../../thirdparty/owemdjee/ecl/src/bdwgc/tests/tests.am" />
     <Text Include="../../thirdparty/owemdjee/ecl/src/bdwgc/tools/callprocs.sh" />
     <Text Include="../../thirdparty/owemdjee/ecl/src/c/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/ecl/src/c/ecl_features.h.in" />
     <Text Include="../../thirdparty/owemdjee/ecl/src/clos/boot.lsp" />
     <Text Include="../../thirdparty/owemdjee/ecl/src/clos/builtin.lsp" />
     <Text Include="../../thirdparty/owemdjee/ecl/src/clos/change.lsp" />
@@ -2394,6 +2398,7 @@
     <Text Include="../../thirdparty/owemdjee/ecl/src/tests/normal-tests/multiprocessing.lsp" />
     <Text Include="../../thirdparty/owemdjee/ecl/src/tests/normal-tests/package-extensions.lsp" />
     <Text Include="../../thirdparty/owemdjee/ecl/src/tests/normal-tests/run-program.lsp" />
+    <Text Include="../../thirdparty/owemdjee/ecl/src/tests/normal-tests/stream.lsp" />
     <Text Include="../../thirdparty/owemdjee/ecl/src/tests/normal-tests/unicode.lsp" />
     <Text Include="../../thirdparty/owemdjee/ecl/src/tests/normal-tests/wscl.lsp" />
     <Text Include="../../thirdparty/owemdjee/ecl/src/tests/stress-tests/multiprocessing.lsp" />
@@ -2423,8 +2428,11 @@
     <Text Include="../../thirdparty/owemdjee/ecl/src/util/tag" />
     <Text Include="../../thirdparty/owemdjee/ecl/src/util/test-android-target.sh" />
     <Text Include="../../thirdparty/owemdjee/ecl/src/util/test-android.sh" />
+    <Text Include="../../thirdparty/owemdjee/ecl/src/util/test-cross-compilation.sh" />
     <Text Include="../../thirdparty/owemdjee/ecl/src/util/wasm32-unknown-emscripten.cross_config" />
     <Text Include="../../thirdparty/owemdjee/ecl/src/util/webserver.lisp" />
+    <Text Include="../../thirdparty/owemdjee/ecl/src/util/x86-linux-gnu.cross_config" />
+    <Text Include="../../thirdparty/owemdjee/ecl/src/util/x86_64-linux-gnu.cross_config" />
     <Xml Include="../../thirdparty/owemdjee/ecl/examples/android/AndroidManifest.xml" />
     <Xml Include="../../thirdparty/owemdjee/ecl/examples/android/build.xml" />
     <Xml Include="../../thirdparty/owemdjee/ecl/examples/android/res/layout/main.xml" />

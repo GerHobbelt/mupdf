@@ -234,6 +234,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/xgboost/plugin/federated/federated_tracker.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/xgboost/plugin/sycl/common/hist_util.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/xgboost/plugin/sycl/common/host_device_vector.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xgboost/plugin/sycl/context_helper.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/xgboost/plugin/sycl/data/gradient_index.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/xgboost/plugin/sycl/device_manager.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/xgboost/plugin/sycl/predictor/predictor.cc" />
@@ -265,7 +266,11 @@
     <ClCompile Include="../../thirdparty/owemdjee/xgboost/src/common/host_device_vector.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/xgboost/src/common/io.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/xgboost/src/common/json.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xgboost/src/common/linalg_op.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xgboost/src/common/numa_topo.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/xgboost/src/common/numeric.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xgboost/src/common/optional_weight.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xgboost/src/common/param_array.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/xgboost/src/common/pseudo_huber.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/xgboost/src/common/quantile.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/xgboost/src/common/quantile_loss_utils.cc" />
@@ -323,8 +328,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/xgboost/src/objective/quantile_obj.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/xgboost/src/objective/regression_obj.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/xgboost/src/predictor/cpu_predictor.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/xgboost/src/predictor/cpu_treeshap.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/xgboost/src/predictor/predictor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xgboost/src/predictor/treeshap.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/xgboost/src/tree/constraints.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/xgboost/src/tree/fit_stump.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/xgboost/src/tree/hist/hist_param.cc" />
@@ -365,9 +370,12 @@
     <ClCompile Include="../../thirdparty/owemdjee/xgboost/tests/cpp/common/test_io.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/xgboost/tests/cpp/common/test_json.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/xgboost/tests/cpp/common/test_linalg.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xgboost/tests/cpp/common/test_math.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/xgboost/tests/cpp/common/test_monitor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xgboost/tests/cpp/common/test_numa_topo.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/xgboost/tests/cpp/common/test_numeric.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/xgboost/tests/cpp/common/test_optional_weight.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xgboost/tests/cpp/common/test_param_array.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/xgboost/tests/cpp/common/test_parameter.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/xgboost/tests/cpp/common/test_partition_builder.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/xgboost/tests/cpp/common/test_probability_distribution.cc" />
@@ -400,6 +408,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/xgboost/tests/cpp/data/test_sparse_page_dmatrix.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/xgboost/tests/cpp/data/test_sparse_page_raw_format.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/xgboost/tests/cpp/encoder/test_ordinal.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/xgboost/tests/cpp/filesystem.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/xgboost/tests/cpp/gbm/test_gblinear.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/xgboost/tests/cpp/gbm/test_gbtree.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/xgboost/tests/cpp/helpers.cc" />
@@ -518,10 +527,13 @@
     <ClInclude Include="../../thirdparty/owemdjee/xgboost/plugin/sycl/common/partition_builder.h" />
     <ClInclude Include="../../thirdparty/owemdjee/xgboost/plugin/sycl/common/row_set.h" />
     <ClInclude Include="../../thirdparty/owemdjee/xgboost/plugin/sycl/common/transform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xgboost/plugin/sycl/context_helper.h" />
     <ClInclude Include="../../thirdparty/owemdjee/xgboost/plugin/sycl/data.h" />
     <ClInclude Include="../../thirdparty/owemdjee/xgboost/plugin/sycl/data/gradient_index.h" />
     <ClInclude Include="../../thirdparty/owemdjee/xgboost/plugin/sycl/device_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xgboost/plugin/sycl/device_properties.h" />
     <ClInclude Include="../../thirdparty/owemdjee/xgboost/plugin/sycl/tree/expand_entry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xgboost/plugin/sycl/tree/hist_dispatcher.h" />
     <ClInclude Include="../../thirdparty/owemdjee/xgboost/plugin/sycl/tree/hist_row_adder.h" />
     <ClInclude Include="../../thirdparty/owemdjee/xgboost/plugin/sycl/tree/hist_synchronizer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/xgboost/plugin/sycl/tree/hist_updater.h" />
@@ -554,7 +566,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/common/bitfield.h" />
     <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/common/categorical.h" />
     <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/common/charconv.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/common/cleanup.h" />
     <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/common/column_matrix.h" />
     <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/common/common.h" />
     <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/common/compressed_iterator.h" />
@@ -563,7 +574,8 @@
     <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/common/cuda_dr_utils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/common/cuda_pinned_allocator.h" />
     <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/common/cuda_rt_utils.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/common/cuda_stream_pool.cuh" />
+    <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/common/cuda_stream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/common/cuda_stream_pool.h" />
     <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/common/deterministic.cuh" />
     <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/common/device_compression.cuh" />
     <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/common/device_compression.h" />
@@ -578,10 +590,12 @@
     <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/common/linalg_op.cuh" />
     <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/common/linalg_op.h" />
     <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/common/math.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/common/numa_topo.h" />
     <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/common/numeric.h" />
     <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/common/nvtx_utils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/common/observer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/common/optional_weight.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/common/param_array.h" />
     <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/common/partition_builder.h" />
     <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/common/probability_distribution.h" />
     <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/common/pseudo_huber.h" />
@@ -605,17 +619,20 @@
     <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/common/transform.h" />
     <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/common/transform_iterator.h" />
     <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/common/type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/common/utils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/common/version.h" />
     <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/data/adapter.h" />
     <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/data/array_interface.h" />
     <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/data/batch_utils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/data/cat_container.cuh" />
     <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/data/cat_container.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/data/columnar.h" />
     <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/data/device_adapter.cuh" />
     <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/data/ellpack_page.cuh" />
     <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/data/ellpack_page.h" />
     <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/data/ellpack_page_raw_format.h" />
     <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/data/ellpack_page_source.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/data/entry.h" />
     <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/data/extmem_quantile_dmatrix.h" />
     <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/data/file_iterator.h" />
     <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/data/gradient_index.h" />
@@ -650,8 +667,10 @@
     <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/objective/multiclass_param.h" />
     <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/objective/regression_loss.h" />
     <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/objective/regression_param.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/predictor/cpu_treeshap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/predictor/array_tree_layout.h" />
     <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/predictor/predict_fn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/predictor/treeshap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/predictor/utils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/tree/common_row_partitioner.h" />
     <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/tree/constraints.cuh" />
     <ClInclude Include="../../thirdparty/owemdjee/xgboost/src/tree/constraints.h" />
@@ -777,9 +796,6 @@
     <Text Include="../../thirdparty/owemdjee/xgboost/demo/data/featmap.txt" />
     <Text Include="../../thirdparty/owemdjee/xgboost/demo/data/gen_autoclaims.R" />
     <Text Include="../../thirdparty/owemdjee/xgboost/demo/data/veterans_lung_cancer.csv" />
-    <Text Include="../../thirdparty/owemdjee/xgboost/demo/gpu_acceleration/README.rst" />
-    <Text Include="../../thirdparty/owemdjee/xgboost/demo/gpu_acceleration/cover_type.py" />
-    <Text Include="../../thirdparty/owemdjee/xgboost/demo/gpu_acceleration/tree_shap.py" />
     <Text Include="../../thirdparty/owemdjee/xgboost/demo/guide-python/README.rst" />
     <Text Include="../../thirdparty/owemdjee/xgboost/demo/guide-python/basic_walkthrough.py" />
     <Text Include="../../thirdparty/owemdjee/xgboost/demo/guide-python/boost_from_prediction.py" />
@@ -788,6 +804,7 @@
     <Text Include="../../thirdparty/owemdjee/xgboost/demo/guide-python/cat_pipeline.py" />
     <Text Include="../../thirdparty/owemdjee/xgboost/demo/guide-python/categorical.py" />
     <Text Include="../../thirdparty/owemdjee/xgboost/demo/guide-python/continuation.py" />
+    <Text Include="../../thirdparty/owemdjee/xgboost/demo/guide-python/cover_type.py" />
     <Text Include="../../thirdparty/owemdjee/xgboost/demo/guide-python/cross_validation.py" />
     <Text Include="../../thirdparty/owemdjee/xgboost/demo/guide-python/custom_rmsle.py" />
     <Text Include="../../thirdparty/owemdjee/xgboost/demo/guide-python/custom_softmax.py" />
@@ -797,6 +814,7 @@
     <Text Include="../../thirdparty/owemdjee/xgboost/demo/guide-python/feature_weights.py" />
     <Text Include="../../thirdparty/owemdjee/xgboost/demo/guide-python/gamma_regression.py" />
     <Text Include="../../thirdparty/owemdjee/xgboost/demo/guide-python/generalized_linear_model.py" />
+    <Text Include="../../thirdparty/owemdjee/xgboost/demo/guide-python/gpu_tree_shap.py" />
     <Text Include="../../thirdparty/owemdjee/xgboost/demo/guide-python/individual_trees.py" />
     <Text Include="../../thirdparty/owemdjee/xgboost/demo/guide-python/learning_to_rank.py" />
     <Text Include="../../thirdparty/owemdjee/xgboost/demo/guide-python/model_parser.py" />
@@ -861,6 +879,7 @@
     <Text Include="../../thirdparty/owemdjee/xgboost/doc/changes/index.rst" />
     <Text Include="../../thirdparty/owemdjee/xgboost/doc/changes/v2.1.0.rst" />
     <Text Include="../../thirdparty/owemdjee/xgboost/doc/changes/v3.0.0.rst" />
+    <Text Include="../../thirdparty/owemdjee/xgboost/doc/changes/v3.1.0.rst" />
     <Text Include="../../thirdparty/owemdjee/xgboost/doc/cli.rst" />
     <Text Include="../../thirdparty/owemdjee/xgboost/doc/conf.py" />
     <Text Include="../../thirdparty/owemdjee/xgboost/doc/contrib/ci.rst" />
@@ -894,6 +913,7 @@
     <Text Include="../../thirdparty/owemdjee/xgboost/doc/parameter.rst" />
     <Text Include="../../thirdparty/owemdjee/xgboost/doc/prediction.rst" />
     <Text Include="../../thirdparty/owemdjee/xgboost/doc/python/callbacks.rst" />
+    <Text Include="../../thirdparty/owemdjee/xgboost/doc/python/data_input.rst" />
     <Text Include="../../thirdparty/owemdjee/xgboost/doc/python/index.rst" />
     <Text Include="../../thirdparty/owemdjee/xgboost/doc/python/python_api.rst" />
     <Text Include="../../thirdparty/owemdjee/xgboost/doc/python/python_intro.rst" />
@@ -949,6 +969,7 @@
     <Text Include="../../thirdparty/owemdjee/xgboost/ops/pipeline/build-cpu.sh" />
     <Text Include="../../thirdparty/owemdjee/xgboost/ops/pipeline/build-cuda-impl.sh" />
     <Text Include="../../thirdparty/owemdjee/xgboost/ops/pipeline/build-cuda.sh" />
+    <Text Include="../../thirdparty/owemdjee/xgboost/ops/pipeline/build-cuda13.sh" />
     <Text Include="../../thirdparty/owemdjee/xgboost/ops/pipeline/build-gpu-rpkg-impl.sh" />
     <Text Include="../../thirdparty/owemdjee/xgboost/ops/pipeline/build-gpu-rpkg.sh" />
     <Text Include="../../thirdparty/owemdjee/xgboost/ops/pipeline/build-jvm-doc-impl.sh" />
@@ -961,13 +982,14 @@
     <Text Include="../../thirdparty/owemdjee/xgboost/ops/pipeline/build-python-wheels-arm64.sh" />
     <Text Include="../../thirdparty/owemdjee/xgboost/ops/pipeline/build-python-wheels-cpu.sh" />
     <Text Include="../../thirdparty/owemdjee/xgboost/ops/pipeline/build-python-wheels-macos.sh" />
-    <Text Include="../../thirdparty/owemdjee/xgboost/ops/pipeline/build-python-wheels-manylinux2014.sh" />
     <Text Include="../../thirdparty/owemdjee/xgboost/ops/pipeline/build-r-docs-impl.sh" />
     <Text Include="../../thirdparty/owemdjee/xgboost/ops/pipeline/build-r-docs.sh" />
     <Text Include="../../thirdparty/owemdjee/xgboost/ops/pipeline/build-test-cpu-nonomp.sh" />
     <Text Include="../../thirdparty/owemdjee/xgboost/ops/pipeline/build-test-jvm-packages-impl.sh" />
     <Text Include="../../thirdparty/owemdjee/xgboost/ops/pipeline/build-test-jvm-packages.sh" />
     <Text Include="../../thirdparty/owemdjee/xgboost/ops/pipeline/build-test-sycl.sh" />
+    <Text Include="../../thirdparty/owemdjee/xgboost/ops/pipeline/build-variant-wheels-impl.sh" />
+    <Text Include="../../thirdparty/owemdjee/xgboost/ops/pipeline/build-variant-wheels.sh" />
     <Text Include="../../thirdparty/owemdjee/xgboost/ops/pipeline/build-win64-cpu.ps1" />
     <Text Include="../../thirdparty/owemdjee/xgboost/ops/pipeline/build-win64-gpu.ps1" />
     <Text Include="../../thirdparty/owemdjee/xgboost/ops/pipeline/classify-git-branch.sh" />
@@ -981,6 +1003,7 @@
     <Text Include="../../thirdparty/owemdjee/xgboost/ops/pipeline/manage-artifacts.py" />
     <Text Include="../../thirdparty/owemdjee/xgboost/ops/pipeline/run-clang-tidy.sh" />
     <Text Include="../../thirdparty/owemdjee/xgboost/ops/pipeline/test-c-api-demo.sh" />
+    <Text Include="../../thirdparty/owemdjee/xgboost/ops/pipeline/test-cpp-cuda13.sh" />
     <Text Include="../../thirdparty/owemdjee/xgboost/ops/pipeline/test-cpp-gpu.sh" />
     <Text Include="../../thirdparty/owemdjee/xgboost/ops/pipeline/test-cpp-i386-impl.sh" />
     <Text Include="../../thirdparty/owemdjee/xgboost/ops/pipeline/test-cpp-i386.sh" />
@@ -988,6 +1011,8 @@
     <Text Include="../../thirdparty/owemdjee/xgboost/ops/pipeline/test-jvm-gpu.sh" />
     <Text Include="../../thirdparty/owemdjee/xgboost/ops/pipeline/test-python-macos.sh" />
     <Text Include="../../thirdparty/owemdjee/xgboost/ops/pipeline/test-python-sdist.sh" />
+    <Text Include="../../thirdparty/owemdjee/xgboost/ops/pipeline/test-python-wheel-cuda13-impl.sh" />
+    <Text Include="../../thirdparty/owemdjee/xgboost/ops/pipeline/test-python-wheel-cuda13.sh" />
     <Text Include="../../thirdparty/owemdjee/xgboost/ops/pipeline/test-python-wheel-impl.sh" />
     <Text Include="../../thirdparty/owemdjee/xgboost/ops/pipeline/test-python-wheel.sh" />
     <Text Include="../../thirdparty/owemdjee/xgboost/ops/pipeline/test-python-with-sysprefix.sh" />
@@ -1019,6 +1044,7 @@
     <Text Include="../../thirdparty/owemdjee/xgboost/python-package/README.cpu.rst" />
     <Text Include="../../thirdparty/owemdjee/xgboost/python-package/README.dft.rst" />
     <Text Include="../../thirdparty/owemdjee/xgboost/python-package/README.rst" />
+    <Text Include="../../thirdparty/owemdjee/xgboost/python-package/README.stub.rst" />
     <Text Include="../../thirdparty/owemdjee/xgboost/python-package/hatch_build.py" />
     <Text Include="../../thirdparty/owemdjee/xgboost/python-package/packager/__init__.py" />
     <Text Include="../../thirdparty/owemdjee/xgboost/python-package/packager/build_config.py" />
@@ -1028,6 +1054,7 @@
     <Text Include="../../thirdparty/owemdjee/xgboost/python-package/packager/util.py" />
     <Text Include="../../thirdparty/owemdjee/xgboost/python-package/pyproject.toml" />
     <Text Include="../../thirdparty/owemdjee/xgboost/python-package/pyproject.toml.in" />
+    <Text Include="../../thirdparty/owemdjee/xgboost/python-package/pyproject.toml.stub.in" />
     <Text Include="../../thirdparty/owemdjee/xgboost/python-package/xgboost/VERSION" />
     <Text Include="../../thirdparty/owemdjee/xgboost/python-package/xgboost/__init__.py" />
     <Text Include="../../thirdparty/owemdjee/xgboost/python-package/xgboost/_data_utils.py" />
@@ -1068,6 +1095,7 @@
     <Text Include="../../thirdparty/owemdjee/xgboost/python-package/xgboost/testing/params.py" />
     <Text Include="../../thirdparty/owemdjee/xgboost/python-package/xgboost/testing/parse_tree.py" />
     <Text Include="../../thirdparty/owemdjee/xgboost/python-package/xgboost/testing/plotting.py" />
+    <Text Include="../../thirdparty/owemdjee/xgboost/python-package/xgboost/testing/predict.py" />
     <Text Include="../../thirdparty/owemdjee/xgboost/python-package/xgboost/testing/quantile_dmatrix.py" />
     <Text Include="../../thirdparty/owemdjee/xgboost/python-package/xgboost/testing/ranking.py" />
     <Text Include="../../thirdparty/owemdjee/xgboost/python-package/xgboost/testing/shared.py" />

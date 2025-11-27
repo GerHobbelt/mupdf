@@ -393,8 +393,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/ql/experimental/finitedifferences/glued1dmesher.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/ql/experimental/finitedifferences/vanillavppoption.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/ql/experimental/forward/analytichestonforwardeuropeanengine.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/QuantLib/ql/experimental/fx/blackdeltacalculator.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/QuantLib/ql/experimental/fx/deltavolquote.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/ql/experimental/inflation/cpicapfloorengines.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/ql/experimental/inflation/cpicapfloortermpricesurface.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/ql/experimental/inflation/yoycapfloortermpricesurface.cpp" />
@@ -460,6 +458,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/ql/indexes/bmaindex.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/ql/indexes/equityindex.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/ql/indexes/ibor/bibor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/QuantLib/ql/indexes/ibor/cdi.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/ql/indexes/ibor/corra.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/ql/indexes/ibor/custom.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/ql/indexes/ibor/eonia.cpp" />
@@ -550,6 +549,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/ql/instruments/quantovanillaoption.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/ql/instruments/simplechooseroption.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/ql/instruments/simplifynotificationgraph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/QuantLib/ql/instruments/softbarrieroption.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/ql/instruments/stickyratchet.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/ql/instruments/stock.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/ql/instruments/swap.cpp" />
@@ -903,11 +903,13 @@
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/ql/pricingengines/asian/mc_discr_geom_av_price.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/ql/pricingengines/asian/mc_discr_geom_av_price_heston.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/ql/pricingengines/asian/turnbullwakemanasianengine.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/QuantLib/ql/pricingengines/bacheliercalculator.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/ql/pricingengines/barrier/analyticbarrierengine.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/ql/pricingengines/barrier/analyticbinarybarrierengine.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/ql/pricingengines/barrier/analyticdoublebarrierbinaryengine.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/ql/pricingengines/barrier/analyticdoublebarrierengine.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/ql/pricingengines/barrier/analyticpartialtimebarrieroptionengine.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/QuantLib/ql/pricingengines/barrier/analyticsoftbarrierengine.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/ql/pricingengines/barrier/analytictwoassetbarrierengine.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/ql/pricingengines/barrier/discretizedbarrieroption.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/ql/pricingengines/barrier/fdblackscholesbarrierengine.cpp" />
@@ -930,6 +932,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/ql/pricingengines/basket/stulzengine.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/ql/pricingengines/basket/vectorbsmprocessextractor.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/ql/pricingengines/blackcalculator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/QuantLib/ql/pricingengines/blackdeltacalculator.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/ql/pricingengines/blackformula.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/ql/pricingengines/blackscholescalculator.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/ql/pricingengines/bond/bondfunctions.cpp" />
@@ -1039,6 +1042,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/ql/processes/squarerootprocess.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/ql/processes/stochasticprocessarray.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/ql/quote.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/QuantLib/ql/quotes/deltavolquote.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/ql/quotes/eurodollarfuturesquote.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/ql/quotes/forwardswapquote.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/ql/quotes/forwardvaluequote.cpp" />
@@ -1194,6 +1198,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/test-suite/asianoptions.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/test-suite/assetswap.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/test-suite/autocovariances.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/QuantLib/test-suite/bacheliercalculator.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/test-suite/barrieroption.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/test-suite/basismodels.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/test-suite/basisswapratehelpers.cpp" />
@@ -1201,6 +1206,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/test-suite/batesmodel.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/test-suite/bermudanswaption.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/test-suite/binaryoption.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/QuantLib/test-suite/blackcalculator.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/test-suite/blackdeltacalculator.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/test-suite/blackformula.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/test-suite/bondforward.cpp" />
@@ -1331,6 +1337,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/test-suite/settings.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/test-suite/shortratemodels.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/test-suite/sofrfutures.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/QuantLib/test-suite/softbarrieroption.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/test-suite/solvers.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/test-suite/spreadoption.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/QuantLib/test-suite/squarerootclvmodel.cpp" />
@@ -1698,6 +1705,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/indexes/ibor/bibor.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/indexes/ibor/bkbm.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/indexes/ibor/cadlibor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/indexes/ibor/cdi.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/indexes/ibor/cdor.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/indexes/ibor/chflibor.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/indexes/ibor/corra.hpp" />
@@ -1728,6 +1736,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/indexes/ibor/thbfix.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/indexes/ibor/tibor.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/indexes/ibor/tona.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/indexes/ibor/tonar.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/indexes/ibor/trlibor.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/indexes/ibor/usdlibor.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/indexes/ibor/wibor.hpp" />
@@ -1785,9 +1794,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/instruments/cpicapfloor.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/instruments/cpiswap.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/instruments/creditdefaultswap.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/instruments/dividendbarrieroption.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/instruments/dividendschedule.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/instruments/dividendvanillaoption.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/instruments/doublebarrieroption.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/instruments/doublebarriertype.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/instruments/equitytotalreturnswap.hpp" />
@@ -1825,6 +1832,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/instruments/quantovanillaoption.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/instruments/simplechooseroption.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/instruments/simplifynotificationgraph.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/instruments/softbarrieroption.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/instruments/stickyratchet.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/instruments/stock.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/instruments/swap.hpp" />
@@ -2376,12 +2384,14 @@
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/pricingengines/asian/mc_discr_geom_av_price_heston.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/pricingengines/asian/mcdiscreteasianenginebase.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/pricingengines/asian/turnbullwakemanasianengine.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/pricingengines/bacheliercalculator.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/pricingengines/barrier/all.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/pricingengines/barrier/analyticbarrierengine.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/pricingengines/barrier/analyticbinarybarrierengine.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/pricingengines/barrier/analyticdoublebarrierbinaryengine.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/pricingengines/barrier/analyticdoublebarrierengine.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/pricingengines/barrier/analyticpartialtimebarrieroptionengine.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/pricingengines/barrier/analyticsoftbarrierengine.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/pricingengines/barrier/analytictwoassetbarrierengine.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/pricingengines/barrier/binomialbarrierengine.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/pricingengines/barrier/discretizedbarrieroption.hpp" />
@@ -2406,6 +2416,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/pricingengines/basket/stulzengine.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/pricingengines/basket/vectorbsmprocessextractor.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/pricingengines/blackcalculator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/pricingengines/blackdeltacalculator.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/pricingengines/blackformula.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/pricingengines/blackscholescalculator.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/pricingengines/bond/all.hpp" />
@@ -2551,6 +2562,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/quote.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/quotes/all.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/quotes/compositequote.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/quotes/deltavolquote.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/quotes/derivedquote.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/quotes/eurodollarfuturesquote.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/quotes/forwardswapquote.hpp" />
@@ -2675,10 +2687,13 @@
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/termstructures/yield/oisratehelper.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/termstructures/yield/overnightindexfutureratehelper.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/termstructures/yield/piecewiseforwardspreadedtermstructure.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/termstructures/yield/piecewisespreadyieldcurve.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/termstructures/yield/piecewiseyieldcurve.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/termstructures/yield/piecewisezerospreadedtermstructure.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/termstructures/yield/quantotermstructure.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/termstructures/yield/ratehelpers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/termstructures/yield/spreadbootstraptraits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/termstructures/yield/spreaddiscountcurve.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/termstructures/yield/ultimateforwardtermstructure.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/termstructures/yield/zerocurve.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/QuantLib/ql/termstructures/yield/zerospreadedtermstructure.hpp" />
@@ -2801,7 +2816,6 @@
     <Text Include="../../thirdparty/owemdjee/QuantLib/Docs/pages/fixedincome.docs" />
     <Text Include="../../thirdparty/owemdjee/QuantLib/Docs/pages/history.docs" />
     <Text Include="../../thirdparty/owemdjee/QuantLib/Docs/pages/index.docs" />
-    <Text Include="../../thirdparty/owemdjee/QuantLib/Docs/pages/install.docs" />
     <Text Include="../../thirdparty/owemdjee/QuantLib/Docs/pages/instruments.docs" />
     <Text Include="../../thirdparty/owemdjee/QuantLib/Docs/pages/lattices.docs" />
     <Text Include="../../thirdparty/owemdjee/QuantLib/Docs/pages/license.docs" />
@@ -2811,8 +2825,6 @@
     <Text Include="../../thirdparty/owemdjee/QuantLib/Docs/pages/processes.docs" />
     <Text Include="../../thirdparty/owemdjee/QuantLib/Docs/pages/resources.docs" />
     <Text Include="../../thirdparty/owemdjee/QuantLib/Docs/pages/termstructures.docs" />
-    <Text Include="../../thirdparty/owemdjee/QuantLib/Docs/pages/usage.docs" />
-    <Text Include="../../thirdparty/owemdjee/QuantLib/Docs/pages/where.docs" />
     <Text Include="../../thirdparty/owemdjee/QuantLib/Docs/quantlib.doxy" />
     <Text Include="../../thirdparty/owemdjee/QuantLib/Docs/quantlibextra.css" />
     <Text Include="../../thirdparty/owemdjee/QuantLib/Docs/quantlibfooter.html" />
@@ -3003,14 +3015,12 @@
     <Text Include="../../thirdparty/owemdjee/QuantLib/test-suite/bin/runtest.bat" />
     <Text Include="../../thirdparty/owemdjee/QuantLib/tools/check_all_header_docs.sh" />
     <Text Include="../../thirdparty/owemdjee/QuantLib/tools/check_all_headers.sh" />
-    <Text Include="../../thirdparty/owemdjee/QuantLib/tools/check_all_inclusions.sh" />
     <Text Include="../../thirdparty/owemdjee/QuantLib/tools/check_all_licenses.sh" />
     <Text Include="../../thirdparty/owemdjee/QuantLib/tools/check_copyrights.sh" />
     <Text Include="../../thirdparty/owemdjee/QuantLib/tools/check_filelists.sh" />
     <Text Include="../../thirdparty/owemdjee/QuantLib/tools/check_filelists_diffs.py" />
     <Text Include="../../thirdparty/owemdjee/QuantLib/tools/check_header.py" />
     <Text Include="../../thirdparty/owemdjee/QuantLib/tools/check_header_docs.py" />
-    <Text Include="../../thirdparty/owemdjee/QuantLib/tools/check_inclusions.py" />
     <Text Include="../../thirdparty/owemdjee/QuantLib/tools/check_test_times.py" />
     <Text Include="../../thirdparty/owemdjee/QuantLib/tools/collect_copyrights.py" />
     <Text Include="../../thirdparty/owemdjee/QuantLib/tools/tgz2zip" />

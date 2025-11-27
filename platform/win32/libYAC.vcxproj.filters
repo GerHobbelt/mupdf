@@ -203,10 +203,16 @@
     <ClCompile Include="../../thirdparty/owemdjee/YACLib/src/algo/base_core.cpp">
       <Filter>Source Files\src\algo</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/YACLib/src/algo/drop_core.cpp">
+      <Filter>Source Files\src\algo</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/YACLib/src/algo/one_shot_event.cpp">
       <Filter>Source Files\src\algo</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/YACLib/src/algo/result_core.cpp">
+    <ClCompile Include="../../thirdparty/owemdjee/YACLib/src/algo/shared_core.cpp">
+      <Filter>Source Files\src\algo</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/YACLib/src/algo/unique_core.cpp">
       <Filter>Source Files\src\algo</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/YACLib/src/algo/wait_group.cpp">
@@ -216,6 +222,9 @@
       <Filter>Source Files\src\async</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/YACLib/src/async/promise_impl.cpp">
+      <Filter>Source Files\src\async</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/YACLib/src/async/shared_future_impl.cpp">
       <Filter>Source Files\src\async</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/YACLib/src/async/wait_impl.cpp">
@@ -344,6 +353,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/YACLib/test/unit/algo/when_any.cpp">
       <Filter>Source Files\test\unit\algo</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/YACLib/test/unit/async/connect.cpp">
+      <Filter>Source Files\test\unit\async</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/YACLib/test/unit/async/core_size.cpp">
       <Filter>Source Files\test\unit\async</Filter>
     </ClCompile>
@@ -366,6 +378,9 @@
       <Filter>Source Files\test\unit\async</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/YACLib/test/unit/async/make_task.cpp">
+      <Filter>Source Files\test\unit\async</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/YACLib/test/unit/async/shared_future.cpp">
       <Filter>Source Files\test\unit\async</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/YACLib/test/unit/async/stress.cpp">
@@ -446,6 +461,15 @@
     <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/algo/detail/result_core.hpp">
       <Filter>Header Files\include\yaclib\algo\detail</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/algo/detail/shared_core.hpp">
+      <Filter>Header Files\include\yaclib\algo\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/algo/detail/shared_event.hpp">
+      <Filter>Header Files\include\yaclib\algo\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/algo/detail/unique_core.hpp">
+      <Filter>Header Files\include\yaclib\algo\detail</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/algo/detail/wait_event.hpp">
       <Filter>Header Files\include\yaclib\algo\detail</Filter>
     </ClInclude>
@@ -454,6 +478,9 @@
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/algo/wait_group.hpp">
       <Filter>Header Files\include\yaclib\algo</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/async/connect.hpp">
+      <Filter>Header Files\include\yaclib\async</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/async/contract.hpp">
       <Filter>Header Files\include\yaclib\async</Filter>
@@ -482,6 +509,21 @@
     <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/async/run.hpp">
       <Filter>Header Files\include\yaclib\async</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/async/share.hpp">
+      <Filter>Header Files\include\yaclib\async</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/async/shared_contract.hpp">
+      <Filter>Header Files\include\yaclib\async</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/async/shared_future.hpp">
+      <Filter>Header Files\include\yaclib\async</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/async/shared_promise.hpp">
+      <Filter>Header Files\include\yaclib\async</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/async/split.hpp">
+      <Filter>Header Files\include\yaclib\async</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/async/wait.hpp">
       <Filter>Header Files\include\yaclib\async</Filter>
     </ClInclude>
@@ -500,7 +542,13 @@
     <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/coro/await.hpp">
       <Filter>Header Files\include\yaclib\coro</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/coro/await_inline.hpp">
+      <Filter>Header Files\include\yaclib\coro</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/coro/await_on.hpp">
+      <Filter>Header Files\include\yaclib\coro</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/coro/await_sticky.hpp">
       <Filter>Header Files\include\yaclib\coro</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/coro/coro.hpp">
@@ -540,6 +588,9 @@
       <Filter>Header Files\include\yaclib\coro</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/coro/on.hpp">
+      <Filter>Header Files\include\yaclib\coro</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/coro/shared_future.hpp">
       <Filter>Header Files\include\yaclib\coro</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/coro/shared_mutex.hpp">
