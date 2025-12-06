@@ -57,16 +57,16 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -113,8 +113,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCANTAILOR;SCANTAILOR_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -228,27 +228,7 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/app/DefaultParamsDialog.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/app/FixDpiDialog.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/app/LoadFilesStatusDialog.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/app/MainWindow.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/app/NewOpenProjectPanel.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/app/OutOfMemoryDialog.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/app/ProjectCreationContext.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/app/ProjectFilesDialog.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/app/ProjectOpeningContext.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/app/RelinkablePathVisualization.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/app/RelinkingDialog.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/app/RelinkingListView.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/app/RelinkingModel.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/app/RelinkingSortingModel.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/app/SettingsDialog.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/app/StatusBarPanel.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/app/SystemLoadWidget.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/app/ThumbnailSequence.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/app/main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/AbstractIconPack.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/Application.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/ApplicationSettings.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/AtomicFileOverwriter.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/AutoManualMode.cpp" />
@@ -337,29 +317,23 @@
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/Utils.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/WorkerThreadPool.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/ZoneEditorBase.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/deskew/ApplyDialog.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/deskew/CacheDrivenTask.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/deskew/Dependencies.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/deskew/Filter.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/deskew/ImageView.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/deskew/OptionsWidget.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/deskew/Params.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/deskew/Settings.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/deskew/Task.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/deskew/Thumbnail.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/deskew/Utils.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/fix_orientation/ApplyDialog.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/fix_orientation/CacheDrivenTask.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/fix_orientation/Filter.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/fix_orientation/ImageView.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/fix_orientation/OptionsWidget.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/fix_orientation/Settings.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/fix_orientation/Task.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/fix_orientation/Utils.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/output/ApplyColorsDialog.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/output/BlackWhiteOptions.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/output/CacheDrivenTask.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/output/ChangeDewarpingDialog.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/output/ChangeDpiDialog.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/output/ColorCommonOptions.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/output/ColorParams.cpp" />
@@ -376,8 +350,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/output/FillZoneEditor.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/output/FillZonePropFactory.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/output/Filter.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/output/ImageView.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/output/OptionsWidget.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/output/OtsuBinarizationOptionsWidget.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/output/OutputFileParams.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/output/OutputGenerator.cpp" />
@@ -407,12 +379,10 @@
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/output/WolfBinarizationOptionsWidget.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/output/ZoneCategoryProperty.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/page_layout/Alignment.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/page_layout/ApplyDialog.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/page_layout/CacheDrivenTask.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/page_layout/Filter.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/page_layout/Guide.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/page_layout/ImageView.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/page_layout/OptionsWidget.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/page_layout/OrderByHeightProvider.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/page_layout/OrderByWidthProvider.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/page_layout/Params.cpp" />
@@ -425,7 +395,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/page_split/Filter.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/page_split/ImageView.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/page_split/LayoutType.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/page_split/OptionsWidget.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/page_split/OrderBySplitTypeProvider.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/page_split/PageLayout.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/page_split/PageLayoutAdapter.cpp" />
@@ -438,13 +407,11 @@
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/page_split/UnremoveButton.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/page_split/Utils.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/page_split/VertLineFinder.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/select_content/ApplyDialog.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/select_content/CacheDrivenTask.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/select_content/ContentBoxFinder.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/select_content/Dependencies.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/select_content/Filter.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/select_content/ImageView.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/select_content/OptionsWidget.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/select_content/OrderByHeightProvider.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/select_content/OrderByWidthProvider.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scantailor/src/core/filters/select_content/PageFinder.cpp" />
@@ -1172,4 +1139,3 @@
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
-  
