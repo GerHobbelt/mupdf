@@ -22,7 +22,7 @@
 
 #include "mupdf/fitz.h"
 
-#if BUILDING_MUPDF_MINIMAL_CORE <= 1
+#if BUILDING_MUPDF_MINIMAL_CORE > 0
 
 #include "leptonica-wrap.h"
 
