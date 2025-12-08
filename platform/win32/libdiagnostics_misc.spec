@@ -1,7 +1,4 @@
 
 also-ignore:
-	/tmp/
-	/src/x/
-	
 	/tests/
 	

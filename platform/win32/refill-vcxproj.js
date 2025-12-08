@@ -351,6 +351,7 @@ const projectMap = {
 	"libiconv_prepare": "libiconv",
 	"libparameters_example_upani_01": "libparameters",
 	"libparameters_example_upani_02": "libparameters",
+	"libparameters_example_zeroing": "libparameters",
 };
 
 testpath = `${scriptpath}/../../thirdparty/owemdjee/${projname_alt}`;

@@ -52,16 +52,16 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -74,7 +74,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -108,8 +108,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENIMAGEIO;OPENIMAGEIO_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -247,6 +247,15 @@
     <ProjectReference Include="libImath.vcxproj">
       <Project>{0B51171B-B10E-4EAC-8FFA-19226A34C666}</Project>
     </ProjectReference>
+    <ProjectReference Include="libjbig2dec.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-958957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjbig2enc.vcxproj">
+      <Project>{83ac0bda-89b9-4703-a77d-8049ac3a0d04}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjbigkit.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff411ac3}</Project>
+    </ProjectReference>
     <ProjectReference Include="libjpeg-turbo.vcxproj">
       <Project>{0B51171B-B10E-4EAC-8FFA-19226A37CDF7}</Project>
     </ProjectReference>
@@ -258,6 +267,9 @@
     </ProjectReference>
     <ProjectReference Include="liblcms2.vcxproj">
       <Project>{0B51171B-B10E-4EAC-8FFA-19226A38D604}</Project>
+    </ProjectReference>
+    <ProjectReference Include="liblerc.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff5437c9}</Project>
     </ProjectReference>
     <ProjectReference Include="libmupdf_minimal_core.vcxproj">
       <Project>{0B51171B-B10E-4EAC-8FFA-19226AF79EB0}</Project>
@@ -1189,4 +1201,3 @@
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
-  
