@@ -2027,7 +2027,6 @@ pdf_filter_Td(fz_context *ctx, pdf_processor *proc, float tx, float ty)
 	if (fz_is_empty_rect(p->gstate->clip_rect))
 		return;
 
-	p->Tm_adjust = 0;
 	pdf_tos_translate(&p->tos, tx, ty);
 	if (p->Tm_pending)
 		return; /* Exit, just with Tm_pending */
