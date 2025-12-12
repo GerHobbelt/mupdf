@@ -1025,23 +1025,10 @@ pdf_dev_fill_image_mask(fz_context *ctx, fz_device *dev, fz_image *image, fz_mat
 }
 
 static void
-pdf_dev_clip_image_mask(fz_context *ctx, fz_device *dev, fz_image *image, fz_matrix ctm, fz_rect scissor)
-{
-	pdf_device *pdev = (pdf_device*)dev;
-
-	fz_warn(ctx, "the pdf device does not support image masks; output may be incomplete");
-
-	/* FIXME */
-	pdf_dev_end_text(ctx, pdev);
-	pdf_dev_push(ctx, pdev);
-}
-
-static void
 pdf_dev_pop_clip(fz_context *ctx, fz_device *dev)
 {
 	pdf_device *pdev = (pdf_device*)dev;
 
-	/* FIXME */
 	pdf_dev_end_text(ctx, pdev);
 	pdf_dev_pop(ctx, pdev);
 }
@@ -1124,6 +1111,65 @@ pdf_dev_end_mask(fz_context *ctx, fz_device *dev, fz_function *tr)
 	gs->on_pop_arg = NULL;
 	pdf_drop_obj(ctx, form_ref);
 	fz_append_string(ctx, gs->buf, "q\n");
+	gs->ctm = fz_identity;
+}
+
+static void
+pdf_dev_clip_image_mask(fz_context *ctx, fz_device *dev, fz_image *image, fz_matrix ctm, fz_rect scissor)
+{
+	pdf_device *pdev = (pdf_device*)dev;
+	gstate *gs;
+	pdf_obj *smask = NULL;
+	char egsname[32];
+	pdf_obj *egs = NULL;
+	pdf_obj *egss;
+	pdf_obj *form_ref;
+	fz_rect bbox = fz_transform_rect(fz_unit_rect, ctm);
+	float black = 1;
+
+	/* Put the image mask into a softmask, and select that. */
+
+	fz_var(smask);
+	fz_var(egs);
+
+	pdf_dev_end_text(ctx, pdev);
+
+	pdf_dev_ctm(ctx, pdev, fz_identity);
+
+	/* Make a new form to contain the contents of the softmask */
+	pdf_dev_new_form(ctx, &form_ref, pdev, bbox, 0, 0, 1, fz_device_gray(ctx));
+
+	fz_try(ctx)
+	{
+		fz_snprintf(egsname, sizeof(egsname), "CM%d", pdev->num_smasks++);
+		egss = pdf_dict_get(ctx, pdev->resources, PDF_NAME(ExtGState));
+		if (!egss)
+			egss = pdf_dict_put_dict(ctx, pdev->resources, PDF_NAME(ExtGState), 10);
+		egs = pdf_dict_puts_dict(ctx, egss, egsname, 1);
+
+		pdf_dict_put(ctx, egs, PDF_NAME(Type), PDF_NAME(ExtGState));
+		smask = pdf_dict_put_dict(ctx, egs, PDF_NAME(SMask), 4);
+
+		pdf_dict_put(ctx, smask, PDF_NAME(Type), PDF_NAME(Mask));
+		pdf_dict_put(ctx, smask, PDF_NAME(S), PDF_NAME(Alpha));
+		pdf_dict_put(ctx, smask, PDF_NAME(G), form_ref);
+
+		gs = CURRENT_GSTATE(pdev);
+		fz_append_printf(ctx, gs->buf, "/CM%d gs\n", pdev->num_smasks-1);
+	}
+	fz_catch(ctx)
+	{
+		pdf_drop_obj(ctx, form_ref);
+		fz_rethrow(ctx);
+	}
+
+	/* Now, everything we get until the end_mask needs to go into a
+	 * new buffer, which will be the stream contents for the form. */
+	pdf_dev_push_new_buf(ctx, pdev, fz_new_buffer(ctx, 1024), NULL, form_ref);
+
+	pdf_dev_fill_image_mask(ctx, dev, image, ctm, fz_device_gray(ctx), &black, 1, fz_default_color_params);
+
+	pdf_dev_end_mask(ctx, dev, NULL);
 }
 
 static void
