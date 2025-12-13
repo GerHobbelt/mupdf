@@ -251,6 +251,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/crc/internal/crc_x86_arm_combined.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/failure_signal_handler.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/internal/address_is_readable.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/internal/borrowed_fixup_buffer.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/internal/decode_rust_punycode.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/internal/demangle.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/internal/demangle_rust.cc" />
@@ -291,6 +292,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/log/internal/proto.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/log/internal/structured_proto.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/log/internal/vlog_config.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/log/log_entry.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/log/log_sink.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/log/scoped_mock_log.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/numeric/int128.cc" />
@@ -380,6 +382,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/time/internal/cctz/src/time_zone_info.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/time/internal/cctz/src/time_zone_libc.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/time/internal/cctz/src/time_zone_lookup.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/time/internal/cctz/src/time_zone_name_win.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/time/internal/cctz/src/time_zone_posix.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/time/internal/cctz/src/zone_info_source.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/time/time.cc" />
@@ -403,11 +406,11 @@
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/exception_safety_testing.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/exception_testing.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/hide_ptr.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/identity.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/iterator_traits.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/iterator_traits_test_helper.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/low_level_alloc.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/low_level_scheduling.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/nullability_traits.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/per_thread_tls.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/poison.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/pretty_function.h" />
@@ -496,6 +499,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/failure_signal_handler.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/internal/address_is_readable.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/internal/addresses.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/internal/borrowed_fixup_buffer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/internal/bounded_utf8_length_sequence.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/internal/decode_rust_punycode.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/internal/demangle.h" />
@@ -674,6 +678,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/strings/escaping.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/strings/has_absl_stringify.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/strings/has_ostream_operator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/strings/internal/append_and_overwrite.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/strings/internal/charconv_bigint.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/strings/internal/charconv_parse.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/strings/internal/cord_data_edge.h" />
@@ -716,6 +721,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/strings/internal/utf8.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/strings/match.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/strings/numbers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/strings/resize_and_overwrite.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/strings/str_cat.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/strings/str_format.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/strings/str_join.h" />
@@ -748,11 +754,13 @@
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/time/internal/cctz/include/cctz/civil_time_detail.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/time/internal/cctz/include/cctz/time_zone.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/time/internal/cctz/include/cctz/zone_info_source.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/time/internal/cctz/src/test_time_zone_names.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/time/internal/cctz/src/time_zone_fixed.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/time/internal/cctz/src/time_zone_if.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/time/internal/cctz/src/time_zone_impl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/time/internal/cctz/src/time_zone_info.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/time/internal/cctz/src/time_zone_libc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/time/internal/cctz/src/time_zone_name_win.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/time/internal/cctz/src/time_zone_posix.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/time/internal/cctz/src/tzfile.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/time/internal/get_current_time_chrono.inc" />
