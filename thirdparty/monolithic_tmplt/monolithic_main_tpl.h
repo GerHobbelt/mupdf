@@ -68,8 +68,30 @@ static struct cmd_info
 extern "C" {
 #endif
 
+static const char *post_strrpbrk(const char* s, const char* charset)
+{
+	if (!s)
+		return "???";
+	const char* p;
+	while ((p = strpbrk(s, charset)) != NULL) {
+		s = p;
+		s++;
+	}
+	return s;
+}
+
+static const char* optbinname(const char* argv0)
+{
+	if (argv0 && *argv0)
+		return post_strrpbrk(argv0, ":/\\");	// skip past all UNIX, DOS, Windows, VMS path separators to get the *name* of the binary.
+	else
+		return USAGE_NAME;
+}
+
+
 static const char* xoptarg; /* Global argument pointer. */
 static int xoptind = 0; /* Global argv index. */
+
 static int xgetopt(int argc, const char** argv, const char* optstring)
 {
 	static const char* scan = NULL; /* Private scan pointer. */
@@ -95,10 +117,16 @@ static int xgetopt(int argc, const char** argv, const char* optstring)
 	}
 
 	c = *scan++;
+
+	if (c == '-') {
+		fprintf(stderr, "%s: unsupported long-named option --%s\n", optbinname(argv[0]), scan);
+		return '?';
+	}
+
 	place = strchr(optstring, c);
 
 	if (!place || c == ':') {
-		fprintf(stderr, "%s: unknown option -%c\n", argv[0], c);
+		fprintf(stderr, "%s: unknown option -%c\n", optbinname(argv[0]), c);
 		return '?';
 	}
 
@@ -113,7 +141,7 @@ static int xgetopt(int argc, const char** argv, const char* optstring)
 			xoptind++;
 		}
 		else {
-			fprintf(stderr, "%s: option requires argument -%c\n", argv[0], c);
+			fprintf(stderr, "%s: option requires argument -%c\n", optbinname(argv[0]), c);
 			return ':';
 		}
 	}
@@ -697,11 +725,11 @@ static int quit(void)
 }
 
 
-static int display_cmd_usage(int mode)
+static int display_cmd_usage(int mode, const char *appname)
 {
 	if (mode < 2)
 	{
-		fprintf(stderr, "Usage: %s [options] [command]\n", USAGE_NAME);
+		fprintf(stderr, "Usage: %s [options] [command]\n", appname);
 		fprintf(stderr, "\t-i: Enter interactive prompt after running code.\n\n");
 	}
 
@@ -710,9 +738,18 @@ static int display_cmd_usage(int mode)
 }
 
 
+static int display_cmd_usage_after_error(const char *appname)
+{
+	fprintf(stderr, "\n\nUsage: %s [options] [command]\n", appname);
+	fprintf(stderr, "Use '-h' to obtain more info about the available commands.\n\n");
+
+	return 2;
+}
+
+
 static int usage(void)
 {
-	return display_cmd_usage(1);
+	return display_cmd_usage(1, NULL);
 }
 
 // load the monolithic core init APIs.
@@ -736,6 +773,7 @@ int MONOLITHIC_SUBCLUSTER_MAIN(int argc, const char** argv)
 	char* input;
 	int status = 0;
 	int interactive = 0;
+	int abortive = 0;
 	int c;
 
 	MONOLITHIC_SUBCLUSTER_MAIN_INIT();
@@ -744,83 +782,89 @@ int MONOLITHIC_SUBCLUSTER_MAIN(int argc, const char** argv)
 	{
 		switch (c) {
 		case 'h':
-		default:
-			status = display_cmd_usage(0);
+			status = display_cmd_usage(0, optbinname(argv[0]));
 			interactive = -1;
 			break;
+
+		case '?':
+		default:
+			status = display_cmd_usage_after_error(optbinname(argv[0]));
+			abortive = -1;
+			break;
+
 		case 'i':
 			interactive = 1;
-			break;
+			continue;
 		}
+		break;
 	}
 
-	if (xoptind == argc) {
-		if (interactive == 0) {
-			interactive = 1;
-		}
-	}
-	else {
-		int si = xoptind;
-		size_t l = 0;
+	if (!abortive) {
+		if (xoptind == argc) {
+			if (interactive == 0) {
+				interactive = 1;
+			}
+		} else {
+			int si = xoptind;
+			size_t l = 0;
 
-		for (int i = si; i < argc; i++)
-			l += strlen(argv[i]) + 1;
-		l += 2;
-		input = (char *)malloc(l);
-		*input = 0;
+			for (int i = si; i < argc; i++)
+				l += strlen(argv[i]) + 1;
+			l += 2;
+			input = (char *)malloc(l);
+			*input = 0;
 
-		for (int i = si; i < argc; i++)
-		{
-			snprintf(input + strlen(input), l - strlen(input), "%s ", argv[i]);
+			for (int i = si; i < argc; i++)
+			{
+				snprintf(input + strlen(input), l - strlen(input), "%s ", argv[i]);
+			}
+			trim(input);
+			if (!input || !*input) {
+				status = 1;
+			} else {
+				status = parse(input);
+			}
 		}
-		trim(input);
-		if (!input || !*input) {
-			status = 1;
-		}
-		else {
-			status = parse(input);
-		}
-	}
 
-	if (interactive > 0) {
-		display_cmd_usage(2);
-		if (_isatty(0)) {
-			using_history();
-			rl_bind_key('\t', rl_insert);
-			input = readline(PS1);
-			while (input) {
-				trim(input);
-				if (!*input)
-					status = 1;
-				else {
-					status = parse(input);
-					if (status == 999) {
-						free(input);
-						break;
-					}
-				}
-				if (*input)
-					add_history(input);
-				free(input);
+		if (interactive > 0) {
+			display_cmd_usage(2, optbinname(argv[0]));
+			if (_isatty(0)) {
+				using_history();
+				rl_bind_key('\t', rl_insert);
 				input = readline(PS1);
-			}
-			putchar('\n');
-		}
-		else {
-			input = read_stdin("> ");
-			while (input) {
-				trim(input);
-				if (!*input)
-					status = 1;
-				else {
-					status = parse(input);
+				while (input) {
+					trim(input);
+					if (!*input)
+						status = 1;
+					else {
+						status = parse(input);
+						if (status == 999) {
+							free(input);
+							break;
+						}
+					}
+					if (*input)
+						add_history(input);
+					free(input);
+					input = readline(PS1);
 				}
-				free(input);
-				if (status == 999)
-					break;
+				putchar('\n');
+			} else {
 				input = read_stdin("> ");
+				while (input) {
+					trim(input);
+					if (!*input)
+						status = 1;
+					else {
+						status = parse(input);
+					}
+					free(input);
+					if (status == 999)
+						break;
+					input = read_stdin("> ");
+				}
+				putchar('\n');
 			}
-			putchar('\n');
 		}
 	}
 
