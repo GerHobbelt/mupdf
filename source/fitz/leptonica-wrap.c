@@ -92,22 +92,33 @@ void *leptonica_realloc(void *ptr, size_t blocksize)
 static void lept_stderr_print(const char *msg)
 {
 	fz_context *ctx = fz_get_global_context();
+	static int seen_any_err_before = 0;             // make the explicit leptonica error/warnings/info messages jump up out just a little more...
 
 	//fz_write_string(ctx, fz_stderr(ctx), msg);
 
 	if (strncmp(msg, "Error in ", 9) == 0) {
+		if (!seen_any_err_before)
+			fz_info(ctx, "\n");
+		seen_any_err_before = 1;
+
 		fz_error(ctx, "ERROR: Leptonica::%s", msg + 9);
 		return;
 	}
 	if (strncmp(msg, "Warning in ", 11) == 0) {
+		if (!seen_any_err_before)
+			fz_info(ctx, "\n");
+		seen_any_err_before = 1;
+
 		fz_warn(ctx, "WARNING: Leptonica::%s", msg + 11);
 		return;
 	}
 	if (strncmp(msg, "Info in ", 8) == 0) {
 		fz_info(ctx, "INFO: Leptonica::%s", msg + 8);
+		//seen_any_err_before = 0;        -- do NOT reset the signal: more ERRORs may follow and we want them all bundled together, if possible.
 		return;
 	}
-	fz_info(ctx, "Leptonica::%s", msg);
+	fz_info(ctx, /* "Leptonica::" */ "%s", msg);
+	seen_any_err_before = 0;      // DO reset the signal: these are generic messages unrelated to any explicit ERROR/WARNING/INFO messages.
 }
 
 
