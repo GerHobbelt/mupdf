@@ -1653,6 +1653,7 @@ BitSerializer
 lemon
 lemon-sliced
 ckdl
+libspng
 
 
 EOT

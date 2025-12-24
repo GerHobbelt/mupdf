@@ -21,6 +21,10 @@
 
 #include "jmemsys.h"  /* jpeg/jpeg-turbo's `j_common_ptr` */
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /*
 * Callback which sets up libmupdf default libjpeg/jpeg-turbo's system memory
 * manager.
@@ -36,6 +40,14 @@ int fz_jpeg_dflt_sys_mem_register(j_common_ptr cinfo);
 
 int fz_jpeg_sys_mem_register(j_common_ptr cinfo);
 
+#ifdef __cplusplus
+}
+#endif
+
+#endif  // jpeg_common_fields
+
+#ifdef __cplusplus
+extern "C" {
 #endif
 
 /*
@@ -49,5 +61,9 @@ int fz_jpeg_sys_mem_register(j_common_ptr cinfo);
 * the setup action 'on demand'.
 */
 void fz_set_default_jpeg_sys_mem_mgr(void);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

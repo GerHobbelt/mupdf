@@ -1,0 +1,464 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{E247EF44-6727-4787-B439-FE93480E8B9C}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSPNG;SPNG_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../scripts/zlib;../../thirdparty/owemdjee/libspng/spng;../../thirdparty/libpng;../../thirdparty/zlib;../../thirdparty/owemdjee/pthread-win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>SPNG_MULTITHREADING;BUILD_MONOLITHIC;BUILDING_LIBSPNG;SPNG_STATICLIB;IDN2_STATIC;IDN2_BUILDING;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSPNG;SPNG_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSPNG;SPNG_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../scripts/zlib;../../thirdparty/owemdjee/libspng/spng;../../thirdparty/libpng;../../thirdparty/zlib;../../thirdparty/owemdjee/pthread-win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>SPNG_MULTITHREADING;BUILD_MONOLITHIC;BUILDING_LIBSPNG;SPNG_STATICLIB;IDN2_STATIC;IDN2_BUILDING;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSPNG;SPNG_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSPNG;SPNG_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../scripts/zlib;../../thirdparty/owemdjee/libspng/spng;../../thirdparty/libpng;../../thirdparty/zlib;../../thirdparty/owemdjee/pthread-win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>SPNG_MULTITHREADING;BUILD_MONOLITHIC;BUILDING_LIBSPNG;SPNG_STATICLIB;IDN2_STATIC;IDN2_BUILDING;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSPNG;SPNG_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSPNG;SPNG_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../scripts/zlib;../../thirdparty/owemdjee/libspng/spng;../../thirdparty/libpng;../../thirdparty/zlib;../../thirdparty/owemdjee/pthread-win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>SPNG_MULTITHREADING;BUILD_MONOLITHIC;BUILDING_LIBSPNG;SPNG_STATICLIB;IDN2_STATIC;IDN2_BUILDING;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSPNG;SPNG_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/libspng/examples/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libspng/spng/spng.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libspng/tests/test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libspng/tests/testsuite.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/libspng/spng/spng.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libspng/tests/framac_stubs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libspng/tests/spngt_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libspng/tests/test_png.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libspng/tests/test_spng.h" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/crashers/bad_iCCP.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/crashers/badadler.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/crashers/badcrc.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/crashers/empty_ancillary_chunks.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/crashers/huge_IDAT.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/crashers/huge_bKGD_chunk.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/crashers/huge_cHRM_chunk.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/crashers/huge_eXIf_chunk.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/crashers/huge_gAMA_chunk.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/crashers/huge_hIST_chunk.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/crashers/huge_iCCP_chunk.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/crashers/huge_iTXt_chunk.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/crashers/huge_juNK_unsafe_to_copy.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/crashers/huge_juNk_safe_to_copy.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/crashers/huge_pCAL_chunk.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/crashers/huge_pHYs_chunk.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/crashers/huge_sCAL_chunk.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/crashers/huge_sPLT_chunk.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/crashers/huge_sRGB_chunk.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/crashers/huge_sTER_chunk.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/crashers/huge_tEXt_chunk.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/crashers/huge_tIME_chunk.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/crashers/huge_zTXt_chunk.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/crashers/invalid_gray_alpha_sbit.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/crashers/missing_plte.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/crashers/zero_gama.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/crashers/zero_width.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/basi0g01.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/basi0g02.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/basi0g04.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/basi0g08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/basi0g16.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/basi2c08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/basi2c16.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/basi3p01.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/basi3p02.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/basi3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/basi3p08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/basi4a08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/basi4a16.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/basi6a08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/basi6a16.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/basn0g01.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/basn0g02.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/basn0g04.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/basn0g08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/basn0g16.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/basn2c08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/basn2c16.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/basn3p01.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/basn3p02.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/basn3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/basn3p08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/basn4a08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/basn4a16.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/basn6a08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/basn6a16.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/bgai4a08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/bgai4a16.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/bgan6a08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/bgan6a16.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/bgbn4a08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/bggn4a16.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/bgwn6a08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/bgyn6a16.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/ccwn2c08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/ccwn3p08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/cdfn2c08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/cdhn2c08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/cdsn2c08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/cdun2c08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/ch1n3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/ch2n3p08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/cm0n0g04.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/cm7n0g04.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/cm9n0g04.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/cs3n2c16.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/cs3n3p08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/cs5n2c08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/cs5n3p08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/cs8n2c08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/cs8n3p08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/ct0n0g04.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/ct1n0g04.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/cten0g04.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/ctfn0g04.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/ctgn0g04.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/cthn0g04.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/ctjn0g04.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/ctzn0g04.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/exif2c08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/f00n0g08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/f00n2c08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/f01n0g08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/f01n2c08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/f02n0g08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/f02n2c08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/f03n0g08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/f03n2c08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/f04n0g08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/f04n2c08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/f99n0g04.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/g03n0g16.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/g03n2c08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/g03n3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/g04n0g16.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/g04n2c08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/g04n3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/g05n0g16.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/g05n2c08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/g05n3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/g07n0g16.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/g07n2c08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/g07n3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/g10n0g16.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/g10n2c08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/g10n3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/g25n0g16.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/g25n2c08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/g25n3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/oi1n0g16.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/oi1n2c16.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/oi2n0g16.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/oi2n2c16.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/oi4n0g16.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/oi4n2c16.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/oi9n0g16.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/oi9n2c16.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/pp0n2c16.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/pp0n6a08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/ps1n0g08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/ps1n2c16.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/ps2n0g08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/ps2n2c16.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/s01i3p01.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/s01n3p01.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/s02i3p01.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/s02n3p01.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/s03i3p01.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/s03n3p01.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/s04i3p01.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/s04n3p01.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/s05i3p02.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/s05n3p02.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/s06i3p02.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/s06n3p02.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/s07i3p02.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/s07n3p02.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/s08i3p02.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/s08n3p02.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/s09i3p02.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/s09n3p02.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/s32i3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/s32n3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/s33i3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/s33n3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/s34i3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/s34n3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/s35i3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/s35n3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/s36i3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/s36n3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/s37i3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/s37n3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/s38i3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/s38n3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/s39i3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/s39n3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/s40i3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/s40n3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/tbbn0g04.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/tbbn2c16.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/tbbn3p08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/tbgn2c16.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/tbgn3p08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/tbrn2c08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/tbwn0g16.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/tbwn3p08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/tbyn3p08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/tm3n3p02.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/tp0n0g08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/tp0n2c08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/tp0n3p08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/tp1n3p08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/xc1n0g08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/xc9n2c08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/xcrn0g04.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/xcsn0g01.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/xd0n2c08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/xd3n2c08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/xd9n2c08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/xdtn0g01.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/xhdn0g08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/xlfn0g04.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/xs1n0g01.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/xs2n0g01.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/xs4n0g01.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/xs7n0g01.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/z00n2c08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/z03n2c08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/z06n2c08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/images/z09n2c08.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/misc/icc_profile.png" />
+    <Image Include="../../thirdparty/owemdjee/libspng/tests/misc/unknown.png" />
+    <Text Include="../../thirdparty/owemdjee/libspng/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libspng/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/libspng/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/libspng/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libspng/SECURITY.md" />
+    <Text Include="../../thirdparty/owemdjee/libspng/cmake/Config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/libspng/cmake/libspng.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/libspng/docs/api.md" />
+    <Text Include="../../thirdparty/owemdjee/libspng/docs/build.md" />
+    <Text Include="../../thirdparty/owemdjee/libspng/docs/chunk.md" />
+    <Text Include="../../thirdparty/owemdjee/libspng/docs/context.md" />
+    <Text Include="../../thirdparty/owemdjee/libspng/docs/decode.md" />
+    <Text Include="../../thirdparty/owemdjee/libspng/docs/encode.md" />
+    <Text Include="../../thirdparty/owemdjee/libspng/docs/errors.md" />
+    <Text Include="../../thirdparty/owemdjee/libspng/docs/index.md" />
+    <Text Include="../../thirdparty/owemdjee/libspng/docs/migrate-libpng.md" />
+    <Text Include="../../thirdparty/owemdjee/libspng/docs/usage.md" />
+    <Text Include="../../thirdparty/owemdjee/libspng/docs/version.md" />
+    <Text Include="../../thirdparty/owemdjee/libspng/meson_options.txt" />
+    <Text Include="../../thirdparty/owemdjee/libspng/mkdocs.yml" />
+    <Text Include="../../thirdparty/owemdjee/libspng/tests/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libspng/tests/images/PngSuite.LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/libspng/tests/images/PngSuite.README" />
+  </ItemGroup>
+  <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+</Project>
