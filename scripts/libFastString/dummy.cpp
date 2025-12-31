@@ -1,0 +1,2 @@
+
+#include <FastString.h>

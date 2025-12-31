@@ -1996,3 +1996,14 @@ if [[ "$ARG" =~ [0] ]] ; then
 	  delnewproj2 $f
 	done
 fi
+
+
+# process any remaining sets, if any:
+if [ -n "$3" ] ; then
+	shift
+	shift
+	echo ""
+	echo "$0" "$ARG" $@
+	echo ""
+	"$0" "$ARG" $@
+fi

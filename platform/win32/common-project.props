@@ -15,6 +15,55 @@ See also:
 	  <DisableSpecificWarnings>4865;4505;5245;4774;4711;4295;4152;4200;4355;5246;5267;4866;4868;5220;4582;4583;4435;4619;5029;5266;4371;5031;4946;5250;5262;5038;5219;4710;4388;4324;4242;4365;4623;4626;5026;5027;4625;4514;4464;4061;4668;5045;4820;4180;4244;4018;4267;5105;4100;4127;4206;4102;4146;4189;4245;4334;4389;4457;4458;4456;4459;4701;4702;4706;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <PreprocessorDefinitions>LIBASSERT_STATIC_DEFINE;GHC_DO_NOT_USE_STD_FS;_SILENCE_CXX20_ATOMIC_INIT_DEPRECATION_WARNING;_SILENCE_CXX23_DENORM_DEPRECATION_WARNING;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;_CRTDBG_MAP_ALLOC;_CRT_SECURE_NO_DEPRECATE;_CRT_INTERNAL_NONSTDC_NAMES;_USE_MATH_DEFINES;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <!--<CompileAs>CompileAsCpp</CompileAs>-->
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <!--
+	  <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+	  -->
+
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+
+	  <!--
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+	  -->
+	  
+	  <!--
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <UseDynamicDebugging>true</UseDynamicDebugging>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+	  -->
+
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+
+      <UseDynamicDebugging>false</UseDynamicDebugging>
+
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <UseStandardPreprocessor>true</UseStandardPreprocessor>
+      <UseUnicodeForAssemblerListing>true</UseUnicodeForAssemblerListing>
+      <TreatAngleIncludeAsExternal>true</TreatAngleIncludeAsExternal>
     </ClCompile>
     <Midl>
       <PreprocessorDefinitions>LIBASSERT_STATIC_DEFINE;GHC_DO_NOT_USE_STD_FS;_SILENCE_CXX20_ATOMIC_INIT_DEPRECATION_WARNING;_SILENCE_CXX23_DENORM_DEPRECATION_WARNING;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;_CRTDBG_MAP_ALLOC;_CRT_SECURE_NO_DEPRECATE;_CRT_INTERNAL_NONSTDC_NAMES;_USE_MATH_DEFINES;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -33,6 +82,7 @@ See also:
 	  
 	  P.S. it looks like adding/changing/removing this linker setting is only picked up when we RESTART MSVC. Huh?! (I got the impression that the ClCompile settings above were picked up rather more quickly and easily than that.  :-S   As I am of course keeping a very thorough dev log *cough* *cough* when fiddling with those earlier, it may be a case of osmosis of wishful thinking into my cranial factual memory banks: given this year's noises from US wannabe-governmental types, this part wasn't coded in Rust when my parents went about constructing me. *soit.* In case you need a moment of procrastination/schadenfreude: https://pebkac2.fr/aleatoire
 	  -->
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
     </Link>
   </ItemDefinitionGroup>
 </Project>

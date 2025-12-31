@@ -94,23 +94,6 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-      <LanguageStandard_C>stdclatest</LanguageStandard_C>
-      <SupportJustMyCode>false</SupportJustMyCode>
-      <SDLCheck>false</SDLCheck>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <StringPooling>true</StringPooling>
-      <ExceptionHandling>Async</ExceptionHandling>
-      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
-      <FloatingPointModel>Fast</FloatingPointModel>
-      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
-      <FloatingPointExceptions>false</FloatingPointExceptions>
-      <ConformanceMode>true</ConformanceMode>
-      <OmitFramePointers>true</OmitFramePointers>
-      <EnableUnitySupport>true</EnableUnitySupport>
-      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
 </ItemDefinitionGroup>
@@ -542,6 +525,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_read_format_7zip_encryption_data.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_read_format_7zip_encryption_header.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_read_format_7zip_encryption_partially.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_read_format_7zip_issue2765.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_read_format_7zip_malformed.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_read_format_7zip_packinfo_digests.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_read_format_ar.c" />
@@ -602,6 +586,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_read_format_rar_overflow.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_read_format_raw.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_read_format_tar.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_read_format_tar_V_negative_size.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_read_format_tar_concatenated.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_read_format_tar_empty_filename.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_read_format_tar_empty_pax.c" />
@@ -748,7 +733,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_xattr_platform.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test_zip_filename_encoding.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/xxhash.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive_fe/err.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive_fe/lafe_err.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive_fe/line_reader.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive_fe/passphrase.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/tar/bsdtar.c" />
@@ -894,6 +879,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/libarchive/libarchive/archive_pathmatch.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libarchive/libarchive/archive_platform.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libarchive/libarchive/archive_platform_acl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libarchive/libarchive/archive_platform_stat.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libarchive/libarchive/archive_platform_xattr.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libarchive/libarchive/archive_ppmd7_private.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libarchive/libarchive/archive_ppmd8_private.h" />
@@ -914,7 +900,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/libarchive/libarchive/config_freebsd.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libarchive/libarchive/filter_fork.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libarchive/libarchive/test/test.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libarchive/libarchive_fe/err.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libarchive/libarchive_fe/lafe_err.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libarchive/libarchive_fe/lafe_platform.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libarchive/libarchive_fe/line_reader.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libarchive/libarchive_fe/passphrase.h" />
