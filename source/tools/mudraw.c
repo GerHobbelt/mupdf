@@ -839,8 +839,11 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 						output_format == OUT_OCR_XHTML
 						) ? FZ_STEXT_PRESERVE_IMAGES : 0;
 			stext_options.flags |= FZ_STEXT_CLIP;
-			stext_options.flags |= FZ_STEXT_ACCURATE_BBOXES;
-			stext_options.flags |= FZ_STEXT_COLLECT_STYLES;
+			if (output_format != OUT_TEXT)
+			{
+				stext_options.flags |= FZ_STEXT_ACCURATE_BBOXES;
+				stext_options.flags |= FZ_STEXT_COLLECT_STYLES;
+			}
 			if (output_format == OUT_STEXT_JSON || output_format == OUT_OCR_STEXT_JSON)
 				stext_options.flags |= FZ_STEXT_PRESERVE_SPANS;
 			fz_apply_stext_options(ctx, &stext_options, user_options);
