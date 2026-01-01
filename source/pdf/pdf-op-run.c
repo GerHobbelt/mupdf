@@ -2256,8 +2256,8 @@ push_marked_content(fz_context *ctx, pdf_run_processor *proc, const char *tagstr
 		/* Check to see if val contains an MCID. */
 		mc_dict = lookup_mcid(ctx, proc, val);
 
-		/* No point in layer processing unnecessarily */
-		if (proc->process_layers)
+		/* No point in layer processing if we don't support begin_layer */
+		if (proc->process_layers && proc->dev->begin_layer != NULL)
 		{
 			/* Start any optional content layers. */
 			if (pdf_name_eq(ctx, tag, PDF_NAME(OC)))
@@ -2269,7 +2269,7 @@ push_marked_content(fz_context *ctx, pdf_run_processor *proc, const char *tagstr
 		}
 
 		/* Structure */
-		if (proc->process_structure && mc_dict && !proc->broken_struct_tree)
+		if (proc->process_structure && proc->dev->begin_structure != NULL && mc_dict && !proc->broken_struct_tree)
 		{
 			fz_try(ctx)
 				mc->structure_pushed = send_begin_structure(ctx, proc, mc_dict);
