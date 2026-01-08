@@ -50,6 +50,7 @@ fz_context *get_leptonica_ctx(void)
 
 void *leptonica_malloc(size_t size)
 {
+	assert(leptonica_mem != NULL);
 	void *ret = Memento_label(fz_malloc_no_throw(leptonica_mem, size), "leptonica_malloc");
 #if DEBUG_ALLOCS
 	fz_info(leptonica_mem, "dbg: %d LEPTONICA_MALLOC(%p) %d -> %p\n", event++, leptonica_mem, (int)size, ret);
@@ -59,6 +60,7 @@ void *leptonica_malloc(size_t size)
 
 void leptonica_free(const void *ptr)
 {
+	assert(leptonica_mem != NULL);
 #if DEBUG_ALLOCS
 	fz_info(leptonica_mem, "dbg: %d LEPTONICA_FREE(%p) %p\n", event++, leptonica_mem, ptr);
 #endif
@@ -67,10 +69,12 @@ void leptonica_free(const void *ptr)
 
 void *leptonica_calloc(size_t numelm, size_t elemsize)
 {
+	assert(leptonica_mem != NULL);
 	void *ret = leptonica_malloc(numelm * elemsize);
 
-	if (ret)
+	if (ret) {
 		memset(ret, 0, numelm * elemsize);
+	}
 #if DEBUG_ALLOCS
 	fz_info(leptonica_mem, "dbg: %d LEPTONICA_CALLOC %d,%d -> %p\n", event++, (int)numelm, (int)elemsize, ret);
 #endif
@@ -80,6 +84,7 @@ void *leptonica_calloc(size_t numelm, size_t elemsize)
 /* Not currently actually used */
 void *leptonica_realloc(void *ptr, size_t blocksize)
 {
+	assert(leptonica_mem != NULL);
 	void *ret = fz_realloc_no_throw(leptonica_mem, ptr, blocksize);
 
 #if DEBUG_ALLOCS
@@ -144,6 +149,7 @@ fz_set_leptonica_mem(fz_context *ctx)
 {
 	int die = 0;
 
+	assert(ctx != NULL);
 	fz_lock(ctx, FZ_LOCK_ALLOC);
 	die = (leptonica_mem != NULL) && (leptonica_mem != ctx);
 	if (!die)
@@ -164,6 +170,7 @@ fz_clear_leptonica_mem(fz_context *ctx)
 {
 	int die = 0;
 
+	assert(ctx != NULL);
 	fz_lock(ctx, FZ_LOCK_ALLOC);
 	die = (leptonica_mem == NULL);
 	if (!die)
