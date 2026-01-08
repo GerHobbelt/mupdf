@@ -85,23 +85,6 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-      <LanguageStandard_C>stdclatest</LanguageStandard_C>
-      <SupportJustMyCode>false</SupportJustMyCode>
-      <SDLCheck>false</SDLCheck>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <StringPooling>true</StringPooling>
-      <ExceptionHandling>Async</ExceptionHandling>
-      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
-      <FloatingPointModel>Fast</FloatingPointModel>
-      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
-      <FloatingPointExceptions>false</FloatingPointExceptions>
-      <ConformanceMode>true</ConformanceMode>
-      <OmitFramePointers>true</OmitFramePointers>
-      <EnableUnitySupport>true</EnableUnitySupport>
-      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
 </ItemDefinitionGroup>
@@ -265,7 +248,6 @@
     <Text Include="../../thirdparty/owemdjee/bebop/CONTRIBUTING.md" />
     <Text Include="../../thirdparty/owemdjee/bebop/Compiler/BebopCompiler.cs" />
     <Text Include="../../thirdparty/owemdjee/bebop/Compiler/CliStrings.cs" />
-    <Text Include="../../thirdparty/owemdjee/bebop/Compiler/CommandLineFlags.cs" />
     <Text Include="../../thirdparty/owemdjee/bebop/Compiler/Commands/BuildCommand.cs" />
     <Text Include="../../thirdparty/owemdjee/bebop/Compiler/Commands/ConvertCommand.cs" />
     <Text Include="../../thirdparty/owemdjee/bebop/Compiler/Commands/LanguageServerCommand.cs" />
@@ -361,8 +343,8 @@
     <Text Include="../../thirdparty/owemdjee/bebop/Core/Parser/DefaultImportResolver.cs" />
     <Text Include="../../thirdparty/owemdjee/bebop/Core/Parser/Extensions/TypeExtensions.cs" />
     <Text Include="../../thirdparty/owemdjee/bebop/Core/Parser/IImportResolver.cs" />
+    <Text Include="../../thirdparty/owemdjee/bebop/Core/Parser/RpcSchema.cs" />
     <Text Include="../../thirdparty/owemdjee/bebop/Core/Parser/SchemaParser.cs" />
-    <Text Include="../../thirdparty/owemdjee/bebop/Core/Schemas/SchemaRepo.cs" />
     <Text Include="../../thirdparty/owemdjee/bebop/LICENSE.TXT" />
     <Text Include="../../thirdparty/owemdjee/bebop/Laboratory/C#/Benchmarks/BufferReadWrite.cs" />
     <Text Include="../../thirdparty/owemdjee/bebop/Laboratory/C#/Benchmarks/ObjectReadWrite.cs" />
@@ -404,10 +386,8 @@
     <Text Include="../../thirdparty/owemdjee/bebop/Laboratory/Integration/decode.ts" />
     <Text Include="../../thirdparty/owemdjee/bebop/Laboratory/Integration/encode.ts" />
     <Text Include="../../thirdparty/owemdjee/bebop/Laboratory/Integration/makelib.ts" />
-    <Text Include="../../thirdparty/owemdjee/bebop/Laboratory/Integration/package-lock.json" />
     <Text Include="../../thirdparty/owemdjee/bebop/Laboratory/Integration/package.json" />
     <Text Include="../../thirdparty/owemdjee/bebop/Laboratory/Integration/run_test.js" />
-    <Text Include="../../thirdparty/owemdjee/bebop/Laboratory/Integration/run_test.sh" />
     <Text Include="../../thirdparty/owemdjee/bebop/Laboratory/Integration/schema.cs" />
     <Text Include="../../thirdparty/owemdjee/bebop/Laboratory/Integration/schema.ts" />
     <Text Include="../../thirdparty/owemdjee/bebop/Laboratory/Integration/tsconfig.json" />
@@ -440,7 +420,6 @@
     <Text Include="../../thirdparty/owemdjee/bebop/Laboratory/Rust/functionality-testing/src/flags.rs" />
     <Text Include="../../thirdparty/owemdjee/bebop/Laboratory/Rust/functionality-testing/src/jazz.rs" />
     <Text Include="../../thirdparty/owemdjee/bebop/Laboratory/Rust/functionality-testing/src/lib.rs" />
-    <Text Include="../../thirdparty/owemdjee/bebop/Laboratory/Rust/functionality-testing/src/rpc.rs" />
     <Text Include="../../thirdparty/owemdjee/bebop/Laboratory/Rust/manual-testing/Cargo.toml" />
     <Text Include="../../thirdparty/owemdjee/bebop/Laboratory/Schemas/ShouldFail/bebop.json" />
     <Text Include="../../thirdparty/owemdjee/bebop/Laboratory/Schemas/bebop.json" />
@@ -466,7 +445,6 @@
     <Text Include="../../thirdparty/owemdjee/bebop/Laboratory/TypeScript/vitest.config.js" />
     <Text Include="../../thirdparty/owemdjee/bebop/NuGet.Config" />
     <Text Include="../../thirdparty/owemdjee/bebop/README.md" />
-    <Text Include="../../thirdparty/owemdjee/bebop/Repl/Pages/Index.razor" />
     <Text Include="../../thirdparty/owemdjee/bebop/Runtime/C#/Attributes/BebopRecordAttribute.cs" />
     <Text Include="../../thirdparty/owemdjee/bebop/Runtime/C#/Attributes/BindRecordAttribute.cs" />
     <Text Include="../../thirdparty/owemdjee/bebop/Runtime/C#/Attributes/RecordHandlerAttribute.cs" />
@@ -499,15 +477,7 @@
     <Text Include="../../thirdparty/owemdjee/bebop/Runtime/Rust/benches/main.rs" />
     <Text Include="../../thirdparty/owemdjee/bebop/Runtime/Rust/benches/serialization.rs" />
     <Text Include="../../thirdparty/owemdjee/bebop/Runtime/Rust/benches/slice_wrapper.rs" />
-    <Text Include="../../thirdparty/owemdjee/bebop/Runtime/Rust/build.rs" />
     <Text Include="../../thirdparty/owemdjee/bebop/Runtime/Rust/src/lib.rs" />
-    <Text Include="../../thirdparty/owemdjee/bebop/Runtime/Rust/src/rpc/error.rs" />
-    <Text Include="../../thirdparty/owemdjee/bebop/Runtime/Rust/src/rpc/mod.rs" />
-    <Text Include="../../thirdparty/owemdjee/bebop/Runtime/Rust/src/rpc/router/call_table.rs" />
-    <Text Include="../../thirdparty/owemdjee/bebop/Runtime/Rust/src/rpc/router/calls.rs" />
-    <Text Include="../../thirdparty/owemdjee/bebop/Runtime/Rust/src/rpc/router/context.rs" />
-    <Text Include="../../thirdparty/owemdjee/bebop/Runtime/Rust/src/rpc/router/mod.rs" />
-    <Text Include="../../thirdparty/owemdjee/bebop/Runtime/Rust/src/rpc/transport.rs" />
     <Text Include="../../thirdparty/owemdjee/bebop/Runtime/Rust/src/serialization/alignment.rs" />
     <Text Include="../../thirdparty/owemdjee/bebop/Runtime/Rust/src/serialization/error.rs" />
     <Text Include="../../thirdparty/owemdjee/bebop/Runtime/Rust/src/serialization/fixed_sized.rs" />

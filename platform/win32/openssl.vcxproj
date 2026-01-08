@@ -89,23 +89,6 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-      <LanguageStandard_C>stdclatest</LanguageStandard_C>
-      <SupportJustMyCode>false</SupportJustMyCode>
-      <SDLCheck>false</SDLCheck>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <StringPooling>true</StringPooling>
-      <ExceptionHandling>Async</ExceptionHandling>
-      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
-      <FloatingPointModel>Fast</FloatingPointModel>
-      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
-      <FloatingPointExceptions>false</FloatingPointExceptions>
-      <ConformanceMode>true</ConformanceMode>
-      <OmitFramePointers>true</OmitFramePointers>
-      <EnableUnitySupport>true</EnableUnitySupport>
-      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
 </ItemDefinitionGroup>
@@ -1252,6 +1235,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/openssl/gost-engine/test_params.c" />
     <ClCompile Include="../../thirdparty/owemdjee/openssl/gost-engine/test_sign.c" />
     <ClCompile Include="../../thirdparty/owemdjee/openssl/gost-engine/test_tls.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openssl/gost-engine/test_tls13handshake.c" />
     <ClCompile Include="../../thirdparty/owemdjee/openssl/gost-engine/test_tlstree.c" />
     <ClCompile Include="../../thirdparty/owemdjee/openssl/krb5/doc/doxy_examples/cc_set_config.c" />
     <ClCompile Include="../../thirdparty/owemdjee/openssl/krb5/doc/doxy_examples/cc_unique.c" />
@@ -5678,6 +5662,7 @@
     <Text Include="../../thirdparty/owemdjee/openssl/oqs-provider/oqs-template/generate.yml-0.12.0" />
     <Text Include="../../thirdparty/owemdjee/openssl/oqs-provider/oqs-template/generate.yml-0.13.0" />
     <Text Include="../../thirdparty/owemdjee/openssl/oqs-provider/oqs-template/generate.yml-0.14.0" />
+    <Text Include="../../thirdparty/owemdjee/openssl/oqs-provider/oqs-template/generate.yml-0.15.0" />
     <Text Include="../../thirdparty/owemdjee/openssl/oqs-provider/oqs-template/generate.yml-0.7.2" />
     <Text Include="../../thirdparty/owemdjee/openssl/oqs-provider/oqs-template/generate.yml-0.8.0" />
     <Text Include="../../thirdparty/owemdjee/openssl/oqs-provider/oqs-template/generate.yml-0.9.0" />
@@ -6140,6 +6125,7 @@
     <Text Include="../../thirdparty/owemdjee/openssl/pyca-cryptography/tests/hazmat/primitives/utils.py" />
     <Text Include="../../thirdparty/owemdjee/openssl/pyca-cryptography/tests/hazmat/test_oid.py" />
     <Text Include="../../thirdparty/owemdjee/openssl/pyca-cryptography/tests/test_cryptography_utils.py" />
+    <Text Include="../../thirdparty/owemdjee/openssl/pyca-cryptography/tests/test_doubles.py" />
     <Text Include="../../thirdparty/owemdjee/openssl/pyca-cryptography/tests/test_fernet.py" />
     <Text Include="../../thirdparty/owemdjee/openssl/pyca-cryptography/tests/test_meta.py" />
     <Text Include="../../thirdparty/owemdjee/openssl/pyca-cryptography/tests/test_utils.py" />
@@ -6235,6 +6221,7 @@
     <Text Include="../../thirdparty/owemdjee/openssl/pyca-cryptography/vectors/cryptography_vectors/asymmetric/DSA/FIPS_186-3/Readme.txt" />
     <Text Include="../../thirdparty/owemdjee/openssl/pyca-cryptography/vectors/cryptography_vectors/asymmetric/DSA/FIPS_186-3/SigGen.txt" />
     <Text Include="../../thirdparty/owemdjee/openssl/pyca-cryptography/vectors/cryptography_vectors/asymmetric/EC/compressed_points.txt" />
+    <Text Include="../../thirdparty/owemdjee/openssl/pyca-cryptography/vectors/cryptography_vectors/asymmetric/EC/truncated-private-key.der" />
     <Text Include="../../thirdparty/owemdjee/openssl/pyca-cryptography/vectors/cryptography_vectors/asymmetric/ECDH/KASValidityTest_ECCStaticUnified_KDFConcat_NOKC_init.fax" />
     <Text Include="../../thirdparty/owemdjee/openssl/pyca-cryptography/vectors/cryptography_vectors/asymmetric/ECDH/KASValidityTest_ECCStaticUnified_KDFConcat_NOKC_resp.fax" />
     <Text Include="../../thirdparty/owemdjee/openssl/pyca-cryptography/vectors/cryptography_vectors/asymmetric/ECDH/KASValidityTest_ECCStaticUnified_NOKC_ZZOnly_init.fax" />
@@ -6254,8 +6241,6 @@
     <Text Include="../../thirdparty/owemdjee/openssl/pyca-cryptography/vectors/cryptography_vectors/asymmetric/Ed448/ed448-pkcs8.der" />
     <Text Include="../../thirdparty/owemdjee/openssl/pyca-cryptography/vectors/cryptography_vectors/asymmetric/Ed448/ed448-pub.der" />
     <Text Include="../../thirdparty/owemdjee/openssl/pyca-cryptography/vectors/cryptography_vectors/asymmetric/Ed448/rfc8032.txt" />
-    <Text Include="../../thirdparty/owemdjee/openssl/pyca-cryptography/vectors/cryptography_vectors/asymmetric/ML-KEM/mlkem1024_decap_tests.txt" />
-    <Text Include="../../thirdparty/owemdjee/openssl/pyca-cryptography/vectors/cryptography_vectors/asymmetric/ML-KEM/mlkem768_decap_tests.txt" />
     <Text Include="../../thirdparty/owemdjee/openssl/pyca-cryptography/vectors/cryptography_vectors/asymmetric/OpenSSH/dsa-nopsw.key" />
     <Text Include="../../thirdparty/owemdjee/openssl/pyca-cryptography/vectors/cryptography_vectors/asymmetric/OpenSSH/dsa-psw.key" />
     <Text Include="../../thirdparty/owemdjee/openssl/pyca-cryptography/vectors/cryptography_vectors/asymmetric/OpenSSH/ecdsa-nopsw.key" />

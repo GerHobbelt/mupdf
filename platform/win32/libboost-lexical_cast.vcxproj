@@ -89,23 +89,6 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-      <LanguageStandard_C>stdclatest</LanguageStandard_C>
-      <SupportJustMyCode>false</SupportJustMyCode>
-      <SDLCheck>false</SDLCheck>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <StringPooling>true</StringPooling>
-      <ExceptionHandling>Async</ExceptionHandling>
-      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
-      <FloatingPointModel>Fast</FloatingPointModel>
-      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
-      <FloatingPointExceptions>false</FloatingPointExceptions>
-      <ConformanceMode>true</ConformanceMode>
-      <OmitFramePointers>true</OmitFramePointers>
-      <EnableUnitySupport>true</EnableUnitySupport>
-      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
 </ItemDefinitionGroup>
@@ -226,11 +209,12 @@
     <ClCompile Include="../../scripts/boost/libboost-lexical_cast-dummy.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/boost/libs/lexical_cast/modules/usage_sample.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/lexical_cast/include/boost/detail/basic_pointerbuf.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/lexical_cast/include/boost/detail/lcast_precision.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/lexical_cast/include/boost/lexical_cast.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/lexical_cast/include/boost/lexical_cast/bad_lexical_cast.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/lexical_cast/include/boost/lexical_cast/detail/buffer_view.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/lexical_cast/include/boost/lexical_cast/detail/config.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/lexical_cast/include/boost/lexical_cast/detail/converter_lexical.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/lexical_cast/include/boost/lexical_cast/detail/converter_lexical_streams.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/lexical_cast/include/boost/lexical_cast/detail/converter_numeric.hpp" />
@@ -238,6 +222,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/lexical_cast/include/boost/lexical_cast/detail/is_character.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/lexical_cast/include/boost/lexical_cast/detail/lcast_basic_unlockedbuf.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/lexical_cast/include/boost/lexical_cast/detail/lcast_char_constants.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/lexical_cast/include/boost/lexical_cast/detail/lcast_precision.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/lexical_cast/include/boost/lexical_cast/detail/lcast_unsigned_converters.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/lexical_cast/include/boost/lexical_cast/detail/type_traits.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/lexical_cast/include/boost/lexical_cast/detail/widest_char.hpp" />

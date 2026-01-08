@@ -89,23 +89,6 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-      <LanguageStandard_C>stdclatest</LanguageStandard_C>
-      <SupportJustMyCode>false</SupportJustMyCode>
-      <SDLCheck>false</SDLCheck>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <StringPooling>true</StringPooling>
-      <ExceptionHandling>Async</ExceptionHandling>
-      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
-      <FloatingPointModel>Fast</FloatingPointModel>
-      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
-      <FloatingPointExceptions>false</FloatingPointExceptions>
-      <ConformanceMode>true</ConformanceMode>
-      <OmitFramePointers>true</OmitFramePointers>
-      <EnableUnitySupport>true</EnableUnitySupport>
-      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
 </ItemDefinitionGroup>
@@ -328,8 +311,10 @@
     <ClCompile Include="../../thirdparty/owemdjee/opencv/hal/riscv-rvv/src/core/sqrt.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/hal/riscv-rvv/src/core/svd.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/hal/riscv-rvv/src/core/transpose.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/hal/riscv-rvv/src/features2d/fast.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/hal/riscv-rvv/src/imgproc/bilateral_filter.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/hal/riscv-rvv/src/imgproc/box_filter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/hal/riscv-rvv/src/imgproc/canny.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/hal/riscv-rvv/src/imgproc/color.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/hal/riscv-rvv/src/imgproc/filter.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/hal/riscv-rvv/src/imgproc/gaussian_blur.cpp" />
@@ -340,7 +325,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/opencv/hal/riscv-rvv/src/imgproc/morph.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/hal/riscv-rvv/src/imgproc/pyramids.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/hal/riscv-rvv/src/imgproc/resize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/hal/riscv-rvv/src/imgproc/scharr.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/hal/riscv-rvv/src/imgproc/sep_filter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/hal/riscv-rvv/src/imgproc/sobel.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/hal/riscv-rvv/src/imgproc/threshold.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/hal/riscv-rvv/src/imgproc/warp.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/samples/cpp/3calibration.cpp" />
@@ -455,8 +442,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/opencv/samples/cpp/tutorial_code/TrackingMotion/cornerSubPix_Demo.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/samples/cpp/tutorial_code/TrackingMotion/goodFeaturesToTrack_Demo.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/samples/cpp/tutorial_code/calib3d/camera_calibration/camera_calibration.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/opencv/samples/cpp/tutorial_code/calib3d/real_time_pose_estimation/src/CsvReader.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/opencv/samples/cpp/tutorial_code/calib3d/real_time_pose_estimation/src/CsvWriter.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/samples/cpp/tutorial_code/calib3d/real_time_pose_estimation/src/Mesh.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/samples/cpp/tutorial_code/calib3d/real_time_pose_estimation/src/Model.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/samples/cpp/tutorial_code/calib3d/real_time_pose_estimation/src/ModelRegistration.cpp" />
@@ -553,6 +538,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/opencv/samples/directx/d3d11_interop.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/samples/directx/d3d9_interop.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/samples/directx/d3d9ex_interop.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/samples/dnn/alpha_matting.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/samples/dnn/auto_white_balance.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/samples/dnn/classification.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/samples/dnn/colorization.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/samples/dnn/deblurring.cpp" />
@@ -566,6 +553,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/opencv/samples/dnn/person_reid.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/samples/dnn/segmentation.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/samples/dnn/speech_recognition.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/samples/dnn/super_resolution.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/samples/dnn/text_detection.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/samples/dnn/yolox.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/samples/gpu/alpha_comp.cpp" />
@@ -642,14 +630,14 @@
     <ClInclude Include="../../thirdparty/owemdjee/opencv/hal/ndsrvp/ndsrvp_hal.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/hal/ndsrvp/src/cvutils.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/hal/riscv-rvv/include/core.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/hal/riscv-rvv/include/features2d.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/hal/riscv-rvv/include/imgproc.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/hal/riscv-rvv/include/types.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/hal/riscv-rvv/rvv_hal.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/hal/riscv-rvv/src/core/common.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/hal/riscv-rvv/src/features2d/common.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/hal/riscv-rvv/src/imgproc/common.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/include/opencv2/opencv.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/opencv/samples/cpp/tutorial_code/calib3d/real_time_pose_estimation/src/CsvReader.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/opencv/samples/cpp/tutorial_code/calib3d/real_time_pose_estimation/src/CsvWriter.h" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/samples/cpp/tutorial_code/calib3d/real_time_pose_estimation/src/Mesh.h" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/samples/cpp/tutorial_code/calib3d/real_time_pose_estimation/src/Model.h" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/samples/cpp/tutorial_code/calib3d/real_time_pose_estimation/src/ModelRegistration.h" />
@@ -1421,6 +1409,7 @@
     <Image Include="../../thirdparty/owemdjee/opencv/samples/data/building.jpg" />
     <Image Include="../../thirdparty/owemdjee/opencv/samples/data/butterfly.jpg" />
     <Image Include="../../thirdparty/owemdjee/opencv/samples/data/cards.png" />
+    <Image Include="../../thirdparty/owemdjee/opencv/samples/data/castle.jpg" />
     <Image Include="../../thirdparty/owemdjee/opencv/samples/data/chessboard.png" />
     <Image Include="../../thirdparty/owemdjee/opencv/samples/data/chicky_512.png" />
     <Image Include="../../thirdparty/owemdjee/opencv/samples/data/detect_blob.png" />
@@ -1574,11 +1563,13 @@
     <Text Include="../../thirdparty/owemdjee/opencv/apps/chromatic-aberration-calibration/ca_calibration.py" />
     <Text Include="../../thirdparty/owemdjee/opencv/apps/interactive-calibration/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/opencv/apps/model-diagnostics/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/opencv/apps/python-calibration-generator/board.py" />
-    <Text Include="../../thirdparty/owemdjee/opencv/apps/python-calibration-generator/calibration_generator.py" />
-    <Text Include="../../thirdparty/owemdjee/opencv/apps/python-calibration-generator/config_cv_test.yaml" />
-    <Text Include="../../thirdparty/owemdjee/opencv/apps/python-calibration-generator/drawer.py" />
-    <Text Include="../../thirdparty/owemdjee/opencv/apps/python-calibration-generator/utils.py" />
+    <Text Include="../../thirdparty/owemdjee/opencv/apps/multiview-calibration/multiview_calibration.py" />
+    <Text Include="../../thirdparty/owemdjee/opencv/apps/multiview-calibration/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/opencv/apps/pattern-tools/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/opencv/apps/pattern-tools/generate_pattern.py" />
+    <Text Include="../../thirdparty/owemdjee/opencv/apps/pattern-tools/requirements-test.txt" />
+    <Text Include="../../thirdparty/owemdjee/opencv/apps/pattern-tools/svgfig.py" />
+    <Text Include="../../thirdparty/owemdjee/opencv/apps/pattern-tools/test_charuco_board.py" />
     <Text Include="../../thirdparty/owemdjee/opencv/apps/python_app_test.py" />
     <Text Include="../../thirdparty/owemdjee/opencv/apps/version/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/opencv/cmake/FindCUDA.cmake" />
@@ -1600,6 +1591,7 @@
     <Text Include="../../thirdparty/owemdjee/opencv/cmake/OpenCVDetectCUDALanguage.cmake" />
     <Text Include="../../thirdparty/owemdjee/opencv/cmake/OpenCVDetectCUDAUtils.cmake" />
     <Text Include="../../thirdparty/owemdjee/opencv/cmake/OpenCVDetectCXXCompiler.cmake" />
+    <Text Include="../../thirdparty/owemdjee/opencv/cmake/OpenCVDetectDLPack.cmake" />
     <Text Include="../../thirdparty/owemdjee/opencv/cmake/OpenCVDetectDirectML.cmake" />
     <Text Include="../../thirdparty/owemdjee/opencv/cmake/OpenCVDetectDirectX.cmake" />
     <Text Include="../../thirdparty/owemdjee/opencv/cmake/OpenCVDetectFlatbuffers.cmake" />
@@ -1857,11 +1849,6 @@
     <Text Include="../../thirdparty/owemdjee/opencv/doc/mymath.js" />
     <Text Include="../../thirdparty/owemdjee/opencv/doc/mymath.sty" />
     <Text Include="../../thirdparty/owemdjee/opencv/doc/opencv-logo.md" />
-    <Text Include="../../thirdparty/owemdjee/opencv/doc/pattern_tools/README.txt" />
-    <Text Include="../../thirdparty/owemdjee/opencv/doc/pattern_tools/gen_pattern.py" />
-    <Text Include="../../thirdparty/owemdjee/opencv/doc/pattern_tools/svgfig.py" />
-    <Text Include="../../thirdparty/owemdjee/opencv/doc/pattern_tools/test_charuco_board.py" />
-    <Text Include="../../thirdparty/owemdjee/opencv/doc/pattern_tools/test_requirements.txt" />
     <Text Include="../../thirdparty/owemdjee/opencv/doc/py_tutorials/py_bindings/py_bindings_basics/py_bindings_basics.markdown" />
     <Text Include="../../thirdparty/owemdjee/opencv/doc/py_tutorials/py_bindings/py_table_of_contents_bindings.markdown" />
     <Text Include="../../thirdparty/owemdjee/opencv/doc/py_tutorials/py_calib3d/py_calibration/py_calibration.markdown" />
@@ -1926,6 +1913,7 @@
     <Text Include="../../thirdparty/owemdjee/opencv/doc/py_tutorials/py_photo/py_non_local_means/py_non_local_means.markdown" />
     <Text Include="../../thirdparty/owemdjee/opencv/doc/py_tutorials/py_photo/py_table_of_contents_photo.markdown" />
     <Text Include="../../thirdparty/owemdjee/opencv/doc/py_tutorials/py_setup/py_intro/py_intro.markdown" />
+    <Text Include="../../thirdparty/owemdjee/opencv/doc/py_tutorials/py_setup/py_pip_install/py_pip_install.markdown" />
     <Text Include="../../thirdparty/owemdjee/opencv/doc/py_tutorials/py_setup/py_setup_in_fedora/py_setup_in_fedora.markdown" />
     <Text Include="../../thirdparty/owemdjee/opencv/doc/py_tutorials/py_setup/py_setup_in_ubuntu/py_setup_in_ubuntu.markdown" />
     <Text Include="../../thirdparty/owemdjee/opencv/doc/py_tutorials/py_setup/py_setup_in_windows/py_setup_in_windows.markdown" />
@@ -2075,6 +2063,7 @@
     <Text Include="../../thirdparty/owemdjee/opencv/doc/tutorials/introduction/linux_install/linux_install.markdown" />
     <Text Include="../../thirdparty/owemdjee/opencv/doc/tutorials/introduction/load_save_image/load_save_image.markdown" />
     <Text Include="../../thirdparty/owemdjee/opencv/doc/tutorials/introduction/macos_install/macos_install.markdown" />
+    <Text Include="../../thirdparty/owemdjee/opencv/doc/tutorials/introduction/oneapi_install/oneapi_install.markdown" />
     <Text Include="../../thirdparty/owemdjee/opencv/doc/tutorials/introduction/table_of_content_introduction.markdown" />
     <Text Include="../../thirdparty/owemdjee/opencv/doc/tutorials/introduction/transition_guide/transition_guide.markdown" />
     <Text Include="../../thirdparty/owemdjee/opencv/doc/tutorials/introduction/windows_install/windows_install.markdown" />
@@ -2154,6 +2143,8 @@
     <Text Include="../../thirdparty/owemdjee/opencv/samples/dnn/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/opencv/samples/dnn/README.md" />
     <Text Include="../../thirdparty/owemdjee/opencv/samples/dnn/action_recognition.py" />
+    <Text Include="../../thirdparty/owemdjee/opencv/samples/dnn/alpha_matting.py" />
+    <Text Include="../../thirdparty/owemdjee/opencv/samples/dnn/auto_white_balance.py" />
     <Text Include="../../thirdparty/owemdjee/opencv/samples/dnn/classification.py" />
     <Text Include="../../thirdparty/owemdjee/opencv/samples/dnn/colorization.py" />
     <Text Include="../../thirdparty/owemdjee/opencv/samples/dnn/common.py" />
@@ -2212,6 +2203,7 @@
     <Text Include="../../thirdparty/owemdjee/opencv/samples/dnn/shrink_tf_graph_weights.py" />
     <Text Include="../../thirdparty/owemdjee/opencv/samples/dnn/siamrpnpp.py" />
     <Text Include="../../thirdparty/owemdjee/opencv/samples/dnn/speech_recognition.py" />
+    <Text Include="../../thirdparty/owemdjee/opencv/samples/dnn/super_resolution.py" />
     <Text Include="../../thirdparty/owemdjee/opencv/samples/dnn/text_detection.py" />
     <Text Include="../../thirdparty/owemdjee/opencv/samples/dnn/tf_text_graph_common.py" />
     <Text Include="../../thirdparty/owemdjee/opencv/samples/dnn/tf_text_graph_efficientdet.py" />
@@ -2307,6 +2299,7 @@
     <Text Include="../../thirdparty/owemdjee/opencv/samples/python/aruco_detect_board_charuco.py" />
     <Text Include="../../thirdparty/owemdjee/opencv/samples/python/asift.py" />
     <Text Include="../../thirdparty/owemdjee/opencv/samples/python/audio_spectrogram.py" />
+    <Text Include="../../thirdparty/owemdjee/opencv/samples/python/background_subtractor_mask.py" />
     <Text Include="../../thirdparty/owemdjee/opencv/samples/python/calibrate.py" />
     <Text Include="../../thirdparty/owemdjee/opencv/samples/python/camera_calibration_show_extrinsics.py" />
     <Text Include="../../thirdparty/owemdjee/opencv/samples/python/color_correction_model.py" />
@@ -2320,7 +2313,6 @@
     <Text Include="../../thirdparty/owemdjee/opencv/samples/python/macbeth_chart_detection.py" />
     <Text Include="../../thirdparty/owemdjee/opencv/samples/python/morphology.py" />
     <Text Include="../../thirdparty/owemdjee/opencv/samples/python/mouse_and_match.py" />
-    <Text Include="../../thirdparty/owemdjee/opencv/samples/python/multiview_calibration.py" />
     <Text Include="../../thirdparty/owemdjee/opencv/samples/python/odometry.py" />
     <Text Include="../../thirdparty/owemdjee/opencv/samples/python/opencv_version.py" />
     <Text Include="../../thirdparty/owemdjee/opencv/samples/python/plane_tracker.py" />
@@ -2415,6 +2407,7 @@
     <Text Include="../../thirdparty/owemdjee/opencv/samples/python/tutorial_code/videoio/video-input-psnr-ssim.py" />
     <Text Include="../../thirdparty/owemdjee/opencv/samples/python/tutorial_code/videoio/videocapture_obsensor.py" />
     <Text Include="../../thirdparty/owemdjee/opencv/samples/python/video.py" />
+    <Text Include="../../thirdparty/owemdjee/opencv/samples/python/visualize_mono_calibration.py" />
     <Text Include="../../thirdparty/owemdjee/opencv/samples/python/volume.py" />
     <Text Include="../../thirdparty/owemdjee/opencv/samples/samples_utils.cmake" />
     <Text Include="../../thirdparty/owemdjee/opencv/samples/semihosting/CMakeLists.txt" />
@@ -2462,6 +2455,7 @@
     <Text Include="../../thirdparty/owemdjee/opencv/samples/wp8/OpenCVXaml/OpenCVXaml/Resources/AppResources.Designer.cs" />
     <Text Include="../../thirdparty/owemdjee/opencv/samples/wp8/OpenCVXaml/OpenCVXaml/Resources/AppResources.resx" />
     <Text Include="../../thirdparty/owemdjee/opencv/samples/wp8/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/opencv/supporters.txt" />
     <Xml Include="../../thirdparty/owemdjee/opencv/apps/interactive-calibration/defaultConfig.xml" />
     <Xml Include="../../thirdparty/owemdjee/opencv/doc/DoxygenLayout.xml" />
     <Xml Include="../../thirdparty/owemdjee/opencv/samples/cpp/tutorial_code/calib3d/camera_calibration/VID5.xml" />

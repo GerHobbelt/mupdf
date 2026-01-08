@@ -89,23 +89,6 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-      <LanguageStandard_C>stdclatest</LanguageStandard_C>
-      <SupportJustMyCode>false</SupportJustMyCode>
-      <SDLCheck>false</SDLCheck>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <StringPooling>true</StringPooling>
-      <ExceptionHandling>Async</ExceptionHandling>
-      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
-      <FloatingPointModel>Fast</FloatingPointModel>
-      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
-      <FloatingPointExceptions>false</FloatingPointExceptions>
-      <ConformanceMode>true</ConformanceMode>
-      <OmitFramePointers>true</OmitFramePointers>
-      <EnableUnitySupport>true</EnableUnitySupport>
-      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
 </ItemDefinitionGroup>
@@ -257,8 +240,6 @@
   <ItemGroup>
     <ClCompile Include="../../thirdparty/owemdjee/tre/Tools/rewrite_raw_strings.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tre/tests/monolithic-main.c" />
-    <ClInclude Include="../../thirdparty/owemdjee/tre/contrib/ps3/config.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tre/contrib/ps3/tre-config.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tre/local_includes/regex.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tre/local_includes/tre.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tre/tests/monolithic_examples.h" />
@@ -270,16 +251,9 @@
     <Text Include="../../thirdparty/owemdjee/tre/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/tre/NEWS" />
     <Text Include="../../thirdparty/owemdjee/tre/README.md" />
-    <Text Include="../../thirdparty/owemdjee/tre/README_waf.txt" />
     <Text Include="../../thirdparty/owemdjee/tre/THANKS" />
     <Text Include="../../thirdparty/owemdjee/tre/TODO" />
-    <Text Include="../../thirdparty/owemdjee/tre/Tools/waf/build_variants.py" />
-    <Text Include="../../thirdparty/owemdjee/tre/Tools/waf/intltool.py" />
-    <Text Include="../../thirdparty/owemdjee/tre/Tools/waf/lib_unit_tests.py" />
-    <Text Include="../../thirdparty/owemdjee/tre/Tools/waf/python_unit_tests.py" />
     <Text Include="../../thirdparty/owemdjee/tre/configure.ac" />
-    <Text Include="../../thirdparty/owemdjee/tre/contrib/README.txt" />
-    <Text Include="../../thirdparty/owemdjee/tre/contrib/ps3/Makefile" />
     <Text Include="../../thirdparty/owemdjee/tre/doc/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/tre/doc/agrep.1.in" />
     <Text Include="../../thirdparty/owemdjee/tre/doc/default.css" />
@@ -287,9 +261,7 @@
     <Text Include="../../thirdparty/owemdjee/tre/doc/tre-syntax.html" />
     <Text Include="../../thirdparty/owemdjee/tre/local_includes/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/tre/local_includes/tre-config.h.in" />
-    <Text Include="../../thirdparty/owemdjee/tre/local_includes/wscript" />
     <Text Include="../../thirdparty/owemdjee/tre/m4/Makefile.am" />
-    <Text Include="../../thirdparty/owemdjee/tre/m4/ac_libtool_tags.m4" />
     <Text Include="../../thirdparty/owemdjee/tre/m4/ax_check_funcs_comp.m4" />
     <Text Include="../../thirdparty/owemdjee/tre/m4/ax_check_sign.m4" />
     <Text Include="../../thirdparty/owemdjee/tre/m4/ax_decl_wchar_max.m4" />
@@ -299,7 +271,6 @@
     <Text Include="../../thirdparty/owemdjee/tre/po/POTFILES.in" />
     <Text Include="../../thirdparty/owemdjee/tre/po/fi.po" />
     <Text Include="../../thirdparty/owemdjee/tre/po/sv.po" />
-    <Text Include="../../thirdparty/owemdjee/tre/po/wscript" />
     <Text Include="../../thirdparty/owemdjee/tre/po/zh_CN.po" />
     <Text Include="../../thirdparty/owemdjee/tre/tests/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/tre/tests/agrep/Makefile.am" />
@@ -312,7 +283,6 @@
     <Text Include="../../thirdparty/owemdjee/tre/tests/agrep/records.args" />
     <Text Include="../../thirdparty/owemdjee/tre/tests/agrep/records.input" />
     <Text Include="../../thirdparty/owemdjee/tre/tests/agrep/run-tests.sh" />
-    <Text Include="../../thirdparty/owemdjee/tre/tests/agrep/wscript" />
     <Text Include="../../thirdparty/owemdjee/tre/tests/build-hosts/ahma" />
     <Text Include="../../thirdparty/owemdjee/tre/tests/build-hosts/earthquake" />
     <Text Include="../../thirdparty/owemdjee/tre/tests/build-hosts/hemuli" />
@@ -320,32 +290,6 @@
     <Text Include="../../thirdparty/owemdjee/tre/tests/build-on-hosts.sh" />
     <Text Include="../../thirdparty/owemdjee/tre/tests/build-run.sh" />
     <Text Include="../../thirdparty/owemdjee/tre/tests/build-tests.sh" />
-    <Text Include="../../thirdparty/owemdjee/tre/tests/data/retest/expected/nls_ap_nc_sb_ri/foo.txt" />
-    <Text Include="../../thirdparty/owemdjee/tre/tests/data/retest/expected/nls_ap_nc_sb_ti/foo.txt" />
-    <Text Include="../../thirdparty/owemdjee/tre/tests/data/retest/expected/nls_ap_wc_mb_ri/foo.txt" />
-    <Text Include="../../thirdparty/owemdjee/tre/tests/data/retest/expected/nls_ap_wc_mb_ti/foo.txt" />
-    <Text Include="../../thirdparty/owemdjee/tre/tests/data/retest/expected/nls_ap_wc_sb_ri/foo.txt" />
-    <Text Include="../../thirdparty/owemdjee/tre/tests/data/retest/expected/nls_ap_wc_sb_ti/foo.txt" />
-    <Text Include="../../thirdparty/owemdjee/tre/tests/data/retest/expected/nls_ex_nc_sb_ri/foo.txt" />
-    <Text Include="../../thirdparty/owemdjee/tre/tests/data/retest/expected/nls_ex_nc_sb_ti/foo.txt" />
-    <Text Include="../../thirdparty/owemdjee/tre/tests/data/retest/expected/nls_ex_wc_mb_ri/foo.txt" />
-    <Text Include="../../thirdparty/owemdjee/tre/tests/data/retest/expected/nls_ex_wc_mb_ti/foo.txt" />
-    <Text Include="../../thirdparty/owemdjee/tre/tests/data/retest/expected/nls_ex_wc_sb_ri/foo.txt" />
-    <Text Include="../../thirdparty/owemdjee/tre/tests/data/retest/expected/nls_ex_wc_sb_ti/foo.txt" />
-    <Text Include="../../thirdparty/owemdjee/tre/tests/data/retest/expected/sls_ap_nc_sb_ri/foo.txt" />
-    <Text Include="../../thirdparty/owemdjee/tre/tests/data/retest/expected/sls_ap_nc_sb_ti/foo.txt" />
-    <Text Include="../../thirdparty/owemdjee/tre/tests/data/retest/expected/sls_ap_wc_mb_ri/foo.txt" />
-    <Text Include="../../thirdparty/owemdjee/tre/tests/data/retest/expected/sls_ap_wc_mb_ti/foo.txt" />
-    <Text Include="../../thirdparty/owemdjee/tre/tests/data/retest/expected/sls_ap_wc_sb_ri/foo.txt" />
-    <Text Include="../../thirdparty/owemdjee/tre/tests/data/retest/expected/sls_ap_wc_sb_ti/foo.txt" />
-    <Text Include="../../thirdparty/owemdjee/tre/tests/data/retest/expected/sls_ex_nc_sb_ri/foo.txt" />
-    <Text Include="../../thirdparty/owemdjee/tre/tests/data/retest/expected/sls_ex_nc_sb_ti/foo.txt" />
-    <Text Include="../../thirdparty/owemdjee/tre/tests/data/retest/expected/sls_ex_wc_mb_ri/foo.txt" />
-    <Text Include="../../thirdparty/owemdjee/tre/tests/data/retest/expected/sls_ex_wc_mb_ti/foo.txt" />
-    <Text Include="../../thirdparty/owemdjee/tre/tests/data/retest/expected/sls_ex_wc_sb_ri/foo.txt" />
-    <Text Include="../../thirdparty/owemdjee/tre/tests/data/retest/expected/sls_ex_wc_sb_ti/foo.txt" />
-    <Text Include="../../thirdparty/owemdjee/tre/tests/data/strtest/expected/foo.txt" />
-    <Text Include="../../thirdparty/owemdjee/tre/tests/wscript" />
     <Text Include="../../thirdparty/owemdjee/tre/tre.pc.in" />
     <Text Include="../../thirdparty/owemdjee/tre/tre.spec.in" />
     <Text Include="../../thirdparty/owemdjee/tre/utils/Makefile.am" />
@@ -353,11 +297,9 @@
     <Text Include="../../thirdparty/owemdjee/tre/utils/build-release.sh" />
     <Text Include="../../thirdparty/owemdjee/tre/utils/build-rpm.sh" />
     <Text Include="../../thirdparty/owemdjee/tre/utils/build-sources.sh" />
-    <Text Include="../../thirdparty/owemdjee/tre/utils/replace-vars.sh" />
-    <Text Include="../../thirdparty/owemdjee/tre/waf" />
+    <Text Include="../../thirdparty/owemdjee/tre/win32/config.h.in" />
     <Text Include="../../thirdparty/owemdjee/tre/win32/tre-config.h.in" />
     <Text Include="../../thirdparty/owemdjee/tre/win32/tre.def" />
-    <Text Include="../../thirdparty/owemdjee/tre/wscript" />
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>

@@ -89,23 +89,6 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-      <LanguageStandard_C>stdclatest</LanguageStandard_C>
-      <SupportJustMyCode>false</SupportJustMyCode>
-      <SDLCheck>false</SDLCheck>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <StringPooling>true</StringPooling>
-      <ExceptionHandling>Async</ExceptionHandling>
-      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
-      <FloatingPointModel>Fast</FloatingPointModel>
-      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
-      <FloatingPointExceptions>false</FloatingPointExceptions>
-      <ConformanceMode>true</ConformanceMode>
-      <OmitFramePointers>true</OmitFramePointers>
-      <EnableUnitySupport>true</EnableUnitySupport>
-      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
 </ItemDefinitionGroup>
@@ -224,8 +207,18 @@
   </ImportGroup>
   <ItemGroup>
     <ClCompile Include="../../thirdparty/owemdjee/libunisani/source/driver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunisani/source/internal-utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunisani/source/leptonica-sanitize.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libunisani/source/lowercase.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunisani/source/normstrngs.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunisani/source/produce-ngrams.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libunisani/source/replace-german-diacritics.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunisani/source/sanitation-driver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunisani/source/sanitize-filepath.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunisani/source/sanitize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunisani/source/test-core-beliefs.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunisani/source/test-main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libunisani/source/transliterate-b0rked-utf8-PEP383.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libunisani/source/transliterate-cp1252.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libunisani/source/transliterate-emoji.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libunisani/source/transliterate-iconv.cpp" />
@@ -234,6 +227,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/libunisani/source/transliterate-to-pinyin.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libunisani/source/transliterate-utf8.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/libunisani/include/unisani/unisani.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libunisani/source/unisani-implementation.h" />
     <Text Include="../../thirdparty/owemdjee/libunisani/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libunisani/DEVELOPER-README.md" />
     <Text Include="../../thirdparty/owemdjee/libunisani/LICENSE" />

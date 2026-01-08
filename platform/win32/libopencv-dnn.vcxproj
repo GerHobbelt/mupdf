@@ -89,23 +89,6 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <DisableSpecificWarnings>5054;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-      <LanguageStandard_C>stdclatest</LanguageStandard_C>
-      <SupportJustMyCode>false</SupportJustMyCode>
-      <SDLCheck>false</SDLCheck>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <StringPooling>true</StringPooling>
-      <ExceptionHandling>Async</ExceptionHandling>
-      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
-      <FloatingPointModel>Fast</FloatingPointModel>
-      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
-      <FloatingPointExceptions>false</FloatingPointExceptions>
-      <ConformanceMode>true</ConformanceMode>
-      <OmitFramePointers>true</OmitFramePointers>
-      <EnableUnitySupport>true</EnableUnitySupport>
-      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
 </ItemDefinitionGroup>
@@ -262,11 +245,15 @@
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layer_factory.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/accum_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/affinegrid_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/arg_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/attention_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/batch_norm_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/bitshift_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/blank_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/cast2_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/cast_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/centercroppad_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/clip_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/concat2_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/concat_layer.cpp" />
@@ -285,7 +272,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/cumsum_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/depth_space_ops_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/dequantizelinear_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/det_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/detection_output_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/dft_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/einsum_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/elementwise_layers.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/eltwise_layer.cpp" />
@@ -299,10 +288,13 @@
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/gather_elements_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/gather_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/gemm_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/gridsample_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/group_norm_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/hardmax.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/if_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/instance_norm_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/is_inf_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/is_nan_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/layer_norm.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/layers_common.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/lrn_layer.cpp" />
@@ -310,9 +302,13 @@
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/max_unpooling_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/mvn_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/nary_eltwise_layers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/nll_loss_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/nonmaxsuppression_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/nonzero_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/normalize_bbox_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/not_implemented_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/not_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/onehot_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/pad2_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/padding_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/permute_layer.cpp" />
@@ -323,19 +319,24 @@
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/range_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/recurrent2_layers.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/recurrent_layers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/reduce2_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/reduce_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/region_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/reorg_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/reshape2_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/reshape_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/resize2_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/resize_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/rotary_embedding_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/scale_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/scatterND_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/scatter_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/shape_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/shuffle_channel_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/size_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/slice2_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/slice_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/softmax_cross_entropy_loss_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/softmax_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/split2_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/split_layer.cpp" />
@@ -346,6 +347,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/topk_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/transpose_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/trilu_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/unique_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/unsqueeze_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/legacy_backend.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/model.cpp" />

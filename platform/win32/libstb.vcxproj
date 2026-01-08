@@ -89,23 +89,6 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-      <LanguageStandard_C>stdclatest</LanguageStandard_C>
-      <SupportJustMyCode>false</SupportJustMyCode>
-      <SDLCheck>false</SDLCheck>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <StringPooling>true</StringPooling>
-      <ExceptionHandling>Async</ExceptionHandling>
-      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
-      <FloatingPointModel>Fast</FloatingPointModel>
-      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
-      <FloatingPointExceptions>false</FloatingPointExceptions>
-      <ConformanceMode>true</ConformanceMode>
-      <OmitFramePointers>true</OmitFramePointers>
-      <EnableUnitySupport>true</EnableUnitySupport>
-      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
 </ItemDefinitionGroup>
@@ -124,7 +107,6 @@
       <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/libstb;../../thirdparty/owemdjee/libstb/deprecated;../../thirdparty/owemdjee/dirent/include;../../include/fake;../../thirdparty/owemdjee/libstb/tests/caveview;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTB;STB_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTB;STB_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -152,7 +134,6 @@
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTB;STB_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTB;STB_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -181,7 +162,6 @@
       <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/libstb;../../thirdparty/owemdjee/libstb/deprecated;../../thirdparty/owemdjee/dirent/include;../../include/fake;../../thirdparty/owemdjee/libstb/tests/caveview;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTB;STB_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTB;STB_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -209,7 +189,6 @@
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTB;STB_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTB;STB_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -227,68 +206,29 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/libstb/deprecated/stb_image.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libstb/deprecated/stretch_test.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libstb/stb_image_resize_test/dotimings.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libstb/stb_image_resize_test/oldir.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libstb/stb_image_resize_test/stbirtest.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libstb/stb_image_resize_test/vf_train.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstb/src/stb_c_lexer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstb/src/stb_connected_components.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstb/src/stb_divide.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstb/src/stb_ds.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstb/src/stb_dxt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstb/src/stb_easy_font.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstb/src/stb_herringbone_wang_tile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstb/src/stb_hexwave.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstb/src/stb_image.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstb/src/stb_image_draw.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstb/src/stb_image_resize2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstb/src/stb_image_write.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstb/src/stb_include.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstb/src/stb_leakcheck.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstb/src/stb_libqrencode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstb/src/stb_perlin.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstb/src/stb_rect_pack.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstb/src/stb_sprintf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstb/src/stb_textedit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstb/src/stb_tilemap_editor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstb/src/stb_truetype.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstb/src/stb_voxel_render.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libstb/stb_vorbis.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libstb/tests/c_lexer_test.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libstb/tests/caveview/cave_main.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libstb/tests/caveview/cave_mesher.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libstb/tests/caveview/cave_parse.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libstb/tests/caveview/cave_render.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libstb/tests/caveview/win32/SDL_windows_main.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libstb/tests/grid_reachability.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libstb/tests/herringbone_generator.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libstb/tests/herringbone_map.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libstb/tests/image/image_test_issues.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libstb/tests/image_test.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libstb/tests/image_write_test.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libstb/tests/oversample/oversample_main.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libstb/tests/pg_test/pg_test.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libstb/tests/resample_test.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libstb/tests/resample_test_c.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libstb/tests/sdf/sdf_test.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libstb/tests/stb.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libstb/tests/stb_cpp.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libstb/tests/stb_static.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libstb/tests/stblib_test.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libstb/tests/stblib_test_companion.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libstb/tests/test_c_compilation.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libstb/tests/test_c_lexer.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libstb/tests/test_cpp_compilation.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libstb/tests/test_ds.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libstb/tests/test_ds_cpp.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libstb/tests/test_dxt.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libstb/tests/test_easyfont.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libstb/tests/test_image.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libstb/tests/test_image_write.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libstb/tests/test_perlin.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libstb/tests/test_png_paeth.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libstb/tests/test_png_regress.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libstb/tests/test_siphash.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libstb/tests/test_sprintf.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libstb/tests/test_truetype.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libstb/tests/test_vorbis.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libstb/tests/test_voxel.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libstb/tests/textedit_sample.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libstb/tests/tilemap_editor_integration_example.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libstb/tests/truetype_test_win32.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libstb/tests/vorbis/1248/1248.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libstb/tests/vorbis/1490/vorbis.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libstb/tests/vorbis/vorbis_test_issues.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libstb/tests/vorbseek/vorbseek.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libstb/tools/build_matrix.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libstb/tools/easy_font_maker.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libstb/tools/make_readme.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libstb/tools/trailing_whitespace.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libstb/tools/unicode.c" />
-    <ClInclude Include="../../thirdparty/owemdjee/libstb/deprecated/rrsprintf.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libstb/deprecated/stb.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libstb/deprecated/stb_image_resize.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libstb/deprecated/stretchy_buffer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libstb/stb_c_lexer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libstb/stb_connected_components.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libstb/stb_divide.h" />
@@ -300,7 +240,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/libstb/stb_image.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libstb/stb_image_draw.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libstb/stb_image_resize2.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libstb/stb_image_resize_test/old_image_resize.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libstb/stb_image_write.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libstb/stb_include.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libstb/stb_leakcheck.h" />
@@ -312,25 +251,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/libstb/stb_tilemap_editor.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libstb/stb_truetype.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libstb/stb_voxel_render.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libstb/tests/caveview/cave_parse.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libstb/tests/caveview/caveview.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libstb/tests/caveview/glext.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libstb/tests/caveview/glext_list.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libstb/tests/caveview/stb_gl.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libstb/tests/caveview/stb_glprog.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libstb/tests/image/1454_gif.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libstb/tests/oversample/stb_wingraph.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libstb/tests/prerelease/stb_lib.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libstb/tests/vorbis/1536.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libstb/tests/vorbis/1537.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libstb/tests/vorbis/1553.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libstb/tests/vorbis/1554.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libstb/tests/vorbis/1555.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libstb/tests/vorbis/1556.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libstb/tests/vorbis/1557.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libstb/tests/vorbis/1558.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libstb/tests/vorbis/1559.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libstb/tests/vorbis/1560.h" />
     <Image Include="../../thirdparty/owemdjee/libstb/data/atari_8bit_font_revised.png" />
     <Image Include="../../thirdparty/owemdjee/libstb/data/easy_font_raw.png" />
     <Image Include="../../thirdparty/owemdjee/libstb/data/herringbone/template_caves_limit_connectivity.png" />
@@ -355,306 +275,15 @@
     <Image Include="../../thirdparty/owemdjee/libstb/data/map_01.png" />
     <Image Include="../../thirdparty/owemdjee/libstb/data/map_02.png" />
     <Image Include="../../thirdparty/owemdjee/libstb/data/map_03.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/16bit/basi0g16.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/16bit/basi2c16.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/16bit/basi4a16.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/16bit/basi6a16.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/16bit/basn0g16.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/16bit/basn2c16.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/16bit/basn4a16.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/16bit/basn6a16.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/16bit/bgai4a16.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/16bit/bgan6a16.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/16bit/bggn4a16.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/16bit/bgyn6a16.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/16bit/oi1n0g16.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/16bit/oi1n2c16.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/16bit/oi2n0g16.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/16bit/oi2n2c16.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/16bit/oi4n0g16.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/16bit/oi4n2c16.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/16bit/oi9n0g16.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/16bit/oi9n2c16.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/16bit/tbbn2c16.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/16bit/tbgn2c16.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/16bit/tbwn0g16.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/corrupt/xc1n0g08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/corrupt/xc9n2c08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/corrupt/xcrn0g04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/corrupt/xcsn0g01.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/corrupt/xd0n2c08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/corrupt/xd3n2c08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/corrupt/xd9n2c08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/corrupt/xdtn0g01.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/corrupt/xhdn0g08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/corrupt/xlfn0g04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/corrupt/xs1n0g01.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/corrupt/xs2n0g01.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/corrupt/xs4n0g01.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/corrupt/xs7n0g01.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/iphone/iphone_basi0g01.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/iphone/iphone_basi0g02.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/iphone/iphone_basi3p02.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/iphone/iphone_bgwn6a08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/iphone/iphone_bgyn6a16.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/iphone/iphone_tbyn3p08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/iphone/iphone_z06n2c08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/basi0g01.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/basi0g02.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/basi0g04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/basi0g08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/basi2c08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/basi3p01.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/basi3p02.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/basi3p04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/basi3p08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/basi4a08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/basi6a08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/basn0g01.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/basn0g02.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/basn0g04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/basn0g08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/basn2c08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/basn3p01.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/basn3p02.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/basn3p04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/basn3p08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/basn4a08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/basn6a08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/bgai4a08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/bgan6a08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/bgbn4a08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/bgwn6a08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/s01i3p01.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/s01n3p01.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/s02i3p01.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/s02n3p01.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/s03i3p01.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/s03n3p01.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/s04i3p01.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/s04n3p01.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/s05i3p02.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/s05n3p02.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/s06i3p02.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/s06n3p02.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/s07i3p02.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/s07n3p02.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/s08i3p02.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/s08n3p02.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/s09i3p02.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/s09n3p02.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/s32i3p04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/s32n3p04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/s33i3p04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/s33n3p04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/s34i3p04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/s34n3p04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/s35i3p04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/s35n3p04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/s36i3p04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/s36n3p04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/s37i3p04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/s37n3p04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/s38i3p04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/s38n3p04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/s39i3p04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/s39n3p04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/s40i3p04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/s40n3p04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/tbbn0g04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/tbbn3p08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/tbgn3p08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/tbrn2c08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/tbwn3p08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/tbyn3p08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/tm3n3p02.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/tp0n0g08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/tp0n2c08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/tp0n3p08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/tp1n3p08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/z00n2c08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/z03n2c08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/z06n2c08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary/z09n2c08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/basi0g01.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/basi0g02.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/basi0g04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/basi0g08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/basi2c08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/basi3p01.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/basi3p02.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/basi3p04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/basi3p08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/basi4a08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/basi6a08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/basn0g01.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/basn0g02.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/basn0g04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/basn0g08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/basn2c08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/basn3p01.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/basn3p02.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/basn3p04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/basn3p08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/basn4a08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/basn6a08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/bgai4a08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/bgan6a08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/bgbn4a08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/bgwn6a08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/s01i3p01.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/s01n3p01.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/s02i3p01.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/s02n3p01.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/s03i3p01.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/s03n3p01.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/s04i3p01.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/s04n3p01.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/s05i3p02.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/s05n3p02.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/s06i3p02.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/s06n3p02.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/s07i3p02.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/s07n3p02.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/s08i3p02.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/s08n3p02.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/s09i3p02.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/s09n3p02.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/s32i3p04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/s32n3p04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/s33i3p04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/s33n3p04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/s34i3p04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/s34n3p04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/s35i3p04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/s35n3p04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/s36i3p04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/s36n3p04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/s37i3p04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/s37n3p04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/s38i3p04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/s38n3p04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/s39i3p04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/s39n3p04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/s40i3p04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/s40n3p04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/tbbn0g04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/tbbn3p08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/tbgn3p08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/tbrn2c08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/tbwn3p08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/tbyn3p08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/tm3n3p02.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/tp0n0g08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/tp0n2c08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/tp0n3p08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/tp1n3p08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/z00n2c08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/z03n2c08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/z06n2c08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/primary_check/z09n2c08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/ccwn2c08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/ccwn3p08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/cdfn2c08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/cdhn2c08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/cdsn2c08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/cdun2c08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/ch1n3p04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/ch2n3p08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/cm0n0g04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/cm7n0g04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/cm9n0g04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/cs3n2c16.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/cs3n3p08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/cs5n2c08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/cs5n3p08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/cs8n2c08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/cs8n3p08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/ct0n0g04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/ct1n0g04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/cten0g04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/ctfn0g04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/ctgn0g04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/cthn0g04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/ctjn0g04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/ctzn0g04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/f00n0g08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/f00n2c08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/f01n0g08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/f01n2c08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/f02n0g08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/f02n2c08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/f03n0g08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/f03n2c08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/f04n0g08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/f04n2c08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/f99n0g04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/g03n0g16.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/g03n2c08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/g03n3p04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/g04n0g16.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/g04n2c08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/g04n3p04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/g05n0g16.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/g05n2c08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/g05n3p04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/g07n0g16.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/g07n2c08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/g07n3p04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/g10n0g16.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/g10n2c08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/g10n3p04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/g25n0g16.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/g25n2c08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/g25n3p04.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/pp0n2c16.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/pp0n6a08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/ps1n0g08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/ps1n2c16.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/ps2n0g08.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/unused/ps2n2c16.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/sdf/sdf_test_arial_16.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/sdf/sdf_test_times_16.png" />
-    <Image Include="../../thirdparty/owemdjee/libstb/tests/sdf/sdf_test_times_50.png" />
     <Text Include="../../thirdparty/owemdjee/libstb/LICENSE" />
     <Text Include="../../thirdparty/owemdjee/libstb/README.md" />
     <Text Include="../../thirdparty/owemdjee/libstb/SECURITY.md" />
     <Text Include="../../thirdparty/owemdjee/libstb/data/herringbone/license.txt" />
-    <Text Include="../../thirdparty/owemdjee/libstb/deprecated/stretchy_buffer.txt" />
     <Text Include="../../thirdparty/owemdjee/libstb/docs/other_libs.md" />
     <Text Include="../../thirdparty/owemdjee/libstb/docs/stb_howto.txt" />
     <Text Include="../../thirdparty/owemdjee/libstb/docs/stb_voxel_render_interview.md" />
     <Text Include="../../thirdparty/owemdjee/libstb/docs/why_public_domain.md" />
     <Text Include="../../thirdparty/owemdjee/libstb/test_lexer.sh" />
-    <Text Include="../../thirdparty/owemdjee/libstb/tests/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/libstb/tests/Makefile" />
-    <Text Include="../../thirdparty/owemdjee/libstb/tests/caveview/README.md" />
-    <Text Include="../../thirdparty/owemdjee/libstb/tests/caveview/caveview.dsw" />
-    <Text Include="../../thirdparty/owemdjee/libstb/tests/oversample/README.md" />
-    <Text Include="../../thirdparty/owemdjee/libstb/tests/oversample/oversample.dsw" />
-    <Text Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/PngSuite.LICENSE" />
-    <Text Include="../../thirdparty/owemdjee/libstb/tests/pngsuite/ref_results.csv" />
-    <Text Include="../../thirdparty/owemdjee/libstb/tests/stb.dsw" />
-    <Text Include="../../thirdparty/owemdjee/libstb/tests/vorbis/1168a/issue-url" />
-    <Text Include="../../thirdparty/owemdjee/libstb/tests/vorbis/1168a/log.txt" />
-    <Text Include="../../thirdparty/owemdjee/libstb/tests/vorbis/1168b/issue-url" />
-    <Text Include="../../thirdparty/owemdjee/libstb/tests/vorbis/1168b/log.txt" />
-    <Text Include="../../thirdparty/owemdjee/libstb/tests/vorbis/1168c/issue-url" />
-    <Text Include="../../thirdparty/owemdjee/libstb/tests/vorbis/1168c/log.txt" />
-    <Text Include="../../thirdparty/owemdjee/libstb/tests/vorbis/1168d/issue-url" />
-    <Text Include="../../thirdparty/owemdjee/libstb/tests/vorbis/1168d/log.txt" />
-    <Text Include="../../thirdparty/owemdjee/libstb/tests/vorbis/1168e/issue-url" />
-    <Text Include="../../thirdparty/owemdjee/libstb/tests/vorbis/1174a/issue-url" />
-    <Text Include="../../thirdparty/owemdjee/libstb/tests/vorbis/1174b/issue-url" />
-    <Text Include="../../thirdparty/owemdjee/libstb/tests/vorbis/1248/log.txt" />
-    <Text Include="../../thirdparty/owemdjee/libstb/tests/vorbis/1312/issue-url" />
-    <Text Include="../../thirdparty/owemdjee/libstb/tests/vorbis/1312/log.txt" />
-    <Text Include="../../thirdparty/owemdjee/libstb/tests/vorbis/1490/log.txt" />
-    <Text Include="../../thirdparty/owemdjee/libstb/tools/README.footer.md" />
-    <Text Include="../../thirdparty/owemdjee/libstb/tools/README.header.md" />
-    <Text Include="../../thirdparty/owemdjee/libstb/tools/README.list" />
-    <Text Include="../../thirdparty/owemdjee/libstb/tools/make_readme.dsp" />
-    <Text Include="../../thirdparty/owemdjee/libstb/tools/mr.bat" />
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
