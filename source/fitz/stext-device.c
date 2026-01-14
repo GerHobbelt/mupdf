@@ -1566,17 +1566,17 @@ fixup_bboxes_and_bidi(fz_context *ctx, fz_stext_block *block)
 }
 
 static void
-advance_x(fz_point *a, fz_point b, float d)
+advance_to_x(fz_point *a, fz_point b, float x)
 {
-	a->y += (b.y - a->y) * d / (b.x - a->x);
-	a->x += d;
+	a->y += (b.y - a->y) * (x - a->x) / (b.x - a->x);
+	a->x = x;
 }
 
 static void
-advance_y(fz_point *a, fz_point b, float d)
+advance_to_y(fz_point *a, fz_point b, float y)
 {
-	a->x += (b.x - a->x) * d / (b.y - a->y);
-	a->y += d;
+	a->x += (b.x - a->x) * (y - a->y) / (b.y - a->y);
+	a->y = y;
 }
 
 static int
@@ -1593,13 +1593,13 @@ line_crosses_rect(fz_point a, fz_point b, fz_rect r)
 		return 0;
 
 	if (a.x < r.x0)
-		advance_x(&a, b, r.x0 - a.x);
+		advance_to_x(&a, b, r.x0);
 	if (a.x > r.x1)
-		advance_x(&a, b, r.x1 - a.x);
+		advance_to_x(&a, b, r.x1);
 	if (a.y < r.y0)
-		advance_y(&a, b, r.y0 - a.y);
+		advance_to_y(&a, b, r.y0);
 	if (a.y > r.y1)
-		advance_y(&a, b, r.y1 - a.y);
+		advance_to_y(&a, b, r.y1);
 
 	return fz_is_point_inside_rect(a, r);
 }
@@ -1670,6 +1670,13 @@ static fz_rect expanded_rect_from_quad(fz_quad quad, fz_point dir, fz_point orig
 	fz_point right = { quad.lr.x - quad.ur.x, quad.lr.y - quad.ur.y };
 	float height = (hypotf(left.x, left.y) + hypotf(right.x, right.y))/2;
 	int neg = 0;
+	float extra_rise = 0;
+
+	/* Spaces will have 0 ascent. underscores will have small ascent.
+	 * We want a sane ascent to be able to spot strikeouts, but not
+	 * so big that it incorporates lines above the text, like borders. */
+	if (ascent < 0.75*size)
+		extra_rise = 0.75*size - ascent;
 
 	/* We'd like height to be at least ascent + 1/4 size */
 	if (height < 0)
@@ -1684,6 +1691,10 @@ static fz_rect expanded_rect_from_quad(fz_quad quad, fz_point dir, fz_point orig
 	quad.ll.y +=   height * dir.x;
 	quad.lr.x += - height * dir.y;
 	quad.lr.y +=   height * dir.x;
+	quad.ul.x -= - extra_rise * dir.y;
+	quad.ul.y -=   extra_rise * dir.x;
+	quad.ur.x -= - extra_rise * dir.y;
+	quad.ur.y -=   extra_rise * dir.x;
 
 	return fz_rect_from_quad(quad);
 }
@@ -1698,7 +1709,7 @@ static int feq(float a,float b)
 }
 
 static void
-check_strikeout(fz_context *ctx, fz_stext_block *block, fz_point from, fz_point to, fz_point dir)
+check_strikeout(fz_context *ctx, fz_stext_block *block, fz_point from, fz_point to, fz_point dir, float thickness)
 {
 	for ( ; block; block = block->next)
 	{
@@ -1723,7 +1734,14 @@ check_strikeout(fz_context *ctx, fz_stext_block *block, fz_point from, fz_point 
 			{
 				fz_point up;
 				float dx, dy, dot;
-				fz_rect ch_box = expanded_rect_from_quad(ch->quad, line->dir, ch->origin, ch->size);
+				fz_rect ch_box;
+
+				/* If the thickness is more than a 1/4 of the size, it's a highlight, not a
+				 * line! */
+				if (ch->size < thickness*4)
+					continue;
+
+				ch_box = expanded_rect_from_quad(ch->quad, line->dir, ch->origin, ch->size);
 
 				if (!line_crosses_rect(from, to, ch_box))
 					continue;
@@ -1758,12 +1776,13 @@ check_rects_for_strikeout(fz_context *ctx, fz_stext_device *tdev, fz_stext_page 
 	{
 		fz_point from = tdev->rects[i].from;
 		fz_point to = tdev->rects[i].to;
+		float thickness = tdev->rects[i].thickness;
 		fz_point dir;
 		dir.x = to.x - from.x;
 		dir.y = to.y - from.y;
 		dir = fz_normalize_vector(dir);
 
-		check_strikeout(ctx, page->first_block, from, to, dir);
+		check_strikeout(ctx, page->first_block, from, to, dir, thickness);
 	}
 }
 
