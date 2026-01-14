@@ -937,7 +937,7 @@ pdf_write_ink_appearance(fz_context *ctx, pdf_annot *annot, fz_buffer *buf, fz_r
 
 	*rect = fz_empty_rect;
 
-	fz_append_printf(ctx, buf, "1 j\n");
+	fz_append_printf(ctx, buf, "1 J\n1 j\n");
 
 	ink_list = pdf_dict_get(ctx, annot->obj, PDF_NAME(InkList));
 	n = pdf_array_len(ctx, ink_list);
@@ -3103,7 +3103,10 @@ retry_after_repair:
 		/* Never update Popup and Link annotations */
 		subtype = pdf_dict_get(ctx, annot->obj, PDF_NAME(Subtype));
 		if (subtype == PDF_NAME(Popup) || subtype == PDF_NAME(Link))
+		{
+			pdf_end_operation(ctx, annot->page->doc);
 			break;
+		}
 
 		/* Never update signed Signature widgets */
 		if (subtype == PDF_NAME(Widget))
@@ -3113,7 +3116,10 @@ retry_after_repair:
 			{
 				/* We cannot synthesise an appearance for a signed Sig, so don't even try. */
 				if (pdf_signature_is_signed(ctx, annot->page->doc, annot->obj))
+				{
+					pdf_end_operation(ctx, annot->page->doc);
 					break;
+				}
 			}
 		}
 
