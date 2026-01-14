@@ -140,7 +140,6 @@ public class PDFAnnotation
 	public native void setFlags(int flags);
 	public native String getContents();
 	public native void setContents(String contents);
-	public native boolean hasRect();
 	public native float[] getColor();
 	public native void setColor(float[] color);
 	public native float getOpacity();
