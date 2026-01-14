@@ -874,7 +874,8 @@ push_adjustment_to_array(fz_context *ctx, pdf_sanitize_processor *p, pdf_obj *ar
 {
 	if (p->Tm_adjust == 0)
 		return;
-	pdf_array_push_real(ctx, arr, p->Tm_adjust * 1000);
+	/* Negate the number here, because it will be subtracted upon use. */
+	pdf_array_push_real(ctx, arr, -p->Tm_adjust * 1000);
 	p->Tm_adjust = 0;
 }
 
@@ -905,7 +906,7 @@ filter_show_string(fz_context *ctx, pdf_sanitize_processor *p, unsigned char *bu
 		}
 		if (i != len)
 		{
-			adjust_text(ctx, p, p->tos.char_tx, p->tos.char_ty);
+			adjust_text(ctx, p, p->tos.char_tx / p->gstate->pending.text.scale, p->tos.char_ty / p->gstate->pending.text.scale);
 			i += inc;
 		}
 		if (removed_space)
@@ -962,7 +963,7 @@ filter_show_text(fz_context *ctx, pdf_sanitize_processor *p, pdf_obj *text)
 					}
 					if (j != len)
 					{
-						adjust_text(ctx, p, p->tos.char_tx, p->tos.char_ty);
+						adjust_text(ctx, p, -p->tos.char_tx / p->gstate->pending.text.scale, -p->tos.char_ty / p->gstate->pending.text.scale);
 						j += inc;
 					}
 					if (removed_space)
@@ -971,7 +972,7 @@ filter_show_text(fz_context *ctx, pdf_sanitize_processor *p, pdf_obj *text)
 			}
 			else
 			{
-				float tadj = - pdf_to_real(ctx, item) * gstate->pending.text.size * 0.001f;
+				float tadj = pdf_to_real(ctx, item) * gstate->pending.text.size * 0.001f / p->gstate->pending.text.scale;
 				if (fontdesc->wmode == 0)
 				{
 					adjust_text(ctx, p, tadj, 0);
@@ -2420,7 +2421,10 @@ pdf_filter_BI(fz_context *ctx, pdf_processor *proc, fz_image *image, const char 
 			if (image)
 			{
 				fz_try(ctx)
+				{
+					copy_resource(ctx, p, PDF_NAME(ColorSpace), colorspace);
 					p->chain->op_BI(ctx, p->chain, image, colorspace);
+				}
 				fz_always(ctx)
 					fz_drop_image(ctx, image);
 				fz_catch(ctx)
@@ -2429,6 +2433,7 @@ pdf_filter_BI(fz_context *ctx, pdf_processor *proc, fz_image *image, const char 
 		}
 		else
 		{
+			copy_resource(ctx, p, PDF_NAME(ColorSpace), colorspace);
 			p->chain->op_BI(ctx, p->chain, image, colorspace);
 		}
 	}

@@ -2178,7 +2178,7 @@ def build(
         except Exception:
             command0 = None
         if command != command0:
-           reasons.append( 'command has changed')
+           reasons.append( f'command has changed: {command0!r} => {command!r}')
 
     if not reasons or all_reasons:
         reason = fs_any_newer( infiles, outfiles)
@@ -2208,8 +2208,12 @@ def build(
     if os.path.exists( command_filename):
         fs_rename(command_filename, command_filename_temp)
     fs_update( command, command_filename_temp)
+    assert os.path.isfile( command_filename_temp)
 
     system( command, out=out, verbose=verbose, executable=executable, caller=2)
+
+    assert os.path.isfile( command_filename_temp), \
+            f'Command seems to have deleted {command_filename_temp=}: {command!r}'
 
     fs_rename( command_filename_temp, command_filename)
 

@@ -2862,6 +2862,14 @@ JNIEXPORT void JNICALL Java_com_artifex_mupdf_fitz_PDFAnnotation_setContents
 
 /*
  * Class:     com_artifex_mupdf_fitz_PDFAnnotation
+ * Method:    hasRect
+ * Signature: ()Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_artifex_mupdf_fitz_PDFAnnotation_hasRect
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_artifex_mupdf_fitz_PDFAnnotation
  * Method:    getRect
  * Signature: ()Lcom/artifex/mupdf/fitz/Rect;
  */
@@ -3868,6 +3876,14 @@ JNIEXPORT jboolean JNICALL Java_com_artifex_mupdf_fitz_PDFDocument_canBeSavedInc
  */
 JNIEXPORT jboolean JNICALL Java_com_artifex_mupdf_fitz_PDFDocument_isRedacted
   (JNIEnv *, jobject);
+
+/*
+ * Class:     com_artifex_mupdf_fitz_PDFDocument
+ * Method:    rearrangePages
+ * Signature: ([I)V
+ */
+JNIEXPORT void JNICALL Java_com_artifex_mupdf_fitz_PDFDocument_rearrangePages
+  (JNIEnv *, jobject, jintArray);
 
 /*
  * Class:     com_artifex_mupdf_fitz_PDFDocument
