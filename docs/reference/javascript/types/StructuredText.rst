@@ -36,10 +36,6 @@ Static properties
 
 	used to search text with the needle being a regexp
 
-.. data:: StructuredText.SEARCH_KEEP_WHITESPACE
-
-	used to search text preserving whitespace; without this all whitespace is converted to single spaces, and leading/trailing whitespace is removed.
-
 .. data:: StructuredText.SEARCH_KEEP_LINES
 
 	used to search text preserving line breaks.
@@ -47,6 +43,10 @@ Static properties
 .. data:: StructuredText.SEARCH_KEEP_PARAGRAPHS
 
 	used to search text preserving paragraph breaks.
+
+.. data:: StructuredText.SEARCH_KEEP_HYPHENS
+
+	used to search text preserving hyphens and not joining lines.
 
 Instance methods
 ----------------

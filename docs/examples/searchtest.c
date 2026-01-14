@@ -9,7 +9,7 @@ feed_page(fz_context *ctx, fz_document *doc, fz_search *search, int page_num, fz
 {
 	fz_stext_page *page;
 
-	printf("FEEDING page %d\n", page_num);
+	printf("FEEDING page %d\n", page_num+1);
 	page = fz_new_stext_page_from_page_number(ctx, doc, page_num, options);
 	fz_feed_search(ctx, search, page, page_num);
 }
@@ -18,7 +18,7 @@ static void
 search_test(fz_context *ctx, fz_search_options options, const char *needle, int first_page, int backwards)
 {
 	fz_stext_options stext_options = { FZ_STEXT_DEHYPHENATE };
-	fz_document *doc = fz_open_document(ctx, "../MyTests/pdf_reference17.pdf");
+	fz_document *doc = fz_open_document(ctx, "pdfref17.pdf");
 	int n = fz_count_pages(ctx, doc);
 	fz_search *search = NULL;
 	fz_search_result res;
