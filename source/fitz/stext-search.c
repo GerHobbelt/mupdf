@@ -596,12 +596,14 @@ static const char *match_exact(const char *h, const char *n)
 static const char *find_exact(fz_context *ctx, void *dummy, const char *s, const char *needle, const char **endp, int bol)
 {
 	const char *end;
+	int c;
+
 	while (*s)
 	{
 		end = match_exact(s, needle);
 		if (end)
 			return *endp = end, s;
-		++s;
+		s += fz_chartorune(&c, s);
 	}
 	return *endp = NULL, NULL;
 }
@@ -609,14 +611,17 @@ static const char *find_exact(fz_context *ctx, void *dummy, const char *s, const
 static const char *find_rev_exact(fz_context *ctx, void *dummy, const char *start, size_t offset, const char *needle, const char **endp, int bol)
 {
 	const char *end;
+	int idx = fz_runeidx(start, &start[offset]);
+
 	while (1)
 	{
 		end = match_exact(&start[offset], needle);
 		if (end)
 			return *endp = end, &start[offset];
-		if (offset == 0)
+		if (idx == 0)
 			break;
-		offset--;;
+		idx--;
+		offset = fz_runeptr(start, idx) - start;
 	}
 	return *endp = NULL, NULL;
 }
@@ -1487,6 +1492,9 @@ get_haystack(fz_context *ctx, fz_stext_page *page, fz_text_transform transform)
 static int
 ensure_haystack_for_page(fz_context *ctx, fz_search *search, search_page *page)
 {
+	char *s;
+	int c;
+
 	if (page->end_of_doc)
 	{
 		assert(&search->current_page != page);
@@ -1497,7 +1505,17 @@ ensure_haystack_for_page(fz_context *ctx, fz_search *search, search_page *page)
 		page->haystack = get_haystack(ctx, page->page, search->transform);
 	page->length = strlen(page->haystack);
 
-	return (page->haystack[0] == 0);
+	/* skip initial whitespace looking for the first non-whitespace character */
+	s = page->haystack;
+	while (*s)
+	{
+		s += fz_chartorune(&c, s);
+		if (!fz_is_unicode_whitespace(c))
+			return 0;
+	}
+
+	/* no non-whitespace character found! */
+	return 1;
 }
 
 /* Depth first traversal to first block that's not a struct */
@@ -1515,6 +1533,8 @@ first_block(fz_stext_block *block, fz_stext_struct **str)
 			}
 			(*str) = block->u.s.down;
 			block = (*str)->first_block;
+			if (block == NULL)
+				break;
 		}
 		if (block)
 			return block;
@@ -1574,6 +1594,7 @@ step_stext(fz_search *search)
 	fz_stext_position *spos = &search->current_stext;
 	const char *pos = search->combined_haystack + search->current_pos;
 	int c;
+	int have_stepped_ws = search->squashing_whitespace;
 
 	/* Step current_pos forward over the current char (this might actually
 	 * step 0 chars if we are squashing whitespace). */
@@ -1587,14 +1608,19 @@ step_stext(fz_search *search)
 			assert(fz_is_unicode_whitespace(*pos));
 			pos += fz_chartorune(&c, pos);
 			search->squashing_whitespace = 1;
+			have_stepped_ws = 1;
 		}
 		else if (fz_is_unicode_whitespace(*pos))
+		{
 			pos += fz_chartorune(&c, pos);
+			have_stepped_ws = 1;
+		}
 	}
 	else
 	{
 		/* We want to swallow one non-whitespace char from the haystack. */
 		search->squashing_whitespace = 0;
+		have_stepped_ws = 0;
 		pos += fz_chartorune(&c, pos);
 		assert(!fz_is_unicode_whitespace(c));
 	}
@@ -1605,12 +1631,29 @@ dehyphenate:
 	spos->ch = spos->ch->next;
 	if (spos->ch)
 	{
-		/* Soft hyphens were always removed. */
-		if (spos->ch->c == 0xad)
-			goto dehyphenate;
-		/* If we are at the end of a joined line, and we are dehyphenating, skip the hyphen. */
-		if ((spos->line->flags & FZ_STEXT_LINE_FLAGS_JOINED) != 0 && spos->ch->next == NULL && (search->options & FZ_SEARCH_KEEP_HYPHENS) == 0)
-			goto dehyphenate;
+		fz_chartorune(&c, pos);
+		if (spos->ch->c != c)
+		{
+			/* We're out of sync because of a (soft) hyphen that was removed from the flattened text,
+			 * but is present in the stext. */
+
+			/* Last character of a line where we aren't keeping hyphens; check for dehyphenation. */
+			if (spos->ch == spos->line->last_char && (search->options & FZ_SEARCH_KEEP_HYPHENS) == 0)
+			{
+				/* Soft hyphens were always removed. */
+				if (spos->ch->c == 0xad)
+					goto dehyphenate;
+				/* If we are at the end of a joined line, and we are dehyphenating, skip the hyphen. */
+				if ((spos->line->flags & FZ_STEXT_LINE_FLAGS_JOINED) != 0 && fz_is_unicode_hyphen(spos->ch->c))
+					goto dehyphenate;
+			}
+
+			/* Soft hyphens at the beginning or in the middle of a line are always removed. */
+			if (spos->ch != spos->line->last_char && spos->ch->c == 0xad)
+				goto dehyphenate;
+
+			assert("UNSYNCED SEARCH!!!");
+		}
 		search->current_pos = pos - search->combined_haystack;
 		return 0; /* Simple! */
 	}
@@ -1625,6 +1668,7 @@ dehyphenate:
 			{
 				pos += fz_chartorune(&c, pos);
 				search->squashing_whitespace = 1;
+				have_stepped_ws = 1;
 			}
 			else
 			{
@@ -1633,7 +1677,7 @@ dehyphenate:
 				 * with a soft-hyphen that didn't add a space,
 				 * nor set the FZ_STEXT_LINE_FLAGS_JOINED flag.
 				 */
-				search->squashing_whitespace = 0;
+				search->squashing_whitespace = have_stepped_ws;
 			}
 		}
 		spos->line = spos->line->next;
@@ -1671,7 +1715,7 @@ dehyphenate:
 			 * the end of a page which ended in a hyphen that we dehyphenated,
 			 * or we removed a soft-hyphen (see comment in "step the line" above).
 			 */
-			search->squashing_whitespace = 0;
+			search->squashing_whitespace = have_stepped_ws;
 		}
 		spos->block = next_block(spos->block, &spos->struc);
 		if (spos->block == NULL)
@@ -1927,6 +1971,7 @@ reset_positions(fz_context *ctx, fz_search *search, search_page *page)
 	if (page->page->first_block == NULL)
 		return 1;
 	find_first_char(ctx, search, page);
+
 	/* Skip leading whitespace if appropriate */
 	search->squashing_whitespace = 0;
 	if ((search->transform & FZ_TEXT_TRANSFORM_KEEP_WHITESPACE) != 0)
@@ -1965,7 +2010,7 @@ fz_search_result fz_search_forwards(fz_context *ctx, fz_search *search)
 	 * We may have ditched both the combined haystack and the spun version, but the
 	 * offsets within those buffers, when they are reformed, should be valid.
 	 */
-	assert(search->combined_spun_haystack == NULL || search->current_spun_pos <= search->combined_length);
+	assert(search->combined_spun_haystack == NULL || search->current_spun_pos <= search->combined_spun_length);
 	assert(search->combined_haystack == NULL || search->current_pos <= search->combined_length);
 
 	/* Was the last search a backwards search? If so, we need to adjust our
@@ -2017,6 +2062,7 @@ fz_search_result fz_search_forwards(fz_context *ctx, fz_search *search)
 		result.u.more_input.seq_needed = 0; /* Any number will do! */
 		return result;
 	}
+
 	/* And we need a haystack from that page. */
 	if (ensure_haystack_for_page(ctx, search, &search->current_page))
 	{
@@ -2036,6 +2082,7 @@ fz_search_result fz_search_forwards(fz_context *ctx, fz_search *search)
 
 		return result;
 	}
+
 	/* We need to either have the next page, or to know there is no next page. */
 	if (search->next_page.page == NULL && !search->next_page.end_of_doc)
 	{
@@ -2044,6 +2091,7 @@ fz_search_result fz_search_forwards(fz_context *ctx, fz_search *search)
 
 		return result;
 	}
+
 	/* And we need a haystack from that page (unless it's the end). */
 	if (ensure_haystack_for_page(ctx, search, &search->next_page))
 	{
@@ -2060,6 +2108,7 @@ fz_search_result fz_search_forwards(fz_context *ctx, fz_search *search)
 
 	/* Then we need to combine the haystacks from those 2 pages. */
 	ensure_combined_haystack(ctx, search, &search->current_page, &search->next_page);
+
 	/* Then spin that hay into gold. */
 	ensure_combined_spun_haystack(ctx, search);
 
@@ -2296,7 +2345,7 @@ fz_search_result fz_search_backwards(fz_context *ctx, fz_search *search)
 	 * We may have ditched both the combined haystack and the spun version, but the
 	 * offsets within those buffers, when they are reformed, should be valid.
 	 */
-	assert(search->combined_spun_haystack == NULL || search->current_spun_pos <= search->combined_length);
+	assert(search->combined_spun_haystack == NULL || search->current_spun_pos <= search->combined_spun_length);
 	assert(search->combined_haystack == NULL || search->current_pos <= search->combined_length);
 
 	/* Was the last search a forwards search? If so, we need to adjust our
@@ -2406,7 +2455,7 @@ fz_search_result fz_search_backwards(fz_context *ctx, fz_search *search)
 	if (search->current_stext.block == NULL)
 	{
 		/* Search from the last char on the page. */
-		from = search->combined_length - 1;
+		from = search->combined_length;
 	}
 	else
 	{
@@ -2477,7 +2526,10 @@ fz_search_result fz_search_backwards(fz_context *ctx, fz_search *search)
 		 * the beginning and to step forwards. */
 		offset = begin - search->combined_haystack;
 		if (offset < search->combined_split)
+		{
+			assert(search->previous_page.page != NULL);
 			reset_positions(ctx, search, &search->previous_page);
+		}
 		else
 		{
 			reset_positions(ctx, search, &search->current_page);

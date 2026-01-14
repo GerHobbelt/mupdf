@@ -730,12 +730,25 @@ Usage:
                 -d build/shared-debug
                 -d build/shared-release [default]
 
-            On Windows one can specify the CPU and Python version; we then
-            use 'py -0f' to find the matching installed Python along with its
-            Python.h and python.lib. For example:
+            Windows specifics:
 
-                -d build/shared-release-x32-py3.8
-                -d build/shared-release-x64-py3.9
+                * On Windows we support building for specific cpus and python
+                  versions.
+
+                * We use `py -0f' to find the matching installed Python along
+                  with its Python.h and python.lib.
+
+                * We append -x32 or -x64 for current system if not already
+                  present.
+
+                * We append -py<current_python_version> if '-py...' is not
+                  already present.
+
+                For example:
+
+                    -d build/shared-release-x32
+                    -d build/shared-release-x32-py3.8
+                    -d build/shared-release-x64-py3.9
 
         --doc <languages>
             Generates documentation for the different APIs in
@@ -806,6 +819,9 @@ Usage:
 
         --test-csharp
             Tests the experimental C# API.
+
+        --test-csharp-exceptions
+            Tests the experimental C# API's handling of exceptions.
 
         --test-python
             Tests the python API.
@@ -1347,11 +1363,7 @@ def build_0(
 
 
 def link_l_flags(sos):
-    ld_origin = None
-    if state.state_.pyodide:
-        # Don't add '-Wl,-rpath*' etc if building for Pyodide.
-        ld_origin = False
-    ret = jlib.link_l_flags( sos, ld_origin)
+    ret = jlib.link_l_flags( sos)
     r = os.environ.get('LDFLAGS')
     if r:
         ret += f' {r}'
@@ -1499,7 +1511,7 @@ def build( build_dirs, swig_command, args, vs_upgrade, make_command):
     devenv = 'devenv.com'
     if state.state_.windows:
         # Search for devenv.com in standard locations.
-        windows_vs = wdev.WindowsVS()
+        windows_vs = wdev.WindowsVS(cpu=wdev.WindowsCpu(build_dirs.cpu.name))
         devenv = windows_vs.devenv
 
     #jlib.log('{build_dirs.dir_so=}')
@@ -2141,102 +2153,69 @@ def build( build_dirs, swig_command, args, vs_upgrade, make_command):
                     sos.append( f'{build_dirs.dir_so}/libmupdfcpp.so{so_version}')
                     if os.path.basename( build_dirs.dir_so).startswith( 'shared-'):
                         sos.append( f'{build_dirs.dir_so}/libmupdf.so{so_version}')
-                    if pyodide:
-                        # Need to use separate compilation/linking.
-                        o_file = f'{os.path.relpath(cpp_path)}.o'
-                        command = ( textwrap.dedent(
-                                f'''
-                                {compiler}
-                                    -c
-                                    -o {o_file}
-                                    {cpp_path}
-                                    {build_dirs.cpp_flags}
-                                    -fPIC
-                                    {cflags}
-                                    -I {include1}
-                                    -I {include2}
-                                    {flags_compile}
-                                    -Wno-deprecated-declarations
-                                    -Wno-free-nonheap-object
-                                    -DSWIG_PYTHON_SILENT_MEMLEAK
-                                ''')
-                                )
-                        infiles = [
-                                cpp_path,
-                                include1,
-                                include2,
-                                ]
-                        jlib.build(
-                                infiles,
-                                o_file,
-                                command,
-                                force_rebuild,
-                                )
 
-                        command = ( textwrap.dedent(
-                                f'''
-                                {compiler}
-                                    -o {os.path.relpath(out_so)}
-                                    -sSIDE_MODULE
-                                    {o_file}
-                                    {build_dirs.cpp_flags}
-                                    -shared
-                                    {flags_link}
-                                    {link_l_flags( sos)}
-                                ''')
-                                )
-                        infiles = [
-                                o_file,
-                                libmupdf,
-                                ]
-                        infiles += sos
+                    # Use separate compilation/linking - is faster when only
+                    # mupdf.so has changed, and Pyodide requires it anyway.
+                    o_file = f'{os.path.relpath(cpp_path)}.o'
+                    command = ( textwrap.dedent(
+                            f'''
+                            {compiler}
+                                -c
+                                -o {o_file}
+                                {cpp_path}
+                                {build_dirs.cpp_flags}
+                                -fPIC
+                                {cflags}
+                                -I {include1}
+                                -I {include2}
+                                {flags_compile}
+                                -Wno-deprecated-declarations
+                                -Wno-free-nonheap-object
+                                -DSWIG_PYTHON_SILENT_MEMLEAK
+                            ''')
+                            )
+                    infiles = [
+                            cpp_path,
+                            include1,
+                            include2,
+                            ]
+                    jlib.build(
+                            infiles,
+                            o_file,
+                            command,
+                            force_rebuild,
+                            )
 
-                        jlib.build(
-                                infiles,
-                                out_so,
-                                command,
-                                force_rebuild,
-                                )
-                    else:
-                        # Not Pyodide.
-                        command = ( textwrap.dedent(
-                                f'''
-                                {compiler}
-                                    -o {os.path.relpath(out_so)}
-                                    {cpp_path}
-                                    {build_dirs.cpp_flags}
-                                    -fPIC
-                                    -shared
-                                    {cflags}
-                                    -I {include1}
-                                    -I {include2}
-                                    {flags_compile}
-                                    -Wno-deprecated-declarations
-                                    -Wno-free-nonheap-object
-                                    -DSWIG_PYTHON_SILENT_MEMLEAK
-                                    {flags_link}
-                                    {link_l_flags( sos)}
-                                ''')
-                                )
-                        infiles = [
-                                cpp_path,
-                                include1,
-                                include2,
-                                libmupdf,
-                                ]
-                        infiles += sos
+                    command = ( textwrap.dedent(
+                            f'''
+                            {compiler}
+                                -o {os.path.relpath(out_so)}
+                                {'-sSIDE_MODULE' if pyodide else ''}
+                                {o_file}
+                                {build_dirs.cpp_flags}
+                                -shared
+                                {flags_link}
+                                {link_l_flags( sos)}
+                            ''')
+                            )
+                    infiles = [
+                            o_file,
+                            libmupdf,
+                            ]
+                    infiles += sos
 
-                        command_was_run = jlib.build(
-                                infiles,
-                                out_so,
-                                command,
-                                force_rebuild,
+                    command_was_run = jlib.build(
+                            infiles,
+                            out_so,
+                            command,
+                            force_rebuild,
+                            )
+
+                    if command_was_run:
+                        macos_patch( out_so,
+                                f'{build_dirs.dir_so}/libmupdf.dylib{so_version}',
+                                f'{build_dirs.dir_so}/libmupdfcpp.so{so_version}',
                                 )
-                        if command_was_run:
-                            macos_patch( out_so,
-                                    f'{build_dirs.dir_so}/libmupdf.dylib{so_version}',
-                                    f'{build_dirs.dir_so}/libmupdfcpp.so{so_version}',
-                                    )
             else:
                 raise Exception( 'unrecognised --build action %r' % action)
 
@@ -2894,7 +2873,7 @@ def main2():
                     jlib.build(
                             (f'{build_dirs.dir_mupdf}/scripts/mupdfwrap_test.cs', mupdf_cs),
                             out,
-                            f'"{csc}" -out:{{OUT}} {{IN}}',
+                            f'"{csc}"{" -platform:x86" if build_dirs.cpu.name == "x32" else ""} -out:{{OUT}} {{IN}}',
                             )
                     if state.state_.windows:
                         out_rel = os.path.relpath( out, build_dirs.dir_so)
@@ -2912,7 +2891,10 @@ def main2():
                 if 1:
                     # Build and run test using minimal swig library to test
                     # handling of Unicode strings.
-                    swig.test_swig_csharp()
+                    swig.test_swig_csharp_unicode(x32 = build_dirs.cpu.name == 'x32')
+
+            elif arg == '--test-csharp-exceptions':
+                swig.test_swig_charp_exceptions(x32 = build_dirs.cpu.name == 'x32')
 
             elif arg == '--test-csharp-gui':
                 csc, mono, mupdf_cs = csharp.csharp_settings(build_dirs)

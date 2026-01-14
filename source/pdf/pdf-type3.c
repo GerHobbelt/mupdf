@@ -37,7 +37,7 @@ pdf_t3_free_resources(fz_context *ctx, void *doc, void *rdb_)
 }
 
 pdf_font_desc *
-pdf_load_type3_font(fz_context *ctx, pdf_document *doc, pdf_obj *rdb, pdf_obj *dict)
+pdf_load_type3_font(fz_context *ctx, pdf_document *doc, pdf_resource_stack *rdb, pdf_obj *dict)
 {
 	char buf[256];
 	const char *estrings[256];
@@ -71,7 +71,7 @@ pdf_load_type3_font(fz_context *ctx, pdf_document *doc, pdf_obj *rdb, pdf_obj *d
 		if (pdf_is_name(ctx, obj))
 			fz_strlcpy(buf, pdf_to_name(ctx, obj), sizeof buf);
 		else
-			fz_strlcpy(buf, "Unnamed-T3", sizeof buf);
+			fz_snprintf(buf, sizeof buf, "Type3 (%d 0 R)", pdf_to_num(ctx, dict));
 
 		fontdesc = pdf_new_font_desc(ctx);
 
@@ -171,7 +171,7 @@ pdf_load_type3_font(fz_context *ctx, pdf_document *doc, pdf_obj *rdb, pdf_obj *d
 		font->t3freeres = pdf_t3_free_resources;
 		font->t3resources = pdf_dict_get(ctx, dict, PDF_NAME(Resources));
 		if (!font->t3resources)
-			font->t3resources = rdb;
+			font->t3resources = rdb->resources; /* TODO: keep full resource dictionary chain! */
 		if (font->t3resources)
 			pdf_keep_obj(ctx, font->t3resources);
 		if (!font->t3resources)
@@ -230,7 +230,7 @@ void pdf_load_type3_glyphs(fz_context *ctx, pdf_document *doc, pdf_font_desc *fo
 		}
 
 		/* Derive missing font bbox from char bboxes if there are any. */
-		if (fontdesc->font->flags.invalid_bbox && fontdesc->font->bbox_table != NULL)
+		if ((fontdesc->font->flags.invalid_bbox || fz_is_empty_rect(fontdesc->font->bbox)) && fontdesc->font->bbox_table != NULL)
 		{
 			/* Union all the char bboxes together. */
 			fz_rect bbox = fz_empty_rect;
@@ -240,6 +240,8 @@ void pdf_load_type3_glyphs(fz_context *ctx, pdf_document *doc, pdf_font_desc *fo
 					bbox = fz_union_rect(bbox, fontdesc->font->bbox_table[0][i]);
 			}
 			fontdesc->font->bbox = bbox;
+			fontdesc->font->ascender = bbox.y1;
+			fontdesc->font->descender = bbox.y0;
 		}
 	}
 	fz_catch(ctx)

@@ -612,9 +612,16 @@ pdf_update_page(fz_context *ctx, pdf_page *page)
 	pdf_annot *widget;
 	int changed = 0;
 
+	if (page->doc == NULL)
+		return 0;
+
+	if (!page->doc->resynth_required && !page->doc->recalculate)
+		return 0;
+
 	fz_try(ctx)
 	{
 		pdf_begin_implicit_operation(ctx, page->doc);
+
 		if (page->doc->recalculate)
 			pdf_calculate_form(ctx, page->doc);
 
@@ -624,6 +631,7 @@ pdf_update_page(fz_context *ctx, pdf_page *page)
 		for (widget = page->widgets; widget; widget = widget->next)
 			if (pdf_update_annot(ctx, widget))
 				changed = 1;
+
 		pdf_end_operation(ctx, page->doc);
 	}
 	fz_catch(ctx)
@@ -632,6 +640,17 @@ pdf_update_page(fz_context *ctx, pdf_page *page)
 		fz_rethrow(ctx);
 	}
 
+	return changed;
+}
+
+int
+pdf_update_open_pages(fz_context *ctx, pdf_document *doc)
+{
+	fz_page *page;
+	int changed = 0;
+	for (page = doc->super.open; page; page = page->next)
+		if (pdf_update_page(ctx, (pdf_page*)page))
+			changed = 1;
 	return changed;
 }
 
@@ -2367,6 +2386,10 @@ static void pdf_bake_annot(fz_context *ctx, fz_buffer *buf, pdf_document *doc, p
 	pdf_obj *ap;
 	char name[20];
 
+	int flags = pdf_dict_get_int(ctx, annot, PDF_NAME(F));
+	if (flags & (PDF_ANNOT_IS_INVISIBLE | PDF_ANNOT_IS_HIDDEN))
+		return;
+
 	ap = get_annot_ap(ctx, annot);
 	if (ap)
 	{
@@ -2407,7 +2430,13 @@ static void pdf_bake_page(fz_context *ctx, pdf_document *doc, pdf_obj *page, int
 
 	res = pdf_dict_get(ctx, page, PDF_NAME(Resources));
 	if (!res)
-		res = pdf_dict_put_dict(ctx, page, PDF_NAME(Resources), 4);
+	{
+		res = pdf_dict_get_inheritable(ctx, page, PDF_NAME(Resources));
+		if (res)
+			pdf_dict_put(ctx, page, PDF_NAME(Resources), res);
+		else
+			res = pdf_dict_put_dict(ctx, page, PDF_NAME(Resources), 4);
+	}
 
 	res_xobj = pdf_dict_get(ctx, res, PDF_NAME(XObject));
 	if (!res_xobj)

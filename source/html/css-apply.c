@@ -612,6 +612,9 @@ match_an_plus_b_microsyntax(fz_xml *node, const char *val, int (*callback)(fz_xm
 static int
 match_pseudo_condition(fz_xml *node, const char *key, const char *val)
 {
+	if (!strcmp(key, "link"))
+		return fz_xml_att(node, "href") != NULL;
+
 	if (!strcmp(key, "empty"))
 		return fz_xml_down(node) == NULL;
 	if (!strcmp(key, "root"))
@@ -993,6 +996,13 @@ add_shorthand_font(fz_css_match *match, fz_css_value *value, int spec)
 }
 
 static void
+add_shorthand_background(fz_css_match *match, fz_css_value *value, int spec)
+{
+	/* TODO: background-image, -origin, -size, -repeat */
+	add_property(match, PRO_BACKGROUND_COLOR, value, spec);
+}
+
+static void
 add_property(fz_css_match *match, int name, fz_css_value *value, int spec)
 {
 	/* shorthand expansions: */
@@ -1037,7 +1047,9 @@ add_property(fz_css_match *match, int name, fz_css_value *value, int spec)
 	case PRO_FONT:
 		add_shorthand_font(match, value, spec);
 		return;
-	/* TODO: background */
+	case PRO_BACKGROUND:
+		add_shorthand_background(match, value, spec);
+		return;
 	}
 
 	if (name < NUM_PROPERTIES && match->spec[name] <= spec)
@@ -1263,6 +1275,7 @@ is_inheritable_property(int name)
 		name == PRO_WHITE_SPACE ||
 		name == PRO_WIDOWS ||
 		name == PRO_WORD_SPACING ||
+		name == PRO_HYPHENS ||
 		// Strictly speaking, text-decoration is not an inherited property,
 		// but since when drawing an underlined element, all children are also underlined,
 		// we may as well make it inherited.
@@ -1272,15 +1285,14 @@ is_inheritable_property(int name)
 static fz_css_value *
 value_from_inheritable_property(fz_css_match *match, int name)
 {
-	fz_css_value *value = match->value[name];
-	if (match->up)
+	while (match)
 	{
-		if (value && !strcmp(value->data, "inherit"))
-			return value_from_inheritable_property(match->up, name);
-		if (!value)
-			return value_from_inheritable_property(match->up, name);
+		fz_css_value *value = match->value[name];
+		if (value && strcmp(value->data, "inherit") != 0)
+			return value;
+		match = match->up;
 	}
-	return value;
+	return NULL;
 }
 
 static fz_css_value *
@@ -1811,11 +1823,13 @@ void
 fz_default_css_style(fz_context *ctx, fz_css_style *style)
 {
 	memset(style, 0, sizeof *style);
+	style->direction = FZ_BIDI_LTR;
 	style->visibility = V_VISIBLE;
 	style->text_align = TA_LEFT;
 	style->vertical_align = VA_BASELINE;
 	style->white_space = WS_NORMAL;
 	style->list_style_type = LST_DISC;
+	style->hyphens = HYP_MANUAL;
 	style->font_size = make_number(1, N_SCALE);
 	style->width = make_number(0, N_AUTO);
 	style->height = make_number(0, N_AUTO);
@@ -1937,6 +1951,20 @@ fz_apply_css_style(fz_context *ctx, fz_html_font_set *set, fz_css_style *style, 
 
 	style->width = number_from_property(match, PRO_WIDTH, 0, N_AUTO);
 	style->height = number_from_property(match, PRO_HEIGHT, 0, N_AUTO);
+
+	value = value_from_property(match, PRO_DIRECTION);
+	if (value)
+	{
+		if (!strcmp(value->data, "rtl")) style->direction = FZ_BIDI_RTL;
+	}
+
+	value = value_from_property(match, PRO_HYPHENS);
+	if (value)
+	{
+		if (!strcmp(value->data, "none")) style->hyphens = HYP_NONE;
+		else if (!strcmp(value->data, "manual")) style->hyphens = HYP_MANUAL;
+		else if (!strcmp(value->data, "auto")) style->hyphens = HYP_AUTO;
+	}
 
 	style->margin[0] = number_from_property(match, PRO_MARGIN_TOP, 0, N_LENGTH);
 	style->margin[1] = number_from_property(match, PRO_MARGIN_RIGHT, 0, N_LENGTH);

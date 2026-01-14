@@ -472,6 +472,7 @@ class Generated:
         self.swig_python_exceptions = io.StringIO()
         self.swig_python_set_error_classes = io.StringIO()
         self.swig_csharp = io.StringIO()
+        self.swig_csharp_exceptions = io.StringIO()
         self.virtual_fnptrs = []    # List of extra wrapper class names with virtual fnptrs.
         self.cppyy_extra = ''
 
@@ -1136,7 +1137,7 @@ g_extra_definitions = textwrap.dedent(f'''
             assert(e != 0);
             char* buf = (char*) fz_malloc(ctx, e);
             int e2 = fz_lookup_metadata(ctx, doc, key, buf, e);
-            assert(e2 = e);
+            assert(e2 == e);
             std::string ret = buf;
             free(buf);
             return ret;
@@ -1153,7 +1154,7 @@ g_extra_definitions = textwrap.dedent(f'''
             assert(e != 0);
             char* buf = (char*) fz_malloc(ctx, e);
             int e2 = pdf_lookup_metadata(ctx, doc, key, buf, e);
-            assert(e2 = e);
+            assert(e2 == e);
             std::string ret = buf;
             free(buf);
             return ret;
@@ -1935,6 +1936,36 @@ def make_function_wrappers(
                 }}
             '''
             ))
+
+    generated.swig_csharp_exceptions.write(textwrap.dedent(f'''
+            /*
+            On Windows, exceptions are automatically converted into
+            System.Runtime.InteropServices.SEHException instances but the exception
+            message is not used.
+
+            On Mono this doesn't seem to happen and std::terminate() is called.
+
+            So we use swig's `%exception {...}` to convert exceptions here.
+
+            Unlike in the Python bindings, we do not (yet) attempt to convert
+            the different MuPDF C++ exception types into the equivalent C#
+            types. Instead we always create a SWIG_CSharpApplicationException
+            with the C++ exception's `.what()` string.
+            */
+            %exception
+            {{
+                try
+                {{
+                    $action
+                }}
+                catch (std::exception& e)
+                {{
+                    //std::cout << "%exception: Received exception: " << e.what() << "\\n" << std::flush;
+                    SWIG_CSharpSetPendingException(SWIG_CSharpApplicationException, e.what());
+                    //std::cout << "%exception: after SWIG_CSharpSetPendingException.\\n" << std::flush;
+                }}
+            }}
+            '''))
 
     # Declare exception class for each FZ_ERROR_*. Also append catch blocks for
     # each of these exception classes to `handle_exception()`.

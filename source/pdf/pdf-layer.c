@@ -382,7 +382,7 @@ pdf_select_layer_config(fz_context *ctx, pdf_document *doc, int config)
 		pdf_obj *o = pdf_array_get(ctx, obj, i);
 		for (j=0; j < len; j++)
 		{
-			if (!pdf_objcmp_resolve(ctx, desc->ocgs[j].obj, o))
+			if (!pdf_objcmp(ctx, desc->ocgs[j].obj, o))
 			{
 				desc->ocgs[j].state = 1;
 				break;
@@ -397,7 +397,7 @@ pdf_select_layer_config(fz_context *ctx, pdf_document *doc, int config)
 		pdf_obj *o = pdf_array_get(ctx, obj, i);
 		for (j=0; j < len; j++)
 		{
-			if (!pdf_objcmp_resolve(ctx, desc->ocgs[j].obj, o))
+			if (!pdf_objcmp(ctx, desc->ocgs[j].obj, o))
 			{
 				desc->ocgs[j].state = 0;
 				break;
@@ -518,7 +518,7 @@ clear_radio_group(fz_context *ctx, pdf_document *doc, int config_num, pdf_obj *o
 				{
 					pdf_ocg_entry *s = &doc->ocg->ocgs[k];
 
-					if (!pdf_objcmp_resolve(ctx, s->obj, g))
+					if (!pdf_objcmp(ctx, s->obj, g))
 						s->state = 0;
 				}
 			}
@@ -657,7 +657,7 @@ ocg_intents_include(fz_context *ctx, pdf_ocg_descriptor *desc, const char *name)
 }
 
 static int
-pdf_is_ocg_hidden_imp(fz_context *ctx, pdf_document *doc, pdf_obj *rdb, const char *usage, pdf_obj *ocg, pdf_cycle_list *cycle_up)
+pdf_is_ocg_hidden_imp(fz_context *ctx, pdf_document *doc, pdf_resource_stack *rdb, const char *usage, pdf_obj *ocg, pdf_cycle_list *cycle_up)
 {
 	pdf_cycle_list cycle;
 	pdf_ocg_descriptor *desc = pdf_read_ocg(ctx, doc);
@@ -675,7 +675,7 @@ pdf_is_ocg_hidden_imp(fz_context *ctx, pdf_document *doc, pdf_obj *rdb, const ch
 	/* If we've been handed a name, look it up in the properties. */
 	if (pdf_is_name(ctx, ocg))
 	{
-		ocg = pdf_dict_get(ctx, pdf_dict_get(ctx, rdb, PDF_NAME(Properties)), ocg);
+		ocg = pdf_lookup_resource(ctx, rdb, PDF_NAME(Properties), pdf_to_name(ctx, ocg));
 	}
 	/* If we haven't been given an ocg at all, then we're visible */
 	if (!ocg)
@@ -821,7 +821,7 @@ pdf_is_ocg_hidden_imp(fz_context *ctx, pdf_document *doc, pdf_obj *rdb, const ch
 }
 
 int
-pdf_is_ocg_hidden(fz_context *ctx, pdf_document *doc, pdf_obj *rdb, const char *usage, pdf_obj *ocg)
+pdf_is_ocg_hidden(fz_context *ctx, pdf_document *doc, pdf_resource_stack *rdb, const char *usage, pdf_obj *ocg)
 {
 	return pdf_is_ocg_hidden_imp(ctx, doc, rdb, usage, ocg, NULL);
 }

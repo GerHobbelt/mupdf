@@ -3160,6 +3160,8 @@ pdf_new_document(fz_context *ctx, fz_stream *file)
 	/* Default to PDF-1.7 if the version header is missing and for new documents */
 	doc->version = 17;
 
+	doc->use_page_tree_map = 1;
+
 	return doc;
 }
 
@@ -3658,6 +3660,7 @@ pdf_document *pdf_create_document(fz_context *ctx)
 	pdf_obj *root;
 	pdf_obj *pages;
 	pdf_obj *trailer = NULL;
+	pdf_obj *info;
 
 	fz_var(trailer);
 
@@ -3681,8 +3684,13 @@ pdf_document *pdf_create_document(fz_context *ctx)
 		pdf_dict_put_int(ctx, pages, PDF_NAME(Count), 0);
 		pdf_dict_put_array(ctx, pages, PDF_NAME(Kids), 1);
 
+		info = pdf_dict_put_dict(ctx, root, PDF_NAME(Info), 1);
+		pdf_dict_put_text_string(ctx, info, PDF_NAME(Producer), "MuPDF " FZ_VERSION);
+
 		/* Set the trailer of the final xref section. */
 		doc->xref_sections[0].trailer = trailer;
+
+		doc->checked = 1;
 	}
 	fz_catch(ctx)
 	{

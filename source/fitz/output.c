@@ -34,6 +34,7 @@
 #ifdef _WIN32
 #include <io.h>
 #include <windows.h>
+#include <fcntl.h>
 #else
 #include <unistd.h>
 #endif
@@ -60,17 +61,26 @@ file_write(fz_context *ctx, void *opaque, const void *buffer, size_t count)
 		fz_throw(ctx, FZ_ERROR_SYSTEM, "cannot fwrite: %s", strerror(errno));
 }
 
+static int64_t stdout_offset = 0;
+
 static void
 stdout_write(fz_context *ctx, void *opaque, const void *buffer, size_t count)
 {
+	stdout_offset += count;
 	file_write(ctx, stdout, buffer, count);
+}
+
+static int64_t
+stdout_tell(fz_context *ctx, void *opaque)
+{
+	return stdout_offset;
 }
 
 static fz_output fz_stdout_global = {
 	NULL,
 	stdout_write,
 	NULL,
-	NULL,
+	stdout_tell,
 	NULL,
 };
 
@@ -250,9 +260,19 @@ fz_new_output_with_path(fz_context *ctx, const char *filename, int append)
 	if (!strcmp(filename, "/dev/null"))
 		return fz_new_output(ctx, 0, NULL, null_write, NULL, NULL);
 	if (!strcmp(filename, "/dev/stdout"))
+	{
+#ifdef _WIN32
+		(void)setmode(fileno(stdout), O_BINARY);
+#endif
 		return fz_stdout(ctx);
+	}
 	if (!strcmp(filename, "/dev/stderr"))
+	{
+#ifdef _WIN32
+		(void)setmode(fileno(stderr), O_BINARY);
+#endif
 		return fz_stderr(ctx);
+	}
 
 	/* If <append> is false, we use fopen()'s 'x' flag to force an error if
 	 * some other process creates the file immediately after we have removed
@@ -346,6 +366,8 @@ buffer_drop(fz_context *ctx, void *opaque)
 static void
 buffer_reset(fz_context *ctx, void *opaque)
 {
+	fz_buffer *buffer = opaque;
+	fz_clear_buffer(ctx, buffer);
 }
 
 fz_output *

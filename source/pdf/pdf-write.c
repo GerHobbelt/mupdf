@@ -243,18 +243,24 @@ static int removeduplicateobjs(fz_context *ctx, pdf_document *doc, pdf_write_sta
 	expand_lists(ctx, opts, xref_len);
 	for (num = 1; num < xref_len; num++)
 	{
+		pdf_obj *a;
+
+		if (num >= opts->list_len || !opts->use_list[num])
+			continue;
+
+		a = pdf_get_xref_entry_no_null(ctx, doc, num)->obj;
+
 		/* Only compare an object to objects preceding it */
 		for (other = 1; other < num; other++)
 		{
-			pdf_obj *a, *b;
+			pdf_obj *b;
 			int newnum;
 
-			if (num == other || num >= opts->list_len || !opts->use_list[num] || !opts->use_list[other])
+			if (!opts->use_list[other])
 				continue;
 
 			/* TODO: resolve indirect references to see if we can omit them */
 
-			a = pdf_get_xref_entry_no_null(ctx, doc, num)->obj;
 			b = pdf_get_xref_entry_no_null(ctx, doc, other)->obj;
 			if (opts->do_garbage >= 4)
 			{
@@ -854,6 +860,7 @@ static void copystream(fz_context *ctx, pdf_document *doc, pdf_write_state *opts
 			{
 				tmp_comp = deflatebuf(ctx, data, len, opts->compression_effort);
 				pdf_dict_put(ctx, obj, PDF_NAME(Filter), PDF_NAME(FlateDecode));
+				pdf_dict_del(ctx, obj, PDF_NAME(DecodeParms));
 			}
 			else
 			{
@@ -863,6 +870,7 @@ static void copystream(fz_context *ctx, pdf_document *doc, pdf_write_state *opts
 				unsigned char *comp_data = fz_new_brotli_data(ctx, &comp_len, data, len, mode);
 				tmp_comp = fz_new_buffer_from_data(ctx, comp_data, comp_len);
 				pdf_dict_put(ctx, obj, PDF_NAME(Filter), PDF_NAME(BrotliDecode));
+				pdf_dict_del(ctx, obj, PDF_NAME(DecodeParms));
 			}
 			len = fz_buffer_storage(ctx, tmp_comp, &data);
 		}
@@ -1535,8 +1543,14 @@ writeobjects(fz_context *ctx, pdf_document *doc, pdf_write_state *opts)
 	{
 		int version = pdf_version(ctx, doc);
 		fz_write_printf(ctx, opts->out, "%%PDF-%d.%d\n", version / 10, version % 10);
-		fz_write_string(ctx, opts->out, "%\xC2\xB5\xC2\xB6\n\n");
+		fz_write_string(ctx, opts->out, "%\xC2\xB5\xC2\xB6\n");
 	}
+
+#ifdef CLUSTER
+	fz_write_string(ctx, opts->out, "% Written by MuPDF CLUSTER\n\n");
+#else
+	fz_write_string(ctx, opts->out, "% Written by MuPDF " FZ_VERSION "\n\n");
+#endif
 
 	for (num = 0; num < xref_len; num++)
 		dowriteobject(ctx, doc, opts, num);
@@ -1870,7 +1884,7 @@ const char *fz_pdf_write_options_usage =
 	"\tor garbage=deduplicate: ... and remove duplicate objects\n"
 	"\tincremental: write changes as incremental update\n"
 	"\tobjstms: use object streams and cross reference streams\n"
-	"\tappearance=yes|all: synthesize just missing, or all, annotation/widget apperance streams\n"
+	"\tappearance=yes|all: synthesize just missing, or all, annotation/widget appearance streams\n"
 	"\tcontinue-on-error: continue saving the document even if there is an error\n"
 	"\tdecrypt: write unencrypted document\n"
 	"\tencrypt=rc4-40|rc4-128|aes-128|aes-256: write encrypted document\n"
@@ -1985,9 +1999,9 @@ prepare_for_save(fz_context *ctx, pdf_document *doc, const pdf_write_options *in
 {
 	/* Make sure we have no pending annotation changes that need to be updated. */
 	if (doc->recalculate)
-		fz_throw(ctx, FZ_ERROR_ARGUMENT, "form needs recalculation before saving");
+		pdf_calculate_form(ctx, doc);
 	if (doc->resynth_required)
-		fz_throw(ctx, FZ_ERROR_ARGUMENT, "annotations need resynthesis before saving");
+		pdf_update_open_pages(ctx, doc);
 
 	/* Rewrite (and possibly sanitize) the operator streams */
 	if (in_opts->do_clean || in_opts->do_sanitize)
@@ -2376,10 +2390,14 @@ unpack_objstm_objs(fz_context *ctx, pdf_document *doc, int xref_len)
 	}
 }
 
-static void
-prepass(fz_context *ctx, pdf_document *doc)
+void
+pdf_check_document(fz_context *ctx, pdf_document *doc)
 {
 	int num;
+
+	if (doc->checked)
+		return;
+	doc->checked = 1;
 
 	for (num = 1; num < pdf_xref_len(ctx, doc); ++num)
 	{
@@ -2440,7 +2458,8 @@ do_pdf_save_document(fz_context *ctx, pdf_document *doc, pdf_write_state *opts, 
 		 * into memory. We'll end up doing this later on anyway, but by doing
 		 * it here, we force any repairs to happen before writing proper
 		 * starts. */
-		prepass(ctx, doc);
+		pdf_check_document(ctx, doc);
+
 		xref_len = pdf_xref_len(ctx, doc);
 
 		initialise_write_state(ctx, doc, in_opts, opts);

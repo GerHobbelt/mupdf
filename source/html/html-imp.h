@@ -45,6 +45,9 @@ typedef struct fz_css_value_s fz_css_value;
 typedef struct fz_css_number_s fz_css_number;
 typedef struct fz_css_color_s fz_css_color;
 
+/* Enable the following to get sequence numbers in the html boxes to aid debugging. */
+//#define DEBUG_HTML_SEQ
+
 struct fz_html_font_face_s
 {
 	char *family;
@@ -154,6 +157,7 @@ enum
 	PRO_FONT_VARIANT,
 	PRO_FONT_WEIGHT,
 	PRO_HEIGHT,
+	PRO_HYPHENS,
 	PRO_INSET_BOTTOM,
 	PRO_INSET_LEFT,
 	PRO_INSET_RIGHT,
@@ -197,6 +201,7 @@ enum
 	NUM_PROPERTIES,
 
 	/* Short-hand properties (always expanded when applied, never used as is): */
+	PRO_BACKGROUND,
 	PRO_BORDER,
 	PRO_BORDER_BOTTOM,
 	PRO_BORDER_COLOR,
@@ -226,6 +231,7 @@ enum { BS_NONE, BS_SOLID, BS_DOTTED, BS_DASHED, BS_DOUBLE, BS_GROOVE, BS_RIDGE, 
 enum { V_VISIBLE, V_HIDDEN, V_COLLAPSE };
 enum { PB_AUTO, PB_ALWAYS, PB_AVOID, PB_LEFT, PB_RIGHT };
 enum { TD_NONE, TD_UNDERLINE, TD_LINE_THROUGH };
+enum { HYP_NONE, HYP_MANUAL, HYP_AUTO };
 
 enum {
 	WS_COLLAPSE = 1,
@@ -270,6 +276,7 @@ struct fz_css_color_s
 
 struct fz_css_style_s
 {
+	fz_font *font;
 	fz_css_number font_size;
 	fz_css_number width, height;
 	fz_css_number margin[4];
@@ -279,6 +286,14 @@ struct fz_css_style_s
 	fz_css_number border_spacing;
 	fz_css_number text_indent;
 	fz_css_number text_stroke_width;
+	fz_css_number line_height;
+	fz_css_number leading;
+	fz_css_color background_color;
+	fz_css_color border_color[4];
+	fz_css_color color;
+	fz_css_color text_fill_color;
+	fz_css_color text_stroke_color;
+
 	/* First group of 32 */
 	unsigned int rowspan : 10; /* Needs to be able to represent 1-1000 */
 	unsigned int colspan : 10; /* Needs to be able to represent 1-1000 */
@@ -286,9 +301,11 @@ struct fz_css_style_s
 	unsigned int vertical_align : 3;
 	unsigned int page_break_before : 3;
 	unsigned int page_break_after : 3;
+
 	/* Second group of 32 */
 	unsigned int visibility : 2;
 	unsigned int text_align : 2;
+	unsigned int direction : 1;
 	unsigned int list_style_type : 4;
 	unsigned int border_style_0 : 4;
 	unsigned int border_style_1 : 4;
@@ -299,15 +316,9 @@ struct fz_css_style_s
 	unsigned int overflow_wrap : 1;
 	unsigned int position : 2;
 	unsigned int border_collapse : 1;
-	unsigned int blank : 1;
-	fz_css_number line_height;
-	fz_css_number leading;
-	fz_css_color background_color;
-	fz_css_color border_color[4];
-	fz_css_color color;
-	fz_css_color text_fill_color;
-	fz_css_color text_stroke_color;
-	fz_font *font;
+
+	/* Third group of 32 */
+	unsigned int hyphens : 2;
 };
 
 struct fz_css_style_splay_s {
@@ -468,6 +479,9 @@ struct fz_html_box_s
 
 	const char *tag, *id, *href;
 	const fz_css_style *style;
+#ifdef DEBUG_HTML_SEQ
+	int seq;
+#endif
 
 	union {
 		/* Only needed during build stage */

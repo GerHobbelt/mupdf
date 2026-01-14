@@ -1688,7 +1688,7 @@ static fz_font *load_js_font_file(fz_context *ctx, const char *name, const char 
 
 static fz_font *load_js_font(fz_context *ctx, const char *name, int bold, int italic, int needs_exact_metrics)
 {
-	return load_js_font_file(ctx, name, "undefined", bold, italic);
+	return load_js_font_file(ctx, name, NULL, bold, italic);
 }
 
 static fz_font *load_js_cjk_font(fz_context *ctx, const char *name, int ordering, int serif)
@@ -1705,7 +1705,7 @@ static fz_font *load_js_cjk_font(fz_context *ctx, const char *name, int ordering
 
 static fz_font *load_js_fallback_font(fz_context *ctx, int script, int language, int serif, int bold, int italic)
 {
-	return load_js_font_file(ctx, "undefined", fz_lookup_script_name(ctx, script, language), bold, italic);
+	return load_js_font_file(ctx, NULL, fz_lookup_script_name(ctx, script, language), bold, italic);
 }
 
 static void ffi_installLoadFontFunction(js_State *J)
@@ -2279,17 +2279,10 @@ static fz_device *new_js_device(fz_context *ctx, js_State *J)
 
 #if FZ_ENABLE_PDF
 
-typedef struct resources_stack
-{
-	struct resources_stack *next;
-	pdf_obj *resources;
-} resources_stack;
-
 typedef struct
 {
 	pdf_processor super;
 	js_State *J;
-	resources_stack *rstack;
 	int extgstate;
 } pdf_js_processor;
 
@@ -2911,7 +2904,7 @@ static void js_proc_Do_form(fz_context *ctx, pdf_processor *proc, const char *na
 	PROC_BEGIN("op_Do_form");
 	js_pushstring(J, name);
 	ffi_pushobj(J, pdf_keep_obj(ctx, xobj));
-	ffi_pushobj(J, pdf_keep_obj(ctx, ((pdf_js_processor*)proc)->rstack->resources));
+	ffi_pushobj(J, pdf_keep_obj(ctx, proc->rstack->resources));
 	PROC_END(3);
 }
 
@@ -2963,42 +2956,11 @@ static void js_proc_EX(fz_context *ctx, pdf_processor *proc)
 	PROC_END(0);
 }
 
-static void js_proc_push_resources(fz_context *ctx, pdf_processor *proc, pdf_obj *res)
-{
-	PROC_BEGIN("push_resources");
-	ffi_pushobj(J, pdf_keep_obj(ctx, res));
-	PROC_END(1);
-}
-
-static pdf_obj *js_proc_pop_resources(fz_context *ctx, pdf_processor *proc)
-{
-	PROC_BEGIN("pop_resources");
-	PROC_END(0);
-	return NULL;
-}
-
-static void js_proc_drop(fz_context *ctx, pdf_processor *proc)
-{
-	pdf_js_processor *pr = (pdf_js_processor *)proc;
-
-	while (pr->rstack)
-	{
-		resources_stack *stk = pr->rstack;
-		pr->rstack = stk->next;
-		pdf_drop_obj(ctx, stk->resources);
-		fz_free(ctx, stk);
-	}
-}
-
 static pdf_processor *new_js_processor(fz_context *ctx, js_State *J)
 {
 	pdf_js_processor *proc = pdf_new_processor(ctx, sizeof *proc);
 
 	proc->super.close_processor = NULL;
-	proc->super.drop_processor = js_proc_drop;
-
-	proc->super.push_resources = js_proc_push_resources;
-	proc->super.pop_resources = js_proc_pop_resources;
 
 	/* general graphics state */
 	proc->super.op_w = js_proc_w;
@@ -3677,27 +3639,69 @@ static void ffi_readFile(js_State *J)
 static void ffi_setUserCSS(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
-	const char *user_css = js_tostring(J, 1);
 	int use_doc_css = js_iscoercible(J, 2) ? js_toboolean(J, 2) : 1;
-	fz_try(ctx) {
-		fz_set_user_css(ctx, user_css);
-		fz_set_use_document_css(ctx, use_doc_css);
-	} fz_catch(ctx)
-		rethrow(J);
+
+	if (js_isuserdata(J, 1, "fz_buffer"))
+	{
+		fz_buffer *cssbuf = ffi_tonewbuffer(J, 1);
+		const char *user_css = NULL;
+		fz_try(ctx) {
+			user_css = fz_string_from_buffer(ctx, cssbuf);
+			fz_set_user_css(ctx, user_css);
+			fz_set_use_document_css(ctx, use_doc_css);
+		} fz_catch(ctx)
+			rethrow(J);
+	}
+	else
+	{
+		const char *user_css = js_tostring(J, 1);
+		fz_try(ctx) {
+			fz_set_user_css(ctx, user_css);
+			fz_set_use_document_css(ctx, use_doc_css);
+		} fz_catch(ctx)
+			rethrow(J);
+	}
+
 }
 
 static void ffi_new_Archive(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
-	const char *path = js_tostring(J, 1);
 	fz_archive *arch = NULL;
-	fz_try(ctx)
-		if (fz_is_directory(ctx, path))
-			arch = fz_open_directory(ctx, path);
-		else
-			arch = fz_open_archive(ctx, path);
-	fz_catch(ctx)
-		rethrow(J);
+
+	if (js_isuserdata(J, 1, "fz_buffer"))
+	{
+		fz_buffer *archbuf = ffi_tonewbuffer(J, 1);
+		fz_stream *archstm = NULL;
+
+		fz_var(archstm);
+
+		fz_try(ctx)
+		{
+			archstm = fz_open_buffer(ctx, archbuf);
+			arch = fz_open_archive_with_stream(ctx, archstm);
+		}
+		fz_always(ctx)
+		{
+			fz_drop_stream(ctx, archstm);
+			fz_drop_buffer(ctx, archbuf);
+		}
+		fz_catch(ctx)
+			rethrow(J);
+	}
+	else
+	{
+		const char *path = js_tostring(J, 1);
+		fz_try(ctx)
+			if (fz_is_directory(ctx, path))
+				arch = fz_open_directory(ctx, path);
+			else
+				arch = fz_open_archive(ctx, path);
+		fz_catch(ctx)
+			rethrow(J);
+	}
+
+
 	ffi_pusharchive(J, arch);
 }
 
@@ -3955,14 +3959,120 @@ static void ffi_Document_openDocument(js_State *J)
 
 	if (js_isuserdata(J, 1, "fz_buffer"))
 	{
+		const char *magic = js_iscoercible(J, 2) ? js_tostring(J, 2) : NULL;
+		fz_archive *dir = js_iscoercible(J, 4) ? ffi_toarchive(J, 4) : NULL;
+		fz_buffer *accbuf = js_iscoercible(J, 3) ? ffi_tonewbuffer(J, 3) : NULL;
+		fz_buffer *docbuf = ffi_tonewbuffer(J, 1);
+		fz_stream *docstm = NULL;
+		fz_stream *accstm = NULL;
+
+		fz_var(docstm);
+		fz_var(accstm);
+
+		fz_try(ctx)
+		{
+			docstm = fz_open_buffer(ctx, docbuf);
+			accstm = fz_open_buffer(ctx, accbuf);
+			doc = fz_open_accelerated_document_with_stream_and_dir(ctx, magic, docstm, accstm, dir);
+		}
+		fz_always(ctx)
+		{
+			fz_drop_stream(ctx, accstm);
+			fz_drop_stream(ctx, docstm);
+			fz_drop_buffer(ctx, accbuf);
+			fz_drop_buffer(ctx, docbuf);
+		}
+		fz_catch(ctx)
+			rethrow(J);
+	}
+	else
+	{
+		const char *filename = js_tostring(J, 1);
+		const char *accelerator = js_iscoercible(J, 2) ? js_tostring(J, 2) : NULL;
+		fz_archive *dir = js_iscoercible(J, 3) ? ffi_toarchive(J, 3) : NULL;
+		fz_stream *docstm = NULL;
+		fz_stream *accstm = NULL;
+
+		fz_var(docstm);
+		fz_var(accstm);
+
+		fz_try(ctx)
+		{
+			docstm = fz_open_file(ctx, filename);
+			if (accelerator)
+				accstm = fz_open_file(ctx, accelerator);
+			if (dir)
+				doc = fz_open_accelerated_document_with_stream_and_dir(ctx, filename, docstm, accstm, dir);
+			else
+				doc = fz_open_accelerated_document(ctx, filename, accelerator);
+		}
+		fz_always(ctx)
+		{
+			fz_drop_stream(ctx, accstm);
+			fz_drop_stream(ctx, docstm);
+		}
+		fz_catch(ctx)
+			rethrow(J);
+	}
+
+	ffi_pushdocument(J, doc);
+}
+
+static void ffi_Document_recognize(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	const char *magic = js_tostring(J, 1);
+	int recognized;
+
+	fz_try(ctx)
+		recognized = fz_recognize_document(ctx, magic) != NULL;
+	fz_catch(ctx)
+		rethrow(J);
+
+	js_pushboolean(J, recognized);
+}
+
+static void ffi_Document_recognizeContent(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	int recognized;
+
+	if (js_isuserdata(J, 1, "fz_buffer") && js_isuserdata(J, 2, "fz_archive"))
+	{
+		fz_archive *arch = ffi_toarchive(J, 3);
 		const char *magic = js_tostring(J, 2);
 		fz_buffer *buf = ffi_tonewbuffer(J, 1);
 		fz_stream *stm = NULL;
+		unsigned char *data;
+		size_t len;
 		fz_var(stm);
 		fz_try(ctx)
 		{
-			stm = fz_open_buffer(ctx, buf);
-			doc = fz_open_document_with_stream(ctx, magic, stm);
+			len = fz_buffer_storage(ctx, buf, &data);
+			stm = fz_open_memory(ctx, data, len);
+			recognized = fz_recognize_document_stream_and_dir_content(ctx, stm, arch, magic) != NULL;
+		}
+		fz_always(ctx)
+		{
+			fz_drop_stream(ctx, stm);
+			fz_drop_buffer(ctx, buf);
+		}
+		fz_catch(ctx)
+			rethrow(J);
+	}
+	else if (js_isuserdata(J, 1, "fz_buffer"))
+	{
+		const char *magic = js_tostring(J, 2);
+		fz_buffer *buf = ffi_tonewbuffer(J, 1);
+		fz_stream *stm = NULL;
+		unsigned char *data;
+		size_t len;
+		fz_var(stm);
+		fz_try(ctx)
+		{
+			len = fz_buffer_storage(ctx, buf, &data);
+			stm = fz_open_memory(ctx, data, len);
+			recognized = fz_recognize_document_stream_content(ctx, stm, magic) != NULL;
 		}
 		fz_always(ctx)
 		{
@@ -3976,12 +4086,12 @@ static void ffi_Document_openDocument(js_State *J)
 	{
 		const char *filename = js_tostring(J, 1);
 		fz_try(ctx)
-			doc = fz_open_document(ctx, filename);
+			recognized = fz_recognize_document_content(ctx, filename) != NULL;
 		fz_catch(ctx)
 			rethrow(J);
 	}
 
-	ffi_pushdocument(J, doc);
+	js_pushboolean(J, recognized);
 }
 
 static void ffi_Document_isPDF(js_State *J)
@@ -6331,7 +6441,8 @@ stext_walk(js_State *J, fz_stext_block *block)
 						js_pushnumber(J, ch->size);
 						ffi_pushquad(J, ch->quad);
 						ffi_pushrgb(J, ch->argb);
-						js_call(J, 6);
+						js_pushnumber(J, ch->flags);
+						js_call(J, 7);
 						js_pop(J, 1);
 					}
 				}
@@ -6408,7 +6519,7 @@ static void ffi_StructuredText_search(js_State *J)
 	fz_search_options options =  ffi_toenum(J, 2, FZ_SEARCH_IGNORE_CASE, search_options_from_string);
 	search_state state = { J, 0, 0 };
 
-	state.max_hits = js_iscoercible(J, 2) ? js_tointeger(J, 2) : 500;
+	state.max_hits = js_iscoercible(J, 3) ? js_tointeger(J, 3) : 500;
 	js_newarray(J);
 
 	fz_try(ctx)
@@ -6575,6 +6686,19 @@ static void ffi_StructuredText_asText(js_State *J)
 	js_pushstring(J, data);
 	js_endtry(J);
 	fz_drop_buffer(ctx, buf);
+}
+
+static void ffi_StructuredText_classifyRect(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	fz_stext_page *page = js_touserdata(J, 0, "fz_stext_page");
+	fz_rect rect = ffi_torect(J, 1);
+	fz_structure classify = ffi_toenum(J, 2, FZ_STRUCTURE_INVALID, fz_structure_from_string);
+
+	fz_try(ctx)
+		fz_classify_stext_rect(ctx, page, classify, rect);
+	fz_catch(ctx)
+		rethrow(J);
 }
 
 static void ffi_new_DisplayListDevice(js_State *J)
@@ -7264,19 +7388,54 @@ static void ffi_pushobj(js_State *J, pdf_obj *obj)
 static void ffi_new_PDFDocument(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
-	const char *filename = js_iscoercible(J, 1) ? js_tostring(J, 1) : NULL;
 	pdf_document *pdf = NULL;
 
-	fz_try(ctx)
-		if (filename)
-			pdf = pdf_open_document(ctx, filename);
-		else
-			pdf = pdf_create_document(ctx);
-	fz_catch(ctx)
-		rethrow(J);
+	if (js_isuserdata(J, 1, "fz_buffer"))
+	{
+		fz_buffer *docbuf = ffi_tonewbuffer(J, 1);
+		fz_stream *docstm = NULL;
+
+		fz_var(docstm);
+
+		fz_try(ctx)
+		{
+			docstm = fz_open_buffer(ctx, docbuf);
+			pdf = pdf_open_document_with_stream(ctx, docstm);
+		}
+		fz_always(ctx)
+		{
+			fz_drop_stream(ctx, docstm);
+			fz_drop_buffer(ctx, docbuf);
+		}
+		fz_catch(ctx)
+			rethrow(J);
+	}
+	else
+	{
+		const char *filename = js_iscoercible(J, 1) ? js_tostring(J, 1) : NULL;
+
+		fz_try(ctx)
+			if (filename)
+				pdf = pdf_open_document(ctx, filename);
+			else
+				pdf = pdf_create_document(ctx);
+		fz_catch(ctx)
+			rethrow(J);
+	}
 
 	js_getregistry(J, "pdf_document");
 	js_newuserdata(J, "pdf_document", pdf, ffi_gc_pdf_document);
+}
+
+static void ffi_PDFDocument_check(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	pdf_document *pdf = js_touserdata(J, 0, "pdf_document");
+
+	fz_try(ctx)
+		pdf_check_document(ctx, pdf);
+	fz_catch(ctx)
+		rethrow(J);
 }
 
 static void ffi_PDFDocument_getVersion(js_State *J)
@@ -7640,6 +7799,17 @@ static void ffi_PDFDocument_addFont(js_State *J)
 		rethrow(J);
 
 	ffi_pushobj(J, ind);
+}
+
+static void ffi_PDFDocument_setPageTreeCache(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	pdf_document *pdf = js_touserdata(J, 0, "pdf_document");
+	int enabled = js_toboolean(J, 1);
+	fz_try(ctx)
+		pdf_set_page_tree_cache(ctx, pdf, enabled);
+	fz_catch(ctx)
+		rethrow(J);
 }
 
 static void ffi_PDFDocument_addPage(js_State *J)
@@ -8144,6 +8314,16 @@ static void ffi_PDFDocument_wasRepaired(js_State *J)
 	fz_catch(ctx)
 		rethrow(J);
 	js_pushboolean(J, val);
+}
+
+static void ffi_PDFDocument_repair(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	pdf_document *pdf = js_touserdata(J, 0, "pdf_document");
+	fz_try(ctx)
+		pdf_repair_xref(ctx, pdf);
+	fz_catch(ctx)
+		rethrow(J);
 }
 
 static void ffi_PDFDocument_canBeSavedIncrementally(js_State *J)
@@ -9467,6 +9647,17 @@ static void ffi_PDFPage_associatedFile(js_State *J)
 	fz_catch(ctx)
 		rethrow(J);
 	ffi_pushobj(J, obj);
+}
+
+static void ffi_PDFPage_clip(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	pdf_page *pdf = js_touserdata(J, 0, "pdf_page");
+	fz_rect rect = ffi_torect(J, 1);
+	fz_try(ctx)
+		pdf_clip_page(ctx, pdf, &rect);
+	fz_catch(ctx)
+		rethrow(J);
 }
 
 static void ffi_PDFAnnotation_getBounds(js_State *J)
@@ -11022,7 +11213,7 @@ static void ffi_PDFAnnotation_process(js_State *J)
 	}
 	fz_always(ctx)
 	{
-		pdf_processor_pop_resources(ctx, proc);
+		pdf_drop_obj(ctx, pdf_processor_pop_resources(ctx, proc));
 		pdf_drop_processor(ctx, proc);
 	}
 	fz_catch(ctx)
@@ -11862,12 +12053,27 @@ static void ffi_new_PDFPKCS7Signer(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
 	pdf_pkcs7_signer *signer = NULL;
-	const char *filename = js_tostring(J, 1);
 	const char *password = js_tostring(J, 2);
-	fz_try(ctx)
-		signer = pkcs7_openssl_read_pfx(ctx, filename, password);
-	fz_catch(ctx)
-		rethrow(J);
+
+	if (js_isuserdata(J, 1, "fz_buffer"))
+	{
+		fz_buffer *buf = ffi_tonewbuffer(J, 1);
+		fz_try(ctx)
+			signer = pkcs7_openssl_read_pfx_from_buffer(ctx, buf, password);
+		fz_always(ctx)
+			fz_drop_buffer(ctx, buf);
+		fz_catch(ctx)
+			rethrow(J);
+	}
+	else
+	{
+		const char *filename = js_tostring(J, 1);
+		fz_try(ctx)
+			signer = pkcs7_openssl_read_pfx(ctx, filename, password);
+		fz_catch(ctx)
+			rethrow(J);
+	}
+
 	ffi_pushsigner(J, signer);
 }
 
@@ -12009,7 +12215,9 @@ int murun_main(int argc, char **argv)
 
 	js_newobject(J);
 	{
-		jsB_propfun(J, "Document.openDocument", ffi_Document_openDocument, 2);
+		jsB_propfun(J, "Document.openDocument", ffi_Document_openDocument, 4);
+		jsB_propfun(J, "Document.recognize", ffi_Document_recognize, 1);
+		jsB_propfun(J, "Document.recognizeContent", ffi_Document_recognizeContent, 3);
 	}
 	js_setglobal(J, "Document");
 
@@ -12272,12 +12480,13 @@ int murun_main(int argc, char **argv)
 	js_newobjectx(J);
 	{
 		jsB_propfun(J, "StructuredText.walk", ffi_StructuredText_walk, 1);
-		jsB_propfun(J, "StructuredText.search", ffi_StructuredText_search, 2);
+		jsB_propfun(J, "StructuredText.search", ffi_StructuredText_search, 3);
 		jsB_propfun(J, "StructuredText.highlight", ffi_StructuredText_highlight, 2);
 		jsB_propfun(J, "StructuredText.copy", ffi_StructuredText_copy, 2);
 		jsB_propfun(J, "StructuredText.asJSON", ffi_StructuredText_asJSON, 1);
 		jsB_propfun(J, "StructuredText.asHTML", ffi_StructuredText_asHTML, 1);
 		jsB_propfun(J, "StructuredText.asText", ffi_StructuredText_asText, 0);
+		jsB_propfun(J, "StructuredText.classifyRect", ffi_StructuredText_classifyRect, 2);
 	}
 	js_setregistry(J, "fz_stext_page");
 
@@ -12344,6 +12553,7 @@ int murun_main(int argc, char **argv)
 	js_getregistry(J, "fz_document");
 	js_newobjectx(J);
 	{
+		jsB_propfun(J, "PDFDocument.check", ffi_PDFDocument_check, 0);
 		jsB_propfun(J, "PDFDocument.getVersion", ffi_PDFDocument_getVersion, 0);
 		jsB_propfun(J, "PDFDocument.getTrailer", ffi_PDFDocument_getTrailer, 0);
 		jsB_propfun(J, "PDFDocument.countObjects", ffi_PDFDocument_countObjects, 0);
@@ -12365,6 +12575,7 @@ int murun_main(int argc, char **argv)
 		jsB_propfun(J, "PDFDocument.isFilespec", ffi_PDFDocument_isFilespec, 1);
 		jsB_propfun(J, "PDFDocument.isEmbeddedFile", ffi_PDFDocument_isEmbeddedFile, 1);
 
+		jsB_propfun(J, "PDFDocument.setPageTreeCache", ffi_PDFDocument_setPageTreeCache, 1);
 		jsB_propfun(J, "PDFDocument.addPage", ffi_PDFDocument_addPage, 4);
 		jsB_propfun(J, "PDFDocument.insertPage", ffi_PDFDocument_insertPage, 2);
 		jsB_propfun(J, "PDFDocument.deletePage", ffi_PDFDocument_deletePage, 1);
@@ -12404,6 +12615,7 @@ int murun_main(int argc, char **argv)
 		jsB_propfun(J, "PDFDocument.hasUnsavedChanges", ffi_PDFDocument_hasUnsavedChanges, 0);
 		jsB_propfun(J, "PDFDocument.wasRepaired", ffi_PDFDocument_wasRepaired, 0);
 		jsB_propfun(J, "PDFDocument.canBeSavedIncrementally", ffi_PDFDocument_canBeSavedIncrementally, 0);
+		jsB_propfun(J, "PDFDocument.repair", ffi_PDFDocument_repair, 0);
 
 		jsB_propfun(J, "PDFDocument.enableJournal", ffi_PDFDocument_enableJournal, 0);
 		jsB_propfun(J, "PDFDocument.getJournal", ffi_PDFDocument_getJournal, 0);
@@ -12463,6 +12675,7 @@ int murun_main(int argc, char **argv)
 		jsB_propfun(J, "PDFPage.setPageBox", ffi_PDFPage_setPageBox, 2);
 		jsB_propfun(J, "PDFPage.countAssociatedFiles", ffi_PDFPage_countAssociatedFiles, 0);
 		jsB_propfun(J, "PDFPage.associatedFile", ffi_PDFPage_associatedFile, 1);
+		jsB_propfun(J, "PDFPage.clip", ffi_PDFPage_clip, 1);
 	}
 	js_setregistry(J, "pdf_page");
 
@@ -12879,6 +13092,17 @@ int murun_main(int argc, char **argv)
 		jsB_enum(J, "StructuredText", "SEARCH_IGNORE_DIACRITICS", FZ_SEARCH_IGNORE_DIACRITICS);
 		jsB_enum(J, "StructuredText", "SEARCH_REGEXP", FZ_SEARCH_REGEXP);
 
+		jsB_enum(J, "StructuredText", "FLAGS_STRIKEOUT", FZ_STEXT_STRIKEOUT);
+		jsB_enum(J, "StructuredText", "FLAGS_UNDERLINE", FZ_STEXT_UNDERLINE);
+		jsB_enum(J, "StructuredText", "FLAGS_SYNTHETIC", FZ_STEXT_SYNTHETIC);
+		jsB_enum(J, "StructuredText", "FLAGS_BOLD", FZ_STEXT_BOLD);
+		jsB_enum(J, "StructuredText", "FLAGS_FILLED", FZ_STEXT_FILLED);
+		jsB_enum(J, "StructuredText", "FLAGS_STROKED", FZ_STEXT_STROKED);
+		jsB_enum(J, "StructuredText", "FLAGS_CLIPPED", FZ_STEXT_CLIPPED);
+		jsB_enum(J, "StructuredText", "FLAGS_UNICODE_IS_CID", FZ_STEXT_UNICODE_IS_CID);
+		jsB_enum(J, "StructuredText", "FLAGS_UNICODE_IS_GID", FZ_STEXT_UNICODE_IS_GID);
+		jsB_enum(J, "StructuredText", "FLAGS_SYNTHETIC_LARGE", FZ_STEXT_SYNTHETIC_LARGE);
+
 		jsB_enum(J, "StructuredText", "VECTOR_IS_STROKED", FZ_STEXT_VECTOR_IS_STROKED);
 		jsB_enum(J, "StructuredText", "VECTOR_IS_RECTANGLE", FZ_STEXT_VECTOR_IS_RECTANGLE);
 	}
@@ -12981,6 +13205,7 @@ int murun_main(int argc, char **argv)
 		jsB_enum(J, "PDFPage", "REDACT_LINE_ART_REMOVE_IF_TOUCHED", PDF_REDACT_LINE_ART_REMOVE_IF_TOUCHED);
 		jsB_enum(J, "PDFPage", "REDACT_TEXT_REMOVE", PDF_REDACT_TEXT_REMOVE);
 		jsB_enum(J, "PDFPage", "REDACT_TEXT_NONE", PDF_REDACT_TEXT_NONE);
+		jsB_enum(J, "PDFPage", "REDACT_TEXT_REMOVE_INVISIBLE", PDF_REDACT_TEXT_REMOVE_INVISIBLE);
 
 		jsB_enum(J, "PDFWidget", "TYPE_UNKNOWN", PDF_WIDGET_TYPE_UNKNOWN);
 		jsB_enum(J, "PDFWidget", "TYPE_BUTTON", PDF_WIDGET_TYPE_BUTTON);
@@ -13045,12 +13270,22 @@ int murun_main(int argc, char **argv)
 		js_pop(J, 2);
 
 		js_endtry(J);
+
+		if (js_try(J))
+		{
+			js_report(J, js_trystring(J, -1, "Error"));
+			js_freestate(J);
+			fz_drop_context(ctx);
+			return 1;
+		}
+
 		if (murun_dofile(J, argv[1]))
 		{
 			js_freestate(J);
 			fz_drop_context(ctx);
 			return 1;
 		}
+		js_endtry(J);
 	} else {
 		char line[256];
 		fputs(PS1, stdout);

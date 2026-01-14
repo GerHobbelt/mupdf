@@ -60,9 +60,13 @@ public class PDFDocument extends Document
 		super(newNative());
 	}
 
+	public native void check();
+
 	public boolean isPDF() {
 		return true;
 	}
+
+	public native void setPageTreeCache(boolean enabled);
 
 	public native PDFObject findPage(int at);
 

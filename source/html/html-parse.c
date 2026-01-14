@@ -30,11 +30,9 @@
 
 enum { T, R, B, L };
 
-#define DEFAULT_DIR FZ_BIDI_LTR
-
 static const char *html_default_css =
 "@page{margin:3em 2em}"
-"a{color:#06C;text-decoration:underline}"
+"a:link{color:blue;text-decoration:underline}"
 "address{display:block;font-style:italic}"
 "b{font-weight:bold}"
 "bdo{direction:rtl;unicode-bidi:bidi-override}"
@@ -113,7 +111,7 @@ static const char *fb2_default_css =
 "table{display:table}"
 "tr{display:table-row}"
 "th,td{display:table-cell}"
-"a{color:#06C;text-decoration:underline}"
+"a{color:blue;text-decoration:underline}"
 "a[type=note]{font-size:small;vertical-align:super}"
 "code{white-space:pre;font-family:monospace}"
 "emphasis{font-style:italic}"
@@ -450,6 +448,81 @@ find_flow_encloser(fz_context *ctx, fz_html_box *flow)
 	return flow;
 }
 
+static void
+generate_text_run(fz_context *ctx, fz_html_box *box, fz_html_box *flow, const char *mark, const char *end, int lang, struct genstate *g)
+{
+	fz_pool *pool = g->pool;
+	int bsp = box->style->white_space & WS_ALLOW_BREAK_SPACE;
+	const char *text = mark;
+	const char *prev;
+	int c;
+
+	while (text < end)
+	{
+		prev = text;
+		text += fz_chartorune(&c, text);
+		if (c == 0xAD) /* soft hyphen */
+		{
+			if (mark != prev)
+				add_flow_word(ctx, pool, flow, box, mark, prev, lang);
+			if (box->style->hyphens != HYP_NONE)
+				add_flow_shyphen(ctx, pool, flow, box);
+			mark = text;
+			g->last_brk_cls = UCDN_LINEBREAK_CLASS_WJ; /* don't add sbreaks after a soft hyphen */
+		}
+		else if (bsp) /* allow soft breaks */
+		{
+			int this_brk_cls = ucdn_get_resolved_linebreak_class(c);
+			if (this_brk_cls <= UCDN_LINEBREAK_CLASS_ZWJ)
+			{
+				int brk = pairbrk[g->last_brk_cls][this_brk_cls];
+
+				/* we handle spaces elsewhere, so ignore these classes */
+				if (brk == '@') brk = '^';
+				if (brk == '#') brk = '^';
+				if (brk == '%') brk = '^';
+
+				if (brk == '_')
+				{
+					if (mark != prev)
+						add_flow_word(ctx, pool, flow, box, mark, prev, lang);
+					add_flow_sbreak(ctx, pool, flow, box);
+					mark = prev;
+				}
+
+				g->last_brk_cls = this_brk_cls;
+			}
+		}
+	}
+	if (mark != text)
+		add_flow_word(ctx, pool, flow, box, mark, text, lang);
+}
+
+static void
+generate_text_run_with_hyphens(fz_context *ctx, fz_html_box *box, fz_html_box *flow, const char *mark, const char *end, int lang, fz_hyphenator *hyph, struct genstate *g)
+{
+	char word[256];
+	int size = end - mark;
+	if (size < 64)
+	{
+		fz_hyphenate_word(ctx, hyph, mark, size, word, sizeof word);
+		generate_text_run(ctx, box, flow, word, word + strlen(word), lang, g);
+	}
+	else
+	{
+		generate_text_run(ctx, box, flow, mark, end, lang, g);
+	}
+}
+
+static int fz_isletter_or_apos(int c)
+{
+	int cat;
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == '\'' || c == 0x2019)
+		return 1;
+	cat = ucdn_get_general_category(c);
+	return cat >= UCDN_GENERAL_CATEGORY_LL && cat <= UCDN_GENERAL_CATEGORY_LU;
+}
+
 static void generate_text(fz_context *ctx, fz_html_box *box, const char *text, int lang, struct genstate *g)
 {
 	fz_html_box *flow;
@@ -457,12 +530,24 @@ static void generate_text(fz_context *ctx, fz_html_box *box, const char *text, i
 	int collapse = box->style->white_space & WS_COLLAPSE;
 	int bsp = box->style->white_space & WS_ALLOW_BREAK_SPACE;
 	int bnl = box->style->white_space & WS_FORCE_BREAK_NEWLINE;
+	fz_hyphenator *hyph = NULL;
+	int c, n;
 
 	static const char *space = " ";
 
 	flow = find_flow_encloser(ctx, box);
 	if (flow == NULL)
 		return;
+
+	if (box->style->hyphens == HYP_AUTO && lang != FZ_LANG_UNSET)
+	{
+		hyph = fz_lookup_hyphenator(ctx, lang);
+		if (!hyph)
+		{
+			char tmp[8];
+			fz_warn(ctx, "no hyphenation table for lang='%s'", fz_string_from_text_language(tmp, lang));
+		}
+	}
 
 	while (*text)
 	{
@@ -500,8 +585,7 @@ static void generate_text(fz_context *ctx, fz_html_box *box, const char *text, i
 		}
 		else
 		{
-			const char *prev, *mark = text;
-			int c;
+			const char *mark = text;
 
 			flush_space(ctx, flow, lang, g);
 
@@ -509,43 +593,45 @@ static void generate_text(fz_context *ctx, fz_html_box *box, const char *text, i
 				g->last_brk_cls = UCDN_LINEBREAK_CLASS_WJ;
 
 			while (*text && !iswhite(*text))
+				++text;
+
+			if (hyph)
 			{
-				prev = text;
-				text += fz_chartorune(&c, text);
-				if (c == 0xAD) /* soft hyphen */
+				// split word into letter and non-letter runs for hyphenator
+				const char *p = mark;
+				n = fz_chartorune(&c, p);
+				while (p < text)
 				{
-					if (mark != prev)
-						add_flow_word(ctx, pool, flow, box, mark, prev, lang);
-					add_flow_shyphen(ctx, pool, flow, box);
-					mark = text;
-					g->last_brk_cls = UCDN_LINEBREAK_CLASS_WJ; /* don't add sbreaks after a soft hyphen */
-				}
-				else if (bsp) /* allow soft breaks */
-				{
-					int this_brk_cls = ucdn_get_resolved_linebreak_class(c);
-					if (this_brk_cls <= UCDN_LINEBREAK_CLASS_ZWJ)
+					p += n;
+					if (fz_isletter_or_apos(c))
 					{
-						int brk = pairbrk[g->last_brk_cls][this_brk_cls];
-
-						/* we handle spaces elsewhere, so ignore these classes */
-						if (brk == '@') brk = '^';
-						if (brk == '#') brk = '^';
-						if (brk == '%') brk = '^';
-
-						if (brk == '_')
+						while (p < text)
 						{
-							if (mark != prev)
-								add_flow_word(ctx, pool, flow, box, mark, prev, lang);
-							add_flow_sbreak(ctx, pool, flow, box);
-							mark = prev;
+							n = fz_chartorune(&c, p);
+							if (!fz_isletter_or_apos(c))
+								break;
+							p += n;
 						}
-
-						g->last_brk_cls = this_brk_cls;
+						generate_text_run_with_hyphens(ctx, box, flow, mark, p, lang, hyph, g);
 					}
+					else
+					{
+						while (p < text)
+						{
+							n = fz_chartorune(&c, p);
+							if (fz_isletter_or_apos(c))
+								break;
+							p += n;
+						}
+						generate_text_run(ctx, box, flow, mark, p, lang, g);
+					}
+					mark = p;
 				}
 			}
-			if (mark != text)
-				add_flow_word(ctx, pool, flow, box, mark, text, lang);
+			else
+			{
+				generate_text_run(ctx, box, flow, mark, text, lang, g);
+			}
 
 			g->at_bol = 0;
 		}
@@ -726,6 +812,13 @@ static fz_html_box *new_box(fz_context *ctx, struct genstate *g, fz_xml *node, i
 	box->heading = 0;
 	box->list_item = 0;
 
+#ifdef DEBUG_HTML_SEQ
+	{
+		static int seq = 0;
+		box->seq = seq++;
+	}
+#endif
+
 	box->style = fz_css_enlist(ctx, style, &g->styles, g->pool);
 
 	if (tag)
@@ -856,25 +949,38 @@ static void
 apply_attributes_as_styles(fz_context *ctx, fz_css_style *style, fz_xml *node)
 {
 	const char *att;
+	const char *tag = fz_xml_tag(node);
 
-	att = fz_xml_att(node, "width");
-	if (att)
-	{
-		style->width.value = fz_atof(att);
-		if (strchr(att,'%'))
-			style->width.unit = N_PERCENT;
-		else
-			style->width.unit = N_LENGTH;
-	}
+	if (tag == NULL)
+		return; /* No tag -> no attributes. */
 
-	att = fz_xml_att(node, "height");
-	if (att)
+	if (!strcmp(tag, "canvas") ||
+		!strcmp(tag, "embed") ||
+		!strcmp(tag, "iframe") ||
+		!strcmp(tag, "img") ||
+		!strcmp(tag, "input") ||
+		!strcmp(tag, "object") ||
+		!strcmp(tag, "video"))
 	{
-		style->height.value = fz_atof(att);
-		if (strchr(att,'%'))
-			style->height.unit = N_PERCENT;
-		else
-			style->height.unit = N_LENGTH;
+		att = fz_xml_att(node, "width");
+		if (att)
+		{
+			style->width.value = fz_atof(att);
+			if (strchr(att,'%'))
+				style->width.unit = N_PERCENT;
+			else
+				style->width.unit = N_LENGTH;
+		}
+
+		att = fz_xml_att(node, "height");
+		if (att)
+		{
+			style->height.value = fz_atof(att);
+			if (strchr(att,'%'))
+				style->height.unit = N_PERCENT;
+			else
+				style->height.unit = N_LENGTH;
+		}
 	}
 
 	att = fz_xml_att(node, "valign");
@@ -889,18 +995,22 @@ apply_attributes_as_styles(fz_context *ctx, fz_css_style *style, fz_xml *node)
 	else if (!strcmp(att, "baseline"))
 		style->vertical_align = VA_BASELINE;
 
-	att = fz_xml_att(node, "rowspan");
-	if (att)
+	if (!strcmp(tag, "td") ||
+		!strcmp(tag, "th"))
 	{
-		int i = fz_atoi(att);
-		style->rowspan = fz_clampi(i, 1, 1000);
-	}
+		att = fz_xml_att(node, "rowspan");
+		if (att)
+		{
+			int i = fz_atoi(att);
+			style->rowspan = fz_clampi(i, 1, 1000);
+		}
 
-	att = fz_xml_att(node, "colspan");
-	if (att)
-	{
-		int i = fz_atoi(att);
-		style->colspan = fz_clampi(i, 1, 1000);
+		att = fz_xml_att(node, "colspan");
+		if (att)
+		{
+			int i = fz_atoi(att);
+			style->colspan = fz_clampi(i, 1, 1000);
+		}
 	}
 
 	/* FIXME: We probably need to vary this based on node type;
@@ -1241,6 +1351,7 @@ static void gen2_tag(fz_context *ctx, struct genstate *g, fz_html_box *root_box,
 	tag = fz_xml_tag(node);
 
 	dir_att = fz_xml_att(node, "dir");
+	g->markup_dir = style->direction;
 	if (dir_att)
 	{
 		if (!strcmp(dir_att, "auto"))
@@ -1249,8 +1360,6 @@ static void gen2_tag(fz_context *ctx, struct genstate *g, fz_html_box *root_box,
 			g->markup_dir = FZ_BIDI_RTL;
 		else if (!strcmp(dir_att, "ltr"))
 			g->markup_dir = FZ_BIDI_LTR;
-		else
-			g->markup_dir = DEFAULT_DIR;
 	}
 
 	lang_att = fz_xml_att(node, "lang");
@@ -1412,31 +1521,6 @@ static void gen2_children(fz_context *ctx, struct genstate *g, fz_html_box *root
 	}
 }
 
-static char *concat_text(fz_context *ctx, fz_xml *root)
-{
-	fz_xml *node;
-	size_t i = 0, n = 1;
-	char *s;
-	for (node = fz_xml_down(root); node; node = fz_xml_next(node))
-	{
-		const char *text = fz_xml_text(node);
-		n += text ? strlen(text) : 0;
-	}
-	s = Memento_label(fz_malloc(ctx, n), "concat_html");
-	for (node = fz_xml_down(root); node; node = fz_xml_next(node))
-	{
-		const char *text = fz_xml_text(node);
-		if (text)
-		{
-			n = strlen(text);
-			memcpy(s+i, text, n);
-			i += n;
-		}
-	}
-	s[i] = 0;
-	return s;
-}
-
 static void
 html_load_css_link(fz_context *ctx, fz_html_font_set *set, fz_archive *zip, const char *base_uri, fz_css *css, fz_xml *root, const char *href)
 {
@@ -1498,7 +1582,7 @@ html_load_css(fz_context *ctx, fz_html_font_set *set, fz_archive *zip, const cha
 		}
 		else if (fz_xml_is_tag(node, "style"))
 		{
-			char *s = concat_text(ctx, node);
+			char *s = fz_new_text_from_xml(ctx, node);
 			fz_try(ctx)
 			{
 				fz_parse_css(ctx, css, s, "<style>");
@@ -1525,7 +1609,7 @@ fb2_load_css(fz_context *ctx, fz_html_font_set *set, fz_archive *zip, const char
 	stylesheet = fz_xml_find_down(fictionbook, "stylesheet");
 	if (stylesheet)
 	{
-		char *s = concat_text(ctx, stylesheet);
+		char *s = fz_new_text_from_xml(ctx, stylesheet);
 		fz_try(ctx)
 		{
 			fz_parse_css(ctx, css, s, "<stylesheet>");
@@ -1566,7 +1650,7 @@ load_fb2_images(fz_context *ctx, fz_xml *root)
 
 		fz_try(ctx)
 		{
-			b64 = concat_text(ctx, binary);
+			b64 = fz_new_text_from_xml(ctx, binary);
 			buf = fz_new_buffer_from_base64(ctx, b64, strlen(b64));
 			img = fz_new_image_from_buffer(ctx, buf);
 		}
@@ -1916,7 +2000,7 @@ xml_to_boxes(fz_context *ctx, fz_html_font_set *set, fz_archive *zip, const char
 		fz_apply_css_style(ctx, g.set, &style, &root_match);
 
 		g.pool = tree->pool;
-		g.markup_dir = DEFAULT_DIR;
+		g.markup_dir = style.direction;
 		g.markup_lang = FZ_LANG_UNSET;
 
 		// Create root node
@@ -2289,6 +2373,7 @@ fz_debug_html_flow(fz_context *ctx, fz_html_flow *flow, int level)
 		case FLOW_IMAGE: printf("image"); break;
 		case FLOW_ANCHOR: printf("anchor"); break;
 		}
+		printf(" script=%d", flow->script);
 		// printf(" y=%g x=%g w=%g", flow->y, flow->x, flow->w);
 		if (flow->type == FLOW_IMAGE)
 			printf(" h=%g", flow->h);
@@ -2353,6 +2438,9 @@ fz_debug_html_box(fz_context *ctx, fz_html_box *box, int level)
 	{
 		indent(level);
 		printf("box ");
+#ifdef DEBUG_HTML_SEQ
+		printf("seq=%d ", box->seq);
+#endif
 		switch (box->type) {
 		case BOX_BLOCK: printf("block"); break;
 		case BOX_FLOW: printf("flow"); break;
@@ -2366,6 +2454,8 @@ fz_debug_html_box(fz_context *ctx, fz_html_box *box, int level)
 		// printf(" em=%g", box->em);
 		// printf(" x=%g y=%g w=%g b=%g", box->x, box->y, box->w, box->b);
 
+		if (box->markup_dir == FZ_BIDI_RTL)
+			printf(" rtl");
 		if (box->is_first_flow)
 			printf(" is-first-flow");
 		if (box->list_item)
@@ -2412,6 +2502,8 @@ fz_debug_html_box(fz_context *ctx, fz_html_box *box, int level)
 				printf(">padding=(%g %g %g %g)\n", box->u.block.padding[0], box->u.block.padding[1], box->u.block.padding[2], box->u.block.padding[3]);
 			}
 		}
+		indent(level+1);
+		printf(">layout=(%g %g)->(%g %g)\n", box->s.layout.x, box->s.layout.y, box->s.layout.w + box->s.layout.x, box->s.layout.b);
 
 		if (box->down)
 			fz_debug_html_box(ctx, box->down, level + 1);

@@ -646,6 +646,19 @@ pdf_load_image_stream(fz_context *ctx, pdf_document *doc, int num, fz_compressio
 		n = pdf_array_len(ctx, obj);
 		for (i = 0; i < n; i++)
 			len = pdf_guess_filter_length(len, pdf_array_get_name(ctx, obj, i));
+		if (worst_case == 0 && pdf_name_eq(ctx, pdf_dict_get(ctx, dict, PDF_NAME(Subtype)), PDF_NAME(Image)))
+		{
+			int64_t w = pdf_dict_get_int64(ctx, dict, PDF_NAME(Width));
+			int64_t h = pdf_dict_get_int64(ctx, dict, PDF_NAME(Height));
+			int bpc = pdf_dict_get_int_default(ctx, dict, PDF_NAME(BitsPerComponent), 8);
+			int nc = pdf_guess_colorspace_components(ctx, pdf_dict_get(ctx, dict, PDF_NAME(ColorSpace)));
+			if (w > 0 && h > 0 && bpc > 0 && nc > 0)
+			{
+				worst_case = (size_t)(((w * nc * bpc + 7) >> 3) * h);
+				if (worst_case < len)
+					worst_case = len;
+			}
+		}
 	}
 	fz_always(ctx)
 	{

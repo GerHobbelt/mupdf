@@ -35,10 +35,14 @@ pdf_filter_type3(fz_context *ctx, pdf_document *doc, pdf_obj *obj, pdf_obj *page
 static void
 pdf_filter_resources(fz_context *ctx, pdf_document *doc, pdf_obj *in_res, pdf_obj *res, pdf_filter_options *options, pdf_cycle_list *cycle_up)
 {
+	pdf_cycle_list cycle;
 	pdf_obj *obj;
 	int i, n;
 
 	if (!options->recurse)
+		return;
+
+	if (pdf_cycle(ctx, &cycle, cycle_up, in_res))
 		return;
 
 	/* ExtGState */
@@ -55,7 +59,7 @@ pdf_filter_resources(fz_context *ctx, pdf_document *doc, pdf_obj *in_res, pdf_ob
 				if (g)
 				{
 					/* Transparency group XObject */
-					pdf_filter_xobject(ctx, doc, g, in_res, options, cycle_up);
+					pdf_filter_xobject(ctx, doc, g, in_res, options, &cycle);
 				}
 			}
 		}
@@ -71,7 +75,7 @@ pdf_filter_resources(fz_context *ctx, pdf_document *doc, pdf_obj *in_res, pdf_ob
 			pdf_obj *pat = pdf_dict_get_val(ctx, obj, i);
 			if (pat && pdf_dict_get_int(ctx, pat, PDF_NAME(PatternType)) == 1)
 			{
-				pdf_filter_xobject(ctx, doc, pat, in_res, options, cycle_up);
+				pdf_filter_xobject(ctx, doc, pat, in_res, options, &cycle);
 			}
 		}
 	}
@@ -88,7 +92,7 @@ pdf_filter_resources(fz_context *ctx, pdf_document *doc, pdf_obj *in_res, pdf_ob
 				pdf_obj *xobj = pdf_dict_get_val(ctx, obj, i);
 				if (xobj && pdf_dict_get(ctx, xobj, PDF_NAME(Subtype)) == PDF_NAME(Form))
 				{
-					pdf_filter_xobject(ctx, doc, xobj, in_res, options, cycle_up);
+					pdf_filter_xobject(ctx, doc, xobj, in_res, options, &cycle);
 				}
 			}
 		}
@@ -104,7 +108,7 @@ pdf_filter_resources(fz_context *ctx, pdf_document *doc, pdf_obj *in_res, pdf_ob
 			pdf_obj *font = pdf_dict_get_val(ctx, obj, i);
 			if (font && pdf_dict_get(ctx, font, PDF_NAME(Subtype)) == PDF_NAME(Type3))
 			{
-				pdf_filter_type3(ctx, doc, font, in_res, options, cycle_up);
+				pdf_filter_type3(ctx, doc, font, in_res, options, &cycle);
 			}
 		}
 	}
@@ -256,10 +260,10 @@ pdf_filter_type3(fz_context *ctx, pdf_document *doc, pdf_obj *obj, pdf_obj *page
 
 			if (i > 0)
 			{
+				// reset all chained processors (and clear the buffer)
 				pdf_reset_processor(ctx, top);
-				fz_clear_buffer(ctx, buffer);
 			}
-			pdf_process_raw_contents(ctx, top, doc, in_res, val, NULL);
+			pdf_process_raw_contents(ctx, top, doc, val, NULL);
 
 			pdf_close_processor(ctx, top);
 
@@ -530,7 +534,7 @@ pdf_redact_end_page(fz_context *ctx, fz_buffer *buf, void *opaque)
 }
 
 static int
-pdf_redact_text_filter(fz_context *ctx, void *opaque, int *ucsbuf, int ucslen, fz_matrix trm, fz_matrix ctm, fz_rect bbox)
+pdf_redact_text_filter(fz_context *ctx, void *opaque, int *ucsbuf, int ucslen, fz_matrix trm, fz_matrix ctm, fz_rect bbox, int tr, float ca, float CA)
 {
 	struct redact_filter_state *red = opaque;
 	pdf_page *page = red->page;
@@ -584,6 +588,33 @@ pdf_redact_text_filter(fz_context *ctx, void *opaque, int *ucsbuf, int ucslen, f
 	}
 
 	return 0;
+}
+
+static int
+pdf_redact_invisible_text_filter(fz_context *ctx, void *opaque, int *ucsbuf, int ucslen, fz_matrix trm, fz_matrix ctm, fz_rect bbox, int tr, float ca, float CA)
+{
+	int invisible = 0;
+
+	switch (tr)
+	{
+		case 0: /* Fill */
+			invisible = (ca == 0);
+			break;
+		case 1: /* Stroke */
+			invisible = (CA == 0);
+			break;
+		case 2: /* Fill + Stroke */
+			invisible = (ca == 0 && CA == 0);
+			break;
+		case 3: /* Neither Fill nor stroke */
+			invisible = 1;
+			break;
+	}
+
+	if (!invisible)
+		return 0;
+
+	return pdf_redact_text_filter(ctx, opaque, ucsbuf, ucslen, trm, ctm, bbox, tr, ca, CA);
 }
 
 static fz_pixmap *
@@ -1068,6 +1099,8 @@ void init_redact_filter(fz_context *ctx, pdf_redact_options *redact_opts, struct
 	red->sanitize_opts.opaque = red;
 	if (text == PDF_REDACT_TEXT_REMOVE)
 		red->sanitize_opts.text_filter = pdf_redact_text_filter;
+	if (text == PDF_REDACT_TEXT_REMOVE_INVISIBLE)
+		red->sanitize_opts.text_filter = pdf_redact_invisible_text_filter;
 	if (image_method == PDF_REDACT_IMAGE_PIXELS)
 		red->sanitize_opts.image_filter = pdf_redact_image_filter_pixels;
 	if (image_method == PDF_REDACT_IMAGE_REMOVE)
@@ -1277,6 +1310,64 @@ pdf_clip_page(fz_context *ctx, pdf_page *page, fz_rect *clip)
 		pdf_filter_page_contents(ctx, doc, page, &hc.filter_opts);
 		pdf_clip_page_links(ctx, &hc);
 		pdf_clip_page_annotations(ctx, &hc);
+		pdf_end_operation(ctx, doc);
+	}
+	fz_catch(ctx)
+	{
+		pdf_abandon_operation(ctx, doc);
+		fz_rethrow(ctx);
+	}
+}
+
+/* Vectorisation of pages */
+
+struct vectorize_filter_state {
+	pdf_filter_options filter_opts;
+	pdf_vectorize_filter_options vectorize_opts;
+	pdf_filter_factory filter_list[2];
+	pdf_page *page;
+};
+
+static
+void init_vectorize_filter(fz_context *ctx, struct vectorize_filter_state *hc, pdf_page *page)
+{
+	memset(&hc->filter_opts, 0, sizeof hc->filter_opts);
+	memset(&hc->vectorize_opts, 0, sizeof hc->vectorize_opts);
+
+	hc->filter_opts.recurse = 0;
+	hc->filter_opts.instance_forms = 0;
+	hc->filter_opts.ascii = 0;
+	hc->filter_opts.opaque = hc;
+	hc->filter_opts.filters = hc->filter_list;
+	hc->filter_opts.recurse = 1;
+
+	hc->vectorize_opts.opaque = hc;
+
+	hc->filter_list[0].filter = pdf_new_vectorize_filter;
+	hc->filter_list[0].options = &hc->vectorize_opts;
+	hc->filter_list[1].filter = NULL;
+	hc->filter_list[1].options = NULL;
+
+	hc->page = page;
+}
+
+void
+pdf_vectorize_page(fz_context *ctx, pdf_page *page)
+{
+	pdf_document *doc;
+	struct vectorize_filter_state hv;
+
+	if (page == NULL)
+		return;
+
+	doc = page->doc;
+
+	init_vectorize_filter(ctx, &hv, page);
+
+	pdf_begin_operation(ctx, doc, "Vectorize text to page");
+	fz_try(ctx)
+	{
+		pdf_filter_page_contents(ctx, doc, page, &hv.filter_opts);
 		pdf_end_operation(ctx, doc);
 	}
 	fz_catch(ctx)
