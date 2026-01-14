@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 #include "mupdf/fitz.h"
 #include "pdf-annot-imp.h"
@@ -247,13 +247,11 @@ pdf_sign_signature_with_appearance(fz_context *ctx, pdf_annot *widget, pdf_pkcs7
 			pdf_dict_put_drop(ctx, form, PDF_NAME(SigFlags), pdf_new_int(ctx, sf | PDF_SIGFLAGS_SIGSEXIST | PDF_SIGFLAGS_APPENDONLY));
 
 		pdf_signature_set_value(ctx, doc, wobj, signer, t);
-	}
-	fz_always(ctx)
-	{
 		pdf_end_operation(ctx, doc);
 	}
 	fz_catch(ctx)
 	{
+		pdf_abandon_operation(ctx, doc);
 		fz_rethrow(ctx);
 	}
 }
@@ -433,14 +431,13 @@ void pdf_clear_signature(fz_context *ctx, pdf_annot *widget)
 
 		dlist = pdf_signature_appearance_unsigned(ctx, rect, lang);
 		pdf_set_annot_appearance_from_display_list(ctx, widget, "N", NULL, fz_identity, dlist);
+		pdf_end_operation(ctx, widget->page->doc);
 	}
 	fz_always(ctx)
-	{
-		pdf_end_operation(ctx, widget->page->doc);
 		fz_drop_display_list(ctx, dlist);
-	}
 	fz_catch(ctx)
 	{
+		pdf_abandon_operation(ctx, widget->page->doc);
 		fz_rethrow(ctx);
 	}
 }

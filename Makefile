@@ -100,7 +100,7 @@ $(OUT)/source/helpers/pkcs7/%.o : source/helpers/pkcs7/%.c
 	$(CC_CMD) $(WARNING_CFLAGS) $(LIB_CFLAGS) $(LIBCRYPTO_CFLAGS)
 
 $(OUT)/source/tools/%.o : source/tools/%.c
-	$(CC_CMD) $(WARNING_CFLAGS) $(THIRD_CFLAGS) $(THREADING_CFLAGS)
+	$(CC_CMD) $(LIB_CFLAGS) $(WARNING_CFLAGS) $(THIRD_CFLAGS) $(THREADING_CFLAGS)
 
 $(OUT)/generated/%.o : generated/%.c
 	$(CC_CMD) $(WARNING_CFLAGS) $(LIB_CFLAGS) -O0
@@ -323,21 +323,24 @@ MUTOOL_SRC += $(sort $(wildcard source/tools/pdf*.c))
 MUTOOL_OBJ := $(MUTOOL_SRC:%.c=$(OUT)/%.o)
 MUTOOL_EXE := $(OUT)/mutool$(EXE)
 $(MUTOOL_EXE) : $(MUTOOL_OBJ) $(MUPDF_LIB) $(THIRD_LIB) $(PKCS7_LIB) $(THREAD_LIB)
-	$(LINK_CMD) $(THIRD_LIBS) $(THREADING_LIBS) $(LIBCRYPTO_LIBS)
+	$(LINK_CMD) $(EXE_LDFLAGS) $(THIRD_LIBS) $(THREADING_LIBS) $(LIBCRYPTO_LIBS)
 TOOL_APPS += $(MUTOOL_EXE)
 
 MURASTER_OBJ := $(OUT)/source/tools/muraster.o
 MURASTER_EXE := $(OUT)/muraster$(EXE)
 $(MURASTER_EXE) : $(MURASTER_OBJ) $(MUPDF_LIB) $(THIRD_LIB) $(PKCS7_LIB) $(THREAD_LIB)
-	$(LINK_CMD) $(THIRD_LIBS) $(THREADING_LIBS) $(LIBCRYPTO_LIBS)
+	$(LINK_CMD) $(EXE_LDFLAGS) $(THIRD_LIBS) $(THREADING_LIBS) $(LIBCRYPTO_LIBS)
 TOOL_APPS += $(MURASTER_EXE)
 
 ifeq ($(HAVE_GLUT),yes)
   MUVIEW_GLUT_SRC += $(sort $(wildcard platform/gl/*.c))
   MUVIEW_GLUT_OBJ := $(MUVIEW_GLUT_SRC:%.c=$(OUT)/%.o)
+ifeq ($(HAVE_WIN32),yes)
+  MUVIEW_GLUT_OBJ += $(OUT)/platform/gl/gl-winres.o
+endif
   MUVIEW_GLUT_EXE := $(OUT)/mupdf-gl$(EXE)
   $(MUVIEW_GLUT_EXE) : $(MUVIEW_GLUT_OBJ) $(MUPDF_LIB) $(THIRD_LIB) $(THIRD_GLUT_LIB) $(PKCS7_LIB)
-	$(LINK_CMD) $(THIRD_LIBS) $(LIBCRYPTO_LIBS) $(WIN32_LDFLAGS) $(THIRD_GLUT_LIBS)
+	$(LINK_CMD) $(EXE_LDFLAGS) $(THIRD_LIBS) $(LIBCRYPTO_LIBS) $(WIN32_LDFLAGS) $(THIRD_GLUT_LIBS)
   VIEW_APPS += $(MUVIEW_GLUT_EXE)
 endif
 
@@ -371,7 +374,7 @@ ifeq ($(HAVE_PTHREAD),yes)
   MUVIEW_X11_CURL_OBJ += $(OUT)/platform/x11/curl/curl_stream.o
   MUVIEW_X11_CURL_OBJ += $(OUT)/platform/x11/curl/prog_stream.o
   $(MUVIEW_X11_CURL_EXE) : $(MUVIEW_X11_CURL_OBJ) $(MUPDF_LIB) $(THIRD_LIB) $(PKCS7_LIB) $(CURL_LIB)
-	$(LINK_CMD) $(THIRD_LIBS) $(X11_LIBS) $(LIBCRYPTO_LIBS) $(CURL_LIBS) $(PTHREAD_LIBS)
+	$(LINK_CMD) $(EXE_LDFLAGS) $(THIRD_LIBS) $(X11_LIBS) $(LIBCRYPTO_LIBS) $(CURL_LIBS) $(PTHREAD_LIBS)
   VIEW_APPS += $(MUVIEW_X11_CURL_EXE)
 endif
 endif
@@ -459,10 +462,30 @@ install-docs:
 	install -d $(DESTDIR)$(docdir)
 	install -d $(DESTDIR)$(docdir)/examples
 	install -m 644 README COPYING CHANGES $(DESTDIR)$(docdir)
-	install -m 644 docs/*.html docs/*.css docs/*.png $(DESTDIR)$(docdir)
 	install -m 644 docs/examples/* $(DESTDIR)$(docdir)/examples
 
 install: install-libs install-apps install-docs
+
+install-docs-html:
+	python3 scripts/build-docs.py
+	install -d $(DESTDIR)$(docdir)
+	install -d $(DESTDIR)$(docdir)/_images
+	install -d $(DESTDIR)$(docdir)/_static
+	install -d $(DESTDIR)$(docdir)/_static/js
+	install -d $(DESTDIR)$(docdir)/_static/css
+	install -d $(DESTDIR)$(docdir)/_static/css/fonts
+	install -m 644 build/docs/html/*.html $(DESTDIR)$(docdir)
+	install -m 644 build/docs/html/*.inv $(DESTDIR)$(docdir)
+	install -m 644 build/docs/html/*.js $(DESTDIR)$(docdir)
+	install -m 644 build/docs/html/_images/* $(DESTDIR)$(docdir)/_images
+	install -m 644 build/docs/html/_static/*.css $(DESTDIR)$(docdir)/_static
+	install -m 644 build/docs/html/_static/*.ico $(DESTDIR)$(docdir)/_static
+	install -m 644 build/docs/html/_static/*.js $(DESTDIR)$(docdir)/_static
+	install -m 644 build/docs/html/_static/*.png $(DESTDIR)$(docdir)/_static
+	install -m 644 build/docs/html/_static/*.svg $(DESTDIR)$(docdir)/_static
+	install -m 644 build/docs/html/_static/js/* $(DESTDIR)$(docdir)/_static/js
+	install -m 644 build/docs/html/_static/css/*.css $(DESTDIR)$(docdir)/_static/css
+	install -m 644 build/docs/html/_static/css/fonts/* $(DESTDIR)$(docdir)/_static/css/fonts
 
 tarball:
 	bash scripts/archive.sh
@@ -476,6 +499,9 @@ watch:
 watch-recompile:
 	@ while ! inotifywait -q -e modify $(WATCH_SRCS) ; do time -p $(MAKE) ; done
 
+wasm:
+	$(MAKE) -C platform/wasm
+
 java:
 	$(MAKE) -C platform/java build=$(build)
 
@@ -488,6 +514,9 @@ extract-test:
 
 tags:
 	$(TAGS_CMD)
+
+find-try-return:
+	@ bash scripts/find-try-return.sh
 
 cscope.files: $(shell find include source platform -name '*.[ch]')
 	@ echo $^ | tr ' ' '\n' > $@
@@ -532,10 +561,10 @@ android: generate
 c++: c++-$(build)
 
 c++-release: shared-release
-	./scripts/mupdfwrap.py --venv pylocal -d build/shared-release -b 01
+	./scripts/mupdfwrap.py --venv -d build/shared-release -b 01
 
 c++-debug: shared-debug
-	./scripts/mupdfwrap.py --venv pylocal -d build/shared-debug -b 01
+	./scripts/mupdfwrap.py --venv -d build/shared-debug -b 01
 
 c++-clean:
 	rm -rf platform/c++

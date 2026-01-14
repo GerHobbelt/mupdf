@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 #include "mupdf/fitz.h"
 #include "mupdf/ucdn.h"
@@ -268,7 +268,9 @@ remove_last_char(fz_context *ctx, fz_stext_line *line)
 		}
 		if (prev)
 		{
-			/* the characters are pool allocated, so we don't actually leak the removed node */
+			/* The characters are pool allocated, so we don't actually leak the removed node. */
+			/* We do need to drop the char's font reference though. */
+			fz_drop_font(ctx, prev->next->font);
 			line->last_char = prev;
 			line->last_char->next = NULL;
 		}

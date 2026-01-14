@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 #include "mupdf/fitz.h"
 #include "pdf-annot-imp.h"
@@ -693,6 +693,7 @@ int pdf_xref_ensure_incremental_object(fz_context *ctx, pdf_document *doc, int n
 	pdf_xref_entry *new_entry, *old_entry;
 	pdf_xref_subsec *sub = NULL;
 	int i;
+	pdf_obj *copy;
 
 	/* Make sure we have created an xref section for incremental updates */
 	ensure_incremental_xref(ctx, doc);
@@ -718,15 +719,25 @@ int pdf_xref_ensure_incremental_object(fz_context *ctx, pdf_document *doc, int n
 	if (i == 0 || sub == NULL)
 		return 0;
 
+	copy = pdf_deep_copy_obj(ctx, sub->table[num - sub->start].obj);
+
 	/* Move the object to the incremental section */
+	i = doc->xref_index[num];
 	doc->xref_index[num] = 0;
 	old_entry = &sub->table[num - sub->start];
-	new_entry = pdf_get_incremental_xref_entry(ctx, doc, num);
+	fz_try(ctx)
+		new_entry = pdf_get_incremental_xref_entry(ctx, doc, num);
+	fz_catch(ctx)
+	{
+		pdf_drop_obj(ctx, copy);
+		doc->xref_index[num] = i;
+		fz_rethrow(ctx);
+	}
 	*new_entry = *old_entry;
 	/* Better keep a copy. We must override the old entry with
 	 * the copy because the caller may be holding a reference to
 	 * the original and expect it to end up in the new entry */
-	old_entry->obj = pdf_deep_copy_obj(ctx, old_entry->obj);
+	old_entry->obj = copy;
 	old_entry->stm_buf = NULL;
 
 	return 1;
@@ -770,10 +781,20 @@ void pdf_xref_ensure_local_object(fz_context *ctx, pdf_document *doc, int num)
 	if (sub == NULL)
 		return; /* No object to find */
 
+	copy = pdf_deep_copy_obj(ctx, sub->table[num - sub->start].obj);
+
 	/* Copy the object to the local section */
+	i = doc->xref_index[num];
 	doc->xref_index[num] = 0;
 	old_entry = &sub->table[num - sub->start];
-	new_entry = pdf_get_local_xref_entry(ctx, doc, num);
+	fz_try(ctx)
+		new_entry = pdf_get_local_xref_entry(ctx, doc, num);
+	fz_catch(ctx)
+	{
+		pdf_drop_obj(ctx, copy);
+		doc->xref_index[num] = i;
+		fz_rethrow(ctx);
+	}
 	*new_entry = *old_entry;
 	new_entry->stm_buf = NULL;
 	new_entry->obj = NULL;
@@ -781,7 +802,6 @@ void pdf_xref_ensure_local_object(fz_context *ctx, pdf_document *doc, int num)
 	 * Better keep a copy. We must override the old entry with
 	 * the copy because the caller may be holding a reference to
 	 * the original and expect it to end up in the new entry */
-	copy = pdf_deep_copy_obj(ctx, old_entry->obj);
 	new_entry->obj = old_entry->obj;
 	old_entry->obj = copy;
 	new_entry->stm_buf = NULL; /* FIXME */
@@ -1125,6 +1145,14 @@ pdf_xref_find_subsection(fz_context *ctx, pdf_document *doc, int start, int len)
 			/* The end of the start+len range is in 'sub'. */
 			/* For now, we won't support extending sub backwards. Just take this as
 			 * needing to solidify. Case 3. */
+			solidify = 1;
+			break;
+		}
+		else if (start < sub->start && start + len >= sub->start + sub->len)
+		{
+			/* The end of the start+len range is beyond 'sub'. */
+			/* For now, we won't support extending sub backwards. Just take this as
+			 * needing to solidify. Another variant of case 3. */
 			solidify = 1;
 			break;
 		}
@@ -2514,7 +2542,9 @@ perform_repair:
 				 * repair, it may not be. It is safe to call pdf_get_xref_entry_no_change
 				 * here, as it does not try/catch. */
 				ox = pdf_get_xref_entry_no_change(ctx, doc, num);
-				ox->type = 'o'; /* Not recursing any more. */
+				/* Bug 706762: ox can be NULL if the object went away during a repair. */
+				if (ox && ox->type == 'O')
+					ox->type = 'o'; /* Not recursing any more. */
 			}
 			fz_catch(ctx)
 				fz_rethrow(ctx);
@@ -2523,7 +2553,8 @@ perform_repair:
 			if (!x->obj)
 			{
 				x->type = 'f';
-				ox->type = 'f';
+				if (ox)
+					ox->type = 'f';
 				if (doc->repair_attempted)
 					fz_throw(ctx, FZ_ERROR_GENERIC, "object (%d 0 R) was not found in its object stream", num);
 				goto perform_repair;
@@ -2981,11 +3012,13 @@ pdf_set_metadata(fz_context *ctx, pdf_document *doc, const char *key, const char
 		if (!strncmp(key, FZ_META_INFO, strlen(FZ_META_INFO)))
 			key += strlen(FZ_META_INFO);
 		pdf_dict_put_text_string(ctx, info, pdf_new_name(ctx, key), value);
-	}
-	fz_always(ctx)
 		pdf_end_operation(ctx, doc);
+	}
 	fz_catch(ctx)
+	{
+		pdf_abandon_operation(ctx, doc);
 		fz_rethrow(ctx);
+	}
 }
 
 static fz_link_dest
@@ -2995,10 +3028,9 @@ pdf_resolve_link_imp(fz_context *ctx, fz_document *doc_, const char *uri)
 	return pdf_resolve_link_dest(ctx, doc, uri);
 }
 
-char *
-pdf_format_link_uri_imp(fz_context *ctx, fz_document *doc, fz_link_dest dest)
+char *pdf_format_link_uri(fz_context *ctx, fz_document *doc, fz_link_dest dest)
 {
-	return pdf_format_link_uri(ctx, dest);
+	return pdf_new_uri_from_explicit_dest(ctx, dest);
 }
 
 /*
@@ -3030,7 +3062,7 @@ pdf_new_document(fz_context *ctx, fz_stream *file)
 	doc->super.has_permission = (fz_document_has_permission_fn*)pdf_has_permission;
 	doc->super.outline_iterator = (fz_document_outline_iterator_fn*)pdf_new_outline_iterator;
 	doc->super.resolve_link_dest = pdf_resolve_link_imp;
-	doc->super.format_link_uri = pdf_format_link_uri_imp;
+	doc->super.format_link_uri = pdf_format_link_uri;
 	doc->super.count_pages = pdf_count_pages_imp;
 	doc->super.load_page = pdf_load_page_imp;
 	doc->super.page_label = pdf_page_label_imp;
@@ -3573,6 +3605,36 @@ static const char *pdf_mimetypes[] =
 	NULL
 };
 
+static int
+pdf_recognize_doc_content(fz_context *ctx, fz_stream *stream)
+{
+	const char *match = "%PDF-";
+	int pos = 0;
+	int n = 4096+5;
+	int c;
+
+	do
+	{
+		c = fz_read_byte(ctx, stream);
+		if (c == EOF)
+			return 0;
+		if (c == match[pos])
+		{
+			pos++;
+			if (pos == 5)
+				return 100;
+		}
+		else
+		{
+			/* Restart matching, but recheck c against the start. */
+			pos = (c == match[0]);
+		}
+	}
+	while (--n > 0);
+
+	return 0;
+}
+
 fz_document_handler pdf_document_handler =
 {
 	NULL,
@@ -3581,7 +3643,8 @@ fz_document_handler pdf_document_handler =
 	pdf_extensions,
 	pdf_mimetypes,
 	NULL,
-	NULL
+	NULL,
+	pdf_recognize_doc_content
 };
 
 void pdf_mark_xref(fz_context *ctx, pdf_document *doc)
@@ -5073,4 +5136,34 @@ int pdf_obj_is_incremental(fz_context *ctx, pdf_obj *obj)
 	v = pdf_find_incremental_update_num_for_obj(ctx, doc, obj);
 
 	return (v == 0);
+}
+
+void pdf_minimize_document(fz_context *ctx, pdf_document *doc)
+{
+	int i;
+
+	/* Don't throw anything away if we've done a repair! */
+	if (doc == NULL || doc->repair_attempted)
+		return;
+
+	/* Don't throw anything away in the incremental section, as that's where
+	 * all our changes will be. */
+	for (i = doc->num_incremental_sections; i < doc->num_xref_sections; i++)
+	{
+		pdf_xref *xref = &doc->xref_sections[i];
+		pdf_xref_subsec *sub;
+
+		for (sub = xref->subsec; sub; sub = sub->next)
+		{
+			int len = sub->len;
+			int j;
+			for (j = 0; j < len; j++)
+			{
+				pdf_xref_entry *e = &sub->table[j];
+				if (e->obj == NULL)
+					continue;
+				e->obj = pdf_drop_singleton_obj(ctx, e->obj);
+			}
+		}
+	}
 }

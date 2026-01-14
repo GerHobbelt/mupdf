@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 #include "mupdf/fitz.h"
 #include "html-imp.h"
@@ -113,7 +113,7 @@ htdoc_drop_page(fz_context *ctx, fz_page *page_)
 }
 
 static fz_rect
-htdoc_bound_page(fz_context *ctx, fz_page *page_)
+htdoc_bound_page(fz_context *ctx, fz_page *page_, fz_box_type box)
 {
 	html_page *page = (html_page*)page_;
 	html_document *doc = page->doc;
@@ -177,7 +177,7 @@ htdoc_load_outline(fz_context *ctx, fz_document *doc_)
 }
 
 static int
-fb2doc_lookup_metadata(fz_context *ctx, fz_document *doc_, const char *key, char *buf, int size)
+fb2doc_lookup_metadata(fz_context *ctx, fz_document *doc_, const char *key, char *buf, size_t size)
 {
 	html_document *doc = (html_document*)doc_;
 	if (!strcmp(key, FZ_META_FORMAT))
@@ -188,7 +188,7 @@ fb2doc_lookup_metadata(fz_context *ctx, fz_document *doc_, const char *key, char
 }
 
 static int
-htdoc_lookup_metadata(fz_context *ctx, fz_document *doc_, const char *key, char *buf, int size)
+htdoc_lookup_metadata(fz_context *ctx, fz_document *doc_, const char *key, char *buf, size_t size)
 {
 	html_document *doc = (html_document*)doc_;
 	if (!strcmp(key, FZ_META_FORMAT))
@@ -199,7 +199,7 @@ htdoc_lookup_metadata(fz_context *ctx, fz_document *doc_, const char *key, char 
 }
 
 static int
-xhtdoc_lookup_metadata(fz_context *ctx, fz_document *doc_, const char *key, char *buf, int size)
+xhtdoc_lookup_metadata(fz_context *ctx, fz_document *doc_, const char *key, char *buf, size_t size)
 {
 	html_document *doc = (html_document*)doc_;
 	if (!strcmp(key, FZ_META_FORMAT))
@@ -210,7 +210,7 @@ xhtdoc_lookup_metadata(fz_context *ctx, fz_document *doc_, const char *key, char
 }
 
 static int
-mobi_lookup_metadata(fz_context *ctx, fz_document *doc_, const char *key, char *buf, int size)
+mobi_lookup_metadata(fz_context *ctx, fz_document *doc_, const char *key, char *buf, size_t size)
 {
 	html_document *doc = (html_document*)doc_;
 	if (!strcmp(key, FZ_META_FORMAT))

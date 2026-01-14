@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 #include "mupdf/fitz.h"
 #include "html-imp.h"
@@ -240,10 +240,11 @@ fz_extract_html_from_mobi(fz_context *ctx, fz_buffer *mobi)
 	fz_tree *tree = NULL;
 	uint32_t *offsets = NULL;
 	char buf[32];
-	uint32_t i, k, n, extra;
+	uint32_t i, k, extra;
 	uint32_t recindex;
 	uint32_t minoffset, maxoffset;
 	int format = FORMAT_TEXT;
+	size_t n;
 
 	// https://wiki.mobileread.com/wiki/PalmDOC
 
@@ -275,9 +276,8 @@ fz_extract_html_from_mobi(fz_context *ctx, fz_buffer *mobi)
 
 		// record info list count
 		n = fz_read_uint16(ctx, stm);
-		fz_warn(ctx, "expecting %d records", n);
 
-		minoffset = fz_tell(ctx, stm) + n * 2 * sizeof (uint32_t) - 1;
+		minoffset = (uint32_t)fz_tell(ctx, stm) + n * 2 * sizeof (uint32_t) - 1;
 		maxoffset = (uint32_t)mobi->len;
 
 		// record info list
@@ -286,15 +286,9 @@ fz_extract_html_from_mobi(fz_context *ctx, fz_buffer *mobi)
 		{
 			uint32_t offset = fz_read_uint32(ctx, stm);
 			if (offset <= minoffset)
-			{
-				fz_warn(ctx, "offset %u <= minoffset %u", offset, minoffset);
 				continue;
-			}
 			if (offset >= maxoffset)
-			{
-				fz_warn(ctx, "offset %u >= maxoffset %u", offset, maxoffset);
 				continue;
-			}
 			offsets[k++] = offset;
 			skip_bytes(ctx, stm, 4);
 			minoffset = fz_mini(minoffset, offsets[i]);

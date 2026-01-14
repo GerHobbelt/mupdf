@@ -1,10 +1,13 @@
 # Configuration for the Makefile
 
-OS := $(shell uname)
-OS := $(OS:MINGW%=MINGW)
-OS := $(OS:MSYS%=MINGW)
-OS := $(OS:Windows_NT=MINGW)
-OS := $(OS:Darwin=MACOS)
+# We use $OS from environment if set.
+ifeq ($(OS),)
+  OS := $(shell uname)
+  OS := $(OS:MINGW%=MINGW)
+  OS := $(OS:MSYS%=MINGW)
+  OS := $(OS:Windows_NT=MINGW)
+  OS := $(OS:Darwin=MACOS)
+endif
 
 WARNING_CFLAGS := -Wall -Wsign-compare
 
@@ -71,6 +74,12 @@ ifeq ($(shared),yes)
   LIB_CFLAGS = -fPIC
   ifeq ($(OS),MACOS)
     LIB_LDFLAGS = -dynamiclib
+  else ifeq ($(OS),wasm)
+    LIB_LDFLAGS = -shared -sSIDE_MODULE
+    EXE_LDFLAGS = -sMAIN_MODULE
+  else ifeq ($(OS),wasm-mt)
+    LIB_LDFLAGS = -shared -sSIDE_MODULE
+    EXE_LDFLAGS = -sMAIN_MODULE
   else
     LIB_LDFLAGS = -shared
   endif
@@ -83,19 +92,19 @@ ifeq ($(build),debug)
   CFLAGS += -pipe -g
   LDFLAGS += -g
 else ifeq ($(build),release)
-  CFLAGS += -pipe -O2 -DNDEBUG -fomit-frame-pointer
+  CFLAGS += -pipe -O2 -DNDEBUG
   LDFLAGS += $(LDREMOVEUNREACH) -Wl,-s
 else ifeq ($(build),small)
-  CFLAGS += -pipe -Os -DNDEBUG -fomit-frame-pointer
+  CFLAGS += -pipe -Os -DNDEBUG
   LDFLAGS += $(LDREMOVEUNREACH) -Wl,-s
 else ifeq ($(build),valgrind)
-  CFLAGS += -pipe -O2 -DNDEBUG -DPACIFY_VALGRIND -fno-omit-frame-pointer
+  CFLAGS += -pipe -O2 -DNDEBUG -DPACIFY_VALGRIND
   LDFLAGS += $(LDREMOVEUNREACH) -Wl,-s
 else ifeq ($(build),sanitize)
-  CFLAGS += -pipe -g -fno-omit-frame-pointer $(SANITIZE_FLAGS)
+  CFLAGS += -pipe -g $(SANITIZE_FLAGS)
   LDFLAGS += -g $(SANITIZE_FLAGS)
 else ifeq ($(build),sanitize-release)
-  CFLAGS += -pipe -O2 -DNDEBUG -fno-omit-frame-pointer $(SANITIZE_FLAGS)
+  CFLAGS += -pipe -O2 -DNDEBUG $(SANITIZE_FLAGS)
   LDFLAGS += $(LDREMOVEUNREACH) -Wl,-s $(SANITIZE_FLAGS)
 else ifeq ($(build),profile)
   CFLAGS += -pipe -O2 -DNDEBUG -pg
@@ -104,7 +113,7 @@ else ifeq ($(build),coverage)
   CFLAGS += -pipe -g -pg -fprofile-arcs -ftest-coverage
   LIBS += -lgcov
 else ifeq ($(build),native)
-  CFLAGS += -pipe -O2 -DNDEBUG -fomit-frame-pointer -march=native
+  CFLAGS += -pipe -O2 -DNDEBUG -march=native
   LDFLAGS += $(LDREMOVEUNREACH) -Wl,-s
 else ifeq ($(build),memento)
   CFLAGS += -pipe -g -DMEMENTO -DMEMENTO_MUPDF_HACKS
@@ -118,7 +127,7 @@ else ifeq ($(build),memento)
     endif
   endif
 else ifeq ($(build),gperf)
-  CFLAGS += -pipe -O2 -DNDEBUG -fomit-frame-pointer -DGPERF
+  CFLAGS += -pipe -O2 -DNDEBUG -DGPERF
   LIBS += -lprofiler
 else
   $(error unknown build setting: '$(build)')
@@ -158,7 +167,10 @@ else ifeq ($(OS),MACOS)
   LD = xcrun ld
   RANLIB = xcrun ranlib
 
-  ifeq (, $(shell which pkg-config))
+  ifneq ($(ARCHFLAGS),)
+    $(warning "MacOS with ARCHFLAGS set. Assuming we are building for arm64, and setting HAVE_LIBCRYPTO to no.")
+    HAVE_LIBCRYPTO := no
+  else ifeq (, $(shell which pkg-config))
     $(warning "No pkg-config found, install it for proper integration of libcrypto")
   else
     HAVE_LIBCRYPTO := $(shell pkg-config --exists 'libcrypto >= 1.1.0' && echo yes)
@@ -169,7 +181,14 @@ else ifeq ($(OS),MACOS)
   endif
 
 else ifeq ($(OS),Linux)
-  HAVE_OBJCOPY := yes
+  ifeq ($(PYODIDE_ROOT),)
+    HAVE_OBJCOPY := yes
+  else
+    # Pyodide's ld does not support -b so we cannot use it to create object
+    # files containing font data, so leave HAVE_OBJCOPY unset. And we need
+    # extra memory when linking.
+    LDFLAGS += -sTOTAL_MEMORY=48MB
+  endif
 
   ifeq ($(shell pkg-config --exists freetype2 && echo yes),yes)
 	SYS_FREETYPE_CFLAGS := $(shell pkg-config --cflags freetype2)
@@ -230,7 +249,9 @@ else ifeq ($(OS),Linux)
 	X11_LIBS := $(shell pkg-config --libs x11 xext)
   endif
 
-  HAVE_LIBCRYPTO := $(shell pkg-config --exists 'libcrypto >= 1.1.0' && echo yes)
+  ifeq ($(HAVE_LIBCRYPTO),)
+    HAVE_LIBCRYPTO := $(shell pkg-config --exists 'libcrypto >= 1.1.0' && echo yes)
+  endif
   ifeq ($(HAVE_LIBCRYPTO),yes)
 	LIBCRYPTO_CFLAGS := $(shell pkg-config --cflags libcrypto) -DHAVE_LIBCRYPTO
 	LIBCRYPTO_LIBS := $(shell pkg-config --libs libcrypto)

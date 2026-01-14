@@ -239,9 +239,8 @@ def sdist():
         b += '0'
     if use_swig:
         b += '2'
-    extra = ' --swig-windows-auto' if windows() else ''
     command = '' if os.getcwd() == root_dir() else f'cd {os.path.relpath(root_dir())} && '
-    command += f'{sys.executable} ./scripts/mupdfwrap.py{extra} -d {build_dir()} -b "{b}"'
+    command += f'{sys.executable} ./scripts/mupdfwrap.py -d {build_dir()} -b "{b}"'
     log(f'Running: {command}')
     subprocess.check_call(command, shell=True)
     paths += [
@@ -289,7 +288,6 @@ def build():
     command = '' if root_dir() == os.getcwd() else f'cd {os.path.relpath(root_dir())} && '
     command += (
             f'"{sys.executable}" ./scripts/mupdfwrap.py'
-            f'{" --swig-windows-auto" if windows() else ""}'
             f' -d {build_dir()}'
             f' -b {b}'
             )
@@ -312,9 +310,9 @@ def build():
                 'mupdf.py',             # Python.
                 ]
     elif macos():
-        jlib.log( 'Contents of {build_dir=} are:')
-        for leaf in os.listdir(build_dir):
-            jlib.log( '    {leaf}')
+        log( f'Contents of {build_dir()} are:')
+        for leaf in os.listdir(build_dir()):
+            log( f'    {leaf}')
         names = [
                 'libmupdf.dylib',   # C.
                 'libmupdfcpp.so',   # C++.

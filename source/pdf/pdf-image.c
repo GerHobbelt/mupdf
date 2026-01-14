@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
@@ -830,6 +830,7 @@ unknown_compression:
 		}
 
 		pdf_update_stream(ctx, doc, imobj, buffer, 1);
+		pdf_end_operation(ctx, doc);
 	}
 	fz_always(ctx)
 	{
@@ -837,10 +838,10 @@ unknown_compression:
 		fz_drop_pixmap(ctx, smask_pixmap);
 		fz_drop_pixmap(ctx, pixmap);
 		fz_drop_buffer(ctx, buffer);
-		pdf_end_operation(ctx, doc);
 	}
 	fz_catch(ctx)
 	{
+		pdf_abandon_operation(ctx, doc);
 		pdf_drop_obj(ctx, imobj);
 		fz_rethrow(ctx);
 	}

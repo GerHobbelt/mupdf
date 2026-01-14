@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
@@ -193,7 +193,7 @@ static void field_getName(js_State *J)
 	pdf_obj *field = js_touserdata(J, 0, "Field");
 	char *name = NULL;
 	fz_try(js->ctx)
-		name = pdf_field_name(js->ctx, field);
+		name = pdf_load_field_name(js->ctx, field);
 	fz_catch(js->ctx)
 		rethrow(js);
 	if (js_try(J)) {
@@ -1088,15 +1088,16 @@ static void pdf_js_load_document_level(pdf_js *js)
 			pdf_js_execute(js, buf, codebuf, NULL);
 			fz_free(ctx, codebuf);
 		}
+		pdf_end_operation(ctx, doc);
 	}
 	fz_always(ctx)
+		pdf_drop_obj(ctx, javascript);
+	fz_catch(ctx)
 	{
 		if (in_op)
-			pdf_end_operation(ctx, doc);
-		pdf_drop_obj(ctx, javascript);
-	}
-	fz_catch(ctx)
+			pdf_abandon_operation(ctx, doc);
 		fz_rethrow(ctx);
+	}
 }
 
 void pdf_js_event_init(pdf_js *js, pdf_obj *target, const char *value, int willCommit)
@@ -1248,13 +1249,13 @@ void pdf_js_execute(pdf_js *js, const char *name, const char *source, char **res
 				js_pop(J, 1);
 			}
 		}
-	}
-	fz_always(ctx)
-	{
 		pdf_end_operation(ctx, js->doc);
 	}
 	fz_catch(ctx)
+	{
+		pdf_abandon_operation(ctx, js->doc);
 		fz_rethrow(ctx);
+	}
 }
 
 pdf_js_console *pdf_js_get_console(fz_context *ctx, pdf_document *doc)

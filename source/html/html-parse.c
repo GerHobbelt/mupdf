@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 #include "mupdf/fitz.h"
 #include "mupdf/ucdn.h"
@@ -1773,7 +1773,13 @@ fz_parse_html_imp(fz_context *ctx,
 	html->layout_h = 0;
 	html->layout_em = 0;
 
-	fz_parse_html_tree(ctx, set, zip, base_uri, buf, user_css, try_xml, try_html5, &html->tree, &html->title, 1, patch_mobi);
+	fz_try(ctx)
+		fz_parse_html_tree(ctx, set, zip, base_uri, buf, user_css, try_xml, try_html5, &html->tree, &html->title, 1, patch_mobi);
+	fz_catch(ctx)
+	{
+		fz_drop_html(ctx, html);
+		fz_rethrow(ctx);
+	}
 
 	return html;
 }

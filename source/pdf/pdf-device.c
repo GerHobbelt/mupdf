@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
@@ -573,11 +573,14 @@ pdf_dev_text_span(fz_context *ctx, pdf_device *pdev, fz_text_span *span)
 		else if (enc == ENC_UNICODE)
 			fz_append_printf(ctx, gs->buf, "%04x", it->ucs);
 
-		adv = fz_advance_glyph(ctx, span->font, it->gid, span->wmode);
-		if (span->wmode == 0)
-			trm = fz_pre_translate(trm, adv, 0);
-		else
-			trm = fz_pre_translate(trm, 0, adv);
+		if (it->gid != -1)
+		{
+			adv = fz_advance_glyph(ctx, span->font, it->gid, span->wmode);
+			if (span->wmode == 0)
+				trm = fz_pre_translate(trm, adv, 0);
+			else
+				trm = fz_pre_translate(trm, 0, adv);
+		}
 	}
 
 	fz_append_string(ctx, gs->buf, ">]TJ\n");

@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
@@ -1371,7 +1371,7 @@ pdf_filter_re(fz_context *ctx, pdf_processor *proc, float x, float y, float w, f
 
 	if (p->options->culler)
 	{
-		fz_rectto(ctx, p->path, x, y, w, h);
+		fz_rectto(ctx, p->path, x, y, x+w, y+h);
 		return;
 	}
 
@@ -2795,8 +2795,8 @@ pdf_sanitize_push_resources(fz_context *ctx, pdf_processor *proc, pdf_obj *res)
 	{
 		pdf_drop_obj(ctx, stk->old_rdb);
 		pdf_drop_obj(ctx, stk->new_rdb);
-		fz_free(ctx, stk);
 		p->rstack = stk->next;
+		fz_free(ctx, stk);
 		fz_rethrow(ctx);
 	}
 }
@@ -2971,8 +2971,12 @@ pdf_new_sanitize_filter(
 		proc->gstate->sent.ctm = fz_identity;
 		proc->gstate->pending.text.scale = 1;
 		proc->gstate->pending.text.size = -1;
+		proc->gstate->pending.stroke.linewidth = 1;
+		proc->gstate->pending.stroke.miterlimit = 10;
 		proc->gstate->sent.text.scale = 1;
 		proc->gstate->sent.text.size = -1;
+		proc->gstate->sent.stroke.linewidth = 1;
+		proc->gstate->sent.stroke.miterlimit = 10;
 	}
 	fz_catch(ctx)
 	{

@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 #ifndef MUPDF_PDF_XREF_H
 #define MUPDF_PDF_XREF_H
@@ -231,7 +231,7 @@ void pdf_mark_xref(fz_context *ctx, pdf_document *doc);
 void pdf_clear_xref(fz_context *ctx, pdf_document *doc);
 void pdf_clear_xref_to_mark(fz_context *ctx, pdf_document *doc);
 
-int pdf_repair_obj(fz_context *ctx, pdf_document *doc, pdf_lexbuf *buf, int64_t *stmofsp, int *stmlenp, pdf_obj **encrypt, pdf_obj **id, pdf_obj **page, int64_t *tmpofs, pdf_obj **root);
+int pdf_repair_obj(fz_context *ctx, pdf_document *doc, pdf_lexbuf *buf, int64_t *stmofsp, int64_t *stmlenp, pdf_obj **encrypt, pdf_obj **id, pdf_obj **page, int64_t *tmpofs, pdf_obj **root);
 
 pdf_obj *pdf_progressive_advance(fz_context *ctx, pdf_document *doc, int pagenum);
 

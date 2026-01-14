@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
@@ -228,6 +228,11 @@ static BIO *BIO_new_stream(fz_context *ctx, fz_stream *stm)
 	}
 
 	bio = BIO_new(methods);
+	if (!bio)
+	{
+		BIO_meth_free(methods);
+		return NULL;
+	}
 	data = BIO_get_data(bio);
 	data->ctx = ctx;
 	data->stm = stm;
@@ -633,7 +638,12 @@ static char *x509_get_name_entry_string(fz_context *ctx, X509_NAME *name, int ni
 
 static pdf_pkcs7_distinguished_name *x509_distinguished_name(fz_context *ctx, X509 *x509)
 {
-	pdf_pkcs7_distinguished_name *dn = fz_malloc_struct(ctx, pdf_pkcs7_distinguished_name);
+	pdf_pkcs7_distinguished_name *dn;
+
+	if (x509 == NULL)
+		return NULL;
+
+	dn = fz_malloc_struct(ctx, pdf_pkcs7_distinguished_name);
 
 	fz_try(ctx)
 	{

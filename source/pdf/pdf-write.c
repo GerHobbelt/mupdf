@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 #include "mupdf/fitz.h"
 #include "pdf-annot-imp.h"
@@ -112,7 +112,7 @@ typedef struct
 	int64_t first_xref_entry_offset;
 	int64_t file_len;
 	int hints_shared_offset;
-	int hintstream_len;
+	int64_t hintstream_len;
 	pdf_obj *linear_l;
 	pdf_obj *linear_h0;
 	pdf_obj *linear_h1;
@@ -2216,12 +2216,10 @@ static void writexref(fz_context *ctx, pdf_document *doc, pdf_write_state *opts,
 
 			if (opts->crypt_obj)
 			{
-				pdf_obj *encrypt;
 				if (pdf_is_indirect(ctx, opts->crypt_obj))
-					encrypt = pdf_new_indirect(ctx, doc, opts->crypt_object_number, 0);
+					pdf_dict_put_drop(ctx, trailer, PDF_NAME(Encrypt), pdf_new_indirect(ctx, doc, opts->crypt_object_number, 0));
 				else
-					encrypt = opts->crypt_obj;
-				pdf_dict_put(ctx, trailer, PDF_NAME(Encrypt), encrypt);
+					pdf_dict_put(ctx, trailer, PDF_NAME(Encrypt), opts->crypt_obj);
 			}
 
 			if (opts->metadata)
@@ -2805,7 +2803,7 @@ make_hint_stream(fz_context *ctx, pdf_document *doc, pdf_write_state *opts)
 		make_page_offset_hints(ctx, doc, opts, buf);
 		obj = pdf_load_object(ctx, doc, pdf_xref_len(ctx, doc)-1);
 		pdf_update_stream(ctx, doc, obj, buf, 0);
-		opts->hintstream_len = (int)fz_buffer_storage(ctx, buf, NULL);
+		opts->hintstream_len = (int64_t)fz_buffer_storage(ctx, buf, NULL);
 	}
 	fz_always(ctx)
 	{
@@ -3251,11 +3249,15 @@ prepare_for_save(fz_context *ctx, pdf_document *doc, const pdf_write_options *in
 	{
 		pdf_begin_operation(ctx, doc, "Clean content streams");
 		fz_try(ctx)
+		{
 			clean_content_streams(ctx, doc, in_opts->do_sanitize, in_opts->do_ascii);
-		fz_always(ctx)
 			pdf_end_operation(ctx, doc);
+		}
 		fz_catch(ctx)
+		{
+			pdf_abandon_operation(ctx, doc);
 			fz_rethrow(ctx);
+		}
 	}
 
 	/* When saving a PDF with signatures the file will
@@ -3454,6 +3456,7 @@ do_pdf_save_document(fz_context *ctx, pdf_document *doc, pdf_write_state *opts, 
 
 	xref_len = pdf_xref_len(ctx, doc);
 
+	pdf_begin_operation(ctx, doc, "Save document");
 	fz_try(ctx)
 	{
 		initialise_write_state(ctx, doc, in_opts, opts);
@@ -3645,6 +3648,7 @@ do_pdf_save_document(fz_context *ctx, pdf_document *doc, pdf_write_state *opts, 
 		{
 			complete_signatures(ctx, doc, opts);
 		}
+		pdf_end_operation(ctx, doc);
 	}
 	fz_always(ctx)
 	{
@@ -3661,6 +3665,7 @@ do_pdf_save_document(fz_context *ctx, pdf_document *doc, pdf_write_state *opts, 
 	}
 	fz_catch(ctx)
 	{
+		pdf_abandon_operation(ctx, doc);
 		fz_rethrow(ctx);
 	}
 }

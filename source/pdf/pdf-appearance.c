@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 #include "mupdf/fitz.h"
 #include "pdf-annot-imp.h"
@@ -321,7 +321,7 @@ static fz_point rotate_vector(float angle, float x, float y)
 	return fz_make_point(x*ca - y*sa, x*sa + y*ca);
 }
 
-static void pdf_write_arrow_appearance(fz_context *ctx, fz_buffer *buf, fz_rect *rect, float x, float y, float dx, float dy, float w)
+static void pdf_write_arrow_appearance(fz_context *ctx, fz_buffer *buf, fz_rect *rect, float x, float y, float dx, float dy, float w, int close)
 {
 	float r = fz_max(1, w);
 	float angle = atan2f(dy, dx);
@@ -339,6 +339,8 @@ static void pdf_write_arrow_appearance(fz_context *ctx, fz_buffer *buf, fz_rect 
 	fz_append_printf(ctx, buf, "%g %g m\n", a.x, a.y);
 	fz_append_printf(ctx, buf, "%g %g l\n", x, y);
 	fz_append_printf(ctx, buf, "%g %g l\n", b.x, b.y);
+	if (close)
+		fz_append_printf(ctx, buf, "h\n");
 }
 
 static void include_cap(fz_rect *rect, float x, float y, float r)
@@ -380,17 +382,18 @@ pdf_write_line_cap_appearance(fz_context *ctx, fz_buffer *buf, fz_rect *rect,
 		fz_append_printf(ctx, buf, "%g %g l\n", x+r, y);
 		fz_append_printf(ctx, buf, "%g %g l\n", x, y-r);
 		fz_append_printf(ctx, buf, "%g %g l\n", x-r, y);
+		fz_append_printf(ctx, buf, "h\n");
 		maybe_stroke_and_fill(ctx, buf, sc, ic);
 		include_cap(rect, x, y, r + w/sqrtf(2));
 	}
 	else if (cap == PDF_NAME(OpenArrow))
 	{
-		pdf_write_arrow_appearance(ctx, buf, rect, x, y, dx, dy, w);
+		pdf_write_arrow_appearance(ctx, buf, rect, x, y, dx, dy, w, 0);
 		maybe_stroke(ctx, buf, sc);
 	}
 	else if (cap == PDF_NAME(ClosedArrow))
 	{
-		pdf_write_arrow_appearance(ctx, buf, rect, x, y, dx, dy, w);
+		pdf_write_arrow_appearance(ctx, buf, rect, x, y, dx, dy, w, 1);
 		maybe_stroke_and_fill(ctx, buf, sc, ic);
 	}
 	/* PDF 1.5 */
@@ -408,12 +411,12 @@ pdf_write_line_cap_appearance(fz_context *ctx, fz_buffer *buf, fz_rect *rect,
 	}
 	else if (cap == PDF_NAME(ROpenArrow))
 	{
-		pdf_write_arrow_appearance(ctx, buf, rect, x, y, -dx, -dy, w);
+		pdf_write_arrow_appearance(ctx, buf, rect, x, y, -dx, -dy, w, 0);
 		maybe_stroke(ctx, buf, sc);
 	}
 	else if (cap == PDF_NAME(RClosedArrow))
 	{
-		pdf_write_arrow_appearance(ctx, buf, rect, x, y, -dx, -dy, w);
+		pdf_write_arrow_appearance(ctx, buf, rect, x, y, -dx, -dy, w, 1);
 		maybe_stroke_and_fill(ctx, buf, sc, ic);
 	}
 	/* PDF 1.6 */
@@ -2834,12 +2837,12 @@ pdf_signature_appearance_signed(fz_context *ctx, fz_rect rect, fz_text_language 
 			float img_aspect = (float) img->w / img->h;
 			float rectw = prect.x1 - prect.x0;
 			float recth = prect.y1 - prect.y0;
-			float midx = (prect.x0 + prect.x1) / 2.0;
-			float midy = (prect.y0 + prect.y1) / 2.0;
+			float midx = (prect.x0 + prect.x1) / 2.0f;
+			float midy = (prect.y0 + prect.y1) / 2.0f;
 			float rect_aspect = rectw / recth;
 			float scale = img_aspect > rect_aspect ? rectw / img->w : recth / img->h;
 			fz_matrix ctm = fz_pre_translate(fz_pre_scale(fz_translate(midx, midy), scale * img->w, scale * img->h), -0.5, -0.5);
-			fz_fill_image(ctx, dev, img, ctm, 1.0, fz_default_color_params);
+			fz_fill_image(ctx, dev, img, ctm, 1.0f, fz_default_color_params);
 		}
 
 		if (left_text)
@@ -2909,7 +2912,7 @@ pdf_signature_appearance_unsigned(fz_context *ctx, fz_rect rect, fz_text_languag
 		/* Draw a rectangle with a protusion to the right [xxxxx> */
 		fz_moveto(ctx, path, rect.x0, rect.y0);
 		fz_lineto(ctx, path, rect.x1, rect.y0);
-		fz_lineto(ctx, path, rect.x1 + (rect.y1 - rect.y0) / 2.0, (rect.y0 + rect.y1) / 2.0);
+		fz_lineto(ctx, path, rect.x1 + (rect.y1 - rect.y0) / 2.0f, (rect.y0 + rect.y1) / 2.0f);
 		fz_lineto(ctx, path, rect.x1, rect.y1);
 		fz_lineto(ctx, path, rect.x0, rect.y1);
 		fz_closepath(ctx, path);
@@ -3249,16 +3252,17 @@ retry_after_repair:
 		}
 
 		pdf_clean_obj(ctx, annot->obj);
+		pdf_end_operation(ctx, annot->page->doc);
 	}
 	fz_always(ctx)
 	{
 		if (pop_local_xref)
 			pdf_annot_pop_local_xref(ctx, annot);
 		fz_end_throw_on_repair(ctx);
-		pdf_end_operation(ctx, annot->page->doc);
 	}
 	fz_catch(ctx)
 	{
+		pdf_abandon_operation(ctx, annot->page->doc);
 		/* If we hit a repair while synthesising, we need to give it another
 		 * go. Do that directly here, rather than waiting for the next time
 		 * we are called, because we don't want to risk discarding any

@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 #include "mupdf/fitz.h"
 
@@ -411,8 +411,23 @@ set_op_from_spaces(fz_context *ctx, fz_overprint *op, const fz_pixmap *dest, fz_
 	if (!op)
 		return NULL;
 
-	if (!fz_colorspace_is_subtractive(ctx, src) || !fz_colorspace_is_subtractive(ctx, dest->colorspace))
+	if (fz_colorspace_is_indexed(ctx, src))
+		src = fz_base_colorspace(ctx, src);
+
+	if (!fz_colorspace_is_subtractive(ctx, dest->colorspace))
 		return NULL;
+	if (fz_colorspace_is_gray(ctx, src))
+	{
+		/* gray counts as a CMYK with CMY = 0 */
+	}
+	else if (!fz_colorspace_is_subtractive(ctx, src))
+	{
+		/* The source pixmap was not in a subtractive space, so we can't
+		 * base overprint decisions on that. But we know we've converted
+		 * to a subtractive destination, so we can base overprint
+		 * decisions on what we ended up with. */
+		src = dest->colorspace;
+	}
 
 	sn = fz_colorspace_n(ctx, src);
 	dn = dest->n - dest->alpha;
@@ -794,16 +809,9 @@ fz_draw_clip_path(fz_context *ctx, fz_device *devp, const fz_path *path, int eve
 
 	model = state->dest->colorspace;
 
+	bbox = fz_intersect_irect(fz_pixmap_bbox(ctx, state->dest), state->scissor);
 	if (!fz_is_infinite_rect(scissor))
-	{
-		bbox = fz_irect_from_rect(fz_transform_rect(scissor, dev->transform));
-		bbox = fz_intersect_irect(bbox, fz_pixmap_bbox(ctx, state->dest));
-		bbox = fz_intersect_irect(bbox, state->scissor);
-	}
-	else
-	{
-		bbox = fz_intersect_irect(fz_pixmap_bbox(ctx, state->dest), state->scissor);
-	}
+		bbox = fz_intersect_irect(bbox, fz_irect_from_rect(fz_transform_rect(scissor, dev->transform)));
 
 	if (fz_flatten_fill_path(ctx, rast, path, ctm, flatness, bbox, &bbox) || fz_is_rect_rasterizer(ctx, rast))
 	{
@@ -872,16 +880,9 @@ fz_draw_clip_stroke_path(fz_context *ctx, fz_device *devp, const fz_path *path, 
 
 	model = state->dest->colorspace;
 
+	bbox = fz_intersect_irect(fz_pixmap_bbox(ctx, state->dest), state->scissor);
 	if (!fz_is_infinite_rect(scissor))
-	{
-		bbox = fz_irect_from_rect(fz_transform_rect(scissor, dev->transform));
-		bbox = fz_intersect_irect(bbox, fz_pixmap_bbox(ctx, state->dest));
-		bbox = fz_intersect_irect(bbox, state->scissor);
-	}
-	else
-	{
-		bbox = fz_intersect_irect(fz_pixmap_bbox(ctx, state->dest), state->scissor);
-	}
+		bbox = fz_intersect_irect(bbox, fz_irect_from_rect(fz_transform_rect(scissor, dev->transform)));
 
 	if (fz_flatten_stroke_path(ctx, rast, path, stroke, ctm, flatness, linewidth, bbox, &bbox))
 	{
@@ -1169,14 +1170,16 @@ fz_draw_stroke_text(fz_context *ctx, fz_device *devp, const fz_text *text, const
 			else
 			{
 				fz_path *path = fz_outline_glyph(ctx, span->font, gid, tm);
-				if (path)
-				{
-					fz_draw_stroke_path(ctx, devp, path, stroke, in_ctm, colorspace, color, alpha, color_params);
-					fz_drop_path(ctx, path);
-				}
+				if (!path)
+					fz_warn(ctx, "cannot render glyph");
 				else
 				{
-					fz_warn(ctx, "cannot render glyph");
+					fz_try(ctx)
+						fz_draw_stroke_path(ctx, devp, path, stroke, in_ctm, colorspace, color, alpha, color_params);
+					fz_always(ctx)
+						fz_drop_path(ctx, path);
+					fz_catch(ctx)
+						fz_rethrow(ctx);
 				}
 			}
 		}
@@ -1689,7 +1692,7 @@ convert_pixmap_for_painting(fz_context *ctx, fz_pixmap *pixmap, fz_colorspace *m
 {
 	fz_pixmap *converted;
 
-	if (fz_colorspace_is_device_n(ctx, src_cs) && dest->seps)
+	if ((fz_colorspace_is_device_n(ctx, src_cs) && dest->seps) || fz_compare_separations(ctx, pixmap->seps, dest->seps))
 	{
 		converted = fz_clone_pixmap_area_with_different_seps(ctx, pixmap, NULL, model, dest->seps, color_params, dev->default_cs);
 		*eop = set_op_from_spaces(ctx, *eop, dest, src_cs, 0);
@@ -1813,7 +1816,7 @@ fz_draw_fill_image(fz_context *ctx, fz_device *devp, fz_image *image, fz_matrix 
 
 	fz_try(ctx)
 	{
-		int conversion_required = (src_cs != model || state->dest->seps);
+		int conversion_required = (src_cs != model || fz_compare_separations(ctx, state->dest->seps, pixmap->seps));
 
 		if (state->blendmode & FZ_BLEND_KNOCKOUT && alpha != 1)
 			state = fz_knockout_begin(ctx, dev);
@@ -2640,6 +2643,12 @@ fz_draw_begin_tile(fz_context *ctx, fz_device *devp, fz_rect area, fz_rect view,
 	 * assert(bbox.x0 > state->dest->x || bbox.x1 < state->dest->x + state->dest->w ||
 	 *	bbox.y0 > state->dest->y || bbox.y1 < state->dest->y + state->dest->h);
 	 */
+
+	/* A BBox of zero height or width should still paint one pixel! */
+	if (bbox.x1 == bbox.x0)
+		bbox.x1 = bbox.x0 + 1;
+	if (bbox.y1 == bbox.y0)
+		bbox.y1 = bbox.y0 + 1;
 
 	/* Check to see if we have one cached */
 	if (id)
