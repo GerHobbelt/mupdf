@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2022 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -20,5 +20,47 @@
 // Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
 // CA 94945, U.S.A., +1(415)492-9861, for further information.
 
-Module.noExitRuntime = true;
-Module.noInitialRun = true;
+package com.artifex.mupdf.fitz;
+
+public class Story
+{
+	static {
+		Context.init();
+	}
+
+	protected long pointer;
+
+	protected native void finalize();
+
+	public void destroy() {
+		finalize();
+	}
+
+	private static native long newStory(byte[] content, byte[] user_css, float em);
+
+	public Story(String content, String user_css, float em)
+	{
+		pointer = newStory(content.getBytes(), user_css.getBytes(), em);
+	}
+
+	public Story(byte[] content, String user_css, float em)
+	{
+		pointer = newStory(content, user_css.getBytes(), em);
+	}
+
+	public Story(String content, byte[] user_css, float em)
+	{
+		pointer = newStory(content.getBytes(), user_css, em);
+	}
+
+	public Story(byte[] content, byte[] user_css, float em)
+	{
+		pointer = newStory(content, user_css, em);
+	}
+
+	public native boolean place(Rect rect, Rect filled);
+
+	public native void draw(Device dev, Matrix ctm);
+
+	public native DOM document();
+}

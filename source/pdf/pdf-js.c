@@ -964,7 +964,7 @@ static void preload_helpers(pdf_js *js)
 	/* When testing on the cluster:
 	 * Use a fixed date for "new Date" and Date.now().
 	 * Sadly, this breaks uses of the Date function without the new keyword.
-	 * Return a fixed number from Math.random().
+	 * Return a fixed random sequence from Math.random().
 	 */
 #ifdef CLUSTER
 	js_dostring(js->imp,
@@ -973,7 +973,8 @@ static void preload_helpers(pdf_js *js)
 "Date.now = function() { return 298252800000; }\n"
 "Date.UTC = function() { return 298252800000; }\n"
 "Date.parse = MuPDFOldDate.parse;\n"
-"Math.random = function() { return 1/4; }\n"
+"Math.random = function() { return (Math.random.seed = Math.random.seed * 48271 % 2147483647) / 2147483647; }\n"
+"Math.random.seed = 217;\n"
 	);
 #endif
 
@@ -1258,7 +1259,7 @@ void pdf_js_execute(pdf_js *js, const char *name, const char *source, char **res
 
 pdf_js_console *pdf_js_get_console(fz_context *ctx, pdf_document *doc)
 {
-	return doc->js ? doc->js->console : NULL;
+	return (doc && doc->js) ? doc->js->console : NULL;
 }
 
 void pdf_js_set_console(fz_context *ctx, pdf_document *doc, pdf_js_console *console, void *user)

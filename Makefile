@@ -174,10 +174,43 @@ HEXDUMP_SH := scripts/hexdump.sh
 
 FONT_BIN := $(sort $(wildcard resources/fonts/urw/*.cff))
 FONT_BIN += $(sort $(wildcard resources/fonts/han/*.ttc))
-FONT_BIN += $(sort $(wildcard resources/fonts/droid/*.ttf))
+FONT_BIN += $(sort $(wildcard resources/fonts/droid/DroidSansFallbackFull.ttf))
+FONT_BIN += $(sort $(wildcard resources/fonts/droid/DroidSansFallback.ttf))
 FONT_BIN += $(sort $(wildcard resources/fonts/noto/*.otf))
 FONT_BIN += $(sort $(wildcard resources/fonts/noto/*.ttf))
 FONT_BIN += $(sort $(wildcard resources/fonts/sil/*.cff))
+
+# Note: The tests here must match the equivalent tests in noto.c
+
+ifneq ($(filter -DTOFU_CJK,$(XCFLAGS)),)
+  FONT_BIN := $(filter-out resources/fonts/han/%.ttc, $(FONT_BIN))
+  FONT_BIN := $(filter-out resources/fonts/droid/DroidSansFallbackFull.ttf, $(FONT_BIN))
+  FONT_BIN := $(filter-out resources/fonts/droid/DroidSansFallback.ttf, $(FONT_BIN))
+endif
+
+ifneq ($(filter -DTOFU_CJK_EXT,$(XCFLAGS)),)
+  FONT_BIN := $(filter-out resources/fonts/han/%.ttc, $(FONT_BIN))
+  FONT_BIN := $(filter-out resources/fonts/droid/DroidSansFallbackFull.ttf, $(FONT_BIN))
+endif
+
+ifneq ($(filter -DTOFU_CJK_LANG,$(XCFLAGS)),)
+  FONT_BIN := $(filter-out resources/fonts/han/%.ttc, $(FONT_BIN))
+endif
+
+ifneq ($(filter -DTOFU,$(XCFLAGS)),)
+  FONT_BIN := $(filter-out resources/fonts/noto/%.otf,$(FONT_BIN))
+  FONT_BIN := $(filter-out resources/fonts/noto/%.ttf,$(FONT_BIN))
+  FONT_BIN := $(filter-out resources/fonts/sil/%.cff,$(FONT_BIN))
+endif
+
+ifneq ($(filter -DTOFU_NOTO,$(XCFLAGS)),)
+  FONT_BIN := $(filter-out resources/fonts/noto/%.otf,$(FONT_BIN))
+  FONT_BIN := $(filter-out resources/fonts/noto/%.ttf,$(FONT_BIN))
+endif
+
+ifneq ($(filter -DTOFU_SIL,$(XCFLAGS)),)
+  FONT_BIN := $(filter-out resources/fonts/sil/%.cff,$(FONT_BIN))
+endif
 
 FONT_GEN := $(FONT_BIN:%=generated/%.c)
 
@@ -513,15 +546,27 @@ c++-clean:
 python: python-$(build)
 
 python-release: c++-release
-	./scripts/mupdfwrap.py -d build/shared-release -b 023
+	./scripts/mupdfwrap.py -d build/shared-release -b 23
 
 python-debug: c++-debug
-	./scripts/mupdfwrap.py -d build/shared-debug -b 023
+	./scripts/mupdfwrap.py -d build/shared-debug -b 23
 
 python-clean:
 	rm -rf platform/python
+
+csharp: csharp-$(build)
+
+csharp-release: c++-release
+	./scripts/mupdfwrap.py -d build/shared-release -b --csharp 23
+
+csharp-debug: c++-debug
+	./scripts/mupdfwrap.py -d build/shared-debug -b --csharp 23
+
+csharp-clean:
+	rm -rf platform/csharp
 
 .PHONY: all clean nuke install third libs apps generate tags wasm
 .PHONY: shared shared-debug shared-clean
 .PHONY: c++ c++-release c++-debug c++-clean
 .PHONY: python python-debug python-clean
+.PHONY: csharp csharp-debug csharp-clean

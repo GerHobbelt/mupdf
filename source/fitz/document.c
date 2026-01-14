@@ -154,15 +154,17 @@ fz_open_accelerated_document_with_stream(fz_context *ctx, const char *magic, fz_
 {
 	const fz_document_handler *handler;
 
-	if (magic == NULL || stream == NULL)
+	if (stream == NULL)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "no document to open");
+	if (magic == NULL)
+		fz_throw(ctx, FZ_ERROR_GENERIC, "missing file type");
 
 	handler = fz_recognize_document(ctx, magic);
 	if (!handler)
 #if FZ_ENABLE_PDF
 		handler = &pdf_document_handler;
 #else
-		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot find document handler for file type: %s", magic);
+		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot find document handler for file type: '%s'", magic);
 #endif
 	if (handler->open_accel_with_stream)
 		if (accel || handler->open_with_stream == NULL)
@@ -785,18 +787,18 @@ void fz_set_link_rect(fz_context *ctx, fz_link *link, fz_rect rect)
 {
 	if (link == NULL)
 		return;
-	if (link->set_rect == NULL)
+	if (link->set_rect_fn == NULL)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "This format of document does not support updating link bounds");
-	link->set_rect(ctx, link, rect);
+	link->set_rect_fn(ctx, link, rect);
 }
 
 void fz_set_link_uri(fz_context *ctx, fz_link *link, const char *uri)
 {
 	if (link == NULL)
 		return;
-	if (link->set_uri == NULL)
+	if (link->set_uri_fn == NULL)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "This format of document does not support updating link uri");
-	link->set_uri(ctx, link, uri);
+	link->set_uri_fn(ctx, link, uri);
 }
 
 void *

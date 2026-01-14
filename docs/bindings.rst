@@ -38,97 +38,234 @@ These APIs are currently a beta release and liable to change.
 The C++ MuPDF API
 =================
 
+Basics
+------
+
 * Auto-generated from the MuPDF C API's header files.
 
 * Everything is in C++ namespace `mupdf`.
 
-* Provides C++ functions that wrap most `fz_*()` and `pdf_*()` functions.
+* All functions and methods do not take `fz_context*` arguments.
+  (Automatically-generated per-thread contexts are used internally.)
 
-  * Functions and methods do not take `fz_context`
-    arguments. (Automatically-generated per-thread contexts are used internally.)
+* All MuPDF `setjmp()`/`longjmp()`-based exceptions are converted into C++ exceptions.
 
-  * MuPDF `setjmp()`/`longjmp()`-based exceptions are converted into C++ exceptions.
+Low-level C++ API
+-----------------
 
-* Provides C++ classes that wrap most `fz_*` and `pdf_*` structs.
+The MuPDF C API is provided as low-level C++ functions with a `ll_` prefix.
 
-  * These C++ wrapper classes automatically handle reference counting of the
-    underlying C structs. So there is no need for manual calls to `fz_keep_*()`
-    and `fz_drop_*()`, and class instances can be treated as values and copied
-    arbitrarily.
+* No `fz_context*` arguments.
 
-  * Class methods provide access to most of the underlying C API.
+* MuPDF exceptions are converted into C++ exceptions.
 
-* Provides a small number of extensions beyond the basic C API:
+Class-aware C++ API
+-------------------
 
-  * Some generated classes have extra  `begin()` and `end()` methods to allow standard C++ iteration:
-    |expand_begin|
-    ::
-        #include "mupdf/classes.h"
-        #include "mupdf/functions.h"
+C++ wrapper classes wrap most `fz_*` and `pdf_*` C structs.
 
-        #include <iostream>
+* Class names are camel-case versions of the wrapped struct's
+  name.
 
-        void show_stext(mupdf::StextPage& page)
+* Classes automatically handle reference counting of the underlying C structs,
+  so there is no need for manual calls to `fz_keep_*()` and `fz_drop_*()`, and
+  class instances can be treated as values and copied arbitrarily.
+
+Class-aware functions and methods take and return wrapper class instances
+instead of MuPDF C structs.
+
+* No `fz_context*` arguments.
+
+* MuPDF exceptions are converted into C++ exceptions.
+
+* Class-aware functions have the same names as the underlying C API function.
+
+* Class-aware functions that have a C++ wrapper class as their first parameter
+  are also provided as a member function of the wrapper class, with the same
+  name as the class-aware function.
+
+Usually it is more convenient to use the class-aware API rather than the
+low-level C++ API.
+
+Example wrappers
+----------------
+
+The MuPDF C API function
+``fz_buffer *fz_new_buffer_from_page(fz_context *ctx, fz_page *page, const fz_stext_options *options)``
+is available as these C++ functions/methods:
+
+.. code-block:: c++
+
+    namespace mupdf
+    {
+        // Low-level wrapper:
+        ::fz_buffer *ll_fz_new_buffer_from_page(::fz_page *page, const ::fz_stext_options *options);
+
+        // Class-aware wrapper:
+        FzBuffer fz_new_buffer_from_page(const FzPage& page, FzStextOptions& options);
+
+        // Method in wrapper class FzPage:
+        struct FzPage
         {
-            for (mupdf::StextPage::iterator it_page: page)
-            {
-                mupdf::StextBlock block = *it_page;
-                for (mupdf::StextBlock::iterator it_block: block)
-                {
-                    mupdf::StextLine line = *it_block;
-                    for (mupdf::StextLine::iterator it_line: line)
-                    {
-                        mupdf::StextChar stextchar = *it_line;
-                        fz_stext_char* c = stextchar.m_internal;
-                        using namespace mupdf;
-                        std::cout << "StextChar("
-                                << "c=" << c->c
-                                << " color=" << c->color
-                                << " origin=" << c->origin
-                                << " quad=" << c->quad
-                                << " size=" << c->size
-                                << " font_name=" << c->font->name
-                                << "\n";
-                    }
-                }
-            }
-        }
-    |expand_end|
+            ...
+            FzBuffer fz_new_buffer_from_page(FzStextOptions& options);
+            ...
+        };
+    }
 
-  * Some custom class methods and constructors.
 
-  * Functions for generating a text representation of some simple 'POD' structs.
+Extensions beyond the basic C API
+---------------------------------
 
-    For example for `fz_rect` we provide these functions::
+* Some generated classes have extra  `begin()` and `end()` methods to allow standard C++ iteration:
+  |expand_begin|
 
-        std::ostream& operator<< (std::ostream& out, const fz_rect& rhs);
-        std::ostream& operator<< (std::ostream& out, const Rect& rhs);
-        std::string to_string_fz_rect(const fz_rect& s);
-        std::string to_string(const fz_rect& s);
-        std::string Rect::to_string() const;
+  .. code-block:: c++
 
-    These each generate text such as: `(x0=90.51 y0=160.65 x1=501.39 y1=1215.6)`
+      #include "mupdf/classes.h"
+      #include "mupdf/functions.h"
+
+      #include <iostream>
+
+      void show_stext(mupdf::FzStextPage& page)
+      {
+          for (mupdf::FzStextPage::iterator it_page: page)
+          {
+              mupdf::FzStextBlock block = *it_page;
+              for (mupdf::FzStextBlock::iterator it_block: block)
+              {
+                  mupdf::FzStextLine line = *it_block;
+                  for (mupdf::FzStextLine::iterator it_line: line)
+                  {
+                      mupdf::FzStextChar stextchar = *it_line;
+                      fz_stext_char* c = stextchar.m_internal;
+                      using namespace mupdf;
+                      std::cout << "FzStextChar("
+                              << "c=" << c->c
+                              << " color=" << c->color
+                              << " origin=" << c->origin
+                              << " quad=" << c->quad
+                              << " size=" << c->size
+                              << " font_name=" << c->font->name
+                              << "\n";
+                  }
+              }
+          }
+      }
+
+  |expand_end|
+
+* Some custom class methods and constructors.
+
+* Functions for generating a text representation of 'POD' structs and their C++
+  wrapper classes.
+
+  For example for `fz_rect` we provide these functions:
+
+  .. code-block:: c++
+
+      std::ostream& operator<< (std::ostream& out, const fz_rect& rhs);
+      std::ostream& operator<< (std::ostream& out, const FzRect& rhs);
+      std::string to_string_fz_rect(const fz_rect& s);
+      std::string to_string(const fz_rect& s);
+      std::string Rect::to_string() const;
+
+  These each generate text such as: `(x0=90.51 y0=160.65 x1=501.39 y1=1215.6)`
+
+Environmental variables
+-----------------------
+
+* **MUPDF_mt_ctx**
+
+  Controls auto-generated internal `fz_context*`.
+
+  * Unset or "1": each thread has its own `fz_context*`.
+
+  * "0": a single `fz_context*` is used for all threads; this might give
+    a small performance increase in single-threaded programmes, but will be
+    unsafe in multi-threaded programmes.
+
+  * Other values are unrecognised and will stop execution.
+
+Debug builds only
+^^^^^^^^^^^^^^^^^
+
+Debug builds contain diagnostics/checking code that is activated via these
+environmental variables:
+
+* **MUPDF_check_refs**
+
+  If "1", generated code checks MuPDF struct reference counts at
+  runtime.
+
+* **MUPDF_trace**
+
+  If "1", generated code outputs a diagnostic each time it calls a MuPDF
+  function (apart from keep/drop functions).
+
+  If "2", we also show arg POD and pointer values.
+
+* **MUPDF_trace_director**
+
+  If "1", generated code outputs a diagnostic when doing special
+  handling of MuPDF structs containing function pointers.
+
+* **MUPDF_trace_exceptions**
+
+  If "1", generated code outputs diagnostics when it converts MuPDF
+  `setjmp()`/`longjmp()` exceptions into C++ exceptions.
+
+* **MUPDF_trace_keepdrop**
+
+  If "1", generated code outputs diagnostics for calls to `*_keep_*()` and
+  `*_drop_*()`.
+
+Limitations
+-----------
+
+* Global instances of C++ wrapper classes are not supported.
+
+  This is because:
+
+  * C++ wrapper class destructors generally call MuPDF functions (for example
+    `fz_drop_*()`).
+
+  * The C++ bindings use internal thread-local objects to allow per-thread
+    `fz_context`'s to be efficiently obtained for use with underlying MuPDF
+    functions.
+
+  * C++ globals are destructed *after* thread-local objects are destructed.
+
+  So if a global instance of a C++ wrapper class is created, its destructor
+  will attempt to get a `fz_context*` using internal thread-local objects
+  which will have already been destroyed.
+
+  We attempt to display a diagnostic when this happens, but this cannot be
+  relied on as behaviour is formally undefined.
+
 
 The Python and C# MuPDF APIs
 ============================
 
-* A python module called `mupdf`.
+* A Python module called `mupdf`.
 * A C# namespace called `mupdf`.
 
   * C# bindings are experimental as of 2021-10-14.
-* Generated from the C++ MuPDF API's header files, so inherit the abstractions of the C++ API:
+* Generated from the C++ MuPDF API's header files, so inherits the abstractions of the C++ API:
 
-  * No `fz_context` arguments.
+  * No `fz_context*` arguments.
   * Automatic reference counting, so no need to call `fz_keep_*()` or `fz_drop_*()`, and we have value-semantics for class instances.
   * Native Python and C# exceptions.
 * Output parameters are returned as tuples.
 * Allows implementation of mutool in Python - see `mupdf:scripts/mutool.py <https://git.ghostscript.com/?p=mupdf.git;a=blob;f=mupdf:scripts/mutool.py>`_
   and `mupdf:scripts/mutool_draw.py <https://git.ghostscript.com/?p=mupdf.git;a=blob;f=mupdf:scripts/mutool_draw.py>`_.
 
-* Provides text representation of simple 'POD' structs::
+* Provides text representation of simple 'POD' structs:
 
-    rect = mupdf.Rect(...)
-    print(rect) # Will output text such as: (x0=90.51 y0=160.65 x1=501.39 y1=215.6)
+  .. code-block:: python
+
+      rect = mupdf.FzRect(...)
+      print(rect) # Will output text such as: (x0=90.51 y0=160.65 x1=501.39 y1=215.6)
 
   * This works for classes where the C++ API defines a `to_string()` method as described above.
 
@@ -170,7 +307,7 @@ Using the Python API
 Minimal Python code that uses the `mupdf` module::
 
     import mupdf
-    document = mupdf.Document('foo.pdf')
+    document = mupdf.FzDocument('foo.pdf')
 
 A simple example Python test script (run by `scripts/mupdfwrap.py -t`) is:
 
@@ -186,48 +323,50 @@ More detailed usage of the Python API can be found in:
 
   |expand_begin|
   ::
-    #!/usr/bin/env python3
 
-    import mupdf
+      #!/usr/bin/env python3
 
-    def show_stext(document):
-        '''
-        Shows all available information about Stext blocks, lines and characters.
-        '''
-        for p in range(document.count_pages()):
-            page = document.load_page(p)
-            stextpage = mupdf.StextPage(page, mupdf.StextOptions())
-            for block in stextpage:
-                block_ = block.m_internal
-                log(f'block: type={block_.type} bbox={block_.bbox}')
-                for line in block:
-                    line_ = line.m_internal
-                    log(f'    line: wmode={line_.wmode}'
-                            + f' dir={line_.dir}'
-                            + f' bbox={line_.bbox}'
-                            )
-                    for char in line:
-                        char_ = char.m_internal
-                        log(f'        char: {chr(char_.c)!r} c={char_.c:4} color={char_.color}'
-                                + f' origin={char_.origin}'
-                                + f' quad={char_.quad}'
-                                + f' size={char_.size:6.2f}'
-                                + f' font=('
-                                    +  f'is_mono={char_.font.flags.is_mono}'
-                                    + f' is_bold={char_.font.flags.is_bold}'
-                                    + f' is_italic={char_.font.flags.is_italic}'
-                                    + f' ft_substitute={char_.font.flags.ft_substitute}'
-                                    + f' ft_stretch={char_.font.flags.ft_stretch}'
-                                    + f' fake_bold={char_.font.flags.fake_bold}'
-                                    + f' fake_italic={char_.font.flags.fake_italic}'
-                                    + f' has_opentype={char_.font.flags.has_opentype}'
-                                    + f' invalid_bbox={char_.font.flags.invalid_bbox}'
-                                    + f' name={char_.font.name}'
-                                    + f')'
-                                )
+      import mupdf
 
-    document = mupdf.Document('foo.pdf')
-    show_stext(document)
+      def show_stext(document):
+          '''
+          Shows all available information about Stext blocks, lines and characters.
+          '''
+          for p in range(document.fz_count_pages()):
+              page = document.fz_load_page(p)
+              stextpage = mupdf.FzStextPage(page, mupdf.FzStextOptions())
+              for block in stextpage:
+                  block_ = block.m_internal
+                  log(f'block: type={block_.type} bbox={block_.bbox}')
+                  for line in block:
+                      line_ = line.m_internal
+                      log(f'    line: wmode={line_.wmode}'
+                              + f' dir={line_.dir}'
+                              + f' bbox={line_.bbox}'
+                              )
+                      for char in line:
+                          char_ = char.m_internal
+                          log(f'        char: {chr(char_.c)!r} c={char_.c:4} color={char_.color}'
+                                  + f' origin={char_.origin}'
+                                  + f' quad={char_.quad}'
+                                  + f' size={char_.size:6.2f}'
+                                  + f' font=('
+                                      +  f'is_mono={char_.font.flags.is_mono}'
+                                      + f' is_bold={char_.font.flags.is_bold}'
+                                      + f' is_italic={char_.font.flags.is_italic}'
+                                      + f' ft_substitute={char_.font.flags.ft_substitute}'
+                                      + f' ft_stretch={char_.font.flags.ft_stretch}'
+                                      + f' fake_bold={char_.font.flags.fake_bold}'
+                                      + f' fake_italic={char_.font.flags.fake_italic}'
+                                      + f' has_opentype={char_.font.flags.has_opentype}'
+                                      + f' invalid_bbox={char_.font.flags.invalid_bbox}'
+                                      + f' name={char_.font.name}'
+                                      + f')'
+                                  )
+
+      document = mupdf.FzDocument('foo.pdf')
+      show_stext(document)
+
   |expand_end|
 
 Basic PDF viewers written in Python and C#
@@ -245,6 +384,34 @@ Changelog
 
 [Note that this is only for changes to the generation of the C++/Python/C#
 APIs; changes to the main MuPDF API are not detailed here.]
+
+* **2022-10-21**:
+
+  * Document that global instances of wrapper classes are not supported.
+  * Python: provide class-aware out-param wrappers.
+  * Generate `operator==` and `operator!=` for POD structs and wrapper classes.
+  * Moved `operator<<` into top-level namespace.
+  * Document that we require the `clang` package on Linux when building.
+  * Disable unhelpful SWIG warnings when building.
+  * Support for calling `fz_document_handler` fnptrs in C++ API.
+  * Work around Memento build problem on Linux.
+  * Fixed some leaks by improving detection of functions returning kept/borrowed references.
+  * Fixed handling of kept/borrowed references in Python/C# functions with out-params.
+
+* **2022-08-29**: Simplified naming of C++/Python/C# classes and functions.
+
+  * Don't remove leading `fz_` from function/method names.
+  * For low-level wrappers, add `ll_` prefix to the original name; don't
+    remove initial `fz_`; don't add `p` prefix for `pdf_*()` wrappers.
+  * For class-aware wrapper functions, use original C name; don't use `m` prefix.
+  * Include initial `Fz` prefix for wrapper classes of `fz_*` structs.
+
+  So new naming scheme is:
+
+  * Low-level wrappers: prepend `ll_` to the full MuPDF C function name.
+  * Wrapper class names: convert the full struct name to camel-case.
+  * Wrapper class methods: use the full wrapped MuPDF C function name.
+  * Class-aware wrappers: use the full wrapped MuPDF C function name.
 
 * **2022-5-11**: Documented the experimental C# API.
 
@@ -336,6 +503,7 @@ APIs; changes to the main MuPDF API are not detailed here.]
     passing to `mupdf.new_buffer_from_copied_data()`.
 
   * Avoid excluding class method wrappers for `pdf_*()` fns in python.
+
   |expand_end|
 
 * **2022-02-05**: Uploaded Doxygen/Pydoc documentation for the C, C++ and Python
@@ -433,6 +601,7 @@ APIs; changes to the main MuPDF API are not detailed here.]
 
     * Improved generated accessor methods - e.g. ignore functions and function
       pointers and return `int` instead of `int8_t` to avoid SWIG getting confused.
+
   |expand_end|
 
 * **2020-10-07**: Experimental release of C++ and Python bindings in MuPDF-1.18.0.
@@ -454,6 +623,8 @@ General requirements
 * Python package `libclang` - a Python interface onto the libclang C/C++ parser.
 
 * SWIG version 3 or 4.
+
+* For C# on Unix, we also need Mono.
 
 
 Windows
@@ -499,14 +670,16 @@ Linux
 
 (Debian-specific; similar packages exist on other distributions.)
 
-* `sudo apt install python3-dev swig python-clang`
+* `sudo apt install python3-dev swig clang python3-clang`
+* For C#: `sudo apt install mono-devel`
 
 Notes:
 
-* One can do `pip install libclang` instead of installing the `python-clang`
-  package in the above command.
+* One can do `pip install libclang` instead of installing the `clang` and
+  `python3-clang` packages in the above command.
 
-* `pip install clang` does not provide a usable Python interface onto the clang
+* Note that, despite its name, the Python `clang` package on pypi.org (`pip
+  install clang`) does not provide a usable Python interface onto the clang
   parser.
 
 
@@ -514,23 +687,30 @@ OpenBSD
 ^^^^^^^
 
 * `sudo pkg_add python py3-llvm swig`
+* For C#: `sudo pkg_add mono`
 
 
 Doing a build
 -------------
 
-Build MuPDF shared library, C++ and Python MuPDF APIs, and run basic tests::
+Build MuPDF shared library, C++ and Python MuPDF APIs, and run basic tests:
+
+.. code-block:: shell
 
     git clone --recursive git://git.ghostscript.com/mupdf.git
     cd mupdf
     ./scripts/mupdfwrap.py -b all --test-python
     ./scripts/mupdfwrap.py -b all --test-python-gui
 
-As above but do a debug build::
+As above but do a debug build:
+
+.. code-block:: shell
 
     ./scripts/mupdfwrap.py -d build/shared-debug -b all --test-python
 
-C# build and tests::
+C# build and tests:
+
+.. code-block:: shell
 
     ./scripts/mupdfwrap.py -b --csharp all --test-csharp
     ./scripts/mupdfwrap.py -b --csharp all --test-csharp-gui
@@ -556,7 +736,7 @@ Generation of the C++ MuPDF API
 
 * Generates C++ code that wraps the basic C interface, converting MuPDF
   `setjmp()`/`longjmp()` exceptions into C++ exceptions and automatically
-  handling ``fz_context``'s internally.
+  handling `fz_context`'s internally.
 
 * Generates C++ classes for each `fz_*` and `pdf_*` struct, and uses various
   heuristics to define constructors, methods and static methods that call
@@ -586,11 +766,15 @@ Generation of the Python and C# MuPDF APIs
 Building auto-generated MuPDF API documentation
 -----------------------------------------------
 
-Build HTML documentation for the C, C++ and Python APIs (using Doxygen and pydoc)::
+Build HTML documentation for the C, C++ and Python APIs (using Doxygen and pydoc):
+
+.. code-block:: shell
 
     ./scripts/mupdfwrap.py --doc all
 
-This will generate the following tree::
+This will generate the following tree:
+
+.. code-block:: text
 
     mupdf/docs/generated/
         index.html
@@ -611,7 +795,9 @@ Other intermediate generated files are created in `mupdf/platform/`
 
 **Details**
 |expand_begin|
-::
+
+.. code-block:: text
+
     mupdf/
         build/
             shared-release/    [Unix runtime files.]
@@ -660,6 +846,12 @@ Other intermediate generated files are created in `mupdf/platform/`
                 mupdf.cs
                 mupdfcpp_swig.cpp
                 mupdfcpp_swig.i
+
+        win32/
+            Release/    [Windows 32-bit .dll, .lib, .exp, .pdb etc.]
+            x64/
+                Release/    [Windows 64-bit .dll, .lib, .exp, .pdb etc.]
+
 |expand_end|
 
 
@@ -668,6 +860,8 @@ C++ bindings details
 
 Class-based API overview
 ------------------------
+
+All generated code is in namespace `mupdf`.
 
 Class wrappers are defined for each MuPDF struct.
 
@@ -680,7 +874,7 @@ the corresponding wrapper class.
 Args that are pointers to a MuPDF struct will be changed to take a reference to
 the corresponding wrapper class.
 
-In addition there will be a non-member function called `mupdf::m<fnname>()`
+In addition there will be a non-member function called `mupdf::<fnname>()`
 which provides exactly the same functionality, taking a reference to the
 wrapper class as an explicit first arg called `self`.
 
@@ -691,9 +885,7 @@ wrapper class as an explicit first arg called `self`.
 Details
 ^^^^^^^
 
-* Class wrappers for a MuPDF struct `fz_bar` are called `mupdf::Bar`.
-
-* Class wrappers for a MuPDF struct `pdf_bar` are called `mupdf::PdfBar`.
+* Class wrappers have names that are camel-case versions of the underlying MuPDF C structs.
 
 * All C++ functions omit any `fz_context*` arg.
 
@@ -707,26 +899,26 @@ Wrappers for a MuPDF function `fz_foo()` are available in multiple forms:
 
 * Functions in the `mupdf` namespace.
 
-  * `mupdf::foo()`
+  * `mupdf::ll_fz_foo()`
 
     * Low-level wrapper:
 
-      * Does not take `fz_context*` args.
+      * Does not take `fz_context*` arg.
       * Translates MuPDF exceptions into C++ exceptions.
       * Takes/returns pointers to MuPDF structs.
       * Code that uses these functions will need to make explicit calls to
         `fz_keep_*()` and `fz_drop_*()`.
 
-  * `mupdf::mfz_foo()`
+  * `mupdf::fz_foo()`
 
-    * High-level wrapper:
+    * High-level class-aware wrapper:
 
-      * Does not take `fz_context*` args.
+      * Does not take `fz_context*` arg.
       * Translates MuPDF exceptions into C++ exceptions.
       * Takes references to C++ wrapper class instances instead of pointers to
         MuPDF structs.
-      * Where applicable, returns a C++ wrapper class instance instead of a
-        pointer to a MuPDF struct.
+      * Where applicable, returns C++ wrapper class instances instead of
+        pointers to MuPDF structs.
       * Code that uses these functions does not need to call `fz_keep_*()`
         and `fz_drop_*()` - C++ wrapper class instances take care of reference
         counting internally.
@@ -737,10 +929,10 @@ Wrappers for a MuPDF function `fz_foo()` are available in multiple forms:
     takes a pointer to a MuPDF struct `foo_bar`, it is generally available as a
     member function of the wrapper class `mupdf::FooBar`:
 
-    * `mupdf::FooBar::foo()`
+    * `mupdf::FooBar::fz_foo()`
 
-  * Apart from being a member function, this is identical to
-    `mupdf::mfz_foo()`, for example taking references to wrapper classes
+  * Apart from being a member function, this is identical to class-aware
+    wrapper `mupdf::fz_foo()`, for example taking references to wrapper classes
     instead of pointers to MuPDF structs.
 
 
@@ -767,7 +959,6 @@ wrapper will be a POD class. This is done in one of two ways:
   convenient to use.
 
 
-
 Wrapper class constructors
 --------------------------
 
@@ -783,15 +974,15 @@ We cope with this in two ways:
 * Create a static method that returns a new instance of the wrapper class
   by value.
 
-  * This is not possible if the underlying MuPDF struct is not reference counted
-    or trivially copyable.
+  * This is not possible if the underlying MuPDF struct is not copyable - i.e.
+    not reference counted and not POD.
 
 * Define an enum within the wrapper class, and provide a constructor that takes
   an instance of this enum to specify which MuPDF function to use.
 
 
-Wrapper class default constructors
-----------------------------------
+Default constructors
+^^^^^^^^^^^^^^^^^^^^
 
 Some POD classes have a default constructor that sets the various fields to
 default values.
@@ -800,11 +991,20 @@ Where it is useful, non-POD wrapper classes can have a default constructor that
 sets `m_internal` to null.
 
 
+Raw constructors
+^^^^^^^^^^^^^^^^
+
+Many wrapper classes have constructors that take a pointer to the underlying
+MuPDF C struct. These are usually for internal use only. They do not call
+`fz_keep_*()` - it is expected that any supplied MuPDF struct is already
+owned.
+
+
 Extra static methods
 --------------------
 
 Where relevant, wrapper class can have static methods that wrap selected MuPDF
-functions. For example `Matrix` does this for `fz_concat()`, `fz_scale()` etc,
+functions. For example `FzMatrix` does this for `fz_concat()`, `fz_scale()` etc,
 because these return the result by value rather than modifying a `fz_matrix`
 instance.
 
@@ -814,7 +1014,7 @@ Miscellaneous custom wrapper classes
 
 The wrapper for `fz_outline_item` does not contain a `fz_outline_item` by
 value or pointer. Instead it defines C++-style member equivalents to
-``fz_outline_item``'s fields, to simplify usage from C++ and Python/C#.
+`fz_outline_item`'s fields, to simplify usage from C++ and Python/C#.
 
 The fields are initialised from a `fz_outline_item` when the wrapper class
 is constructed. In this particular case there is no need to hold on to a
@@ -833,7 +1033,7 @@ as an `unsigned char*` that is not a zero-terminated string. Sometimes we provid
 C++ method that returns a `std::vector` by value, so that Python and C# code can
 wrap it in a systematic way.
 
-For example `Md5::md5_final2()`.
+For example `Md5::fz_md5_final2()`.
 
 
 Making MuPDF function pointers call Python code
@@ -873,8 +1073,8 @@ the Python API:
     pointers (which generally take a `fz_context *ctx` arg).
 
   * However as of 2022-06-03 if the C function throws a MuPDF exception, it
-    will not be translated into a C++/Python exception, and so probably crash the
-    process.
+    will not be translated into a C++/Python exception, and so will probably
+    crash the process.
 
 * Where the underlying MuPDF function pointer has an arg that is a pointer to
   an MuPDF struct, unlike elsewhere in the MuPDF bindings we do not translate
@@ -888,13 +1088,16 @@ the Python API:
     destructor will call `fz_drop_*()`.
 
   * It might be safe to create an wrapper class instance using an explicit call
-    to `mupdf.keep_*()`, but this has not been tested.
+    to `mupdf.fz_keep_*()`, but this has not been tested.
 
 Here is an example PDF filter written in Python that removes alternating items:
 
 Details
+
 |expand_begin|
-::
+
+.. code-block::
+
     import mupdf
 
     def test_filter(path):
@@ -915,14 +1118,15 @@ Details
         filter_ = MyFilter()
 
         document = mupdf.PdfDocument(path)
-        for p in range(document.count_pages()):
-            page = document.load_page(p)
-            print( f'Running document.filter_page_contents on page {p}')
-            document.begin_operation('test filter')
-            document.filter_page_contents(page, filter_)
-            document.end_operation()
+        for p in range(document.pdf_count_pages()):
+            page = document.pdf_load_page(p)
+            print( f'Running document.pdf_filter_page_contents on page {p}')
+            document.pdf_begin_operation('test filter')
+            document.pdf_filter_page_contents(page, filter_)
+            document.pdf_end_operation()
 
-        document.save_document('foo.pdf', mupdf.PdfWriteOptions())
+        document.pdf_save_document('foo.pdf', mupdf.PdfWriteOptions())
+
 |expand_end|
 
 
