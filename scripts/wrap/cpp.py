@@ -1108,6 +1108,9 @@ g_extra_declarations = textwrap.dedent(f'''
 
         /** SWIG-friendly wrapper for fz_enumerate_font_cmap(). */
         std::vector<fz_font_ucs_gid> fz_enumerate_font_cmap2(fz_context* ctx, fz_font* font);
+
+        /** SWIG-friendly wrapper for pdf_set_annot_callout_line(). */
+        void pdf_set_annot_callout_line2(fz_context *ctx, pdf_annot *annot, std::vector<fz_point>& callout);
         ''')
 
 g_extra_definitions = textwrap.dedent(f'''
@@ -1342,6 +1345,11 @@ g_extra_definitions = textwrap.dedent(f'''
             std::vector<fz_font_ucs_gid> ret;
             fz_enumerate_font_cmap(ctx, font, fz_enumerate_font_cmap2_cb, &ret);
             return ret;
+        }}
+
+        void pdf_set_annot_callout_line2(fz_context *ctx, pdf_annot *annot, std::vector<fz_point>& callout)
+        {{
+            pdf_set_annot_callout_line(ctx, annot, &callout[0], callout.size());
         }}
         ''')
 
@@ -2295,7 +2303,7 @@ def class_add_iterator( tu, struct_cursor, struct_name, classname, extras, refch
             classes.ExtraMethod( f'{classname}Iterator', 'end()',
                     f'''
                     {{
-                        auto ret = {classname}Iterator(NULL);
+                        auto ret = {classname}Iterator({it_type}());
                         {refcheck_if}
                         #if {check_refs}
                         if (s_check_refs)
@@ -3516,10 +3524,21 @@ def class_raw_constructor(
         constructor_decl = f'{classname}(::{struct_name}* internal)'
     out_h.write( '\n')
     out_h.write( f'    {comment}\n')
+    explicit = ''
+    if parse.has_refs( tu, struct_cursor.type):
+        # Don't allow implicit construction from low-level struct, because our
+        # destructor will drop it without a prior balancing keep.
+        explicit = f'explicit '
+        out_h.write(
+                f'    /* This constructor is marked as `explicit` because wrapper classes do not\n'
+                f'    call `keep`in constructors, but do call `drop` in destructors. So\n'
+                f'    automatic construction from a {struct_name}* will generally cause an\n'
+                f'    unbalanced `drop` resulting in errors such as SEGV. */\n'
+                )
     if extras.constructor_raw == 'default':
-        out_h.write( f'    FZ_FUNCTION {classname}(::{struct_name}* internal=NULL);\n')
+        out_h.write( f'    FZ_FUNCTION {explicit}{classname}(::{struct_name}* internal=NULL);\n')
     else:
-        out_h.write( f'    FZ_FUNCTION {constructor_decl};\n')
+        out_h.write( f'    FZ_FUNCTION {explicit}{constructor_decl};\n')
 
     if extras.constructor_raw != 'declaration_only':
         out_cpp.write( f'FZ_FUNCTION {classname}::{constructor_decl}\n')
@@ -3707,10 +3726,12 @@ def class_accessors(
         out_cpp.write( '{\n')
         if keep_function:
             out_cpp.write( f'    {rename.ll_fn(keep_function)}(m_internal->{cursor.spelling});\n')
-        if extras.pod:
-            out_cpp.write( f'    return m_internal.{cursor.spelling};\n')
+            out_cpp.write( f'    return ({classname2}) m_internal->{cursor.spelling};\n')
         else:
-            out_cpp.write( f'    return m_internal->{cursor.spelling};\n')
+            if extras.pod:
+                out_cpp.write( f'    return m_internal.{cursor.spelling};\n')
+            else:
+                out_cpp.write( f'    return m_internal->{cursor.spelling};\n')
         out_cpp.write( '}\n')
         out_cpp.write( '\n')
     assert n, f'No fields found for {struct_cursor.spelling}.'
@@ -4160,8 +4181,9 @@ def class_wrapper_virtual_fnptrs(
     for cursor, fnptr_type in get_fnptrs( shallow_typedef_expansion=True):
 
         # Write static callback.
+        return_type = _make_top_level(fnptr_type.get_result().spelling)
         out_cpp.write(f'/* Static callback, calls self->{cursor.spelling}(). */\n')
-        out_cpp.write(f'static {_make_top_level(fnptr_type.get_result().spelling)} {classname}2_s_{cursor.spelling}')
+        out_cpp.write(f'static {return_type} {classname}2_s_{cursor.spelling}')
         out_cpp.write('(')
         sep = ''
         for i, arg_type in enumerate( fnptr_type.argument_types()):
@@ -4180,9 +4202,11 @@ def class_wrapper_virtual_fnptrs(
         out_cpp.write(f'        std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << ": {classname}2_s_{cursor.spelling}(): arg_0=" << arg_0 << " arg_1=" << arg_1 << " self=" << self << "\\n";\n')
         out_cpp.write( '    }\n')
         out_cpp.write( '    #endif\n')
-        out_cpp.write( '    try\n')
         out_cpp.write( '    {\n')
-        out_cpp.write(f'        return self->{cursor.spelling}(')
+        out_cpp.write( '        char error_message[256] = "";\n')
+        out_cpp.write( '        try\n')
+        out_cpp.write( '        {\n')
+        out_cpp.write(f'            return self->{cursor.spelling}(')
         sep = ''
         for i, arg_type in enumerate( fnptr_type.argument_types()):
             if i == self_n:
@@ -4194,18 +4218,25 @@ def class_wrapper_virtual_fnptrs(
             out_cpp.write( f'{sep}{name}')
             sep = ', '
         out_cpp.write(');\n')
-        out_cpp.write('    }\n')
+        out_cpp.write('        }\n')
 
         # todo: catch our different exception types and map to FZ_ERROR_*.
-        out_cpp.write( '    catch (std::exception& e)\n')
-        out_cpp.write( '    {\n')
-        out_cpp.write(f'        {trace_if}\n')
-        out_cpp.write( '        if (s_trace_director)\n')
+        out_cpp.write( '        catch (std::exception& e)\n')
         out_cpp.write( '        {\n')
-        out_cpp.write(f'            std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << ": {classname}2_s_{cursor.spelling}(): converting std::exception to fz_throw(): " << e.what() << "\\n";\n')
+        out_cpp.write(f'            {trace_if}\n')
+        out_cpp.write( '            if (s_trace_director)\n')
+        out_cpp.write( '            {\n')
+        out_cpp.write(f'                std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << ": {classname}2_s_{cursor.spelling}(): converting std::exception to fz_throw(): " << e.what() << "\\n";\n')
+        out_cpp.write( '            }\n')
+        out_cpp.write( '            #endif\n')
+        out_cpp.write( '            fz_strlcpy(error_message, e.what(), sizeof(error_message));\n')
         out_cpp.write( '        }\n')
-        out_cpp.write( '        #endif\n')
-        out_cpp.write( '        fz_throw(arg_0, FZ_ERROR_GENERIC, "%s", e.what());\n')
+        out_cpp.write( '        /* We defer fz_throw() to here, to ensure that `std::exception& e` has been destructed. */\n')
+        out_cpp.write( '        fz_throw(arg_0, FZ_ERROR_GENERIC, "%s", error_message);\n')
+        if return_type != 'void':
+            out_cpp.write(f'        /* Keep compiler happy. */\n')
+            out_cpp.write(f'        {return_type} ret;\n')
+            out_cpp.write(f'        return ret;\n')
         out_cpp.write( '    }\n')
         out_cpp.write('}\n')
 

@@ -1692,7 +1692,7 @@ typedef struct
 } walk_stack_t;
 
 static void
-walk(fz_context *ctx, walk_stack_t *ws, obj_info_t *oi, pdf_obj *obj, audit_type_t type)
+walk(fz_context *ctx, walk_stack_t *ws, int n, obj_info_t *oi, pdf_obj *obj, audit_type_t type)
 {
 	int num = 0;
 	do
@@ -1700,6 +1700,8 @@ walk(fz_context *ctx, walk_stack_t *ws, obj_info_t *oi, pdf_obj *obj, audit_type
 		if (pdf_is_indirect(ctx, obj))
 		{
 			num = pdf_to_num(ctx, obj);
+			if (num < 0 || num >= n)
+				fz_throw(ctx, FZ_ERROR_GENERIC, "object outside of xref range");
 			if (oi[num].type != AUDIT_UNKNOWN)
 				goto visited;
 			if (pdf_mark_obj(ctx, obj))
@@ -1851,12 +1853,12 @@ visited:
 }
 
 static void
-classify_by_walking(fz_context *ctx, pdf_document *doc, obj_info_t *oi)
+classify_by_walking(fz_context *ctx, pdf_document *doc, int n, obj_info_t *oi)
 {
 	walk_stack_t ws = { 0 };
 
 	fz_try(ctx)
-		walk(ctx, &ws, oi, pdf_trailer(ctx, doc), AUDIT_TRAILER);
+		walk(ctx, &ws, n, oi, pdf_trailer(ctx, doc), AUDIT_TRAILER);
 	fz_always(ctx)
 		fz_free(ctx, ws.stack);
 	fz_catch(ctx)
@@ -1948,7 +1950,7 @@ filter_file(fz_context *ctx, fz_output *out, const char *filename)
 		}
 
 		/* Walk the doc structure. */
-		classify_by_walking(ctx, pdf, oi);
+		classify_by_walking(ctx, pdf, n, oi);
 
 		/* Filter the content streams to establish operator usage */
 		filter_page_streams(ctx, pdf, &ou);
@@ -2132,7 +2134,7 @@ int pdfaudit_main(int argc, const char **argv)
 			fz_drop_output(ctx, out);
 	fz_catch(ctx)
 	{
-		fz_log_error(ctx, fz_caught_message(ctx));
+		fz_report_error(ctx);
 		errors++;
 	}
 

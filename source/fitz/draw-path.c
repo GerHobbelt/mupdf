@@ -1125,7 +1125,7 @@ fz_dash_lineto(fz_context *ctx, struct sctx *s, float bx, float by, int from_bez
 	float total, used, ratio, tail;
 	float ax, ay;
 	float mx, my;
-	float old_bx, old_by;
+	float old_bx = 0, old_by = 0;
 	int n;
 	fz_linecap dash_cap = s->stroke->dash_cap;
 

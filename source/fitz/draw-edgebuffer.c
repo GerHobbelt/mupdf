@@ -886,6 +886,8 @@ cursor_flush(fz_context* ctx, fz_edgebuffer * FZ_RESTRICT eb)
 	}
 	else
 	{
+		iy2 = 0;
+
 		/* Try to merge the end of cursor 0 with the start of cursor 0 */
 		if (cr0->saved)
 		{

@@ -1204,7 +1204,7 @@ fz_parse_xml(fz_context *ctx, fz_buffer *buf, int preserve_white)
 {
 	struct parser parser;
 	fz_xml *xml = NULL;
-	fz_xml root, *node;
+	fz_xml *root, *node;
 	char *p = NULL;
 	const char *error;
 	int dofree = 0;
@@ -1227,9 +1227,8 @@ fz_parse_xml(fz_context *ctx, fz_buffer *buf, int preserve_white)
 		n = fz_buffer_storage(ctx, buf, &s);
 	}
 
-	memset(&root, 0, sizeof(root));
 	parser.pool = fz_new_pool(ctx);
-	parser.head = &root;
+	parser.head = root = fz_pool_alloc(ctx, parser.pool, offsetof(fz_xml, u.node.u.d.name) + 1);
 	parser.preserve_white = preserve_white;
 	parser.depth = 0;
 #ifdef FZ_XML_SEQ
@@ -1249,11 +1248,11 @@ fz_parse_xml(fz_context *ctx, fz_buffer *buf, int preserve_white)
 
 		xml = fz_pool_alloc(ctx, parser.pool, sizeof *xml);
 		xml->up = NULL;
-		xml->down = root.down;
+		xml->down = root->down;
 		xml->u.doc.refs = 1;
 		xml->u.doc.pool = parser.pool;
 
-		for (node = root.down; node; node = node->u.node.next)
+		for (node = root->down; node; node = node->u.node.next)
 			node->up = xml;
 	}
 	fz_always(ctx)

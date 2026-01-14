@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2024 Artifex Software, Inc.
+// Copyright (C) 2004-2025 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -498,7 +498,7 @@ static void generate_text(fz_context *ctx, fz_html_box *box, const char *text, i
 				else if (bsp) /* allow soft breaks */
 				{
 					int this_brk_cls = ucdn_get_resolved_linebreak_class(c);
-					if (this_brk_cls < UCDN_LINEBREAK_CLASS_RI)
+					if (this_brk_cls <= UCDN_LINEBREAK_CLASS_RI)
 					{
 						int brk = pairbrk[g->last_brk_cls][this_brk_cls];
 
@@ -1770,8 +1770,6 @@ xml_to_boxes(fz_context *ctx, fz_html_font_set *set, fz_archive *zip, const char
 			fz_free(ctx, *rtitle);
 			*rtitle = NULL;
 		}
-		/* Dropping the tree works regardless of whether the tree is part of an fz_html or not. */
-		fz_drop_html_tree(ctx, tree);
 		fz_rethrow(ctx);
 	}
 }

@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2024 Artifex Software, Inc.
+// Copyright (C) 2004-2025 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -469,12 +469,18 @@ void pdf_rearrange_pages(fz_context *ctx, pdf_document *doc, int count, const in
 
 void pdf_clean_file(fz_context *ctx, const char *infile, const char *outfile, const char *password, pdf_clean_options *opts, int argc, const char *argv[])
 {
+	pdf_clean_options default_opts = { 0 };
 	pdf_document *pdf = NULL;
 	int *pages = NULL;
 	int cap, len, page;
 
 	fz_var(pdf);
 	fz_var(pages);
+
+	if (opts == NULL)
+		opts = &default_opts;
+	if (argc > 0 && argv == NULL)
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "arguments array must be set if arguments exist");
 
 	fz_try(ctx)
 	{
@@ -518,7 +524,7 @@ void pdf_clean_file(fz_context *ctx, const char *infile, const char *outfile, co
 				argidx++;
 			}
 
-			pdf_rearrange_pages(ctx, pdf, len, pages, opts ? opts->structure : PDF_CLEAN_STRUCTURE_DROP);
+			pdf_rearrange_pages(ctx, pdf, len, pages, opts->structure);
 		}
 
 		pdf_rewrite_images(ctx, pdf, &opts->image);
