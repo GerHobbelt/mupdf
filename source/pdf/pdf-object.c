@@ -5481,7 +5481,7 @@ void pdf_verify_name_table_sanity(fz_context* ctx)
 
 	for (i = PDF_ENUM_FALSE+1; i < PDF_ENUM_LIMIT-1; i++)
 	{
-		assert(strcmp(PDF_NAME_LIST[i], PDF_NAME_LIST[i+1]) < 0);
+		assert(strcmp(PDF_NAME_LIST[i], PDF_NAME_LIST[i+1]) < 0); // if this one fails, check (case sensitive) alphabetic sort of entries in "mupdf/pdf/name-table.h"
 	}
 }
 #endif

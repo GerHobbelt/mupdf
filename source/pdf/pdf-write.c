@@ -3929,7 +3929,7 @@ do_pdf_save_document(fz_context *ctx, pdf_document *doc, pdf_write_state *opts, 
 		if (opts->crypt)
 		{
 			pdf_obj *crypt = pdf_dict_get(ctx, pdf_trailer(ctx, doc), PDF_NAME(Encrypt));
-			opts->crypt_object_number = pdf_to_num(ctx, crypt);
+			int crypt_num = pdf_to_num(ctx, crypt);
 			if (crypt_num < opts->list_len)
 				opts->crypt_object_number = crypt_num;
 		}

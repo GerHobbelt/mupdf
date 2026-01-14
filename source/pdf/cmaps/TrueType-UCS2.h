@@ -144,7 +144,7 @@ static const pdf_range cmap_TrueType_UCS2_ranges[] = {
 };
 
 static pdf_cmap cmap_TrueType_UCS2 = {
-	{ -1, pdf_drop_cmap_imp },
+	{ -42, pdf_drop_cmap_imp },
 	/* cmapname */ "TrueType-UCS2",
 	/* usecmap */ "", NULL,
 	/* wmode */ 0,
