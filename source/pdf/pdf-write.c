@@ -3307,19 +3307,20 @@ pdf_parse_write_options(fz_context *ctx, pdf_write_options *opts, const char *ar
 		opts->do_encrypt = fz_option_eq(val, "yes") ? PDF_ENCRYPT_NONE : PDF_ENCRYPT_KEEP;
 	if (fz_has_option(ctx, args, "encrypt", &val))
 	{
-		opts->do_encrypt = PDF_ENCRYPT_UNKNOWN;
 		if (fz_option_eq(val, "none") || fz_option_eq(val, "no"))
 			opts->do_encrypt = PDF_ENCRYPT_NONE;
-		if (fz_option_eq(val, "keep"))
+		else if (fz_option_eq(val, "keep"))
 			opts->do_encrypt = PDF_ENCRYPT_KEEP;
-		if (fz_option_eq(val, "rc4-40") || fz_option_eq(val, "yes"))
+		else if (fz_option_eq(val, "rc4-40") || fz_option_eq(val, "yes"))
 			opts->do_encrypt = PDF_ENCRYPT_RC4_40;
-		if (fz_option_eq(val, "rc4-128"))
+		else if (fz_option_eq(val, "rc4-128"))
 			opts->do_encrypt = PDF_ENCRYPT_RC4_128;
-		if (fz_option_eq(val, "aes-128"))
+		else if (fz_option_eq(val, "aes-128"))
 			opts->do_encrypt = PDF_ENCRYPT_AES_128;
-		if (fz_option_eq(val, "aes-256"))
+		else if (fz_option_eq(val, "aes-256"))
 			opts->do_encrypt = PDF_ENCRYPT_AES_256;
+		else
+			fz_throw(ctx, FZ_ERROR_ARGUMENT, "unknown encryption in options");
 	}
 	if (fz_has_option(ctx, args, "owner-password", &val))
 		fz_copy_option(ctx, val, opts->opwd_utf8, nelem(opts->opwd_utf8));
@@ -3723,6 +3724,15 @@ gather_to_objstms(fz_context *ctx, pdf_document *doc, pdf_write_state *opts, int
 }
 
 static void
+prepass(fz_context *ctx, pdf_document *doc)
+{
+	int num;
+
+	for (num = 1; num < pdf_xref_len(ctx, doc); ++num)
+		pdf_cache_object(ctx, doc, num);
+}
+
+static void
 do_pdf_save_document(fz_context *ctx, pdf_document *doc, pdf_write_state *opts, const pdf_write_options *in_opts)
 {
 	int lastfree;
@@ -3744,11 +3754,16 @@ do_pdf_save_document(fz_context *ctx, pdf_document *doc, pdf_write_state *opts, 
 		fz_write_string(ctx, opts->out, "\n");
 	}
 
-	xref_len = pdf_xref_len(ctx, doc);
-
 	pdf_begin_operation(ctx, doc, "Save document");
 	fz_try(ctx)
 	{
+		/* First, we do a prepass across the document to load all the objects
+		 * into memory. We'll end up doing this later on anyway, but by doing
+		 * it here, we force any repairs to happen before writing proper
+		 * starts. */
+		prepass(ctx, doc);
+		xref_len = pdf_xref_len(ctx, doc);
+
 		initialise_write_state(ctx, doc, in_opts, opts);
 
 		if (!opts->dont_regenerate_id)
