@@ -153,7 +153,8 @@ int mutrace_main(int argc, char **argv)
 	}
 	fz_catch(ctx)
 	{
-		fprintf(stderr, "cannot initialize mupdf: %s\n",  fz_caught_message(ctx));
+		fz_report_error(ctx);
+		fprintf(stderr, "cannot initialize mupdf\n");
 		fz_drop_context(ctx);
 		return EXIT_FAILURE;
 	}
@@ -166,7 +167,7 @@ int mutrace_main(int argc, char **argv)
 			doc = fz_open_document(ctx, argv[i]);
 			if (fz_needs_password(ctx, doc))
 				if (!fz_authenticate_password(ctx, doc, password))
-					fz_throw(ctx, FZ_ERROR_GENERIC, "cannot authenticate password: %s", argv[i]);
+					fz_throw(ctx, FZ_ERROR_ARGUMENT, "cannot authenticate password: %s", argv[i]);
 			fz_layout_document(ctx, doc, layout_w, layout_h, layout_em);
 			printf("<document filename=\"%s\">\n", argv[i]);
 			count = fz_count_pages(ctx, doc);
@@ -181,7 +182,8 @@ int mutrace_main(int argc, char **argv)
 	}
 	fz_catch(ctx)
 	{
-		fprintf(stderr, "cannot run document: %s\n", fz_caught_message(ctx));
+		fz_report_error(ctx);
+		fprintf(stderr, "cannot run document\n");
 		fz_drop_document(ctx, doc);
 		fz_drop_context(ctx);
 		return EXIT_FAILURE;

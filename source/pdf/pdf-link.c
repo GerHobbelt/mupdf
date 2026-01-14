@@ -62,91 +62,105 @@ resolve_dest(fz_context *ctx, pdf_document *doc, pdf_obj *dest)
 	return resolve_dest_rec(ctx, doc, dest, 0);
 }
 
+static void
+populate_destination(fz_context *ctx, pdf_document *doc, pdf_obj *dest, int is_remote, fz_link_dest *destination)
+{
+	pdf_obj *arg1 = pdf_array_get(ctx, dest, 2);
+	pdf_obj *arg2 = pdf_array_get(ctx, dest, 3);
+	pdf_obj *arg3 = pdf_array_get(ctx, dest, 4);
+	pdf_obj *arg4 = pdf_array_get(ctx, dest, 5);
+	float arg1v = pdf_to_real(ctx, arg1);
+	float arg2v = pdf_to_real(ctx, arg2);
+	float arg3v = pdf_to_real(ctx, arg3);
+	float arg4v = pdf_to_real(ctx, arg4);
+	pdf_obj *type, *page = NULL;
+	fz_matrix ctm = fz_identity;
+	fz_rect rect;
+	fz_point p;
+	int pageno;
+
+	if (is_remote)
+		pageno = pdf_array_get_int(ctx, dest, 0);
+	else
+	{
+		page = pdf_array_get(ctx, dest, 0);
+		if (pdf_is_int(ctx, page))
+		{
+			pageno = pdf_to_int(ctx, page);
+			page = pdf_lookup_page_obj(ctx, doc, pageno);
+		}
+		else
+			pageno = pdf_lookup_page_number(ctx, doc, page);
+		pageno = fz_clampi(pageno, 0, pdf_count_pages(ctx, doc) - 1);
+		if (pdf_is_dict(ctx, page))
+			pdf_page_obj_transform(ctx, page, NULL, &ctm);
+	}
+
+	destination->loc.page = pageno;
+
+	type = pdf_array_get(ctx, dest, 1);
+	if (type == PDF_NAME(XYZ))
+		destination->type = FZ_LINK_DEST_XYZ;
+	else if (type == PDF_NAME(Fit))
+		destination->type = FZ_LINK_DEST_FIT;
+	else if (type == PDF_NAME(FitH))
+		destination->type = FZ_LINK_DEST_FIT_H;
+	else if (type == PDF_NAME(FitV))
+		destination->type = FZ_LINK_DEST_FIT_V;
+	else if (type == PDF_NAME(FitR))
+		destination->type = FZ_LINK_DEST_FIT_R;
+	else if (type == PDF_NAME(FitB))
+		destination->type = FZ_LINK_DEST_FIT_B;
+	else if (type == PDF_NAME(FitBH))
+		destination->type = FZ_LINK_DEST_FIT_BH;
+	else if (type == PDF_NAME(FitBV))
+		destination->type = FZ_LINK_DEST_FIT_BV;
+	else
+		destination->type = FZ_LINK_DEST_XYZ;
+
+	switch (destination->type)
+	{
+	default:
+	case FZ_LINK_DEST_FIT:
+	case FZ_LINK_DEST_FIT_B:
+		break;
+	case FZ_LINK_DEST_FIT_H:
+	case FZ_LINK_DEST_FIT_BH:
+		p = fz_transform_point_xy(0, arg1v, ctm);
+		destination->y = arg1 ? p.y : NAN;
+		break;
+	case FZ_LINK_DEST_FIT_V:
+	case FZ_LINK_DEST_FIT_BV:
+		p = fz_transform_point_xy(arg1v, 0, ctm);
+		destination->x = arg1 ? p.x : NAN;
+		break;
+	case FZ_LINK_DEST_XYZ:
+		p = fz_transform_point_xy(arg1v, arg2v, ctm);
+		destination->x = arg1 ? p.x : NAN;
+		destination->y = arg2 ? p.y : NAN;
+		destination->zoom = arg3 ? (arg3v > 0 ? (arg3v * 100) : 100) : NAN;
+		break;
+	case FZ_LINK_DEST_FIT_R:
+		rect.x0 = arg1v;
+		rect.y0 = arg2v;
+		rect.x1 = arg3v;
+		rect.y1 = arg4v;
+		fz_transform_rect(rect, ctm);
+		destination->x = fz_min(rect.x0, rect.x1);
+		destination->y = fz_min(rect.y0, rect.y1);
+		destination->w = fz_abs(rect.x1 - rect.x0);
+		destination->h = fz_abs(rect.y1 - rect.y0);
+		break;
+	}
+}
+
 static char *
 pdf_parse_link_dest_to_file_with_uri(fz_context *ctx, pdf_document *doc, const char *uri, pdf_obj *dest)
 {
 	if (pdf_is_array(ctx, dest) && pdf_array_len(ctx, dest) >= 1)
 	{
 		fz_link_dest destination = fz_make_link_dest_none();
-		pdf_obj *arg1, *arg2, *arg3, *arg4;
-		float arg1v, arg2v, arg3v, arg4v;
-		pdf_obj *typeobj;
-		fz_matrix page_ctm;
-		fz_rect rect;
-		int pageno;
-		fz_point p;
-
-		pageno = pdf_array_get_int(ctx, dest, 0);
-
-		destination.loc.page = pageno;
-
-		typeobj = pdf_array_get(ctx, dest, 1);
-		if (typeobj == PDF_NAME(XYZ))
-			destination.type = FZ_LINK_DEST_XYZ;
-		else if (typeobj == PDF_NAME(Fit))
-			destination.type = FZ_LINK_DEST_FIT;
-		else if (typeobj == PDF_NAME(FitH))
-			destination.type = FZ_LINK_DEST_FIT_H;
-		else if (typeobj == PDF_NAME(FitV))
-			destination.type = FZ_LINK_DEST_FIT_V;
-		else if (typeobj == PDF_NAME(FitR))
-			destination.type = FZ_LINK_DEST_FIT_R;
-		else if (typeobj == PDF_NAME(FitB))
-			destination.type = FZ_LINK_DEST_FIT_B;
-		else if (typeobj == PDF_NAME(FitBH))
-			destination.type = FZ_LINK_DEST_FIT_BH;
-		else if (typeobj == PDF_NAME(FitBV))
-			destination.type = FZ_LINK_DEST_FIT_BV;
-		else
-			destination.type = FZ_LINK_DEST_XYZ;
-
-		arg1 = pdf_array_get(ctx, dest, 2);
-		arg2 = pdf_array_get(ctx, dest, 3);
-		arg3 = pdf_array_get(ctx, dest, 4);
-		arg4 = pdf_array_get(ctx, dest, 5);
-
-		arg1v = pdf_to_real(ctx, arg1);
-		arg2v = pdf_to_real(ctx, arg2);
-		arg3v = pdf_to_real(ctx, arg3);
-		arg4v = pdf_to_real(ctx, arg4);
-
-		page_ctm = fz_identity;
-
-		switch (destination.type)
-		{
-		default:
-		case FZ_LINK_DEST_FIT:
-		case FZ_LINK_DEST_FIT_B:
-			break;
-		case FZ_LINK_DEST_FIT_H:
-		case FZ_LINK_DEST_FIT_BH:
-			p = fz_transform_point_xy(0, arg1v, page_ctm);
-			destination.y = arg1 ? p.y : NAN;
-			break;
-		case FZ_LINK_DEST_FIT_V:
-		case FZ_LINK_DEST_FIT_BV:
-			p = fz_transform_point_xy(arg1v, 0, page_ctm);
-			destination.x = arg1 ? p.x : NAN;
-			break;
-		case FZ_LINK_DEST_XYZ:
-			p = fz_transform_point_xy(arg1v, arg2v, page_ctm);
-			destination.x = arg1 ? p.x : NAN;
-			destination.y = arg2 ? p.y : NAN;
-			destination.zoom = arg3 ? (arg3v > 0 ? (arg3v * 100) : 100) : NAN;
-			break;
-		case FZ_LINK_DEST_FIT_R:
-			rect.x0 = arg1v;
-			rect.y0 = arg2v;
-			rect.x1 = arg3v;
-			rect.y1 = arg4v;
-			fz_transform_rect(rect, page_ctm);
-			destination.x = rect.x0;
-			destination.y = rect.y0;
-			destination.w = rect.x1 - rect.x0;
-			destination.h = rect.y1 - rect.y0;
-			break;
-		}
-
+		populate_destination(ctx, doc, dest, 1, &destination);
 		return pdf_append_explicit_dest_to_uri(ctx, uri, destination);
 	}
 	else if (pdf_is_name(ctx, dest))
@@ -172,104 +186,9 @@ pdf_parse_link_dest_to_file_with_path(fz_context *ctx, pdf_document *doc, const 
 	if (pdf_is_array(ctx, dest) && pdf_array_len(ctx, dest) >= 1)
 	{
 		fz_link_dest destination = fz_make_link_dest_none();
-		pdf_obj *arg1, *arg2, *arg3, *arg4;
-		float arg1v, arg2v, arg3v, arg4v;
-		pdf_obj *pageobj, *typeobj;
-		fz_matrix page_ctm;
-		fz_rect rect;
-		int pageno;
-		fz_point p;
-
 		if (!is_remote)
 			dest = resolve_dest(ctx, doc, dest);
-
-		pageobj = pdf_array_get(ctx, dest, 0);
-		if (pdf_is_int(ctx, pageobj))
-		{
-			pageno = pdf_to_int(ctx, pageobj);
-			if (is_remote)
-				pageobj = NULL;
-			else
-				pageobj = pdf_lookup_page_obj(ctx, doc, pageno);
-		}
-		else
-			pageno = pdf_lookup_page_number(ctx, doc, pageobj);
-
-		if (!is_remote)
-			pageno = fz_clampi(pageno, 0, pdf_count_pages(ctx, doc) - 1);
-
-		destination.loc.page = pageno;
-
-		typeobj = pdf_array_get(ctx, dest, 1);
-		if (typeobj == PDF_NAME(XYZ))
-			destination.type = FZ_LINK_DEST_XYZ;
-		else if (typeobj == PDF_NAME(Fit))
-			destination.type = FZ_LINK_DEST_FIT;
-		else if (typeobj == PDF_NAME(FitH))
-			destination.type = FZ_LINK_DEST_FIT_H;
-		else if (typeobj == PDF_NAME(FitV))
-			destination.type = FZ_LINK_DEST_FIT_V;
-		else if (typeobj == PDF_NAME(FitR))
-			destination.type = FZ_LINK_DEST_FIT_R;
-		else if (typeobj == PDF_NAME(FitB))
-			destination.type = FZ_LINK_DEST_FIT_B;
-		else if (typeobj == PDF_NAME(FitBH))
-			destination.type = FZ_LINK_DEST_FIT_BH;
-		else if (typeobj == PDF_NAME(FitBV))
-			destination.type = FZ_LINK_DEST_FIT_BV;
-		else
-			destination.type = FZ_LINK_DEST_XYZ;
-
-		arg1 = pdf_array_get(ctx, dest, 2);
-		arg2 = pdf_array_get(ctx, dest, 3);
-		arg3 = pdf_array_get(ctx, dest, 4);
-		arg4 = pdf_array_get(ctx, dest, 5);
-
-		arg1v = pdf_to_real(ctx, arg1);
-		arg2v = pdf_to_real(ctx, arg2);
-		arg3v = pdf_to_real(ctx, arg3);
-		arg4v = pdf_to_real(ctx, arg4);
-
-		if (pageobj)
-			pdf_page_obj_transform(ctx, pageobj, NULL, &page_ctm);
-		else
-			page_ctm = fz_identity;
-
-		switch (destination.type)
-		{
-		default:
-		case FZ_LINK_DEST_FIT:
-		case FZ_LINK_DEST_FIT_B:
-			break;
-		case FZ_LINK_DEST_FIT_H:
-		case FZ_LINK_DEST_FIT_BH:
-			p = fz_transform_point_xy(0, arg1v, page_ctm);
-			destination.y = arg1 ? p.y : NAN;
-			break;
-		case FZ_LINK_DEST_FIT_V:
-		case FZ_LINK_DEST_FIT_BV:
-			p = fz_transform_point_xy(arg1v, 0, page_ctm);
-			destination.x = arg1 ? p.x : NAN;
-			break;
-		case FZ_LINK_DEST_XYZ:
-			p = fz_transform_point_xy(arg1v, arg2v, page_ctm);
-			destination.x = arg1 ? p.x : NAN;
-			destination.y = arg2 ? p.y : NAN;
-			destination.zoom = arg3 ? (arg3v > 0 ? (arg3v * 100) : 100) : NAN;
-			break;
-		case FZ_LINK_DEST_FIT_R:
-			rect.x0 = arg1v;
-			rect.y0 = arg2v;
-			rect.x1 = arg3v;
-			rect.y1 = arg4v;
-			fz_transform_rect(rect, page_ctm);
-			destination.x = rect.x0;
-			destination.y = rect.y0;
-			destination.w = rect.x1 - rect.x0;
-			destination.h = rect.y1 - rect.y0;
-			break;
-		}
-
+		populate_destination(ctx, doc, dest, is_remote, &destination);
 		return pdf_new_uri_from_path_and_explicit_dest(ctx, path, destination);
 	}
 	else if (pdf_is_name(ctx, dest))
@@ -516,8 +435,8 @@ pdf_add_embedded_file(fz_context *ctx, pdf_document *doc,
 		pdf_drop_obj(ctx, file);
 	fz_catch(ctx)
 	{
-		pdf_abandon_operation(ctx, doc);
 		pdf_drop_obj(ctx, filespec);
+		pdf_abandon_operation(ctx, doc);
 		fz_rethrow(ctx);
 	}
 
@@ -718,6 +637,8 @@ pdf_load_link_annots(fz_context *ctx, pdf_document *doc, pdf_page *page, pdf_obj
 		fz_catch(ctx)
 		{
 			fz_rethrow_if(ctx, FZ_ERROR_TRYLATER);
+			fz_rethrow_if(ctx, FZ_ERROR_SYSTEM);
+			fz_report_error(ctx);
 			link = NULL;
 		}
 
@@ -1097,95 +1018,7 @@ pdf_parse_link_dest(fz_context *ctx, pdf_document *doc, pdf_obj *dest)
 	if (pdf_is_array(ctx, dest) && pdf_array_len(ctx, dest) >= 1)
 	{
 		fz_link_dest destination = fz_make_link_dest_none();
-		pdf_obj *arg1, *arg2, *arg3, *arg4;
-		float arg1v, arg2v, arg3v, arg4v;
-		pdf_obj *pageobj, *typeobj;
-		fz_matrix page_ctm;
-		fz_rect rect;
-		int pageno;
-		fz_point p;
-
-		pageobj = pdf_array_get(ctx, dest, 0);
-		if (pdf_is_int(ctx, pageobj))
-		{
-			pageno = pdf_to_int(ctx, pageobj);
-			pageobj = pdf_lookup_page_obj(ctx, doc, pageno);
-		}
-		else
-			pageno = pdf_lookup_page_number(ctx, doc, pageobj);
-
-		destination.loc.page = pageno;
-
-		typeobj = pdf_array_get(ctx, dest, 1);
-		if (typeobj == PDF_NAME(XYZ))
-			destination.type = FZ_LINK_DEST_XYZ;
-		else if (typeobj == PDF_NAME(Fit))
-			destination.type = FZ_LINK_DEST_FIT;
-		else if (typeobj == PDF_NAME(FitH))
-			destination.type = FZ_LINK_DEST_FIT_H;
-		else if (typeobj == PDF_NAME(FitV))
-			destination.type = FZ_LINK_DEST_FIT_V;
-		else if (typeobj == PDF_NAME(FitR))
-			destination.type = FZ_LINK_DEST_FIT_R;
-		else if (typeobj == PDF_NAME(FitB))
-			destination.type = FZ_LINK_DEST_FIT_B;
-		else if (typeobj == PDF_NAME(FitBH))
-			destination.type = FZ_LINK_DEST_FIT_BH;
-		else if (typeobj == PDF_NAME(FitBV))
-			destination.type = FZ_LINK_DEST_FIT_BV;
-		else
-			destination.type = FZ_LINK_DEST_XYZ;
-
-		arg1 = pdf_array_get(ctx, dest, 2);
-		arg2 = pdf_array_get(ctx, dest, 3);
-		arg3 = pdf_array_get(ctx, dest, 4);
-		arg4 = pdf_array_get(ctx, dest, 5);
-
-		arg1v = pdf_to_real(ctx, arg1);
-		arg2v = pdf_to_real(ctx, arg2);
-		arg3v = pdf_to_real(ctx, arg3);
-		arg4v = pdf_to_real(ctx, arg4);
-
-		if (pageobj)
-			pdf_page_obj_transform(ctx, pageobj, NULL, &page_ctm);
-		else
-			page_ctm = fz_identity;
-
-		switch (destination.type)
-		{
-		default:
-		case FZ_LINK_DEST_FIT:
-		case FZ_LINK_DEST_FIT_B:
-			break;
-		case FZ_LINK_DEST_FIT_H:
-		case FZ_LINK_DEST_FIT_BH:
-			p = fz_transform_point_xy(0, arg1v, page_ctm);
-			destination.y = arg1 ? p.y : NAN;
-			break;
-		case FZ_LINK_DEST_FIT_V:
-		case FZ_LINK_DEST_FIT_BV:
-			p = fz_transform_point_xy(arg1v, 0, page_ctm);
-			destination.x = arg1 ? p.x : NAN;
-			break;
-		case FZ_LINK_DEST_XYZ:
-			p = fz_transform_point_xy(arg1v, arg2v, page_ctm);
-			destination.x = arg1 ? p.x : NAN;
-			destination.y = arg2 ? p.y : NAN;
-			destination.zoom = arg3 ? (arg3v > 0 ? (arg3v * 100) : 100) : NAN;
-			break;
-		case FZ_LINK_DEST_FIT_R:
-			rect.x0 = arg1v;
-			rect.y0 = arg2v;
-			rect.x1 = arg3v;
-			rect.y1 = arg4v;
-			fz_transform_rect(rect, page_ctm);
-			destination.x = rect.x0;
-			destination.y = rect.y0;
-			destination.w = rect.x1 - rect.x0;
-			destination.h = rect.y1 - rect.y0;
-			break;
-		}
-
+		populate_destination(ctx, doc, dest, 0, &destination);
 		return format_explicit_dest_link_uri(ctx, NULL, NULL, destination);
 	}
 	else if (pdf_is_name(ctx, dest))
@@ -1220,7 +1053,7 @@ pdf_add_filespec_from_link(fz_context *ctx, pdf_document *doc, const char *uri)
 		else if (fz_is_external_link(ctx, uri))
 			filespec = pdf_add_url_filespec(ctx, doc, uri);
 		else
-			fz_throw(ctx, FZ_ERROR_GENERIC, "can not add non-uri as file specification");
+			fz_throw(ctx, FZ_ERROR_ARGUMENT, "can not add non-uri as file specification");
 	}
 	fz_always(ctx)
 		fz_free(ctx, file);
@@ -1263,7 +1096,7 @@ pdf_new_action_from_link(fz_context *ctx, pdf_document *doc, const char *uri)
 			pdf_dict_put_text_string(ctx, action, PDF_NAME(URI), uri);
 		}
 		else
-			fz_throw(ctx, FZ_ERROR_GENERIC, "unsupported link URI type");
+			fz_throw(ctx, FZ_ERROR_ARGUMENT, "unsupported link URI type");
 	}
 	fz_always(ctx)
 		fz_free(ctx, file);
@@ -1285,6 +1118,7 @@ pdf_obj *pdf_add_filespec(fz_context *ctx, pdf_document *doc, const char *filena
 	size_t len, i;
 
 	fz_var(asciiname);
+	fz_var(filespec);
 
 	fz_try(ctx)
 	{
@@ -1312,9 +1146,10 @@ pdf_obj *pdf_add_filespec(fz_context *ctx, pdf_document *doc, const char *filena
 	fz_always(ctx)
 		fz_free(ctx, asciiname);
 	fz_catch(ctx)
+	{
+		pdf_drop_obj(ctx, filespec);
 		fz_rethrow(ctx);
-
-
+	}
 
 	return filespec;
 }
@@ -1348,7 +1183,7 @@ pdf_new_dest_from_link(fz_context *ctx, pdf_document *doc, const char *uri, int 
 		char *name = parse_uri_named_dest(ctx, uri);
 
 		fz_try(ctx)
-			dest = pdf_new_name(ctx, name);
+			dest = pdf_new_text_string(ctx, name);
 		fz_always(ctx)
 			fz_free(ctx, name);
 		fz_catch(ctx)
@@ -1495,9 +1330,9 @@ pdf_resolve_link_dest(fz_context *ctx, pdf_document *doc, const char *uri)
 		}
 		else if (has_named_dest(ctx, uri))
 		{
-			char *name = parse_uri_named_dest(ctx, uri);
+			name = parse_uri_named_dest(ctx, uri);
 
-			needle = pdf_new_string(ctx, name, strlen(name));
+			needle = pdf_new_text_string(ctx, name);
 			destobj = resolve_dest(ctx, doc, needle);
 			if (destobj)
 			{

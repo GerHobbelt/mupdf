@@ -163,20 +163,24 @@ cbz_bound_page(fz_context *ctx, fz_page *page_, fz_box_type box)
 	cbz_page *page = (cbz_page*)page_;
 	fz_image *image = page->image;
 	int xres, yres;
-	fz_rect bbox;
-	uint8_t orientation = fz_image_orientation(ctx, page->image);
+	fz_rect bbox = fz_empty_rect;
+	uint8_t orientation;
 
-	fz_image_resolution(image, &xres, &yres);
-	bbox.x0 = bbox.y0 = 0;
-	if (orientation == 0 || (orientation & 1) == 1)
+	if (image)
 	{
-		bbox.x1 = image->w * DPI / xres;
-		bbox.y1 = image->h * DPI / yres;
-	}
-	else
-	{
-		bbox.y1 = image->w * DPI / xres;
-		bbox.x1 = image->h * DPI / yres;
+		fz_image_resolution(image, &xres, &yres);
+		bbox.x0 = bbox.y0 = 0;
+		orientation = fz_image_orientation(ctx, image);
+		if (orientation == 0 || (orientation & 1) == 1)
+		{
+			bbox.x1 = image->w * DPI / xres;
+			bbox.y1 = image->h * DPI / yres;
+		}
+		else
+		{
+			bbox.y1 = image->w * DPI / xres;
+			bbox.x1 = image->h * DPI / yres;
+		}
 	}
 	return bbox;
 }
@@ -188,23 +192,36 @@ cbz_run_page(fz_context *ctx, fz_page *page_, fz_device *dev, fz_matrix ctm, fz_
 	fz_image *image = page->image;
 	int xres, yres;
 	float w, h;
-	uint8_t orientation = fz_image_orientation(ctx, page->image);
-	fz_matrix immat = fz_image_orientation_matrix(ctx, page->image);
+	uint8_t orientation;
+	fz_matrix immat;
 
-	fz_image_resolution(image, &xres, &yres);
-	if (orientation == 0 || (orientation & 1) == 1)
+	if (image)
 	{
-		w = image->w * DPI / xres;
-		h = image->h * DPI / yres;
+		fz_try(ctx)
+		{
+			fz_image_resolution(image, &xres, &yres);
+			orientation = fz_image_orientation(ctx, image);
+			if (orientation == 0 || (orientation & 1) == 1)
+			{
+				w = image->w * DPI / xres;
+				h = image->h * DPI / yres;
+			}
+			else
+			{
+				h = image->w * DPI / xres;
+				w = image->h * DPI / yres;
+			}
+			immat = fz_image_orientation_matrix(ctx, image);
+			immat = fz_post_scale(immat, w, h);
+			ctm = fz_concat(immat, ctm);
+			fz_fill_image(ctx, dev, image, ctm, 1, fz_default_color_params);
+		}
+		fz_catch(ctx)
+		{
+			fz_report_error(ctx);
+			fz_warn(ctx, "cannot render image on page");
+		}
 	}
-	else
-	{
-		h = image->w * DPI / xres;
-		w = image->h * DPI / yres;
-	}
-	immat = fz_post_scale(immat, w, h);
-	ctm = fz_concat(immat, ctm);
-	fz_fill_image(ctx, dev, image, ctm, 1, fz_default_color_params);
 }
 
 static void
@@ -222,21 +239,18 @@ cbz_load_page(fz_context *ctx, fz_document *doc_, int chapter, int number)
 	fz_buffer *buf = NULL;
 
 	if (number < 0 || number >= doc->page_count)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot load page %d", number);
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "invalid page number %d", number);
 
 	fz_var(page);
 
-	if (doc->arch)
-		buf = fz_read_archive_entry(ctx, doc->arch, doc->page[number]);
-	if (!buf)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot load cbz page");
+	page = fz_new_derived_page(ctx, cbz_page, doc_);
+	page->super.bound_page = cbz_bound_page;
+	page->super.run_page_contents = cbz_run_page;
+	page->super.drop_page = cbz_drop_page;
 
 	fz_try(ctx)
 	{
-		page = fz_new_derived_page(ctx, cbz_page, doc_);
-		page->super.bound_page = cbz_bound_page;
-		page->super.run_page_contents = cbz_run_page;
-		page->super.drop_page = cbz_drop_page;
+		buf = fz_read_archive_entry(ctx, doc->arch, doc->page[number]);
 		page->image = fz_new_image_from_buffer(ctx, buf);
 	}
 	fz_always(ctx)
@@ -245,8 +259,8 @@ cbz_load_page(fz_context *ctx, fz_document *doc_, int chapter, int number)
 	}
 	fz_catch(ctx)
 	{
-		fz_drop_page(ctx, (fz_page*)page);
-		fz_rethrow(ctx);
+		fz_report_error(ctx);
+		fz_warn(ctx, "cannot decode image on page, leaving it blank");
 	}
 
 	return (fz_page*)page;
@@ -262,11 +276,9 @@ cbz_lookup_metadata(fz_context *ctx, fz_document *doc_, const char *key, char *b
 }
 
 static fz_document *
-cbz_open_document_with_stream(fz_context *ctx, fz_stream *file)
+cbz_open_document(fz_context *ctx, fz_stream *file, fz_stream *accel, fz_archive *dir)
 {
-	cbz_document *doc;
-
-	doc = fz_new_derived_document(ctx, cbz_document);
+	cbz_document *doc = fz_new_derived_document(ctx, cbz_document);
 
 	doc->super.drop_document = cbz_drop_document;
 	doc->super.count_pages = cbz_count_pages;
@@ -275,7 +287,10 @@ cbz_open_document_with_stream(fz_context *ctx, fz_stream *file)
 
 	fz_try(ctx)
 	{
-		doc->arch = fz_open_archive_with_stream(ctx, file);
+		if (file)
+			doc->arch = fz_open_archive_with_stream(ctx, file);
+		else
+			doc->arch = fz_keep_archive(ctx, dir);
 		cbz_create_page_list(ctx, doc);
 	}
 	fz_catch(ctx)
@@ -288,6 +303,9 @@ cbz_open_document_with_stream(fz_context *ctx, fz_stream *file)
 
 static const char *cbz_extensions[] =
 {
+#ifdef HAVE_LIBARCHIVE
+	"cbr",
+#endif
 	"cbt",
 	"cbz",
 	"tar",
@@ -297,7 +315,13 @@ static const char *cbz_extensions[] =
 
 static const char *cbz_mimetypes[] =
 {
+#ifdef HAVE_LIBARCHIVE
+	"application/vnd.comicbook-rar",
+#endif
 	"application/vnd.comicbook+zip",
+#ifdef HAVE_LIBARCHIVE
+	"application/x-cbr",
+#endif
 	"application/x-cbt",
 	"application/x-cbz",
 	"application/x-tar",
@@ -306,7 +330,7 @@ static const char *cbz_mimetypes[] =
 };
 
 static int
-cbz_recognize_doc_content(fz_context *ctx, fz_stream *stream)
+cbz_recognize_doc_content(fz_context *ctx, fz_stream *stream, fz_archive *dir)
 {
 	fz_archive *arch = NULL;
 	int ret = 0;
@@ -317,9 +341,14 @@ cbz_recognize_doc_content(fz_context *ctx, fz_stream *stream)
 
 	fz_try(ctx)
 	{
-		arch = fz_try_open_archive_with_stream(ctx, stream);
-		if (arch == NULL)
-			break;
+		if (stream == NULL)
+			arch = fz_keep_archive(ctx, dir);
+		else
+		{
+			arch = fz_try_open_archive_with_stream(ctx, stream);
+			if (arch == NULL)
+				break;
+		}
 
 		/* If it's an archive, and we can find at least one plausible page
 		 * then we can open it as a cbz. */
@@ -327,7 +356,10 @@ cbz_recognize_doc_content(fz_context *ctx, fz_stream *stream)
 		for (i = 0; i < count && ret == 0; i++)
 		{
 			const char *name = fz_list_archive_entry(ctx, arch, i);
-			const char *ext = name ? strrchr(name, '.') : NULL;
+			const char *ext;
+			if (name == NULL)
+				continue;
+			ext = strrchr(name, '.');
 			if (ext)
 			{
 				for (k = 0; cbz_ext_list[k]; k++)
@@ -352,11 +384,8 @@ cbz_recognize_doc_content(fz_context *ctx, fz_stream *stream)
 fz_document_handler cbz_document_handler =
 {
 	NULL,
-	NULL,
-	cbz_open_document_with_stream,
+	cbz_open_document,
 	cbz_extensions,
 	cbz_mimetypes,
-	NULL,
-	NULL,
 	cbz_recognize_doc_content
 };

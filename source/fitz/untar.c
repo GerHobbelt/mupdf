@@ -106,7 +106,7 @@ static void ensure_tar_entries(fz_context *ctx, fz_tar_archive *tar)
 		if (n == 0)
 			break;
 		if (n < nelem(record))
-			fz_throw(ctx, FZ_ERROR_GENERIC, "premature end of data in tar record");
+			fz_throw(ctx, FZ_ERROR_FORMAT, "premature end of data in tar record");
 
 		if (is_zeroed(ctx, record, nelem(record)))
 			continue;
@@ -119,7 +119,7 @@ static void ensure_tar_entries(fz_context *ctx, fz_tar_archive *tar)
 
 		size = otoi(octsize);
 		if (size > INT_MAX)
-			fz_throw(ctx, FZ_ERROR_GENERIC, "tar archive entry too large");
+			fz_throw(ctx, FZ_ERROR_FORMAT, "tar archive entry too large");
 
 		typeflag = (char) record[156];
 
@@ -130,7 +130,7 @@ static void ensure_tar_entries(fz_context *ctx, fz_tar_archive *tar)
 			{
 				n = fz_read(ctx, file, (unsigned char *) longname, size);
 				if (n < (size_t) size)
-					fz_throw(ctx, FZ_ERROR_GENERIC, "premature end of data in tar long name entry name");
+					fz_throw(ctx, FZ_ERROR_FORMAT, "premature end of data in tar long name entry name");
 				longname[size] = '\0';
 			}
 			fz_catch(ctx)
@@ -206,7 +206,7 @@ static fz_buffer *read_tar_entry(fz_context *ctx, fz_archive *arch, const char *
 		fz_seek(ctx, file, ent->offset + 512, 0);
 		ubuf->len = fz_read(ctx, file, ubuf->data, ent->size);
 		if (ubuf->len != (size_t)ent->size)
-			fz_throw(ctx, FZ_ERROR_GENERIC, "cannot read entire archive entry");
+			fz_throw(ctx, FZ_ERROR_FORMAT, "cannot read entire archive entry");
 	}
 	fz_catch(ctx)
 	{
@@ -238,6 +238,50 @@ static int count_tar_entries(fz_context *ctx, fz_archive *arch)
 	return tar->count;
 }
 
+static int isoct(unsigned char *d, int n)
+{
+	while (--n > 0)
+	{
+		unsigned char c = *d++;
+		if (c < '0' || c > '7')
+			return 0;
+	}
+	return (*d == 0);
+}
+
+static int
+check_v7(fz_context *ctx, fz_stream *file)
+{
+	unsigned char data[512];
+	size_t n;
+	int i;
+
+	fz_seek(ctx, file, 0, SEEK_SET);
+	n = fz_read(ctx, file, data, nelem(data));
+	if (n != nelem(data))
+		return 0;
+
+	/* Skip over name. */
+	for (i = 0; i < 100 && data[i] != 0; i++);
+
+	/* We want at least 1 byte of name, and a zero terminator. */
+	if (i == 0 || i == 100)
+		return 0;
+
+	/* Skip over a run of zero terminators. */
+	for (; i < 100 && data[i] == 0; i++);
+
+	if (i != 100)
+		return 0;
+
+	return (isoct(data+100, 8) &&
+		isoct(data+108, 8) &&
+		isoct(data+116, 8) &&
+		isoct(data+124, 12) &&
+		isoct(data+136, 12) &&
+		isoct(data+148, 8));
+}
+
 int
 fz_is_tar_archive(fz_context *ctx, fz_stream *file)
 {
@@ -256,7 +300,7 @@ fz_is_tar_archive(fz_context *ctx, fz_stream *file)
 	if (!memcmp(data, paxsignature, nelem(paxsignature)))
 		return 1;
 	if (!memcmp(data, v7signature, nelem(v7signature)))
-		return 1;
+		return check_v7(ctx, file);
 
 	return 0;
 }
@@ -267,7 +311,7 @@ fz_open_tar_archive_with_stream(fz_context *ctx, fz_stream *file)
 	fz_tar_archive *tar;
 
 	if (!fz_is_tar_archive(ctx, file))
-		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot recognize tar archive");
+		fz_throw(ctx, FZ_ERROR_FORMAT, "cannot recognize tar archive");
 
 	tar = fz_new_derived_archive(ctx, file, fz_tar_archive);
 	tar->super.format = "tar";

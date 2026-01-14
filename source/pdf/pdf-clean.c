@@ -156,7 +156,7 @@ pdf_filter_content_stream(
 	fz_try(ctx)
 	{
 		*out_buf = fz_new_buffer(ctx, 1024);
-		top = proc_buffer = pdf_new_buffer_processor(ctx, *out_buf, options->ascii);
+		top = proc_buffer = pdf_new_buffer_processor(ctx, *out_buf, options->ascii, options->newlines);
 		if (num_filters > 0)
 		{
 			for (i = num_filters - 1; i >= 0; i--)
@@ -239,7 +239,7 @@ pdf_filter_type3(fz_context *ctx, pdf_document *doc, pdf_obj *obj, pdf_obj *page
 			in_res = page_res;
 
 		buffer = fz_new_buffer(ctx, 1024);
-		top = proc_buffer = pdf_new_buffer_processor(ctx, buffer, options->ascii);
+		top = proc_buffer = pdf_new_buffer_processor(ctx, buffer, options->ascii, options->newlines);
 		if (num_filters > 0)
 		{
 			for (i = num_filters - 1; i >= 0; i--)
@@ -290,7 +290,6 @@ static void
 pdf_filter_xobject(fz_context *ctx, pdf_document *doc, pdf_obj *stm, pdf_obj *page_res, pdf_filter_options *options, pdf_cycle_list *cycle_up)
 {
 	pdf_cycle_list cycle;
-	pdf_obj *struct_parents_obj;
 	int struct_parents;
 	pdf_obj *new_res = NULL;
 	fz_buffer *new_buf = NULL;
@@ -301,10 +300,7 @@ pdf_filter_xobject(fz_context *ctx, pdf_document *doc, pdf_obj *stm, pdf_obj *pa
 
 	// TODO for RJW: XObject can also be a StructParent; how do we handle that case?
 
-	struct_parents_obj = pdf_dict_get(ctx, stm, PDF_NAME(StructParents));
-	struct_parents = -1;
-	if (pdf_is_number(ctx, struct_parents_obj))
-		struct_parents = pdf_to_int(ctx, struct_parents_obj);
+	struct_parents = pdf_dict_get_int_default(ctx, stm, PDF_NAME(StructParents), -1);
 
 	old_res = pdf_dict_get(ctx, stm, PDF_NAME(Resources));
 	if (!old_res)
@@ -341,7 +337,6 @@ pdf_filter_xobject_instance(fz_context *ctx, pdf_obj *old_xobj, pdf_obj *page_re
 	pdf_obj *new_xobj;
 	pdf_obj *new_res, *old_res;
 	fz_buffer *new_buf;
-	pdf_obj *struct_parents_obj;
 	int struct_parents;
 	fz_matrix matrix;
 
@@ -352,10 +347,7 @@ pdf_filter_xobject_instance(fz_context *ctx, pdf_obj *old_xobj, pdf_obj *page_re
 	// TODO for RJW: XObject can also be a StructParent; how do we handle that case?
 	// TODO for RJW: will we run into trouble by duplicating StructParents stuff?
 
-	struct_parents_obj = pdf_dict_get(ctx, old_xobj, PDF_NAME(StructParents));
-	struct_parents = -1;
-	if (pdf_is_number(ctx, struct_parents_obj))
-		struct_parents = pdf_to_int(ctx, struct_parents_obj);
+	struct_parents = pdf_dict_get_int_default(ctx, old_xobj, PDF_NAME(StructParents), -1);
 
 	old_res = pdf_dict_get(ctx, old_xobj, PDF_NAME(Resources));
 	if (!old_res)
@@ -394,15 +386,11 @@ pdf_filter_xobject_instance(fz_context *ctx, pdf_obj *old_xobj, pdf_obj *page_re
 void pdf_filter_page_contents(fz_context *ctx, pdf_document *doc, pdf_page *page, pdf_filter_options *options)
 {
 	pdf_obj *contents, *old_res;
-	pdf_obj *struct_parents_obj;
 	pdf_obj *new_res;
 	fz_buffer *buffer;
 	int struct_parents;
 
-	struct_parents_obj = pdf_dict_get(ctx, page->obj, PDF_NAME(StructParents));
-	struct_parents = -1;
-	if (pdf_is_number(ctx, struct_parents_obj))
-		struct_parents = pdf_to_int(ctx, struct_parents_obj);
+	struct_parents = pdf_dict_get_int_default(ctx, page->obj, PDF_NAME(StructParents), -1);
 
 	contents = pdf_page_contents(ctx, page);
 	old_res = pdf_page_resources(ctx, page);
@@ -472,7 +460,7 @@ pdf_redact_end_page(fz_context *ctx, fz_buffer *buf, void *opaque)
 	pdf_obj *qp;
 	int i, n;
 
-	fz_append_string(ctx, buf, "0 g\n");
+	fz_append_string(ctx, buf, " 0 g\n");
 
 	for (annot = pdf_first_annot(ctx, page); annot; annot = pdf_next_annot(ctx, annot))
 	{
@@ -538,20 +526,24 @@ pdf_redact_text_filter(fz_context *ctx, void *opaque, int *ucsbuf, int ucslen, f
 		{
 			qp = pdf_dict_get(ctx, annot->obj, PDF_NAME(QuadPoints));
 			n = pdf_array_len(ctx, qp);
+			/* Note, we test for the intersection being a valid rectangle, NOT
+			 * a non-empty one. This is because we can have 'empty' character
+			 * boxes (say for diacritics), that while 0 width, do have a defined
+			 * position on the plane, and hence inclusion makes sense. */
 			if (n > 0)
 			{
 				for (i = 0; i < n; i += 8)
 				{
 					q = pdf_to_quad(ctx, qp, i);
 					r = fz_rect_from_quad(q);
-					if (!fz_is_empty_rect(fz_intersect_rect(bbox, r)))
+					if (fz_is_valid_rect(fz_intersect_rect(bbox, r)))
 						return 1;
 				}
 			}
 			else
 			{
 				r = pdf_dict_get_rect(ctx, annot->obj, PDF_NAME(Rect));
-				if (!fz_is_empty_rect(fz_intersect_rect(bbox, r)))
+				if (fz_is_valid_rect(fz_intersect_rect(bbox, r)))
 					return 1;
 			}
 		}
@@ -870,7 +862,7 @@ pdf_redact_image_filter_pixels(fz_context *ctx, void *opaque, fz_matrix ctm, con
 			fz_rethrow(ctx);
 		return image;
 	}
-	return fz_keep_image(ctx, image);
+	return image;
 }
 
 /* Returns 0 if area does not intersect with any of our redactions.
@@ -1091,7 +1083,7 @@ int
 pdf_redact_page(fz_context *ctx, pdf_document *doc, pdf_page *page, pdf_redact_options *redact_opts)
 {
 	if (page == NULL || page->doc != doc)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "Can't redact a page not from the doc");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "Can't redact a page not from the doc");
 	return pdf_apply_redaction_imp(ctx, page, NULL, redact_opts);
 }
 

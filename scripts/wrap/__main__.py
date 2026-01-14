@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-'''
+r'''
 Support for generating C++ and python wrappers for the mupdf API.
 
 Overview:
@@ -402,7 +402,10 @@ Tools required to build:
 
             pip install libclang
 
-    SWIG for Python bindings:
+    setuptools:
+        Used internally.
+
+    SWIG for Python/C# bindings:
 
         We work with swig-3 and swig-4. If swig-4 is used, we propogate
         doxygen-style comments for structures and functions into the generated
@@ -425,7 +428,7 @@ Building Python bindings:
 
         Windows:
             > py -m venv pylocal
-            > pylocal\\Scripts\\activate
+            > pylocal\Scripts\activate
             (pylocal) > pip install libclang pyqt5
             (pylocal) > cd ...\mupdf
             (pylocal) > python setup.py install
@@ -637,6 +640,13 @@ Usage:
                     Set -j arg used when action 'm' calls make (not
                     Windows). If <N> is 0 we use the number of CPUs
                     (from Python's multiprocessing.cpu_count()).
+                --m-target <target>
+                    Set target for action 'm'. Default is blank, so make will
+                    build the default `all` target.
+                --m-vars <text>
+                    Text to insert near start of the action 'm' make command,
+                    typically to set MuPDF build flags, for example:
+                        --m-vars 'HAVE_LIBCRYPTO=no'
                 --regress
                     Checks for regressions in generated C++ code and SWIG .i
                     file (actions 0 and 2 below). If a generated file already
@@ -789,6 +799,11 @@ Usage:
             Also see '--sync-docs' option for copying these generated
             documentation files elsewhere.
 
+        --make <make-command>
+            Override make command, e.g. `--make gmake`.
+            If not specified, we use $MUPDF_MAKE. If this is not set, we use
+            `make` (or `gmake` on OpenBSD).
+
         --ref
             Copy generated C++ files to mupdfwrap_ref/ directory for use by --diff.
 
@@ -883,10 +898,10 @@ Usage:
             Compare generated class methods with functions called by platform/gl
             code.
 
-        python3 -m cProfile -s cumulative ./scripts/mupdfwrap.py -b 0
+        python3 -m cProfile -s cumulative ./scripts/mupdfwrap.py --venv -b 0
             Profile generation of C++ source code.
 
-        ./scripts/mupdfwrap.py --venv --swig-windows-auto -b all -t
+        ./scripts/mupdfwrap.py --venv -b all -t
             Build and test on Windows.
 
 
@@ -1043,49 +1058,10 @@ def windows_find_python_py( cpu=None, version=None):
     Windows only. Looks for python matching `cpu` and `version`, by parsing
     output of `py -0p`.
     '''
-    if cpu is None:
-        cpu = state.Cpu()
-    if version is None:
-        version = state.python_version()
-    command = 'py -0p'
-    jlib.log('Running: {command}')
-    text = jlib.system(command, out='return')
-    for line in text.split('\n'):
-        jlib.log( '    {line}')
-        m = re.match( '^ *-([0-9.]+)-((64)|(32)) +([^\\r*]+)[\\r*]*$', line)
-        if not m:
-            continue
-        version2 = m.group(1)
-        bits = int(m.group(2))
-        if bits != cpu.bits or version2 != version:
-            continue
-        python = m.group(5).strip()
-        # We don't use os.path.dirname() here because it might fail if we are
-        # Cygwin python.
-        root = python[ :python.rfind('\\')]
-        if not os.path.exists(python):
-            # Sometimes it seems that the specified .../python.exe does not exist,
-            # and we have to change it to .../python<version>.exe.
-            #
-            assert python.endswith('.exe'), f'python={python!r}'
-            python2 = f'{python[:-4]}{version}.exe'
-            jlib.log( 'Python {python!r} does not exist; changed to: {python2!r}')
-            assert os.path.exists( python2)
-            python = python2
-
-        jlib.log('{cpu=} {version=}: have found: {python=} {version=} {root=} {cpu=}')
-
-        # Need to run the Python we have found, to find its
-        # sysconfig.get_path('include').
-        #
-        command = f'{python} -c "import sysconfig; print( sysconfig.get_path(\'include\'))"'
-        include = jlib.system( command, out='return').strip()
-        jlib.log( 'for {python=}, sysconfig.get_path("include")) returned: {include!r}')
-
-        jlib.log( 'Returning {=cpu version python root include}')
-        return cpu, version, python, root, include
-
-    raise Exception( f'Failed to find python matching cpu={cpu} version={version}. Run "py -0p" to see available pythons')
+    wp = wdev.WindowsPython(cpu=cpu, version=version)
+    command = f'{wp.path} -c "import sysconfig; print( sysconfig.get_path(\'include\'))"'
+    include = jlib.system( command, out='return').strip()
+    return wp.cpu, wp.version, wp.path, wp.root, include
 
 
 def windows_find_python( cpu=None, version=None):
@@ -1161,7 +1137,7 @@ def _test_get_m_command():
         assert command == expected_command, f'\nExpected: {expected_command}\nBut:      {command}'
 
     mupdf_root = os.path.abspath( f'{__file__}/../../../')
-    infix = 'CXX=clang++ ' if state.state_.openbsd else ''
+    infix = 'CXX=c++ ' if state.state_.openbsd else ''
 
     test(
             'shared-release',
@@ -1178,7 +1154,32 @@ def _test_get_m_command():
     jlib.log( '_get_m_command() ok')
 
 
-def _get_m_command( build_dirs, j=None):
+def get_so_version( build_dirs):
+    '''
+    Returns `.<minor>.<patch>` from include/mupdf/fitz/version.h.
+
+    Returns '' on macos.
+    '''
+    if state.state_.macos or state.state_.pyodide:
+        return ''
+    if os.environ.get('USE_SONAME') == 'no':
+        return ''
+    d = dict()
+    def get_v( name):
+        path = f'{build_dirs.dir_mupdf}/include/mupdf/fitz/version.h'
+        with open( path) as f:
+            for line in f:
+                m = re.match(f'^#define {name} (.+)\n$', line)
+                if m:
+                    return m.group(1)
+        assert 0, f'Cannot find #define of {name=} in {path=}.'
+    major = get_v('FZ_VERSION_MAJOR')
+    minor = get_v('FZ_VERSION_MINOR')
+    patch = get_v('FZ_VERSION_PATCH')
+    return f'.{minor}.{patch}'
+
+
+def _get_m_command( build_dirs, j=None, make=None, m_target=None, m_vars=None):
     '''
     Generates a `make` command for building with `build_dirs.dir_mupdf`.
 
@@ -1186,13 +1187,20 @@ def _get_m_command( build_dirs, j=None):
     '''
     assert not state.state_.windows, 'Cannot do "-b m" on Windows; C library is integrated into C++ library built by "-b 01"'
     #jlib.log( '{build_dirs.dir_mupdf=}')
-    make = 'make'
-    if state.state_.openbsd:
-        # Need to run gmake, not make. Also for some
-        # reason gmake on OpenBSD sets CC to clang, but
-        # CXX to g++, so need to force CXX=clang++ too.
-        #
-        make = 'CXX=clang++ gmake'
+    if not make:
+        make = os.environ.get('MUPDF_MAKE')
+        if make:
+            jlib.log('Overriding from $MUPDF_MAKE: {make=}.')
+    if not make:
+        if state.state_.openbsd:
+            # Need to run gmake, not make. Also for some
+            # reason gmake on OpenBSD sets CC to clang, but
+            # CXX to g++, so need to force CXX=c++ too.
+            #
+            make = 'CXX=c++ gmake'
+            jlib.log('OpenBSD, using: {make=}.')
+    if not make:
+        make = 'make'
 
     if j is not None:
         if j == 0:
@@ -1203,16 +1211,21 @@ def _get_m_command( build_dirs, j=None):
     actual_build_dir = f'{build_dirs.dir_mupdf}/build/'
     make_env = ''
     make_args = ' HAVE_GLUT=no HAVE_PTHREAD=yes verbose=yes'
+    if m_vars:
+        make_args += f' {m_vars}'
     suffix = None
     build_prefix = ''
+    build_suffix = ''
     in_prefix = True
     for i, flag in enumerate( flags):
-        if flag in ('x32', 'x64') or flag.startswith('py'):
+        if flag in ('x32', 'x64') or re.match('py[0-9]', flag):
             # setup.py puts cpu and python version
             # elements into the build directory name
             # when creating wheels; we need to ignore
             # them.
-            pass
+            jlib.log('Ignoring {flag=}')
+            build_suffix += f'-{flag}'
+            actual_build_dir += f'-{flag}'
         else:
             if 0: pass  # lgtm [py/unreachable-statement]
             elif flag == 'debug':
@@ -1253,6 +1266,10 @@ def _get_m_command( build_dirs, j=None):
     assert suffix, f'Leaf must contain "shared-" or "fpic-": build_dirs.dir_so={build_dirs.dir_so}'
     if build_prefix:
         make_args += f' build_prefix={build_prefix}'
+    if build_suffix:
+        make_args += f' build_suffix={build_suffix}'
+    if m_target:
+        make_args += f' {m_target}'
     command = f'cd {build_dirs.dir_mupdf} &&'
     if make_env:
         command += make_env
@@ -1311,9 +1328,10 @@ def macos_patch( library, *sublibraries):
         List of paths of shared libraries; these have typically been
         specified with `-l` when `library` was created.
     '''
-    jlib.log( f'macos_patch(): library={library}  sublibraries={sublibraries}')
     if not state.state_.macos:
         return
+    jlib.log( f'macos_patch(): library={library}  sublibraries={sublibraries}')
+    # Find what shared libraries are used by `library`.
     jlib.system( f'otool -L {library}', out='log')
     command = 'install_name_tool'
     names = []
@@ -1322,7 +1340,13 @@ def macos_patch( library, *sublibraries):
         name = name.split('\n')
         assert len(name) == 2 and name[0] == f'{sublibrary}:', f'{name=}'
         name = name[1]
-        command += f' -change {name} @rpath/{os.path.basename(name)}'
+        # strip trailing so_name.
+        leaf = os.path.basename(name)
+        m = re.match('^(.+[.]((so)|(dylib)))[0-9.]*$', leaf)
+        assert m
+        jlib.log(f'Changing {leaf=} to {m.group(1)}')
+        leaf = m.group(1)
+        command += f' -change {name} @rpath/{leaf}'
     command += f' {library}'
     jlib.system( command, out='log')
     jlib.system( f'otool -L {library}', out='log')
@@ -1353,10 +1377,10 @@ def build_0(
 
     # On 32-bit Windows, libclang doesn't work. So we attempt to run 64-bit `-b
     # 0` to generate C++ code.
-    jlib.log( '{state.state_.windows=} {build_dirs.cpu.bits=} {sys.maxsize=}')
+    jlib.log1( '{state.state_.windows=} {build_dirs.cpu.bits=}')
     if state.state_.windows and build_dirs.cpu.bits == 32:
         try:
-            jlib.log( 'Trying dummy call of clang.cindex.Index.create()')
+            jlib.log( 'Windows 32-bit: trying dummy call of clang.cindex.Index.create()')
             state.clang.cindex.Index.create()
         except Exception as e:
             py = f'py -{state.python_version()}'
@@ -1438,13 +1462,17 @@ def build_0(
 
 def link_l_flags(sos):
     ld_origin = None
-    if os.environ.get('OS') in ('wasm', 'wasm-mt'):
-        # Don't add '-Wl,-rpath*' etc if building for wasm.
+    if state.state_.pyodide:
+        # Don't add '-Wl,-rpath*' etc if building for Pyodide.
         ld_origin = False
-    return jlib.link_l_flags( sos, ld_origin)
+    ret = jlib.link_l_flags( sos, ld_origin)
+    r = os.environ.get('LDFLAGS')
+    if r:
+        ret += f' {r}'
+    return ret
 
 
-def build( build_dirs, swig_command, args, vs_upgrade):
+def build( build_dirs, swig_command, args, vs_upgrade, make_command):
     '''
     Handles -b ...
     '''
@@ -1470,11 +1498,20 @@ def build( build_dirs, swig_command, args, vs_upgrade):
     clang_info_verbose = False
     force_rebuild = False
     header_git = False
+    m_target = None
+    m_vars = None
     j = 0
     refcheck_if = '#ifndef NDEBUG'
-    wasm = os.environ.get('OS') in ('wasm', 'wasm-mt')
-    if wasm:
-        compiler = 'em++'
+    pyodide = state.state_.pyodide
+    if pyodide:
+        # Looks like Pyodide sets CXX to (for example) /tmp/tmp8h1meqsj/c++. We
+        # don't evaluate it here, because that would force a rebuild each time
+        # because of the command changing.
+        assert os.environ.get('CXX', None), 'Pyodide build but $CXX not defined.'
+        compiler = '$CXX'
+    elif 'CXX' in os.environ:
+        compiler = os.environ['CXX']
+        jlib.log(f'Setting compiler to {os.environ["CXX"]=}.')
     elif state.state_.macos:
         compiler = 'c++ -std=c++14'
         # Add extra flags for MacOS cross-compilation, where ARCHFLAGS can be
@@ -1533,6 +1570,10 @@ def build( build_dirs, swig_command, args, vs_upgrade):
         elif actions == '--refcheck-if':
             refcheck_if = args.next()
             jlib.log( 'Have set {refcheck_if=}')
+        elif actions == '--m-target':
+            m_target = args.next()
+        elif actions == '--m-vars':
+            m_vars = args.next()
         elif actions.startswith( '-'):
             raise Exception( f'Unrecognised --build flag: {actions}')
         else:
@@ -1542,8 +1583,10 @@ def build( build_dirs, swig_command, args, vs_upgrade):
         actions = '0123' if state.state_.windows else 'm0123'
 
     dir_so_flags = os.path.basename( build_dirs.dir_so).split( '-')
+    cflags = os.environ.get('XCXXFLAGS', '')
 
     windows_build_type = build_dirs.windows_build_type()
+    so_version = get_so_version( build_dirs)
 
     for action in actions:
         with jlib.LogPrefixScope( f'{action}: '):
@@ -1558,8 +1601,12 @@ def build( build_dirs, swig_command, args, vs_upgrade):
                     jlib.log( 'Ignoring `-b m` on Windows as not required.')
                 else:
                     jlib.log( 'Building libmupdf.so ...')
-                    command, actual_build_dir, suffix = _get_m_command( build_dirs, j)
+                    command, actual_build_dir, suffix = _get_m_command( build_dirs, j, make_command, m_target, m_vars)
                     jlib.system( command, prefix=jlib.log_text(), out='log', verbose=1)
+
+                    suffix2 = '.dylib' if state.state_.macos else '.so'
+                    p = f'{actual_build_dir}/libmupdf{suffix2}{so_version}'
+                    assert os.path.isfile(p), f'Does not exist: {p=}'
 
                     if actual_build_dir != build_dirs.dir_so:
                         # This happens when we are being run by
@@ -1570,7 +1617,6 @@ def build( build_dirs, swig_command, args, vs_upgrade):
                         # build/shared-release/libmupdf.so, so we need
                         # to copy into build/shared-release-x64-py3.8/.
                         #
-                        suffix2 = '.dylib' if state.state_.macos else '.so'
                         jlib.fs_copy( f'{actual_build_dir}/libmupdf{suffix2}', f'{build_dirs.dir_so}/libmupdf{suffix2}', verbose=1)
 
             elif action == '0':
@@ -1593,10 +1639,7 @@ def build( build_dirs, swig_command, args, vs_upgrade):
                     #
                     win32_infix = _windows_vs_upgrade( vs_upgrade, build_dirs, devenv)
                     jlib.log(f'Building mupdfcpp.dll by running devenv ...')
-                    build = f'{windows_build_type}Python'
-                    if 'tesseract' in dir_so_flags:
-                        build += 'Tesseract'
-                    build += f'|{build_dirs.cpu.windows_config}'
+                    build = f'{windows_build_type}|{build_dirs.cpu.windows_config}'
                     command = (
                             f'cd {build_dirs.dir_mupdf}&&'
                             f'"{devenv}"'
@@ -1619,29 +1662,82 @@ def build( build_dirs, swig_command, args, vs_upgrade):
                     cpp_files_text = ''
                     for i in cpp_files:
                         cpp_files_text += ' ' + os.path.relpath(i)
-                    if 'shared' in dir_so_flags:
-                        libmupdfcpp = f'{build_dirs.dir_so}/libmupdfcpp.so'
-                        libmupdf = f'{build_dirs.dir_so}/libmupdf.so'
+                    libmupdfcpp = f'{build_dirs.dir_so}/libmupdfcpp.so{so_version}'
+                    libmupdf = f'{build_dirs.dir_so}/libmupdf.so{so_version}'
+                    if pyodide:
+                        # Compile/link separately. Otherwise
+                        # emsdk/upstream/bin/llvm-nm: error: a.out: No such
+                        # file or directory
+                        o_files = list()
+                        for cpp_file in cpp_files:
+                            o_file = f'{os.path.relpath(cpp_file)}.o'
+                            o_files.append(o_file)
+                            command = textwrap.dedent(
+                                    f'''
+                                    {compiler}
+                                        -c
+                                        -o {o_file}
+                                        {build_dirs.cpp_flags}
+                                        -fPIC
+                                        {cflags}
+                                        -I {include1}
+                                        -I {include2}
+                                        {cpp_file}
+                                    ''').strip().replace( '\n', ' \\\n')
+                            jlib.build(
+                                    [include1, include2, cpp_file],
+                                    o_file,
+                                    command,
+                                    force_rebuild,
+                                    )
                         command = ( textwrap.dedent(
                                 f'''
                                 {compiler}
                                     -o {os.path.relpath(libmupdfcpp)}
-                                    {"-sSIDE_MODULE" if wasm else ""}
+                                    -sSIDE_MODULE
                                     {build_dirs.cpp_flags}
                                     -fPIC -shared
+                                    -I {include1}
+                                    -I {include2}
+                                    {" ".join(o_files)}
+                                    {link_l_flags(libmupdf)}
+                                ''').strip().replace( '\n', ' \\\n')
+                                )
+                        jlib.build(
+                                [include1, include2] + o_files,
+                                libmupdfcpp,
+                                command,
+                                force_rebuild,
+                                )
+
+                    elif 'shared' in dir_so_flags:
+                        link_soname_arg = ''
+                        if state.state_.linux and so_version:
+                            link_soname_arg = f'-Wl,-soname,{os.path.basename(libmupdfcpp)}'
+                        command = ( textwrap.dedent(
+                                f'''
+                                {compiler}
+                                    -o {os.path.relpath(libmupdfcpp)}
+                                    {link_soname_arg}
+                                    {build_dirs.cpp_flags}
+                                    -fPIC -shared
+                                    {cflags}
                                     -I {include1}
                                     -I {include2}
                                     {cpp_files_text}
                                     {link_l_flags(libmupdf)}
                                 ''').strip().replace( '\n', ' \\\n')
                                 )
-                        jlib.build(
+                        command_was_run = jlib.build(
                                 [include1, include2] + cpp_files,
                                 libmupdfcpp,
                                 command,
                                 force_rebuild,
                                 )
-                        macos_patch( libmupdfcpp, f'{build_dirs.dir_so}/libmupdf.dylib')
+                        if command_was_run:
+                            macos_patch( libmupdfcpp, f'{build_dirs.dir_so}/libmupdf.dylib{so_version}')
+                        if so_version and state.state_.linux:
+                            jlib.system(f'ln -sf libmupdfcpp.so{so_version} {build_dirs.dir_so}/libmupdfcpp.so')
 
                     elif 'fpic' in dir_so_flags:
                         # We build a .so containing the C and C++ API. This
@@ -1662,6 +1758,7 @@ def build( build_dirs, swig_command, args, vs_upgrade):
                                         {build_dirs.cpp_flags}
                                         -fPIC
                                         -c
+                                        {cflags}
                                         -I {include1}
                                         -I {include2}
                                         -o {ofile}
@@ -1883,18 +1980,10 @@ def build( build_dirs, swig_command, args, vs_upgrade):
                         #
                         # todo: maybe instead use sysconfig.get_config_vars() ?
                         #
+                        python_flags = pipcl.PythonFlags()
+                        flags_compile = python_flags.includes
+                        flags_link = python_flags.ldflags
 
-                        if os.environ.get('PYODIDE_ROOT'):
-                            _include_dir = os.environ[ 'PYO3_CROSS_INCLUDE_DIR']
-                            _lib_dir = os.environ[ 'PYO3_CROSS_LIB_DIR']
-                            jlib.log( 'PYODIDE_ROOT set. {_include_dir=} {_lib_dir=}')
-                            flags_compile = f'-I {_include_dir}'
-                            flags_link = f'-L {_lib_dir}'
-
-                        else:
-                            python_flags = pipcl.PythonFlags()
-                            flags_compile = python_flags.includes
-                            flags_link = python_flags.ldflags
                         if state.state_.macos:
                             # We need this to avoid numerous errors like:
                             #
@@ -1904,6 +1993,7 @@ def build( build_dirs, swig_command, args, vs_upgrade):
                             #       _wrap_fz_warn(_object*, _object*) in mupdfcpp_swig-0a6733.o
                             #       ...
                             flags_link += ' -undefined dynamic_lookup'
+
                         jlib.log('flags_compile={flags_compile!r}')
                         jlib.log('flags_link={flags_link!r}')
 
@@ -1914,9 +2004,9 @@ def build( build_dirs, swig_command, args, vs_upgrade):
 
                     dir_so_flags = os.path.basename( build_dirs.dir_so).split( '-')
                     if 'shared' in dir_so_flags:
-                        libmupdf        = f'{build_dirs.dir_so}/libmupdf.so'
+                        libmupdf        = f'{build_dirs.dir_so}/libmupdf.so{so_version}'
                         libmupdfthird   = f''
-                        libmupdfcpp     = f'{build_dirs.dir_so}/libmupdfcpp.so'
+                        libmupdfcpp     = f'{build_dirs.dir_so}/libmupdfcpp.so{so_version}'
                     elif 'fpic' in dir_so_flags:
                         libmupdf        = f'{build_dirs.dir_so}/libmupdf.a'
                         libmupdfthird   = f'{build_dirs.dir_so}/libmupdf-third.a'
@@ -1929,8 +2019,8 @@ def build( build_dirs, swig_command, args, vs_upgrade):
                         out_so = f'{build_dirs.dir_so}/_mupdf.so'
                     elif build_csharp:
                         cpp_path = f'{build_dirs.dir_mupdf}/platform/csharp/mupdfcpp_swig.cpp'
-                        out_so = f'{build_dirs.dir_so}/mupdfcsharp.so'
-
+                        out_so = f'{build_dirs.dir_so}/mupdfcsharp.so'  # todo: append {so_version} ?
+                    cpp_path = os.path.relpath(cpp_path)    # So we don't expose build machine details in __FILE__.
                     if state.state_.openbsd:
                         # clang needs around 2G on OpenBSD.
                         #
@@ -1964,6 +2054,7 @@ def build( build_dirs, swig_command, args, vs_upgrade):
                                         {build_dirs.cpp_flags}
                                         -fPIC
                                         --shared
+                                        {cflags}
                                         -I {include1}
                                         -I {include2}
                                         {flags_compile}
@@ -2000,46 +2091,106 @@ def build( build_dirs, swig_command, args, vs_upgrade):
                     # module) using the same underlying C library.
                     #
                     sos = []
-                    sos.append( f'{build_dirs.dir_so}/libmupdfcpp.so')
+                    sos.append( f'{build_dirs.dir_so}/libmupdfcpp.so{so_version}')
                     if os.path.basename( build_dirs.dir_so).startswith( 'shared-'):
-                        sos.append( f'{build_dirs.dir_so}/libmupdf.so')
-                    command = ( textwrap.dedent(
-                            f'''
-                            {compiler}
-                                -o {os.path.relpath(out_so)}
-                                {"-sMAIN_MODULE" if wasm else ""}
-                                {cpp_path}
-                                {build_dirs.cpp_flags}
-                                -fPIC
-                                -shared
-                                -I {include1}
-                                -I {include2}
-                                {flags_compile}
-                                -Wno-deprecated-declarations
-                                -Wno-free-nonheap-object
-                                -DSWIG_PYTHON_SILENT_MEMLEAK
-                                {flags_link}
-                                {link_l_flags( sos)}
-                            ''').strip().replace( '\n', ' \\\n')
-                            )
-                    infiles = [
-                            cpp_path,
-                            include1,
-                            include2,
-                            libmupdf,
-                            ]
-                    infiles += sos
+                        sos.append( f'{build_dirs.dir_so}/libmupdf.so{so_version}')
+                    if pyodide:
+                        # Need to use separate compilation/linking.
+                        o_file = f'{os.path.relpath(cpp_path)}.o'
+                        command = ( textwrap.dedent(
+                                f'''
+                                {compiler}
+                                    -c
+                                    -o {o_file}
+                                    {cpp_path}
+                                    {build_dirs.cpp_flags}
+                                    -fPIC
+                                    {cflags}
+                                    -I {include1}
+                                    -I {include2}
+                                    {flags_compile}
+                                    -Wno-deprecated-declarations
+                                    -Wno-free-nonheap-object
+                                    -DSWIG_PYTHON_SILENT_MEMLEAK
+                                ''').strip().replace( '\n', ' \\\n')
+                                )
+                        infiles = [
+                                cpp_path,
+                                include1,
+                                include2,
+                                ]
+                        jlib.build(
+                                infiles,
+                                o_file,
+                                command,
+                                force_rebuild,
+                                )
 
-                    jlib.build(
-                            infiles,
-                            out_so,
-                            command,
-                            force_rebuild,
-                            )
-                    macos_patch( out_so,
-                            f'{build_dirs.dir_so}/libmupdf.dylib',
-                            f'{build_dirs.dir_so}/libmupdfcpp.so',
-                            )
+                        command = ( textwrap.dedent(
+                                f'''
+                                {compiler}
+                                    -o {os.path.relpath(out_so)}
+                                    -sSIDE_MODULE
+                                    {o_file}
+                                    {build_dirs.cpp_flags}
+                                    -shared
+                                    {flags_link}
+                                    {link_l_flags( sos)}
+                                ''').strip().replace( '\n', ' \\\n')
+                                )
+                        infiles = [
+                                o_file,
+                                libmupdf,
+                                ]
+                        infiles += sos
+
+                        jlib.build(
+                                infiles,
+                                out_so,
+                                command,
+                                force_rebuild,
+                                )
+                    else:
+                        # Not Pyodide.
+                        command = ( textwrap.dedent(
+                                f'''
+                                {compiler}
+                                    -o {os.path.relpath(out_so)}
+                                    {"-sMAIN_MODULE" if 0 and pyodide else ""}
+                                    {cpp_path}
+                                    {build_dirs.cpp_flags}
+                                    -fPIC
+                                    -shared
+                                    {cflags}
+                                    -I {include1}
+                                    -I {include2}
+                                    {flags_compile}
+                                    -Wno-deprecated-declarations
+                                    -Wno-free-nonheap-object
+                                    -DSWIG_PYTHON_SILENT_MEMLEAK
+                                    {flags_link}
+                                    {link_l_flags( sos)}
+                                ''').strip().replace( '\n', ' \\\n')
+                                )
+                        infiles = [
+                                cpp_path,
+                                include1,
+                                include2,
+                                libmupdf,
+                                ]
+                        infiles += sos
+
+                        command_was_run = jlib.build(
+                                infiles,
+                                out_so,
+                                command,
+                                force_rebuild,
+                                )
+                        if command_was_run:
+                            macos_patch( out_so,
+                                    f'{build_dirs.dir_so}/libmupdf.dylib{so_version}',
+                                    f'{build_dirs.dir_so}/libmupdfcpp.so{so_version}',
+                                    )
             else:
                 raise Exception( 'unrecognised --build action %r' % action)
 
@@ -2226,13 +2377,18 @@ def make_docs( build_dirs, languages_original):
         else:
             raise Exception( f'unrecognised language param: {lang}')
 
+    make_docs_index( build_dirs, languages_original)
+
+
+def make_docs_index( build_dirs, languages_original):
     # Create index.html with links to the different bindings'
     # documentation.
     #
     #mupdf_dir = os.path.abspath( f'{__file__}/../../..')
+    out_dir = f'{build_dirs.dir_mupdf}/docs/generated'
     top_index_html = f'{out_dir}/index.html'
     with open( top_index_html, 'w') as f:
-        git_id = jlib.get_git_id( build_dirs.dir_mupdf)
+        git_id = jlib.git_get_id( build_dirs.dir_mupdf)
         git_id = git_id.split( '\n')[0]
         f.write( textwrap.dedent( f'''
                 <!DOCTYPE html>
@@ -2282,9 +2438,10 @@ def main2():
     #
     build_dirs = state.BuildDirs()
 
-    # Set default swig.
+    # Set default swig and make.
     #
     swig_command = 'swig'
+    make_command = None
 
     # Whether to use `devenv.com /upgrade`.
     #
@@ -2307,7 +2464,7 @@ def main2():
                 print( __doc__)
 
             elif arg == '--build' or arg == '-b':
-                build( build_dirs, swig_command, args, vs_upgrade)
+                build( build_dirs, swig_command, args, vs_upgrade, make_command)
 
             elif arg == '--check-headers':
                 keep_going = False
@@ -2387,6 +2544,13 @@ def main2():
             elif arg == '--doc':
                 languages = args.next()
                 make_docs( build_dirs, languages)
+
+            elif arg == '--doc-index':
+                languages = args.next()
+                make_docs_index( build_dirs, languages)
+
+            elif arg == '--make':
+                make_command = args.next()
 
             elif arg == '--ref':
                 assert 'mupdfwrap_ref' in build_dirs.ref_dir
@@ -2832,17 +2996,26 @@ def main2():
                     jlib.system(f'"{sys.executable}" -m venv --system-site-packages {venv}', out='log', verbose=1)
                 else:
                     jlib.system(f'"{sys.executable}" -m venv {venv}', out='log', verbose=1)
+
                 if state.state_.windows:
-                    command = f'{venv}\\Scripts\\activate.bat'
+                    command_venv_enter = f'{venv}\\Scripts\\activate.bat'
                 else:
-                    command = f'. {venv}/bin/activate'
-                command += f' && python -m pip install --upgrade pip'
-                if state.state_.openbsd:
-                    jlib.log( 'Not installing libclang on openbsd; we assume py3-llvm is installed.')
-                    command += f' && python -m pip install --upgrade swig'
-                else:
-                    command += f' && python -m pip install{force_reinstall} --upgrade libclang swig'
-                command += f' && python {shlex.quote(sys.argv[0])}'
+                    command_venv_enter = f'. {venv}/bin/activate'
+
+                command = f'{command_venv_enter} && python -m pip install --upgrade pip'
+
+                # Required packages are specified by
+                # setup.py:get_requires_for_build_wheel().
+                mupdf_root = os.path.abspath( f'{__file__}/../../../')
+                sys.path.insert(0, f'{mupdf_root}')
+                import setup
+                del sys.path[0]
+                packages = setup.get_requires_for_build_wheel()
+                packages = ' '.join(packages)
+                command += f' && python -m pip install{force_reinstall} --upgrade {packages}'
+                jlib.system(command, out='log', verbose=1)
+
+                command = f'{command_venv_enter} && python {shlex.quote(sys.argv[0])}'
                 while 1:
                     try:
                         command += f' {shlex.quote(args.next())}'

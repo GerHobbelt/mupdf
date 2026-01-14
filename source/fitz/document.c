@@ -75,14 +75,14 @@ void fz_register_document_handler(fz_context *ctx, const fz_document_handler *ha
 
 	dc = ctx->handler;
 	if (dc == NULL)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "Document handler list not found");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "Document handler list not found");
 
 	for (i = 0; i < dc->count; i++)
 		if (dc->handler[i] == handler)
 			return;
 
 	if (dc->count >= FZ_DOCUMENT_HANDLER_MAX)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "Too many document handlers");
+		fz_throw(ctx, FZ_ERROR_LIMIT, "Too many document handlers");
 
 	dc->handler[dc->count++] = handler;
 }
@@ -90,13 +90,19 @@ void fz_register_document_handler(fz_context *ctx, const fz_document_handler *ha
 const fz_document_handler *
 fz_recognize_document_stream_content(fz_context *ctx, fz_stream *stream, const char *magic)
 {
+	return fz_recognize_document_stream_and_dir_content(ctx, stream, NULL, magic);
+}
+
+const fz_document_handler *
+fz_recognize_document_stream_and_dir_content(fz_context *ctx, fz_stream *stream, fz_archive *dir, const char *magic)
+{
 	fz_document_handler_context *dc;
 	int i, best_score, best_i;
 	const char *ext;
 
 	dc = ctx->handler;
 	if (dc->count == 0)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "No document handlers registered");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "No document handlers registered");
 
 	ext = strrchr(magic, '.');
 	if (ext)
@@ -107,23 +113,36 @@ fz_recognize_document_stream_content(fz_context *ctx, fz_stream *stream, const c
 	best_score = 0;
 	best_i = -1;
 
-	if (stream && stream->seek != NULL)
+	if ((stream && stream->seek != NULL) || (stream == NULL && dir != NULL))
 	{
 		for (i = 0; i < dc->count; i++)
 		{
 			int score = 0;
 
-			fz_seek(ctx, stream, 0, SEEK_SET);
-
 			if (dc->handler[i]->recognize_content)
-				score = dc->handler[i]->recognize_content(ctx, stream);
-
+			{
+				if (stream)
+					fz_seek(ctx, stream, 0, SEEK_SET);
+				fz_try(ctx)
+				{
+					score = dc->handler[i]->recognize_content(ctx, stream, dir);
+				}
+				fz_catch(ctx)
+				{
+					/* in case of zip errors when recognizing EPUB/XPS/DOCX files */
+					fz_rethrow_unless(ctx, FZ_ERROR_FORMAT);
+					(void)fz_convert_error(ctx, NULL); /* ugly hack to silence the error message */
+					score = 0;
+				}
+			}
 			if (best_score < score)
 			{
 				best_score = score;
 				best_i = i;
 			}
 		}
+		if (stream)
+			fz_seek(ctx, stream, 0, SEEK_SET);
 	}
 
 	if (best_score < 100)
@@ -169,13 +188,22 @@ fz_recognize_document_stream_content(fz_context *ctx, fz_stream *stream, const c
 
 const fz_document_handler *fz_recognize_document_content(fz_context *ctx, const char *filename)
 {
-	fz_stream *stream  = fz_open_file(ctx, filename);
+	fz_stream *stream = NULL;
 	const fz_document_handler *handler = NULL;
+	fz_archive *zip = NULL;
+
+	if (fz_is_directory(ctx, filename))
+		zip = fz_open_directory(ctx, filename);
+	else
+		stream  = fz_open_file(ctx, filename);
 
 	fz_try(ctx)
-		handler = fz_recognize_document_stream_content(ctx, stream, filename);
+		handler = fz_recognize_document_stream_and_dir_content(ctx, stream, zip, filename);
 	fz_always(ctx)
+	{
 		fz_drop_stream(ctx, stream);
+		fz_drop_archive(ctx, zip);
+	}
 	fz_catch(ctx)
 		fz_rethrow(ctx);
 
@@ -185,7 +213,7 @@ const fz_document_handler *fz_recognize_document_content(fz_context *ctx, const 
 const fz_document_handler *
 fz_recognize_document(fz_context *ctx, const char *magic)
 {
-	return fz_recognize_document_stream_content(ctx, NULL, magic);
+	return fz_recognize_document_stream_and_dir_content(ctx, NULL, NULL, magic);
 }
 
 #if FZ_ENABLE_PDF
@@ -193,39 +221,37 @@ extern fz_document_handler pdf_document_handler;
 #endif
 
 fz_document *
-fz_open_accelerated_document_with_stream(fz_context *ctx, const char *magic, fz_stream *stream, fz_stream *accel)
+fz_open_accelerated_document_with_stream_and_dir(fz_context *ctx, const char *magic, fz_stream *stream, fz_stream *accel, fz_archive *dir)
 {
 	const fz_document_handler *handler;
 
-	if (stream == NULL)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "no document to open");
+	if (stream == NULL && dir == NULL)
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "no document to open");
 	if (magic == NULL)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "missing file type");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "missing file type");
 
-	handler = fz_recognize_document_stream_content(ctx, stream, magic);
+	handler = fz_recognize_document_stream_and_dir_content(ctx, stream, dir, magic);
 	if (!handler)
-#if FZ_ENABLE_PDF
-		handler = &pdf_document_handler;
-#else
-		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot find document handler for file type: '%s'", magic);
-#endif
-	if (handler->open_accel_with_stream)
-		if (accel || handler->open_with_stream == NULL)
-			return handler->open_accel_with_stream(ctx, stream, accel);
-	if (accel)
-	{
-		/* We've had an accelerator passed to a format that doesn't
-		 * handle it. This should never happen, as how did the
-		 * accelerator get created? */
-		fz_drop_stream(ctx, accel);
-	}
-	return handler->open_with_stream(ctx, stream);
+		fz_throw(ctx, FZ_ERROR_UNSUPPORTED, "cannot find document handler for file type: '%s'", magic);
+	return handler->open(ctx, stream, accel, dir);
+}
+
+fz_document *
+fz_open_accelerated_document_with_stream(fz_context *ctx, const char *magic, fz_stream *stream, fz_stream *accel)
+{
+	return fz_open_accelerated_document_with_stream_and_dir(ctx, magic, stream, accel, NULL);
 }
 
 fz_document *
 fz_open_document_with_stream(fz_context *ctx, const char *magic, fz_stream *stream)
 {
 	return fz_open_accelerated_document_with_stream(ctx, magic, stream, NULL);
+}
+
+fz_document *
+fz_open_document_with_stream_and_dir(fz_context *ctx, const char *magic, fz_stream *stream, fz_archive *dir)
+{
+	return fz_open_accelerated_document_with_stream_and_dir(ctx, magic, stream, NULL, dir);
 }
 
 fz_document *
@@ -253,41 +279,34 @@ fz_open_accelerated_document(fz_context *ctx, const char *filename, const char *
 	fz_var(afile);
 
 	if (filename == NULL)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "no document to open");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "no document to open");
 
 	handler = fz_recognize_document_content(ctx, filename);
 	if (!handler)
-#if FZ_ENABLE_PDF
-		handler = &pdf_document_handler;
-#else
-		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot find document handler for file: %s", filename);
-#endif
+		fz_throw(ctx, FZ_ERROR_UNSUPPORTED, "cannot find document handler for file: %s", filename);
 
-	if (accel) {
-		if (handler->open_accel)
-			return handler->open_accel(ctx, filename, accel);
-		if (handler->open_accel_with_stream == NULL)
-		{
-			/* We're not going to be able to use the accelerator - this
-			 * should never happen, as how can one have been created? */
-			accel = NULL;
-		}
+	if (fz_is_directory(ctx, filename))
+	{
+		/* Cannot accelerate directories, currently. */
+		fz_archive *dir = fz_open_directory(ctx, filename);
+
+		fz_try(ctx)
+			doc = fz_open_accelerated_document_with_stream_and_dir(ctx, filename, NULL, NULL, dir);
+		fz_always(ctx)
+			fz_drop_archive(ctx, dir);
+		fz_catch(ctx)
+			fz_rethrow(ctx);
+
+		return doc;
 	}
-	if (!accel && handler->open)
-		return handler->open(ctx, filename);
 
 	file = fz_open_file(ctx, filename);
 
 	fz_try(ctx)
 	{
-		if (accel || handler->open_with_stream == NULL)
-		{
-			if (accel)
-				afile = fz_open_file(ctx, accel);
-			doc = handler->open_accel_with_stream(ctx, file, afile);
-		}
-		else
-			doc = handler->open_with_stream(ctx, file);
+		if (accel)
+			afile = fz_open_file(ctx, accel);
+		doc = handler->open(ctx, file, afile, NULL);
 	}
 	fz_always(ctx)
 	{
@@ -323,7 +342,7 @@ void fz_output_accelerator(fz_context *ctx, fz_document *doc, fz_output *accel)
 	if (doc->output_accelerator == NULL)
 	{
 		fz_drop_output(ctx, accel);
-		fz_throw(ctx, FZ_ERROR_GENERIC, "Document does not support writing an accelerator");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "Document does not support writing an accelerator");
 	}
 
 	doc->output_accelerator(ctx, doc, accel);
@@ -456,7 +475,7 @@ fz_format_link_uri(fz_context *ctx, fz_document *doc, fz_link_dest dest)
 {
 	if (doc && doc->format_link_uri)
 		return doc->format_link_uri(ctx, doc, dest);
-	fz_throw(ctx, FZ_ERROR_GENERIC, "cannot create internal links for this document type");
+	fz_throw(ctx, FZ_ERROR_ARGUMENT, "cannot create internal links for this document type");
 }
 
 fz_location
@@ -518,7 +537,7 @@ fz_load_page(fz_context *ctx, fz_document *doc, int number)
 			return fz_load_chapter_page(ctx, doc, i, number - start);
 		start += m;
 	}
-	fz_throw(ctx, FZ_ERROR_GENERIC, "Page not found: %d", number+1);
+	fz_throw(ctx, FZ_ERROR_ARGUMENT, "invalid page number: %d", number+1);
 }
 
 fz_location fz_last_page(fz_context *ctx, fz_document *doc)
@@ -698,6 +717,24 @@ fz_bound_page_box(fz_context *ctx, fz_page *page, fz_box_type box)
 }
 
 void
+fz_run_document_structure(fz_context *ctx, fz_document *doc, fz_device *dev, fz_cookie *cookie)
+{
+	if (doc && doc->run_structure)
+	{
+		fz_try(ctx)
+		{
+			doc->run_structure(ctx, doc, dev, cookie);
+		}
+		fz_catch(ctx)
+		{
+			dev->close_device = NULL; /* aborted run, don't warn about unclosed device */
+			fz_rethrow_unless(ctx, FZ_ERROR_ABORT);
+			fz_ignore_error(ctx);
+		}
+	}
+}
+
+void
 fz_run_page_contents(fz_context *ctx, fz_page *page, fz_device *dev, fz_matrix transform, fz_cookie *cookie)
 {
 	if (page && page->run_page_contents)
@@ -709,8 +746,8 @@ fz_run_page_contents(fz_context *ctx, fz_page *page, fz_device *dev, fz_matrix t
 		fz_catch(ctx)
 		{
 			dev->close_device = NULL; /* aborted run, don't warn about unclosed device */
-			if (fz_caught(ctx) != FZ_ERROR_ABORT)
-				fz_rethrow(ctx);
+			fz_rethrow_unless(ctx, FZ_ERROR_ABORT);
+			fz_ignore_error(ctx);
 		}
 	}
 }
@@ -727,8 +764,8 @@ fz_run_page_annots(fz_context *ctx, fz_page *page, fz_device *dev, fz_matrix tra
 		fz_catch(ctx)
 		{
 			dev->close_device = NULL; /* aborted run, don't warn about unclosed device */
-			if (fz_caught(ctx) != FZ_ERROR_ABORT)
-				fz_rethrow(ctx);
+			fz_rethrow_unless(ctx, FZ_ERROR_ABORT);
+			fz_ignore_error(ctx);
 		}
 	}
 }
@@ -745,8 +782,8 @@ fz_run_page_widgets(fz_context *ctx, fz_page *page, fz_device *dev, fz_matrix tr
 		fz_catch(ctx)
 		{
 			dev->close_device = NULL; /* aborted run, don't warn about unclosed device */
-			if (fz_caught(ctx) != FZ_ERROR_ABORT)
-				fz_rethrow(ctx);
+			fz_rethrow_unless(ctx, FZ_ERROR_ABORT);
+			fz_ignore_error(ctx);
 		}
 	}
 }
@@ -835,7 +872,7 @@ fz_link *fz_create_link(fz_context *ctx, fz_page *page, fz_rect bbox, const char
 	if (page == NULL || uri == NULL)
 		return NULL;
 	if (page->create_link == NULL)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "This format of document does not support creating links");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "This format of document does not support creating links");
 	return page->create_link(ctx, page, bbox, uri);
 }
 
@@ -844,7 +881,7 @@ void fz_delete_link(fz_context *ctx, fz_page *page, fz_link *link)
 	if (page == NULL || link == NULL)
 		return;
 	if (page->delete_link == NULL)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "This format of document does not support deleting links");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "This format of document does not support deleting links");
 	page->delete_link(ctx, page, link);
 }
 
@@ -853,7 +890,7 @@ void fz_set_link_rect(fz_context *ctx, fz_link *link, fz_rect rect)
 	if (link == NULL)
 		return;
 	if (link->set_rect_fn == NULL)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "This format of document does not support updating link bounds");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "This format of document does not support updating link bounds");
 	link->set_rect_fn(ctx, link, rect);
 }
 
@@ -862,7 +899,7 @@ void fz_set_link_uri(fz_context *ctx, fz_link *link, const char *uri)
 	if (link == NULL)
 		return;
 	if (link->set_uri_fn == NULL)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "This format of document does not support updating link uri");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "This format of document does not support updating link uri");
 	link->set_uri_fn(ctx, link, uri);
 }
 

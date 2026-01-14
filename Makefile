@@ -41,7 +41,12 @@ VERSION_MINOR = $(shell grep "define FZ_VERSION_MINOR" include/mupdf/fitz/versio
 VERSION_PATCH = $(shell grep "define FZ_VERSION_PATCH" include/mupdf/fitz/version.h | cut -d ' ' -f 3)
 
 ifeq ($(LINUX_OR_OPENBSD),yes)
-  SO_VERSION = .$(VERSION_MINOR).$(VERSION_PATCH)
+  ifneq ($(USE_SONAME),no)
+    SO_VERSION = .$(VERSION_MINOR).$(VERSION_PATCH)
+    ifeq ($(OS),Linux)
+      SO_VERSION_LINUX := yes
+    endif
+  endif
 endif
 
 # --- Commands ---
@@ -69,7 +74,7 @@ ifdef RANLIB
   RANLIB_CMD = $(QUIET_RANLIB) $(RANLIB) $@
 endif
 LINK_CMD = $(QUIET_LINK) $(MKTGTDIR) ; $(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
-TAGS_CMD = $(QUIET_TAGS) ctags -R --c-kinds=+p --exclude=platform/python --exclude=platform/c++
+TAGS_CMD = $(QUIET_TAGS) ctags
 WINDRES_CMD = $(QUIET_WINDRES) $(MKTGTDIR) ; $(WINDRES) $< $@
 OBJCOPY_CMD = $(QUIET_OBJCOPY) $(MKTGTDIR) ; $(LD) -r -b binary -z noexecstack -o $@ $<
 GENDEF_CMD = $(QUIET_GENDEF) gendef - $< > $@
@@ -93,9 +98,11 @@ $(OUT)/%.exe: %.c
 	$(LINK_CMD)
 
 $(OUT)/%.$(SO)$(SO_VERSION):
-	$(LINK_CMD) $(LIB_LDFLAGS) $(THIRD_LIBS) $(LIBCRYPTO_LIBS)
-ifneq ($(SO_VERSION),)
+ifeq ($(SO_VERSION_LINUX),yes)
+	$(LINK_CMD) -Wl,-soname,$(notdir $@) $(LIB_LDFLAGS) $(THIRD_LIBS) $(LIBCRYPTO_LIBS)
 	ln -sf $(notdir $@) $(patsubst %$(SO_VERSION), %, $@)
+else
+	$(LINK_CMD) $(LIB_LDFLAGS) $(THIRD_LIBS) $(LIBCRYPTO_LIBS)
 endif
 
 $(OUT)/%.def: $(OUT)/%.$(SO)$(SO_VERSION)
@@ -142,6 +149,11 @@ $(OUT)/source/%.o : source/%.cpp
 ifeq ($(HAVE_TESSERACT),yes)
 $(OUT)/source/fitz/tessocr.o : source/fitz/tessocr.cpp
 	$(CXX_CMD) $(WARNING_CFLAGS) $(LIB_CFLAGS) $(THIRD_CFLAGS) $(TESSERACT_CFLAGS) $(TESSERACT_DEFINES) $(TESSERACT_LANGFLAGS)
+endif
+
+ifeq ($(HAVE_LEPTONICA),yes)
+$(OUT)/source/fitz/leptonica-wrap.o : source/fitz/leptonica-wrap.c
+	$(CC_CMD) $(WARNING_CFLAGS) $(LIB_CFLAGS) $(THIRD_CFLAGS) $(LEPTONICA_CFLAGS) $(LEPTONICA_DEFINES) $(LEPTONICA_BUILD_CFLAGS)
 endif
 
 $(OUT)/platform/%.o : platform/%.c
@@ -444,6 +456,7 @@ incdir ?= $(prefix)/include
 mandir ?= $(prefix)/share/man
 docdir ?= $(prefix)/share/doc/mupdf
 pydir ?= $(shell python3 -c "import sysconfig; print(sysconfig.get_path('platlib'))")
+SO_INSTALL_MODE ?= 644
 
 third: $(THIRD_LIB)
 extra-libs: $(THIRD_GLUT_LIB)
@@ -475,7 +488,8 @@ install-docs:
 
 	install -d $(DESTDIR)$(docdir)
 	install -d $(DESTDIR)$(docdir)/examples
-	install -m 644 README COPYING CHANGES $(DESTDIR)$(docdir)
+	install -m 644 README CHANGES $(DESTDIR)$(docdir)
+	install -m 644 $(wildcard COPYING LICENSE) $(DESTDIR)$(docdir)
 	install -m 644 docs/examples/* $(DESTDIR)$(docdir)/examples
 
 install: install-libs install-apps install-docs
@@ -513,9 +527,6 @@ watch:
 watch-recompile:
 	@ while ! inotifywait -q -e modify $(WATCH_SRCS) ; do time -p $(MAKE) ; done
 
-wasm:
-	$(MAKE) -C platform/wasm
-
 java:
 	$(MAKE) -C platform/java build=$(build)
 
@@ -526,8 +537,13 @@ extract-test:
 	$(MAKE) debug
 	$(MAKE) -C thirdparty/extract mutool=../../build/debug/mutool test-mutool
 
+TAG_HDR_FILES=$(shell git ls-files | grep -v '^\(docs\|scripts\|generated\)' | grep '\.h$$')
+TAG_SRC_FILES=$(shell git ls-files | grep -v '^\(docs\|scripts\|generated\)' | grep -v '\.h$$')
+
 tags:
-	$(TAGS_CMD)
+	$(TAGS_CMD) --sort=no --c-kinds=+p-t $(TAG_SRC_FILES)
+	$(TAGS_CMD) -a --sort=no --c-kinds=+p-t $(TAG_HDR_FILES)
+	$(TAGS_CMD) -a --sort=no --c-kinds=t $(TAG_SRC_FILES) $(TAG_HDR_FILES)
 
 find-try-return:
 	@ bash scripts/find-try-return.sh
@@ -599,13 +615,17 @@ $(error OUT=$(OUT) does not contain shared)
 endif
 
 # C++, Python and C# shared libraries.
+#
+# To disable automatic use of a venv, use `make VENV_FLAG= ...` or `VENV_FLAG=
+# make ...`.
+#
+VENV_FLAG ?= --venv
 c++-%: shared-%
-	./scripts/mupdfwrap.py --venv -d $(OUT) -b 01
+	./scripts/mupdfwrap.py $(VENV_FLAG) -d $(OUT) -b 01
 python-%: c++-%
-	./scripts/mupdfwrap.py --venv -d $(OUT) -b 23
+	./scripts/mupdfwrap.py $(VENV_FLAG) -d $(OUT) -b 23
 csharp-%: c++-%
-	./scripts/mupdfwrap.py --venv -d $(OUT) -b --csharp 23
-
+	./scripts/mupdfwrap.py $(VENV_FLAG) -d $(OUT) -b --csharp 23
 
 # Installs of C, C++, Python and C# shared libraries
 #
@@ -619,21 +639,21 @@ endif
 
 install-shared-c: install-shared-check shared install-headers
 	install -d $(DESTDIR)$(libdir)
-	install -m 644 $(OUT)/libmupdf.$(SO)$(SO_VERSION) $(DESTDIR)$(libdir)/
+	install -m $(SO_INSTALL_MODE) $(OUT)/libmupdf.$(SO)$(SO_VERSION) $(DESTDIR)$(libdir)/
 ifneq ($(OS),OpenBSD)
 	ln -sf libmupdf.$(SO)$(SO_VERSION) $(DESTDIR)$(libdir)/libmupdf.$(SO)
 endif
 
 install-shared-c++: install-shared-c c++
 	install -m 644 platform/c++/include/mupdf/*.h $(DESTDIR)$(incdir)/mupdf
-	install -m 644 $(OUT)/libmupdfcpp.$(SO)$(SO_VERSION) $(DESTDIR)$(libdir)/
+	install -m $(SO_INSTALL_MODE) $(OUT)/libmupdfcpp.$(SO)$(SO_VERSION) $(DESTDIR)$(libdir)/
 ifneq ($(OS),OpenBSD)
 	ln -sf libmupdfcpp.$(SO)$(SO_VERSION) $(DESTDIR)$(libdir)/libmupdfcpp.$(SO)
 endif
 
 install-shared-python: install-shared-c++ python
 	install -d $(DESTDIR)$(pydir)/mupdf
-	install -m 644 $(OUT)/_mupdf.$(SO) $(DESTDIR)$(pydir)/mupdf
+	install -m $(SO_INSTALL_MODE) $(OUT)/_mupdf.$(SO) $(DESTDIR)$(pydir)/mupdf
 	install -m 644 $(OUT)/mupdf.py $(DESTDIR)$(pydir)/mupdf/__init__.py
 
 else

@@ -153,7 +153,7 @@ static int strip_outline(fz_context *ctx, pdf_document *doc, pdf_obj *outlines, 
 				/* Outline with invalid dest and no children. Drop it by
 				 * pulling the next one in here. */
 				pdf_obj *next = pdf_dict_get(ctx, current, PDF_NAME(Next));
-				if (next == NULL)
+				if (!pdf_is_dict(ctx, next))
 				{
 					/* There is no next one to pull in */
 					if (prev != NULL)
@@ -201,11 +201,11 @@ static int strip_outlines(fz_context *ctx, pdf_document *doc, pdf_obj *outlines,
 	pdf_obj *first;
 	pdf_obj *last;
 
-	if (outlines == NULL)
+	if (!pdf_is_dict(ctx, outlines))
 		return 0;
 
 	first = pdf_dict_get(ctx, outlines, PDF_NAME(First));
-	if (first == NULL)
+	if (!pdf_is_dict(ctx, first))
 		nc = 0;
 	else
 		nc = strip_outline(ctx, doc, first, page_count, page_object_nums, names_list, &first, &last);
@@ -227,7 +227,7 @@ static int strip_outlines(fz_context *ctx, pdf_document *doc, pdf_obj *outlines,
 	return nc;
 }
 
-static void pdf_rearrange_pages_imp(fz_context *ctx, pdf_document *doc, int count, int *new_page_list)
+static void pdf_rearrange_pages_imp(fz_context *ctx, pdf_document *doc, int count, const int *new_page_list)
 {
 	pdf_obj *oldroot, *pages, *kids, *olddests;
 	pdf_obj *root = NULL;
@@ -414,7 +414,7 @@ static void pdf_rearrange_pages_imp(fz_context *ctx, pdf_document *doc, int coun
 	}
 }
 
-void pdf_rearrange_pages(fz_context *ctx, pdf_document *doc, int count, int *new_page_list)
+void pdf_rearrange_pages(fz_context *ctx, pdf_document *doc, int count, const int *new_page_list)
 {
 	pdf_begin_operation(ctx, doc, "Rearrange pages");
 	fz_try(ctx)
@@ -429,7 +429,7 @@ void pdf_rearrange_pages(fz_context *ctx, pdf_document *doc, int count, int *new
 	}
 }
 
-void pdf_clean_file(fz_context *ctx, char *infile, char *outfile, char *password, pdf_write_options *opts, int argc, char *argv[])
+void pdf_clean_file(fz_context *ctx, char *infile, char *outfile, char *password, pdf_clean_options *opts, int argc, char *argv[])
 {
 	pdf_document *pdf = NULL;
 	int *pages = NULL;
@@ -443,7 +443,9 @@ void pdf_clean_file(fz_context *ctx, char *infile, char *outfile, char *password
 		pdf = pdf_open_document(ctx, infile);
 		if (pdf_needs_password(ctx, pdf))
 			if (!pdf_authenticate_password(ctx, pdf, password))
-				fz_throw(ctx, FZ_ERROR_GENERIC, "cannot authenticate password: %s", infile);
+				fz_throw(ctx, FZ_ERROR_ARGUMENT, "cannot authenticate password: %s", infile);
+
+		len = cap = 0;
 
 		/* Only retain the specified subset of the pages */
 		if (argc)
@@ -463,6 +465,8 @@ void pdf_clean_file(fz_context *ctx, char *infile, char *outfile, char *password
 					if (len + (epage - spage + 1) >= cap)
 					{
 						int n = cap ? cap * 2 : 8;
+						while (len + (epage - spage + 1) >= n)
+							n *= 2;
 						pages = fz_realloc_array(ctx, pages, n, int);
 						cap = n;
 					}
@@ -481,7 +485,12 @@ void pdf_clean_file(fz_context *ctx, char *infile, char *outfile, char *password
 			pdf_rearrange_pages(ctx, pdf, len, pages);
 		}
 
-		pdf_save_document(ctx, pdf, outfile, opts);
+		pdf_rewrite_images(ctx, pdf, &opts->image);
+
+		if (opts->subset_fonts)
+			pdf_subset_fonts(ctx, pdf, len, pages);
+
+		pdf_save_document(ctx, pdf, outfile, &opts->write);
 	}
 	fz_always(ctx)
 	{

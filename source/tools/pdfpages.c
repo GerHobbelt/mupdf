@@ -137,10 +137,21 @@ showpages(fz_context *ctx, pdf_document *doc, fz_output *out, const char *pageli
 	pagecount = pdf_count_pages(ctx, doc);
 	while ((pagelist = fz_parse_page_range(ctx, pagelist, &spage, &epage, pagecount)))
 	{
+		int fail;
 		if (spage > epage)
 			page = spage, spage = epage, epage = page;
 		for (page = spage; page <= epage; page++)
-			ret |= showpage(ctx, doc, out, page);
+		{
+			fail = showpage(ctx, doc, out, page);
+			/* On the first failure, check for the pagecount having changed. */
+			if (fail && !ret)
+			{
+				pagecount = pdf_count_pages(ctx, doc);
+				if (epage > pagecount)
+					epage = pagecount;
+			}
+			ret |= fail;
+		}
 	}
 
 	return ret;
@@ -171,7 +182,7 @@ pdfpages_pages(fz_context *ctx, fz_output *out, char *filename, char *password, 
 			doc = pdf_open_document(ctx, filename);
 			if (pdf_needs_password(ctx, doc))
 				if (!pdf_authenticate_password(ctx, doc, password))
-					fz_throw(ctx, FZ_ERROR_GENERIC, "cannot authenticate password: %s", filename);
+					fz_throw(ctx, FZ_ERROR_ARGUMENT, "cannot authenticate password: %s", filename);
 
 			state = NO_INFO_GATHERED;
 		}
@@ -225,7 +236,7 @@ int pdfpages_main(int argc, char **argv)
 		ret = pdfpages_pages(ctx, fz_stdout(ctx), filename, password, &argv[fz_optind], argc-fz_optind);
 	fz_catch(ctx)
 	{
-		fz_log_error(ctx, fz_caught_message(ctx));
+		fz_report_error(ctx);
 		ret = 1;
 	}
 	fz_drop_context(ctx);

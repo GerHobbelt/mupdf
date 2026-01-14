@@ -67,7 +67,7 @@ fz_jpg_mem_init(j_common_ptr cinfo, fz_context *ctx)
 				fz_jpg_mem_alloc, fz_jpg_mem_free, NULL))
 	{
 		fz_free(ctx, custmptr);
-		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot initialize custom JPEG memory handler");
+		fz_throw(ctx, FZ_ERROR_LIBRARY, "cannot initialize custom JPEG memory handler");
 	}
 	cinfo->client_data = custmptr;
 }
@@ -100,7 +100,7 @@ static void error_exit(j_common_ptr cinfo)
 	char msg[JMSG_LENGTH_MAX];
 	fz_context *ctx = JZ_CTX_FROM_CINFO(cinfo);
 	cinfo->err->format_message(cinfo, msg);
-	fz_throw(ctx, FZ_ERROR_GENERIC, "jpeg error: %s", msg);
+	fz_throw(ctx, FZ_ERROR_LIBRARY, "jpeg error: %s", msg);
 }
 
 static void init_destination(j_compress_ptr cinfo)
@@ -135,7 +135,7 @@ static void term_destination(j_compress_ptr cinfo)
 }
 
 void
-fz_write_pixmap_as_jpeg(fz_context *ctx, fz_output *out, fz_pixmap *pix, int quality)
+fz_write_pixmap_as_jpeg(fz_context *ctx, fz_output *out, fz_pixmap *pix, int quality, int invert_cmyk)
 {
 	struct jpeg_compress_struct cinfo;
 	struct jpeg_error_mgr err;
@@ -148,9 +148,9 @@ fz_write_pixmap_as_jpeg(fz_context *ctx, fz_output *out, fz_pixmap *pix, int qua
 	int alpha = pix->alpha;
 
 	if (pix->s > 0)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "pixmap may not have separations to save as JPEG");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "pixmap may not have separations to save as JPEG");
 	if (cs && !fz_colorspace_is_gray(ctx, cs) && !fz_colorspace_is_rgb(ctx, cs) && !fz_colorspace_is_cmyk(ctx, cs))
-		fz_throw(ctx, FZ_ERROR_GENERIC, "pixmap must be Grayscale, RGB, or CMYK to save as JPEG");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "pixmap must be Grayscale, RGB, or CMYK to save as JPEG");
 
 	/* Treat alpha only as greyscale */
 	if (n == 1 && alpha)
@@ -158,7 +158,7 @@ fz_write_pixmap_as_jpeg(fz_context *ctx, fz_output *out, fz_pixmap *pix, int qua
 	n -= alpha;
 
 	if (alpha > 0)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "pixmap may not have alpha to save as JPEG");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "pixmap may not have alpha to save as JPEG");
 
 	cinfo.mem = NULL;
 	cinfo.global_state = 0;
@@ -210,7 +210,7 @@ fz_write_pixmap_as_jpeg(fz_context *ctx, fz_output *out, fz_pixmap *pix, int qua
 
 		jpeg_start_compress(&cinfo, TRUE);
 
-		if (fz_colorspace_is_subtractive(ctx, pix->colorspace))
+		if (fz_colorspace_is_cmyk(ctx, pix->colorspace) && invert_cmyk)
 			fz_invert_pixmap_raw(ctx, pix);
 
 		while (cinfo.next_scanline < cinfo.image_height) {
@@ -218,7 +218,7 @@ fz_write_pixmap_as_jpeg(fz_context *ctx, fz_output *out, fz_pixmap *pix, int qua
 			(void) jpeg_write_scanlines(&cinfo, row_pointer, 1);
 		}
 
-		if (fz_colorspace_is_subtractive(ctx, pix->colorspace))
+		if (fz_colorspace_is_cmyk(ctx, pix->colorspace) && invert_cmyk)
 			fz_invert_pixmap_raw(ctx, pix);
 
 		jpeg_finish_compress(&cinfo);
@@ -243,7 +243,7 @@ fz_save_pixmap_as_jpeg(fz_context *ctx, fz_pixmap *pixmap, const char *filename,
 	fz_output *out = fz_new_output_with_path(ctx, filename, 0);
 	fz_try(ctx)
 	{
-		fz_write_pixmap_as_jpeg(ctx, out, pixmap, quality);
+		fz_write_pixmap_as_jpeg(ctx, out, pixmap, quality, 1);
 		fz_close_output(ctx, out);
 	}
 	fz_always(ctx)
@@ -257,7 +257,7 @@ fz_save_pixmap_as_jpeg(fz_context *ctx, fz_pixmap *pixmap, const char *filename,
 }
 
 static fz_buffer *
-jpeg_from_pixmap(fz_context *ctx, fz_pixmap *pix, fz_color_params color_params, int quality, int drop)
+jpeg_from_pixmap(fz_context *ctx, fz_pixmap *pix, fz_color_params color_params, int quality, int invert_cmyk, int drop)
 {
 	fz_buffer *buf = NULL;
 	fz_output *out = NULL;
@@ -269,7 +269,7 @@ jpeg_from_pixmap(fz_context *ctx, fz_pixmap *pix, fz_color_params color_params, 
 	{
 		buf = fz_new_buffer(ctx, 1024);
 		out = fz_new_output_with_buffer(ctx, buf);
-		fz_write_pixmap_as_jpeg(ctx, out, pix, quality);
+		fz_write_pixmap_as_jpeg(ctx, out, pix, quality, invert_cmyk);
 		fz_close_output(ctx, out);
 	}
 	fz_always(ctx)
@@ -287,14 +287,14 @@ jpeg_from_pixmap(fz_context *ctx, fz_pixmap *pix, fz_color_params color_params, 
 }
 
 fz_buffer *
-fz_new_buffer_from_image_as_jpeg(fz_context *ctx, fz_image *image, fz_color_params color_params, int quality)
+fz_new_buffer_from_image_as_jpeg(fz_context *ctx, fz_image *image, fz_color_params color_params, int quality, int invert_cmyk)
 {
 	fz_pixmap *pix = fz_get_pixmap_from_image(ctx, image, NULL, NULL, NULL, NULL);
-	return jpeg_from_pixmap(ctx, pix, color_params, 1, quality);
+	return jpeg_from_pixmap(ctx, pix, color_params, quality, 1, invert_cmyk);
 }
 
 fz_buffer *
-fz_new_buffer_from_pixmap_as_jpeg(fz_context *ctx, fz_pixmap *pix, fz_color_params color_params, int quality)
+fz_new_buffer_from_pixmap_as_jpeg(fz_context *ctx, fz_pixmap *pix, fz_color_params color_params, int quality, int invert_cmyk)
 {
-	return jpeg_from_pixmap(ctx, pix, color_params, 0, quality);
+	return jpeg_from_pixmap(ctx, pix, color_params, quality, 0, invert_cmyk);
 }

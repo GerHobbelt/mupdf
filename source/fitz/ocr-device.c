@@ -24,6 +24,7 @@
 
 #include <assert.h>
 #include <string.h>
+#include <errno.h>
 
 #undef DEBUG_OCR
 
@@ -286,12 +287,12 @@ fz_ocr_begin_mask(fz_context *ctx, fz_device *dev, fz_rect rect, int luminosity,
 }
 
 static void
-fz_ocr_end_mask(fz_context *ctx, fz_device *dev)
+fz_ocr_end_mask(fz_context *ctx, fz_device *dev, fz_function *tr)
 {
 	fz_ocr_device *ocr = (fz_ocr_device *)dev;
 
-	fz_end_mask(ctx, ocr->list_dev);
-	fz_end_mask(ctx, ocr->draw_dev);
+	fz_end_mask_tr(ctx, ocr->list_dev, tr);
+	fz_end_mask_tr(ctx, ocr->draw_dev, tr);
 }
 
 static void
@@ -533,11 +534,12 @@ fz_clone_text_span(fz_context *ctx, const fz_text_span *span)
 	cspan = fz_malloc_struct(ctx, fz_text_span);
 	*cspan = *span;
 	cspan->cap = cspan->len;
-	cspan->items = fz_malloc_no_throw(ctx, sizeof(*cspan->items) * cspan->len);
+	cspan->items = fz_calloc_no_throw(ctx, cspan->len, sizeof(*cspan->items));
 	if (cspan->items == NULL)
 	{
 		fz_free(ctx, cspan);
-		fz_throw(ctx, FZ_ERROR_MEMORY, "Failed to malloc while cloning text span");
+		errno = ENOMEM;
+		fz_throw(ctx, FZ_ERROR_SYSTEM, "calloc (%zu x %zu bytes) failed", (size_t)cspan->len, sizeof(*cspan->items));
 	}
 	memcpy(cspan->items, span->items, sizeof(*cspan->items) * cspan->len);
 	fz_keep_font(ctx, cspan->font);
@@ -852,11 +854,11 @@ rewrite_begin_mask(fz_context *ctx, fz_device *dev, fz_rect area, int luminosity
 }
 
 static void
-rewrite_end_mask(fz_context *ctx, fz_device *dev)
+rewrite_end_mask(fz_context *ctx, fz_device *dev, fz_function *tr)
 {
 	fz_rewrite_device *rewrite = (fz_rewrite_device *)dev;
 
-	fz_end_mask(ctx, rewrite->target);
+	fz_end_mask_tr(ctx, rewrite->target, tr);
 }
 
 static void
@@ -1107,12 +1109,12 @@ fz_new_ocr_device(fz_context *ctx,
 		void *progress_arg)
 {
 #ifdef OCR_DISABLED
-	fz_throw(ctx, FZ_ERROR_GENERIC, "OCR Disabled in this build");
+	fz_throw(ctx, FZ_ERROR_UNSUPPORTED, "OCR Disabled in this build");
 #else
 	fz_ocr_device *dev;
 
 	if (target == NULL)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "OCR devices require a target");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "OCR devices require a target");
 
 	dev = fz_new_derived_device(ctx, fz_ocr_device);
 

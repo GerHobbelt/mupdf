@@ -182,7 +182,8 @@ int muconvert_main(int argc, char **argv)
 		fz_register_document_handlers(ctx);
 	fz_catch(ctx)
 	{
-		fprintf(stderr, "cannot register document handlers: %s\n", fz_caught_message(ctx));
+		fz_report_error(ctx);
+		fprintf(stderr, "cannot register document handlers\n");
 		fz_drop_context(ctx);
 		return EXIT_FAILURE;
 	}
@@ -203,11 +204,13 @@ int muconvert_main(int argc, char **argv)
 		out = fz_new_document_writer(ctx, output, format, options);
 	fz_catch(ctx)
 	{
-		fprintf(stderr, "cannot create document: %s\n", fz_caught_message(ctx));
+		fz_report_error(ctx);
+		fprintf(stderr, "cannot create document\n");
 		fz_drop_context(ctx);
 		return EXIT_FAILURE;
 	}
 
+	fz_var(doc);
 	fz_try(ctx)
 	{
 		for (i = fz_optind; i < argc; ++i)
@@ -215,7 +218,7 @@ int muconvert_main(int argc, char **argv)
 			doc = fz_open_document(ctx, argv[i]);
 			if (fz_needs_password(ctx, doc))
 				if (!fz_authenticate_password(ctx, doc, password))
-					fz_throw(ctx, FZ_ERROR_GENERIC, "cannot authenticate password: %s", argv[i]);
+					fz_throw(ctx, FZ_ERROR_ARGUMENT, "cannot authenticate password: %s", argv[i]);
 			fz_layout_document(ctx, doc, layout_w, layout_h, layout_em);
 			count = fz_count_pages(ctx, doc);
 
@@ -236,7 +239,7 @@ int muconvert_main(int argc, char **argv)
 	}
 	fz_catch(ctx)
 	{
-		fz_log_error(ctx, fz_caught_message(ctx));
+		fz_report_error(ctx);
 		retval = EXIT_FAILURE;
 	}
 

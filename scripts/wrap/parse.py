@@ -63,8 +63,9 @@ def get_fz_extras( tu, fzname):
 def get_children(cursor):
     '''
     Like cursor.get_children() but recurses into cursors with
-    clang.cindex.CursorKind.UNEXPOSED_DECL, which picks up top-level items
-    marked with `extern "C"`.
+    clang.cindex.CursorKind.UNEXPOSED_DECL which picks up top-level items
+    marked with `extern "C"`, and clang.cindex.CursorKind.LINKAGE_SPEC which
+    picks up items inside `extern "C" {...}`.
     '''
     verbose = 0
     for cursor in cursor.get_children():
@@ -77,7 +78,13 @@ def get_children(cursor):
                 if verbose and cursor.spelling:
                     jlib.log( '{cursor.spelling=}')
                 yield cursor2
-        elif 1:
+        elif cursor.kind == clang.cindex.CursorKind.LINKAGE_SPEC:
+            # extern "C" {...}
+            for cursor2 in cursor.get_children():
+                if verbose and cursor.spelling:
+                    jlib.log( '{cursor.spelling=}')
+                yield cursor2
+        else:
             if verbose and cursor.spelling:
                 jlib.log( '{cursor.spelling=}')
             yield cursor
@@ -276,12 +283,14 @@ def has_refs( tu, type_):
                     if not ret:
                         if verbose:
                             jlib.log(
-                                    'Cannot find .refs member or we only have forward'
+                                    '{type_.spelling=}: Cannot find .refs member or we only have forward'
                                     ' declaration, so have to hard-code the size and offset'
                                     ' of the refs member.'
                                     )
                         if base_type_cursor.is_definition():
                             if key == 'pdf_document':
+                                ret = 'super.refs', 32
+                            elif key == 'pdf_page':
                                 ret = 'super.refs', 32
                             elif key == 'fz_pixmap':
                                 ret = 'storable.refs', 32
@@ -853,7 +862,7 @@ def find_wrappable_function_with_arg0_type_cache_populate( tu):
 
                 fnname_to_method_structname[ fnname] = arg0
 
-    jlib.log( f'populating find_wrappable_function_with_arg0_type_cache took {time.time()-t0}s')
+    jlib.log1( f'populating find_wrappable_function_with_arg0_type_cache took {time.time()-t0:.2f}s')
 
 
 def find_wrappable_function_with_arg0_type( tu, structname):

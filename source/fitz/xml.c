@@ -28,6 +28,8 @@
 
 #include <gumbo.h>
 
+#define FZ_XML_MAX_DEPTH 4096
+
 /* #define FZ_XML_SEQ */
 
 static const struct { const char *name; int c; } html_entities[] = {
@@ -104,15 +106,23 @@ struct parser
 #endif
 };
 
-static void xml_indent(int n)
+static void xml_indent(fz_context *ctx, fz_output *out, int n)
 {
 	while (n--) {
-		putchar(' ');
-		putchar(' ');
+		fz_write_byte(ctx, out, ' ');
+		fz_write_byte(ctx, out, ' ');
 	}
 }
 
 void fz_debug_xml(fz_xml *item, int level)
+{
+	/* This is a bit nasty as it relies on implementation
+	 * details of both fz_stdout, and fz_write_printf coping
+	 * with NULL ctx. */
+	fz_output_xml(NULL, fz_stdout(NULL), item, level);
+}
+
+void fz_output_xml(fz_context *ctx, fz_output *out, fz_xml *item, int level)
 {
 	char *s;
 
@@ -122,64 +132,63 @@ void fz_debug_xml(fz_xml *item, int level)
 	/* Skip over the DOC object at the top. */
 	if (item->up == NULL)
 	{
-		fz_debug_xml(item->down, level);
+		fz_output_xml(ctx, out, item->down, level);
 		return;
 	}
 
 	s = fz_xml_text(item);
+	xml_indent(ctx, out, level);
 	if (s)
 	{
 		int c;
-		xml_indent(level);
-		putchar('"');
+		fz_write_byte(ctx, out, '"');
 		while (*s) {
 			s += fz_chartorune(&c, s);
 			switch (c) {
 			default:
 				if (c > 0xFFFF)
-					printf("\\u{%X}", c);
+					fz_write_printf(ctx, out, "\\u{%X}", c);
 				else if (c < 32 || c > 127)
-					printf("\\u%04X", c);
+					fz_write_printf(ctx, out, "\\u%04X", c);
 				else
-					putchar(c);
+					fz_write_byte(ctx, out, c);
 				break;
-			case '\\': putchar('\\'); putchar('\\'); break;
-			case '\b': putchar('\\'); putchar('b'); break;
-			case '\f': putchar('\\'); putchar('f'); break;
-			case '\n': putchar('\\'); putchar('n'); break;
-			case '\r': putchar('\\'); putchar('r'); break;
-			case '\t': putchar('\\'); putchar('t'); break;
+			case '\\': fz_write_byte(ctx, out, '\\'); fz_write_byte(ctx, out, '\\'); break;
+			case '\b': fz_write_byte(ctx, out, '\\'); fz_write_byte(ctx, out, 'b'); break;
+			case '\f': fz_write_byte(ctx, out, '\\'); fz_write_byte(ctx, out, 'f'); break;
+			case '\n': fz_write_byte(ctx, out, '\\'); fz_write_byte(ctx, out, 'n'); break;
+			case '\r': fz_write_byte(ctx, out, '\\'); fz_write_byte(ctx, out, 'r'); break;
+			case '\t': fz_write_byte(ctx, out, '\\'); fz_write_byte(ctx, out, 't'); break;
 			}
 		}
-		putchar('"');
+		fz_write_byte(ctx, out, '"');
 #ifdef FZ_XML_SEQ
-		printf(" <%d>", item->seq);
+		fz_write_printf(ctx, out, " <%d>", item->seq);
 #endif
-		putchar('\n');
+		fz_write_byte(ctx, out, '\n');
 	}
 	else
 	{
 		fz_xml *child;
 		struct attribute *att;
 
-		xml_indent(level);
 #ifdef FZ_XML_SEQ
-		printf("(%s <%d>\n", item->u.node.u.d.name, item->u.node.seq);
+		fz_write_printf(ctx, out, "(%s <%d>\n", item->u.node.u.d.name, item->u.node.seq);
 #else
-		printf("(%s\n", item->u.node.u.d.name);
+		fz_write_printf(ctx, out, "(%s\n", item->u.node.u.d.name);
 #endif
 		for (att = item->u.node.u.d.atts; att; att = att->next)
 		{
-			xml_indent(level);
-			printf("=%s %s\n", att->name, att->value);
+			xml_indent(ctx, out, level);
+			fz_write_printf(ctx, out, "=%s %s\n", att->name, att->value);
 		}
 		for (child = fz_xml_down(item); child; child = child->u.node.next)
-			fz_debug_xml(child, level + 1);
-		xml_indent(level);
+			fz_output_xml(ctx, out, child, level + 1);
+		xml_indent(ctx, out, level);
 #ifdef FZ_XML_SEQ
-		printf(")%s <%d>\n", item->u.node.u.d.name, item->u.node.seq);
+		fz_write_printf(ctx, out, ")%s <%d>\n", item->u.node.u.d.name, item->u.node.seq);
 #else
-		printf(")%s\n", item->u.node.u.d.name);
+		fz_write_printf(ctx, out, ")%s\n", item->u.node.u.d.name);
 #endif
 	}
 }
@@ -310,11 +319,14 @@ fz_xml *fz_xml_find_next_match(fz_xml *item, const char *tag, const char *att, c
 	if (item && FZ_DOCUMENT_ITEM(item))
 		item = item->down;
 
-	do
+	if (item != NULL)
 	{
-		item = tag ? fz_xml_find_next(item, tag) : item->u.node.next;
+		do
+		{
+			item = tag ? fz_xml_find_next(item, tag) : item->u.node.next;
+		}
+		while (item != NULL && !fz_xml_att_eq(item, att, match));
 	}
-	while (item != NULL && !fz_xml_att_eq(item, att, match));
 
 	return item;
 }
@@ -489,6 +501,8 @@ static void xml_emit_open_tag(fz_context *ctx, struct parser *parser, const char
 
 	parser->head = head;
 	parser->depth++;
+	if (parser->depth >= FZ_XML_MAX_DEPTH)
+		fz_throw(ctx, FZ_ERROR_SYNTAX, "too deep xml element nesting");
 }
 
 static void xml_emit_att_name(fz_context *ctx, struct parser *parser, const char *a, const char *b)
@@ -768,7 +782,8 @@ parse_attribute_value:
 	return "end of data in attribute value";
 }
 
-static int fast_tolower(int c) {
+static int fast_tolower(int c)
+{
 	if ((unsigned)c - 'A' < 26)
 		return c | 32;
 	return c;
@@ -801,11 +816,82 @@ static int startswith(const char *a, const char *b)
 	return !fast_strncasecmp(a, b, strlen(b));
 }
 
-// Look for encoding in <meta http-equiv="content-type" content="text/html; charset=XXX"> tags
-static const unsigned short *find_meta_encoding(char *s)
+/* https://encoding.spec.whatwg.org/#names-and-labels */
+static struct { char *encoding; char *alias; } encoding_aliases[] = {
+	{ "big5", "big5" },
+	{ "big5", "big5-hkscs" },
+	{ "big5", "cn-big5" },
+	{ "big5", "csbig5" },
+	{ "big5", "x-x-big5" },
+	{ "euc-cn", "euc-cn" },
+	{ "euc-jp", "cseucpkdfmtjapanese" },
+	{ "euc-jp", "euc-jp" },
+	{ "euc-jp", "x-euc-jp" },
+	{ "euc-kr", "cseuckr" },
+	{ "euc-kr", "csksc56011987" },
+	{ "euc-kr", "euc-kr" },
+	{ "euc-kr", "iso-ir-149" },
+	{ "euc-kr", "korean" },
+	{ "euc-kr", "ks_c_5601" },
+	{ "euc-kr", "ksc5601" },
+	{ "euc-kr", "ksc_5601" },
+	{ "euc-kr", "windows-949" },
+	{ "euc-tw", "euc-tw" },
+	{ "gb18030", "chinese" },
+	{ "gb18030", "csgb2312" },
+	{ "gb18030", "csiso58gb231280" },
+	{ "gb18030", "gb18030" },
+	{ "gb18030", "gb2312" },
+	{ "gb18030", "gb_2312" },
+	{ "gb18030", "gbk" },
+	{ "gb18030", "iso-ir-58" },
+	{ "gb18030", "x-gbk" },
+	{ "iso-8859-1", "ascii" },
+	{ "iso-8859-1", "iso-8859-1" },
+	{ "iso-8859-1", "iso8859-1" },
+	{ "iso-8859-1", "latin1" },
+	{ "iso-8859-1", "us-ascii" },
+	{ "iso-8859-7", "greek" },
+	{ "iso-8859-7", "greek8" },
+	{ "iso-8859-7", "iso-8859-1" },
+	{ "iso-8859-7", "iso8859-1" },
+	{ "koi8-r", "koi" },
+	{ "koi8-r", "koi8" },
+	{ "koi8-r", "koi8-r" },
+	{ "koi8-r", "koi8-ru" },
+	{ "koi8-r", "koi8-u" },
+	{ "koi8-r", "koi8_r" },
+	{ "shift_jis", "csshiftjis" },
+	{ "shift_jis", "ms932" },
+	{ "shift_jis", "ms_kanji" },
+	{ "shift_jis", "shift-jis" },
+	{ "shift_jis", "shift_jis" },
+	{ "shift_jis", "sjis" },
+	{ "shift_jis", "windows-31j" },
+	{ "shift_jis", "x-sjis" },
+	{ "windows-1250", "cp1250" },
+	{ "windows-1250", "windows-1250" },
+	{ "windows-1251", "cp1251" },
+	{ "windows-1251", "windows-1251" },
+	{ "windows-1252", "cp1252" },
+	{ "windows-1252", "cp819" },
+	{ "windows-1252", "windows-1252" },
+};
+
+static char *match_encoding_name(char *enc)
 {
-	const unsigned short *table = NULL;
-	char *end, *meta;
+	size_t i;
+	for (i = 0; i < nelem(encoding_aliases); ++i)
+		if (startswith(enc, encoding_aliases[i].alias))
+			return encoding_aliases[i].encoding;
+	return NULL;
+}
+
+// Look for encoding in <meta http-equiv="content-type" content="text/html; charset=XXX"> tags
+static const char *find_meta_encoding(char *s)
+{
+	const char *table = NULL;
+	char *end, *meta, *charset, *enc;
 
 	meta = fast_strcasestr(s, "<meta");
 	while (meta && !table)
@@ -816,22 +902,12 @@ static const unsigned short *find_meta_encoding(char *s)
 			*end = 0;
 			if (fast_strcasestr(meta, "http-equiv") && fast_strcasestr(meta, "content-type"))
 			{
-				char *charset = fast_strcasestr(meta, "charset=");
+				charset = fast_strcasestr(meta, "charset=");
 				if (charset)
 				{
-					char *enc = charset + 8;
-					if (startswith(enc, "iso-8859-1") || startswith(enc, "latin1"))
-						table = fz_unicode_from_iso8859_1;
-					else if (startswith(enc, "iso-8859-7") || startswith(enc, "greek"))
-						table = fz_unicode_from_iso8859_7;
-					else if (startswith(enc, "koi8"))
-						table = fz_unicode_from_koi8u;
-					else if (startswith(enc, "windows-1250"))
-						table = fz_unicode_from_windows_1250;
-					else if (startswith(enc, "windows-1251"))
-						table = fz_unicode_from_windows_1251;
-					else if (startswith(enc, "windows-1252"))
-						table = fz_unicode_from_windows_1252;
+					enc = match_encoding_name(charset + 8);
+					if (enc)
+						table = enc;
 				}
 			}
 			*end = '>';
@@ -842,9 +918,9 @@ static const unsigned short *find_meta_encoding(char *s)
 	return table;
 }
 
-static const unsigned short *find_xml_encoding(char *s)
+static const char *find_xml_encoding(char *s)
 {
-	const unsigned short *table = NULL;
+	const char *table = NULL;
 	char *end, *xml, *enc;
 
 	end = strchr(s, '>');
@@ -857,19 +933,9 @@ static const unsigned short *find_xml_encoding(char *s)
 			enc = strstr(xml, "encoding=");
 			if (enc)
 			{
-				enc += 10;
-				if (startswith(enc, "iso-8859-1") || startswith(enc, "latin1"))
-					table = fz_unicode_from_iso8859_1;
-				else if (startswith(enc, "iso-8859-7") || startswith(enc, "greek"))
-					table = fz_unicode_from_iso8859_7;
-				else if (startswith(enc, "koi8"))
-					table = fz_unicode_from_koi8u;
-				else if (startswith(enc, "windows-1250"))
-					table = fz_unicode_from_windows_1250;
-				else if (startswith(enc, "windows-1251"))
-					table = fz_unicode_from_windows_1251;
-				else if (startswith(enc, "windows-1252"))
-					table = fz_unicode_from_windows_1252;
+				enc = match_encoding_name(enc + 10);
+				if (enc)
+					table = enc;
 			}
 		}
 		*end = '>';
@@ -883,9 +949,11 @@ static const unsigned short *find_xml_encoding(char *s)
 
 static char *convert_to_utf8(fz_context *ctx, unsigned char *s, size_t n, int *dofree)
 {
-	const unsigned short *table;
+	fz_text_decoder dec;
+	const char *enc;
 	const unsigned char *e = s + n;
 	char *dst, *d;
+	int m;
 	int c;
 
 	if (s[0] == 0xFE && s[1] == 0xFF) {
@@ -914,14 +982,14 @@ static char *convert_to_utf8(fz_context *ctx, unsigned char *s, size_t n, int *d
 		return dst;
 	}
 
-	table = find_xml_encoding((char*)s);
-	if (table) {
-		dst = d = Memento_label(fz_malloc(ctx, n * FZ_UTFMAX), "utf8");
-		while (*s) {
-			c = table[*s++];
-			d += fz_runetochar(d, c);
-		}
-		*d = 0;
+	enc = find_xml_encoding((char*)s);
+	if (enc)
+	{
+		fz_init_text_decoder(ctx, &dec, enc);
+		// NOTE: use decode_size if memory is more important than speed
+		m = dec.decode_bound(&dec, s, n);
+		dst = Memento_label(fz_malloc(ctx, m), "utf8");
+		dec.decode(&dec, dst, s, n);
 		*dofree = 1;
 		return dst;
 	}

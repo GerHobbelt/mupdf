@@ -51,7 +51,7 @@ void pdf_write_digest(fz_context *ctx, fz_output *out, pdf_obj *byte_range, pdf_
 	fz_var(cstr);
 
 	if (hexdigest_length < 4)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "Bad parameters to pdf_write_digest");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "Bad parameters to pdf_write_digest");
 
 	len = (hexdigest_length - 2) / 2;
 
@@ -73,9 +73,9 @@ void pdf_write_digest(fz_context *ctx, fz_output *out, pdf_obj *byte_range, pdf_
 		digest = fz_malloc(ctx, len);
 		digest_len = signer->create_digest(ctx, signer, in, digest, len);
 		if (digest_len == 0)
-			fz_throw(ctx, FZ_ERROR_GENERIC, "signer provided no signature digest");
+			fz_throw(ctx, FZ_ERROR_ARGUMENT, "signer provided no signature digest");
 		if (digest_len > len)
-			fz_throw(ctx, FZ_ERROR_GENERIC, "signature digest larger than space for digest");
+			fz_throw(ctx, FZ_ERROR_ARGUMENT, "signature digest larger than space for digest");
 
 		fz_drop_stream(ctx, in);
 		in = NULL;
@@ -161,7 +161,7 @@ check_field_locking(fz_context *ctx, pdf_obj *obj, void *data_, pdf_obj **ff)
 
 			if (((flags & PDF_FIELD_IS_READ_ONLY) == 0) && /* Field is not currently locked */
 				pdf_is_field_locked(ctx, data->locked, data->prefix->name)) /* Field should be locked */
-				pdf_dict_put_drop(ctx, obj, PDF_NAME(Ff), pdf_new_int(ctx, flags | PDF_FIELD_IS_READ_ONLY));
+				pdf_dict_put_int(ctx, obj, PDF_NAME(Ff), flags | PDF_FIELD_IS_READ_ONLY);
 		}
 	}
 	fz_catch(ctx)
@@ -206,7 +206,10 @@ static void enact_sig_locking(fz_context *ctx, pdf_document *doc, pdf_obj *sig)
 	fz_always(ctx)
 		pdf_drop_locked_fields(ctx, locked);
 	fz_catch(ctx)
+	{
+		pop_field_locking(ctx, NULL, &data);
 		fz_rethrow(ctx);
+	}
 }
 
 void
@@ -215,7 +218,7 @@ pdf_sign_signature_with_appearance(fz_context *ctx, pdf_annot *widget, pdf_pkcs7
 	pdf_document *doc = widget->page->doc;
 
 	if (pdf_widget_is_readonly(ctx, widget))
-		fz_throw(ctx, FZ_ERROR_GENERIC, "Signature is read only, it cannot be signed.");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "Signature is read only, it cannot be signed.");
 
 	pdf_begin_operation(ctx, doc, "Sign signature");
 
@@ -244,7 +247,7 @@ pdf_sign_signature_with_appearance(fz_context *ctx, pdf_annot *widget, pdf_pkcs7
 
 		sf = pdf_to_int(ctx, pdf_dict_get(ctx, form, PDF_NAME(SigFlags)));
 		if ((sf & (PDF_SIGFLAGS_SIGSEXIST | PDF_SIGFLAGS_APPENDONLY)) != (PDF_SIGFLAGS_SIGSEXIST | PDF_SIGFLAGS_APPENDONLY))
-			pdf_dict_put_drop(ctx, form, PDF_NAME(SigFlags), pdf_new_int(ctx, sf | PDF_SIGFLAGS_SIGSEXIST | PDF_SIGFLAGS_APPENDONLY));
+			pdf_dict_put_int(ctx, form, PDF_NAME(SigFlags), sf | PDF_SIGFLAGS_SIGSEXIST | PDF_SIGFLAGS_APPENDONLY);
 
 		pdf_signature_set_value(ctx, doc, wobj, signer, t);
 		pdf_end_operation(ctx, doc);
@@ -306,7 +309,11 @@ void pdf_sign_signature(fz_context *ctx, pdf_annot *widget,
 	int logo = flags & PDF_SIGNATURE_SHOW_LOGO;
 	fz_rect rect = pdf_annot_rect(ctx, widget);
 	fz_text_language lang = pdf_annot_language(ctx, widget);
+#ifdef CLUSTER
+	int64_t now = 1112281971; /* release date of MuPDF 0.1 */
+#else
 	int64_t now = time(NULL);
+#endif
 	char *name = NULL;
 	char *info = NULL;
 	fz_display_list *dlist = NULL;
@@ -414,7 +421,7 @@ void pdf_clear_signature(fz_context *ctx, pdf_annot *widget)
 
 		pdf_begin_operation(ctx, widget->page->doc, "Clear Signature");
 		if (pdf_widget_is_readonly(ctx, widget))
-			fz_throw(ctx, FZ_ERROR_GENERIC, "Signature read only, it cannot be cleared.");
+			fz_throw(ctx, FZ_ERROR_ARGUMENT, "Signature read only, it cannot be cleared.");
 
 		pdf_xref_remove_unsaved_signature(ctx, ((pdf_annot *)widget)->page->doc, ((pdf_annot *)widget)->obj);
 
@@ -598,76 +605,4 @@ pdf_signature_error pdf_check_certificate(fz_context *ctx, pdf_pkcs7_verifier *v
 	fz_catch(ctx)
 		fz_rethrow(ctx);
 	return result;
-}
-
-int pdf_check_signature(fz_context *ctx, pdf_pkcs7_verifier *verifier, pdf_document *doc, pdf_obj *signature, char *ebuf, size_t ebufsize)
-{
-	int res = 0;
-
-	if (pdf_xref_obj_is_unsaved_signature(doc, signature))
-	{
-		fz_strlcpy(ebuf, "Signed but document yet to be saved.", ebufsize);
-		if (ebufsize > 0)
-			ebuf[ebufsize-1] = 0;
-		return 0;
-	}
-
-	fz_var(res);
-	fz_try(ctx)
-	{
-		if (pdf_signature_is_signed(ctx, doc, signature))
-		{
-			pdf_signature_error err;
-
-			err = pdf_check_digest(ctx, verifier, doc, signature);
-			if (err == PDF_SIGNATURE_ERROR_OKAY)
-				err = pdf_check_certificate(ctx, verifier, doc, signature);
-
-			fz_strlcpy(ebuf, pdf_signature_error_description(err), ebufsize);
-			res = (err == PDF_SIGNATURE_ERROR_OKAY);
-
-			switch (err)
-			{
-			case PDF_SIGNATURE_ERROR_SELF_SIGNED:
-			case PDF_SIGNATURE_ERROR_SELF_SIGNED_IN_CHAIN:
-			case PDF_SIGNATURE_ERROR_NOT_TRUSTED:
-			{
-				pdf_pkcs7_distinguished_name *dn;
-
-				dn = pdf_signature_get_signatory(ctx, verifier, doc, signature);
-				if (dn)
-				{
-					char *s = pdf_signature_format_distinguished_name(ctx, dn);
-					pdf_signature_drop_distinguished_name(ctx, dn);
-					fz_strlcat(ebuf, " (", ebufsize);
-					fz_strlcat(ebuf, s, ebufsize);
-					fz_free(ctx, s);
-				}
-				else
-				{
-					fz_strlcat(ebuf, "()", ebufsize);
-				}
-
-				break;
-			}
-			default:
-				break;
-			}
-		}
-		else
-		{
-			res = 0;
-			fz_strlcpy(ebuf, "Not signed.", ebufsize);
-		}
-	}
-	fz_catch(ctx)
-	{
-		res = 0;
-		fz_strlcpy(ebuf, fz_caught_message(ctx), ebufsize);
-	}
-
-	if (ebufsize > 0)
-		ebuf[ebufsize-1] = 0;
-
-	return res;
 }

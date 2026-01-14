@@ -55,15 +55,38 @@ pdf_load_embedded_cmap_imp(fz_context *ctx, pdf_document *doc, pdf_obj *stmobj, 
 		obj = pdf_dict_get(ctx, stmobj, PDF_NAME(UseCMap));
 		if (pdf_is_name(ctx, obj))
 		{
-			usecmap = pdf_load_system_cmap(ctx, pdf_to_name(ctx, obj));
-			pdf_set_usecmap(ctx, cmap, usecmap);
+			fz_try(ctx)
+			{
+				usecmap = pdf_load_system_cmap(ctx, pdf_to_name(ctx, obj));
+				pdf_set_usecmap(ctx, cmap, usecmap);
+			}
+			fz_catch(ctx)
+			{
+				fz_rethrow_if(ctx, FZ_ERROR_SYSTEM);
+				fz_report_error(ctx);
+				fz_warn(ctx, "cannot load system CMap: %s", pdf_to_name(ctx, obj));
+			}
 		}
 		else if (pdf_is_indirect(ctx, obj))
 		{
 			if (pdf_cycle(ctx, &cycle, cycle_up, obj))
-				fz_throw(ctx, FZ_ERROR_GENERIC, "recursive CMap");
+				fz_throw(ctx, FZ_ERROR_FORMAT, "recursive CMap");
 			usecmap = pdf_load_embedded_cmap_imp(ctx, doc, obj, &cycle);
 			pdf_set_usecmap(ctx, cmap, usecmap);
+		}
+		else if (strlen(cmap->usecmap_name) > 0)
+		{
+			fz_try(ctx)
+			{
+				usecmap = pdf_load_system_cmap(ctx, cmap->usecmap_name);
+				pdf_set_usecmap(ctx, cmap, usecmap);
+			}
+			fz_catch(ctx)
+			{
+				fz_rethrow_if(ctx, FZ_ERROR_SYSTEM);
+				fz_report_error(ctx);
+				fz_warn(ctx, "cannot load system CMap: %s", pdf_to_name(ctx, obj));
+			}
 		}
 
 		pdf_store_item(ctx, stmobj, cmap, pdf_cmap_size(ctx, cmap));
@@ -301,13 +324,13 @@ pdf_load_system_cmap(fz_context *ctx, const char *cmap_name)
 
 	cmap = pdf_load_builtin_cmap(ctx, cmap_name);
 	if (!cmap)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "no builtin cmap file: %s", cmap_name);
+		fz_throw(ctx, FZ_ERROR_FORMAT, "no builtin cmap file: %s", cmap_name);
 
 	if (cmap->usecmap_name[0] && !cmap->usecmap)
 	{
 		usecmap = pdf_load_system_cmap(ctx, cmap->usecmap_name);
 		if (!usecmap)
-			fz_throw(ctx, FZ_ERROR_GENERIC, "no builtin cmap file: %s", cmap->usecmap_name);
+			fz_throw(ctx, FZ_ERROR_FORMAT, "no builtin cmap file: %s", cmap->usecmap_name);
 		pdf_set_usecmap(ctx, cmap, usecmap);
 	}
 

@@ -219,6 +219,7 @@ static int run_slow_operation_step(int cancel)
 		ui_show_warning_dialog("%s failed: %s",
 			ui_slow_operation_state.operation_text,
 			fz_caught_message(ctx));
+		fz_report_error(ctx);
 
 		/* Call to cancel. */
 		fz_try(ctx)
@@ -426,6 +427,7 @@ static void do_save_pdf_dialog(int for_signing)
 			fz_catch(ctx)
 			{
 				ui_show_warning_dialog("%s", fz_caught_message(ctx));
+				fz_report_error(ctx);
 			}
 		}
 	}
@@ -482,6 +484,7 @@ static void save_attachment_dialog(void)
 			fz_catch(ctx)
 			{
 				ui_show_warning_dialog("%s", fz_caught_message(ctx));
+				fz_report_error(ctx);
 			}
 		}
 	}
@@ -522,6 +525,7 @@ static void open_attachment_dialog(void)
 			fz_catch(ctx)
 			{
 				ui_show_warning_dialog("%s", fz_caught_message(ctx));
+				fz_report_error(ctx);
 			}
 		}
 	}
@@ -551,6 +555,7 @@ static void open_stamp_image_dialog(void)
 			fz_catch(ctx)
 			{
 				ui_show_warning_dialog("%s", fz_caught_message(ctx));
+				fz_report_error(ctx);
 			}
 		}
 	}
@@ -1747,7 +1752,7 @@ static void do_edit_line(fz_irect canvas_area, fz_irect area, fz_rect *rect)
 		rect->y0 = fz_min(a.y, b.y);
 		rect->x1 = fz_max(a.x, b.x);
 		rect->y1 = fz_max(a.y, b.y);
-		lw = pdf_annot_border(ctx, ui.selected_annot);
+		lw = pdf_annot_border_width(ctx, ui.selected_annot);
 		*rect = fz_expand_rect(*rect, fz_matrix_expansion(view_page_ctm) * lw);
 
 		/* cancel on right click */

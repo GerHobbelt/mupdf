@@ -120,7 +120,6 @@ typedef struct
 	int BT_pending;
 	int in_BT;
 	float Tm_adjust;
-	void *font_name;
 	tag_record *current_tags;
 	tag_record *pending_tags;
 	resources_stack *rstack;
@@ -179,7 +178,7 @@ create_resource_name(fz_context *ctx, pdf_sanitize_processor *p, pdf_obj *key, c
 		if (!pdf_dict_gets(ctx, res, buf))
 			return;
 	}
-	fz_throw(ctx, FZ_ERROR_GENERIC, "Cannot create unique resource name");
+	fz_throw(ctx, FZ_ERROR_LIMIT, "Cannot create unique resource name");
 }
 
 static void
@@ -193,7 +192,9 @@ filter_push(fz_context *ctx, pdf_sanitize_processor *p)
 	p->gstate = new_gstate;
 
 	pdf_keep_font(ctx, new_gstate->pending.text.font);
+	fz_keep_string(ctx, new_gstate->pending.text.fontname);
 	pdf_keep_font(ctx, new_gstate->sent.text.font);
+	fz_keep_string(ctx, new_gstate->sent.text.fontname);
 }
 
 static int
@@ -211,7 +212,9 @@ filter_pop(fz_context *ctx, pdf_sanitize_processor *p)
 			p->chain->op_Q(ctx, p->chain);
 
 	pdf_drop_font(ctx, gstate->pending.text.font);
+	fz_drop_string(ctx, gstate->pending.text.fontname);
 	pdf_drop_font(ctx, gstate->sent.text.font);
+	fz_drop_string(ctx, gstate->sent.text.fontname);
 	fz_free(ctx, gstate);
 	p->gstate = old;
 	return 0;
@@ -520,10 +523,11 @@ done_SC:
 					p->chain->op_TL(ctx, p->chain, gstate->pending.text.leading);
 			}
 			if (gstate->pending.text.font != gstate->sent.text.font ||
-				gstate->pending.text.size != gstate->sent.text.size)
+				gstate->pending.text.size != gstate->sent.text.size ||
+				gstate->pending.text.fontname != gstate->sent.text.fontname)
 			{
 				if (p->chain->op_Tf)
-					p->chain->op_Tf(ctx, p->chain, p->font_name, gstate->pending.text.font, gstate->pending.text.size);
+					p->chain->op_Tf(ctx, p->chain, fz_cstring_from_string(gstate->pending.text.fontname), gstate->pending.text.font, gstate->pending.text.size);
 			}
 			if (gstate->pending.text.render != gstate->sent.text.render)
 			{
@@ -536,8 +540,10 @@ done_SC:
 					p->chain->op_Ts(ctx, p->chain, gstate->pending.text.rise);
 			}
 			pdf_drop_font(ctx, gstate->sent.text.font);
+			fz_drop_string(ctx, gstate->sent.text.fontname);
 			gstate->sent.text = gstate->pending.text;
 			gstate->sent.text.font = pdf_keep_font(ctx, gstate->pending.text.font);
+			gstate->sent.text.fontname = fz_keep_string(ctx, gstate->pending.text.fontname);
 
 			if (p->Td_pending != 0)
 			{
@@ -976,7 +982,7 @@ filter_show_text(fz_context *ctx, pdf_sanitize_processor *p, pdf_obj *text)
 				if (fontdesc->wmode == 0)
 				{
 					adjust_text(ctx, p, tadj, 0);
-					p->tos.tm = fz_pre_translate(p->tos.tm, tadj * p->gstate->pending.text.scale, 0);
+					p->tos.tm = fz_pre_translate(p->tos.tm, -tadj * p->gstate->pending.text.scale, 0);
 				}
 				else
 				{
@@ -1186,7 +1192,7 @@ pdf_filter_gs_ca(fz_context *ctx, pdf_processor *proc, float alpha)
 }
 
 static void
-pdf_filter_gs_SMask(fz_context *ctx, pdf_processor *proc, pdf_obj *smask, float *bc, int luminosity)
+pdf_filter_gs_SMask(fz_context *ctx, pdf_processor *proc, pdf_obj *smask, float *bc, int luminosity, pdf_obj *tr)
 {
 	pdf_sanitize_processor *p = (pdf_sanitize_processor*)proc;
 
@@ -1194,7 +1200,7 @@ pdf_filter_gs_SMask(fz_context *ctx, pdf_processor *proc, pdf_obj *smask, float 
 		return;
 
 	if (p->chain->op_gs_SMask)
-		p->chain->op_gs_SMask(ctx, p->chain, smask, bc, luminosity);
+		p->chain->op_gs_SMask(ctx, p->chain, smask, bc, luminosity, tr);
 }
 
 static void
@@ -1939,9 +1945,9 @@ pdf_filter_Tf(fz_context *ctx, pdf_processor *proc, const char *name, pdf_font_d
 		return;
 
 	filter_flush(ctx, p, 0);
-	fz_free(ctx, p->font_name);
-	p->font_name = NULL;
-	p->font_name = name ? fz_strdup(ctx, name) : NULL;
+	fz_drop_string(ctx, p->gstate->pending.text.fontname);
+	p->gstate->pending.text.fontname = NULL;
+	p->gstate->pending.text.fontname = name ? fz_new_string(ctx, name) : NULL;
 	pdf_drop_font(ctx, p->gstate->pending.text.font);
 	p->gstate->pending.text.font = pdf_keep_font(ctx, font);
 	p->gstate->pending.text.size = size;
@@ -2760,7 +2766,9 @@ pdf_drop_sanitize_processor(fz_context *ctx, pdf_processor *proc)
 	{
 		filter_gstate *next = gs->next;
 		pdf_drop_font(ctx, gs->pending.text.font);
+		fz_drop_string(ctx, gs->pending.text.fontname);
 		pdf_drop_font(ctx, gs->sent.text.font);
+		fz_drop_string(ctx, gs->sent.text.fontname);
 		fz_free(ctx, gs);
 		gs = next;
 	}
@@ -2770,7 +2778,6 @@ pdf_drop_sanitize_processor(fz_context *ctx, pdf_processor *proc)
 		pop_tag(ctx, p, &p->current_tags);
 	pdf_drop_obj(ctx, p->structarray);
 	pdf_drop_document(ctx, p->doc);
-	fz_free(ctx, p->font_name);
 
 	fz_drop_path(ctx, p->path);
 
@@ -2990,6 +2997,8 @@ pdf_new_sanitize_filter(
 		pdf_drop_processor(ctx, (pdf_processor *) proc);
 		fz_rethrow(ctx);
 	}
+
+	proc->super.requirements = proc->chain->requirements;
 
 	return (pdf_processor*)proc;
 }

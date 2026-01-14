@@ -197,7 +197,7 @@ pdf_write_dash_pattern(fz_context *ctx, pdf_annot *annot, fz_buffer *buf, pdf_ob
 
 static float pdf_write_border_appearance(fz_context *ctx, pdf_annot *annot, fz_buffer *buf)
 {
-	float w = pdf_annot_border(ctx, annot);
+	float w = pdf_annot_border_width(ctx, annot);
 	fz_append_printf(ctx, buf, "%g w\n", w);
 	return w;
 }
@@ -2199,7 +2199,7 @@ pdf_write_tx_widget_appearance(fz_context *ctx, pdf_annot *annot, fz_buffer *buf
 	}
 	else if (ff & PDF_TX_FIELD_IS_COMB)
 	{
-		int maxlen = pdf_to_int(ctx, pdf_dict_get_inheritable(ctx, annot->obj, PDF_NAME(MaxLen)));
+		int maxlen = pdf_dict_get_inheritable_int(ctx, annot->obj, PDF_NAME(MaxLen));
 		if (has_bc && maxlen > 1)
 		{
 			float cell_w = (w - 2 * b) / maxlen;
@@ -2239,7 +2239,7 @@ pdf_layout_text_widget(fz_context *ctx, pdf_annot *annot)
 	text = pdf_field_value(ctx, annot->obj);
 	ff = pdf_field_flags(ctx, annot->obj);
 
-	b = pdf_annot_border(ctx, annot);
+	b = pdf_annot_border_width(ctx, annot);
 	r = pdf_dict_get_int(ctx, pdf_dict_get(ctx, annot->obj, PDF_NAME(MK)), PDF_NAME(R));
 	q = pdf_annot_quadding(ctx, annot);
 	pdf_annot_default_appearance(ctx, annot, &font, &size, &n, color);
@@ -2267,7 +2267,7 @@ pdf_layout_text_widget(fz_context *ctx, pdf_annot *annot)
 		}
 		else if (ff & PDF_TX_FIELD_IS_COMB)
 		{
-			int maxlen = pdf_to_int(ctx, pdf_dict_get_inheritable(ctx, annot->obj, PDF_NAME(MaxLen)));
+			int maxlen = pdf_dict_get_inheritable_int(ctx, annot->obj, PDF_NAME(MaxLen));
 			layout_variable_text(ctx, out, text, lang, font, size, q, x, y, w, h, 0, 0.8f, 1.2f, 0, maxlen, 0);
 		}
 		else
@@ -2383,7 +2383,7 @@ pdf_write_widget_appearance(fz_context *ctx, pdf_annot *annot, fz_buffer *buf,
 	}
 	else
 	{
-		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot create appearance stream for %s widgets", pdf_to_name(ctx, ft));
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "cannot create appearance stream for %s widgets", pdf_to_name(ctx, ft));
 	}
 }
 
@@ -2394,7 +2394,7 @@ pdf_write_appearance(fz_context *ctx, pdf_annot *annot, fz_buffer *buf,
 	switch (pdf_annot_type(ctx, annot))
 	{
 	default:
-		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot create appearance stream for %s annotations",
+		fz_throw(ctx, FZ_ERROR_UNSUPPORTED, "cannot create appearance stream for %s annotations",
 			pdf_dict_get_name(ctx, annot->obj, PDF_NAME(Subtype)));
 	case PDF_ANNOT_WIDGET:
 		pdf_write_widget_appearance(ctx, annot, buf, rect, bbox, matrix, res);
@@ -2491,7 +2491,7 @@ static pdf_obj *draw_push_button(fz_context *ctx, pdf_annot *annot, fz_rect bbox
 	fz_var(res);
 	fz_try(ctx)
 	{
-		b = pdf_annot_border(ctx, annot);
+		b = pdf_annot_border_width(ctx, annot);
 		has_bc = pdf_annot_MK_BC_rgb(ctx, annot, bc);
 		has_bg = pdf_annot_MK_BG_rgb(ctx, annot, bg);
 
@@ -3249,6 +3249,8 @@ retry_after_repair:
 				fz_catch(ctx)
 				{
 					fz_rethrow_if(ctx, FZ_ERROR_REPAIRED);
+					fz_rethrow_if(ctx, FZ_ERROR_SYSTEM);
+					fz_report_error(ctx);
 					fz_warn(ctx, "cannot create appearance stream");
 				}
 			}
@@ -3281,7 +3283,10 @@ retry_after_repair:
 		 * Repairs only ever happen once for a document, so no infinite
 		 * loop potential here. */
 		if (fz_caught(ctx) == FZ_ERROR_REPAIRED)
+		{
+			fz_report_error(ctx);
 			goto retry_after_repair;
+		}
 		fz_rethrow(ctx);
 	}
 }

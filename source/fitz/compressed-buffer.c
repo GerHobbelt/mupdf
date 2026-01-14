@@ -25,16 +25,32 @@
 /* This code needs to be kept out of stm_buffer.c to avoid it being
  * pulled into cmapdump.c */
 
+fz_compressed_buffer *
+fz_keep_compressed_buffer(fz_context *ctx, fz_compressed_buffer *cbuf)
+{
+	return (fz_compressed_buffer *)fz_keep_imp(ctx, cbuf, &cbuf->refs);
+}
+
 void
 fz_drop_compressed_buffer(fz_context *ctx, fz_compressed_buffer *buf)
 {
-	if (buf)
+	if (fz_drop_imp(ctx, buf, &buf->refs))
 	{
 		if (buf->params.type == FZ_IMAGE_JBIG2)
 			fz_drop_jbig2_globals(ctx, buf->params.u.jbig2.globals);
 		fz_drop_buffer(ctx, buf->buffer);
 		fz_free(ctx, buf);
 	}
+}
+
+fz_compressed_buffer *
+fz_new_compressed_buffer(fz_context *ctx)
+{
+	fz_compressed_buffer *cbuf = fz_malloc_struct(ctx, fz_compressed_buffer);
+
+	cbuf->refs = 1;
+
+	return cbuf;
 }
 
 fz_stream *
@@ -87,7 +103,7 @@ fz_open_image_decomp_stream(fz_context *ctx, fz_stream *tail, fz_compression_par
 					our_l2factor = 3;
 				*l2factor -= our_l2factor;
 			}
-			head = fz_open_dctd(ctx, tail, params->u.jpeg.color_transform, our_l2factor, NULL);
+			head = fz_open_dctd(ctx, tail, params->u.jpeg.color_transform, params->u.jpeg.invert_cmyk, our_l2factor, NULL);
 			break;
 
 		case FZ_IMAGE_JBIG2:

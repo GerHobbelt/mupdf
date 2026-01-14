@@ -187,6 +187,7 @@ struct fz_stext_line
 struct fz_stext_char
 {
 	int c; /* unicode character value */
+	int bidi; /* even for LTR, odd for RTL */
 	int color; /* sRGB hex color */
 	fz_point origin;
 	fz_quad quad;
@@ -282,7 +283,7 @@ char *fz_copy_selection(fz_context *ctx, fz_stext_page *page, fz_point a, fz_poi
 char *fz_copy_rectangle(fz_context *ctx, fz_stext_page *page, fz_rect area, int crlf);
 
 /**
-	Options for creating a pixmap and draw device.
+	Options for creating structured text.
 */
 typedef struct
 {

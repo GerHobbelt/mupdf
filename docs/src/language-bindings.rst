@@ -94,6 +94,17 @@ instead of MuPDF C structs.
 Usually it is more convenient to use the class-aware C++ API rather than the
 low-level C++ API.
 
+C++ Exceptions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+C++ exceptions use classes for each `FZ_ERROR_*` enum, all derived from a class
+`mupdf::FzErrorBase` which in turn derives from `std::exception`.
+
+For example if MuPDF C code does `fz_throw(ctx, FZ_ERROR_GENERIC,
+"something failed")`, this will appear as a C++ exception with type
+`mupdf::FzErrorGeneric`. Its `what()` method will return `code=2: something
+failed`, and it will have a public member `m_code` set to `FZ_ERROR_GENERIC`.
+
 Example wrappers
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -170,7 +181,7 @@ Extensions beyond the basic C API
 * There are various custom class methods and constructors.
 
 * There are extra functions for generating a text representation of 'POD'
-  structs and their C++ wrapper classes.
+  (plain old data) structs and their C++ wrapper classes.
 
   For example for `fz_rect` we provide these functions:
 
@@ -184,7 +195,7 @@ Extensions beyond the basic C API
 
   These each generate text such as: `(x0=90.51 y0=160.65 x1=501.39 y1=1215.6)`
 
-Environmental variables
+Runtime environmental variables
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 All builds
@@ -420,6 +431,20 @@ Changelog
 
 [Note that this is only for changes to the generation of the C++/Python/C#
 APIs; changes to the main MuPDF API are not detailed here.]
+
+
+* **2023-11-16**:
+
+    * Fixed debug builds on Windows.
+    * Fixed 32-bit builds on Windows.
+    * Fixed cross-build to arm64 on MacOS.
+    * Fixed unsafe custom fz_search_page2().
+    * Added custom fz_highlight_selection2().
+    * Added debug diagnostics to Director `use_virtual_*()` methods.
+    * Various fixes for Pyodide builds.
+    * Use version numbers in names of shared libraries.
+    * Added custom wrapping of struct pdf_clean_options.
+    * Use $CXX if defined when building bindings (not Windows).
 
 
 * **2023-07-13**:
@@ -843,6 +868,17 @@ All platforms
         python -m pip install --upgrade pip
 
 
+General build flags
+~~~~~~~~~~~~~~~~~~~
+
+In all of the commands below, one can set environmental variables to control
+the build of the underlying MuPDF C API, for example `USE_SYSTEM_LIBJPEG=yes`.
+
+In addition, `XCXXFLAGS` can be used to set additional C++ compiler flags when
+building the C++ and Python bindings (the name is analogous to the `XCFLAGS`
+used by MuPDF's makefile when compiling the core library).
+
+
 Building and installing the Python bindings using `pip`
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -858,6 +894,12 @@ Building and installing the Python bindings using `pip`
   available from pypi.org so pip will fail to install prerequisites from
   `pypackage.toml`.
 
+  Instead one can run `setup.py` directly:
+
+  .. code-block:: shell
+
+      cd mupdf && setup.py install
+
 
 Building the Python bindings
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -866,7 +908,7 @@ Building the Python bindings
 
   .. code-block:: shell
 
-      pip install libclang swig
+      pip install libclang swig setuptools
       cd mupdf && python scripts/mupdfwrap.py -b all
 
 * OpenBSD.
@@ -877,7 +919,7 @@ Building the Python bindings
   .. code-block:: shell
 
       sudo pkg_add py3-llvm
-      pip install swig
+      pip install swig setuptools
       cd mupdf && python scripts/mupdfwrap.py -b all
 
 Building the C++ bindings
@@ -887,7 +929,7 @@ Building the C++ bindings
 
   .. code-block:: shell
 
-      pip install libclang
+      pip install libclang setuptools
       cd mupdf && python scripts/mupdfwrap.py -b m01
 
 * OpenBSD.
@@ -898,6 +940,7 @@ Building the C++ bindings
   .. code-block:: shell
 
       sudo pkg_add py3-llvm
+      pip install setuptools
       cd mupdf && python scripts/mupdfwrap.py -b m01
 
 
@@ -908,7 +951,7 @@ Building the C# bindings
 
   .. code-block:: shell
 
-      pip install libclang swig
+      pip install libclang swig setuptools
       cd mupdf && python scripts/mupdfwrap.py -b --csharp all
 
 * Linux.
@@ -928,7 +971,7 @@ Building the C# bindings
   .. code-block:: shell
 
       sudo pkg_add py3-llvm mono
-      pip install swig
+      pip install swig setuptools
       cd mupdf && python scripts/mupdfwrap.py -b --csharp all
 
 
@@ -1023,6 +1066,11 @@ Notes
 
       python scripts/mupdfwrap.py -b --devenv <devenv.com-location> ...
 
+* Specifying compilers.
+
+  On non-Windows, we use `cc` and `c++` as default C and C++ compilers;
+  override by setting environment variables `$CC` and `$CXX`.
+
 * OpenBSD `libclang`.
 
   *
@@ -1048,25 +1096,14 @@ Notes
   One can specify a debug build using the `-d <build-directory>` arg
   before `-b`.
 
-  * Linux, MacOS, OpenBSD.
+  .. code-block:: shell
 
-    .. code-block:: shell
+      python ./scripts/mupdfwrap.py -d build/shared-debug -b ...
 
-        python ./scripts/mupdfwrap.py -d build/shared-debug -b ...
-
-  * Windows.
-
-    *
-      One has to also specify the CPU type and Python version, for
-      example:
-
-      .. code-block:: shell
-
-          python ./scripts/mupdfwrap.py -d build/shared-debug-x64-py3.11 -b ...
-
-    *
-      Debug builds may require a debug version of the Python
-      interpreter, for example `python311_d.lib`.
+  *
+    Debug builds of the Python and C# bindings on Windows have not been
+    tested. There may be issues with requiring a debug version of the Python
+    interpreter, for example `python311_d.lib`.
 
 *
   C# build failure: `cstring.i not implemented for this target` and/or
@@ -1449,16 +1486,129 @@ Extra functions in C++, Python and C#
 [These functions are available as low-level functions, class-aware
 functions and class methods.]
 
-* `std::string mupdf::fz_lookup_metadata2(mupdf::FzDocument& document, const char* key)`:
-  Return key value or raise an exception if not found:
-* `std::string mupdf::pdf_lookup_metadata2(mupdf::PdfDocument& document, const char* key)`:
-  Return key value or raise an exception if not found:
-* `std::vector<unsigned char> mupdf::fz_md5_pixmap2(mupdf::FzPixmap& pixmap)`:
-  Convenience wrapper for `fz_md5_pixmap()`.
-* `int mupdf::fz_samples_get(mupdf::FzPixmap& pixmap, int offset);
-  Mainly for simple (but slow) access from Python and C#.
-* `void mupdf::fz_samples_set(mupdf::FzPixmap& pixmap, int offset, int value);
-  Mainly for simple (but slow) access from Python and C#.
+.. code-block:: c++
+
+        /**
+        C++ alternative to `fz_lookup_metadata()` that returns a `std::string`
+        or calls `fz_throw()` if not found.
+        */
+        FZ_FUNCTION std::string fz_lookup_metadata2(fz_context* ctx, fz_document* doc, const char* key);
+
+        /**
+        C++ alternative to `pdf_lookup_metadata()` that returns a `std::string`
+        or calls `fz_throw()` if not found.
+        */
+        FZ_FUNCTION std::string pdf_lookup_metadata2(fz_context* ctx, pdf_document* doc, const char* key);
+
+        /**
+        C++ alternative to `fz_md5_pixmap()` that returns the digest by value.
+        */
+        FZ_FUNCTION std::vector<unsigned char> fz_md5_pixmap2(fz_context* ctx, fz_pixmap* pixmap);
+
+        /**
+        C++ alternative to fz_md5_final() that returns the digest by value.
+        */
+        FZ_FUNCTION std::vector<unsigned char> fz_md5_final2(fz_md5* md5);
+
+        /** */
+        FZ_FUNCTION long long fz_pixmap_samples_int(fz_context* ctx, fz_pixmap* pixmap);
+
+        /**
+        Provides simple (but slow) access to pixmap data from Python and C#.
+        */
+        FZ_FUNCTION int fz_samples_get(fz_pixmap* pixmap, int offset);
+
+        /**
+        Provides simple (but slow) write access to pixmap data from Python and
+        C#.
+        */
+        FZ_FUNCTION void fz_samples_set(fz_pixmap* pixmap, int offset, int value);
+
+        /**
+        C++ alternative to fz_highlight_selection() that returns quads in a
+        std::vector.
+        */
+        FZ_FUNCTION std::vector<fz_quad> fz_highlight_selection2(fz_context* ctx, fz_stext_page* page, fz_point a, fz_point b, int max_quads);
+
+        struct fz_search_page2_hit
+        {{
+            fz_quad quad;
+            int mark;
+        }};
+
+        /**
+        C++ alternative to fz_search_page() that returns information in a std::vector.
+        */
+        FZ_FUNCTION std::vector<fz_search_page2_hit> fz_search_page2(fz_context* ctx, fz_document* doc, int number, const char* needle, int hit_max);
+
+        /**
+        C++ alternative to fz_string_from_text_language() that returns information in a std::string.
+        */
+        FZ_FUNCTION std::string fz_string_from_text_language2(fz_text_language lang);
+
+        /**
+        C++ alternative to fz_get_glyph_name() that returns information in a std::string.
+        */
+        FZ_FUNCTION std::string fz_get_glyph_name2(fz_context* ctx, fz_font* font, int glyph);
+
+        /**
+        Extra struct containing fz_install_load_system_font_funcs()'s args,
+        which we wrap with virtual_fnptrs set to allow use from Python/C# via
+        Swig Directors.
+        */
+        typedef struct fz_install_load_system_font_funcs_args
+        {{
+            fz_load_system_font_fn* f;
+            fz_load_system_cjk_font_fn* f_cjk;
+            fz_load_system_fallback_font_fn* f_fallback;
+        }} fz_install_load_system_font_funcs_args;
+
+        /**
+        Alternative to fz_install_load_system_font_funcs() that takes args in a
+        struct, to allow use from Python/C# via Swig Directors.
+        */
+        FZ_FUNCTION void fz_install_load_system_font_funcs2(fz_context* ctx, fz_install_load_system_font_funcs_args* args);
+
+        /** Internal singleton state to allow Swig Director class to find
+        fz_install_load_system_font_funcs_args class wrapper instance. */
+        FZ_DATA extern void* fz_install_load_system_font_funcs2_state;
+
+        /** Helper for calling a `fz_document_open_fn` function pointer via Swig
+        from Python/C#. */
+        FZ_FUNCTION fz_document* fz_document_open_fn_call(fz_context* ctx, fz_document_open_fn fn, fz_stream* stream, fz_stream* accel, fz_archive* dir);
+
+        /** Helper for calling a `fz_document_recognize_content_fn` function
+        pointer via Swig from Python/C#. */
+        FZ_FUNCTION int fz_document_recognize_content_fn_call(fz_context* ctx, fz_document_recognize_content_fn fn, fz_stream* stream, fz_archive* dir);
+
+        /** Swig-friendly wrapper for pdf_choice_widget_options(), returns the
+        options directly in a vector. */
+        FZ_FUNCTION std::vector<std::string> pdf_choice_widget_options2(fz_context* ctx, pdf_annot* tw, int exportval);
+
+        /** Swig-friendly wrapper for fz_new_image_from_compressed_buffer(),
+        uses specified `decode` and `colorkey` if they are not null (in which
+        case we assert that they have size `2*fz_colorspace_n(colorspace)`). */
+        FZ_FUNCTION fz_image* fz_new_image_from_compressed_buffer2(
+                fz_context* ctx,
+                int w,
+                int h,
+                int bpc,
+                fz_colorspace* colorspace,
+                int xres,
+                int yres,
+                int interpolate,
+                int imagemask,
+                const std::vector<float>& decode,
+                const std::vector<int>& colorkey,
+                fz_compressed_buffer* buffer,
+                fz_image* mask
+                );
+
+        /** Swig-friendly wrapper for pdf_rearrange_pages(). */
+        void pdf_rearrange_pages2(fz_context* ctx, pdf_document* doc, const std::vector<int>& pages);
+
+        /** Swig-friendly wrapper for pdf_subset_fonts(). */
+        void pdf_subset_fonts2(fz_context *ctx, pdf_document *doc, const std::vector<int>& pages);
 
 
 Python/C# bindings details
@@ -1553,6 +1703,22 @@ Non-standard API or implementation
 * `pdf_lookup_metadata(pdfdocument, key)`: Return key value or None if not found:
 * `pdf_set_annot_color()`: Takes single `color` arg which must be float or tuple of 1-4 floats.
 * `pdf_set_annot_interior_color()`: Takes single `color` arg which must be float or tuple of 1-4 floats.
+* `fz_install_load_system_font_funcs()`: Takes Python callbacks with no `ctx` arg,
+  which can return `None`, `fz_font*` or a `mupdf.FzFont`.
+
+  Example usage (from `scripts/mupdfwrap_test.py:test_install_load_system_font()`)::
+
+    def font_f(name, bold, italic, needs_exact_metrics):
+        print(f'font_f(): Looking for font: {name=} {bold=} {italic=} {needs_exact_metrics=}.')
+        return mupdf.fz_new_font_from_file(...)
+    def f_cjk(name, ordering, serif):
+        print(f'f_cjk(): Looking for font: {name=} {ordering=} {serif=}.')
+        return None
+    def f_fallback(script, language, serif, bold, italic):
+        print(f'f_fallback(): looking for font: {script=} {language=} {serif=} {bold=} {italic=}.')
+        return None
+    mupdf.fz_install_load_system_font_funcs(font_f, f_cjk, f_fallback)
+
 
 Making MuPDF function pointers call Python code
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

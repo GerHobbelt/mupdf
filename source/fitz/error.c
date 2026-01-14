@@ -27,6 +27,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <errno.h>
 
 #ifdef _MSC_VER
 #ifndef NDEBUG
@@ -42,9 +43,10 @@
 
 void fz_default_error_callback(void *user, const char *message)
 {
-	fprintf(stderr, "error: %s\n", message);
+	/* TODO: send errcode and format it here instead of in fz_report_error */
+	fputs(message, stderr);
+	fputc('\n', stderr);
 #ifdef USE_OUTPUT_DEBUG_STRING
-	OutputDebugStringA("error: ");
 	OutputDebugStringA(message);
 	OutputDebugStringA("\n");
 #endif
@@ -239,7 +241,7 @@ fz_jmp_buf *fz_push_try(fz_context *ctx)
 		/* We need to arrive in the always/catch block as if throw had taken place. */
 		ctx->error.top++;
 		ctx->error.top->state = 2;
-		ctx->error.top->code = FZ_ERROR_GENERIC;
+		ctx->error.top->code = FZ_ERROR_LIMIT;
 	}
 	else
 	{
@@ -273,7 +275,7 @@ int fz_do_always(fz_context *ctx)
 #endif
 }
 
-int fz_do_catch(fz_context *ctx)
+int (fz_do_catch)(fz_context *ctx)
 {
 	ctx->error.errcode = ctx->error.top->code;
 	return (ctx->error.top--)->state > 1;
@@ -283,6 +285,12 @@ int fz_caught(fz_context *ctx)
 {
 	assert(ctx && ctx->error.errcode >= FZ_ERROR_NONE);
 	return ctx->error.errcode;
+}
+
+int fz_caught_errno(fz_context *ctx)
+{
+	assert(ctx && ctx->error.errcode == FZ_ERROR_SYSTEM);
+	return ctx->error.errnum;
 }
 
 const char *fz_caught_message(fz_context *ctx)
@@ -324,6 +332,21 @@ void (fz_log_error)(fz_context *ctx, const char *str)
 /* coverity[+kill] */
 FZ_NORETURN void (fz_vthrow)(fz_context *ctx, int code, const char *fmt, va_list ap)
 {
+	if (ctx->error.errcode)
+	{
+		fz_flush_warnings(ctx);
+		fz_warn(ctx, "UNHANDLED EXCEPTION!");
+		fz_report_error(ctx);
+#ifdef CLUSTER
+		abort();
+#endif
+	}
+
+	if (code == FZ_ERROR_SYSTEM)
+		ctx->error.errnum = errno;
+	else
+		ctx->error.errnum = 0;
+
 	fz_vsnprintf(ctx->error.message, sizeof ctx->error.message, fmt, ap);
 	ctx->error.message[sizeof(ctx->error.message) - 1] = 0;
 
@@ -360,33 +383,42 @@ void (fz_rethrow_if)(fz_context *ctx, int err)
 		fz_rethrow(ctx);
 }
 
-#if FZ_VERBOSE_EXCEPTIONS
+void (fz_rethrow_unless)(fz_context *ctx, int err)
+{
+	assert(ctx && ctx->error.errcode >= FZ_ERROR_NONE);
+	if (ctx->error.errcode != err)
+		fz_rethrow(ctx);
+}
+
 static const char *
-errcode_to_string(int exc)
+fz_error_type_name(enum fz_error_type exc)
 {
 	switch (exc)
 	{
-	case FZ_ERROR_NONE:
-		return "NONE";
-	case FZ_ERROR_MEMORY:
-		return "MEMORY";
-	case FZ_ERROR_GENERIC:
-		return "GENERIC";
-	case FZ_ERROR_SYNTAX:
-		return "SYNTAX";
-	case FZ_ERROR_MINOR:
-		return "MINOR";
-	case FZ_ERROR_TRYLATER:
-		return "TRYLATER";
-	case FZ_ERROR_ABORT:
-		return "ABORT";
-	case FZ_ERROR_REPAIRED:
-		return "REPAIRED";
-	case FZ_ERROR_COUNT:
-		return "COUNT";
-	default:
-		return "<Invalid>";
+	case FZ_ERROR_NONE: return "none";
+	case FZ_ERROR_GENERIC: return "generic";
+	case FZ_ERROR_SYSTEM: return "system";
+	case FZ_ERROR_LIBRARY: return "library";
+	case FZ_ERROR_UNSUPPORTED: return "unsupported";
+	case FZ_ERROR_ARGUMENT: return "argument";
+	case FZ_ERROR_LIMIT: return "limit";
+	case FZ_ERROR_FORMAT: return "format";
+	case FZ_ERROR_SYNTAX: return "syntax";
+	case FZ_ERROR_TRYLATER: return "trylater";
+	case FZ_ERROR_ABORT: return "abort";
+	case FZ_ERROR_REPAIRED: return "repaired";
 	}
+	return "invalid error type";
+}
+
+#if FZ_VERBOSE_EXCEPTIONS
+
+int fz_do_catchFL(fz_context *ctx, const char *file, int line)
+{
+	int rc = (fz_do_catch)(ctx);
+	if (rc)
+		(fz_log_error_printf)(ctx, "%s:%d: Catching", file, line);
+	return rc;
 }
 
 
@@ -429,10 +461,20 @@ void fz_log_errorFL(fz_context *ctx, const char *file, int line, const char *str
 /* coverity[+kill] */
 FZ_NORETURN void fz_vthrowFL(fz_context *ctx, const char *file, int line, int code, const char *fmt, va_list ap)
 {
+	if (ctx->error.errcode)
+	{
+		fz_flush_warnings(ctx);
+		fz_warn(ctx, "UNHANDLED EXCEPTION!");
+		fz_report_error(ctx);
+#ifdef CLUSTER
+		abort();
+#endif
+	}
+
 	fz_vsnprintf(ctx->error.message, sizeof ctx->error.message, fmt, ap);
 	ctx->error.message[sizeof(ctx->error.message) - 1] = 0;
 
-	(fz_log_error_printf)(ctx, "%s:%d: Throwing %s '%s'", file, line, errcode_to_string(code), ctx->error.message);
+	(fz_log_error_printf)(ctx, "%s:%d: Throwing %s '%s'", file, line, fz_error_type_name(code), ctx->error.message);
 
 	throw(ctx, code);
 }
@@ -459,8 +501,18 @@ void fz_morph_errorFL(fz_context *ctx, const char *file, int line, int fromerr, 
 	assert(ctx && ctx->error.errcode >= FZ_ERROR_NONE);
 	if (ctx->error.errcode == fromerr)
 	{
-		(fz_log_error_printf)(ctx, "%s:%d: Morphing %s->%s", file, line, errcode_to_string(fromerr), errcode_to_string(toerr));
+		(fz_log_error_printf)(ctx, "%s:%d: Morphing %s->%s", file, line, fz_error_type_name(fromerr), fz_error_type_name(toerr));
 		ctx->error.errcode = toerr;
+	}
+}
+
+void fz_rethrow_unlessFL(fz_context *ctx, const char *file, int line, int err)
+{
+	assert(ctx && ctx->error.errcode >= FZ_ERROR_NONE);
+	if (ctx->error.errcode != err)
+	{
+		(fz_log_error_printf)(ctx, "%s:%d: Rethrowing", file, line);
+		(fz_rethrow)(ctx);
 	}
 }
 
@@ -487,4 +539,39 @@ void fz_end_throw_on_repair(fz_context *ctx)
 	fz_lock(ctx, FZ_LOCK_ALLOC);
 	ctx->throw_on_repair--;
 	fz_unlock(ctx, FZ_LOCK_ALLOC);
+}
+
+void fz_report_error(fz_context *ctx)
+{
+#ifdef CLUSTER
+	if (ctx->error.errcode == FZ_ERROR_TRYLATER || ctx->error.errcode == FZ_ERROR_ABORT)
+	{
+		fprintf(stderr, "REPORTED ERROR THAT IS TRYLATER OR ABORT\n");
+		abort();
+	}
+#endif
+	/* TODO: send errcode to fz_log_error instead of formatting it here */
+	fz_log_error_printf(ctx, "%s error: %s", fz_error_type_name(ctx->error.errcode), ctx->error.message);
+	ctx->error.errcode = FZ_ERROR_NONE;
+}
+
+void fz_ignore_error(fz_context *ctx)
+{
+#ifdef CLUSTER
+	if (ctx->error.errcode != FZ_ERROR_TRYLATER && ctx->error.errcode != FZ_ERROR_ABORT)
+	{
+		fprintf(stderr, "IGNORED ERROR THAT IS NOT TRYLATER OR ABORT\n");
+		abort();
+	}
+#endif
+	ctx->error.errcode = FZ_ERROR_NONE;
+}
+
+/* Convert an error into another runtime exception. */
+const char *fz_convert_error(fz_context *ctx, int *code)
+{
+	if (code)
+		*code = ctx->error.errcode;
+	ctx->error.errcode = FZ_ERROR_NONE;
+	return ctx->error.message;
 }

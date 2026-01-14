@@ -1841,6 +1841,8 @@ def fs_update( text, filename, return_different=False):
 
     If `return_different` is true, we return existing contents if `filename`
     already exists and differs from `text`.
+
+    Otherwise we return true if file has changed.
     '''
     try:
         with open( filename) as f:
@@ -1850,12 +1852,12 @@ def fs_update( text, filename, return_different=False):
     if text != text0:
         if return_different and text0 is not None:
             return text
-        log( 'Updating:  ' + filename)
         # Write to temp file and rename, to ensure we are atomic.
         filename_temp = f'{filename}-jlib-temp'
         with open( filename_temp, 'w') as f:
             f.write( text)
         fs_rename( filename_temp, filename)
+        return True
 
 
 def fs_find_in_paths( name, paths=None, verbose=False):
@@ -2178,7 +2180,7 @@ def build(
         except Exception:
             command0 = None
         if command != command0:
-           reasons.append( f'command has changed: {command0!r} => {command!r}')
+           reasons.append( f'command has changed:\n{command0}\n=>\n{command}')
 
     if not reasons or all_reasons:
         reason = fs_any_newer( infiles, outfiles)
@@ -2243,9 +2245,11 @@ def link_l_flags( sos, ld_origin=None):
         dir_ = os.path.dirname( so)
         name = os.path.basename( so)
         assert name.startswith( 'lib'), f'name={name}'
-        if name.endswith( '.so'):
+        m = re.search( '(.so[.0-9]*)$', name)
+        if m:
+            l = len(m.group(1))
             dirs.add( dir_)
-            names.append( f'-l {name[3:-3]}')
+            names.append( f'-l {name[3:-l]}')
         elif darwin and name.endswith( '.dylib'):
             dirs.add( dir_)
             names.append( f'-l {name[3:-6]}')

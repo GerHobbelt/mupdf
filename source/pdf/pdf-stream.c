@@ -38,6 +38,8 @@ pdf_obj_num_is_stream(fz_context *ctx, pdf_document *doc, int num)
 	fz_catch(ctx)
 	{
 		fz_rethrow_if(ctx, FZ_ERROR_TRYLATER);
+		fz_rethrow_if(ctx, FZ_ERROR_SYSTEM);
+		fz_report_error(ctx);
 		return 0;
 	}
 
@@ -94,13 +96,14 @@ pdf_load_jbig2_globals(fz_context *ctx, pdf_obj *dict)
 		return globals;
 
 	if (pdf_mark_obj(ctx, dict))
-		fz_throw(ctx, FZ_ERROR_GENERIC, "cyclic reference when loading JBIG2 globals");
+		fz_throw(ctx, FZ_ERROR_FORMAT, "cyclic reference when loading JBIG2 globals");
 
 	fz_try(ctx)
 	{
 		buf = pdf_load_stream(ctx, dict);
 		globals = fz_load_jbig2_globals(ctx, buf);
-		pdf_store_item(ctx, dict, globals, fz_buffer_storage(ctx, buf, NULL));
+		if (globals)
+			pdf_store_item(ctx, dict, globals, fz_buffer_storage(ctx, buf, NULL));
 	}
 	fz_always(ctx)
 	{
@@ -118,40 +121,24 @@ pdf_load_jbig2_globals(fz_context *ctx, pdf_obj *dict)
 static void
 build_compression_params(fz_context *ctx, pdf_obj *f, pdf_obj *p, fz_compression_params *params)
 {
-	int predictor = pdf_dict_get_int(ctx, p, PDF_NAME(Predictor));
-	pdf_obj *columns_obj = pdf_dict_get(ctx, p, PDF_NAME(Columns));
-	int columns = pdf_to_int(ctx, columns_obj);
-	int colors = pdf_dict_get_int(ctx, p, PDF_NAME(Colors));
-	int bpc = pdf_dict_get_int(ctx, p, PDF_NAME(BitsPerComponent));
-	if (bpc == 0)
-		bpc = 8;
-
 	params->type = FZ_IMAGE_RAW;
 
 	if (pdf_name_eq(ctx, f, PDF_NAME(CCITTFaxDecode)) || pdf_name_eq(ctx, f, PDF_NAME(CCF)))
 	{
-		pdf_obj *k = pdf_dict_get(ctx, p, PDF_NAME(K));
-		pdf_obj *eol = pdf_dict_get(ctx, p, PDF_NAME(EndOfLine));
-		pdf_obj *eba = pdf_dict_get(ctx, p, PDF_NAME(EncodedByteAlign));
-		pdf_obj *rows = pdf_dict_get(ctx, p, PDF_NAME(Rows));
-		pdf_obj *eob = pdf_dict_get(ctx, p, PDF_NAME(EndOfBlock));
-		pdf_obj *bi1 = pdf_dict_get(ctx, p, PDF_NAME(BlackIs1));
-
 		params->type = FZ_IMAGE_FAX;
-		params->u.fax.k = (k ? pdf_to_int(ctx, k) : 0);
-		params->u.fax.end_of_line = (eol ? pdf_to_bool(ctx, eol) : 0);
-		params->u.fax.encoded_byte_align = (eba ? pdf_to_bool(ctx, eba) : 0);
-		params->u.fax.columns = (columns_obj ? columns : 1728);
-		params->u.fax.rows = (rows ? pdf_to_int(ctx, rows) : 0);
-		params->u.fax.end_of_block = (eob ? pdf_to_bool(ctx, eob) : 1);
-		params->u.fax.black_is_1 = (bi1 ? pdf_to_bool(ctx, bi1) : 0);
+		params->u.fax.k = pdf_dict_get_int_default(ctx, p, PDF_NAME(K), 0);
+		params->u.fax.end_of_line = pdf_dict_get_bool_default(ctx, p, PDF_NAME(EndOfLine), 0);
+		params->u.fax.encoded_byte_align = pdf_dict_get_bool_default(ctx, p, PDF_NAME(EncodedByteAlign), 0);
+		params->u.fax.columns = pdf_dict_get_int_default(ctx, p, PDF_NAME(Columns), 1728);
+		params->u.fax.rows = pdf_dict_get_int_default(ctx, p, PDF_NAME(Rows), 0);
+		params->u.fax.end_of_block = pdf_dict_get_bool_default(ctx, p, PDF_NAME(EndOfBlock), 1);
+		params->u.fax.black_is_1 = pdf_dict_get_bool_default(ctx, p, PDF_NAME(BlackIs1), 0);
 	}
 	else if (pdf_name_eq(ctx, f, PDF_NAME(DCTDecode)) || pdf_name_eq(ctx, f, PDF_NAME(DCT)))
 	{
-		pdf_obj *ct = pdf_dict_get(ctx, p, PDF_NAME(ColorTransform));
-
 		params->type = FZ_IMAGE_JPEG;
-		params->u.jpeg.color_transform = (ct ? pdf_to_int(ctx, ct) : -2);
+		params->u.jpeg.color_transform = pdf_dict_get_int_default(ctx, p, PDF_NAME(ColorTransform), -1);
+		params->u.jpeg.invert_cmyk = 0;
 	}
 	else if (pdf_name_eq(ctx, f, PDF_NAME(RunLengthDecode)) || pdf_name_eq(ctx, f, PDF_NAME(RL)))
 	{
@@ -160,21 +147,19 @@ build_compression_params(fz_context *ctx, pdf_obj *f, pdf_obj *p, fz_compression
 	else if (pdf_name_eq(ctx, f, PDF_NAME(FlateDecode)) || pdf_name_eq(ctx, f, PDF_NAME(Fl)))
 	{
 		params->type = FZ_IMAGE_FLATE;
-		params->u.flate.predictor = predictor;
-		params->u.flate.columns = columns;
-		params->u.flate.colors = colors;
-		params->u.flate.bpc = bpc;
+		params->u.flate.predictor = pdf_dict_get_int_default(ctx, p, PDF_NAME(Predictor), 1);
+		params->u.flate.columns = pdf_dict_get_int_default(ctx, p, PDF_NAME(Columns), 1);
+		params->u.flate.colors = pdf_dict_get_int_default(ctx, p, PDF_NAME(Colors), 1);
+		params->u.flate.bpc = pdf_dict_get_int_default(ctx, p, PDF_NAME(BitsPerComponent), 8);
 	}
 	else if (pdf_name_eq(ctx, f, PDF_NAME(LZWDecode)) || pdf_name_eq(ctx, f, PDF_NAME(LZW)))
 	{
-		pdf_obj *ec = pdf_dict_get(ctx, p, PDF_NAME(EarlyChange));
-
 		params->type = FZ_IMAGE_LZW;
-		params->u.lzw.predictor = predictor;
-		params->u.lzw.columns = columns;
-		params->u.lzw.colors = colors;
-		params->u.lzw.bpc = bpc;
-		params->u.lzw.early_change = (ec ? pdf_to_int(ctx, ec) : 1);
+		params->u.lzw.predictor = pdf_dict_get_int_default(ctx, p, PDF_NAME(Predictor), 1);
+		params->u.lzw.columns = pdf_dict_get_int_default(ctx, p, PDF_NAME(Columns), 1);
+		params->u.lzw.colors = pdf_dict_get_int_default(ctx, p, PDF_NAME(Colors), 1);
+		params->u.lzw.bpc = pdf_dict_get_int_default(ctx, p, PDF_NAME(BitsPerComponent), 8);
+		params->u.lzw.early_change = pdf_dict_get_int_default(ctx, p, PDF_NAME(EarlyChange), 1);
 	}
 	else if (pdf_name_eq(ctx, f, PDF_NAME(JBIG2Decode)))
 	{
@@ -427,7 +412,7 @@ pdf_load_compressed_inline_image(fz_context *ctx, pdf_document *doc, pdf_obj *di
 	fz_var(decomp);
 	fz_var(pixmap);
 
-	bc = fz_malloc_struct(ctx, fz_compressed_buffer);
+	bc = fz_new_compressed_buffer(ctx);
 	fz_try(ctx)
 	{
 		bc->buffer = fz_new_buffer(ctx, 1024);
@@ -459,7 +444,7 @@ pdf_open_raw_stream_number(fz_context *ctx, pdf_document *doc, int num)
 
 	x = pdf_cache_object(ctx, doc, num);
 	if (x->stm_ofs == 0)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "object is not a stream");
+		fz_throw(ctx, FZ_ERROR_FORMAT, "object is not a stream");
 
 	return pdf_open_raw_filter(ctx, doc->file, doc, x->obj, num, &orig_num, &orig_gen, x->stm_ofs);
 }
@@ -471,7 +456,7 @@ pdf_open_image_stream(fz_context *ctx, pdf_document *doc, int num, fz_compressio
 
 	x = pdf_cache_object(ctx, doc, num);
 	if (x->stm_ofs == 0 && x->stm_buf == NULL)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "object is not a stream");
+		fz_throw(ctx, FZ_ERROR_FORMAT, "object is not a stream");
 
 	return pdf_open_filter(ctx, doc, doc->file, x->obj, num, x->stm_ofs, params, might_be_image);
 }
@@ -486,7 +471,7 @@ fz_stream *
 pdf_open_stream_with_offset(fz_context *ctx, pdf_document *doc, int num, pdf_obj *dict, int64_t stm_ofs)
 {
 	if (stm_ofs == 0)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "object is not a stream");
+		fz_throw(ctx, FZ_ERROR_FORMAT, "object is not a stream");
 	return pdf_open_filter(ctx, doc, doc->file, dict, num, stm_ofs, NULL, 1);
 }
 
@@ -638,12 +623,12 @@ pdf_load_image_stream(fz_context *ctx, pdf_document *doc, int num, fz_compressio
 		/* In 32 bit builds, we might find a length being too
 		 * large for a size_t. */
 		if ((int64_t)len != ilen)
-			fz_throw(ctx, FZ_ERROR_GENERIC, "Stream too large");
+			fz_throw(ctx, FZ_ERROR_LIMIT, "Stream too large");
 		obj = pdf_dict_get(ctx, dict, PDF_NAME(Filter));
 		len = pdf_guess_filter_length(len, pdf_to_name(ctx, obj));
 		n = pdf_array_len(ctx, obj);
 		for (i = 0; i < n; i++)
-			len = pdf_guess_filter_length(len, pdf_to_name(ctx, pdf_array_get(ctx, obj, i)));
+			len = pdf_guess_filter_length(len, pdf_array_get_name(ctx, obj, i));
 	}
 	fz_always(ctx)
 	{
@@ -681,7 +666,7 @@ pdf_load_stream_number(fz_context *ctx, pdf_document *doc, int num)
 fz_compressed_buffer *
 pdf_load_compressed_stream(fz_context *ctx, pdf_document *doc, int num, size_t worst_case)
 {
-	fz_compressed_buffer *bc = fz_malloc_struct(ctx, fz_compressed_buffer);
+	fz_compressed_buffer *bc = fz_new_compressed_buffer(ctx);
 
 	fz_try(ctx)
 	{
@@ -711,11 +696,12 @@ pdf_open_object_array(fz_context *ctx, pdf_document *doc, pdf_obj *list)
 			fz_concat_push_drop(ctx, stm, pdf_open_stream(ctx, obj));
 		fz_catch(ctx)
 		{
-			if (fz_caught(ctx) == FZ_ERROR_TRYLATER)
+			if (fz_caught(ctx) == FZ_ERROR_TRYLATER || fz_caught(ctx) == FZ_ERROR_SYSTEM)
 			{
 				fz_drop_stream(ctx, stm);
 				fz_rethrow(ctx);
 			}
+			fz_report_error(ctx);
 			fz_warn(ctx, "cannot load content stream part %d/%d", i + 1, n);
 		}
 	}
@@ -743,26 +729,26 @@ fz_buffer *pdf_load_raw_stream(fz_context *ctx, pdf_obj *ref)
 {
 	if (pdf_is_stream(ctx, ref))
 		return pdf_load_raw_stream_number(ctx, pdf_get_indirect_document(ctx, ref), pdf_to_num(ctx, ref));
-	fz_throw(ctx, FZ_ERROR_GENERIC, "object is not a stream");
+	fz_throw(ctx, FZ_ERROR_FORMAT, "object is not a stream");
 }
 
 fz_buffer *pdf_load_stream(fz_context *ctx, pdf_obj *ref)
 {
 	if (pdf_is_stream(ctx, ref))
 		return pdf_load_stream_number(ctx, pdf_get_indirect_document(ctx, ref), pdf_to_num(ctx, ref));
-	fz_throw(ctx, FZ_ERROR_GENERIC, "object is not a stream");
+	fz_throw(ctx, FZ_ERROR_FORMAT, "object is not a stream");
 }
 
 fz_stream *pdf_open_raw_stream(fz_context *ctx, pdf_obj *ref)
 {
 	if (pdf_is_stream(ctx, ref))
 		return pdf_open_raw_stream_number(ctx, pdf_get_indirect_document(ctx, ref), pdf_to_num(ctx, ref));
-	fz_throw(ctx, FZ_ERROR_GENERIC, "object is not a stream");
+	fz_throw(ctx, FZ_ERROR_FORMAT, "object is not a stream");
 }
 
 fz_stream *pdf_open_stream(fz_context *ctx, pdf_obj *ref)
 {
 	if (pdf_is_stream(ctx, ref))
 		return pdf_open_stream_number(ctx, pdf_get_indirect_document(ctx, ref), pdf_to_num(ctx, ref));
-	fz_throw(ctx, FZ_ERROR_GENERIC, "object is not a stream");
+	fz_throw(ctx, FZ_ERROR_FORMAT, "object is not a stream");
 }

@@ -61,16 +61,21 @@ void
 xps_select_font_encoding(fz_context *ctx, fz_font *font, int idx)
 {
 	FT_Face face = fz_font_ft_face(ctx, font);
+	fz_ft_lock(ctx);
 	FT_Set_Charmap(face, face->charmaps[idx]);
+	fz_ft_unlock(ctx);
 }
 
 int
 xps_encode_font_char(fz_context *ctx, fz_font *font, int code)
 {
 	FT_Face face = fz_font_ft_face(ctx, font);
-	int gid = FT_Get_Char_Index(face, code);
+	int gid;
+	fz_ft_lock(ctx);
+	gid = FT_Get_Char_Index(face, code);
 	if (gid == 0 && face->charmap && face->charmap->platform_id == 3 && face->charmap->encoding_id == 0)
 		gid = FT_Get_Char_Index(face, 0xF000 | code);
+	fz_ft_unlock(ctx);
 	return gid;
 }
 
@@ -81,10 +86,10 @@ xps_measure_font_glyph(fz_context *ctx, xps_document *doc, fz_font *font, int gi
 	FT_Face face = fz_font_ft_face(ctx, font);
 	FT_Fixed hadv = 0, vadv = 0;
 
-	fz_lock(ctx, FZ_LOCK_FREETYPE);
+	fz_ft_lock(ctx);
 	FT_Get_Advance(face, gid, mask, &hadv);
 	FT_Get_Advance(face, gid, mask | FT_LOAD_VERTICAL_LAYOUT, &vadv);
-	fz_unlock(ctx, FZ_LOCK_FREETYPE);
+	fz_ft_unlock(ctx);
 
 	mtx->hadv = (float) hadv / face->units_per_EM;
 	mtx->vadv = (float) vadv / face->units_per_EM;
@@ -253,12 +258,19 @@ xps_lookup_font(fz_context *ctx, xps_document *doc, char *base_uri, char *font_u
 			if (fz_caught(ctx) == FZ_ERROR_TRYLATER)
 			{
 				if (doc->cookie)
+				{
 					doc->cookie->incomplete = 1;
+					fz_ignore_error(ctx);
+				}
 				else
 					fz_rethrow(ctx);
 			}
 			else
+			{
+				fz_rethrow_if(ctx, FZ_ERROR_SYSTEM);
+				fz_report_error(ctx);
 				fz_warn(ctx, "cannot find font resource part '%s'", partname);
+			}
 			return NULL;
 		}
 

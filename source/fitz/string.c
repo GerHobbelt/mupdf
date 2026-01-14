@@ -416,7 +416,7 @@ fz_format_output_path(fz_context *ctx, char *path, size_t size, const char *fmt,
 		num[i++] = '0';
 	n = s - fmt;
 	if (n + i + strlen(p) >= size)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "path name buffer overflow");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "path name buffer overflow");
 	memcpy(path, fmt, n);
 	while (i > 0)
 		path[n++] = num[--i];
@@ -477,6 +477,16 @@ fz_cleanname(char *name)
 		*q++ = '.';
 	*q = '\0';
 	return name;
+}
+
+char *
+fz_cleanname_strdup(fz_context *ctx, const char *name)
+{
+	size_t len = strlen(name);
+	char *newname = fz_malloc(ctx, fz_maxz(2, len + 1));
+	memcpy(newname, name, len + 1);
+	newname[len] = '\0';
+	return fz_cleanname(newname);
 }
 
 enum
@@ -746,6 +756,8 @@ int fz_is_page_range(fz_context *ctx, const char *s)
 
 const char *fz_parse_page_range(fz_context *ctx, const char *s, int *a, int *b, int n)
 {
+	const char *orig = s;
+
 	if (!s || !s[0])
 		return NULL;
 
@@ -778,6 +790,12 @@ const char *fz_parse_page_range(fz_context *ctx, const char *s, int *a, int *b, 
 
 	*a = fz_clampi(*a, 1, n);
 	*b = fz_clampi(*b, 1, n);
+
+	if (s == orig)
+	{
+		fz_warn(ctx, "skipping invalid page range");
+		return NULL;
+	}
 
 	return s;
 }
@@ -927,4 +945,29 @@ void *fz_memmem(const void *h0, size_t k, const void *n0, size_t l)
 	if (l==4) return fourbyte_memmem(h, k, n);
 
 	return twoway_memmem(h, h+k, n, l);
+}
+
+char *
+fz_utf8_from_wchar(fz_context *ctx, const wchar_t *s)
+{
+	const wchar_t *src = s;
+	char *d;
+	char *dst;
+	int len = 1;
+
+	while (*src)
+	{
+		len += fz_runelen(*src++);
+	}
+
+	d = Memento_label(fz_malloc(ctx, len), "utf8_from_wchar");
+	dst = d;
+	src = s;
+	while (*src)
+	{
+		dst += fz_runetochar(dst, *src++);
+	}
+	*dst = 0;
+
+	return d;
 }

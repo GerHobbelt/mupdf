@@ -24,12 +24,11 @@
 #define SOURCE_HTML_IMP_H
 
 #include "mupdf/fitz.h"
+#include "mupdf/html.h"
 
 #include "../fitz/xml-imp.h"
 
 typedef struct fz_html_font_face_s fz_html_font_face;
-typedef struct fz_html_font_set_s fz_html_font_set;
-typedef struct fz_html_s fz_html;
 typedef struct fz_html_box_s fz_html_box;
 typedef struct fz_html_flow_s fz_html_flow;
 typedef struct fz_css_style_splay_s fz_css_style_splay;
@@ -325,6 +324,18 @@ struct fz_html_s
 	char *title;
 };
 
+typedef enum
+{
+	FZ_HTML_RESTART_REASON_NONE = 0,
+	FZ_HTML_RESTART_REASON_LINE_HEIGHT = 1,
+	FZ_HTML_RESTART_REASON_LINE_WIDTH = 2
+} fz_html_restart_reason;
+
+enum
+{
+	FZ_HTML_RESTARTER_FLAGS_NO_OVERFLOW = 1
+};
+
 typedef struct {
 	/* start will be filled in on entry with the first node to start
 	 * operation on. NULL means start 'immediately'. As we traverse
@@ -353,6 +364,10 @@ typedef struct {
 	 * a border, so that if we then fail to put any content into the box
 	 * we'll elide the entire box/border, not output an empty one. */
 	fz_html_box *potential;
+
+	fz_html_restart_reason reason;
+
+	int flags;
 } fz_html_restarter;
 
 struct fz_story
@@ -399,46 +414,17 @@ struct fz_story
 	fz_archive *zip;
 };
 
-enum
-{
-	FZ_HTML_STRUCT_UNKNOWN = 0,
-	FZ_HTML_STRUCT_BODY,
-	FZ_HTML_STRUCT_DIV,
-	FZ_HTML_STRUCT_SPAN,
-	FZ_HTML_STRUCT_BLOCKQUOTE,
-	FZ_HTML_STRUCT_P,
-	FZ_HTML_STRUCT_H1,
-	FZ_HTML_STRUCT_H2,
-	FZ_HTML_STRUCT_H3,
-	FZ_HTML_STRUCT_H4,
-	FZ_HTML_STRUCT_H5,
-	FZ_HTML_STRUCT_H6,
-	FZ_HTML_STRUCT_L,
-	FZ_HTML_STRUCT_LI,
-	FZ_HTML_STRUCT_TABLE,
-	FZ_HTML_STRUCT_TR,
-	FZ_HTML_STRUCT_TH,
-	FZ_HTML_STRUCT_TD,
-	FZ_HTML_STRUCT_THEAD,
-	FZ_HTML_STRUCT_TBODY,
-	FZ_HTML_STRUCT_TFOOT
-};
-
-
 struct fz_html_box_s
 {
 	unsigned int type : 3;
 	unsigned int is_first_flow : 1; /* for text-indent */
 	unsigned int markup_dir : 2;
-	unsigned int structure : 5;
+	unsigned int heading : 3;
 	unsigned int list_item : 21;
 
 	fz_html_box *up, *down, *next;
 
-#ifndef NDEBUG
-	const char *tag;
-#endif
-	const char *id, *href;
+	const char *tag, *id, *href;
 	const fz_css_style *style;
 
 	union {
@@ -451,7 +437,7 @@ struct fz_html_box_s
 		/* Only needed during layout */
 		struct {
 			float x, y, w, b; /* content */
-			float em;
+			float em, baseline;
 		} layout;
 	} s;
 
@@ -554,12 +540,8 @@ void fz_add_html_font_face(fz_context *ctx, fz_html_font_set *set,
 fz_font *fz_load_html_font(fz_context *ctx, fz_html_font_set *set, const char *family, int is_bold, int is_italic, int is_small_caps);
 void fz_drop_html_font_set(fz_context *ctx, fz_html_font_set *htx);
 
-void fz_add_css_font_faces(fz_context *ctx, fz_html_font_set *set, fz_archive *zip, const char *base_uri, fz_css *css);
+void fz_add_css_font_faces(fz_context *ctx, fz_html_font_set *set, fz_archive *dir, const char *base_uri, fz_css *css);
 
-fz_html *fz_parse_fb2(fz_context *ctx, fz_html_font_set *htx, fz_archive *zip, const char *base_uri, fz_buffer *buf, const char *user_css);
-fz_html *fz_parse_html5(fz_context *ctx, fz_html_font_set *htx, fz_archive *zip, const char *base_uri, fz_buffer *buf, const char *user_css);
-fz_html *fz_parse_xhtml(fz_context *ctx, fz_html_font_set *htx, fz_archive *zip, const char *base_uri, fz_buffer *buf, const char *user_css);
-fz_html *fz_parse_mobi(fz_context *ctx, fz_html_font_set *htx, fz_archive *zip, const char *base_uri, fz_buffer *buf, const char *user_css);
 fz_html *fz_parse_txt(fz_context *ctx, fz_html_font_set *htx, fz_archive *zip, const char *base_uri, fz_buffer *buf, const char *user_css);
 
 void fz_layout_html(fz_context *ctx, fz_html *html, float w, float h, float em);
@@ -584,8 +566,13 @@ fz_html_flow *fz_html_split_flow(fz_context *ctx, fz_pool *pool, fz_html_flow *f
 
 fz_archive *fz_extract_html_from_mobi(fz_context *ctx, fz_buffer *mobi);
 
-int fz_html_heading_from_struct(int structure);
-const char *fz_html_structure_to_string(int structure);
-fz_structure fz_html_structure_to_structure(int s);
+fz_structure fz_html_tag_to_structure(const char *tag);
+
+fz_html *fz_parse_html(fz_context *ctx,
+	fz_html_font_set *set, fz_archive *dir, const char *base_uri, fz_buffer *buf, const char *user_css,
+	int try_xml, int try_html5, int patch_mobi);
+
+fz_buffer *fz_txt_buffer_to_html(fz_context *ctx, fz_buffer *in);
+
 
 #endif

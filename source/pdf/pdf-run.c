@@ -32,7 +32,7 @@ pdf_run_annot_with_usage(fz_context *ctx, pdf_document *doc, pdf_page *page, pdf
 	fz_default_colorspaces *default_cs = NULL;
 	int flags;
 	int resources_pushed = 0;
-	int struct_parent_num = -1;
+	int struct_parent_num;
 	pdf_obj *struct_parent;
 
 	fz_var(proc);
@@ -69,7 +69,7 @@ pdf_run_annot_with_usage(fz_context *ctx, pdf_document *doc, pdf_page *page, pdf
 		flags = pdf_dict_get_int(ctx, annot->obj, PDF_NAME(F));
 		if (flags & PDF_ANNOT_IS_NO_ROTATE)
 		{
-			int rotate = pdf_to_int(ctx, pdf_dict_get_inheritable(ctx, page->obj, PDF_NAME(Rotate)));
+			int rotate = pdf_dict_get_inheritable_int(ctx, page->obj, PDF_NAME(Rotate));
 			fz_rect rect = pdf_dict_get_rect(ctx, annot->obj, PDF_NAME(Rect));
 			fz_point tp = fz_transform_point_xy(rect.x0, rect.y1, page_ctm);
 			page_ctm = fz_concat(page_ctm, fz_translate(-tp.x, -tp.y));
@@ -80,8 +80,7 @@ pdf_run_annot_with_usage(fz_context *ctx, pdf_document *doc, pdf_page *page, pdf
 		ctm = fz_concat(page_ctm, ctm);
 
 		struct_parent = pdf_dict_getl(ctx, page->obj, PDF_NAME(StructParent));
-		if (pdf_is_number(ctx, struct_parent))
-			struct_parent_num = pdf_to_int(ctx, struct_parent);
+		struct_parent_num = pdf_to_int_default(ctx, struct_parent, -1);
 
 		proc = pdf_new_run_processor(ctx, page->doc, dev, ctm, struct_parent_num, usage, NULL, default_cs, cookie);
 		pdf_processor_push_resources(ctx, proc, pdf_page_resources(ctx, annot->page));
@@ -111,7 +110,7 @@ static fz_rect pdf_page_cropbox(fz_context *ctx, pdf_page *page)
 
 static fz_rect pdf_page_mediabox(fz_context *ctx, pdf_page *page)
 {
-	return pdf_to_rect(ctx, pdf_dict_get_inheritable(ctx, page->obj, PDF_NAME(MediaBox)));
+	return pdf_dict_get_inheritable_rect(ctx, page->obj, PDF_NAME(MediaBox));
 }
 
 static void
@@ -126,7 +125,7 @@ pdf_run_page_contents_with_usage_imp(fz_context *ctx, pdf_document *doc, pdf_pag
 	fz_default_colorspaces *default_cs = NULL;
 	fz_colorspace *colorspace = NULL;
 	fz_path *path = NULL;
-	int struct_parent_num = -1;
+	int struct_parent_num;
 	pdf_obj *struct_parent;
 
 	fz_var(proc);
@@ -167,6 +166,8 @@ pdf_run_page_contents_with_usage_imp(fz_context *ctx, pdf_document *doc, pdf_pag
 					fz_catch(ctx)
 					{
 						fz_rethrow_if(ctx, FZ_ERROR_TRYLATER);
+						fz_rethrow_if(ctx, FZ_ERROR_SYSTEM);
+						fz_report_error(ctx);
 						fz_warn(ctx, "Ignoring Page blending colorspace.");
 					}
 					if (!fz_is_valid_blend_colorspace(ctx, colorspace))
@@ -184,8 +185,7 @@ pdf_run_page_contents_with_usage_imp(fz_context *ctx, pdf_document *doc, pdf_pag
 		}
 
 		struct_parent = pdf_dict_get(ctx, page->obj, PDF_NAME(StructParents));
-		if (pdf_is_number(ctx, struct_parent))
-			struct_parent_num = pdf_to_int(ctx, struct_parent);
+		struct_parent_num = pdf_to_int_default(ctx, struct_parent, -1);
 
 		/* Clip content to CropBox if it is smaller than the MediaBox */
 		if (cropbox.x0 > mediabox.x0 || cropbox.x1 < mediabox.x1 || cropbox.y0 > mediabox.y0 || cropbox.y1 < mediabox.y1)
@@ -431,6 +431,259 @@ pdf_run_glyph(fz_context *ctx, pdf_document *doc, pdf_obj *resources, fz_buffer 
 	}
 	fz_always(ctx)
 		pdf_drop_processor(ctx, proc);
+	fz_catch(ctx)
+		fz_rethrow(ctx);
+}
+
+fz_structure
+pdf_structure_type(fz_context *ctx, pdf_obj *role_map, pdf_obj *tag)
+{
+	/* Perform Structure mapping to go from tag to standard. */
+	if (role_map)
+	{
+		pdf_obj *o = pdf_dict_get(ctx, role_map, tag);
+		if (o)
+			tag = o;
+	}
+
+	if (pdf_name_eq(ctx, tag, PDF_NAME(Document)))
+		return FZ_STRUCTURE_DOCUMENT;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(Part)))
+		return FZ_STRUCTURE_PART;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(Art)))
+		return FZ_STRUCTURE_ART;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(Sect)))
+		return FZ_STRUCTURE_SECT;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(Div)))
+		return FZ_STRUCTURE_DIV;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(BlockQuote)))
+		return FZ_STRUCTURE_BLOCKQUOTE;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(Caption)))
+		return FZ_STRUCTURE_CAPTION;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(TOC)))
+		return FZ_STRUCTURE_TOC;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(TOCI)))
+		return FZ_STRUCTURE_TOCI;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(Index)))
+		return FZ_STRUCTURE_INDEX;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(NonStruct)))
+		return FZ_STRUCTURE_NONSTRUCT;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(Private)))
+		return FZ_STRUCTURE_PRIVATE;
+	/* Grouping elements (PDF 2.0 - Table 364) */
+	if (pdf_name_eq(ctx, tag, PDF_NAME(DocumentFragment)))
+		return FZ_STRUCTURE_DOCUMENTFRAGMENT;
+	/* Grouping elements (PDF 2.0 - Table 365) */
+	if (pdf_name_eq(ctx, tag, PDF_NAME(Aside)))
+		return FZ_STRUCTURE_ASIDE;
+	/* Grouping elements (PDF 2.0 - Table 366) */
+	if (pdf_name_eq(ctx, tag, PDF_NAME(Title)))
+		return FZ_STRUCTURE_TITLE;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(FENote)))
+		return FZ_STRUCTURE_FENOTE;
+	/* Grouping elements (PDF 2.0 - Table 367) */
+	if (pdf_name_eq(ctx, tag, PDF_NAME(Sub)))
+		return FZ_STRUCTURE_SUB;
+
+	/* Paragraphlike elements (PDF 1.7 - Table 10.21) */
+	if (pdf_name_eq(ctx, tag, PDF_NAME(P)))
+		return FZ_STRUCTURE_P;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(H)))
+		return FZ_STRUCTURE_H;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(H1)))
+		return FZ_STRUCTURE_H1;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(H2)))
+		return FZ_STRUCTURE_H2;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(H3)))
+		return FZ_STRUCTURE_H3;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(H4)))
+		return FZ_STRUCTURE_H4;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(H5)))
+		return FZ_STRUCTURE_H5;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(H6)))
+		return FZ_STRUCTURE_H6;
+
+	/* List elements (PDF 1.7 - Table 10.23) */
+	if (pdf_name_eq(ctx, tag, PDF_NAME(List)))
+		return FZ_STRUCTURE_LIST;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(LI)))
+		return FZ_STRUCTURE_LISTITEM;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(Lbl)))
+		return FZ_STRUCTURE_LABEL;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(LBody)))
+		return FZ_STRUCTURE_LISTBODY;
+
+	/* Table elements (PDF 1.7 - Table 10.24) */
+	if (pdf_name_eq(ctx, tag, PDF_NAME(Table)))
+		return FZ_STRUCTURE_TABLE;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(TR)))
+		return FZ_STRUCTURE_TR;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(TH)))
+		return FZ_STRUCTURE_TH;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(TD)))
+		return FZ_STRUCTURE_TD;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(THead)))
+		return FZ_STRUCTURE_THEAD;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(TBody)))
+		return FZ_STRUCTURE_TBODY;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(TFoot)))
+		return FZ_STRUCTURE_TFOOT;
+
+	/* Inline elements (PDF 1.7 - Table 10.25) */
+	if (pdf_name_eq(ctx, tag, PDF_NAME(Span)))
+		return FZ_STRUCTURE_SPAN;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(Quote)))
+		return FZ_STRUCTURE_QUOTE;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(Note)))
+		return FZ_STRUCTURE_NOTE;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(Reference)))
+		return FZ_STRUCTURE_REFERENCE;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(BibEntry)))
+		return FZ_STRUCTURE_BIBENTRY;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(Code)))
+		return FZ_STRUCTURE_CODE;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(Link)))
+		return FZ_STRUCTURE_LINK;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(Annot)))
+		return FZ_STRUCTURE_ANNOT;
+	/* Inline elements (PDF 2.0 - Table 368) */
+	if (pdf_name_eq(ctx, tag, PDF_NAME(Em)))
+		return FZ_STRUCTURE_EM;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(Strong)))
+		return FZ_STRUCTURE_STRONG;
+
+	/* Ruby inline element (PDF 1.7 - Table 10.26) */
+	if (pdf_name_eq(ctx, tag, PDF_NAME(Ruby)))
+		return FZ_STRUCTURE_RUBY;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(RB)))
+		return FZ_STRUCTURE_RB;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(RT)))
+		return FZ_STRUCTURE_RT;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(RP)))
+		return FZ_STRUCTURE_RP;
+
+	/* Warichu inline element (PDF 1.7 - Table 10.26) */
+	if (pdf_name_eq(ctx, tag, PDF_NAME(Warichu)))
+		return FZ_STRUCTURE_WARICHU;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(WT)))
+		return FZ_STRUCTURE_WT;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(WP)))
+		return FZ_STRUCTURE_WP;
+
+	/* Illustration elements (PDF 1.7 - Table 10.27) */
+	if (pdf_name_eq(ctx, tag, PDF_NAME(Figure)))
+		return FZ_STRUCTURE_FIGURE;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(Formula)))
+		return FZ_STRUCTURE_FORMULA;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(Form)))
+		return FZ_STRUCTURE_FORM;
+
+	/* Artifact structure type (PDF 2.0 - Table 375) */
+	if (pdf_name_eq(ctx, tag, PDF_NAME(Artifact)))
+		return FZ_STRUCTURE_ARTIFACT;
+
+	return FZ_STRUCTURE_INVALID;
+}
+
+/* The recursive descent of the structure tree uses an fz_try at each level.
+ * At the risk of creating a foot cannon... "no one will need more than ~64
+ * levels of structure tree". */
+static void
+run_ds(fz_context *ctx, fz_device *dev, pdf_obj *role_map, pdf_obj *obj, int idx, fz_cookie *cookie)
+{
+	pdf_obj *k;
+	int i, n;
+
+	/* Check the cookie for aborting */
+	if (cookie)
+	{
+		if (cookie->abort)
+			return;
+		cookie->progress++;
+	}
+
+	if (pdf_is_number(ctx, obj))
+	{
+		/* A marked-content identifier denoting a marked content sequence. WHAT? */
+		return;
+	}
+
+	if (pdf_mark_obj(ctx, obj))
+		return;
+
+	fz_try(ctx)
+	{
+		fz_structure standard;
+		pdf_obj *tag = pdf_dict_get(ctx, obj, PDF_NAME(S));
+		if (!tag)
+			break;
+
+		standard = pdf_structure_type(ctx, role_map, tag);
+		if (standard == FZ_STRUCTURE_INVALID)
+			break;
+		fz_begin_structure(ctx, dev, standard, pdf_to_name(ctx, tag), idx);
+		k = pdf_dict_get(ctx, obj, PDF_NAME(K));
+		if (k)
+		{
+			n = pdf_array_len(ctx, k);
+			if (n == 0)
+				run_ds(ctx, dev, role_map, k, 0, cookie);
+			else
+			{
+				for (i = 0; i < n; i++)
+					run_ds(ctx, dev, role_map, pdf_array_get(ctx, k, i), i, cookie);
+			}
+		}
+		fz_end_structure(ctx, dev);
+	}
+	fz_always(ctx)
+		pdf_unmark_obj(ctx, obj);
+	fz_catch(ctx)
+		fz_rethrow(ctx);
+}
+
+void pdf_run_document_structure(fz_context *ctx, pdf_document *doc, fz_device *dev, fz_cookie *cookie)
+{
+	int nocache;
+	int marked = 0;
+	pdf_obj *st, *rm, *k;
+
+	fz_var(marked);
+
+	nocache = !!(dev->hints & FZ_NO_CACHE);
+	if (nocache)
+		pdf_mark_xref(ctx, doc);
+
+	fz_try(ctx)
+	{
+		st = pdf_dict_get(ctx, pdf_dict_get(ctx, pdf_trailer(ctx, doc), PDF_NAME(Root)), PDF_NAME(StructTreeRoot));
+		rm = pdf_dict_get(ctx, st, PDF_NAME(RoleMap));
+
+		if (pdf_mark_obj(ctx, st))
+			break;
+		marked = 1;
+
+		k = pdf_dict_get(ctx, st, PDF_NAME(K));
+		if (k)
+		{
+			int n = pdf_array_len(ctx, k);
+			if (n == 0)
+				run_ds(ctx, dev, rm, k, 0, cookie);
+			else
+			{
+				int i;
+				for (i = 0; i < n; i++)
+					run_ds(ctx, dev, rm, pdf_array_get(ctx, k, i), i, cookie);
+			}
+		}
+	}
+	fz_always(ctx)
+	{
+		if (marked)
+			pdf_unmark_obj(ctx, st);
+		if (nocache)
+			pdf_clear_xref_to_mark(ctx, doc);
+	}
 	fz_catch(ctx)
 		fz_rethrow(ctx);
 }

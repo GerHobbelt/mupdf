@@ -26,7 +26,12 @@
 #include <string.h>
 #include <math.h>
 
+#include "mupdf/ucdn.h"
+
 #define TILE
+
+/* Enable this to watch changes in the structure stack. */
+#undef DEBUG_STRUCTURE
 
 /*
  * Emit graphics calls to device.
@@ -84,6 +89,7 @@ struct pdf_gstate
 	int blendmode;
 	pdf_obj *softmask;
 	pdf_obj *softmask_resources;
+	pdf_obj *softmask_tr;
 	fz_matrix softmask_ctm;
 	float softmask_bc[FZ_MAX_COLORS];
 	int luminosity;
@@ -126,6 +132,7 @@ struct pdf_run_processor
 
 	/* text object state */
 	pdf_text_object_state tos;
+	int bidi;
 
 	/* graphics state */
 	pdf_gstate *gstate;
@@ -191,6 +198,15 @@ typedef struct
 	fz_matrix ctm;
 } softmask_save;
 
+static fz_function *
+load_transfer_function(fz_context *ctx, pdf_obj *obj)
+{
+	if (obj == NULL || pdf_name_eq(ctx, obj, PDF_NAME(Identity)))
+		return NULL;
+
+	return (fz_function *)pdf_load_function(ctx, obj, 1, 1);
+}
+
 static pdf_gstate *
 begin_softmask(fz_context *ctx, pdf_run_processor *pr, softmask_save *save)
 {
@@ -201,6 +217,9 @@ begin_softmask(fz_context *ctx, pdf_run_processor *pr, softmask_save *save)
 	fz_matrix mask_matrix;
 	fz_colorspace *mask_colorspace;
 	int saved_blendmode;
+	fz_function *tr = NULL;
+
+	fz_var(tr);
 
 	save->softmask = softmask;
 	if (softmask == NULL)
@@ -233,15 +252,25 @@ begin_softmask(fz_context *ctx, pdf_run_processor *pr, softmask_save *save)
 
 	fz_try(ctx)
 	{
+		if (gstate->softmask_tr)
+		{
+			tr = load_transfer_function(ctx, gstate->softmask_tr);
+			pdf_drop_obj(ctx, gstate->softmask_tr);
+			gstate->softmask_tr = NULL;
+		}
+
 		fz_begin_mask(ctx, pr->dev, mask_bbox, gstate->luminosity, mask_colorspace, gstate->softmask_bc, gstate->fill.color_params);
 		gstate->blendmode = 0;
 		pdf_run_xobject(ctx, pr, softmask, save->page_resources, fz_identity, 1);
 		gstate = pr->gstate + pr->gtop;
 		gstate->blendmode = saved_blendmode;
-		fz_end_mask(ctx, pr->dev);
+		fz_end_mask_tr(ctx, pr->dev, tr);
 	}
 	fz_always(ctx)
+	{
+		fz_drop_function(ctx, tr);
 		fz_drop_colorspace(ctx, mask_colorspace);
+	}
 	fz_catch(ctx)
 		fz_rethrow(ctx);
 
@@ -387,6 +416,7 @@ pdf_keep_gstate(fz_context *ctx, pdf_gstate *gs)
 	if (gs->softmask_resources)
 		pdf_keep_obj(ctx, gs->softmask_resources);
 	fz_keep_stroke_state(ctx, gs->stroke_state);
+	pdf_keep_obj(ctx, gs->softmask_tr);
 }
 
 static void
@@ -398,6 +428,7 @@ pdf_drop_gstate(fz_context *ctx, pdf_gstate *gs)
 	pdf_drop_obj(ctx, gs->softmask);
 	pdf_drop_obj(ctx, gs->softmask_resources);
 	fz_drop_stroke_state(ctx, gs->stroke_state);
+	pdf_drop_obj(ctx, gs->softmask_tr);
 }
 
 static void
@@ -405,6 +436,9 @@ pdf_gsave(fz_context *ctx, pdf_run_processor *pr)
 {
 	if (pr->gtop == pr->gcap-1)
 	{
+		if (pr->gcap * 2 >= 4096)
+			fz_throw(ctx, FZ_ERROR_LIMIT, "too many nested graphics states");
+
 		pr->gstate = fz_realloc_array(ctx, pr->gstate, pr->gcap*2, pdf_gstate);
 		pr->gcap *= 2;
 	}
@@ -441,6 +475,8 @@ pdf_grestore(fz_context *ctx, pdf_run_processor *pr)
 		{
 			/* Silently swallow the problem - restores must
 			 * never throw! */
+			fz_rethrow_if(ctx, FZ_ERROR_SYSTEM); // FIXME - unsure if we can throw here?
+			fz_report_error(ctx);
 		}
 		clip_depth--;
 	}
@@ -456,6 +492,7 @@ pdf_show_pattern(fz_context *ctx, pdf_run_processor *pr, pdf_pattern *pat, int p
 	int x0, y0, x1, y1;
 	float fx0, fy0, fx1, fy1;
 	fz_rect local_area;
+	int oldbot;
 	int id;
 
 	pdf_gsave(ctx, pr);
@@ -540,9 +577,17 @@ pdf_show_pattern(fz_context *ctx, pdf_run_processor *pr, pdf_pattern *pat, int p
 		if (!cached)
 		{
 			gstate->ctm = ptm;
+
+			oldbot = pr->gbot;
+			pr->gbot = pr->gtop;
+
 			pdf_gsave(ctx, pr);
 			pdf_process_contents(ctx, (pdf_processor*)pr, pat->document, pat->resources, pat->contents, NULL, NULL);
 			pdf_grestore(ctx, pr);
+
+			while (pr->gtop > pr->gbot)
+				pdf_grestore(ctx, pr);
+			pr->gbot = oldbot;
 		}
 		fz_end_tile(ctx, pr->dev);
 	}
@@ -577,9 +622,17 @@ pdf_show_pattern(fz_context *ctx, pdf_run_processor *pr, pdf_pattern *pat, int p
 				 * it each time round the loop. */
 				gstate = pr->gstate + pr->gtop;
 				gstate->ctm = fz_pre_translate(ptm, x * pat->xstep, y * pat->ystep);
+
+				oldbot = pr->gbot;
+				pr->gbot = pr->gtop;
+
 				pdf_gsave(ctx, pr);
 				pdf_process_contents(ctx, (pdf_processor*)pr, pat->document, pat->resources, pat->contents, NULL, NULL);
 				pdf_grestore(ctx, pr);
+
+				while (pr->gtop > pr->gbot)
+					pdf_grestore(ctx, pr);
+				pr->gbot = oldbot;
 			}
 		}
 	}
@@ -627,6 +680,11 @@ pdf_show_image(fz_context *ctx, pdf_run_processor *pr, fz_image *image)
 	fz_rect bbox;
 
 	if (pr->super.hidden)
+		return;
+
+	/* image can be NULL here if we are, for example, running to an
+	 * stext device. */
+	if (image == NULL)
 		return;
 
 	flush_begin_layer(ctx, pr);
@@ -969,6 +1027,41 @@ pdf_flush_text(fz_context *ctx, pdf_run_processor *pr)
 	return pr->gstate + pr->gtop;
 }
 
+static int
+guess_bidi_level(int bidiclass, int cur_bidi)
+{
+	switch (bidiclass)
+	{
+	/* strong */
+	case UCDN_BIDI_CLASS_L: return 0;
+	case UCDN_BIDI_CLASS_R: return 1;
+	case UCDN_BIDI_CLASS_AL: return 1;
+
+	/* weak */
+	case UCDN_BIDI_CLASS_EN:
+	case UCDN_BIDI_CLASS_ES:
+	case UCDN_BIDI_CLASS_ET:
+		return 0;
+	case UCDN_BIDI_CLASS_AN:
+		return 1;
+	case UCDN_BIDI_CLASS_CS:
+	case UCDN_BIDI_CLASS_NSM:
+	case UCDN_BIDI_CLASS_BN:
+		return cur_bidi;
+
+	/* neutral */
+	case UCDN_BIDI_CLASS_B:
+	case UCDN_BIDI_CLASS_S:
+	case UCDN_BIDI_CLASS_WS:
+	case UCDN_BIDI_CLASS_ON:
+		return cur_bidi;
+
+	/* embedding, override, pop ... we don't support them */
+	default:
+		return 0;
+	}
+}
+
 static void
 pdf_show_char(fz_context *ctx, pdf_run_processor *pr, int cid, fz_text_language lang)
 {
@@ -1032,12 +1125,15 @@ pdf_show_char(fz_context *ctx, pdf_run_processor *pr, int cid, fz_text_language 
 		ucslen = 1;
 	}
 
+	/* guess bidi level from unicode value */
+	pr->bidi = guess_bidi_level(ucdn_get_bidi_class(ucsbuf[0]), pr->bidi);
+
 	/* add glyph to textobject */
-	fz_show_glyph_aux(ctx, pr->tos.text, fontdesc->font, trm, gid, ucsbuf[0], cid, fontdesc->wmode, 0, FZ_BIDI_NEUTRAL, lang);
+	fz_show_glyph_aux(ctx, pr->tos.text, fontdesc->font, trm, gid, ucsbuf[0], cid, fontdesc->wmode, pr->bidi, FZ_BIDI_NEUTRAL, lang);
 
 	/* add filler glyphs for one-to-many unicode mapping */
 	for (i = 1; i < ucslen; i++)
-		fz_show_glyph_aux(ctx, pr->tos.text, fontdesc->font, trm, -1, ucsbuf[i], -1, fontdesc->wmode, 0, FZ_BIDI_NEUTRAL, lang);
+		fz_show_glyph_aux(ctx, pr->tos.text, fontdesc->font, trm, -1, ucsbuf[i], -1, fontdesc->wmode, pr->bidi, FZ_BIDI_NEUTRAL, lang);
 
 	pdf_tos_move_after_char(ctx, &pr->tos);
 }
@@ -1340,156 +1436,6 @@ pdf_set_pattern(fz_context *ctx, pdf_run_processor *pr, int what, pdf_pattern *p
 	mat->gstate_num = pr->gparent;
 }
 
-fz_structure
-structure_type(fz_context *ctx, pdf_run_processor *proc, pdf_obj *tag)
-{
-	/* Perform Structure mapping to go from tag to standard. */
-	if (proc->role_map)
-	{
-		pdf_obj *o = pdf_dict_get(ctx, proc->role_map, tag);
-		if (o)
-			tag = o;
-	}
-
-	if (pdf_name_eq(ctx, tag, PDF_NAME(Document)))
-		return FZ_STRUCTURE_DOCUMENT;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(Part)))
-		return FZ_STRUCTURE_PART;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(Art)))
-		return FZ_STRUCTURE_ART;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(Sect)))
-		return FZ_STRUCTURE_SECT;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(Div)))
-		return FZ_STRUCTURE_DIV;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(BlockQuote)))
-		return FZ_STRUCTURE_BLOCKQUOTE;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(Caption)))
-		return FZ_STRUCTURE_CAPTION;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(TOC)))
-		return FZ_STRUCTURE_TOC;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(TOCI)))
-		return FZ_STRUCTURE_TOCI;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(Index)))
-		return FZ_STRUCTURE_INDEX;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(NonStruct)))
-		return FZ_STRUCTURE_NONSTRUCT;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(Private)))
-		return FZ_STRUCTURE_PRIVATE;
-	/* Grouping elements (PDF 2.0 - Table 364) */
-	if (pdf_name_eq(ctx, tag, PDF_NAME(DocumentFragment)))
-		return FZ_STRUCTURE_DOCUMENTFRAGMENT;
-	/* Grouping elements (PDF 2.0 - Table 365) */
-	if (pdf_name_eq(ctx, tag, PDF_NAME(Aside)))
-		return FZ_STRUCTURE_ASIDE;
-	/* Grouping elements (PDF 2.0 - Table 366) */
-	if (pdf_name_eq(ctx, tag, PDF_NAME(Title)))
-		return FZ_STRUCTURE_TITLE;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(FENote)))
-		return FZ_STRUCTURE_FENOTE;
-	/* Grouping elements (PDF 2.0 - Table 367) */
-	if (pdf_name_eq(ctx, tag, PDF_NAME(Sub)))
-		return FZ_STRUCTURE_SUB;
-
-	/* Paragraphlike elements (PDF 1.7 - Table 10.21) */
-	if (pdf_name_eq(ctx, tag, PDF_NAME(P)))
-		return FZ_STRUCTURE_P;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(H)))
-		return FZ_STRUCTURE_H;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(H1)))
-		return FZ_STRUCTURE_H1;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(H2)))
-		return FZ_STRUCTURE_H2;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(H3)))
-		return FZ_STRUCTURE_H3;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(H4)))
-		return FZ_STRUCTURE_H4;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(H5)))
-		return FZ_STRUCTURE_H5;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(H6)))
-		return FZ_STRUCTURE_H6;
-
-	/* List elements (PDF 1.7 - Table 10.23) */
-	if (pdf_name_eq(ctx, tag, PDF_NAME(List)))
-		return FZ_STRUCTURE_LIST;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(LI)))
-		return FZ_STRUCTURE_LISTITEM;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(Lbl)))
-		return FZ_STRUCTURE_LABEL;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(LBody)))
-		return FZ_STRUCTURE_LISTBODY;
-
-	/* Table elements (PDF 1.7 - Table 10.24) */
-	if (pdf_name_eq(ctx, tag, PDF_NAME(Table)))
-		return FZ_STRUCTURE_TABLE;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(TR)))
-		return FZ_STRUCTURE_TR;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(TH)))
-		return FZ_STRUCTURE_TH;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(TD)))
-		return FZ_STRUCTURE_TD;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(THead)))
-		return FZ_STRUCTURE_THEAD;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(TBody)))
-		return FZ_STRUCTURE_TBODY;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(TFoot)))
-		return FZ_STRUCTURE_TFOOT;
-
-	/* Inline elements (PDF 1.7 - Table 10.25) */
-	if (pdf_name_eq(ctx, tag, PDF_NAME(Span)))
-		return FZ_STRUCTURE_SPAN;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(Quote)))
-		return FZ_STRUCTURE_QUOTE;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(Note)))
-		return FZ_STRUCTURE_NOTE;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(Reference)))
-		return FZ_STRUCTURE_REFERENCE;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(BibEntry)))
-		return FZ_STRUCTURE_BIBENTRY;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(Code)))
-		return FZ_STRUCTURE_CODE;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(Link)))
-		return FZ_STRUCTURE_LINK;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(Annot)))
-		return FZ_STRUCTURE_ANNOT;
-	/* Inline elements (PDF 2.0 - Table 368) */
-	if (pdf_name_eq(ctx, tag, PDF_NAME(Em)))
-		return FZ_STRUCTURE_EM;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(Strong)))
-		return FZ_STRUCTURE_STRONG;
-
-	/* Ruby inline element (PDF 1.7 - Table 10.26) */
-	if (pdf_name_eq(ctx, tag, PDF_NAME(Ruby)))
-		return FZ_STRUCTURE_RUBY;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(RB)))
-		return FZ_STRUCTURE_RB;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(RT)))
-		return FZ_STRUCTURE_RT;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(RP)))
-		return FZ_STRUCTURE_RP;
-
-	/* Warichu inline element (PDF 1.7 - Table 10.26) */
-	if (pdf_name_eq(ctx, tag, PDF_NAME(Warichu)))
-		return FZ_STRUCTURE_WARICHU;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(WT)))
-		return FZ_STRUCTURE_WT;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(WP)))
-		return FZ_STRUCTURE_WP;
-
-	/* Illustration elements (PDF 1.7 - Table 10.27) */
-	if (pdf_name_eq(ctx, tag, PDF_NAME(Figure)))
-		return FZ_STRUCTURE_FIGURE;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(Formula)))
-		return FZ_STRUCTURE_FORMULA;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(Form)))
-		return FZ_STRUCTURE_FORM;
-
-	/* Artifact structure type (PDF 2.0 - Table 375) */
-	if (pdf_name_eq(ctx, tag, PDF_NAME(Artifact)))
-		return FZ_STRUCTURE_ARTIFACT;
-
-	return FZ_STRUCTURE_INVALID;
-}
-
 static void
 begin_metatext(fz_context *ctx, pdf_run_processor *proc, pdf_obj *val, pdf_obj *mcid, fz_metatext meta, pdf_obj *name)
 {
@@ -1611,16 +1557,50 @@ end_layer(fz_context *ctx, pdf_run_processor *proc, pdf_obj *val)
 	}
 }
 
+#ifdef DEBUG_STRUCTURE
+static void
+structure_dump(fz_context *ctx, const char *str, pdf_obj *obj)
+{
+	printf("%s STACK=", str);
+
+	if (obj == NULL)
+	{
+		printf("empty\n");
+		return;
+	}
+
+	do
+	{
+		int n = pdf_to_num(ctx, obj);
+		printf(" %d", n);
+		obj = pdf_dict_get(ctx, obj, PDF_NAME(P));
+	}
+	while (obj);
+	printf("\n");
+}
+#endif
+
 static void
 pop_structure_to(fz_context *ctx, pdf_run_processor *proc, pdf_obj *common)
 {
 	pdf_obj *struct_tree_root = pdf_dict_getl(ctx, pdf_trailer(ctx, proc->doc), PDF_NAME(Root), PDF_NAME(StructTreeRoot), NULL);
 
+#ifdef DEBUG_STRUCTURE
+	structure_dump(ctx, "pop_structure_to (before)", proc->mcid_sent);
+
+	{
+		int n = pdf_to_num(ctx, common);
+		printf("Popping until %d\n", n);
+	}
+#endif
+
 	while (pdf_objcmp(ctx, proc->mcid_sent, common))
 	{
 		pdf_obj *p = pdf_dict_get(ctx, proc->mcid_sent, PDF_NAME(P));
-
-		fz_end_structure(ctx, proc->dev);
+		pdf_obj *tag = pdf_dict_get(ctx, proc->mcid_sent, PDF_NAME(S));
+		fz_structure standard = pdf_structure_type(ctx, proc->role_map, tag);
+		if (standard != FZ_STRUCTURE_INVALID)
+			fz_end_structure(ctx, proc->dev);
 		pdf_drop_obj(ctx, proc->mcid_sent);
 		proc->mcid_sent = pdf_keep_obj(ctx, p);
 		if (!pdf_objcmp(ctx, p, struct_tree_root))
@@ -1630,6 +1610,9 @@ pop_structure_to(fz_context *ctx, pdf_run_processor *proc, pdf_obj *common)
 			break;
 		}
 	}
+#ifdef DEBUG_STRUCTURE
+	structure_dump(ctx, "pop_structure_to (after)", proc->mcid_sent);
+#endif
 }
 
 struct line
@@ -1650,7 +1633,7 @@ find_most_recent_common_ancestor_imp(fz_context *ctx, pdf_obj *a, struct line *l
 	if (pdf_is_dict(ctx, a))
 	{
 		if (pdf_cycle(ctx, &cycle, cycle_up_a, a))
-			fz_throw(ctx, FZ_ERROR_GENERIC, "cycle in structure tree");
+			fz_throw(ctx, FZ_ERROR_FORMAT, "cycle in structure tree");
 		line.obj = a;
 		line.child = line_a;
 		parent = pdf_dict_get(ctx, a, PDF_NAME(P));
@@ -1660,7 +1643,7 @@ find_most_recent_common_ancestor_imp(fz_context *ctx, pdf_obj *a, struct line *l
 	else if (pdf_is_dict(ctx, b))
 	{
 		if (pdf_cycle(ctx, &cycle, cycle_up_b, b))
-			fz_throw(ctx, FZ_ERROR_GENERIC, "cycle in structure tree");
+			fz_throw(ctx, FZ_ERROR_FORMAT, "cycle in structure tree");
 		line.obj = b;
 		line.child = line_b;
 		parent = pdf_dict_get(ctx, b, PDF_NAME(P));
@@ -1685,10 +1668,43 @@ find_most_recent_ancestor(fz_context *ctx, pdf_obj *a, pdf_obj *b)
 	return find_most_recent_common_ancestor_imp(ctx, a, NULL, b, NULL, NULL, NULL);
 }
 
+static int
+get_struct_index(fz_context *ctx, pdf_obj *send)
+{
+	pdf_obj *p = pdf_dict_get(ctx, send, PDF_NAME(P));
+	pdf_obj *k;
+	int i, n;
+
+	if (p == NULL)
+		return 0; /* Presumably the StructTreeToot */
+
+	/* So, get the kids array. */
+	k = pdf_dict_get(ctx, p, PDF_NAME(K));
+	n = pdf_array_len(ctx, k);
+	if (n == 0)
+	{
+		/* Not an array, presumably a singleton. */
+		if (pdf_objcmp(ctx, k, send) == 0)
+			return 0;
+		return -1;
+	}
+	for (i = 0; i < n; i++)
+	{
+		if (pdf_objcmp(ctx, pdf_array_get(ctx, k, i), send) == 0)
+			return i;
+	}
+	return -1;
+}
+
 static void
 send_begin_structure(fz_context *ctx, pdf_run_processor *proc, pdf_obj *mc_dict)
 {
 	pdf_obj *common = NULL;
+
+#ifdef DEBUG_STRUCTURE
+	printf("send_begin_structure  %d\n", pdf_to_num(ctx, mc_dict));
+	structure_dump(ctx, "on entry", proc->mcid_sent);
+#endif
 
 	/* We are currently nested in A,B,C,...E,F,mcid_sent. We want to update to
 	 * being in A,B,C,...G,H,mc_dict. So we need to find the lowest common point. */
@@ -1697,6 +1713,9 @@ send_begin_structure(fz_context *ctx, pdf_run_processor *proc, pdf_obj *mc_dict)
 	/* So, we need to pop everything up to common (i.e. everything below common will be closed). */
 	pop_structure_to(ctx, proc, common);
 
+#ifdef DEBUG_STRUCTURE
+	structure_dump(ctx, "after popping", proc->mcid_sent);
+#endif
 	/* Now we need to send everything between common (proc->mcid_sent) and mc_dict.
 	 * Again, n^2 will do... */
 	while (pdf_objcmp(ctx, proc->mcid_sent, mc_dict))
@@ -1704,7 +1723,9 @@ send_begin_structure(fz_context *ctx, pdf_run_processor *proc, pdf_obj *mc_dict)
 		pdf_obj *send = mc_dict;
 		fz_structure standard;
 		pdf_obj *tag;
-		int uid;
+		int idx;
+		pdf_obj *slowptr = send;
+		int slow = 0;
 
 		while (1) {
 			pdf_obj *p = pdf_dict_get(ctx, send, PDF_NAME(P));
@@ -1712,17 +1733,33 @@ send_begin_structure(fz_context *ctx, pdf_run_processor *proc, pdf_obj *mc_dict)
 			if (!pdf_objcmp(ctx, p, proc->mcid_sent))
 				break;
 			send = p;
+
+			slow ^= 1;
+			if (slow == 0)
+				slowptr = pdf_dict_get(ctx, slowptr, PDF_NAME(P));
+			if (!pdf_objcmp(ctx, send, slowptr))
+			{
+				fz_warn(ctx, "Loop found in structure tree. Ignoring structure.");
+				proc->broken_struct_tree = 1;
+				return;
+			}
 		}
 
-		uid = pdf_to_num(ctx, send);
+#ifdef DEBUG_STRUCTURE
+		printf("sending %d\n", pdf_to_num(ctx, send));
+#endif
+		idx = get_struct_index(ctx, send);
 		tag = pdf_dict_get(ctx, send, PDF_NAME(S));
-		standard = structure_type(ctx, proc, tag);
+		standard = pdf_structure_type(ctx, proc->role_map, tag);
 		if (standard != FZ_STRUCTURE_INVALID)
-			fz_begin_structure(ctx, proc->dev, standard, pdf_to_name(ctx, tag), uid);
+			fz_begin_structure(ctx, proc->dev, standard, pdf_to_name(ctx, tag), idx);
 
 		pdf_drop_obj(ctx, proc->mcid_sent);
 		proc->mcid_sent = pdf_keep_obj(ctx, send);
 	}
+#ifdef DEBUG_STRUCTURE
+	structure_dump(ctx, "on exit", proc->mcid_sent);
+#endif
 }
 
 static void
@@ -1731,7 +1768,6 @@ push_marked_content(fz_context *ctx, pdf_run_processor *proc, const char *tagstr
 	pdf_obj *tag;
 	marked_content_stack *mc = NULL;
 	int drop_tag = 1;
-	fz_structure standard;
 	pdf_obj *mc_dict = NULL;
 
 	/* Flush any pending text so it's not in the wrong layer. */
@@ -1771,20 +1807,18 @@ push_marked_content(fz_context *ctx, pdf_run_processor *proc, const char *tagstr
 				send_begin_structure(ctx, proc, mc_dict);
 			fz_catch(ctx)
 			{
-				fz_warn(ctx, "structure tree broken, assume tree is missing: %s", fz_caught_message(ctx));
+				fz_report_error(ctx);
+				fz_warn(ctx, "structure tree broken, assume tree is missing");
 				proc->broken_struct_tree = 1;
 			}
 		}
 
-		if (!mc_dict || proc->broken_struct_tree)
-		{
-			standard = structure_type(ctx, proc, tag);
-			if (standard != FZ_STRUCTURE_INVALID)
-			{
-				pdf_flush_text(ctx, proc);
-				fz_begin_structure(ctx, proc->dev, standard, pdf_to_name(ctx, tag), 0);
-			}
-		}
+		/* Previously, I'd tried to send stuff like:
+		 *	/Artifact <</Type/Pagination>>BDC
+		 * as a structure entry, lured by the fact that 'Artifact' is a
+		 * structure tag. I now believe this is wrong. Only stuff with
+		 * an MCID pointer should be sent using the structure mechanism.
+		 */
 
 		/* ActualText */
 		begin_metatext(ctx, proc, val, mc_dict, FZ_METATEXT_ACTUALTEXT, PDF_NAME(ActualText));
@@ -1811,7 +1845,6 @@ pop_marked_content(fz_context *ctx, pdf_run_processor *proc, int neat)
 {
 	marked_content_stack *mc = proc->marked_content;
 	pdf_obj *val, *tag;
-	fz_structure standard;
 	pdf_obj *mc_dict = NULL;
 
 	if (mc == NULL)
@@ -1832,12 +1865,12 @@ pop_marked_content(fz_context *ctx, pdf_run_processor *proc, int neat)
 		return;
 	}
 
-	/* Make sure that any pending text is written into the correct layer. */
-	pdf_flush_text(ctx, proc);
-
 	/* Close structure/layers here, in reverse order to how we opened them. */
 	fz_try(ctx)
 	{
+		/* Make sure that any pending text is written into the correct layer. */
+		pdf_flush_text(ctx, proc);
+
 		/* Check to see if val contains an MCID. */
 		mc_dict = lookup_mcid(ctx, proc, val);
 
@@ -1854,19 +1887,10 @@ pop_marked_content(fz_context *ctx, pdf_run_processor *proc, int neat)
 		end_metatext(ctx, proc, val, mc_dict, PDF_NAME(ActualText));
 
 		/* Structure */
-		if (mc_dict)
+		if (mc_dict && !proc->broken_struct_tree)
 		{
-			/* Do nothing for now. */
-		}
-		else
-		{
-			/* Maybe drop this entirely? */
-			standard = structure_type(ctx, proc, tag);
-			if (standard != FZ_STRUCTURE_INVALID)
-			{
-				pdf_flush_text(ctx, proc);
-				fz_end_structure(ctx, proc->dev);
-			}
+			pdf_obj *p = pdf_dict_get(ctx, mc_dict, PDF_NAME(P));
+			pop_structure_to(ctx, proc, p);
 		}
 
 		/* Finally, close any layers. */
@@ -1921,7 +1945,7 @@ pdf_run_xobject(fz_context *ctx, pdf_run_processor *pr, pdf_obj *xobj, pdf_obj *
 	fz_default_colorspaces *xobj_default_cs = NULL;
 	marked_content_stack *save_marked_content = NULL;
 	int save_struct_parent;
-	pdf_obj *struct_parent;
+	pdf_obj *oc;
 
 	/* Avoid infinite recursion */
 	pdf_cycle_list *cycle_up = pr->cycle;
@@ -1943,13 +1967,13 @@ pdf_run_xobject(fz_context *ctx, pdf_run_processor *pr, pdf_obj *xobj, pdf_obj *
 	pr->marked_content = NULL;
 	save_struct_parent = pr->struct_parent;
 
-	pr->struct_parent = -1;
-
 	fz_try(ctx)
 	{
-		struct_parent = pdf_dict_get(ctx, xobj, PDF_NAME(StructParent));
-		if (pdf_is_number(ctx, struct_parent))
-			pr->struct_parent = pdf_to_int(ctx, struct_parent);
+		pr->struct_parent = pdf_dict_get_int_default(ctx, xobj, PDF_NAME(StructParent), -1);
+
+		oc = pdf_dict_get(ctx, xobj, PDF_NAME(OC));
+		if (oc)
+			begin_oc(ctx, pr, oc, NULL);
 
 		pdf_gsave(ctx, pr);
 
@@ -2010,8 +2034,8 @@ pdf_run_xobject(fz_context *ctx, pdf_run_processor *pr, pdf_obj *xobj, pdf_obj *
 			xobj_default_cs = pdf_update_default_colorspaces(ctx, pr->default_cs, resources);
 		fz_catch(ctx)
 		{
-			if (fz_caught(ctx) != FZ_ERROR_TRYLATER)
-				fz_rethrow(ctx);
+			fz_rethrow_unless(ctx, FZ_ERROR_TRYLATER);
+			fz_ignore_error(ctx);
 			if (pr->cookie)
 				pr->cookie->incomplete = 1;
 		}
@@ -2053,6 +2077,9 @@ pdf_run_xobject(fz_context *ctx, pdf_run_processor *pr, pdf_obj *xobj, pdf_obj *
 		while (oldtop < pr->gtop)
 			pdf_grestore(ctx, pr);
 
+		if (oc)
+			end_oc(ctx, pr, oc, NULL);
+
 		if (xobj_default_cs != save_default_cs)
 		{
 			fz_set_default_colorspaces(ctx, pr->dev, save_default_cs);
@@ -2075,8 +2102,7 @@ pdf_run_xobject(fz_context *ctx, pdf_run_processor *pr, pdf_obj *xobj, pdf_obj *
 		/* Note: Any SYNTAX errors should have been swallowed
 		 * by pdf_process_contents, but in case any escape from other
 		 * functions, recast the error type here to be safe. */
-		if (fz_caught(ctx) == FZ_ERROR_SYNTAX)
-			fz_throw(ctx, FZ_ERROR_GENERIC, "syntax error in xobject");
+		fz_morph_error(ctx, FZ_ERROR_SYNTAX, FZ_ERROR_FORMAT);
 		fz_rethrow(ctx);
 	}
 }
@@ -2218,7 +2244,7 @@ static void pdf_run_gs_ca(fz_context *ctx, pdf_processor *proc, float alpha)
 	gstate->fill.alpha = fz_clamp(alpha, 0, 1);
 }
 
-static void pdf_run_gs_SMask(fz_context *ctx, pdf_processor *proc, pdf_obj *smask, float *bc, int luminosity)
+static void pdf_run_gs_SMask(fz_context *ctx, pdf_processor *proc, pdf_obj *smask, float *bc, int luminosity, pdf_obj *tr)
 {
 	pdf_run_processor *pr = (pdf_run_processor *)proc;
 	pdf_gstate *gstate = pdf_flush_text(ctx, pr);
@@ -2241,6 +2267,11 @@ static void pdf_run_gs_SMask(fz_context *ctx, pdf_processor *proc, pdf_obj *smas
 		gstate->softmask_ctm = gstate->ctm;
 		gstate->softmask = pdf_keep_obj(ctx, smask);
 		gstate->softmask_resources = pdf_keep_obj(ctx, pr->rstack->resources);
+		if (tr)
+		{
+			pdf_drop_obj(ctx, gstate->softmask_tr);
+			gstate->softmask_tr = pdf_keep_obj(ctx, tr);
+		}
 		for (i = 0; i < cs_n; ++i)
 			gstate->softmask_bc[i] = bc[i];
 		gstate->luminosity = luminosity;
@@ -2407,6 +2438,7 @@ static void pdf_run_BT(fz_context *ctx, pdf_processor *proc)
 	pdf_run_processor *pr = (pdf_run_processor *)proc;
 	pr->tos.tm = fz_identity;
 	pr->tos.tlm = fz_identity;
+	pr->bidi = 0;
 }
 
 static void pdf_run_ET(fz_context *ctx, pdf_processor *proc)
@@ -2988,6 +3020,10 @@ pdf_new_run_processor(fz_context *ctx, pdf_document *doc, fz_device *dev, fz_mat
 
 		proc->super.op_END = pdf_run_END;
 	}
+
+	proc->super.requirements = 0;
+	if ((dev->hints & FZ_DONT_DECODE_IMAGES) == 0)
+		proc->super.requirements |= PDF_PROCESSOR_REQUIRES_DECODED_IMAGES;
 
 	proc->doc = pdf_keep_document(ctx, doc);
 	proc->dev = dev;
