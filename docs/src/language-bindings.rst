@@ -27,10 +27,28 @@ Language Bindings
     </details>
 
 
-Auto-generated :title:`C++`, :title:`Python` and :title:`C#` versions of the :title:`MuPDF C API` are available.
+Auto-generated abstracted :title:`C++`, :title:`Python` and :title:`C#` versions of the :title:`MuPDF C API` are available.
 
-These :title:`APIs` are currently a beta release and liable to change.
 
+.. graphviz::
+
+    digraph
+    {
+      size="4,4";
+      labeljust=l;
+
+      "MuPDF C API" [shape="rectangle"]
+      "MuPDF C++ API" [shape="rectangle"]
+      "SWIG" [shape="oval"]
+      "MuPDF Python API" [shape="rectangle"]
+      "MuPDF C# API" [shape="rectangle"]
+
+      "MuPDF C API" -> "MuPDF C++ API" [label=" Parse C headers with libclang,\n generate abstractions." labeljust=l]
+
+      "MuPDF C++ API" -> "SWIG" [label=" Parse C++ headers with SWIG."]
+      "SWIG" -> "MuPDF Python API"
+      "SWIG" -> "MuPDF C# API"
+    }
 
 The C++ MuPDF API
 ---------------------------------------------------------------
@@ -59,7 +77,7 @@ The MuPDF C API is provided as low-level C++ functions with `ll_` prefixes.
 Class-aware C++ API
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-C++ wrapper classes wrap most `fz_*` and `pdf_*` C structs.
+C++ wrapper classes wrap most `fz_*` and `pdf_*` C structs:
 
 * Class names are camel-case versions of the wrapped struct's
   name, for example `fz_document`'s wrapper class is `mupdf::FzDocument`.
@@ -69,7 +87,7 @@ C++ wrapper classes wrap most `fz_*` and `pdf_*` C structs.
   class instances can be treated as values and copied arbitrarily.
 
 Class-aware functions and methods take and return wrapper class instances
-instead of MuPDF C structs.
+instead of MuPDF C structs:
 
 * No `fz_context*` arguments.
 
@@ -90,6 +108,24 @@ instead of MuPDF C structs.
 * Wrapper classes are defined in `mupdf/platform/c++/include/mupdf/classes.h`.
 
 * Class-aware functions are declared in `mupdf/platform/c++/include/mupdf/classes2.h`.
+
+*
+  Wrapper classes for reference-counted MuPDF structs:
+
+  *
+    The C++ wrapper classes will have a public `m_internal` member that is a
+    pointer to the underlying MuPDF struct.
+
+  *
+    If a MuPDF C function returns a null pointer to a MuPDF struct, the
+    class-aware C++ wrapper will return an instance of the wrapper class with a
+    null `m_internal` member.
+
+  *
+    The C++ wrapper class will have an `operator bool()` that returns true if
+    the `m_internal` member is non-null.
+
+    [Introduced 2024-07-08.]
 
 Usually it is more convenient to use the class-aware C++ API rather than the
 low-level C++ API.
@@ -227,8 +263,8 @@ environmental variables:
 
 * **MUPDF_check_error_stack**
 
-    If `1`, generated code outputs a diagnostic if a MuPDF function changes the
-    current `fz_context`'s error stack depth.
+  If `1`, generated code outputs a diagnostic if a MuPDF function changes the
+  current `fz_context`'s error stack depth.
 
 * **MUPDF_trace**
 
@@ -283,7 +319,6 @@ The Python and C# MuPDF APIs
 * A Python module called `mupdf`.
 * A C# namespace called `mupdf`.
 
-  * C# bindings are experimental as of 2021-10-14.
 * Auto-generated from the C++ MuPDF API using SWIG, so inherits the abstractions of the C++ API:
 
   * No `fz_context*` arguments.
@@ -295,7 +330,7 @@ The Python and C# MuPDF APIs
 
       fz_buffer *fz_read_best(fz_context *ctx, fz_stream *stm, size_t initial, int *truncated);
 
-  The class-aware Python wrapper is:
+  The class-aware Python wrapper is::
 
       mupdf.fz_read_best(stm, initial)
 
@@ -321,7 +356,6 @@ The Python and C# MuPDF APIs
 
 * Uses SWIG Director classes to allow C function pointers in MuPDF structs to call Python code.
 
-  * This has not been tested on C#.
 
 Installing the Python mupdf module using `pip`
 ---------------------------------------------------------------
@@ -366,55 +400,55 @@ More detailed usage of the Python API can be found in:
 * `scripts/mutool_draw.py <https://git.ghostscript.com/?p=mupdf.git;a=blob;f=scripts/mutool_draw.py>`_
 
 
-**Example Python code that shows all available information about a document's Stext blocks, lines and characters.**
+**Example Python code that shows all available information about a document's Stext blocks, lines and characters**:
 
-  |expand_begin|
-  ::
+|expand_begin|
+::
 
-      #!/usr/bin/env python3
+    #!/usr/bin/env python3
 
-      import mupdf
+    import mupdf
 
-      def show_stext(document):
-          '''
-          Shows all available information about Stext blocks, lines and characters.
-          '''
-          for p in range(document.fz_count_pages()):
-              page = document.fz_load_page(p)
-              stextpage = mupdf.FzStextPage(page, mupdf.FzStextOptions())
-              for block in stextpage:
-                  block_ = block.m_internal
-                  log(f'block: type={block_.type} bbox={block_.bbox}')
-                  for line in block:
-                      line_ = line.m_internal
-                      log(f'    line: wmode={line_.wmode}'
-                              + f' dir={line_.dir}'
-                              + f' bbox={line_.bbox}'
-                              )
-                      for char in line:
-                          char_ = char.m_internal
-                          log(f'        char: {chr(char_.c)!r} c={char_.c:4} color={char_.color}'
-                                  + f' origin={char_.origin}'
-                                  + f' quad={char_.quad}'
-                                  + f' size={char_.size:6.2f}'
-                                  + f' font=('
-                                      +  f'is_mono={char_.font.flags.is_mono}'
-                                      + f' is_bold={char_.font.flags.is_bold}'
-                                      + f' is_italic={char_.font.flags.is_italic}'
-                                      + f' ft_substitute={char_.font.flags.ft_substitute}'
-                                      + f' ft_stretch={char_.font.flags.ft_stretch}'
-                                      + f' fake_bold={char_.font.flags.fake_bold}'
-                                      + f' fake_italic={char_.font.flags.fake_italic}'
-                                      + f' has_opentype={char_.font.flags.has_opentype}'
-                                      + f' invalid_bbox={char_.font.flags.invalid_bbox}'
-                                      + f' name={char_.font.name}'
-                                      + f')'
-                                  )
+    def show_stext(document):
+        '''
+        Shows all available information about Stext blocks, lines and characters.
+        '''
+        for p in range(document.fz_count_pages()):
+            page = document.fz_load_page(p)
+            stextpage = mupdf.FzStextPage(page, mupdf.FzStextOptions())
+            for block in stextpage:
+                block_ = block.m_internal
+                log(f'block: type={block_.type} bbox={block_.bbox}')
+                for line in block:
+                    line_ = line.m_internal
+                    log(f'    line: wmode={line_.wmode}'
+                            + f' dir={line_.dir}'
+                            + f' bbox={line_.bbox}'
+                            )
+                    for char in line:
+                        char_ = char.m_internal
+                        log(f'        char: {chr(char_.c)!r} c={char_.c:4} color={char_.color}'
+                                + f' origin={char_.origin}'
+                                + f' quad={char_.quad}'
+                                + f' size={char_.size:6.2f}'
+                                + f' font=('
+                                    +  f'is_mono={char_.font.flags.is_mono}'
+                                    + f' is_bold={char_.font.flags.is_bold}'
+                                    + f' is_italic={char_.font.flags.is_italic}'
+                                    + f' ft_substitute={char_.font.flags.ft_substitute}'
+                                    + f' ft_stretch={char_.font.flags.ft_stretch}'
+                                    + f' fake_bold={char_.font.flags.fake_bold}'
+                                    + f' fake_italic={char_.font.flags.fake_italic}'
+                                    + f' has_opentype={char_.font.flags.has_opentype}'
+                                    + f' invalid_bbox={char_.font.flags.invalid_bbox}'
+                                    + f' name={char_.font.name}'
+                                    + f')'
+                                )
 
-      document = mupdf.FzDocument('foo.pdf')
-      show_stext(document)
+    document = mupdf.FzDocument('foo.pdf')
+    show_stext(document)
 
-  |expand_end|
+|expand_end|
 
 Basic PDF viewers written in Python and C#
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -435,16 +469,16 @@ APIs; changes to the main MuPDF API are not detailed here.]
 
 * **2023-11-16**:
 
-    * Fixed debug builds on Windows.
-    * Fixed 32-bit builds on Windows.
-    * Fixed cross-build to arm64 on MacOS.
-    * Fixed unsafe custom fz_search_page2().
-    * Added custom fz_highlight_selection2().
-    * Added debug diagnostics to Director `use_virtual_*()` methods.
-    * Various fixes for Pyodide builds.
-    * Use version numbers in names of shared libraries.
-    * Added custom wrapping of struct pdf_clean_options.
-    * Use $CXX if defined when building bindings (not Windows).
+  * Fixed debug builds on Windows.
+  * Fixed 32-bit builds on Windows.
+  * Fixed cross-build to arm64 on MacOS.
+  * Fixed unsafe custom fz_search_page2().
+  * Added custom fz_highlight_selection2().
+  * Added debug diagnostics to Director `use_virtual_*()` methods.
+  * Various fixes for Pyodide builds.
+  * Use version numbers in names of shared libraries.
+  * Added custom wrapping of struct pdf_clean_options.
+  * Use $CXX if defined when building bindings (not Windows).
 
 
 * **2023-07-13**:
@@ -702,7 +736,9 @@ APIs; changes to the main MuPDF API are not detailed here.]
   on pypi.org with pre-built Wheels for Windows and Linux.
 
   **Details**
+
   |expand_begin|
+
   * Changes that apply to both C++ and Python bindings:
 
     * Improved access to metadata - added `Document::lookup_metadata()`
@@ -794,7 +830,7 @@ General requirements
 
 *
   `libclang Python interface onto
-  <https://libclang.readthedocs.io/en/latest/index.html>`_ the `libclang
+  <https://libclang.readthedocs.io/en/latest/index.html>`_ the `clang
   C/C++ parser <https://clang.llvm.org/>`_.
 
 * `swig <https://swig.org/>`_, for Python and C# bindings.
@@ -1243,7 +1279,7 @@ All generated files are within the MuPDF checkout.
                         functions.h
                         internal.h
 
-                implementation/  [MuPDF C++ implementation source files.]
+                implementation/ [MuPDF C++ implementation source files.]
                     classes.cpp
                     classes2.cpp
                     exceptions.cpp
@@ -1253,14 +1289,14 @@ All generated files are within the MuPDF checkout.
                 generated.pickle    [Information from clang parse step, used by later stages.]
                 windows_mupdf.def   [List of MuPDF public global data, used when linking mupdfcpp.dll.]
 
-            python/ [SWIG Python input/output files.]
-                mupdfcpp_swig.cpp
-                mupdfcpp_swig.i
+            python/ [SWIG Python files.]
+                mupdfcpp_swig.i     [SWIG input file.]
+                mupdfcpp_swig.i.cpp [SWIG output file.]
 
-            csharp/  [SWIG C# input/output files.]
-                mupdf.cs
-                mupdfcpp_swig.cpp
-                mupdfcpp_swig.i
+            csharp/  [SWIG C# files.]
+                mupdf.cs            [SWIG output file, no out-params helpers.]
+                mupdfcpp_swig.i     [SWIG input file.]
+                mupdfcpp_swig.i.cpp [SWIG output file.]
 
             win32/
                 Release/    [Windows 32-bit .dll, .lib, .exp, .pdb etc.]
@@ -1295,7 +1331,7 @@ both in `mupdfcpp.dll`, which is built by running devenv on
 `platform/win32/mupdf.sln`.
 
 The Python SWIG library is called `_mupdf.pyd` which, despite the name, is a
-standard Windows DLL, built from `platform/python/mupdfcpp_swig.cpp`.
+standard Windows DLL, built from `platform/python/mupdfcpp_swig.i.cpp`.
 
 DLL export of functions and data
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1573,13 +1609,13 @@ functions and class methods.]
         fz_install_load_system_font_funcs_args class wrapper instance. */
         FZ_DATA extern void* fz_install_load_system_font_funcs2_state;
 
-        /** Helper for calling a `fz_document_open_fn` function pointer via Swig
-        from Python/C#. */
-        FZ_FUNCTION fz_document* fz_document_open_fn_call(fz_context* ctx, fz_document_open_fn fn, fz_stream* stream, fz_stream* accel, fz_archive* dir);
+        /** Helper for calling `fz_document_handler::open` function pointer via
+        Swig from Python/C#. */
+        FZ_FUNCTION fz_document* fz_document_handler_open(fz_context* ctx, const fz_document_handler *handler, fz_stream* stream, fz_stream* accel, fz_archive* dir);
 
-        /** Helper for calling a `fz_document_recognize_content_fn` function
+        /** Helper for calling a `fz_document_handler::recognize` function
         pointer via Swig from Python/C#. */
-        FZ_FUNCTION int fz_document_recognize_content_fn_call(fz_context* ctx, fz_document_recognize_content_fn fn, fz_stream* stream, fz_archive* dir);
+        FZ_FUNCTION int fz_document_handler_recognize(fz_context* ctx, const fz_document_handler *handler, const char *magic);
 
         /** Swig-friendly wrapper for pdf_choice_widget_options(), returns the
         options directly in a vector. */
@@ -1609,6 +1645,10 @@ functions and class methods.]
 
         /** Swig-friendly wrapper for pdf_subset_fonts(). */
         void pdf_subset_fonts2(fz_context *ctx, pdf_document *doc, const std::vector<int>& pages);
+
+        /** Swig-friendly and typesafe way to do fz_snprintf(fmt, value). `fmt`
+        must end with one of 'efg' otherwise we throw an exception. */
+        std::string fz_format_double(fz_context* ctx, const char* fmt, double value);
 
 
 Python/C# bindings details

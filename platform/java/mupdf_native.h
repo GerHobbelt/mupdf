@@ -1469,6 +1469,14 @@ JNIEXPORT jboolean JNICALL Java_com_artifex_mupdf_fitz_Document_isUnencryptedPDF
 JNIEXPORT jstring JNICALL Java_com_artifex_mupdf_fitz_Document_formatLinkURI
   (JNIEnv *, jobject, jobject);
 
+/*
+ * Class:     com_artifex_mupdf_fitz_Document
+ * Method:    asPDF
+ * Signature: ()Lcom/artifex/mupdf/fitz/PDFDocument;
+ */
+JNIEXPORT jobject JNICALL Java_com_artifex_mupdf_fitz_Document_asPDF
+  (JNIEnv *, jobject);
+
 #ifdef __cplusplus
 }
 #endif
@@ -2812,6 +2820,28 @@ extern "C" {
 #define com_artifex_mupdf_fitz_PDFAnnotation_IS_TOGGLE_NO_VIEW 256L
 #undef com_artifex_mupdf_fitz_PDFAnnotation_IS_LOCKED_CONTENTS
 #define com_artifex_mupdf_fitz_PDFAnnotation_IS_LOCKED_CONTENTS 512L
+#undef com_artifex_mupdf_fitz_PDFAnnotation_IT_DEFAULT
+#define com_artifex_mupdf_fitz_PDFAnnotation_IT_DEFAULT 0L
+#undef com_artifex_mupdf_fitz_PDFAnnotation_IT_FREETEXT_CALLOUT
+#define com_artifex_mupdf_fitz_PDFAnnotation_IT_FREETEXT_CALLOUT 1L
+#undef com_artifex_mupdf_fitz_PDFAnnotation_IT_FREETEXT_TYPEWRITER
+#define com_artifex_mupdf_fitz_PDFAnnotation_IT_FREETEXT_TYPEWRITER 2L
+#undef com_artifex_mupdf_fitz_PDFAnnotation_IT_LINE_ARROW
+#define com_artifex_mupdf_fitz_PDFAnnotation_IT_LINE_ARROW 3L
+#undef com_artifex_mupdf_fitz_PDFAnnotation_IT_LINE_DIMENSION
+#define com_artifex_mupdf_fitz_PDFAnnotation_IT_LINE_DIMENSION 4L
+#undef com_artifex_mupdf_fitz_PDFAnnotation_IT_POLYLINE_DIMENSION
+#define com_artifex_mupdf_fitz_PDFAnnotation_IT_POLYLINE_DIMENSION 5L
+#undef com_artifex_mupdf_fitz_PDFAnnotation_IT_POLYGON_CLOUD
+#define com_artifex_mupdf_fitz_PDFAnnotation_IT_POLYGON_CLOUD 6L
+#undef com_artifex_mupdf_fitz_PDFAnnotation_IT_POLYGON_DIMENSION
+#define com_artifex_mupdf_fitz_PDFAnnotation_IT_POLYGON_DIMENSION 7L
+#undef com_artifex_mupdf_fitz_PDFAnnotation_IT_STAMP_IMAGE
+#define com_artifex_mupdf_fitz_PDFAnnotation_IT_STAMP_IMAGE 8L
+#undef com_artifex_mupdf_fitz_PDFAnnotation_IT_STAMP_SNAPSHOT
+#define com_artifex_mupdf_fitz_PDFAnnotation_IT_STAMP_SNAPSHOT 9L
+#undef com_artifex_mupdf_fitz_PDFAnnotation_IT_UNKNOWN
+#define com_artifex_mupdf_fitz_PDFAnnotation_IT_UNKNOWN 255L
 /*
  * Class:     com_artifex_mupdf_fitz_PDFAnnotation
  * Method:    finalize
@@ -3406,6 +3436,30 @@ JNIEXPORT jobject JNICALL Java_com_artifex_mupdf_fitz_PDFAnnotation_getFileSpeci
 
 /*
  * Class:     com_artifex_mupdf_fitz_PDFAnnotation
+ * Method:    hasIntent
+ * Signature: ()Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_artifex_mupdf_fitz_PDFAnnotation_hasIntent
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_artifex_mupdf_fitz_PDFAnnotation
+ * Method:    getIntent
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_com_artifex_mupdf_fitz_PDFAnnotation_getIntent
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_artifex_mupdf_fitz_PDFAnnotation
+ * Method:    setIntent
+ * Signature: (I)V
+ */
+JNIEXPORT void JNICALL Java_com_artifex_mupdf_fitz_PDFAnnotation_setIntent
+  (JNIEnv *, jobject, jint);
+
+/*
+ * Class:     com_artifex_mupdf_fitz_PDFAnnotation
  * Method:    eventEnter
  * Signature: ()V
  */
@@ -3567,10 +3621,10 @@ JNIEXPORT void JNICALL Java_com_artifex_mupdf_fitz_PDFAnnotation_setHiddenForEdi
 /*
  * Class:     com_artifex_mupdf_fitz_PDFAnnotation
  * Method:    applyRedaction
- * Signature: (ZII)Z
+ * Signature: (ZIII)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_artifex_mupdf_fitz_PDFAnnotation_applyRedaction
-  (JNIEnv *, jobject, jboolean, jint, jint);
+  (JNIEnv *, jobject, jboolean, jint, jint, jint);
 
 #ifdef __cplusplus
 }
@@ -4824,12 +4878,16 @@ extern "C" {
 #define com_artifex_mupdf_fitz_PDFPage_REDACT_IMAGE_PIXELS 2L
 #undef com_artifex_mupdf_fitz_PDFPage_REDACT_IMAGE_REMOVE_UNLESS_INVISIBLE
 #define com_artifex_mupdf_fitz_PDFPage_REDACT_IMAGE_REMOVE_UNLESS_INVISIBLE 3L
-#undef com_artifex_mupdf_fitz_PDFPage_REDACT_LINEART_NONE
-#define com_artifex_mupdf_fitz_PDFPage_REDACT_LINEART_NONE 0L
-#undef com_artifex_mupdf_fitz_PDFPage_REDACT_LINEART_IF_TOUCHED
-#define com_artifex_mupdf_fitz_PDFPage_REDACT_LINEART_IF_TOUCHED 1L
-#undef com_artifex_mupdf_fitz_PDFPage_REDACT_LINEART_IF_COVERED
-#define com_artifex_mupdf_fitz_PDFPage_REDACT_LINEART_IF_COVERED 2L
+#undef com_artifex_mupdf_fitz_PDFPage_REDACT_LINE_ART_NONE
+#define com_artifex_mupdf_fitz_PDFPage_REDACT_LINE_ART_NONE 0L
+#undef com_artifex_mupdf_fitz_PDFPage_REDACT_LINE_ART_REMOVE_IF_COVERED
+#define com_artifex_mupdf_fitz_PDFPage_REDACT_LINE_ART_REMOVE_IF_COVERED 1L
+#undef com_artifex_mupdf_fitz_PDFPage_REDACT_LINE_ART_REMOVE_IF_TOUCHED
+#define com_artifex_mupdf_fitz_PDFPage_REDACT_LINE_ART_REMOVE_IF_TOUCHED 2L
+#undef com_artifex_mupdf_fitz_PDFPage_REDACT_TEXT_REMOVE
+#define com_artifex_mupdf_fitz_PDFPage_REDACT_TEXT_REMOVE 0L
+#undef com_artifex_mupdf_fitz_PDFPage_REDACT_TEXT_NONE
+#define com_artifex_mupdf_fitz_PDFPage_REDACT_TEXT_NONE 1L
 /*
  * Class:     com_artifex_mupdf_fitz_PDFPage
  * Method:    getObject
@@ -4865,10 +4923,10 @@ JNIEXPORT void JNICALL Java_com_artifex_mupdf_fitz_PDFPage_deleteAnnotation
 /*
  * Class:     com_artifex_mupdf_fitz_PDFPage
  * Method:    applyRedactions
- * Signature: (ZII)Z
+ * Signature: (ZIII)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_artifex_mupdf_fitz_PDFPage_applyRedactions
-  (JNIEnv *, jobject, jboolean, jint, jint);
+  (JNIEnv *, jobject, jboolean, jint, jint, jint);
 
 /*
  * Class:     com_artifex_mupdf_fitz_PDFPage
@@ -5035,6 +5093,28 @@ extern "C" {
 #define com_artifex_mupdf_fitz_PDFWidget_IS_TOGGLE_NO_VIEW 256L
 #undef com_artifex_mupdf_fitz_PDFWidget_IS_LOCKED_CONTENTS
 #define com_artifex_mupdf_fitz_PDFWidget_IS_LOCKED_CONTENTS 512L
+#undef com_artifex_mupdf_fitz_PDFWidget_IT_DEFAULT
+#define com_artifex_mupdf_fitz_PDFWidget_IT_DEFAULT 0L
+#undef com_artifex_mupdf_fitz_PDFWidget_IT_FREETEXT_CALLOUT
+#define com_artifex_mupdf_fitz_PDFWidget_IT_FREETEXT_CALLOUT 1L
+#undef com_artifex_mupdf_fitz_PDFWidget_IT_FREETEXT_TYPEWRITER
+#define com_artifex_mupdf_fitz_PDFWidget_IT_FREETEXT_TYPEWRITER 2L
+#undef com_artifex_mupdf_fitz_PDFWidget_IT_LINE_ARROW
+#define com_artifex_mupdf_fitz_PDFWidget_IT_LINE_ARROW 3L
+#undef com_artifex_mupdf_fitz_PDFWidget_IT_LINE_DIMENSION
+#define com_artifex_mupdf_fitz_PDFWidget_IT_LINE_DIMENSION 4L
+#undef com_artifex_mupdf_fitz_PDFWidget_IT_POLYLINE_DIMENSION
+#define com_artifex_mupdf_fitz_PDFWidget_IT_POLYLINE_DIMENSION 5L
+#undef com_artifex_mupdf_fitz_PDFWidget_IT_POLYGON_CLOUD
+#define com_artifex_mupdf_fitz_PDFWidget_IT_POLYGON_CLOUD 6L
+#undef com_artifex_mupdf_fitz_PDFWidget_IT_POLYGON_DIMENSION
+#define com_artifex_mupdf_fitz_PDFWidget_IT_POLYGON_DIMENSION 7L
+#undef com_artifex_mupdf_fitz_PDFWidget_IT_STAMP_IMAGE
+#define com_artifex_mupdf_fitz_PDFWidget_IT_STAMP_IMAGE 8L
+#undef com_artifex_mupdf_fitz_PDFWidget_IT_STAMP_SNAPSHOT
+#define com_artifex_mupdf_fitz_PDFWidget_IT_STAMP_SNAPSHOT 9L
+#undef com_artifex_mupdf_fitz_PDFWidget_IT_UNKNOWN
+#define com_artifex_mupdf_fitz_PDFWidget_IT_UNKNOWN 255L
 #undef com_artifex_mupdf_fitz_PDFWidget_TYPE_UNKNOWN
 #define com_artifex_mupdf_fitz_PDFWidget_TYPE_UNKNOWN 0L
 #undef com_artifex_mupdf_fitz_PDFWidget_TYPE_BUTTON

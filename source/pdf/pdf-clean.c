@@ -253,10 +253,14 @@ pdf_filter_type3(fz_context *ctx, pdf_document *doc, pdf_obj *obj, pdf_obj *page
 		{
 			pdf_obj *val = pdf_dict_get_val(ctx, charprocs, i);
 
-			fz_clear_buffer(ctx, buffer);
+			if (i > 0)
+			{
+				pdf_reset_processor(ctx, top);
+				fz_clear_buffer(ctx, buffer);
+			}
 			pdf_process_raw_contents(ctx, top, doc, in_res, val, NULL);
 
-			pdf_close_processor(ctx, proc_buffer);
+			pdf_close_processor(ctx, top);
 
 			if (!options->no_update)
 			{
@@ -403,13 +407,11 @@ void pdf_filter_page_contents(fz_context *ctx, pdf_document *doc, pdf_page *page
 			options->complete(ctx, buffer, options->opaque);
 		if (!options->no_update)
 		{
-			/* If contents is not a stream it's an array of streams or missing. */
-			if (!pdf_is_stream(ctx, contents))
-			{
-				/* Create a new stream object to replace the array of streams or missing object. */
-				contents = pdf_add_object_drop(ctx, doc, pdf_new_dict(ctx, doc, 1));
-				pdf_dict_put_drop(ctx, page->obj, PDF_NAME(Contents), contents);
-			}
+			/* Always create a new stream object to replace the page contents. This is useful
+			   both if the contents is an array of streams, is entirely missing or if the contents
+			   are shared between pages. */
+			contents = pdf_add_object_drop(ctx, doc, pdf_new_dict(ctx, doc, 1));
+			pdf_dict_put_drop(ctx, page->obj, PDF_NAME(Contents), contents);
 			pdf_update_stream(ctx, doc, contents, buffer, 0);
 			pdf_dict_put(ctx, page->obj, PDF_NAME(Resources), new_res);
 		}
@@ -449,6 +451,7 @@ struct redact_filter_state {
 	pdf_page *page;
 	pdf_annot *target; // NULL if all
 	int line_art;
+	int text;
 };
 
 static void
@@ -990,6 +993,7 @@ void init_redact_filter(fz_context *ctx, pdf_redact_options *redact_opts, struct
 	int black_boxes = redact_opts ? redact_opts->black_boxes : 0;
 	int image_method = redact_opts ? redact_opts->image_method : PDF_REDACT_IMAGE_PIXELS;
 	int line_art = redact_opts ? redact_opts->line_art : PDF_REDACT_LINE_ART_NONE;
+	int text = redact_opts ? redact_opts->text : PDF_REDACT_TEXT_REMOVE;
 
 	memset(&red->filter_opts, 0, sizeof red->filter_opts);
 	memset(&red->sanitize_opts, 0, sizeof red->sanitize_opts);
@@ -1002,9 +1006,11 @@ void init_redact_filter(fz_context *ctx, pdf_redact_options *redact_opts, struct
 	if (black_boxes)
 		red->filter_opts.complete = pdf_redact_end_page;
 	red->line_art = line_art;
+	red->text = text;
 
 	red->sanitize_opts.opaque = red;
-	red->sanitize_opts.text_filter = pdf_redact_text_filter;
+	if (text == PDF_REDACT_TEXT_REMOVE)
+		red->sanitize_opts.text_filter = pdf_redact_text_filter;
 	if (image_method == PDF_REDACT_IMAGE_PIXELS)
 		red->sanitize_opts.image_filter = pdf_redact_image_filter_pixels;
 	if (image_method == PDF_REDACT_IMAGE_REMOVE)

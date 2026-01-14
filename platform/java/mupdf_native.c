@@ -571,6 +571,18 @@ static int check_enums()
 	valid &= com_artifex_mupdf_fitz_PDFAnnotation_IS_TOGGLE_NO_VIEW == PDF_ANNOT_IS_TOGGLE_NO_VIEW;
 	valid &= com_artifex_mupdf_fitz_PDFAnnotation_IS_LOCKED_CONTENTS == PDF_ANNOT_IS_LOCKED_CONTENTS;
 
+	valid &= com_artifex_mupdf_fitz_PDFAnnotation_IT_DEFAULT == PDF_ANNOT_IT_DEFAULT;
+	valid &= com_artifex_mupdf_fitz_PDFAnnotation_IT_FREETEXT_CALLOUT == PDF_ANNOT_IT_FREETEXT_CALLOUT;
+	valid &= com_artifex_mupdf_fitz_PDFAnnotation_IT_FREETEXT_TYPEWRITER == PDF_ANNOT_IT_FREETEXT_TYPEWRITER;
+	valid &= com_artifex_mupdf_fitz_PDFAnnotation_IT_LINE_ARROW == PDF_ANNOT_IT_LINE_ARROW;
+	valid &= com_artifex_mupdf_fitz_PDFAnnotation_IT_LINE_DIMENSION == PDF_ANNOT_IT_LINE_DIMENSION;
+	valid &= com_artifex_mupdf_fitz_PDFAnnotation_IT_POLYLINE_DIMENSION == PDF_ANNOT_IT_POLYLINE_DIMENSION;
+	valid &= com_artifex_mupdf_fitz_PDFAnnotation_IT_POLYGON_CLOUD == PDF_ANNOT_IT_POLYGON_CLOUD;
+	valid &= com_artifex_mupdf_fitz_PDFAnnotation_IT_POLYGON_DIMENSION == PDF_ANNOT_IT_POLYGON_DIMENSION;
+	valid &= com_artifex_mupdf_fitz_PDFAnnotation_IT_STAMP_IMAGE == PDF_ANNOT_IT_STAMP_IMAGE;
+	valid &= com_artifex_mupdf_fitz_PDFAnnotation_IT_STAMP_SNAPSHOT == PDF_ANNOT_IT_STAMP_SNAPSHOT;
+	valid &= com_artifex_mupdf_fitz_PDFAnnotation_IT_UNKNOWN == PDF_ANNOT_IT_UNKNOWN;
+
 	valid &= com_artifex_mupdf_fitz_PDFDocument_LANGUAGE_UNSET == FZ_LANG_UNSET;
 	valid &= com_artifex_mupdf_fitz_PDFDocument_LANGUAGE_ur == FZ_LANG_ur;
 	valid &= com_artifex_mupdf_fitz_PDFDocument_LANGUAGE_urd == FZ_LANG_urd;
@@ -647,6 +659,13 @@ static int check_enums()
 	valid &= com_artifex_mupdf_fitz_PDFPage_REDACT_IMAGE_REMOVE == PDF_REDACT_IMAGE_REMOVE;
 	valid &= com_artifex_mupdf_fitz_PDFPage_REDACT_IMAGE_PIXELS == PDF_REDACT_IMAGE_PIXELS;
 	valid &= com_artifex_mupdf_fitz_PDFPage_REDACT_IMAGE_REMOVE_UNLESS_INVISIBLE == PDF_REDACT_IMAGE_REMOVE_UNLESS_INVISIBLE;
+
+	valid &= com_artifex_mupdf_fitz_PDFPage_REDACT_LINE_ART_NONE == PDF_REDACT_LINE_ART_NONE;
+	valid &= com_artifex_mupdf_fitz_PDFPage_REDACT_LINE_ART_REMOVE_IF_TOUCHED == PDF_REDACT_LINE_ART_REMOVE_IF_TOUCHED;
+	valid &= com_artifex_mupdf_fitz_PDFPage_REDACT_LINE_ART_REMOVE_IF_COVERED == PDF_REDACT_LINE_ART_REMOVE_IF_COVERED;
+
+	valid &= com_artifex_mupdf_fitz_PDFPage_REDACT_TEXT_REMOVE == PDF_REDACT_TEXT_REMOVE;
+	valid &= com_artifex_mupdf_fitz_PDFPage_REDACT_TEXT_NONE == PDF_REDACT_TEXT_NONE;
 
 	return valid ? 1 : 0;
 }

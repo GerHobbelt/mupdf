@@ -1420,6 +1420,7 @@ def system(
         caller=1,
         bufsize=-1,
         env_extra=None,
+        multiline=True,
         ):
     '''
     Runs a command like `os.system()` or `subprocess.*`, but with more
@@ -1494,6 +1495,10 @@ def system(
         env_extra:
             If not `None`, a `dict` with extra items that are added to the
             environment passed to the child process.
+        multiline:
+            If true (the default) we convert a multiline command into a single
+            command, but preserve the multiline representation in verbose
+            diagnostics.
 
     Returns:
 
@@ -1591,10 +1596,18 @@ def system(
                             ' or support o() or o.write().'
                             )
                 o_decoder = decoders_ensure(o.encoding)
-                def fn(text):
-                    o.write(text)
+                def o_fn(text, o=o):
+                    if errors == 'strict':
+                        o.write(text)
+                    else:
+                        # This is probably only necessary on Windows, where
+                        # sys.stdout can be cp1252 and will sometimes raise
+                        # UnicodeEncodeError. We hard-ignore these errors.
+                        try:
+                            o.write(text)
+                        except Exception as e:
+                            o.write(f'\n[Ignoring Exception: {e}]\n')
                     o.flush()   # Seems to be necessary on Windows.
-                o_fn = fn
             if o_prefix:
                 o_fn = StreamPrefix( o_fn, o_prefix).write
             if not o_decoder:
@@ -1612,6 +1625,19 @@ def system(
         stderr = subprocess.DEVNULL
     else:
         assert 0, f'Inconsistent out: {out}'
+
+    if multiline and '\n' in command:
+        command = textwrap.dedent(command)
+        lines = list()
+        for line in command.split( '\n'):
+            h = 0 if line.startswith( '#') else line.find(' #')
+            if h >= 0:
+                line = line[:h]
+            if line.strip():
+                line = line.rstrip()
+                lines.append(line)
+        sep = ' ' if platform.system() == 'Windows' else ' \\\n'
+        command = sep.join(lines)
 
     if verbose:
         log(f'running: {command_env_text( command, env_extra)}', nv=0, caller=caller+1)

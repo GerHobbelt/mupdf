@@ -18,11 +18,16 @@ include Makethird
 
 # --- Configuration ---
 
-# Do not specify CFLAGS or LIBS on the make invocation line - specify
-# XCFLAGS or XLIBS instead. Make ignores any lines in the makefile that
-# set a variable that was set on the command line.
+# Do not specify CFLAGS, LDFLAGS, LIB_LDFLAGS, EXE_LDFLAGS or LIBS on the make
+# invocation line - specify XCFLAGS, XLDFLAGS, XLIB_LDFLAGS, XEXE_LDFLAGS or
+# XLIBS instead. Make ignores any lines in the makefile that set a variable
+# that was set on the command line.
 CFLAGS += $(XCFLAGS) -Iinclude
 LIBS += $(XLIBS) -lm
+
+LDFLAGS += $(XLDFLAGS)
+LIB_LDFLAGS += $(XLIB_LDFLAGS)
+EXE_LDFLAGS += $(XEXE_LDFLAGS)
 
 ifneq ($(threading),no)
   ifeq ($(HAVE_PTHREAD),yes)
@@ -141,6 +146,9 @@ $(OUT)/source/fitz/memento.o : source/fitz/memento.c
 	$(CC_CMD) $(WARNING_CFLAGS) $(LIB_CFLAGS) $(THIRD_CFLAGS) -DMEMENTO_MUPDF_HACKS
 
 $(OUT)/source/%.o : source/%.c
+	$(CC_CMD) $(WARNING_CFLAGS) -Wdeclaration-after-statement $(LIB_CFLAGS) $(THIRD_CFLAGS)
+
+$(OUT)/thirdparty/so/source/%.o : thirdparty/so/source/%.c
 	$(CC_CMD) $(WARNING_CFLAGS) -Wdeclaration-after-statement $(LIB_CFLAGS) $(THIRD_CFLAGS)
 
 $(OUT)/source/%.o : source/%.cpp
@@ -460,7 +468,8 @@ SO_INSTALL_MODE ?= 644
 
 third: $(THIRD_LIB)
 extra-libs: $(THIRD_GLUT_LIB)
-libs: $(LIBS_TO_INSTALL_IN_BIN) $(LIBS_TO_INSTALL_IN_LIB)
+libs: $(LIBS_TO_INSTALL_IN_BIN) $(LIBS_TO_INSTALL_IN_LIB) $(COMMERCIAL_LIBS)
+commercial-libs: $(COMMERCIAL_LIBS)
 tools: $(TOOL_APPS)
 apps: $(TOOL_APPS) $(VIEW_APPS)
 
@@ -510,10 +519,6 @@ install-docs-html:
 	install -m 644 build/docs/html/_static/*.ico $(DESTDIR)$(docdir)/_static
 	install -m 644 build/docs/html/_static/*.js $(DESTDIR)$(docdir)/_static
 	install -m 644 build/docs/html/_static/*.png $(DESTDIR)$(docdir)/_static
-	install -m 644 build/docs/html/_static/*.svg $(DESTDIR)$(docdir)/_static
-	install -m 644 build/docs/html/_static/js/* $(DESTDIR)$(docdir)/_static/js
-	install -m 644 build/docs/html/_static/css/*.css $(DESTDIR)$(docdir)/_static/css
-	install -m 644 build/docs/html/_static/css/fonts/* $(DESTDIR)$(docdir)/_static/css/fonts
 
 tarball:
 	bash scripts/archive.sh

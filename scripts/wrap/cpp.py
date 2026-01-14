@@ -266,7 +266,7 @@ def write_call_arg(
     return have_used_this
 
 
-def make_fncall( tu, cursor, return_type, fncall, out, refcheck_if):
+def make_fncall( tu, cursor, return_type, fncall, out, refcheck_if, trace_if):
     '''
     Writes a low-level function call to <out>, using fz_context_s from
     internal_context_get() and with fz_try...fz_catch that converts to C++
@@ -313,7 +313,7 @@ def make_fncall( tu, cursor, return_type, fncall, out, refcheck_if):
                 return 's_trace_keepdrop'
         return 's_trace > 1'
 
-    out.write( f'    {refcheck_if}\n')
+    out.write( f'    {trace_if}\n')
     out.write( f'    if ({varname_enable()}) {{\n')
     out.write( f'        std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << "(): calling {cursor.spelling}():";\n')
     for arg in parse.get_args( tu, cursor, include_fz_context=True):
@@ -414,7 +414,7 @@ def make_fncall( tu, cursor, return_type, fncall, out, refcheck_if):
 
     if uses_fz_context and use_fz_try:
         out.write(      f'    fz_catch(auto_ctx) {{\n')
-        out.write(      f'        {refcheck_if}\n')
+        out.write(      f'        {trace_if}\n')
         out.write(      f'        if (s_trace_exceptions) {{\n')
         out.write(      f'            std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << "(): fz_catch() has caught exception.\\n";\n')
         out.write(      f'        }}\n')
@@ -519,8 +519,12 @@ def make_outparam_helper(
         # swig - swig maps int64_t to mupdf.SWIGTYPE_p_int64_t which can't be
         # treated or converted to an integer.
         #
+        # We also value-initialise in case the underlying mupdf function also
+        # reads the supplied value - i.e. treats it as an in-parm as well as an
+        # out-param; this is paricularly important for pointer out-params.
+        #
         pointee = state.get_name_canonical( arg.cursor.type.get_pointee())
-        generated.swig_cpp.write(f'        {declaration_text( pointee, arg.name)};\n')
+        generated.swig_cpp.write(f'        {declaration_text( pointee, arg.name)} = {{}};\n')
     generated.swig_cpp.write(f'    }};\n')
     generated.swig_cpp.write('\n')
 
@@ -538,19 +542,6 @@ def make_outparam_helper(
     generated.swig_cpp.write(f'    /* Out-params function for {cursor.spelling}(). */\n')
     generated.swig_cpp.write(f'    {declaration_text( cursor.result_type, name_args)}\n')
     generated.swig_cpp.write( '    {\n')
-    # Set all pointer fields to NULL.
-    for arg in parse.get_args( tu, cursor):
-        if not arg.out_param:
-            continue
-        if arg.cursor.type.get_pointee().kind == state.clang.cindex.TypeKind.POINTER:
-            generated.swig_cpp.write(f'        outparams->{arg.name} = NULL;\n')
-    # Make call. Note that *_outparams will have changed size_t to unsigned long or similar so
-    # that SWIG can handle it. Would like to cast the addresses of the struct members to
-    # things like (size_t*) but this cause problems with const so we use temporaries.
-    for arg in parse.get_args( tu, cursor):
-        if not arg.out_param:
-            continue
-        generated.swig_cpp.write(f'        {declaration_text(arg.cursor.type.get_pointee(), arg.name)};\n')
     return_void = (cursor.result_type.spelling == 'void')
     generated.swig_cpp.write(f'        ')
     if not return_void:
@@ -560,16 +551,11 @@ def make_outparam_helper(
     for arg in parse.get_args( tu, cursor):
         generated.swig_cpp.write(sep)
         if arg.out_param:
-            #generated.swig_cpp.write(f'&outparams->{arg.name}')
-            generated.swig_cpp.write(f'&{arg.name}')
+            generated.swig_cpp.write(f'&outparams->{arg.name}')
         else:
             generated.swig_cpp.write(f'{arg.name}')
         sep = ', '
     generated.swig_cpp.write(');\n')
-    for arg in parse.get_args( tu, cursor):
-        if not arg.out_param:
-            continue
-        generated.swig_cpp.write(f'        outparams->{arg.name} = {arg.name};\n')
     if not return_void:
         generated.swig_cpp.write('        return ret;\n')
     generated.swig_cpp.write('    }\n')
@@ -804,6 +790,7 @@ def function_wrapper(
         out_cpp,
         generated,
         refcheck_if,
+        trace_if,
         ):
     '''
     Writes low-level C++ wrapper fn, converting any fz_try..fz_catch exception
@@ -824,6 +811,9 @@ def function_wrapper(
     refcheck_if:
         A '#if*' statement that determines whether extra checks are compiled
         in.
+    trace_if:
+        A '#if*' statement that determines whether runtime diagnostics are
+        compiled in.
 
     Example generated function:
 
@@ -863,8 +853,16 @@ def function_wrapper(
 
     # Copy any comment into .h file before declaration.
     if cursor.raw_comment:
-        out_h.write( f'{cursor.raw_comment}')
-        if not cursor.raw_comment.endswith( '\n'):
+        # On Windows, carriage returns can appear in cursor.raw_comment on
+        # due to line ending inconsistencies in our generated extra.cpp and
+        # extra.h, and can cause spurious differences in our generated C++
+        # code, which in turn causes unnecessary rebuilds.
+        #
+        # It would probably better to fix line endings in our generation of
+        # extra.*.
+        raw_comment = cursor.raw_comment.replace('\r', '')
+        out_h.write(raw_comment)
+        if not raw_comment.endswith( '\n'):
             out_h.write( '\n')
 
     # Write declaration and definition.
@@ -908,7 +906,7 @@ def function_wrapper(
         else:
             fncall += f'{arg.separator}{arg.name}'
     fncall += ')'
-    make_fncall( tu, cursor, return_type, fncall, out_cpp, refcheck_if)
+    make_fncall( tu, cursor, return_type, fncall, out_cpp, refcheck_if, trace_if)
     out_cpp.write( '}\n')
     out_cpp.write( '\n')
 
@@ -1054,13 +1052,13 @@ g_extra_declarations = textwrap.dedent(f'''
         fz_install_load_system_font_funcs_args class wrapper instance. */
         FZ_DATA extern void* fz_install_load_system_font_funcs2_state;
 
-        /** Helper for calling a `fz_document_open_fn` function pointer via Swig
-        from Python/C#. */
-        FZ_FUNCTION fz_document* fz_document_open_fn_call(fz_context* ctx, fz_document_open_fn fn, fz_stream* stream, fz_stream* accel, fz_archive* dir);
+        /** Helper for calling `fz_document_handler::open` function pointer via
+        Swig from Python/C#. */
+        FZ_FUNCTION fz_document* fz_document_handler_open(fz_context* ctx, const fz_document_handler *handler, fz_stream* stream, fz_stream* accel, fz_archive* dir, void* recognize_state);
 
-        /** Helper for calling a `fz_document_recognize_content_fn` function
+        /** Helper for calling a `fz_document_handler::recognize` function
         pointer via Swig from Python/C#. */
-        FZ_FUNCTION int fz_document_recognize_content_fn_call(fz_context* ctx, fz_document_recognize_content_fn fn, fz_stream* stream, fz_archive* dir);
+        FZ_FUNCTION int fz_document_handler_recognize(fz_context* ctx, const fz_document_handler *handler, const char *magic);
 
         /** Swig-friendly wrapper for pdf_choice_widget_options(), returns the
         options directly in a vector. */
@@ -1090,6 +1088,11 @@ g_extra_declarations = textwrap.dedent(f'''
 
         /** Swig-friendly wrapper for pdf_subset_fonts(). */
         void pdf_subset_fonts2(fz_context *ctx, pdf_document *doc, const std::vector<int>& pages);
+
+        /** Swig-friendly and typesafe way to do fz_snprintf(fmt, value). `fmt`
+        must end with one of 'efg' otherwise we throw an exception. */
+        std::string fz_format_double(fz_context* ctx, const char* fmt, double value);
+
         ''')
 
 g_extra_definitions = textwrap.dedent(f'''
@@ -1217,14 +1220,14 @@ g_extra_definitions = textwrap.dedent(f'''
 
         void* fz_install_load_system_font_funcs2_state = nullptr;
 
-        FZ_FUNCTION fz_document* fz_document_open_fn_call(fz_context* ctx, fz_document_open_fn fn, fz_stream* stream, fz_stream* accel, fz_archive* dir)
+        FZ_FUNCTION fz_document* fz_document_handler_open(fz_context* ctx, const fz_document_handler *handler, fz_stream* stream, fz_stream* accel, fz_archive* dir, void* recognize_state)
         {{
-            return fn(ctx, stream, accel, dir);
+            return handler->open(ctx, handler, stream, accel, dir, recognize_state);
         }}
 
-        FZ_FUNCTION int fz_document_recognize_content_fn_call(fz_context* ctx, fz_document_recognize_content_fn fn, fz_stream* stream, fz_archive* dir)
+        FZ_FUNCTION int fz_document_handler_recognize(fz_context* ctx, const fz_document_handler *handler, const char *magic)
         {{
-            return fn(ctx, stream, dir);
+            return handler->recognize(ctx, handler, magic);
         }}
 
         FZ_FUNCTION std::vector<std::string> pdf_choice_widget_options2(fz_context* ctx, pdf_annot* tw, int exportval)
@@ -1289,6 +1292,23 @@ g_extra_definitions = textwrap.dedent(f'''
         {{
             return pdf_subset_fonts(ctx, doc, pages.size(), &pages[0]);
         }}
+
+        static void s_format_check(fz_context* ctx, const char* fmt, const char* specifiers)
+        {{
+            int length = strlen(fmt);
+            if (!length || !strchr(specifiers, fmt[length-1]))
+            {{
+                fz_throw(ctx, FZ_ERROR_ARGUMENT, "Incorrect fmt '%s' should end with one of '%s'.", fmt, specifiers);
+            }}
+        }}
+
+        std::string fz_format_double(fz_context* ctx, const char* fmt, double value)
+        {{
+            char buffer[256];
+            s_format_check(ctx, fmt, "efg");
+            fz_snprintf(buffer, sizeof(buffer), fmt, value);
+            return buffer;
+        }}
         ''')
 
 def make_extra( out_extra_h, out_extra_cpp):
@@ -1309,7 +1329,7 @@ def make_extra( out_extra_h, out_extra_cpp):
     out_extra_cpp.write( g_extra_definitions)
 
 
-def make_internal_functions( namespace, out_h, out_cpp, refcheck_if):
+def make_internal_functions( namespace, out_h, out_cpp, refcheck_if, trace_if):
     '''
     Writes internal support functions.
 
@@ -1369,10 +1389,10 @@ def make_internal_functions( namespace, out_h, out_cpp, refcheck_if):
                 return false;
             }}
 
-            {refcheck_if}
+            {trace_if}
                 static const int    s_trace = mupdf::internal_env_flag("MUPDF_trace");
             #else
-                static const int    s_trace = mupdf::internal_env_flag_check_unset("{refcheck_if}", "MUPDF_trace");
+                static const int    s_trace = mupdf::internal_env_flag_check_unset("{trace_if}", "MUPDF_trace");
             #endif
 
             struct {rename.internal("state")}
@@ -1432,6 +1452,7 @@ def make_internal_functions( namespace, out_h, out_cpp, refcheck_if):
                                 << " calling fz_drop_context()\\n";
                     }}
                     fz_drop_context(m_ctx);
+                    m_ctx = nullptr;
                 }}
 
                 bool                m_multithreaded;
@@ -1599,6 +1620,7 @@ def make_function_wrappers(
         out_functions_cpp2,
         generated,
         refcheck_if,
+        trace_if,
         ):
     '''
     Generates C++ source code containing wrappers for all fz_*() functions.
@@ -1692,7 +1714,7 @@ def make_function_wrappers(
             m_code(code),
             m_text(text)
             {{
-                {refcheck_if}
+                {trace_if}
                 if (s_trace_exceptions)
                 {{
                     std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << "(): {base_name}: " << m_text << "\\n";
@@ -1900,7 +1922,7 @@ def make_function_wrappers(
                 FZ_FUNCTION {typename}::{typename}(const char* text)
                 : {base_name}({enum}, text)
                 {{
-                    {refcheck_if}
+                    {trace_if}
                     if (s_trace_exceptions)
                     {{
                         std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << "(): {typename} constructor, text: " << m_text << "\\n";
@@ -1925,15 +1947,10 @@ def make_function_wrappers(
             {{
                 int code;
                 const char* text = fz_convert_error(ctx, &code);
-                {refcheck_if}
+                {trace_if}
                 if (s_trace_exceptions)
                 {{
                     std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << "(): code=" << code << "\\n";
-                }}
-                #endif
-                {refcheck_if}
-                if (s_trace_exceptions)
-                {{
                     std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << "(): text=" << text << "\\n";
                 }}
                 #endif
@@ -1944,7 +1961,7 @@ def make_function_wrappers(
     out_exceptions_cpp.write( f'}}\n')
     out_exceptions_cpp.write( '\n')
 
-    make_internal_functions( namespace, out_internal_h, out_internal_cpp, refcheck_if)
+    make_internal_functions( namespace, out_internal_h, out_internal_cpp, refcheck_if, trace_if)
 
     # Generate wrappers for each function that we find.
     #
@@ -1986,6 +2003,7 @@ def make_function_wrappers(
                 out_functions_cpp,
                 generated,
                 refcheck_if,
+                trace_if,
                 )
         if not fnname.startswith( ( 'fz_keep_', 'fz_drop_', 'pdf_keep_', 'pdf_drop_')):
             function_wrapper_class_aware(
@@ -1995,6 +2013,7 @@ def make_function_wrappers(
                     class_name=None,
                     fn_cursor=cursor,
                     refcheck_if=refcheck_if,
+                    trace_if=trace_if,
                     fnname=fnname,
                     out_h=out_functions_h2,
                     out_cpp=out_functions_cpp2,
@@ -2140,7 +2159,7 @@ def make_function_wrappers(
             '''))
 
 
-def class_add_iterator( tu, struct_cursor, struct_name, classname, extras, refcheck_if):
+def class_add_iterator( tu, struct_cursor, struct_name, classname, extras, refcheck_if, trace_if):
     '''
     Add begin() and end() methods so that this generated class is iterable
     from C++ with:
@@ -2424,6 +2443,7 @@ def class_constructor_default(
         out_h,
         out_cpp,
         refcheck_if,
+        trace_if,
         ):
     '''
     Generates constructor that sets each member to default value.
@@ -2478,6 +2498,7 @@ def class_copy_constructor(
         out_h,
         out_cpp,
         refcheck_if,
+        trace_if,
         ):
     '''
     Generate a copy constructor and operator= by finding a suitable fz_keep_*()
@@ -2536,7 +2557,7 @@ def class_copy_constructor(
         out_cpp.write( '{\n')
 
         # Write trace code.
-        out_cpp.write( f'    {refcheck_if}\n')
+        out_cpp.write( f'    {trace_if}\n')
         out_cpp.write( f'    if (s_trace_keepdrop) {{\n')
         out_cpp.write( f'        std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << "():"\n')
         out_cpp.write( f'                << " have called {rename.ll_fn(keep_name)}(rhs.m_internal)\\n"\n')
@@ -2564,7 +2585,7 @@ def class_copy_constructor(
     out_cpp.write( f'/* {comment} */\n')
     out_cpp.write( f'FZ_FUNCTION {classname}& {classname}::operator=(const {classname}& rhs)\n')
     out_cpp.write(  '{\n')
-    out_cpp.write( f'    {refcheck_if}\n')
+    out_cpp.write( f'    {trace_if}\n')
     out_cpp.write( f'    if (s_trace_keepdrop) {{\n')
     out_cpp.write( f'        std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << "():"\n')
     out_cpp.write( f'                << " calling {rename.ll_fn(drop_name)}(this->m_internal)"\n')
@@ -2626,6 +2647,7 @@ def function_wrapper_class_aware_body(
         return_cursor,
         wrap_return,
         refcheck_if,
+        trace_if,
         ):
     '''
     Writes function or method body to <out_cpp> that calls a generated C++ wrapper
@@ -2667,7 +2689,7 @@ def function_wrapper_class_aware_body(
     return_void = (fn_cursor.result_type.spelling == 'void')
 
     # Write trace code.
-    out_cpp.write( f'    {refcheck_if}\n')
+    out_cpp.write( f'    {trace_if}\n')
     out_cpp.write( f'    if (s_trace) {{\n')
     out_cpp.write( f'        std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << "():"\n')
     out_cpp.write( f'                << " calling mupdf::{rename.ll_fn(fnname)}()\\n";\n')
@@ -2865,6 +2887,7 @@ def function_wrapper_class_aware(
         class_name,
         fn_cursor,
         refcheck_if,
+        trace_if,
         class_static=False,
         class_constructor=False,
         extras=None,
@@ -3196,7 +3219,8 @@ def function_wrapper_class_aware(
     # Copy any comment (indented) into class definition above method
     # declaration.
     if fn_cursor.raw_comment:
-        for line in fn_cursor.raw_comment.split( '\n'):
+        raw_comment = fn_cursor.raw_comment.replace('\r', '')
+        for line in raw_comment.split( '\n'):
             out_h.write( f'    {line}\n')
 
     if duplicate_type:
@@ -3232,6 +3256,7 @@ def function_wrapper_class_aware(
             return_cursor,
             wrap_return,
             refcheck_if,
+            trace_if,
             )
 
     if struct_name:
@@ -3263,6 +3288,7 @@ def class_custom_method(
         out_h,
         out_cpp,
         refcheck_if,
+        trace_if,
         ):
     '''
     Writes custom method as specified by <extramethod>.
@@ -3298,9 +3324,13 @@ def class_custom_method(
         return_space = ''
         comment = 'Custom destructor.'
         is_destructor = True
+    elif extramethod.name_args.startswith('operator '):
+        name_args = extramethod.name_args
+        comment = 'Custom operator.'
+        return_space = ''
     else:
         # Constructor.
-        assert extramethod.name_args.startswith( '('), f'bad constructor/destructor in classname={classname}'
+        assert extramethod.name_args.startswith( '('), f'bad constructor/destructor in {classname=}: {extramethod.name_args=}'
         name_args = f'{classname}{extramethod.name_args}'
         return_space = ''
         comment = 'Custom constructor.'
@@ -3372,6 +3402,7 @@ def class_raw_constructor(
         out_h,
         out_cpp,
         refcheck_if,
+        trace_if,
         ):
     '''
     Create a raw constructor - a constructor taking a pointer to underlying
@@ -3597,6 +3628,7 @@ def class_destructor(
         out_h,
         out_cpp,
         refcheck_if,
+        trace_if,
         ):
     if len(destructor_fns) > 1:
         # Use function with shortest name.
@@ -3910,6 +3942,7 @@ def class_wrapper_virtual_fnptrs(
         out_h_end,
         generated,
         refcheck_if,
+        trace_if,
         ):
     '''
     Generate extra wrapper class if struct contains function pointers, for
@@ -3952,7 +3985,7 @@ def class_wrapper_virtual_fnptrs(
     alloc = [''] + alloc.split('\n')
     alloc = '\n    '.join(alloc)
     out_cpp.write(f'{alloc}\n')
-    out_cpp.write(f'    {refcheck_if}\n')
+    out_cpp.write(f'    {trace_if}\n')
     out_cpp.write(f'    if (s_trace_director)\n')
     out_cpp.write( '    {\n')
     out_cpp.write(f'        std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << ": {classname}2::{classname}2(): this=" << this << "\\n";\n')
@@ -3972,7 +4005,7 @@ def class_wrapper_virtual_fnptrs(
         out_cpp.write('\n')
         out_cpp.write(f'FZ_FUNCTION {classname}2::~{classname}2()\n')
         out_cpp.write( '{\n')
-        out_cpp.write(f'    {refcheck_if}\n')
+        out_cpp.write(f'    {trace_if}\n')
         out_cpp.write(f'    if (s_trace_director)\n')
         out_cpp.write( '    {\n')
         out_cpp.write(f'        std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << ": ~{classname}2(): this=" << this << "\\n";\n')
@@ -4038,7 +4071,7 @@ def class_wrapper_virtual_fnptrs(
         out_cpp.write('{\n')
         self_expression = self_() if self_n is None else self_( f'arg_{self_n}')
         out_cpp.write(f'    {classname}2* self = {self_expression};\n')
-        out_cpp.write(f'    {refcheck_if}\n')
+        out_cpp.write(f'    {trace_if}\n')
         out_cpp.write(f'    if (s_trace_director)\n')
         out_cpp.write( '    {\n')
         out_cpp.write(f'        std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << ": {classname}2_s_{cursor.spelling}(): arg_0=" << arg_0 << " arg_1=" << arg_1 << " self=" << self << "\\n";\n')
@@ -4063,7 +4096,7 @@ def class_wrapper_virtual_fnptrs(
         # todo: catch our different exception types and map to FZ_ERROR_*.
         out_cpp.write( '    catch (std::exception& e)\n')
         out_cpp.write( '    {\n')
-        out_cpp.write(f'        {refcheck_if}\n')
+        out_cpp.write(f'        {trace_if}\n')
         out_cpp.write( '        if (s_trace_director)\n')
         out_cpp.write( '        {\n')
         out_cpp.write(f'            std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << ": {classname}2_s_{cursor.spelling}(): converting std::exception to fz_throw(): " << e.what() << "\\n";\n')
@@ -4086,7 +4119,7 @@ def class_wrapper_virtual_fnptrs(
         out_cpp.write(f'FZ_FUNCTION void {classname}2::use_virtual_{cursor.spelling}( bool use)\n')
         out_cpp.write( '{\n')
 
-        out_cpp.write(f'    {refcheck_if}\n')
+        out_cpp.write(f'    {trace_if}\n')
         out_cpp.write(f'    if (s_trace_director)\n')
         out_cpp.write( '    {\n')
         out_cpp.write(f'        std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << ": {classname}2::use_virtual_{cursor.spelling}(): this=" << this << " use=" << use << "\\n";\n')
@@ -4153,6 +4186,7 @@ def class_wrapper(
         out_h2,
         generated,
         refcheck_if,
+        trace_if,
         ):
     '''
     Creates source for a class called <classname> that wraps <struct_name>,
@@ -4188,7 +4222,7 @@ def class_wrapper(
     '''
     assert extras, f'extras is None for {struct_name}'
     if extras.iterator_next:
-        class_add_iterator( tu, struct_cursor, struct_name, classname, extras, refcheck_if)
+        class_add_iterator( tu, struct_cursor, struct_name, classname, extras, refcheck_if, trace_if)
 
     if extras.class_pre:
         out_h.write( textwrap.dedent( extras.class_pre))
@@ -4211,8 +4245,9 @@ def class_wrapper(
     else:
         out_h.write( f'/** Wrapper class for struct `{struct_name}`. Not copyable or assignable. */\n')
     if struct_cursor.raw_comment:
-        out_h.write( f'{struct_cursor.raw_comment}')
-        if not struct_cursor.raw_comment.endswith( '\n'):
+        raw_comment = struct_cursor.raw_comment.replace('\r', '')
+        out_h.write(raw_comment)
+        if not raw_comment.endswith( '\n'):
             out_h.write( '\n')
     out_h.write( f'struct {classname}\n{{')
 
@@ -4276,6 +4311,7 @@ def class_wrapper(
                     classname,
                     cursor,
                     refcheck_if,
+                    trace_if,
                     class_static=False,
                     class_constructor=True,
                     extras=extras,
@@ -4302,6 +4338,7 @@ def class_wrapper(
                 out_h,
                 out_cpp,
                 refcheck_if,
+                trace_if,
                 )
         num_constructors += 1
 
@@ -4322,6 +4359,7 @@ def class_wrapper(
                 out_h,
                 out_cpp,
                 refcheck_if,
+                trace_if,
                 )
     elif extras.copyable:
         out_h.write( '\n')
@@ -4343,6 +4381,7 @@ def class_wrapper(
                     out_h,
                     out_cpp,
                     refcheck_if,
+                    trace_if,
                     )
             num_constructors += 1
 
@@ -4393,6 +4432,7 @@ def class_wrapper(
                 classname,
                 fn_cursor=None,
                 refcheck_if=refcheck_if,
+                trace_if=trace_if,
                 class_static=True,
                 struct_cursor=struct_cursor,
                 generated=generated,
@@ -4416,6 +4456,7 @@ def class_wrapper(
                 classname,
                 None, #fn_cursor
                 refcheck_if,
+                trace_if,
                 struct_cursor=struct_cursor,
                 generated=generated,
                 debug=state.state_.show_details(fnname),
@@ -4435,6 +4476,7 @@ def class_wrapper(
                 out_h,
                 out_cpp,
                 refcheck_if,
+                trace_if,
                 )
         if is_constructor:
             num_constructors += 1
@@ -4463,6 +4505,7 @@ def class_wrapper(
                 out_h,
                 out_cpp,
                 refcheck_if,
+                trace_if,
                 )
 
     # Accessor methods to POD data.
@@ -4498,10 +4541,11 @@ def class_wrapper(
                 out_h,
                 out_cpp,
                 refcheck_if,
+                trace_if,
                 )
 
     # If class has '{structname}* m_internal;', provide access to m_iternal as
-    # an integer, for use by python etc.
+    # an integer, for use by python etc, and provide `operator bool()`.
     if not extras.pod:
         class_custom_method(
                 tu,
@@ -4521,7 +4565,38 @@ def class_wrapper(
                 out_h,
                 out_cpp,
                 refcheck_if,
+                trace_if,
                 )
+        class_custom_method(
+                tu,
+                register_fn_use,
+                struct_cursor,
+                classname,
+                classes.ExtraMethod(
+                    '',
+                    'operator bool()',
+                    f'''
+                    {{
+                        {trace_if}
+                        if (s_trace)
+                        {{
+                            std::cerr << __FILE__ << ":" << __LINE__ << ":"
+                                    << " {classname}::operator bool() called,"
+                                    << " m_internal=" << m_internal << "."
+                                    << "\\n";
+                        }}
+                        #endif
+                        return m_internal ? true : false;
+                    }}
+                    ''',
+                    '/** Return true iff `m_internal` is not null. */',
+                    ),
+                out_h,
+                out_cpp,
+                refcheck_if,
+                trace_if,
+                )
+
     # Class members.
     #
     out_h.write( '\n')
@@ -4604,6 +4679,7 @@ def class_wrapper(
             out_h_end,
             generated,
             refcheck_if,
+            trace_if,
             )
 
     return is_container, has_to_string
@@ -4678,7 +4754,7 @@ def refcount_check_code( out, refcheck_if):
 
             If <allow_int_this> is true, we allow _this->m_internal to be
             an invalid pointer less than 4096, in which case we don't try
-            to check refs. This is used for_pdf_obj because in Python the
+            to check refs. This is used for pdf_obj because in Python the
             enums PDF_ENUM_NAME_* are converted to mupdf.PdfObj's containg
             .m_internal's which are the enum values cast to (for_pdf_obj*), so
             that they can be used directly.
@@ -4825,6 +4901,7 @@ def cpp_source(
         check_regress,
         clang_info_version,
         refcheck_if,
+        trace_if,
         debug,
         ):
     '''
@@ -4850,6 +4927,11 @@ def cpp_source(
             `#if ... ' text for enabling reference-checking code. For example
             `#if 1` to always enable, `#ifndef NDEBUG` to only enable in debug
             builds, `#if 0` to always disable.
+        refcheck_if:
+            `#if ... ' text for enabling optional runtime diagnostic, for
+            example by setting `MuPDF_trace=1` runtime. For example `#if 1` to
+            always enable, `#ifndef NDEBUG` to only enable in debug builds,
+            `#if 0` to always disable.
         debug:
             True if debug build.
 
@@ -5167,10 +5249,10 @@ def cpp_source(
 
             #include <string.h>
 
-            {refcheck_if}
+            {trace_if}
                 static const bool   s_trace_exceptions = mupdf::internal_env_flag("MUPDF_trace_exceptions");
             #else
-                static const bool   s_trace_exceptions_dummy = mupdf::internal_env_flag_check_unset("{refcheck_if}", "MUPDF_trace_exceptions");
+                static const bool   s_trace_exceptions_dummy = mupdf::internal_env_flag_check_unset("{trace_if}", "MUPDF_trace_exceptions");
             #endif
             '''))
 
@@ -5206,14 +5288,14 @@ def cpp_source(
 
             #include <string.h>
 
-            {refcheck_if}
+            {trace_if}
                 static const int    s_trace = mupdf::internal_env_flag("MUPDF_trace");
                 static const bool   s_trace_keepdrop = mupdf::internal_env_flag("MUPDF_trace_keepdrop");
                 static const bool   s_trace_director = mupdf::internal_env_flag("MUPDF_trace_director");
             #else
-                static const int    s_trace = mupdf::internal_env_flag_check_unset("{refcheck_if}", "MUPDF_trace");
-                static const bool   s_trace_keepdrop = mupdf::internal_env_flag_check_unset("{refcheck_if}", "MUPDF_trace_keepdrop");
-                static const bool   s_trace_director = mupdf::internal_env_flag_check_unset("{refcheck_if}", "MUPDF_trace_director");
+                static const int    s_trace = mupdf::internal_env_flag_check_unset("{trace_if}", "MUPDF_trace");
+                static const bool   s_trace_keepdrop = mupdf::internal_env_flag_check_unset("{trace_if}", "MUPDF_trace_keepdrop");
+                static const bool   s_trace_director = mupdf::internal_env_flag_check_unset("{trace_if}", "MUPDF_trace_director");
             #endif
             '''))
 
@@ -5234,10 +5316,10 @@ def cpp_source(
 
             #include <string.h>
 
-            {refcheck_if}
+            {trace_if}
                 static const int    s_trace = mupdf::internal_env_flag("MUPDF_trace");
             #else
-                static const int    s_trace = mupdf::internal_env_flag_check_unset("{refcheck_if}", "MUPDF_trace");
+                static const int    s_trace = mupdf::internal_env_flag_check_unset("{trace_if}", "MUPDF_trace");
             #endif
             '''))
 
@@ -5277,16 +5359,16 @@ def cpp_source(
                     "info:ModDate",
             }};
 
-            {refcheck_if}
+            {trace_if}
                 static const int    s_trace = internal_env_flag("MUPDF_trace");
                 static const bool   s_trace_keepdrop = internal_env_flag("MUPDF_trace_keepdrop");
                 static const bool   s_trace_exceptions = internal_env_flag("MUPDF_trace_exceptions");
                 static const bool   s_check_error_stack = internal_env_flag("MUPDF_check_error_stack");
             #else
-                static const int    s_trace = internal_env_flag_check_unset("{refcheck_if}", "MUPDF_trace");
-                static const bool   s_trace_keepdrop = internal_env_flag_check_unset("{refcheck_if}", "MUPDF_trace_keepdrop");
-                static const bool   s_trace_exceptions = internal_env_flag_check_unset("{refcheck_if}", "MUPDF_trace_exceptions");
-                static const bool   s_check_error_stack = internal_env_flag_check_unset("{refcheck_if}", "MUPDF_check_error_stack");
+                static const int    s_trace = internal_env_flag_check_unset("{trace_if}", "MUPDF_trace");
+                static const bool   s_trace_keepdrop = internal_env_flag_check_unset("{trace_if}", "MUPDF_trace_keepdrop");
+                static const bool   s_trace_exceptions = internal_env_flag_check_unset("{trace_if}", "MUPDF_trace_exceptions");
+                static const bool   s_check_error_stack = internal_env_flag_check_unset("{trace_if}", "MUPDF_check_error_stack");
             #endif
 
             '''))
@@ -5307,6 +5389,7 @@ def cpp_source(
             out_cpps.classes2,
             generated,
             refcheck_if,
+            trace_if,
             )
 
     fn_usage = dict()
@@ -5462,6 +5545,7 @@ def cpp_source(
                     out_hs.classes2,
                     generated,
                     refcheck_if,
+                    trace_if,
                     )
         if is_container:
             generated.container_classnames.append( classname)

@@ -562,7 +562,7 @@ static void pdf_set_link_uri(fz_context *ctx, fz_link *link_, const char *uri)
 fz_link *pdf_new_link(fz_context *ctx, pdf_page *page, fz_rect rect, const char *uri, pdf_obj *obj)
 {
 	pdf_link *link = fz_new_derived_link(ctx, pdf_link, rect, uri);
-	link->super.drop = (fz_link_drop_link_fn*) pdf_drop_link_imp;
+	link->super.drop = pdf_drop_link_imp;
 	link->super.set_rect_fn = pdf_set_link_rect;
 	link->super.set_uri_fn = pdf_set_link_uri;
 	link->page = page; /* only borrowed, as the page owns the link */
@@ -657,6 +657,8 @@ pdf_load_link_annots(fz_context *ctx, pdf_document *doc, pdf_page *page, pdf_obj
 	return head;
 }
 
+#define isnanorzero(x) (isnan(x) || (x) == 0)
+
 static char*
 format_explicit_dest_link_uri(fz_context *ctx, const char *schema, const char *uri, fz_link_dest dest)
 {
@@ -699,19 +701,19 @@ format_explicit_dest_link_uri(fz_context *ctx, const char *schema, const char *u
 		else
 			return fz_asprintf(ctx, "%s%s%cpage=%d&view=FitBV,%g", schema, uri, "#&"[has_frag], pageno, dest.x);
 	case FZ_LINK_DEST_XYZ:
-		if (!isnan(dest.zoom) && !isnan(dest.x) && !isnan(dest.y))
+		if (!isnanorzero(dest.zoom) && !isnan(dest.x) && !isnan(dest.y))
 			return fz_asprintf(ctx, "%s%s%cpage=%d&zoom=%g,%g,%g", schema, uri, "#&"[has_frag], pageno, dest.zoom, dest.x, dest.y);
-		else if (!isnan(dest.zoom) && !isnan(dest.x) && isnan(dest.y))
+		else if (!isnanorzero(dest.zoom) && !isnan(dest.x) && isnan(dest.y))
 			return fz_asprintf(ctx, "%s%s%cpage=%d&zoom=%g,%g,nan", schema, uri, "#&"[has_frag], pageno, dest.zoom, dest.x);
-		else if (!isnan(dest.zoom) && isnan(dest.x) && !isnan(dest.y))
+		else if (!isnanorzero(dest.zoom) && isnan(dest.x) && !isnan(dest.y))
 			return fz_asprintf(ctx, "%s%s%cpage=%d&zoom=%g,nan,%g", schema, uri, "#&"[has_frag], pageno, dest.zoom, dest.y);
-		else if (!isnan(dest.zoom) && isnan(dest.x) && isnan(dest.y))
+		else if (!isnanorzero(dest.zoom) && isnan(dest.x) && isnan(dest.y))
 			return fz_asprintf(ctx, "%s%s%cpage=%d&zoom=%g,nan,nan", schema, uri, "#&"[has_frag], pageno, dest.zoom);
-		else if (isnan(dest.zoom) && !isnan(dest.x) && !isnan(dest.y))
+		else if (isnanorzero(dest.zoom)&& !isnan(dest.x) && !isnan(dest.y))
 			return fz_asprintf(ctx, "%s%s%cpage=%d&zoom=nan,%g,%g", schema, uri, "#&"[has_frag], pageno, dest.x, dest.y);
-		else if (isnan(dest.zoom) && !isnan(dest.x) && isnan(dest.y))
+		else if (isnanorzero(dest.zoom) && !isnan(dest.x) && isnan(dest.y))
 			return fz_asprintf(ctx, "%s%s%cpage=%d&zoom=nan,%g,nan", schema, uri, "#&"[has_frag], pageno, dest.x);
-		else if (isnan(dest.zoom) && isnan(dest.x) && !isnan(dest.y))
+		else if (isnanorzero(dest.zoom) && isnan(dest.x) && !isnan(dest.y))
 			return fz_asprintf(ctx, "%s%s%cpage=%d&zoom=nan,nan,%g", schema, uri, "#&"[has_frag], pageno, dest.y);
 		else
 			return fz_asprintf(ctx, "%s%s%cpage=%d", schema, uri, "#&"[has_frag], pageno);
@@ -1256,7 +1258,26 @@ pdf_new_dest_from_link(fz_context *ctx, pdf_document *doc, const char *uri, int 
 					pdf_array_push_real(ctx, dest, p.x);
 				break;
 			case FZ_LINK_DEST_XYZ:
-				p = fz_transform_point_xy(val.x, val.y, invctm);
+				if (invctm.a == 0 && invctm.d == 0)
+				{
+					/* Rotating by 90 or 270 degrees. */
+					p = fz_transform_point_xy(isnan(val.x) ? 0 : val.x, isnan(val.y) ? 0 : val.y, invctm);
+					if (isnan(val.x))
+						p.y = val.x;
+					if (isnan(val.y))
+						p.x = val.y;
+				}
+				else if (invctm.b == 0 && invctm.c == 0)
+				{
+					/* No rotation, or 180 degrees. */
+					p = fz_transform_point_xy(isnan(val.x) ? 0 : val.x, isnan(val.y) ? 0 : val.y, invctm);
+					if (isnan(val.x))
+						p.x = val.x;
+					if (isnan(val.y))
+						p.y = val.y;
+				}
+				else
+					p = fz_transform_point_xy(val.x, val.y, invctm);
 				pdf_array_push(ctx, dest, PDF_NAME(XYZ));
 				if (isnan(p.x))
 					pdf_array_push(ctx, dest, PDF_NULL);

@@ -11,6 +11,7 @@ import textwrap
 import jlib
 
 from . import cpp
+from . import csharp
 from . import rename
 from . import state
 from . import util
@@ -36,10 +37,63 @@ def translate_ucdn_macros( build_dirs):
     assert n
     return out.getvalue()
 
+def _csharp_unicode_prefix():
+    '''
+    Returns typemaps that automatically convert C# strings (which are utf16)
+    into utf8 when calling MuPDF, and convert strings returned by MuPDF (which
+    are utf8) into utf16.
+
+    We return empty string if not on Windows, because Mono appears to already
+    work.
+    '''
+    if not state.state_.windows:
+        # Mono on Linux already seems to use utf8.
+        return ''
+
+    text = textwrap.dedent('''
+            // This ensures that our code below overrides whatever is defined
+            // in std_string.i and any later `%include "std_string.i"` is
+            // ignored.
+            %include "std_string.i"
+
+            // See https://github.com/swig/swig/pull/2364. We also add typemaps
+            // for `const char*`.
+
+            %{
+            #include <string>
+            %}
+
+            namespace std
+            {
+                %typemap(imtype,
+                         inattributes="[global::System.Runtime.InteropServices.MarshalAs(global::System.Runtime.InteropServices.UnmanagedType.LPUTF8Str)]",
+                         outattributes="[return: global::System.Runtime.InteropServices.MarshalAs(global::System.Runtime.InteropServices.UnmanagedType.LPUTF8Str)]",
+                         directorinattributes="[global::System.Runtime.InteropServices.MarshalAs(global::System.Runtime.InteropServices.UnmanagedType.LPUTF8Str)]",
+                         directoroutattributes="[return: global::System.Runtime.InteropServices.MarshalAs(global::System.Runtime.InteropServices.UnmanagedType.LPUTF8Str)]"
+                         ) string "string"
+
+
+                %typemap(imtype,
+                         inattributes="[global::System.Runtime.InteropServices.MarshalAs(global::System.Runtime.InteropServices.UnmanagedType.LPUTF8Str)]",
+                         outattributes="[return: global::System.Runtime.InteropServices.MarshalAs(global::System.Runtime.InteropServices.UnmanagedType.LPUTF8Str)]",
+                         directorinattributes="[global::System.Runtime.InteropServices.MarshalAs(global::System.Runtime.InteropServices.UnmanagedType.LPUTF8Str)]",
+                         directoroutattributes="[return: global::System.Runtime.InteropServices.MarshalAs(global::System.Runtime.InteropServices.UnmanagedType.LPUTF8Str)]"
+                         ) const string & "string"
+
+                %typemap(imtype,
+                         inattributes="[global::System.Runtime.InteropServices.MarshalAs(global::System.Runtime.InteropServices.UnmanagedType.LPUTF8Str)]",
+                         outattributes="[return: global::System.Runtime.InteropServices.MarshalAs(global::System.Runtime.InteropServices.UnmanagedType.LPUTF8Str)]",
+                         directorinattributes="[global::System.Runtime.InteropServices.MarshalAs(global::System.Runtime.InteropServices.UnmanagedType.LPUTF8Str)]",
+                         directoroutattributes="[return: global::System.Runtime.InteropServices.MarshalAs(global::System.Runtime.InteropServices.UnmanagedType.LPUTF8Str)]"
+                         ) const char* "string"
+            }
+            ''')
+    return text
+
 
 def build_swig(
-        state_,
-        build_dirs,
+        state_: state.State,
+        build_dirs: state.BuildDirs,
         generated,
         language='python',
         swig_command='swig',
@@ -119,7 +173,11 @@ def build_swig(
                 static std::string to_stdstring(PyObject* s)
                 {{
                     PyObject* repr_str = PyUnicode_AsEncodedString(s, "utf-8", "~E~");
-                    const char* repr_str_s = PyBytes_AS_STRING(repr_str);
+                    #ifdef Py_LIMITED_API
+                        const char* repr_str_s = PyBytes_AsString(repr_str);
+                    #else
+                        const char* repr_str_s = PyBytes_AS_STRING(repr_str);
+                    #endif
                     std::string ret = repr_str_s;
                     Py_DECREF(repr_str);
                     Py_DECREF(s);
@@ -590,6 +648,35 @@ def build_swig(
     text = ''
 
     text += '%module(directors="1") mupdf\n'
+
+    jlib.log(f'{build_dirs.Py_LIMITED_API=}')
+    if build_dirs.Py_LIMITED_API:  # e.g. 0x03080000
+        text += textwrap.dedent(f'''
+                %begin %{{
+                /* Use Python Stable ABI with earliest Python version that we
+                support. */
+                #define Py_LIMITED_API {build_dirs.Py_LIMITED_API}
+
+                /* These seem to be mistakenly undefined when Py_LIMITED_API
+                is defined, so we force the values from Python.h. Also see
+                https://github.com/python/cpython/issues/98680. */
+                #ifndef PyBUF_READ
+                    #define PyBUF_READ 0x100
+                #endif
+                #ifndef PyBUF_WRITE
+                    #define PyBUF_WRITE 0x200
+                #endif
+                %}}
+                ''')
+
+    # https://www.mono-project.com/docs/advanced/pinvoke/
+    #
+    # > Mono on all platforms currently uses UTF-8 encoding for all string
+    # > marshaling operations.
+    #
+    if language == 'csharp':
+        text += _csharp_unicode_prefix()
+
     for i in generated.virtual_fnptrs:
         text += f'%feature("director") {i};\n'
 
@@ -751,7 +838,11 @@ def build_swig(
     # Ignore all C MuPDF functions; SWIG will still look at the C++ API in
     # namespace mudf.
     for fnname in generated.c_functions:
-        if fnname in ('pdf_annot_type', 'pdf_widget_type'):
+        if fnname in (
+                    'pdf_annot_type',
+                    'pdf_widget_type',
+                    'pdf_zugferd_profile',
+                    ):
             # These are also enums which we don't want to ignore. SWIGing the
             # functions is hopefully harmless.
             pass
@@ -1512,7 +1603,7 @@ def build_swig(
                         if isinstance( arg, FzOutput2):
                             assert not out, "More than one FzOutput2 passed to FzDocumentWriter.__init__()"
                             out = arg
-                    if out:
+                    if out is not None:
                         self._out = out
                     return FzDocumentWriter__init__0(self, *args)
                 FzDocumentWriter.__init__ = FzDocumentWriter__init__1
@@ -1581,6 +1672,8 @@ def build_swig(
                             f_fallback,
                             )
                     fz_install_load_system_font_funcs2(g_fz_install_load_system_font_funcs_args)
+
+                Py_LIMITED_API = {repr(build_dirs.Py_LIMITED_API) if build_dirs.Py_LIMITED_API else 'None'}
                 ''')
 
         # Add __iter__() methods for all classes with begin() and end() methods.
@@ -1612,32 +1705,6 @@ def build_swig(
 
         text += '%}\n'
 
-    text2_code = textwrap.dedent( '''
-            ''')
-
-    if text2_code.strip():
-        text2 = textwrap.dedent( f'''
-                %{{
-                    #include "mupdf/fitz.h"
-                    #include "mupdf/classes.h"
-                    #include "mupdf/classes2.h"
-                    #include <vector>
-
-                    {text2_code}
-                %}}
-
-                %include std_vector.i
-
-                namespace std
-                {{
-                    %template(vectori) vector<int>;
-                }};
-
-                {text2_code}
-                ''')
-    else:
-        text2 = ''
-
     if 1:   # lgtm [py/constant-conditional-expression]
         # This is a horrible hack to avoid swig failing because
         # include/mupdf/pdf/object.h defines an enum which contains a #include.
@@ -1662,10 +1729,10 @@ def build_swig(
         assert oo != o
         jlib.fs_update( oo, f'{build_dirs.dir_mupdf}/platform/python/include/mupdf/pdf/object.h')
 
-    swig_i      = f'{build_dirs.dir_mupdf}/platform/{language}/mupdfcpp_swig.i'
+    swig_i      = build_dirs.mupdfcpp_swig_i(language)
+    swig_cpp    = build_dirs.mupdfcpp_swig_cpp(language)
     include1    = f'{build_dirs.dir_mupdf}/include/'
     include2    = f'{build_dirs.dir_mupdf}/platform/c++/include'
-    swig_cpp    = f'{build_dirs.dir_mupdf}/platform/{language}/mupdfcpp_swig.cpp'
     swig_py     = f'{build_dirs.dir_so}/mupdf.py'
 
     swig2_i     = f'{build_dirs.dir_mupdf}/platform/{language}/mupdfcpp2_swig.i'
@@ -1675,10 +1742,7 @@ def build_swig(
     os.makedirs( f'{build_dirs.dir_mupdf}/platform/{language}', exist_ok=True)
     os.makedirs( f'{build_dirs.dir_so}', exist_ok=True)
     util.update_file_regress( text, swig_i, check_regress)
-    if text2:
-        util.update_file_regress( text2, swig2_i, check_regress)
-    else:
-        jlib.fs_update( '', swig2_i)
+    jlib.fs_update( '', swig2_i)
 
     # Disable some unhelpful SWIG warnings. Must not use -Wall as it overrides
     # all warning disables.
@@ -1722,9 +1786,7 @@ def build_swig(
             # include/mupdf/fitz/heap.h. Otherwise swig's preprocessor seems to
             # ignore #undef's in include/mupdf/fitz/heap-imp.h then complains
             # about redefinition of macros in include/mupdf/fitz/heap.h.
-            command = (
-                    textwrap.dedent(
-                    f'''
+            command = f'''
                     "{swig_command}"
                         {"-D_WIN32" if state_.windows else ""}
                         -c++
@@ -1733,7 +1795,7 @@ def build_swig(
                         -Wextra
                         {disable_swig_warnings}
                         -module {module}
-                        -outdir {os.path.relpath(build_dirs.dir_so)}
+                        -outdir {os.path.relpath(build_dirs.dir_mupdf)}/platform/python
                         -o {cpp}
                         -includeall
                         {os.environ.get('XCXXFLAGS', '')}
@@ -1743,67 +1805,45 @@ def build_swig(
                         -ignoremissing
                         -DMUPDF_FITZ_HEAP_H
                         {swig_i}
-                    ''').strip().replace( '\n', "" if state_.windows else " \\\n")
-                    )
+                    '''
             return command
 
-        def modify_py( rebuilt, swig_py, do_enums):
-            if not rebuilt:
-                return
-            swig_py_leaf = os.path.basename( swig_py)
-            assert swig_py_leaf.endswith( '.py')
-            so = f'_{swig_py_leaf[:-3]}.so'
-            swig_py_tmp = f'{swig_py}-'
-            jlib.fs_remove( swig_py_tmp)
-            os.rename( swig_py, swig_py_tmp)
-            with open( swig_py_tmp) as f:
-                swig_py_content = f.read()
+        def modify_py( path_in, path_out):
+            with open( path_in) as f:
+                text = f.read()
 
-            if state_.windows:
-                jlib.log('Adding prefix to {swig_cpp=}')
-                prefix = ''
-                postfix = ''
-                with open( swig_cpp) as f:
-                    swig_py_content = prefix + swig_py_content + postfix
+            # Change all our PDF_ENUM_NAME_* enums so that they are actually
+            # PdfObj instances so that they can be used like any other PdfObj.
+            #
+            #jlib.log('{len(generated.c_enums)=}')
+            for enum_type, enum_names in generated.c_enums.items():
+                for enum_name in enum_names:
+                    if enum_name.startswith( 'PDF_ENUM_NAME_'):
+                        text += f'{enum_name} = {rename.class_("pdf_obj")}( obj_enum_to_obj( {enum_name}))\n'
 
-            if do_enums:
-                # Change all our PDF_ENUM_NAME_* enums so that they are actually
-                # PdfObj instances so that they can be used like any other PdfObj.
-                #
-                #jlib.log('{len(generated.c_enums)=}')
-                for enum_type, enum_names in generated.c_enums.items():
-                    for enum_name in enum_names:
-                        if enum_name.startswith( 'PDF_ENUM_NAME_'):
-                            swig_py_content += f'{enum_name} = {rename.class_("pdf_obj")}( obj_enum_to_obj( {enum_name}))\n'
+            # 2024-09-28: important to not include PDF_LIMIT here, because
+            # pdf_drop_obj() treats all pdf_obj*'s as real pointers if they are
+            # >= PDF_LIMIT.
+            for name in ('NULL', 'TRUE', 'FALSE'):
+                text += f'PDF_{name} = {rename.class_("pdf_obj")}( obj_enum_to_obj( PDF_ENUM_{name}))\n'
 
-            with open( swig_py_tmp, 'w') as f:
-                f.write( swig_py_content)
-            os.rename( swig_py_tmp, swig_py)
+            jlib.fs_update(text, path_out)
 
-        if text2:
-            # Make mupdf2, for mupdfpy optimisations.
-            jlib.log( 'Running SWIG to generate mupdf2 .cpp')
-            command = make_command( 'mupdf2', swig2_cpp, swig2_i)
-            rebuilt = jlib.build(
-                    (swig2_i, include1, include2),
-                    (swig2_cpp, swig2_py),
-                    command,
-                    force_rebuild,
-                    )
-            modify_py( rebuilt, swig2_py, do_enums=False)
-        else:
-            jlib.fs_update( '', swig2_cpp)
-            jlib.fs_remove( swig2_py)
+        jlib.fs_update( '', swig2_cpp)
+        jlib.fs_remove( swig2_py)
 
         # Make main mupdf .so.
         command = make_command( 'mupdf', swig_cpp, swig_i)
+        swig_py_ = f'{build_dirs.dir_mupdf}/platform/python/mupdf.py'
         rebuilt = jlib.build(
                 (swig_i, include1, include2),
-                (swig_cpp, swig_py),
+                (swig_cpp, swig_py_),
                 command,
                 force_rebuild,
                 )
-        modify_py( rebuilt, swig_py, do_enums=True)
+        jlib.log(f'swig => {rebuilt=}.')
+        updated = modify_py( swig_py_, swig_py)
+        jlib.log(f'modify_py() => {updated=}.')
 
 
     elif language == 'csharp':
@@ -1822,11 +1862,14 @@ def build_swig(
             # swig generated c dll reference to a c sharp project".
             #
             dllimport = 'mupdfcsharp.dll'
-        command = (
-                textwrap.dedent(
-                f'''
+
+        # See https://www.swig.org/Doc4.2/CSharp.html `23.3.1 Primitive types`
+        # for description of SWIGWORDSIZE64. If we were to build on 32-bit Linux
+        # we would have to remove the `-DSWIGWORDSIZE64` flag.
+        command = (f'''
                 "{swig_command}"
                     {"-D_WIN32" if state_.windows else ""}
+                    {"-DSWIGWORDSIZE64" if state_.linux else ""}
                     -c++
                     -csharp
                     -Wextra
@@ -1844,8 +1887,8 @@ def build_swig(
                     -ignoremissing
                     -DMUPDF_FITZ_HEAP_H
                     {os.path.relpath(swig_i)}
-                ''').strip().replace( '\n', "" if state_.windows else "\\\n")
-                )
+                ''')
+
         rebuilt = jlib.build(
                 (swig_i, include1, include2),
                 (f'{outdir}/mupdf.cs', os.path.relpath(swig_cpp)),
@@ -1878,7 +1921,8 @@ def build_swig(
     else:
         assert 0
 
-    if swig_cpp_old:
+    # Disabled; see above for explanation.
+    if 0 and swig_cpp_old:
         with open( swig_cpp_old) as f:
             swig_cpp_contents_old = f.read()
         with open(swig_cpp) as f:
@@ -1933,3 +1977,265 @@ def test_swig():
                 test.i
             ''').replace( '\n', ' \\\n')
             )
+
+
+def test_swig_csharp():
+    '''
+    Checks behaviour with and without our custom string marshalling code from
+    _csharp_unicode_prefix().
+    '''
+    test_swig_csharp_internal(fix=0)
+    test_swig_csharp_internal(fix=1)
+
+
+def test_swig_csharp_internal(fix):
+    '''
+    Test utf8 string handling, with/without use of _csharp_unicode_prefix().
+    '''
+    # We create C++/C# source directly from this function, and explicitly run
+    # C++ and .NET/Mono build commands.
+    #
+
+    build_dir = f'test_swig_{fix}'
+    os.makedirs( build_dir, exist_ok=True)
+
+    print('')
+    print(f'### test_swig_internal(): {fix=}', flush=1)
+
+    # Create SWIG input file `test.i`.
+    #
+    test_i = '%module test\n'
+
+    if fix:
+        test_i += _csharp_unicode_prefix()
+
+    test_i += textwrap.dedent(f'''
+            %include "std_string.i"
+
+            // Returns escaped representation of `text`.
+            const char* foo1(const char* text);
+
+            // Returns escaped representation of `text`.
+            std::string foo2(const std::string& text);
+
+            // Returns 4-byte string `0xf0 0x90 0x90 0xb7`, which decodes as
+            // utf8 to a 4-byte utf16 character.
+            const char* bar();
+
+            // Returns 4-byte string `0xf0 0x90 0x90 0xb7`, which decodes as
+            // utf8 to a 4-byte utf16 character.
+            std::string bar2();
+
+            %{{
+                // Returns string containing escaped description of `text`.
+                std::string foo2(const std::string& text)
+                {{
+                    std::string ret;
+                    for (int i=0; i<text.size(); ++i)
+                    {{
+                        char buffer[8];
+                        snprintf(buffer, sizeof(buffer), " \\\\x%02x", (unsigned char) text[i]);
+                        ret += buffer;
+                    }}
+                    return ret;
+                }}
+
+                // Returns pointer to static buffer containing escaped
+                // description of `text`.
+                const char* foo1(const char* text)
+                {{
+                    std::string text2 = text;
+                    static std::string ret;
+                    ret = foo2(text2);
+                    return ret.c_str();
+                }}
+
+                // Returns pointer to static buffer containing a utf8 string.
+                const char* bar()
+                {{
+                    static char ret[] =
+                    {{
+                            (char) 0xf0,
+                            (char) 0x90,
+                            (char) 0x90,
+                            (char) 0xb7,
+                            0,
+                    }};
+                    return ret;
+                }}
+
+                // Returns a std::string containing a utf8 string.
+                std::string bar2()
+                {{
+                    const char* ret = bar();
+                    return std::string(ret);
+                }}
+            %}}
+            ''')
+    with open(f'{build_dir}/test.i', 'w') as f:
+        f.write(test_i)
+
+    # Run swig on `test.i` to generate `test.cs` and `test.cpp`.
+    #
+    jlib.system(
+            f'''
+            cd {build_dir} && swig
+                {'-DSWIG_CSHARP_NO_STRING_HELPER=1 -DSWIG_CSHARP_NO_EXCEPTION_HELPER=1' if 0 and fix else ''}
+                -D_WIN32
+                -c++
+                -csharp
+                -Wextra
+                -Wall
+                -dllimport test.dll
+                -outdir .
+                -outfile test.cs
+                -o test.cpp
+                test.i
+            ''')
+
+    # Compile/link test.cpp to create test.dll.
+    #
+    if state.state_.windows:
+        import wdev
+        vs = wdev.WindowsVS()
+        jlib.system(
+                f'''
+                cd {build_dir} && "{vs.vcvars}"&&"{vs.cl}"
+                    /nologo                     #
+                    /c                          # Compiles without linking.
+                    /EHsc                       # Enable "Standard C++ exception handling".
+                    /MD
+                    /Tptest.cpp                 # /Tp specifies C++ source file.
+                    /Fotest.cpp.obj             # Output file.
+                    /permissive-                # Set standard-conformance mode.
+                    /FC                         # Display full path of source code files passed to cl.exe in diagnostic text.
+                    /W3                         # Sets which warning level to output. /W3 is IDE default.
+                    /diagnostics:caret          # Controls the format of diagnostic messages.
+                ''')
+
+        jlib.system(
+                f'''
+                cd {build_dir} && "{vs.vcvars}"&&"{vs.link}"
+                    /nologo                     #
+                    /DLL
+                    /IMPLIB:test.lib        # Overrides the default import library name.
+                    /OUT:test.dll           # Specifies the output file name.
+                    /nologo
+                    test.cpp.obj
+                ''')
+    else:
+        jlib.system(
+                f'''
+                cd {build_dir} && c++
+                    -fPIC
+                    --shared
+                    -o test.dll
+                    test.cpp
+                ''')
+
+    # Create C# test programme `testfoo.cs`.
+    #
+    cs = textwrap.dedent(f'''
+            public class HelloWorld
+            {{
+                public static void Main(string[] args)
+                {{
+                    bool expect_fix = ({fix if state.state_.windows else 1} != 0);
+
+                    // Utf8 for our string with 4-byte utf16 character.
+                    //
+                    byte[] text_utf8 = {{ 0xf0, 0x90, 0x90, 0xb7, }};
+                    string text = System.Text.Encoding.UTF8.GetString(text_utf8);
+
+                    // Escaped representation of text_utf8, as returned by
+                    // calls of test.foo1() and test.foo2() below.
+                    //
+                    string text_utf8_escaped = " \\\\xf0 \\\\x90 \\\\x90 \\\\xb7";
+                    string incorrect_utf8_escaped = " \\\\x3f \\\\x3f";
+
+                    // test.foo1()/test.foo2() return a `const
+                    // char*`/`std::string` containing an escaped
+                    // representation of the string that they were given. If
+                    // things are working correctly, this will be an escaped
+                    // representation of `text_utf8`.
+                    //
+
+                    string foo1 = test.foo1(text);
+                    System.Console.WriteLine("foo1: " + foo1);
+                    string foo_expected_escaped = (expect_fix) ? text_utf8_escaped : incorrect_utf8_escaped;
+                    if (foo1 != foo_expected_escaped)
+                    {{
+                        throw new System.Exception(
+                                "foo1 incorrect: '" + foo1 + "'"
+                                + " - foo_expected_escaped: '" + foo_expected_escaped + "'"
+                                );
+                    }}
+
+                    string foo2 = test.foo2(text);
+                    System.Console.WriteLine("foo2: " + foo2);
+                    if (foo2 != foo_expected_escaped)
+                    {{
+                        throw new System.Exception(
+                                "foo2 incorrect: '" + foo2 + "'"
+                                + " - foo_expected_escaped: '" + foo_expected_escaped + "'"
+                                );
+                    }}
+
+                    // test.bar1() and test.bar2() return a `const
+                    // char*`/`std::string` containing the bytes of
+                    // `text_utf8`. If things are working correctly we will see
+                    // exactly these bytes.
+                    //
+                    byte[] bar_expected_utf8_incorrect = {{ 0xc3, 0xb0, 0xc2, 0x90, 0xc2, 0x90, 0xc2, 0xb7, }};
+                    byte[] bar_expected_utf8 = (expect_fix) ? text_utf8 : bar_expected_utf8_incorrect;
+
+                    string ret3 = test.bar();
+                    byte[] ret3_utf8 = System.Text.Encoding.UTF8.GetBytes(ret3);
+                    print_bytes_as_string("ret3_utf8:", ret3_utf8);
+                    if (!equal(ret3_utf8, bar_expected_utf8))
+                    {{
+                        throw new System.Exception("ret3 != bar_expected_utf8");
+                    }}
+
+                    string ret4 = test.bar2();
+                    byte[] ret4_utf8 = System.Text.Encoding.UTF8.GetBytes(ret4);
+                    print_bytes_as_string("ret4_utf8:", ret4_utf8);
+                    if (!equal(ret4_utf8, bar_expected_utf8))
+                    {{
+                        throw new System.Exception("ret4_utf8 != bar_expected_utf8");
+                    }}
+                }}
+
+                static bool equal(byte[] a, byte[] b)
+                {{
+                    if (a.Length != b.Length)   return false;
+                    for (int i=0; i<a.Length; ++i)
+                    {{
+                        if (a[i] != b[i])   return false;
+                    }}
+                    return true;
+                }}
+
+                static void print_bytes_as_string(string prefix, byte[] a)
+                {{
+                    System.Console.Write(prefix);
+                    System.Console.Write("[");
+                    foreach (var b in a)
+                    {{
+                        System.Console.Write(" {{0:x2}}", b);
+                    }}
+                    System.Console.WriteLine("]");
+                }}
+            }}
+            ''')
+    with open(f'{build_dir}/testfoo.cs', 'w') as f:
+        f.write(cs)
+
+    # Use `csc` to compile `testfoo.cs` and create `testfoo.exe`.
+    #
+    csc, mono, _ = csharp.csharp_settings(None)
+    jlib.system(f'cd {build_dir} && "{csc}" -out:testfoo.exe testfoo.cs test.cs')
+
+    # Run `testfoo.exe`.
+    #
+    jlib.system(f'cd {build_dir} && {mono} testfoo.exe')
