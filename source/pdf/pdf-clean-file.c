@@ -483,8 +483,6 @@ void pdf_clean_file(fz_context *ctx, char *infile, char *outfile, char *password
 			int pagecount = pdf_count_pages(ctx, pdf);
 			int argidx = 0;
 
-			len = cap = 0;
-
 			while (argc - argidx)
 			{
 				int spage, epage;

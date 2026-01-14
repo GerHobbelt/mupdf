@@ -607,37 +607,3 @@ fz_document_handler mobi_document_handler =
 	mobi_extensions,
 	mobi_mimetypes
 };
-
-static fz_document *
-txt_open_document_with_stream(fz_context *ctx, fz_stream *file)
-{
-	return htdoc_open_document_with_buffer(ctx, NULL, fz_read_all(ctx, file, 0), FORMAT_TXT);
-}
-
-static fz_document *
-txt_open_document(fz_context *ctx, const char *filename)
-{
-	return htdoc_open_document_with_buffer(ctx, NULL, fz_read_file(ctx, filename), FORMAT_TXT);
-}
-
-static const char *txt_extensions[] =
-{
-	"txt",
-	"text",
-	NULL
-};
-
-static const char *txt_mimetypes[] =
-{
-	"text.plain",
-	NULL
-};
-
-fz_document_handler txt_document_handler =
-{
-	NULL,
-	txt_open_document,
-	txt_open_document_with_stream,
-	txt_extensions,
-	txt_mimetypes
-};

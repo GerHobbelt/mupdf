@@ -577,12 +577,6 @@ static void ffi_pushpdfdocument(js_State *J, pdf_document *document)
 	js_newuserdata(J, "pdf_document", document, ffi_gc_pdf_document);
 }
 
-static void ffi_pushpdfdocument(js_State *J, pdf_document *document)
-{
-	js_getregistry(J, "pdf_document");
-	js_newuserdata(J, "pdf_document", document, ffi_gc_pdf_document);
-}
-
 static void ffi_pushsigner(js_State *J, pdf_pkcs7_signer *signer)
 {
 	js_getregistry(J, "pdf_pkcs7_signer");
@@ -3541,23 +3535,6 @@ static void ffi_Document_openDocument(js_State *J)
 static void ffi_Document_isPDF(js_State *J)
 {
 	js_pushboolean(J, js_isuserdata(J, 0, "pdf_document"));
-}
-
-static void ffi_Document_asPDF(js_State *J)
-{
-	fz_context *ctx = js_getcontext(J);
-	fz_document *doc = ffi_todocument(J, 0);
-	pdf_document *pdf;
-
-	fz_try(ctx)
-		pdf = fz_new_pdf_document_from_fz_document(ctx, doc);
-	fz_catch(ctx)
-		rethrow(J);
-
-	if (pdf != NULL)
-		ffi_pushpdfdocument(J, pdf);
-	else
-		js_pushnull(J);
 }
 
 static void ffi_Document_asPDF(js_State *J)

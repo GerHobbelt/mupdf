@@ -140,7 +140,6 @@ public class PDFAnnotation
 	public native void setFlags(int flags);
 	public native String getContents();
 	public native void setContents(String contents);
-	public native boolean hasRect();
 	public native float[] getColor();
 	public native void setColor(float[] color);
 	public native float getOpacity();
@@ -331,10 +330,6 @@ public class PDFAnnotation
 	public boolean hasFileSpecification() { return hasFilespec(); }
 	public void setFileSpecification(PDFObject fs) { setFilespec(fs); }
 	public PDFObject getFileSpecification() { return getFilespec(); }
-
-	public native boolean hasIntent();
-	public native int getIntent();
-	public native void setIntent(int intent);
 
 	public native boolean hasIntent();
 	public native int getIntent();
