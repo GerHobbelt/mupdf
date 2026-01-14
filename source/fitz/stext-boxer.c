@@ -702,7 +702,9 @@ page_subset(fz_context *ctx, fz_stext_page *page, fz_stext_block **first_block, 
 	newblock->u.s.down->first_block = target;
 	target->prev = NULL;
 
-	for (block = target; block->next != NULL; block = block->next);
+	for (block = target; block->next != NULL; block = block->next)
+		newblock->bbox = fz_union_rect(newblock->bbox, block->bbox);
+	newblock->bbox = fz_union_rect(newblock->bbox, block->bbox);
 	newblock->u.s.down->last_block = block;
 
 #ifdef DEBUG_STRUCT
@@ -830,7 +832,17 @@ int fz_segment_stext_page(fz_context *ctx, fz_stext_page *page)
 					boxer_feed(ctx, boxer, &line->bbox);
 				break;
 			case FZ_STEXT_BLOCK_VECTOR:
-				boxer_feed(ctx, boxer, &block->bbox);
+			{
+				/* Allow a 1 point margin around vectors to avoid hairline
+				 * cracks between supposedly abutting things. */
+				int VECTOR_MARGIN = 1;
+				fz_rect r = block->bbox;
+				r.x0 -= VECTOR_MARGIN;
+				r.y0 -= VECTOR_MARGIN;
+				r.x1 += VECTOR_MARGIN;
+				r.y1 += VECTOR_MARGIN;
+				boxer_feed(ctx, boxer, &r);
+			}
 			}
 		}
 
