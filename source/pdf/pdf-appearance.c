@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2004-2022 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -264,14 +264,14 @@ pdf_write_line_cap_appearance(fz_context *ctx, fz_buffer *buf, fz_rect *rect,
 {
 	if (cap == PDF_NAME(Square))
 	{
-		float r = fz_max(2.5f, w * 2.5f);
+		float r = fz_max(3.0f, w * 3.0f);
 		fz_append_printf(ctx, buf, "%g %g %g %g re\n", x-r, y-r, r*2, r*2);
 		maybe_stroke_and_fill(ctx, buf, sc, ic);
-		include_cap(rect, x, y, r);
+		include_cap(rect, x, y, r + w/2);
 	}
 	else if (cap == PDF_NAME(Circle))
 	{
-		float r = fz_max(2.5f, w * 2.5f);
+		float r = fz_max(3.0f, w * 3.0f);
 		float m = r * CIRCLE_MAGIC;
 		fz_append_printf(ctx, buf, "%g %g m\n", x, y+r);
 		fz_append_printf(ctx, buf, "%g %g %g %g %g %g c\n", x+m, y+r, x+r, y+m, x+r, y);
@@ -279,17 +279,17 @@ pdf_write_line_cap_appearance(fz_context *ctx, fz_buffer *buf, fz_rect *rect,
 		fz_append_printf(ctx, buf, "%g %g %g %g %g %g c\n", x-m, y-r, x-r, y-m, x-r, y);
 		fz_append_printf(ctx, buf, "%g %g %g %g %g %g c\n", x-r, y+m, x-m, y+r, x, y+r);
 		maybe_stroke_and_fill(ctx, buf, sc, ic);
-		include_cap(rect, x, y, r);
+		include_cap(rect, x, y, r + w/2);
 	}
 	else if (cap == PDF_NAME(Diamond))
 	{
-		float r = fz_max(2.5f, w * 2.5f);
+		float r = fz_max(3.0f, w * 3.0f);
 		fz_append_printf(ctx, buf, "%g %g m\n", x, y+r);
 		fz_append_printf(ctx, buf, "%g %g l\n", x+r, y);
 		fz_append_printf(ctx, buf, "%g %g l\n", x, y-r);
 		fz_append_printf(ctx, buf, "%g %g l\n", x-r, y);
 		maybe_stroke_and_fill(ctx, buf, sc, ic);
-		include_cap(rect, x, y, r);
+		include_cap(rect, x, y, r + w/sqrtf(2));
 	}
 	else if (cap == PDF_NAME(OpenArrow))
 	{
@@ -311,7 +311,8 @@ pdf_write_line_cap_appearance(fz_context *ctx, fz_buffer *buf, fz_rect *rect,
 		fz_append_printf(ctx, buf, "%g %g l\n", b.x, b.y);
 		maybe_stroke(ctx, buf, sc);
 		*rect = fz_include_point_in_rect(*rect, a);
-		*rect = fz_include_point_in_rect(*rect, b);
+		*rect = fz_include_point_in_rect(*rect, a);
+		*rect = fz_expand_rect(*rect, w);
 	}
 	else if (cap == PDF_NAME(ROpenArrow))
 	{
@@ -338,6 +339,7 @@ pdf_write_line_cap_appearance(fz_context *ctx, fz_buffer *buf, fz_rect *rect,
 		maybe_stroke(ctx, buf, sc);
 		*rect = fz_include_point_in_rect(*rect, a);
 		*rect = fz_include_point_in_rect(*rect, b);
+		*rect = fz_expand_rect(*rect, w);
 	}
 }
 
@@ -444,15 +446,16 @@ pdf_write_circle_appearance(fz_context *ctx, pdf_annot *annot, fz_buffer *buf, f
 static void
 pdf_write_polygon_appearance(fz_context *ctx, pdf_annot *annot, fz_buffer *buf, fz_rect *rect, pdf_obj **res, int close)
 {
-	pdf_obj *verts;
+	pdf_obj *verts, *le;
 	fz_point p;
 	int i, n;
 	float lw;
-	int sc;
+	int sc, ic;
 
 	pdf_write_opacity(ctx, annot, buf, res);
 	lw = pdf_write_border_appearance(ctx, annot, buf);
 	sc = pdf_write_stroke_color_appearance(ctx, annot, buf);
+	ic = pdf_write_interior_fill_color_appearance(ctx, annot, buf);
 
 	*rect = fz_empty_rect;
 
@@ -478,8 +481,40 @@ pdf_write_polygon_appearance(fz_context *ctx, pdf_annot *annot, fz_buffer *buf, 
 		}
 		if (close)
 			fz_append_string(ctx, buf, "h\n");
-		maybe_stroke(ctx, buf, sc);
+		if (close)
+			maybe_stroke_and_fill(ctx, buf, sc, ic);
+		else
+			maybe_stroke(ctx, buf, sc);
 		*rect = fz_expand_rect(*rect, lw);
+	}
+
+	le = pdf_dict_get(ctx, annot->obj, PDF_NAME(LE));
+	if (!close && n >= 2 && pdf_array_len(ctx, le) == 2)
+	{
+		float dx, dy, l;
+		fz_point a, b;
+
+		a.x = pdf_array_get_real(ctx, verts, 0*2+0);
+		a.y = pdf_array_get_real(ctx, verts, 0*2+1);
+		b.x = pdf_array_get_real(ctx, verts, 1*2+0);
+		b.y = pdf_array_get_real(ctx, verts, 1*2+1);
+
+		dx = b.x - a.x;
+		dy = b.y - a.y;
+		l = sqrtf(dx*dx + dy*dy);
+
+		pdf_write_line_cap_appearance(ctx, buf, rect, a.x, a.y, dx/l, dy/l, lw, sc, ic, pdf_array_get(ctx, le, 0));
+
+		a.x = pdf_array_get_real(ctx, verts, (n-1)*2+0);
+		a.y = pdf_array_get_real(ctx, verts, (n-1)*2+1);
+		b.x = pdf_array_get_real(ctx, verts, (n-2)*2+0);
+		b.y = pdf_array_get_real(ctx, verts, (n-2)*2+1);
+
+		dx = b.x - a.x;
+		dy = b.y - a.y;
+		l = sqrtf(dx*dx + dy*dy);
+
+		pdf_write_line_cap_appearance(ctx, buf, rect, a.x, a.y, dx/l, dy/l, lw, sc, ic, pdf_array_get(ctx, le, 1));
 	}
 }
 
@@ -2702,6 +2737,26 @@ retry_after_repair:
 		needs_resynth = pdf_annot_needs_resynthesis(ctx, annot);
 		if (needs_resynth)
 			local_synthesis = 0;
+
+		/* Some appearances can NEVER be resynthesised. Spot those here. */
+		if (needs_resynth)
+		{
+			if (pdf_name_eq(ctx, pdf_dict_get(ctx, annot->obj, PDF_NAME(Subtype)), PDF_NAME(Stamp)))
+			{
+				/* Don't resynthesize Stamps with non-standard names if
+				 * they already have an appearance. These usually have
+				 * custom images already set for their appearance.
+				 */
+				if (!pdf_annot_is_standard_stamp(ctx, annot) && ap_n)
+				{
+					/* However, we allow changing the Rect even if we don't
+					 * resynthesize the appearance. This should also count
+					 * as having a changed appearance. */
+					pdf_set_annot_resynthesised(ctx, annot);
+					needs_resynth = 0;
+				}
+			}
+		}
 
 		if (local_synthesis || needs_resynth)
 		{
