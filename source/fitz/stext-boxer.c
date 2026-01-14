@@ -88,7 +88,7 @@ rectlist_append(rectlist_t *list, fz_rect *box)
 			/* If the one that just got chopped off wasn't r, move it down. */
 			if (i < list->len)
 			{
-				memcpy(r, &list->list[list->len], sizeof(*r));
+				memmove(r, &list->list[list->len], sizeof(*r));
 				i--; /* Reconsider this entry next time. */
 			}
 		}
@@ -923,6 +923,8 @@ int fz_segment_stext_rect(fz_context *ctx, fz_stext_page *page, fz_rect rect)
 int fz_segment_stext_page(fz_context *ctx, fz_stext_page *page)
 {
 	fz_stext_block *block;
+
+	fz_stext_remove_page_fill(ctx, page);
 
 	/* If we have structure already, give up. We can't hope to beat
 	 * proper structure! */
