@@ -190,6 +190,9 @@ flush_begin_layer(fz_context *ctx, pdf_run_processor *proc)
 {
 	begin_layer_stack *s;
 
+	if (proc->dev->begin_layer == NULL)
+		return;
+
 	while (proc->begin_layer)
 	{
 		s = proc->begin_layer;
@@ -226,6 +229,9 @@ static void nest_layer_clip(fz_context *ctx, pdf_run_processor *proc)
 static void
 do_end_layer(fz_context *ctx, pdf_run_processor *proc)
 {
+	if (proc->dev->begin_structure == NULL)
+		return;
+
 	if (proc->nest_depth > 0 && proc->nest_mark[proc->nest_depth-1] == proc->mc_depth)
 	{
 		fz_end_layer(ctx, proc->dev);
@@ -1853,7 +1859,7 @@ pop_structure_to(fz_context *ctx, pdf_run_processor *proc, pdf_obj *common)
 static void
 pop_any_pending_mcid_changes(fz_context *ctx, pdf_run_processor *pr)
 {
-	if (pr->pending_mcid_pop == NULL)
+	if (pr->dev->begin_structure == NULL || pr->pending_mcid_pop == NULL)
 		return;
 
 	pop_structure_to(ctx, pr, pr->pending_mcid_pop);
@@ -3161,7 +3167,8 @@ pdf_close_run_processor(fz_context *ctx, pdf_processor *proc)
 		}
 	}
 
-	pop_structure_to(ctx, pr, NULL);
+	if (pr->dev->begin_structure != NULL)
+		pop_structure_to(ctx, pr, NULL);
 
 	clear_marked_content(ctx, pr);
 }
@@ -3418,7 +3425,7 @@ pdf_new_run_processor(fz_context *ctx, pdf_document *doc, fz_device *dev, fz_mat
 
 			/* Annotations and XObjects can be their own content items. We spot this by
 			 * the struct_parent looking up to be a singular object. */
-			if (struct_parent != -1 && struct_tree_root)
+			if (proc->dev->begin_structure != NULL && struct_parent != -1 && struct_tree_root)
 			{
 				pdf_obj *struct_obj = pdf_lookup_number(ctx, pdf_dict_get(ctx, struct_tree_root, PDF_NAME(ParentTree)), struct_parent);
 				if (pdf_is_dict(ctx, struct_obj))
