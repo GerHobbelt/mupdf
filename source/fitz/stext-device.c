@@ -126,6 +126,7 @@ typedef struct
 	fz_matrix trm;
 	int new_obj;
 	int lastchar;
+	fz_stext_line *lastline;
 	int lastbidi;
 	int flags;
 	int color;
@@ -226,10 +227,12 @@ fz_new_stext_page(fz_context *ctx, fz_rect mediabox)
 	fz_try(ctx)
 	{
 		page = fz_pool_alloc(ctx, pool, sizeof(*page));
+		page->refs = 1;
 		page->pool = pool;
 		page->mediabox = mediabox;
 		page->first_block = NULL;
 		page->last_block = NULL;
+		page->id_list = fz_new_pool_array(ctx, pool, fz_stext_page_details, 4);
 	}
 	fz_catch(ctx)
 	{
@@ -266,10 +269,27 @@ drop_run(fz_context *ctx, fz_stext_block *block)
 	}
 }
 
+fz_stext_page_details *fz_stext_page_details_for_block(fz_context *ctx, fz_stext_page *page, fz_stext_block *block)
+{
+	if (block == NULL || page == NULL)
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "page details require a page and a block");
+
+	return (fz_stext_page_details *)fz_pool_array_lookup(ctx, page->id_list, block->id);
+}
+
+fz_stext_page *
+fz_keep_stext_page(fz_context *ctx, fz_stext_page *page)
+{
+	return fz_keep_imp(ctx, page, &page->refs);
+}
+
 void
 fz_drop_stext_page(fz_context *ctx, fz_stext_page *page)
 {
-	if (page)
+	if (page == NULL)
+		return;
+
+	if (fz_drop_imp(ctx, page, &page->refs))
 	{
 		drop_run(ctx, page->first_block);
 		fz_drop_pool(ctx, page->pool);
@@ -282,11 +302,13 @@ fz_drop_stext_page(fz_context *ctx, fz_stext_page *page)
  * with more complicated pointer setup.
  */
 static fz_stext_block *
-add_block_to_page(fz_context *ctx, fz_stext_page *page)
+add_block_to_page(fz_context *ctx, fz_stext_page *page, int type, int id)
 {
 	fz_stext_block *block = fz_pool_alloc(ctx, page->pool, sizeof *page->first_block);
 	block->bbox = fz_empty_rect; /* Fixes bug 703267. */
 	block->prev = page->last_block;
+	block->type = type;
+	block->id = id;
 	if (page->last_struct)
 	{
 		if (page->last_struct->last_block)
@@ -313,18 +335,15 @@ add_block_to_page(fz_context *ctx, fz_stext_page *page)
 }
 
 static fz_stext_block *
-add_text_block_to_page(fz_context *ctx, fz_stext_page *page)
+add_text_block_to_page(fz_context *ctx, fz_stext_page *page, int id)
 {
-	fz_stext_block *block = add_block_to_page(ctx, page);
-	block->type = FZ_STEXT_BLOCK_TEXT;
-	return block;
+	return add_block_to_page(ctx, page, FZ_STEXT_BLOCK_TEXT, id);
 }
 
 static fz_stext_block *
-add_image_block_to_page(fz_context *ctx, fz_stext_page *page, fz_matrix ctm, fz_image *image)
+add_image_block_to_page(fz_context *ctx, fz_stext_page *page, fz_matrix ctm, fz_image *image, int id)
 {
-	fz_stext_block *block = add_block_to_page(ctx, page);
-	block->type = FZ_STEXT_BLOCK_IMAGE;
+	fz_stext_block *block = add_block_to_page(ctx, page, FZ_STEXT_BLOCK_IMAGE, id);
 	block->u.i.transform = ctm;
 	block->u.i.image = fz_keep_image(ctx, image);
 	block->bbox = fz_transform_rect(fz_unit_rect, ctm);
@@ -430,29 +449,6 @@ add_char_to_line(fz_context *ctx, fz_stext_page *page, fz_stext_line *line, fz_m
 	return ch;
 }
 
-static void
-remove_last_char(fz_context *ctx, fz_stext_line *line)
-{
-	if (line && line->first_char)
-	{
-		fz_stext_char *prev = NULL;
-		fz_stext_char *ch = line->first_char;
-		while (ch->next)
-		{
-			prev = ch;
-			ch = ch->next;
-		}
-		if (prev)
-		{
-			/* The characters are pool allocated, so we don't actually leak the removed node. */
-			/* We do need to drop the char's font reference though. */
-			fz_drop_font(ctx, prev->next->font);
-			line->last_char = prev;
-			line->last_char->next = NULL;
-		}
-	}
-}
-
 static fz_stext_char *reverse_bidi_span(fz_stext_char *curr, fz_stext_char *tail)
 {
 	fz_stext_char *prev, *next;
@@ -486,7 +482,7 @@ static void reverse_bidi_line(fz_stext_line *line)
 	}
 }
 
-static int is_hyphen(int c)
+int fz_is_unicode_hyphen(int c)
 {
 	/* check for: hyphen-minus, soft hyphen, hyphen, and non-breaking hyphen */
 	return (c == '-' || c == 0xAD || c == 0x2010 || c == 0x2011);
@@ -530,6 +526,9 @@ font_equiv(fz_context *ctx, fz_font *f, fz_font *g)
 		return 1;
 
 	if (strcmp(f->name, g->name) != 0)
+		return 0;
+
+	if (f->buffer == NULL || g->buffer == NULL)
 		return 0;
 
 	fz_font_digest(ctx, f, fdigest);
@@ -604,7 +603,7 @@ fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int 
 {
 	fz_stext_page *page = dev->page;
 	fz_stext_block *cur_block;
-	fz_stext_line *cur_line;
+	fz_stext_line *cur_line = NULL;
 
 	int new_para = 0;
 	int new_line = 1;
@@ -692,6 +691,7 @@ fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int 
 		add_char_to_line(ctx, page, cur_line, trm, font, size, c, (dev->flags & FZ_STEXT_ACCURATE_BBOXES) ? glyph : NON_ACCURATE_GLYPH, &dev->pen, &dev->pen, bidi, dev->color, 0, flags, dev->flags);
 		dev->lastbidi = bidi;
 		dev->lastchar = c;
+		dev->lastline = cur_line;
 		return;
 	}
 
@@ -838,15 +838,12 @@ fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int 
 	/* Start a new block (but only at the beginning of a text object) */
 	if (new_para || !cur_block)
 	{
-		cur_block = add_text_block_to_page(ctx, page);
+		cur_block = add_text_block_to_page(ctx, page, dev->id);
 		cur_line = cur_block->u.t.last_line;
 	}
 
-	if (new_line && (dev->flags & FZ_STEXT_DEHYPHENATE) && is_hyphen(dev->lastchar))
-	{
-		remove_last_char(ctx, cur_line);
-		new_line = 0;
-	}
+	if (new_line && (dev->flags & FZ_STEXT_DEHYPHENATE) && fz_is_unicode_hyphen(dev->lastchar) && dev->lastline != NULL)
+		dev->lastline->flags |= FZ_STEXT_LINE_FLAGS_JOINED;
 
 	/* Start a new line */
 	if (new_line || !cur_line || force_new_line)
@@ -864,6 +861,7 @@ fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int 
 move_pen_and_exit:
 	dev->lastchar = c;
 	dev->lastbidi = bidi;
+	dev->lastline = cur_line;
 	dev->lag_pen = p;
 	dev->pen = q;
 
@@ -1373,7 +1371,7 @@ fz_stext_end_metatext(fz_context *ctx, fz_device *dev)
 	if (!tdev->metatext)
 		return; /* Mismatched pop. Live with it. */
 
-	if (tdev->metatext->type != FZ_METATEXT_ACTUALTEXT)
+	if (tdev->metatext->type != FZ_METATEXT_ACTUALTEXT || (tdev->opts.flags & FZ_STEXT_IGNORE_ACTUALTEXT) != 0)
 	{
 		/* We only deal with ActualText here. Just pop anything else off,
 		 * and we're done. */
@@ -1449,7 +1447,7 @@ fz_stext_fill_image(fz_context *ctx, fz_device *dev, fz_image *img, fz_matrix ct
 
 	/* If the alpha is less than 50% then it's probably a watermark or effect or something. Skip it. */
 	if (alpha >= 0.5f)
-		add_image_block_to_page(ctx, tdev->page, ctm, img);
+		add_image_block_to_page(ctx, tdev->page, ctm, img, tdev->id);
 
 }
 
@@ -1501,22 +1499,19 @@ static void
 fz_stext_fill_shade(fz_context *ctx, fz_device *dev, fz_shade *shade, fz_matrix ctm, float alpha, fz_color_params color_params)
 {
 	fz_stext_device *tdev = (fz_stext_device*)dev;
-	fz_rect *bounds = actualtext_bounds(tdev);
 	fz_matrix local_ctm;
 	fz_rect scissor;
 	fz_image *image;
 
-	/* If we aren't keeping images, but we are in a bound, update the bounds
-	 * without generating the entire image. */
-	if ((tdev->opts.flags & FZ_STEXT_PRESERVE_IMAGES) == 0 && bounds)
+	/* If we aren't preserving images, don't waste time making the shade. */
+	if ((tdev->opts.flags & FZ_STEXT_PRESERVE_IMAGES) == 0)
 	{
-		*bounds = fz_union_rect(*bounds, fz_bound_shade(ctx, shade, ctm));
+		/* But we do still need to handle actualtext bounds. */
+		fz_rect *bounds = actualtext_bounds(tdev);
+		if (bounds)
+			*bounds = fz_union_rect(*bounds, fz_bound_shade(ctx, shade, ctm));
 		return;
 	}
-
-	/* Unless we are preserving image, nothing to do here. */
-	if ((tdev->opts.flags & FZ_STEXT_PRESERVE_IMAGES) == 0)
-		return;
 
 	local_ctm = ctm;
 	scissor = fz_device_current_scissor(ctx, dev);
@@ -1791,6 +1786,9 @@ fz_stext_close_device(fz_context *ctx, fz_device *dev)
 {
 	fz_stext_device *tdev = (fz_stext_device*)dev;
 	fz_stext_page *page = tdev->page;
+
+	if ((tdev->flags & FZ_STEXT_DEHYPHENATE) && fz_is_unicode_hyphen(tdev->lastchar) && tdev->lastline != NULL)
+		tdev->lastline->flags |= FZ_STEXT_LINE_FLAGS_JOINED;
 
 	fixup_bboxes_and_bidi(ctx, page->first_block);
 
@@ -2084,11 +2082,10 @@ check_for_strikeout(fz_context *ctx, fz_stext_device *tdev, fz_stext_page *page,
 }
 
 static void
-add_vector(fz_context *ctx, fz_stext_page *page, fz_rect bbox, uint32_t flags, uint32_t argb)
+add_vector(fz_context *ctx, fz_stext_page *page, fz_rect bbox, uint32_t flags, uint32_t argb, int id)
 {
-	fz_stext_block *b = add_block_to_page(ctx, page);
+	fz_stext_block *b = add_block_to_page(ctx, page, FZ_STEXT_BLOCK_VECTOR, id);
 
-	b->type = FZ_STEXT_BLOCK_VECTOR;
 	b->bbox = bbox;
 	b->u.v.flags = flags;
 	b->u.v.argb = argb;
@@ -2104,6 +2101,7 @@ typedef struct
 	fz_rect pending;
 	int count;
 	fz_point p[5];
+	int id;
 } split_path_data;
 
 static void
@@ -2141,7 +2139,7 @@ maybe_rect(fz_context *ctx, split_path_data *sp)
 			for (i = 1; i < sp->count; i++)
 				bounds = fz_include_point_in_rect(bounds, sp->p[i]);
 			if (fz_is_valid_rect(sp->pending))
-				add_vector(ctx, sp->page, sp->pending, sp->flags | FZ_STEXT_VECTOR_IS_RECTANGLE | FZ_STEXT_VECTOR_CONTINUES, sp->argb);
+				add_vector(ctx, sp->page, sp->pending, sp->flags | FZ_STEXT_VECTOR_IS_RECTANGLE | FZ_STEXT_VECTOR_CONTINUES, sp->argb, sp->id);
 			sp->pending = bounds;
 			return;
 		}
@@ -2245,7 +2243,7 @@ fz_path_walker split_path_rects =
 };
 
 static void
-add_vectors_from_path(fz_context *ctx, fz_stext_page *page, const fz_path *path, fz_matrix ctm, fz_colorspace *cs, const float *color, float alpha, fz_color_params cp, int stroke)
+add_vectors_from_path(fz_context *ctx, fz_stext_page *page, int id, const fz_path *path, fz_matrix ctm, fz_colorspace *cs, const float *color, float alpha, fz_color_params cp, int stroke)
 {
 	int have_leftovers;
 	split_path_data sp;
@@ -2257,6 +2255,7 @@ add_vectors_from_path(fz_context *ctx, fz_stext_page *page, const fz_path *path,
 	sp.count = 0;
 	sp.leftovers = fz_empty_rect;
 	sp.pending = fz_empty_rect;
+	sp.id = id;
 	fz_walk_path(ctx, path, &split_path_rects, &sp);
 
 	have_leftovers = fz_is_valid_rect(sp.leftovers);
@@ -2264,9 +2263,9 @@ add_vectors_from_path(fz_context *ctx, fz_stext_page *page, const fz_path *path,
 	maybe_rect(ctx, &sp);
 
 	if (fz_is_valid_rect(sp.pending))
-		add_vector(ctx, page, sp.pending, sp.flags | FZ_STEXT_VECTOR_IS_RECTANGLE | (have_leftovers ? FZ_STEXT_VECTOR_CONTINUES : 0), sp.argb);
+		add_vector(ctx, page, sp.pending, sp.flags | FZ_STEXT_VECTOR_IS_RECTANGLE | (have_leftovers ? FZ_STEXT_VECTOR_CONTINUES : 0), sp.argb, id);
 	if (have_leftovers)
-		add_vector(ctx, page, sp.leftovers, sp.flags, sp.argb);
+		add_vector(ctx, page, sp.leftovers, sp.flags, sp.argb, id);
 }
 
 static void
@@ -2285,7 +2284,7 @@ fz_stext_fill_path(fz_context *ctx, fz_device *dev, const fz_path *path, int eve
 		check_for_strikeout(ctx, tdev, page, path, ctm);
 
 	if (tdev->flags & FZ_STEXT_COLLECT_VECTORS)
-		add_vectors_from_path(ctx, page, path, ctm, cs, color, alpha, cp, 0);
+		add_vectors_from_path(ctx, page, tdev->id, path, ctm, cs, color, alpha, cp, 0);
 }
 
 static void
@@ -2304,7 +2303,7 @@ fz_stext_stroke_path(fz_context *ctx, fz_device *dev, const fz_path *path, const
 		check_for_strikeout(ctx, tdev, page, path, ctm);
 
 	if (tdev->flags & FZ_STEXT_COLLECT_VECTORS)
-		add_vectors_from_path(ctx, page, path, ctm, cs, color, alpha, cp, 1);
+		add_vectors_from_path(ctx, page, tdev->id, path, ctm, cs, color, alpha, cp, 1);
 }
 
 static void
@@ -2431,6 +2430,19 @@ fz_stext_begin_structure(fz_context *ctx, fz_device *dev, fz_structure standard,
 		newblock->prev = gt->prev;
 		if (gt->prev)
 			gt->prev->next = newblock;
+		else if (page->last_struct)
+		{
+			/* We're linking it in at the start under another struct! */
+			assert(page->last_struct->first_block == gt);
+			assert(page->last_struct->last_block != NULL);
+			page->last_struct->first_block = newblock;
+		}
+		else
+		{
+			/* We're linking it in at the start of the page! */
+			assert(page->first_block == gt);
+			page->first_block = newblock;
+		}
 		gt->prev = newblock;
 		newblock->next = gt;
 	}
@@ -2439,6 +2451,16 @@ fz_stext_begin_structure(fz_context *ctx, fz_device *dev, fz_structure standard,
 		/* Link it in at the end of the list (i.e. after 'block') */
 		newblock->prev = block;
 		block->next = newblock;
+		if (page->last_struct)
+		{
+			assert(page->last_struct->last_block == block);
+			page->last_struct->last_block = newblock;
+		}
+		else
+		{
+			assert(page->last_block == block);
+			page->last_block = newblock;
+		}
 	}
 	else if (page->last_struct)
 	{
@@ -2486,6 +2508,12 @@ fz_stext_end_structure(fz_context *ctx, fz_device *dev)
 fz_device *
 fz_new_stext_device(fz_context *ctx, fz_stext_page *page, const fz_stext_options *opts)
 {
+	return fz_new_stext_device_for_page(ctx, page, opts, 0, 0, fz_empty_rect);
+}
+
+fz_device *
+fz_new_stext_device_for_page(fz_context *ctx, fz_stext_page *page, const fz_stext_options *opts, int chapter_num, int page_num, fz_rect mediabox)
+{
 	fz_stext_device *dev = fz_new_derived_device(ctx, fz_stext_device);
 
 	dev->super.close_device = fz_stext_close_device;
@@ -2522,18 +2550,40 @@ fz_new_stext_device(fz_context *ctx, fz_stext_page *page, const fz_stext_options
 	dev->pen.y = 0;
 	dev->trm = fz_identity;
 	dev->lastchar = ' ';
+	dev->lastline = NULL;
 	dev->lasttext = NULL;
 	dev->lastbidi = 0;
 	dev->last_was_fake_bold = 1;
 	if (opts)
 		dev->opts = *opts;
 
-	if ((dev->flags & FZ_STEXT_PRESERVE_IMAGES) == 0)
+	/* If we are ignoring images, then it'd be nice to skip the decode costs. BUT we still need them to tell
+	 * us the bounds for ActualText, so we can only actually skip them if we are ignoring actualtext too. */
+	if ((dev->flags & FZ_STEXT_PRESERVE_IMAGES) == 0 && (dev->opts.flags & FZ_STEXT_IGNORE_ACTUALTEXT) != 0)
 		dev->super.hints |= FZ_DONT_DECODE_IMAGES;
 
 	dev->rect_max = 0;
 	dev->rect_len = 0;
 	dev->rects = NULL;
+
+	/* Push a new id */
+	fz_try(ctx)
+	{
+		fz_stext_page_details *deets;
+		size_t id;
+		deets = fz_pool_array_append(ctx, page->id_list, &id);
+		dev->id = (int)id;
+		deets->mediabox = mediabox;
+		deets->chapter = chapter_num;
+		deets->page = page_num;
+	}
+	fz_catch(ctx)
+	{
+		fz_free(ctx, dev);
+		fz_rethrow(ctx);
+	}
+
+	page->mediabox = fz_union_rect(page->mediabox, mediabox);
 
 	return (fz_device*)dev;
 }

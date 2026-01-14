@@ -117,7 +117,9 @@ typedef struct fz_stext_grid_positions fz_stext_grid_positions;
 	between characters.
 
 	FZ_STEXT_DEHYPHENATE: If this option is set, hyphens at the
-	end of a line will be removed and the lines will be merged.
+	end of a line will be recorded as being soft-hyphens; when flattened
+	soft-hyphens at the end of lines will cause the lines to be
+	joined.
 
 	FZ_STEXT_PRESERVE_SPANS: If this option is set, spans on the same line
 	will not be merged. Each line will thus be a span of text with the same
@@ -310,12 +312,24 @@ enum
  *	the logical data, a caller now has to do a depth-first traversal.
  */
 
+typedef struct
+{
+	fz_rect mediabox;
+	int chapter;
+	int page;
+} fz_stext_page_details;
+
 /**
 	A text page is a list of blocks, together with an overall
 	bounding box.
+
+	The name of this structure is now slightly out of date. It
+	should really be fz_stext_document, cos it can contain
+	content from multiple pages.
 */
 typedef struct
 {
+	int refs;
 	fz_pool *pool;
 	fz_rect mediabox;
 	fz_stext_block *first_block;
@@ -326,7 +340,20 @@ typedef struct
 	 * not be used by anything outside of the stext device. */
 	fz_stext_block *last_block;
 	fz_stext_struct *last_struct;
+
+	/* An array of fz_stext_page_details */
+	fz_pool_array *id_list;
 } fz_stext_page;
+
+/**
+	Take a new reference to an fz_stext_page.
+*/
+fz_stext_page *fz_keep_stext_page(fz_context *ctx, fz_stext_page *page);
+
+/**
+	Helper function to retrieve the details for a given id from a block.
+*/
+fz_stext_page_details *fz_stext_page_details_for_block(fz_context *ctx, fz_stext_page *page, fz_stext_block *block);
 
 enum
 {
@@ -369,6 +396,7 @@ enum
 struct fz_stext_block
 {
 	int type;
+	int id;
 	fz_rect bbox;
 	union {
 		struct { fz_stext_line *first_line, *last_line; int flags;} t;
@@ -380,12 +408,18 @@ struct fz_stext_block
 	fz_stext_block *prev, *next;
 };
 
+typedef enum
+{
+	FZ_STEXT_LINE_FLAGS_JOINED = 1
+} fz_stext_line_flags;
+
 /**
 	A text line is a list of characters that share a common baseline.
 */
 struct fz_stext_line
 {
-	int wmode; /* 0 for horizontal, 1 for vertical */
+	uint8_t wmode; /* 0 for horizontal, 1 for vertical */
+	uint8_t flags;
 	fz_point dir; /* normalized direction of baseline */
 	fz_rect bbox;
 	fz_stext_char *first_char, *last_char;
@@ -541,6 +575,7 @@ void fz_print_stext_page_as_text(fz_context *ctx, fz_output *out, fz_stext_page 
 
 /**
 	Search for occurrence of 'needle' in text page.
+	Case insensitive match.
 
 	Return the number of quads and store hit quads in the passed in
 	array.
@@ -561,6 +596,16 @@ int fz_search_stext_page(fz_context *ctx, fz_stext_page *text, const char *needl
 typedef int (fz_search_callback_fn)(fz_context *ctx, void *opaque, int num_quads, fz_quad *hit_bbox);
 
 /**
+	Callback function for use in searching.
+
+	Called with the list of quads that correspond to a single hit.
+
+	The callback should return with 0 to continue the search, or 1 to abort it.
+	All other values are reserved at this point.
+*/
+typedef int (fz_match_callback_fn)(fz_context *ctx, void *opaque, int num_quads, fz_quad *hit_bbox, int chapter, int page);
+
+/**
 	Search for occurrence of 'needle' in text page.
 
 	Call callback once for each hit. This callback will receive
@@ -574,7 +619,6 @@ typedef int (fz_search_callback_fn)(fz_context *ctx, void *opaque, int num_quads
 	without notice.
 */
 int fz_search_stext_page_cb(fz_context *ctx, fz_stext_page *text, const char *needle, fz_search_callback_fn *cb, void *opaque);
-
 
 /**
 	Return a list of quads to highlight lines inside the selection
@@ -686,6 +730,42 @@ fz_find_table_within_bounds(fz_context *ctx, fz_stext_page *page, fz_rect bounds
 fz_device *fz_new_stext_device(fz_context *ctx, fz_stext_page *page, const fz_stext_options *options);
 
 /**
+	Create a device to extract the text on a page into an existing
+	fz_stext_page structure.
+
+	Gather the text on a page into blocks and lines.
+
+	The reading order is taken from the order the text is drawn in
+	the source file, so may not be accurate.
+
+	stext_page: The text page to which content should be added. This will
+	usually be a newly created (empty) text page, but it can be one
+	containing data already (for example when merging multiple
+	pages, or watermarking).
+
+	options: Options to configure the stext device.
+
+	The next 2 parameters are copied into the fz_stext_page structure's
+	ids section, so only have to be valid if you expect to interrogate
+	that section later.
+
+	chapter_num: The chapter number that this page came from.
+
+	page_num: The page number that this page came from.
+
+	The final parameter is copied into the fz_stext_page structure's
+	ids section. The mediabox for the enture fz_stext_page is unioned
+	with this, so pass fz_empty_bbox if you don't care about getting
+	a valid value back from the ids section, but you don't want to
+	upset the value in the page->mediabox field.
+
+	mediabox: The mediabox for this page.
+*/
+fz_device *
+fz_new_stext_device_for_page(fz_context *ctx, fz_stext_page *stext_page, const fz_stext_options *opts, int chapter_num, int page_num, fz_rect mediabox);
+
+
+/**
 	Create a device to OCR the text on the page.
 
 	Renders the page internally to a bitmap that is then OCRd. Text
@@ -732,5 +812,195 @@ fz_device *fz_new_ocr_device(fz_context *ctx, fz_device *target, fz_matrix ctm, 
 
 fz_document *fz_open_reflowed_document(fz_context *ctx, fz_document *underdoc, const fz_stext_options *opts);
 
+/**
+	Simple function to return if a given unicode char is equivalent to a space.
+*/
+int fz_is_unicode_space_equivalent(int c);
+
+/**
+	Simple function to return if a given unicode char is whitespace.
+*/
+int fz_is_unicode_whitespace(int c);
+
+/**
+	Simple function to return if a given unicode char is a hyphen.
+*/
+int fz_is_unicode_hyphen(int c);
+
+typedef struct fz_search fz_search;
+
+typedef enum
+{
+	FZ_SEARCH_EXACT = 0,
+	FZ_SEARCH_IGNORE_CASE = 1,
+	FZ_SEARCH_IGNORE_DIACRITICS = 2,
+	FZ_SEARCH_REGEXP = 4,
+	FZ_SEARCH_KEEP_WHITESPACE = 8,
+	FZ_SEARCH_KEEP_LINES = 16,
+	FZ_SEARCH_KEEP_PARAGRAPHS = 32,
+	FZ_SEARCH_KEEP_HYPHENS = 64
+} fz_search_options;
+
+/**
+	Create a new search.
+*/
+fz_search *fz_new_search(fz_context *ctx);
+
+/**
+	Change the options/needle to be used for a search.
+
+	If the needle is invalid (in the case of regexps, it fails to compile)
+	it will throw an error.
+
+	If the needle changes, the current position of the search within the
+	text is kept.
+
+	If the options change, the search position may revert to the beginning
+	of the current page.
+*/
+void fz_search_set_options(fz_context *ctx, fz_search *search, fz_search_options options, const char *needle);
+
+typedef enum
+{
+	/* Ran out of stext to search. Please feed me some more. */
+	FZ_SEARCH_MORE_INPUT = 0,
+
+	/* We have a match. match structure has been populated. */
+	FZ_SEARCH_MATCH = 1,
+
+	/* Search complete */
+	FZ_SEARCH_COMPLETE
+} fz_search_reason;
+
+typedef struct
+{
+	fz_quad quad;
+	int seq;
+	int chapter_num;
+	int page_num;
+} fz_match_quad;
+
+
+typedef struct
+{
+	fz_stext_struct *struc;
+	fz_stext_block *block;
+	fz_stext_line *line;
+	fz_stext_char *ch;
+} fz_stext_position;
+
+typedef struct
+{
+	int num_quads;
+	fz_match_quad *quads;
+	fz_stext_position begin;
+	fz_stext_position end;
+}
+fz_search_result_details;
+
+/**
+	Structure used to represent the 'result' of a search.
+*/
+typedef struct
+{
+	fz_search_reason reason;
+	union
+	{
+		struct
+		{
+			int seq_needed;
+		} more_input;
+		struct
+		{
+			fz_search_result_details *result;
+		} match;
+	} u;
+} fz_search_result;
+
+/**
+	Continue searching for the next match.
+
+	Will return with a search result.
+
+	If it asks for more stext, feed it with the requested page (or
+	NULL to tell it it's the end of the document) before calling
+	this again.
+
+	Several pages may be requested before searching begins.
+*/
+fz_search_result fz_search_forwards(fz_context *ctx, fz_search *search);
+
+/**
+	Continue searching backwards for the next match.
+
+	Will return asking for more stext, having matched, or having
+	completed the search.
+
+	If it asks for more stext, then any further calls to this
+	function will give the same result, until stext is supplied,
+	or a NULL stext is fed in to indicate the end of the document.
+
+	Several pages may be requested before searching begins.
+*/
+fz_search_result fz_search_backwards(fz_context *ctx, fz_search *search);
+
+/**
+	Supply more stext to be searched; ownership of the stext page is
+	passed in.
+
+	This can be called immediately after an fz_search has been created
+	to give it the first page to search, or it will be requested as soon
+	as the first search operation is done on that page.
+
+	If we are calling this in response to fz_search_forwards telling
+	us that we need another page, page will be the stext for the next
+	page.
+
+	If we are calling this in response to fz_search_backwards telling
+	is that we need another page, page will be the stext for the previous
+	page.
+
+	seq is a simple integer value that will be parrotted back to us in the
+	match (typically the page number within the document).
+
+	The search function will retain the page for a while. When it has
+	finished with it, it will call fz_drop_stext_page() to release it.
+
+	Pass page = NULL to indicate that there are no more pages (in this
+	direction) to be fed.
+*/
+void fz_feed_search(fz_context *ctx, fz_search *search, fz_stext_page *page, int seq);
+
+/**
+	Free the search structures.
+*/
+void fz_drop_search(fz_context *ctx, fz_search *search);
+
+/**
+	Search for occurrence of 'needle' in text page, matching in a given
+	style.
+
+	Return the number of quads and store hit quads in the passed in
+	array.
+
+	NOTE: This is an experimental interface and subject to change
+	without notice.
+*/
+int fz_match_stext_page(fz_context *ctx, fz_stext_page *text, const char *needle, int *hit_mark, fz_quad *hit_bbox, int hit_max, fz_search_options options);
+
+/**
+	Search for occurrence of 'needle' in text page.
+
+	Call callback once for each hit. This callback will receive
+	(potentially) multiple quads for each hit.
+
+	Returns the number of hits - note that this is potentially
+	different from (i.e. is not greater than) the number of quads
+	as returned by the non callback API.
+
+	NOTE: This is an experimental interface and subject to change
+	without notice.
+*/
+int fz_match_stext_page_cb(fz_context *ctx, fz_stext_page *page, const char *needle, fz_match_callback_fn *cb, void *opaque, fz_search_options options);
 
 #endif

@@ -1376,9 +1376,9 @@ pdf_read_new_xref_section(fz_context *ctx, pdf_document *doc, fz_stream *stm, in
 	for (i = i0; i < i0 + i1; i++)
 	{
 		pdf_xref_entry *entry = &table[i-i0];
-		int a = 0;
+		int64_t a = 0;
 		int64_t b = 0;
-		int c = 0;
+		int64_t c = 0;
 
 		if (fz_is_eof(ctx, stm))
 			fz_throw(ctx, FZ_ERROR_FORMAT, "truncated xref stream");
@@ -1465,16 +1465,16 @@ pdf_read_new_xref(fz_context *ctx, pdf_document *doc)
 		w1 = pdf_array_get_int(ctx, obj, 1);
 		w2 = pdf_array_get_int(ctx, obj, 2);
 
-		if (w0 < 0)
+		if (w0 < 0 || w0 > 8)
 			fz_warn(ctx, "xref stream objects have corrupt type");
-		if (w1 < 0)
+		if (w1 < 0 || w1 > 8)
 			fz_warn(ctx, "xref stream objects have corrupt offset");
-		if (w2 < 0)
+		if (w2 < 0 || w2 > 8)
 			fz_warn(ctx, "xref stream objects have corrupt generation");
 
-		w0 = w0 < 0 ? 0 : w0;
-		w1 = w1 < 0 ? 0 : w1;
-		w2 = w2 < 0 ? 0 : w2;
+		w0 = w0 < 0 ? 0 : w0 > 8 ? 8 : w0;
+		w1 = w1 < 0 ? 0 : w1 > 8 ? 8 : w1;
+		w2 = w2 < 0 ? 0 : w2 > 8 ? 8 : w2;
 
 		index = pdf_dict_get(ctx, trailer, PDF_NAME(Index));
 
@@ -2442,7 +2442,7 @@ pdf_load_unencrypted_object(fz_context *ctx, pdf_document *doc, int num)
 	pdf_xref_entry *x;
 
 	if (num <= 0 || num >= pdf_xref_len(ctx, doc))
-		fz_throw(ctx, FZ_ERROR_FORMAT, "object out of range (%d 0 R); xref size %d", num, pdf_xref_len(ctx, doc));
+		return NULL;
 
 	x = pdf_get_xref_entry_no_null(ctx, doc, num);
 	if (x->type == 'n')
@@ -2474,7 +2474,7 @@ pdf_cache_object(fz_context *ctx, pdf_document *doc, int num)
 	fz_var(try_repair);
 
 	if (num <= 0 || num >= pdf_xref_len(ctx, doc))
-		fz_throw(ctx, FZ_ERROR_FORMAT, "object out of range (%d 0 R); xref size %d", num, pdf_xref_len(ctx, doc));
+		return NULL;
 
 object_updated:
 	try_repair = 0;
@@ -2482,7 +2482,7 @@ object_updated:
 
 	x = pdf_get_xref_entry(ctx, doc, num);
 	if (x == NULL)
-		fz_throw(ctx, FZ_ERROR_FORMAT, "cannot find object in xref (%d 0 R)", num);
+		return NULL;
 
 	if (x->obj != NULL)
 		return x;
@@ -2598,8 +2598,13 @@ perform_repair:
 pdf_obj *
 pdf_load_object(fz_context *ctx, pdf_document *doc, int num)
 {
-	pdf_xref_entry *entry = pdf_cache_object(ctx, doc, num);
-	return pdf_keep_obj(ctx, entry->obj);
+	pdf_xref_entry *entry;
+	if (num <= 0 || num >= pdf_xref_len(ctx, doc))
+		return NULL;
+	entry = pdf_cache_object(ctx, doc, num);
+	if (entry)
+		return pdf_keep_obj(ctx, entry->obj);
+	return NULL;
 }
 
 pdf_obj *
@@ -2613,11 +2618,9 @@ pdf_resolve_indirect(fz_context *ctx, pdf_obj *ref)
 
 		if (!doc)
 			return NULL;
-		if (num <= 0)
-		{
-			fz_warn(ctx, "invalid indirect reference (%d 0 R)", num);
+
+		if (num <= 0 || num >= pdf_xref_len(ctx, doc))
 			return NULL;
-		}
 
 		fz_try(ctx)
 			entry = pdf_cache_object(ctx, doc, num);
@@ -2631,7 +2634,10 @@ pdf_resolve_indirect(fz_context *ctx, pdf_obj *ref)
 			return NULL;
 		}
 
-		ref = entry->obj;
+		if (entry)
+			return entry->obj;
+
+		return NULL;
 	}
 	return ref;
 }

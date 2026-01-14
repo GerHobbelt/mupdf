@@ -535,10 +535,9 @@ Resources
 	Create a `PDFObject` from the `Font` object as a simple font.
 
 	:param Font font:
-	:param string encoding:
-		The encoding to use. Encoding is either "Latin"
-		(CP-1252), "Greek" (ISO-8859-7), or "Cyrillic"
-		(KOI-8U). The default is "Latin".
+	:param "Latin" | "Greek" | "Cyrillic" encoding: Which 8-bit encoding to use. Defaults to "Latin".
+
+	See `Font.SIMPLE_ENCODING_LATIN`, etc.
 
 	:returns: `PDFObject`
 
@@ -937,6 +936,61 @@ Journalling
 Layers
 ------
 
+.. method:: PDFDocument.prototype.countLayerConfigs()
+
+	Return the number of optional content layer configurations in this document.
+
+	:returns: number
+
+	.. code-block::
+
+		var configs = pdfDocument.countLayerConfigs()
+
+.. method:: PDFDocument.prototype.getLayerConfigName(n)
+
+	Return the name of configuration number ``n``, where ``n`` is
+	``0 <= n < countLayerConfigs()``.
+
+	:returns: string
+
+	.. code-block::
+
+		var name = pdfDocument.getLayerConfigName(0)
+
+.. method:: PDFDocument.prototype.getLayerConfigInfo(n)
+
+	Return the creator of configuration number ``n``, where ``n`` is
+	``0 <= n < countLayerConfigs()``.
+
+	:returns: string
+
+	.. code-block::
+
+		var creator = pdfDocument.getLayerConfigCreator(0)
+
+.. method:: PDFDocument.prototype.selectLayerConfig(n)
+
+	Select layer configuration number ``n``, where ``n`` is
+	``0 <= n < countLayerConfigs()``.
+
+	.. code-block::
+
+		var info = pdfDocument.selectLayerConfig(1)
+
+.. method:: PDFDocument.prototype.countLayerConfigUIs()
+
+	Return the number of optional content layer UI elements in this document
+	given the selected optional content layer configuration.
+
+	:returns: number
+
+.. method:: PDFDocument.prototype.getLayerConfigUIInfo(n)
+
+	Return the information about optional content layer UI element number ``n``,
+	where ``n`` is ``0 <= n < countLayerConfigUIs()``.
+
+	:returns: ``{ type: number, depth: number, selected: boolean, locked: boolean, text: string }``
+
 .. method:: PDFDocument.prototype.countLayers()
 
 	Return the number of optional content layers in this document.
@@ -945,7 +999,7 @@ Layers
 
 	.. code-block::
 
-		var count = pdfDocument.countLayers()
+		var layers = pdfDocument.countLayers()
 
 .. method:: PDFDocument.prototype.isLayerVisible(n)
 

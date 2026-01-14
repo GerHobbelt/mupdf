@@ -267,6 +267,10 @@ static int removeduplicateobjs(fz_context *ctx, pdf_document *doc, pdf_write_sta
 					continue;
 			}
 
+			/* Never common up pages! */
+			if (pdf_name_eq(ctx, pdf_dict_get(ctx, a, PDF_NAME(Type)), PDF_NAME(Page)))
+				continue;
+
 			/* Keep the lowest numbered object */
 			newnum = fz_mini(num, other);
 			opts->renumber_map[num] = newnum;
@@ -382,6 +386,24 @@ static void renumberobj(fz_context *ctx, pdf_document *doc, pdf_write_state *opt
 	}
 }
 
+static void
+renumber_stored_object_ref(fz_context *ctx, pdf_obj **objp, pdf_write_state *opts, pdf_document *doc, int xref_len)
+{
+	int o;
+	pdf_obj *obj;
+
+	if (objp == NULL || !pdf_is_indirect(ctx, *objp))
+		return;
+
+	o = pdf_to_num(ctx, *objp);
+	if (o >= xref_len || o <= 0 || opts->renumber_map[o] == 0)
+		obj = PDF_NULL;
+	else
+		obj = pdf_new_indirect(ctx, doc, opts->renumber_map[o], 0);
+	pdf_drop_obj(ctx, *objp);
+	*objp = obj;
+}
+
 static void renumberobjs(fz_context *ctx, pdf_document *doc, pdf_write_state *opts)
 {
 	pdf_xref_entry *newxref = NULL;
@@ -411,7 +433,11 @@ static void renumberobjs(fz_context *ctx, pdf_document *doc, pdf_write_state *op
 
 			if (pdf_is_indirect(ctx, obj))
 			{
-				obj = pdf_new_indirect(ctx, doc, to, 0);
+				int o = pdf_to_num(ctx, obj);
+				if (o >= xref_len || o <= 0 || opts->renumber_map[o] == 0)
+					obj = PDF_NULL;
+				else
+					obj = pdf_new_indirect(ctx, doc, opts->renumber_map[o], 0);
 				fz_try(ctx)
 					pdf_update_object(ctx, doc, num, obj);
 				fz_always(ctx)
@@ -424,6 +450,22 @@ static void renumberobjs(fz_context *ctx, pdf_document *doc, pdf_write_state *op
 				renumberobj(ctx, doc, opts, obj);
 			}
 		}
+
+		/* Now walk the open pages, renumbering the page objects there. */
+		{
+			fz_page *page;
+
+			for (page = doc->super.open; page != NULL; page = page->next)
+			{
+				if (page->doc == NULL)
+					continue;
+				renumber_stored_object_ref(ctx, &((pdf_page*)page)->obj, opts, doc, xref_len);
+			}
+		}
+
+		/* And the OCGs store several. Just drop 'em all. */
+		pdf_drop_ocg(ctx, doc);
+		doc->ocg = NULL;
 
 		/* Create new table for the reordered, compacted xref */
 		newxref = Memento_label(fz_malloc_array(ctx, xref_len + 3, pdf_xref_entry), "pdf_xref_entries");
@@ -1941,6 +1983,12 @@ int pdf_can_be_saved_incrementally(fz_context *ctx, pdf_document *doc)
 static void
 prepare_for_save(fz_context *ctx, pdf_document *doc, const pdf_write_options *in_opts)
 {
+	/* Make sure we have no pending annotation changes that need to be updated. */
+	if (doc->recalculate)
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "form needs recalculation before saving");
+	if (doc->resynth_required)
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "annotations need resynthesis before saving");
+
 	/* Rewrite (and possibly sanitize) the operator streams */
 	if (in_opts->do_clean || in_opts->do_sanitize)
 	{
@@ -2238,7 +2286,7 @@ objstm_gather(fz_context *ctx, pdf_xref_entry *x, int i, pdf_document *doc, objs
 	/* Ensure the object is loaded! */
 	if (i == 0)
 		return; /* pdf_cache_object does not like being called for i == 0 which should be free. */
-	pdf_cache_object(ctx, doc, i);
+	(void) pdf_cache_object(ctx, doc, i);
 
 	/* Both normal objects and stream objects can get put into objstms (because we've already
 	 * unpacked stream objects from objstms earlier!) Stream objects that are non-incremental
@@ -2338,10 +2386,26 @@ prepass(fz_context *ctx, pdf_document *doc)
 		if (pdf_object_exists(ctx, doc, num))
 		{
 			fz_try(ctx)
-				pdf_cache_object(ctx, doc, num);
+				(void) pdf_cache_object(ctx, doc, num);
 			fz_catch(ctx)
 				fz_report_error(ctx);
 		}
+	}
+}
+
+static void
+pdf_ensure_pages_are_pages(fz_context *ctx, pdf_document *doc)
+{
+	int i;
+
+	if (!doc->fwd_page_map)
+		return;
+
+	for (i = 0; i < doc->map_page_count; i++)
+	{
+		pdf_obj *type = pdf_dict_get(ctx, doc->fwd_page_map[i], PDF_NAME(Type));
+		if (type == NULL)
+			pdf_dict_put(ctx, doc->fwd_page_map[i], PDF_NAME(Type), PDF_NAME(Page));
 	}
 }
 
@@ -2448,6 +2512,13 @@ do_pdf_save_document(fz_context *ctx, pdf_document *doc, pdf_write_state *opts, 
 
 		xref_len = pdf_xref_len(ctx, doc); /* May have changed due to repair */
 		expand_lists(ctx, opts, xref_len);
+
+		if (opts->do_garbage >= 1)
+		{
+			pdf_ensure_pages_are_pages(ctx, doc);
+			pdf_drop_page_tree_internal(ctx, doc);
+			pdf_empty_store(ctx, doc);
+		}
 
 		do
 		{
@@ -2585,6 +2656,9 @@ do_pdf_save_document(fz_context *ctx, pdf_document *doc, pdf_write_state *opts, 
 		{
 			complete_signatures(ctx, doc, opts);
 		}
+
+		pdf_sync_open_pages(ctx, doc);
+
 		pdf_end_operation(ctx, doc);
 	}
 	fz_always(ctx)

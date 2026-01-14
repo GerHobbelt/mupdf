@@ -166,15 +166,18 @@ void
 pdf_nuke_annots(fz_context *ctx, pdf_page *page)
 {
 	pdf_annot *annot;
+	pdf_annot *next;
 
-	for (annot = page->annots; annot; annot = annot->next)
+	for (annot = page->annots; annot; annot = next)
 	{
+		next = annot->next;
 		pdf_drop_obj(ctx, annot->obj);
 		annot->obj = NULL;
 		pdf_drop_annot(ctx, annot);
 	}
-	for (annot = page->widgets; annot; annot = annot->next)
+	for (annot = page->widgets; annot; annot = next)
 	{
+		next = annot->next;
 		pdf_drop_obj(ctx, annot->obj);
 		annot->obj = NULL;
 		pdf_drop_annot(ctx, annot);
@@ -3641,7 +3644,7 @@ const char *pdf_string_from_intent(fz_context *ctx, enum pdf_intent it)
 	switch (it)
 	{
 	default:
-	case PDF_ANNOT_IT_DEFAULT: return NULL;
+	case PDF_ANNOT_IT_DEFAULT: return "Default";
 	case PDF_ANNOT_IT_FREETEXT_CALLOUT: return "FreeTextCallout";
 	case PDF_ANNOT_IT_FREETEXT_TYPEWRITER: return "FreeTextTypeWriter";
 	case PDF_ANNOT_IT_LINE_ARROW: return "LineArrow";

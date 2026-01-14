@@ -146,12 +146,12 @@ $(OUT)/source/%.o : source/%.cpp
 
 ifeq ($(HAVE_TESSERACT),yes)
 $(OUT)/source/fitz/tessocr.o : source/fitz/tessocr.cpp
-	$(CXX_CMD) $(WARNING_CFLAGS) $(LIB_CFLAGS) $(THIRD_CFLAGS) $(TESSERACT_CFLAGS) $(TESSERACT_DEFINES) $(TESSERACT_LANGFLAGS) $(LEPTONICA_CFLAGS)
+	$(CXX_CMD) $(WARNING_CFLAGS) $(LIB_CFLAGS) $(THIRD_CFLAGS) $(TESSERACT_CFLAGS) $(TESSERACT_LANGFLAGS) $(LEPTONICA_CFLAGS)
 endif
 
 ifeq ($(HAVE_LEPTONICA),yes)
 $(OUT)/source/fitz/leptonica-wrap.o : source/fitz/leptonica-wrap.c
-	$(CC_CMD) $(WARNING_CFLAGS) $(LIB_CFLAGS) $(THIRD_CFLAGS) $(LEPTONICA_CFLAGS) $(LEPTONICA_DEFINES)
+	$(CC_CMD) $(WARNING_CFLAGS) $(LIB_CFLAGS) $(THIRD_CFLAGS) $(LEPTONICA_CFLAGS)
 endif
 
 $(OUT)/source/fitz/barcode.o : source/fitz/barcode.cpp
@@ -335,6 +335,7 @@ MUTOOL_SRC += source/tools/muconvert.c
 MUTOOL_SRC += source/tools/mudraw.c
 MUTOOL_SRC += source/tools/murun.c
 MUTOOL_SRC += source/tools/mutrace.c
+MUTOOL_SRC += source/tools/mugrep.c
 MUTOOL_SRC += source/tools/mubar.c
 MUTOOL_SRC += source/tools/cmapdump.c
 MUTOOL_SRC += $(sort $(wildcard source/tools/pdf*.c))
@@ -660,7 +661,9 @@ install-% c++-% python-% csharp-%:
 
 endif
 
-.PHONY: all clean nuke install third libs apps generate tags docs
+.PHONY: all clean nuke install third libs apps generate tags tarball
+.PHONY: docs docs-live docs-clean java java-clean wasm wasm-clean
+.PHONY: watch watch-recompile
 .PHONY: shared shared-debug shared-clean
 .PHONY: c++-% python-% csharp-%
 .PHONY: c++-clean python-clean csharp-clean

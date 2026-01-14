@@ -1,5 +1,5 @@
 /* ANSI-C code produced by gperf version 3.1 */
-/* Command-line: gperf source/html/css-properties.gperf  */
+/* Command-line: 'C:\\Program Files\\Bin\\gperf.exe' source/html/css-properties.gperf  */
 /* Computed positions: -k'1-2,$' */
 
 #if !((' ' == 32) && ('!' == 33) && ('"' == 34) && ('#' == 35) \
@@ -32,12 +32,12 @@
 #line 1 "source/html/css-properties.gperf"
 struct css_property_info { const char *name; int key; };
 
-#define TOTAL_KEYWORDS 68
+#define TOTAL_KEYWORDS 78
 #define MIN_WORD_LENGTH 3
 #define MAX_WORD_LENGTH 25
-#define MIN_HASH_VALUE 10
-#define MAX_HASH_VALUE 144
-/* maximum key range = 135, duplicates = 0 */
+#define MIN_HASH_VALUE 6
+#define MAX_HASH_VALUE 161
+/* maximum key range = 156, duplicates = 0 */
 
 #ifdef __GNUC__
 __inline
@@ -51,206 +51,227 @@ css_property_hash (register const char *str, register size_t len)
 {
   static unsigned char asso_values[] =
     {
-      145, 145, 145, 145, 145, 145, 145, 145, 145, 145,
-      145, 145, 145, 145, 145, 145, 145, 145, 145, 145,
-      145, 145, 145, 145, 145, 145, 145, 145, 145, 145,
-      145, 145, 145, 145, 145, 145, 145, 145, 145, 145,
-      145, 145, 145, 145, 145,  25, 145, 145, 145, 145,
-      145, 145, 145, 145, 145, 145, 145, 145, 145, 145,
-      145, 145, 145, 145, 145, 145, 145, 145, 145, 145,
-      145, 145, 145, 145, 145, 145, 145, 145, 145, 145,
-      145, 145, 145, 145, 145, 145, 145, 145, 145, 145,
-      145, 145, 145, 145, 145, 145, 145,  35,   5,   5,
-        5,  10,  65,  85,  55,  75, 145, 145,   0,  20,
-        5,   0,   0,   0,   0,  35,  20,   0,   0,   5,
-      145,  35, 145, 145, 145, 145, 145, 145, 145, 145,
-      145, 145, 145, 145, 145, 145, 145, 145, 145, 145,
-      145, 145, 145, 145, 145, 145, 145, 145, 145, 145,
-      145, 145, 145, 145, 145, 145, 145, 145, 145, 145,
-      145, 145, 145, 145, 145, 145, 145, 145, 145, 145,
-      145, 145, 145, 145, 145, 145, 145, 145, 145, 145,
-      145, 145, 145, 145, 145, 145, 145, 145, 145, 145,
-      145, 145, 145, 145, 145, 145, 145, 145, 145, 145,
-      145, 145, 145, 145, 145, 145, 145, 145, 145, 145,
-      145, 145, 145, 145, 145, 145, 145, 145, 145, 145,
-      145, 145, 145, 145, 145, 145, 145, 145, 145, 145,
-      145, 145, 145, 145, 145, 145, 145, 145, 145, 145,
-      145, 145, 145, 145, 145, 145, 145, 145, 145, 145,
-      145, 145, 145, 145, 145, 145
+      162, 162, 162, 162, 162, 162, 162, 162, 162, 162,
+      162, 162, 162, 162, 162, 162, 162, 162, 162, 162,
+      162, 162, 162, 162, 162, 162, 162, 162, 162, 162,
+      162, 162, 162, 162, 162, 162, 162, 162, 162, 162,
+      162, 162, 162, 162, 162,   5, 162, 162, 162, 162,
+      162, 162, 162, 162, 162, 162, 162, 162, 162, 162,
+      162, 162, 162, 162, 162, 162, 162, 162, 162, 162,
+      162, 162, 162, 162, 162, 162, 162, 162, 162, 162,
+      162, 162, 162, 162, 162, 162, 162, 162, 162, 162,
+      162, 162, 162, 162, 162, 162, 162,  25,   5,  85,
+        0,   5,  95,  55,  55,  75, 162, 162,   0,  25,
+       50,   5,   0,   0,  30,   0,   0,   0,   0,  20,
+      162,  50, 162, 162, 162, 162, 162, 162, 162, 162,
+      162, 162, 162, 162, 162, 162, 162, 162, 162, 162,
+      162, 162, 162, 162, 162, 162, 162, 162, 162, 162,
+      162, 162, 162, 162, 162, 162, 162, 162, 162, 162,
+      162, 162, 162, 162, 162, 162, 162, 162, 162, 162,
+      162, 162, 162, 162, 162, 162, 162, 162, 162, 162,
+      162, 162, 162, 162, 162, 162, 162, 162, 162, 162,
+      162, 162, 162, 162, 162, 162, 162, 162, 162, 162,
+      162, 162, 162, 162, 162, 162, 162, 162, 162, 162,
+      162, 162, 162, 162, 162, 162, 162, 162, 162, 162,
+      162, 162, 162, 162, 162, 162, 162, 162, 162, 162,
+      162, 162, 162, 162, 162, 162, 162, 162, 162, 162,
+      162, 162, 162, 162, 162, 162, 162, 162, 162, 162,
+      162, 162, 162, 162, 162, 162
     };
   return len + asso_values[(unsigned char)str[1]] + asso_values[(unsigned char)str[0]] + asso_values[(unsigned char)str[len - 1]];
 }
 
 static struct css_property_info css_property_list[] =
   {
-    {""}, {""}, {""}, {""}, {""}, {""}, {""}, {""}, {""},
+    {""}, {""}, {""}, {""}, {""}, {""},
+#line 72 "source/html/css-properties.gperf"
+    {"quotes",PRO_QUOTES},
     {""},
-#line 34 "source/html/css-properties.gperf"
-    {"color",PRO_COLOR},
-#line 13 "source/html/css-properties.gperf"
-    {"border",PRO_BORDER},
+#line 79 "source/html/css-properties.gperf"
+    {"top",PRO_INSET_TOP},
+#line 50 "source/html/css-properties.gperf"
+    {"left",PRO_INSET_LEFT},
+    {""}, {""}, {""}, {""}, {""}, {""},
+#line 77 "source/html/css-properties.gperf"
+    {"text-indent",PRO_TEXT_INDENT},
     {""},
-#line 56 "source/html/css-properties.gperf"
+#line 63 "source/html/css-properties.gperf"
     {"overflow-wrap",PRO_OVERFLOW_WRAP},
     {""},
-#line 29 "source/html/css-properties.gperf"
-    {"border-top",PRO_BORDER_TOP},
-    {""},
-#line 18 "source/html/css-properties.gperf"
-    {"border-color",PRO_BORDER_COLOR},
-    {""}, {""}, {""},
 #line 30 "source/html/css-properties.gperf"
-    {"border-top-color",PRO_BORDER_TOP_COLOR},
+    {"border-top",PRO_BORDER_TOP},
 #line 20 "source/html/css-properties.gperf"
-    {"border-left-color",PRO_BORDER_LEFT_COLOR},
+    {"border-left",PRO_BORDER_LEFT},
 #line 24 "source/html/css-properties.gperf"
-    {"border-right-color",PRO_BORDER_RIGHT_COLOR},
-#line 15 "source/html/css-properties.gperf"
-    {"border-bottom-color",PRO_BORDER_BOTTOM_COLOR},
-    {""}, {""},
-#line 28 "source/html/css-properties.gperf"
+    {"border-right",PRO_BORDER_RIGHT},
+    {""}, {""}, {""}, {""},
+#line 29 "source/html/css-properties.gperf"
     {"border-style",PRO_BORDER_STYLE},
-    {""},
-#line 70 "source/html/css-properties.gperf"
-    {"vertical-align",PRO_VERTICAL_ALIGN},
-    {""},
-#line 31 "source/html/css-properties.gperf"
+    {""}, {""},
+#line 19 "source/html/css-properties.gperf"
+    {"border-collapse",PRO_BORDER_COLLAPSE},
+#line 32 "source/html/css-properties.gperf"
     {"border-top-style",PRO_BORDER_TOP_STYLE},
-#line 21 "source/html/css-properties.gperf"
+#line 22 "source/html/css-properties.gperf"
     {"border-left-style",PRO_BORDER_LEFT_STYLE},
-#line 25 "source/html/css-properties.gperf"
+#line 26 "source/html/css-properties.gperf"
     {"border-right-style",PRO_BORDER_RIGHT_STYLE},
 #line 16 "source/html/css-properties.gperf"
     {"border-bottom-style",PRO_BORDER_BOTTOM_STYLE},
     {""},
-#line 19 "source/html/css-properties.gperf"
-    {"border-left",PRO_BORDER_LEFT},
-#line 23 "source/html/css-properties.gperf"
-    {"border-right",PRO_BORDER_RIGHT},
+#line 68 "source/html/css-properties.gperf"
+    {"padding-top",PRO_PADDING_TOP},
+#line 66 "source/html/css-properties.gperf"
+    {"padding-left",PRO_PADDING_LEFT},
+#line 67 "source/html/css-properties.gperf"
+    {"padding-right",PRO_PADDING_RIGHT},
+    {""}, {""},
+#line 35 "source/html/css-properties.gperf"
+    {"bottom",PRO_INSET_BOTTOM},
+#line 62 "source/html/css-properties.gperf"
+    {"orphans",PRO_ORPHANS},
+    {""},
+#line 78 "source/html/css-properties.gperf"
+    {"text-transform",PRO_TEXT_TRANSFORM},
+    {""},
+#line 13 "source/html/css-properties.gperf"
+    {"border",PRO_BORDER},
+#line 70 "source/html/css-properties.gperf"
+    {"page-break-before",PRO_PAGE_BREAK_BEFORE},
 #line 14 "source/html/css-properties.gperf"
     {"border-bottom",PRO_BORDER_BOTTOM},
-    {""}, {""},
-#line 64 "source/html/css-properties.gperf"
-    {"quotes",PRO_QUOTES},
-#line 55 "source/html/css-properties.gperf"
-    {"orphans",PRO_ORPHANS},
-#line 65 "source/html/css-properties.gperf"
-    {"src",PRO_SRC},
-    {""},
-#line 66 "source/html/css-properties.gperf"
-    {"text-align",PRO_TEXT_ALIGN},
-#line 61 "source/html/css-properties.gperf"
-    {"padding-top",PRO_PADDING_TOP},
     {""}, {""}, {""},
-#line 67 "source/html/css-properties.gperf"
+#line 18 "source/html/css-properties.gperf"
+    {"border-color",PRO_BORDER_COLOR},
+    {""}, {""}, {""},
+#line 31 "source/html/css-properties.gperf"
+    {"border-top-color",PRO_BORDER_TOP_COLOR},
+#line 21 "source/html/css-properties.gperf"
+    {"border-left-color",PRO_BORDER_LEFT_COLOR},
+#line 25 "source/html/css-properties.gperf"
+    {"border-right-color",PRO_BORDER_RIGHT_COLOR},
+#line 15 "source/html/css-properties.gperf"
+    {"border-bottom-color",PRO_BORDER_BOTTOM_COLOR},
+#line 61 "source/html/css-properties.gperf"
+    {"margin-top",PRO_MARGIN_TOP},
+#line 59 "source/html/css-properties.gperf"
+    {"margin-left",PRO_MARGIN_LEFT},
+#line 60 "source/html/css-properties.gperf"
+    {"margin-right",PRO_MARGIN_RIGHT},
+#line 71 "source/html/css-properties.gperf"
+    {"position",PRO_POSITION},
+#line 65 "source/html/css-properties.gperf"
+    {"padding-bottom",PRO_PADDING_BOTTOM},
+#line 75 "source/html/css-properties.gperf"
+    {"text-align",PRO_TEXT_ALIGN},
+#line 48 "source/html/css-properties.gperf"
+    {"height",PRO_HEIGHT},
+    {""}, {""},
+#line 80 "source/html/css-properties.gperf"
+    {"vertical-align",PRO_VERTICAL_ALIGN},
+#line 76 "source/html/css-properties.gperf"
     {"text-decoration",PRO_TEXT_DECORATION},
-#line 62 "source/html/css-properties.gperf"
+#line 69 "source/html/css-properties.gperf"
     {"page-break-after",PRO_PAGE_BREAK_AFTER},
+    {""}, {""},
+#line 51 "source/html/css-properties.gperf"
+    {"letter-spacing",PRO_LETTER_SPACING},
     {""},
-#line 9 "source/html/css-properties.gperf"
-    {"-webkit-text-fill-color",PRO_TEXT_FILL_COLOR},
-    {""},
-#line 10 "source/html/css-properties.gperf"
-    {"-webkit-text-stroke-color",PRO_TEXT_STROKE_COLOR},
 #line 12 "source/html/css-properties.gperf"
     {"background-color",PRO_BACKGROUND_COLOR},
-    {""}, {""}, {""}, {""},
-#line 68 "source/html/css-properties.gperf"
-    {"text-indent",PRO_TEXT_INDENT},
-#line 63 "source/html/css-properties.gperf"
-    {"page-break-before",PRO_PAGE_BREAK_BEFORE},
-    {""},
-#line 69 "source/html/css-properties.gperf"
-    {"text-transform",PRO_TEXT_TRANSFORM},
-#line 54 "source/html/css-properties.gperf"
-    {"margin-top",PRO_MARGIN_TOP},
-#line 50 "source/html/css-properties.gperf"
-    {"margin",PRO_MARGIN},
-#line 59 "source/html/css-properties.gperf"
-    {"padding-left",PRO_PADDING_LEFT},
-#line 60 "source/html/css-properties.gperf"
-    {"padding-right",PRO_PADDING_RIGHT},
-#line 58 "source/html/css-properties.gperf"
-    {"padding-bottom",PRO_PADDING_BOTTOM},
-    {""}, {""},
-#line 33 "source/html/css-properties.gperf"
+#line 34 "source/html/css-properties.gperf"
     {"border-width",PRO_BORDER_WIDTH},
-    {""}, {""}, {""},
-#line 32 "source/html/css-properties.gperf"
+#line 9 "source/html/css-properties.gperf"
+    {"-webkit-text-fill-color",PRO_TEXT_FILL_COLOR},
+#line 28 "source/html/css-properties.gperf"
+    {"border-spacing",PRO_BORDER_SPACING},
+#line 10 "source/html/css-properties.gperf"
+    {"-webkit-text-stroke-color",PRO_TEXT_STROKE_COLOR},
+#line 33 "source/html/css-properties.gperf"
     {"border-top-width",PRO_BORDER_TOP_WIDTH},
-#line 22 "source/html/css-properties.gperf"
+#line 23 "source/html/css-properties.gperf"
     {"border-left-width",PRO_BORDER_LEFT_WIDTH},
-#line 26 "source/html/css-properties.gperf"
+#line 27 "source/html/css-properties.gperf"
     {"border-right-width",PRO_BORDER_RIGHT_WIDTH},
 #line 17 "source/html/css-properties.gperf"
     {"border-bottom-width",PRO_BORDER_BOTTOM_WIDTH},
     {""},
-#line 72 "source/html/css-properties.gperf"
-    {"white-space",PRO_WHITE_SPACE},
-    {""}, {""},
-#line 39 "source/html/css-properties.gperf"
-    {"font-size",PRO_FONT_SIZE},
-#line 40 "source/html/css-properties.gperf"
-    {"font-style",PRO_FONT_STYLE},
 #line 52 "source/html/css-properties.gperf"
-    {"margin-left",PRO_MARGIN_LEFT},
-#line 53 "source/html/css-properties.gperf"
-    {"margin-right",PRO_MARGIN_RIGHT},
-#line 51 "source/html/css-properties.gperf"
-    {"margin-bottom",PRO_MARGIN_BOTTOM},
-#line 37 "source/html/css-properties.gperf"
-    {"font",PRO_FONT},
-    {""},
-#line 43 "source/html/css-properties.gperf"
-    {"height",PRO_HEIGHT},
-    {""}, {""},
-#line 35 "source/html/css-properties.gperf"
-    {"direction",PRO_DIRECTION},
-#line 46 "source/html/css-properties.gperf"
-    {"list-style",PRO_LIST_STYLE},
-#line 42 "source/html/css-properties.gperf"
-    {"font-weight",PRO_FONT_WEIGHT},
-#line 41 "source/html/css-properties.gperf"
-    {"font-variant",PRO_FONT_VARIANT},
-    {""},
-#line 48 "source/html/css-properties.gperf"
-    {"list-style-position",PRO_LIST_STYLE_POSITION},
-#line 49 "source/html/css-properties.gperf"
-    {"list-style-type",PRO_LIST_STYLE_TYPE},
-#line 47 "source/html/css-properties.gperf"
-    {"list-style-image",PRO_LIST_STYLE_IMAGE},
-#line 75 "source/html/css-properties.gperf"
-    {"word-spacing",PRO_WORD_SPACING},
-    {""},
-#line 27 "source/html/css-properties.gperf"
-    {"border-spacing",PRO_BORDER_SPACING},
-    {""},
-#line 45 "source/html/css-properties.gperf"
     {"line-height",PRO_LINE_HEIGHT},
+#line 64 "source/html/css-properties.gperf"
+    {"padding",PRO_PADDING},
+#line 58 "source/html/css-properties.gperf"
+    {"margin-bottom",PRO_MARGIN_BOTTOM},
+    {""},
+#line 53 "source/html/css-properties.gperf"
+    {"list-style",PRO_LIST_STYLE},
+#line 82 "source/html/css-properties.gperf"
+    {"white-space",PRO_WHITE_SPACE},
+#line 85 "source/html/css-properties.gperf"
+    {"word-spacing",PRO_WORD_SPACING},
     {""}, {""},
-#line 44 "source/html/css-properties.gperf"
-    {"letter-spacing",PRO_LETTER_SPACING},
+#line 56 "source/html/css-properties.gperf"
+    {"list-style-type",PRO_LIST_STYLE_TYPE},
+#line 54 "source/html/css-properties.gperf"
+    {"list-style-image",PRO_LIST_STYLE_IMAGE},
+#line 38 "source/html/css-properties.gperf"
+    {"columns",PRO_COLUMNS},
+    {""},
+#line 8 "source/html/css-properties.gperf"
+    {"-mupdf-leading",PRO_LEADING},
+#line 41 "source/html/css-properties.gperf"
+    {"float",PRO_FLOAT},
+#line 83 "source/html/css-properties.gperf"
+    {"widows",PRO_WIDOWS},
+    {""}, {""},
+#line 42 "source/html/css-properties.gperf"
+    {"font",PRO_FONT},
 #line 11 "source/html/css-properties.gperf"
     {"-webkit-text-stroke-width",PRO_TEXT_STROKE_WIDTH},
-#line 38 "source/html/css-properties.gperf"
-    {"font-family",PRO_FONT_FAMILY},
-    {""}, {""}, {""}, {""}, {""}, {""}, {""}, {""},
-#line 71 "source/html/css-properties.gperf"
-    {"visibility",PRO_VISIBILITY},
-#line 73 "source/html/css-properties.gperf"
-    {"widows",PRO_WIDOWS},
-#line 36 "source/html/css-properties.gperf"
-    {"display",PRO_DISPLAY},
-    {""}, {""}, {""}, {""},
 #line 57 "source/html/css-properties.gperf"
-    {"padding",PRO_PADDING},
-    {""}, {""}, {""}, {""}, {""}, {""}, {""}, {""}, {""},
+    {"margin",PRO_MARGIN},
     {""}, {""}, {""},
+#line 73 "source/html/css-properties.gperf"
+    {"right",PRO_INSET_RIGHT},
+#line 47 "source/html/css-properties.gperf"
+    {"font-weight",PRO_FONT_WEIGHT},
+#line 46 "source/html/css-properties.gperf"
+    {"font-variant",PRO_FONT_VARIANT},
+    {""},
+#line 44 "source/html/css-properties.gperf"
+    {"font-size",PRO_FONT_SIZE},
+#line 45 "source/html/css-properties.gperf"
+    {"font-style",PRO_FONT_STYLE},
+    {""}, {""},
 #line 74 "source/html/css-properties.gperf"
+    {"src",PRO_SRC},
+    {""},
+#line 36 "source/html/css-properties.gperf"
+    {"clear",PRO_CLEAR},
+    {""}, {""}, {""}, {""},
+#line 37 "source/html/css-properties.gperf"
+    {"color",PRO_COLOR},
+    {""}, {""}, {""}, {""},
+#line 49 "source/html/css-properties.gperf"
+    {"inset",PRO_INSET},
+    {""},
+#line 40 "source/html/css-properties.gperf"
+    {"display",PRO_DISPLAY},
+    {""},
+#line 39 "source/html/css-properties.gperf"
+    {"direction",PRO_DIRECTION},
+#line 81 "source/html/css-properties.gperf"
+    {"visibility",PRO_VISIBILITY},
+    {""}, {""}, {""}, {""}, {""}, {""}, {""}, {""},
+#line 55 "source/html/css-properties.gperf"
+    {"list-style-position",PRO_LIST_STYLE_POSITION},
+    {""}, {""}, {""}, {""}, {""}, {""}, {""}, {""}, {""},
+    {""},
+#line 84 "source/html/css-properties.gperf"
     {"width",PRO_WIDTH},
-    {""}, {""}, {""},
-#line 8 "source/html/css-properties.gperf"
-    {"-mupdf-leading",PRO_LEADING}
+    {""}, {""}, {""}, {""}, {""},
+#line 43 "source/html/css-properties.gperf"
+    {"font-family",PRO_FONT_FAMILY}
   };
 
 struct css_property_info *

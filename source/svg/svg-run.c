@@ -160,7 +160,7 @@ svg_run_rect(fz_context *ctx, fz_device *dev, svg_document *doc, fz_xml *node, c
 			ry = h * 0.5f;
 
 		if (w <= 0 || h <= 0)
-			return;
+			break;
 
 		path = fz_new_path(ctx);
 		if (rx == 0 || ry == 0)
@@ -359,6 +359,12 @@ svg_parse_polygon_imp(fz_context *ctx, svg_document *doc, fz_xml *node, int docl
 				str = svg_lex_number(&number, str);
 				args[nargs++] = number;
 			}
+			else
+			{
+				/* Don't know what this is. Just skip it. */
+				fz_warn(ctx, "syntax error in polygon points");
+				str++;
+			}
 
 			if (nargs == 2)
 			{
@@ -426,7 +432,7 @@ svg_run_polygon(fz_context *ctx, fz_device *dev, svg_document *doc, fz_xml *node
 		svg_parse_common(ctx, doc, node, &local_state);
 
 		path = svg_parse_polygon_imp(ctx, doc, node, 1);
-			svg_draw_path(ctx, dev, doc, path, &local_state);
+		svg_draw_path(ctx, dev, doc, path, &local_state);
 	}
 	fz_always(ctx)
 	{
@@ -1015,7 +1021,7 @@ static const char *linejoin_table[] = { "miter", "round", "bevel" };
 static void
 svg_parse_common(fz_context *ctx, svg_document *doc, fz_xml *node, svg_state *state)
 {
-	fz_stroke_state *stroke = state->stroke;
+	fz_stroke_state *stroke = state->stroke = fz_unshare_stroke_state(ctx, state->stroke);
 
 	char *transform_att = fz_xml_att(node, "transform");
 
@@ -1135,7 +1141,7 @@ svg_parse_common(fz_context *ctx, svg_document *doc, fz_xml *node, svg_state *st
 	else
 	{
 		stroke->start_cap = svg_parse_enum_from_style(ctx, doc, style_att, "stroke-linecap",
-			nelem(linecap_table), linecap_table, FZ_LINECAP_BUTT);
+			nelem(linecap_table), linecap_table, stroke->start_cap);
 	}
 
 	stroke->dash_cap = stroke->start_cap;
@@ -1153,7 +1159,7 @@ svg_parse_common(fz_context *ctx, svg_document *doc, fz_xml *node, svg_state *st
 	else
 	{
 		stroke->linejoin = svg_parse_enum_from_style(ctx, doc, style_att, "stroke-linejoin",
-			nelem(linejoin_table), linejoin_table, FZ_LINEJOIN_MITER);
+			nelem(linejoin_table), linejoin_table, stroke->linejoin);
 	}
 
 	if (stroke_miterlimit_att)

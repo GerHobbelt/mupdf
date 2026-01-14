@@ -133,6 +133,7 @@ static jclass cls_OutlineIterator;
 static jclass cls_PDFAnnotation;
 static jclass cls_PDFDocument;
 static jclass cls_PDFDocument_JsEventListener;
+static jclass cls_PDFDocument_LayerConfigUIInfo;
 static jclass cls_PDFDocument_PDFEmbeddedFileParams;
 static jclass cls_PDFGraftMap;
 static jclass cls_PDFObject;
@@ -224,6 +225,11 @@ static jfieldID fid_NativeDevice_nativeResource;
 static jfieldID fid_OutlineIterator_pointer;
 static jfieldID fid_PDFAnnotation_pointer;
 static jfieldID fid_PDFDocument_pointer;
+static jfieldID fid_PDFDocument_LayerConfigUIInfo_type;
+static jfieldID fid_PDFDocument_LayerConfigUIInfo_depth;
+static jfieldID fid_PDFDocument_LayerConfigUIInfo_selected;
+static jfieldID fid_PDFDocument_LayerConfigUIInfo_locked;
+static jfieldID fid_PDFDocument_LayerConfigUIInfo_text;
 static jfieldID fid_PDFGraftMap_pointer;
 static jfieldID fid_PDFObject_Null;
 static jfieldID fid_PDFObject_pointer;
@@ -356,6 +362,7 @@ static jmethodID mid_OutlineIterator_init;
 static jmethodID mid_PDFAnnotation_init;
 static jmethodID mid_LinkDestination_init;
 static jmethodID mid_PDFDocument_JsEventListener_onAlert;
+static jmethodID mid_PDFDocument_LayerConfigUIInfo_init;
 static jmethodID mid_PDFDocument_PDFEmbeddedFileParams_init;
 static jmethodID mid_PDFDocument_init;
 static jmethodID mid_PDFGraftMap_init;
@@ -710,6 +717,9 @@ static int check_enums()
 	valid &= com_artifex_mupdf_fitz_PDFDocument_LANGUAGE_zh == FZ_LANG_zh;
 	valid &= com_artifex_mupdf_fitz_PDFDocument_LANGUAGE_zh_Hans == FZ_LANG_zh_Hans;
 	valid &= com_artifex_mupdf_fitz_PDFDocument_LANGUAGE_zh_Hant == FZ_LANG_zh_Hant;
+	valid &= com_artifex_mupdf_fitz_PDFDocument_LAYER_UI_LABEL == PDF_LAYER_UI_LABEL;
+	valid &= com_artifex_mupdf_fitz_PDFDocument_LAYER_UI_CHECKBOX == PDF_LAYER_UI_CHECKBOX;
+	valid &= com_artifex_mupdf_fitz_PDFDocument_LAYER_UI_RADIOBOX == PDF_LAYER_UI_RADIOBOX;
 	valid &= com_artifex_mupdf_fitz_PDFDocument_NOT_ZUGFERD == PDF_NOT_ZUGFERD;
 	valid &= com_artifex_mupdf_fitz_PDFDocument_ZUGFERD_COMFORT == PDF_ZUGFERD_COMFORT;
 	valid &= com_artifex_mupdf_fitz_PDFDocument_ZUGFERD_BASIC == PDF_ZUGFERD_BASIC;
@@ -744,6 +754,14 @@ static int check_enums()
 	valid &= com_artifex_mupdf_fitz_StructuredText_SELECT_CHARS == FZ_SELECT_CHARS;
 	valid &= com_artifex_mupdf_fitz_StructuredText_SELECT_WORDS == FZ_SELECT_WORDS;
 	valid &= com_artifex_mupdf_fitz_StructuredText_SELECT_LINES == FZ_SELECT_LINES;
+	valid &= com_artifex_mupdf_fitz_StructuredText_SEARCH_EXACT == FZ_SEARCH_EXACT;
+	valid &= com_artifex_mupdf_fitz_StructuredText_SEARCH_IGNORE_CASE == FZ_SEARCH_IGNORE_CASE;
+	valid &= com_artifex_mupdf_fitz_StructuredText_SEARCH_IGNORE_DIACRITICS == FZ_SEARCH_IGNORE_DIACRITICS;
+	valid &= com_artifex_mupdf_fitz_StructuredText_SEARCH_REGEXP == FZ_SEARCH_REGEXP;
+	valid &= com_artifex_mupdf_fitz_StructuredText_SEARCH_KEEP_WHITESPACE == FZ_SEARCH_KEEP_WHITESPACE;
+	valid &= com_artifex_mupdf_fitz_StructuredText_SEARCH_KEEP_LINES == FZ_SEARCH_KEEP_LINES;
+	valid &= com_artifex_mupdf_fitz_StructuredText_SEARCH_KEEP_PARAGRAPHS == FZ_SEARCH_KEEP_PARAGRAPHS;
+	valid &= com_artifex_mupdf_fitz_StructuredText_SEARCH_KEEP_HYPHENS == FZ_SEARCH_KEEP_HYPHENS;
 
 	valid &= com_artifex_mupdf_fitz_PDFWidget_TYPE_UNKNOWN == PDF_WIDGET_TYPE_UNKNOWN;
 	valid &= com_artifex_mupdf_fitz_PDFWidget_TYPE_BUTTON == PDF_WIDGET_TYPE_BUTTON;
@@ -1159,7 +1177,7 @@ static int find_fids(JNIEnv *env)
 	mid_Device_endMask = get_method(&err, env, "endMask", "()V");
 	mid_Device_beginGroup = get_method(&err, env, "beginGroup", "(L"PKG"Rect;L"PKG"ColorSpace;ZZIF)V");
 	mid_Device_endGroup = get_method(&err, env, "endGroup", "()V");
-	mid_Device_beginTile = get_method(&err, env, "beginTile", "(L"PKG"Rect;L"PKG"Rect;FFL"PKG"Matrix;I)I");
+	mid_Device_beginTile = get_method(&err, env, "beginTile", "(L"PKG"Rect;L"PKG"Rect;FFL"PKG"Matrix;II)I");
 	mid_Device_endTile = get_method(&err, env, "endTile", "()V");
 	mid_Device_renderFlags = get_method(&err, env, "renderFlags", "(II)V");
 	mid_Device_setDefaultColorSpaces = get_method(&err, env, "setDefaultColorSpaces", "(L"PKG"DefaultColorSpaces;)V");
@@ -1265,6 +1283,14 @@ static int find_fids(JNIEnv *env)
 	cls_PDFDocument = get_class(&err, env, PKG"PDFDocument");
 	fid_PDFDocument_pointer = get_field(&err, env, "pointer", "J");
 	mid_PDFDocument_init = get_method(&err, env, "<init>", "(J)V");
+
+	cls_PDFDocument_LayerConfigUIInfo = get_class (&err, env, PKG"PDFDocument$LayerConfigUIInfo");
+	fid_PDFDocument_LayerConfigUIInfo_type = get_field(&err, env, "type", "I");
+	fid_PDFDocument_LayerConfigUIInfo_depth = get_field(&err, env, "depth", "I");
+	fid_PDFDocument_LayerConfigUIInfo_selected = get_field(&err, env, "selected", "Z");
+	fid_PDFDocument_LayerConfigUIInfo_locked = get_field(&err, env, "locked", "Z");
+	fid_PDFDocument_LayerConfigUIInfo_text = get_field(&err, env, "text", "Ljava/lang/String;");
+	mid_PDFDocument_LayerConfigUIInfo_init = get_method(&err, env, "<init>", "()V");
 
 	cls_LinkDestination = get_class(&err, env, PKG"LinkDestination");
 	mid_LinkDestination_init = get_method(&err, env, "<init>", "(IIIFFFFF)V");
@@ -1636,6 +1662,7 @@ static void lose_fids(JNIEnv *env)
 	(*env)->DeleteGlobalRef(env, cls_PDFAnnotation);
 	(*env)->DeleteGlobalRef(env, cls_PDFDocument);
 	(*env)->DeleteGlobalRef(env, cls_PDFDocument_JsEventListener);
+	(*env)->DeleteGlobalRef(env, cls_PDFDocument_LayerConfigUIInfo);
 	(*env)->DeleteGlobalRef(env, cls_PDFDocument_PDFEmbeddedFileParams);
 	(*env)->DeleteGlobalRef(env, cls_PDFGraftMap);
 	(*env)->DeleteGlobalRef(env, cls_PDFObject);

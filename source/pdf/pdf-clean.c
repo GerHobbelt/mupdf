@@ -213,6 +213,7 @@ pdf_filter_type3(fz_context *ctx, pdf_document *doc, pdf_obj *obj, pdf_obj *page
 	fz_var(buffer);
 	fz_var(res);
 	fz_var(new_buf);
+	fz_var(top);
 
 	/* We cannot combine instancing with type3 fonts. The new names for
 	 * instanced form/image resources would clash, since they start over for
@@ -952,6 +953,28 @@ rect_touches_redactions(fz_context *ctx, fz_rect area, struct redact_filter_stat
 }
 
 static void
+remove_page_link(fz_context *ctx, pdf_page *page, pdf_obj *obj)
+{
+	pdf_link **linkp = (pdf_link **)&page->links;
+	pdf_link *link;
+
+	while ((link = *linkp) != NULL)
+	{
+		if (link->obj == obj)
+		{
+			*linkp = (pdf_link *)link->super.next;
+			link->super.next = NULL;
+			fz_drop_link(ctx, &link->super);
+			break;
+		}
+		else
+		{
+			linkp = (pdf_link **)&link->super.next;
+		}
+	}
+}
+
+static void
 pdf_redact_page_links(fz_context *ctx, struct redact_filter_state *red)
 {
 	pdf_obj *annots;
@@ -970,6 +993,7 @@ pdf_redact_page_links(fz_context *ctx, struct redact_filter_state *red)
 			if (rect_touches_redactions(ctx, area, red))
 			{
 				pdf_array_delete(ctx, annots, k);
+				remove_page_link(ctx, red->page, link);
 				continue;
 			}
 		}
