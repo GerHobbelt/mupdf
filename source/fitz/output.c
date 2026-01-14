@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2022 Artifex Software, Inc.
+// Copyright (C) 2004-2024 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -387,7 +387,7 @@ fz_reset_output(fz_context *ctx, fz_output *out)
 	if (!out)
 		return;
 	if (out->reset == NULL)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "Cannot reset this output");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "Cannot reset this output");
 
 	out->reset(ctx, out->state);
 	out->closed = 0;

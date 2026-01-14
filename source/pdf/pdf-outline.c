@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2023 Artifex Software, Inc.
+// Copyright (C) 2004-2024 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -244,7 +244,7 @@ do_outline_update(fz_context *ctx, pdf_obj *obj, fz_outline_item *item, int is_n
 		pdf_obj *cobj = pdf_dict_get(ctx, parent, PDF_NAME(Count));
 		count = pdf_to_int(ctx, cobj);
 		if (open_delta || cobj == NULL)
-			pdf_dict_put_int(ctx, parent, PDF_NAME(Count), count >= 0 ? count + open_delta : count - open_delta);
+			pdf_dict_put_int(ctx, parent, PDF_NAME(Count), count > 0 ? count + open_delta : count - open_delta);
 		if (count < 0)
 			break;
 		parent = pdf_dict_get(ctx, parent, PDF_NAME(Parent));
@@ -282,10 +282,11 @@ pdf_outline_iterator_insert(fz_context *ctx, fz_outline_iterator *iter_, fz_outl
 	pdf_obj *prev;
 	pdf_obj *parent;
 	pdf_obj *outlines = NULL;
+	pdf_obj *newoutlines = NULL;
 	int result = 0;
 
 	fz_var(obj);
-	fz_var(outlines);
+	fz_var(newoutlines);
 
 	pdf_begin_operation(ctx, doc, "Insert outline item");
 
@@ -302,7 +303,7 @@ pdf_outline_iterator_insert(fz_context *ctx, fz_outline_iterator *iter_, fz_outl
 			if (outlines == NULL)
 			{
 				/* No outlines entry, better make one. */
-				outlines = pdf_add_new_dict(ctx, doc, 4);
+				newoutlines = outlines = pdf_add_new_dict(ctx, doc, 4);
 				pdf_dict_put(ctx, root, PDF_NAME(Outlines), outlines);
 				pdf_dict_put(ctx, outlines, PDF_NAME(Type), PDF_NAME(Outlines));
 			}
@@ -352,7 +353,7 @@ pdf_outline_iterator_insert(fz_context *ctx, fz_outline_iterator *iter_, fz_outl
 	fz_always(ctx)
 	{
 		pdf_drop_obj(ctx, obj);
-		pdf_drop_obj(ctx, outlines);
+		pdf_drop_obj(ctx, newoutlines);
 	}
 	fz_catch(ctx)
 	{

@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2023 Artifex Software, Inc.
+// Copyright (C) 2004-2024 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -316,4 +316,6 @@ public class PDFObject implements Iterable<PDFObject>
 			throw new UnsupportedOperationException();
 		}
 	}
+
+	public native boolean isFilespec();
 }

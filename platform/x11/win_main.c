@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2004-2024 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -40,10 +40,6 @@
 
 #ifndef WM_MOUSEWHEEL
 #define WM_MOUSEWHEEL 0x020A
-#endif
-
-#ifndef PATH_MAX
-#define PATH_MAX 4096
 #endif
 
 #define MIN(x,y) ((x) < (y) ? (x) : (y))
@@ -1298,6 +1294,7 @@ WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShow
 	MSG msg;
 	int code;
 	fz_context *ctx;
+	char *profile_name = NULL;
 	int kbps = 0;
 	int displayRes = get_system_dpi();
 	int c;
@@ -1317,7 +1314,7 @@ WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShow
 
 	argv = fz_argv_from_wargv(argc, wargv);
 
-	while ((c = fz_getopt(argc, argv, "Ip:r:A:C:W:H:S:U:Xb:")) != -1)
+	while ((c = fz_getopt(argc, argv, "Ip:r:A:C:W:H:S:U:Xb:c:")) != -1)
 	{
 		switch (c)
 		{
@@ -1330,6 +1327,7 @@ WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShow
 		case 'r': displayRes = fz_atoi(fz_optarg); break;
 		case 'I': gapp.invert = 1; break;
 		case 'A': fz_set_aa_level(ctx, fz_atoi(fz_optarg)); break;
+		case 'c': profile_name = fz_optarg; break;
 		case 'W': gapp.layout_w = fz_atoi(fz_optarg); break;
 		case 'H': gapp.layout_h = fz_atoi(fz_optarg); break;
 		case 'S': gapp.layout_em = fz_atoi(fz_optarg); break;
@@ -1362,6 +1360,9 @@ WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShow
 
 	if (fz_optind < argc)
 		gapp.pageno = atoi(argv[fz_optind++]);
+
+	if (profile_name)
+		pdfapp_load_profile(&gapp, profile_name);
 
 	if (kbps)
 		pdfapp_open_progressive(&gapp, filename, 0, kbps);

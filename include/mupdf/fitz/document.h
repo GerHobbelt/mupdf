@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2023 Artifex Software, Inc.
+// Copyright (C) 2004-2024 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -32,6 +32,7 @@
 #include "mupdf/fitz/link.h"
 #include "mupdf/fitz/outline.h"
 #include "mupdf/fitz/separation.h"
+#include "mupdf/fitz/archive.h"
 
 typedef struct fz_document_handler fz_document_handler;
 typedef struct fz_page fz_page;
@@ -399,7 +400,7 @@ typedef int (fz_document_recognize_content_fn)(fz_context *ctx, const fz_documen
 
 	opaque: The value previously returned by the init call.
 */
-typedef void fz_document_handler_fin_fn(fz_context *ctx, const fz_document_handler *handler);
+typedef void (fz_document_handler_fin_fn)(fz_context *ctx, const fz_document_handler *handler);
 
 
 
@@ -878,14 +879,6 @@ void fz_run_page_widgets(fz_context *ctx, fz_page *page, fz_device *dev, fz_matr
 	Never throws exceptions.
 */
 fz_page *fz_keep_page(fz_context *ctx, fz_page *page);
-
-/**
-	Increment the reference count for the page. Returns the same
-	pointer. Must only be used when the alloc lock is already taken.
-
-	Never throws exceptions.
-*/
-fz_page *fz_keep_page_locked(fz_context *ctx, fz_page *page);
 
 /**
 	Decrements the reference count for the page. When the reference

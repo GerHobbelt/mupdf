@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2022 Artifex Software, Inc.
+// Copyright (C) 2004-2024 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -1289,7 +1289,11 @@ load_cid_font(fz_context *ctx, pdf_document *doc, pdf_obj *dict, pdf_obj *encodi
 			}
 
 			if (fontdesc->to_ttf_cmap)
+			{
 				fz_warn(ctx, "non-embedded font using identity encoding: %s (mapping via %s)", basefont, fontdesc->to_ttf_cmap->cmap_name);
+				if (!fontdesc->to_unicode)
+					fontdesc->to_unicode = pdf_keep_cmap(ctx, fontdesc->to_ttf_cmap);
+			}
 			else
 				fz_warn(ctx, "non-embedded font using identity encoding: %s", basefont);
 		}
@@ -1489,6 +1493,12 @@ pdf_load_font_descriptor(fz_context *ctx, pdf_document *doc, pdf_font_desc *font
 		if (fontdesc->descent == 0.0f)
 			fontdesc->descent = 1000.0f * face->descender / face->units_per_EM;
 	}
+
+	/* Prefer FontDescriptor Ascent/Descent values to embedded font's */
+	if (fontdesc->ascent)
+		fontdesc->font->ascender = fontdesc->ascent / 1000.0f;
+	if (fontdesc->descent)
+		fontdesc->font->descender = fontdesc->descent / 1000.0f;
 }
 
 static void

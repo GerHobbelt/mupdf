@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2023 Artifex Software, Inc.
+// Copyright (C) 2004-2024 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -379,7 +379,6 @@ FUN(PDFDocument_findPage)(JNIEnv *env, jobject self, jint jat)
 	pdf_obj *obj = NULL;
 
 	if (!ctx || !pdf) return NULL;
-	if (jat < 0 || jat >= pdf_count_pages(ctx, pdf)) jni_throw_oob(env, "at is not a valid page");
 
 	fz_try(ctx)
 		obj = pdf_lookup_page_obj(ctx, pdf, jat);
@@ -608,7 +607,6 @@ FUN(PDFDocument_insertPage)(JNIEnv *env, jobject self, jint jat, jobject jpage)
 	pdf_obj *page = from_PDFObject(env, jpage);
 
 	if (!ctx || !pdf) return;
-	if (jat != INT_MAX && jat >= pdf_count_pages(ctx, pdf)) jni_throw_oob_void(env, "at is not a valid page");
 	if (!page) jni_throw_arg_void(env, "page must not be null");
 
 	fz_try(ctx)
@@ -625,7 +623,6 @@ FUN(PDFDocument_deletePage)(JNIEnv *env, jobject self, jint jat)
 	int at = jat;
 
 	if (!ctx || !pdf) return;
-	if (jat < 0 || jat >= pdf_count_pages(ctx, pdf)) jni_throw_oob_void(env, "at is not a valid page");
 
 	fz_try(ctx)
 		pdf_delete_page(ctx, pdf, at);
@@ -1533,6 +1530,12 @@ FUN(PDFDocument_addEmbeddedFile)(JNIEnv *env, jobject self, jstring jfilename, j
 JNIEXPORT jstring JNICALL
 FUN(PDFDocument_getEmbeddedFileParams)(JNIEnv *env, jobject self, jobject jfs)
 {
+	return FUN(PDFDocument_getFilespecParams)(env, self, jfs);
+}
+
+JNIEXPORT jstring JNICALL
+FUN(PDFDocument_getFilespecParams)(JNIEnv *env, jobject self, jobject jfs)
+{
 	fz_context *ctx = get_context(env);
 	pdf_obj *fs = from_PDFObject_safe(env, jfs);
 	pdf_embedded_file_params params;
@@ -1584,6 +1587,21 @@ FUN(PDFDocument_verifyEmbeddedFileChecksum)(JNIEnv *env, jobject self, jobject j
 		jni_rethrow(env, ctx);
 
 	return valid ? JNI_TRUE : JNI_FALSE;
+}
+
+JNIEXPORT jboolean JNICALL
+FUN(PDFDocument_isEmbeddedFile)(JNIEnv *env, jobject self, jobject jfs)
+{
+	fz_context *ctx = get_context(env);
+	pdf_obj *fs = from_PDFObject_safe(env, jfs);
+	int embedded = 0;
+
+	fz_try(ctx)
+		embedded = pdf_is_embedded_file(ctx, fs);
+	fz_catch(ctx)
+		jni_rethrow(env, ctx);
+
+	return embedded ? JNI_TRUE : JNI_FALSE;
 }
 
 JNIEXPORT void JNICALL
@@ -1805,4 +1823,80 @@ FUN(PDFDocument_rearrangePages)(JNIEnv *env, jobject self, jobject jpages)
 		fz_free(ctx, pages);
 	fz_catch(ctx)
 		jni_rethrow_void(env, ctx);
+}
+
+JNIEXPORT jint JNICALL
+FUN(PDFDocument_countAssociatedFiles)(JNIEnv *env, jobject self)
+{
+	fz_context *ctx = get_context(env);
+	pdf_document *doc = from_PDFDocument(env, self);
+	int n;
+
+	fz_try(ctx)
+		n = pdf_count_document_associated_files(ctx, doc);
+	fz_catch(ctx)
+		jni_rethrow(env, ctx);
+
+	return n;
+}
+
+JNIEXPORT jobject JNICALL
+FUN(PDFDocument_associatedFile)(JNIEnv *env, jobject self, jint idx)
+{
+	fz_context *ctx = get_context(env);
+	pdf_document *doc = from_PDFDocument(env, self);
+	pdf_obj *af;
+
+	fz_try(ctx)
+		af = pdf_document_associated_file(ctx, doc, idx);
+	fz_catch(ctx)
+		jni_rethrow(env, ctx);
+
+	return to_PDFObject_safe_own(ctx, env, af);
+}
+
+JNIEXPORT jint JNICALL
+FUN(PDFDocument_zugferdProfile)(JNIEnv *env, jobject self)
+{
+	fz_context *ctx = get_context(env);
+	pdf_document *doc = from_PDFDocument(env, self);
+	enum pdf_zugferd_profile p;
+	float version;
+
+	fz_try(ctx)
+		p = pdf_zugferd_profile(ctx, doc, &version);
+	fz_catch(ctx)
+		jni_rethrow(env, ctx);
+
+	return (int)p;
+}
+
+JNIEXPORT jfloat JNICALL
+FUN(PDFDocument_zugferdVersion)(JNIEnv *env, jobject self)
+{
+	fz_context *ctx = get_context(env);
+	pdf_document *doc = from_PDFDocument(env, self);
+	float version;
+
+	fz_try(ctx)
+		(void) pdf_zugferd_profile(ctx, doc, &version);
+	fz_catch(ctx)
+		jni_rethrow(env, ctx);
+
+	return (jfloat)version;
+}
+
+JNIEXPORT jobject JNICALL
+FUN(PDFDocument_zugferdXML)(JNIEnv *env, jobject self)
+{
+	fz_context *ctx = get_context(env);
+	pdf_document *doc = from_PDFDocument(env, self);
+	fz_buffer *buf;
+
+	fz_try(ctx)
+		buf = pdf_zugferd_xml(ctx, doc);
+	fz_catch(ctx)
+		jni_rethrow(env, ctx);
+
+	return to_Buffer_safe_own(ctx, env, buf);
 }

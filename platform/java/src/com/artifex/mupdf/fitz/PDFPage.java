@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2004-2024 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -114,6 +114,9 @@ public class PDFPage extends Page
 	public void setCropBox(Rect rect) {
 		setPageBox(Page.CROP_BOX, rect);
 	}
+
+	public native int countAssociatedFiles();
+	public native PDFObject associatedFile(int idx);
 
 	// TODO: toPixmap with usage and page box
 }

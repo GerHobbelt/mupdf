@@ -1586,7 +1586,9 @@ def system(
                 out_frame_record = inspect.stack()[caller]
                 o_fn = lambda text: log( text, caller=out_frame_record, nv=False, raw=True)
             elif isinstance(o, int):
-                o_fn = lambda text: os.write( o, text)
+                def fn(text, o=o):
+                    os.write(o, text.encode())
+                o_fn = fn
             elif callable(o):
                 o_fn = o
             else:
@@ -2114,7 +2116,7 @@ def fs_newer( pattern, t):
     paths = glob.glob(pattern)
     paths_new = []
     for path in paths:
-        tt = os.path.getmtime(path)
+        tt = fs_mtime(path)
         if tt >= t:
             paths_new.append(path)
     return paths_new

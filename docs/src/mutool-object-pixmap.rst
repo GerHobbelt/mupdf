@@ -1,4 +1,4 @@
-.. Copyright (C) 2001-2023 Artifex Software, Inc.
+.. Copyright (C) 2001-2024 Artifex Software, Inc.
 .. All Rights Reserved.
 
 ----
@@ -14,7 +14,11 @@
 `Pixmap`
 ----------------------------
 
-A `Pixmap` object contains a color raster image (short for pixel map). The components in a pixel in the `Pixmap` are all byte values, with the transparency as the last component. A `Pixmap` also has a location (x, y) in addition to its size; so that they can easily be used to represent tiles of a page.
+A `Pixmap` object contains a color raster image (short for pixel map).
+The components in a pixel in the `Pixmap` are all byte values,
+with the transparency as the last component.
+A `Pixmap` also has a location (x, y) in addition to its size;
+so that they can easily be used to represent tiles of a page.
 
 
 .. method:: new Pixmap(colorspace, bounds, alpha)
@@ -300,7 +304,9 @@ A `Pixmap` object contains a color raster image (short for pixel map). The compo
 
 .. method:: invertLuminance()
 
-    Transform all pixels so that luminance of each pixel is inverted, and the chrominance remains as unchanged as possible. All components are processed, except alpha which is unchanged.
+    Transform all pixels so that luminance of each pixel is inverted,
+    and the chrominance remains as unchanged as possible.
+    All components are processed, except alpha which is unchanged.
 
     |example_tag|
 
@@ -310,7 +316,8 @@ A `Pixmap` object contains a color raster image (short for pixel map). The compo
 
 .. method:: gamma(gamma)
 
-    Apply gamma correction to `Pixmap`. All components are processed, except alpha which is unchanged.
+    Apply gamma correction to `Pixmap`. All components are processed,
+    except alpha which is unchanged.
 
     Values `>= 0.1 & < 1` = darken, `> 1 & < 10` = lighten.
 
@@ -324,7 +331,8 @@ A `Pixmap` object contains a color raster image (short for pixel map). The compo
 
 .. method:: tint(black, white)
 
-    Tint all pixels in a :title:`RGB`, :title:`BGR` or :title:`Gray` `Pixmap`. Map black and white respectively to the given hex :title:`RGB` values.
+    Tint all pixels in a :title:`RGB`, :title:`BGR` or :title:`Gray` `Pixmap`.
+     Map black and white respectively to the given hex :title:`RGB` values.
 
     :arg black: `Integer`.
     :arg white: `Integer`.
@@ -339,11 +347,10 @@ A `Pixmap` object contains a color raster image (short for pixel map). The compo
 
 .. method:: warp(points, width, height)
 
-    |mutool_tag|
-
     Return a warped subsection of the `Pixmap`, where the result has the requested dimensions.
 
-    :arg points: `[x0, y0, x1, y1, x2, y2, x3, y3, x4, y4]` Points give the corner points of a convex quadrilateral within the `Pixmap` to be warped.
+    :arg points: `[x0, y0, x1, y1, x2, y2, x3, y3, x4, y4]`
+    Points give the corner points of a convex quadrilateral within the `Pixmap` to be warped.
     :arg width: `Int`.
     :arg height: `Int`.
 
@@ -358,9 +365,11 @@ A `Pixmap` object contains a color raster image (short for pixel map). The compo
 
 .. method:: convertToColorSpace(colorspace, proof, defaultColorSpaces, colorParams, keepAlpha)
 
-    |mutool_tag|
-
-    Convert pixmap into a new pixmap of a desired colorspace. A proofing colorspace, a set of default colorspaces and color parameters used during conversion may be specified. Finally a boolean indicates if alpha should be preserved (default is to not preserve alpha).
+    Convert pixmap into a new pixmap of a desired colorspace.
+    A proofing colorspace, a set of default colorspaces and color
+    parameters used during conversion may be specified.
+    Finally a boolean indicates if alpha should be preserved
+    (default is to not preserve alpha).
 
     :arg colorspace: `Colorspace`.
     :arg proof: `Colorspace`.
@@ -444,7 +453,8 @@ A `Pixmap` object contains a color raster image (short for pixel map). The compo
 
     |wasm_tag|
 
-    Returns a buffer of the `Pixmap` as a :title:`JPEG`. Note, if the `Pixmap` has an alpha channel then an exception will be thrown.
+    Returns a buffer of the `Pixmap` as a :title:`JPEG`.
+    Note, if the `Pixmap` has an alpha channel then an exception will be thrown.
 
 
     :return: `Buffer`.
@@ -454,3 +464,38 @@ A `Pixmap` object contains a color raster image (short for pixel map). The compo
     .. code-block:: javascript
 
         var buffer = pixmap.asJPEG(80);
+
+
+.. method:: skewDetect()
+
+    |wasm_tag|
+
+    Returns the angle of skew detected from `Pixmap`.
+    Note, if the `Pixmap` is not Greyscale with no alpha then an exception will be thrown.
+
+
+    :return: `Float`.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var angle = pixmap.skewDetect();
+
+
+.. method:: deskew(angle, border)
+
+    |wasm_tag|
+
+    Returns a new `Pixmap` being the deskewed version of the supplied `Pixmap`.
+    Note, if a `Pixmap` is supplied that is not RGB or Greyscale, or has alpha then an exception will be thrown.
+
+    :arg angle: `Float`. The angle to deskew.
+    :arg border: `String`. "increase" increases the size of the pixmap so no pixels are lost. "maintain" maintains the size of the pixmap. "decrease" decreases the size of the page so no new pixels are shown.
+    :return: `Pixmap`.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var deskewed = pixmap.deskew(angle, 0);

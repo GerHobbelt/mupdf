@@ -1,4 +1,4 @@
-.. Copyright (C) 2001-2023 Artifex Software, Inc.
+.. Copyright (C) 2001-2024 Artifex Software, Inc.
 .. All Rights Reserved.
 
 
@@ -106,8 +106,6 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
 
 .. method:: rearrangePages(pages)
-
-    |mutool_tag|
 
     Rearrange (re-order and/or delete) pages in the `PDFDocument`.
 
@@ -221,7 +219,7 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
 .. method:: hasUnsavedChanges()
 
-    Returns *true* if the document has been saved since it was last opened or saved.
+    Returns *true* if the document has been changed since it was last opened or saved.
 
     :return: `Boolean`.
 
@@ -459,7 +457,7 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
     Begin a journal operation.
 
-    :arg length: `String` The name of the operation.
+    :arg op: `String` The name of the operation.
 
 
     |example_tag|
@@ -486,7 +484,7 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
     .. code-block:: javascript
 
-        pdfDocument.beginImplicitOperation();
+        pdfDocument.endOperation();
 
 .. method:: abandonOperation()
 
@@ -542,8 +540,17 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
         pdfDocument.redo();
 
+.. method:: saveJournal(filename)
 
+    Save the journal to a file.
 
+    :arg filename: File to save the journal to.
+
+   |example_tag|
+
+    .. code-block:: javascript
+
+        pdfDocument.saveJournal("test.journal");
 
 
 ----
@@ -695,7 +702,6 @@ Some dictionaries in :title:`PDF` also have attached binary data. These are call
 
 .. method:: newByteString(byteString)
 
-    |mutool_tag|
 
     Create a new byte string object.
 
@@ -875,7 +881,6 @@ All page objects are structured into a page tree, which defines the order the pa
 .. method:: addPage(mediabox, rotate, resources, contents)
 
 
-
     Create a new `PDFPage` object. Note: this function does NOT add it to the page tree, use :ref:`insertPage<mutool_insertPage>` to do that.
 
     :arg mediabox: `[ulx,uly,lrx,lry]` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
@@ -907,7 +912,6 @@ All page objects are structured into a page tree, which defines the order the pa
 
     |example_tag|
 
-    |mutool_tag|
 
     .. literalinclude:: ../examples/pdf-create.js
        :caption: docs/examples/pdf-create.js
@@ -1059,7 +1063,7 @@ The following functions can be used to copy objects from one :title:`PDF` docume
 
 .. _mutool_object_pdf_document_embedded_files:
 
-Embedded files in :title:`PDFs`
+Embedded/Associated files in :title:`PDFs`
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -1107,17 +1111,23 @@ Embedded files in :title:`PDFs`
 
 .. method:: getEmbeddedFileParams(fileSpecObject)
 
+    Historical alias for getFilespecParams.
+
+
+
+.. method:: getFilespecParams(fileSpecObject)
+
     Return an object describing the file referenced by the `fileSpecObject`.
 
     :arg fileSpecObject: `Object` :ref:`File Specification Object<mutool_run_js_api_file_spec_object>`.
 
-    :return: `Object` :ref:`Embedded File Object<mutool_run_js_api_pdf_document_embedded_file_object>`.
+    :return: `Object` :ref:`Filespec Params Object<mutool_run_js_api_pdf_document_filespec_params_object>`.
 
     |example_tag|
 
     .. code-block:: javascript
 
-        var obj = pdfDocument.getEmbeddedFileParams(fileSpecObject);
+        var obj = pdfDocument.getFilespecParams(fileSpecObject);
 
 
 .. method:: getEmbeddedFileContents(fileSpecObject)
@@ -1155,6 +1165,97 @@ Embedded files in :title:`PDFs`
 
         var fileChecksumValid = pdfDocument.verifyEmbeddedFileChecksum(fileSpecObject);
 
+
+
+
+.. method:: countAssociatedFiles()
+
+    Return the number of Associated Files on this document. Note that this is the number of files associated at the document level, not necessarily the total number of files associated with elements throughout the entire document.
+
+    :return: `Integer`
+
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var count = pdfDocument.countAssociatedFiles();
+
+
+
+
+.. method:: associatedFile(n)
+
+    Return the Filespec object that represents the nth Associated File on this document. 0 <= n < count, where count is the value given by countAssociatedFiles().
+
+    :return fileSpecObject: `Object` :ref:`File Specification Object<mutool_run_js_api_file_spec_object>`.
+
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var obj = pdfDocument.associatedFile(0);
+
+
+
+
+
+
+
+----
+
+
+.. _mutool_object_pdf_document_zugferd:
+
+ZUGFeRD support in :title:`PDFs`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+.. method:: zugferdProfile()
+
+    Determine if the current PDF is a ZUGFeRD PDF, and, if so, return the profile type in use. Possible return values include: "NOT ZUGFERD", "COMFORT", "BASIC", "EXTENDED", "BASIC WL", "MINIMUM", "XRECHNUNG", and "UNKNOWN".
+
+    :return: `String`.
+
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var profile = pdfDocument.zugferdProfile();
+
+
+
+.. method:: zugferdVersion()
+
+    Determine if the current PDF is a ZUGFeRD PDF, and, if so, return the version of the spec it claims to conforms to.
+    This will return 0 for non-zugferd PDFs.
+
+    :return: `Float`.
+
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var version = pdfDocument.zugferdVersion();
+
+
+
+.. method:: zugferdXML()
+
+    Return a buffer containing the embedded ZUGFeRD XML data from this PDF.
+
+    :return: `Buffer`.
+
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var buf = pdfDocument.zugferdXML();
 
 
 

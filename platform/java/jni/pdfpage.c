@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2004-2024 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -268,4 +268,34 @@ FUN(PDFPage_setPageBox)(JNIEnv *env, jobject self, jint box, jobject jrect)
 		pdf_set_page_box(ctx, page, box, rect);
 	fz_catch(ctx)
 		jni_rethrow_void(env, ctx);
+}
+
+JNIEXPORT jint JNICALL
+FUN(PDFPage_countAssociatedFiles)(JNIEnv *env, jobject self)
+{
+	fz_context *ctx = get_context(env);
+	pdf_page *page = from_PDFPage(env, self);
+	int n;
+
+	fz_try(ctx)
+		n = pdf_count_page_associated_files(ctx, page);
+	fz_catch(ctx)
+		jni_rethrow(env, ctx);
+
+	return n;
+}
+
+JNIEXPORT jobject JNICALL
+FUN(PDFPage_associatedFile)(JNIEnv *env, jobject self, jint idx)
+{
+	fz_context *ctx = get_context(env);
+	pdf_page *page = from_PDFPage(env, self);
+	pdf_obj *af;
+
+	fz_try(ctx)
+		af = pdf_page_associated_file(ctx, page, idx);
+	fz_catch(ctx)
+		jni_rethrow(env, ctx);
+
+	return to_PDFObject_safe_own(ctx, env, af);
 }

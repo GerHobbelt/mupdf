@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2022 Artifex Software, Inc.
+// Copyright (C) 2004-2024 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -29,7 +29,7 @@
 #include <string.h>
 #include <errno.h>
 
-#ifdef _MSC_VER
+#ifdef _WIN32
 #ifndef NDEBUG
 #define USE_OUTPUT_DEBUG_STRING
 #include <windows.h>

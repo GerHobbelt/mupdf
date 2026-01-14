@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2023 Artifex Software, Inc.
+// Copyright (C) 2004-2024 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -42,7 +42,7 @@
 #include <limits.h>
 #include <stdlib.h>
 #include <stdio.h>
-#ifdef _MSC_VER
+#ifdef _WIN32
 struct timeval;
 struct timezone;
 int gettimeofday(struct timeval *tv, struct timezone *tz);
@@ -55,10 +55,6 @@ int gettimeofday(struct timeval *tv, struct timezone *tz);
 #else
 #include <sys/stat.h> /* for mkdir */
 #include <unistd.h> /* for getcwd */
-#endif
-
-#ifndef PATH_MAX
-#define PATH_MAX 4096
 #endif
 
 /* Allow for windows stdout being made binary */
@@ -376,6 +372,10 @@ static int layer_off[1000];
 static int layer_on_len;
 static int layer_off_len;
 
+static int skew_correct;
+static float skew_angle;
+static int skew_border;
+
 static const char ocr_language_default[] = "eng";
 static const char *ocr_language = ocr_language_default;
 static const char *ocr_datadir = NULL;
@@ -489,9 +489,11 @@ static int usage(void)
 #ifndef OCR_DISABLED
 		"\t-t -\tSpecify language/script for OCR (default: eng)\n"
 		"\t-d -\tSpecify path for OCR files (default: rely on TESSDATA_PREFIX environment variable)\n"
+		"\t-k -{,-}\tSkew correction options. auto or angle {0=increase size, 1=maintain size, 2=decrease size}\n"
 #else
 		"\t-t -\tSpecify language/script for OCR (default: eng) (disabled)\n"
 		"\t-d -\tSpecify path for OCR files (default: rely on TESSDATA_PREFIX environment variable) (disabled)\n"
+		"\t-k -{,-}\tSkew correction options. auto or angle {0=increase size, 1=maintain size, 2=decrease size} (disabled)\n"
 #endif
 		"\n"
 		"\t-y l\tList the layer configs to stderr\n"
@@ -578,6 +580,9 @@ file_level_headers(fz_context *ctx)
 			fz_strlcat(options, ocr_datadir, sizeof (options));
 		}
 		fz_parse_pdfocr_options(ctx, &opts, options);
+		opts.skew_correct = skew_correct;
+		opts.skew_border = skew_border;
+		opts.skew_angle = skew_angle;
 		bander = fz_new_pdfocr_band_writer(ctx, out, &opts);
 	}
 }
@@ -826,7 +831,8 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 						output_format == OUT_OCR_HTML ||
 						output_format == OUT_OCR_XHTML
 						) ? FZ_STEXT_PRESERVE_IMAGES : 0;
-			stext_options.flags |= FZ_STEXT_MEDIABOX_CLIP;
+			stext_options.flags |= FZ_STEXT_CLIP;
+			stext_options.flags |= FZ_STEXT_ACCURATE_BBOXES;
 			if (output_format == OUT_STEXT_JSON || output_format == OUT_OCR_STEXT_JSON)
 				stext_options.flags |= FZ_STEXT_PRESERVE_SPANS;
 			tmediabox = fz_transform_rect(mediabox, ctm);
@@ -1352,6 +1358,20 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum)
 
 	start = (showtime ? gettime() : 0);
 
+	if (output_file_per_page)
+	{
+		char text_buffer[512];
+
+		bgprint_flush();
+		if (out)
+		{
+			fz_close_output(ctx, out);
+			fz_drop_output(ctx, out);
+		}
+		fz_format_output_path(ctx, text_buffer, sizeof text_buffer, output, pagenum);
+		out = fz_new_output_with_path(ctx, text_buffer, 0);
+	}
+
 	page = fz_load_page(ctx, doc, pagenum - 1);
 
 	if (spots != SPOTS_NONE)
@@ -1450,20 +1470,6 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum)
 			fz_rethrow(ctx);
 		}
 		features = iscolor ? " color" : " grayscale";
-	}
-
-	if (output_file_per_page)
-	{
-		char text_buffer[512];
-
-		bgprint_flush();
-		if (out)
-		{
-			fz_close_output(ctx, out);
-			fz_drop_output(ctx, out);
-		}
-		fz_format_output_path(ctx, text_buffer, sizeof text_buffer, output, pagenum);
-		out = fz_new_output_with_path(ctx, text_buffer, 0);
 	}
 
 	if (bgprint.active)
@@ -2030,7 +2036,7 @@ int mudraw_main(int argc, char **argv)
 
 	fz_var(doc);
 
-	while ((c = fz_getopt(argc, argv, "qp:o:F:R:r:w:h:fB:c:e:G:Is:A:DiW:H:S:T:t:d:U:XLvPl:y:Yz:Z:NO:am:Kb:")) != -1)
+	while ((c = fz_getopt(argc, argv, "qp:o:F:R:r:w:h:fB:c:e:G:Is:A:DiW:H:S:T:t:d:U:XLvPl:y:Yz:Z:NO:am:Kb:k:")) != -1)
 	{
 		switch (c)
 		{
@@ -2140,6 +2146,18 @@ int mudraw_main(int argc, char **argv)
 		case 'z': layer_off[layer_off_len++] = !strcmp(fz_optarg, "all") ? -1 : fz_atoi(fz_optarg); break;
 		case 'Z': layer_on[layer_on_len++] = !strcmp(fz_optarg, "all") ? -1 : fz_atoi(fz_optarg); break;
 		case 'a': useaccel = 0; break;
+		case 'k':
+		{
+			const char *a;
+			if (fz_optarg[0] == 'a')
+				skew_correct = 1;
+			else
+				skew_correct = 2, skew_angle = fz_atof(fz_optarg);
+			a = strchr(fz_optarg, ',');
+			if (a != NULL)
+				skew_border = fz_atoi(fz_optarg+1);
+			break;
+		}
 
 		case 'v': fprintf(stderr, "mudraw version %s\n", FZ_VERSION); return 1;
 		}
@@ -2516,7 +2534,7 @@ int mudraw_main(int argc, char **argv)
 			fz_register_document_handlers(ctx);
 #ifdef HAVE_SMARTOFFICE
 			{
-				void *cfg = so_doc_handler_enable(ctx, "en-gb");
+				void *cfg = so_doc_handler_enable(ctx, "en-gb", NULL, 1);
 				so_doc_handler_configure(ctx, cfg, SO_DOC_HANDLER_MODE, SO_DOC_HANDLER_MODE_HTML);
 			}
 #endif

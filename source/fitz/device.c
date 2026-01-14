@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2023 Artifex Software, Inc.
+// Copyright (C) 2004-2024 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -708,7 +708,7 @@ fz_structure_to_string(fz_structure type)
 
 	/* List elements (PDF 1.7 - Table 10.23) */
 	case FZ_STRUCTURE_LIST:
-		return "List";
+		return "L";
 	case FZ_STRUCTURE_LISTITEM:
 		return "LI";
 	case FZ_STRUCTURE_LABEL:

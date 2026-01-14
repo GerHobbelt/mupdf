@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2023 Artifex Software, Inc.
+// Copyright (C) 2004-2024 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -1887,6 +1887,7 @@ pdf_init_document(fz_context *ctx, pdf_document *doc)
 
 		if (repaired)
 		{
+			pdf_repair_obj_stms(ctx, doc);
 			pdf_repair_trailer(ctx, doc);
 		}
 	}
@@ -1904,7 +1905,6 @@ void pdf_repair_trailer(fz_context *ctx, pdf_document *doc)
 	int i;
 
 	int xref_len = pdf_xref_len(ctx, doc);
-	pdf_repair_obj_stms(ctx, doc);
 
 	hasroot = (pdf_dict_get(ctx, pdf_trailer(ctx, doc), PDF_NAME(Root)) != NULL);
 	hasinfo = (pdf_dict_get(ctx, pdf_trailer(ctx, doc), PDF_NAME(Info)) != NULL);
@@ -2225,6 +2225,12 @@ pdf_load_obj_stm(fz_context *ctx, pdf_document *doc, int num, pdf_lexbuf *buf, i
 				else
 				{
 					entry->obj = obj;
+					/* If we've just read a 'null' object, don't leave this as a NULL 'o' object,
+					 * as that will a) confuse the code that called us into thinking that nothing
+					 * was loaded, and b) cause the entire objstm to be reloaded every time that
+					 * object is acccessed. Instead, just mark it as an 'f'. */
+					if (obj == NULL)
+						entry->type = 'f';
 					fz_drop_buffer(ctx, entry->stm_buf);
 					entry->stm_buf = NULL;
 				}
@@ -2918,6 +2924,9 @@ void
 pdf_update_object(fz_context *ctx, pdf_document *doc, int num, pdf_obj *newobj)
 {
 	pdf_xref_entry *x;
+
+	if (!doc)
+		return;
 
 	if (doc->local_xref && doc->local_xref_nesting > 0)
 	{
@@ -3740,6 +3749,7 @@ pdf_document *pdf_create_document(fz_context *ctx)
 static const char *pdf_extensions[] =
 {
 	"pdf",
+	"fdf",
 	"pclm",
 	"ai",
 	NULL
@@ -3756,6 +3766,7 @@ static int
 pdf_recognize_doc_content(fz_context *ctx, const fz_document_handler *handler, fz_stream *stream, fz_archive *dir, void **state, fz_document_recognize_state_free_fn **free_state)
 {
 	const char *match = "%PDF-";
+	const char *match2 = "%FDF-";
 	int pos = 0;
 	int n = 4096+5;
 	int c;
@@ -3773,7 +3784,7 @@ pdf_recognize_doc_content(fz_context *ctx, const fz_document_handler *handler, f
 		c = fz_read_byte(ctx, stream);
 		if (c == EOF)
 			return 0;
-		if (c == match[pos])
+		if (c == match[pos] || c == match2[pos])
 		{
 			pos++;
 			if (pos == 5)
@@ -5086,13 +5097,18 @@ int pdf_find_version_for_obj(fz_context *ctx, pdf_document *doc, pdf_obj *obj)
 
 int pdf_validate_signature(fz_context *ctx, pdf_annot *widget)
 {
-	pdf_document *doc = widget->page->doc;
-	int unsaved_versions = pdf_count_unsaved_versions(ctx, doc);
-	int num_versions = pdf_count_versions(ctx, doc) + unsaved_versions;
-	int version = pdf_find_version_for_obj(ctx, doc, widget->obj);
-	int i;
+	pdf_document *doc;
+	int unsaved_versions, num_versions, version, i;
 	pdf_locked_fields *locked = NULL;
 	int o_xref_base;
+
+	if (!widget->page)
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "annotation not bound to any page");
+
+	doc = widget->page->doc;
+	unsaved_versions = pdf_count_unsaved_versions(ctx, doc);
+	num_versions = pdf_count_versions(ctx, doc) + unsaved_versions;
+	version = pdf_find_version_for_obj(ctx, doc, widget->obj);
 
 	if (version > num_versions-1)
 		version = num_versions-1;

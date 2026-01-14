@@ -1,4 +1,4 @@
-.. Copyright (C) 2001-2023 Artifex Software, Inc.
+.. Copyright (C) 2001-2024 Artifex Software, Inc.
 .. All Rights Reserved.
 
 ----
@@ -31,8 +31,6 @@ To get the widgets on a page see: :ref:`PDFPage getWidgets()<mutool_run_js_api_p
 
 .. method:: getFieldType()
 
-    |mutool_tag_wasm_soon|
-
     Return `String` indicating type of widget: "button", "checkbox", "combobox", "listbox", "radiobutton", "signature" or "text".
 
     :return: `String`.
@@ -42,8 +40,6 @@ To get the widgets on a page see: :ref:`PDFPage getWidgets()<mutool_run_js_api_p
     .. code-block:: javascript
 
         var type = widget.getFieldType();
-
-    .. |tor_todo| WASM: TypeError: PDFWidget.TYPES is not a function
 
 
 .. method:: getFieldFlags()
@@ -393,6 +389,19 @@ Signature Methods
 
 
     .. |tor_todo| WASM, Even says "TODO" in the mupdf.js source file :)
+
+
+.. method:: incrementalChangesSinceSigning()
+
+    |mutool_tag_wasm_soon|
+
+    Returns true if there have been incremental changes since the signature widget was signed.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var changed = widget.incrementalChangesSinceSigning();
 
 
 Widget Events

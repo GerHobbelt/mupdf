@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2023 Artifex Software, Inc.
+// Copyright (C) 2004-2024 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -143,6 +143,7 @@ enum
 	PRO_COLOR,
 	PRO_DIRECTION,
 	PRO_DISPLAY,
+	PRO_FONT,
 	PRO_FONT_FAMILY,
 	PRO_FONT_SIZE,
 	PRO_FONT_STYLE,

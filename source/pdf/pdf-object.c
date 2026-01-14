@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2004-2024 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -1403,6 +1403,7 @@ void pdf_abandon_operation(fz_context *ctx, pdf_document *doc)
 void pdf_undo(fz_context *ctx, pdf_document *doc)
 {
 	pdf_journal_entry *entry;
+	pdf_journal_fragment *frag;
 
 	if (ctx == NULL || doc == NULL)
 		return;
@@ -1421,6 +1422,12 @@ void pdf_undo(fz_context *ctx, pdf_document *doc)
 	fz_write_printf(ctx, fz_stddbg(ctx), "Undo!\n");
 #endif
 
+	// nuke all caches
+	pdf_drop_page_tree_internal(ctx, doc);
+	pdf_sync_open_pages(ctx, doc);
+	for (frag = entry->head; frag; frag = frag->next)
+		pdf_purge_object_from_store(ctx, doc, frag->obj_num);
+
 	doc->journal->current = entry->prev;
 
 	swap_fragments(ctx, doc, entry);
@@ -1431,6 +1438,7 @@ void pdf_undo(fz_context *ctx, pdf_document *doc)
 void pdf_redo(fz_context *ctx, pdf_document *doc)
 {
 	pdf_journal_entry *entry;
+	pdf_journal_fragment *frag;
 
 	if (ctx == NULL || doc == NULL)
 		return;
@@ -1459,6 +1467,12 @@ void pdf_redo(fz_context *ctx, pdf_document *doc)
 
 	if (entry == NULL)
 		fz_throw(ctx, FZ_ERROR_ARGUMENT, "Already at end of history");
+
+	// nuke all caches
+	pdf_drop_page_tree_internal(ctx, doc);
+	pdf_sync_open_pages(ctx, doc);
+	for (frag = entry->head; frag; frag = frag->next)
+		pdf_purge_object_from_store(ctx, doc, frag->obj_num);
 
 	doc->journal->current = entry;
 
@@ -1655,6 +1669,8 @@ void pdf_deserialise_journal(fz_context *ctx, pdf_document *doc, fz_stream *stm)
 		obj = pdf_parse_dict(ctx, doc, stm, &doc->lexbuf.base);
 
 		nis = pdf_dict_get_int(ctx, obj, PDF_NAME(NumSections));
+		if (nis < 0 || nis > doc->num_xref_sections)
+			fz_throw(ctx, FZ_ERROR_FORMAT, "Bad journal format");
 		pdf_fingerprint_file(ctx, doc, digest, nis);
 
 		file_size = pdf_dict_get_int(ctx, obj, PDF_NAME(FileSize));
@@ -1721,6 +1737,9 @@ void pdf_deserialise_journal(fz_context *ctx, pdf_document *doc, fz_stream *stm)
 	doc->journal->current = NULL;
 	if (pos > 0)
 	{
+		if (doc->journal->head == NULL)
+			fz_throw(ctx, FZ_ERROR_FORMAT, "Badly formed journal");
+
 		doc->journal->current = doc->journal->head;
 		while (--pos)
 		{
@@ -1841,6 +1860,10 @@ static void prepare_object_for_alteration(fz_context *ctx, pdf_obj *obj, pdf_obj
 			pdf_drop_local_xref_and_resources(ctx, doc);
 		}
 	}
+
+	// Empty store of items keyed on the object being changed.
+	if (parent != 0)
+		pdf_purge_object_from_store(ctx, doc, parent);
 
 	entry = NULL;
 	if (doc->journal)
@@ -2032,6 +2055,22 @@ pdf_array_find(fz_context *ctx, pdf_obj *arr, pdf_obj *obj)
 			return i;
 
 	return -1;
+}
+
+pdf_obj *pdf_new_point(fz_context *ctx, pdf_document *doc, fz_point point)
+{
+	pdf_obj *arr = pdf_new_array(ctx, doc, 2);
+	fz_try(ctx)
+	{
+		pdf_array_push_real(ctx, arr, point.x);
+		pdf_array_push_real(ctx, arr, point.y);
+	}
+	fz_catch(ctx)
+	{
+		pdf_drop_obj(ctx, arr);
+		fz_rethrow(ctx);
+	}
+	return arr;
 }
 
 pdf_obj *pdf_new_rect(fz_context *ctx, pdf_document *doc, fz_rect rect)
@@ -3807,6 +3846,16 @@ void pdf_dict_put_text_string(fz_context *ctx, pdf_obj *dict, pdf_obj *key, cons
 	pdf_dict_put_drop(ctx, dict, key, pdf_new_text_string(ctx, x));
 }
 
+void pdf_dict_put_indirect(fz_context *ctx, pdf_obj *dict, pdf_obj *key, int num)
+{
+	pdf_dict_put_drop(ctx, dict, key, pdf_new_indirect(ctx, pdf_get_bound_document(ctx, dict), num, 0));
+}
+
+void pdf_dict_put_point(fz_context *ctx, pdf_obj *dict, pdf_obj *key, fz_point x)
+{
+	pdf_dict_put_drop(ctx, dict, key, pdf_new_point(ctx, pdf_get_bound_document(ctx, dict), x));
+}
+
 void pdf_dict_put_rect(fz_context *ctx, pdf_obj *dict, pdf_obj *key, fz_rect x)
 {
 	pdf_dict_put_drop(ctx, dict, key, pdf_new_rect(ctx, pdf_get_bound_document(ctx, dict), x));
@@ -3979,6 +4028,19 @@ const char *pdf_dict_get_string(fz_context *ctx, pdf_obj *dict, pdf_obj *key, si
 const char *pdf_dict_get_text_string(fz_context *ctx, pdf_obj *dict, pdf_obj *key)
 {
 	return pdf_to_text_string(ctx, pdf_dict_get(ctx, dict, key));
+}
+
+const char *pdf_dict_get_text_string_opt(fz_context *ctx, pdf_obj *dict, pdf_obj *key)
+{
+	pdf_obj *obj = pdf_dict_get(ctx, dict, key);
+	if (!pdf_is_string(ctx, obj))
+		return NULL;
+	return pdf_to_text_string(ctx, obj);
+}
+
+fz_point pdf_dict_get_point(fz_context *ctx, pdf_obj *dict, pdf_obj *key)
+{
+	return pdf_to_point(ctx, pdf_dict_get(ctx, dict, key), 0);
 }
 
 fz_rect pdf_dict_get_rect(fz_context *ctx, pdf_obj *dict, pdf_obj *key)

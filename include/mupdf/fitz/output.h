@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2022 Artifex Software, Inc.
+// Copyright (C) 2004-2024 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -343,8 +343,20 @@ void fz_write_stream(fz_context *ctx, fz_output *out, fz_stream *in);
 /**
 	Our customised 'printf'-like string formatter.
 	Takes %c, %d, %s, %u, %x, %X as usual.
-	Modifiers are not supported except for zero-padding ints (e.g.
-	%02d, %03u, %04x, etc).
+	The only modifiers supported are:
+	1) zero-padding ints (e.g. %02d, %03u, %04x, etc).
+	2) ' to indicate that ' should be inserted into
+		integers as thousands separators.
+	3) , to indicate that , should be inserted into
+		integers as thousands separators.
+	4) _ to indicate that , should be inserted into
+		integers as thousands separators.
+	Posix chooses the thousand separator in a locale
+	specific way - we do not. We always apply it every
+	3 characters for the positive part of integers, so
+	other styles, such as Indian (123,456,78) are not
+	supported.
+
 	%g output in "as short as possible hopefully lossless
 	non-exponent" form, see fz_ftoa for specifics.
 	%f and %e output as usual.
@@ -356,6 +368,7 @@ void fz_write_stream(fz_context *ctx, fz_output *out, fz_stream *in);
 	%q and %( output escaped strings in C/PDF syntax.
 	%l{d,u,x,X} indicates that the values are int64_t.
 	%z{d,u,x,X} indicates that the value is a size_t.
+	%< outputs a quoted (utf8) string (for XML).
 
 	user: An opaque pointer that is passed to the emit function.
 

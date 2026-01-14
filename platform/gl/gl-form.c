@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2004-2024 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -24,10 +24,6 @@
 
 #include <string.h>
 #include <stdio.h>
-
-#ifndef PATH_MAX
-#define PATH_MAX 4096
-#endif
 
 #include "mupdf/helpers/pkcs7-openssl.h"
 

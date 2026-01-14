@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2023 Artifex Software, Inc.
+// Copyright (C) 2004-2024 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -36,10 +36,6 @@
 #include "mupdf/helpers/pkcs7-openssl.h"
 
 #include "mujs.h"
-
-#ifndef PATH_MAX
-#define PATH_MAX 4096
-#endif
 
 #ifndef _WIN32
 #include <sys/stat.h> /* for mkdir */
@@ -975,7 +971,7 @@ void load_page(void)
 					trace_action("  throw new RegressionError(widgetstr, 'is read-only:', tmp, 'expected:', %d);\n", is_readonly);
 					trace_action("tmp = widget.checkCertificate();\n");
 					trace_action("if (tmp != '%s')\n", cert_error);
-					trace_action("  throw new RegressionError(widgetstr, 'is read-only:', tmp, 'expected:', %d);\n", cert_error);
+					trace_action("  throw new RegressionError(widgetstr, 'certificate error:', tmp, 'expected:', %d);\n", cert_error);
 					trace_action("tmp = widget.checkDigest();\n");
 					trace_action("if (tmp != %q)\n", digest_error);
 					trace_action("  throw new RegressionError(widgetstr, 'digest error:', tmp, 'expected:', %q);\n", digest_error);
@@ -1392,6 +1388,7 @@ static void do_undo(void)
 
 	if (desired != -1 && desired != pos)
 	{
+		clear_selected_annot();
 		page_contents_changed = 1;
 		while (pos > desired)
 		{
@@ -1405,7 +1402,6 @@ static void do_undo(void)
 			pdf_redo(ctx, pdf);
 			pos++;
 		}
-		clear_selected_annot();
 		load_page();
 	}
 
@@ -2535,6 +2531,8 @@ static char *short_signature_error_desc(pdf_signature_error err)
 		return "Self-signed in chain";
 	case PDF_SIGNATURE_ERROR_NOT_TRUSTED:
 		return "Untrusted";
+	case PDF_SIGNATURE_ERROR_NOT_SIGNED:
+		return "Not signed";
 	default:
 	case PDF_SIGNATURE_ERROR_UNKNOWN:
 		return "Unknown error";
@@ -2715,6 +2713,9 @@ static fz_buffer *format_info_text()
 	}
 	fz_append_printf(ctx, out, "ICC rendering: %s.\n", currenticc ? "on" : "off");
 	fz_append_printf(ctx, out, "Spot rendering: %s.\n", currentseparations ? "on" : "off");
+
+	if (fz_is_document_reflowable(ctx, doc))
+		fz_append_printf(ctx, out, "Em size: %g\n", layout_em);
 
 	return out;
 }
@@ -3274,7 +3275,7 @@ int main(int argc, char **argv)
 	return 0;
 }
 
-#ifdef _MSC_VER
+#ifdef _WIN32
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd)
 {
 	int argc;

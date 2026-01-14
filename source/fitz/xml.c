@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2022 Artifex Software, Inc.
+// Copyright (C) 2004-2024 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -26,7 +26,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#if FZ_ENABLE_HTML_ENGINE
 #include <gumbo.h>
+#endif
 
 #define FZ_XML_MAX_DEPTH 4096
 
@@ -132,7 +134,9 @@ void fz_output_xml(fz_context *ctx, fz_output *out, fz_xml *item, int level)
 	/* Skip over the DOC object at the top. */
 	if (item->up == NULL)
 	{
-		fz_output_xml(ctx, out, item->down, level);
+		fz_xml *child;
+		for (child = fz_xml_down(item); child; child = child->u.node.next)
+			fz_output_xml(ctx, out, child, level + 1);
 		return;
 	}
 
@@ -1127,6 +1131,7 @@ fz_parse_xml(fz_context *ctx, fz_buffer *buf, int preserve_white)
 	return xml;
 }
 
+#if FZ_ENABLE_HTML_ENGINE
 /*
 	Parse the contents of buffer into a tree of XML nodes, using the HTML5 syntax.
 
@@ -1201,10 +1206,12 @@ static void xml_from_gumbo(fz_context *ctx, struct parser *parser, GumboNode *no
 		break;
 	}
 }
+#endif
 
 fz_xml *
 fz_parse_xml_from_html5(fz_context *ctx, fz_buffer *buf)
 {
+#if FZ_ENABLE_HTML_ENGINE
 	struct parser parser;
 	fz_xml *xml = NULL;
 	fz_xml root, *node;
@@ -1292,6 +1299,9 @@ fz_parse_xml_from_html5(fz_context *ctx, fz_buffer *buf)
 	}
 
 	return xml;
+#else
+	fz_throw(ctx, FZ_ERROR_GENERIC, "HTML Engine not enabled in this build");
+#endif
 }
 
 fz_xml *fz_xml_find_dfs(fz_xml *item, const char *tag, const char *att, const char *match)

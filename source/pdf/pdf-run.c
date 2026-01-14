@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2023 Artifex Software, Inc.
+// Copyright (C) 2004-2024 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -79,7 +79,7 @@ pdf_run_annot_with_usage(fz_context *ctx, pdf_document *doc, pdf_page *page, pdf
 
 		ctm = fz_concat(page_ctm, ctm);
 
-		struct_parent = pdf_dict_getl(ctx, page->obj, PDF_NAME(StructParent));
+		struct_parent = pdf_dict_getl(ctx, page->obj, PDF_NAME(StructParent), NULL);
 		struct_parent_num = pdf_to_int_default(ctx, struct_parent, -1);
 
 		proc = pdf_new_run_processor(ctx, page->doc, dev, ctm, struct_parent_num, usage, NULL, default_cs, cookie);
@@ -254,8 +254,13 @@ void pdf_run_page_contents(fz_context *ctx, pdf_page *page, fz_device *dev, fz_m
 void pdf_run_annot(fz_context *ctx, pdf_annot *annot, fz_device *dev, fz_matrix ctm, fz_cookie *cookie)
 {
 	pdf_page *page = annot->page;
-	pdf_document *doc = page->doc;
+	pdf_document *doc;
 	int nocache;
+
+	if (!page)
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "annotation not bound to any page");
+
+	doc = page->doc;
 
 	nocache = !!(dev->hints & FZ_NO_CACHE);
 	if (nocache)
@@ -504,7 +509,7 @@ pdf_structure_type(fz_context *ctx, pdf_obj *role_map, pdf_obj *tag)
 		return FZ_STRUCTURE_H6;
 
 	/* List elements (PDF 1.7 - Table 10.23) */
-	if (pdf_name_eq(ctx, tag, PDF_NAME(List)))
+	if (pdf_name_eq(ctx, tag, PDF_NAME(L)))
 		return FZ_STRUCTURE_LIST;
 	if (pdf_name_eq(ctx, tag, PDF_NAME(LI)))
 		return FZ_STRUCTURE_LISTITEM;

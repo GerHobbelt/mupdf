@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2022 Artifex Software, Inc.
+// Copyright (C) 2004-2024 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -32,7 +32,6 @@
 #include <windows.h>
 #include <direct.h> /* for mkdir */
 
-#ifdef _MSC_VER
 #ifndef _WINRT
 
 #define DELTA_EPOCH_IN_MICROSECS 11644473600000000Ui64
@@ -61,7 +60,6 @@ int gettimeofday(struct timeval *tv, struct timezone *tz)
 }
 
 #endif /* !_WINRT */
-#endif /* _MSC_VER */
 
 static char *
 utf8_from_wchar(const wchar_t *s)

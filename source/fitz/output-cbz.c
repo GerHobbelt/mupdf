@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2004-2024 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -25,10 +25,6 @@
 #include <zlib.h>
 
 #include <limits.h>
-
-#ifndef PATH_MAX
-#define PATH_MAX 4096
-#endif
 
 typedef struct
 {

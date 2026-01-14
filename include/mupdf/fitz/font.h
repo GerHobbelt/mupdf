@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2004-2024 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -765,6 +765,9 @@ struct fz_font
 	void (*t3freeres)(fz_context *ctx, void *doc, void *resources);
 
 	fz_rect bbox;	/* font bbox is used only for t3 fonts */
+
+	float ascender;
+	float descender;
 
 	int glyph_count;
 

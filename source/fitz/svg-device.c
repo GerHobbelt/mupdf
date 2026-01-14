@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2022 Artifex Software, Inc.
+// Copyright (C) 2004-2024 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -368,7 +368,7 @@ svg_cluster_advance(fz_context *ctx, const fz_text_span *span, int i, int end)
 	while (i + n < end && span->items[i + n].gid == -1)
 		++n;
 	if (n > 1)
-		return fz_advance_glyph(ctx, span->font, span->items[i].gid, span->wmode) / n;
+		return span->items[i].adv / n;
 	return 0; /* this value is never used (since n==1) */
 }
 
@@ -1286,7 +1286,7 @@ svg_dev_begin_layer(fz_context *ctx, fz_device *dev, const char *name)
 	fz_buffer *out = sdev->out;
 
 	sdev->layers++;
-	fz_append_printf(ctx, out, "<g inkscape:groupmode=\"layer\" inkscape:label=\"%s\">\n", name ? name : "null");
+	fz_append_printf(ctx, out, "<g inkscape:groupmode=\"layer\" inkscape:label=%<>\n", name ? name : "");
 }
 
 static void

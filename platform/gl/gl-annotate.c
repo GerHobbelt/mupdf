@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2023 Artifex Software, Inc.
+// Copyright (C) 2004-2024 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -28,10 +28,6 @@
 #include <time.h>
 #include <limits.h>
 
-#ifndef PATH_MAX
-#define PATH_MAX 4096
-#endif
-
 static int is_draw_mode = 0;
 static int new_contents = 0;
 
@@ -46,6 +42,30 @@ static int ocr_language_input_initialised = 0;
 static pdf_document *pdf_has_redactions_doc = NULL;
 static int pdf_has_redactions;
 static int do_snapshot;
+
+static int label_slider(const char *label, int *value, int min, int max)
+{
+	int changed;
+	ui_panel_begin(0, ui.gridsize, 0, 0, 0);
+	ui_layout(R, NONE, CENTER, 0, 0);
+	changed = ui_slider(value, min, max, 100);
+	ui_layout(L, X, CENTER, 0, 0);
+	ui_label("%s: %d", label, *value);
+	ui_panel_end();
+	return changed;
+}
+
+static int label_select(const char *label, const char *id, const char *current, const char *options[], int n)
+{
+	int changed;
+	ui_panel_begin(0, ui.gridsize, 0, 0, 0);
+	ui_layout(L, NONE, CENTER, 0, 0);
+	ui_label("%s: ", label);
+	ui_layout(T, X, CENTER, 0, 0);
+	changed = ui_select(id, current, options, n);
+	ui_panel_end();
+	return changed;
+}
 
 static int pdf_filter(const char *fn)
 {
@@ -153,6 +173,8 @@ static void save_pdf_options(void)
 	ui_checkbox("Compress", &save_opts.do_compress);
 	ui_checkbox("Compress images", &save_opts.do_compress_images);
 	ui_checkbox("Compress fonts", &save_opts.do_compress_fonts);
+	ui_checkbox("Object streams", &save_opts.do_use_objstms);
+	ui_checkbox("Preserve metadata", &save_opts.do_preserve_metadata);
 
 	if (save_opts.do_incremental)
 	{
@@ -544,8 +566,11 @@ static void open_stamp_image_dialog(void)
 			fz_var(img);
 			fz_try(ctx)
 			{
+				trace_action("tmp = new Image(%q);\n", stamp_image_filename);
 				img = fz_new_image_from_file(ctx, stamp_image_filename);
+				trace_action("annot.setAppearance(tmp);\n");
 				pdf_set_annot_stamp_image(ctx, ui.selected_annot, img);
+				trace_action("annot.setIcon(%q);\n", fz_basename(stamp_image_filename));
 				pdf_set_annot_icon_name(ctx, ui.selected_annot, fz_basename(stamp_image_filename));
 			}
 			fz_always(ctx)
@@ -706,8 +731,7 @@ static void do_annotate_color(char *label,
 	float color[4];
 	int hex, choice, n;
 	get_color(ctx, ui.selected_annot, &n, color);
-	ui_label("%s:", label);
-	choice = ui_select(label, name_from_hex(hex_from_color(n, color)), color_names, nelem(color_names));
+	choice = label_select(label, label, name_from_hex(hex_from_color(n, color)), color_names, nelem(color_names));
 	if (choice != -1)
 	{
 		hex = color_values[choice];
@@ -744,7 +768,60 @@ static void do_annotate_date(void)
 		ui_label("Date: %s", s);
 }
 
-static void do_annotate_contents(void)
+static const char *intent_names[] = {
+	"Default", // all
+	"FreeTextCallout", // freetext
+	"FreeTextTypewriter", // freetext
+	"LineArrow", // line
+	"LineDimension", // line
+	"PolyLineDimension", // polyline
+	"PolygonCloud", // polygon
+	"PolygonDimension", // polygon
+	"StampImage", // stamp
+	"StampSnapshot", // stamp
+};
+
+static enum pdf_intent do_annotate_intent(void)
+{
+	enum pdf_intent intent;
+	int choice;
+
+	if (!pdf_annot_has_intent(ctx, ui.selected_annot))
+		return PDF_ANNOT_IT_DEFAULT;
+
+	intent = pdf_annot_intent(ctx, ui.selected_annot);
+	choice = label_select("Intent", "IT", intent_names[intent], intent_names, nelem(intent_names));
+	if (choice != -1)
+	{
+		trace_action("annot.setIntent(%d);\n", choice);
+		pdf_set_annot_intent(ctx, ui.selected_annot, choice);
+		intent = choice;
+
+		// Changed intent!
+		if (intent == PDF_ANNOT_IT_FREETEXT_CALLOUT)
+		{
+			pdf_set_annot_callout_point(ctx, ui.selected_annot, fz_make_point(0, 0));
+			pdf_set_annot_callout_style(ctx, ui.selected_annot, PDF_ANNOT_LE_OPEN_ARROW);
+		}
+	}
+
+	// Press 'c' to move Callout line to current cursor position.
+	if (intent == PDF_ANNOT_IT_FREETEXT_CALLOUT)
+	{
+		if (!ui.focus && ui.key && ui.plain)
+		{
+			if (ui.key == 'c')
+			{
+				fz_point p = fz_transform_point(fz_make_point(ui.x, ui.y), view_page_inv_ctm);
+				pdf_set_annot_callout_point(ctx, ui.selected_annot, p);
+			}
+		}
+	}
+
+	return intent;
+}
+
+static int do_annotate_contents(void)
 {
 	static int is_same_edit_operation = 1;
 	static pdf_annot *last_annot = NULL;
@@ -779,6 +856,8 @@ static void do_annotate_contents(void)
 			is_same_edit_operation = 1;
 		}
 	}
+
+	return input.text[0] != 0;
 }
 
 static const char *file_attachment_icons[] = { "Graph", "Paperclip", "PushPin", "Tag" };
@@ -796,6 +875,8 @@ static const char *quadding_names[] = { "Left", "Center", "Right" };
 static const char *font_names[] = { "Cour", "Helv", "TiRo" };
 static const char *lang_names[] = { "", "ja", "ko", "zh-Hans", "zh-Hant" };
 static const char *im_redact_names[] = { "Keep images", "Remove images", "Erase pixels" };
+static const char *la_redact_names[] = { "Keep line art", "Remove covered line art", "Remove touched line art" };
+static const char *tx_redact_names[] = { "Remove text", "Keep text" };
 static const char *border_styles[] = { "Solid", "Dashed", "Dotted" };
 static const char *border_intensities[] = { "None", "Small clouds", "Large clouds", "Enormous clouds" };
 
@@ -954,12 +1035,13 @@ static void do_border(void)
 	static int choice;
 	enum pdf_border_style style;
 
+	ui_spacer();
+
 	width = pdf_annot_border_width(ctx, ui.selected_annot);
 	style = pdf_annot_border_style(ctx, ui.selected_annot);
 
 	width = fz_clampi(width, 0, 12);
-	ui_label("Border: %d", width);
-	if (ui_slider(&width, 0, 12, 100))
+	if (label_slider("Border", &width, 0, 12))
 	{
 		pdf_set_annot_border_width(ctx, ui.selected_annot, width);
 		trace_action("annot.setBorderWidth(%d);\n", width);
@@ -968,8 +1050,7 @@ static void do_border(void)
 	width = fz_max(width, 1);
 
 	choice = detect_border_style(style, width);
-	ui_label("Border style:");
-	choice = ui_select("BorderStyle", border_styles[choice], border_styles, nelem(border_styles));
+	choice = label_select("Style", "BorderStyle", border_styles[choice], border_styles, nelem(border_styles));
 	if (choice != -1)
 	{
 		pdf_clear_annot_border_dash(ctx, ui.selected_annot);
@@ -1002,8 +1083,7 @@ static void do_border(void)
 		if (pdf_annot_border_effect(ctx, ui.selected_annot) == PDF_BORDER_EFFECT_NONE)
 			intensity = 0;
 
-		ui_label("Border effect:");
-		intensity = ui_select("BorderEffect", border_intensities[intensity], border_intensities, nelem(border_intensities));
+		intensity = label_select("Effect", "BorderEffect", border_intensities[intensity], border_intensities, nelem(border_intensities));
 		if (intensity != -1)
 		{
 			enum pdf_border_effect effect = intensity ? PDF_BORDER_EFFECT_CLOUDY : PDF_BORDER_EFFECT_NONE;
@@ -1019,6 +1099,7 @@ void do_annotate_panel(void)
 {
 	static struct list annot_list;
 	enum pdf_annot_type subtype;
+	enum pdf_intent intent;
 	pdf_annot *annot;
 	int idx;
 	int n;
@@ -1050,7 +1131,7 @@ void do_annotate_panel(void)
 	for (annot = pdf_first_annot(ctx, page); annot; annot = pdf_next_annot(ctx, annot))
 		++n;
 
-	ui_list_begin(&annot_list, n, 0, ui.lineheight * 10 + 4);
+	ui_list_begin(&annot_list, n, 0, ui.lineheight * 6 + 4);
 	for (idx=0, annot = pdf_first_annot(ctx, page); annot; ++idx, annot = pdf_next_annot(ctx, annot))
 	{
 		char buf[256];
@@ -1067,7 +1148,7 @@ void do_annotate_panel(void)
 
 	if (ui.selected_annot && (subtype = pdf_annot_type(ctx, ui.selected_annot)) != PDF_ANNOT_WIDGET)
 	{
-		int n, choice;
+		int n, choice, has_content;
 		pdf_obj *obj;
 
 		/* common annotation properties */
@@ -1081,9 +1162,24 @@ void do_annotate_panel(void)
 		if (obj)
 			ui_label("Popup: %d 0 R", pdf_to_num(ctx, obj));
 
-		do_annotate_contents();
+		has_content = do_annotate_contents();
 
-		ui_spacer();
+		intent = do_annotate_intent();
+		if (subtype == PDF_ANNOT_FREE_TEXT && intent == PDF_ANNOT_IT_FREETEXT_CALLOUT)
+		{
+			enum pdf_line_ending s;
+			int s_choice;
+
+			s = pdf_annot_callout_style(ctx, ui.selected_annot);
+
+			s_choice = label_select("Callout", "CL", line_ending_styles[s], line_ending_styles, nelem(line_ending_styles));
+			if (s_choice != -1)
+			{
+				s = s_choice;
+				trace_action("annot.setCalloutStyle(%q);\n", line_ending_styles[s]);
+				pdf_set_annot_callout_style(ctx, ui.selected_annot, s);
+			}
+		}
 
 		if (subtype == PDF_ANNOT_FREE_TEXT)
 		{
@@ -1091,22 +1187,15 @@ void do_annotate_panel(void)
 			int q;
 			const char *text_lang;
 			const char *text_font;
+			char text_font_buf[20];
 			char lang_buf[8];
 			static float text_size_f, text_color[4];
 			static int text_size;
 
-			q = pdf_annot_quadding(ctx, ui.selected_annot);
-			ui_label("Text Alignment:");
-			choice = ui_select("Q", quadding_names[q], quadding_names, nelem(quadding_names));
-			if (choice != -1)
-			{
-				trace_action("annot.setQuadding(%d);\n", choice);
-				pdf_set_annot_quadding(ctx, ui.selected_annot, choice);
-			}
+			ui_spacer();
 
 			text_lang = fz_string_from_text_language(lang_buf, pdf_annot_language(ctx, ui.selected_annot));
-			ui_label("Text Language:");
-			lang_choice = ui_select("DA/Lang", text_lang, lang_names, nelem(lang_names));
+			lang_choice = label_select("Language", "DA/Lang", text_lang, lang_names, nelem(lang_names));
 			if (lang_choice != -1)
 			{
 				text_lang = lang_names[lang_choice];
@@ -1114,18 +1203,25 @@ void do_annotate_panel(void)
 				pdf_set_annot_language(ctx, ui.selected_annot, fz_text_language_from_string(text_lang));
 			}
 
-			pdf_annot_default_appearance(ctx, ui.selected_annot, &text_font, &text_size_f, &n, text_color);
+			q = pdf_annot_quadding(ctx, ui.selected_annot);
+			choice = label_select("Text Align", "Q", quadding_names[q], quadding_names, nelem(quadding_names));
+			if (choice != -1)
+			{
+				trace_action("annot.setQuadding(%d);\n", choice);
+				pdf_set_annot_quadding(ctx, ui.selected_annot, choice);
+			}
+
+			pdf_annot_default_appearance_unmapped(ctx, ui.selected_annot, text_font_buf, sizeof text_font_buf, &text_size_f, &n, text_color);
 			text_size = text_size_f;
-			ui_label("Text Font:");
-			font_choice = ui_select("DA/Font", text_font, font_names, nelem(font_names));
-			ui_label("Text Size: %d", text_size);
-			size_changed = ui_slider(&text_size, 8, 36, 256);
-			ui_label("Text Color:");
-			color_choice = ui_select("DA/Color", name_from_hex(hex_from_color(n, text_color)), color_names+1, nelem(color_names)-1);
+			font_choice = label_select("Text Font", "DA/Font", text_font_buf, font_names, nelem(font_names));
+			size_changed = label_slider("Text Size", &text_size, 8, 36);
+			color_choice = label_select("Text Color", "DA/Color", name_from_hex(hex_from_color(n, text_color)), color_names+1, nelem(color_names)-1);
 			if (font_choice != -1 || color_choice != -1 || size_changed)
 			{
 				if (font_choice != -1)
 					text_font = font_names[font_choice];
+				else
+					text_font = text_font_buf;
 				if (color_choice != -1)
 				{
 					n = 3;
@@ -1150,7 +1246,6 @@ void do_annotate_panel(void)
 						text_font, text_size);
 				pdf_set_annot_default_appearance(ctx, ui.selected_annot, text_font, text_size, n, text_color);
 			}
-			ui_spacer();
 		}
 
 		if (subtype == PDF_ANNOT_LINE || subtype == PDF_ANNOT_POLY_LINE)
@@ -1158,13 +1253,12 @@ void do_annotate_panel(void)
 			enum pdf_line_ending s, e;
 			int s_choice, e_choice;
 
+			ui_spacer();
+
 			pdf_annot_line_ending_styles(ctx, ui.selected_annot, &s, &e);
 
-			ui_label("Line Start:");
-			s_choice = ui_select("LE0", line_ending_styles[s], line_ending_styles, nelem(line_ending_styles));
-
-			ui_label("Line End:");
-			e_choice = ui_select("LE1", line_ending_styles[e], line_ending_styles, nelem(line_ending_styles));
+			s_choice = label_select("Line End 1", "LE0", line_ending_styles[s], line_ending_styles, nelem(line_ending_styles));
+			e_choice = label_select("Line End 2", "LE1", line_ending_styles[e], line_ending_styles, nelem(line_ending_styles));
 
 			if (s_choice != -1 || e_choice != -1)
 			{
@@ -1175,16 +1269,57 @@ void do_annotate_panel(void)
 			}
 		}
 
+		if (subtype == PDF_ANNOT_LINE)
+		{
+			static int ll, lle, llo;
+			static int cap;
+
+			ll = pdf_annot_line_leader(ctx, ui.selected_annot);
+			if (label_slider("Leader", &ll, -20, 20))
+			{
+				pdf_set_annot_line_leader(ctx, ui.selected_annot, ll);
+				trace_action("annot.setLineLeader(%d);\n", ll);
+			}
+
+			if (ll)
+			{
+				lle = pdf_annot_line_leader_extension(ctx, ui.selected_annot);
+				if (label_slider("  LLE", &lle, 0, 20))
+				{
+					pdf_set_annot_line_leader_extension(ctx, ui.selected_annot, lle);
+					trace_action("annot.setLineLeaderExtension(%d);\n", ll);
+				}
+
+				llo = pdf_annot_line_leader_offset(ctx, ui.selected_annot);
+				if (label_slider("  LLO", &llo, 0, 20))
+				{
+					pdf_set_annot_line_leader_offset(ctx, ui.selected_annot, llo);
+					trace_action("annot.setLineLeaderOffset(%d);\n", ll);
+				}
+			}
+
+			if (has_content)
+			{
+				cap = pdf_annot_line_caption(ctx, ui.selected_annot);
+				if (ui_checkbox("Caption", &cap))
+				{
+					pdf_set_annot_line_caption(ctx, ui.selected_annot, cap);
+					trace_action("annot.setLineCaption(%s);\n", cap ? "true" : "false");
+				}
+			}
+		}
+
 		if (pdf_annot_has_icon_name(ctx, ui.selected_annot))
 		{
 			const char *name = pdf_annot_icon_name(ctx, ui.selected_annot);
-			ui_label("Icon:");
+
 			switch (pdf_annot_type(ctx, ui.selected_annot))
 			{
 			default:
 				break;
 			case PDF_ANNOT_TEXT:
-				choice = ui_select("Icon", name, text_icons, nelem(text_icons));
+				ui_spacer();
+				choice = label_select("Icon", "Icon", name, text_icons, nelem(text_icons));
 				if (choice != -1)
 				{
 					trace_action("annot.setIcon(%q);\n", text_icons[choice]);
@@ -1192,7 +1327,8 @@ void do_annotate_panel(void)
 				}
 				break;
 			case PDF_ANNOT_FILE_ATTACHMENT:
-				choice = ui_select("Icon", name, file_attachment_icons, nelem(file_attachment_icons));
+				ui_spacer();
+				choice = label_select("Icon", "Icon", name, file_attachment_icons, nelem(file_attachment_icons));
 				if (choice != -1)
 				{
 					trace_action("annot.setIcon(%q);\n", file_attachment_icons[choice]);
@@ -1200,7 +1336,8 @@ void do_annotate_panel(void)
 				}
 				break;
 			case PDF_ANNOT_SOUND:
-				choice = ui_select("Icon", name, sound_icons, nelem(sound_icons));
+				ui_spacer();
+				choice = label_select("Icon", "Icon", name, sound_icons, nelem(sound_icons));
 				if (choice != -1)
 				{
 					trace_action("annot.setIcon(%q);\n", sound_icons[choice]);
@@ -1208,7 +1345,8 @@ void do_annotate_panel(void)
 				}
 				break;
 			case PDF_ANNOT_STAMP:
-				choice = ui_select("Icon", name, stamp_icons, nelem(stamp_icons));
+				ui_spacer();
+				choice = label_select("Icon", "Icon", name, stamp_icons, nelem(stamp_icons));
 				if (choice != -1)
 				{
 					trace_action("annot.setIcon(%q);\n", stamp_icons[choice]);
@@ -1221,6 +1359,8 @@ void do_annotate_panel(void)
 		if (pdf_annot_has_border(ctx, ui.selected_annot))
 			do_border();
 
+		ui_spacer();
+
 		if (should_edit_color(subtype))
 			do_annotate_color("Color", pdf_annot_color, pdf_set_annot_color);
 		if (should_edit_icolor(subtype))
@@ -1228,19 +1368,17 @@ void do_annotate_panel(void)
 
 		{
 			static int opacity;
-			opacity = pdf_annot_opacity(ctx, ui.selected_annot) * 255;
-			ui_label("Opacity:");
-			if (ui_slider(&opacity, 0, 255, 256))
+			opacity = pdf_annot_opacity(ctx, ui.selected_annot) * 100;
+			if (label_slider("Opacity", &opacity, 0, 100))
 			{
-				trace_action("annot.setOpacity(%g);\n", opacity / 255.0f);
-				pdf_set_annot_opacity(ctx, ui.selected_annot, opacity / 255.0f);
+				trace_action("annot.setOpacity(%g);\n", opacity / 100.0f);
+				pdf_set_annot_opacity(ctx, ui.selected_annot, opacity / 100.0f);
 			}
 		}
 
-		ui_spacer();
-
 		if (pdf_annot_has_quad_points(ctx, ui.selected_annot))
 		{
+			ui_spacer();
 			if (is_draw_mode)
 			{
 				n = pdf_annot_quad_point_count(ctx, ui.selected_annot);
@@ -1262,6 +1400,7 @@ void do_annotate_panel(void)
 
 		if (pdf_annot_has_vertices(ctx, ui.selected_annot))
 		{
+			ui_spacer();
 			if (is_draw_mode)
 			{
 				n = pdf_annot_vertex_count(ctx, ui.selected_annot);
@@ -1283,6 +1422,7 @@ void do_annotate_panel(void)
 
 		if (pdf_annot_has_ink_list(ctx, ui.selected_annot))
 		{
+			ui_spacer();
 			if (is_draw_mode)
 			{
 				n = pdf_annot_ink_list_count(ctx, ui.selected_annot);
@@ -1305,6 +1445,7 @@ void do_annotate_panel(void)
 		if (pdf_annot_type(ctx, ui.selected_annot) == PDF_ANNOT_STAMP)
 		{
 			char attname[PATH_MAX];
+			ui_spacer();
 			if (ui_button("Image..."))
 			{
 				fz_dirname(attname, filename, sizeof attname);
@@ -1318,6 +1459,7 @@ void do_annotate_panel(void)
 			pdf_embedded_file_params params;
 			char attname[PATH_MAX];
 			pdf_obj *fs = pdf_annot_filespec(ctx, ui.selected_annot);
+			ui_spacer();
 			if (pdf_is_embedded_file(ctx, fs))
 			{
 				if (ui_button("Save..."))
@@ -1339,7 +1481,6 @@ void do_annotate_panel(void)
 		}
 
 		ui_spacer();
-
 		if (ui_button("Delete"))
 		{
 			trace_action("page.deleteAnnotation(annot);\n");
@@ -1436,6 +1577,8 @@ void do_redact_panel(void)
 	pdf_annot *annot;
 	int idx;
 	int im_choice;
+	int la_choice;
+	int tx_choice;
 	int i;
 
 	int num_redact = 0;
@@ -1481,6 +1624,14 @@ void do_redact_panel(void)
 	if (im_choice != -1)
 		redact_opts.image_method = im_choice;
 
+	la_choice = ui_select("Redact/LA", la_redact_names[redact_opts.line_art], la_redact_names, nelem(la_redact_names));
+	if (la_choice != -1)
+		redact_opts.line_art = la_choice;
+
+	tx_choice = ui_select("Redact/TX", tx_redact_names[redact_opts.text], tx_redact_names, nelem(tx_redact_names));
+	if (tx_choice != -1)
+		redact_opts.text = tx_choice;
+
 	ui_spacer();
 
 	if (ui_button_aux("Redact Page", num_redact == 0))
@@ -1503,7 +1654,7 @@ void do_redact_panel(void)
 
 	ui_spacer();
 
-	ui_list_begin(&annot_list, num_redact, 0, ui.lineheight * 10 + 4);
+	ui_list_begin(&annot_list, num_redact, 0, ui.lineheight * 6 + 4);
 	for (idx=0, annot = pdf_first_annot(ctx, page); annot; ++idx, annot = pdf_next_annot(ctx, annot))
 	{
 		char buf[50];
@@ -2021,7 +2172,11 @@ void do_annotate_canvas(fz_irect canvas_area)
 	{
 		enum pdf_annot_type subtype = pdf_annot_type(ctx, annot);
 
-		bounds = pdf_bound_annot(ctx, annot);
+		if (pdf_annot_has_rect(ctx, annot))
+			bounds = pdf_annot_rect(ctx, annot);
+		else
+			bounds = pdf_bound_annot(ctx, annot);
+
 		bounds = fz_transform_rect(bounds, view_page_ctm);
 		area = fz_irect_from_rect(bounds);
 
