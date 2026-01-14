@@ -1516,8 +1516,14 @@ begin_oc(fz_context *ctx, pdf_run_processor *proc, pdf_obj *val, pdf_cycle_list 
 	obj = pdf_dict_get(ctx, val, PDF_NAME(Name));
 	if (obj)
 	{
+		const char *name = "";
 		pdf_flush_text(ctx, proc);
-		push_begin_layer(ctx, proc, pdf_to_name(ctx, obj));
+		if (pdf_is_name(ctx, obj))
+			name = pdf_to_name(ctx, obj);
+		else if (pdf_is_string(ctx, obj))
+			name = pdf_to_text_string(ctx, obj);
+
+		push_begin_layer(ctx, proc, name);
 		return;
 	}
 
@@ -1665,6 +1671,9 @@ push_marked_content(fz_context *ctx, pdf_run_processor *proc, const char *tagstr
 	fz_structure standard;
 	pdf_obj *mc_dict = NULL;
 
+	/* Flush any pending text so it's not in the wrong layer. */
+	pdf_flush_text(ctx, proc);
+
 	if (!tagstr)
 		tagstr = "Untitled";
 	tag = pdf_new_name(ctx, tagstr);
@@ -1751,6 +1760,9 @@ pop_marked_content(fz_context *ctx, pdf_run_processor *proc, int neat)
 		pdf_drop_obj(ctx, val);
 		return;
 	}
+
+	/* Make sure that any pending text is written into the correct layer. */
+	pdf_flush_text(ctx, proc);
 
 	/* Close structure/layers here, in reverse order to how we opened them. */
 	fz_try(ctx)
