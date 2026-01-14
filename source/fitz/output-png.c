@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2022 Artifex Software, Inc.
+// Copyright (C) 2004-2023 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -173,12 +173,15 @@ png_write_header(fz_context *ctx, fz_band_writer *writer_, fz_colorspace *cs)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "PNGs cannot contain spot colors");
 	if (fz_colorspace_type(ctx, cs) == FZ_COLORSPACE_BGR)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "pixmap can not be bgr");
+	if (cs && !fz_colorspace_is_gray(ctx, cs) && !fz_colorspace_is_rgb(ctx, cs))
+		fz_throw(ctx, FZ_ERROR_GENERIC, "pixmap must be grayscale or rgb to write as png");
 
 	/* Treat alpha only as greyscale */
 	if (n == 1 && alpha)
 		alpha = 0;
+	n -= alpha;
 
-	switch (n - alpha)
+	switch (n)
 	{
 	case 1: color = (alpha ? 4 : 0); break; /* 0 = Greyscale, 4 = Greyscale + Alpha */
 	case 3: color = (alpha ? 6 : 2); break; /* 2 = RGB, 6 = RGBA */
@@ -236,21 +239,21 @@ png_write_band(fz_context *ctx, fz_band_writer *writer_, int stride, int band_st
 		if (usize > SIZE_MAX / band_height)
 			fz_throw(ctx, FZ_ERROR_GENERIC, "png data too large.");
 		usize *= band_height;
-		writer->usize = usize;
-		/* Now figure out how large a buffer we need to compress into.
-		 * deflateBound always expands a bit, and it's limited by being
-		 * a uLong rather than a size_t. */
-		writer->csize = writer->usize >= UINT32_MAX ? UINT32_MAX : deflateBound(&writer->stream, writer->usize);
-		if (writer->csize < writer->usize || writer->csize > UINT32_MAX) /* Check for overflow */
-			writer->csize = UINT32_MAX;
-		writer->udata = Memento_label(fz_malloc(ctx, writer->usize), "png_write_udata");
-		writer->cdata = Memento_label(fz_malloc(ctx, writer->csize), "png_write_cdata");
 		writer->stream.opaque = ctx;
 		writer->stream.zalloc = fz_zlib_alloc;
 		writer->stream.zfree = fz_zlib_free;
 		err = deflateInit(&writer->stream, Z_DEFAULT_COMPRESSION);
 		if (err != Z_OK)
 			fz_throw(ctx, FZ_ERROR_GENERIC, "compression error %d", err);
+		writer->usize = usize;
+		/* Now figure out how large a buffer we need to compress into.
+		 * deflateBound always expands a bit, and it's limited by being
+		 * a uLong rather than a size_t. */
+		writer->csize = writer->usize >= UINT32_MAX ? UINT32_MAX : deflateBound(&writer->stream, (uLong)writer->usize);
+		if (writer->csize < writer->usize || writer->csize > UINT32_MAX) /* Check for overflow */
+			writer->csize = UINT32_MAX;
+		writer->udata = Memento_label(fz_malloc(ctx, writer->usize), "png_write_udata");
+		writer->cdata = Memento_label(fz_malloc(ctx, writer->csize), "png_write_cdata");
 	}
 
 	dp = writer->udata;
@@ -298,7 +301,7 @@ png_write_band(fz_context *ctx, fz_band_writer *writer_, int stride, int band_st
 		size_t eaten;
 
 		writer->stream.next_in = dp;
-		writer->stream.avail_in = remain <= UINT32_MAX ? remain : UINT32_MAX;
+		writer->stream.avail_in = (uInt)(remain <= UINT32_MAX ? remain : UINT32_MAX);
 		writer->stream.next_out = writer->cdata;
 		writer->stream.avail_out = writer->csize <= UINT32_MAX ? (uInt)writer->csize : UINT32_MAX;
 

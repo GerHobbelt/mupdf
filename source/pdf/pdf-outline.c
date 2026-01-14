@@ -71,24 +71,32 @@ pdf_test_outline(fz_context *ctx, pdf_document *doc, pdf_obj *dict, pdf_mark_bit
 			if (*fixed == 0)
 				pdf_begin_operation(ctx, doc, "Repair outline nodes");
 			*fixed = 1;
-		}
-		if (parent_diff)
-		{
-			fz_warn(ctx, "Bad or missing parent pointer in outline tree, repairing");
-			pdf_dict_put(ctx, dict, PDF_NAME(Parent), expected_parent);
-		}
-		if (prev_diff)
-		{
-			fz_warn(ctx, "Bad or missing prev pointer in outline tree, repairing");
-			if (expected_prev)
-				pdf_dict_put(ctx, dict, PDF_NAME(Prev), expected_prev);
-			else
-				pdf_dict_del(ctx, dict, PDF_NAME(Prev));
-		}
-		if (last_diff)
-		{
-			fz_warn(ctx, "Bad or missing last pointer in outline tree, repairing");
-			pdf_dict_put(ctx, expected_parent, PDF_NAME(Last), dict);
+			doc->non_structural_change = 1;
+			fz_try(ctx)
+			{
+				if (parent_diff)
+				{
+					fz_warn(ctx, "Bad or missing parent pointer in outline tree, repairing");
+					pdf_dict_put(ctx, dict, PDF_NAME(Parent), expected_parent);
+				}
+				if (prev_diff)
+				{
+					fz_warn(ctx, "Bad or missing prev pointer in outline tree, repairing");
+					if (expected_prev)
+						pdf_dict_put(ctx, dict, PDF_NAME(Prev), expected_prev);
+					else
+						pdf_dict_del(ctx, dict, PDF_NAME(Prev));
+				}
+				if (last_diff)
+				{
+					fz_warn(ctx, "Bad or missing last pointer in outline tree, repairing");
+					pdf_dict_put(ctx, expected_parent, PDF_NAME(Last), dict);
+				}
+			}
+			fz_always(ctx)
+				doc->non_structural_change = 0;
+			fz_catch(ctx)
+				fz_rethrow(ctx);
 		}
 
 		first = pdf_dict_get(ctx, dict, PDF_NAME(First));
@@ -512,7 +520,8 @@ fz_outline_iterator *pdf_new_outline_iterator(fz_context *ctx, pdf_document *doc
 		first = pdf_dict_get(ctx, obj, PDF_NAME(First));
 		if (first)
 		{
-			/* cache page tree for fast link destination lookups */
+			/* cache page tree for fast link destination lookups. This
+			 * will be dropped 'just in time' on writes to the doc. */
 			pdf_load_page_tree(ctx, doc);
 			fz_try(ctx)
 			{
@@ -531,7 +540,6 @@ fz_outline_iterator *pdf_new_outline_iterator(fz_context *ctx, pdf_document *doc
 			{
 				if (fixed)
 					pdf_end_operation(ctx, doc);
-				pdf_drop_page_tree(ctx, doc);
 			}
 			fz_catch(ctx)
 				fz_rethrow(ctx);

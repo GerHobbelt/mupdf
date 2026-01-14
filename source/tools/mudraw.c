@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2004-2023 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -49,6 +49,7 @@ int gettimeofday(struct timeval *tv, struct timezone *tz);
 #include <windows.h>
 #include <direct.h> /* for getcwd */
 #else
+#include <sys/stat.h> /* for mkdir */
 #include <unistd.h> /* for getcwd */
 #endif
 
@@ -337,7 +338,7 @@ fz_colorspace *proof_cs = NULL;
 static const char *icc_filename = NULL;
 static float gamma_value = 1;
 static int invert = 0;
-static int kill_text = 0;
+static int kill = 0;
 static int band_height = 0;
 static int lowmemory = 0;
 
@@ -403,8 +404,7 @@ static struct {
 static int usage(void)
 {
 	fprintf(stderr,
-		"mudraw version " FZ_VERSION "\n"
-		"Usage: mudraw [options] file [pages]\n"
+		"usage: mudraw [options] file [pages]\n"
 		"\t-p -\tpassword\n"
 		"\n"
 		"\t-o -\toutput file name (%%d for page number)\n"
@@ -454,6 +454,7 @@ static int usage(void)
 		"\t-A -/-\tnumber of bits of antialiasing (0 to 8) (graphics, text)\n"
 		"\t-l -\tminimum stroked line width (in pixels)\n"
 		"\t-K\tdo not draw text\n"
+		"\t-KK\tonly draw text\n"
 		"\t-D\tdisable use of display list\n"
 		"\t-i\tignore errors\n"
 		"\t-L\tlow memory mode (avoid caching, clear objects after each page)\n"
@@ -593,6 +594,26 @@ file_level_trailers(fz_context *ctx)
 	}
 }
 
+static void apply_kill_switch(fz_device *dev)
+{
+	if (kill == 1)
+	{
+		/* kill all non-clipping text operators */
+		dev->fill_text = NULL;
+		dev->stroke_text = NULL;
+		dev->ignore_text = NULL;
+	}
+	else if (kill == 2)
+	{
+		/* kill all non-clipping path, image, and shading operators */
+		dev->fill_path = NULL;
+		dev->stroke_path = NULL;
+		dev->fill_shade = NULL;
+		dev->fill_image = NULL;
+		dev->fill_image_mask = NULL;
+	}
+}
+
 static void drawband(fz_context *ctx, fz_page *page, fz_display_list *list, fz_matrix ctm, fz_rect tbounds, fz_cookie *cookie, int band_start, fz_pixmap *pix, fz_bitmap **bit)
 {
 	fz_device *dev = NULL;
@@ -609,11 +630,7 @@ static void drawband(fz_context *ctx, fz_page *page, fz_display_list *list, fz_m
 			fz_clear_pixmap_with_value(ctx, pix, 255);
 
 		dev = fz_new_draw_device_with_proof(ctx, fz_identity, pix, proof_cs);
-		if (kill_text)
-		{
-			dev->fill_text = NULL;
-			dev->stroke_text = NULL;
-		}
+		apply_kill_switch(dev);
 		if (lowmemory)
 			fz_enable_device_hints(ctx, dev, FZ_NO_CACHE);
 		if (alphabits_graphics == 0)
@@ -674,6 +691,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			fz_write_printf(ctx, out, "<page mediabox=\"%g %g %g %g\">\n",
 					tmediabox.x0, tmediabox.y0, tmediabox.x1, tmediabox.y1);
 			dev = fz_new_trace_device(ctx, out);
+			apply_kill_switch(dev);
 			if (output_format == OUT_OCR_TRACE)
 			{
 				pre_ocr_dev = dev;
@@ -720,6 +738,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			fz_write_printf(ctx, out, "<page mediabox=\"%g %g %g %g\">\n",
 					tmediabox.x0, tmediabox.y0, tmediabox.x1, tmediabox.y1);
 			dev = fz_new_xmltext_device(ctx, out);
+			apply_kill_switch(dev);
 			if (list)
 				fz_run_display_list(ctx, list, dev, ctm, fz_infinite_rect, cookie);
 			else
@@ -751,6 +770,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			tmediabox = fz_transform_rect(mediabox, ctm);
 
 			dev = fz_new_bbox_device(ctx, &bbox);
+			apply_kill_switch(dev);
 			if (lowmemory)
 				fz_enable_device_hints(ctx, dev, FZ_NO_CACHE);
 			if (list)
@@ -800,6 +820,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			tmediabox = fz_transform_rect(mediabox, ctm);
 			text = fz_new_stext_page(ctx, tmediabox);
 			dev = fz_new_stext_device(ctx, text, &stext_options);
+			apply_kill_switch(dev);
 			if (lowmemory)
 				fz_enable_device_hints(ctx, dev, FZ_NO_CACHE);
 			if (output_format == OUT_OCR_TEXT ||
@@ -877,6 +898,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			pdf_obj *page_obj;
 
 			dev = pdf_page_write(ctx, pdfout, mediabox, &resources, &contents);
+			apply_kill_switch(dev);
 			if (list)
 				fz_run_display_list(ctx, list, dev, fz_identity, fz_infinite_rect, cookie);
 			else
@@ -927,6 +949,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			}
 
 			dev = fz_new_svg_device(ctx, outs, tbounds.x1-tbounds.x0, tbounds.y1-tbounds.y0, FZ_SVG_TEXT_AS_PATH, 1);
+			apply_kill_switch(dev);
 			if (lowmemory)
 				fz_enable_device_hints(ctx, dev, FZ_NO_CACHE);
 			if (list)
@@ -1379,6 +1402,7 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum)
 	{
 		int iscolor;
 		dev = fz_new_test_device(ctx, &iscolor, 0.02f, 0, NULL);
+		apply_kill_switch(dev);
 		if (lowmemory)
 			fz_enable_device_hints(ctx, dev, FZ_NO_CACHE);
 		fz_try(ctx)
@@ -1861,18 +1885,72 @@ static void apply_layer_config(fz_context *ctx, fz_document *doc, const char *lc
 #endif
 }
 
-static int convert_to_accel_path(fz_context *ctx, char outname[], char *absname, size_t len)
+static int
+fz_mkdir(char *path)
+{
+#ifdef _WIN32
+	int ret;
+	wchar_t *wpath = fz_wchar_from_utf8(path);
+
+	if (wpath == NULL)
+		return -1;
+
+	ret = _wmkdir(wpath);
+
+	free(wpath);
+
+	return ret;
+#else
+	return mkdir(path, S_IRWXU | S_IRWXG | S_IRWXO);
+#endif
+}
+
+static int create_accel_path(fz_context *ctx, char outname[], size_t len, int create, const char *absname, ...)
+{
+	va_list args;
+	char *s = outname;
+	size_t z, remain = len;
+	char *arg;
+
+	va_start(args, absname);
+
+	while ((arg = va_arg(args, char *)) != NULL)
+	{
+		z = fz_snprintf(s, remain, "%s", arg);
+		if (z+1 > remain)
+			goto fail; /* won't fit */
+
+		if (create)
+			fz_mkdir(outname);
+		if (!fz_is_directory(ctx, outname))
+			goto fail; /* directory creation failed, or that dir doesn't exist! */
+#ifdef _WIN32
+		s[z] = '\\';
+#else
+		s[z] = '/';
+#endif
+		s[z+1] = 0;
+		s += z+1;
+		remain -= z+1;
+	}
+
+	if (fz_snprintf(s, remain, "%s.accel", absname) >= remain)
+		goto fail; /* won't fit */
+
+	va_end(args);
+
+	return 1;
+
+fail:
+	va_end(args);
+
+	return 0;
+}
+
+static int convert_to_accel_path(fz_context *ctx, char outname[], char *absname, size_t len, int create)
 {
 	char *tmpdir;
 	char *s;
-
-	tmpdir = getenv("TEMP");
-	if (!tmpdir)
-		tmpdir = getenv("TMP");
-	if (!tmpdir)
-		tmpdir = "/var/tmp";
-	if (!fz_is_directory(ctx, tmpdir))
-		tmpdir = "/tmp";
 
 	if (absname[0] == '/' || absname[0] == '\\')
 		++absname;
@@ -1884,17 +1962,34 @@ static int convert_to_accel_path(fz_context *ctx, char outname[], char *absname,
 		++s;
 	}
 
-	if (fz_snprintf(outname, len, "%s/%s.accel", tmpdir, absname) >= len)
-		return 0;
-	return 1;
+#ifdef _WIN32
+	tmpdir = getenv("USERPROFILE");
+	if (tmpdir && create_accel_path(ctx, outname, len, create, absname, tmpdir, ".config", "mupdf", NULL))
+		return 1; /* OK! */
+	/* TEMP and TMP are user-specific on modern windows. */
+	tmpdir = getenv("TEMP");
+	if (tmpdir && create_accel_path(ctx, outname, len, create, absname, tmpdir, "mupdf", NULL))
+		return 1; /* OK! */
+	tmpdir = getenv("TMP");
+	if (tmpdir && create_accel_path(ctx, outname, len, create, absname, tmpdir, "mupdf", NULL))
+		return 1; /* OK! */
+#else
+	tmpdir = getenv("XDG_CACHE_HOME");
+	if (tmpdir && create_accel_path(ctx, outname, len, create, absname, tmpdir, "mupdf", NULL))
+		return 1; /* OK! */
+	tmpdir = getenv("HOME");
+	if (tmpdir && create_accel_path(ctx, outname, len, create, absname, tmpdir, ".cache", "mupdf", NULL))
+		return 1; /* OK! */
+#endif
+	return 0; /* Fail */
 }
 
-static int get_accelerator_filename(fz_context *ctx, char outname[], size_t len, const char *fname)
+static int get_accelerator_filename(fz_context *ctx, char outname[], size_t len, const char *filename, int create)
 {
 	char absname[PATH_MAX];
-	if (!fz_realpath(fname, absname))
+	if (!fz_realpath(filename, absname))
 		return 0;
-	if (!convert_to_accel_path(ctx, outname, absname, len))
+	if (!convert_to_accel_path(ctx, outname, absname, len, create))
 		return 0;
 	return 1;
 }
@@ -1907,7 +2002,7 @@ static void save_accelerator(fz_context *ctx, fz_document *doc, const char *fnam
 		return;
 	if (!fz_document_supports_accelerator(ctx, doc))
 		return;
-	if (!get_accelerator_filename(ctx, absname, sizeof(absname), fname))
+	if (!get_accelerator_filename(ctx, absname, sizeof(absname), fname, 1))
 		return;
 
 	fz_save_accelerator(ctx, doc, absname);
@@ -1962,7 +2057,7 @@ int mudraw_main(int argc, char **argv)
 		case 'U': layout_css = fz_optarg; break;
 		case 'X': layout_use_doc_css = 0; break;
 
-		case 'K': kill_text = 1; break;
+		case 'K': ++kill; break;
 
 		case 'O': spots = fz_atof(fz_optarg);
 #ifndef FZ_ENABLE_SPOT_RENDERING
@@ -2424,7 +2519,7 @@ int mudraw_main(int argc, char **argv)
 					if (!useaccel)
 						accel = NULL;
 					/* If there was an accelerator to load, what would it be called? */
-					else if (get_accelerator_filename(ctx, accelpath, sizeof(accelpath), filename))
+					else if (get_accelerator_filename(ctx, accelpath, sizeof(accelpath), filename, 0))
 					{
 						/* Check whether that file exists, and isn't older than
 						 * the document. */
@@ -2450,11 +2545,33 @@ int mudraw_main(int argc, char **argv)
 
 					doc = fz_open_accelerated_document(ctx, filename, accel);
 
+#ifdef CLUSTER
+					/* Load and then drop the outline if we're running under the cluster.
+					 * This allows our outline handling to be tested automatically. */
+					fz_try(ctx)
+						fz_drop_outline(ctx, fz_load_outline(ctx, doc));
+					fz_catch(ctx)
+					{
+						/* Drop any error */
+					}
+#endif
+
 					if (fz_needs_password(ctx, doc))
 					{
 						if (!fz_authenticate_password(ctx, doc, password))
 							fz_throw(ctx, FZ_ERROR_GENERIC, "cannot authenticate password: %s", filename);
 					}
+
+#ifdef CLUSTER
+					/* Load and then drop the outline if we're running under the cluster.
+					 * This allows our outline handling to be tested automatically. */
+					fz_try(ctx)
+						fz_drop_outline(ctx, fz_load_outline(ctx, doc));
+					fz_catch(ctx)
+					{
+						/* Drop any error */
+					}
+#endif
 
 					/* Once document is open check for output intent colorspace */
 					oi = fz_document_output_intent(ctx, doc);

@@ -468,6 +468,9 @@ int pdf_to_gen(fz_context *ctx, pdf_obj *obj)
 	return 0;
 }
 
+/*
+	DEPRECATED: Do not use in new code.
+*/
 pdf_document *pdf_get_indirect_document(fz_context *ctx, pdf_obj *obj)
 {
 	if (OBJ_IS_INDIRECT(obj))
@@ -475,6 +478,9 @@ pdf_document *pdf_get_indirect_document(fz_context *ctx, pdf_obj *obj)
 	return NULL;
 }
 
+/*
+	DEPRECATED: Do not use in new code.
+*/
 pdf_document *pdf_get_bound_document(fz_context *ctx, pdf_obj *obj)
 {
 	if (obj < PDF_LIMIT)
@@ -486,6 +492,16 @@ pdf_document *pdf_get_bound_document(fz_context *ctx, pdf_obj *obj)
 	if (obj->kind == PDF_DICT)
 		return DICT(obj)->doc;
 	return NULL;
+}
+
+/*
+	This implementation will do to provide the required
+	API change in advance of the rewrite to use weak references
+	in the next version.
+*/
+pdf_document *pdf_pin_document(fz_context *ctx, pdf_obj *obj)
+{
+	return pdf_keep_document(ctx, pdf_get_bound_document(ctx, obj));
 }
 
 int pdf_objcmp_resolve(fz_context *ctx, pdf_obj *a, pdf_obj *b)
@@ -614,9 +630,9 @@ do_objcmp(fz_context *ctx, pdf_obj *a, pdf_obj *b, int check_streams)
 			int ap = pdf_obj_parent_num(ctx, a);
 			int bp;
 			int a_is_stream = 0;
-			pdf_xref_entry *entrya = pdf_get_xref_entry(ctx, doc, ap);
+			pdf_xref_entry *entrya = pdf_get_xref_entry_no_change(ctx, doc, ap);
 			pdf_xref_entry *entryb;
-			if (entrya->obj == a && pdf_obj_num_is_stream(ctx, doc, ap))
+			if (entrya != NULL && entrya->obj == a && pdf_obj_num_is_stream(ctx, doc, ap))
 			{
 				/* It's a stream, and we know a != b from above. */
 				if (!check_streams)
@@ -624,8 +640,8 @@ do_objcmp(fz_context *ctx, pdf_obj *a, pdf_obj *b, int check_streams)
 				a_is_stream = 1;
 			}
 			bp = pdf_obj_parent_num(ctx, b);
-			entryb = pdf_get_xref_entry(ctx, doc, bp);
-			if (entryb->obj == b && pdf_obj_num_is_stream(ctx, doc, bp))
+			entryb = pdf_get_xref_entry_no_change(ctx, doc, bp);
+			if (entryb != NULL && entryb->obj == b && pdf_obj_num_is_stream(ctx, doc, bp))
 			{
 				/* It's a stream, and we know a != b from above. So mismatch. */
 				if (!check_streams || !a_is_stream)
@@ -1482,6 +1498,27 @@ static void prepare_object_for_alteration(fz_context *ctx, pdf_obj *obj, pdf_obj
 		return;
 	}
 
+	/* Do we need to drop the page maps? */
+	if (doc && (doc->rev_page_map || doc->fwd_page_map))
+	{
+		if (doc->non_structural_change)
+		{
+			/* No need to drop the reverse page map on a non-structural change. */
+		}
+		else if (parent == 0)
+		{
+			/* This object isn't linked into the document - can't change the
+			 * pagemap. */
+		}
+		else if (doc->local_xref && doc->local_xref_nesting > 0)
+		{
+			/* We have a local_xref and it's in force. By convention, we
+			 * never do structural changes in local_xrefs. */
+		}
+		else
+			pdf_drop_page_tree_internal(ctx, doc);
+	}
+
 	if (val)
 	{
 		val_doc = pdf_get_bound_document(ctx, val);
@@ -2094,10 +2131,11 @@ pdf_obj *
 pdf_dict_geta(fz_context *ctx, pdf_obj *obj, pdf_obj *key, pdf_obj *abbrev)
 {
 	pdf_obj *v;
-	v = pdf_dict_get(ctx, obj, key);
+	/* ISO 32000-2:2020 (PDF 2.0) - abbreviated names take precendence. */
+	v = pdf_dict_get(ctx, obj, abbrev);
 	if (v)
 		return v;
-	return pdf_dict_get(ctx, obj, abbrev);
+	return pdf_dict_get(ctx, obj, key);
 }
 
 static void
@@ -2579,6 +2617,8 @@ pdf_mark_list_push(fz_context *ctx, pdf_mark_list *marks, pdf_obj *obj)
 	int num = pdf_to_num(ctx, obj);
 	int i;
 
+	/* If object is not an indirection, then no record to check.
+	 * We must still push it to allow pops to stay in sync. */
 	if (num > 0)
 	{
 		/* Note: this is slow, if the mark list is expected to be big use pdf_mark_bits instead! */
@@ -2591,7 +2631,10 @@ pdf_mark_list_push(fz_context *ctx, pdf_mark_list *marks, pdf_obj *obj)
 	{
 		int newsize = marks->max << 1;
 		if (marks->list == marks->local_list)
+		{
 			marks->list = fz_malloc_array(ctx, newsize, int);
+			memcpy(marks->list, marks->local_list, sizeof(marks->local_list));
+		}
 		else
 			marks->list = fz_realloc_array(ctx, marks->list, newsize, int);
 		marks->max = newsize;
@@ -3246,50 +3289,58 @@ int pdf_obj_refs(fz_context *ctx, pdf_obj *obj)
 
 /* Convenience functions */
 
-static pdf_obj *
-pdf_dict_get_inheritable_imp(fz_context *ctx, pdf_obj *node, pdf_obj *key, int depth, pdf_cycle_list *cycle_up)
-{
-	pdf_cycle_list cycle;
-	pdf_obj *val = pdf_dict_get(ctx, node, key);
-	if (val)
-		return val;
-	if (pdf_cycle(ctx, &cycle, cycle_up, node))
-		fz_throw(ctx, FZ_ERROR_GENERIC, "cycle in tree (parents)");
-	if (depth > 100)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "too much recursion in tree (parents)");
-	node = pdf_dict_get(ctx, node, PDF_NAME(Parent));
-	if (node)
-		return pdf_dict_get_inheritable_imp(ctx, node, key, depth + 1, &cycle);
-	return NULL;
-}
+/*
+	Uses Floyd's cycle finding algorithm, modified to avoid starting
+	the 'slow' pointer for a while.
 
+	https://www.geeksforgeeks.org/floyds-cycle-finding-algorithm/
+*/
 pdf_obj *
 pdf_dict_get_inheritable(fz_context *ctx, pdf_obj *node, pdf_obj *key)
 {
-	return pdf_dict_get_inheritable_imp(ctx, node, key, 0, NULL);
-}
+	pdf_obj *slow = node;
+	int halfbeat = 11; /* Don't start moving slow pointer for a while. */
 
-static pdf_obj *
-pdf_dict_getp_inheritable_imp(fz_context *ctx, pdf_obj *node, const char *path, int depth, pdf_cycle_list *cycle_up)
-{
-	pdf_cycle_list cycle;
-	pdf_obj *val = pdf_dict_getp(ctx, node, path);
-	if (val)
-		return val;
-	if (pdf_cycle(ctx, &cycle, cycle_up, node))
-		fz_throw(ctx, FZ_ERROR_GENERIC, "cycle in tree (parents)");
-	if (depth > 100)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "too much recursion in tree (parents)");
-	node = pdf_dict_get(ctx, node, PDF_NAME(Parent));
-	if (node)
-		return pdf_dict_getp_inheritable_imp(ctx, node, path, depth + 1, &cycle);
+	while (node)
+	{
+		pdf_obj *val = pdf_dict_get(ctx, node, key);
+		if (val)
+			return val;
+		node = pdf_dict_get(ctx, node, PDF_NAME(Parent));
+		if (node == slow)
+			fz_throw(ctx, FZ_ERROR_GENERIC, "cycle in resources");
+		if (--halfbeat == 0)
+		{
+			slow = pdf_dict_get(ctx, slow, PDF_NAME(Parent));
+			halfbeat = 2;
+		}
+	}
+
 	return NULL;
 }
 
 pdf_obj *
 pdf_dict_getp_inheritable(fz_context *ctx, pdf_obj *node, const char *path)
 {
-	return pdf_dict_getp_inheritable_imp(ctx, node, path, 0, NULL);
+	pdf_obj *slow = node;
+	int halfbeat = 11; /* Don't start moving slow pointer for a while. */
+
+	while (node)
+	{
+		pdf_obj *val = pdf_dict_getp(ctx, node, path);
+		if (val)
+			return val;
+		node = pdf_dict_get(ctx, node, PDF_NAME(Parent));
+		if (node == slow)
+			fz_throw(ctx, FZ_ERROR_GENERIC, "cycle in resources");
+		if (--halfbeat == 0)
+		{
+			slow = pdf_dict_get(ctx, slow, PDF_NAME(Parent));
+			halfbeat = 2;
+		}
+	}
+
+	return NULL;
 }
 
 void pdf_dict_put_bool(fz_context *ctx, pdf_obj *dict, pdf_obj *key, int x)
@@ -3486,3 +3537,15 @@ fz_matrix pdf_array_get_matrix(fz_context *ctx, pdf_obj *array, int index)
 {
 	return pdf_to_matrix(ctx, pdf_array_get(ctx, array, index));
 }
+
+#ifndef NDEBUG
+void pdf_verify_name_table_sanity(void)
+{
+	int i;
+
+	for (i = PDF_ENUM_FALSE+1; i < PDF_ENUM_LIMIT-1; i++)
+	{
+		assert(strcmp(PDF_NAME_LIST[i], PDF_NAME_LIST[i+1]) < 0);
+	}
+}
+#endif

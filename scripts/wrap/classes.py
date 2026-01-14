@@ -73,9 +73,10 @@ class ClassExtra:
             class_post='',
             class_pre='',
             class_top='',
+            constructor_default=True,
+            constructor_excludes=None,
             constructor_prefixes=None,
             constructor_raw=True,
-            constructor_excludes=None,
             constructors_extra=None,
             constructors_wrappers=None,
             copyable=True,
@@ -108,6 +109,12 @@ class ClassExtra:
 
         class_top:
             Extra text at start of class definition, e.g. for enums.
+
+        constructor_default:
+            If None we set to true if `pod` is true, otherwise false. If
+            true, we create a default constructor. If `pod` is true this
+            constructor will default-initialise each member, otherwise it will
+            set `m_internal` to null.
 
         constructor_excludes:
             Lists of constructor functions to ignore.
@@ -203,7 +210,8 @@ class ClassExtra:
 
         pod:
             If 'inline', there is no m_internal; instead, each member of the
-            underlying class is placed in the wrapper class.
+            underlying class is placed in the wrapper class and special method
+            `internal()` returns a fake pointer to underlying class.
 
             If 'none', there is no m_internal member at all. Typically
             <extra_cpp> could be used to add in custom members.
@@ -212,13 +220,20 @@ class ClassExtra:
             the underlying class instead of a pointer to it.
 
         virtual_fnptrs:
-            If true, should be (self, alloc) or (self, alloc, free):
+            If true, should be a dict with these keys:
 
-                self:
+                self_:
                     A callable taking single arg that is the name of a pointer
                     to an instance of the MuPDF struct; should return C++ code
                     that converts the specified name into a pointer to the
                     corresponding virtual_fnptrs wrapper class.
+                self_n:
+                    Index of arg that is the void* that should be passed to
+                    `virtual_fnptrs['self_']` to recover the virtual_fnptrs
+                    wrapper class.  Note that we assume/require that all
+                    virtual fns have the same `self_n`. If not specified,
+                    default is 1 (we generally expect args to be (fz_context*
+                    ctx, void*, ...).
                 alloc:
                     Code for embedding in the virtual_fnptrs wrapper class's
                     constructor that creates a new instances of the MuPDF
@@ -238,11 +253,14 @@ class ClassExtra:
         '''
         if accessors is None and pod is True:
             accessors = True
+        if constructor_default is None:
+            constructor_default = pod
         self.accessors = accessors
         self.class_bottom = class_bottom
         self.class_post = class_post
         self.class_pre = class_pre
         self.class_top = class_top
+        self.constructor_default = constructor_default
         self.constructor_excludes = constructor_excludes or []
         self.constructor_prefixes = constructor_prefixes or []
         self.constructor_raw = constructor_raw
@@ -272,7 +290,7 @@ class ClassExtra:
         assert_list_of( self.constructors_extra, ExtraConstructor)
 
         if virtual_fnptrs:
-            assert isinstance(virtual_fnptrs, tuple) and len(virtual_fnptrs) in ( 2, 3), f'virtual_fnptrs={virtual_fnptrs!r}'
+            assert isinstance(virtual_fnptrs, dict), f'virtual_fnptrs={virtual_fnptrs!r}'
 
     def __str__( self):
         ret = ''
@@ -281,6 +299,7 @@ class ClassExtra:
         ret += f' class_post={self.class_post}'
         ret += f' class_pre={self.class_pre}'
         ret += f' class_top={self.class_top}'
+        ret += f' constructor_default={self.constructor_default}'
         ret += f' constructor_excludes={self.constructor_excludes}'
         ret += f' constructor_prefixes={self.constructor_prefixes}'
         ret += f' constructor_raw={self.constructor_raw}'
@@ -322,10 +341,10 @@ class ClassExtras:
         We return None if <name> is a known enum.
         '''
         verbose = state.state_.show_details( name)
-        if verbose:
+        if 0 and verbose:
             jlib.log( 'ClassExtras.get(): {=name}')
         name = util.clip( name, ('const ', 'struct '))
-        if verbose:
+        if 0 and verbose:
             jlib.log( 'ClassExtras.get(): {=name}')
         if not name.startswith( ('fz_', 'pdf_')):
             return
@@ -363,6 +382,8 @@ classextras = ClassExtras(
 
         fz_band_writer = ClassExtra(
                 class_top = '''
+                    /* We use these enums to support construction via all the relevent MuPDF functions. */
+
                     enum Cm
                     {
                         MONO,
@@ -392,7 +413,7 @@ classextras = ClassExtras(
                             else throw std::runtime_error( "Unrecognised fz_band_writer_s Cm type");
                         }}
                         ''',
-                        comment = f'/* Calls fz_new_mono_pcl_band_writer() or fz_new_color_pcl_band_writer(). */',
+                        comment = f'/* Constructor using fz_new_mono_pcl_band_writer() or fz_new_color_pcl_band_writer(). */',
                         ),
                     ExtraConstructor(
                         f'({rename.class_("fz_output")}& out, P p)',
@@ -410,7 +431,7 @@ classextras = ClassExtras(
                             else throw std::runtime_error( "Unrecognised fz_band_writer_s P type");
                         }}
                         ''',
-                        comment = f'/* Calls fz_new_p*_band_writer(). */',
+                        comment = f'/* Constructor using fz_new_p*_band_writer(). */',
                         ),
                     ExtraConstructor(
                         f'({rename.class_("fz_output")}& out, Cm cm, const {rename.class_("fz_pwg_options")}& options)',
@@ -424,7 +445,7 @@ classextras = ClassExtras(
                             else throw std::runtime_error( "Unrecognised fz_band_writer_s Cm type");
                         }}
                         ''',
-                        comment = f'/* Calls fz_new_mono_pwg_band_writer() or fz_new_pwg_band_writer(). */',
+                        comment = f'/* Constructor using fz_new_mono_pwg_band_writer() or fz_new_pwg_band_writer(). */',
                         ),
                     ],
                 copyable = False,
@@ -479,18 +500,10 @@ classextras = ClassExtras(
                         ''',
                         comment = '/* Construct using one of: fz_device_gray(), fz_device_rgb(), fz_device_bgr(), fz_device_cmyk(), fz_device_lab(). */',
                         ),
-                        ExtraConstructor(
-                        '()',
-                        '''
-                        : m_internal( NULL)
-                        {
-                        }
-                        ''',
-                        comment = '/* Sets m_internal = NULL. */',
-                        ),
                     ],
                 constructor_raw=1,
                 class_top = '''
+                        /* We use this enums to support construction via all the relevent MuPDF functions. */
                         enum Fixed
                         {
                             Fixed_GRAY,
@@ -518,7 +531,7 @@ classextras = ClassExtras(
                         this->m_internal.incomplete = 0;
                     }
                     ''',
-                    comment = '/* Sets all fields to default values. */',
+                    comment = '/* Default constructor sets all fields to default values. */',
                     ),
                     ],
                 constructor_raw = False,
@@ -545,33 +558,16 @@ classextras = ClassExtras(
                 ),
 
         fz_device = ClassExtra(
-                virtual_fnptrs = (
-                    lambda name: f'(*({rename.class_("fz_device")}2**) ({name} + 1))',
-                    f'm_internal = {rename.ll_fn("fz_new_device_of_size")}('
-                            + f'sizeof(*m_internal)'
-                            + f' + sizeof({rename.class_("fz_device")}2*));\n'
-                        + f'*(({rename.class_("fz_device")}2**) (m_internal + 1)) = this;\n'
-                        ,
+                virtual_fnptrs = dict(
+                    self_ = lambda name: f'(*({rename.class_("fz_device")}2**) ({name} + 1))',
+                    alloc = textwrap.dedent( f'''
+                        m_internal = {rename.ll_fn("fz_new_device_of_size")}(
+                                sizeof(*m_internal) + sizeof({rename.class_("fz_device")}2*)
+                                );
+                        *(({rename.class_("fz_device")}2**) (m_internal + 1)) = this;
+                        '''),
                     ),
                 constructor_raw = True,
-                method_wrappers_static = [
-                    ],
-                constructors_extra = [
-                    ExtraConstructor( '()',
-                        f'''
-                        : m_internal( NULL)
-                        {{
-                            #ifndef NDEBUG
-                            if (s_check_refs)
-                            {{
-                                s_{rename.class_('fz_device')}_refs_check.add( this, __FILE__, __LINE__, __FUNCTION__);
-                            }}
-                            #endif
-                        }}
-                        ''',
-                        comment = '/* Sets m_internal = NULL. */',
-                        ),
-                    ],
                 ),
 
         fz_document = ClassExtra(
@@ -589,7 +585,7 @@ classextras = ClassExtras(
                             m_internal = {rename.ll_fn('fz_keep_document')}(&pdfdocument.m_internal->super);
                         }}
                         ''',
-                        f'/* Return {rename.class_("fz_document")} for pdfdocument.m_internal.super. */',
+                        f'/* Returns a {rename.class_("fz_document")} for pdfdocument.m_internal.super. */',
                         ),
                     ],
                 constructor_raw = 'default',
@@ -897,16 +893,6 @@ classextras = ClassExtras(
 
         fz_image = ClassExtra(
                 accessors=True,
-                constructors_extra = [
-                    ExtraConstructor( '()',
-                        f'''
-                        {{
-                            m_internal = nullptr;
-                        }}
-                        ''',
-                        '/* Construct with m_internal set to null. */',
-                        )
-                    ],
                 ),
 
         fz_irect = ClassExtra(
@@ -1098,9 +1084,9 @@ classextras = ClassExtras(
                 ),
 
         fz_output = ClassExtra(
-                virtual_fnptrs = (
-                    lambda name: f'({rename.class_("fz_output")}2*) {name}',
-                    f'm_internal = {rename.ll_fn("fz_new_output")}(0 /*bufsize*/, this /*state*/, nullptr /*write*/, nullptr /*close*/, nullptr /*drop*/);\n',
+                virtual_fnptrs = dict(
+                    self_ = lambda name: f'({rename.class_("fz_output")}2*) {name}',
+                    alloc = f'm_internal = {rename.ll_fn("fz_new_output")}(0 /*bufsize*/, this /*state*/, nullptr /*write*/, nullptr /*close*/, nullptr /*drop*/);\n',
                     ),
                 constructor_raw = 'default',
                 constructor_excludes = [
@@ -1214,14 +1200,16 @@ classextras = ClassExtras(
 
         fz_path_walker = ClassExtra(
                 constructor_raw = 'default',
-                virtual_fnptrs = (
-                    lambda name: f'*({rename.class_("fz_path_walker")}2**) ((fz_path_walker*) {name} + 1)',
-                    textwrap.dedent(
-                        f'''
-                        m_internal = (::fz_path_walker*) {rename.ll_fn("fz_calloc")}(1, sizeof(*m_internal) + sizeof({rename.class_("fz_path_walker")}2*));
+                virtual_fnptrs = dict(
+                    self_ = lambda name: f'*({rename.class_("fz_path_walker")}2**) ((fz_path_walker*) {name} + 1)',
+                    alloc = textwrap.dedent( f'''
+                        m_internal = (::fz_path_walker*) {rename.ll_fn("fz_calloc")}(
+                                1, sizeof(*m_internal)
+                                + sizeof({rename.class_("fz_path_walker")}2*)
+                                );
                         *({rename.class_("fz_path_walker")}2**) (m_internal + 1) = this;
                         '''),
-                    f'{rename.ll_fn("fz_free")}(m_internal);\n',
+                    free = f'{rename.ll_fn("fz_free")}(m_internal);\n',
                     ),
                 ),
 
@@ -1251,19 +1239,6 @@ classextras = ClassExtras(
 
         fz_pdfocr_options = ClassExtra(
                 pod = 'inline',
-                constructors_extra = [
-                    ExtraConstructor( '()',
-                        f'''
-                        {{
-                            this->compress = 0;
-                            this->strip_height = 0;
-                            this->language[0] = 0;
-                            this->datadir[0] = 0;
-                        }}
-                        ''',
-                        '/* Default constructor; sets all fields to zero or empty string. */',
-                        ),
-                    ],
                 methods_extra = [
                     ExtraMethod(
                         'void',
@@ -1342,14 +1317,6 @@ classextras = ClassExtras(
 
                     ],
                 constructors_extra = [
-                    ExtraConstructor( '()',
-                        '''
-                        : x(0), y(0)
-                        {
-                        }
-                        ''',
-                        comment = '/* Default constructor sets to (0, 0). */',
-                        ),
                     ExtraConstructor( '(float x, float y)',
                         '''
                         : x(x), y(y)
@@ -1387,16 +1354,6 @@ classextras = ClassExtras(
                     'fz_transform_quad',
                     'fz_quad_from_rect'
                     ],
-                constructors_extra = [
-                    ExtraConstructor(
-                        '()',
-                        '''
-                        : ul{0,0}, ur{0,0}, ll{0,0}, lr{0,0}
-                        {
-                        }''',
-                        comment = '/* Default constructor. */',
-                        ),
-                ],
                 pod='inline',
                 constructor_raw = True,
                 ),
@@ -1450,19 +1407,6 @@ classextras = ClassExtras(
                         }}
                         ''',
                         comment = '/* Construct from fz_unit_rect, fz_empty_rect or fz_infinite_rect. */',
-                        ),
-                    ExtraConstructor(
-                        '()',
-                        '''
-                        :
-                        x0(0),
-                        x1(0),
-                        y0(0),
-                        y1(0)
-                        {
-                        }
-                        ''',
-                        comment = '/* Default constructor initialises to (0, 0, 0, 0. */',
                         ),
                     ],
                 methods_extra = [
@@ -1567,16 +1511,6 @@ classextras = ClassExtras(
                 ),
 
         fz_shade_color_cache = ClassExtra(
-                constructors_extra = [
-                    ExtraConstructor( '()',
-                        '''
-                        : m_internal( NULL)
-                        {
-                        }
-                        ''',
-                        comment = f'/* Constructor that sets m_internal to NULL; can then be passed to {rename.class_("fz_shade")}::{rename.method("fz_shade_color_cache", "fz_paint_shade")}(). */',
-                        ),
-                    ],
                 ),
 
         # Our wrappers of the fz_stext_* structs all have a default copy
@@ -1626,14 +1560,6 @@ classextras = ClassExtras(
 
         fz_stext_options = ClassExtra(
                 constructors_extra = [
-                    ExtraConstructor( '()',
-                        '''
-                        : flags( 0)
-                        {
-                        }
-                        ''',
-                        comment = '/* Construct with .flags set to 0. */',
-                        ),
                     ExtraConstructor( '(int flags)',
                         '''
                         : flags( flags)
@@ -1663,7 +1589,7 @@ classextras = ClassExtras(
                             return ret;
                         }}
                         ''',
-                        comment = f'/* Wrapper for fz_copy_selection(). */',
+                        comment = f'/* Wrapper for fz_copy_selection() that returns std::string. */',
                         ),
                     ExtraMethod(
                         'std::string',
@@ -1676,7 +1602,7 @@ classextras = ClassExtras(
                             return ret;
                         }}
                         ''',
-                        comment = f'/* Wrapper for fz_copy_rectangle(). */',
+                        comment = f'/* Wrapper for fz_copy_rectangle() that returns a std::string. */',
                         ),
                     ExtraMethod(
                         f'std::vector<{rename.class_("fz_quad")}>',
@@ -1689,7 +1615,7 @@ classextras = ClassExtras(
                             return ret;
                         }}
                         ''',
-                        '/* Wrapper for fz_search_stext_page() that returns vector of Quads. */',
+                        '/* Wrapper for fz_search_stext_page() that returns std::vector of Quads. */',
                         )
                     ],
                 iterator_next = ('first_block', 'last_block'),
@@ -1759,6 +1685,10 @@ classextras = ClassExtras(
                     ],
                 ),
 
+        fz_story_element_position = ClassExtra(
+                pod='inline',
+                ),
+
         fz_transition = ClassExtra(
                 pod='inline',
                 constructor_raw = True,
@@ -1809,32 +1739,60 @@ classextras = ClassExtras(
                     ],
                 ),
 
+        pdf_filter_factory = ClassExtra(
+                pod = 'inline',
+                virtual_fnptrs = dict(
+                    self_ = lambda name: f'({rename.class_("pdf_filter_factory")}2*) {name}',
+                    self_n = 6,
+                    alloc = f'this->options = this;\n',
+                    ),
+                ),
+
         pdf_filter_options = ClassExtra(
                 pod = 'inline',
                 # We don't need to allocate extra space, and because we are a
                 # POD class, we can simply let our default constructor run.
                 #
-                virtual_fnptrs = (
-                        lambda name: f'({rename.class_("pdf_filter_options")}2*) {name}',
-                        f'this->opaque = this;\n'
+                virtual_fnptrs = dict(
+                        self_ = lambda name: f'({rename.class_("pdf_filter_options")}2*) {name}',
+                        self_n = 2,
+                        alloc = f'this->opaque = this;\n',
                         ),
                 constructors_extra = [
                     ExtraConstructor( '()',
                         f'''
                         {{
-                            this->image_filter = nullptr;
-                            this->text_filter = nullptr;
-                            this->after_text_object = nullptr;
-                            this->end_page = nullptr;
                             this->recurse = 0;
                             this->instance_forms = 0;
-                            this->sanitize = 0;
                             this->ascii = 0;
+                            this->opaque = nullptr;
+                            this->complete = nullptr;
+                            this->filters = nullptr;
+                            pdf_filter_factory eof = {{ nullptr, nullptr}};
+                            m_filters.push_back( eof);
                         }}
                         ''',
                         comment = '/* Default constructor initialises all fields to null/zero. */',
                     )
                     ],
+                methods_extra = [
+                    ExtraMethod(
+                            'void',
+                            f'add_factory( const pdf_filter_factory& factory)',
+                            textwrap.dedent( f'''
+                                {{
+                                    this->m_filters.back() = factory;
+                                    pdf_filter_factory eof = {{ nullptr, nullptr}};
+                                    this->m_filters.push_back( eof);
+                                    this->filters = &this->m_filters[0];
+                                }}
+                                '''),
+                            comment = f'/* Appends `factory` to internal vector and updates this->filters. */',
+                            ),
+                    ],
+                class_bottom = textwrap.dedent( f'''
+                    std::vector< pdf_filter_factory> m_filters;
+                    '''),
                 ),
 
         pdf_lexbuf = ClassExtra(
@@ -1846,7 +1804,7 @@ classextras = ClassExtras(
                             {rename.ll_fn('pdf_lexbuf_init')}(m_internal, size);
                         }}
                         ''',
-                        comment = '/* Constructor that calls pdf_lexbuf_init(size) */',
+                        comment = '/* Constructor that calls pdf_lexbuf_init(size). */',
                         ),
                     ],
                 methods_extra = [
@@ -1866,17 +1824,6 @@ classextras = ClassExtras(
 
         pdf_layer_config = ClassExtra(
                 pod = 'inline',
-                constructors_extra = [
-                    ExtraConstructor( '()',
-                        f'''
-                        {{
-                            this->name = nullptr;
-                            this->creator = nullptr;
-                        }}
-                        ''',
-                        comment = '/* Default constructor sets .name and .creator to null. */',
-                        ),
-                    ],
                 ),
 
         pdf_layer_config_ui = ClassExtra(
@@ -1892,7 +1839,7 @@ classextras = ClassExtras(
                             this->locked = 0;
                         }}
                         ''',
-                        comment = '/* Default constructor sets all .text to null and other fields to zero. */',
+                        comment = '/* Default constructor sets .text to null, .type to PDF_LAYER_UI_LABEL, and other fields to zero. */',
                         ),
                     ],
                 ),
@@ -1964,43 +1911,31 @@ classextras = ClassExtras(
                 ),
 
         pdf_processor = ClassExtra(
-                virtual_fnptrs = (
-                    lambda name: f'(*({rename.class_("pdf_processor")}2**) ({name} + 1))',
-                    f'm_internal = (::pdf_processor*) {rename.ll_fn("pdf_new_processor")}(sizeof(*m_internal) + sizeof({rename.class_("pdf_processor")}2*));\n'
-                        + f'*(({rename.class_("pdf_processor")}2**) (m_internal + 1)) = this;\n'
-                        ,
+                virtual_fnptrs = dict(
+                    self_ = lambda name: f'(*({rename.class_("pdf_processor")}2**) ({name} + 1))',
+                    alloc = textwrap.dedent( f'''
+                        m_internal = (::pdf_processor*) {rename.ll_fn("pdf_new_processor")}(
+                                sizeof(*m_internal)
+                                + sizeof({rename.class_("pdf_processor")}2*)
+                                );
+                        *(({rename.class_("pdf_processor")}2**) (m_internal + 1)) = this;
+                        '''),
                     ),
-                constructors_extra = [
-                    ExtraConstructor( '()',
-                        f'''
-                        : m_internal( NULL)
-                        {{
-                            #ifndef NDEBUG
-                            if (s_check_refs)
-                            {{
-                                s_{rename.class_("pdf_processor")}_refs_check.add( this, __FILE__, __LINE__, __FUNCTION__);
-                            }}
-                            #endif
-                        }}
-                        ''',
-                        comment = '/* Sets m_internal = NULL. */',
-                        ),
-                    ],
                 ),
 
         pdf_redact_options = ClassExtra(
                 pod = 'inline',
-                constructors_extra = [
-                    ExtraConstructor( '()',
-                        f'''
-                        {{
-                            this->black_boxes = 0;
-                            this->image_method = 0;
-                        }}
-                        ''',
-                        comment = '/* Default constructor initialises .black_boxes=0 and .image_method=0. */',
+                ),
+
+        pdf_sanitize_filter_options = ClassExtra(
+                pod = 'inline',
+                # We don't need to allocate extra space, and because we are a
+                # POD class, we can simply let our default constructor run.
+                #
+                virtual_fnptrs = dict(
+                        self_ = lambda name: f'({rename.class_("pdf_sanitize_filter_options")}2*) {name}',
+                        alloc = f'this->opaque = this;\n',
                         ),
-                    ],
                 ),
 
         pdf_write_options = ClassExtra(
@@ -2018,11 +1953,10 @@ classextras = ClassExtras(
                         f'(const {rename.class_("pdf_write_options")}& rhs)',
                         f'''
                         {{
-                            /* Use memcpy() otherwise we get 'invalid array assignment' errors. */
                             *this = rhs;
                         }}
                         ''',
-                        comment = '/* Copy constructor using plain memcpy(). */'
+                        comment = '/* Copy constructor using raw memcopy(). */'
                         ),
                     ],
                     methods_extra = [

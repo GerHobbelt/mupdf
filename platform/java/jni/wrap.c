@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2022 Artifex Software, Inc.
+// Copyright (C) 2004-2023 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -36,6 +36,22 @@ static inline jobject to_ColorSpace(fz_context *ctx, JNIEnv *env, fz_colorspace 
 		fz_throw_java(ctx, env);
 
 	return jcs;
+}
+
+static inline jobject to_DefaultColorSpaces(fz_context *ctx, JNIEnv *env, fz_default_colorspaces *dcs)
+{
+	jobject jdcs;
+
+	if (!ctx || !dcs) return NULL;
+
+	fz_keep_default_colorspaces(ctx, dcs);
+	jdcs = (*env)->CallStaticObjectMethod(env, cls_DefaultColorSpaces, mid_DefaultColorSpaces_init, jlong_cast(dcs));
+	if (!jdcs)
+		fz_drop_default_colorspaces(ctx, dcs);
+	if ((*env)->ExceptionCheck(env))
+		fz_throw_java(ctx, env);
+
+	return jdcs;
 }
 
 static inline jobject to_FitzInputStream(fz_context *ctx, JNIEnv *env, fz_stream *stm)
@@ -192,6 +208,25 @@ static inline jfloatArray to_floatArray(fz_context *ctx, JNIEnv *env, const floa
 		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot allocate float array");
 
 	(*env)->SetFloatArrayRegion(env, jarr, 0, n, arr);
+	if ((*env)->ExceptionCheck(env))
+		fz_throw_java(ctx, env);
+
+	return jarr;
+}
+
+static inline jintArray to_intArray(fz_context *ctx, JNIEnv *env, const int *arr, jint n)
+{
+	jintArray jarr;
+
+	if (!ctx) return NULL;
+
+	jarr = (*env)->NewIntArray(env, n);
+	if ((*env)->ExceptionCheck(env))
+		fz_throw_java(ctx, env);
+	if (!jarr)
+		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot allocate int array");
+
+	(*env)->SetIntArrayRegion(env, jarr, 0, n, (jint *) arr);
 	if ((*env)->ExceptionCheck(env))
 		fz_throw_java(ctx, env);
 
@@ -621,6 +656,32 @@ static inline jobject to_PDFWidget_safe(fz_context *ctx, JNIEnv *env, pdf_annot 
 
 /* Conversion functions: C to Java. Take ownership of fitz object. None of these throw fitz exceptions. */
 
+static inline jobject to_Buffer_safe_own(fz_context *ctx, JNIEnv *env, fz_buffer *buf)
+{
+	jobject jobj;
+
+	if (!ctx || !buf) return NULL;
+
+	jobj = (*env)->NewObject(env, cls_Buffer, mid_Buffer_init, jlong_cast(buf));
+	if (!jobj)
+		fz_drop_buffer(ctx, buf);
+
+	return jobj;
+}
+
+static inline jobject to_ColorSpace_safe_own(fz_context *ctx, JNIEnv *env, fz_colorspace *cs)
+{
+	jobject jobj;
+
+	if (!ctx || !cs) return NULL;
+
+	jobj = (*env)->NewObject(env, cls_ColorSpace, mid_ColorSpace_init, jlong_cast(cs));
+	if (!jobj)
+		fz_drop_colorspace(ctx, cs);
+
+	return jobj;
+}
+
 static inline jobject to_Document_safe_own(fz_context *ctx, JNIEnv *env, fz_document *doc)
 {
 	jobject obj;
@@ -776,6 +837,15 @@ static inline jobject to_StructuredText_safe_own(fz_context *ctx, JNIEnv *env, f
 
 /* Conversion functions: Java to C. These all throw java exceptions. */
 
+static inline fz_archive *from_Archive(JNIEnv *env, jobject jobj)
+{
+	fz_archive *arch;
+	if (!jobj) return NULL;
+	arch = CAST(fz_archive *, (*env)->GetLongField(env, jobj, fid_Archive_pointer));
+	if (!arch) jni_throw_null(env, "cannot use already destroyed Archive");
+	return arch;
+}
+
 static inline fz_buffer *from_Buffer(JNIEnv *env, jobject jobj)
 {
 	fz_buffer *buffer;
@@ -801,6 +871,15 @@ static inline fz_cookie *from_Cookie(JNIEnv *env, jobject jobj)
 	cookie = CAST(fz_cookie *, (*env)->GetLongField(env, jobj, fid_Cookie_pointer));
 	if (!cookie) jni_throw_null(env, "cannot use already destroyed Cookie");
 	return cookie;
+}
+
+static inline fz_default_colorspaces *from_DefaultColorSpaces(JNIEnv *env, jobject jobj)
+{
+	fz_default_colorspaces *dcs;
+	if (!jobj) return NULL;
+	dcs = CAST(fz_default_colorspaces *, (*env)->GetLongField(env, jobj, fid_DefaultColorSpaces_pointer));
+	if (!dcs) jni_throw_null(env, "cannot use already destroyed DefaultColorSpaces");
+	return dcs;
 }
 
 static fz_device *from_Device(JNIEnv *env, jobject jobj)
@@ -1091,6 +1170,12 @@ static fz_link_dest from_LinkDestination(JNIEnv *env, jobject jdest)
 
 /* Conversion functions: Java to C. None of these throw java exceptions. */
 
+static inline fz_archive *from_Archive_safe(JNIEnv *env, jobject jobj)
+{
+	if (!jobj) return NULL;
+	return CAST(fz_archive *, (*env)->GetLongField(env, jobj, fid_Archive_pointer));
+}
+
 static inline fz_buffer *from_Buffer_safe(JNIEnv *env, jobject jobj)
 {
 	if (!jobj) return NULL;
@@ -1119,6 +1204,12 @@ static inline fz_cookie *from_Cookie_safe(JNIEnv *env, jobject jobj)
 {
 	if (!jobj) return NULL;
 	return CAST(fz_cookie *, (*env)->GetLongField(env, jobj, fid_Cookie_pointer));
+}
+
+static inline fz_default_colorspaces *from_DefaultColorSpaces_safe(JNIEnv *env, jobject jobj)
+{
+	if (!jobj) return NULL;
+	return CAST(fz_default_colorspaces *, (*env)->GetLongField(env, jobj, fid_DefaultColorSpaces_pointer));
 }
 
 static fz_device *from_Device_safe(JNIEnv *env, jobject jobj)

@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2022 Artifex Software, Inc.
+// Copyright (C) 2004-2023 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -115,16 +115,16 @@ FUN(PDFAnnotation_getType)(JNIEnv *env, jobject self)
 {
 	fz_context *ctx = get_context(env);
 	pdf_annot *annot = from_PDFAnnotation(env, self);
-	jint subtype = 0;
+	jint type = 0;
 
 	if (!ctx || !annot) return 0;
 
 	fz_try(ctx)
-		subtype = pdf_annot_type(ctx, annot);
+		type = pdf_annot_type(ctx, annot);
 	fz_catch(ctx)
 		jni_rethrow(env, ctx);
 
-	return subtype;
+	return type;
 }
 
 JNIEXPORT jint JNICALL
@@ -1129,6 +1129,22 @@ FUN(PDFAnnotation_setNativeAppearance)(JNIEnv *env, jobject self, jstring jappea
 }
 
 JNIEXPORT void JNICALL
+FUN(PDFAnnotation_setNativeAppearanceImage)(JNIEnv *env, jobject self, jobject jimage)
+{
+	fz_context *ctx = get_context(env);
+	pdf_annot *annot = from_PDFAnnotation(env, self);
+	fz_image *image = from_Image(env, jimage);
+
+	if (!ctx || !annot || !image)
+		return;
+
+	fz_try(ctx)
+		pdf_set_annot_stamp_image(ctx, annot, image);
+	fz_catch(ctx)
+		jni_rethrow_void(env, ctx);
+}
+
+JNIEXPORT void JNICALL
 FUN(PDFAnnotation_setNativeAppearanceDisplayList)(JNIEnv *env, jobject self, jstring jappearance, jstring jstate, jobject jctm, jobject jlist)
 {
 	fz_context *ctx = get_context(env);
@@ -1330,4 +1346,254 @@ FUN(PDFAnnotation_getFileSpecification)(JNIEnv *env, jobject self)
 		jni_rethrow(env, ctx);
 
 	return to_PDFObject_safe(ctx, env, fs);
+}
+
+JNIEXPORT jboolean JNICALL
+FUN(PDFAnnotation_hasBorder)(JNIEnv *env, jobject self)
+{
+	fz_context *ctx = get_context(env);
+	pdf_annot *annot = from_PDFAnnotation(env, self);
+	jboolean has = JNI_FALSE;
+
+	fz_try(ctx)
+		has = pdf_annot_has_border(ctx, annot);
+	fz_catch(ctx)
+		jni_rethrow(env, ctx);
+
+	return has;
+}
+
+JNIEXPORT jint JNICALL
+FUN(PDFAnnotation_getBorderStyle)(JNIEnv *env, jobject self)
+{
+	fz_context *ctx = get_context(env);
+	pdf_annot *annot = from_PDFAnnotation(env, self);
+	enum pdf_border_style style = PDF_BORDER_STYLE_SOLID;
+
+	if (!ctx || !annot) return 0;
+
+	fz_try(ctx)
+		style = pdf_annot_border_style(ctx, annot);
+	fz_catch(ctx)
+		jni_rethrow(env, ctx);
+
+	return style;
+}
+
+JNIEXPORT void JNICALL
+FUN(PDFAnnotation_setBorderStyle)(JNIEnv *env, jobject self, jint style)
+{
+	fz_context *ctx = get_context(env);
+	pdf_annot *annot = from_PDFAnnotation(env, self);
+
+	fz_try(ctx)
+		pdf_set_annot_border_style(ctx, annot, style);
+	fz_catch(ctx)
+		jni_rethrow_void(env, ctx);
+}
+
+JNIEXPORT jfloat JNICALL
+FUN(PDFAnnotation_getBorderWidth)(JNIEnv *env, jobject self)
+{
+	fz_context *ctx = get_context(env);
+	pdf_annot *annot = from_PDFAnnotation(env, self);
+	float width;
+
+	if (!ctx || !annot) return 0;
+
+	fz_try(ctx)
+		width = pdf_annot_border_width(ctx, annot);
+	fz_catch(ctx)
+		jni_rethrow(env, ctx);
+
+	return width;
+}
+
+JNIEXPORT void JNICALL
+FUN(PDFAnnotation_setBorderWidth)(JNIEnv *env, jobject self, jfloat width)
+{
+	fz_context *ctx = get_context(env);
+	pdf_annot *annot = from_PDFAnnotation(env, self);
+
+	fz_try(ctx)
+		pdf_set_annot_border_width(ctx, annot, width);
+	fz_catch(ctx)
+		jni_rethrow_void(env, ctx);
+}
+
+JNIEXPORT jint JNICALL
+FUN(PDFAnnotation_getBorderDashCount)(JNIEnv *env, jobject self)
+{
+	fz_context *ctx = get_context(env);
+	pdf_annot *annot = from_PDFAnnotation(env, self);
+	int count;
+
+	if (!ctx || !annot) return 0;
+
+	fz_try(ctx)
+		count = pdf_annot_border_dash_count(ctx, annot);
+	fz_catch(ctx)
+		jni_rethrow(env, ctx);
+
+	return count;
+}
+
+JNIEXPORT jfloat JNICALL
+FUN(PDFAnnotation_getBorderDashItem)(JNIEnv *env, jobject self, jint i)
+{
+	fz_context *ctx = get_context(env);
+	pdf_annot *annot = from_PDFAnnotation(env, self);
+	int length;
+
+	if (!ctx || !annot) return 0;
+
+	fz_try(ctx)
+		length = pdf_annot_border_dash_item(ctx, annot, i);
+	fz_catch(ctx)
+		jni_rethrow(env, ctx);
+
+	return length;
+}
+
+JNIEXPORT void JNICALL
+FUN(PDFAnnotation_clearBorderDash)(JNIEnv *env, jobject self)
+{
+	fz_context *ctx = get_context(env);
+	pdf_annot *annot = from_PDFAnnotation(env, self);
+
+	if (!ctx || !annot) return;
+
+	fz_try(ctx)
+		pdf_clear_annot_border_dash(ctx, annot);
+	fz_catch(ctx)
+		jni_rethrow_void(env, ctx);
+}
+
+JNIEXPORT void JNICALL
+FUN(PDFAnnotation_addBorderDashItem)(JNIEnv *env, jobject self, jfloat length)
+{
+	fz_context *ctx = get_context(env);
+	pdf_annot *annot = from_PDFAnnotation(env, self);
+
+	if (!ctx || !annot) return;
+
+	fz_try(ctx)
+		pdf_add_annot_border_dash_item(ctx, annot, length);
+	fz_catch(ctx)
+		jni_rethrow_void(env, ctx);
+}
+
+JNIEXPORT jboolean JNICALL
+FUN(PDFAnnotation_hasBorderEffect)(JNIEnv *env, jobject self)
+{
+	fz_context *ctx = get_context(env);
+	pdf_annot *annot = from_PDFAnnotation(env, self);
+	jboolean has = JNI_FALSE;
+
+	fz_try(ctx)
+		has = pdf_annot_has_border_effect(ctx, annot);
+	fz_catch(ctx)
+		jni_rethrow(env, ctx);
+
+	return has;
+}
+
+JNIEXPORT jint JNICALL
+FUN(PDFAnnotation_getBorderEffect)(JNIEnv *env, jobject self)
+{
+	fz_context *ctx = get_context(env);
+	pdf_annot *annot = from_PDFAnnotation(env, self);
+	jint effect = PDF_BORDER_EFFECT_NONE;
+
+	fz_try(ctx)
+		effect = pdf_annot_border_effect(ctx, annot);
+	fz_catch(ctx)
+		jni_rethrow(env, ctx);
+
+	return effect;
+}
+
+JNIEXPORT void JNICALL
+FUN(PDFAnnotation_setBorderEffect)(JNIEnv *env, jobject self, jint effect)
+{
+	fz_context *ctx = get_context(env);
+	pdf_annot *annot = from_PDFAnnotation(env, self);
+
+	fz_try(ctx)
+		pdf_set_annot_border_effect(ctx, annot, effect);
+	fz_catch(ctx)
+		jni_rethrow_void(env, ctx);
+}
+
+JNIEXPORT jfloat JNICALL
+FUN(PDFAnnotation_getBorderEffectIntensity)(JNIEnv *env, jobject self)
+{
+	fz_context *ctx = get_context(env);
+	pdf_annot *annot = from_PDFAnnotation(env, self);
+	jfloat intensity = PDF_BORDER_EFFECT_NONE;
+
+	fz_try(ctx)
+		intensity = pdf_annot_border_effect_intensity(ctx, annot);
+	fz_catch(ctx)
+		jni_rethrow(env, ctx);
+
+	return intensity;
+}
+
+JNIEXPORT void JNICALL
+FUN(PDFAnnotation_setBorderEffectIntensity)(JNIEnv *env, jobject self, jfloat intensity)
+{
+	fz_context *ctx = get_context(env);
+	pdf_annot *annot = from_PDFAnnotation(env, self);
+
+	fz_try(ctx)
+		pdf_set_annot_border_effect_intensity(ctx, annot, intensity);
+	fz_catch(ctx)
+		jni_rethrow_void(env, ctx);
+}
+
+JNIEXPORT jboolean JNICALL
+FUN(PDFAnnotation_hasFileSpecification)(JNIEnv *env, jobject self)
+{
+	fz_context *ctx = get_context(env);
+	pdf_annot *annot = from_PDFAnnotation(env, self);
+	jboolean has = JNI_FALSE;
+
+	fz_try(ctx)
+		has = pdf_annot_has_filespec(ctx, annot);
+	fz_catch(ctx)
+		jni_rethrow(env, ctx);
+
+	return has;
+}
+
+JNIEXPORT void JNICALL
+FUN(PDFAnnotation_setHiddenForEditing)(JNIEnv *env, jobject self, jboolean hidden)
+{
+	fz_context *ctx = get_context(env);
+	pdf_annot *annot = from_PDFAnnotation_safe(env, self);
+
+	if (!ctx || !annot) return;
+
+	fz_try(ctx)
+		pdf_set_annot_hidden_for_editing(ctx, annot, hidden);
+	fz_catch(ctx)
+		jni_rethrow_void(env, ctx);
+}
+
+JNIEXPORT jboolean JNICALL
+FUN(PDFAnnotation_getHiddenForEditing)(JNIEnv *env, jobject self)
+{
+	fz_context *ctx = get_context(env);
+	pdf_annot *annot = from_PDFAnnotation_safe(env, self);
+	jboolean hidden = JNI_FALSE;
+
+	if (!ctx || !annot) return JNI_FALSE;
+
+	fz_try(ctx)
+		hidden = pdf_annot_hidden_for_editing(ctx, annot);
+	fz_catch(ctx)
+		jni_rethrow(env, ctx);
+
+	return hidden;
 }

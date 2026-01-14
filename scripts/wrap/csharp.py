@@ -83,7 +83,7 @@ def make_outparam_helper_csharp(
             jlib.log(f'Cannot generate C# out-param wrapper for {cursor.mangled_name} because has array arg.', 1)
             return
         if arg.cursor.type.kind == state.clang.cindex.TypeKind.POINTER:
-            pointee = arg.cursor.type.get_pointee().get_canonical()
+            pointee = state.get_name_canonical( arg.cursor.type.get_pointee())
             if pointee.kind == state.clang.cindex.TypeKind.ENUM:
                 jlib.log(f'Cannot generate C# out-param wrapper for {cursor.mangled_name} because has enum out-param arg.', 1)
                 return
@@ -235,7 +235,7 @@ def make_outparam_helper_csharp(
             extras = parse.get_fz_extras( tu, arg.alt.type.spelling)
             assert extras.pod != 'none' \
                     'Cannot pass wrapper for {type_.spelling} as arg because pod is "none" so we cannot recover struct.'
-            write('.internal_()' if extras.pod else '.m_internal')
+            write('.internal_()' if extras.pod == 'inline' else '.m_internal')
         sep = ', '
     write(f'{sep}outparams);\n')
 

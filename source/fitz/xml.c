@@ -218,7 +218,7 @@ char *fz_xml_tag(fz_xml *item)
 {
 	/* DOC items can never have MAGIC_TEXT as their down value,
 	 * so this is safe. */
-	return item && !FZ_TEXT_ITEM(item) && item->u.node.u.d.name[0] ? item->u.node.u.d.name : NULL;
+	return item && !FZ_TEXT_ITEM(item) ? item->u.node.u.d.name : NULL;
 }
 
 int fz_xml_is_tag(fz_xml *item, const char *name)
@@ -784,7 +784,7 @@ static int fast_strncasecmp(const char *a, const char *b, size_t n)
 static char *fast_strcasestr(char *h, char *n)
 {
 	int n0 = fast_tolower(*n++);
-	int nn = strlen(n);
+	size_t nn = strlen(n);
 	while (*h != 0)
 	{
 		if (fast_tolower(*h) == n0 && fast_strncasecmp(h+1, n, nn) == 0)

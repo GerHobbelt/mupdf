@@ -79,40 +79,71 @@ def test_filter(path):
     if platform.system() == 'Windows':
         print( 'Not testing mupdf.PdfFilterOptions2 because known to fail on Windows.')
         return
-    class MyFilter( mupdf.PdfFilterOptions2):
+
+    # pdf_sanitizer_filter_options.
+    class MySanitizeFilterOptions( mupdf.PdfSanitizeFilterOptions2):
         def __init__( self):
             super().__init__()
             self.use_virtual_text_filter()
-            self.recurse = 1
-            self.sanitize = 1
             self.state = 1
-            self.ascii = True
         def text_filter( self, ctx, ucsbuf, ucslen, trm, ctm, bbox):
             if 0:
-                print( f'text_filter(): ctx={ctx} ucsbuf={ucsbuf} ucslen={ucslen} trm={trm} ctm={ctm} bbox={bbox}')
+                log( f'text_filter(): ctx={ctx} ucsbuf={ucsbuf} ucslen={ucslen} trm={trm} ctm={ctm} bbox={bbox}')
             # Remove every other item.
             self.state = 1 - self.state
             return self.state
-    print( f'dir(MyFilter): {dir(MyFilter)}', file=sys.stderr)
-    print( f'dir(MyFilter.text_filter): {dir(MyFilter.text_filter)}', file=sys.stderr)
+    sanitize_filter_options = MySanitizeFilterOptions()
 
-    if 1:
-        import inspect
-        signature = inspect.signature( MyFilter.text_filter)
-        for n, param in signature.parameters.items():
-            print( f'    {n}: {param}', file=sys.stderr)
-    filter_ = MyFilter()
+    # pdf_filter_factory.
+    class MyPdfFilterFactory( mupdf.PdfFilterFactory2):
+        def __init__( self, sopts):
+            super().__init__()
+            self.sopts = sopts
+            self.use_virtual_filter()
+        def filter(self, ctx, doc, chain, struct_parents, transform, options):
+            return mupdf.ll_pdf_new_sanitize_filter( doc, chain, struct_parents, transform, options, self.sopts)
+        def filter_bad(self, ctx, doc, chain, struct_parents, transform, options, extra_arg):
+            return mupdf.ll_pdf_new_sanitize_filter( doc, chain, struct_parents, transform, options, self.sopts)
+    filter_factory = MyPdfFilterFactory( sanitize_filter_options.internal())
+
+    # pdf_filter_options.
+    class MyFilterOptions( mupdf.PdfFilterOptions2):
+        def __init__( self):
+            super().__init__()
+            self.recurse = 1
+            self.instance_forms = 0
+            self.ascii = 1
+    filter_options = MyFilterOptions()
+
+    filter_options.add_factory( filter_factory.internal())
+
     document = mupdf.PdfDocument(path)
-    print('test_filter(): dir(document):\n' + '\n'.join(dir(document)), file=sys.stderr)
     for p in range(document.pdf_count_pages()):
         page = document.pdf_load_page(p)
-        print( f'Running document.pdf_filter_page_contents on page {p}', file=sys.stderr)
+        log( f'Running document.pdf_filter_page_contents on page {p}')
         document.pdf_begin_operation('test filter')
-        document.pdf_filter_page_contents(page, filter_)
+        document.pdf_filter_page_contents(page, filter_options)
         document.pdf_end_operation()
 
-    if 0:
-        document.save_document('foo.pdf', mupdf.PdfWriteOptions())
+    if 1:
+        # Try again but with a broken filter_factory callback method, and check
+        # we get an appropriate exception. This checks that the SWIG Director
+        # exception-handling code is working.
+        #
+        filter_factory.filter = filter_factory.filter_bad
+        page = document.pdf_load_page(0)
+        document.pdf_begin_operation('test filter')
+        try:
+            document.pdf_filter_page_contents(page, filter_options)
+        except Exception as e:
+            e_expected_text = "filter_bad() missing 1 required positional argument: 'extra_arg'"
+            if e_expected_text not in str(e):
+                raise Exception(f'Error does not contain expected text: {e_expected_text}') from e
+        finally:
+            document.pdf_end_operation()
+
+    if 1:
+        document.pdf_save_document('mupdf_test-out0.pdf', mupdf.PdfWriteOptions())
 
 
 def test(path):
@@ -182,7 +213,7 @@ def test(path):
     log(f'Have created scale: a={scale.a} b={scale.b} c={scale.c} d={scale.d} e={scale.e} f={scale.f}')
 
     colorspace = mupdf.FzColorspace(mupdf.FzColorspace.Fixed_RGB)
-    log(f'{colorspace.m_internal.key_storable.storable.refs=}')
+    log(f'colorspace.m_internal.key_storable.storable.refs={colorspace.m_internal.key_storable.storable.refs!r}')
     if 0:
         c = colorspace.fz_clamp_color([3.14])
         log('colorspace.clamp_color returned c={c}')

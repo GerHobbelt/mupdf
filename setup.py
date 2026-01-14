@@ -67,6 +67,11 @@ def windows():
     return s == 'Windows' or s.startswith('CYGWIN')
 
 @cache
+def macos():
+    s = platform.system()
+    return s == 'Darwin'
+
+@cache
 def build_dir():
     # This is x86/x64-specific.
     #
@@ -207,6 +212,23 @@ def sdist():
 
     paths = pipcl.git_items( root_dir(), submodules=True)
 
+    # Strip out some large test directories.
+    i = 0
+    while i < len( paths):
+        path = paths[i]
+        remove = False
+        if (0
+                or path.startswith( 'thirdparty/harfbuzz/test/')
+                or path.startswith( 'thirdparty/tesseract/test/')
+                or path.startswith( 'thirdparty/extract/test/')
+                ):
+            remove = True
+        if remove:
+            #log( f'Excluding: {path}')
+            del paths[i]
+        else:
+            i += 1
+
     # Build C++ files and SWIG C code for inclusion in sdist, so that it can be
     # used on systems without clang-python or SWIG.
     #
@@ -288,6 +310,16 @@ def build():
                 f'mupdfcpp{infix}.dll', # C and C++.
                 '_mupdf.pyd',           # Python internals.
                 'mupdf.py',             # Python.
+                ]
+    elif macos():
+        jlib.log( 'Contents of {build_dir=} are:')
+        for leaf in os.listdir(build_dir):
+            jlib.log( '    {leaf}')
+        names = [
+                'libmupdf.dylib',   # C.
+                'libmupdfcpp.so',   # C++.
+                '_mupdf.so',        # Python internals.
+                'mupdf.py',         # Python.
                 ]
     else:
         names = [

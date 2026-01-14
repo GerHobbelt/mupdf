@@ -55,12 +55,22 @@ pdf_repair_obj(fz_context *ctx, pdf_document *doc, pdf_lexbuf *buf, int64_t *stm
 	fz_stream *file = doc->file;
 	pdf_token tok;
 	int stm_len;
+	int64_t local_ofs;
+
+	if (tmpofs == NULL)
+		tmpofs = &local_ofs;
+	if (stmofsp == NULL)
+		stmofsp = &local_ofs;
 
 	*stmofsp = 0;
 	if (stmlenp)
 		*stmlenp = -1;
 
 	stm_len = 0;
+
+	*tmpofs = fz_tell(ctx, file);
+	if (*tmpofs < 0)
+		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot tell in file");
 
 	/* On entry to this function, we know that we've just seen
 	 * '<int> <int> obj'. We expect the next thing we see to be a
@@ -357,6 +367,8 @@ pdf_repair_xref(fz_context *ctx, pdf_document *doc)
 	doc->repair_attempted = 1;
 	doc->repair_in_progress = 1;
 
+	pdf_drop_page_tree_internal(ctx, doc);
+	doc->page_tree_broken = 0;
 	pdf_forget_xref(ctx, doc);
 
 	fz_seek(ctx, doc->file, 0, 0);

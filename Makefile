@@ -482,9 +482,6 @@ java:
 java-clean:
 	$(MAKE) -C platform/java build=$(build) clean
 
-wasm:
-	$(MAKE) -C platform/wasm
-
 extract-test:
 	$(MAKE) debug
 	$(MAKE) -C thirdparty/extract mutool=../../build/debug/mutool test-mutool
@@ -535,10 +532,10 @@ android: generate
 c++: c++-$(build)
 
 c++-release: shared-release
-	./scripts/mupdfwrap.py -d build/shared-release -b 01
+	./scripts/mupdfwrap.py --venv pylocal -d build/shared-release -b 01
 
 c++-debug: shared-debug
-	./scripts/mupdfwrap.py -d build/shared-debug -b 01
+	./scripts/mupdfwrap.py --venv pylocal -d build/shared-debug -b 01
 
 c++-clean:
 	rm -rf platform/c++
@@ -565,7 +562,7 @@ csharp-debug: c++-debug
 csharp-clean:
 	rm -rf platform/csharp
 
-.PHONY: all clean nuke install third libs apps generate tags wasm
+.PHONY: all clean nuke install third libs apps generate tags
 .PHONY: shared shared-debug shared-clean
 .PHONY: c++ c++-release c++-debug c++-clean
 .PHONY: python python-debug python-clean

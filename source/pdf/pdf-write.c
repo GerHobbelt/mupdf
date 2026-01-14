@@ -1549,13 +1549,31 @@ static void preloadobjstms(fz_context *ctx, pdf_document *doc)
 	pdf_obj *obj;
 	int num;
 
+	/* If we have attempted a repair, then everything will have been
+	 * loaded already. */
+	if (doc->repair_attempted)
+		return;
+
+	fz_var(num);
+
 	/* xref_len may change due to repair, so check it every iteration */
 	for (num = 0; num < pdf_xref_len(ctx, doc); num++)
 	{
-		if (pdf_get_xref_entry_no_null(ctx, doc, num)->type == 'o')
+		fz_try(ctx)
 		{
-			obj = pdf_load_object(ctx, doc, num);
-			pdf_drop_obj(ctx, obj);
+			for (; num < pdf_xref_len(ctx, doc); num++)
+			{
+				if (pdf_get_xref_entry_no_null(ctx, doc, num)->type == 'o')
+				{
+					obj = pdf_load_object(ctx, doc, num);
+					pdf_drop_obj(ctx, obj);
+				}
+			}
+		}
+		fz_catch(ctx)
+		{
+			/* Ignore the error, so we can carry on trying to load. */
+			fz_warn(ctx, "%s", fz_caught_message(ctx));
 		}
 	}
 }
@@ -2197,7 +2215,14 @@ static void writexref(fz_context *ctx, pdf_document *doc, pdf_write_state *opts,
 				pdf_dict_put(ctx, trailer, PDF_NAME(ID), obj);
 
 			if (opts->crypt_obj)
-				pdf_dict_put(ctx, trailer, PDF_NAME(Encrypt), opts->crypt_obj);
+			{
+				pdf_obj *encrypt;
+				if (pdf_is_indirect(ctx, opts->crypt_obj))
+					encrypt = pdf_new_indirect(ctx, doc, opts->crypt_object_number, 0);
+				else
+					encrypt = opts->crypt_obj;
+				pdf_dict_put(ctx, trailer, PDF_NAME(Encrypt), encrypt);
+			}
 
 			if (opts->metadata)
 				pdf_dict_putp(ctx, trailer, "Root/Metadata", opts->metadata);
@@ -2218,7 +2243,7 @@ static void writexref(fz_context *ctx, pdf_document *doc, pdf_write_state *opts,
 
 	fz_write_printf(ctx, opts->out, "startxref\n%lu\n%%%%EOF\n", startxref);
 
-	doc->has_xref_streams = 0;
+	doc->last_xref_was_old_style = 1;
 }
 
 static void writexrefstreamsubsect(fz_context *ctx, pdf_document *doc, pdf_write_state *opts, pdf_obj *index, fz_buffer *fzbuf, int from, int to)
@@ -2359,7 +2384,7 @@ static void writexrefstream(fz_context *ctx, pdf_document *doc, pdf_write_state 
 		fz_rethrow(ctx);
 	}
 
-	doc->has_old_style_xrefs = 0;
+	doc->last_xref_was_old_style = 0;
 }
 
 static void
@@ -2975,11 +3000,15 @@ static void clean_content_streams(fz_context *ctx, pdf_document *doc, int saniti
 	int n = pdf_count_pages(ctx, doc);
 	int i;
 
-	pdf_filter_options filter;
-	memset(&filter, 0, sizeof filter);
-	filter.recurse = 1;
-	filter.sanitize = sanitize;
-	filter.ascii = ascii;
+	pdf_filter_options options = { 0 };
+	pdf_sanitize_filter_options sopts = { 0 };
+	pdf_filter_factory list[2] = { 0 };
+
+	options.recurse = 1;
+	options.ascii = ascii;
+	options.filters = sanitize ? list : NULL;
+	list[0].filter = pdf_new_sanitize_filter;
+	list[0].options = &sopts;
 
 	for (i = 0; i < n; i++)
 	{
@@ -2988,10 +3017,10 @@ static void clean_content_streams(fz_context *ctx, pdf_document *doc, int saniti
 
 		fz_try(ctx)
 		{
-			pdf_filter_page_contents(ctx, doc, page, &filter);
+			pdf_filter_page_contents(ctx, doc, page, &options);
 			for (annot = pdf_first_annot(ctx, page); annot != NULL; annot = pdf_next_annot(ctx, annot))
 			{
-				pdf_filter_annot_contents(ctx, doc, annot, &filter);
+				pdf_filter_annot_contents(ctx, doc, annot, &options);
 			}
 		}
 		fz_always(ctx)
@@ -3210,8 +3239,6 @@ int pdf_can_be_saved_incrementally(fz_context *ctx, pdf_document *doc)
 	if (doc->repair_attempted)
 		return 0;
 	if (doc->redacted)
-		return 0;
-	if (doc->has_xref_streams && doc->has_old_style_xrefs)
 		return 0;
 	return 1;
 }
@@ -3553,7 +3580,7 @@ do_pdf_save_document(fz_context *ctx, pdf_document *doc, pdf_write_state *opts, 
 				}
 
 				opts->first_xref_offset = fz_tell_output(ctx, opts->out);
-				if (doc->has_xref_streams)
+				if (!doc->last_xref_was_old_style)
 					writexrefstream(ctx, doc, opts, 0, xref_len, 1, 0, opts->first_xref_offset);
 				else
 					writexref(ctx, doc, opts, 0, xref_len, 1, 0, opts->first_xref_offset);
