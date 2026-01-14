@@ -50,15 +50,6 @@ echo gzip $CSTEM.tar
 pigz -f -k -11 $CSTEM.tar
 rm -f $CSTEM.tar
 
-# Generate commercial tarball
-cp $STEM.tar $CSTEM.tar
-tar f $CSTEM.tar --wildcards --delete ${STEM}/COPYING
-tar -r -f $CSTEM.tar --owner=0 --group=0 --mode=664 --transform=s,$(dirname "$0")/customer\.txt,${STEM}/LICENSE, "$(dirname "$0")/customer.txt"
-
-echo gzip $CSTEM.tar
-pigz -f -k -11 $CSTEM.tar
-rm -f $CSTEM.tar
-
 echo gzip $STEM.tar
 pigz -f -k -11 $STEM.tar
 
