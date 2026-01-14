@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2024 Artifex Software, Inc.
+// Copyright (C) 2004-2025 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -50,6 +50,7 @@ int pdfsign_main(int argc, char *argv[]);
 int pdfrecolor_main(int argc, char *argv[]);
 int pdftrim_main(int argc, char *argv[]);
 int pdfbake_main(int argc, char *argv[]);
+int mubar_main(int argc, char *argv[]);
 
 int cmapdump_main(int argc, char *argv[]);
 int pdfaudit_main(int argc, char *argv[]);
@@ -88,6 +89,9 @@ static struct {
 	{ cmapdump_main, "cmapdump", "dump CMap resource as C source file" },
 #endif
 	{ pdfaudit_main, "audit", "produce usage stats from PDF files" },
+#endif
+#if FZ_ENABLE_BARCODE
+	{ mubar_main, "barcode", "encode/decode barcodes" },
 #endif
 };
 

@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2022 Artifex Software, Inc.
+// Copyright (C) 2004-2025 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -470,9 +470,9 @@ fz_lookup_noto_stem_from_script(fz_context *ctx, int script, int language)
 	case UCDN_SCRIPT_BRAHMI: return "Brahmi";
 	case UCDN_SCRIPT_MANDAIC: return "Mandaic";
 	case UCDN_SCRIPT_CHAKMA: return "Chakma";
-	case UCDN_SCRIPT_MIAO: return "Miao";
 	case UCDN_SCRIPT_MEROITIC_CURSIVE: return "Meroitic";
 	case UCDN_SCRIPT_MEROITIC_HIEROGLYPHS: return "Meroitic";
+	case UCDN_SCRIPT_MIAO: return "Miao";
 	case UCDN_SCRIPT_SHARADA: return "Sharada";
 	case UCDN_SCRIPT_SORA_SOMPENG: return "SoraSompeng";
 	case UCDN_SCRIPT_TAKRI: return "Takri";
@@ -504,7 +504,7 @@ fz_lookup_noto_stem_from_script(fz_context *ctx, int script, int language)
 	case UCDN_SCRIPT_HATRAN: return "Hatran";
 	case UCDN_SCRIPT_MULTANI: return "Multani";
 	case UCDN_SCRIPT_OLD_HUNGARIAN: return "OldHungarian";
-	case UCDN_SCRIPT_SIGNWRITING: return "Signwriting";
+	case UCDN_SCRIPT_SIGNWRITING: return "SignWriting";
 	case UCDN_SCRIPT_ADLAM: return "Adlam";
 	case UCDN_SCRIPT_BHAIKSUKI: return "Bhaiksuki";
 	case UCDN_SCRIPT_MARCHEN: return "Marchen";
@@ -538,5 +538,20 @@ fz_lookup_noto_stem_from_script(fz_context *ctx, int script, int language)
 	case UCDN_SCRIPT_KAWI: return "Kawi";
 	case UCDN_SCRIPT_NAG_MUNDARI: return "NagMundari";
 	}
-	return NULL;
+}
+
+const char *
+fz_lookup_script_name(fz_context *ctx, int script, int language)
+{
+	switch (script) {
+	case UCDN_SCRIPT_COMMON:
+	case UCDN_SCRIPT_INHERITED:
+	case UCDN_SCRIPT_UNKNOWN:
+		return "Common";
+	case UCDN_SCRIPT_LATIN: return "Latin";
+	case UCDN_SCRIPT_GREEK: return "Greek";
+	case UCDN_SCRIPT_CYRILLIC: return "Cyrillic";
+	case UCDN_SCRIPT_ARABIC: return "Arabic";
+	default: return fz_lookup_noto_stem_from_script(ctx, script, language);
+	}
 }

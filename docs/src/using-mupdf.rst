@@ -1,15 +1,14 @@
-.. Copyright (C) 2001-2023 Artifex Software, Inc.
+.. Copyright (C) 2001-2025 Artifex Software, Inc.
 .. All Rights Reserved.
 
 
-.. include:: header.rst
 
 .. meta::
    :description: MuPDF documentation
    :keywords: MuPDF, pdf, epub
 
 
-Using :title:`MuPDF` with :title:`C`
+Using MuPDF with C
 ==========================================
 
 This intends to be an introductory guide into how to use :title:`MuPDF` with your :title:`C` code and as such assumes at least an intermediate knowledge of programming with :title:`C`.
@@ -324,7 +323,6 @@ Any objects returned by functions that do not have any of these special words, a
 
 
 
-.. include:: footer.rst
 
 
 

@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2022 Artifex Software, Inc.
+// Copyright (C) 2004-2025 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -275,6 +275,12 @@ FZ_DATA extern const fz_irect fz_empty_irect;
 */
 FZ_DATA extern const fz_rect fz_infinite_rect;
 FZ_DATA extern const fz_irect fz_infinite_irect;
+
+/**
+	An invalid rectangle.
+*/
+FZ_DATA extern const fz_rect fz_invalid_rect;
+FZ_DATA extern const fz_irect fz_invalid_irect;
 
 /**
 	Check if rectangle is empty.
@@ -829,6 +835,30 @@ int fz_is_point_inside_rect(fz_point p, fz_rect r);
 	top right corner is not included).
 */
 int fz_is_point_inside_irect(int x, int y, fz_irect r);
+
+/**
+	Inclusion test for rects.
+
+	rects are assumed to be both open or both closed.
+
+	No invalid rect can include any other rect.
+	No invalid rect can be included by any rect.
+	Empty (point) rects can include themselves.
+	Empty (line) rects can include many (subline) rects.
+*/
+int fz_is_rect_inside_rect(fz_rect inner, fz_rect outer);
+
+/**
+	Inclusion test for irects.
+
+	rects are assumed to be both open or both closed.
+
+	No invalid rect can include any other rect.
+	No invalid rect can be included by any rect.
+	Empty (point) rects can include themselves.
+	Empty (line) rects can include many (subline) rects.
+*/
+int fz_is_irect_inside_irect(fz_irect inner, fz_irect outer);
 
 /**
 	Inclusion test for quad in quad.
