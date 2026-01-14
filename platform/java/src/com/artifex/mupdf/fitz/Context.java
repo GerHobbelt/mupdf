@@ -70,10 +70,25 @@ public class Context
 
 	public native static Version getVersion();
 
-	public class Version {
+	public static class Version {
 		public String version;
 		public int major;
 		public int minor;
 		public int patch;
 	}
+
+	public static void setLog(Log log_) {
+		synchronized(lock) {
+			log = log_;
+		}
+	}
+
+	public interface Log
+	{
+		void error(String message);
+		void warning(String message);
+	}
+
+	private static Log log;
+	private final static Object lock = new Object();
 }

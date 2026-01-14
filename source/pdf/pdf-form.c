@@ -93,6 +93,21 @@ int pdf_field_type(fz_context *ctx, pdf_obj *obj)
 		return PDF_WIDGET_TYPE_BUTTON;
 }
 
+const char *pdf_field_type_string(fz_context *ctx, pdf_obj *obj)
+{
+	switch (pdf_field_type(ctx, obj))
+	{
+	default:
+	case PDF_WIDGET_TYPE_BUTTON: return "button";
+	case PDF_WIDGET_TYPE_CHECKBOX: return "checkbox";
+	case PDF_WIDGET_TYPE_COMBOBOX: return "combobox";
+	case PDF_WIDGET_TYPE_LISTBOX: return "listbox";
+	case PDF_WIDGET_TYPE_RADIOBUTTON: return "radiobutton";
+	case PDF_WIDGET_TYPE_SIGNATURE: return "signature";
+	case PDF_WIDGET_TYPE_TEXT: return "text";
+	}
+}
+
 /* Find the point in a field hierarchy where all descendants
  * share the same name */
 static pdf_obj *find_head_of_field_group(fz_context *ctx, pdf_obj *obj)
@@ -1081,8 +1096,8 @@ int pdf_text_widget_format(fz_context *ctx, pdf_annot *tw)
 static char *
 merge_changes(fz_context *ctx, const char *value, int start, int end, const char *change)
 {
-	int changelen = change ? strlen(change) : 0;
-	int valuelen = value ? strlen(value) : 0;
+	int changelen = change ? (int)strlen(change) : 0;
+	int valuelen = value ? (int)strlen(value) : 0;
 	int prelen = (start >= 0 ? start : 0);
 	int postlen = (end >= 0 && end <= valuelen ? valuelen - end : 0);
 	int newlen =  prelen + changelen + postlen + 1;
@@ -1193,14 +1208,14 @@ int pdf_edit_text_field_value(fz_context *ctx, pdf_annot *widget, const char *va
 			if (rc)
 			{
 				*result = merge_changes(ctx, evt.newValue, evt.selStart, evt.selEnd, evt.newChange);
-				*selStart = evt.selStart + strlen(evt.newChange);
+				*selStart = evt.selStart + (int)strlen(evt.newChange);
 				*selEnd = *selStart;
 			}
 		}
 		else
 		{
 			*result = merge_changes(ctx, value, *selStart, *selEnd, change);
-			*selStart = evt.selStart + strlen(change);
+			*selStart = evt.selStart + (int)strlen(change);
 			*selEnd = *selStart;
 		}
 	}

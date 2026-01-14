@@ -146,6 +146,8 @@ int pdf_lookup_metadata(fz_context *ctx, pdf_document *doc, const char *key, cha
 
 fz_outline *pdf_load_outline(fz_context *ctx, pdf_document *doc);
 
+fz_outline_iterator *pdf_new_outline_iterator(fz_context *ctx, pdf_document *doc);
+
 /*
 	Get the number of layer configurations defined in this document.
 
@@ -605,6 +607,7 @@ typedef struct
 	char opwd_utf8[128]; /* Owner password. */
 	char upwd_utf8[128]; /* User password. */
 	int do_snapshot; /* Do not use directly. Use the snapshot functions. */
+	int do_preserve_metadata; /* When cleaning, preserve metadata unchanged. */
 } pdf_write_options;
 
 FZ_DATA extern const pdf_write_options pdf_default_write_options;

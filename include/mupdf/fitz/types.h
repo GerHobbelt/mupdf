@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2021 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -20,29 +20,22 @@
 // Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
 // CA 94945, U.S.A., +1(415)492-9861, for further information.
 
-#ifndef TESSOCR_H
-#define TESSOCR_H
+#ifndef MUPDF_FITZ_TYPES_H
+#define MUPDF_FITZ_TYPES_H
 
-#include "mupdf/fitz.h"
+typedef struct fz_document fz_document;
 
-void *ocr_init(fz_context *ctx, const char *lang, const char *datadir);
-
-void ocr_fin(fz_context *ctx, void *api);
-
-void ocr_recognise(fz_context *ctx,
-		void *api,
-		fz_pixmap *pix,
-		void (*callback)(fz_context *ctx,
-				void *arg,
-				int unicode,
-				const char *font_name,
-				const int *line_bbox,
-				const int *word_bbox,
-				const int *char_bbox,
-				int pointsize),
-		int (*progress)(fz_context *ctx,
-				void *arg,
-				int progress),
-		void *arg);
+/**
+	Locations within the document are referred to in terms of
+	chapter and page, rather than just a page number. For some
+	documents (such as epub documents with large numbers of pages
+	broken into many chapters) this can make navigation much faster
+	as only the required chapter needs to be decoded at a time.
+*/
+typedef struct
+{
+	int chapter;
+	int page;
+} fz_location;
 
 #endif

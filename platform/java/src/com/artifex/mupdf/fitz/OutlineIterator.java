@@ -20,29 +20,50 @@
 // Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
 // CA 94945, U.S.A., +1(415)492-9861, for further information.
 
-#ifndef TESSOCR_H
-#define TESSOCR_H
+package com.artifex.mupdf.fitz;
 
-#include "mupdf/fitz.h"
+public class OutlineIterator
+{
+	protected long pointer;
 
-void *ocr_init(fz_context *ctx, const char *lang, const char *datadir);
+	protected native void finalize();
 
-void ocr_fin(fz_context *ctx, void *api);
+	public void destroy() {
+		finalize();
+	}
 
-void ocr_recognise(fz_context *ctx,
-		void *api,
-		fz_pixmap *pix,
-		void (*callback)(fz_context *ctx,
-				void *arg,
-				int unicode,
-				const char *font_name,
-				const int *line_bbox,
-				const int *word_bbox,
-				const int *char_bbox,
-				int pointsize),
-		int (*progress)(fz_context *ctx,
-				void *arg,
-				int progress),
-		void *arg);
+	protected OutlineIterator(long p) {
+		pointer = p;
+	}
 
-#endif
+	public native int next();
+	public native int prev();
+	public native int up();
+	public native int down();
+
+	public int insert(OutlineItem item)
+	{
+		return insert(item.title, item.uri, item.is_open);
+	}
+	public native int insert(String title, String uri, boolean is_open);
+	public void update(OutlineItem item)
+	{
+		update(item.title, item.uri, item.is_open);
+	}
+	public native void update(String title, String uri, boolean is_open);
+	public native OutlineItem item();
+	public native int delete();
+
+	public static class OutlineItem {
+		public String title;
+		public String uri;
+		public boolean is_open;
+
+		public OutlineItem(String title, String uri, boolean is_open)
+		{
+			this.title = title;
+			this.uri = uri;
+			this.is_open = is_open;
+		}
+	}
+}
