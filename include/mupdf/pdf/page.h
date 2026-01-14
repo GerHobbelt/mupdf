@@ -158,15 +158,41 @@ fz_pixmap *pdf_new_pixmap_from_page_contents_with_separations_and_usage(fz_conte
 fz_pixmap *pdf_new_pixmap_from_page_with_separations_and_usage(fz_context *ctx, pdf_page *page, fz_matrix ctm, fz_colorspace *cs, fz_separations *seps, int alpha, const char *usage, fz_box_type box);
 
 enum {
+	/* Do not change images at all */
 	PDF_REDACT_IMAGE_NONE,
+
+	/* If the image intrudes across the redaction region (even if clipped),
+	 * remove it. */
 	PDF_REDACT_IMAGE_REMOVE,
+
+	/* If the image intrudes across the redaction region (even if clipped),
+	 * replace the bit that intrudes with black pixels. */
 	PDF_REDACT_IMAGE_PIXELS,
+
+	/* If the image, when clipped, intrudes across the redaction
+	 * region, remove it completely. Note: clipped is a rough estimate
+	 * based on the bbox of clipping paths.
+	 *
+	 * Essentially this says "remove any image that has visible parts
+	 * that extend into the redaction region".
+	 *
+	 * This method can effectively 'leak' invisible information during
+	 * the redaction phase, so should be used with caution.
+	 */
+	PDF_REDACT_IMAGE_REMOVE_UNLESS_INVISIBLE
+};
+
+enum {
+	PDF_REDACT_LINE_ART_NONE,
+	PDF_REDACT_LINE_ART_REMOVE_IF_COVERED,
+	PDF_REDACT_LINE_ART_REMOVE_IF_TOUCHED
 };
 
 typedef struct
 {
 	int black_boxes;
 	int image_method;
+	int line_art;
 } pdf_redact_options;
 
 int pdf_redact_page(fz_context *ctx, pdf_document *doc, pdf_page *page, pdf_redact_options *opts);
