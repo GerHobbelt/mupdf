@@ -2525,7 +2525,7 @@ pdf_signature_info(fz_context *ctx, const char *name, pdf_pkcs7_distinguished_na
 #endif
 
 		fzbuf = fz_new_buffer(ctx, 256);
-		if (name)
+		if (name && strlen(name) > 0)
 		{
 			if (include_labels)
 				fz_append_string(ctx, fzbuf, "Digitally signed by ");
@@ -2541,7 +2541,7 @@ pdf_signature_info(fz_context *ctx, const char *name, pdf_pkcs7_distinguished_na
 			fz_append_string(ctx, fzbuf, dn_str);
 		}
 
-		if (reason)
+		if (reason && strlen(reason) > 0)
 		{
 			fz_append_string(ctx, fzbuf, "\n");
 			if (include_labels)
@@ -2549,7 +2549,7 @@ pdf_signature_info(fz_context *ctx, const char *name, pdf_pkcs7_distinguished_na
 			fz_append_string(ctx, fzbuf, reason);
 		}
 
-		if (location)
+		if (location && strlen(location) > 0)
 		{
 			fz_append_string(ctx, fzbuf, "\n");
 			if (include_labels)
@@ -2734,9 +2734,9 @@ retry_after_repair:
 				/* We don't want to be using any local xref, so
 				 * bin any that we have. */
 				pdf_annot_pop_and_discard_local_xref(ctx, annot);
-				/* Binning the xref may leave us holding pointers
-				 * to the wrong versions of ap_n. */
-				ap_n = pdf_annot_ap(ctx, annot);
+				/* Binning the xref may leave ap_n holding an invalid pointer.
+				 * We don't use it from this point onwards anymore, but beware
+				 * in future code changes. */
 				pop_local_xref = 0;
 			}
 

@@ -584,6 +584,21 @@ FUN(Document_recognize)(JNIEnv *env, jclass cls, jstring jmagic)
 	return recognized;
 }
 
+JNIEXPORT jboolean JNICALL
+FUN(Document_supportsAccelerator)(JNIEnv *env, jobject self)
+{
+	fz_context *ctx = get_context(env);
+	fz_document *doc = from_Document(env, self);
+	jboolean support = JNI_FALSE;
+
+	fz_try(ctx)
+		support = fz_document_supports_accelerator(ctx, doc);
+	fz_catch(ctx)
+		jni_rethrow(env, ctx);
+
+	return support;
+}
+
 JNIEXPORT void JNICALL
 FUN(Document_saveAccelerator)(JNIEnv *env, jobject self, jstring jfilename)
 {
@@ -1006,22 +1021,79 @@ FUN(Document_search)(JNIEnv *env, jobject self, jint chapter, jint page, jstring
 {
 	fz_context *ctx = get_context(env);
 	fz_document *doc = from_Document(env, self);
-	fz_quad hits[256];
+	fz_quad hits[500];
+	int marks[500];
 	const char *needle = NULL;
 	int n = 0;
 
-	if (!ctx || !page) return NULL;
-	if (!jneedle) jni_throw_arg(env, "needle must not be null");
+	if (!ctx) return NULL;
+	if (!jneedle) return NULL;
 
 	needle = (*env)->GetStringUTFChars(env, jneedle, NULL);
 	if (!needle) return 0;
 
 	fz_try(ctx)
-		n = fz_search_chapter_page_number(ctx, doc, chapter, page, needle, hits, nelem(hits));
+		n = fz_search_chapter_page_number(ctx, doc, chapter, page, needle, marks, hits, nelem(hits));
 	fz_always(ctx)
 		(*env)->ReleaseStringUTFChars(env, jneedle, needle);
 	fz_catch(ctx)
 		jni_rethrow(env, ctx);
 
-	return to_QuadArray_safe(ctx, env, hits, n);
+	return to_SearchHits_safe(ctx, env, marks, hits, n);
+}
+
+JNIEXPORT jobject JNICALL
+FUN(Document_resolveLinkDestination)(JNIEnv *env, jobject self, jstring juri)
+{
+	fz_context *ctx = get_context(env);
+	fz_document *doc = from_Document(env, self);
+	const char *uri = "";
+	fz_link_dest dest;
+	jobject jdestination;
+
+	if (!ctx || !doc) return NULL;
+
+	if (juri)
+	{
+		uri = (*env)->GetStringUTFChars(env, juri, NULL);
+		if (!uri)
+			return NULL;
+	}
+
+	fz_try(ctx)
+		dest = fz_resolve_link_dest(ctx, doc, uri);
+	fz_always(ctx)
+		if (juri)
+			(*env)->ReleaseStringUTFChars(env, juri, uri);
+	fz_catch(ctx)
+		jni_rethrow(env, ctx);
+
+	jdestination = (*env)->NewObject(env, cls_LinkDestination, mid_LinkDestination_init,
+		dest.loc.chapter, dest.loc.page, dest.type, dest.x, dest.y, dest.w, dest.h, dest.zoom);
+	if (!jdestination || (*env)->ExceptionCheck(env))
+		return NULL;
+
+	return jdestination;
+}
+
+JNIEXPORT jstring JNICALL
+FUN(Document_formatLinkURI)(JNIEnv *env, jobject self, jobject jdest)
+{
+	fz_context *ctx = get_context(env);
+	fz_document *doc = from_Document(env, self);
+	fz_link_dest dest = from_LinkDestination(env, jdest);
+	char *uri = NULL;
+	jobject juri;
+
+	fz_try(ctx)
+		uri = fz_format_link_uri(ctx, doc, dest);
+	fz_catch(ctx)
+		jni_rethrow(env, ctx);
+
+	juri = (*env)->NewStringUTF(env, uri);
+	fz_free(ctx, uri);
+	if (juri == NULL || (*env)->ExceptionCheck(env))
+		return NULL;
+
+	return juri;
 }

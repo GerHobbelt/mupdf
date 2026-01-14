@@ -20,14 +20,12 @@ Overview:
 '''
 
 
-import argparse
 import distutils.util
 import glob
 import os
 import platform
 import re
 import shutil
-import subprocess
 import sys
 import tarfile
 import time
@@ -106,6 +104,7 @@ def venv_run(
         prefix=None,
         pip_upgrade=True,
         bufsize=-1,
+        raise_errors=True,
         ):
     '''
     Runs commands inside Python venv, joined by &&.
@@ -184,6 +183,7 @@ def venv_run(
 
     return system(
             command,
+            raise_errors=raise_errors,
             return_output=return_output,
             prefix=prefix,
             bufsize=bufsize,
@@ -706,7 +706,7 @@ def main():
 
     sdist = None
     wheels = []
-    pypi_test = True
+    pypi_test = 1
     abis = None
     outdir = 'pypackage-out'
     remote = None
@@ -792,6 +792,7 @@ def main():
                         or "build ...", otherwise uses ABIs (default or as
                         specified with 'abis ...').
                         ''',
+                        multi=True,
                         subargs = [
                             jlib.Arg('-p <python>',
                                     help='''
@@ -868,10 +869,18 @@ def main():
                 # Also run basic import test.
                 command += " -t"
 
+            # Add a command to rsync remote wheels back to local machine.
+            #
+            #log( '{sdist=}')
+            sdist_prefix = os.path.basename( sdist)
+            sdist_suffix = '.tar.gz'
+            assert sdist_prefix.endswith( sdist_suffix)
+            sdist_prefix = sdist_prefix[ : -len( sdist_suffix)]
             command += (
                     f'"'
-                    f' && rsync -ai {user}{host}:{directory}pypackage-out/ {outdir}/'
+                    f' && rsync -ai \'{user}{host}:{directory}pypackage-out/{sdist_prefix}*\' {outdir}/'
                     )
+
             system(command, prefix=f'{user}{host}:{directory}: ')
 
         else:
@@ -918,13 +927,14 @@ def main():
             log(f'    {wheel}')
 
     if args.test:
-        pypi = False
-        package_name = None
-        python = args.test.p.python if args.test.p else None
-        if args.test.pypi:
-            pypi = True
-            package_name = args.test.pypi.package_name
-        test(args.test.command, package_name, wheels, abis, pypi, pypi_test, python)
+        for test_ in args.test:
+            pypi = False
+            package_name = None
+            python = test_.p.python if test_.p else None
+            if test_.pypi:
+                pypi = True
+                package_name = test_.pypi.package_name
+            test( test_.command, package_name, wheels, abis, pypi, pypi_test, python)
 
     if args.upload:
         assert sdist, f'Cannot upload because no sdist specified; use "sdist ...".'
@@ -932,12 +942,21 @@ def main():
         log(f'Uploading wheels ({len(wheels)} for sdist: {sdist!r}')
         for wheel in wheels:
             log(f'    {wheel}')
-        venv_run([
-                f'pip install twine',
-                f'python -m twine upload --disable-progress-bar {"--repository testpypi" if pypi_test else ""} {sdist} {" ".join(wheels)}',
-                ],
-                bufsize=0,  # So we see login/password prompts.
-                )
+        # We repeated on error, in case user enters the wrong password.
+        while 1:
+            try:
+                venv_run([
+                        f'pip install twine',
+                        f'python -m twine upload --disable-progress-bar {"--repository testpypi" if pypi_test else ""} {sdist} {" ".join(wheels)}',
+                        ],
+                        bufsize=0,  # So we see login/password prompts.
+                        raise_errors=True,
+                        )
+            except Exception  as e:
+                jlib.log( 'Failed to upload: {e=}')
+                input( jlib.log_text( 'Press <enter> to retry... ').strip())
+            else:
+                break
 
     for remote in args.remote:
         user, host, directory = parse_remote(remote.uri)
@@ -950,7 +969,7 @@ def main():
                 prefix=f'rsync to {user}{host}:{directory}: ',
                 )
         if remote.a:
-            remote_args = remote.a.args
+            remote_args = f'pypi-test {pypi_test} {remote.a.args}'
             system(
                     f'ssh {user}{host} '
                     f'"'

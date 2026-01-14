@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2004-2022 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -22,8 +22,21 @@
 
 package com.artifex.mupdf.fitz;
 
+import java.io.InputStream;
+import java.util.Date;
+
 public class PDFDocument extends Document
 {
+	/* Languages, keep in sync with FZ_LANG_* */
+	public static final int LANGUAGE_UNSET = 0;
+	public static final int LANGUAGE_ur = 507;
+	public static final int LANGUAGE_urd = 3423;
+	public static final int LANGUAGE_ko = 416;
+	public static final int LANGUAGE_ja = 37;
+	public static final int LANGUAGE_zh = 242;
+	public static final int LANGUAGE_zh_Hans = 14093;
+	public static final int LANGUAGE_zh_Hant = 14822;
+
 	static {
 		Context.init();
 	}
@@ -136,7 +149,23 @@ public class PDFDocument extends Document
 	}
 
 	public interface JsEventListener {
-		void onAlert(String message);
+		public static final int BUTTON_GROUP_OK = 0;
+		public static final int BUTTON_GROUP_OK_CANCEL = 1;
+		public static final int BUTTON_GROUP_YES_NO = 2;
+		public static final int BUTTON_GROUP_YES_NO_CANCEL = 3;
+
+		public static final int BUTTON_NONE = 0;
+		public static final int BUTTON_OK = 1;
+		public static final int BUTTON_CANCEL = 2;
+		public static final int BUTTON_NO = 3;
+		public static final int BUTTON_YES = 4;
+
+		public static class AlertResult {
+			public int buttonPressed;
+			public boolean checkboxChecked;
+		}
+
+		public AlertResult onAlert(PDFDocument doc, String title, String message, int iconType, int buttonGroupType, String checkboxMessage, boolean checkboxState);
 	}
 	public native void enableJs();
 	public native void disableJs();
@@ -159,6 +188,10 @@ public class PDFDocument extends Document
 	public native boolean wasLinearized();
 
 	public native void enableJournal();
+	public native void saveJournal(String filename);
+	public native void saveJournalWithStream(SeekableOutputStream stream);
+	public native void loadJournal(String filename);
+	public native void loadJournalWithStream(SeekableInputStream stream);
 
 	public native int undoRedoPosition();
 	public native int undoRedoSteps();
@@ -172,4 +205,39 @@ public class PDFDocument extends Document
 	public native void beginOperation(String operation);
 	public native void beginImplicitOperation();
 	public native void endOperation();
+
+	public native int getLanguage();
+	public native void setLanguage(int lang);
+
+	public native int countSignatures();
+
+	public native PDFObject addEmbeddedFile(String filename, String mimetype, Buffer contents, long created, long modified, boolean addChecksum);
+	public native PDFEmbeddedFileParams getEmbeddedFileParams(PDFObject fs);
+	public native Buffer loadEmbeddedFileContents(PDFObject fs);
+	public native boolean verifyEmbeddedFileChecksum(PDFObject fs);
+
+	public PDFObject addEmbeddedFile(String filename, String mimetype, InputStream stream, Date created, Date modified, boolean addChecksum) {
+		Buffer contents = new Buffer();
+		contents.writeFromStream(stream);
+		long createdTime = created != null ? created.getTime() : -1;
+		long modifiedTime = modified != null ? modified.getTime() : -1;
+		return addEmbeddedFile(filename, mimetype, contents, createdTime, modifiedTime, addChecksum);
+	}
+
+	public static class PDFEmbeddedFileParams {
+		public final String filename;
+		public final String mimetype;
+		public final int size;
+		public final Date creationDate;
+		public final Date modificationDate;
+
+		protected PDFEmbeddedFileParams(String filename, String mimetype, int size, long created, long modified) {
+			this.filename = filename;
+			this.mimetype = mimetype;
+			this.size = size;
+			this.creationDate = new Date(created);
+			this.modificationDate = new Date(modified);
+		}
+	}
+
 }

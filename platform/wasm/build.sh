@@ -4,6 +4,9 @@ make -j4 -C ../.. generate
 
 source /opt/emsdk/emsdk_env.sh
 
+echo Building generated files:
+make -j4 -C ../.. generate
+
 echo Building library:
 make -j4 -C ../.. \
 	OS=wasm build=release \
@@ -18,7 +21,8 @@ emcc -Wall -Os -g1 -o libmupdf.js \
 	-s ASSERTIONS=1 \
 	-s ABORTING_MALLOC=0 \
 	-s ALLOW_MEMORY_GROWTH=1 \
-	-s EXTRA_EXPORTED_RUNTIME_METHODS='["ccall","cwrap"]' \
+	-s EXPORTED_RUNTIME_METHODS='["ccall","cwrap"]' \
+	-s EXPORTED_FUNCTIONS='["_malloc","_free"]' \
 	-I ../../include \
 	--pre-js wrap.js \
 	wrap.c \

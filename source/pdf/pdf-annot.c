@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2004-2022 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -518,20 +518,23 @@ pdf_create_link(fz_context *ctx, pdf_page *page, fz_rect bbox, const char *uri)
 	fz_link **linkp;
 	fz_rect page_mediabox;
 	fz_matrix page_ctm;
+	fz_rect rect;
 
 	fz_var(link);
 	fz_var(ind_obj);
 	fz_var(bs);
 	fz_var(a);
 
-	pdf_page_transform(ctx, page, &page_mediabox, &page_ctm);
-	page_ctm = fz_invert_matrix(page_ctm);
-	bbox = fz_transform_rect(bbox, page_ctm);
+	pdf_begin_operation(ctx, page->doc, "Create Link");
 
 	fz_try(ctx)
 	{
 		int ind_obj_num;
 		pdf_obj *annot_arr;
+
+		pdf_page_transform(ctx, page, &page_mediabox, &page_ctm);
+		page_ctm = fz_invert_matrix(page_ctm);
+		rect = fz_transform_rect(bbox, page_ctm);
 
 		annot_arr = pdf_dict_get(ctx, page->obj, PDF_NAME(Annots));
 		if (annot_arr == NULL)
@@ -542,19 +545,15 @@ pdf_create_link(fz_context *ctx, pdf_page *page, fz_rect bbox, const char *uri)
 
 		pdf_dict_put(ctx, annot_obj, PDF_NAME(Type), PDF_NAME(Annot));
 		pdf_dict_put(ctx, annot_obj, PDF_NAME(Subtype), PDF_NAME(Link));
-		pdf_dict_put_rect(ctx, annot_obj, PDF_NAME(Rect), bbox);
+		pdf_dict_put_rect(ctx, annot_obj, PDF_NAME(Rect), rect);
 		bs = pdf_new_dict(ctx, doc, 4);
 		pdf_dict_put(ctx, bs, PDF_NAME(S), PDF_NAME(S));
 		pdf_dict_put(ctx, bs, PDF_NAME(Type), PDF_NAME(Border));
 		pdf_dict_put_int(ctx, bs, PDF_NAME(W), 0);
 		pdf_dict_put(ctx, annot_obj, PDF_NAME(BS), bs);
-		if (uri)
-		{
-			a = pdf_new_dict(ctx, doc, 2);
-			pdf_dict_put(ctx, a, PDF_NAME(S), PDF_NAME(URI));
-			pdf_dict_put_text_string(ctx, a, PDF_NAME(URI), uri);
-			pdf_dict_put(ctx, annot_obj, PDF_NAME(A), a);
-		}
+
+		pdf_dict_put_drop(ctx, annot_obj, PDF_NAME(A),
+			pdf_new_action_from_link(ctx, doc, uri));
 
 		/*
 			Both annotation object and annotation structure are now created.
@@ -577,10 +576,10 @@ pdf_create_link(fz_context *ctx, pdf_page *page, fz_rect bbox, const char *uri)
 	}
 	fz_always(ctx)
 	{
-		pdf_drop_obj(ctx, a);
 		pdf_drop_obj(ctx, bs);
 		pdf_drop_obj(ctx, annot_obj);
 		pdf_drop_obj(ctx, ind_obj);
+		pdf_end_operation(ctx, page->doc);
 	}
 	fz_catch(ctx)
 	{
@@ -2837,4 +2836,56 @@ pdf_set_annot_appearance_from_display_list(fz_context *ctx, pdf_annot *annot, co
 	}
 	fz_catch(ctx)
 		fz_rethrow(ctx);
+}
+
+static pdf_obj *filespec_subtypes[] = {
+	PDF_NAME(FileAttachment),
+	NULL,
+};
+
+int
+pdf_annot_has_filespec(fz_context *ctx, pdf_annot *annot)
+{
+	return is_allowed_subtype_wrap(ctx, annot, PDF_NAME(FS), filespec_subtypes);
+}
+
+pdf_obj *
+pdf_annot_filespec(fz_context *ctx, pdf_annot *annot)
+{
+	pdf_obj *filespec;
+
+	pdf_annot_push_local_xref(ctx, annot);
+
+	fz_try(ctx)
+	{
+		check_allowed_subtypes(ctx, annot, PDF_NAME(FS), filespec_subtypes);
+		filespec = pdf_dict_get(ctx, annot->obj, PDF_NAME(FS));
+	}
+	fz_always(ctx)
+		pdf_annot_pop_local_xref(ctx, annot);
+	fz_catch(ctx)
+		fz_rethrow(ctx);
+
+	return filespec;
+}
+
+void
+pdf_set_annot_filespec(fz_context *ctx, pdf_annot *annot, pdf_obj *fs)
+{
+	if (!pdf_is_embedded_file(ctx, fs))
+		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot set non-filespec as annotation filespec");
+
+	begin_annot_op(ctx, annot, "Set filespec");
+
+	fz_try(ctx)
+	{
+		check_allowed_subtypes(ctx, annot, PDF_NAME(M), markup_subtypes);
+		pdf_dict_put_drop(ctx, pdf_annot_obj(ctx, annot), PDF_NAME(FS), fs);
+	}
+	fz_always(ctx)
+		end_annot_op(ctx, annot);
+	fz_catch(ctx)
+		fz_rethrow(ctx);
+
+	pdf_dirty_annot(ctx, annot);
 }

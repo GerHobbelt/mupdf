@@ -86,6 +86,7 @@ public class Document
 
 	public static native boolean recognize(String magic);
 
+	public native boolean supportsAccelerator();
 	public native void saveAccelerator(String filename);
 	public native void outputAccelerator(SeekableOutputStream stream);
 
@@ -191,7 +192,7 @@ public class Document
 		return -1;
 	}
 
-	public native Quad[] search(int chapter, int page, String needle);
+	public native Quad[][] search(int chapter, int page, String needle);
 
 	public native Location resolveLink(String uri);
 	public Location resolveLink(Outline link) {
@@ -199,6 +200,17 @@ public class Document
 	}
 	public Location resolveLink(Link link) {
 		return resolveLink(link.uri);
+	}
+
+	public native LinkDestination resolveLinkDestination(String uri);
+	public LinkDestination resolveLinkDestination(OutlineIterator.OutlineItem item) {
+		return resolveLinkDestination(item.uri);
+	}
+	public LinkDestination resolveLinkDestination(Outline link) {
+		return resolveLinkDestination(link.uri);
+	}
+	public LinkDestination resolveLinkDestination(Link link) {
+		return resolveLinkDestination(link.uri);
 	}
 
 	public native Outline[] loadOutline();
@@ -222,6 +234,8 @@ public class Document
 	public native boolean hasPermission(int permission);
 
 	public native boolean isUnencryptedPDF();
+
+	public native String formatLinkURI(LinkDestination dest);
 
 	public boolean isPDF() {
 		return false;

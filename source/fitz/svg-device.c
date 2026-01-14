@@ -86,6 +86,9 @@ typedef struct
 	image *images;
 
 	int layers;
+
+	float page_width;
+	float page_height;
 } svg_device;
 
 /* SVG is awkward about letting us define things within symbol definitions
@@ -909,6 +912,9 @@ svg_dev_fill_image(fz_context *ctx, fz_device *dev, fz_image *image, fz_matrix c
 	fz_matrix local_ctm = ctm;
 	fz_matrix scale = { 0 };
 
+	if (alpha == 0)
+		return;
+
 	scale.a = 1.0f / image->w;
 	scale.d = 1.0f / image->h;
 
@@ -929,8 +935,20 @@ svg_dev_fill_shade(fz_context *ctx, fz_device *dev, fz_shade *shade, fz_matrix c
 	fz_output *out = sdev->out;
 	fz_irect bbox;
 	fz_pixmap *pix;
+	fz_rect scissor = fz_device_current_scissor(ctx, dev);
 
-	bbox = fz_round_rect(fz_intersect_rect(fz_bound_shade(ctx, shade, ctm), fz_device_current_scissor(ctx, dev)));
+	if (alpha == 0)
+		return;
+
+	if (fz_is_infinite_rect(scissor))
+	{
+		scissor.x0 = 0;
+		scissor.x1 = sdev->page_width;
+		scissor.y0 = 0;
+		scissor.y1 = sdev->page_height;
+	}
+
+	bbox = fz_round_rect(fz_intersect_rect(fz_bound_shade(ctx, shade, ctm), scissor));
 	if (fz_is_empty_irect(bbox))
 		return;
 	pix = fz_new_pixmap_with_bbox(ctx, fz_device_rgb(ctx), bbox, NULL, 1);
@@ -1084,6 +1102,7 @@ svg_dev_begin_group(fz_context *ctx, fz_device *dev, fz_rect bbox, fz_colorspace
 		out = end_def(ctx, sdev);
 	}
 
+	/* FIXME: Handle alpha == 0 somehow? */
 	/* SVG 1.1 doesn't support adequate blendmodes/knockout etc, so just ignore it for now */
 	if (alpha == 1)
 		fz_write_printf(ctx, out, "<g");
@@ -1332,6 +1351,8 @@ fz_device *fz_new_svg_device_with_id(fz_context *ctx, fz_output *out, float page
 	dev->layers = 0;
 	dev->text_as_text = (text_format == FZ_SVG_TEXT_AS_TEXT);
 	dev->reuse_images = reuse_images;
+	dev->page_width = page_width;
+	dev->page_height = page_height;
 
 	fz_write_printf(ctx, out, "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n");
 	fz_write_printf(ctx, out, "<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n");

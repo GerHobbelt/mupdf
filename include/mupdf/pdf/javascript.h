@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2004-2022 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -23,6 +23,9 @@
 #ifndef MUPDF_PDF_JAVASCRIPT_H
 #define MUPDF_PDF_JAVASCRIPT_H
 
+#include "mupdf/pdf/document.h"
+#include "mupdf/pdf/form.h"
+
 void pdf_enable_js(fz_context *ctx, pdf_document *doc);
 void pdf_disable_js(fz_context *ctx, pdf_document *doc);
 int pdf_js_supported(fz_context *ctx, pdf_document *doc);
@@ -35,6 +38,6 @@ char *pdf_js_event_value(pdf_js *js);
 void pdf_js_event_init_keystroke(pdf_js *js, pdf_obj *target, pdf_keystroke_event *evt);
 int pdf_js_event_result_keystroke(pdf_js *js, pdf_keystroke_event *evt);
 
-void pdf_js_execute(pdf_js *js, const char *name, const char *code);
+void pdf_js_execute(pdf_js *js, const char *name, const char *code, char **result);
 
 #endif

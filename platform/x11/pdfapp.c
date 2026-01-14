@@ -6,11 +6,6 @@
 #include <limits.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include <sys/stat.h>
-
-#ifdef _MSC_VER
-#define stat _stat
-#endif
 
 #ifdef _WIN32
 #include <windows.h>
@@ -28,17 +23,6 @@
 #ifndef MAX
 #define MAX(a,b) ((a) > (b) ? (a) : (b))
 #endif
-
-time_t
-stat_mtime(const char *path)
-{
-	struct stat info;
-
-	if (stat(path, &info) < 0)
-		return 0;
-
-	return info.st_mtime;
-}
 
 static int convert_to_accel_path(fz_context *ctx, char outname[], char *absname, size_t len)
 {
@@ -412,13 +396,13 @@ void pdfapp_open_progressive(pdfapp_t *app, char *filename, int reload, int kbps
 		}
 		else if (kbps > 0)
 		{
-			fz_stream *stream = fz_open_file_progressive(ctx, filename, kbps, pdfapp_more_data, app);
+			app->stream = fz_open_file_progressive(ctx, filename, kbps, pdfapp_more_data, app);
 			while (1)
 			{
 				fz_try(ctx)
 				{
-					fz_seek(ctx, stream, 0, SEEK_SET);
-					app->doc = fz_open_document_with_stream(ctx, filename, stream);
+					fz_seek(ctx, app->stream, 0, SEEK_SET);
+					app->doc = fz_open_document_with_stream(ctx, filename, app->stream);
 				}
 				fz_catch(ctx)
 				{
@@ -445,8 +429,8 @@ void pdfapp_open_progressive(pdfapp_t *app, char *filename, int reload, int kbps
 			{
 				/* Check whether that file exists, and isn't older than
 				 * the document. */
-				atime = stat_mtime(accelpath);
-				dtime = stat_mtime(filename);
+				atime = fz_stat_mtime(accelpath);
+				dtime = fz_stat_mtime(filename);
 				if (atime == 0)
 				{
 					/* No accelerator */
@@ -1124,6 +1108,12 @@ static void pdfapp_gotouri(pdfapp_t *app, char *uri)
 		}
 	}
 
+	if (strncmp(uri, "file://", 7) && strncmp(uri, "http://", 7) && strncmp(uri, "https://", 8) && strncmp(uri, "mailto:", 7))
+	{
+		fz_warn(app->ctx, "refusing to open unknown link (%s)", uri);
+		return;
+	}
+
 	winopenuri(app, uri);
 }
 
@@ -1196,7 +1186,7 @@ static void pdfapp_search_in_direction(pdfapp_t *app, enum panning *panto, int d
 			pdfapp_showpage(app, 1, 0, 0, 0, 1);
 		}
 
-		app->hit_count = fz_search_stext_page(app->ctx, app->page_text, app->search, app->hit_bbox, nelem(app->hit_bbox));
+		app->hit_count = fz_search_stext_page(app->ctx, app->page_text, app->search, NULL, app->hit_bbox, nelem(app->hit_bbox));
 		if (app->hit_count > 0)
 		{
 			*panto = dir == 1 ? PAN_TO_TOP : PAN_TO_BOTTOM;

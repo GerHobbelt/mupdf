@@ -237,9 +237,8 @@ add_char_to_line(fz_context *ctx, fz_stext_page *page, fz_stext_line *line, fz_m
 	}
 	else
 	{
-		fz_rect bbox = fz_font_bbox(ctx, font);
-		a.x = bbox.x1;
-		d.x = bbox.x0;
+		a.x = 1;
+		d.x = 0;
 		a.y = 0;
 		d.y = 0;
 	}
@@ -847,6 +846,10 @@ fz_parse_stext_options(fz_context *ctx, fz_stext_options *opts, const char *stri
 	opts->flags |= FZ_STEXT_MEDIABOX_CLIP;
 	if (fz_has_option(ctx, string, "mediabox-clip", &val) && fz_option_eq(val, "no"))
 		opts->flags ^= FZ_STEXT_MEDIABOX_CLIP;
+
+	opts->scale = 1;
+	if (fz_has_option(ctx, string, "resolution", &val))
+		opts->scale = fz_atof(val) / 96.0f; /* HTML base resolution is 96ppi */
 
 	return opts;
 }

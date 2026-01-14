@@ -346,6 +346,10 @@ fz_copy_pixmap_area_converting_seps(fz_context *ctx, fz_pixmap *src, fz_pixmap *
 	dstride -= dn * dw;
 	sstride -= sn * dw;
 
+	if (dst->x < src->x || dst->x + dst->w > src->x + src->w ||
+		dst->y < src->y || dst->y + dst->h > src->y + src-> h)
+		fz_throw(ctx, FZ_ERROR_GENERIC, "Cannot convert pixmap where dst is not within src!");
+
 	/* Process colorants (and alpha) first */
 	if (dst->colorspace == src->colorspace && proof_cs == NULL && dst->s == 0 && src->s == 0)
 	{
@@ -753,6 +757,12 @@ fz_copy_pixmap_area_converting_seps(fz_context *ctx, fz_pixmap *src, fz_pixmap *
 			/* Converting from CMYK + Spots -> RGB with a change in spots. */
 			fz_pixmap *temp = fz_new_pixmap(ctx, src->colorspace, src->w, src->h, dst->seps, dst->alpha);
 
+			/* Match the regions exactly (this matters in particular when we are
+			 * using rotation, and the src region is not origined at 0,0 - see bug
+			 * 704726. */
+			temp->x = src->x;
+			temp->y = src->y;
+
 			fz_try(ctx)
 			{
 				temp = fz_copy_pixmap_area_converting_seps(ctx, src, temp, prf, color_params, default_cs);
@@ -853,6 +863,7 @@ fz_copy_pixmap_area_converting_seps(fz_context *ctx, fz_pixmap *src, fz_pixmap *
 					{
 						unsigned char *dd = ddata;
 						const unsigned char *sd = sdata + sc;
+
 						if (sa)
 						{
 							for (y = dh; y > 0; y--)
@@ -875,6 +886,7 @@ fz_copy_pixmap_area_converting_seps(fz_context *ctx, fz_pixmap *src, fz_pixmap *
 						}
 						else
 						{
+							/* This case is exercised by: -o out%d.pgm -r72 -D -F pgm -stm ../perf-testing-gpdl/pdf/Ad_InDesign.pdf */
 							for (y = dh; y > 0; y--)
 							{
 								for (x = dw; x > 0; x--)
@@ -895,13 +907,14 @@ fz_copy_pixmap_area_converting_seps(fz_context *ctx, fz_pixmap *src, fz_pixmap *
 					{
 						unsigned char *dd = ddata;
 						const unsigned char *sd = sdata + sc;
+
 						if (sa)
 						{
 							for (y = dh; y > 0; y--)
 							{
 								for (x = dw; x > 0; x--)
 								{
-									unsigned char v = 0xff - sd[i];
+									unsigned char v = sd[i];
 									if (v != 0)
 									{
 										unsigned char a = sd[ss];
@@ -917,11 +930,12 @@ fz_copy_pixmap_area_converting_seps(fz_context *ctx, fz_pixmap *src, fz_pixmap *
 						}
 						else
 						{
+							/* This case is exercised by: -o out.pkm -r72 -D ../MyTests/Bug704778.pdf 1 */
 							for (y = dh; y > 0; y--)
 							{
 								for (x = dw; x > 0; x--)
 								{
-									unsigned char v = 0xff - sd[i];
+									unsigned char v = sd[i];
 									if (v != 0)
 										for (k = 0; k < dc; k++)
 											dd[k] = fz_clampi(dd[k] + v * convert[k], 0, 255);
@@ -942,6 +956,7 @@ fz_copy_pixmap_area_converting_seps(fz_context *ctx, fz_pixmap *src, fz_pixmap *
 					{
 						unsigned char *dd = ddata;
 						const unsigned char *sd = sdata + sc;
+
 						if (sa)
 						{
 							for (y = dh; y > 0; y--)
@@ -964,6 +979,7 @@ fz_copy_pixmap_area_converting_seps(fz_context *ctx, fz_pixmap *src, fz_pixmap *
 						}
 						else
 						{
+							/* Nothing in the cluster tests this case. */
 							for (y = dh; y > 0; y--)
 							{
 								for (x = dw; x > 0; x--)
@@ -984,13 +1000,14 @@ fz_copy_pixmap_area_converting_seps(fz_context *ctx, fz_pixmap *src, fz_pixmap *
 					{
 						unsigned char *dd = ddata;
 						const unsigned char *sd = sdata + sc;
+
 						if (sa)
 						{
 							for (y = dh; y > 0; y--)
 							{
 								for (x = dw; x > 0; x--)
 								{
-									unsigned char v = 0xff - sd[i];
+									unsigned char v = sd[i];
 									if (v != 0)
 									{
 										unsigned char a = sd[ss];
@@ -1006,11 +1023,12 @@ fz_copy_pixmap_area_converting_seps(fz_context *ctx, fz_pixmap *src, fz_pixmap *
 						}
 						else
 						{
+							/* This case is exercised by: -o out.png -r72 -D ../MyTests/Bug704778.pdf 1 */
 							for (y = dh; y > 0; y--)
 							{
 								for (x = dw; x > 0; x--)
 								{
-									unsigned char v = 0xff - sd[i];
+									unsigned char v = sd[i];
 									if (v != 0)
 										for (k = 0; k < dc; k++)
 											dd[k] = fz_clampi(dd[k] - v * convert[k], 0, 255);

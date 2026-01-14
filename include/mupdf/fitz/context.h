@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2004-2022 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -259,12 +259,34 @@ void fz_default_error_callback(void *user, const char *message);
 void fz_default_warning_callback(void *user, const char *message);
 
 /**
+	A callback called whenever an error message is generated.
+	The user pointer passed to fz_set_error_callback() is passed
+	along with the error message.
+*/
+typedef void (fz_error_cb)(void *user, const char *message);
+
+/**
+	A callback called whenever a warning message is generated.
+	The user pointer passed to fz_set_warning_callback() is
+	passed along with the warning message.
+*/
+typedef void (fz_warning_cb)(void *user, const char *message);
+
+/**
 	Set the error callback. This will be called as part of the
 	exception handling.
 
 	The callback must not throw exceptions!
 */
-void fz_set_error_callback(fz_context *ctx, void (*print)(void *user, const char *message), void *user);
+void fz_set_error_callback(fz_context *ctx, fz_error_cb *error_cb, void *user);
+
+/**
+	Retrieve the currently set error callback, or NULL if none
+	has been set. Optionally, if user is non-NULL, the user pointer
+	given when the warning callback was set is also passed back to
+	the caller.
+*/
+fz_error_cb *fz_error_callback(fz_context *ctx, void **user);
 
 /**
 	Set the warning callback. This will be called as part of the
@@ -272,7 +294,15 @@ void fz_set_error_callback(fz_context *ctx, void (*print)(void *user, const char
 
 	The callback must not throw exceptions!
 */
-void fz_set_warning_callback(fz_context *ctx, void (*print)(void *user, const char *message), void *user);
+void fz_set_warning_callback(fz_context *ctx, fz_warning_cb *warning_cb, void *user);
+
+/**
+	Retrieve the currently set warning callback, or NULL if none
+	has been set. Optionally, if user is non-NULL, the user pointer
+	given when the warning callback was set is also passed back to
+	the caller.
+*/
+fz_warning_cb *fz_warning_callback(fz_context *ctx, void **user);
 
 /**
 	In order to tune MuPDF's behaviour, certain functions can

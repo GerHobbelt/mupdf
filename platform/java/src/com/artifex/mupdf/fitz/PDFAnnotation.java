@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2004-2022 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -107,16 +107,6 @@ public class PDFAnnotation
 	public static final int IS_LOCKED = 1 << (8-1);
 	public static final int IS_TOGGLE_NO_VIEW = 1 << (9-1);
 	public static final int IS_LOCKED_CONTENTS = 1 << (10-1);
-
-	/* Languages, keep in sync with FZ_LANG_* */
-	public static final int LANGUAGE_UNSET = 0;
-	public static final int LANGUAGE_ur = 507;
-	public static final int LANGUAGE_urd = 3423;
-	public static final int LANGUAGE_ko = 416;
-	public static final int LANGUAGE_ja = 37;
-	public static final int LANGUAGE_zh = 242;
-	public static final int LANGUAGE_zh_Hans = 14093;
-	public static final int LANGUAGE_zh_Hant = 14822;
 
 	public native int getType();
 	public native int getFlags();
@@ -253,6 +243,7 @@ public class PDFAnnotation
 
 	public native PDFObject getObject();
 
+	/* See PDFDocument.LANGUAGE_* */
 	public native int getLanguage();
 	public native void setLanguage(int lang);
 
@@ -299,4 +290,7 @@ public class PDFAnnotation
 	public void setAppearance(DisplayList list) {
 		setNativeAppearanceDisplayList(null, null, null, list);
 	}
+
+	public native void setFileSpecification(PDFObject fs);
+	public native PDFObject getFileSpecification();
 }

@@ -170,7 +170,7 @@ PKCS7_OBJ := $(PKCS7_SRC:%.c=$(OUT)/%.o)
 
 # --- Generated embedded font files ---
 
-HEXDUMP_EXE := $(OUT)/scripts/hexdump.exe
+HEXDUMP_SH := scripts/hexdump.sh
 
 FONT_BIN := $(sort $(wildcard resources/fonts/urw/*.cff))
 FONT_BIN += $(sort $(wildcard resources/fonts/han/*.ttc))
@@ -181,10 +181,10 @@ FONT_BIN += $(sort $(wildcard resources/fonts/sil/*.cff))
 
 FONT_GEN := $(FONT_BIN:%=generated/%.c)
 
-generated/%.cff.c : %.cff $(HEXDUMP_EXE) ; $(QUIET_GEN) $(MKTGTDIR) ; $(HEXDUMP_EXE) -s $@ $<
-generated/%.otf.c : %.otf $(HEXDUMP_EXE) ; $(QUIET_GEN) $(MKTGTDIR) ; $(HEXDUMP_EXE) -s $@ $<
-generated/%.ttf.c : %.ttf $(HEXDUMP_EXE) ; $(QUIET_GEN) $(MKTGTDIR) ; $(HEXDUMP_EXE) -s $@ $<
-generated/%.ttc.c : %.ttc $(HEXDUMP_EXE) ; $(QUIET_GEN) $(MKTGTDIR) ; $(HEXDUMP_EXE) -s $@ $<
+generated/%.cff.c : %.cff $(HEXDUMP_SH) ; $(QUIET_GEN) $(MKTGTDIR) ; bash $(HEXDUMP_SH) > $@ $<
+generated/%.otf.c : %.otf $(HEXDUMP_SH) ; $(QUIET_GEN) $(MKTGTDIR) ; bash $(HEXDUMP_SH) > $@ $<
+generated/%.ttf.c : %.ttf $(HEXDUMP_SH) ; $(QUIET_GEN) $(MKTGTDIR) ; bash $(HEXDUMP_SH) > $@ $<
+generated/%.ttc.c : %.ttc $(HEXDUMP_SH) ; $(QUIET_GEN) $(MKTGTDIR) ; bash $(HEXDUMP_SH) > $@ $<
 
 ifeq ($(HAVE_OBJCOPY),yes)
   MUPDF_OBJ += $(FONT_BIN:%=$(OUT)/%.o)
@@ -401,22 +401,23 @@ libs: $(LIBS_TO_INSTALL_IN_BIN) $(LIBS_TO_INSTALL_IN_LIB)
 tools: $(TOOL_APPS)
 apps: $(TOOL_APPS) $(VIEW_APPS)
 
-install: libs apps
+install-libs: libs
 	install -d $(DESTDIR)$(incdir)/mupdf
 	install -d $(DESTDIR)$(incdir)/mupdf/fitz
 	install -d $(DESTDIR)$(incdir)/mupdf/pdf
 	install -m 644 include/mupdf/*.h $(DESTDIR)$(incdir)/mupdf
 	install -m 644 include/mupdf/fitz/*.h $(DESTDIR)$(incdir)/mupdf/fitz
 	install -m 644 include/mupdf/pdf/*.h $(DESTDIR)$(incdir)/mupdf/pdf
-
 ifneq ($(LIBS_TO_INSTALL_IN_LIB),)
 	install -d $(DESTDIR)$(libdir)
 	install -m 644 $(LIBS_TO_INSTALL_IN_LIB) $(DESTDIR)$(libdir)
 endif
 
+install-apps: apps
 	install -d $(DESTDIR)$(bindir)
 	install -m 755 $(LIBS_TO_INSTALL_IN_BIN) $(TOOL_APPS) $(VIEW_APPS) $(DESTDIR)$(bindir)
 
+install-docs:
 	install -d $(DESTDIR)$(mandir)/man1
 	install -m 644 docs/man/*.1 $(DESTDIR)$(mandir)/man1
 
@@ -425,6 +426,8 @@ endif
 	install -m 644 README COPYING CHANGES $(DESTDIR)$(docdir)
 	install -m 644 docs/*.html docs/*.css docs/*.png $(DESTDIR)$(docdir)
 	install -m 644 docs/examples/* $(DESTDIR)$(docdir)/examples
+
+install: install-libs install-apps install-docs
 
 tarball:
 	bash scripts/archive.sh

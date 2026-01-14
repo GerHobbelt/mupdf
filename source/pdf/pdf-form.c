@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2004-2022 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -183,13 +183,17 @@ lookup_field_sub(fz_context *ctx, pdf_obj *dict, const char *str)
 			str++;
 	}
 
-	/* If there is a kids array, walk those looking for the appropriate one. */
+	/* If there is a kids array, but the search string is not empty, we have
+	encountered an internal field which represents a set of terminal fields. */
+
+	/* If there is a kids array and the search string is not empty,
+	walk those looking for the appropriate one. */
 	kids = pdf_dict_get(ctx, dict, PDF_NAME(Kids));
-	if (kids)
+	if (kids && *str != 0)
 		return pdf_lookup_field(ctx, kids, str);
 
-	/* No Kids, so we're a terminal node. We accept it as the match if we've
-	 * exhausted the match string. */
+	/* The field may be a terminal or an internal field at this point.
+	Accept it as the match if the match string is exhausted. */
 	if (*str == 0)
 		return dict;
 
@@ -259,6 +263,14 @@ static void reset_form_field(fz_context *ctx, pdf_document *doc, pdf_obj *field)
 		case PDF_WIDGET_TYPE_RADIOBUTTON:
 			{
 				pdf_obj *leafv = pdf_dict_get_inheritable(ctx, field, PDF_NAME(V));
+				pdf_obj *ap = pdf_dict_get(ctx, field, PDF_NAME(AP));
+				pdf_obj *n = pdf_dict_get(ctx, ap, PDF_NAME(N));
+
+				/* Value does not refer to any appearance state in the
+				normal appearance stream dictionary, default to Off instead. */
+				if (pdf_is_dict(ctx, n) && !pdf_dict_get(ctx, n, leafv))
+					leafv = NULL;
+
 				if (!leafv)
 					leafv = PDF_NAME(Off);
 				pdf_dict_put(ctx, field, PDF_NAME(AS), leafv);
@@ -293,12 +305,18 @@ void pdf_field_reset(fz_context *ctx, pdf_document *doc, pdf_obj *field)
 	}
 }
 
-static void add_field_hierarchy_to_array(fz_context *ctx, pdf_obj *array, pdf_obj *field)
+static void add_field_hierarchy_to_array(fz_context *ctx, pdf_obj *array, pdf_obj *field, pdf_obj *fields, int exclude)
 {
 	pdf_obj *kids = pdf_dict_get(ctx, field, PDF_NAME(Kids));
-	pdf_obj *exclude = pdf_dict_get(ctx, field, PDF_NAME(Exclude));
+	const char *needle = pdf_field_name(ctx, field);
+	int i, n;
 
-	if (exclude)
+	n = pdf_array_len(ctx, fields);
+	for (i = 0; i < n; i++)
+		if (!strcmp(needle, pdf_field_name(ctx, pdf_array_get(ctx, fields, i))))
+			break;
+
+	if ((exclude && i < n) || (!exclude && i == n))
 		return;
 
 	pdf_array_push(ctx, array, field);
@@ -308,7 +326,7 @@ static void add_field_hierarchy_to_array(fz_context *ctx, pdf_obj *array, pdf_ob
 		int i, n = pdf_array_len(ctx, kids);
 
 		for (i = 0; i < n; i++)
-			add_field_hierarchy_to_array(ctx, array, pdf_array_get(ctx, kids, i));
+			add_field_hierarchy_to_array(ctx, array, pdf_array_get(ctx, kids, i), fields, exclude);
 	}
 }
 
@@ -327,57 +345,17 @@ static pdf_obj *specified_fields(fz_context *ctx, pdf_document *doc, pdf_obj *fi
 
 	fz_try(ctx)
 	{
-		/* The 'fields' array not being present signals that all fields
-		* should be acted upon, so handle it using the exclude case - excluding none */
-		if (exclude || !fields)
+		n = pdf_array_len(ctx, fields);
+
+		for (i = 0; i < n; i++)
 		{
-			/* mark the fields we don't want to act upon */
-			n = pdf_array_len(ctx, fields);
-			for (i = 0; i < n; i++)
-			{
-				pdf_obj *field = pdf_array_get(ctx, fields, i);
+			pdf_obj *field = pdf_array_get(ctx, fields, i);
 
-				if (pdf_is_string(ctx, field))
-					field = pdf_lookup_field(ctx, form, pdf_to_str_buf(ctx, field));
+			if (pdf_is_string(ctx, field))
+				field = pdf_lookup_field(ctx, form, pdf_to_str_buf(ctx, field));
 
-				if (field)
-					pdf_dict_put(ctx, field, PDF_NAME(Exclude), PDF_NULL);
-			}
-
-			/* Act upon all unmarked fields */
-			n = pdf_array_len(ctx, form);
-
-			for (i = 0; i < n; i++)
-				add_field_hierarchy_to_array(ctx, result, pdf_array_get(ctx, form, i));
-
-			/* Unmark the marked fields */
-			n = pdf_array_len(ctx, fields);
-
-			for (i = 0; i < n; i++)
-			{
-				pdf_obj *field = pdf_array_get(ctx, fields, i);
-
-				if (pdf_is_string(ctx, field))
-					field = pdf_lookup_field(ctx, form, pdf_to_str_buf(ctx, field));
-
-				if (field)
-					pdf_dict_del(ctx, field, PDF_NAME(Exclude));
-			}
-		}
-		else
-		{
-			n = pdf_array_len(ctx, fields);
-
-			for (i = 0; i < n; i++)
-			{
-				pdf_obj *field = pdf_array_get(ctx, fields, i);
-
-				if (pdf_is_string(ctx, field))
-					field = pdf_lookup_field(ctx, form, pdf_to_str_buf(ctx, field));
-
-				if (field)
-					add_field_hierarchy_to_array(ctx, result, field);
-			}
+			if (field)
+				add_field_hierarchy_to_array(ctx, result, field, fields, exclude);
 		}
 	}
 	fz_catch(ctx)
@@ -1098,7 +1076,7 @@ merge_changes(fz_context *ctx, const char *value, int start, int end, const char
 {
 	int changelen = change ? (int)strlen(change) : 0;
 	int valuelen = value ? (int)strlen(value) : 0;
-	int prelen = (start >= 0 ? start : 0);
+	int prelen = (start >= 0 ? (start < valuelen ? start : valuelen) : 0);
 	int postlen = (end >= 0 && end <= valuelen ? valuelen - end : 0);
 	int newlen =  prelen + changelen + postlen + 1;
 	char *merged = fz_malloc(ctx, newlen);
@@ -2007,7 +1985,7 @@ static void pdf_execute_js_action(fz_context *ctx, pdf_document *doc, pdf_obj *t
 			fz_snprintf(buf, sizeof buf, "%d/%s", pdf_to_num(ctx, target), path);
 			pdf_begin_operation(ctx, doc, "Javascript Event");
 			in_op = 1;
-			pdf_js_execute(doc->js, buf, code);
+			pdf_js_execute(doc->js, buf, code, NULL);
 		}
 		fz_always(ctx)
 		{

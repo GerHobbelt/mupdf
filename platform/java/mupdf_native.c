@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2004-2022 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -87,6 +87,8 @@ static JavaVM *jvm = NULL;
 
 /* All the cached classes/mids/fids we need. */
 
+static jclass cls_AlertResult;
+static jclass cls_ArrayOfQuad;
 static jclass cls_Buffer;
 static jclass cls_ColorSpace;
 static jclass cls_Context;
@@ -108,6 +110,7 @@ static jclass cls_Image;
 static jclass cls_IndexOutOfBoundsException;
 static jclass cls_IntegerArray;
 static jclass cls_Link;
+static jclass cls_LinkDestination;
 static jclass cls_Location;
 static jclass cls_Matrix;
 static jclass cls_NativeDevice;
@@ -120,6 +123,7 @@ static jclass cls_OutlineIterator;
 static jclass cls_PDFAnnotation;
 static jclass cls_PDFDocument;
 static jclass cls_PDFDocument_JsEventListener;
+static jclass cls_PDFDocument_PDFEmbeddedFileParams;
 static jclass cls_PDFGraftMap;
 static jclass cls_PDFObject;
 static jclass cls_PDFPage;
@@ -154,14 +158,16 @@ static jclass cls_TextWidgetLineLayout;
 static jclass cls_TryLaterException;
 static jclass cls_UnsupportedOperationException;
 
+static jfieldID fid_AlertResult_buttonPressed;
+static jfieldID fid_AlertResult_checkboxChecked;
 static jfieldID fid_Buffer_pointer;
 static jfieldID fid_ColorSpace_pointer;
-static jfieldID fid_Context_log;
-static jfieldID fid_Context_lock;
 static jfieldID fid_Context_Version_major;
 static jfieldID fid_Context_Version_minor;
 static jfieldID fid_Context_Version_patch;
 static jfieldID fid_Context_Version_version;
+static jfieldID fid_Context_lock;
+static jfieldID fid_Context_log;
 static jfieldID fid_Cookie_pointer;
 static jfieldID fid_DefaultAppearance_color;
 static jfieldID fid_DefaultAppearance_font;
@@ -176,6 +182,14 @@ static jfieldID fid_FitzInputStream_markpos;
 static jfieldID fid_FitzInputStream_pointer;
 static jfieldID fid_Font_pointer;
 static jfieldID fid_Image_pointer;
+static jfieldID fid_LinkDestination_chapter;
+static jfieldID fid_LinkDestination_height;
+static jfieldID fid_LinkDestination_page;
+static jfieldID fid_LinkDestination_type;
+static jfieldID fid_LinkDestination_width;
+static jfieldID fid_LinkDestination_x;
+static jfieldID fid_LinkDestination_y;
+static jfieldID fid_LinkDestination_zoom;
 static jfieldID fid_Matrix_a;
 static jfieldID fid_Matrix_b;
 static jfieldID fid_Matrix_c;
@@ -245,6 +259,7 @@ static jfieldID fid_TextWidgetLineLayout_x;
 static jfieldID fid_TextWidgetLineLayout_y;
 static jfieldID fid_Text_pointer;
 
+static jmethodID mid_Buffer_init;
 static jmethodID mid_ColorSpace_fromPointer;
 static jmethodID mid_ColorSpace_init;
 static jmethodID mid_Context_Version_init;
@@ -289,7 +304,9 @@ static jmethodID mid_Outline_init;
 static jmethodID mid_OutlineItem_init;
 static jmethodID mid_OutlineIterator_init;
 static jmethodID mid_PDFAnnotation_init;
+static jmethodID mid_LinkDestination_init;
 static jmethodID mid_PDFDocument_JsEventListener_onAlert;
+static jmethodID mid_PDFDocument_PDFEmbeddedFileParams_init;
 static jmethodID mid_PDFDocument_init;
 static jmethodID mid_PDFGraftMap_init;
 static jmethodID mid_PDFObject_init;
@@ -362,9 +379,9 @@ static int check_enums()
 	valid &= com_artifex_mupdf_fitz_Device_BLEND_COLOR == FZ_BLEND_COLOR;
 	valid &= com_artifex_mupdf_fitz_Device_BLEND_LUMINOSITY == FZ_BLEND_LUMINOSITY;
 
-	valid &= com_artifex_mupdf_fitz_Font_LATIN == PDF_SIMPLE_ENCODING_LATIN;
-	valid &= com_artifex_mupdf_fitz_Font_GREEK == PDF_SIMPLE_ENCODING_GREEK;
-	valid &= com_artifex_mupdf_fitz_Font_CYRILLIC == PDF_SIMPLE_ENCODING_CYRILLIC;
+	valid &= com_artifex_mupdf_fitz_Font_SIMPLE_ENCODING_LATIN == PDF_SIMPLE_ENCODING_LATIN;
+	valid &= com_artifex_mupdf_fitz_Font_SIMPLE_ENCODING_GREEK == PDF_SIMPLE_ENCODING_GREEK;
+	valid &= com_artifex_mupdf_fitz_Font_SIMPLE_ENCODING_CYRILLIC == PDF_SIMPLE_ENCODING_CYRILLIC;
 
 	valid &= com_artifex_mupdf_fitz_Font_ADOBE_CNS == FZ_ADOBE_CNS;
 	valid &= com_artifex_mupdf_fitz_Font_ADOBE_GB == FZ_ADOBE_GB;
@@ -423,14 +440,23 @@ static int check_enums()
 	valid &= com_artifex_mupdf_fitz_PDFAnnotation_IS_TOGGLE_NO_VIEW == PDF_ANNOT_IS_TOGGLE_NO_VIEW;
 	valid &= com_artifex_mupdf_fitz_PDFAnnotation_IS_LOCKED_CONTENTS == PDF_ANNOT_IS_LOCKED_CONTENTS;
 
-	valid &= com_artifex_mupdf_fitz_PDFAnnotation_LANGUAGE_UNSET == FZ_LANG_UNSET;
-	valid &= com_artifex_mupdf_fitz_PDFAnnotation_LANGUAGE_ur == FZ_LANG_ur;
-	valid &= com_artifex_mupdf_fitz_PDFAnnotation_LANGUAGE_urd == FZ_LANG_urd;
-	valid &= com_artifex_mupdf_fitz_PDFAnnotation_LANGUAGE_ko == FZ_LANG_ko;
-	valid &= com_artifex_mupdf_fitz_PDFAnnotation_LANGUAGE_ja == FZ_LANG_ja;
-	valid &= com_artifex_mupdf_fitz_PDFAnnotation_LANGUAGE_zh == FZ_LANG_zh;
-	valid &= com_artifex_mupdf_fitz_PDFAnnotation_LANGUAGE_zh_Hans == FZ_LANG_zh_Hans;
-	valid &= com_artifex_mupdf_fitz_PDFAnnotation_LANGUAGE_zh_Hant == FZ_LANG_zh_Hant;
+	valid &= com_artifex_mupdf_fitz_PDFDocument_LANGUAGE_UNSET == FZ_LANG_UNSET;
+	valid &= com_artifex_mupdf_fitz_PDFDocument_LANGUAGE_ur == FZ_LANG_ur;
+	valid &= com_artifex_mupdf_fitz_PDFDocument_LANGUAGE_urd == FZ_LANG_urd;
+	valid &= com_artifex_mupdf_fitz_PDFDocument_LANGUAGE_ko == FZ_LANG_ko;
+	valid &= com_artifex_mupdf_fitz_PDFDocument_LANGUAGE_ja == FZ_LANG_ja;
+	valid &= com_artifex_mupdf_fitz_PDFDocument_LANGUAGE_zh == FZ_LANG_zh;
+	valid &= com_artifex_mupdf_fitz_PDFDocument_LANGUAGE_zh_Hans == FZ_LANG_zh_Hans;
+	valid &= com_artifex_mupdf_fitz_PDFDocument_LANGUAGE_zh_Hant == FZ_LANG_zh_Hant;
+
+	valid &= com_artifex_mupdf_fitz_LinkDestination_LINK_DEST_FIT == FZ_LINK_DEST_FIT;
+	valid &= com_artifex_mupdf_fitz_LinkDestination_LINK_DEST_FIT_B == FZ_LINK_DEST_FIT_B;
+	valid &= com_artifex_mupdf_fitz_LinkDestination_LINK_DEST_FIT_H == FZ_LINK_DEST_FIT_H;
+	valid &= com_artifex_mupdf_fitz_LinkDestination_LINK_DEST_FIT_BH == FZ_LINK_DEST_FIT_BH;
+	valid &= com_artifex_mupdf_fitz_LinkDestination_LINK_DEST_FIT_V == FZ_LINK_DEST_FIT_V;
+	valid &= com_artifex_mupdf_fitz_LinkDestination_LINK_DEST_FIT_BV == FZ_LINK_DEST_FIT_BV;
+	valid &= com_artifex_mupdf_fitz_LinkDestination_LINK_DEST_FIT_R == FZ_LINK_DEST_FIT_R;
+	valid &= com_artifex_mupdf_fitz_LinkDestination_LINK_DEST_XYZ == FZ_LINK_DEST_XYZ;
 
 	valid &= com_artifex_mupdf_fitz_StrokeState_LINE_CAP_BUTT == FZ_LINECAP_BUTT;
 	valid &= com_artifex_mupdf_fitz_StrokeState_LINE_CAP_ROUND == FZ_LINECAP_ROUND;
@@ -727,6 +753,7 @@ static int find_fids(JNIEnv *env)
 	int getvmErr;
 
 	cls_Buffer = get_class(&err, env, PKG"Buffer");
+	mid_Buffer_init = get_method(&err, env, "<init>", "(J)V");
 	fid_Buffer_pointer = get_field(&err, env, "pointer", "J");
 
 	cls_ColorSpace = get_class(&err, env, PKG"ColorSpace");
@@ -817,7 +844,7 @@ static int find_fids(JNIEnv *env)
 	mid_Link_init = get_method(&err, env, "<init>", "(L"PKG"Rect;Ljava/lang/String;)V");
 
 	cls_Location = get_class(&err, env, PKG"Location");
-	mid_Location_init = get_method(&err, env, "<init>", "(IIFF)V");
+	mid_Location_init = get_method(&err, env, "<init>", "(II)V");
 
 	cls_Matrix = get_class(&err, env, PKG"Matrix");
 	fid_Matrix_a = get_field(&err, env, "a", "F");
@@ -865,8 +892,26 @@ static int find_fids(JNIEnv *env)
 	fid_PDFDocument_pointer = get_field(&err, env, "pointer", "J");
 	mid_PDFDocument_init = get_method(&err, env, "<init>", "(J)V");
 
+	cls_LinkDestination = get_class(&err, env, PKG"LinkDestination");
+	mid_LinkDestination_init = get_method(&err, env, "<init>", "(IIIFFFFF)V");
+	fid_LinkDestination_chapter = get_field(&err, env, "chapter", "I");
+	fid_LinkDestination_page = get_field(&err, env, "page", "I");
+	fid_LinkDestination_type = get_field(&err, env, "type", "I");
+	fid_LinkDestination_x = get_field(&err, env, "x", "F");
+	fid_LinkDestination_y = get_field(&err, env, "y", "F");
+	fid_LinkDestination_width = get_field(&err, env, "width", "F");
+	fid_LinkDestination_height = get_field(&err, env, "height", "F");
+	fid_LinkDestination_zoom = get_field(&err, env, "zoom", "F");
+
 	cls_PDFDocument_JsEventListener = get_class(&err, env, PKG"PDFDocument$JsEventListener");
-	mid_PDFDocument_JsEventListener_onAlert = get_method(&err, env, "onAlert", "(Ljava/lang/String;)V");
+	mid_PDFDocument_JsEventListener_onAlert = get_method(&err, env, "onAlert", "(L"PKG"PDFDocument;Ljava/lang/String;Ljava/lang/String;IILjava/lang/String;Z)L"PKG"PDFDocument$JsEventListener$AlertResult;");
+
+	cls_PDFDocument_PDFEmbeddedFileParams = get_class(&err, env, PKG"PDFDocument$PDFEmbeddedFileParams");
+	mid_PDFDocument_PDFEmbeddedFileParams_init = get_method(&err, env, "<init>", "(Ljava/lang/String;Ljava/lang/String;IJJ)V");
+
+	cls_AlertResult = get_class(&err, env, PKG"PDFDocument$JsEventListener$AlertResult");
+	fid_AlertResult_buttonPressed = get_field(&err, env, "buttonPressed", "I");
+	fid_AlertResult_checkboxChecked = get_field(&err, env, "checkboxChecked", "Z");
 
 	cls_PDFGraftMap = get_class(&err, env, PKG"PDFGraftMap");
 	fid_PDFGraftMap_pointer = get_field(&err, env, "pointer", "J");
@@ -928,6 +973,8 @@ static int find_fids(JNIEnv *env)
 	fid_Quad_lr_x = get_field(&err, env, "lr_x", "F");
 	fid_Quad_lr_y = get_field(&err, env, "lr_y", "F");
 	mid_Quad_init = get_method(&err, env, "<init>", "(FFFFFFFF)V");
+
+	cls_ArrayOfQuad = get_class(&err, env, "[L"PKG"Quad;");
 
 	cls_Rect = get_class(&err, env, PKG"Rect");
 	fid_Rect_x0 = get_field(&err, env, "x0", "F");
@@ -1081,6 +1128,8 @@ static void jni_detach_thread(jboolean detach)
 
 static void lose_fids(JNIEnv *env)
 {
+	(*env)->DeleteGlobalRef(env, cls_AlertResult);
+	(*env)->DeleteGlobalRef(env, cls_ArrayOfQuad);
 	(*env)->DeleteGlobalRef(env, cls_Buffer);
 	(*env)->DeleteGlobalRef(env, cls_ColorSpace);
 	(*env)->DeleteGlobalRef(env, cls_Context);
@@ -1101,6 +1150,7 @@ static void lose_fids(JNIEnv *env)
 	(*env)->DeleteGlobalRef(env, cls_IndexOutOfBoundsException);
 	(*env)->DeleteGlobalRef(env, cls_IntegerArray);
 	(*env)->DeleteGlobalRef(env, cls_Link);
+	(*env)->DeleteGlobalRef(env, cls_LinkDestination);
 	(*env)->DeleteGlobalRef(env, cls_Location);
 	(*env)->DeleteGlobalRef(env, cls_Matrix);
 	(*env)->DeleteGlobalRef(env, cls_NativeDevice);
@@ -1113,6 +1163,7 @@ static void lose_fids(JNIEnv *env)
 	(*env)->DeleteGlobalRef(env, cls_PDFAnnotation);
 	(*env)->DeleteGlobalRef(env, cls_PDFDocument);
 	(*env)->DeleteGlobalRef(env, cls_PDFDocument_JsEventListener);
+	(*env)->DeleteGlobalRef(env, cls_PDFDocument_PDFEmbeddedFileParams);
 	(*env)->DeleteGlobalRef(env, cls_PDFGraftMap);
 	(*env)->DeleteGlobalRef(env, cls_PDFObject);
 	(*env)->DeleteGlobalRef(env, cls_PDFPage);

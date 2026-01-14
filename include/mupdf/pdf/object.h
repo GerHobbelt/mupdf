@@ -23,6 +23,8 @@
 #ifndef MUPDF_PDF_OBJECT_H
 #define MUPDF_PDF_OBJECT_H
 
+#include "mupdf/fitz/stream.h"
+
 typedef struct pdf_document pdf_document;
 typedef struct pdf_crypt pdf_crypt;
 typedef struct pdf_journal pdf_journal;
@@ -85,6 +87,18 @@ int pdf_name_eq(fz_context *ctx, pdf_obj *a, pdf_obj *b);
 int pdf_obj_marked(fz_context *ctx, pdf_obj *obj);
 int pdf_mark_obj(fz_context *ctx, pdf_obj *obj);
 void pdf_unmark_obj(fz_context *ctx, pdf_obj *obj);
+
+typedef struct
+{
+	int len;
+	int max;
+	pdf_obj **list;
+} pdf_mark_list;
+
+int pdf_mark_list_push(fz_context *ctx, pdf_mark_list *list, pdf_obj *obj);
+void pdf_mark_list_pop(fz_context *ctx, pdf_mark_list *list);
+void pdf_mark_list_init(fz_context *ctx, pdf_mark_list *list);
+void pdf_mark_list_free(fz_context *ctx, pdf_mark_list *list);
 
 void pdf_set_obj_memo(fz_context *ctx, pdf_obj *obj, int bit, int memo);
 int pdf_obj_memo(fz_context *ctx, pdf_obj *obj, int bit, int *memo);

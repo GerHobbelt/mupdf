@@ -34,30 +34,68 @@
 */
 
 static void
-pdf_test_outline(fz_context *ctx, pdf_document *doc, pdf_obj *dict, pdf_obj *mark_list, pdf_obj *parent)
+pdf_test_outline(fz_context *ctx, pdf_document *doc, pdf_obj *dict, pdf_mark_list *mark_list, pdf_obj *parent, int *fixed)
 {
-	pdf_obj *obj, *prev = NULL;
+	int parent_diff, prev_diff, last_diff;
+	pdf_obj *first, *last, *next, *prev;
+	pdf_obj *expected_parent = parent;
+	pdf_obj *expected_prev = NULL;
+
+	last = pdf_dict_get(ctx, expected_parent, PDF_NAME(Last));
 
 	while (dict && pdf_is_dict(ctx, dict))
 	{
-		if (pdf_mark_obj(ctx, dict))
+		if (pdf_mark_list_push(ctx, mark_list, dict))
 			fz_throw(ctx, FZ_ERROR_GENERIC, "Cycle detected in outlines");
-		pdf_array_push(ctx, mark_list, dict);
 
-		obj = pdf_dict_get(ctx, dict, PDF_NAME(Prev));
-		if (pdf_objcmp(ctx, prev, obj))
-			fz_throw(ctx, FZ_ERROR_GENERIC, "Bad or missing pointer in outline tree");
-		prev = dict;
+		parent = pdf_dict_get(ctx, dict, PDF_NAME(Parent));
+		prev = pdf_dict_get(ctx, dict, PDF_NAME(Prev));
+		next = pdf_dict_get(ctx, dict, PDF_NAME(Next));
 
-		obj = pdf_dict_get(ctx, dict, PDF_NAME(Parent));
-		if (pdf_objcmp(ctx, parent, obj))
-			fz_throw(ctx, FZ_ERROR_GENERIC, "Bad or missing parent pointer in outline tree");
+		parent_diff = pdf_objcmp(ctx, parent, expected_parent);
+		prev_diff = pdf_objcmp(ctx, prev, expected_prev);
+		last_diff = next == NULL && pdf_objcmp(ctx, last, dict);
 
-		obj = pdf_dict_get(ctx, dict, PDF_NAME(First));
-		if (obj)
-			pdf_test_outline(ctx, doc, obj, mark_list, dict);
+		if (fixed == NULL)
+		{
+			if (parent_diff)
+				fz_throw(ctx, FZ_ERROR_GENERIC, "Outline parent pointer still bad or missing despite repair");
+			if (prev_diff)
+				fz_throw(ctx, FZ_ERROR_GENERIC, "Outline prev pointer still bad or missing despite repair");
+			if (last_diff)
+				fz_throw(ctx, FZ_ERROR_GENERIC, "Outline last pointer still bad or missing despite repair");
+		}
+		else if (parent_diff || prev_diff || last_diff)
+		{
+			if (*fixed == 0)
+				pdf_begin_operation(ctx, doc, "Repair outline nodes");
+			*fixed = 1;
+		}
+		if (parent_diff)
+		{
+			fz_warn(ctx, "Bad or missing parent pointer in outline tree, repairing");
+			pdf_dict_put(ctx, dict, PDF_NAME(Parent), expected_parent);
+		}
+		if (prev_diff)
+		{
+			fz_warn(ctx, "Bad or missing prev pointer in outline tree, repairing");
+			if (expected_prev)
+				pdf_dict_put(ctx, dict, PDF_NAME(Prev), expected_prev);
+			else
+				pdf_dict_del(ctx, dict, PDF_NAME(Prev));
+		}
+		if (last_diff)
+		{
+			fz_warn(ctx, "Bad or missing last pointer in outline tree, repairing");
+			pdf_dict_put(ctx, expected_parent, PDF_NAME(Last), dict);
+		}
 
-		dict = pdf_dict_get(ctx, dict, PDF_NAME(Next));
+		first = pdf_dict_get(ctx, dict, PDF_NAME(First));
+		if (first)
+			pdf_test_outline(ctx, doc, first, mark_list, dict, fixed);
+
+		expected_prev = dict;
+		dict = next;
 	}
 }
 
@@ -87,7 +125,7 @@ pdf_outline_iterator_next(fz_context *ctx, fz_outline_iterator *iter_)
 	pdf_outline_iterator *iter = (pdf_outline_iterator *)iter_;
 	pdf_obj *next;
 
-	if (iter->modifier != MOD_NONE)
+	if (iter->modifier != MOD_NONE || iter->current == NULL)
 		return -1;
 	next = pdf_dict_get(ctx, iter->current, PDF_NAME(Next));
 	if (next == NULL)
@@ -107,7 +145,7 @@ pdf_outline_iterator_prev(fz_context *ctx, fz_outline_iterator *iter_)
 	pdf_outline_iterator *iter = (pdf_outline_iterator *)iter_;
 	pdf_obj *prev;
 
-	if (iter->modifier == MOD_BELOW)
+	if (iter->modifier == MOD_BELOW || iter->current == NULL)
 		return -1;
 	if (iter->modifier == MOD_AFTER)
 	{
@@ -128,14 +166,24 @@ pdf_outline_iterator_up(fz_context *ctx, fz_outline_iterator *iter_)
 {
 	pdf_outline_iterator *iter = (pdf_outline_iterator *)iter_;
 	pdf_obj *up;
+	pdf_obj *grandparent;
 
+	if (iter->current == NULL)
+		return -1;
 	if (iter->modifier == MOD_BELOW)
 	{
 		iter->modifier = MOD_NONE;
 		return 0;
 	}
+	/* The topmost level still has a parent pointer, just one
+	 * that points to the outlines object. We never want to
+	 * allow us to move 'up' onto the outlines object. */
 	up = pdf_dict_get(ctx, iter->current, PDF_NAME(Parent));
 	if (up == NULL)
+		/* This should never happen! */
+		return -1;
+	grandparent = pdf_dict_get(ctx, up, PDF_NAME(Parent));
+	if (grandparent == NULL)
 		return -1;
 
 	iter->modifier = MOD_NONE;
@@ -149,7 +197,7 @@ pdf_outline_iterator_down(fz_context *ctx, fz_outline_iterator *iter_)
 	pdf_outline_iterator *iter = (pdf_outline_iterator *)iter_;
 	pdf_obj *down;
 
-	if (iter->modifier != MOD_NONE)
+	if (iter->modifier != MOD_NONE || iter->current == NULL)
 		return -1;
 	down = pdf_dict_get(ctx, iter->current, PDF_NAME(First));
 	if (down == NULL)
@@ -163,146 +211,12 @@ pdf_outline_iterator_down(fz_context *ctx, fz_outline_iterator *iter_)
 	return 0;
 }
 
-static int
-int_from_fragment(const char *uri, const char *needle, int val_nomatch, int val)
-{
-	const char *n = needle;
-	if (*uri == '#')
-		uri++;
-	while (*uri)
-	{
-		if (*uri == *n)
-		{
-			/* Match, move on one char.*/
-			uri++;
-			n++;
-			/* If the match hasn't ended yet, loop and keep going. */
-			if (*n != 0)
-				continue;
-			if (*uri == '&' || *uri == 0)
-				return val;
-			if (*uri == '=')
-			{
-				const char *u = ++uri;
-				int v = 0;
-				while (*u >= '0' && *u <= '9')
-				{
-					v = (v*10)+ (*u++)-'0';
-				}
-				if (u == uri)
-					return val;
-				return v;
-			}
-		}
-		/* Skip to next one. */
-		while (*uri && *uri != '&')
-			uri++;
-		if (*uri)
-			uri++;
-		n = needle;
-	}
-	return val_nomatch;
-}
-
-typedef struct
-{
-	pdf_obj *name;
-	char string[16];
-	int len;
-} namestring;
-
-#define PDF_OUTLINE_TYPE(A) { PDF_NAME(A), # A, sizeof(#A)-1 }
-static const namestring fit_types[] =
-{
-	PDF_OUTLINE_TYPE(Fit),
-	PDF_OUTLINE_TYPE(FitB),
-	PDF_OUTLINE_TYPE(FitBH),
-	PDF_OUTLINE_TYPE(FitBV),
-	PDF_OUTLINE_TYPE(FitH),
-	PDF_OUTLINE_TYPE(FitR),
-	PDF_OUTLINE_TYPE(FitV),
-	{ NULL, "" }
-};
-#undef PDF_OUTLINE_TYPE
-
-static pdf_obj *
-type_match(const char **uri, const namestring *types)
-{
-	if (*uri == NULL)
-		return NULL;
-
-	while (types->name)
-	{
-		if (strncmp(*uri, types->string, types->len) == 0)
-		{
-			char c = (*uri)[types->len];
-			if (c == ',' || c == '&')
-			{
-				++(*uri);
-				return types->name;
-			}
-			if (c == 0)
-				return types->name;
-		}
-		types++;
-	}
-	return NULL;
-}
-
-static const char *
-val_from_fragment(const char *uri, const char *needle)
-{
-	const char *n = needle;
-	if (*uri == '#')
-		uri++;
-	while (*uri)
-	{
-		if (*uri == *n)
-		{
-			/* Match, move on one char.*/
-			uri++;
-			n++;
-			/* If the match hasn't ended yet, loop and keep going. */
-			if (*n != 0)
-				continue;
-			if (*uri == '&' || *uri == 0)
-				return NULL;
-			if (*uri == '=')
-				return ++uri;
-		}
-		/* Skip to next one. */
-		while (*uri && *uri != '&')
-			uri++;
-		if (*uri)
-			uri++;
-		n = needle;
-	}
-	return NULL;
-}
-
-static float
-my_read_float(const char **str)
-{
-	float f;
-	char *end;
-
-	if (**str == 0)
-		return 0;
-
-	f = fz_strtof(*str, &end);
-	*str = end;
-	if (**str == ',')
-		(*str)++;
-
-	return f;
-}
-
 static void
 do_outline_update(fz_context *ctx, pdf_obj *obj, fz_outline_item *item, int is_new_node)
 {
 	int count;
 	int open_delta = 0;
-	pdf_obj *parent, *up;
+	pdf_obj *parent;
 
 	/* If the open/closed state changes, update. */
 	count = pdf_dict_get_int(ctx, obj, PDF_NAME(Count));
@@ -311,17 +225,19 @@ do_outline_update(fz_context *ctx, pdf_obj *obj, fz_outline_item *item, int is_n
 		pdf_dict_put_int(ctx, obj, PDF_NAME(Count), -count);
 		open_delta = -count;
 	}
-	else if (is_new_node && item->is_open)
+	else if (is_new_node)
 		open_delta = 1;
 
-	up = obj;
-	while ((parent = pdf_dict_get(ctx, up, PDF_NAME(Parent))) != NULL)
+	parent = pdf_dict_get(ctx, obj, PDF_NAME(Parent));
+	while (parent)
 	{
-		pdf_obj *cobj = pdf_dict_get(ctx, up, PDF_NAME(Count));
+		pdf_obj *cobj = pdf_dict_get(ctx, parent, PDF_NAME(Count));
 		count = pdf_to_int(ctx, cobj);
 		if (open_delta || cobj == NULL)
-			pdf_dict_put_int(ctx, up, PDF_NAME(Count), count > 0 ? count + open_delta : count - open_delta);
-		up = parent;
+			pdf_dict_put_int(ctx, parent, PDF_NAME(Count), count >= 0 ? count + open_delta : count - open_delta);
+		if (count < 0)
+			break;
+		parent = pdf_dict_get(ctx, parent, PDF_NAME(Parent));
 	}
 
 	if (item->title)
@@ -333,62 +249,14 @@ do_outline_update(fz_context *ctx, pdf_obj *obj, fz_outline_item *item, int is_n
 	pdf_dict_del(ctx, obj, PDF_NAME(Dest));
 	if (item->uri)
 	{
+		pdf_document *doc = pdf_get_bound_document(ctx, obj);
+
 		if (fz_is_external_link(ctx, item->uri))
-		{
-			pdf_obj *a = pdf_dict_put_dict(ctx, obj, PDF_NAME(A), 4);
-			pdf_dict_put(ctx, a, PDF_NAME(Type), PDF_NAME(Action));
-			pdf_dict_put(ctx, a, PDF_NAME(S), PDF_NAME(URI));
-			pdf_dict_put_text_string(ctx, a, PDF_NAME(URI), item->uri);
-		}
+			pdf_dict_put_drop(ctx, obj, PDF_NAME(A),
+				pdf_new_action_from_link(ctx, doc, item->uri));
 		else
-		{
-			pdf_document *doc = pdf_get_bound_document(ctx, obj);
-			int page = int_from_fragment(item->uri, "page", 0, 0) - 1;
-			const char *val = val_from_fragment(item->uri, "view");
-			pdf_obj *type = type_match(&val, fit_types);
-			pdf_obj *arr = pdf_dict_put_array(ctx, obj, PDF_NAME(Dest), 5);
-
-			if (type == NULL)
-			{
-				val = val_from_fragment(item->uri, "viewrect");
-				if (val)
-					type = PDF_NAME(FitR);
-			}
-			if (type == NULL)
-			{
-				val = val_from_fragment(item->uri, "zoom");
-				if (val)
-					type = PDF_NAME(XYZ);
-			}
-
-			pdf_array_push(ctx, arr, pdf_lookup_page_obj(ctx, doc, page));
-			if (type)
-			{
-				float a1, a2, a3, a4;
-				a1 = my_read_float(&val);
-				a2 = my_read_float(&val);
-				a3 = my_read_float(&val);
-				a4 = my_read_float(&val);
-				pdf_array_push(ctx, arr, type);
-				if (type == PDF_NAME(XYZ))
-				{
-					pdf_array_push_real(ctx, arr, a1);
-					pdf_array_push_real(ctx, arr, a2);
-					pdf_array_push_real(ctx, arr, a3);
-				}
-				else if (type == PDF_NAME(FitH) || type == PDF_NAME(FitBH) || type == PDF_NAME(FitV) || type == PDF_NAME(FitBV))
-					pdf_array_push_real(ctx, arr, a1);
-				else if (type == PDF_NAME(FitR))
-				{
-					pdf_array_push_real(ctx, arr, a1);
-					pdf_array_push_real(ctx, arr, a2);
-					pdf_array_push_real(ctx, arr, a3);
-					pdf_array_push_real(ctx, arr, a4);
-				}
-			}
-			else
-				pdf_array_push(ctx, arr, PDF_NAME(Fit));
-		}
+			pdf_dict_put_drop(ctx, obj, PDF_NAME(Dest),
+				pdf_new_destination_from_link(ctx, doc, item->uri));
 	}
 }
 
@@ -397,25 +265,32 @@ pdf_outline_iterator_insert(fz_context *ctx, fz_outline_iterator *iter_, fz_outl
 {
 	pdf_outline_iterator *iter = (pdf_outline_iterator *)iter_;
 	pdf_document *doc = (pdf_document *)iter->super.doc;
-	pdf_obj *obj;
+	pdf_obj *obj = NULL;
 	pdf_obj *prev;
 	pdf_obj *parent;
-	int result;
+	pdf_obj *outlines = NULL;
+	int result = 0;
 
-	obj = pdf_add_new_dict(ctx, doc, 4);
+	fz_var(obj);
+	fz_var(outlines);
+
+	pdf_begin_operation(ctx, doc, "Insert outline item");
+
 	fz_try(ctx)
 	{
+		obj = pdf_add_new_dict(ctx, doc, 4);
+
 		if (iter->modifier == MOD_BELOW)
 			parent = iter->current;
 		else if (iter->modifier == MOD_NONE && iter->current == NULL)
 		{
-			pdf_obj *outlines, *root;
-			root = pdf_dict_get(ctx, pdf_trailer(ctx, doc), PDF_NAME(Root));
+			pdf_obj *root = pdf_dict_get(ctx, pdf_trailer(ctx, doc), PDF_NAME(Root));
 			outlines = pdf_dict_get(ctx, root, PDF_NAME(Outlines));
 			if (outlines == NULL)
 			{
 				/* No outlines entry, better make one. */
-				outlines = pdf_dict_put_dict(ctx, root, PDF_NAME(Outlines), 4);
+				outlines = pdf_add_new_dict(ctx, doc, 4);
+				pdf_dict_put(ctx, root, PDF_NAME(Outlines), outlines);
 				pdf_dict_put(ctx, outlines, PDF_NAME(Type), PDF_NAME(Outlines));
 			}
 			iter->modifier = MOD_BELOW;
@@ -452,6 +327,8 @@ pdf_outline_iterator_insert(fz_context *ctx, fz_outline_iterator *iter_, fz_outl
 				pdf_dict_put(ctx, prev, PDF_NAME(Next), obj);
 				pdf_dict_put(ctx, obj, PDF_NAME(Prev), prev);
 			}
+			else
+				pdf_dict_put(ctx, parent, PDF_NAME(First), obj);
 			pdf_dict_put(ctx, iter->current, PDF_NAME(Prev), obj);
 			pdf_dict_put(ctx, obj, PDF_NAME(Next), iter->current);
 			result = 0;
@@ -459,7 +336,11 @@ pdf_outline_iterator_insert(fz_context *ctx, fz_outline_iterator *iter_, fz_outl
 		}
 	}
 	fz_always(ctx)
+	{
 		pdf_drop_obj(ctx, obj);
+		pdf_drop_obj(ctx, outlines);
+		pdf_end_operation(ctx, doc);
+	}
 	fz_catch(ctx)
 		fz_rethrow(ctx);
 
@@ -470,68 +351,100 @@ static void
 pdf_outline_iterator_update(fz_context *ctx, fz_outline_iterator *iter_, fz_outline_item *item)
 {
 	pdf_outline_iterator *iter = (pdf_outline_iterator *)iter_;
+	pdf_document *doc = (pdf_document *)iter->super.doc;
 
 	if (iter->modifier != MOD_NONE || iter->current == NULL)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "Can't update a non-existent outline item!");
 
-	do_outline_update(ctx, iter->current, item, 0);
+	pdf_begin_operation(ctx, doc, "Update outline item");
+
+	fz_try(ctx)
+		do_outline_update(ctx, iter->current, item, 0);
+	fz_always(ctx)
+		pdf_end_operation(ctx, doc);
+	fz_catch(ctx)
+		fz_rethrow(ctx);
 }
 
 static int
 pdf_outline_iterator_del(fz_context *ctx, fz_outline_iterator *iter_)
 {
 	pdf_outline_iterator *iter = (pdf_outline_iterator *)iter_;
+	pdf_document *doc = (pdf_document *)iter->super.doc;
 	pdf_obj *next, *prev, *parent;
+	int result = 0;
 	int count;
 
-	if (iter->modifier != MOD_NONE)
+	if (iter->modifier != MOD_NONE || iter->current == NULL)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "Can't delete a non-existent outline item!");
 
 	prev = pdf_dict_get(ctx, iter->current, PDF_NAME(Prev));
 	next = pdf_dict_get(ctx, iter->current, PDF_NAME(Next));
 	parent = pdf_dict_get(ctx, iter->current, PDF_NAME(Parent));
 	count = pdf_dict_get_int(ctx, iter->current, PDF_NAME(Count));
-
+	/* How many nodes visible from above are being removed? */
 	if (count > 0)
+		count++; /* Open children, plus this node. */
+	else
+		count = 1; /* Just this node */
+
+	pdf_begin_operation(ctx, doc, "Delete outline item");
+
+	fz_try(ctx)
 	{
 		pdf_obj *up = parent;
 		while (up)
 		{
 			int c = pdf_dict_get_int(ctx, up, PDF_NAME(Count));
 			pdf_dict_put_int(ctx, up, PDF_NAME(Count), (c > 0 ? c - count : c + count));
+			if (c < 0)
+				break;
 			up = pdf_dict_get(ctx, up, PDF_NAME(Parent));
 		}
-	}
 
-	if (prev)
-	{
-		if (next)
-			pdf_dict_put(ctx, prev, PDF_NAME(Next), next);
-		else
-			pdf_dict_del(ctx, prev, PDF_NAME(Next));
-	}
-	if (next)
-	{
 		if (prev)
-			pdf_dict_put(ctx, next, PDF_NAME(Prev), prev);
+		{
+			if (next)
+				pdf_dict_put(ctx, prev, PDF_NAME(Next), next);
+			else
+				pdf_dict_del(ctx, prev, PDF_NAME(Next));
+		}
+		if (next)
+		{
+			if (prev)
+				pdf_dict_put(ctx, next, PDF_NAME(Prev), prev);
+			else
+			{
+				pdf_dict_put(ctx, parent, PDF_NAME(First), next);
+				pdf_dict_del(ctx, next, PDF_NAME(Prev));
+			}
+			iter->current = next;
+		}
+		else if (prev)
+		{
+			iter->current = prev;
+			pdf_dict_put(ctx, parent, PDF_NAME(Last), prev);
+		}
+		else if (parent)
+		{
+			iter->current = parent;
+			iter->modifier = MOD_BELOW;
+			pdf_dict_del(ctx, parent, PDF_NAME(First));
+			pdf_dict_del(ctx, parent, PDF_NAME(Last));
+			result = 1;
+		}
 		else
-			pdf_dict_del(ctx, next, PDF_NAME(Prev));
-		iter->current = next;
+		{
+			iter->current = NULL;
+			result = 1;
+		}
 	}
-	else if (prev)
-	{
-		iter->current = prev;
-		pdf_dict_put(ctx, parent, PDF_NAME(Last), prev);
-	}
-	else
-	{
-		iter->current = parent;
-		iter->modifier = MOD_BELOW;
-		pdf_dict_del(ctx, parent, PDF_NAME(First));
-		pdf_dict_del(ctx, parent, PDF_NAME(Last));
-	}
+	fz_always(ctx)
+		pdf_end_operation(ctx, doc);
+	fz_catch(ctx)
+		fz_rethrow(ctx);
 
-	return 0;
+	return result;
 }
 
 static fz_outline_item *
@@ -583,13 +496,14 @@ pdf_outline_iterator_drop(fz_context *ctx, fz_outline_iterator *iter_)
 
 fz_outline_iterator *pdf_new_outline_iterator(fz_context *ctx, pdf_document *doc)
 {
-	pdf_obj *root, *obj, *first, *mark_list;
+	pdf_obj *root, *obj, *first;
+	pdf_mark_list mark_list;
 	pdf_outline_iterator *iter = NULL;
-	int i;
+	int fixed = 0;
 
 	/* Walk the outlines to spot problems that might bite us later
 	 * (in particular, for cycles). */
-	mark_list = pdf_new_array(ctx, doc, 100);
+	pdf_mark_list_init(ctx, &mark_list);
 	fz_try(ctx)
 	{
 		root = pdf_dict_get(ctx, pdf_trailer(ctx, doc), PDF_NAME(Root));
@@ -600,24 +514,32 @@ fz_outline_iterator *pdf_new_outline_iterator(fz_context *ctx, pdf_document *doc
 			/* cache page tree for fast link destination lookups */
 			pdf_load_page_tree(ctx, doc);
 			fz_try(ctx)
-				pdf_test_outline(ctx, doc, first, mark_list, obj);
+			{
+				/* Pass through the outlines once, fixing inconsistencies */
+				pdf_test_outline(ctx, doc, first, &mark_list, obj, &fixed);
+
+				if (fixed)
+				{
+					/* If a fix was performed, pass through again,
+					this time throwing if it's still not correct. */
+					pdf_mark_list_free(ctx, &mark_list);
+					pdf_test_outline(ctx, doc, first, &mark_list, obj, NULL);
+				}
+			}
 			fz_always(ctx)
+			{
+				if (fixed)
+					pdf_end_operation(ctx, doc);
 				pdf_drop_page_tree(ctx, doc);
+			}
 			fz_catch(ctx)
 				fz_rethrow(ctx);
 		}
 	}
 	fz_always(ctx)
-	{
-		int len = pdf_array_len(ctx, mark_list);
-		for (i = 0; i < len; ++i)
-			pdf_unmark_obj(ctx, pdf_array_get(ctx, mark_list, i));
-		pdf_drop_obj(ctx, mark_list);
-	}
+		pdf_mark_list_free(ctx, &mark_list);
 	fz_catch(ctx)
-	{
 		fz_rethrow(ctx);
-	}
 
 	iter = fz_new_derived_outline_iter(ctx, pdf_outline_iterator, &doc->super);
 	iter->super.del = pdf_outline_iterator_del;
@@ -635,59 +557,140 @@ fz_outline_iterator *pdf_new_outline_iterator(fz_context *ctx, pdf_document *doc
 	return &iter->super;
 }
 
+fz_link_dest
+pdf_resolve_link_dest(fz_context *ctx, pdf_document *doc, const char *uri)
+{
+	fz_link_dest dest;
+	pdf_obj *page_obj;
+	fz_matrix page_ctm;
+	fz_rect mediabox;
+
+	dest = pdf_parse_link_uri(ctx, uri);
+	if (dest.loc.page < 0)
+		return fz_make_link_dest_none();
+
+	page_obj = pdf_lookup_page_obj(ctx, doc, dest.loc.page);
+	pdf_page_obj_transform(ctx, page_obj, &mediabox, &page_ctm);
+	mediabox = fz_transform_rect(mediabox, page_ctm);
+
+	/* clamp coordinates to remain on page */
+	dest.x = fz_clamp(dest.x, 0, mediabox.x1 - mediabox.x0);
+	dest.y = fz_clamp(dest.y, 0, mediabox.y1 - mediabox.y0);
+	dest.w = fz_clamp(dest.w, 0, mediabox.x1 - dest.x);
+	dest.h = fz_clamp(dest.h, 0, mediabox.y1 - dest.y);
+
+	return dest;
+}
+
 int
 pdf_resolve_link(fz_context *ctx, pdf_document *doc, const char *uri, float *xp, float *yp)
 {
-	if (uri && uri[0] == '#')
+	fz_link_dest dest = pdf_resolve_link_dest(ctx, doc, uri);
+	if (xp) *xp = dest.x;
+	if (yp) *yp = dest.y;
+	return dest.loc.page;
+}
+
+pdf_obj *
+pdf_new_destination_from_link(fz_context *ctx, pdf_document *doc, const char *uri)
+{
+	pdf_obj *dest = pdf_new_array(ctx, doc, 6);
+	fz_matrix ctm, invctm;
+	pdf_obj *pageobj;
+	fz_link_dest val;
+	fz_point p;
+	fz_rect r;
+
+	fz_try(ctx)
 	{
-		int page = int_from_fragment(uri, "page", 0, 0) - 1;
-		const char *val = val_from_fragment(uri, "view");
-		pdf_obj *type = type_match(&val, fit_types);
+		val = pdf_parse_link_uri(ctx, uri);
 
-		if (type == NULL)
-		{
-			val = val_from_fragment(uri, "viewrect");
-			if (val)
-				type = PDF_NAME(FitR);
-		}
-		if (type == NULL)
-		{
-			val = val_from_fragment(uri, "zoom");
-			if (val)
-				type = PDF_NAME(XYZ);
-		}
+		pageobj = pdf_lookup_page_obj(ctx, doc, val.loc.page);
+		pdf_array_push(ctx, dest, pageobj);
 
-		/* Nasty: Map full details down to just x or y. */
-		if (xp)
-			*xp = -1;
-		if (yp)
-			*yp = -1;
-		if (type)
-		{
-			fz_rect mediabox;
-			fz_matrix pagectm;
-			float w, h, a1, a2;
-			/* Only a1 and a2 are currently used. In future we may want to read
-			 * a3 and a4 too. */
-			a1 = my_read_float(&val);
-			a2 = my_read_float(&val);
-			/* Link coords use a coordinate space that does not seem to respect Rotate or UserUnit. */
-			/* All we need to do is figure out the page size to flip the coordinate space and
-			 * clamp the coordinates to stay on the page. */
-			pdf_page_obj_transform(ctx, pdf_lookup_page_obj(ctx, doc, page), &mediabox, &pagectm);
-			mediabox = fz_transform_rect(mediabox, pagectm);
-			w = mediabox.x1 - mediabox.x0;
-			h = mediabox.y1 - mediabox.y0;
+		pdf_page_obj_transform(ctx, pageobj, NULL, &ctm);
+		invctm = fz_invert_matrix(ctm);
 
-			if (type == PDF_NAME(FitH) || type == PDF_NAME(FitBH))
-				*yp = fz_clamp(h-a1, 0, h);
-			if (type == PDF_NAME(FitV) || type == PDF_NAME(FitBV))
-				*xp = fz_clamp(a1, 0, w);
-			if (type == PDF_NAME(FitR) || type == PDF_NAME(XYZ))
-				*xp = fz_clamp(a1, 0, w), *yp = fz_clamp(h-a2, 0, h);
+		switch (val.type)
+		{
+		default:
+		case FZ_LINK_DEST_FIT:
+			pdf_array_push(ctx, dest, PDF_NAME(Fit));
+			break;
+		case FZ_LINK_DEST_FIT_H:
+			p = fz_transform_point_xy(0, val.y, invctm);
+			pdf_array_push(ctx, dest, PDF_NAME(FitH));
+			pdf_array_push_real(ctx, dest, p.y);
+			break;
+		case FZ_LINK_DEST_FIT_BH:
+			p = fz_transform_point_xy(0, val.y, invctm);
+			pdf_array_push(ctx, dest, PDF_NAME(FitBH));
+			pdf_array_push_real(ctx, dest, p.y);
+			break;
+		case FZ_LINK_DEST_FIT_V:
+			p = fz_transform_point_xy(val.x, 0, invctm);
+			pdf_array_push(ctx, dest, PDF_NAME(FitV));
+			pdf_array_push_real(ctx, dest, p.x);
+			break;
+		case FZ_LINK_DEST_FIT_BV:
+			p = fz_transform_point_xy(val.x, 0, invctm);
+			pdf_array_push(ctx, dest, PDF_NAME(FitBV));
+			pdf_array_push_real(ctx, dest, p.x);
+			break;
+		case FZ_LINK_DEST_XYZ:
+			p = fz_transform_point_xy(val.x, val.y, invctm);
+			pdf_array_push(ctx, dest, PDF_NAME(XYZ));
+			pdf_array_push_real(ctx, dest, p.x);
+			pdf_array_push_real(ctx, dest, p.y);
+			pdf_array_push_real(ctx, dest, val.zoom / 100);
+			break;
+		case FZ_LINK_DEST_FIT_R:
+			r.x0 = val.x;
+			r.y0 = val.y;
+			r.x1 = val.x + val.w;
+			r.y1 = val.y + val.h;
+			fz_transform_rect(r, invctm);
+			pdf_array_push(ctx, dest, PDF_NAME(FitR));
+			pdf_array_push_real(ctx, dest, r.x0);
+			pdf_array_push_real(ctx, dest, r.y0);
+			pdf_array_push_real(ctx, dest, r.x1);
+			pdf_array_push_real(ctx, dest, r.y1);
+			break;
 		}
-		return page;
 	}
-	fz_warn(ctx, "unknown link uri '%s'", uri);
-	return -1;
+	fz_catch(ctx)
+	{
+		pdf_drop_obj(ctx, dest);
+		fz_rethrow(ctx);
+	}
+
+	return dest;
+}
+
+pdf_obj *
+pdf_new_action_from_link(fz_context *ctx, pdf_document *doc, const char *uri)
+{
+	pdf_obj *action = pdf_new_dict(ctx, doc, 2);
+
+	fz_try(ctx)
+	{
+		if (fz_is_external_link(ctx, uri))
+		{
+			pdf_dict_put(ctx, action, PDF_NAME(S), PDF_NAME(URI));
+			pdf_dict_put_text_string(ctx, action, PDF_NAME(URI), uri);
+		}
+		else
+		{
+			pdf_dict_put(ctx, action, PDF_NAME(S), PDF_NAME(GoTo));
+			pdf_dict_put_drop(ctx, action, PDF_NAME(D),
+				pdf_new_destination_from_link(ctx, doc, uri));
+		}
+	}
+	fz_catch(ctx)
+	{
+		pdf_drop_obj(ctx, action);
+		fz_rethrow(ctx);
+	}
+
+	return action;
 }

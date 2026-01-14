@@ -64,4 +64,31 @@ public class PDFPage extends Page
 	}
 
 	public native PDFWidget createSignature();
+
+	public native Matrix getTransform();
+
+	public Link createLinkFit(Rect bbox, int page) {
+		return createLink(bbox, LinkDestination.Fit(0, page));
+	}
+	public Link createLinkFitB(Rect bbox, int page) {
+		return createLink(bbox, LinkDestination.FitB(0, page));
+	}
+	public Link createLinkXYZ(Rect bbox, int page, float x, float y, float zoom) {
+		return createLink(bbox, LinkDestination.XYZ(0, page, x, y, zoom));
+	}
+	public Link createLinkFitR(Rect bbox, int page, float x, float y, float w, float h) {
+		return createLink(bbox, LinkDestination.FitR(0, page, x, y, w, h));
+	}
+	public Link createLinkFitV(Rect bbox, int page, float x) {
+		return createLink(bbox, LinkDestination.FitV(0, page, x));
+	}
+	public Link createLinkFitBV(Rect bbox, int page, float x) {
+		return createLink(bbox, LinkDestination.FitBV(0, page, x));
+	}
+	public Link createLinkFitH(Rect bbox, int page, float y) {
+		return createLink(bbox, LinkDestination.FitH(0, page, y));
+	}
+	public Link createLinkFitBH(Rect bbox, int page, float y) {
+		return createLink(bbox, LinkDestination.FitBH(0, page, y));
+	}
 }

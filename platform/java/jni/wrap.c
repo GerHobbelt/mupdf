@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2004-2022 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -200,6 +200,20 @@ static inline jfloatArray to_floatArray(fz_context *ctx, JNIEnv *env, const floa
 
 /* Conversion functions: C to Java. None of these throw fitz exceptions. */
 
+static inline jobject to_Buffer_safe(fz_context *ctx, JNIEnv *env, fz_buffer *buf)
+{
+	jobject jbuf;
+
+	if (!ctx || !buf) return NULL;
+
+	fz_keep_buffer(ctx, buf);
+	jbuf = (*env)->NewObject(env, cls_Buffer, mid_Buffer_init, jlong_cast(buf));
+	if (!jbuf)
+		fz_drop_buffer(ctx, buf);
+
+	return jbuf;
+}
+
 static inline jint to_ColorParams_safe(fz_context *ctx, JNIEnv *env, fz_color_params cp)
 {
 	if (!ctx) return 0;
@@ -344,6 +358,20 @@ static inline jobject to_PDFAnnotation_safe(fz_context *ctx, JNIEnv *env, pdf_an
 	return jannot;
 }
 
+static inline jobject to_PDFDocument_safe(fz_context *ctx, JNIEnv *env, pdf_document *pdf)
+{
+	jobject jpdf;
+
+	if (!ctx || !pdf) return NULL;
+
+	pdf_keep_document(ctx, pdf);
+	jpdf = (*env)->NewObject(env, cls_PDFDocument, mid_PDFDocument_init, jlong_cast(pdf));
+	if (!jpdf)
+		pdf_drop_document(ctx, pdf);
+
+	return jpdf;
+}
+
 static inline jobject to_PDFObject_safe(fz_context *ctx, JNIEnv *env, pdf_obj *obj)
 {
 	jobject jobj;
@@ -401,6 +429,65 @@ static inline jobjectArray to_QuadArray_safe(fz_context *ctx, JNIEnv *env, const
 	}
 
 	return arr;
+}
+
+static int count_next_hits(const int *marks, int a, int end)
+{
+	int b = a + 1;
+	while (b < end && !marks[b])
+		++b;
+	return b - a;
+}
+
+/* Array of Array of Quad */
+static inline jobjectArray to_SearchHits_safe(fz_context *ctx, JNIEnv *env, const int *marks, const fz_quad *quads, jint n)
+{
+	jobjectArray toparr, arr;
+	int i, k, a, m;
+
+	if (!ctx || !marks || !quads)
+		return NULL;
+
+	/* Count total number of search hits */
+	i = a = 0;
+	while (a < n)
+	{
+		a += count_next_hits(marks, a, n);
+		++i;
+	}
+
+	toparr = (*env)->NewObjectArray(env, i, cls_ArrayOfQuad, NULL);
+	if (!toparr || (*env)->ExceptionCheck(env))
+		return NULL;
+
+	i = a = 0;
+	while (a < n)
+	{
+		m = count_next_hits(marks, a, n);
+
+		arr = (*env)->NewObjectArray(env, m, cls_Quad, NULL);
+		if (!arr || (*env)->ExceptionCheck(env))
+			return NULL;
+		(*env)->SetObjectArrayElement(env, toparr, i++, arr);
+		if ((*env)->ExceptionCheck(env))
+			return NULL;
+
+		for (k = 0; k < m; ++k) {
+			jobject jquad = to_Quad_safe(ctx, env, quads[a+k]);
+			if (!jquad || (*env)->ExceptionCheck(env))
+				return NULL;
+			(*env)->SetObjectArrayElement(env, arr, k, jquad);
+			if ((*env)->ExceptionCheck(env))
+				return NULL;
+			(*env)->DeleteLocalRef(env, jquad);
+		}
+
+		(*env)->DeleteLocalRef(env, arr);
+
+		a += m;
+	}
+
+	return toparr;
 }
 
 static inline jobject to_Rect_safe(fz_context *ctx, JNIEnv *env, fz_rect rect)
@@ -949,6 +1036,24 @@ static inline fz_quad from_Quad(JNIEnv *env, jobject jquad)
 	return quad;
 }
 
+static fz_link_dest from_LinkDestination(JNIEnv *env, jobject jdest)
+{
+	fz_link_dest dest;
+
+	if (!jdest)
+		return fz_make_link_dest_none();
+
+	dest.loc.chapter = (*env)->GetIntField(env, jdest, fid_LinkDestination_chapter);
+	dest.loc.page = (*env)->GetIntField(env, jdest, fid_LinkDestination_page);
+	dest.type = (*env)->GetIntField(env, jdest, fid_LinkDestination_type);
+	dest.x = (*env)->GetFloatField(env, jdest, fid_LinkDestination_x);
+	dest.y = (*env)->GetFloatField(env, jdest, fid_LinkDestination_y);
+	dest.w = (*env)->GetFloatField(env, jdest, fid_LinkDestination_width);
+	dest.h = (*env)->GetFloatField(env, jdest, fid_LinkDestination_height);
+	dest.zoom = (*env)->GetFloatField(env, jdest, fid_LinkDestination_zoom);
+
+	return dest;
+}
 
 /* Conversion functions: Java to C. None of these throw java exceptions. */
 

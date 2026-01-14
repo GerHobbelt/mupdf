@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2004-2022 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -476,9 +476,11 @@ function AFParseDateEx(string, fmt) {
 			if (order.indexOf('y') < order.indexOf('m')) {
 				year = nums[0];
 				month = nums[1];
+				date = 1;
 			} else {
 				year = nums[1];
 				month = nums[0];
+				date = 1;
 			}
 		}
 
@@ -688,7 +690,7 @@ function AFSpecial_KeystrokeEx(fmt) {
 			event.selStart = 0;
 			event.selEnd = event.value.length;
 		}
-	} else if (event.willCommit)
+	} else
 		app.alert('The value entered ('+event.value+') does not match the format of the field [ '+event.target.name+' ] should be '+fmt);
 }
 
@@ -719,6 +721,8 @@ function AFSpecial_Keystroke(index) {
 
 function AFSpecial_Format(index) {
 	var res;
+	if (!event.value)
+		return;
 	switch (index) {
 	case 0:
 		res = util.printx('99999', event.value);
@@ -875,10 +879,6 @@ String.prototype.substr = function (start, length) {
 Date.prototype.getYear = Date.prototype.getFullYear;
 Date.prototype.setYear = Date.prototype.setFullYear;
 Date.prototype.toGMTString = Date.prototype.toUTCString;
-
-console.clear = function() { console.println('--- clear console ---\n'); };
-console.show = function(){};
-console.hide = function(){};
 
 app.plugIns = [];
 app.viewerType = 'Reader';

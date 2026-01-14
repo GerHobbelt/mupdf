@@ -47,7 +47,6 @@ def expand_nv( text, caller=1):
     If <expression> ends with '=', this character is removed and we prefix the
     result with <expression>=.
 
-
     >>> x = 45
     >>> y = 'hello'
     >>> expand_nv( 'foo {x} {y=}')
@@ -60,6 +59,15 @@ def expand_nv( text, caller=1):
     >>> y = 'hello'
     >>> expand_nv( 'foo {x} {y!r=}')
     "foo 45 y='hello'"
+
+    If <expression> starts with '=', this character is removed and we show each
+    space-separated item in the remaining text as though it was appended with
+    '='.
+
+    >>> foo = 45
+    >>> y = 'hello'
+    >>> expand_nv('{=foo y}')
+    'foo=45 y=hello'
     '''
     if isinstance( caller, int):
         frame_record = inspect.stack()[ caller]
@@ -87,7 +95,14 @@ def expand_nv( text, caller=1):
                     if close < 0:
                         raise Exception( 'After "{" at offset %s, cannot find closing "}". text is: %r' % (
                                 pos, text))
-                    yield pre, text[ pos+1 : close]
+                    text2 = text[ pos+1 : close]
+                    if text2.startswith('='):
+                        text2 = text2[1:]
+                        for i, text3 in enumerate(text2.split()):
+                            pre2 = ' ' if i else pre
+                            yield pre2, text3 + '='
+                    else:
+                        yield pre, text[ pos+1 : close]
                     pre = ''
                     pos = close + 1
                 else:
@@ -329,6 +344,8 @@ def log( text, level=0, caller=1, nv=True, out=None, raw=False):
 
     text:
         The text to output.
+    level:
+        Lower values are more verbose.
     caller:
         How many frames to step up to get caller's context when evaluating
         file:line information and/or expressions. Or frame record as returned
@@ -485,179 +502,251 @@ def force_line_buffering():
     return stdout0, stderr0
 
 
-def exception_info( exception=None, limit=None, out=None, prefix='', oneline=False):
+def exception_info(
+        exception_or_traceback=None,
+        limit=None,
+        file=None,
+        chain=True,
+        outer=True,
+        _filelinefn=True,
+        ):
     '''
-    General replacement for traceback.* functions that print/return information
-    about exceptions and backtraces. This function provides a simple way of
-    getting the functionality provided by these traceback functions:
+    Shows an exception and/or backtrace.
+
+    Alternative to traceback.* functions that print/return
+    information about exceptions and backtraces, such as:
 
         traceback.format_exc()
         traceback.format_exception()
         traceback.print_exc()
         traceback.print_exception()
 
+    Install as system default with:
+        sys.excepthook = lambda type_, exception, traceback: exception_info( exception, chain='reverse')
+
+    Returns None, or the generated text if <file> is 'return'.
+
     Args:
-        exception:
-            None, or a (type, value, traceback) tuple, e.g. from
-            sys.exc_info(). If None, we call sys.exc_info() and use its return
-            value. If there is no live exception we show information about the
-            current backtrace.
+        exception_or_traceback:
+            None, an Exception or a types.TracebackType. If None we use current
+            exception from sys.exc_info(), otherwise the current backtrace from
+            inspect.stack().
         limit:
-            None or maximum number of stackframes to output.
-        out:
-            None or callable taking single <text> parameter or object with a
-            'write' member that takes a single <text> parameter.
-        prefix:
-            Used to prefix all lines of text.
-        oneline:
-            If true, we only show one line of information.
+            As in traceback.* functions: None to show all frames, positive to
+            show last <limit> frames, negative to exclude outermost -limit
+            frames.
+        file:
+            As in traceback.* functions: file-like object to which we write
+            output, or sys.stderr if None. Special value 'return' makes us
+            return our output as a string.
+        chain:
+            As in traceback.* functions: if true we show chained exceptions as
+            described in PEP-3134. Special value 'because' reverses the usual
+            ordering, showing higher-level exceptions first and joining with
+            'Because:' text.
+        outer:
+            If true (the default) we also show an exception's outer frames
+            above the catch block (see below for details). We use outer=false
+            for chained exceptions to avoid duplication.
+        _filelinefn:
+            Internal only; used with doctest - makes us omit file:line:
+            information to allow simple comparison with expected output.
 
-    Returns:
-        A string containing description of specified exception (if any) and
-        backtrace. Also sends this description to <out> if specified.
+    Differences from traceback.* functions:
 
-    Inclusion of outer frames:
-        We improve upon traceback.* in that we also include outermost stack
-        frames above the point at which an exception was caught - frames from
-        the top-level <module> or thread creation fn to the try..catch block,
-        which makes backtraces much more useful.
+        Frames are displayed as one line in the form:
+            <file>:<line>:<function>: <text>
 
-        Google 'sys.exc_info backtrace incomplete' for more details.
+        Filenames are displayed as relative to the current directory if
+        applicable.
 
-        We separate the two parts of the backtrace using a line '^except
-        raise:'; the idea here is that '^except' is pointing upwards to the
-        frame that caught the exception, while 'raise:' is referring downwards
-        to the frames that eventually raised the exception.
+        Inclusion of outer frames:
+            Unlike traceback.* functions, stack traces for exceptions include
+            outer stack frames above the point at which an exception was caught
+            - frames from the top-level <module> or thread creation to the
+            catch block. [Search for 'sys.exc_info backtrace incomplete' for
+            more details.]
 
-        So the backtrace looks like this:
+            We separate the two parts of the backtrace using a marker line
+            '^except raise:' where '^except' points upwards to the frame that
+            caught the exception and 'raise:' refers downwards to the frame
+            that raised the exception.
 
-            root (e.g. <module> or /usr/lib/python2.7/threading.py:778:__bootstrap():
+            So the backtrace for an exception looks like this:
+
+                <file>:<line>:<fn>: <text>  [in root module.]
+                ...                         [... other frames]
+                <file>:<line>:<fn>: <text>  [the except: block where exception was caught.]
+                ^except raise:              [marker line]
+                <file>:<line>:<fn>: <text>  [try: block.]
+                ...                         [... other frames]
+                <file>:<line>:<fn>: <text>  [where the exception was raised.]
+
+    Examples:
+
+        Define some nested function calls which raise and except and call
+        exception_info(). We use file=sys.stdout so we can check the output
+        with doctest, and set _filelinefn=0 so that the output can be matched
+        easily.
+
+        >>> def a():
+        ...     b()
+        >>> def b():
+        ...     try:
+        ...         c()
+        ...     except Exception as e:
+        ...         exception_info( file=sys.stdout, chain=g_chain, _filelinefn=0)
+        >>> def c():
+        ...     try:
+        ...         d()
+        ...     except Exception as e:
+        ...         raise Exception( 'c: d() failed') from e
+        >>> def d():
+        ...     e()
+        >>> def e():
+        ...     raise Exception('e(): deliberate error')
+
+        We use +ELLIPSIS to allow '...' to match arbitrary outer frames from
+        the doctest code itself.
+
+        With chain=True (the default), we output low-level exceptions first,
+        matching the behaviour of traceback.* functions:
+
+        >>> g_chain = True
+        >>> a() # doctest: +REPORT_UDIFF +ELLIPSIS
+        Traceback (most recent call last):
+            c(): d()
+            d(): e()
+            e(): raise Exception('e(): deliberate error')
+        Exception: e(): deliberate error
+        <BLANKLINE>
+        The above exception was the direct cause of the following exception:
+        Traceback (most recent call last):
             ...
-            file:line in the except: block where the exception was caught.
+            <module>(): a() # doctest: +REPORT_UDIFF +ELLIPSIS
+            a(): b()
+            b(): exception_info( file=sys.stdout, chain=g_chain, _filelinefn=0)
             ^except raise:
-            file:line in the try: block.
+            b(): c()
+            c(): raise Exception( 'c: d() failed') from e
+        Exception: c: d() failed
+
+
+        With chain='because', we output high-level exceptions first:
+
+        >>> g_chain = 'because'
+        >>> a() # doctest: +REPORT_UDIFF +ELLIPSIS
+        Traceback (most recent call last):
             ...
-            file:line where the exception was raised.
-
-        The items below the '^except raise:' marker are the usual items that
-        traceback.* shows for an exception.
-
-    Also the backtraces that are generated are more concise than those provided
-    by traceback.* - just one line per frame instead of two - and filenames are
-    output relative to the current directory if applicable. And one can easily
-    prefix all lines with a specified string, e.g. to indent the text.
+            <module>(): a() # doctest: +REPORT_UDIFF +ELLIPSIS
+            a(): b()
+            b(): exception_info( file=sys.stdout, chain=g_chain, _filelinefn=0)
+            ^except raise:
+            b(): c()
+            c(): raise Exception( 'c: d() failed') from e
+        Exception: c: d() failed
+        <BLANKLINE>
+        Because:
+        Traceback (most recent call last):
+            c(): d()
+            d(): e()
+            e(): raise Exception('e(): deliberate error')
+        Exception: e(): deliberate error
     '''
-    if exception is None:
-        exception = sys.exc_info()
-    etype, value, tb = exception
-    out2 = io.StringIO()
-    try:
-        frames = []
+    if isinstance( exception_or_traceback, types.TracebackType):
+        exception = None
+        tb = exception_or_traceback
+    elif isinstance( exception_or_traceback, BaseException):
+        exception = exception_or_traceback
+    elif exception_or_traceback:
+        assert 0, f'Unrecognised exception_or_traceback type: {type(exception_or_traceback)}'
+    else:
+        _, exception, tb = sys.exc_info()
+        if not exception:
+            tb = inspect.stack()[1:]
 
-        if tb:
-            # There is a live exception.
-            #
-            # Get frames above point at which exception was caught - frames
-            # starting at top-level <module> or thread creation fn, and ending
-            # at the point in the catch: block from which we were called.
-            #
-            # These frames are not included explicitly in sys.exc_info()[2] and are
-            # also omitted by traceback.* functions, which makes for incomplete
-            # backtraces that miss much useful information.
-            #
-            for f in reversed(inspect.getouterframes(tb.tb_frame)):
-                ff = f[1], f[2], f[3], f[4][0].strip()
-                frames.append(ff)
-        else:
-            # No exception; use current backtrace.
-            for f in inspect.stack():
-                ff = f[1], f[2], f[3], f[4][0].strip()
-                frames.append(ff)
+    if file == 'return':
+        out = io.StringIO()
+    else:
+        out = file if file else sys.stderr
 
-        # If there is a live exception, append frames from point in the try:
-        # block that caused the exception to be raised, to the point at which
-        # the exception was thrown.
-        #
-        # [One can get similar information using traceback.extract_tb(tb):
-        #   for f in traceback.extract_tb(tb):
-        #       frames.append(f)
-        # ]
-        if tb:
-            # Insert a marker to separate the two parts of the backtrace, used
-            # for our special '^except raise:' line.
-            frames.append( None)
+    def do_chain( exception):
+        exception_info( exception, limit, out, chain, outer=False, _filelinefn=_filelinefn)
 
-            for f in inspect.getinnerframes(tb):
-                ff = f[1], f[2], f[3], f[4][0].strip()
-                frames.append(ff)
+    if exception and chain and chain != 'because':
+        if exception.__cause__:
+            do_chain( exception.__cause__)
+            out.write( '\nThe above exception was the direct cause of the following exception:\n')
+        elif exception.__context__:
+            do_chain( exception.__context__)
+            out.write( '\nDuring handling of the above exception, another exception occurred:\n')
 
-        cwd = os.getcwd() + os.sep
-        if oneline:
-            if etype and value:
-                # The 'exception_text' variable below will usually be assigned
-                # something like '<ExceptionType>: <ExceptionValue>', unless
-                # there was no explanatory text provided (e.g. "raise Exception()").
-                # In this case, str(value) will evaluate to ''.
-                exception_text = traceback.format_exception_only(etype, value)[0].strip()
-                filename, line, fnname, text = frames[-1]
-                if filename.startswith(cwd):
-                    filename = filename[len(cwd):]
-                if not str(value):
-                    # The exception doesn't have any useful explanatory text
-                    # (for example, maybe it was raised by an expression like
-                    # "assert <expression>" without a subsequent comma).  In
-                    # the absence of anything more helpful, print the code that
-                    # raised the exception.
-                    exception_text += ' (%s)' % text
-                line = '%s%s at %s:%s:%s()' % (prefix, exception_text, filename, line, fnname)
-                out2.write(line)
-        else:
-            out2.write( '%sBacktrace:\n' % prefix)
-            for frame in frames:
-                if frame is None:
-                    out2.write( '%s    ^except raise:\n' % prefix)
-                    continue
-                filename, line, fnname, text = frame
-                if filename.startswith( cwd):
-                    filename = filename[ len(cwd):]
-                if filename.startswith( './'):
-                    filename = filename[ 2:]
-                out2.write( '%s    %s:%s:%s(): %s\n' % (
-                        prefix, filename, line, fnname, text))
+    cwd = os.getcwd() + os.sep
 
-            if etype and value:
-                out2.write( '%sException:\n' % prefix)
-                lines = traceback.format_exception_only( etype, value)
-                for line in lines:
-                    # It seems that the lines returned from
-                    # traceback.format_exception_only() can sometimes contain
-                    # \n characters, so we do an additional loop to ensure that
-                    # these are indented consistently.
-                    #
-                    for line2 in line.split('\n'):
-                        out2.write( '%s    %s\n' % ( prefix, line2))
+    def output_frames( frames, reverse, limit):
+        if reverse:
+            frames = reversed( frames)
+        if limit is not None:
+            frames = list( frames)
+            frames = frames[ -limit:]
+        for frame in frames:
+            f, filename, line, fnname, text, index = frame
+            text = text[0].strip() if text else ''
+            if filename.startswith( cwd):
+                filename = filename[ len(cwd):]
+            if filename.startswith( f'.{os.sep}'):
+                filename = filename[ 2:]
+            if _filelinefn:
+                out.write( f'    {filename}:{line}:{fnname}(): {text}\n')
+            else:
+                out.write( f'    {fnname}(): {text}\n')
 
-        text = out2.getvalue()
+    out.write( 'Traceback (most recent call last):\n')
+    if exception:
+        tb = exception.__traceback__
+        if outer:
+            output_frames( inspect.getouterframes( tb.tb_frame), reverse=True, limit=limit)
+            out.write( '    ^except raise:\n')
+        output_frames( inspect.getinnerframes( tb), reverse=False, limit=None)
+    else:
+        output_frames( tb, reverse=True, limit=limit)
 
-        # Write text to <out> if specified.
-        out = getattr( out, 'write', out)
-        if callable( out):
-            out( text)
-        return text
+    if exception:
+        lines = traceback.format_exception_only( type(exception), exception)
+        for line in lines:
+            out.write( line)
 
-    finally:
-        # clear things to avoid cycles.
-        del exception
-        del etype
-        del value
-        del tb
-        del frames
+    if exception and chain == 'because':
+        if exception.__cause__:
+            out.write( '\nBecause:\n')
+            do_chain( exception.__cause__)
+        elif exception.__context__:
+            out.write( '\nBecause error occurred handling this exception:\n')
+            do_chain( exception.__context__)
+
+    if file == 'return':
+        return out.getvalue()
 
 
 def number_sep( s):
     '''
     Simple number formatter, adds commas in-between thousands. <s> can
     be a number or a string. Returns a string.
+
+    >>> number_sep(1)
+    '1'
+    >>> number_sep(12)
+    '12'
+    >>> number_sep(123)
+    '123'
+    >>> number_sep(1234)
+    '1,234'
+    >>> number_sep(12345)
+    '12,345'
+    >>> number_sep(123456)
+    '123,456'
+    >>> number_sep(1234567)
+    '1,234,567'
     '''
     if not isinstance( s, str):
         s = str( s)
@@ -676,14 +765,6 @@ def number_sep( s):
     ret += s[end:]
     return ret
 
-assert number_sep(1)=='1'
-assert number_sep(12)=='12'
-assert number_sep(123)=='123'
-assert number_sep(1234)=='1,234'
-assert number_sep(12345)=='12,345'
-assert number_sep(123456)=='123,456'
-assert number_sep(1234567)=='1,234,567'
-
 
 class Stream:
     '''
@@ -701,7 +782,12 @@ class StreamPrefix:
     takes no parameters and return a string.
     '''
     def __init__( self, stream, prefix):
-        self.stream = stream
+        if callable(stream):
+            self.stream_write = stream
+            self.stream_flush = lambda: None
+        else:
+            self.stream_write = stream.write
+            self.stream_flush = stream.flush
         self.at_start = True
         if callable(prefix):
             self.prefix = prefix
@@ -720,10 +806,10 @@ class StreamPrefix:
         text = text.replace( '\n', '\n%s' % self.prefix())
         if append_newline:
             text += '\n'
-        self.stream.write( text)
+        self.stream_write( text)
 
     def flush( self):
-        self.stream.flush()
+        self.stream_flush()
 
 
 def debug( text):
@@ -895,28 +981,39 @@ def system(
             If true, we raise an exception if the command fails, otherwise we
             return the failing error code or zero.
         out:
-            Where output is sent.
-            If None, child process inherits this process's stdout and stderr.
-            If subprocess.DEVNULL, child process's output is lost.
-            Otherwise we repeatedly read child process's output via a pipe and
-            write to <out>:
-                If <out> is 'return' we store the output and include it in our
-                return value or exception.
-                Otherwise if <out> is 'log' we write to jlib.log() using our
-                caller's stack frame.
-                Otherwise if <out> is an integer, we do: os.write( out, text)
-                Otherwise if <out> is callable, we do: out( text)
-                Otherwise we assume <out> is python stream or similar, and do:
-                out.write(text)
+            Where to send output from child process.
+
+            <out> is <o> or (o, prefix) or list of such items. Each <o> is
+            matched as follows:
+
+                None: child process inherits this process's stdout and
+                stderr. (Must be the only item, and <prefix> is not supported.)
+
+                subprocess.DEVNULL: child process's output is lost. (Must be
+                the only item, and <prefix> is not supported.)
+
+                'return': we store the output and include it in our return
+                value or exception. Can only be specified once.
+
+                'log': we write to jlib.log() using our caller's stack
+                frame. Can only be specified once.
+
+                An integer: we do: os.write(o, text)
+
+                Is callable: we do: o(text)
+
+                Otherwise we assume <o> is python stream or similar, and do:
+                o.write(text)
+
+            If <prefix> is specified, it is applied to each line in the output
+            before being sent to <o>.
         prefix:
-            If not None, should be prefix string or callable used to prefix
-            all output. [This is for convenience to avoid the need to do
-            out=StreamPrefix(...).]
+            Default prefix for all items in <out>.
         shell:
             Passed to underlying subprocess.Popen() call.
         encoding:
             Sepecify the encoding used to translate the command's output to
-            characters. If None we send bytes to <out>.
+            characters. If None we send bytes to items in <out>.
         errors:
             How to handle encoding errors; see docs for codecs module
             for details. Defaults to 'replace' so we never raise a
@@ -937,16 +1034,23 @@ def system(
             environment passed to the child process.
 
     Returns:
-        If raise_errors is true:
-            If the command failed, we raise an exception; if <out> is 'return'
-            the exception text includes the output.
-            If <out> is 'return' we return the text output from the command.
-            Else we return None
+        raise_errors:
+            true:
+                If the command failed, we raise an exception; if <out> contains
+                'return' the exception text includes the output.
 
-        Else if <out> is 'return', we return (e, text) where <e> is the
-        command's exit code and <text> is the output from the command.
+                Else if <out> contains 'return' we return the text output from the
+                command.
 
-        Else we return <e>, the command's exit code.
+                Else we return None.
+            false:
+                If <out> contains 'return', we return (e, text) where <e> is the
+                command's exit code and <text> is the output from the command.
+
+                Else we return <e>, the command's return code.
+
+                In the above, <e> is the subprocess-style returncode - the exit
+                code, or -N if killed by signal N.
 
     >>> print(system('echo hello a', prefix='foo:', out='return'))
     foo:hello a
@@ -963,14 +1067,59 @@ def system(
     foo:
     <BLANKLINE>
     '''
-    out_original = out
-    if out == 'log':
-        out_frame_record = inspect.stack()[caller]
-        out = lambda text: log( text, caller=out_frame_record, nv=False, raw=True)
-    elif out == 'return':
-        # Store the output ourselves so we can return it.
-        out_return = io.StringIO()
-        out = out_return
+    out_pipe = 0
+    out_none = 0
+    out_devnull = 0
+    out_return = None
+    out_log = 0
+
+    outs = out if isinstance(out, list) else [out]
+    for i, o in enumerate(outs):
+        if o is None:
+            out_none += 1
+        elif o == subprocess.DEVNULL:
+            out_devnull += 1
+        else:
+            out_pipe += 1
+            o_prefix = prefix
+            if isinstance(o, tuple) and len(o) == 2:
+                o, o_prefix = o
+                assert o not in (None, subprocess.DEVNULL), f'out[]={o} does not make sense with a prefix ({o_prefix})'
+            assert not isinstance(o, (tuple, list))
+            if o == 'return':
+                assert not out_return, f'"return" specified twice does not make sense'
+                out_return = io.StringIO()
+                outs[i] = out_return.write
+            elif o == 'log':
+                assert not out_log, f'"log" specified twice does not make sense'
+                out_log += 1
+                out_frame_record = inspect.stack()[caller]
+                outs[i] = lambda text: log( text, caller=out_frame_record, nv=False, raw=True)
+            elif isinstance(o, int):
+                outs[i] = lambda text: os.write( o, text)
+            elif callable(o):
+                outs[i] = o
+            else:
+                assert hasattr(o, 'write') and callable(o.write), (
+                        f'Do not understand o={o}, must be one of:'
+                            ' None, subprocess.DEVNULL, "return", "log", <int>,'
+                            ' or support o() or o.write().'
+                            )
+                outs[i] = o.write
+            if o_prefix:
+                outs[i] = StreamPrefix( outs[i], o_prefix).write
+
+    if out_pipe:
+        stdout = subprocess.PIPE
+        stderr = subprocess.STDOUT
+    elif out_none == len(outs):
+        stdout = None
+        stderr = None
+    elif out_devnull == len(outs):
+        stdout = subprocess.DEVNULL
+        stderr = subprocess.DEVNULL
+    else:
+        assert 0, f'Inconsistent out: {out}'
 
     if verbose:
         env_text = ''
@@ -978,19 +1127,6 @@ def system(
             for n, v in env_extra.items():
                 env_text += f' {n}={v}'
         log(f'running:{env_text} {command}', nv=0, caller=caller+1)
-
-    out_raw = out in (None, subprocess.DEVNULL)
-    if prefix:
-        if out_raw:
-            raise Exception( 'No out stream available for prefix')
-        out = StreamPrefix( make_out_callable( out), prefix)
-
-    if out_raw:
-        stdout = out
-        stderr = out
-    else:
-        stdout = subprocess.PIPE
-        stderr = subprocess.STDOUT
 
     env = None
     if env_extra:
@@ -1009,10 +1145,7 @@ def system(
             env=env
             )
 
-    child_out = child.stdout
-
-    if stdout == subprocess.PIPE:
-        out2 = make_out_callable( out)
+    if out_pipe:
         decoder = None
         if encoding:
             # subprocess's universal_newlines and codec.streamreader seem to
@@ -1033,47 +1166,50 @@ def system(
             # multipe calls to write() - it returns all available data, not
             # just from the first unread write() call.
             #
-            bytes_ = os.read( child.stdout.fileno(), 10000)
+            output = os.read( child.stdout.fileno(), 10000)
             if decoder:
-                final = not bytes_
-                text = decoder.decode(bytes_, final)
-                out2.write(text)
-            else:
-                out2.write(bytes_)
-            if not bytes_:
+                final = not output
+                output = decoder.decode(output, final)
+            for o in outs:
+                o(output)
+            if not output:
                 break
 
     e = child.wait()
 
-    if out_original == 'log':
+    if out_log:
         if not _log_text_line_start:
-            # Terminate last incomplete line.
+            # Terminate last incomplete line of log outputs.
             sys.stdout.write('\n')
     if verbose:
         log(f'[returned e={e}]', nv=0, caller=caller+1)
 
-    if out_original == 'return':
-        output_return = out_return.getvalue()
+    if out_return:
+        out_return = out_return.getvalue()
 
     if raise_errors:
         if e:
-            if out_original == 'return':
-                if not output_return.endswith('\n'):
-                    output_return += '\n'
+            env_string = ''
+            if env_extra:
+                for n, v in env_extra.items():
+                    env_string += f'{n}={v} '
+            if out_return is not None:
+                if not out_return.endswith('\n'):
+                    out_return += '\n'
                 raise Exception(
-                        f'Command failed: {command}\n'
+                        f'Command failed: {env_string}{command}\n'
                         f'Output was:\n'
-                        f'{output_return}'
+                        f'{out_return}'
                         )
             else:
-                raise Exception( 'command failed: %s' % command)
-        elif out_original == 'return':
-            return output_return
+                raise Exception( f'command failed: {env_string}{command}')
+        elif out_return is not None:
+            return out_return
         else:
             return
 
-    if out_original == 'return':
-        return e, output_return
+    if out_return is not None:
+        return e, out_return
     else:
         return e
 
@@ -1199,25 +1335,43 @@ class Args:
         except StopIteration:
             return None
 
-def update_file( text, filename):
+def update_file( text, filename, return_different=False):
     '''
     Writes <text> to <filename>. Does nothing if contents of <filename> are
     already <text>.
+
+    If <return_different> is true, we return existing contents if <filename>
+    already exists and differs from <text>.
     '''
     try:
         with open( filename) as f:
             text0 = f.read()
     except OSError:
         text0 = None
-    if text == text0:
-        log( 'Unchanged: ' + filename)
-    else:
+    if text != text0:
+        if return_different and text0 is not None:
+            return text
         log( 'Updating:  ' + filename)
         # Write to temp file and rename, to ensure we are atomic.
         filename_temp = f'{filename}-jlib-temp'
         with open( filename_temp, 'w') as f:
             f.write( text)
         rename( filename_temp, filename)
+
+
+def find_in_paths( name, paths=None):
+    '''
+    Looks for <name> in paths and returns complete path. paths is list/tuple or
+    colon-separated string; if None we use $PATH.
+    '''
+    if paths is None:
+        paths = os.environ.get( 'PATH', '')
+    if isinstance( paths, str):
+        paths = paths.split( ':')
+    for path in paths:
+        p = f'{path}/{name}'
+        if os.path.isfile( p):
+            return p
 
 
 def mtime( filename, default=0):
@@ -1232,7 +1386,13 @@ def mtime( filename, default=0):
 def get_filenames( paths):
     '''
     Yields each file in <paths>, walking any directories.
+
+    If <paths> is a tuple (paths2, filter_) and <filter_> is callable, we yield
+    all files in <paths2> for which filter_(path2) returns true.
     '''
+    filter_ = lambda path: True
+    if isinstance( paths, tuple) and len( paths) == 2 and callable( paths[1]):
+        paths, filter_ = paths
     if isinstance( paths, str):
         paths = (paths,)
     for name in paths:
@@ -1240,9 +1400,11 @@ def get_filenames( paths):
             for dirpath, dirnames, filenames in os.walk( name):
                 for filename in filenames:
                     path = os.path.join( dirpath, filename)
-                    yield path
+                    if filter_( path):
+                        yield path
         else:
-            yield name
+            if filter_( name):
+                yield name
 
 def remove( path):
     '''
@@ -1365,10 +1527,11 @@ def build(
     infiles:
         Names of files that are read by <command>. Can be a single filename. If
         an item is a directory, we expand to all filenames in the directory's
-        tree.
+        tree. Can be (files2, filter_) as supported by jlib.get_filenames().
     outfiles:
-        Names of files that are written by <command>. Can also be a single
-        filename.
+        Names of files that are written by <command>. Can also be a
+        single filename. Can be (files2, filter_) as supported by
+        jlib.get_filenames().
     command:
         Command to run. {IN} and {OUT} are replaced by space-separated
         <infiles> and <outfiles> with '/' changed to '\' on Windows.
@@ -1414,6 +1577,8 @@ def build(
     os_name = platform.system()
     os_windows = (os_name == 'Windows' or os_name.startswith('CYGWIN'))
     def files_string(files):
+        if isinstance(files, tuple) and len(files) == 2 and callable(files[1]):
+            files = files[0],
         ret = ' '.join(files)
         if os_windows:
             # This works on Cygwyn; we might only need '\\' if running in a Cmd
@@ -1450,14 +1615,20 @@ def build(
     # fails but still creates target(s), then next time we will know target(s)
     # are not up to date.
     #
+    # We rename the command to a temporary file and then rename back again
+    # after the command finishes so that its mtime is unchanged if the command
+    # has not changed.
+    #
     ensure_parent_dir( command_filename)
-    with open( command_filename, 'w') as f:
-        pass
+    command_filename_temp = command_filename + '-'
+    remove(command_filename_temp)
+    if os.path.exists( command_filename):
+        rename(command_filename, command_filename_temp)
+    update_file( command, command_filename_temp)
 
     system( command, out=out, verbose=verbose, executable=executable, caller=2)
 
-    with open( command_filename, 'w') as f:
-        f.write( command)
+    rename( command_filename_temp, command_filename)
 
     return True
 
@@ -2351,7 +2522,6 @@ class Arg:
 
 if __name__ == '__main__':
 
-    import doctest
     doctest.testmod(
             optionflags=doctest.FAIL_FAST,
             )
