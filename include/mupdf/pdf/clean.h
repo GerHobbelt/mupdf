@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2024 Artifex Software, Inc.
+// Copyright (C) 2004-2025 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -32,13 +32,33 @@
 extern "C" {
 #endif
 
+/**
+	Specifies whether the PDF's structure tree should be dropped or
+	kept when rearranging or subsetting its pages.
+
+	PDF_CLEAN_STRUCTURE_DROP: Remove the structure tree entirely.
+
+	PDF_CLEAN_STRUCTURE_KEEP: Preserve the structure tree. When
+	redacting a document, preserving the structure tree might leak
+	information.
+ */
+typedef enum {
+	PDF_CLEAN_STRUCTURE_DROP = 0,
+	PDF_CLEAN_STRUCTURE_KEEP = 1
+} pdf_clean_options_structure;
+
 typedef struct
 {
 	pdf_write_options write;
 	pdf_image_rewriter_options image;
 
-	/* Experimental option. Subject to change. */
 	int subset_fonts;
+
+	/* 0 to drop the structure tree (default).
+	 * 1 to keep it unchanged.
+	 * Future values reserved.
+	 */
+	pdf_clean_options_structure structure;
 } pdf_clean_options;
 
 /*
@@ -49,7 +69,7 @@ void pdf_clean_file(fz_context *ctx, const char *infile, const char *outfile, co
 /*
 	Recreate page tree to include only the pages listed in the array, in the order listed.
 */
-void pdf_rearrange_pages(fz_context *ctx, pdf_document *doc, int count, const int *pages);
+void pdf_rearrange_pages(fz_context *ctx, pdf_document *doc, int count, const int *pages, pdf_clean_options_structure structure);
 
 
 #ifdef __cplusplus

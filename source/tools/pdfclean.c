@@ -77,6 +77,7 @@ static int usage(void)
 		"\t--{color,gray,bitonal}-{,lossy-,lossless-}image-subsample-method -\n\t\taverage, bicubic\n"
 		"\t--{color,gray,bitonal}-{,lossy-,lossless-}image-subsample-dpi -[,-]\n\t\tDPI at which to subsample [+ target dpi]\n"
 		"\t--{color,gray,bitonal}-{,lossy-,lossless-}image-recompress-method -[:quality]\n\t\tnever, same, lossless, jpeg, j2k, fax, jbig2\n"
+		"\t--structure=keep|drop\tKeep or drop the structure tree\n"
 		"\tpages\tcomma separated list of page numbers and ranges\n"
 	);
 
@@ -101,6 +102,7 @@ int pdfclean_main(int argc, const char** argv)
 	int tighten = 0;
 	pdf_clean_options opts = { 0 };
 	int errors = 0;
+	int structure = 0;
 
 	const fz_getopt_long_options longopts[] =
 	{
@@ -127,6 +129,8 @@ int pdfclean_main(int argc, const char** argv)
 		{ "bitonal-image-subsample-method=average|bicubic", &opts.image.bitonal_image_subsample_method, (void *)19 },
 		{ "bitonal-image-subsample-dpi:", &opts.image.bitonal_image_subsample_threshold, (void *)20 },
 		{ "bitonal-image-recompress-method=never|same|lossless|jpeg:|j2k:|fax|jbig2", &opts.image.bitonal_image_recompress_method, (void *)21 },
+
+		{ "structure=drop|keep", &structure, (void *)22 },
 
 		{ NULL, NULL, NULL }
 	};
@@ -241,6 +245,9 @@ int pdfclean_main(int argc, const char** argv)
 				opts.image.bitonal_image_recompress_quality = fz_optarg;
 				if (fz_optarg)
 					return usage();
+				break;
+			case 22: /* structure */
+				opts.structure = structure; /* Allow for int/enum size mismatch. */
 				break;
 			}
 			break;
