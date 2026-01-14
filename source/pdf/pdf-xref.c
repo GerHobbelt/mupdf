@@ -5363,7 +5363,6 @@ pdf_debug_doc_changes(fz_context *ctx, pdf_document *doc)
 			}
 		}
 	}
-
 }
 
 int pdf_obj_is_incremental(fz_context *ctx, pdf_obj *obj)
