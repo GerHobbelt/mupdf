@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2022 Artifex Software, Inc.
+// Copyright (C) 2022 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -20,39 +20,47 @@
 // Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
 // CA 94945, U.S.A., +1(415)492-9861, for further information.
 
-#ifndef MUPDF_PDF_ANNOT_IMP_H
-#define MUPDF_PDF_ANNOT_IMP_H
+package com.artifex.mupdf.fitz;
 
-#include "mupdf/pdf.h"
-
-struct pdf_annot
+public class HTMLStory
 {
-	int refs;
+	static {
+		Context.init();
+	}
 
-	pdf_page *page;
-	pdf_obj *obj;
+	protected long pointer;
 
-	int is_hot;
-	int is_active;
+	protected native void finalize();
 
-	int needs_new_ap; /* If set, then a resynthesis of this annotation has been requested. */
-	int has_new_ap; /* If set, then the appearance stream has changed since last queried. */
-	int ignore_trigger_events;
+	public void destroy() {
+		finalize();
+	}
 
-	pdf_annot *next;
-};
+	private static native long newHTMLStory(byte[] content, byte[] user_css, float em);
 
-typedef struct
-{
-	fz_link super;
-	pdf_page *page;
-	pdf_obj *obj;
-} pdf_link;
+	public HTMLStory(String content, String user_css, float em)
+	{
+		pointer = newHTMLStory(content.getBytes(), user_css.getBytes(), em);
+	}
 
-void pdf_load_annots(fz_context *ctx, pdf_page *page, pdf_obj *annots);
-void pdf_drop_annots(fz_context *ctx, pdf_annot *annot_list);
-void pdf_drop_widgets(fz_context *ctx, pdf_annot *widget_list);
+	public HTMLStory(byte[] content, String user_css, float em)
+	{
+		pointer = newHTMLStory(content, user_css.getBytes(), em);
+	}
 
-void pdf_set_annot_has_changed(fz_context *ctx, pdf_annot *annot);
+	public HTMLStory(String content, byte[] user_css, float em)
+	{
+		pointer = newHTMLStory(content.getBytes(), user_css, em);
+	}
 
-#endif
+	public HTMLStory(byte[] content, byte[] user_css, float em)
+	{
+		pointer = newHTMLStory(content, user_css, em);
+	}
+
+	public native boolean place(Rect rect, Rect filled);
+
+	public native void draw(Device dev, Matrix ctm);
+
+	public native DOM document();
+}

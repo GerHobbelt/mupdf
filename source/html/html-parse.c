@@ -169,7 +169,13 @@ static void fz_drop_html_flow(fz_context *ctx, fz_html_flow *flow)
 static fz_html_flow *add_flow(fz_context *ctx, fz_pool *pool, fz_html_box *top, fz_html_box *inline_box, int type, int extras)
 {
 	size_t size = (type == FLOW_IMAGE ? sizeof(fz_html_flow) : offsetof(fz_html_flow, content) + extras);
-	fz_html_flow *flow = fz_pool_alloc(ctx, pool, size);
+	fz_html_flow *flow;
+
+	/* Shouldn't happen, but bug 705324. */
+	if (top == NULL || top->type != BOX_FLOW)
+		return NULL;
+
+	flow = fz_pool_alloc(ctx, pool, size);
 	flow->type = type;
 	flow->expand = 0;
 	flow->bidi_level = 0;
@@ -184,7 +190,8 @@ static fz_html_flow *add_flow(fz_context *ctx, fz_pool *pool, fz_html_box *top, 
 static void add_flow_space(fz_context *ctx, fz_pool *pool, fz_html_box *top, fz_html_box *inline_box)
 {
 	fz_html_flow *flow = add_flow(ctx, pool, top, inline_box, FLOW_SPACE, 0);
-	flow->expand = 1;
+	if (flow)
+		flow->expand = 1;
 }
 
 static void add_flow_break(fz_context *ctx, fz_pool *pool, fz_html_box *top, fz_html_box *inline_box)
@@ -205,6 +212,8 @@ static void add_flow_shyphen(fz_context *ctx, fz_pool *pool, fz_html_box *top, f
 static void add_flow_word(fz_context *ctx, fz_pool *pool, fz_html_box *top, fz_html_box *inline_box, const char *a, const char *b, int lang)
 {
 	fz_html_flow *flow = add_flow(ctx, pool, top, inline_box, FLOW_WORD, b - a + 1);
+	if (flow == NULL)
+		return;
 	memcpy(flow->content.text, a, b - a);
 	flow->content.text[b - a] = 0;
 	flow->markup_lang = lang;
@@ -213,7 +222,8 @@ static void add_flow_word(fz_context *ctx, fz_pool *pool, fz_html_box *top, fz_h
 static void add_flow_image(fz_context *ctx, fz_pool *pool, fz_html_box *top, fz_html_box *inline_box, fz_image *img)
 {
 	fz_html_flow *flow = add_flow(ctx, pool, top, inline_box, FLOW_IMAGE, 0);
-	flow->content.image = fz_keep_image(ctx, img);
+	if (flow)
+		flow->content.image = fz_keep_image(ctx, img);
 }
 
 static void add_flow_anchor(fz_context *ctx, fz_pool *pool, fz_html_box *top, fz_html_box *inline_box)
@@ -302,6 +312,46 @@ static const char *pairbrk[29] =
 	"_^^%%%^^^_______%%__^^^_____%", /* RI regional indicator */
 };
 
+static fz_html_box *
+find_block_encloser(fz_context *ctx, fz_html_box *top)
+{
+	/* This code was written to assume that there will always be a
+	 * block box enclosing callers of this. Bug 705323 shows that
+	 * this isn't always the case. In the absence of a reproducer
+	 * file, all I can do is try to patch around the issue so that
+	 * we won't crash. */
+	while (top->type != BOX_BLOCK)
+	{
+		if (top->up == NULL)
+		{
+			fz_warn(ctx, "Block encloser not found. Please report this file!");
+			break;
+		}
+		top = top->up;
+	}
+	return top;
+}
+
+static fz_html_box *
+find_flow_encloser(fz_context *ctx, fz_html_box *flow)
+{
+	/* This code was written to assume that there will always be a
+	 * flow box enclosing callers of this. Bug 705324 shows that
+	 * this isn't always the case. In the absence of a reproducer
+	 * file, all I can do is try to patch around the issue so that
+	 * we won't crash. */
+	while (flow->type != BOX_FLOW)
+	{
+		if (flow->up == NULL)
+		{
+			fz_warn(ctx, "Flow encloser not found. Please report this file!");
+			break;
+		}
+		flow = flow->up;
+	}
+	return flow;
+}
+
 static void generate_text(fz_context *ctx, fz_html_box *box, const char *text, int lang, struct genstate *g)
 {
 	fz_html_box *flow;
@@ -312,9 +362,9 @@ static void generate_text(fz_context *ctx, fz_html_box *box, const char *text, i
 
 	static const char *space = " ";
 
-	flow = box;
-	while (flow->type != BOX_FLOW)
-		flow = flow->up;
+	flow = find_flow_encloser(ctx, box);
+	if (flow == NULL)
+		return;
 
 	while (*text)
 	{
@@ -459,18 +509,16 @@ static fz_image *load_svg_image(fz_context *ctx, fz_archive *zip, const char *ba
 static void generate_anchor(fz_context *ctx, fz_html_box *box, struct genstate *g)
 {
 	fz_pool *pool = g->pool;
-	fz_html_box *flow = box;
-	while (flow->type != BOX_FLOW)
-		flow = flow->up;
+	fz_html_box *flow = find_flow_encloser(ctx, box);
 	add_flow_anchor(ctx, pool, flow, box);
 }
 
 static void generate_image(fz_context *ctx, fz_html_box *box, fz_image *img, struct genstate *g)
 {
-	fz_html_box *flow = box;
+	fz_html_box *flow;
 	fz_pool *pool = g->pool;
-	while (flow->type != BOX_FLOW)
-		flow = flow->up;
+
+	flow = find_flow_encloser(ctx, box);
 
 	flush_space(ctx, flow, box, 0, g);
 
@@ -528,20 +576,42 @@ static void fz_drop_html_box(fz_context *ctx, fz_html_box *box)
 static void fz_drop_html_imp(fz_context *ctx, fz_storable *stor)
 {
 	fz_html *html = (fz_html *)stor;
-	fz_drop_html_box(ctx, html->root);
-	fz_drop_pool(ctx, html->pool);
+	fz_drop_html_box(ctx, html->tree.root);
+	fz_drop_pool(ctx, html->tree.pool);
+}
+
+static void fz_drop_html_story_imp(fz_context *ctx, fz_storable *stor)
+{
+	fz_html_story *story = (fz_html_story *)stor;
+	fz_free(ctx, story->user_css);
+	fz_drop_html_box(ctx, story->tree.root);
+	fz_drop_html_font_set(ctx, story->font_set);
+	fz_drop_pool(ctx, story->tree.pool);
+}
+
+void fz_drop_html_tree(fz_context *ctx, fz_html_tree *tree)
+{
+	fz_defer_reap_start(ctx);
+	fz_drop_storable(ctx, &tree->storable);
+	fz_defer_reap_end(ctx);
 }
 
 void fz_drop_html(fz_context *ctx, fz_html *html)
 {
-	fz_defer_reap_start(ctx);
-	fz_drop_storable(ctx, &html->storable);
-	fz_defer_reap_end(ctx);
+	fz_drop_html_tree(ctx, &html->tree);
+}
+
+void fz_drop_html_story(fz_context *ctx, fz_html_story *story)
+{
+	if (!story)
+		return;
+
+	fz_drop_html_tree(ctx, &story->tree);
 }
 
 fz_html *fz_keep_html(fz_context *ctx, fz_html *html)
 {
-	return fz_keep_storable(ctx, &html->storable);
+	return fz_keep_storable(ctx, &html->tree.storable);
 }
 
 static fz_html_box *new_box(fz_context *ctx, fz_pool *pool, fz_bidi_direction markup_dir)
@@ -589,14 +659,12 @@ static fz_html_box *insert_block_box(fz_context *ctx, fz_html_box *box, fz_html_
 	}
 	else if (top->type == BOX_FLOW)
 	{
-		while (top->type != BOX_BLOCK)
-			top = top->up;
+		top = find_block_encloser(ctx, top);
 		insert_box(ctx, box, BOX_BLOCK, top);
 	}
 	else if (top->type == BOX_INLINE)
 	{
-		while (top->type != BOX_BLOCK)
-			top = top->up;
+		top = find_block_encloser(ctx, top);
 		insert_box(ctx, box, BOX_BLOCK, top);
 	}
 	return top;
@@ -648,7 +716,14 @@ static void insert_inline_box(fz_context *ctx, fz_html_box *box, fz_html_box *to
 	else
 	{
 		while (top->type != BOX_BLOCK && top->type != BOX_TABLE_CELL)
+		{
+			if (top->up == NULL)
+			{
+				fz_warn(ctx, "Box encloser not found. Please report this file!");
+				break;
+			}
 			top = top->up;
+		}
 
 		/* Here 'next' actually means 'last of my children' */
 		if (top->next && top->next->type == BOX_FLOW)
@@ -715,16 +790,12 @@ generate_boxes(fz_context *ctx,
 					style.font_size.value = 1;
 					style.font_size.unit = N_SCALE;
 					box->style = fz_css_enlist(ctx, &style, &g->styles, g->pool);
-					flow = box;
-					while (flow->type != BOX_FLOW)
-						flow = flow->up;
+					flow = find_flow_encloser(ctx, box);
 					add_flow_break(ctx, g->pool, flow, box);
 				}
 				else
 				{
-					flow = top;
-					while (flow->type != BOX_FLOW)
-						flow = flow->up;
+					flow = find_flow_encloser(ctx, top);
 					add_flow_break(ctx, g->pool, flow, top);
 				}
 				g->at_bol = 1;
@@ -1294,13 +1365,42 @@ fix_nexts(fz_html_box *box)
 	}
 }
 
-static fz_html *
-fz_parse_html_imp(fz_context *ctx,
-	fz_html_font_set *set, fz_archive *zip, const char *base_uri, fz_buffer *buf, const char *user_css,
-	int try_xml, int try_html5)
+static fz_xml_doc *
+parse_to_xml(fz_context *ctx, fz_buffer *buf, int try_xml, int try_html5)
+{
+	fz_xml_doc *xml;
+
+	if (try_xml && try_html5)
+	{
+		fz_try(ctx)
+			xml = fz_parse_xml(ctx, buf, 1);
+		fz_catch(ctx)
+		{
+			if (fz_caught(ctx) == FZ_ERROR_SYNTAX)
+			{
+				fz_warn(ctx, "syntax error in XHTML; retrying using HTML5 parser");
+				xml = fz_parse_xml_from_html5(ctx, buf);
+			}
+			else
+				fz_rethrow(ctx);
+		}
+	}
+	else if (try_xml)
+		xml = fz_parse_xml(ctx, buf, 1);
+	else
+	{
+		assert(try_html5);
+		xml = fz_parse_xml_from_html5(ctx, buf);
+	}
+
+	return xml;
+}
+
+static void
+xml_to_boxes(fz_context *ctx, fz_html_font_set *set, fz_archive *zip, const char *base_uri, const char *user_css,
+	fz_xml_doc *xml, fz_html_tree *tree, char **rtitle, int try_fictionbook)
 {
 	fz_xml *root, *node;
-	fz_html *html = NULL;
 	char *title;
 
 	fz_css_match match;
@@ -1316,28 +1416,10 @@ fz_parse_html_imp(fz_context *ctx,
 	g.emit_white = 0;
 	g.last_brk_cls = UCDN_LINEBREAK_CLASS_OP;
 	g.styles = NULL;
+	g.xml = xml;
 
-	if (try_xml && try_html5)
-	{
-		fz_try(ctx)
-			g.xml = fz_parse_xml(ctx, buf, 1);
-		fz_catch(ctx)
-		{
-			if (fz_caught(ctx) == FZ_ERROR_SYNTAX)
-			{
-				fz_warn(ctx, "syntax error in XHTML; retrying using HTML5 parser");
-				g.xml = fz_parse_xml_from_html5(ctx, buf);
-			}
-			else
-				fz_rethrow(ctx);
-		}
-	}
-	else if (try_xml)
-		g.xml = fz_parse_xml(ctx, buf, 1);
-	else if (try_html5)
-		g.xml = fz_parse_xml_from_html5(ctx, buf);
-	else
-		return NULL; /* should never happen! */
+	if (rtitle)
+		*rtitle = NULL;
 
 	root = fz_xml_root(g.xml);
 
@@ -1356,7 +1438,7 @@ fz_parse_html_imp(fz_context *ctx,
 
 	fz_try(ctx)
 	{
-		if (fz_xml_find(root, "FictionBook"))
+		if (try_fictionbook && fz_xml_find(root, "FictionBook"))
 		{
 			g.is_fb2 = 1;
 			fz_parse_css(ctx, g.css, fb2_default_css, "<default:fb2>");
@@ -1394,24 +1476,18 @@ fz_parse_html_imp(fz_context *ctx,
 	{
 		fz_css_style style;
 
-		g.pool = fz_new_pool(ctx);
-		html = fz_pool_alloc(ctx, g.pool, sizeof *html);
-		FZ_INIT_STORABLE(html, 1, fz_drop_html_imp);
-		html->pool = g.pool;
-		html->root = new_box(ctx, g.pool, DEFAULT_DIR);
-		html->layout_w = 0;
-		html->layout_h = 0;
-		html->layout_em = 0;
+		g.pool = tree->pool;
+		tree->root = new_box(ctx, g.pool, DEFAULT_DIR);
 
 		fz_match_css_at_page(ctx, &match, g.css);
 		fz_apply_css_style(ctx, g.set, &style, &match);
-		html->root->style = fz_css_enlist(ctx, &style, &g.styles, g.pool);
+		tree->root->style = fz_css_enlist(ctx, &style, &g.styles, g.pool);
 		// TODO: transfer page margins out of this hacky box
 
-		generate_boxes(ctx, root, html->root, &match, 0, 0, DEFAULT_DIR, FZ_LANG_UNSET, &g);
-		fix_nexts(html->root);
+		generate_boxes(ctx, root, tree->root, &match, 0, 0, DEFAULT_DIR, FZ_LANG_UNSET, &g);
+		fix_nexts(tree->root);
 
-		detect_directionality(ctx, g.pool, html->root);
+		detect_directionality(ctx, g.pool, tree->root);
 
 		if (g.is_fb2)
 		{
@@ -1419,33 +1495,118 @@ fz_parse_html_imp(fz_context *ctx,
 			node = fz_xml_find_down(node, "description");
 			node = fz_xml_find_down(node, "title-info");
 			node = fz_xml_find_down(node, "book-title");
-			title = fz_xml_text(fz_xml_down(node));
-			if (title)
-				html->title = fz_pool_strdup(ctx, g.pool, title);
+			if (rtitle)
+			{
+				title = fz_xml_text(fz_xml_down(node));
+				if (title)
+					*rtitle = fz_pool_strdup(ctx, g.pool, title);
+			}
 		}
 		else
 		{
 			node = fz_xml_find(root, "html");
 			node = fz_xml_find_down(node, "head");
 			node = fz_xml_find_down(node, "title");
-			title = fz_xml_text(fz_xml_down(node));
-			if (title)
-				html->title = fz_pool_strdup(ctx, g.pool, title);
+			if (rtitle)
+			{
+				title = fz_xml_text(fz_xml_down(node));
+				if (title)
+					*rtitle = fz_pool_strdup(ctx, g.pool, title);
+			}
 		}
 	}
 	fz_always(ctx)
 	{
 		fz_drop_tree(ctx, g.images, (void(*)(fz_context*,void*))fz_drop_image);
 		fz_drop_css(ctx, g.css);
-		fz_drop_xml(ctx, g.xml);
 	}
 	fz_catch(ctx)
 	{
-		fz_drop_html(ctx, html);
+		if (rtitle)
+		{
+			fz_free(ctx, *rtitle);
+			*rtitle = NULL;
+		}
+		/* Dropping the tree works regardless of whether the tree is part of an fz_html or not. */
+		fz_drop_html_tree(ctx, tree);
+		fz_rethrow(ctx);
+	}
+}
+
+static void
+fz_parse_html_tree(fz_context *ctx,
+	fz_html_font_set *set, fz_archive *zip, const char *base_uri, fz_buffer *buf, const char *user_css,
+	int try_xml, int try_html5, fz_html_tree *tree, char **rtitle, int try_fictionbook)
+{
+	fz_xml_doc *xml;
+
+	if (rtitle)
+		*rtitle = NULL;
+
+	xml = parse_to_xml(ctx, buf, try_xml, try_html5);
+
+	fz_try(ctx)
+		xml_to_boxes(ctx, set, zip, base_uri, user_css, xml, tree, rtitle, try_fictionbook);
+	fz_always(ctx)
+		fz_drop_xml(ctx, xml);
+	fz_catch(ctx)
+		fz_rethrow(ctx);
+}
+
+static fz_html *
+fz_parse_html_imp(fz_context *ctx,
+	fz_html_font_set *set, fz_archive *zip, const char *base_uri, fz_buffer *buf, const char *user_css,
+	int try_xml, int try_html5)
+{
+	fz_pool *pool = fz_new_pool(ctx);
+	fz_html *html = fz_pool_alloc(ctx, pool, sizeof *html); /* Can't fail */
+
+	html->tree.pool = pool;
+	FZ_INIT_STORABLE(&(html->tree), 1, fz_drop_html_imp);
+	html->layout_w = 0;
+	html->layout_h = 0;
+	html->layout_em = 0;
+
+	fz_parse_html_tree(ctx, set, zip, base_uri, buf, user_css, try_xml, try_html5, &html->tree, &html->title, 1);
+
+	return html;
+}
+
+fz_html_story *
+fz_new_html_story(fz_context *ctx, fz_buffer *buf, const char *user_css, float em)
+{
+	fz_pool *pool = fz_new_pool(ctx);
+	fz_html_story *story = NULL;
+
+	fz_var(story);
+
+	fz_try(ctx)
+	{
+		story = fz_pool_alloc(ctx, pool, sizeof *story);
+		memset(story, 0, sizeof(*story));
+		FZ_INIT_STORABLE(&(story->tree), 1, fz_drop_html_story_imp);
+		story->tree.pool = pool;
+		story->font_set = fz_new_html_font_set(ctx);
+		story->em = em;
+		story->user_css = user_css ? fz_strdup(ctx, user_css) : NULL;
+		story->dom = parse_to_xml(ctx, buf, 0, 1);
+
+	}
+	fz_catch(ctx)
+	{
+		if (story != NULL)
+		{
+			fz_drop_html_font_set(ctx, story->font_set);
+			fz_drop_html_tree(ctx, &story->tree);
+			fz_drop_xml(ctx, story->dom);
+		}
+		fz_drop_pool(ctx, pool);
 		fz_rethrow(ctx);
 	}
 
-	return html;
+	fz_parse_html_tree(ctx, story->font_set, NULL, ".", buf, user_css, 0, 1, &story->tree, NULL, 0);
+
+	return story;
 }
 
 fz_html *
@@ -1594,7 +1755,7 @@ fz_debug_html(fz_context *ctx, fz_html_box *box)
 static size_t
 fz_html_size(fz_context *ctx, fz_html *html)
 {
-	return html ? fz_pool_size(ctx, html->pool) : 0;
+	return html ? fz_pool_size(ctx, html->tree.pool) : 0;
 }
 
 /* Magic to make html storable. */
@@ -1708,4 +1869,57 @@ html_filter_store(fz_context *ctx, void *doc, void *key_)
 void fz_purge_stored_html(fz_context *ctx, void *doc)
 {
 	fz_filter_store(ctx, html_filter_store, doc, &fz_html_store_type);
+}
+
+int fz_place_story(fz_context *ctx, fz_html_story *story, fz_rect where, fz_rect *filled)
+{
+	float w, h;
+
+	if (filled)
+		*filled = fz_empty_rect;
+
+	if (story == NULL || story->complete)
+		return 0;
+
+	/* Convert from XML to box model on the first attempt to place.
+	 * The DOM is unusable from here on in. */
+	if (story->dom)
+	{
+		xml_to_boxes(ctx, story->font_set, NULL, ".", story->user_css, story->dom, &story->tree, NULL, 0);
+		fz_drop_xml(ctx, story->dom);
+		story->dom = NULL;
+	}
+
+	w = where.x1 - where.x0;
+	h = where.y1 - where.y0;
+	/* Confusingly, we call the layout using restart_draw, not restart_place,
+	 * because we don't want to destroy the current values in restart_place
+	 * in case we have to retry later. This means the values are left in
+	 * the correct struct though! */
+	story->restart_draw.start = story->restart_place.start;
+	story->restart_draw.start_flow = story->restart_place.start_flow;
+	story->restart_draw.end = NULL;
+	story->restart_draw.end_flow = NULL;
+	story->tree.root->x = where.x0;
+	story->tree.root->y = where.y0;
+	story->bbox = where;
+	fz_restartable_layout_html(ctx, story->tree.root, w, h, w, h, story->em, &story->restart_draw);
+	story->restart_draw.start = story->restart_place.start;
+	story->restart_draw.start_flow = story->restart_place.start_flow;
+
+	if (filled)
+	{
+		fz_html_box *b = story->tree.root;
+		filled->x0 = b->x - b->margin[L] - b->border[L] - b->padding[L];
+		filled->x1 = b->w + b->margin[R] + b->border[R] + b->padding[R] + b->x;
+		filled->y0 = b->y - b->margin[T] - b->border[T] - b->padding[T];
+		filled->y1 = b->b + b->margin[B] + b->border[B] + b->padding[B];
+	}
+
+#ifndef NDEBUG
+	if (fz_atoi(getenv("FZ_DEBUG_HTML")))
+		fz_debug_html(ctx, story->tree.root);
+#endif
+
+	return story->restart_draw.end != NULL;
 }

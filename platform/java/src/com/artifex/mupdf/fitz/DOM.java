@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2022 Artifex Software, Inc.
+// Copyright (C) 2022 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -22,13 +22,13 @@
 
 package com.artifex.mupdf.fitz;
 
-public class Link
+public class DOM
 {
 	static {
 		Context.init();
 	}
 
-	private long pointer;
+	protected long pointer;
 
 	protected native void finalize();
 
@@ -36,36 +36,32 @@ public class Link
 		finalize();
 	}
 
-	protected Link(long p) {
+	protected DOM(long p) {
 		pointer = p;
 	}
 
-	public native Rect getBounds();
-	public native void setBounds(Rect bbox);
+	public native DOM body();
+	public native DOM document();
+	public native DOM createTextNode(String text);
+	public native DOM createElement(String tag);
 
-	public native String getURI();
-	public native void setURI(String uri);
-
-	public boolean isExternal() {
-		String uri = getURI();
-		char c = uri.charAt(0);
-		if (!(c >= 'a' && c <= 'z') && !(c >= 'A' && c <= 'Z'))
-			return false;
-
-		for (int i = 1; i < uri.length(); i++)
-		{
-			c = uri.charAt(i);
-			if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') ||
-					(c >= '0' && c <= '9') ||
-					c == '+' || c == '-' || c == '.')
-				continue;
-			else
-				return c == ':';
-		}
-		return false;
-	}
-
-	public String toString() {
-		return "Link(bounds="+getBounds()+",uri="+getURI()+")";
-	}
+	public native void insertBefore(DOM toinsert);
+	public native void insertAfter(DOM toinsert);
+	public native void appendChild(DOM toinsert);
+	public native void remove();
+	public native DOM clone();
+	public native DOM parent();
+	public native DOM firstChild();
+	public native DOM next();
+	public native DOM previous();
+	public native DOM addAttribute(String att, String val);
+	public native DOM removeAttribute(String att);
+	public native String attribute(String att);
+	public static class DOMAttribute {
+		String attribute;
+		String value;
+	};
+	public native DOMAttribute[] attributes();
+	public native DOM find(String tag, String att, String val);
+	public native DOM findNext(String tag, String att, String val);
 }

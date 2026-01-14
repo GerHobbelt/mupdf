@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2004-2022 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -58,10 +58,11 @@ pdf_load_page_tree_imp(fz_context *ctx, pdf_document *doc, pdf_obj *node, int id
 	}
 	else if (pdf_name_eq(ctx, type, PDF_NAME(Page)))
 	{
-		if (idx >= doc->rev_page_count)
+		if (idx >= doc->map_page_count)
 			fz_throw(ctx, FZ_ERROR_GENERIC, "too many kids in page tree");
 		doc->rev_page_map[idx].page = idx;
 		doc->rev_page_map[idx].object = pdf_to_num(ctx, node);
+		doc->fwd_page_map[idx] = doc->rev_page_map[idx].object;
 		++idx;
 	}
 	else
@@ -82,21 +83,58 @@ cmp_rev_page_map(const void *va, const void *vb)
 void
 pdf_load_page_tree(fz_context *ctx, pdf_document *doc)
 {
-	if (!doc->rev_page_map)
+	int refs;
+
+	/* Atomically increment the number of times we've been told to load. */
+	fz_lock(ctx, FZ_LOCK_ALLOC);
+	refs = doc->page_map_nesting++;
+	fz_unlock(ctx, FZ_LOCK_ALLOC);
+
+	/* If we were already non-zero, then we're already loaded. */
+	if (refs != 0)
+		return;
+
+	/* At this point we're trusting that only 1 thread should be doing
+	 * stuff that hits the document at a time. */
+	fz_try(ctx)
 	{
-		doc->rev_page_count = pdf_count_pages(ctx, doc);
-		doc->rev_page_map = Memento_label(fz_malloc_array(ctx, doc->rev_page_count, pdf_rev_page_map), "pdf_rev_page_map");
+		doc->map_page_count = pdf_count_pages(ctx, doc);
+		doc->rev_page_map = Memento_label(fz_malloc_array(ctx, doc->map_page_count, pdf_rev_page_map), "pdf_rev_page_map");
+		doc->fwd_page_map = Memento_label(fz_malloc_array(ctx, doc->map_page_count, int), "pdf_fwd_page_map");
 		pdf_load_page_tree_imp(ctx, doc, pdf_dict_getp(ctx, pdf_trailer(ctx, doc), "Root/Pages"), 0, NULL);
-		qsort(doc->rev_page_map, doc->rev_page_count, sizeof *doc->rev_page_map, cmp_rev_page_map);
+		qsort(doc->rev_page_map, doc->map_page_count, sizeof *doc->rev_page_map, cmp_rev_page_map);
+	}
+	fz_catch(ctx)
+	{
+		fz_free(ctx, doc->rev_page_map);
+		doc->rev_page_map = NULL;
+		fz_free(ctx, doc->fwd_page_map);
+		doc->fwd_page_map = NULL;
+		fz_lock(ctx, FZ_LOCK_ALLOC);
+		doc->page_map_nesting--;
+		fz_unlock(ctx, FZ_LOCK_ALLOC);
+		fz_rethrow(ctx);
 	}
 }
 
 void
 pdf_drop_page_tree(fz_context *ctx, pdf_document *doc)
 {
+	int refs;
+
+	fz_lock(ctx, FZ_LOCK_ALLOC);
+	refs = --doc->page_map_nesting;
+	fz_unlock(ctx, FZ_LOCK_ALLOC);
+	if (refs != 0)
+		return;
+
+	/* At this point we're trusting that only 1 thread should be doing
+	 * stuff that hits the document at a time. */
 	fz_free(ctx, doc->rev_page_map);
 	doc->rev_page_map = NULL;
-	doc->rev_page_count = 0;
+	fz_free(ctx, doc->fwd_page_map);
+	doc->fwd_page_map = NULL;
+	doc->map_page_count = 0;
 }
 
 static pdf_obj *
@@ -197,7 +235,13 @@ pdf_lookup_page_loc(fz_context *ctx, pdf_document *doc, int needle, pdf_obj **pa
 pdf_obj *
 pdf_lookup_page_obj(fz_context *ctx, pdf_document *doc, int needle)
 {
-	return pdf_lookup_page_loc(ctx, doc, needle, NULL, NULL);
+	if (doc->fwd_page_map)
+	{
+		if (needle < 0 || needle >= doc->map_page_count)
+			fz_throw(ctx, FZ_ERROR_GENERIC, "cannot find page %d in page tree", needle+1);
+		return pdf_load_object(ctx, doc, doc->fwd_page_map[needle]);
+	} else
+		return pdf_lookup_page_loc(ctx, doc, needle, NULL, NULL);
 }
 
 static int
@@ -263,7 +307,7 @@ static int
 pdf_lookup_page_number_fast(fz_context *ctx, pdf_document *doc, int needle)
 {
 	int l = 0;
-	int r = doc->rev_page_count - 1;
+	int r = doc->map_page_count - 1;
 	while (l <= r)
 	{
 		int m = (l + r) >> 1;
@@ -912,6 +956,7 @@ pdf_new_page(fz_context *ctx, pdf_document *doc)
 	page->super.separations = (fz_page_separations_fn *)pdf_page_separations;
 	page->super.overprint = (fz_page_uses_overprint_fn *)pdf_page_uses_overprint;
 	page->super.create_link = (fz_page_create_link_fn *)pdf_create_link;
+	page->super.delete_link = (fz_page_delete_link_fn *)pdf_delete_link;
 
 	page->obj = NULL;
 
@@ -1063,7 +1108,7 @@ pdf_load_page_imp(fz_context *ctx, fz_document *doc_, int chapter, int number)
 			fz_rect page_mediabox;
 			fz_matrix page_ctm;
 			pdf_page_transform(ctx, page, &page_mediabox, &page_ctm);
-			page->links = pdf_load_link_annots(ctx, doc, obj, number, page_ctm);
+			page->links = pdf_load_link_annots(ctx, doc, page, obj, number, page_ctm);
 			pdf_load_annots(ctx, page, obj);
 		}
 	}
