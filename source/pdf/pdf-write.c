@@ -918,7 +918,8 @@ static void renumberobjs(fz_context *ctx, pdf_document *doc, pdf_write_state *op
 	int *new_use_list;
 	int xref_len = pdf_xref_len(ctx, doc);
 
-	new_use_list = fz_calloc(ctx, pdf_xref_len(ctx, doc)+3, sizeof(int));
+	expand_lists(ctx, opts, xref_len);
+	new_use_list = fz_calloc(ctx, opts->list_len, sizeof(int));
 
 	fz_var(newxref);
 	fz_try(ctx)
@@ -3722,14 +3723,9 @@ flush_gathered(fz_context *ctx, pdf_document *doc, objstm_gather_data *data)
 }
 
 static void
-objstm_gather(fz_context *ctx, pdf_xref_entry *x, int i, pdf_document *doc, void *arg)
+objstm_gather(fz_context *ctx, pdf_xref_entry *x, int i, pdf_document *doc, objstm_gather_data *data)
 {
 	size_t olen, len;
-	objstm_gather_data *data = (objstm_gather_data *)arg;
-
-	/* If we are writing incrementally, then only the last one can be gathered. */
-	if (data->opts->do_incremental && doc->xref_base != 0)
-		return;
 
 	if (i == data->root_num || i == data->info_num)
 		return;
@@ -3743,6 +3739,10 @@ objstm_gather(fz_context *ctx, pdf_xref_entry *x, int i, pdf_document *doc, void
 		return; /* Stream objects, objects with generation number != 0 cannot be put in objstms */
 	if (i == data->opts->crypt_object_number)
 		return; /* Encryption dictionaries can also not be put in objstms */
+
+	/* If we are writing incrementally, then only the last one can be gathered. */
+	if (data->opts->do_incremental && !pdf_obj_is_incremental(ctx, x->obj))
+		return;
 
 	/* FIXME: Can we do a pass through to check for such objects more exactly? */
 	if (pdf_is_int(ctx, x->obj))
@@ -3777,13 +3777,21 @@ objstm_gather(fz_context *ctx, pdf_xref_entry *x, int i, pdf_document *doc, void
 static void
 gather_to_objstms(fz_context *ctx, pdf_document *doc, pdf_write_state *opts, int xref_len)
 {
+	int count, num;
 	objstm_gather_data data = { 0 };
 
 	data.opts = opts;
 	data.root_num = pdf_to_num(ctx, pdf_dict_get(ctx, pdf_trailer(ctx, doc), PDF_NAME(Root)));
 	data.info_num = pdf_to_num(ctx, pdf_dict_get(ctx, pdf_trailer(ctx, doc), PDF_NAME(Info)));
 
-	pdf_xref_entry_map(ctx, doc, objstm_gather, &data);
+	count = pdf_xref_len(ctx, doc);
+	for (num = 1; num < count; ++num)
+	{
+		pdf_xref_entry *x = pdf_get_xref_entry_no_change(ctx, doc, num);
+		if (x)
+			objstm_gather(ctx, x, num, doc, &data);
+	}
+
 	flush_gathered(ctx, doc, &data);
 }
 
@@ -3922,6 +3930,8 @@ do_pdf_save_document(fz_context *ctx, pdf_document *doc, pdf_write_state *opts, 
 		{
 			pdf_obj *crypt = pdf_dict_get(ctx, pdf_trailer(ctx, doc), PDF_NAME(Encrypt));
 			opts->crypt_object_number = pdf_to_num(ctx, crypt);
+			if (crypt_num < opts->list_len)
+				opts->crypt_object_number = crypt_num;
 		}
 
 		if (opts->do_use_objstms)
