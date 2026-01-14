@@ -550,6 +550,7 @@ done_SC:
 				gstate = ensure_pushed(ctx, p);
 				if (p->super.chain->op_Tz)
 					p->super.chain->op_Tz(ctx, p->super.chain, gstate->pending.text.scale*100);
+			}
 			if (gstate->pending.text.font != gstate->sent.text.font ||
 				gstate->pending.text.size != gstate->sent.text.size ||
 				gstate->pending.text.fontname != gstate->sent.text.fontname)

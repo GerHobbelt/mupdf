@@ -819,8 +819,6 @@ Notes
   A possible solution is to install SWIG using the system package
   manager, for example ``sudo apt install swig`` on Linux, or use
   ``./scripts/mupdfwrap.py --swig-windows-auto ...`` on Windows.
-<<<<<<<< HEAD:docs/reference/swig.rst
-========
 
 *
   C# ommisions.
@@ -829,7 +827,6 @@ Notes
   example functions that return void* and have out-params (because tuples
   cannot contain void* items). These will be marked with comments in the
   generated mupdf.cs file.
->>>>>>>> remotes/Artifex-ghostscript/master:docs/reference/cxx-and-derived-bindings.rst
 
 
 * More information about running ``scripts/mupdfwrap.py``.

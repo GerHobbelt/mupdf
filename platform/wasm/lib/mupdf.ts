@@ -1968,17 +1968,6 @@ export class Document extends Userdata<"any_document"> {
 		"print-hq": "h".charCodeAt(0),
 	}
 
-	static readonly LINK_DEST: LinkDestType[] = [
-		"Fit",
-		"FitB",
-		"FitH",
-		"FitBH",
-		"FitV",
-		"FitBV",
-		"FitR",
-		"XYZ",
-	]
-
 	static openDocument(from: Buffer | ArrayBuffer | Uint8Array | Stream | string, magic?: string): Document {
 		let pointer = 0 as Pointer<"any_document">
 		let free_from = false
