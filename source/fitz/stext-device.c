@@ -1063,6 +1063,9 @@ flush_actualtext(fz_context *ctx, fz_stext_device *dev, const char *actualtext, 
 	if (*actualtext == 0)
 		return;
 
+	if (!dev->last.valid)
+		return;
+
 	if (dev->flags & (FZ_STEXT_CLIP | FZ_STEXT_CLIP_RECT))
 		if (dev->last.clipped)
 			return;
@@ -1224,7 +1227,7 @@ do_extract_within_actualtext(fz_context *ctx, fz_stext_device *dev, fz_text_span
 
 	/* We found a matching postfix. It seems likely that this is going to be the only
 	 * text object we get, so send any remaining actualtext now. */
-	flush_actualtext(ctx, dev, actualtext, i, i + strlen(actualtext) - (span->len - end));
+	flush_actualtext(ctx, dev, actualtext, i, i + (int)strlen(actualtext) - (span->len - end));
 
 	/* Send the postfix */
 	if (end != span->len)
@@ -1345,6 +1348,7 @@ fz_stext_begin_metatext(fz_context *ctx, fz_device *dev, fz_metatext meta, const
 {
 	fz_stext_device *tdev = (fz_stext_device*)dev;
 	metatext_t *mt = find_actualtext(tdev);
+	char *new_text = NULL;
 
 	if (mt != NULL && meta == FZ_METATEXT_ACTUALTEXT)
 		flush_actualtext(ctx, tdev, mt->text, 0, -1);
@@ -1352,13 +1356,23 @@ fz_stext_begin_metatext(fz_context *ctx, fz_device *dev, fz_metatext meta, const
 	if (meta == FZ_METATEXT_ACTUALTEXT)
 		tdev->last.valid = 0;
 
-	mt = fz_malloc_struct(ctx, metatext_t);
+	new_text = text ? fz_strdup(ctx, text) : NULL;
 
-	mt->prev = tdev->metatext;
-	tdev->metatext = mt;
-	mt->type = meta;
-	mt->text = text ? fz_strdup(ctx, text) : NULL;
-	mt->bounds = fz_empty_rect;
+	fz_try(ctx)
+	{
+		mt = fz_malloc_struct(ctx, metatext_t);
+
+		mt->prev = tdev->metatext;
+		tdev->metatext = mt;
+		mt->type = meta;
+		mt->text = new_text;
+		mt->bounds = fz_empty_rect;
+	}
+	fz_catch(ctx)
+	{
+		fz_free(ctx, new_text);
+		fz_rethrow(ctx);
+	}
 }
 
 static void
@@ -1418,7 +1432,7 @@ fz_stext_end_metatext(fz_context *ctx, fz_device *dev)
 	}
 	else
 	{
-		if ((dev->flags & (FZ_STEXT_CLIP | FZ_STEXT_CLIP_RECT)) == 0)
+		if ((dev->flags & (FZ_STEXT_CLIP | FZ_STEXT_CLIP_RECT)) == 0 && tdev->metatext->text[0])
 			fz_warn(ctx, "Actualtext with no position. Text may be lost or mispositioned.");
 		pop_metatext(ctx, tdev);
 		return;
