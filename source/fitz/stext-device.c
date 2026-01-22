@@ -1257,6 +1257,9 @@ flush_actualtext(fz_context *ctx, fz_stext_device *dev, const char *actualtext, 
 	if (*actualtext == 0)
 		return;
 
+	if (!dev->last.valid)
+		return;
+
 	while (1)
 	{
 		int rune;
@@ -1533,13 +1536,23 @@ static void
 fz_stext_begin_metatext(fz_context *ctx, fz_device *dev, fz_metatext meta, const char *text)
 {
 	fz_stext_device *tdev = (fz_stext_device*)dev;
-	metatext_t *mt = fz_malloc_struct(ctx, metatext_t);
+	char *new_text = (text ? fz_strdup(ctx, text) : NULL);
 
-	mt->prev = tdev->metatext;
-	tdev->metatext = mt;
-	mt->type = meta;
-	mt->text = text ? fz_strdup(ctx, text) : NULL;
-	mt->bounds = fz_empty_rect;
+	fz_try(ctx)
+	{
+		metatext_t *mt = fz_malloc_struct(ctx, metatext_t);
+
+		mt->prev = tdev->metatext;
+		tdev->metatext = mt;
+		mt->type = meta;
+		mt->text = new_text;
+		mt->bounds = fz_empty_rect;
+	}
+	fz_catch(ctx)
+	{
+		fz_free(ctx, new_text);
+		fz_rethrow(ctx);
+	}
 }
 
 static void
