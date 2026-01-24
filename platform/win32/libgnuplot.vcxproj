@@ -52,16 +52,16 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -74,7 +74,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -91,8 +91,8 @@
       <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGNUPLOT;GNUPLOT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -221,6 +221,11 @@
     <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/alloc.c" />
     <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/amos_airy.c" />
     <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/axis.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/beos/GPApp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/beos/GPBitmap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/beos/GPView.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/beos/GPWindow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/beos/XStringList.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/bf_test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/bitmap.c" />
     <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/boundary.c" />
@@ -257,11 +262,26 @@
     <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/misc.c" />
     <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/mouse.c" />
     <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/multiplot.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/os2/dialogs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/os2/gclient.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/os2/gnupmdrv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/os2/print.c" />
     <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/parse.c" />
     <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/plot.c" />
     <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/plot2d.c" />
     <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/plot3d.c" />
     <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/pm3d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/qtterminal/QtGnuplotApplication.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/qtterminal/QtGnuplotEvent.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/qtterminal/QtGnuplotInstance.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/qtterminal/QtGnuplotItems.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/qtterminal/QtGnuplotScene.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/qtterminal/QtGnuplotWidget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/qtterminal/QtGnuplotWindow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/qtterminal/gnuplot_qt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/qtterminal/qt_conversion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/qtterminal/qt_embed_example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/qtterminal/qt_term.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/readline.c" />
     <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/save.c" />
     <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/scanner.c" />
@@ -496,6 +516,8 @@
     <Text Include="../../thirdparty/owemdjee/gnuplot/config/mingw/Makefile" />
     <Text Include="../../thirdparty/owemdjee/gnuplot/config/msvc/Makefile" />
     <Text Include="../../thirdparty/owemdjee/gnuplot/config/watcom/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/config/woa/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/config/woa/copydlls.rex" />
     <Text Include="../../thirdparty/owemdjee/gnuplot/configure.ac" />
     <Text Include="../../thirdparty/owemdjee/gnuplot/configure.vms" />
     <Text Include="../../thirdparty/owemdjee/gnuplot/demo/Makefile.am.in" />
@@ -692,3 +714,4 @@
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
+  
