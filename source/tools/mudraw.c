@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2024 Artifex Software, Inc.
+// Copyright (C) 2004-2025 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -1112,9 +1112,9 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			{
 				page_stext_options.flags |= FZ_STEXT_ACCURATE_BBOXES;
 			}
-			if (!(stext_options.flags_conf_mask & FZ_STEXT_COLLECT_FLAGS))
+			if (!(stext_options.flags_conf_mask & FZ_STEXT_COLLECT_STYLES))
 			{
-				page_stext_options.flags |= FZ_STEXT_COLLECT_FLAGS;
+				page_stext_options.flags |= FZ_STEXT_COLLECT_STYLES;
 			}
 			if (!(stext_options.flags_conf_mask & FZ_STEXT_PRESERVE_SPANS))
 			{
@@ -1403,20 +1403,20 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			{
 				if (num_workers > 0)
 				{
-					worker_t *w = &workers[band % num_workers];
+					worker_t *work = &workers[band % num_workers];
 #ifndef DISABLE_MUTHREADS
-					DEBUG_THREADS(fz_info(ctx, "Waiting for worker %d to complete band %d\n", w->num, band));
-					mu_wait_semaphore(&w->stop);
+					DEBUG_THREADS(fz_info(ctx, "Waiting for worker %d to complete band %d\n", work->num, band));
+					mu_wait_semaphore(&work->stop);
 #endif
-					w->running = 0;
+					work->running = 0;
 					ASSERT(ctx != w->ctx);
-					ctx->cookie->d.errors += w->cookie.d.errors;
-					pix = w->pix;
-					bit = w->bit;
-					w->bit = NULL;
+					ctx->cookie->d.errors += work->cookie.d.errors;
+					pix = work->pix;
+					bit = work->bit;
+					work->bit = NULL;
 
-					if (w->error)
-						fz_throw(ctx, FZ_ERROR_GENERIC, "worker %d failed to render band %d", w->num, band);
+					if (work->error)
+						fz_throw(ctx, FZ_ERROR_GENERIC, "worker %d failed to render band %d", work->num, band);
 				}
 				else
 				{
@@ -1443,16 +1443,16 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 
 				if (num_workers > 0 && band + num_workers < bands)
 				{
-					worker_t *w = &workers[band % num_workers];
-					w->band = band + num_workers;
-					w->pix->y = band_ibounds.y0 + w->band * band_height;
-					w->ctm = ctm;
-					w->tbounds = tbounds;
-					w->cookie = master_cookie;
-					w->running = 1;
+					worker_t *work = &workers[band % num_workers];
+					work->band = band + num_workers;
+					work->pix->y = band_ibounds.y0 + work->band * band_height;
+					work->ctm = ctm;
+					work->tbounds = tbounds;
+					work->cookie = master_cookie;
+					work->running = 1;
 #ifndef DISABLE_MUTHREADS
-					DEBUG_THREADS(fz_info(ctx, "Triggering worker %d for band %d\n", w->num, w->band));
-					mu_trigger_semaphore(&w->start);
+					DEBUG_THREADS(fz_info(ctx, "Triggering worker %d for band %d\n", work->num, work->band));
+					mu_trigger_semaphore(&work->start);
 #endif
 				}
 				if (num_workers <= 0)
@@ -2503,10 +2503,10 @@ static int convert_to_accel_path(fz_context *ctx, char outname[], char *absname,
 	return 0; /* Fail */
 }
 
-static int get_accelerator_filename(fz_context *ctx, char outname[], size_t len, const char *filename, int create)
+static int get_accelerator_filename(fz_context *ctx, char outname[], size_t len, const char *fname, int create)
 {
 	char absname[PATH_MAX];
-	if (!fz_realpath(filename, absname))
+	if (!fz_realpath(fname, absname))
 		return 0;
 	if (!convert_to_accel_path(ctx, outname, absname, len, create))
 		return 0;

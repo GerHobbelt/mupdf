@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2024 Artifex Software, Inc.
+// Copyright (C) 2004-2025 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -996,6 +996,16 @@ void *fz_realloc(fz_context *ctx, void *p, size_t size   FZDBG_DECL_ARGS);
 void fz_free(fz_context *ctx, const void *p);
 
 /**
+	Flexible array member allocation helpers.
+*/
+#define fz_malloc_flexible(ctx, T, M, count) \
+	Memento_label(fz_calloc(ctx, 1, offsetof(T, M) + sizeof(*((T*)0)->M) * (count)), #T)
+#define fz_realloc_flexible(ctx, p, T, M, count) \
+	Memento_label(fz_realloc(ctx, p, offsetof(T, M) + sizeof(*((T*)0)->M) * (count)), #T)
+#define fz_pool_alloc_flexible(ctx, pool, T, M, count) \
+	fz_pool_alloc(ctx, pool, offsetof(T, M) + sizeof(*((T*)0)->M) * (count))
+
+/**
     fz_malloc equivalent that returns NULL rather than throwing
     exceptions.
 */
@@ -1060,7 +1070,7 @@ void fz_memrnd(fz_context *ctx, uint8_t *block, int len);
 typedef struct
 {
 	int refs;
-	char str[1];
+	char str[FZ_FLEXIBLE_ARRAY];
 } fz_string;
 
 /*

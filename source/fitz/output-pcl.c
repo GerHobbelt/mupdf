@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2024 Artifex Software, Inc.
+// Copyright (C) 2004-2025 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -420,7 +420,13 @@ pcl_header(fz_context *ctx, fz_output *out, fz_pcl_options *pcl, int num_copies,
 			fz_write_string(ctx, out, "\033%-12345X@PJL\r\n@PJL ENTER LANGUAGE = PCL\r\n");
 		fz_write_string(ctx, out, "\033E"); /* reset printer */
 		/* Reset the margins */
-		fz_write_string(ctx, out, "\033&10e-180u36Z");
+		/* ESC & l # E  =  Top Margin in decipoints */
+		fz_write_string(ctx, out, "\033&l0E");
+		/* ESC & l # U  =  Left (Long-Edge) offset registration */
+		/* I don't like it that we have to hardcode -180 decipoints in here, but it seems to work. */
+		fz_write_string(ctx, out, "\033&l-180U");
+		/* ESC & l # Z  =  Top (Short-Edge) offset registration */
+		fz_write_string(ctx, out, "\033&l0Z");
 		/* If the printer supports it, set orientation */
 		if (pcl->features & PCL_HAS_ORIENTATION)
 		{
@@ -577,8 +583,6 @@ static const pcl_papersize papersizes[] =
 	{ e10x14,            "10x14",        3000, 4200}
 };
 
-#define num_elems(X) (sizeof(X)/sizeof(*X))
-
 static void guess_paper_size(fz_pcl_options *pcl, int w, int h, int xres, int yres)
 {
 	int size;
@@ -592,7 +596,7 @@ static void guess_paper_size(fz_pcl_options *pcl, int w, int h, int xres, int yr
 	h = h * 300 / xres;
 
 	/* Look for an exact match */
-	for (size = 0; size < (int)num_elems(papersizes); size++)
+	for (size = 0; size < (int)nelem(papersizes); size++)
 	{
 		if (papersizes[size].code > eCustomPaperSize && (pcl->features & PCL_HAS_RICOH_PAPER_SIZES) == 0)
 			continue;
@@ -607,7 +611,7 @@ static void guess_paper_size(fz_pcl_options *pcl, int w, int h, int xres, int yr
 
 	/* If we didn't find an exact match, find the smallest one that's
 	 * larger. Consider orientation if our printer supports it. */
-	if (size == num_elems(papersizes))
+	if (size == nelem(papersizes))
 	{
 		if ((pcl->features & PCL_CAN_SET_CUSTOM_PAPER_SIZE) != 0)
 		{
@@ -619,7 +623,7 @@ static void guess_paper_size(fz_pcl_options *pcl, int w, int h, int xres, int yr
 			/* Send the next larger one (minimise waste) */
 			int i;
 			int best_waste = INT_MAX;
-			for (i = 0; i < (int)num_elems(papersizes); i++)
+			for (i = 0; i < (int)nelem(papersizes); i++)
 			{
 				int waste;
 				if (papersizes[i].code > eCustomPaperSize && (pcl->features & PCL_HAS_RICOH_PAPER_SIZES) == 0)
@@ -643,9 +647,9 @@ static void guess_paper_size(fz_pcl_options *pcl, int w, int h, int xres, int yr
 		}
 	}
 
-	/* Now, size = The best size we have (or num_elems(papersizes)) if it's too big */
+	/* Now, size = The best size we have (or nelem(papersizes)) if it's too big */
 
-	if (size < (int)num_elems(papersizes))
+	if (size < (int)nelem(papersizes))
 		pcl->paper_size = papersizes[size].code;
 	else
 		pcl->paper_size = eCustomPaperSize; /* Custom */
@@ -845,6 +849,7 @@ color_pcl_compress_column(fz_context *ctx, color_pcl_band_writer *writer, const 
 					break;
 				blanks++;
 				y++;
+				sp += stride;
 			}
 
 			if (blanks)

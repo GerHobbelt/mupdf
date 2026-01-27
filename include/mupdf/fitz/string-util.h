@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2024 Artifex Software, Inc.
+// Copyright (C) 2004-2025 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -196,6 +196,11 @@ const char* fz_basename(const char* path);
 	'.dotfile.org' --> extension = '.org'.
 */
 const char* fz_name_extension(const char* path);
+
+/**
+	portable strverscmp(3) function
+*/
+int fz_strverscmp(const char *s1, const char *s2);
 
 /**
 	Like fz_decode_uri_component but in-place.

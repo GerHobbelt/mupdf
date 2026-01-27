@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2004-2025 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -3336,8 +3336,8 @@ intermediate_run:
 					ww -= len;
 					do
 					{
-						int v = *ddp;
 						int a = *runp++;
+						v = *ddp;
 						if (v == 0)
 						{
 							*ddp++ = a;
@@ -3465,8 +3465,8 @@ intermediate_run:
 					ww -= len;
 					do
 					{
-						int v = *ddp;
 						int a = *runp++;
+						v = *ddp;
 						if (v == 0)
 						{
 							*ddp++ = fz_mul255(a, alpha);

@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2024 Artifex Software, Inc.
+// Copyright (C) 2004-2025 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -11,7 +11,6 @@
 // WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 // FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
 // details.
-//
 // You should have received a copy of the GNU Affero General Public License
 // along with MuPDF. If not, see <https://www.gnu.org/licenses/agpl-3.0.en.html>
 //
@@ -94,6 +93,7 @@ void fz_add_layout_char(fz_context *ctx, fz_layout_block *block, float x, float 
 #define SPACE_DIST 0.15f
 #define SPACE_MAX_DIST 0.8f
 #define BASE_MAX_DIST 0.8f
+#define FAKE_BOLD_MAX_DIST 0.1f
 
 /* We keep a stack of the different metatexts that apply at any
  * given point (normally none!). Whenever we get some content
@@ -152,25 +152,36 @@ typedef struct
 
 const char *fz_stext_options_usage =
 	"Structured text output options:\n"
-	"  inhibit-spaces:       don't add spaces between gaps in the text\n"
 	"  preserve-images:      keep images in output\n"
 	"  reference-images[=filepath_template]\n"
 	"                        store images in separate files and reference these\n"
 	"                        from the generated text file. (Uses a default\n"
 	"                        path template when used without argument or when '=yes')\n"
 	"  preserve-ligatures:   do not expand ligatures into constituent characters\n"
-	"  preserve-whitespace:  do not convert all whitespace into space characters\n"
 	"  preserve-spans:       do not merge spans on the same line\n"
+	"  preserve-whitespace:  do not convert all whitespace into space characters\n"
+	"  inhibit-spaces:       don't add spaces between gaps in the text\n"
+	"  paragraph-break:      break blocks at paragraph boundaries\n"
 	"  reference-images=no:  (default) output images as data URIs\n"
 	"                  =yes: output image reference URI only\n"
 	"  reuse-images:         duplicate images share the same URI\n"
 	"  dehyphenate:          attempt to join up hyphenated words\n"
+	"  ignore-actualtext:    do not apply ActualText replacements\n"
 	"  use-cid-for-unknown-unicode: guess unicode from cid if normal mapping fails\n"
+	"  use-gid-for-unknown-unicode: use glyph index if unicode mapping fails\n"
+	"  accurate-bboxes:      calculate char bboxes from the outlines\n"
+	"  accurate-ascenders:   calculate ascender/descender from font glyphs\n"
+	"  accurate-side-bearings: expand char bboxes to completely include width of glyphs\n"
+	"  collect-styles:       attempt to detect text features (fake bold, strikeout, underlined etc)\n"
 	"  clip:                 do not include text that is completely clipped\n"
+	"  clip-rect=x0:y0:x1:y1 specify clipping rectangle within which to collect content\n"
 	"  glyph-bbox:           use painted area of glyphs instead of font size for bounding boxes\n"
+	"  structured:           collect structure markup\n"
 	"  structured=no:        don't collect structure data\n"
 	"  accurate-bboxes=no:   calculate char bboxes for from the outlines\n"
+	"  vectors:              include vector bboxes in output\n"
 	"  vectors=no:           include vector bboxes in output\n"
+	"  segment:              attempt to segment the page\n"
 	"  segment=no:           don't attempt to segment the page\n"
 	"  table-hunt:           hunt for tables within a (segmented) page\n"
 	"  text-as-path:         (SVG: default) output text as curves\n"
@@ -356,7 +367,7 @@ add_line_to_block(fz_context *ctx, fz_stext_page *page, fz_stext_block *block, c
 #define NON_ACCURATE_GLYPH (-1)
 
 static fz_stext_char *
-add_char_to_line(fz_context *ctx, fz_stext_device *dev, fz_stext_page *page, fz_stext_line *line, fz_matrix trm, fz_font *font, float size, int c, int glyph, fz_point *p, fz_point *q, int bidi, int color, int synthetic, int flags)
+add_char_to_line(fz_context *ctx, fz_stext_device *dev, fz_stext_page *page, fz_stext_line *line, fz_matrix trm, fz_font *font, float size, int c, int glyph, fz_point *p, fz_point *q, int bidi, int color, int synthetic, int flags, int dev_flags)
 {
 	fz_stext_char *ch = fz_pool_alloc(ctx, page->pool, sizeof *line->first_char);
 	fz_point a, d;
@@ -393,26 +404,38 @@ add_char_to_line(fz_context *ctx, fz_stext_device *dev, fz_stext_page *page, fz_
 	{
 		if (line->wmode == 0)
 		{
+			fz_rect bounds;
+			int bounded = 0;
 			a.x = 0;
 			d.x = 0;
-		if (glyph == NON_ACCURATE_GLYPH_ADDED_SPACE)
-		{
-			/* Added space, in accurate mode. */
-			a.y = d.y = 0;
-		}
-		else if (glyph == NON_ACCURATE_GLYPH)
-		{
-			/* Non accurate mode. */
-			a.y = fz_font_ascender(ctx, font);
-			d.y = fz_font_descender(ctx, font);
-		}
-		else
-		{
-			/* Any glyph in accurate mode */
-			fz_rect bounds = fz_bound_glyph(ctx, font, glyph, fz_identity);
-			a.y = bounds.y1;
-			d.y = bounds.y0;
-		}
+			if (glyph == NON_ACCURATE_GLYPH_ADDED_SPACE)
+			{
+				/* Added space, in accurate mode. */
+				a.y = d.y = 0;
+			}
+			else if (glyph == NON_ACCURATE_GLYPH)
+			{
+				/* Non accurate mode. */
+				a.y = fz_font_ascender(ctx, font);
+				d.y = fz_font_descender(ctx, font);
+			}
+			else
+			{
+				/* Any glyph in accurate mode */
+				bounds = fz_bound_glyph(ctx, font, glyph, fz_identity);
+				bounded = 1;
+				a.y = bounds.y1;
+				d.y = bounds.y0;
+			}
+			if (dev_flags & FZ_STEXT_ACCURATE_SIDE_BEARINGS)
+			{
+				if (!bounded)
+					bounds = fz_bound_glyph(ctx, font, glyph, fz_identity);
+				if (a.x > bounds.x0)
+					a.x = bounds.x0;
+				if (d.y < bounds.x1)
+					d.y = bounds.x1;
+			}
 		}
 		else
 		{
@@ -618,6 +641,97 @@ check_for_fake_bold(fz_context *ctx, fz_stext_block *block, fz_font *font, int c
 	return 0;
 }
 
+#define FAKEBOLD_THRESHOLD_RECIP 10
+
+static int
+font_close(float a, float b, float size)
+{
+	a -= b;
+	if (a < 0)
+		a = -a;
+
+	return FAKEBOLD_THRESHOLD_RECIP * a < size;
+}
+
+static int
+font_equiv(fz_context *ctx, fz_font *f, fz_font *g)
+{
+	unsigned char fdigest[16];
+	unsigned char gdigest[16];
+
+	if (f == g)
+		return 1;
+
+	if (strcmp(f->name, g->name) != 0)
+		return 0;
+
+	fz_font_digest(ctx, f, fdigest);
+	fz_font_digest(ctx, g, gdigest);
+
+	return (memcmp(fdigest, gdigest, 16) == 0);
+}
+
+static int
+check_for_fake_bold(fz_context *ctx, fz_stext_block *block, fz_font *font, int c, fz_point p, float size, int flags)
+{
+	fz_stext_line *line;
+	fz_stext_char *ch;
+
+	for (; block != NULL; block = block->next)
+	{
+		if (block->type == FZ_STEXT_BLOCK_STRUCT)
+		{
+			if (block->u.s.down != NULL && check_for_fake_bold(ctx, block->u.s.down->first_block, font, c, p, size, flags))
+				return 1;
+		}
+		else if (block->type == FZ_STEXT_BLOCK_TEXT)
+		{
+			for (line = block->u.t.first_line; line != NULL; line = line->next)
+			{
+				fz_stext_char *pr = NULL;
+				for (ch = line->first_char; ch != NULL; ch = ch->next)
+				{
+					/* Not perfect, but it'll do! */
+					if (ch->c == c && font_close(ch->origin.x, p.x, size) && font_close(ch->origin.y, p.y, size) && font_equiv(ctx, ch->font, font))
+					{
+						/* If we were filled before, and we are stroking now... */
+						if ((ch->flags & (FZ_STEXT_FILLED | FZ_STEXT_STROKED)) == FZ_STEXT_FILLED &&
+							(flags & (FZ_STEXT_FILLED | FZ_STEXT_STROKED)) == FZ_STEXT_STROKED)
+						{
+							/* Update this to be filled + stroked, but don't specifically mark it as fake bold. */
+							ch->flags |= flags;
+							return 1;
+						}
+						/* Overlaying spaces is tricksy. How can that count as boldening when it doesn't mark? We only accept these
+						 * as boldening if either the char before, or the char after were also boldened. */
+						ch->flags |= flags;
+
+						if (c == ' ')
+						{
+							if ((pr && (pr->flags & FZ_STEXT_BOLD) != 0) ||
+								(ch->next && (ch->next->flags & FZ_STEXT_BOLD) != 0))
+							{
+								/* OK, we can be bold. */
+								ch->flags |= FZ_STEXT_BOLD;
+								return 1;
+							}
+							/* Ignore this and keep going */
+						}
+						else
+						{
+							ch->flags |= FZ_STEXT_BOLD;
+							return 1;
+						}
+					}
+					pr = ch;
+				}
+			}
+		}
+	}
+
+	return 0;
+}
+
 static void
 fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int c, int glyph, fz_matrix trm, float adv, int wmode, int bidi, int force_new_line, int flags)
 {
@@ -633,6 +747,7 @@ fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int 
 	fz_point delta;
 	float spacing = 0;
 	float base_offset = 0;
+	float dist;
 
 	/* Preserve RTL-ness only (and ignore level) so we can use bit 2 as "visual" tag for reordering pass. */
 	bidi = bidi & 1;
@@ -683,14 +798,14 @@ fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int 
 		q.y = trm.f;
 	}
 
-	if ((dev->opts.flags & FZ_STEXT_COLLECT_FLAGS) != 0)
+	if ((dev->opts.flags & FZ_STEXT_COLLECT_STYLES) != 0)
 	{
 		if (glyph == -1)
 		{
 			if (dev->last_was_fake_bold)
 				goto move_pen_and_exit;
 		}
-		else if (check_for_fake_bold(ctx, page->first_block, font, c, p, size))
+		else if (check_for_fake_bold(ctx, page->first_block, font, c, p, size, flags))
 		{
 			dev->last_was_fake_bold = 1;
 			goto move_pen_and_exit;
@@ -707,7 +822,7 @@ fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int 
 	if (cur_line && glyph < 0)
 	{
 		/* Don't advance pen or break lines for no-glyph characters in a cluster */
-		add_char_to_line(ctx, dev, page, cur_line, trm, font, size, c, (dev->opts.flags & FZ_STEXT_ACCURATE_BBOXES) ? glyph : NON_ACCURATE_GLYPH, &dev->pen, &dev->pen, bidi, dev->color, 0, flags);
+		add_char_to_line(ctx, dev, page, cur_line, trm, font, size, c, (dev->opts.flags & FZ_STEXT_ACCURATE_BBOXES) ? glyph : NON_ACCURATE_GLYPH, &dev->pen, &dev->pen, bidi, dev->color, 0, flags, dev->opts.flags);
 		dev->lastbidi = bidi;
 		dev->lastchar = c;
 		return;
@@ -725,10 +840,9 @@ fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int 
 		/* Detect fake bold where text is printed twice in the same place. */
 		/* Largely supplanted by the check_for_fake_bold mechanism above,
 		 * but we leave this in for backward compatibility as it's cheap,
-		 * and works even when FZ_STEXT_COLLECT_FLAGS is not set. */
-		delta.x = fabsf(q.x - dev->pen.x);
-		delta.y = fabsf(q.y - dev->pen.y);
-		if (delta.x < FLT_EPSILON && delta.y < FLT_EPSILON && c == dev->lastchar)
+		 * and works even when FZ_STEXT_COLLECT_STYLES is not set. */
+		dist = hypotf(q.x - dev->pen.x, q.y - dev->pen.y) / size;
+		if (dist < FAKE_BOLD_MAX_DIST && c == dev->lastchar)
 			return;
 
 		/* Calculate how far we've moved since the last character. */
@@ -803,7 +917,7 @@ fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int 
 				else
 				{
 					/* Motion is large and unexpected (probably a new table column). */
-					new_line = 0;
+					new_line = 1;
 				}
 			}
 
@@ -880,7 +994,7 @@ fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int 
 	/* Add synthetic space */
 	if (add_space && !(dev->opts.flags & FZ_STEXT_INHIBIT_SPACES))
 	{
-		add_char_to_line(ctx, dev, page, cur_line, trm, font, size, ' ', (dev->opts.flags & FZ_STEXT_ACCURATE_BBOXES) ? NON_ACCURATE_GLYPH_ADDED_SPACE : NON_ACCURATE_GLYPH, &dev->pen, &p, bidi, dev->color, 1, flags);
+		add_char_to_line(ctx, dev, page, cur_line, trm, font, size, ' ', (dev->opts.flags & FZ_STEXT_ACCURATE_BBOXES) ? NON_ACCURATE_GLYPH_ADDED_SPACE : NON_ACCURATE_GLYPH, &dev->pen, &p, bidi, dev->color, 1, flags, dev->opts.flags);
 		if (dev->delayed_new_line)
 		{
 			/* this is after dehyphenation and the next synthetic space, so break to new line. */
@@ -890,7 +1004,7 @@ fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int 
 		}
 	}
 
-	add_char_to_line(ctx, dev, page, cur_line, trm, font, size, c, (dev->opts.flags & FZ_STEXT_ACCURATE_BBOXES) ? glyph : NON_ACCURATE_GLYPH, &p, &q, bidi, dev->color, 0, flags);
+	add_char_to_line(ctx, dev, page, cur_line, trm, font, size, c, (dev->opts.flags & FZ_STEXT_ACCURATE_BBOXES) ? glyph : NON_ACCURATE_GLYPH, &p, &q, bidi, dev->color, 0, flags, dev->opts.flags);
 	if (dev->delayed_new_line && is_space(c))
 	{
 		/* this is after dehyphenation and the next actual space, so break to new line. */
@@ -1068,6 +1182,9 @@ fz_add_stext_char(fz_context *ctx, fz_stext_device *dev, fz_font *font, int c, i
 	if (c == -1)
 		return;
 
+	if (dev->opts.flags & FZ_STEXT_ACCURATE_ASCENDERS)
+		fz_calculate_font_ascender_descender(ctx, font);
+
 	if (!(dev->opts.flags & FZ_STEXT_PRESERVE_LIGATURES))
 	{
 		const char* replacement = get_ligature_replacement(c);
@@ -1094,6 +1211,22 @@ fz_add_stext_char(fz_context *ctx, fz_stext_device *dev, fz_font *font, int c, i
 	fz_add_stext_char_imp(ctx, dev, font, c, glyph, trm, adv, wmode, bidi, force_new_line, flags);
 }
 
+static fz_rect
+current_clip(fz_context *ctx, fz_stext_device *dev)
+{
+	fz_rect r = fz_infinite_rect;
+
+	if (dev->opts.flags & FZ_STEXT_CLIP)
+	{
+		r = fz_device_current_scissor(ctx, &dev->super);
+		r = fz_intersect_rect(r, dev->page->mediabox);
+	}
+	if (dev->opts.flags & FZ_STEXT_CLIP_RECT)
+		r = fz_intersect_rect(r, dev->opts.clip);
+
+	return r;
+}
+
 static void
 do_extract(fz_context *ctx, fz_stext_device *dev, fz_text_span *span, fz_matrix ctm, int start, int end, int flags)
 {
@@ -1105,10 +1238,9 @@ do_extract(fz_context *ctx, fz_stext_device *dev, fz_text_span *span, fz_matrix 
 
 	for (i = start; i < end; i++)
 	{
-		if (dev->opts.flags & FZ_STEXT_CLIP)
+		if (dev->opts.flags & (FZ_STEXT_CLIP | FZ_STEXT_CLIP_RECT))
 		{
-			fz_rect r = fz_device_current_scissor(ctx, &dev->super);
-			r = fz_intersect_rect(r, dev->page->mediabox);
+			fz_rect r = current_clip(ctx, dev);
 			if (fz_glyph_entirely_outside_box(ctx, &ctm, span, &span->items[i], &r))
 			{
 				dev->last.clipped = 1;
@@ -1201,7 +1333,7 @@ flush_actualtext(fz_context *ctx, fz_stext_device *dev, const char *actualtext, 
 		if (rune == 0)
 			break;
 
-		if (dev->opts.flags & FZ_STEXT_CLIP)
+		if (dev->opts.flags & (FZ_STEXT_CLIP | FZ_STEXT_CLIP_RECT))
 			if (dev->last.clipped)
 				continue;
 
@@ -1266,6 +1398,10 @@ do_extract_within_actualtext(fz_context *ctx, fz_stext_device *dev, fz_text_span
 		return;
 	}
 
+	/* We haven't consumed the whole string, so there must be runes left.
+	 * Shut coverity up. */
+	assert(z != 0);
+
 	/* Spot a matching postfix. Can't send it til the end. */
 	for (end = span->len; end > start; end--)
 	{
@@ -1301,10 +1437,9 @@ do_extract_within_actualtext(fz_context *ctx, fz_stext_device *dev, fz_text_span
 		}
 		dev->last.valid = 1;
 
-		if (dev->opts.flags & FZ_STEXT_CLIP)
+		if (dev->opts.flags & (FZ_STEXT_CLIP | FZ_STEXT_CLIP_RECT))
 		{
-			fz_rect r = fz_device_current_scissor(ctx, &dev->super);
-			r = fz_intersect_rect(r, dev->page->mediabox);
+			fz_rect r = current_clip(ctx, dev);
 			if (fz_glyph_entirely_outside_box(ctx, &ctm, span, &span->items[i], &r))
 			{
 				dev->last.clipped = 1;
@@ -1391,7 +1526,7 @@ fz_stext_fill_text(fz_context *ctx, fz_device *dev, const fz_text *text, fz_matr
 {
 	fz_stext_device *tdev = (fz_stext_device*)dev;
 	fz_text_span *span;
-	if (text == tdev->lasttext)
+	if (text == tdev->lasttext && (tdev->opts.flags & FZ_STEXT_COLLECT_STYLES) == 0)
 		return;
 	tdev->color = hexrgba_from_color(ctx, colorspace, color, alpha);
 	tdev->new_obj = 1;
@@ -1407,7 +1542,7 @@ fz_stext_stroke_text(fz_context *ctx, fz_device *dev, const fz_text *text, const
 {
 	fz_stext_device *tdev = (fz_stext_device*)dev;
 	fz_text_span *span;
-	if (text == tdev->lasttext)
+	if (text == tdev->lasttext && (tdev->opts.flags & FZ_STEXT_COLLECT_STYLES) == 0)
 		return;
 	tdev->color = hexrgba_from_color(ctx, colorspace, color, alpha);
 	tdev->new_obj = 1;
@@ -1422,7 +1557,7 @@ fz_stext_clip_text(fz_context *ctx, fz_device *dev, const fz_text *text, fz_matr
 {
 	fz_stext_device *tdev = (fz_stext_device*)dev;
 	fz_text_span *span;
-	if (text == tdev->lasttext)
+	if (text == tdev->lasttext && (tdev->opts.flags & FZ_STEXT_COLLECT_STYLES) == 0)
 		return;
 	tdev->color = 0;
 	tdev->new_obj = 1;
@@ -1437,7 +1572,7 @@ fz_stext_clip_stroke_text(fz_context *ctx, fz_device *dev, const fz_text *text, 
 {
 	fz_stext_device *tdev = (fz_stext_device*)dev;
 	fz_text_span *span;
-	if (text == tdev->lasttext)
+	if (text == tdev->lasttext && (tdev->opts.flags & FZ_STEXT_COLLECT_STYLES) == 0)
 		return;
 	tdev->color = 0;
 	tdev->new_obj = 1;
@@ -1452,7 +1587,7 @@ fz_stext_ignore_text(fz_context *ctx, fz_device *dev, const fz_text *text, fz_ma
 {
 	fz_stext_device *tdev = (fz_stext_device*)dev;
 	fz_text_span *span;
-	if (text == tdev->lasttext)
+	if (text == tdev->lasttext && (tdev->opts.flags & FZ_STEXT_COLLECT_STYLES) == 0)
 		return;
 	tdev->color = 0;
 	tdev->new_obj = 1;
@@ -1649,6 +1784,8 @@ fz_stext_fill_shade(fz_context *ctx, fz_device *dev, fz_shade *shade, fz_matrix 
 
 	local_ctm = ctm;
 	scissor = fz_device_current_scissor(ctx, dev);
+	if (dev->flags & FZ_STEXT_CLIP_RECT)
+		scissor = fz_intersect_rect(scissor, tdev->opts.clip);
 	scissor = fz_intersect_rect(scissor, tdev->page->mediabox);
 	image = fz_new_image_from_shade(ctx, shade, &local_ctm, color_params, scissor);
 	fz_try(ctx)
@@ -1711,6 +1848,9 @@ fz_stext_close_device(fz_context *ctx, fz_device *dev)
 
 	if (tdev->opts.flags & FZ_STEXT_PARAGRAPH_BREAK)
 		fz_paragraph_break(ctx, page);
+
+	if (tdev->opts.flags & FZ_STEXT_TABLE_HUNT)
+		fz_table_hunt(ctx, page);
 }
 
 static void
@@ -1722,6 +1862,34 @@ fz_stext_drop_device(fz_context *ctx, fz_device *dev)
 	fz_drop_font(ctx, tdev->last.font);
 	while (tdev->metatext)
 		pop_metatext(ctx, tdev);
+}
+
+static int
+val_is_rect(const char *val, fz_rect *rp)
+{
+	fz_rect r;
+	const char *s;
+
+	s = strchr(val, ':');
+	if (s == NULL || s == val)
+		return 0;
+	r.x0 = fz_atof(val);
+	val = s+1;
+	s = strchr(val, ':');
+	if (s == NULL || s == val)
+		return 0;
+	r.y0 = fz_atof(val);
+	val = s+1;
+	s = strchr(val, ':');
+	if (s == NULL || s == val)
+		return 0;
+	r.x1 = fz_atof(val);
+	val = s+1;
+	r.y1 = fz_atof(val);
+
+	*rp = r;
+
+	return 1;
 }
 
 fz_stext_options *
@@ -1800,6 +1968,12 @@ fz_parse_stext_options(fz_context *ctx, fz_stext_options *opts, const char *stri
 		if (fz_option_eq(val, "yes"))
 			opts->flags |= FZ_STEXT_USE_CID_FOR_UNKNOWN_UNICODE;
 	}
+	if (fz_has_option(ctx, string, "use-gid-for-unknown-unicode", &val))
+	{
+		opts->flags_conf_mask |= FZ_STEXT_USE_GID_FOR_UNKNOWN_UNICODE;
+		if (fz_option_eq(val, "yes"))
+			opts->flags |= FZ_STEXT_USE_GID_FOR_UNKNOWN_UNICODE;
+	}
 	if (fz_has_option(ctx, string, "accurate-bboxes", &val))
 	{
 		opts->flags_conf_mask |= FZ_STEXT_ACCURATE_BBOXES;
@@ -1836,6 +2010,24 @@ fz_parse_stext_options(fz_context *ctx, fz_stext_options *opts, const char *stri
 		if (fz_option_eq(val, "yes"))
 			opts->flags |= FZ_STEXT_TABLE_HUNT;
 	}
+	if (fz_has_option(ctx, string, "collect-styles", &val))
+	{
+		opts->flags_conf_mask |= FZ_STEXT_COLLECT_STYLES;
+		if (fz_option_eq(val, "yes"))
+			opts->flags |= FZ_STEXT_COLLECT_STYLES;
+	}
+	if (fz_has_option(ctx, string, "accurate-ascenders", &val))
+	{
+		opts->flags_conf_mask |= FZ_STEXT_ACCURATE_ASCENDERS;
+		if (fz_option_eq(val, "yes"))
+			opts->flags |= FZ_STEXT_ACCURATE_ASCENDERS;
+	}
+	if (fz_has_option(ctx, string, "accurate-side-bearings", &val))
+	{
+		opts->flags_conf_mask |= FZ_STEXT_ACCURATE_SIDE_BEARINGS;
+		if (fz_option_eq(val, "yes"))
+			opts->flags |= FZ_STEXT_ACCURATE_SIDE_BEARINGS;
+	}
 	if (fz_has_option(ctx, string, "glyph-bbox", &val))
 	{
 		opts->flags_conf_mask |= FZ_STEXT_GLYPH_BBOX;
@@ -1855,6 +2047,14 @@ fz_parse_stext_options(fz_context *ctx, fz_stext_options *opts, const char *stri
 		opts->flags_conf_mask |= FZ_STEXT_CLIP;
 		if (fz_option_eq(val, "no"))
 			opts->flags &= ~FZ_STEXT_CLIP;
+		else
+			opts->flags |= FZ_STEXT_CLIP;
+	}
+	if (fz_has_option(ctx, string, "clip-rect", &val))
+	{
+		opts->flags_conf_mask |= FZ_STEXT_CLIP_RECT;
+		if (val_is_rect(val, &opts->clip))
+			opts->flags |= FZ_STEXT_CLIP_RECT;
 	}
 	if (fz_has_option(ctx, string, "text-as-path", &val))
 	{
@@ -2284,14 +2484,189 @@ check_for_strikeout(fz_context *ctx, fz_stext_device *tdev, fz_stext_page *page,
 }
 
 static void
-add_vector(fz_context *ctx, fz_stext_page *page, fz_rect bbox, int stroked, fz_colorspace *cs, const float *color, float alpha, fz_color_params cp)
+add_vector(fz_context *ctx, fz_stext_page *page, fz_rect bbox, uint32_t flags, uint32_t argb)
 {
 	fz_stext_block *b = add_block_to_page(ctx, page);
 
 	b->type = FZ_STEXT_BLOCK_VECTOR;
 	b->bbox = bbox;
-	b->u.v.stroked = stroked;
-	b->u.v.argb = hexrgba_from_color(ctx, cs, color, alpha);
+	b->u.v.flags = flags;
+	b->u.v.argb = argb;
+}
+
+typedef struct
+{
+	fz_matrix ctm;
+	uint32_t argb;
+	uint32_t flags;
+	fz_stext_page *page;
+	fz_rect leftovers;
+	fz_rect pending;
+	int count;
+	fz_point p[5];
+} split_path_data;
+
+static void
+maybe_rect(fz_context *ctx, split_path_data *sp)
+{
+	int rect = 0;
+	int i;
+
+	if (sp->count >= 0)
+	{
+		if (sp->count == 3)
+		{
+			/* Allow for "moveto A, lineto B, lineto A, close" */
+			if (feq(sp->p[0].x, sp->p[2].x) || feq(sp->p[0].y, sp->p[2].y))
+				sp->count = 2;
+		}
+		if (sp->count == 2)
+		{
+			if (feq(sp->p[0].x, sp->p[1].x) || feq(sp->p[0].y, sp->p[1].y))
+				rect = 1; /* Count that as a rect */
+		}
+		else if (sp->count == 4 || sp->count == 5)
+		{
+			if (feq(sp->p[0].x, sp->p[1].x) && feq(sp->p[2].x, sp->p[3].x) && feq(sp->p[0].y, sp->p[3].y) && feq(sp->p[1].y, sp->p[2].y))
+				rect = 1;
+			else if (feq(sp->p[0].x, sp->p[3].x) && feq(sp->p[1].x, sp->p[2].x) && feq(sp->p[0].y, sp->p[1].y) && feq(sp->p[2].y, sp->p[3].y))
+				rect = 1;
+		}
+		if (rect)
+		{
+			fz_rect bounds;
+
+			bounds.x0 = bounds.x1 = sp->p[0].x;
+			bounds.y0 = bounds.y1 = sp->p[0].y;
+			for (i = 1; i < sp->count; i++)
+				bounds = fz_include_point_in_rect(bounds, sp->p[i]);
+			if (fz_is_valid_rect(sp->pending))
+				add_vector(ctx, sp->page, sp->pending, sp->flags | FZ_STEXT_VECTOR_IS_RECTANGLE | FZ_STEXT_VECTOR_CONTINUES, sp->argb);
+			sp->pending = bounds;
+			return;
+		}
+
+		for (i = 0; i < sp->count; i++)
+			sp->leftovers = fz_include_point_in_rect(sp->leftovers, sp->p[i]);
+	}
+}
+
+static void
+split_move(fz_context *ctx, void *arg, float x, float y)
+{
+	split_path_data *sp = (split_path_data *)arg;
+	fz_point p = fz_transform_point_xy(x, y, sp->ctm);
+
+	maybe_rect(ctx, sp);
+	sp->p[0] = p;
+	sp->count = 1;
+}
+
+static void
+split_line(fz_context *ctx, void *arg, float x, float y)
+{
+	split_path_data *sp = (split_path_data *)arg;
+	fz_point p = fz_transform_point_xy(x, y, sp->ctm);
+	int i;
+
+	if (sp->count >= 0)
+	{
+		/* Check for lines to the same point. */
+		if (feq(sp->p[sp->count-1].x, p.x) && feq(sp->p[sp->count-1].y, p.y))
+			return;
+		/* If we're still maybe a rect, just record the point. */
+		if (sp->count < 4)
+		{
+			sp->p[sp->count++] = p;
+			return;
+		}
+		/* Check for close line? */
+		if (sp->count == 4)
+		{
+			if (feq(sp->p[0].x, p.x) && feq(sp->p[0].y, p.y))
+			{
+				/* We've just drawn a line back to the start point. */
+				/* Needless saving of point, but it makes the logic
+				 * easier elsewhere. */
+				sp->p[sp->count++] = p;
+				return;
+			}
+		}
+		/* We can no longer be a rect. Output the points we had saved. */
+		for (i = 0; i < sp->count; i++)
+			sp->leftovers = fz_include_point_in_rect(sp->leftovers, sp->p[i]);
+		/* Remember we're not a rect. */
+		sp->count = -1;
+	}
+	/* Roll this point into the non-rect bounds. */
+	sp->leftovers = fz_include_point_in_rect(sp->leftovers, p);
+}
+
+static void
+split_curve(fz_context *ctx, void *arg, float x1, float y1, float x2, float y2, float x3, float y3)
+{
+	split_path_data *sp = (split_path_data *)arg;
+	fz_point p1 = fz_transform_point_xy(x1, y1, sp->ctm);
+	fz_point p2 = fz_transform_point_xy(x2, y2, sp->ctm);
+	fz_point p3 = fz_transform_point_xy(x3, y3, sp->ctm);
+	int i;
+
+	if (sp->count >= 0)
+	{
+		/* We can no longer be a rect. Output the points we had saved. */
+		for (i = 0; i < sp->count; i++)
+			sp->leftovers = fz_include_point_in_rect(sp->leftovers, sp->p[i]);
+		/* Remember we're not a rect. */
+		sp->count = -1;
+	}
+	/* Roll these points into the non-rect bounds. */
+	sp->leftovers = fz_include_point_in_rect(sp->leftovers, p1);
+	sp->leftovers = fz_include_point_in_rect(sp->leftovers, p2);
+	sp->leftovers = fz_include_point_in_rect(sp->leftovers, p3);
+}
+
+static void
+split_close(fz_context *ctx, void *arg)
+{
+	split_path_data *sp = (split_path_data *)arg;
+
+	maybe_rect(ctx, sp);
+	sp->count = 0;
+}
+
+
+static const
+fz_path_walker split_path_rects =
+{
+	split_move,
+	split_line,
+	split_curve,
+	split_close
+};
+
+static void
+add_vectors_from_path(fz_context *ctx, fz_stext_page *page, const fz_path *path, fz_matrix ctm, fz_colorspace *cs, const float *color, float alpha, fz_color_params cp, int stroke)
+{
+	int have_leftovers;
+	split_path_data sp;
+
+	sp.ctm = ctm;
+	sp.argb = hexrgba_from_color(ctx, cs, color, alpha);
+	sp.flags = stroke ? FZ_STEXT_VECTOR_IS_STROKED : 0;
+	sp.page = page;
+	sp.count = 0;
+	sp.leftovers = fz_empty_rect;
+	sp.pending = fz_empty_rect;
+	fz_walk_path(ctx, path, &split_path_rects, &sp);
+
+	have_leftovers = fz_is_valid_rect(sp.leftovers);
+
+	maybe_rect(ctx, &sp);
+
+	if (fz_is_valid_rect(sp.pending))
+		add_vector(ctx, page, sp.pending, sp.flags | FZ_STEXT_VECTOR_IS_RECTANGLE | (have_leftovers ? FZ_STEXT_VECTOR_CONTINUES : 0), sp.argb);
+	if (have_leftovers)
+		add_vector(ctx, page, sp.leftovers, sp.flags, sp.argb);
 }
 
 static void
@@ -2302,15 +2677,15 @@ fz_stext_fill_path(fz_context *ctx, fz_device *dev, const fz_path *path, int eve
 	fz_rect path_bounds = fz_bound_path(ctx, path, NULL, ctm);
 	fz_rect *bounds = actualtext_bounds(tdev);
 
-	/* If we're in an actualttext, then update the bounds to include this content. */
+	/* If we're in an actualtext, then update the bounds to include this content. */
 	if (bounds != NULL)
 		*bounds = fz_union_rect(*bounds, path_bounds);
 
-	if (tdev->opts.flags & FZ_STEXT_COLLECT_FLAGS)
+	if (tdev->opts.flags & FZ_STEXT_COLLECT_STYLES)
 		check_for_strikeout(ctx, tdev, page, path, ctm);
 
 	if (tdev->opts.flags & FZ_STEXT_COLLECT_VECTORS)
-		add_vector(ctx, page, path_bounds, 0, cs, color, alpha, cp);
+		add_vectors_from_path(ctx, page, path, ctm, cs, color, alpha, cp, 0);
 }
 
 static void
@@ -2321,15 +2696,15 @@ fz_stext_stroke_path(fz_context *ctx, fz_device *dev, const fz_path *path, const
 	fz_rect path_bounds = fz_bound_path(ctx, path, ss, ctm);
 	fz_rect *bounds = actualtext_bounds((fz_stext_device *)dev);
 
-	/* If we're in an actualttext, then update the bounds to include this content. */
+	/* If we're in an actualtext, then update the bounds to include this content. */
 	if (bounds != NULL)
 		*bounds = fz_union_rect(*bounds, path_bounds);
 
-	if (tdev->opts.flags & FZ_STEXT_COLLECT_FLAGS)
+	if (tdev->opts.flags & FZ_STEXT_COLLECT_STYLES)
 		check_for_strikeout(ctx, tdev, page, path, ctm);
 
 	if (tdev->opts.flags & FZ_STEXT_COLLECT_VECTORS)
-		add_vector(ctx, page, path_bounds, 1, cs, color, alpha, cp);
+		add_vectors_from_path(ctx, page, path, ctm, cs, color, alpha, cp, 1);
 }
 
 static void
@@ -2475,7 +2850,7 @@ fz_stext_begin_structure(fz_context *ctx, fz_device *dev, fz_structure standard,
 		/* We have no blocks at ANY level. */
 		page->first_block = newblock;
 	}
-	/* Whereever we linked it in, that's where we want to continue adding content. */
+	/* Wherever we linked it in, that's where we want to continue adding content. */
 	page->last_struct = newblock->u.s.down;
 	page->last_block = NULL;
 }
@@ -2535,7 +2910,7 @@ fz_new_stext_device(fz_context *ctx, fz_stext_page *page, const fz_stext_options
 			dev->super.begin_structure = fz_stext_begin_structure;
 			dev->super.end_structure = fz_stext_end_structure;
 		}
-		if (dev->opts.flags & (FZ_STEXT_COLLECT_VECTORS | FZ_STEXT_COLLECT_FLAGS))
+		if (opts->flags & (FZ_STEXT_COLLECT_VECTORS | FZ_STEXT_COLLECT_STYLES))
 		{
 			dev->super.fill_path = fz_stext_fill_path;
 			dev->super.stroke_path = fz_stext_stroke_path;

@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2024 Artifex Software, Inc.
+// Copyright (C) 2004-2025 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -1225,6 +1225,8 @@ void
 pdf_process_annot(fz_context *ctx, pdf_processor *proc, pdf_annot *annot)
 {
 	int flags = pdf_dict_get_int(ctx, annot->obj, PDF_NAME(F));
+	fz_matrix matrix;
+	pdf_obj *ap;
 
 	if ((flags & (PDF_ANNOT_IS_INVISIBLE | PDF_ANNOT_IS_HIDDEN)) || annot->hidden_editing)
 		return;
@@ -1252,23 +1254,23 @@ pdf_process_annot(fz_context *ctx, pdf_processor *proc, pdf_annot *annot)
 	if (pdf_is_ocg_hidden(ctx, annot->page->doc, NULL, proc->usage, pdf_dict_get(ctx, annot->obj, PDF_NAME(OC))))
 		return;
 
-	if (proc->op_q && proc->op_cm && proc->op_Do_form && proc->op_Q)
-	{
-		pdf_obj *ap = pdf_annot_ap(ctx, annot);
-		fz_matrix matrix;
+	ap = pdf_annot_ap(ctx, annot);
 
-		if (!ap)
-			return;
+	if (!ap)
+		return;
 
-		matrix = pdf_annot_transform(ctx, annot);
+	matrix = pdf_annot_transform(ctx, annot);
+	if (proc->op_q)
 		proc->op_q(ctx, proc);
+	if (proc->op_cm)
 		proc->op_cm(ctx, proc,
 			matrix.a, matrix.b,
 			matrix.c, matrix.d,
 			matrix.e, matrix.f);
+	if (proc->op_Do_form)
 		proc->op_Do_form(ctx, proc, NULL, ap);
+	if (proc->op_Q)
 		proc->op_Q(ctx, proc);
-	}
 }
 
 void

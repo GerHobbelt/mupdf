@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2024 Artifex Software, Inc.
+// Copyright (C) 2004-2025 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -115,6 +115,12 @@
 #define FZ_ENABLE_JPX 0
 
 /**
+	Choose whether to enable Brotli compression support.
+	By default, it is enabled.
+*/
+#define FZ_ENABLE_BROTLI 0
+
+/**
 	Choose whether to enable JPEG-XL en-/decoding. (Cost: ~1.7MB)
 */
 #define FZ_ENABLE_JPEGXL 0
@@ -135,6 +141,13 @@
 	interactivity.
 */
 #define FZ_ENABLE_JS 0
+
+/**
+	Choose whether to enable barcode functionality.
+	It is enabled by default, unless disabled by the build
+	system.
+*/
+#define FZ_ENABLE_BARCODE 0
 
 /**
 	Choose which fonts to include.
@@ -321,6 +334,10 @@
 #define FZ_ENABLE_JPX 1
 #endif /* FZ_ENABLE_JPX */
 
+#ifndef FZ_ENABLE_BROTLI
+#define FZ_ENABLE_BROTLI 1
+#endif /* FZ_ENABLE_BROTLI */
+
 #ifndef FZ_ENABLE_JPEGXL
 #define FZ_ENABLE_JPEGXL 1
 #endif
@@ -391,6 +408,14 @@
 
 #ifndef HAVE_LCMS2MT
 #define HAVE_LCMS2MT
+#endif
+
+#if !defined(FZ_ENABLE_BARCODE)
+#if !defined(HAVE_ZXINGCPP)
+#define FZ_ENABLE_BARCODE 0
+#else
+#define FZ_ENABLE_BARCODE 1
+#endif
 #endif
 
 #endif /* FZ_CONFIG_H */

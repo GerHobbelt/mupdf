@@ -1,12 +1,3 @@
-.. Copyright (C) 2001-2023 Artifex Software, Inc.
-.. All Rights Reserved.
-
-----
-
-.. default-domain:: js
-
-.. include:: html_tags.rst
-
 .. _mutool_object_device:
 
 .. _mutool_run_js_api_device:
@@ -29,6 +20,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
 |instance_methods|
 
 .. method:: fillPath(path, evenOdd, transform, colorspace, color, alpha, colorParams)
+
 
     Fill a path.
 
@@ -66,7 +58,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
     .. code-block:: javascript
 
         device.strokePath(path,
-                          stroke,
+                          {dashes:[5,10], lineWidth:3, lineCap:'Round'},
                           mupdf.Matrix.identity,
                           mupdf.ColorSpace.DeviceRGB,
                           [0,1,0],
@@ -109,6 +101,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
 
 
 
+
 .. method:: fillText(text, transform, colorspace, color, alpha, colorParams)
 
 
@@ -145,7 +138,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
     .. code-block:: javascript
 
         device.strokeText(text,
-                          stroke,
+                          {dashes:[5,10], lineWidth:3, lineCap:'Round'},
                           mupdf.Matrix.identity, mupdf.ColorSpace.DeviceRGB,
                           [1,0,0],
                           1);
@@ -179,7 +172,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
 
     .. code-block:: javascript
 
-        device.clipStrokeText(text, stroke,  mupdf.Matrix.identity);
+        device.clipStrokeText(text, {dashes:[5,10], lineWidth:3, lineCap:'Round'},  mupdf.Matrix.identity);
 
 
 
@@ -335,7 +328,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
     :arg alpha: The :ref:`alpha value<mutool_run_js_api_alpha>`.
 
 
-    .. image:: images/isolated-and-knockout.png
+    .. image:: images/isolated-and-knockout.webp
        :align: center
        :scale: 50%
 
@@ -345,6 +338,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
     .. code-block:: javascript
 
         device.beginGroup([0,0,100,100], mupdf.ColorSpace.DeviceRGB, true, true, "Multiply", 0.5);
+
 
 
 .. method:: endGroup()
@@ -431,10 +425,12 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
 
         device.renderFlags(["mask","startcap-undefined"], []);
 
-    |tor_todo| TypeError: device.renderFlags is not a function
+    .. TODO(tor): TypeError: device.renderFlags is not a function
 
 
 .. method:: setDefaultColorSpaces(defaults)
+
+    |mutool_tag_wasm_soon|
 
     Change the set of default colorspaces for the device. See the :ref:`DefaultColorSpaces<mutool_object_default_color_spaces>` object.
 
@@ -446,7 +442,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
     .. code-block:: javascript
 
 
-    |jamie_todo| Ask Tor, how to create a default color space object.
+    .. TODO(tor): Ask Tor, how to create a default color space object.
 
 
 .. method:: beginStructure(standard, raw, uid)
@@ -465,7 +461,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
 
         device.beginStructure("Document", "my_tag_name", 123);
 
-    |tor_todo| TypeError: device.beginStructure is not a function
+    .. TODO(tor): TypeError: device.beginStructure is not a function
 
 
 .. method:: endStructure()
@@ -481,7 +477,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
         device.endStructure();
 
 
-    |tor_todo| TypeError: device.endStructure is not a function
+    .. TODO(tor): TypeError: device.endStructure is not a function
 
 
 .. method:: beginMetatext(type, text)
@@ -501,7 +497,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
         device.beginMetatext("Title", "My title");
 
 
-    |tor_todo| WASM: TypeError: device.beginMetatext is not a function
+    .. TODO(tor): WASM: TypeError: device.beginMetatext is not a function
 
 
 .. method:: endMetatext()
@@ -517,7 +513,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
         device.endMetatext();
 
 
-    |tor_todo| WASM: TypeError: device.endMetatext is not a function
+    .. TODO(tor): WASM: TypeError: device.endMetatext is not a function
 
 
 .. method:: close()

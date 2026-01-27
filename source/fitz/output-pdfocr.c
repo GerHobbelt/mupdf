@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2024 Artifex Software, Inc.
+// Copyright (C) 2004-2025 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -518,7 +518,7 @@ typedef struct word_t
 	float bbox[4];
 	int dirn;
 	int len;
-	int chars[1];
+	int chars[FZ_FLEXIBLE_ARRAY];
 } word_t;
 
 typedef struct
@@ -697,7 +697,7 @@ queue_word(fz_context *ctx, char_callback_data_t *cb)
 	if (cb->word_len == 0)
 		return;
 
-	word = fz_malloc(ctx, sizeof(*word) + (cb->word_len-1)*sizeof(int));
+	word = fz_malloc_flexible(ctx, word_t, chars, cb->word_len);
 	word->next = NULL;
 	word->len = cb->word_len;
 	memcpy(word->bbox, cb->word_bbox, 4*sizeof(float));
@@ -852,7 +852,7 @@ do_skew_correct(fz_context *ctx, pdfocr_band_writer *writer)
 	fz_pixmap *deskewed;
 
 	if (writer->options.skew_correct == 1)
-		writer->options.skew_angle = fz_skew_detect(ctx, writer->skew_bitmap);
+		writer->options.skew_angle = fz_detect_skew(ctx, writer->skew_bitmap);
 
 	deskewed = fz_deskew_pixmap(ctx, writer->skew_bitmap, writer->options.skew_angle, writer->options.skew_border);
 

@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2004-2025 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -824,7 +824,7 @@ pdf_obj *
 pdf_add_substitute_font(fz_context *ctx, pdf_document *doc, fz_font *font)
 {
 	fz_throw(ctx, FZ_ERROR_UNSUPPORTED, "substitute font creation is not implemented yet (font name: %q)", font->name);
-	return NULL;
+	/* unreachable: */ return NULL;
 }
 
 #endif

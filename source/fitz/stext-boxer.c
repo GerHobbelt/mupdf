@@ -32,7 +32,7 @@ typedef struct boxer_s boxer_t;
 typedef struct {
 	int len;
 	int max;
-	fz_rect list[1];
+	fz_rect list[FZ_FLEXIBLE_ARRAY];
 } rectlist_t;
 
 struct boxer_s {
@@ -57,7 +57,7 @@ static int fz_rect_contains_rect(fz_rect a, fz_rect b)
 static rectlist_t *
 rectlist_create(fz_context *ctx, int max)
 {
-	rectlist_t *list = fz_malloc(ctx, sizeof(rectlist_t) + sizeof(fz_rect)*(max-1));
+	rectlist_t *list = fz_malloc_flexible(ctx, rectlist_t, list, max);
 
 	list->len = 0;
 	list->max = max;
@@ -146,13 +146,6 @@ push_if_intersect_suitable(rectlist_t *dst, const fz_rect *a, const fz_rect *b)
 	c = fz_intersect_rect(*a, *b);
 	/* If no intersection, nothing to push. */
 	if (!fz_is_valid_rect(c))
-		return;
-
-	/* If the intersect is too narrow or too tall, ignore it.
-	* We don't care about inter character spaces, for example.
-	* Arbitrary 6 point threshold. */
-#define THRESHOLD 6
-	if (c.x0 + THRESHOLD >= c.x1 || c.y0+THRESHOLD >= c.y1)
 		return;
 
 	rectlist_append(dst, &c);
@@ -497,7 +490,7 @@ new_stext_struct(fz_context *ctx, fz_stext_page *page, fz_stext_block *block, fz
 		raw = "";
 	z = strlen(raw);
 
-	str = fz_pool_alloc(ctx, page->pool, sizeof(*str) + z);
+	str = fz_pool_alloc(ctx, page->pool, offsetof(fz_stext_struct, raw) + z + 1);
 	str->first_block = NULL;
 	str->last_block = NULL;
 	str->standard = standard;
@@ -613,8 +606,8 @@ page_subset(fz_context *ctx, fz_stext_page *page, fz_stext_block **first_block, 
 		{
 			/* Need to look at the parts. */
 			fz_stext_line *line, *next_line;
-			fz_stext_block *newblock = NULL;
 
+			newblock = NULL;
 			for (line = block->u.t.first_line; line != NULL; line = next_line)
 			{
 				next_line = line->next;
@@ -828,6 +821,81 @@ line_isnt_all_spaces(fz_context *ctx, fz_stext_line *line)
 	return 0;
 }
 
+static void
+feed_line(fz_context *ctx, boxer_t *boxer, fz_stext_line *line)
+{
+	fz_stext_char *ch;
+
+	for (ch = line->first_char; ch != NULL; ch = ch->next)
+	{
+		fz_rect r = fz_empty_rect;
+
+		if (ch->c == ' ')
+			continue;
+
+		do
+		{
+			fz_rect bbox = fz_rect_from_quad(ch->quad);
+			float margin = ch->size/2;
+			bbox.x0 -= margin;
+			bbox.y0 -= margin;
+			bbox.x1 += margin;
+			bbox.y1 += margin;
+			r = fz_union_rect(r, bbox);
+			ch = ch->next;
+		}
+		while (ch != NULL && ch->c != ' ');
+		boxer_feed(ctx, boxer, &r);
+		if (ch == NULL)
+			break;
+	}
+}
+
+/* Internal, non-API function, shared with stext-table. */
+fz_rect
+fz_collate_small_vector_run(fz_stext_block **blockp)
+{
+	fz_stext_block *block = *blockp;
+	fz_stext_block *next;
+	fz_rect r = block->bbox;
+	int MAX_SIZE = 2;
+	int MAX_GAP = 2;
+
+	float w = r.x1 - r.x0;
+	float h = r.y1 - r.y0;
+
+	if (w < MAX_SIZE)
+	{
+		while ((next = block->next) != NULL &&
+			next->type == FZ_STEXT_BLOCK_VECTOR &&
+			next->bbox.x0 == r.x0 &&
+			next->bbox.x1 == r.x1 &&
+			((next->bbox.y1 > r.y1 && next->bbox.y0 <= r.y1 + MAX_GAP) ||
+			(next->bbox.y0 < r.y0 && next->bbox.y1 >= r.y0 - MAX_GAP)))
+		{
+			r = fz_union_rect(r, next->bbox);
+			block = next;
+		}
+	}
+	if (h < MAX_SIZE)
+	{
+		while ((next = block->next) != NULL &&
+			next->type == FZ_STEXT_BLOCK_VECTOR &&
+			next->bbox.y0 == r.y0 &&
+			next->bbox.y1 == r.y1 &&
+			((next->bbox.x1 > r.x1 && next->bbox.x0 <= r.x1 + MAX_GAP) ||
+			(next->bbox.x0 < r.x0 && next->bbox.x1 >= r.x0 - MAX_GAP)))
+		{
+			r = fz_union_rect(r, next->bbox);
+			block = next;
+		}
+	}
+
+	*blockp = block;
+
+	return r;
+}
+
 int fz_segment_stext_page(fz_context *ctx, fz_stext_page *page)
 {
 	boxer_t *boxer;
@@ -857,14 +925,15 @@ int fz_segment_stext_page(fz_context *ctx, fz_stext_page *page)
 			case FZ_STEXT_BLOCK_TEXT:
 				for (line = block->u.t.first_line; line != NULL; line = line->next)
 					if (line_isnt_all_spaces(ctx, line))
-						boxer_feed(ctx, boxer, &line->bbox);
+						feed_line(ctx, boxer, line);
 				break;
 			case FZ_STEXT_BLOCK_VECTOR:
 			{
 				/* Allow a 1 point margin around vectors to avoid hairline
 				 * cracks between supposedly abutting things. */
 				int VECTOR_MARGIN = 1;
-				fz_rect r = block->bbox;
+				fz_rect r = fz_collate_small_vector_run(&block);
+
 				r.x0 -= VECTOR_MARGIN;
 				r.y0 -= VECTOR_MARGIN;
 				r.x1 += VECTOR_MARGIN;

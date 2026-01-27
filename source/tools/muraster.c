@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2024 Artifex Software, Inc.
+// Copyright (C) 2004-2025 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -785,7 +785,6 @@ static int dodrawpage(fz_context *ctx, int pagenum, render_details *render)
 		bit = NULL;
 		if (render->num_workers > 0)
 		{
-			int band;
 			for (band = 0; band < fz_mini(render->num_workers, bands); band++)
 			{
 				worker_t *w = &workers[band];

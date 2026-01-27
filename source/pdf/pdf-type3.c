@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2022 Artifex Software, Inc.
+// Copyright (C) 2004-2025 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -26,9 +26,9 @@
 #if FZ_ENABLE_PDF
 
 static void
-pdf_run_glyph_func(fz_context *ctx, void *doc, void *rdb, fz_buffer *contents, fz_device *dev, fz_matrix ctm, void *gstate, fz_default_colorspaces *default_cs, int has_transparency)
+pdf_run_glyph_func(fz_context *ctx, void *doc, void *rdb, fz_buffer *contents, fz_device *dev, fz_matrix ctm, void *gstate, fz_default_colorspaces *default_cs, int has_transparency, void *fill_gstate, void *stroke_gstate)
 {
-	pdf_run_glyph(ctx, doc, (pdf_obj *)rdb, contents, dev, ctm, gstate, default_cs, has_transparency);
+	pdf_run_glyph(ctx, doc, (pdf_obj *)rdb, contents, dev, ctm, gstate, default_cs, has_transparency, fill_gstate, stroke_gstate);
 }
 
 static void
@@ -89,6 +89,7 @@ pdf_load_type3_font(fz_context *ctx, pdf_document *doc, pdf_obj *rdb, pdf_obj *d
 
 		font->ascender = bbox.y1;
 		font->descender = bbox.y0;
+		font->ascdesc_src = FZ_ASCDESC_FROM_BOUNDS;
 
 		/* Encoding */
 

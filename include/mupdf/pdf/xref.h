@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2022 Artifex Software, Inc.
+// Copyright (C) 2004-2025 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -107,6 +107,8 @@ struct pdf_xref
 	invalid after this call (other than the returned one).
 */
 pdf_xref_entry *pdf_cache_object(fz_context *ctx, pdf_document *doc, int num);
+
+int pdf_object_exists(fz_context *ctx, pdf_document *doc, int num);
 
 int pdf_count_objects(fz_context *ctx, pdf_document *doc);
 
@@ -226,9 +228,6 @@ void pdf_xref_ensure_local_object(fz_context *ctx, pdf_document *doc, int num);
 int pdf_obj_is_incremental(fz_context *ctx, pdf_obj *obj);
 
 void pdf_repair_xref(fz_context *ctx, pdf_document *doc);
-void pdf_repair_xref_base(fz_context *ctx, pdf_document *doc);
-void pdf_repair_obj_stms(fz_context *ctx, pdf_document *doc);
-void pdf_repair_trailer(fz_context *ctx, pdf_document *doc);
 
 /*
 	Ensure that the current populating xref has a single subsection

@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2024 Artifex Software, Inc.
+// Copyright (C) 2004-2025 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -23,6 +23,7 @@
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
 #include "pdf-annot-imp.h"
+#include "pdf-imp.h"
 
 #include "mupdf/assertions.h"
 #include <limits.h>
@@ -1652,7 +1653,17 @@ pdf_read_xref_sections(fz_context *ctx, pdf_document *doc, int64_t ofs, int read
 		size = pdf_dict_get_int(ctx, pdf_trailer(ctx, doc), PDF_NAME(Size));
 		xref_len = pdf_xref_len(ctx, doc);
 		if (xref_len > size)
-			fz_throw(ctx, FZ_ERROR_FORMAT, "incorrect number of xref entries in trailer, repairing");
+		{
+			if (xref_len == size+1)
+			{
+				/* Bug 708456 && Bug 708176. Allow for (sadly, quite common
+				 * PDF generators that can't get size right). */
+				fz_warn(ctx, "Trailer Size is off-by-one. Ignoring.");
+				pdf_dict_put_int(ctx, pdf_trailer(ctx, doc), PDF_NAME(Size), size+1);
+			}
+			else
+				fz_throw(ctx, FZ_ERROR_FORMAT, "incorrect number of xref entries in trailer, repairing");
+		}
 	}
 	fz_always(ctx)
 	{
@@ -1865,15 +1876,30 @@ pdf_load_linear(fz_context *ctx, pdf_document *doc)
 	}
 }
 
+static void
+id_and_password(fz_context *ctx, pdf_document *doc)
+{
+	pdf_obj *encrypt, *id;
+
+	pdf_prime_xref_index(ctx, doc);
+
+	encrypt = pdf_dict_get(ctx, pdf_trailer(ctx, doc), PDF_NAME(Encrypt));
+	id = pdf_dict_get(ctx, pdf_trailer(ctx, doc), PDF_NAME(ID));
+
+	if (pdf_is_dict(ctx, encrypt))
+		doc->crypt = pdf_new_crypt(ctx, encrypt, id);
+
+	/* Allow lazy clients to read encrypted files with a blank password */
+	(void)pdf_authenticate_password(ctx, doc, "");
+}
+
 /*
  * Initialize and load xref tables.
  * If password is not null, try to decrypt.
  */
-
 static void
 pdf_init_document(fz_context *ctx, pdf_document *doc)
 {
-	pdf_obj *encrypt, *id;
 	int repaired = 0;
 
 	fz_try(ctx)
@@ -1926,131 +1952,15 @@ pdf_init_document(fz_context *ctx, pdf_document *doc)
 		repaired = 1;
 	}
 
-	fz_try(ctx)
+	if (repaired)
 	{
-		if (repaired)
-		{
-			/* pdf_repair_xref_base may access xref_index, so reset it properly */
-			if (doc->xref_index)
-				memset(doc->xref_index, 0, sizeof(int) * doc->max_xref_len);
-			pdf_repair_xref_base(ctx, doc);
-			pdf_prime_xref_index(ctx, doc);
-		}
-
-		encrypt = pdf_dict_get(ctx, pdf_trailer(ctx, doc), PDF_NAME(Encrypt));
-		id = pdf_dict_get(ctx, pdf_trailer(ctx, doc), PDF_NAME(ID));
-		if (pdf_is_dict(ctx, encrypt))
-			doc->crypt = pdf_new_crypt(ctx, encrypt, id);
-
-		/* Allow lazy clients to read encrypted files with a blank password */
-		(void)pdf_authenticate_password(ctx, doc, "");
-
-		if (repaired)
-		{
-			pdf_repair_obj_stms(ctx, doc);
-			pdf_repair_trailer(ctx, doc);
-		}
+		/* pdf_repair_xref may access xref_index, so reset it properly */
+		if (doc->xref_index)
+			memset(doc->xref_index, 0, sizeof(int) * doc->max_xref_len);
+		pdf_repair_xref_aux(ctx, doc, id_and_password);
 	}
-	fz_catch(ctx)
-	{
-		fz_rethrow(ctx);
-	}
-}
-
-void pdf_repair_trailer(fz_context *ctx, pdf_document *doc)
-{
-	int hasroot, hasinfo;
-	pdf_obj *obj;
-	pdf_obj *dict = NULL;
-	int i;
-
-	int xref_len = pdf_xref_len(ctx, doc);
-
-	hasroot = (pdf_dict_get(ctx, pdf_trailer(ctx, doc), PDF_NAME(Root)) != NULL);
-	hasinfo = (pdf_dict_get(ctx, pdf_trailer(ctx, doc), PDF_NAME(Info)) != NULL);
-
-	fz_var(dict);
-
-	fz_try(ctx)
-	{
-		/* Scan from the end so we have a better chance of finding
-		 * newer objects if there are multiple instances of Info and
-		 * Root objects.
-		 */
-		for (i = xref_len - 1; i > 0 && (!hasinfo || !hasroot); --i)
-		{
-			pdf_xref_entry *entry = pdf_get_xref_entry_no_null(ctx, doc, i);
-			if (entry->type == 0 || entry->type == 'f')
-				continue;
-
-			fz_try(ctx)
-			{
-				dict = pdf_load_object(ctx, doc, i);
-			}
-			fz_catch(ctx)
-			{
-				fz_rethrow_if(ctx, FZ_ERROR_TRYLATER);
-				fz_rethrow_if(ctx, FZ_ERROR_SYSTEM);
-				fz_report_error(ctx);
-				fz_warn(ctx, "ignoring broken object (%d 0 R)", i);
-				continue;
-			}
-
-			if (!hasroot)
-			{
-				obj = pdf_dict_get(ctx, dict, PDF_NAME(Type));
-				if (obj == PDF_NAME(Catalog))
-				{
-					pdf_dict_put_indirect(ctx, pdf_trailer(ctx, doc), PDF_NAME(Root), i);
-					hasroot = 1;
-				}
-			}
-
-			if (!hasinfo)
-			{
-				if (pdf_is_string(ctx, pdf_dict_get(ctx, dict, PDF_NAME(Creator))) || pdf_is_string(ctx, pdf_dict_get(ctx, dict, PDF_NAME(Producer))))
-				{
-					pdf_dict_put_indirect(ctx, pdf_trailer(ctx, doc), PDF_NAME(Info), i);
-					hasinfo = 1;
-				}
-			}
-
-			pdf_drop_obj(ctx, dict);
-			dict = NULL;
-		}
-	}
-	fz_always(ctx)
-	{
-		/* ensure that strings are not used in their repaired, non-decrypted form */
-		if (doc->crypt)
-		{
-			pdf_crypt *tmp;
-			pdf_clear_xref(ctx, doc);
-
-			/* ensure that Encryption dictionary and ID are cached without decryption,
-			   otherwise a decrypted Encryption dictionary and ID may be used when saving
-			   the PDF causing it to be inconsistent (since strings/streams are encrypted
-			   with the actual encryption key, not the decrypted encryption key). */
-			tmp = doc->crypt;
-			doc->crypt = NULL;
-			fz_try(ctx)
-			{
-				(void) pdf_resolve_indirect(ctx, pdf_dict_get(ctx, pdf_trailer(ctx, doc), PDF_NAME(Encrypt)));
-				(void) pdf_resolve_indirect(ctx, pdf_dict_get(ctx, pdf_trailer(ctx, doc), PDF_NAME(ID)));
-			}
-			fz_always(ctx)
-				doc->crypt = tmp;
-			fz_catch(ctx)
-			{
-				fz_rethrow(ctx);
-			}
-		}
-	}
-	fz_catch(ctx)
-	{
-		pdf_drop_obj(ctx, dict);
-		fz_rethrow(ctx);
-	}
+	else
+		id_and_password(ctx, doc);
 }
 
 void
@@ -2292,7 +2202,7 @@ pdf_load_obj_stm(fz_context *ctx, pdf_document *doc, int num, pdf_lexbuf *buf, i
 					/* If we've just read a 'null' object, don't leave this as a NULL 'o' object,
 					 * as that will a) confuse the code that called us into thinking that nothing
 					 * was loaded, and b) cause the entire objstm to be reloaded every time that
-					 * object is acccessed. Instead, just mark it as an 'f'. */
+					 * object is accessed. Instead, just mark it as an 'f'. */
 					if (obj == NULL)
 						entry->type = 'f';
 					fz_drop_buffer(ctx, entry->stm_buf);
@@ -2584,6 +2494,18 @@ pdf_load_unencrypted_object(fz_context *ctx, pdf_document *doc, int num)
 	return NULL;
 }
 
+int
+pdf_object_exists(fz_context *ctx, pdf_document *doc, int num)
+{
+	pdf_xref_entry *x;
+	if (num <= 0 || num >= pdf_xref_len(ctx, doc))
+		return 0;
+	x = pdf_get_xref_entry(ctx, doc, num);
+	if (x && (x->type == 'n' || x->type == 'o'))
+		return 1;
+	return 0;
+}
+
 pdf_xref_entry *
 pdf_cache_object(fz_context *ctx, pdf_document *doc, int num)
 {
@@ -2645,12 +2567,7 @@ object_updated:
 		{
 perform_repair:
 			fz_try(ctx)
-			{
-				pdf_repair_xref_base(ctx, doc);
-				pdf_prime_xref_index(ctx, doc);
-				pdf_repair_obj_stms(ctx, doc);
-				pdf_repair_trailer(ctx, doc);
-			}
+				pdf_repair_xref(ctx, doc);
 			fz_catch(ctx)
 			{
 				fz_rethrow_if(ctx, FZ_ERROR_TRYLATER);
@@ -3246,6 +3163,10 @@ static void pdf_run_document_structure_imp(fz_context *ctx, fz_document *doc, fz
 {
 	pdf_run_document_structure(ctx, pdf_document_from_fz_document(ctx, doc), dev, cookie);
 }
+
+#ifndef NDEBUG
+void pdf_verify_name_table_sanity(void);
+#endif
 
 
 static pdf_document *
@@ -4054,7 +3975,7 @@ enum {
 typedef struct
 {
 	int num_obj;
-	int obj_changes[1];
+	int obj_changes[FZ_FLEXIBLE_ARRAY];
 } pdf_changes;
 
 static int
@@ -4947,7 +4868,7 @@ validate_locked_fields(fz_context *ctx, pdf_document *doc, int version, pdf_lock
 	int all_indirects = 1;
 
 	num_objs = doc->max_xref_len;
-	changes = Memento_label(fz_calloc(ctx, 1, sizeof(*changes) + sizeof(int)*(num_objs-1)), "pdf_changes");
+	changes = fz_malloc_flexible(ctx, pdf_changes, obj_changes, num_objs);
 	changes->num_obj = num_objs;
 
 	fz_try(ctx)
@@ -5305,7 +5226,7 @@ void pdf_drop_local_xref(fz_context *ctx, pdf_xref *xref)
 
 void pdf_drop_local_xref_and_resources(fz_context *ctx, pdf_document *doc)
 {
-	pdf_purge_local_font_resources(ctx, doc);
+	pdf_purge_local_resources(ctx, doc);
 	pdf_purge_locals_from_store(ctx, doc);
 	pdf_drop_local_xref(ctx, doc->local_xref);
 	doc->local_xref = NULL;
@@ -5443,10 +5364,7 @@ void pdf_minimize_document(fz_context *ctx, pdf_document *doc)
 
 void pdf_repair_xref(fz_context *ctx, pdf_document *doc)
 {
-	pdf_repair_xref_base(ctx, doc);
-	pdf_prime_xref_index(ctx, doc);
-	pdf_repair_obj_stms(ctx, doc);
-	pdf_repair_trailer(ctx, doc);
+	pdf_repair_xref_aux(ctx, doc, pdf_prime_xref_index);
 }
 
 #endif

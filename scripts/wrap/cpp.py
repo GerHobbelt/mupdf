@@ -521,7 +521,7 @@ def make_outparam_helper(
         #
         # We also value-initialise in case the underlying mupdf function also
         # reads the supplied value - i.e. treats it as an in-parm as well as an
-        # out-param; this is paricularly important for pointer out-params.
+        # out-param; this is particularly important for pointer out-params.
         #
         pointee = state.get_name_canonical( arg.cursor.type.get_pointee())
         generated.swig_cpp.write(f'        {declaration_text( pointee, arg.name)} = {{}};\n')
@@ -1111,6 +1111,18 @@ g_extra_declarations = textwrap.dedent(f'''
 
         /** SWIG-friendly wrapper for pdf_set_annot_callout_line(). */
         void pdf_set_annot_callout_line2(fz_context *ctx, pdf_annot *annot, std::vector<fz_point>& callout);
+
+        /** SWIG-friendly wrapper for fz_decode_barcode_from_display_list(),
+        avoiding leak of the returned string. */
+        std::string fz_decode_barcode_from_display_list2(fz_context *ctx, fz_barcode_type *type, fz_display_list *list, fz_rect subarea, int rotate);
+
+        /** SWIG-friendly wrapper for fz_decode_barcode_from_pixmap(), avoiding
+        leak of the returned string. */
+        std::string fz_decode_barcode_from_pixmap2(fz_context *ctx, fz_barcode_type *type, fz_pixmap *pix, int rotate);
+
+        /** SWIG-friendly wrapper for fz_decode_barcode_from_page(), avoiding
+        leak of the returned string. */
+        std::string fz_decode_barcode_from_page2(fz_context *ctx, fz_barcode_type *type, fz_page *page, fz_rect subarea, int rotate);
         ''')
 
 g_extra_definitions = textwrap.dedent(f'''
@@ -1350,6 +1362,30 @@ g_extra_definitions = textwrap.dedent(f'''
         void pdf_set_annot_callout_line2(fz_context *ctx, pdf_annot *annot, std::vector<fz_point>& callout)
         {{
             pdf_set_annot_callout_line(ctx, annot, &callout[0], callout.size());
+        }}
+
+        std::string fz_decode_barcode_from_display_list2(fz_context *ctx, fz_barcode_type *type, fz_display_list *list, fz_rect subarea, int rotate)
+        {{
+            char* ret = fz_decode_barcode_from_display_list(ctx, type, list, subarea, rotate);
+            std::string ret2 = ret;
+            fz_free(ctx, ret);
+            return ret2;
+        }}
+
+        std::string fz_decode_barcode_from_pixmap2(fz_context *ctx, fz_barcode_type *type, fz_pixmap *pix, int rotate)
+        {{
+            char* ret = fz_decode_barcode_from_pixmap(ctx, type, pix, rotate);
+            std::string ret2 = ret;
+            fz_free(ctx, ret);
+            return ret2;
+        }}
+
+        std::string fz_decode_barcode_from_page2(fz_context *ctx, fz_barcode_type *type, fz_page *page, fz_rect subarea, int rotate)
+        {{
+            char* ret = fz_decode_barcode_from_page(ctx, type, page, subarea, rotate);
+            std::string ret2 = ret;
+            fz_free(ctx, ret);
+            return ret2;
         }}
         ''')
 
@@ -2513,7 +2549,7 @@ def class_find_destructor_fns( tu, struct_name, base_name):
 
 def num_instances(refcheck_if, delta, name):
     '''
-    Retuns C++ code to embed in a wrapper class constructor/destructor function
+    Returns C++ code to embed in a wrapper class constructor/destructor function
     to update the class static `s_num_instances` variable.
     '''
     ret = ''
@@ -3719,7 +3755,7 @@ def class_accessors(
                     decl = declaration_text( cursor.type, fn_args)
 
         # todo: if return type is uint8_t or int8_t, maybe return as <int>
-        # so SWIG doesn't think it is a string? This would fix errors witht
+        # so SWIG doesn't think it is a string? This would fix errors with
         # fz_image::n and fz_image::bpc.
         out_h.write( f'    FZ_FUNCTION {decl % cursor.spelling};\n')
         out_cpp.write( 'FZ_FUNCTION %s\n' % (decl % ( f'{classname}::{cursor.spelling}')))
@@ -4453,7 +4489,7 @@ def class_wrapper(
                     duplicate_type=duplicate_type,
                     )
         except Clang6FnArgsBug as e:
-            jlib.log( 'Unable to wrap function {fnname} becase: {e}')
+            jlib.log( 'Unable to wrap function {fnname} because: {e}')
         else:
             out_h.write( temp_out_h.getvalue())
             out_cpp.write( temp_out_cpp.getvalue())
@@ -4530,7 +4566,7 @@ def class_wrapper(
             #log( 'auto-detected fn already in {struct_name} method_wrappers: {fnname}')
             # Omit this function, because there is an extra method with the
             # same name. (We could probably include both as they will generally
-            # have different args so overloading will destinguish them, but
+            # have different args so overloading will distinguish them, but
             # extra methods are usually defined to be used in preference.)
             pass
         elif fnname.startswith( 'fz_new_draw_device'):
@@ -4888,7 +4924,7 @@ def refcount_check_code( out, refcheck_if):
             If <allow_int_this> is true, we allow _this->m_internal to be
             an invalid pointer less than 4096, in which case we don't try
             to check refs. This is used for pdf_obj because in Python the
-            enums PDF_ENUM_NAME_* are converted to mupdf.PdfObj's containg
+            enums PDF_ENUM_NAME_* are converted to mupdf.PdfObj's contain
             .m_internal's which are the enum values cast to (for_pdf_obj*), so
             that they can be used directly.
 
@@ -5091,7 +5127,7 @@ def cpp_source(
                 assert not self.closed, f'File.write() called after .close(). {self.filename=}'
                 if fileline:
                     # Generate #line <line> "<filename>" for our caller's
-                    # location. This makes any compiler warnings refer to thei
+                    # location. This makes any compiler warnings refer to their
                     # python code rather than the generated C++ code.
                     tb = traceback.extract_stack( None)
                     filename, line, function, source = tb[0]

@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2024 Artifex Software, Inc.
+// Copyright (C) 2004-2025 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -153,6 +153,9 @@ static struct tool_spec {
 	{ {.fa = cmapdump_main }, "cmapdump", "dump CMap resource as C source file" },
 #endif
 	{ {.fa = pdfaudit_main }, "audit", "Produce usage stats from PDF files" },
+#endif
+#if FZ_ENABLE_BARCODE
+	{ { .fa = mubar_main }, "barcode", "encode/decode barcodes" },
 #endif
 #if defined(MUTOOL_EX)
 	{ {.fa = mupdf_base64_test_main }, "base64_test", "muPDF base64 fringe case tests" },

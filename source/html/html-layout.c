@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2024 Artifex Software, Inc.
+// Copyright (C) 2004-2025 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -66,7 +66,7 @@
 	Our implementation is a 'simple' recursive descent of the structure. We know the width of the area we are laying out into at each point,
 	and we know the top/left coords of the enclosing block. So we start with a well defined left/top point, offset that for margins/borders/padding
 	etc, calculate the width from the enclosing width (via the CSS). We set the height of the content to be zero to start with, and after laying
-	out each of (any) child elements, we ensure that the base of our box is always large enough to enclose the childs boxes with the appropriate
+	out each of (any) child elements, we ensure that the base of our box is always large enough to enclose the child's boxes with the appropriate
 	padding.
 
 	VERTICAL MARGIN COLLAPSE:
@@ -204,7 +204,7 @@ destroy_hb_shaper_data(fz_context *ctx, void *handle)
 }
 
 static const hb_feature_t small_caps_feature[1] = {
-	{ HB_TAG('s','m','c','p'), 1, 0, -1 }
+	{ HB_TAG('s','m','c','p'), 1, 0, (unsigned int)-1 }
 };
 
 static int walk_string(string_walker *walker)
@@ -661,11 +661,11 @@ static void layout_flow(fz_context *ctx, layout_data *ld, fz_html_box *box, fz_h
 
 #ifdef DEBUG_LAYOUT_RESTARTING
 		/* Output us some crufty debug */
-		if(restart->start_flow == NULL)
+		if (restart->start_flow == NULL)
 			printf("<restart>");
 		for (node = box->u.flow.head; node; node = node->next)
 		{
-			if(restart->start_flow == node)
+			if (restart->start_flow == node)
 				printf("<restart>");
 			switch (node->type)
 			{
@@ -1105,7 +1105,7 @@ static void layout_table_row(fz_context *ctx, layout_data *ld, fz_html_box *row,
 
 static void layout_table(fz_context *ctx, layout_data *ld, fz_html_box *box, fz_html_box *top)
 {
-	fz_html_box *row, *cell;
+	fz_html_box *row;
 	int col, ncol = 0;
 	float min_tabw, max_tabw;
 	struct column_width *colw;
@@ -1163,6 +1163,7 @@ static void layout_table(fz_context *ctx, layout_data *ld, fz_html_box *box, fz_
 	/* Find the maximum number of columns. (Count 'col' for each row, biggest one gives ncol). */
 	for (row = box->down; row; row = row->next)
 	{
+		fz_html_box *cell;
 		col = 0;
 		for (cell = row->down; cell; cell = cell->next)
 			++col;
@@ -1433,7 +1434,7 @@ static void layout_block(fz_context *ctx, layout_data *ld, fz_html_box *box, fz_
 				layout_table(ctx, ld, child, box);
 
 			/* Unless we're still skipping, the base of our box must now be at least as
-			 * far down as the child, plus the childs spacing. */
+			 * far down as the child, plus the child's spacing. */
 			if (!restart || restart->start == NULL)
 			{
 				box->s.layout.b = advance_for_spacing(ctx, ld,
@@ -1847,10 +1848,12 @@ static int draw_flow_box(fz_context *ctx, fz_html_box *box, float page_top, floa
 	int stroking, prev_stroking = 0;
 	int restartable_ended = 0;
 	fz_stroke_state *ss = NULL;
+	fz_stroke_state *line_ss = NULL;
 
 	fz_var(text);
 	fz_var(line);
 	fz_var(ss);
+	fz_var(line_ss);
 
 	/* FIXME: HB_DIRECTION_TTB? */
 
@@ -1907,13 +1910,18 @@ static int draw_flow_box(fz_context *ctx, fz_html_box *box, float page_top, floa
 
 				em = node->box->s.layout.em;
 
-				line_width = fz_from_css_number(style->text_stroke_width, 1, 1, 1);
+				line_width = fz_from_css_number(style->text_stroke_width, em, em, 0);
 				filling = style->text_fill_color.a != 0;
 				stroking = style->text_stroke_color.a != 0;
 				if (stroking)
 				{
-					if(ss == NULL)
+					if (ss == NULL)
 						ss = fz_new_stroke_state(ctx);
+				}
+				if (line)
+				{
+					if (line_ss == NULL)
+						line_ss = fz_new_stroke_state(ctx);
 				}
 
 				if (	/* If we've changed whether we're filling... */
@@ -1953,7 +1961,7 @@ static int draw_flow_box(fz_context *ctx, fz_html_box *box, float page_top, floa
 					if (line)
 					{
 						unpacked_color color = unpack_color(prev_color);
-						fz_stroke_path(ctx, dev, line, &fz_default_stroke_state, ctm, fz_device_rgb(ctx), color.rgb, color.a, fz_default_color_params);
+						fz_stroke_path(ctx, dev, line, line_ss, ctm, fz_device_rgb(ctx), color.rgb, color.a, fz_default_color_params);
 						fz_drop_path(ctx, line);
 						line = NULL;
 					}
@@ -1963,7 +1971,11 @@ static int draw_flow_box(fz_context *ctx, fz_html_box *box, float page_top, floa
 				if (style->text_decoration > 0)
 				{
 					if (!line)
+					{
 						line = fz_new_path(ctx);
+						if (line_ss == NULL)
+							line_ss = fz_new_stroke_state(ctx);
+					}
 					if (style->text_decoration & TD_UNDERLINE)
 					{
 						fz_moveto(ctx, line, node->x, node->y + 1.5f - page_top);
@@ -2099,7 +2111,7 @@ static int draw_flow_box(fz_context *ctx, fz_html_box *box, float page_top, floa
 		if (line)
 		{
 			unpacked_color color = unpack_color(prev_color);
-			fz_stroke_path(ctx, dev, line, &fz_default_stroke_state, ctm, fz_device_rgb(ctx), color.rgb, color.a, fz_default_color_params);
+			fz_stroke_path(ctx, dev, line, line_ss, ctm, fz_device_rgb(ctx), color.rgb, color.a, fz_default_color_params);
 			fz_drop_path(ctx, line);
 			line = NULL;
 		}
@@ -2109,6 +2121,7 @@ static int draw_flow_box(fz_context *ctx, fz_html_box *box, float page_top, floa
 		fz_drop_text(ctx, text);
 		fz_drop_path(ctx, line);
 		fz_drop_stroke_state(ctx, ss);
+		fz_drop_stroke_state(ctx, line_ss);
 	}
 	fz_catch(ctx)
 		fz_rethrow(ctx);

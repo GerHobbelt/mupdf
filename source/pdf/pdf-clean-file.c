@@ -46,13 +46,13 @@ string_in_names_list(fz_context *ctx, pdf_obj *p, pdf_obj *names_list)
  * Recreate page tree to only retain specified pages.
  */
 
-static void retainpage(fz_context *ctx, pdf_document *doc, pdf_obj *parent, pdf_obj *kids, int page, pdf_obj *structparents, pdf_obj *ostructparents)
+static void retainpage(fz_context *ctx, pdf_document *doc, pdf_obj *parentobj, pdf_obj *kids, int page, pdf_obj *structparents, pdf_obj *ostructparents)
 {
 	pdf_obj *pageref = pdf_lookup_page_obj(ctx, doc, page);
 
 	pdf_flatten_inheritable_page_items(ctx, pageref);
 
-	pdf_dict_put(ctx, pageref, PDF_NAME(Parent), parent);
+	pdf_dict_put(ctx, pageref, PDF_NAME(Parent), parentobj);
 
 	/* Store page object in new kids array */
 	pdf_array_push(ctx, kids, pageref);
@@ -159,14 +159,17 @@ static int strip_stale_annot_refs(fz_context *ctx, pdf_obj *field, int page_coun
 	}
 }
 
-static int strip_outlines(fz_context *ctx, pdf_document *doc, pdf_obj *outlines, int page_count, int *page_object_nums, pdf_obj *names_list);
+static int strip_outlines(fz_context *ctx, pdf_document *doc, pdf_obj *outlines, int page_count, int *page_object_nums, pdf_obj *names_list, pdf_mark_bits *marks);
 
-static int strip_outline(fz_context *ctx, pdf_document *doc, pdf_obj *outlines, int page_count, int *page_object_nums, pdf_obj *names_list, pdf_obj **pfirst, pdf_obj **plast)
+static int strip_outline(fz_context *ctx, pdf_document *doc, pdf_obj *outlines, int page_count, int *page_object_nums, pdf_obj *names_list, pdf_obj **pfirst, pdf_obj **plast, pdf_mark_bits *marks)
 {
 	pdf_obj *prev = NULL;
 	pdf_obj *first = NULL;
 	pdf_obj *current;
 	int count = 0;
+
+	if (pdf_mark_bits_set(ctx, marks, outlines))
+		fz_throw(ctx, FZ_ERROR_FORMAT, "Cycle detected in outlines");
 
 	for (current = outlines; current != NULL; )
 	{
@@ -174,7 +177,7 @@ static int strip_outline(fz_context *ctx, pdf_document *doc, pdf_obj *outlines, 
 
 		/* Strip any children to start with. This takes care of
 		 * First/Last/Count for us. */
-		nc = strip_outlines(ctx, doc, current, page_count, page_object_nums, names_list);
+		nc = strip_outlines(ctx, doc, current, page_count, page_object_nums, names_list, marks);
 
 		if (!dest_is_valid(ctx, current, page_count, page_object_nums, names_list))
 		{
@@ -225,7 +228,7 @@ static int strip_outline(fz_context *ctx, pdf_document *doc, pdf_obj *outlines, 
 	return count;
 }
 
-static int strip_outlines(fz_context *ctx, pdf_document *doc, pdf_obj *outlines, int page_count, int *page_object_nums, pdf_obj *names_list)
+static int strip_outlines(fz_context *ctx, pdf_document *doc, pdf_obj *outlines, int page_count, int *page_object_nums, pdf_obj *names_list, pdf_mark_bits *marks)
 {
 	int nc;
 	pdf_obj *first;
@@ -234,11 +237,14 @@ static int strip_outlines(fz_context *ctx, pdf_document *doc, pdf_obj *outlines,
 	if (!pdf_is_dict(ctx, outlines))
 		return 0;
 
+	if (pdf_mark_bits_set(ctx, marks, outlines))
+		fz_throw(ctx, FZ_ERROR_FORMAT, "Cycle detected in outlines");
+
 	first = pdf_dict_get(ctx, outlines, PDF_NAME(First));
 	if (!pdf_is_dict(ctx, first))
 		nc = 0;
 	else
-		nc = strip_outline(ctx, doc, first, page_count, page_object_nums, names_list, &first, &last);
+		nc = strip_outline(ctx, doc, first, page_count, page_object_nums, names_list, &first, &last, marks);
 
 	if (nc == 0)
 	{
@@ -270,6 +276,7 @@ static void pdf_rearrange_pages_imp(fz_context *ctx, pdf_document *doc, int coun
 	pdf_obj *structtreeroot = NULL;
 	pdf_obj *ostructparents = NULL;
 	pdf_obj *structparents = NULL;
+	pdf_mark_bits *marks = NULL;
 
 	/* Keep only pages/type and (reduced) dest entries to avoid
 	 * references to unretained pages */
@@ -291,6 +298,7 @@ static void pdf_rearrange_pages_imp(fz_context *ctx, pdf_document *doc, int coun
 	fz_var(allfields);
 	fz_var(page_object_nums);
 	fz_var(kids);
+	fz_var(marks);
 
 	fz_try(ctx)
 	{
@@ -428,13 +436,15 @@ static void pdf_rearrange_pages_imp(fz_context *ctx, pdf_document *doc, int coun
 				pdf_dict_del(ctx, f, PDF_NAME(A));
 		}
 
-		if (strip_outlines(ctx, doc, outlines, pagecount, page_object_nums, names_list) == 0)
+		marks = pdf_new_mark_bits(ctx, doc);
+		if (strip_outlines(ctx, doc, outlines, pagecount, page_object_nums, names_list, marks) == 0)
 		{
 			pdf_dict_del(ctx, root, PDF_NAME(Outlines));
 		}
 	}
 	fz_always(ctx)
 	{
+		pdf_drop_mark_bits(ctx, marks);
 		fz_free(ctx, page_object_nums);
 		pdf_drop_obj(ctx, allfields);
 		pdf_drop_obj(ctx, root);

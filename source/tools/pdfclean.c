@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2024 Artifex Software, Inc.
+// Copyright (C) 2004-2025 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -54,7 +54,7 @@ static int usage(void)
 		"\t-gg\tin addition to -g compact xref table\n"
 		"\t-ggg\tin addition to -gg merge duplicate objects\n"
 		"\t-gggg\tin addition to -ggg check streams for duplication\n"
-		"\t-l\tlinearize PDF\n"
+		"\t-l\tlinearize PDF (no longer supported!)\n"
 		"\t-D\tsave file without encryption\n"
 		"\t-E -\tsave file with new encryption (rc4-40, rc4-128, aes-128, or aes-256)\n"
 		"\t-O -\towner password (only if encrypting)\n"
@@ -68,7 +68,9 @@ static int usage(void)
 		"\t-i\tcompress image streams\n"
 		"\t-c\tclean content streams\n"
 		"\t-s\tsanitize content streams\n"
-		"\t-t\t'tighten' objects\n"
+		"\t-t\tcompact object syntax\n"
+		"\t-tt\tindented object syntax\n"
+		"\t-L\twrite object labels\n"
 		"\t-A\tcreate appearance streams for annotations\n"
 		"\t-AA\trecreate appearance streams for annotations\n"
 		"\t-m\tpreserve metadata\n"
@@ -99,7 +101,7 @@ int pdfclean_main(int argc, const char** argv)
 	const char *outfile = "out.pdf";
 	const char *password = "";
 	int c;
-	int tighten = 0;
+	int pretty = -1;
 	pdf_clean_options opts = { 0 };
 	int errors = 0;
 	int structure = 0;
@@ -142,7 +144,7 @@ int pdfclean_main(int argc, const char** argv)
 	opts.write = pdf_default_write_options;
 	opts.write.dont_regenerate_id = 1;
 
-	while ((c = fz_getopt_long(argc, argv, "ade:fgilmp:stczDAE:O:U:P:SZ", longopts)) != -1)
+	while ((c = fz_getopt_long(argc, argv, "ade:fgilmp:stczDAE:LO:U:P:SZ", longopts)) != -1)
 	{
 		switch (c)
 		{
@@ -158,8 +160,9 @@ int pdfclean_main(int argc, const char** argv)
 		case 'l': opts.write.do_linear += 1; break;
 		case 'c': opts.write.do_clean += 1; break;
 		case 's': opts.write.do_sanitize += 1; break;
-		case 't': tighten = 1; break;
+		case 't': pretty = (pretty < 0) ? 0 : 1; break;
 		case 'A': opts.write.do_appearance += 1; break;
+		case 'L': opts.write.do_labels = 1; break;
 
 		case 'D': opts.write.do_encrypt = PDF_ENCRYPT_NONE; break;
 		case 'E': opts.write.do_encrypt = encrypt_method_from_string(fz_optarg); break;
@@ -260,6 +263,15 @@ int pdfclean_main(int argc, const char** argv)
 	if ((opts.write.do_ascii || opts.write.do_decompress) && !opts.write.do_compress)
 		opts.write.do_pretty = !tighten;
 
+	if (pretty < 0)
+	{
+		if ((opts.write.do_ascii || opts.write.do_decompress) && !opts.write.do_compress)
+			pretty = 1;
+		else
+			pretty = 0;
+	}
+	opts.write.do_pretty = pretty;
+
 	if (argc == fz_optind)
 	{
 		return usage();
@@ -297,6 +309,10 @@ int pdfclean_main(int argc, const char** argv)
 #ifdef HAVE_JBIG2ENC
 	fz_register_jbig2_encoder(ctx, fz_jbig2enc_encoder(ctx));
 #endif
+
+	if (opts.write.do_compress > 1) {
+		fz_warn(ctx, "Brotli compression is currently non-standard and experimental. Files may not be readable in other software.");
+	}
 
 	fz_try(ctx)
 	{

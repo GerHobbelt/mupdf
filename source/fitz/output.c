@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2024 Artifex Software, Inc.
+// Copyright (C) 2004-2025 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -1503,7 +1503,7 @@ fz_write_base64_buffer(fz_context *ctx, fz_output *out, fz_buffer *buf, int newl
 void
 fz_append_base64(fz_context *ctx, fz_buffer *out, const unsigned char *data, size_t size, int newline)
 {
-	static const char set[64] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+	static const char set[65] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 	size_t i;
 	for (i = 0; i + 3 <= size; i += 3)
 	{

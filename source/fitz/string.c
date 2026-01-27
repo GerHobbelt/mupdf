@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2024 Artifex Software, Inc.
+// Copyright (C) 2004-2025 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -845,7 +845,7 @@ fz_decode_uri(fz_context *ctx, const char *s)
 		{
 			int a = tohex(*s++);
 			int b = tohex(*s++);
-			int c = a << 4 | b;
+			c = a << 4 | b;
 			if (strchr(URIRESERVED "#", c)) {
 				*p++ = '%';
 				*p++ = HEX[a];
@@ -1355,7 +1355,7 @@ fz_chartorune(int *rune, const char *str, size_t n)
 	if (n < 1)
 		goto bad;
 	c = *(const unsigned char*)str;
-	if(c < Tx) {
+	if (c < Tx) {
 		*rune = c;
 		return 1;
 	}
@@ -1367,13 +1367,19 @@ fz_chartorune(int *rune, const char *str, size_t n)
 	if (n < 2)
 		goto bad;
 	c1 = *(const unsigned char*)(str+1) ^ Tx;
-	if(c1 & Testx)
+	if (c1 & Testx)
 		goto bad;
-	if(c < T3) {
-		if(c < T2)
+	if (c < T3) {
+		if (c < T2) {
+			/* overlong null character: {0xC0 0x80} */
+			if (c1 == 0) {
+				*rune = 0;
+				return 2;
+			}
 			goto bad;
+		}
 		l = ((c << Bitx) | c1) & Rune2;
-		if(l <= Rune1)
+		if (l <= Rune1)
 			goto bad;
 		*rune = l;
 		return 2;
@@ -1386,12 +1392,20 @@ fz_chartorune(int *rune, const char *str, size_t n)
 	if (n < 3)
 		goto bad;
 	c2 = *(const unsigned char*)(str+2) ^ Tx;
-	if(c2 & Testx)
+	if (c2 & Testx)
 		goto bad;
-	if(c < T4) {
+	if (c < T4) {
 		l = ((((c << Bitx) | c1) << Bitx) | c2) & Rune3;
 		if(l <= Rune2)
 			goto bad;
+		// it's illegal to encode UTF16 surrogates in UTF8: that would be a kind of double-encode!
+		if (l >= 0xD800) {
+			if (l < 0xE000)
+				goto bad;
+			// also reject the 0xFFFE BOM and 0xFFFF codepoint.
+			if (l > 0xFFFD)
+				goto bad;
+		}
 		*rune = l;
 		return 3;
 	}
@@ -1408,6 +1422,9 @@ fz_chartorune(int *rune, const char *str, size_t n)
 	if (c < T5) {
 		l = ((((((c << Bitx) | c1) << Bitx) | c2) << Bitx) | c3) & Rune4;
 		if (l <= Rune3)
+			goto bad;
+		// any codepoint above 0x10FFFF is outside the Unicode range and thus illegal:
+		if (l >= 0x10FFFF)
 			goto bad;
 		*rune = l;
 		return 4;
@@ -1430,6 +1447,13 @@ fz_runetochar(char *str, int rune)
 {
 	/* Runes are signed, so convert to unsigned for range check. */
 	unsigned int c = (unsigned int)rune;
+
+	/* overlong null character */
+	if (c == 0) {
+		((unsigned char *)str)[0] = 0xc0;
+		((unsigned char *)str)[1] = 0x80;
+		return 2;
+	}
 
 	/*
 	 * one character sequence
@@ -1534,7 +1558,6 @@ fz_utflen(const char *s)
 			s += fz_chartorune_unsafe(&rune, s);
 		n++;
 	}
-	return 0;
 }
 
 float fz_atof(const char *s)
@@ -1691,7 +1714,7 @@ static char *twoway_memmem(const unsigned char *h, const unsigned char *z, const
 		BITOP(byteset, n[i], |=), shift[n[i]] = i+1;
 
 	/* Compute maximal suffix */
-	ip = -1; jp = 0; k = p = 1;
+	ip = (size_t)-1; jp = 0; k = p = 1;
 	while (jp+k<l) {
 		if (n[ip+k] == n[jp+k]) {
 			if (k == p) {
@@ -1711,7 +1734,7 @@ static char *twoway_memmem(const unsigned char *h, const unsigned char *z, const
 	p0 = p;
 
 	/* And with the opposite comparison */
-	ip = -1; jp = 0; k = p = 1;
+	ip = (size_t)-1; jp = 0; k = p = 1;
 	while (jp+k<l) {
 		if (n[ip+k] == n[jp+k]) {
 			if (k == p) {
@@ -1877,7 +1900,7 @@ fz_strstr(const char *haystack, const char *needle)
 			matchlen++;
 		else
 		{
-			haystack -= matchlen - 1;
+			haystack -= matchlen;
 			matchlen = 0;
 		}
 	}
@@ -1914,4 +1937,43 @@ fz_strstrcase(const char *haystack, const char *needle)
 	}
 
 	return haystack - matchlen;
+}
+
+static inline int my_isdigit(int c) {
+	return c >= '0' && c <= '9';
+}
+
+int
+fz_strverscmp(const char *l0, const char *r0)
+{
+	// This strverscmp implementation is borrowed from musl.
+	// Copyright © 2005-2020 Rich Felker, et al.
+	// Standard MIT license.
+	const unsigned char *l = (const void *)l0;
+	const unsigned char *r = (const void *)r0;
+	size_t i, dp, j;
+	int z = 1;
+
+	/* Find maximal matching prefix and track its maximal digit
+	 * suffix and whether those digits are all zeros. */
+	for (dp=i=0; l[i]==r[i]; i++) {
+		int c = l[i];
+		if (!c) return 0;
+		if (!my_isdigit(c)) dp=i+1, z=1;
+		else if (c!='0') z=0;
+	}
+
+	if (l[dp]!='0' && r[dp]!='0') {
+		/* If we're not looking at a digit sequence that began
+		 * with a zero, longest digit string is greater. */
+		for (j=i; my_isdigit(l[j]); j++)
+			if (!my_isdigit(r[j])) return 1;
+		if (my_isdigit(r[j])) return -1;
+	} else if (z && dp<i && (my_isdigit(l[i]) || my_isdigit(r[i]))) {
+		/* Otherwise, if common prefix of digit sequence is
+		 * all zeros, digits order less than non-digits. */
+		return (unsigned char)(l[i]-'0') - (unsigned char)(r[i]-'0');
+	}
+
+	return l[i] - r[i];
 }

@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2024 Artifex Software, Inc.
+// Copyright (C) 2004-2025 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -107,7 +107,7 @@ void fz_pcl_preset(fz_context *ctx, fz_pcl_options *opts, const char *preset);
 fz_pcl_options *fz_parse_pcl_options(fz_context *ctx, fz_pcl_options *opts, const char *args);
 
 /**
-	Create a new band writer, outputing monochrome pcl.
+	Create a new band writer, outputting monochrome pcl.
 */
 fz_band_writer *fz_new_mono_pcl_band_writer(fz_context *ctx, fz_output *out, const fz_pcl_options *options);
 
@@ -122,7 +122,7 @@ void fz_write_bitmap_as_pcl(fz_context *ctx, fz_output *out, const fz_bitmap *bi
 void fz_save_bitmap_as_pcl(fz_context *ctx, fz_bitmap *bitmap, char *filename, int append, const fz_pcl_options *pcl);
 
 /**
-	Create a new band writer, outputing color pcl.
+	Create a new band writer, outputting color pcl.
 */
 fz_band_writer *fz_new_color_pcl_band_writer(fz_context *ctx, fz_output *out, const fz_pcl_options *options);
 
@@ -160,7 +160,7 @@ typedef struct
 fz_pclm_options *fz_parse_pclm_options(fz_context *ctx, fz_pclm_options *opts, const char *args);
 
 /**
-	Create a new band writer, outputing pclm
+	Create a new band writer, outputting pclm
 */
 fz_band_writer *fz_new_pclm_band_writer(fz_context *ctx, fz_output *out, const fz_pclm_options *options);
 
@@ -172,7 +172,7 @@ void fz_write_pixmap_as_pclm(fz_context *ctx, fz_output *out, const fz_pixmap *p
 /**
 	Save a (Greyscale or RGB) pixmap as pclm.
 */
-void fz_save_pixmap_as_pclm(fz_context *ctx, fz_pixmap *pixmap, char *filename, int append, const fz_pclm_options *options);
+void fz_save_pixmap_as_pclm(fz_context *ctx, fz_pixmap *pixmap, const char *filename, int append, const fz_pclm_options *options);
 
 #if FZ_ENABLE_OCR_OUTPUT
 
@@ -209,7 +209,7 @@ typedef struct
 fz_pdfocr_options *fz_parse_pdfocr_options(fz_context *ctx, fz_pdfocr_options *opts, const char *args);
 
 /**
-	Create a new band writer, outputing pdfocr.
+	Create a new band writer, outputting pdfocr.
 
 	Ownership of output stays with the caller, the band writer
 	borrows the reference. The caller must keep the output around
@@ -283,6 +283,8 @@ fz_band_writer *fz_new_png_band_writer(fz_context *ctx, fz_output *out, int comp
 	Ownership of the buffer is returned.
 */
 fz_buffer *fz_new_buffer_from_image_as_png(fz_context *ctx, const fz_image *image, fz_color_params color_params);
+fz_buffer *fz_new_buffer_from_image_as_pbm(fz_context *ctx, const fz_image *image, fz_color_params color_params);
+fz_buffer *fz_new_buffer_from_image_as_pkm(fz_context *ctx, const fz_image *image, fz_color_params color_params);
 fz_buffer *fz_new_buffer_from_image_as_pnm(fz_context *ctx, const fz_image *image, fz_color_params color_params);
 fz_buffer *fz_new_buffer_from_image_as_pam(fz_context *ctx, const fz_image *image, fz_color_params color_params);
 fz_buffer *fz_new_buffer_from_image_as_psd(fz_context *ctx, const fz_image *image, fz_color_params color_params);
@@ -295,6 +297,8 @@ fz_buffer *fz_new_buffer_from_image_as_jpx(fz_context *ctx, const fz_image *imag
 	Ownership of the buffer is returned.
 */
 fz_buffer *fz_new_buffer_from_pixmap_as_png(fz_context *ctx, const fz_pixmap *pixmap, fz_color_params color_params);
+fz_buffer *fz_new_buffer_from_pixmap_as_pbm(fz_context *ctx, const fz_pixmap *pixmap, fz_color_params color_params);
+fz_buffer *fz_new_buffer_from_pixmap_as_pkm(fz_context *ctx, const fz_pixmap *pixmap, fz_color_params color_params);
 fz_buffer *fz_new_buffer_from_pixmap_as_pnm(fz_context *ctx, const fz_pixmap *pixmap, fz_color_params color_params);
 fz_buffer *fz_new_buffer_from_pixmap_as_pam(fz_context *ctx, const fz_pixmap *pixmap, fz_color_params color_params);
 fz_buffer *fz_new_buffer_from_pixmap_as_psd(fz_context *ctx, const fz_pixmap *pix, fz_color_params color_params);
@@ -381,7 +385,6 @@ fz_buffer *fz_new_buffer_from_image_as_tiff(fz_context *ctx, const fz_image *ima
 fz_buffer *fz_new_buffer_from_pixmap_as_tiff(fz_context *ctx, const fz_pixmap *pixmap, fz_color_params color_params);
 
 
-
 /**
 		Save a (Greyscale or RGB) pixmap as a MURAW.
 */
@@ -439,7 +442,7 @@ void fz_save_pixmap_as_pnm(fz_context *ctx, const fz_pixmap *pixmap, const char 
 void fz_write_pixmap_as_pnm(fz_context *ctx, fz_output *out, const fz_pixmap *pixmap);
 
 /**
-	Create a band writer targetting pnm (greyscale or rgb, no
+	Create a band writer targeting pnm (greyscale or rgb, no
 	alpha).
 */
 fz_band_writer *fz_new_pnm_band_writer(fz_context *ctx, fz_output *out);
@@ -457,7 +460,7 @@ void fz_save_pixmap_as_pam(fz_context *ctx, const fz_pixmap *pixmap, const char 
 void fz_write_pixmap_as_pam(fz_context *ctx, fz_output *out, const fz_pixmap *pixmap);
 
 /**
-	Create a band writer targetting pnm (greyscale, rgb or cmyk,
+	Create a band writer targeting pnm (greyscale, rgb or cmyk,
 	with or without alpha).
 */
 fz_band_writer *fz_new_pam_band_writer(fz_context *ctx, fz_output *out);
@@ -473,7 +476,7 @@ void fz_save_bitmap_as_pbm(fz_context *ctx, const fz_bitmap *bitmap, const char 
 void fz_write_bitmap_as_pbm(fz_context *ctx, fz_output *out, const fz_bitmap *bitmap);
 
 /**
-	Create a new band writer, targetting pbm.
+	Create a new band writer, targeting pbm.
 */
 fz_band_writer *fz_new_pbm_band_writer(fz_context *ctx, fz_output *out);
 

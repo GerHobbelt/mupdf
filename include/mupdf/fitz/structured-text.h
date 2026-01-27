@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2024 Artifex Software, Inc.
+// Copyright (C) 2004-2025 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -147,6 +147,11 @@ typedef struct fz_stext_grid_positions fz_stext_grid_positions;
 	this option subsumes an older, now deprecated, FZ_STEXT_MEDIABOX_CLIP
 	option.
 
+	FZ_STEXT_CLIP_RECT: If this option is set, characters that would be entirely
+	clipped away by the specified 'clip' rectangle in the options struct
+	will be ignored. This enables content from specific subsections of pages to
+	be extracted.
+
 	FZ_STEXT_COLLECT_STRUCTURE: If this option is set, we will collect
 	the structure as specified using begin/end_structure calls. This will
 	change the returned stext structure from being a simple list of blocks
@@ -217,8 +222,11 @@ enum
 	FZ_STEXT_SEGMENT = 1 << 18,
 	FZ_STEXT_PARAGRAPH_BREAK = 1 << 19,
 	FZ_STEXT_TABLE_HUNT = 1 << 20,
-	FZ_STEXT_COLLECT_FLAGS = 1 << 21,
+	FZ_STEXT_COLLECT_STYLES = 1 << 21,
 	FZ_STEXT_USE_GID_FOR_UNKNOWN_UNICODE = 1 << 22,
+	FZ_STEXT_CLIP_RECT = 1 << 23,
+	FZ_STEXT_ACCURATE_ASCENDERS = 1 << 24,
+	FZ_STEXT_ACCURATE_SIDE_BEARINGS = 1 << 25,
 
 	/* An old, deprecated option. */
 	FZ_STEXT_MEDIABOX_CLIP = FZ_STEXT_CLIP
@@ -306,7 +314,7 @@ enum
  *	MuPDF automatically sends the minimal end_structure/begin_structure
  *	pairs to move us between nodes in the tree.
  *
- *	In order to accomodate this information within the structured text
+ *	In order to accommodate this information within the structured text
  *	data structures an additional block type is used. Previously a
  *	"page" was just a list of blocks, either text or images. e.g.
  *
@@ -365,6 +373,22 @@ enum
 	FZ_STEXT_TEXT_JUSTIFY_FULL = 4,
 };
 
+enum
+{
+	/* Indicates that this vector came from a stroked
+	 * path. */
+	FZ_STEXT_VECTOR_IS_STROKED = 1,
+
+	/* Indicates that this vector came from a rectangular
+	 * (axis-aligned) path (or path segment). */
+	FZ_STEXT_VECTOR_IS_RECTANGLE = 2,
+
+	/* Indicates that this vector came from a path
+	 * segment, and more segments from this same path are
+	 * still to come. */
+	FZ_STEXT_VECTOR_CONTINUES = 4
+};
+
 /**
 	A text block is a list of lines of text (typically a paragraph),
 	or an image.
@@ -377,7 +401,7 @@ struct fz_stext_block
 		struct { fz_stext_line *first_line, *last_line; int flags;} t;
 		struct { fz_matrix transform; fz_image *image; } i;
 		struct { fz_stext_struct *down; int index; } s;
-		struct { uint8_t stroked; uint32_t argb; } v;
+		struct { uint32_t flags; uint32_t argb; } v;
 		struct { fz_stext_grid_positions *xs; fz_stext_grid_positions *ys; } b;
 	} u;
 	fz_stext_block *prev, *next;
@@ -456,7 +480,7 @@ struct fz_stext_struct
 	fz_structure standard;
 	/* Documents can use their own non-standard structure types, which
 	 * are held as 'raw' strings. */
-	char raw[1];
+	char raw[FZ_FLEXIBLE_ARRAY];
 };
 
 /* An example to show how fz_stext_blocks and fz_stext_structs interact:
@@ -497,7 +521,7 @@ struct fz_stext_struct
 		float min;
 		float max;
 		int uncertainty;
-	} list[1];
+	} list[FZ_FLEXIBLE_ARRAY];
  };
 
 FZ_DATA extern const char *fz_stext_options_usage;
@@ -515,6 +539,7 @@ struct fz_stext_options
 	unsigned int flags;
 	unsigned int flags_conf_mask;  // mask: each bit is set for each explicitly set option flag. See also fz_parse_stext_options()
 	float scale;           // scaling factor = (FZ_STEXT_RESOLUTION / 96)
+	fz_rect clip;
 
 	// customizable stuff for FZ_STEXT_REFERENCE_IMAGES:
 	const char* reference_image_path_template;
@@ -806,6 +831,24 @@ void fz_paragraph_break(fz_context *ctx, fz_stext_page *page);
 	information.
 */
 void fz_table_hunt(fz_context *ctx, fz_stext_page *page);
+
+/**
+	Interpret the bounded contents of a given stext page as
+	a table.
+
+	The page contents will be rewritten to contain a Table
+	structure with the identified content in it.
+
+	This uses the same logic as for fz_table_hunt, without the
+	actual hunting. fz_table_hunt hunts to find possible bounds
+	for multiple tables on the page; this routine just finds a
+	single table contained within the given rectangle.
+
+	Returns the stext_block list that contains the content of
+	the table.
+*/
+fz_stext_block *
+fz_find_table_within_bounds(fz_context *ctx, fz_stext_page *page, fz_rect bounds);
 
 /**
 	Create a device to extract the text on a page.

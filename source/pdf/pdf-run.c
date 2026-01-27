@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2024 Artifex Software, Inc.
+// Copyright (C) 2004-2025 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -442,11 +442,11 @@ pdf_run_page(fz_context *ctx, pdf_page *page, fz_device *dev, fz_matrix ctm)
 }
 
 void
-pdf_run_glyph(fz_context *ctx, pdf_document *doc, pdf_obj *resources, fz_buffer *contents, fz_device *dev, fz_matrix ctm, void *gstate, fz_default_colorspaces *default_cs, int has_transparency)
+pdf_run_glyph(fz_context *ctx, pdf_document *doc, pdf_obj *resources, fz_buffer *contents, fz_device *dev, fz_matrix ctm, void *gstate, fz_default_colorspaces *default_cs, int has_transparency, void *fill_gstate, void *stroke_gstate)
 {
 	pdf_processor *proc;
 
-	proc = pdf_new_run_processor(ctx, doc, dev, ctm, -1, "View", gstate, default_cs, has_transparency);
+	proc = pdf_new_run_processor(ctx, doc, dev, ctm, -1, "View", gstate, default_cs, has_transparency, fill_gstate, stroke_gstate);
 	fz_try(ctx)
 	{
 		pdf_process_glyph(ctx, proc, doc, resources, contents);

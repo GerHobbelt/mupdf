@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2024 Artifex Software, Inc.
+// Copyright (C) 2004-2025 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -39,16 +39,17 @@
 #if FZ_ENABLE_PDF
 
 static pdf_document* doc = NULL;
-static fz_context* ctx = NULL;
 static fz_output* out = NULL;
+static pdf_object_labels *labels = NULL;
 static int showbinary = 0;
 static int showdecode = 1;
-static int tight = 0;
-static int repair = 0;
+static int do_tight = 0;
+static int do_repair = 0;
+static int do_label = 0;
 static int showcolumn = 0;
 static int resolve = 0;
 
-static int usage(void)
+static int usage(fz_context* ctx)
 {
 	fz_info(ctx,
 		"usage: mutool show [options] file.pdf ( trailer | xref | pages | grep | outline | js | form | <path> | streams ) *\n"
@@ -68,17 +69,17 @@ static int usage(void)
 	return EXIT_FAILURE;
 }
 
-static void showtrailer(void)
+static void showtrailer(fz_context *ctx)
 {
-	if (tight)
+	if (do_tight)
 		fz_write_printf(ctx, out, "trailer ");
 	else
 		fz_write_printf(ctx, out, "trailer\n");
-	pdf_print_obj(ctx, out, pdf_trailer(ctx, doc), tight, resolve | 1);
+	pdf_print_obj(ctx, out, pdf_trailer(ctx, doc), do_tight, resolve | 1);
 	fz_write_printf(ctx, out, "\n");
 }
 
-static void showxref(void)
+static void showxref(fz_context *ctx)
 {
 	int i;
 	int xref_len = pdf_xref_len(ctx, doc);
@@ -94,7 +95,7 @@ static void showxref(void)
 	}
 }
 
-static void showpages(void)
+static void showpages(fz_context *ctx)
 {
 	pdf_obj* ref;
 	int i, n = pdf_count_pages(ctx, doc);
@@ -128,7 +129,7 @@ static void showsafe(unsigned char* buf, size_t n)
 	}
 }
 
-static void showstream(int num)
+static void showstream(fz_context *ctx, int num)
 {
 	fz_stream* stm;
 	unsigned char buf[2048];
@@ -155,7 +156,12 @@ static void showstream(int num)
 	fz_drop_stream(ctx, stm);
 }
 
-static void showobject(pdf_obj* ref)
+static void showlabel(fz_context *ctx, void *arg, const char *label)
+{
+	fz_write_printf(ctx, arg, "%% %s\n", label);
+}
+
+static void showobject(fz_context *ctx, pdf_obj *ref)
 {
 	pdf_obj* obj = pdf_resolve_indirect(ctx, ref);
 	int num = pdf_to_num(ctx, ref);
@@ -163,11 +169,13 @@ static void showobject(pdf_obj* ref)
 	{
 		if (showbinary)
 		{
-			showstream(num);
+			showstream(ctx, num);
 		}
 		else
 		{
-			if (tight)
+			if (do_label)
+				pdf_label_object(ctx, labels, num, showlabel, out);
+			if (do_tight)
 			{
 				fz_write_printf(ctx, out, "%d 0 obj ", num);
 				pdf_print_obj(ctx, out, obj, 1, resolve | 1);
@@ -178,7 +186,7 @@ static void showobject(pdf_obj* ref)
 				fz_write_printf(ctx, out, "%d 0 obj\n", num);
 				pdf_print_obj(ctx, out, obj, 0, resolve | 1);
 				fz_write_printf(ctx, out, "\nstream\n");
-				showstream(num);
+				showstream(ctx, num);
 				fz_write_printf(ctx, out, "endstream\n");
 				fz_write_printf(ctx, out, "endobj\n");
 			}
@@ -186,7 +194,9 @@ static void showobject(pdf_obj* ref)
 	}
 	else
 	{
-		if (tight)
+		if (do_label)
+			pdf_label_object(ctx, labels, num, showlabel, out);
+		if (do_tight)
 		{
 			fz_write_printf(ctx, out, "%d 0 obj ", num);
 			pdf_print_obj(ctx, out, obj, 1, resolve | 1);
@@ -201,7 +211,7 @@ static void showobject(pdf_obj* ref)
 	}
 }
 
-static void showgrep(void)
+static void showgrep(fz_context *ctx)
 {
 	pdf_obj* ref, * obj;
 	int i, len;
@@ -241,7 +251,7 @@ static void showgrep(void)
 	fz_write_printf(ctx, out, "\n");
 }
 
-static void showstreams(void)
+static void showstreams(fz_context* ctx)
 {
 	int i, len;
 
@@ -254,7 +264,7 @@ static void showstreams(void)
 			if (pdf_obj_num_is_stream(ctx, doc, i))
 			{
 				fz_write_printf(ctx, out, "%d 0 stream ", i);
-				showstream(i);
+				showstream(ctx, i);
 				fz_write_printf(ctx, out, "\n");
 			}
 		}
@@ -262,7 +272,7 @@ static void showstreams(void)
 }
 
 static void
-print_outline(fz_outline* outline, int level)
+print_outline(fz_context *ctx, fz_outline *outline, int level)
 {
 	int i;
 	while (outline)
@@ -276,23 +286,23 @@ print_outline(fz_outline* outline, int level)
 			fz_write_byte(ctx, out, '\t');
 		fz_write_printf(ctx, out, "%Q\t%s\n", outline->title, outline->uri);
 		if (outline->down)
-			print_outline(outline->down, level + 1);
+			print_outline(ctx, outline->down, level + 1);
 		outline = outline->next;
 	}
 }
 
-static void showoutline(void)
+static void showoutline(fz_context *ctx)
 {
 	fz_outline* outline = fz_load_outline(ctx, (fz_document*)doc);
 	fz_try(ctx)
-		print_outline(outline, 1);
+		print_outline(ctx, outline, 1);
 	fz_always(ctx)
 		fz_drop_outline(ctx, outline);
 	fz_catch(ctx)
 		fz_rethrow(ctx);
 }
 
-static void showtext(char* buf, size_t buflen, int indent)
+static void showtext(fz_context *ctx, char *buf, size_t buflen, int indent)
 {
 	int bol = 1;
 	int c;
@@ -322,7 +332,7 @@ static void showtext(char* buf, size_t buflen, int indent)
 		fz_write_byte(ctx, out, '\n');
 }
 
-static void showjs(void)
+static void showjs(fz_context *ctx)
 {
 	pdf_obj* tree;
 	int i;
@@ -336,13 +346,13 @@ static void showjs(void)
 		size_t srclength = 0;
 		char* src = pdf_load_stream_or_string_as_utf8(ctx, js, &srclength);
 		fz_write_printf(ctx, out, "// %s\n", pdf_to_name_not_null(ctx, name));
-		showtext(src, srclength, 0);
+		showtext(ctx, src, srclength, 0);
 		fz_free(ctx, src);
 	}
 	pdf_drop_name_tree(ctx, tree);
 }
 
-static void showaction(pdf_obj* action, const char* name)
+static void showaction(fz_context *ctx, pdf_obj *action, const char *name)
 {
 	if (action)
 	{
@@ -352,7 +362,7 @@ static void showaction(pdf_obj* action, const char* name)
 			size_t srclength = 0;
 			char* src = pdf_load_stream_or_string_as_utf8(ctx, js, &srclength);
 			fz_write_printf(ctx, out, "    %s: {\n", name);
-			showtext(src, srclength, 1);
+			showtext(ctx, src, srclength, 1);
 			fz_write_printf(ctx, out, "    }\n", name);
 			fz_free(ctx, src);
 		}
@@ -361,13 +371,13 @@ static void showaction(pdf_obj* action, const char* name)
 			fz_write_printf(ctx, out, "    %s: ", name);
 			if (pdf_is_indirect(ctx, action))
 				action = pdf_resolve_indirect(ctx, action);
-			pdf_print_obj(ctx, out, action, tight, resolve | 1);
+			pdf_print_obj(ctx, out, action, do_tight, resolve | 1);
 			fz_write_printf(ctx, out, "\n");
 		}
 	}
 }
 
-static void showfield(pdf_obj* field)
+static void showfield(fz_context *ctx, pdf_obj *field)
 {
 	pdf_obj* kids, * ft, * parent;
 	const char* tu;
@@ -424,29 +434,29 @@ static void showfield(pdf_obj* field)
 	if (parent)
 		fz_write_printf(ctx, out, "    Parent: %d\n", pdf_to_num(ctx, parent));
 
-	showaction(pdf_dict_getp(ctx, field, "A"), "Action");
+	showaction(ctx, pdf_dict_getp(ctx, field, "A"), "Action");
 
-	showaction(pdf_dict_getp_inheritable(ctx, field, "AA/K"), "Keystroke");
-	showaction(pdf_dict_getp_inheritable(ctx, field, "AA/V"), "Validate");
-	showaction(pdf_dict_getp_inheritable(ctx, field, "AA/F"), "Format");
-	showaction(pdf_dict_getp_inheritable(ctx, field, "AA/C"), "Calculate");
+	showaction(ctx, pdf_dict_getp_inheritable(ctx, field, "AA/K"), "Keystroke");
+	showaction(ctx, pdf_dict_getp_inheritable(ctx, field, "AA/V"), "Validate");
+	showaction(ctx, pdf_dict_getp_inheritable(ctx, field, "AA/F"), "Format");
+	showaction(ctx, pdf_dict_getp_inheritable(ctx, field, "AA/C"), "Calculate");
 
-	showaction(pdf_dict_getp_inheritable(ctx, field, "AA/E"), "Enter");
-	showaction(pdf_dict_getp_inheritable(ctx, field, "AA/X"), "Exit");
-	showaction(pdf_dict_getp_inheritable(ctx, field, "AA/D"), "Down");
-	showaction(pdf_dict_getp_inheritable(ctx, field, "AA/U"), "Up");
-	showaction(pdf_dict_getp_inheritable(ctx, field, "AA/Fo"), "Focus");
-	showaction(pdf_dict_getp_inheritable(ctx, field, "AA/Bl"), "Blur");
+	showaction(ctx, pdf_dict_getp_inheritable(ctx, field, "AA/E"), "Enter");
+	showaction(ctx, pdf_dict_getp_inheritable(ctx, field, "AA/X"), "Exit");
+	showaction(ctx, pdf_dict_getp_inheritable(ctx, field, "AA/D"), "Down");
+	showaction(ctx, pdf_dict_getp_inheritable(ctx, field, "AA/U"), "Up");
+	showaction(ctx, pdf_dict_getp_inheritable(ctx, field, "AA/Fo"), "Focus");
+	showaction(ctx, pdf_dict_getp_inheritable(ctx, field, "AA/Bl"), "Blur");
 
 	fz_write_string(ctx, out, "\n");
 
 	kids = pdf_dict_get(ctx, field, PDF_NAME(Kids));
 	n = pdf_array_len(ctx, kids);
 	for (i = 0; i < n; ++i)
-		showfield(pdf_array_get(ctx, kids, i));
+		showfield(ctx, pdf_array_get(ctx, kids, i));
 }
 
-static void showform(void)
+static void showform(fz_context *ctx)
 {
 	pdf_obj* fields;
 	int i, n;
@@ -454,7 +464,7 @@ static void showform(void)
 	fields = pdf_dict_getp(ctx, pdf_trailer(ctx, doc), "Root/AcroForm/Fields");
 	n = pdf_array_len(ctx, fields);
 	for (i = 0; i < n; ++i)
-		showfield(pdf_array_get(ctx, fields, i));
+		showfield(ctx, pdf_array_get(ctx, fields, i));
 }
 
 #define SEP ".[]/"
@@ -474,7 +484,7 @@ static int isnumber(const char* s)
 
 #define PDF_XPATH_SIZE 1000
 
-static void showpath(char* path, pdf_obj* obj)
+static void showpath(fz_context *ctx, char *path, pdf_obj *obj)
 {
 	if (path && path[0])
 	{
@@ -493,10 +503,10 @@ static void showpath(char* path, pdf_obj* obj)
 						if (path)
 						{
 							fz_strncpy_s(ctx, buf, path, sizeof buf);
-							showpath(buf, pdf_array_get(ctx, obj, i));
+							showpath(ctx, buf, pdf_array_get(ctx, obj, i));
 						}
 						else
-							showpath(NULL, pdf_array_get(ctx, obj, i));
+							showpath(ctx, NULL, pdf_array_get(ctx, obj, i));
 					}
 				}
 				else if (pdf_is_dict(ctx, obj))
@@ -507,10 +517,10 @@ static void showpath(char* path, pdf_obj* obj)
 						if (path)
 						{
 							fz_strncpy_s(ctx, buf, path, sizeof buf);
-							showpath(buf, pdf_dict_get_val(ctx, obj, i));
+							showpath(ctx, buf, pdf_dict_get_val(ctx, obj, i));
 						}
 						else
-							showpath(NULL, pdf_dict_get_val(ctx, obj, i));
+							showpath(ctx, NULL, pdf_dict_get_val(ctx, obj, i));
 					}
 				}
 				else
@@ -522,10 +532,10 @@ static void showpath(char* path, pdf_obj* obj)
 			{
 				int num = atoi(part);
 				num = num < 0 ? pdf_array_len(ctx, obj) + num : num - 1;
-				showpath(path, pdf_array_get(ctx, obj, num));
+				showpath(ctx, path, pdf_array_get(ctx, obj, num));
 			}
 			else
-				showpath(path, pdf_dict_gets(ctx, obj, part));
+				showpath(ctx, path, pdf_dict_gets(ctx, obj, part));
 		}
 		else
 			fz_write_string(ctx, out, "null\n");
@@ -533,16 +543,16 @@ static void showpath(char* path, pdf_obj* obj)
 	else
 	{
 		if (pdf_is_indirect(ctx, obj))
-			showobject(obj);
+			showobject(ctx, obj);
 		else
 		{
-			pdf_print_obj(ctx, out, obj, tight, resolve | 0);
+			pdf_print_obj(ctx, out, obj, do_tight, resolve | 0);
 			fz_write_string(ctx, out, "\n");
 		}
 	}
 }
 
-static void showpathpage(char* path)
+static void showpathpage(fz_context *ctx, char *path)
 {
 	if (path)
 	{
@@ -559,17 +569,17 @@ static void showpathpage(char* path)
 					if (path)
 					{
 						fz_strncpy_s(ctx, buf, path, sizeof buf);
-						showpath(buf, pdf_lookup_page_obj(ctx, doc, i));
+						showpath(ctx, buf, pdf_lookup_page_obj(ctx, doc, i));
 					}
 					else
-						showpath(NULL, pdf_lookup_page_obj(ctx, doc, i));
+						showpath(ctx, NULL, pdf_lookup_page_obj(ctx, doc, i));
 				}
 			}
 			else if (isnumber(part))
 			{
 				int num = atoi(part);
 				num = num < 0 ? pdf_count_pages(ctx, doc) + num : num - 1;
-				showpath(path, pdf_lookup_page_obj(ctx, doc, num));
+				showpath(ctx, path, pdf_lookup_page_obj(ctx, doc, num));
 			}
 			else
 				fz_write_string(ctx, out, "null\n");
@@ -579,11 +589,11 @@ static void showpathpage(char* path)
 	}
 	else
 	{
-		showpages();
+		showpages(ctx);
 	}
 }
 
-static void showpathroot(const char* path)
+static void showpathroot(fz_context *ctx, const char* path)
 {
 	char buf[PDF_XPATH_SIZE];
 	char* list = buf;
@@ -593,9 +603,9 @@ static void showpathroot(const char* path)
 	if (part && part[0])
 	{
 		if (!strcmp(part, "trailer") || !strcmp(part, "*"))
-			showpath(list, pdf_trailer(ctx, doc));
+			showpath(ctx, list, pdf_trailer(ctx, doc));
 		else if (!strcmp(part, "pages"))
-			showpathpage(list);
+			showpathpage(ctx, list);
 		else if (isnumber(part))
 		{
 			pdf_obj *obj;
@@ -603,7 +613,7 @@ static void showpathroot(const char* path)
 			num = num < 0 ? pdf_xref_len(ctx, doc) + num : num;
 			obj = pdf_new_indirect(ctx, doc, num, 0);
 			fz_try(ctx)
-				showpath(list, obj);
+				showpath(ctx, list, obj);
 			fz_always(ctx)
 				pdf_drop_obj(ctx, obj);
 			fz_catch(ctx)
@@ -611,35 +621,33 @@ static void showpathroot(const char* path)
 		}
 		else
 		{
-			pdf_obj* obj = pdf_dict_gets(ctx, pdf_trailer(ctx, doc), part);
-
-			showpath(list, obj);
+			showpath(ctx, list, pdf_dict_gets(ctx, pdf_trailer(ctx, doc), part));
 		}
 	}
 	else
 		fz_write_string(ctx, out, "null\n");
 }
 
-static void show(const char* sel)
+static void show(fz_context *ctx, const char *sel)
 {
 	if (!strcmp(sel, "trailer"))
-		showtrailer();
+		showtrailer(ctx);
 	else if (!strcmp(sel, "xref"))
-		showxref();
+		showxref(ctx);
 	else if (!strcmp(sel, "pages"))
-		showpages();
+		showpages(ctx);
 	else if (!strcmp(sel, "grep"))
-		showgrep();
+		showgrep(ctx);
 	else if (!strcmp(sel, "streams"))
-		showstreams();
+		showstreams(ctx);
 	else if (!strcmp(sel, "outline"))
-		showoutline();
+		showoutline(ctx);
 	else if (!strcmp(sel, "js"))
-		showjs();
+		showjs(ctx);
 	else if (!strcmp(sel, "form"))
-		showform();
+		showform(ctx);
 	else
-		showpathroot(sel);
+		showpathroot(ctx, sel);
 }
 
 int pdfshow_main(int argc, const char** argv)
@@ -651,36 +659,14 @@ int pdfshow_main(int argc, const char** argv)
 	int errored = 0;
 
 	doc = NULL;
-	ctx = NULL;
 	out = NULL;
 	showbinary = 0;
 	showdecode = 1;
-	tight = 0;
+	do_tight = 0;
 	showcolumn = 0;
 	resolve = 0;
 
-	fz_getopt_reset();
-	while ((c = fz_getopt(argc, argv, "p:o:Rrbegh")) != -1)
-	{
-		switch (c)
-		{
-		case 'p': password = fz_optarg; break;
-		case 'o': output = fz_optarg; break;
-		case 'b': showbinary = 1; break;
-		case 'e': showdecode = 0; break;
-		case 'g': tight = 1; break;
-		case 'r': repair = 1; break;
-		case 'R': resolve = PDF_PRINT_RESOLVE_ALL_INDIRECT; break;
-		default: return usage();
-		}
-	}
-
-	if (fz_optind == argc)
-	{
-		fz_error(ctx, "No files specified to process\n\n");
-		return usage();
-	}
-
+	fz_context* ctx = NULL;
 	if (!fz_has_global_context())
 	{
 		ctx = fz_new_context(NULL, NULL, FZ_STORE_UNLIMITED);
@@ -697,6 +683,29 @@ int pdfshow_main(int argc, const char** argv)
 	{
 		fz_error(ctx, "cannot initialise MuPDF context");
 		return EXIT_FAILURE;
+	}
+
+	fz_getopt_reset();
+	while ((c = fz_getopt(argc, argv, "p:o:beghrLR")) != -1)
+	{
+		switch (c)
+		{
+		case 'p': password = fz_optarg; break;
+		case 'o': output = fz_optarg; break;
+		case 'b': showbinary = 1; break;
+		case 'e': showdecode = 0; break;
+		case 'g': do_tight = 1; break;
+		case 'r': do_repair = 1; break;
+		case 'L': do_label = 1; break;
+		case 'R': resolve = PDF_PRINT_RESOLVE_ALL_INDIRECT; break;
+		default: return usage(ctx);
+		}
+	}
+
+	if (fz_optind == argc)
+	{
+		fz_error(ctx, "No files specified to process\n\n");
+		return usage(ctx);
 	}
 
 	// register a mupdf-aligned default heap memory manager for jpeg/jpeg-turbo
@@ -719,6 +728,7 @@ int pdfshow_main(int argc, const char** argv)
 	}
 
 	fz_var(doc);
+	fz_var(labels);
 	fz_try(ctx)
 	{
 		doc = pdf_open_document(ctx, filename);
@@ -726,7 +736,7 @@ int pdfshow_main(int argc, const char** argv)
 			if (!pdf_authenticate_password(ctx, doc, password))
 				fz_warn(ctx, "cannot authenticate password: %s", filename);
 
-		if (repair)
+		if (do_repair)
 		{
 			fz_try(ctx)
 			{
@@ -741,9 +751,11 @@ int pdfshow_main(int argc, const char** argv)
 			}
 		}
 
+		if (do_label)
+			labels = pdf_load_object_labels(ctx, doc);
 
 		if (fz_optind == argc)
-			showtrailer();
+			showtrailer(ctx);
 
 		// when we are requested to show multiple sections, we include headers/separators:
 		int print_header = (fz_optind + 1 < argc);
@@ -758,7 +770,7 @@ int pdfshow_main(int argc, const char** argv)
 				if (print_header)
 					fz_write_printf(ctx, out, "=== %s =======================================================================\n\n", name);
 
-				show(name);
+				show(ctx, name);
 			}
 			fz_catch(ctx)
 			{
@@ -781,6 +793,7 @@ int pdfshow_main(int argc, const char** argv)
 	{
 		fz_close_output(ctx, out);
 		fz_drop_output(ctx, out);
+		pdf_drop_object_labels(ctx, labels);
 		pdf_drop_document(ctx, doc);
 	}
 	fz_catch(ctx)

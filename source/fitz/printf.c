@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2024 Artifex Software, Inc.
+// Copyright (C) 2004-2025 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -401,7 +401,7 @@ static void fmtquote_pdf(struct fmtbuf *out, const char *s, int sq, int eq)
 				else
 				{
 					fmtputc(out, 'x');
-					fmtputc(out, fz_hex_digits[(c>>4) & 0x0F]);
+					fmtputc(out, fz_hex_digits[(c >> 4) & 0x0F]);
 					fmtputc(out, fz_hex_digits[(c) & 0x0F]);
 				}
 			} else {
@@ -421,6 +421,47 @@ static void fmtquote_pdf(struct fmtbuf *out, const char *s, int sq, int eq)
 	fmtputc(out, eq);
 }
 
+int
+fz_is_valid_xml_char(int c)
+{
+	if (c == 9 || c == 10 || c == 13)
+		return 1;
+	if (c < 32)
+		return 0;
+	if (c < 0xd800)
+		return 1;
+	if (c < 0xe000)
+		return 0;
+	if (c <= 0xfffd)
+		return 1;
+	if (c < 0x10000)
+		return 0;
+	if (c <= 0x10FFFF)
+		return 1;
+	return 0;
+}
+
+int
+fz_is_valid_xml_string(const char *s)
+{
+	int c, n;
+	while (*s != 0) {
+		n = fz_chartorune_unsafe(&c, s);
+		if (!fz_is_valid_xml_char(c))
+			return 0;
+		s += n;
+	}
+	return 1;
+}
+
+int
+fz_range_limit_xml_char(int c)
+{
+	if (fz_is_valid_xml_char(c))
+		return c;
+	return Runeerror;
+}
+
 static void fmtquote_xml(struct fmtbuf* out, const char* s, size_t slen, int verbatim)
 {
 	int i, n, c;
@@ -429,6 +470,10 @@ static void fmtquote_xml(struct fmtbuf* out, const char* s, size_t slen, int ver
 		n = fz_chartorune(&c, s, slen);
 		switch (c) {
 		default:
+			// TODO: check this merged line of code vs. our intended Unicode decode & output behaviour!
+#if 0
+			c = fz_range_limit_xml_char(c);
+#endif
 			if (c < 32) {
 				fmtputc(out, '&');
 				fmtputc(out, '#');
@@ -541,6 +586,18 @@ static void fmtquote_xml(struct fmtbuf* out, const char* s, size_t slen, int ver
 	fmtputc(out, '"');
 }
 
+static void fmtquote_hex(struct fmtbuf *out, const char *s)
+{
+	int c;
+	fmtputc(out, '"');
+	while ((c = *s++) != 0)
+	{
+		fmtputc(out, fz_hex_digits[(c >> 4) & 0x0F]);
+		fmtputc(out, fz_hex_digits[c & 0x0F]);
+	}
+	fmtputc(out, '"');
+}
+
 static void fmtname(struct fmtbuf *out, const char *s)
 {
 	int c;
@@ -548,7 +605,7 @@ static void fmtname(struct fmtbuf *out, const char *s)
 	while ((c = *s++) != 0) {
 		if (c <= 32 || c == '/' || c == '#') {
 			fmtputc(out, '#');
-			fmtputc(out, fz_hex_digits[(c>>4) & 0x0F]);
+			fmtputc(out, fz_hex_digits[(c >> 4) & 0x0F]);
 			fmtputc(out, fz_hex_digits[(c) & 0x0F]);
 		} else {
 			fmtputc(out, c);
@@ -1636,6 +1693,7 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 					}
 				}
 				break;
+
 			case '<': /* quoted string for XML */
 				{
 					const char* str = va_arg(args, const char*);
@@ -1657,6 +1715,29 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 					fmtquote_xml(&out, str, cliplen, 0);
 				}
 				break;
+
+			case '>': /* quoted hex string */
+			{
+				const char* str = va_arg(args, const char*);
+				size_t seglen = strlen(str);
+
+#if 0
+				if (!str)
+					str = "";
+				fmtquote_hex(&out, str);
+#else
+				// when precision has been specified, but is NEGATIVE, than this is a special mode:
+				// discover how to best print the data buffer:
+				if (p < 0) {
+					fmt_print_buffer_optimally(ctx, &out, str, seglen, -p, FPBO_JSON_MODE | FPBO_VERBATIM_UNICODE);
+				}
+				else {
+					fmt_print_buffer_as_hex(&out, str, seglen, p, FPBO_JSON_MODE);
+				}
+#endif
+			}
+			break;
+
 			case '(': /* pdf string */
 				{
 					const char* str = va_arg(args, const char*);

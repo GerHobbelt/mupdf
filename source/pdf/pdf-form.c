@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2024 Artifex Software, Inc.
+// Copyright (C) 2004-2025 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -349,7 +349,7 @@ static void add_field_hierarchy_to_array(fz_context *ctx, pdf_obj *result, pdf_o
 
 	if (pdf_is_array(ctx, kids))
 	{
-		int i, n = pdf_array_len(ctx, kids);
+		n = pdf_array_len(ctx, kids);
 
 		for (i = 0; i < n; i++)
 			add_field_hierarchy_to_array(ctx, result, formfields, exclude, fields, pdf_array_get(ctx, kids, i));
