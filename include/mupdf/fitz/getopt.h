@@ -138,4 +138,10 @@ extern void fz_getopt_reset(void);
 }
 #endif
 
+/**
+	Convert "-" to "/dev/stdout" for use with command lines.
+	Also converts "nul" and "con" on Windows.
+*/
+char *fz_optpath(char *opt);
+
 #endif

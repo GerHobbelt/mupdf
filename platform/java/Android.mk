@@ -110,11 +110,7 @@ LOCAL_SRC_FILES += $(wildcard $(MUPDF_PATH)/generated/resources/fonts/urw/*.c)
 
 LOCAL_CFLAGS += $(MUPDF_EXTRA_CFLAGS)
 
-ifdef USE_EXTRACT
-LOCAL_C_INCLUDES += $(patsubst -I%,$(MUPDF_PATH)/%,$(filter -I%,$(EXTRACT_CFLAGS)))
-LOCAL_CFLAGS += -DHAVE_EXTRACT
-endif
-
+LOCAL_SHORT_COMMANDS := true
 include $(BUILD_STATIC_LIBRARY)
 
 # --- Build local static libraries for thirdparty libraries ---
@@ -203,7 +199,7 @@ LOCAL_SRC_FILES += $(MUPDF_PATH)/source/fitz/tessocr.cpp
 LOCAL_C_INCLUDES += $(patsubst -I%,$(MUPDF_PATH)/%,$(filter -I%,$(TESSERACT_CFLAGS) $(TESSERACT_BUILD_CFLAGS)))
 LOCAL_CFLAGS += $(filter-out -I%,$(TESSERACT_CFLAGS) $(TESSERACT_BUILD_CFLAGS))
 LOCAL_CFLAGS += -Wno-sign-compare
-LOCAL_CFLAGS += $(MUPDF_EXTRA_CFLAGS) -std=c++17
+LOCAL_CFLAGS += $(MUPDF_EXTRA_CFLAGS)
 LOCAL_CPP_FEATURES := exceptions
 include $(BUILD_STATIC_LIBRARY)
 
@@ -280,5 +276,7 @@ LOCAL_LDLIBS += -lm
 
 LOCAL_LDFLAGS := -Wl,--gc-sections
 LOCAL_LDFLAGS += $(MUPDF_EXTRA_LDFLAGS)
+
+LOCAL_SHORT_COMMANDS := true
 
 include $(BUILD_SHARED_LIBRARY)

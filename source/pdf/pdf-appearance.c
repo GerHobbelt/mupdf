@@ -409,7 +409,7 @@ pdf_write_line_cap_appearance(fz_context *ctx, fz_buffer *buf, fz_rect *rect,
 		fz_append_printf(ctx, buf, "%g %g l\n", b.x, b.y);
 		maybe_stroke(ctx, buf, sc);
 		*rect = fz_include_point_in_rect(*rect, a);
-		*rect = fz_include_point_in_rect(*rect, a);
+		*rect = fz_include_point_in_rect(*rect, b);
 		*rect = fz_expand_rect(*rect, w);
 	}
 	else if (cap == PDF_NAME(ROpenArrow))
@@ -3292,6 +3292,8 @@ static void pdf_update_button_appearance(fz_context *ctx, pdf_annot *annot)
 				pdf_dict_put(ctx, annot->obj, PDF_NAME(AS), PDF_NAME(Off));
 				as = PDF_NAME(Off);
 			}
+			else
+				as = pdf_resolve_indirect_chain(ctx, as);
 
 			if (as == PDF_NAME(Off))
 				as_yes = pdf_keep_obj(ctx, pdf_button_field_on_state(ctx, annot->obj));

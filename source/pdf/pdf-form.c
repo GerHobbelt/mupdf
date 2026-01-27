@@ -559,7 +559,7 @@ static void toggle_check_box(fz_context *ctx, pdf_annot *annot)
 
 		/* TODO: check V value as well as or instead of AS? */
 		as = pdf_dict_get(ctx, field, PDF_NAME(AS));
-		if (pdf_is_name(ctx, as) && as != PDF_NAME(Off))
+		if (pdf_is_name(ctx, as) && !pdf_name_eq(ctx, as, PDF_NAME(Off)))
 		{
 			if (is_radio && is_no_toggle_to_off)
 			{
@@ -2421,6 +2421,7 @@ static pdf_obj *get_annot_ap(fz_context *ctx, pdf_obj *annot)
 	pdf_obj *as = pdf_dict_get(ctx, annot, PDF_NAME(AS));
 	if (ap)
 	{
+		as = pdf_resolve_indirect_chain(ctx, as);
 		ap = pdf_dict_get(ctx, ap, PDF_NAME(N));
 		if (pdf_is_stream(ctx, ap))
 			return ap;

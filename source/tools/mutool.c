@@ -120,12 +120,12 @@ static struct tool_spec {
 #if FZ_ENABLE_PDF
 	{ {.fa = pdfclean_main }, "clean", "rewrite pdf file" },
 #endif
+	{ {.fa = mudraw_main }, "draw", "convert document" },
 	{ {.fa = muconvert_main }, "convert", "convert document" },
 #if FZ_ENABLE_PDF
+	{ {.fa = pdfaudit_main }, "audit", "Produce usage stats from PDF files" },
 	{ {.fa = pdfcreate_main }, "create", "create pdf document" },
-	{ {.fa = mudraw_main }, "draw", "convert document" },
 	{ {.fa = muraster_main }, "raster", "convert document to a raster file" },
-	{ {.fa = mutrace_main }, "trace", "trace device calls" },
 	{ {.fa = pdfextract_main }, "extract", "extract font and image resources" },
 	{ {.fa = pdfinfo_main }, "info", "show information about pdf resources" },
 	{ {.fa = pdfmerge_main }, "merge", "merge pages from multiple pdf sources into a new pdf" },
@@ -133,6 +133,7 @@ static struct tool_spec {
 #if defined(MUTOOL_EX)
 	{ {.fa = pdfposter_main }, "poster", "split large page into many tiles" },
 	{ {.fa = pdfrecolor_main }, "recolor", "change colorspace of pdf document" },
+	{ {.fa = pdfshow_main }, "show", "show internal PDF objects" },
 	{ {.fa = pdfsign_main }, "sign", "manipulate PDF digital signatures" },
 	{ {.fa = pdftrim_main }, "trim", "trim PDF page contents" },
 	{ {.fa = pdfbake_main }, "bake", "bake PDF form into static content" },
@@ -152,10 +153,10 @@ static struct tool_spec {
 #if defined(MUTOOL_EX)
 	{ {.fa = cmapdump_main }, "cmapdump", "dump CMap resource as C source file" },
 #endif
-	{ {.fa = pdfaudit_main }, "audit", "Produce usage stats from PDF files" },
 #endif
+	{ {.fa = mutrace_main }, "trace", "trace device calls" },
 #if FZ_ENABLE_BARCODE
-	{ { .fa = mubar_main }, "barcode", "encode/decode barcodes" },
+	{ {.fa = mubar_main }, "barcode", "encode/decode barcodes" },
 #endif
 #if defined(MUTOOL_EX)
 	{ {.fa = mupdf_base64_test_main }, "base64_test", "muPDF base64 fringe case tests" },

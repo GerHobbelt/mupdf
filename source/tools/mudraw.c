@@ -688,7 +688,7 @@ file_level_headers(fz_context *ctx, const char *filename)
 		|| output_format->format == OUT_TRACE || output_format->format == OUT_OCR_TRACE || output_format->format == OUT_BBOX
 		|| output_format->format == OUT_XMLTEXT || output_format->format == OUT_OCR_XMLTEXT)
 	{
-		fz_write_printf(ctx, out, "<document name=\"%s\">\n", fz_basename(filename));
+		fz_write_printf(ctx, out, "<document filename=\"%s\">\n", fz_basename(filename));
 	}
 	else if (output_format->format == OUT_STEXT_JSON || output_format->format == OUT_OCR_STEXT_JSON)
 		fz_write_printf(ctx, out, "{%q:%q,%q:[", "file", filename, "pages");
@@ -952,7 +952,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 
 		fz_try(ctx)
 		{
-			fz_write_printf(ctx, out, "<page pagenum=\"%d\" ctm=\"%M\" bbox=\"%R\" mediabox=\"%R\">\n", pagenum, &ctm, &mediabox, &tmediabox);
+			fz_write_printf(ctx, out, "<page number=\"%d\" ctm=\"%M\" bbox=\"%R\" mediabox=\"%R\">\n", pagenum, &ctm, &mediabox, &tmediabox);
 			dev = fz_new_trace_device(ctx, out);
 			apply_kill_switch(dev);
 			if (output_format->format == OUT_OCR_TRACE)
@@ -1161,7 +1161,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			}
 			else if (output_format->format == OUT_STEXT_JSON || output_format->format == OUT_OCR_STEXT_JSON)
 			{
-				int first = (inc_page_counter() == 0);
+				int first = (inc_page_counter() == 0 || output_file_per_page);
 				if (!first)
 					fz_write_string(ctx, out, ",");
 				fz_print_stext_page_as_json(ctx, out, text, pagenum, ctm);
@@ -2930,7 +2930,7 @@ int main(int argc, const char** argv)
 
 		case 'p': password = fz_optarg; break;
 
-		case 'o': output = fz_optarg; break;
+		case 'o': output = fz_optpath(fz_optarg); break;
 		case 'F': format = fz_optarg; break;
 		case 'n': format_opts = fz_optarg; break;
 

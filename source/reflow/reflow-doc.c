@@ -22,11 +22,13 @@
 
 #include "mupdf/fitz.h"
 
+#if FZ_ENABLE_RENDER_CORE 
+
+#if FZ_ENABLE_HTML_ENGINE
+
 #include "mupdf/assertions.h"
 #include <limits.h>
 #include <string.h>
-
-#if FZ_ENABLE_RENDER_CORE 
 
 #define DEF_WIDTH 612
 #define DEF_HEIGHT 792
@@ -266,5 +268,15 @@ fz_open_reflowed_document(fz_context *ctx, fz_document *underdoc, const fz_stext
 
 	return &doc->base;
 }
+
+#else
+
+fz_document *
+fz_open_reflowed_document(fz_context *ctx, fz_document *underdoc, const fz_stext_options *opts)
+{
+	fz_throw(ctx, FZ_ERROR_UNSUPPORTED, "reflowed documents require html engine");
+}
+
+#endif
 
 #endif

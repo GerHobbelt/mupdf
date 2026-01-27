@@ -212,6 +212,8 @@ int mutrace_main(int argc, const char** argv)
 			out = fz_new_output_with_path(ctx, fbuf, 0);
 		}
 
+		fz_write_printf(ctx, out, "<?xml version=\"1.0\"?>\n");
+		
 		for (i = fz_optind; i < argc; ++i)
 		{
 			doc_file = argv[i];

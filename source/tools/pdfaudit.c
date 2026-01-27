@@ -2083,7 +2083,7 @@ int pdfaudit_main(int argc, const char **argv)
 		switch (c)
 		{
 		case 'o':
-			outfile = fz_optarg;
+			outfile = fz_optpath(fz_optarg);
 			break;
 		case 0:
 		{
@@ -2120,18 +2120,13 @@ int pdfaudit_main(int argc, const char **argv)
 
 	fz_try(ctx)
 	{
-		if (strcmp(outfile, "-") == 0)
-			out = fz_stdout(ctx);
-		else
-			out = fz_new_output_with_path(ctx, outfile, append);
+		out = fz_new_output_with_path(ctx, outfile, append);
 		while (fz_optind < argc)
 			filter_file(ctx, out, argv[fz_optind++]);
-		if (strcmp(outfile, "-") != 0)
-			fz_close_output(ctx, out);
+		fz_close_output(ctx, out);
 	}
 	fz_always(ctx)
-		if (strcmp(outfile, "-") != 0)
-			fz_drop_output(ctx, out);
+		fz_drop_output(ctx, out);
 	fz_catch(ctx)
 	{
 		fz_report_error(ctx);

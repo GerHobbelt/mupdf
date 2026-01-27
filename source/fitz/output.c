@@ -901,6 +901,11 @@ fz_new_output_with_path(fz_context *ctx, const char *filename, int append)
 		return fz_stdout(ctx);
 	}
 
+	if (!strcmp(filename, "/dev/stderr"))
+	{
+		return fz_stderr(ctx);
+	}
+
 	fz_mkdir_for_file(ctx, filename);
 
 	/* If <append> is false, we use fopen()'s 'x' flag to force an error if

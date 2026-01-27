@@ -1920,7 +1920,7 @@ int main(int argc, const char** argv)
 
 		case 'p': password = fz_optarg; break;
 
-		case 'o': output = fz_optarg; break;
+		case 'o': output = fz_optpath(fz_optarg); break;
 		case 'F': format = fz_optarg; break;
 
 		case 'R': rotation = read_rotation(fz_optarg); break;

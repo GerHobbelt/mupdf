@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2024 Artifex Software, Inc.
+// Copyright (C) 2004-2025 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -65,7 +65,7 @@ int pdfrecolor_main(int argc, const char** argv)
 
 		// color convert
 		case 'c': colorspace = fz_optarg; break;
-		case 'o': outputfile = fz_optarg; break;
+		case 'o': outputfile = fz_optpath(fz_optarg); break;
 		case 'r': remove_oi = 1; break;
 		}
 	}
@@ -73,6 +73,9 @@ int pdfrecolor_main(int argc, const char** argv)
 	if (fz_optind == argc || !outputfile)
 		return usage();
 
+	if (!outputfile)
+		outputfile = "out.pdf";
+		
 	infile = argv[fz_optind];
 
 	if (colorspace == NULL || !strcmp(colorspace, "gray"))

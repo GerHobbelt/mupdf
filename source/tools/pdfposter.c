@@ -279,7 +279,7 @@ int pdfposter_main(int argc, const char** argv)
 	if (argc - fz_optind > 0 &&
 		(strstr(argv[fz_optind], ".pdf") || strstr(argv[fz_optind], ".PDF")))
 	{
-		outfile = argv[fz_optind++];
+		outfile = fz_optpath(argv[fz_optind++]);
 	}
 
 	fz_var(doc);
