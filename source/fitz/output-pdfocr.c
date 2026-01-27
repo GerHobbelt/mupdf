@@ -435,7 +435,7 @@ post_skew_write_band(fz_context *ctx, pdfocr_band_writer *writer, int stride, in
 	int line;
 	unsigned char *d;
 
-	if (!out)
+	if (!writer)
 		return;
 
 	if (sh == 0)

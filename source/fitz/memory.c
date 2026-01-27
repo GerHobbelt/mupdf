@@ -92,6 +92,11 @@ do_scavenging_realloc(fz_context *ctx, void *p, size_t size   FZDBG_DECL_ARGS)
 	return NULL;
 }
 
+#pragma push_macro("fz_malloc")
+#pragma push_macro("fz_calloc")
+#pragma push_macro("fz_realloc")
+#pragma push_macro("fz_strdup")
+
 #undef fz_malloc
 void *
 fz_malloc(fz_context *ctx, size_t size   FZDBG_DECL_ARGS)
@@ -243,6 +248,11 @@ fz_strdup(fz_context *ctx, const char *s   FZDBG_DECL_ARGS)
 	}
 	return ns;
 }
+
+#pragma pop_macro("fz_malloc")
+#pragma pop_macro("fz_calloc")
+#pragma pop_macro("fz_realloc")
+#pragma pop_macro("fz_strdup")
 
 fz_string *
 fz_new_string(fz_context *ctx, const char *s   FZDBG_DECL_ARGS)

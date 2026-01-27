@@ -3164,10 +3164,6 @@ static void pdf_run_document_structure_imp(fz_context *ctx, fz_document *doc, fz
 	pdf_run_document_structure(ctx, pdf_document_from_fz_document(ctx, doc), dev, cookie);
 }
 
-#ifndef NDEBUG
-void pdf_verify_name_table_sanity(void);
-#endif
-
 
 static pdf_document *
 pdf_new_document(fz_context *ctx, fz_stream *file)

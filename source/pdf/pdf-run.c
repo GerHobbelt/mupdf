@@ -103,7 +103,7 @@ pdf_run_annot_with_usage(fz_context *ctx, pdf_document *doc, pdf_page *page, pdf
 		struct_parent_num = pdf_to_int_default(ctx, struct_parent, -1);
 
         assert(doc == page->doc); //[GHo]
-		proc = pdf_new_run_processor(ctx, page->doc, dev, ctm, struct_parent_num, usage, NULL, default_cs, page->transparency);
+		proc = pdf_new_run_processor(ctx, page->doc, dev, ctm, struct_parent_num, usage, NULL, default_cs, page->transparency, NULL, NULL);
 		pdf_processor_push_resources(ctx, proc, pdf_page_resources(ctx, annot->page));
 		resources_pushed = 1;
 		pdf_process_annot(ctx, proc, annot);
@@ -218,7 +218,7 @@ pdf_run_page_contents_with_usage_imp(fz_context *ctx, pdf_document *doc, pdf_pag
 			fz_clip_path(ctx, dev, path, 1, ctm, fz_infinite_rect);
 		}
 
-		proc = pdf_new_run_processor(ctx, page->doc, dev, ctm, struct_parent_num, usage, NULL, default_cs, page->transparency);
+		proc = pdf_new_run_processor(ctx, page->doc, dev, ctm, struct_parent_num, usage, NULL, default_cs, page->transparency, NULL, NULL);
 		pdf_process_contents(ctx, proc, doc, resources, contents, NULL);
 		pdf_close_processor(ctx, proc);
 

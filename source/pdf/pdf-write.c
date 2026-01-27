@@ -1141,7 +1141,7 @@ static void writeobject(fz_context *ctx, pdf_document *doc, pdf_write_state *opt
 			{
 				do_deflate = opts->do_compress;
 				do_expand = opts->do_expand;
-				if (is_image_stream(ctx, obj) && opts->do_compress_images && pdf_is_image_codec(ctx, obj))
+				if (pdf_is_image_stream(ctx, obj) && opts->do_compress_images && is_image_codec(ctx, obj))
 					do_deflate = opts->do_compress ? opts->do_compress : 1, do_expand = 0;
 				if (opts->do_compress_fonts && is_font_stream(ctx, obj))
 					do_deflate = opts->do_compress ? opts->do_compress : 1, do_expand = 0;
@@ -2477,7 +2477,6 @@ do_pdf_save_document(fz_context *ctx, pdf_document *doc, pdf_write_state *opts, 
 		xref_len = pdf_xref_len(ctx, doc); /* May have changed due to repair */
 		assert(xref_len >= 3);
 		expand_lists(ctx, opts, xref_len);
-		assert(opts->use_list != NULL && opts->ofs_list != NULL && opts->gen_list != NULL && opts->renumber_map != NULL && opts->rev_renumber_map != NULL);
 
 		do
 		{

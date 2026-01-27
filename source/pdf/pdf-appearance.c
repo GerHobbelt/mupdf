@@ -2381,7 +2381,7 @@ int text_needs_rich_layout(fz_context *ctx, const char *s)
 	int c, script;
 	while (*s)
 	{
-		s += fz_chartorune(&c, s);
+		s += fz_chartorune_unsafe(&c, s);
 
 		// base 14 fonts
 		if (fz_windows_1252_from_unicode(c) > 0)
