@@ -56,7 +56,7 @@ pdf_drop_annots(fz_context *ctx, pdf_annot *annot)
 pdf_obj *
 pdf_annot_ap(fz_context *ctx, pdf_annot *annot)
 {
-	int flags = pdf_dict_get_int(ctx, annot->obj, PDF_NAME(F));
+	int flags = pdf_annot_flags(ctx, annot);
 	int readonly = flags & PDF_ANNOT_IS_READ_ONLY;
 
 	pdf_obj *ap = pdf_dict_get(ctx, annot->obj, PDF_NAME(AP));
@@ -119,31 +119,129 @@ void pdf_set_annot_hot(fz_context *ctx, pdf_annot *annot, int hot)
 		pdf_set_annot_has_changed(ctx, annot);
 }
 
+int
+pdf_annot_display_rotate(fz_context *ctx, pdf_annot *annot)
+{
+	int flags;
+	int rotate;
+
+	pdf_annot_push_local_xref(ctx, annot);
+	fz_try(ctx)
+	{
+		flags = pdf_annot_flags(ctx, annot);
+		if (flags & PDF_ANNOT_IS_NO_ROTATE)
+			rotate = pdf_dict_get_inheritable_int(ctx, annot->page->obj, PDF_NAME(Rotate));
+		else
+			rotate = 0;
+	}
+	fz_always(ctx)
+		pdf_annot_pop_local_xref(ctx, annot);
+	fz_catch(ctx)
+		fz_rethrow(ctx);
+
+	return rotate;
+}
+
+fz_rect
+pdf_annot_display_rect(fz_context *ctx, pdf_annot *annot)
+{
+	fz_rect rect;
+	int flags;
+
+	pdf_annot_push_local_xref(ctx, annot);
+	fz_try(ctx)
+	{
+		rect = pdf_dict_get_rect(ctx, annot->obj, PDF_NAME(Rect));
+		flags = pdf_annot_flags(ctx, annot);
+
+		if (flags & PDF_ANNOT_IS_NO_ZOOM)
+		{
+			pdf_obj *ap = pdf_annot_ap(ctx, annot);
+			if (ap)
+			{
+				fz_rect bbox = pdf_xobject_bbox(ctx, ap);
+				rect = fz_make_rect(
+					rect.x0,
+					rect.y1 - (bbox.y1 - bbox.y0),
+					rect.x0 + (bbox.x1 - bbox.x0),
+					rect.y1
+				);
+			}
+		}
+
+		if (flags & PDF_ANNOT_IS_NO_ROTATE)
+		{
+			int rotate = pdf_dict_get_inheritable_int(ctx, annot->page->obj, PDF_NAME(Rotate));
+			if (rotate != 0)
+			{
+				fz_point tp = fz_make_point(rect.x0, rect.y1);
+				fz_matrix rotmat = fz_translate(-tp.x, -tp.y);
+				rotmat = fz_concat(rotmat, fz_rotate(rotate));
+				rotmat = fz_concat(rotmat, fz_translate(tp.x, tp.y));
+				rect = fz_transform_rect(rect, rotmat);
+			}
+		}
+	}
+	fz_always(ctx)
+		pdf_annot_pop_local_xref(ctx, annot);
+	fz_catch(ctx)
+		fz_rethrow(ctx);
+
+	return rect;
+}
+
 fz_matrix
 pdf_annot_transform(fz_context *ctx, pdf_annot *annot)
 {
 	fz_rect bbox, rect;
-	fz_matrix matrix;
-	float w, h, x, y;
+	fz_matrix matrix, rotmat;
+	float w, h, sx, sy, x, y;
+	int rotate;
+
 	pdf_obj *ap = pdf_annot_ap(ctx, annot);
+	rect = pdf_annot_display_rect(ctx, annot);
+	rotate = pdf_annot_display_rotate(ctx, annot);
 
-	rect = pdf_dict_get_rect(ctx, annot->obj, PDF_NAME(Rect));
-	bbox = pdf_xobject_bbox(ctx, ap);
 	matrix = pdf_xobject_matrix(ctx, ap);
-
+	bbox = pdf_xobject_bbox(ctx, ap);
 	bbox = fz_transform_rect(bbox, matrix);
-	if (bbox.x1 == bbox.x0)
-		w = 0;
-	else
-		w = (rect.x1 - rect.x0) / (bbox.x1 - bbox.x0);
-	if (bbox.y1 == bbox.y0)
-		h = 0;
-	else
-		h = (rect.y1 - rect.y0) / (bbox.y1 - bbox.y0);
-	x = rect.x0 - (bbox.x0 * w);
-	y = rect.y0 - (bbox.y0 * h);
 
-	return fz_pre_scale(fz_translate(x, y), w, h);
+	w = (bbox.x1 - bbox.x0);
+	h = (bbox.y1 - bbox.y0);
+
+	if (rotate == 90)
+	{
+		rotmat = fz_pre_rotate(fz_scale(w/h, h/w), 90);
+		rotmat.e = w;
+	}
+	else if (rotate == 180)
+	{
+		rotmat = fz_rotate(180);
+		rotmat.e = w;
+		rotmat.f = h;
+	}
+	else if (rotate == 270)
+	{
+		rotmat = fz_pre_rotate(fz_scale(w/h, h/w), 270);
+		rotmat.f = h;
+	}
+	else
+	{
+		rotmat = fz_identity;
+	}
+
+	if (bbox.x1 == bbox.x0)
+		sx = 0;
+	else
+		sx = (rect.x1 - rect.x0) / w;
+	if (bbox.y1 == bbox.y0)
+		sy = 0;
+	else
+		sy = (rect.y1 - rect.y0) / h;
+	x = rect.x0 - (bbox.x0 * sx);
+	y = rect.y0 - (bbox.y0 * sy);
+
+	return fz_concat(rotmat, fz_pre_scale(fz_translate(x, y), sx, sy));
 }
 
 /*
@@ -166,15 +264,18 @@ void
 pdf_nuke_annots(fz_context *ctx, pdf_page *page)
 {
 	pdf_annot *annot;
+	pdf_annot *next;
 
-	for (annot = page->annots; annot; annot = annot->next)
+	for (annot = page->annots; annot; annot = next)
 	{
+		next = annot->next;
 		pdf_drop_obj(ctx, annot->obj);
 		annot->obj = NULL;
 		pdf_drop_annot(ctx, annot);
 	}
-	for (annot = page->widgets; annot; annot = annot->next)
+	for (annot = page->widgets; annot; annot = next)
 	{
+		next = annot->next;
 		pdf_drop_obj(ctx, annot->obj);
 		annot->obj = NULL;
 		pdf_drop_annot(ctx, annot);
@@ -278,6 +379,19 @@ pdf_sync_annots(fz_context *ctx, pdf_page *page)
 	}
 }
 
+static int pdf_need_appearances(fz_context *ctx, pdf_document *doc)
+{
+	return pdf_to_bool(ctx,
+		pdf_dict_getl(ctx,
+			pdf_trailer(ctx, doc),
+			PDF_NAME(Root),
+			PDF_NAME(AcroForm),
+			PDF_NAME(NeedAppearances),
+			NULL
+		)
+	);
+}
+
 void
 pdf_load_annots(fz_context *ctx, pdf_page *page)
 {
@@ -285,7 +399,21 @@ pdf_load_annots(fz_context *ctx, pdf_page *page)
 
 	/* We need to run a resynth pass on the annotations on this
 	 * page. That means rerunning it on the complete document. */
-	page->doc->resynth_required = 1;
+	if (page->annots || page->widgets)
+	{
+		page->doc->resynth_required = 1;
+
+		if (pdf_need_appearances(ctx, page->doc))
+		{
+			pdf_annot *widget;
+			for (widget = page->widgets; widget; widget = widget->next)
+			{
+				// request local only resynthesis
+				widget->needs_new_local_ap = 1;
+			}
+		}
+	}
+
 	/* And actually update the page so that any annotations required
 	 * get synthesised. */
 	pdf_update_page(ctx, page);
@@ -318,30 +446,8 @@ pdf_bound_annot(fz_context *ctx, pdf_annot *annot)
 {
 	fz_matrix page_ctm;
 	fz_rect rect;
-	int flags;
-
-	pdf_annot_push_local_xref(ctx, annot);
-
-	fz_try(ctx)
-	{
-		rect = pdf_dict_get_rect(ctx, annot->obj, PDF_NAME(Rect));
-		pdf_page_transform(ctx, annot->page, NULL, &page_ctm);
-
-		flags = pdf_dict_get_int(ctx, annot->obj, PDF_NAME(F));
-		if (flags & PDF_ANNOT_IS_NO_ROTATE)
-		{
-			int rotate = pdf_dict_get_inheritable_int(ctx, annot->page->obj, PDF_NAME(Rotate));
-			fz_point tp = fz_transform_point_xy(rect.x0, rect.y1, page_ctm);
-			page_ctm = fz_concat(page_ctm, fz_translate(-tp.x, -tp.y));
-			page_ctm = fz_concat(page_ctm, fz_rotate(-rotate));
-			page_ctm = fz_concat(page_ctm, fz_translate(tp.x, tp.y));
-		}
-	}
-	fz_always(ctx)
-		pdf_annot_pop_local_xref(ctx, annot);
-	fz_catch(ctx)
-		fz_rethrow(ctx);
-
+	pdf_page_transform(ctx, annot->page, NULL, &page_ctm);
+	rect = pdf_annot_display_rect(ctx, annot);
 	return fz_transform_rect(rect, page_ctm);
 }
 
@@ -351,6 +457,7 @@ pdf_annot_request_resynthesis(fz_context *ctx, pdf_annot *annot)
 	if (annot == NULL)
 		return;
 
+	annot->needs_new_local_ap = 0;
 	annot->needs_new_ap = 1;
 	annot->page->doc->resynth_required = 1;
 }
@@ -367,7 +474,11 @@ pdf_annot_request_synthesis(fz_context *ctx, pdf_annot *annot)
 int
 pdf_annot_needs_resynthesis(fz_context *ctx, pdf_annot *annot)
 {
-	return annot ? annot->needs_new_ap : 0;
+	if (annot == NULL)
+		return 0;
+	if (annot->needs_new_local_ap)
+		return -1;
+	return annot->needs_new_ap;
 }
 
 void pdf_set_annot_resynthesised(fz_context *ctx, pdf_annot *annot)
@@ -375,6 +486,8 @@ void pdf_set_annot_resynthesised(fz_context *ctx, pdf_annot *annot)
 	if (annot == NULL)
 		return;
 
+	if (annot->page->doc->local_xref_nesting == 0)
+		annot->needs_new_local_ap = 0;
 	annot->needs_new_ap = 0;
 	pdf_set_annot_has_changed(ctx, annot);
 }
@@ -865,7 +978,7 @@ pdf_create_annot(fz_context *ctx, pdf_page *page, enum pdf_annot_type type)
 		case PDF_ANNOT_FILE_ATTACHMENT:
 		case PDF_ANNOT_SOUND:
 			{
-				fz_rect icon_rect = { 12, 12, 12+20, 12+20 };
+				fz_rect icon_rect = { 12, 12, 12+16, 12+16 };
 				flags = PDF_ANNOT_IS_PRINT | PDF_ANNOT_IS_NO_ZOOM | PDF_ANNOT_IS_NO_ROTATE;
 				pdf_set_annot_rect(ctx, annot, icon_rect);
 				pdf_set_annot_color(ctx, annot, 3, yellow);
@@ -1114,17 +1227,22 @@ pdf_annot_type(fz_context *ctx, pdf_annot *annot)
 int
 pdf_annot_flags(fz_context *ctx, pdf_annot *annot)
 {
-	int ret;
+	int flags;
 	pdf_annot_push_local_xref(ctx, annot);
 
 	fz_try(ctx)
-		ret = pdf_dict_get_int(ctx, annot->obj, PDF_NAME(F));
+	{
+		flags = pdf_dict_get_int(ctx, annot->obj, PDF_NAME(F));
+		// Text annotations always behave as if NoRotate and NoZoom is set!
+		if (pdf_dict_get(ctx, annot->obj, PDF_NAME(Subtype)) == PDF_NAME(Text))
+			flags |= PDF_ANNOT_IS_NO_ROTATE | PDF_ANNOT_IS_NO_ZOOM;
+	}
 	fz_always(ctx)
 		pdf_annot_pop_local_xref(ctx, annot);
 	fz_catch(ctx)
 		fz_rethrow(ctx);
 
-	return ret;
+	return flags;
 }
 
 void
@@ -1233,7 +1351,6 @@ pdf_set_annot_rect(fz_context *ctx, pdf_annot *annot, fz_rect rect)
 			pdf_set_annot_callout_point(ctx, annot, pdf_annot_callout_point(ctx, annot));
 		}
 
-		pdf_dirty_annot(ctx, annot);
 		end_annot_op(ctx, annot);
 	}
 	fz_catch(ctx)
@@ -1241,6 +1358,8 @@ pdf_set_annot_rect(fz_context *ctx, pdf_annot *annot, fz_rect rect)
 		abandon_annot_op(ctx, annot);
 		fz_rethrow(ctx);
 	}
+
+	pdf_dirty_annot(ctx, annot);
 }
 
 const char *
@@ -1266,6 +1385,8 @@ pdf_set_annot_contents(fz_context *ctx, pdf_annot *annot, const char *text)
 		abandon_annot_op(ctx, annot);
 		fz_rethrow(ctx);
 	}
+
+	pdf_dirty_annot(ctx, annot);
 }
 
 static pdf_obj *markup_subtypes[] = {
@@ -1311,7 +1432,6 @@ pdf_set_annot_rich_contents(fz_context *ctx, pdf_annot *annot, const char *plain
 		check_allowed_subtypes(ctx, annot, PDF_NAME(RC), markup_subtypes);
 		pdf_dict_put_text_string(ctx, annot->obj, PDF_NAME(Contents), plain);
 		pdf_dict_put_text_string(ctx, annot->obj, PDF_NAME(RC), rich);
-		pdf_dirty_annot(ctx, annot);
 		end_annot_op(ctx, annot);
 	}
 	fz_catch(ctx)
@@ -1319,6 +1439,8 @@ pdf_set_annot_rich_contents(fz_context *ctx, pdf_annot *annot, const char *plain
 		abandon_annot_op(ctx, annot);
 		fz_rethrow(ctx);
 	}
+
+	pdf_dirty_annot(ctx, annot);
 }
 
 static pdf_obj *default_style_subtypes[] = {
@@ -1348,7 +1470,6 @@ pdf_set_annot_rich_defaults(fz_context *ctx, pdf_annot *annot, const char *style
 	{
 		check_allowed_subtypes(ctx, annot, PDF_NAME(DS), default_style_subtypes);
 		pdf_dict_put_text_string(ctx, annot->obj, PDF_NAME(DS), style);
-		pdf_dirty_annot(ctx, annot);
 		end_annot_op(ctx, annot);
 	}
 	fz_catch(ctx)
@@ -1356,6 +1477,8 @@ pdf_set_annot_rich_defaults(fz_context *ctx, pdf_annot *annot, const char *style
 		abandon_annot_op(ctx, annot);
 		fz_rethrow(ctx);
 	}
+
+	pdf_dirty_annot(ctx, annot);
 }
 
 int
@@ -2133,6 +2256,28 @@ void pdf_set_document_language(fz_context *ctx, pdf_document *doc, fz_text_langu
 }
 
 fz_text_language
+pdf_guess_text_language_from_font_name(fz_context *ctx, const char *name)
+{
+	if (!strstr(name, "SimFang")) return FZ_LANG_zh_Hans;
+	if (!strstr(name, "SimHei")) return FZ_LANG_zh_Hans;
+	if (!strstr(name, "SimKai")) return FZ_LANG_zh_Hans;
+	if (!strstr(name, "SimLi")) return FZ_LANG_zh_Hans;
+	if (!strstr(name, "SimSun")) return FZ_LANG_zh_Hans;
+	if (!strstr(name, "Song")) return FZ_LANG_zh_Hans;
+
+	if (!strstr(name, "MingLiU")) return FZ_LANG_zh_Hant;
+
+	if (!strstr(name, "Gothic")) return FZ_LANG_ja;
+	if (!strstr(name, "Mincho")) return FZ_LANG_ja;
+
+	if (!strstr(name, "Batang")) return FZ_LANG_ko;
+	if (!strstr(name, "Gulim")) return FZ_LANG_ko;
+	if (!strstr(name, "Dotum")) return FZ_LANG_ko;
+
+	return FZ_LANG_UNSET;
+}
+
+fz_text_language
 pdf_annot_language(fz_context *ctx, pdf_annot *annot)
 {
 	fz_text_language ret;
@@ -2151,6 +2296,16 @@ pdf_annot_language(fz_context *ctx, pdf_annot *annot)
 		pdf_annot_pop_local_xref(ctx, annot);
 	fz_catch(ctx)
 		fz_rethrow(ctx);
+
+	// If Lang is not explicitly set, try to guess from the DA font:
+	if (ret == FZ_LANG_UNSET)
+	{
+		char font_name[80];
+		float size, color[4];
+		int n;
+		pdf_annot_default_appearance_unmapped(ctx, annot, font_name, sizeof font_name, &size, &n, color);
+		ret = pdf_guess_text_language_from_font_name(ctx, font_name);
+	}
 
 	return ret;
 }
@@ -2486,6 +2641,8 @@ pdf_set_annot_color(fz_context *ctx, pdf_annot *annot, int n, const float *color
 		abandon_annot_op(ctx, annot);
 		fz_rethrow(ctx);
 	}
+
+	pdf_dirty_annot(ctx, annot);
 }
 
 static pdf_obj *interior_color_subtypes[] = {
@@ -2526,6 +2683,8 @@ pdf_set_annot_interior_color(fz_context *ctx, pdf_annot *annot, int n, const flo
 		abandon_annot_op(ctx, annot);
 		fz_rethrow(ctx);
 	}
+
+	pdf_dirty_annot(ctx, annot);
 }
 
 static pdf_obj *line_subtypes[] = {
@@ -2980,6 +3139,8 @@ void pdf_set_annot_vertex(fz_context *ctx, pdf_annot *annot, int i, fz_point p)
 		abandon_annot_op(ctx, annot);
 		fz_rethrow(ctx);
 	}
+
+	pdf_dirty_annot(ctx, annot);
 }
 
 static pdf_obj *quad_point_subtypes[] = {
@@ -3545,6 +3706,8 @@ pdf_set_annot_author(fz_context *ctx, pdf_annot *annot, const char *author)
 		abandon_annot_op(ctx, annot);
 		fz_rethrow(ctx);
 	}
+
+	pdf_dirty_annot(ctx, annot);
 }
 
 static pdf_obj *intent_subtypes[] = {
@@ -3641,7 +3804,7 @@ const char *pdf_string_from_intent(fz_context *ctx, enum pdf_intent it)
 	switch (it)
 	{
 	default:
-	case PDF_ANNOT_IT_DEFAULT: return NULL;
+	case PDF_ANNOT_IT_DEFAULT: return "Default";
 	case PDF_ANNOT_IT_FREETEXT_CALLOUT: return "FreeTextCallout";
 	case PDF_ANNOT_IT_FREETEXT_TYPEWRITER: return "FreeTextTypeWriter";
 	case PDF_ANNOT_IT_LINE_ARROW: return "LineArrow";
@@ -3701,6 +3864,8 @@ pdf_set_annot_intent(fz_context *ctx, pdf_annot *annot, enum pdf_intent it)
 		abandon_annot_op(ctx, annot);
 		fz_rethrow(ctx);
 	}
+
+	pdf_dirty_annot(ctx, annot);
 }
 
 static pdf_obj *callout_subtypes[] = {
@@ -3739,6 +3904,7 @@ void pdf_set_annot_callout_style(fz_context *ctx, pdf_annot *annot, enum pdf_lin
 	{
 		check_allowed_subtypes(ctx, annot, PDF_NAME(CL), callout_subtypes);
 		pdf_dict_put(ctx, annot->obj, PDF_NAME(LE), pdf_name_from_line_ending(ctx, style));
+		end_annot_op(ctx, annot);
 	}
 	fz_catch(ctx)
 	{
@@ -3822,7 +3988,6 @@ void pdf_set_annot_callout_line(fz_context *ctx, pdf_annot *annot, fz_point call
 			pdf_dict_del(ctx, annot->obj, PDF_NAME(CL));
 		}
 
-		pdf_dirty_annot(ctx, annot);
 		end_annot_op(ctx, annot);
 	}
 	fz_catch(ctx)
@@ -3830,6 +3995,8 @@ void pdf_set_annot_callout_line(fz_context *ctx, pdf_annot *annot, fz_point call
 		abandon_annot_op(ctx, annot);
 		fz_rethrow(ctx);
 	}
+
+	pdf_dirty_annot(ctx, annot);
 }
 
 fz_point pdf_annot_callout_point(fz_context *ctx, pdf_annot *annot)

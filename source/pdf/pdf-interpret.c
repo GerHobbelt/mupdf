@@ -29,11 +29,670 @@
 /* Maximum number of errors before aborting */
 #define MAX_SYNTAX_ERRORS 100
 
+pdf_obj *
+pdf_lookup_resource(fz_context *ctx, pdf_resource_stack *stack, pdf_obj *type, const char *name)
+{
+	pdf_obj *sub, *obj;
+	while (stack)
+	{
+		sub = pdf_dict_get(ctx, stack->resources, type);
+		if (sub)
+		{
+			obj = pdf_dict_gets(ctx, sub, name);
+			if (obj)
+				return obj;
+		}
+		stack = stack->next;
+	}
+	return NULL;
+}
+
+#define PASSON(A) if (proc && proc->chain && proc->chain->A) proc->chain->A
+static void
+pdf_default_close_processor(fz_context *ctx, pdf_processor *proc)
+{
+	if (proc && proc->chain)
+		pdf_close_processor(ctx, proc->chain);
+}
+
+static void
+pdf_default_drop_processor(fz_context *ctx, pdf_processor *proc)
+{
+	PASSON(drop_processor)(ctx, proc->chain);
+}
+
+static void
+pdf_default_reset_processor(fz_context *ctx, pdf_processor *proc)
+{
+	if (proc && proc->chain)
+		pdf_reset_processor(ctx, proc->chain);
+}
+
+static void
+pdf_default_push_resources(fz_context *ctx, pdf_processor *proc, pdf_obj *res)
+{
+	if (proc && proc->chain)
+		pdf_processor_push_resources(ctx, proc->chain, res);
+}
+
+static pdf_obj *
+pdf_default_pop_resources(fz_context *ctx, pdf_processor *proc)
+{
+	if (proc && proc->chain)
+		return pdf_processor_pop_resources(ctx, proc->chain);
+	return NULL;
+}
+
+static void
+pdf_default_op_w(fz_context *ctx, pdf_processor *proc, float linewidth)
+{
+	PASSON(op_w)(ctx, proc->chain, linewidth);
+}
+
+static void
+pdf_default_op_j(fz_context *ctx, pdf_processor *proc, int linejoin)
+{
+	PASSON(op_j)(ctx, proc->chain, linejoin);
+}
+
+static void
+pdf_default_op_J(fz_context *ctx, pdf_processor *proc, int linecap)
+{
+	PASSON(op_J)(ctx, proc->chain, linecap);
+}
+
+static void
+pdf_default_op_M(fz_context *ctx, pdf_processor *proc, float miterlimit)
+{
+	PASSON(op_M)(ctx, proc->chain, miterlimit);
+}
+
+static void
+pdf_default_op_d(fz_context *ctx, pdf_processor *proc, pdf_obj *array, float phase)
+{
+	PASSON(op_d)(ctx, proc->chain, array, phase);
+}
+
+static void
+pdf_default_op_ri(fz_context *ctx, pdf_processor *proc, const char *intent)
+{
+	PASSON(op_ri)(ctx, proc->chain, intent);
+}
+
+static void
+pdf_default_op_i(fz_context *ctx, pdf_processor *proc, float flatness)
+{
+	PASSON(op_i)(ctx, proc->chain, flatness);
+}
+
+static void
+pdf_default_op_gs_begin(fz_context *ctx, pdf_processor *proc, const char *name, pdf_obj *extgstate)
+{
+	PASSON(op_gs_begin)(ctx, proc->chain, name, extgstate);
+}
+
+static void
+pdf_default_op_gs_BM(fz_context *ctx, pdf_processor *proc, const char *blendmode)
+{
+	PASSON(op_gs_BM)(ctx, proc->chain, blendmode);
+}
+
+static void
+pdf_default_op_gs_ca(fz_context *ctx, pdf_processor *proc, float alpha)
+{
+	PASSON(op_gs_ca)(ctx, proc->chain, alpha);
+}
+
+static void
+pdf_default_op_gs_CA(fz_context *ctx, pdf_processor *proc, float alpha)
+{
+	PASSON(op_gs_CA)(ctx, proc->chain, alpha);
+}
+
+static void
+pdf_default_op_gs_SMask(fz_context *ctx, pdf_processor *proc, pdf_obj *smask, fz_colorspace *smask_cs, float *bc, int luminosity, pdf_obj *tr)
+{
+	PASSON(op_gs_SMask)(ctx, proc->chain, smask, smask_cs, bc, luminosity, tr);
+}
+
+static void
+pdf_default_op_gs_end(fz_context *ctx, pdf_processor *proc)
+{
+	PASSON(op_gs_end)(ctx, proc->chain);
+}
+
+static void
+pdf_default_op_q(fz_context *ctx, pdf_processor *proc)
+{
+	PASSON(op_q)(ctx, proc->chain);
+}
+
+static void
+pdf_default_op_Q(fz_context *ctx, pdf_processor *proc)
+{
+	PASSON(op_Q)(ctx, proc->chain);
+}
+
+static void
+pdf_default_op_cm(fz_context *ctx, pdf_processor *proc, float a, float b, float c, float d, float e, float f)
+{
+	PASSON(op_cm)(ctx, proc->chain, a, b, c, d, e, f);
+}
+
+static void
+pdf_default_op_m(fz_context *ctx, pdf_processor *proc, float x, float y)
+{
+	PASSON(op_m)(ctx, proc->chain, x, y);
+}
+
+static void
+pdf_default_op_l(fz_context *ctx, pdf_processor *proc, float x, float y)
+{
+	PASSON(op_l)(ctx, proc->chain, x, y);
+}
+
+static void
+pdf_default_op_c(fz_context *ctx, pdf_processor *proc, float x1, float y1, float x2, float y2, float x3, float y3)
+{
+	PASSON(op_c)(ctx, proc->chain, x1, y1, x2, y2, x3, y3);
+}
+
+static void
+pdf_default_op_v(fz_context *ctx, pdf_processor *proc, float x2, float y2, float x3, float y3)
+{
+	PASSON(op_v)(ctx, proc->chain, x2, y2, x3, y3);
+}
+
+static void
+pdf_default_op_y(fz_context *ctx, pdf_processor *proc, float x1, float y1, float x3, float y3)
+{
+	PASSON(op_y)(ctx, proc->chain, x1, y1, x3, y3);
+}
+
+static void
+pdf_default_op_h(fz_context *ctx, pdf_processor *proc)
+{
+	PASSON(op_h)(ctx, proc->chain);
+}
+
+static void
+pdf_default_op_re(fz_context *ctx, pdf_processor *proc, float x, float y, float w, float h)
+{
+	PASSON(op_re)(ctx, proc->chain, x, y, w, h);
+}
+
+static void
+pdf_default_op_S(fz_context *ctx, pdf_processor *proc)
+{
+	PASSON(op_S)(ctx, proc->chain);
+}
+
+static void
+pdf_default_op_s(fz_context *ctx, pdf_processor *proc)
+{
+	PASSON(op_s)(ctx, proc->chain);
+}
+
+static void
+pdf_default_op_F(fz_context *ctx, pdf_processor *proc)
+{
+	PASSON(op_F)(ctx, proc->chain);
+}
+
+static void
+pdf_default_op_f(fz_context *ctx, pdf_processor *proc)
+{
+	PASSON(op_f)(ctx, proc->chain);
+}
+
+static void
+pdf_default_op_fstar(fz_context *ctx, pdf_processor *proc)
+{
+	PASSON(op_fstar)(ctx, proc->chain);
+}
+
+static void
+pdf_default_op_B(fz_context *ctx, pdf_processor *proc)
+{
+	PASSON(op_B)(ctx, proc->chain);
+}
+
+static void
+pdf_default_op_Bstar(fz_context *ctx, pdf_processor *proc)
+{
+	PASSON(op_Bstar)(ctx, proc->chain);
+}
+
+static void
+pdf_default_op_b(fz_context *ctx, pdf_processor *proc)
+{
+	PASSON(op_b)(ctx, proc->chain);
+}
+
+static void
+pdf_default_op_bstar(fz_context *ctx, pdf_processor *proc)
+{
+	PASSON(op_bstar)(ctx, proc->chain);
+}
+
+static void
+pdf_default_op_n(fz_context *ctx, pdf_processor *proc)
+{
+	PASSON(op_n)(ctx, proc->chain);
+}
+
+static void
+pdf_default_op_W(fz_context *ctx, pdf_processor *proc)
+{
+	PASSON(op_W)(ctx, proc->chain);
+}
+
+static void
+pdf_default_op_Wstar(fz_context *ctx, pdf_processor *proc)
+{
+	PASSON(op_Wstar)(ctx, proc->chain);
+}
+
+static void
+pdf_default_op_BT(fz_context *ctx, pdf_processor *proc)
+{
+	PASSON(op_BT)(ctx, proc->chain);
+}
+
+static void
+pdf_default_op_ET(fz_context *ctx, pdf_processor *proc)
+{
+	PASSON(op_ET)(ctx, proc->chain);
+}
+
+static void
+pdf_default_op_Tc(fz_context *ctx, pdf_processor *proc, float charspace)
+{
+	PASSON(op_Tc)(ctx, proc->chain, charspace);
+}
+
+static void
+pdf_default_op_Tw(fz_context *ctx, pdf_processor *proc, float wordspace)
+{
+	PASSON(op_Tw)(ctx, proc->chain, wordspace);
+}
+
+static void
+pdf_default_op_Tz(fz_context *ctx, pdf_processor *proc, float scale)
+{
+	PASSON(op_Tz)(ctx, proc->chain, scale);
+}
+
+static void
+pdf_default_op_TL(fz_context *ctx, pdf_processor *proc, float leading)
+{
+	PASSON(op_TL)(ctx, proc->chain, leading);
+}
+
+static void
+pdf_default_op_Tf(fz_context *ctx, pdf_processor *proc, const char *name, pdf_font_desc *font, float size)
+{
+	PASSON(op_Tf)(ctx, proc->chain, name, font, size);
+}
+
+static void
+pdf_default_op_Tr(fz_context *ctx, pdf_processor *proc, int render)
+{
+	PASSON(op_Tr)(ctx, proc->chain, render);
+}
+
+static void
+pdf_default_op_Ts(fz_context *ctx, pdf_processor *proc, float rise)
+{
+	PASSON(op_Ts)(ctx, proc->chain, rise);
+}
+
+static void
+pdf_default_op_Td(fz_context *ctx, pdf_processor *proc, float tx, float ty)
+{
+	PASSON(op_Td)(ctx, proc->chain, tx, ty);
+}
+
+static void
+pdf_default_op_TD(fz_context *ctx, pdf_processor *proc, float tx, float ty)
+{
+	PASSON(op_TD)(ctx, proc->chain, tx, ty);
+}
+
+static void
+pdf_default_op_Tm(fz_context *ctx, pdf_processor *proc, float a, float b, float c, float d, float e, float f)
+{
+	PASSON(op_Tm)(ctx, proc->chain, a, b, c, d, e, f);
+}
+
+static void
+pdf_default_op_Tstar(fz_context *ctx, pdf_processor *proc)
+{
+	PASSON(op_Tstar)(ctx, proc->chain);
+}
+
+static void
+pdf_default_op_TJ(fz_context *ctx, pdf_processor *proc, pdf_obj *array)
+{
+	PASSON(op_TJ)(ctx, proc->chain, array);
+}
+
+static void
+pdf_default_op_Tj(fz_context *ctx, pdf_processor *proc, char *str, size_t len)
+{
+	PASSON(op_Tj)(ctx, proc->chain, str, len);
+}
+
+static void
+pdf_default_op_squote(fz_context *ctx, pdf_processor *proc, char *str, size_t len)
+{
+	PASSON(op_squote)(ctx, proc->chain, str, len);
+}
+
+static void
+pdf_default_op_dquote(fz_context *ctx, pdf_processor *proc, float aw, float ac, char *str, size_t len)
+{
+	PASSON(op_dquote)(ctx, proc->chain, aw, ac, str, len);
+}
+
+static void
+pdf_default_op_d0(fz_context *ctx, pdf_processor *proc, float wx, float wy)
+{
+	PASSON(op_d0)(ctx, proc->chain, wx, wy);
+}
+
+static void
+pdf_default_op_d1(fz_context *ctx, pdf_processor *proc, float wx, float wy, float llx, float lly, float urx, float ury)
+{
+	PASSON(op_d1)(ctx, proc->chain, wx, wy, llx, lly, urx, ury);
+}
+
+static void
+pdf_default_op_CS(fz_context *ctx, pdf_processor *proc, const char *name, fz_colorspace *cs)
+{
+	PASSON(op_CS)(ctx, proc->chain, name, cs);
+}
+
+static void
+pdf_default_op_cs(fz_context *ctx, pdf_processor *proc, const char *name, fz_colorspace *cs)
+{
+	PASSON(op_cs)(ctx, proc->chain, name, cs);
+}
+
+static void
+pdf_default_op_SC_pattern(fz_context *ctx, pdf_processor *proc, const char *name, pdf_pattern *pat, int n, float *color)
+{
+	PASSON(op_SC_pattern)(ctx, proc->chain, name, pat, n, color);
+}
+
+static void
+pdf_default_op_sc_pattern(fz_context *ctx, pdf_processor *proc, const char *name, pdf_pattern *pat, int n, float *color)
+{
+	PASSON(op_sc_pattern)(ctx, proc->chain, name, pat, n, color);
+}
+
+static void
+pdf_default_op_SC_shade(fz_context *ctx, pdf_processor *proc, const char *name, fz_shade *shade)
+{
+	PASSON(op_SC_shade)(ctx, proc->chain, name, shade);
+}
+
+static void
+pdf_default_op_sc_shade(fz_context *ctx, pdf_processor *proc, const char *name, fz_shade *shade)
+{
+	PASSON(op_sc_shade)(ctx, proc->chain, name, shade);
+}
+
+static void
+pdf_default_op_SC_color(fz_context *ctx, pdf_processor *proc, int n, float *color)
+{
+	PASSON(op_SC_color)(ctx, proc->chain, n, color);
+}
+
+static void
+pdf_default_op_sc_color(fz_context *ctx, pdf_processor *proc, int n, float *color)
+{
+	PASSON(op_sc_color)(ctx, proc->chain, n, color);
+}
+
+static void
+pdf_default_op_G(fz_context *ctx, pdf_processor *proc, float g)
+{
+	PASSON(op_G)(ctx, proc->chain, g);
+}
+
+static void
+pdf_default_op_g(fz_context *ctx, pdf_processor *proc, float g)
+{
+	PASSON(op_g)(ctx, proc->chain, g);
+}
+
+static void
+pdf_default_op_RG(fz_context *ctx, pdf_processor *proc, float r, float g, float b)
+{
+	PASSON(op_RG)(ctx, proc->chain, r, g, b);
+}
+
+static void
+pdf_default_op_rg(fz_context *ctx, pdf_processor *proc, float r, float g, float b)
+{
+	PASSON(op_rg)(ctx, proc->chain, r, g, b);
+}
+
+static void
+pdf_default_op_K(fz_context *ctx, pdf_processor *proc, float c, float m, float y, float k)
+{
+	PASSON(op_K)(ctx, proc->chain, c, m, y, k);
+}
+
+static void
+pdf_default_op_k(fz_context *ctx, pdf_processor *proc, float c, float m, float y, float k)
+{
+	PASSON(op_k)(ctx, proc->chain, c, m, y, k);
+}
+
+static void
+pdf_default_op_BI(fz_context *ctx, pdf_processor *proc, fz_image *image, const char *colorspace_name)
+{
+	PASSON(op_BI)(ctx, proc->chain, image, colorspace_name);
+}
+
+static void
+pdf_default_op_sh(fz_context *ctx, pdf_processor *proc, const char *name, fz_shade *shade)
+{
+	PASSON(op_sh)(ctx, proc->chain, name, shade);
+}
+
+static void
+pdf_default_op_Do_image(fz_context *ctx, pdf_processor *proc, const char *name, fz_image *image)
+{
+	PASSON(op_Do_image)(ctx, proc->chain, name, image);
+}
+
+static void
+pdf_default_op_Do_form(fz_context *ctx, pdf_processor *proc, const char *name, pdf_obj *form)
+{
+	PASSON(op_Do_form)(ctx, proc->chain, name, form);
+}
+
+static void
+pdf_default_op_MP(fz_context *ctx, pdf_processor *proc, const char *tag)
+{
+	PASSON(op_MP)(ctx, proc->chain, tag);
+}
+
+static void
+pdf_default_op_DP(fz_context *ctx, pdf_processor *proc, const char *tag, pdf_obj *raw, pdf_obj *cooked)
+{
+	PASSON(op_DP)(ctx, proc->chain, tag, raw, cooked);
+}
+
+static void
+pdf_default_op_BMC(fz_context *ctx, pdf_processor *proc, const char *tag)
+{
+	PASSON(op_BMC)(ctx, proc->chain, tag);
+}
+
+static void
+pdf_default_op_BDC(fz_context *ctx, pdf_processor *proc, const char *tag, pdf_obj *raw, pdf_obj *cooked)
+{
+	PASSON(op_BDC)(ctx, proc->chain, tag, raw, cooked);
+}
+
+static void
+pdf_default_op_EMC(fz_context *ctx, pdf_processor *proc)
+{
+	PASSON(op_EMC)(ctx, proc->chain);
+}
+
+static void
+pdf_default_op_BX(fz_context *ctx, pdf_processor *proc)
+{
+	PASSON(op_BX)(ctx, proc->chain);
+}
+
+static void
+pdf_default_op_EX(fz_context *ctx, pdf_processor *proc)
+{
+	PASSON(op_EX)(ctx, proc->chain);
+}
+
+static void
+pdf_default_op_gs_OP(fz_context *ctx, pdf_processor *proc, int b)
+{
+	PASSON(op_gs_OP)(ctx, proc->chain, b);
+}
+
+static void
+pdf_default_op_gs_op(fz_context *ctx, pdf_processor *proc, int b)
+{
+	PASSON(op_gs_op)(ctx, proc->chain, b);
+}
+
+static void
+pdf_default_op_gs_OPM(fz_context *ctx, pdf_processor *proc, int i)
+{
+	PASSON(op_gs_OPM)(ctx, proc->chain, i);
+}
+
+static void
+pdf_default_op_gs_UseBlackPtComp(fz_context *ctx, pdf_processor *proc, pdf_obj *name)
+{
+	PASSON(op_gs_UseBlackPtComp)(ctx, proc->chain, name);
+}
+
+static void
+pdf_default_op_EOD(fz_context *ctx, pdf_processor *proc)
+{
+	PASSON(op_EOD)(ctx, proc->chain);
+}
+
+static void
+pdf_default_op_END(fz_context *ctx, pdf_processor *proc)
+{
+	PASSON(op_END)(ctx, proc->chain);
+}
+
+#undef PASSON
+
 void *
 pdf_new_processor(fz_context *ctx, int size)
 {
 	pdf_processor *ret = Memento_label(fz_calloc(ctx, 1, size), "pdf_processor");
 	ret->refs = 1;
+
+	ret->close_processor = pdf_default_close_processor;
+	ret->drop_processor = pdf_default_drop_processor;
+	ret->reset_processor = pdf_default_reset_processor;
+	ret->push_resources = pdf_default_push_resources;
+	ret->pop_resources = pdf_default_pop_resources;
+	ret->op_w = pdf_default_op_w;
+	ret->op_j = pdf_default_op_j;
+	ret->op_J = pdf_default_op_J;
+	ret->op_M = pdf_default_op_M;
+	ret->op_d = pdf_default_op_d;
+	ret->op_ri = pdf_default_op_ri;
+	ret->op_i = pdf_default_op_i;
+	ret->op_gs_begin = pdf_default_op_gs_begin;
+	ret->op_gs_BM = pdf_default_op_gs_BM;
+	ret->op_gs_ca = pdf_default_op_gs_ca;
+	ret->op_gs_CA = pdf_default_op_gs_CA;
+	ret->op_gs_SMask = pdf_default_op_gs_SMask;
+	ret->op_gs_end = pdf_default_op_gs_end;
+	ret->op_q = pdf_default_op_q;
+	ret->op_Q = pdf_default_op_Q;
+	ret->op_cm = pdf_default_op_cm;
+	ret->op_m = pdf_default_op_m;
+	ret->op_l = pdf_default_op_l;
+	ret->op_c = pdf_default_op_c;
+	ret->op_v = pdf_default_op_v;
+	ret->op_y = pdf_default_op_y;
+	ret->op_h = pdf_default_op_h;
+	ret->op_re = pdf_default_op_re;
+	ret->op_S = pdf_default_op_S;
+	ret->op_B = pdf_default_op_B;
+	ret->op_s = pdf_default_op_s;
+	ret->op_F = pdf_default_op_F;
+	ret->op_f = pdf_default_op_f;
+	ret->op_fstar = pdf_default_op_fstar;
+	ret->op_B = pdf_default_op_B;
+	ret->op_Bstar = pdf_default_op_Bstar;
+	ret->op_b = pdf_default_op_b;
+	ret->op_bstar = pdf_default_op_bstar;
+	ret->op_n = pdf_default_op_n;
+	ret->op_W = pdf_default_op_W;
+	ret->op_Wstar = pdf_default_op_Wstar;
+	ret->op_BT = pdf_default_op_BT;
+	ret->op_ET = pdf_default_op_ET;
+	ret->op_Tc = pdf_default_op_Tc;
+	ret->op_Tw = pdf_default_op_Tw;
+	ret->op_Tz = pdf_default_op_Tz;
+	ret->op_TL = pdf_default_op_TL;
+	ret->op_Tf = pdf_default_op_Tf;
+	ret->op_Tr = pdf_default_op_Tr;
+	ret->op_Ts = pdf_default_op_Ts;
+	ret->op_Td = pdf_default_op_Td;
+	ret->op_TD = pdf_default_op_TD;
+	ret->op_Tm = pdf_default_op_Tm;
+	ret->op_Tstar = pdf_default_op_Tstar;
+	ret->op_TJ = pdf_default_op_TJ;
+	ret->op_Tj = pdf_default_op_Tj;
+	ret->op_squote = pdf_default_op_squote;
+	ret->op_dquote = pdf_default_op_dquote;
+	ret->op_d0 = pdf_default_op_d0;
+	ret->op_d1 = pdf_default_op_d1;
+	ret->op_CS = pdf_default_op_CS;
+	ret->op_cs = pdf_default_op_cs;
+	ret->op_SC_pattern = pdf_default_op_SC_pattern;
+	ret->op_sc_pattern = pdf_default_op_sc_pattern;
+	ret->op_SC_shade = pdf_default_op_SC_shade;
+	ret->op_sc_shade = pdf_default_op_sc_shade;
+	ret->op_SC_color = pdf_default_op_SC_color;
+	ret->op_sc_color = pdf_default_op_sc_color;
+	ret->op_G = pdf_default_op_G;
+	ret->op_g = pdf_default_op_g;
+	ret->op_RG = pdf_default_op_RG;
+	ret->op_rg = pdf_default_op_rg;
+	ret->op_K = pdf_default_op_K;
+	ret->op_k = pdf_default_op_k;
+	ret->op_BI = pdf_default_op_BI;
+	ret->op_sh = pdf_default_op_sh;
+	ret->op_Do_image = pdf_default_op_Do_image;
+	ret->op_Do_form = pdf_default_op_Do_form;
+	ret->op_MP = pdf_default_op_MP;
+	ret->op_DP = pdf_default_op_DP;
+	ret->op_BMC = pdf_default_op_BMC;
+	ret->op_BDC = pdf_default_op_BDC;
+	ret->op_EMC = pdf_default_op_EMC;
+	ret->op_BX = pdf_default_op_BX;
+	ret->op_EX = pdf_default_op_EX;
+	ret->op_gs_OP = pdf_default_op_gs_OP;
+	ret->op_gs_op = pdf_default_op_gs_op;
+	ret->op_gs_OPM = pdf_default_op_gs_OPM;
+	ret->op_gs_UseBlackPtComp = pdf_default_op_gs_UseBlackPtComp;
+	ret->op_EOD = pdf_default_op_EOD;
+	ret->op_END = pdf_default_op_END;
+
 	return ret;
 }
 
@@ -68,6 +727,13 @@ pdf_drop_processor(fz_context *ctx, pdf_processor *proc)
 			fz_warn(ctx, "dropping unclosed PDF processor");
 		if (proc->drop_processor)
 			proc->drop_processor(ctx, proc);
+		while (proc->rstack)
+		{
+			pdf_resource_stack *stk = proc->rstack;
+			proc->rstack = stk->next;
+			pdf_drop_obj(ctx, stk->resources);
+			fz_free(ctx, stk);
+		}
 		fz_free(ctx, proc);
 	}
 }
@@ -86,11 +752,10 @@ void pdf_reset_processor(fz_context *ctx, pdf_processor *proc)
 }
 
 static void
-pdf_init_csi(fz_context *ctx, pdf_csi *csi, pdf_document *doc, pdf_obj *rdb, pdf_lexbuf *buf, fz_cookie *cookie)
+pdf_init_csi(fz_context *ctx, pdf_csi *csi, pdf_document *doc, pdf_lexbuf *buf, fz_cookie *cookie)
 {
 	memset(csi, 0, sizeof *csi);
 	csi->doc = doc;
-	csi->rdb = rdb;
 	csi->buf = buf;
 	csi->cookie = cookie;
 }
@@ -112,7 +777,7 @@ pdf_clear_stack(fz_context *ctx, pdf_csi *csi)
 }
 
 static pdf_font_desc *
-pdf_try_load_font(fz_context *ctx, pdf_document *doc, pdf_obj *rdb, pdf_obj *font, fz_cookie *cookie)
+pdf_try_load_font(fz_context *ctx, pdf_document *doc, pdf_resource_stack *rdb, pdf_obj *font, fz_cookie *cookie)
 {
 	pdf_font_desc *desc = NULL;
 	fz_try(ctx)
@@ -137,10 +802,9 @@ pdf_try_load_font(fz_context *ctx, pdf_document *doc, pdf_obj *rdb, pdf_obj *fon
 }
 
 static fz_image *
-parse_inline_image(fz_context *ctx, pdf_csi *csi, fz_stream *stm, char *csname, int cslen)
+parse_inline_image(fz_context *ctx, pdf_processor *proc, pdf_csi *csi, fz_stream *stm, char *csname, int cslen)
 {
 	pdf_document *doc = csi->doc;
-	pdf_obj *rdb = csi->rdb;
 	pdf_obj *obj = NULL;
 	pdf_obj *cs;
 	fz_image *img = NULL;
@@ -168,7 +832,7 @@ parse_inline_image(fz_context *ctx, pdf_csi *csi, fz_stream *stm, char *csname, 
 			if (fz_peek_byte(ctx, stm) == '\n')
 				fz_read_byte(ctx, stm);
 
-		img = pdf_load_inline_image(ctx, doc, rdb, obj, stm);
+		img = pdf_load_inline_image(ctx, doc, proc->rstack, obj, stm);
 
 		/* find EI */
 		found = 0;
@@ -251,7 +915,7 @@ pdf_process_extgstate(fz_context *ctx, pdf_processor *proc, pdf_csi *csi, pdf_ob
 		pdf_obj *font_size = pdf_array_get(ctx, obj, 1);
 		pdf_font_desc *font;
 		if (pdf_is_dict(ctx, font_ref))
-			font = pdf_try_load_font(ctx, csi->doc, csi->rdb, font_ref, csi->cookie);
+			font = pdf_try_load_font(ctx, csi->doc, proc->rstack, font_ref, csi->cookie);
 		else
 			font = pdf_load_hail_mary_font(ctx, csi->doc);
 		fz_try(ctx)
@@ -381,10 +1045,9 @@ pdf_process_extgstate(fz_context *ctx, pdf_processor *proc, pdf_csi *csi, pdf_ob
 static void
 pdf_process_Do(fz_context *ctx, pdf_processor *proc, pdf_csi *csi)
 {
-	pdf_obj *xres, *xobj, *subtype;
+	pdf_obj *xobj, *subtype;
 
-	xres = pdf_dict_get(ctx, csi->rdb, PDF_NAME(XObject));
-	xobj = pdf_dict_gets(ctx, xres, csi->name);
+	xobj = pdf_lookup_resource(ctx, proc->rstack, PDF_NAME(XObject), csi->name);
 	if (!xobj)
 		fz_throw(ctx, FZ_ERROR_SYNTAX, "cannot find XObject resource '%s'", csi->name);
 	subtype = pdf_dict_get(ctx, xobj, PDF_NAME(Subtype));
@@ -397,7 +1060,7 @@ pdf_process_Do(fz_context *ctx, pdf_processor *proc, pdf_csi *csi)
 	if (!pdf_is_name(ctx, subtype))
 		fz_throw(ctx, FZ_ERROR_SYNTAX, "no XObject subtype specified");
 
-	if (pdf_is_ocg_hidden(ctx, csi->doc, csi->rdb, proc->usage, pdf_dict_get(ctx, xobj, PDF_NAME(OC))))
+	if (pdf_is_ocg_hidden(ctx, csi->doc, proc->rstack, proc->usage, pdf_dict_get(ctx, xobj, PDF_NAME(OC))))
 		return;
 
 	if (pdf_name_eq(ctx, subtype, PDF_NAME(Form)))
@@ -454,9 +1117,7 @@ pdf_process_CS(fz_context *ctx, pdf_processor *proc, pdf_csi *csi, int stroke)
 		cs = fz_keep_colorspace(ctx, fz_device_cmyk(ctx));
 	else
 	{
-		pdf_obj *csres, *csobj;
-		csres = pdf_dict_get(ctx, csi->rdb, PDF_NAME(ColorSpace));
-		csobj = pdf_dict_gets(ctx, csres, csi->name);
+		pdf_obj *csobj = pdf_lookup_resource(ctx, proc->rstack, PDF_NAME(ColorSpace), csi->name);
 		if (!csobj)
 			fz_throw(ctx, FZ_ERROR_SYNTAX, "cannot find ColorSpace resource '%s'", csi->name);
 		if (pdf_is_array(ctx, csobj) && pdf_array_len(ctx, csobj) == 1 && pdf_name_eq(ctx, pdf_array_get(ctx, csobj, 0), PDF_NAME(Pattern)))
@@ -488,11 +1149,10 @@ pdf_process_SC(fz_context *ctx, pdf_processor *proc, pdf_csi *csi, int stroke)
 {
 	if (csi->name[0])
 	{
-		pdf_obj *patres, *patobj;
+		pdf_obj *patobj;
 		int type;
 
-		patres = pdf_dict_get(ctx, csi->rdb, PDF_NAME(Pattern));
-		patobj = pdf_dict_gets(ctx, patres, csi->name);
+		patobj = pdf_lookup_resource(ctx, proc->rstack, PDF_NAME(Pattern), csi->name);
 		if (!patobj)
 			fz_throw(ctx, FZ_ERROR_SYNTAX, "cannot find Pattern resource '%s'", csi->name);
 
@@ -555,10 +1215,10 @@ pdf_process_SC(fz_context *ctx, pdf_processor *proc, pdf_csi *csi, int stroke)
 }
 
 static pdf_obj *
-resolve_properties(fz_context *ctx, pdf_csi *csi, pdf_obj *obj)
+resolve_properties(fz_context *ctx, pdf_processor *proc, pdf_obj *obj)
 {
 	if (pdf_is_name(ctx, obj))
-		return pdf_dict_get(ctx, pdf_dict_get(ctx, csi->rdb, PDF_NAME(Properties)), obj);
+		return pdf_lookup_resource(ctx, proc->rstack, PDF_NAME(Properties), pdf_to_name(ctx, obj));
 	else
 		return obj;
 }
@@ -567,7 +1227,7 @@ static void
 pdf_process_BDC(fz_context *ctx, pdf_processor *proc, pdf_csi *csi)
 {
 	if (proc->op_BDC)
-		proc->op_BDC(ctx, proc, csi->name, csi->obj, resolve_properties(ctx, csi, csi->obj));
+		proc->op_BDC(ctx, proc, csi->name, csi->obj, resolve_properties(ctx, proc, csi->obj));
 
 	/* Already hidden, no need to look further */
 	if (proc->hidden > 0)
@@ -580,7 +1240,7 @@ pdf_process_BDC(fz_context *ctx, pdf_processor *proc, pdf_csi *csi)
 	if (strcmp(csi->name, "OC"))
 		return;
 
-	if (pdf_is_ocg_hidden(ctx, csi->doc, csi->rdb, proc->usage, csi->obj))
+	if (pdf_is_ocg_hidden(ctx, csi->doc, proc->rstack, proc->usage, csi->obj))
 		++proc->hidden;
 }
 
@@ -687,9 +1347,7 @@ pdf_process_keyword(fz_context *ctx, pdf_processor *proc, pdf_csi *csi, fz_strea
 
 	case B('g','s'):
 		{
-			pdf_obj *gsres, *gsobj;
-			gsres = pdf_dict_get(ctx, csi->rdb, PDF_NAME(ExtGState));
-			gsobj = pdf_dict_gets(ctx, gsres, csi->name);
+			pdf_obj *gsobj = pdf_lookup_resource(ctx, proc->rstack, PDF_NAME(ExtGState), csi->name);
 			if (!gsobj)
 				fz_throw(ctx, FZ_ERROR_SYNTAX, "cannot find ExtGState resource '%s'", csi->name);
 			if (proc->op_gs_begin)
@@ -745,12 +1403,11 @@ pdf_process_keyword(fz_context *ctx, pdf_processor *proc, pdf_csi *csi, fz_strea
 	case B('T','f'):
 		if (proc->op_Tf)
 		{
-			pdf_obj *fontres, *fontobj;
+			pdf_obj *fontobj;
 			pdf_font_desc *font;
-			fontres = pdf_dict_get(ctx, csi->rdb, PDF_NAME(Font));
-			fontobj = pdf_dict_gets(ctx, fontres, csi->name);
+			fontobj = pdf_lookup_resource(ctx, proc->rstack, PDF_NAME(Font), csi->name);
 			if (pdf_is_dict(ctx, fontobj))
-				font = pdf_try_load_font(ctx, csi->doc, csi->rdb, fontobj, csi->cookie);
+				font = pdf_try_load_font(ctx, csi->doc, proc->rstack, fontobj, csi->cookie);
 			else
 				font = pdf_load_hail_mary_font(ctx, csi->doc);
 			fz_try(ctx)
@@ -820,7 +1477,7 @@ pdf_process_keyword(fz_context *ctx, pdf_processor *proc, pdf_csi *csi, fz_strea
 	/* shadings, images, xobjects */
 	case B('B','I'):
 		{
-			fz_image *img = parse_inline_image(ctx, csi, stm, csname, sizeof csname);
+			fz_image *img = parse_inline_image(ctx, proc, csi, stm, csname, sizeof csname);
 			fz_try(ctx)
 			{
 				if (proc->op_BI)
@@ -836,10 +1493,9 @@ pdf_process_keyword(fz_context *ctx, pdf_processor *proc, pdf_csi *csi, fz_strea
 	case B('s','h'):
 		if (proc->op_sh)
 		{
-			pdf_obj *shaderes, *shadeobj;
+			pdf_obj *shadeobj;
 			fz_shade *shade;
-			shaderes = pdf_dict_get(ctx, csi->rdb, PDF_NAME(Shading));
-			shadeobj = pdf_dict_gets(ctx, shaderes, csi->name);
+			shadeobj = pdf_lookup_resource(ctx, proc->rstack, PDF_NAME(Shading), csi->name);
 			if (!shadeobj)
 				fz_throw(ctx, FZ_ERROR_SYNTAX, "cannot find Shading resource '%s'", csi->name);
 			shade = pdf_load_shading(ctx, csi->doc, shadeobj);
@@ -856,7 +1512,7 @@ pdf_process_keyword(fz_context *ctx, pdf_processor *proc, pdf_csi *csi, fz_strea
 
 	/* marked content */
 	case B('M','P'): if (proc->op_MP) proc->op_MP(ctx, proc, csi->name); break;
-	case B('D','P'): if (proc->op_DP) proc->op_DP(ctx, proc, csi->name, csi->obj, resolve_properties(ctx, csi, csi->obj)); break;
+	case B('D','P'): if (proc->op_DP) proc->op_DP(ctx, proc, csi->name, csi->obj, resolve_properties(ctx, proc, csi->obj)); break;
 	case C('B','M','C'): pdf_process_BMC(ctx, proc, csi, csi->name); break;
 	case C('B','D','C'): pdf_process_BDC(ctx, proc, csi); break;
 	case C('E','M','C'): pdf_process_EMC(ctx, proc, csi); break;
@@ -1109,16 +1765,47 @@ pdf_process_stream(fz_context *ctx, pdf_processor *proc, pdf_csi *csi, fz_stream
 
 void pdf_processor_push_resources(fz_context *ctx, pdf_processor *proc, pdf_obj *res)
 {
-	proc->push_resources(ctx, proc, res);
+	pdf_resource_stack *stk = fz_malloc_struct(ctx, pdf_resource_stack);
+	stk->next = proc->rstack;
+	proc->rstack = stk;
+	stk->resources = pdf_keep_obj(ctx, res);
+
+	if (proc->push_resources)
+		proc->push_resources(ctx, proc, res);
 }
 
 pdf_obj *pdf_processor_pop_resources(fz_context *ctx, pdf_processor *proc)
 {
-	return proc->pop_resources(ctx, proc);
+	pdf_resource_stack *stk = proc->rstack;
+	pdf_obj *res = NULL;
+	pdf_obj *out_res = NULL;
+
+	if (stk)
+	{
+		res = stk->resources;
+		proc->rstack = stk->next;
+		fz_free(ctx, stk);
+	}
+
+	if (proc->pop_resources == pdf_default_pop_resources && proc->chain == NULL)
+	{
+		/* It only makes sense to call the default pop resources if we
+		 * have a chained processor. Otherwise just return what we have
+		 * here. */
+		return res;
+	}
+	if (proc->pop_resources)
+	{
+		out_res = proc->pop_resources(ctx, proc);
+		pdf_drop_obj(ctx, res);
+		return out_res;
+	}
+
+	return res;
 }
 
 void
-pdf_process_raw_contents(fz_context *ctx, pdf_processor *proc, pdf_document *doc, pdf_obj *rdb, pdf_obj *stmobj, fz_cookie *cookie)
+pdf_process_raw_contents(fz_context *ctx, pdf_processor *proc, pdf_document *doc, pdf_obj *stmobj, fz_cookie *cookie)
 {
 	pdf_csi csi;
 	pdf_lexbuf buf;
@@ -1130,7 +1817,7 @@ pdf_process_raw_contents(fz_context *ctx, pdf_processor *proc, pdf_document *doc
 	fz_var(stm);
 
 	pdf_lexbuf_init(ctx, &buf, PDF_LEXBUF_SMALL);
-	pdf_init_csi(ctx, &csi, doc, rdb, &buf, cookie);
+	pdf_init_csi(ctx, &csi, doc, &buf, cookie);
 
 	fz_try(ctx)
 	{
@@ -1154,18 +1841,22 @@ pdf_process_raw_contents(fz_context *ctx, pdf_processor *proc, pdf_document *doc
 }
 
 void
-pdf_process_contents(fz_context *ctx, pdf_processor *proc, pdf_document *doc, pdf_obj *rdb, pdf_obj *stmobj, fz_cookie *cookie, pdf_obj **out_res)
+pdf_process_contents(fz_context *ctx, pdf_processor *proc, pdf_document *doc, pdf_obj *in_res, pdf_obj *stmobj, fz_cookie *cookie, pdf_obj **out_res)
 {
-	pdf_processor_push_resources(ctx, proc, rdb);
+	if (in_res)
+		pdf_processor_push_resources(ctx, proc, in_res);
 	fz_try(ctx)
-		pdf_process_raw_contents(ctx, proc, doc, rdb, stmobj, cookie);
+		pdf_process_raw_contents(ctx, proc, doc, stmobj, cookie);
 	fz_always(ctx)
 	{
-		pdf_obj *res = pdf_processor_pop_resources(ctx, proc);
-		if (out_res)
-			*out_res = res;
-		else
-			pdf_drop_obj(ctx, res);
+		if (in_res)
+		{
+			pdf_obj *ret_res = pdf_processor_pop_resources(ctx, proc);
+			if (out_res)
+				*out_res = ret_res;
+			else
+				pdf_drop_obj(ctx, ret_res);
+		}
 	}
 	fz_catch(ctx)
 		fz_rethrow(ctx);
@@ -1188,7 +1879,7 @@ pdf_should_print_annot(fz_context *ctx, pdf_annot *annot)
 void
 pdf_process_annot(fz_context *ctx, pdf_processor *proc, pdf_annot *annot, fz_cookie *cookie)
 {
-	int flags = pdf_dict_get_int(ctx, annot->obj, PDF_NAME(F));
+	int flags = pdf_annot_flags(ctx, annot);
 	fz_matrix matrix;
 	pdf_obj *ap;
 
@@ -1211,8 +1902,6 @@ pdf_process_annot(fz_context *ctx, pdf_processor *proc, pdf_annot *annot, fz_coo
 		if (!strcmp(proc->usage, "View") && (flags & PDF_ANNOT_IS_NO_VIEW))
 			return;
 	}
-
-	/* TODO: NoZoom and NoRotate */
 
 	/* XXX what resources, if any, to use for this check? */
 	if (pdf_is_ocg_hidden(ctx, annot->page->doc, NULL, proc->usage, pdf_dict_get(ctx, annot->obj, PDF_NAME(OC))))
@@ -1238,7 +1927,7 @@ pdf_process_annot(fz_context *ctx, pdf_processor *proc, pdf_annot *annot, fz_coo
 }
 
 void
-pdf_process_glyph(fz_context *ctx, pdf_processor *proc, pdf_document *doc, pdf_obj *rdb, fz_buffer *contents)
+pdf_process_glyph(fz_context *ctx, pdf_processor *proc, pdf_document *doc, pdf_obj *res, fz_buffer *contents)
 {
 	pdf_csi csi;
 	pdf_lexbuf buf;
@@ -1250,18 +1939,20 @@ pdf_process_glyph(fz_context *ctx, pdf_processor *proc, pdf_document *doc, pdf_o
 		return;
 
 	pdf_lexbuf_init(ctx, &buf, PDF_LEXBUF_SMALL);
-	pdf_init_csi(ctx, &csi, doc, rdb, &buf, NULL);
+	pdf_init_csi(ctx, &csi, doc, &buf, NULL);
 
 	fz_try(ctx)
 	{
-		pdf_processor_push_resources(ctx, proc, rdb);
+		if (res)
+			pdf_processor_push_resources(ctx, proc, res);
 		stm = fz_open_buffer(ctx, contents);
 		pdf_process_stream(ctx, proc, &csi, stm);
 		pdf_process_end(ctx, proc, &csi);
 	}
 	fz_always(ctx)
 	{
-		pdf_drop_obj(ctx, pdf_processor_pop_resources(ctx, proc));
+		if (res)
+			pdf_drop_obj(ctx, pdf_processor_pop_resources(ctx, proc));
 		fz_drop_stream(ctx, stm);
 		pdf_clear_stack(ctx, &csi);
 		pdf_lexbuf_fin(ctx, &buf);

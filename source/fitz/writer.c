@@ -28,7 +28,7 @@
  * option string. A plain key has the default value 'yes'. Use strncmp to compare
  * key/value strings. */
 static const char *
-fz_get_option(fz_context *ctx, const char **key, const char **val, const char *opts)
+get_option(fz_context *ctx, const char **key, const char **val, const char *opts)
 {
 	if (!opts || *opts == 0)
 		return NULL;
@@ -59,7 +59,7 @@ fz_has_option(fz_context *ctx, const char *opts, const char *key, const char **v
 {
 	const char *straw;
 	size_t n = strlen(key);
-	while ((opts = fz_get_option(ctx, &straw, val, opts)))
+	while ((opts = get_option(ctx, &straw, val, opts)))
 		if (!strncmp(straw, key, n) && (straw[n] == '=' || straw[n] == ',' || straw[n] == 0))
 			return 1;
 	return 0;
@@ -154,6 +154,51 @@ fz_document_writer *fz_new_pbm_pixmap_writer(fz_context *ctx, const char *path, 
 fz_document_writer *fz_new_pkm_pixmap_writer(fz_context *ctx, const char *path, const char *options)
 {
 	return fz_new_pixmap_writer(ctx, path, options, "out-%04d.pkm", 4, fz_save_pixmap_as_pkm);
+}
+
+static void fz_write_pixmap_as_jpeg_default(fz_context *ctx, fz_output *out, fz_pixmap *pixmap)
+{
+	fz_write_pixmap_as_jpeg(ctx, out, pixmap, 90, 1);
+}
+
+fz_document_writer *fz_new_jpeg_pixmap_writer_with_output(fz_context *ctx, fz_output *out, const char *options)
+{
+	return fz_new_pixmap_writer_with_output(ctx, out, options, 0, fz_write_pixmap_as_jpeg_default);
+}
+
+fz_document_writer *fz_new_png_pixmap_writer_with_output(fz_context *ctx, fz_output *out, const char *options)
+{
+	return fz_new_pixmap_writer_with_output(ctx, out, options, 0, fz_write_pixmap_as_png);
+}
+
+fz_document_writer *fz_new_pam_pixmap_writer_with_output(fz_context *ctx, fz_output *out, const char *options)
+{
+	return fz_new_pixmap_writer_with_output(ctx, out, options, 0, fz_write_pixmap_as_pam);
+}
+
+fz_document_writer *fz_new_pnm_pixmap_writer_with_output(fz_context *ctx, fz_output *out, const char *options)
+{
+	return fz_new_pixmap_writer_with_output(ctx, out, options, 0, fz_write_pixmap_as_pnm);
+}
+
+fz_document_writer *fz_new_pgm_pixmap_writer_with_output(fz_context *ctx, fz_output *out, const char *options)
+{
+	return fz_new_pixmap_writer_with_output(ctx, out, options, 1, fz_write_pixmap_as_pnm);
+}
+
+fz_document_writer *fz_new_ppm_pixmap_writer_with_output(fz_context *ctx, fz_output *out, const char *options)
+{
+	return fz_new_pixmap_writer_with_output(ctx, out, options, 3, fz_write_pixmap_as_pnm);
+}
+
+fz_document_writer *fz_new_pbm_pixmap_writer_with_output(fz_context *ctx, fz_output *out, const char *options)
+{
+	return fz_new_pixmap_writer_with_output(ctx, out, options, 1, fz_write_pixmap_as_pbm);
+}
+
+fz_document_writer *fz_new_pkm_pixmap_writer_with_output(fz_context *ctx, fz_output *out, const char *options)
+{
+	return fz_new_pixmap_writer_with_output(ctx, out, options, 4, fz_write_pixmap_as_pkm);
 }
 
 static int is_extension(const char *a, const char *ext)
@@ -270,6 +315,23 @@ fz_new_document_writer_with_output(fz_context *ctx, fz_output *out, const char *
 
 	if (is_extension(format, "svg"))
 		return fz_new_svg_writer_with_output(ctx, out, options);
+
+	if (is_extension(format, "png"))
+		return fz_new_png_pixmap_writer_with_output(ctx, out, options);
+	if (is_extension(format, "pam"))
+		return fz_new_pam_pixmap_writer_with_output(ctx, out, options);
+	if (is_extension(format, "pnm"))
+		return fz_new_pnm_pixmap_writer_with_output(ctx, out, options);
+	if (is_extension(format, "pgm"))
+		return fz_new_pgm_pixmap_writer_with_output(ctx, out, options);
+	if (is_extension(format, "ppm"))
+		return fz_new_ppm_pixmap_writer_with_output(ctx, out, options);
+	if (is_extension(format, "pbm"))
+		return fz_new_pbm_pixmap_writer_with_output(ctx, out, options);
+	if (is_extension(format, "pkm"))
+		return fz_new_pkm_pixmap_writer_with_output(ctx, out, options);
+	if (is_extension(format, "jpeg") || is_extension(format, "jpg"))
+		return fz_new_jpeg_pixmap_writer_with_output(ctx, out, options);
 
 	if (is_extension(format, "pcl"))
 		return fz_new_pcl_writer_with_output(ctx, out, options);

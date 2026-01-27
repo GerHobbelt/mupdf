@@ -33,6 +33,7 @@
 #endif
 
 typedef struct fz_font_context fz_font_context;
+typedef struct fz_hyph_context fz_hyph_context;
 typedef struct fz_colorspace_context fz_colorspace_context;
 typedef struct fz_style_context fz_style_context;
 typedef struct fz_tuning_context fz_tuning_context;
@@ -862,6 +863,9 @@ struct fz_context
 	 * 1 for every context cloned (directly or indirectly) from it. */
 	int context_count;
 
+	/* Only the master version of this is used! */
+	int next_document_id;
+
 	fz_alloc_context alloc;
 	fz_locks_context locks;
 	fz_error_context error;
@@ -885,6 +889,7 @@ struct fz_context
 	/* shared contexts */
 	fz_output *stddbg;
 	fz_font_context *font;
+	fz_hyph_context *hyph;
 	fz_colorspace_context *colorspace;
 	fz_store *store;
 	fz_glyph_cache *glyph_cache;

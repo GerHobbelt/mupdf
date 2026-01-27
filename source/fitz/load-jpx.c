@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2023 Artifex Software, Inc.
+// Copyright (C) 2004-2025 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -99,42 +99,42 @@ typedef struct
  * threading systems.
  */
 
-static fz_context *opj_secret = NULL;
+static fz_context *fz_opj_secret = NULL;
 
 static void set_opj_context(fz_context *ctx)
 {
-	opj_secret = ctx;
+	fz_opj_secret = ctx;
 }
 
 static fz_context *get_opj_context(void)
 {
-	return opj_secret;
+	return fz_opj_secret;
 }
 
-void opj_lock(fz_context *ctx)
+void fz_opj_lock(fz_context *ctx)
 {
 	fz_ft_lock(ctx);
 
 	set_opj_context(ctx);
 }
 
-void opj_unlock(fz_context *ctx)
+void fz_opj_unlock(fz_context *ctx)
 {
 	set_opj_context(NULL);
 
 	fz_ft_unlock(ctx);
 }
 
-void *opj_malloc(size_t size)
+void *fz_opj_malloc(size_t size)
 {
 	fz_context *ctx = get_opj_context();
 
 	assert(ctx != NULL);
 
-	return Memento_label(fz_malloc_no_throw(ctx, size), "opj_malloc");
+	return Memento_label(fz_malloc_no_throw(ctx, size), "fz_opj_malloc");
 }
 
-void *opj_calloc(size_t n, size_t size)
+void *fz_opj_calloc(size_t n, size_t size)
 {
 	fz_context *ctx = get_opj_context();
 
@@ -143,7 +143,7 @@ void *opj_calloc(size_t n, size_t size)
 	return fz_calloc_no_throw(ctx, n, size);
 }
 
-void *opj_realloc(void *ptr, size_t size)
+void *fz_opj_realloc(void *ptr, size_t size)
 {
 	fz_context *ctx = get_opj_context();
 
@@ -152,7 +152,7 @@ void *opj_realloc(void *ptr, size_t size)
 	return fz_realloc_no_throw(ctx, ptr, size);
 }
 
-void opj_free(void *ptr)
+void fz_opj_free(void *ptr)
 {
 	fz_context *ctx = get_opj_context();
 
@@ -161,7 +161,7 @@ void opj_free(void *ptr)
 	fz_free(ctx, ptr);
 }
 
-static void * opj_aligned_malloc_n(size_t alignment, size_t size)
+static void * fz_opj_aligned_malloc_n(size_t alignment, size_t size)
 {
 	uint8_t *ptr;
 	size_t off;
@@ -170,7 +170,7 @@ static void * opj_aligned_malloc_n(size_t alignment, size_t size)
 		return NULL;
 
 	size += alignment + sizeof(uint8_t);
-	ptr = opj_malloc(size);
+	ptr = fz_opj_malloc(size);
 	if (ptr == NULL)
 		return NULL;
 	off = alignment-(((int)(intptr_t)ptr) & (alignment - 1));
@@ -178,17 +178,17 @@ static void * opj_aligned_malloc_n(size_t alignment, size_t size)
 	return ptr + off;
 }
 
-void * opj_aligned_malloc(size_t size)
+void * fz_opj_aligned_malloc(size_t size)
 {
-	return opj_aligned_malloc_n(16, size);
+	return fz_opj_aligned_malloc_n(16, size);
 }
 
-void * opj_aligned_32_malloc(size_t size)
+void * fz_opj_aligned_32_malloc(size_t size)
 {
-	return opj_aligned_malloc_n(32, size);
+	return fz_opj_aligned_malloc_n(32, size);
 }
 
-void opj_aligned_free(void* ptr_)
+void fz_opj_aligned_free(void* ptr_)
 {
 	uint8_t *ptr = (uint8_t *)ptr_;
 	uint8_t off;
@@ -196,44 +196,38 @@ void opj_aligned_free(void* ptr_)
 		return;
 
 	off = ptr[-1];
-	opj_free((void *)(((unsigned char *)ptr) - off));
+	fz_opj_free((void *)(((unsigned char *)ptr) - off));
 }
 
 #if 0
 /* UNUSED currently, and moderately tricky, so deferred until required */
-void * opj_aligned_realloc(void *ptr, size_t size)
+void * fz_opj_aligned_realloc(void *ptr, size_t size)
 {
-	return opj_realloc(ptr, size);
+	return fz_opj_realloc(ptr, size);
 }
 #endif
 
 static void fz_opj_error_callback(const char *msg, void *client_data)
 {
 	fz_context *ctx = (fz_context *)client_data;
-	char buf[200];
-	size_t n;
-	fz_strlcpy(buf, msg, sizeof buf);
-	n = strlen(buf);
-	if (buf[n-1] == '\n')
-		buf[n-1] = 0;
-	fz_warn(ctx, "openjpeg error: %s", buf);
+	// strlen-1 to trim trailing newline
+	fz_warn(ctx, "openjpeg error: %.*s", (int) strlen(msg)-1, msg);
 }
 
 static void fz_opj_warning_callback(const char *msg, void *client_data)
 {
 	fz_context *ctx = (fz_context *)client_data;
-	char buf[200];
-	size_t n;
-	fz_strlcpy(buf, msg, sizeof buf);
-	n = strlen(buf);
-	if (buf[n-1] == '\n')
-		buf[n-1] = 0;
-	fz_warn(ctx, "openjpeg warning: %s", buf);
+	// strlen-1 to trim trailing newline
+	fz_warn(ctx, "openjpeg warning: %.*s", (int) strlen(msg)-1, msg);
 }
 
 static void fz_opj_info_callback(const char *msg, void *client_data)
 {
-	/* fz_warn("openjpeg info: %s", msg); */
+#if 0
+	fz_context *ctx = (fz_context *)client_data;
+	// strlen-1 to trim trailing newline
+	fz_warn(ctx, "openjpeg info: %.*s", (int) strlen(msg)-1, msg);
+#endif
 }
 
 static OPJ_SIZE_T fz_opj_stream_read(void * p_buffer, OPJ_SIZE_T p_nb_bytes, void * p_user_data)
@@ -425,10 +419,9 @@ jpx_read_image(fz_context *ctx, fz_jpxd *state, const unsigned char *data, size_
 	opj_image_t *jpx;
 	opj_stream_t *stream;
 	OPJ_CODEC_FORMAT format;
-	int a, n, k;
+	int a, n, k, numcomps;
 	int w, h;
 	stream_block sb;
-	OPJ_UINT32 i;
 
 	fz_var(img);
 
@@ -474,12 +467,15 @@ jpx_read_image(fz_context *ctx, fz_jpxd *state, const unsigned char *data, size_
 		fz_throw(ctx, FZ_ERROR_LIBRARY, "Failed to read JPX header");
 	}
 
-	if (!opj_decode(codec, stream, jpx))
+	if (!onlymeta)
 	{
-		opj_stream_destroy(stream);
-		opj_destroy_codec(codec);
-		opj_image_destroy(jpx);
-		fz_throw(ctx, FZ_ERROR_LIBRARY, "Failed to decode JPX image");
+		if (!opj_decode(codec, stream, jpx))
+		{
+			opj_stream_destroy(stream);
+			opj_destroy_codec(codec);
+			opj_image_destroy(jpx);
+			fz_throw(ctx, FZ_ERROR_LIBRARY, "Failed to decode JPX image");
+		}
 	}
 
 	opj_stream_destroy(stream);
@@ -489,22 +485,62 @@ jpx_read_image(fz_context *ctx, fz_jpxd *state, const unsigned char *data, size_
 	if (!jpx)
 		fz_throw(ctx, FZ_ERROR_LIBRARY, "opj_decode failed");
 
+	numcomps = (int)jpx->numcomps;
+
 	/* Count number of alpha and color channels */
-	n = a = 0;
-	for (i = 0; i < jpx->numcomps; ++i)
+	switch (jpx->color_space)
 	{
-		if (jpx->comps[i].alpha)
-			++a;
+	default:
+	case OPJ_CLRSPC_UNKNOWN:
+	case OPJ_CLRSPC_UNSPECIFIED:
+		if (defcs && defcs->n <= numcomps)
+		{
+			n = defcs->n;
+		}
 		else
-			++n;
+		{
+			if (numcomps >= 3)
+			{
+				fz_warn(ctx, "unknown JPX colorspace; assuming RGB");
+				n = 3;
+			}
+			else
+			{
+				fz_warn(ctx, "unknown JPX colorspace; assuming Gray");
+				n = 1;
+			}
+		}
+		break;
+	case OPJ_CLRSPC_SRGB:
+	case OPJ_CLRSPC_SYCC:
+	case OPJ_CLRSPC_EYCC:
+		n = 3;
+		break;
+	case OPJ_CLRSPC_GRAY:
+		n = 1;
+		break;
+	case OPJ_CLRSPC_CMYK:
+		n = 4;
+		break;
+
 	}
 
-	for (k = 1; k < n + a; k++)
+	if (n > numcomps)
 	{
-		if (!jpx->comps[k].data)
+		fz_warn(ctx, "JPX numcomps (%d) doesn't match color_space (%d)", numcomps, n);
+		n = numcomps;
+	}
+	a = numcomps - n;
+
+	if (!onlymeta)
+	{
+		for (k = 0; k < numcomps; ++k)
 		{
-			opj_image_destroy(jpx);
-			fz_throw(ctx, FZ_ERROR_FORMAT, "image components are missing data");
+			if (!jpx->comps[k].data)
+			{
+				opj_image_destroy(jpx);
+				fz_throw(ctx, FZ_ERROR_FORMAT, "image components are missing data");
+			}
 		}
 	}
 
@@ -613,11 +649,11 @@ fz_load_jpx(fz_context *ctx, const unsigned char *data, size_t size, fz_colorspa
 
 	fz_try(ctx)
 	{
-		opj_lock(ctx);
+		fz_opj_lock(ctx);
 		pix = jpx_read_image(ctx, &state, data, size, defcs, 0);
 	}
 	fz_always(ctx)
-		opj_unlock(ctx);
+		fz_opj_unlock(ctx);
 	fz_catch(ctx)
 		fz_rethrow(ctx);
 
@@ -625,17 +661,17 @@ fz_load_jpx(fz_context *ctx, const unsigned char *data, size_t size, fz_colorspa
 }
 
 void
-fz_load_jpx_info(fz_context *ctx, const unsigned char *data, size_t size, int *wp, int *hp, int *xresp, int *yresp, fz_colorspace **cspacep)
+fz_load_jpx_info(fz_context *ctx, const unsigned char *data, size_t size, int *wp, int *hp, int *xresp, int *yresp, fz_colorspace **cspacep, fz_colorspace *defcs)
 {
 	fz_jpxd state = { 0 };
 
 	fz_try(ctx)
 	{
-		opj_lock(ctx);
-		jpx_read_image(ctx, &state, data, size, NULL, 1);
+		fz_opj_lock(ctx);
+		jpx_read_image(ctx, &state, data, size, defcs, 1);
 	}
 	fz_always(ctx)
-		opj_unlock(ctx);
+		fz_opj_unlock(ctx);
 	fz_catch(ctx)
 		fz_rethrow(ctx);
 

@@ -35,6 +35,19 @@ pdf_processor *pdf_keep_processor(fz_context *ctx, pdf_processor *proc);
 void pdf_close_processor(fz_context *ctx, pdf_processor *proc);
 void pdf_drop_processor(fz_context *ctx, pdf_processor *proc);
 
+/*
+ * Stack of resources used during interpretation (holding page and
+ * xobject/font/type3 glyph resource dictionaries).
+ */
+
+struct pdf_resource_stack
+{
+	pdf_resource_stack *next;
+	pdf_obj *resources;
+};
+
+pdf_obj *pdf_lookup_resource(fz_context *ctx, pdf_resource_stack *stack, pdf_obj *type, const char *name);
+
 typedef enum
 {
 	PDF_PROCESSOR_REQUIRES_DECODED_IMAGES = 1
@@ -58,9 +71,12 @@ struct pdf_processor
 	 * is to pass either it, or a filtered version of it onto any
 	 * chained processor. */
 	void (*push_resources)(fz_context *ctx, pdf_processor *proc, pdf_obj *res);
+
 	/* Pop the resources stack. This must be passed on to any chained
 	 * processors. This returns a pointer to the resource dict just
-	 * popped by the deepest filter. The caller inherits this reference. */
+	 * popped by the deepest filter. The caller inherits this reference.
+	 * NOTE: This must NOT throw as it may be called during cleanup!
+	 */
 	pdf_obj *(*pop_resources)(fz_context *ctx, pdf_processor *proc);
 
 	/* general graphics state */
@@ -190,13 +206,18 @@ struct pdf_processor
 	int hidden;
 
 	pdf_processor_requirements requirements;
+
+	/* resource dictionary stack */
+	pdf_resource_stack *rstack;
+
+	/* Unused, except when inited as chain processor */
+	pdf_processor *chain;
 };
 
 typedef struct
 {
 	/* input */
 	pdf_document *doc;
-	pdf_obj *rdb;
 	pdf_lexbuf *buf;
 	fz_cookie *cookie;
 
@@ -359,7 +380,7 @@ typedef struct
 {
 	void *opaque;
 	fz_image *(*image_filter)(fz_context *ctx, void *opaque, fz_matrix ctm, const char *name, fz_image *image, fz_rect scissor);
-	int (*text_filter)(fz_context *ctx, void *opaque, int *ucsbuf, int ucslen, fz_matrix trm, fz_matrix ctm, fz_rect bbox);
+	int (*text_filter)(fz_context *ctx, void *opaque, int *ucsbuf, int ucslen, fz_matrix trm, fz_matrix ctm, fz_rect bbox, int tr, float ca, float CA);
 	void (*after_text_object)(fz_context *ctx, void *opaque, pdf_document *doc, pdf_processor *chain, fz_matrix ctm);
 	int (*culler)(fz_context *ctx, void *opaque, fz_rect bbox, fz_cull_type type);
 }
@@ -390,6 +411,15 @@ pdf_sanitize_filter_options;
 	should be identical to the incoming operator stream.
 */
 pdf_processor *pdf_new_sanitize_filter(fz_context *ctx, pdf_document *doc, pdf_processor *chain, int struct_parents, fz_matrix transform, pdf_filter_options *options, void *sopts);
+
+typedef struct
+{
+	void *opaque;
+	/* To be expanded */
+}
+pdf_vectorize_filter_options;
+
+pdf_processor *pdf_new_vectorize_filter(fz_context *ctx, pdf_document *doc, pdf_processor *chain, int structparents, fz_matrix transform, pdf_filter_options *options, void *vopts);
 
 pdf_obj *pdf_filter_xobject_instance(fz_context *ctx, pdf_obj *old_xobj, pdf_obj *page_res, fz_matrix ctm, pdf_filter_options *options, pdf_cycle_list *cycle_up);
 
@@ -455,7 +485,7 @@ void pdf_process_glyph(fz_context *ctx, pdf_processor *proc, pdf_document *doc, 
 	Function to process a contents stream without handling the resources.
 	The caller is responsible for pushing/popping the resources.
 */
-void pdf_process_raw_contents(fz_context *ctx, pdf_processor *proc, pdf_document *doc, pdf_obj *rdb, pdf_obj *stmobj, fz_cookie *cookie);
+void pdf_process_raw_contents(fz_context *ctx, pdf_processor *proc, pdf_document *doc, pdf_obj *stmobj, fz_cookie *cookie);
 
 /* Text handling helper functions */
 typedef struct

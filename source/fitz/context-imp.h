@@ -44,9 +44,12 @@ fz_colorspace_context *fz_keep_colorspace_context(fz_context *ctx);
 void fz_drop_colorspace_context(fz_context *ctx);
 
 void fz_new_font_context(fz_context *ctx);
-
 fz_font_context *fz_keep_font_context(fz_context *ctx);
 void fz_drop_font_context(fz_context *ctx);
+
+void fz_new_hyph_context(fz_context *ctx);
+fz_hyph_context *fz_keep_hyph_context(fz_context *ctx);
+void fz_drop_hyph_context(fz_context *ctx);
 
 struct fz_tuning_context
 {
@@ -75,5 +78,7 @@ void fz_drop_archive_handler_context(fz_context *ctx);
 fz_archive_handler_context *fz_keep_archive_handler_context(fz_context *ctx);
 
 void fz_log_activity(fz_context *ctx, fz_activity_reason reason, void *arg);
+
+int fz_new_document_id(fz_context *ctx);
 
 #endif

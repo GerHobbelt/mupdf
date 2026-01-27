@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2024 Artifex Software, Inc.
+// Copyright (C) 2004-2026 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -99,6 +99,22 @@ fz_new_buffer_from_copied_data(fz_context *ctx, const unsigned char *data, size_
 	b->len = size;
 	memcpy(b->data, data, size);
 	return b;
+}
+
+fz_buffer *
+fz_new_buffer_from_printf(fz_context *ctx, const char *fmt, ...)
+{
+	size_t len;
+	fz_buffer *buf;
+	va_list ap;
+	va_start(ap, fmt);
+	len = fz_vsnprintf(NULL, 0, fmt, ap);
+	va_end(ap);
+	buf = fz_new_buffer(ctx, len+1);
+	va_start(ap, fmt);
+	fz_append_vprintf(ctx, buf, fmt, ap);
+	va_end(ap);
+	return buf;
 }
 
 fz_buffer *fz_clone_buffer(fz_context *ctx, fz_buffer *buf)
@@ -320,6 +336,8 @@ fz_slice_buffer(fz_context *ctx, fz_buffer *buf, int64_t start, int64_t end)
 void
 fz_append_buffer(fz_context *ctx, fz_buffer *buf, fz_buffer *extra)
 {
+	if (extra == NULL)
+		return;
 	if (buf->cap - buf->len < extra->len)
 	{
 		buf->data = fz_realloc(ctx, buf->data, buf->len + extra->len);

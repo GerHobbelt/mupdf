@@ -659,13 +659,14 @@ do_objcmp(fz_context *ctx, pdf_obj *a, pdf_obj *b, int check_streams)
 		 * Otherwise, do the full, painful, comparison. */
 		{
 			/* Slightly convoluted to know if something is a stream. */
-			pdf_document *doc = DICT(a)->doc;
+			pdf_document *doca = DICT(a)->doc;
+			pdf_document *docb = DICT(b)->doc;
 			int ap = pdf_obj_parent_num(ctx, a);
 			int bp;
 			int a_is_stream = 0;
-			pdf_xref_entry *entrya = pdf_get_xref_entry_no_change(ctx, doc, ap);
+			pdf_xref_entry *entrya = pdf_get_xref_entry_no_change(ctx, doca, ap);
 			pdf_xref_entry *entryb;
-			if (entrya != NULL && entrya->obj == a && pdf_obj_num_is_stream(ctx, doc, ap))
+			if (entrya != NULL && entrya->obj == a && pdf_obj_num_is_stream(ctx, doca, ap))
 			{
 				/* It's a stream, and we know a != b from above. */
 				if (!check_streams)
@@ -673,8 +674,8 @@ do_objcmp(fz_context *ctx, pdf_obj *a, pdf_obj *b, int check_streams)
 				a_is_stream = 1;
 			}
 			bp = pdf_obj_parent_num(ctx, b);
-			entryb = pdf_get_xref_entry_no_change(ctx, doc, bp);
-			if (entryb != NULL && entryb->obj == b && pdf_obj_num_is_stream(ctx, doc, bp))
+			entryb = pdf_get_xref_entry_no_change(ctx, docb, bp);
+			if (entryb != NULL && entryb->obj == b && pdf_obj_num_is_stream(ctx, docb, bp))
 			{
 				/* It's a stream, and we know a != b from above. So mismatch. */
 				if (!check_streams || !a_is_stream)
@@ -699,8 +700,8 @@ do_objcmp(fz_context *ctx, pdf_obj *a, pdf_obj *b, int check_streams)
 				{
 					unsigned char *dataa, *datab;
 					size_t lena, lenb;
-					sa = pdf_load_raw_stream_number(ctx, doc, ap);
-					sb = pdf_load_raw_stream_number(ctx, doc, bp);
+					sa = pdf_load_raw_stream_number(ctx, doca, ap);
+					sb = pdf_load_raw_stream_number(ctx, docb, bp);
 					lena = fz_buffer_storage(ctx, sa, &dataa);
 					lenb = fz_buffer_storage(ctx, sb, &datab);
 					if (lena == lenb && memcmp(dataa, datab, lena) == 0)
@@ -1350,7 +1351,7 @@ swap_fragments(fz_context *ctx, pdf_document *doc, pdf_journal_entry *entry)
 		obuf = xre->stm_buf;
 		xre->obj = frag->inactive;
 		type = xre->type;
-		xre->type = frag->newobj ? 0 : 'o';
+		xre->type = frag->newobj ? 0 : 'n';
 		frag->newobj = type == 0;
 		xre->stm_buf = frag->stream;
 		frag->inactive = old;
@@ -1466,15 +1467,15 @@ void pdf_redo(fz_context *ctx, pdf_document *doc)
 	if (entry == NULL)
 		fz_throw(ctx, FZ_ERROR_ARGUMENT, "Already at end of history");
 
+	doc->journal->current = entry;
+
+	swap_fragments(ctx, doc, entry);
+
 	// nuke all caches
 	pdf_drop_page_tree_internal(ctx, doc);
 	pdf_sync_open_pages(ctx, doc);
 	for (frag = entry->head; frag; frag = frag->next)
 		pdf_purge_object_from_store(ctx, doc, frag->obj_num);
-
-	doc->journal->current = entry;
-
-	swap_fragments(ctx, doc, entry);
 }
 
 void pdf_discard_journal(fz_context *ctx, pdf_journal *journal)
