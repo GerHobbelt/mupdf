@@ -470,7 +470,7 @@ static void pdf_run_obj_to_buf(fz_context *ctx, fz_buffer *buffer, pdf_obj *obj,
 		if (res == NULL)
 			res = pdf_page_resources(ctx, page);
 
-		pdf_process_contents(ctx, proc, page->doc, res, obj, NULL, NULL);
+		pdf_process_contents(ctx, proc, page->doc, res, obj, NULL);
 		pdf_close_processor(ctx, proc);
 	}
 	fz_always(ctx)
