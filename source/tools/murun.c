@@ -6628,6 +6628,43 @@ static void ffi_StructuredText_asJSON(js_State *J)
 	fz_drop_buffer(ctx, buf);
 }
 
+static void ffi_StructuredText_asXML(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	fz_stext_page *page = js_touserdata(J, 0, "fz_stext_page");
+	const char *data = NULL;
+	fz_buffer *buf = NULL;
+	fz_output *out = NULL;
+
+	fz_var(out);
+	fz_var(buf);
+
+	fz_try(ctx)
+	{
+		buf = fz_new_buffer(ctx, 1024);
+		out = fz_new_output_with_buffer(ctx, buf);
+		fz_print_stext_page_as_xml(ctx, out, page, 0);
+		fz_close_output(ctx, out);
+		data = fz_string_from_buffer(ctx, buf);
+	}
+	fz_always(ctx)
+		fz_drop_output(ctx, out);
+	fz_catch(ctx)
+	{
+		fz_drop_buffer(ctx, buf);
+		rethrow(J);
+	}
+
+	if (js_try(J))
+	{
+		fz_drop_buffer(ctx, buf);
+		js_throw(J);
+	}
+	js_pushstring(J, data);
+	js_endtry(J);
+	fz_drop_buffer(ctx, buf);
+}
+
 static void ffi_StructuredText_asHTML(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
@@ -6712,6 +6749,67 @@ static void ffi_StructuredText_classifyRect(js_State *J)
 
 	fz_try(ctx)
 		fz_classify_stext_rect(ctx, page, classify, rect);
+	fz_catch(ctx)
+		rethrow(J);
+}
+
+static void ffi_StructuredText_segment(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	fz_stext_page *page = js_touserdata(J, 0, "fz_stext_page");
+	fz_rect rect;
+	int do_rect = 0;
+
+	if (js_iscoercible(J, 1))
+	{
+		rect = ffi_torect(J, 1);
+		do_rect = 1;
+	}
+
+	fz_try(ctx)
+	{
+		if (!do_rect)
+			fz_segment_stext_page(ctx, page);
+		else
+			fz_segment_stext_rect(ctx, page, rect);
+	}
+	fz_catch(ctx)
+		rethrow(J);
+}
+
+static void ffi_StructuredText_tableHunt(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	fz_stext_page *page = js_touserdata(J, 0, "fz_stext_page");
+	fz_rect rect;
+	int do_rect = 0;
+
+	if (js_iscoercible(J, 1))
+	{
+		rect = ffi_torect(J, 1);
+		do_rect = 1;
+	}
+
+	fz_try(ctx)
+	{
+		if (!do_rect)
+			fz_table_hunt(ctx, page);
+		else
+			fz_table_hunt_within_bounds(ctx, page, rect);
+	}
+	fz_catch(ctx)
+		rethrow(J);
+}
+
+static void ffi_StructuredText_removePageFill(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	fz_stext_page *page = js_touserdata(J, 0, "fz_stext_page");
+
+	fz_try(ctx)
+	{
+		fz_stext_remove_page_fill(ctx, page);
+	}
 	fz_catch(ctx)
 		rethrow(J);
 }
@@ -12499,9 +12597,13 @@ int murun_main(int argc, char **argv)
 		jsB_propfun(J, "StructuredText.highlight", ffi_StructuredText_highlight, 2);
 		jsB_propfun(J, "StructuredText.copy", ffi_StructuredText_copy, 2);
 		jsB_propfun(J, "StructuredText.asJSON", ffi_StructuredText_asJSON, 1);
+		jsB_propfun(J, "StructuredText.asXML", ffi_StructuredText_asXML, 0);
 		jsB_propfun(J, "StructuredText.asHTML", ffi_StructuredText_asHTML, 1);
 		jsB_propfun(J, "StructuredText.asText", ffi_StructuredText_asText, 0);
 		jsB_propfun(J, "StructuredText.classifyRect", ffi_StructuredText_classifyRect, 2);
+		jsB_propfun(J, "StructuredText.tableHunt", ffi_StructuredText_tableHunt, 0);
+		jsB_propfun(J, "StructuredText.segment", ffi_StructuredText_segment, 0);
+		jsB_propfun(J, "StructuredText.removePageFill", ffi_StructuredText_removePageFill, 0);
 	}
 	js_setregistry(J, "fz_stext_page");
 
