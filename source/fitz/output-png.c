@@ -125,20 +125,22 @@ png_write_icc(fz_context *ctx, png_band_writer *writer, fz_colorspace *cs)
 	if (cs && !(cs->flags & FZ_COLORSPACE_IS_DEVICE) && (cs->flags & FZ_COLORSPACE_IS_ICC) && cs->u.icc.buffer)
 	{
 		fz_output *out = writer->super.out;
-		size_t size;
+		size_t size, csize;
 		fz_buffer *buffer = cs->u.icc.buffer;
-		fz_buffer *cbuffer;
-		unsigned char *pos, *chunk = NULL;
+		unsigned char *pos, *cdata, *chunk = NULL;
 		const char *name;
 
 		if (!buffer || buffer->len == 0)
 			return;
 
 		/* Deflate the profile */
-		cbuffer = fz_deflate(ctx, buffer, writer->super.compression_effort);
+		cdata = fz_new_deflated_data_from_buffer(ctx, &csize, buffer, writer->super.compression_effort);
+
+		if (!cdata)
+			return;
 
 		name = cs->name;
-		size = cbuffer->len + strlen(name) + 2;
+		size = csize + strlen(name) + 2;
 
 		fz_try(ctx)
 		{
@@ -146,12 +148,12 @@ png_write_icc(fz_context *ctx, png_band_writer *writer, fz_colorspace *cs)
 			pos = chunk;
 			memcpy(chunk, name, strlen(name)); //-V575
 			pos += strlen(name) + 2;
-			memcpy(pos, cbuffer->data, cbuffer->len);
+			memcpy(pos, cdata, csize);
 			putchunk(ctx, out, "iCCP", chunk, size);
 		}
 		fz_always(ctx)
 		{
-			fz_drop_buffer(ctx, cbuffer);
+			fz_free(ctx, cdata);
 			fz_free(ctx, chunk);
 		}
 		fz_catch(ctx)

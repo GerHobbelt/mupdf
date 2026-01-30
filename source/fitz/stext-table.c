@@ -2270,14 +2270,16 @@ find_table_insertion_point(fz_context *ctx, fz_rect r, tree_pos current, tree_po
 				down.parent = block->u.s.down;
 				down.block = block->u.s.down->first_block;
 				best = find_table_insertion_point(ctx, r, down, best);
-				continue;
 			}
 		}
-		/* Is block a better precursor than best? (Or a valid precursor, if best.block == NULL) */
-		if (block->bbox.y1 < r.y0 && (best.block == NULL || best.block->bbox.y1 < block->bbox.y1))
+		else
 		{
-			best.block = block;
-			best.parent = current.parent;
+			/* Is block a better precursor than best? (Or a valid precursor, if best.block == NULL) */
+			if (block->bbox.y1 < r.y0 && (best.block == NULL || best.block->bbox.y1 < block->bbox.y1))
+			{
+				best.block = block;
+				best.parent = current.parent;
+			}
 		}
 	}
 

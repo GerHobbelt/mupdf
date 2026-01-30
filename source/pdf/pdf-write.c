@@ -638,31 +638,29 @@ static int isbinarystream(fz_context *ctx, const unsigned char *data, size_t len
 	return 0;
 }
 
-static fz_buffer *hexbuf(fz_context *ctx, fz_buffer *input)
+static fz_buffer *hexbuf(fz_context *ctx, const unsigned char *p, size_t n)
 {
-	size_t n = input->len;
 	static const char hex[17] = "0123456789abcdef";
 	int x = 0;
 	size_t len = n * 2 + (n / 32) + 1;
 	unsigned char *data = Memento_label(fz_malloc(ctx, len), "hexbuf");
-	unsigned char *p = data;
-	unsigned char *s = input->data;
+	fz_buffer *buf = fz_new_buffer_from_data(ctx, data, len);
 
 	while (n--)
 	{
-		*p++ = hex[*s >> 4];
-		*p++ = hex[*s & 15];
+		*data++ = hex[*p >> 4];
+		*data++ = hex[*p & 15];
 		if (++x == 32)
 		{
-			*p++ = '\n';
+			*data++ = '\n';
 			x = 0;
 		}
-		s++;
+		p++;
 	}
 
-	*p++ = '>';
+	*data++ = '>';
 
-	return fz_new_buffer_from_data(ctx, data, len);
+	return buf;
 }
 
 static void addhexfilter(fz_context *ctx, pdf_document *doc, pdf_obj *dict)
@@ -714,6 +712,43 @@ static void addhexfilter(fz_context *ctx, pdf_document *doc, pdf_obj *dict)
 		fz_rethrow(ctx);
 }
 
+static fz_buffer *deflatebuf(fz_context *ctx, const unsigned char *p, size_t n, int effort)
+{
+	fz_buffer *buf;
+	uLongf csize;
+	int t;
+	uLong longN = (uLong)n;
+	unsigned char *data;
+	size_t cap;
+	int mode;
+
+	if (n != (size_t)longN)
+		fz_throw(ctx, FZ_ERROR_LIMIT, "Buffer too large to deflate");
+
+	cap = compressBound(longN);
+	data = Memento_label(fz_malloc(ctx, cap), "pdf_write_deflate");
+	buf = fz_new_buffer_from_data(ctx, data, cap);
+	csize = (uLongf)cap;
+	if (effort == 0)
+		mode = Z_DEFAULT_COMPRESSION;
+	else
+		mode = effort * Z_BEST_COMPRESSION / 100;
+	t = compress2(data, &csize, p, longN, mode);
+	if (t != Z_OK)
+	{
+		fz_drop_buffer(ctx, buf);
+		fz_throw(ctx, FZ_ERROR_LIBRARY, "cannot deflate buffer");
+	}
+	fz_try(ctx)
+		fz_resize_buffer(ctx, buf, csize);
+	fz_catch(ctx)
+	{
+		fz_drop_buffer(ctx, buf);
+		fz_rethrow(ctx);
+	}
+	return buf;
+}
+
 static int striphexfilter(fz_context *ctx, pdf_document *doc, pdf_obj *dict)
 {
 	pdf_obj *f, *dp;
@@ -760,7 +795,7 @@ static int striphexfilter(fz_context *ctx, pdf_document *doc, pdf_obj *dict)
 	return is_hex;
 }
 
-static fz_buffer *unhexbuf(fz_context *ctx, fz_buffer *input)
+static fz_buffer *unhexbuf(fz_context *ctx, const unsigned char *p, size_t n)
 {
 	fz_stream *mstm = NULL;
 	fz_stream *xstm = NULL;
@@ -769,9 +804,9 @@ static fz_buffer *unhexbuf(fz_context *ctx, fz_buffer *input)
 	fz_var(xstm);
 	fz_try(ctx)
 	{
-		mstm = fz_open_buffer(ctx, input);
+		mstm = fz_open_memory(ctx, p, n);
 		xstm = fz_open_ahxd(ctx, mstm);
-		out = fz_read_all(ctx, xstm, input->len / 2);
+		out = fz_read_all(ctx, xstm, n/2);
 	}
 	fz_always(ctx)
 	{
@@ -790,31 +825,36 @@ static void write_data(fz_context *ctx, void *arg, const unsigned char *data, si
 
 static void copystream(fz_context *ctx, pdf_document *doc, pdf_write_state *opts, pdf_obj *obj_orig, int num, int gen, int do_deflate, int unenc)
 {
-	fz_buffer *tmp_unhex = NULL, *tmp_comp = NULL, *tmp_hex = NULL, *orig_buf, *buf = NULL;
+	fz_buffer *tmp_unhex = NULL, *tmp_comp = NULL, *tmp_hex = NULL, *buf = NULL;
 	pdf_obj *obj = NULL;
 	pdf_obj *dp;
+	size_t len;
+	unsigned char *data;
 	int w, h;
 
-	fz_var(orig_buf);
+	fz_var(buf);
 	fz_var(tmp_comp);
 	fz_var(tmp_hex);
 	fz_var(obj);
 
 	fz_try(ctx)
 	{
-		buf = orig_buf = pdf_load_raw_stream_number(ctx, doc, num);
+		buf = pdf_load_raw_stream_number(ctx, doc, num);
 		obj = pdf_copy_dict(ctx, obj_orig);
+
+		len = fz_buffer_storage(ctx, buf, &data);
 
 		if (do_deflate && striphexfilter(ctx, doc, obj))
 		{
-			buf = tmp_unhex = unhexbuf(ctx, buf);
+			tmp_unhex = unhexbuf(ctx, data, len);
+			len = fz_buffer_storage(ctx, tmp_unhex, &data);
 		}
 
 		if (do_deflate && !pdf_dict_get(ctx, obj, PDF_NAME(Filter)))
 		{
-			if (is_bitmap_stream(ctx, obj, buf->len, &w, &h))
+			if (is_bitmap_stream(ctx, obj, len, &w, &h))
 			{
-				buf = tmp_comp = fz_compress_ccitt_fax_g4(ctx, buf->data, w, h, (w+7)>>3);
+				tmp_comp = fz_compress_ccitt_fax_g4(ctx, data, w, h, (w+7)>>3);
 				pdf_dict_put(ctx, obj, PDF_NAME(Filter), PDF_NAME(CCITTFaxDecode));
 				dp = pdf_dict_put_dict(ctx, obj, PDF_NAME(DecodeParms), 1);
 				pdf_dict_put_int(ctx, dp, PDF_NAME(K), -1);
@@ -822,7 +862,7 @@ static void copystream(fz_context *ctx, pdf_document *doc, pdf_write_state *opts
 			}
 			else if (do_deflate == 1)
 			{
-				buf = tmp_comp = fz_deflate(ctx, buf, opts->compression_effort);
+				tmp_comp = deflatebuf(ctx, data, len, opts->compression_effort);
 				pdf_dict_put(ctx, obj, PDF_NAME(Filter), PDF_NAME(FlateDecode));
 			}
 			else
@@ -834,11 +874,13 @@ static void copystream(fz_context *ctx, pdf_document *doc, pdf_write_state *opts
 				tmp_comp = fz_new_buffer_from_data(ctx, comp_data, comp_len);
 				pdf_dict_put(ctx, obj, PDF_NAME(Filter), PDF_NAME(BrotliDecode));
 			}
+			len = fz_buffer_storage(ctx, tmp_comp, &data);
 		}
 
-		if (opts->do_ascii && isbinarystream(ctx, buf->data, buf->len))
+		if (opts->do_ascii && isbinarystream(ctx, data, len))
 		{
-			buf = tmp_hex = hexbuf(ctx, buf);
+			tmp_hex = hexbuf(ctx, data, len);
+			len = fz_buffer_storage(ctx, tmp_hex, &data);
 			addhexfilter(ctx, doc, obj);
 		}
 
@@ -846,17 +888,17 @@ static void copystream(fz_context *ctx, pdf_document *doc, pdf_write_state *opts
 
 		if (unenc)
 		{
-			pdf_dict_put_int(ctx, obj, PDF_NAME(Length), buf->len);
+			pdf_dict_put_int(ctx, obj, PDF_NAME(Length), len);
 			pdf_print_obj(ctx, opts->out, obj, opts->do_tight, opts->do_ascii);
 			fz_write_string(ctx, opts->out, "\nstream\n");
-			fz_write_data(ctx, opts->out, buf->data, buf->len);
+			fz_write_data(ctx, opts->out, data, len);
 		}
 		else
 		{
-			pdf_dict_put_int(ctx, obj, PDF_NAME(Length), pdf_encrypted_len(ctx, opts->crypt, num, gen, buf->len));
+			pdf_dict_put_int(ctx, obj, PDF_NAME(Length), pdf_encrypted_len(ctx, opts->crypt, num, gen, len));
 			pdf_print_encrypted_obj(ctx, opts->out, obj, opts->do_tight, opts->do_ascii, opts->crypt, num, gen, NULL);
 			fz_write_string(ctx, opts->out, "\nstream\n");
-			pdf_encrypt_data(ctx, opts->crypt, num, gen, write_data, opts->out, buf->data, buf->len);
+			pdf_encrypt_data(ctx, opts->crypt, num, gen, write_data, opts->out, data, len);
 		}
 
 		fz_write_string(ctx, opts->out, "\nendstream\nendobj\n\n");
@@ -866,7 +908,7 @@ static void copystream(fz_context *ctx, pdf_document *doc, pdf_write_state *opts
 		fz_drop_buffer(ctx, tmp_unhex);
 		fz_drop_buffer(ctx, tmp_hex);
 		fz_drop_buffer(ctx, tmp_comp);
-		fz_drop_buffer(ctx, orig_buf);
+		fz_drop_buffer(ctx, buf);
 		pdf_drop_obj(ctx, obj);
 	}
 	fz_catch(ctx)
@@ -877,28 +919,31 @@ static void copystream(fz_context *ctx, pdf_document *doc, pdf_write_state *opts
 
 static void expandstream(fz_context *ctx, pdf_document *doc, pdf_write_state *opts, pdf_obj *obj_orig, int num, int gen, int do_deflate, int unenc)
 {
-	fz_buffer *buf = NULL, *tmp_comp = NULL, *tmp_hex = NULL, *orig_buf = NULL;
+	fz_buffer *buf = NULL, *tmp_comp = NULL, *tmp_hex = NULL;
 	pdf_obj *obj = NULL;
 	pdf_obj *dp;
+	size_t len;
+	unsigned char *data;
 	int w, h;
 
-	fz_var(orig_buf);
+	fz_var(buf);
 	fz_var(tmp_comp);
 	fz_var(tmp_hex);
 	fz_var(obj);
 
 	fz_try(ctx)
 	{
-		buf = orig_buf = pdf_load_stream_number(ctx, doc, num);
+		buf = pdf_load_stream_number(ctx, doc, num);
 		obj = pdf_copy_dict(ctx, obj_orig);
 		pdf_dict_del(ctx, obj, PDF_NAME(Filter));
 		pdf_dict_del(ctx, obj, PDF_NAME(DecodeParms));
 
+		len = fz_buffer_storage(ctx, buf, &data);
 		if (do_deflate)
 		{
-			if (is_bitmap_stream(ctx, obj, buf->len, &w, &h))
+			if (is_bitmap_stream(ctx, obj, len, &w, &h))
 			{
-				buf = tmp_comp = fz_compress_ccitt_fax_g4(ctx, buf->data, w, h, (w+7)>>3);
+				tmp_comp = fz_compress_ccitt_fax_g4(ctx, data, w, h, (w+7)>>3);
 				pdf_dict_put(ctx, obj, PDF_NAME(Filter), PDF_NAME(CCITTFaxDecode));
 				dp = pdf_dict_put_dict(ctx, obj, PDF_NAME(DecodeParms), 1);
 				pdf_dict_put_int(ctx, dp, PDF_NAME(K), -1);
@@ -906,7 +951,7 @@ static void expandstream(fz_context *ctx, pdf_document *doc, pdf_write_state *op
 			}
 			else if (do_deflate == 1)
 			{
-				buf = tmp_comp = fz_deflate(ctx, buf, opts->compression_effort);
+				tmp_comp = deflatebuf(ctx, data, len, opts->compression_effort);
 				pdf_dict_put(ctx, obj, PDF_NAME(Filter), PDF_NAME(FlateDecode));
 			}
 			else
@@ -918,11 +963,13 @@ static void expandstream(fz_context *ctx, pdf_document *doc, pdf_write_state *op
 				tmp_comp = fz_new_buffer_from_data(ctx, comp_data, comp_len);
 				pdf_dict_put(ctx, obj, PDF_NAME(Filter), PDF_NAME(BrotliDecode));
 			}
+			len = fz_buffer_storage(ctx, tmp_comp, &data);
 		}
 
-		if (opts->do_ascii && isbinarystream(ctx, buf->data, buf->len))
+		if (opts->do_ascii && isbinarystream(ctx, data, len))
 		{
-			buf = tmp_hex = hexbuf(ctx, buf);
+			tmp_hex = hexbuf(ctx, data, len);
+			len = fz_buffer_storage(ctx, tmp_hex, &data);
 			addhexfilter(ctx, doc, obj);
 		}
 
@@ -930,17 +977,17 @@ static void expandstream(fz_context *ctx, pdf_document *doc, pdf_write_state *op
 
 		if (unenc)
 		{
-			pdf_dict_put_int(ctx, obj, PDF_NAME(Length), buf->len);
+			pdf_dict_put_int(ctx, obj, PDF_NAME(Length), len);
 			pdf_print_obj(ctx, opts->out, obj, opts->do_tight, opts->do_ascii);
 			fz_write_string(ctx, opts->out, "\nstream\n");
-			fz_write_data(ctx, opts->out, buf->data, buf->len);
+			fz_write_data(ctx, opts->out, data, len);
 		}
 		else
 		{
-			pdf_dict_put_int(ctx, obj, PDF_NAME(Length), pdf_encrypted_len(ctx, opts->crypt, num, gen, buf->len));
+			pdf_dict_put_int(ctx, obj, PDF_NAME(Length), pdf_encrypted_len(ctx, opts->crypt, num, gen, (int)len));
 			pdf_print_encrypted_obj(ctx, opts->out, obj, opts->do_tight, opts->do_ascii, opts->crypt, num, gen, NULL);
 			fz_write_string(ctx, opts->out, "\nstream\n");
-			pdf_encrypt_data(ctx, opts->crypt, num, gen, write_data, opts->out, buf->data, buf->len);
+			pdf_encrypt_data(ctx, opts->crypt, num, gen, write_data, opts->out, data, len);
 		}
 
 		fz_write_string(ctx, opts->out, "\nendstream\nendobj\n\n");
@@ -949,7 +996,7 @@ static void expandstream(fz_context *ctx, pdf_document *doc, pdf_write_state *op
 	{
 		fz_drop_buffer(ctx, tmp_hex);
 		fz_drop_buffer(ctx, tmp_comp);
-		fz_drop_buffer(ctx, orig_buf);
+		fz_drop_buffer(ctx, buf);
 		pdf_drop_obj(ctx, obj);
 	}
 	fz_catch(ctx)
@@ -1141,7 +1188,7 @@ static void writeobject(fz_context *ctx, pdf_document *doc, pdf_write_state *opt
 			{
 				do_deflate = opts->do_compress;
 				do_expand = opts->do_expand;
-				if (pdf_is_image_stream(ctx, obj) && opts->do_compress_images && is_image_codec(ctx, obj))
+				if (opts->do_compress_images && pdf_is_image_stream(ctx, obj) && is_image_codec(ctx, obj))
 					do_deflate = opts->do_compress ? opts->do_compress : 1, do_expand = 0;
 				if (opts->do_compress_fonts && is_font_stream(ctx, obj))
 					do_deflate = opts->do_compress ? opts->do_compress : 1, do_expand = 0;

@@ -3376,7 +3376,7 @@ pdf_run_pop_resources(fz_context *ctx, pdf_processor *proc)
 	gstate: The initial graphics state.
 */
 pdf_processor *
-pdf_new_run_processor(fz_context *ctx, pdf_document *doc, fz_device *dev, fz_matrix ctm, int struct_parent, const char *usage, pdf_gstate *gstate, fz_default_colorspaces *default_cs, fz_cookie *cookie, int has_transparency, pdf_gstate *fill_gstate, pdf_gstate *stroke_gstate)
+pdf_new_run_processor(fz_context *ctx, pdf_document *doc, fz_device *dev, fz_matrix ctm, int struct_parent, const char *usage, pdf_gstate *gstate, fz_default_colorspaces *default_cs, int has_transparency, pdf_gstate *fill_gstate, pdf_gstate *stroke_gstate)
 {
 	pdf_run_processor *proc = (pdf_run_processor *)pdf_new_processor(ctx, sizeof *proc);
 	{
