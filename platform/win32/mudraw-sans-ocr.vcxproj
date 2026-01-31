@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{0B51171B-B10E-4EAC-8FFA-19226A1828A3}</ProjectGuid>
+    <ProjectGuid>{AA3B1539-2484-49B3-B9EF-3954357D2DAC}</ProjectGuid>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -92,7 +92,7 @@
     <ClCompile>
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../include;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../thirdparty/owemdjee/plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>HAVE_TESSERACT;HAVE_LEPTONICA;MUDRAW_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>FZ_ENABLE_OCR=0;HAVE_LEPTONICA;MUDRAW_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
@@ -114,7 +114,7 @@
     <ClCompile>
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../include;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../thirdparty/owemdjee/plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>HAVE_TESSERACT;HAVE_LEPTONICA;MUDRAW_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>FZ_ENABLE_OCR=0;HAVE_LEPTONICA;MUDRAW_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
@@ -134,7 +134,7 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../include;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../thirdparty/owemdjee/plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>HAVE_TESSERACT;HAVE_LEPTONICA;MUDRAW_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>FZ_ENABLE_OCR=0;HAVE_LEPTONICA;MUDRAW_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -156,7 +156,7 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../include;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../thirdparty/owemdjee/plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>HAVE_TESSERACT;HAVE_LEPTONICA;MUDRAW_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>FZ_ENABLE_OCR=0;HAVE_LEPTONICA;MUDRAW_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -170,9 +170,6 @@
       <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../include;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../thirdparty/owemdjee/plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\source\tools\mudraw.c" />
-  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="bin2coff.vcxproj">
       <Project>{bfe316b3-bd90-433a-a20d-c73975f1caa7}</Project>
@@ -240,9 +237,6 @@
     <ProjectReference Include="libleptonica.vcxproj">
       <Project>{ca0bda38-89b9-4703-a77d-8049ac3a0d04}</Project>
     </ProjectReference>
-    <ProjectReference Include="libleptonica_tools.vcxproj">
-      <Project>{ca0bda38-89b9-4703-a77d-8049acf23027}</Project>
-    </ProjectReference>
     <ProjectReference Include="liblerc.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff5437c9}</Project>
     </ProjectReference>
@@ -252,8 +246,8 @@
     <ProjectReference Include="libmujs.vcxproj">
       <Project>{5edcf4fd-0291-4fb9-8d96-858957ca5e3c}</Project>
     </ProjectReference>
-    <ProjectReference Include="libmupdf.vcxproj">
-      <Project>{5f615f91-dff8-4f05-bf48-6222b7d86519}</Project>
+    <ProjectReference Include="libmupdf_sans_tesseract.vcxproj">
+      <Project>{0b51171b-b10e-4eac-8ffa-19226a45d768}</Project>
     </ProjectReference>
     <ProjectReference Include="libmuthreads.vcxproj">
       <Project>{de21fa8a-fc8a-47e0-87e4-dce8808bfc9b}</Project>
@@ -278,9 +272,6 @@
     </ProjectReference>
     <ProjectReference Include="libsystem_override.vcxproj">
       <Project>{0B51171B-B10E-4EAC-8FFA-19226A8BB47B}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libtesseract.vcxproj">
-      <Project>{ac0bda38-89b9-4703-a77d-8049ac3a0d04}</Project>
     </ProjectReference>
     <ProjectReference Include="libtiff.vcxproj">
       <Project>{0B51171B-B10E-4EAC-8FFA-19226A413401}</Project>
@@ -310,5 +301,11 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../source/tools/mudraw.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../source/system_override/force_link_dependency_helper.cpp" />
+  </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
