@@ -108,7 +108,7 @@ src = src
 })
 
 const sections_to_remove = [
-	"ClCompile", "Resourcecompile", "ClInclude", "MASM", "Text", "Image", "Font", "None"
+	"ClCompile", "Resourcecompile", "ClInclude", "MASM", "Text", "Image", "Font", "None", "bin2coff__otf_", "bin2coff__ttf_", "bin2coff__cff_", "bin2coff__ttc_"
 ];
 
 for (let s of sections_to_remove) {

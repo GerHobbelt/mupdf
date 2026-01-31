@@ -88,6 +88,7 @@ if (!fs.existsSync(filepath)) {
 
 let spec = {
     nasm_or_masm: 0,   // 0: auto; -1: masm; +1: nasm
+    bin2coff_mode: false,
     ignores: [
         '.git/',
         'thirdparty/',
@@ -139,6 +140,11 @@ if (fs.existsSync(specPath)) {
   else if (/^MASM/im.test(rawSpec))
       spec.nasm_or_masm = -1;
 
+  if (/^bin2coff_mode/im.test(rawSpec)) {
+      console.log("!!!!!!!!!! bin2coff_mode");
+      spec.bin2coff_mode = true;
+  }
+  
   if (/^ignore:/m.test(rawSpec)) {
     if (DEBUG > 0) console.log("SPEC include [ignore] section...");
     spec.ignores = rawSpec.replace(/^.*\nignore:(.*?)\n(?:[^\s].*)?$/s, '$1')
@@ -488,6 +494,7 @@ function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
     case '.jpg':
     case '.gif':
     case '.xrc':
+    case '.cff':
     case '.ttf':
     case '.otf':
     case '.ttc':
@@ -527,6 +534,9 @@ function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
     case '.yaml':
     case '.toml':
     case '.ini':
+    case '.props':
+    case '.rules':
+    case '.targets':
         filterDirs.add('Misc Files');
         base = path.dirname(f);
         if (base === '.') {
@@ -620,7 +630,8 @@ function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
     let base;
     let slot;
     let f;
-    switch (path.extname(item).toLowerCase()) {
+    let ext = path.extname(item).toLowerCase();
+    switch (ext) {
     default:
         base = path.dirname(item);
         if (base === '.') {
@@ -786,6 +797,7 @@ function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
         filesToAddToProj.push(slot);
         break;
 
+    case '.cff':
     case '.ttf':
     case '.otf':
     case '.ttc':
@@ -805,17 +817,33 @@ function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
           item = item.replace(sre, '');
         }
         f = unixify(is_dir ? `${rawSourcesPath}/${item}` : `${rawSourcesPath}`).replace(/\/+/g, '/');
-        slot = `
+        if (!spec.bin2coff_mode) {
+            slot = `
     <Font Include="${xmlEncode(f)}">
       <Filter>${xmlEncode(base)}</Filter>
     </Font>
-        `;
-        filesToAdd.push(slot);
+            `;
+            filesToAdd.push(slot);
 
-        slot = `
+            slot = `
     <Font Include="${xmlEncode(f)}" />
-        `;
-        filesToAddToProj.push(slot);
+            `;
+            filesToAddToProj.push(slot);
+        } 
+        else {
+            let opcode = `bin2coff__${ ext.substring(1) }_`;
+            slot = `
+    <${ opcode } Include="${xmlEncode(f)}">
+      <Filter>${xmlEncode(base)}</Filter>
+    </${ opcode }>
+            `;
+            filesToAdd.push(slot);
+
+            slot = `
+    <${ opcode } Include="${xmlEncode(f)}" />
+            `;
+            filesToAddToProj.push(slot);
+        }
         break;
 
     case '.xpm':
