@@ -229,8 +229,8 @@ fz_opt_from_list(const char *opt, const char *optlist)
 	return -1;
 }
 
-char *
-fz_optpath(char *opt)
+const char *
+fz_optpath(const char *opt)
 {
 	if (!strcmp(opt, "-"))
 		return "/dev/stdout";

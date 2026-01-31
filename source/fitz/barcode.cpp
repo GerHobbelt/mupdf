@@ -22,6 +22,8 @@
 
 #include "mupdf/fitz.h"
 
+#if FZ_ENABLE_RENDER_CORE
+
 #if FZ_ENABLE_BARCODE
 
 #ifndef HAVE_ZXINGCPP
@@ -500,3 +502,5 @@ const char *fz_string_from_barcode_type(fz_barcode_type type)
 }
 
 #endif /* FZ_ENABLE_BARCODE */
+
+#endif // FZ_ENABLE_RENDER_CORE 

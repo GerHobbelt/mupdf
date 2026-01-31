@@ -27,6 +27,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#if FZ_ENABLE_PDF
+
 typedef struct pdf_object_labels pdf_object_labels;
 typedef struct pdf_object_label_node pdf_object_label_node;
 
@@ -260,3 +262,5 @@ pdf_label_object(fz_context *ctx, pdf_object_labels *g, int num, pdf_label_objec
 	path[sizeof(path)-1] = 0;
 	find_paths(ctx, g, num, path, &path[sizeof(path)-1], callback, arg);
 }
+
+#endif

@@ -678,7 +678,9 @@ void pdf_set_annot_flags(fz_context *ctx, pdf_annot *annot, int flags);
 	Set the stamp appearance to a custom image.
 */
 pdf_obj *pdf_annot_stamp_image_obj(fz_context *ctx, pdf_annot *annot);
+
 void pdf_set_annot_stamp_image_obj(fz_context *ctx, pdf_annot *annot, pdf_obj *ref);
+
 void pdf_set_annot_stamp_image(fz_context *ctx, pdf_annot *annot, fz_image *image);
 
 /*

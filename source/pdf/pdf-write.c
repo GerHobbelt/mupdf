@@ -715,7 +715,7 @@ static void addhexfilter(fz_context *ctx, pdf_document *doc, pdf_obj *dict)
 static fz_buffer *deflatebuf(fz_context *ctx, const unsigned char *p, size_t n, int effort)
 {
 	fz_buffer *buf;
-	uLongf csize;
+	size_t csize;
 	int t;
 	uLong longN = (uLong)n;
 	unsigned char *data;
@@ -725,15 +725,15 @@ static fz_buffer *deflatebuf(fz_context *ctx, const unsigned char *p, size_t n, 
 	if (n != (size_t)longN)
 		fz_throw(ctx, FZ_ERROR_LIMIT, "Buffer too large to deflate");
 
-	cap = compressBound(longN);
+	cap = zng_compressBound(longN);
 	data = Memento_label(fz_malloc(ctx, cap), "pdf_write_deflate");
 	buf = fz_new_buffer_from_data(ctx, data, cap);
-	csize = (uLongf)cap;
+	csize = cap;
 	if (effort == 0)
 		mode = Z_DEFAULT_COMPRESSION;
 	else
 		mode = effort * Z_BEST_COMPRESSION / 100;
-	t = compress2(data, &csize, p, longN, mode);
+	t = zng_compress2(data, &csize, p, longN, mode);
 	if (t != Z_OK)
 	{
 		fz_drop_buffer(ctx, buf);

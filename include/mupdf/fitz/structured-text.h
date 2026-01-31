@@ -914,12 +914,6 @@ fz_device *fz_new_ocr_device(fz_context *ctx, fz_device *target, fz_matrix ctm, 
 
 fz_document *fz_open_reflowed_document(fz_context *ctx, fz_document *underdoc, const fz_stext_options *opts);
 
-#ifdef __cplusplus
-}
-#endif
-
-#endif
-
 typedef struct
 {
 	/* The maximum width or height that should be considered for rafting. */
@@ -930,5 +924,10 @@ typedef struct
 
 void fz_stext_raft_images(fz_context *ctx, fz_stext_page *stext, fz_image_raft_options *options);
 
+#ifdef __cplusplus
+}
+#endif
+
+#endif
 
 #endif

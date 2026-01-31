@@ -3835,7 +3835,7 @@ static void fmt_obj(fz_context *ctx, struct fmt *fmt, pdf_obj *obj)
 
 		fmt_dict(ctx, fmt, pdf_resolve_indirect(ctx, obj));
 
-		pdf_embedded_file_params fs_params = { NULL };
+		struct pdf_filespec_params fs_params = { NULL };
 
 		fz_buffer* fbuf = NULL;
 		unsigned char* fdata = NULL;
@@ -3843,7 +3843,7 @@ static void fmt_obj(fz_context *ctx, struct fmt *fmt, pdf_obj *obj)
 
 		fz_try(ctx)
 		{
-			pdf_get_embedded_file_params(ctx, obj, &fs_params);
+			pdf_get_filespec_params(ctx, obj, &fs_params);
 
 			fbuf = pdf_load_embedded_file_contents(ctx, obj);
 			if (fbuf)
@@ -4235,8 +4235,8 @@ int pdf_debug_obj_internal(fz_context *ctx, pdf_obj *obj, fz_output *out, int de
 	}
 	else if (pdf_is_embedded_file(ctx, obj))
 	{
-		pdf_embedded_file_params fs_params = { NULL };
-		pdf_get_embedded_file_params(ctx, obj, &fs_params);
+		struct pdf_filespec_params fs_params = { NULL };
+		pdf_get_filespec_params(ctx, obj, &fs_params);
 		fz_write_printf(ctx, out, "embedded_file:%s", fs_params.filename);
 	}
 	else if (pdf_is_indirect(ctx, obj))
@@ -4428,8 +4428,8 @@ static void fmt_dict_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 	{
 		if (pdf_is_embedded_file(ctx, obj))
 		{
-			pdf_embedded_file_params fs_params = { NULL };
-			pdf_get_embedded_file_params(ctx, obj, &fs_params);
+			struct pdf_filespec_params fs_params = { NULL };
+			pdf_get_filespec_params(ctx, obj, &fs_params);
 
 			fmt_indent(ctx, fmt);
 			fmt_printf(ctx, fmt, "%q: %s,\n", "IsEmbeddedFile", "true");

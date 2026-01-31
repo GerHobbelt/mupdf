@@ -22,6 +22,8 @@
 
 #include "mupdf/fitz.h"
 
+#if FZ_ENABLE_RENDER_CORE 
+
 #include <zlib-ng.h>
 
 #include <limits.h>
@@ -343,3 +345,5 @@ fz_new_csv_writer(fz_context *ctx, const char *path, const char *options)
 	}
 	return wri;
 }
+
+#endif

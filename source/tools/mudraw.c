@@ -1409,7 +1409,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 					mu_wait_semaphore(&work->stop);
 #endif
 					work->running = 0;
-					ASSERT(ctx != w->ctx);
+					ASSERT(ctx != work->ctx);
 					ctx->cookie->d.errors += work->cookie.d.errors;
 					pix = work->pix;
 					bit = work->bit;
