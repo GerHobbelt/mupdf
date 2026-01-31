@@ -339,7 +339,9 @@ static const char *format_opts = NULL;
 static fz_stext_options stext_opts = { 0 };
 static fz_pcl_options pcl_opts = { 0 };
 static fz_pclm_options pclm_opts = { 0 };
+#if FZ_ENABLE_OCR_OUTPUT
 static fz_pdfocr_options pdfocr_opts = { 0 };
+#endif
 static fz_pwg_options pwg_opts = { 0 };
 static pdf_write_options pdf_opts = { 0 };
 
@@ -2786,7 +2788,9 @@ int main(int argc, const char** argv)
 	memset(&stext_opts, 0, sizeof(stext_opts));
 	memset(&pcl_opts, 0, sizeof(pcl_opts));
 	memset(&pclm_opts, 0, sizeof(pclm_opts));
+#if FZ_ENABLE_OCR_OUTPUT
 	memset(&pdfocr_opts, 0, sizeof(pdfocr_opts));
+#endif
 	memset(&pwg_opts, 0, sizeof(pwg_opts));
 	memset(&pdf_opts, 0, sizeof(pdf_opts));
 
@@ -3365,10 +3369,12 @@ int main(int argc, const char** argv)
 			{
 				fz_parse_pclm_options(ctx, &pclm_opts, format_opts);
 			}
+#if FZ_ENABLE_OCR_OUTPUT
 			else if (output_format->format == OUT_OCR_PDF)
 			{
 				fz_parse_pdfocr_options(ctx, &pdfocr_opts, format_opts);
 			}
+#endif
 			else if (output_format->format == OUT_PWG)
 			{
 				fz_parse_pwg_options(ctx, &pwg_opts, format_opts);
@@ -3398,6 +3404,7 @@ int main(int argc, const char** argv)
 			{
 				fz_parse_pclm_options(ctx, &pclm_opts, "compression=flate");
 			}
+#if FZ_ENABLE_OCR_OUTPUT
 			else if (output_format->format == OUT_OCR_PDF)
 			{
 				char options[300];
@@ -3409,6 +3416,7 @@ int main(int argc, const char** argv)
 				}
 				fz_parse_pdfocr_options(ctx, &pdfocr_opts, options);
 			}
+#endif
 			else if (output_format->format == OUT_PWG)
 			{
 			}

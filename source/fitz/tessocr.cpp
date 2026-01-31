@@ -33,6 +33,8 @@
 
 #include <climits>
 
+#if FZ_ENABLE_OCR 
+
 #include "tesseract/baseapi.h"
 #include "tesseract/capi.h"          // for ETEXT_DESC
 
@@ -41,8 +43,6 @@
 #include "leptonica-wrap.h"
 
 extern "C" {
-
-#if FZ_ENABLE_OCR 
 
 #if TESSERACT_MAJOR_VERSION >= 5
 
@@ -374,9 +374,9 @@ void ocr_recognise(fz_context *ctx,
 		fz_rethrow(ctx);
 }
 
-#endif // FZ_ENABLE_OCR 
-
 }
+
+#endif // FZ_ENABLE_OCR 
 
 #endif // BUILDING_MUPDF_MINIMAL_CORE
 
