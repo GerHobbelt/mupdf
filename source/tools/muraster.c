@@ -273,9 +273,9 @@ enum {
 };
 
 enum {
-	CS_GRAY,
-	CS_RGB,
-	CS_CMYK
+	CS_GRAY = FZ_COLORSPACE_GRAY,
+	CS_RGB = FZ_COLORSPACE_RGB,
+	CS_CMYK = FZ_COLORSPACE_CMYK
 };
 
 typedef struct
