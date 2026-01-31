@@ -141,7 +141,6 @@ if (fs.existsSync(specPath)) {
       spec.nasm_or_masm = -1;
 
   if (/^bin2coff_mode/im.test(rawSpec)) {
-      console.log("!!!!!!!!!! bin2coff_mode");
       spec.bin2coff_mode = true;
   }
   
