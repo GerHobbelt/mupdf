@@ -20,7 +20,9 @@ cd boost/include
 for f in $( find ../../../thirdparty/owemdjee/boost -type f \( -name '*.h' -o -name '*.hpp' \) | grep -e '\/include\/boost\/' | sort ) ; do
 	DSTFILE=$( echo $f | sed -E -e 's/^.*owemdjee//' -e 's/^.*include\///' )
 	if ! test -f ./$DSTFILE ; then 
-		echo "symlink: $DSTFILE --> $f"
+		TARGETPATH=$( echo $f | sed -E -e 's/^.*owemdjee\///' )
+		BACKPATH=$( echo "$DSTFILE" | sed -E -e 's/[^\/]+\//..\//g' -e 's/[^\/]+$//' )
+		echo "symlink: $DSTFILE --> ${BACKPATH}${TARGETPATH}"
 		mkdir -p $( dirname ./$DSTFILE )
 		cat > ./$DSTFILE << EOF
 //
@@ -31,7 +33,7 @@ for f in $( find ../../../thirdparty/owemdjee/boost -type f \( -name '*.h' -o -n
 
 //#pragma once
 
-#include "$f"
+#include "../../../${BACKPATH}${TARGETPATH}"
 
 EOF
 	fi
