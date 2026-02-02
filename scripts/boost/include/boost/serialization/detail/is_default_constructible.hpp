@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/serialization/include/boost/serialization/detail/is_default_constructible.hpp"
+#include "../../../../../../boost/libs/serialization/include/boost/serialization/detail/is_default_constructible.hpp"
 

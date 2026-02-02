@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/gil/include/boost/gil/extension/toolbox/dynamic_images.hpp"
+#include "../../../../../../../boost/libs/gil/include/boost/gil/extension/toolbox/dynamic_images.hpp"
 

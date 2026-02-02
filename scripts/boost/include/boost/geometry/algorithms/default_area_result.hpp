@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/algorithms/default_area_result.hpp"
+#include "../../../../../../boost/libs/geometry/include/boost/geometry/algorithms/default_area_result.hpp"
 

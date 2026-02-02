@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/fusion/include/boost/fusion/sequence/intrinsic/detail/segmented_begin.hpp"
+#include "../../../../../../../../boost/libs/fusion/include/boost/fusion/sequence/intrinsic/detail/segmented_begin.hpp"
 

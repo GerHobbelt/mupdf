@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/lockfree/include/boost/lockfree/detail/atomic.hpp"
+#include "../../../../../../boost/libs/lockfree/include/boost/lockfree/detail/atomic.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/stacktrace/include/boost/stacktrace/detail/unwind_base_impls.hpp"
+#include "../../../../../../boost/libs/stacktrace/include/boost/stacktrace/detail/unwind_base_impls.hpp"
 

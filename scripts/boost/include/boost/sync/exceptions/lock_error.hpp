@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/sync/include/boost/sync/exceptions/lock_error.hpp"
+#include "../../../../../../boost/libs/sync/include/boost/sync/exceptions/lock_error.hpp"
 

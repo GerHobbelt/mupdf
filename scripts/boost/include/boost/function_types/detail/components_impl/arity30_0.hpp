@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/function_types/include/boost/function_types/detail/components_impl/arity30_0.hpp"
+#include "../../../../../../../boost/libs/function_types/include/boost/function_types/detail/components_impl/arity30_0.hpp"
 

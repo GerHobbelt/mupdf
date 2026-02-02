@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/spirit/include/boost/spirit/home/support/adapt_adt_attributes.hpp"
+#include "../../../../../../../boost/libs/spirit/include/boost/spirit/home/support/adapt_adt_attributes.hpp"
 

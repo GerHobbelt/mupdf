@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/winapi/include/boost/detail/winapi/priority_class.hpp"
+#include "../../../../../../boost/libs/winapi/include/boost/detail/winapi/priority_class.hpp"
 

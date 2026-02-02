@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/thread/include/boost/thread/detail/make_tuple_indices.hpp"
+#include "../../../../../../boost/libs/thread/include/boost/thread/detail/make_tuple_indices.hpp"
 

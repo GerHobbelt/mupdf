@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/signals2/include/boost/signals2/detail/replace_slot_function.hpp"
+#include "../../../../../../boost/libs/signals2/include/boost/signals2/detail/replace_slot_function.hpp"
 

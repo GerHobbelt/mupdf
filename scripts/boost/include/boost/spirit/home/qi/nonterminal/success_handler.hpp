@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/spirit/include/boost/spirit/home/qi/nonterminal/success_handler.hpp"
+#include "../../../../../../../../boost/libs/spirit/include/boost/spirit/home/qi/nonterminal/success_handler.hpp"
 

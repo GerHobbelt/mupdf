@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/spirit/include/boost/spirit/home/lex/lexer/lexertl/generate_static.hpp"
+#include "../../../../../../../../../boost/libs/spirit/include/boost/spirit/home/lex/lexer/lexertl/generate_static.hpp"
 

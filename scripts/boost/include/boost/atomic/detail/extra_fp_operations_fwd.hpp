@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/atomic/include/boost/atomic/detail/extra_fp_operations_fwd.hpp"
+#include "../../../../../../boost/libs/atomic/include/boost/atomic/detail/extra_fp_operations_fwd.hpp"
 

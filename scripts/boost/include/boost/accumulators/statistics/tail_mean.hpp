@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/accumulators/include/boost/accumulators/statistics/tail_mean.hpp"
+#include "../../../../../../boost/libs/accumulators/include/boost/accumulators/statistics/tail_mean.hpp"
 

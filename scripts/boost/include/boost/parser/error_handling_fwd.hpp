@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/parser/include/boost/parser/error_handling_fwd.hpp"
+#include "../../../../../boost/libs/parser/include/boost/parser/error_handling_fwd.hpp"
 

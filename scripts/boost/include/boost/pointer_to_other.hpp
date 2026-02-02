@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/smart_ptr/include/boost/pointer_to_other.hpp"
+#include "../../../../boost/libs/smart_ptr/include/boost/pointer_to_other.hpp"
 

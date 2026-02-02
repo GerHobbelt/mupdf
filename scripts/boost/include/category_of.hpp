@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/fusion/include/boost/fusion/include/category_of.hpp"
+#include "../../../boost/libs/fusion/include/boost/fusion/include/category_of.hpp"
 

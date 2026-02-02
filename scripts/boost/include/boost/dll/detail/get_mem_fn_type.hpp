@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/dll/include/boost/dll/detail/get_mem_fn_type.hpp"
+#include "../../../../../../boost/libs/dll/include/boost/dll/detail/get_mem_fn_type.hpp"
 

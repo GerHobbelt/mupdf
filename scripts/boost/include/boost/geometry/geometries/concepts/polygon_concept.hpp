@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/geometries/concepts/polygon_concept.hpp"
+#include "../../../../../../../boost/libs/geometry/include/boost/geometry/geometries/concepts/polygon_concept.hpp"
 

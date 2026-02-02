@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/index/detail/priority_dequeue.hpp"
+#include "../../../../../../../boost/libs/geometry/include/boost/geometry/index/detail/priority_dequeue.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/python/include/boost/python/manage_new_object.hpp"
+#include "../../../../../boost/libs/python/include/boost/python/manage_new_object.hpp"
 

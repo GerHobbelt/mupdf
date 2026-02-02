@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/spirit/include/boost/spirit/repository/include/karma_confix.hpp"
+#include "../../../boost/libs/spirit/include/boost/spirit/repository/include/karma_confix.hpp"
 

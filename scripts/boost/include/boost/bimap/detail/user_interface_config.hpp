@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/bimap/include/boost/bimap/detail/user_interface_config.hpp"
+#include "../../../../../../boost/libs/bimap/include/boost/bimap/detail/user_interface_config.hpp"
 

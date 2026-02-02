@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/graph/include/boost/graph/r_c_shortest_paths.hpp"
+#include "../../../../../boost/libs/graph/include/boost/graph/r_c_shortest_paths.hpp"
 

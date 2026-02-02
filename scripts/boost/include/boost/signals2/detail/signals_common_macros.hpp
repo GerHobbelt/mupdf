@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/signals2/include/boost/signals2/detail/signals_common_macros.hpp"
+#include "../../../../../../boost/libs/signals2/include/boost/signals2/detail/signals_common_macros.hpp"
 

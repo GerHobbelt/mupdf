@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/algorithms/detail/point_is_spike_or_equal.hpp"
+#include "../../../../../../../boost/libs/geometry/include/boost/geometry/algorithms/detail/point_is_spike_or_equal.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/functional/include/boost/functional/lightweight_forward_adapter.hpp"
+#include "../../../../../boost/libs/functional/include/boost/functional/lightweight_forward_adapter.hpp"
 

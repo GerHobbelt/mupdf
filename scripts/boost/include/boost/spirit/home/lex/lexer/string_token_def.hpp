@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/spirit/include/boost/spirit/home/lex/lexer/string_token_def.hpp"
+#include "../../../../../../../../boost/libs/spirit/include/boost/spirit/home/lex/lexer/string_token_def.hpp"
 

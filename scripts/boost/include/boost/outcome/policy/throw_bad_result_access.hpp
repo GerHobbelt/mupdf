@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/outcome/include/boost/outcome/policy/throw_bad_result_access.hpp"
+#include "../../../../../../boost/libs/outcome/include/boost/outcome/policy/throw_bad_result_access.hpp"
 

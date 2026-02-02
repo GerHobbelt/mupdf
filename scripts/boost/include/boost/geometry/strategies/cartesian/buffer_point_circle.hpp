@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/strategies/cartesian/buffer_point_circle.hpp"
+#include "../../../../../../../boost/libs/geometry/include/boost/geometry/strategies/cartesian/buffer_point_circle.hpp"
 

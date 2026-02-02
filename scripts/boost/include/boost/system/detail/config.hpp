@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/system/include/boost/system/detail/config.hpp"
+#include "../../../../../../boost/libs/system/include/boost/system/detail/config.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/spirit/include/boost/spirit/include/karma_right_alignment.hpp"
+#include "../../../boost/libs/spirit/include/boost/spirit/include/karma_right_alignment.hpp"
 

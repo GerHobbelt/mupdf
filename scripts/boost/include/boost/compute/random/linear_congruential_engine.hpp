@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/compute/include/boost/compute/random/linear_congruential_engine.hpp"
+#include "../../../../../../boost/libs/compute/include/boost/compute/random/linear_congruential_engine.hpp"
 

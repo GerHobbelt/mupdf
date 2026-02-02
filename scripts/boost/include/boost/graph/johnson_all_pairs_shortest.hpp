@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/graph/include/boost/graph/johnson_all_pairs_shortest.hpp"
+#include "../../../../../boost/libs/graph/include/boost/graph/johnson_all_pairs_shortest.hpp"
 

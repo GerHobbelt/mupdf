@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/algorithm/include/boost/algorithm/string/detail/finder_regex.hpp"
+#include "../../../../../../../boost/libs/algorithm/include/boost/algorithm/string/detail/finder_regex.hpp"
 

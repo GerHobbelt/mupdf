@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/compute/include/boost/compute/algorithm/detail/count_if_with_threads.hpp"
+#include "../../../../../../../boost/libs/compute/include/boost/compute/algorithm/detail/count_if_with_threads.hpp"
 

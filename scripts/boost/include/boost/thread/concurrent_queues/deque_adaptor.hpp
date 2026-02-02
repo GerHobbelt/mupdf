@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/thread/include/boost/thread/concurrent_queues/deque_adaptor.hpp"
+#include "../../../../../../boost/libs/thread/include/boost/thread/concurrent_queues/deque_adaptor.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/numeric/odeint/include/boost/numeric/odeint/external/nt2/nt2_resize.hpp"
+#include "../../../../../../../../boost/libs/numeric/odeint/include/boost/numeric/odeint/external/nt2/nt2_resize.hpp"
 

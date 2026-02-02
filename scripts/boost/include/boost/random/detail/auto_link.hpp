@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/random/include/boost/random/detail/auto_link.hpp"
+#include "../../../../../../boost/libs/random/include/boost/random/detail/auto_link.hpp"
 

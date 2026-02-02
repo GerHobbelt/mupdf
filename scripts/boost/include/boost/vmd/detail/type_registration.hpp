@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/vmd/include/boost/vmd/detail/type_registration.hpp"
+#include "../../../../../../boost/libs/vmd/include/boost/vmd/detail/type_registration.hpp"
 

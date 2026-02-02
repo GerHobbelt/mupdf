@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/sync/include/boost/sync/condition_variables/notify_all_at_thread_exit.hpp"
+#include "../../../../../../boost/libs/sync/include/boost/sync/condition_variables/notify_all_at_thread_exit.hpp"
 

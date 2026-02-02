@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/spirit/include/boost/spirit/repository/include/qi_advance.hpp"
+#include "../../../boost/libs/spirit/include/boost/spirit/repository/include/qi_advance.hpp"
 

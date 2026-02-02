@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/math/include/boost/math/special_functions/detail/hypergeometric_1F1_negative_b_regions.hpp"
+#include "../../../../../../../boost/libs/math/include/boost/math/special_functions/detail/hypergeometric_1F1_negative_b_regions.hpp"
 

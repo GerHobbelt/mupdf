@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/compute/include/boost/compute/detail/device_ptr.hpp"
+#include "../../../../../../boost/libs/compute/include/boost/compute/detail/device_ptr.hpp"
 

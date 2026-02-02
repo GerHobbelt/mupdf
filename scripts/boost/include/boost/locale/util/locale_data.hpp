@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/locale/include/boost/locale/util/locale_data.hpp"
+#include "../../../../../../boost/libs/locale/include/boost/locale/util/locale_data.hpp"
 

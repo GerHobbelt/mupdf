@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/math/include/boost/math/interpolators/barycentric_rational.hpp"
+#include "../../../../../../boost/libs/math/include/boost/math/interpolators/barycentric_rational.hpp"
 

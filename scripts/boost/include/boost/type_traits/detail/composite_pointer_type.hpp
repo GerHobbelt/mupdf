@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/type_traits/include/boost/type_traits/detail/composite_pointer_type.hpp"
+#include "../../../../../../boost/libs/type_traits/include/boost/type_traits/detail/composite_pointer_type.hpp"
 

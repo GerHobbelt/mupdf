@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/algorithms/intersects.hpp"
+#include "../../../../../../boost/libs/geometry/include/boost/geometry/algorithms/intersects.hpp"
 

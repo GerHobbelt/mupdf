@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/graph/include/boost/graph/bellman_ford_shortest_paths.hpp"
+#include "../../../../../boost/libs/graph/include/boost/graph/bellman_ford_shortest_paths.hpp"
 

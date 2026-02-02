@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/metaparse/include/boost/metaparse/digit.hpp"
+#include "../../../../../boost/libs/metaparse/include/boost/metaparse/digit.hpp"
 

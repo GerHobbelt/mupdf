@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/mysql/include/boost/mysql/impl/internal/sansio/read_some_rows_dynamic.hpp"
+#include "../../../../../../../../boost/libs/mysql/include/boost/mysql/impl/internal/sansio/read_some_rows_dynamic.hpp"
 

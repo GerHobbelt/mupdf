@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/parameter/include/boost/parameter/aux_/preprocessor/seq_enum.hpp"
+#include "../../../../../../../boost/libs/parameter/include/boost/parameter/aux_/preprocessor/seq_enum.hpp"
 

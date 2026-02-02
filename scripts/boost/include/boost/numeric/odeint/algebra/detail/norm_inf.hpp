@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/numeric/odeint/include/boost/numeric/odeint/algebra/detail/norm_inf.hpp"
+#include "../../../../../../../../boost/libs/numeric/odeint/include/boost/numeric/odeint/algebra/detail/norm_inf.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/random/include/boost/random/detail/gray_coded_qrng.hpp"
+#include "../../../../../../boost/libs/random/include/boost/random/detail/gray_coded_qrng.hpp"
 

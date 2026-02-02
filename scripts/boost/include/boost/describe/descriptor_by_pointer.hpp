@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/describe/include/boost/describe/descriptor_by_pointer.hpp"
+#include "../../../../../boost/libs/describe/include/boost/describe/descriptor_by_pointer.hpp"
 

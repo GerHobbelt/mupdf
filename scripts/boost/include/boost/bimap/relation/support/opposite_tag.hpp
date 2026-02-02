@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/bimap/include/boost/bimap/relation/support/opposite_tag.hpp"
+#include "../../../../../../../boost/libs/bimap/include/boost/bimap/relation/support/opposite_tag.hpp"
 

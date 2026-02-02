@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/compute/include/boost/compute/detail/mpl_vector_to_tuple.hpp"
+#include "../../../../../../boost/libs/compute/include/boost/compute/detail/mpl_vector_to_tuple.hpp"
 

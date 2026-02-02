@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/lockfree/include/boost/lockfree/detail/tagged_ptr_ptrcompression.hpp"
+#include "../../../../../../boost/libs/lockfree/include/boost/lockfree/detail/tagged_ptr_ptrcompression.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/math/include/boost/math/tools/convert_from_string.hpp"
+#include "../../../../../../boost/libs/math/include/boost/math/tools/convert_from_string.hpp"
 

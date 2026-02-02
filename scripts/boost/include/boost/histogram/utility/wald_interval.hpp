@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/histogram/include/boost/histogram/utility/wald_interval.hpp"
+#include "../../../../../../boost/libs/histogram/include/boost/histogram/utility/wald_interval.hpp"
 

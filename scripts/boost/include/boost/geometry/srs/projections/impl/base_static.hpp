@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/srs/projections/impl/base_static.hpp"
+#include "../../../../../../../../boost/libs/geometry/include/boost/geometry/srs/projections/impl/base_static.hpp"
 

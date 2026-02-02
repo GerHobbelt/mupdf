@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/fusion/include/boost/fusion/adapted/struct/detail/adapt_is_tpl.hpp"
+#include "../../../../../../../../boost/libs/fusion/include/boost/fusion/adapted/struct/detail/adapt_is_tpl.hpp"
 

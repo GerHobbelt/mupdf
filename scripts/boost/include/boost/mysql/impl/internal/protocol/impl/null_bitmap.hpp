@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/mysql/include/boost/mysql/impl/internal/protocol/impl/null_bitmap.hpp"
+#include "../../../../../../../../../boost/libs/mysql/include/boost/mysql/impl/internal/protocol/impl/null_bitmap.hpp"
 

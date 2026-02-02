@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/algorithms/detail/is_valid/has_valid_self_turns.hpp"
+#include "../../../../../../../../boost/libs/geometry/include/boost/geometry/algorithms/detail/is_valid/has_valid_self_turns.hpp"
 

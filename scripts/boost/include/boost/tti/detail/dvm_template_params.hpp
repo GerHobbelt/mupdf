@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/tti/include/boost/tti/detail/dvm_template_params.hpp"
+#include "../../../../../../boost/libs/tti/include/boost/tti/detail/dvm_template_params.hpp"
 

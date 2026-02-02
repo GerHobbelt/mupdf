@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/serialization/include/boost/serialization/priority_queue.hpp"
+#include "../../../../../boost/libs/serialization/include/boost/serialization/priority_queue.hpp"
 

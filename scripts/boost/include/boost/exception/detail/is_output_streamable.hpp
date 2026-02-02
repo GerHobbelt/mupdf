@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/exception/include/boost/exception/detail/is_output_streamable.hpp"
+#include "../../../../../../boost/libs/exception/include/boost/exception/detail/is_output_streamable.hpp"
 

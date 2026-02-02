@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/config/include/boost/config/compiler/sunpro_cc.hpp"
+#include "../../../../../../boost/libs/config/include/boost/config/compiler/sunpro_cc.hpp"
 

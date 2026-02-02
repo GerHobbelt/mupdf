@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/gil/include/boost/gil/extension/toolbox/metafunctions/channel_view.hpp"
+#include "../../../../../../../../boost/libs/gil/include/boost/gil/extension/toolbox/metafunctions/channel_view.hpp"
 

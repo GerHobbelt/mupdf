@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/poly_collection/include/boost/poly_collection/detail/packed_segment.hpp"
+#include "../../../../../../boost/libs/poly_collection/include/boost/poly_collection/detail/packed_segment.hpp"
 

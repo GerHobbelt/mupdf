@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/mysql/include/boost/mysql/throw_on_error.hpp"
+#include "../../../../../boost/libs/mysql/include/boost/mysql/throw_on_error.hpp"
 

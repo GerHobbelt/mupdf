@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/math/include/boost/math/quadrature/detail/ooura_fourier_integrals_detail.hpp"
+#include "../../../../../../../boost/libs/math/include/boost/math/quadrature/detail/ooura_fourier_integrals_detail.hpp"
 

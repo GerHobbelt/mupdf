@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/mysql/include/boost/mysql/impl/internal/byte_to_hex.hpp"
+#include "../../../../../../../boost/libs/mysql/include/boost/mysql/impl/internal/byte_to_hex.hpp"
 

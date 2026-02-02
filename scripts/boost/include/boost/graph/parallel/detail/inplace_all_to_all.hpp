@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/graph_parallel/include/boost/graph/parallel/detail/inplace_all_to_all.hpp"
+#include "../../../../../../../boost/libs/graph_parallel/include/boost/graph/parallel/detail/inplace_all_to_all.hpp"
 

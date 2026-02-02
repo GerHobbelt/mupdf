@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/mpi/include/boost/mpi/detail/broadcast_sc.hpp"
+#include "../../../../../../boost/libs/mpi/include/boost/mpi/detail/broadcast_sc.hpp"
 

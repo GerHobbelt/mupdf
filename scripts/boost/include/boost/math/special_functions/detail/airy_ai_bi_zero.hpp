@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/math/include/boost/math/special_functions/detail/airy_ai_bi_zero.hpp"
+#include "../../../../../../../boost/libs/math/include/boost/math/special_functions/detail/airy_ai_bi_zero.hpp"
 

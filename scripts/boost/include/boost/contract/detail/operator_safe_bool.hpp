@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/contract/include/boost/contract/detail/operator_safe_bool.hpp"
+#include "../../../../../../boost/libs/contract/include/boost/contract/detail/operator_safe_bool.hpp"
 

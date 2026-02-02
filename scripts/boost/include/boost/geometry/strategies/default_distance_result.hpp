@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/strategies/default_distance_result.hpp"
+#include "../../../../../../boost/libs/geometry/include/boost/geometry/strategies/default_distance_result.hpp"
 

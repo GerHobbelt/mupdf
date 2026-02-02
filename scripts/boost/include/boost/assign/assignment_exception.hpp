@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/assign/include/boost/assign/assignment_exception.hpp"
+#include "../../../../../boost/libs/assign/include/boost/assign/assignment_exception.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/spirit/include/boost/spirit/home/classic/core/composite/sequential_and.hpp"
+#include "../../../../../../../../../boost/libs/spirit/include/boost/spirit/home/classic/core/composite/sequential_and.hpp"
 

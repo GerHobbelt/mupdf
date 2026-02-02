@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/compute/include/boost/compute/algorithm/partial_sum.hpp"
+#include "../../../../../../boost/libs/compute/include/boost/compute/algorithm/partial_sum.hpp"
 

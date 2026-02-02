@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/scope/include/boost/scope/detail/type_traits/disjunction.hpp"
+#include "../../../../../../../boost/libs/scope/include/boost/scope/detail/type_traits/disjunction.hpp"
 

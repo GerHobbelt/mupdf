@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/atomic/include/boost/atomic/detail/gcc_ppc_asm_common.hpp"
+#include "../../../../../../boost/libs/atomic/include/boost/atomic/detail/gcc_ppc_asm_common.hpp"
 

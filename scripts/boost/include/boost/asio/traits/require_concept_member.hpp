@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/asio/include/boost/asio/traits/require_concept_member.hpp"
+#include "../../../../../../boost/libs/asio/include/boost/asio/traits/require_concept_member.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/mysql/include/boost/mysql/character_set.hpp"
+#include "../../../../../boost/libs/mysql/include/boost/mysql/character_set.hpp"
 

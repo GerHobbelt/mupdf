@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/util/type_traits_std.hpp"
+#include "../../../../../../boost/libs/geometry/include/boost/geometry/util/type_traits_std.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/outcome/include/boost/outcome/experimental/status-code/quick_status_code_from_enum.hpp"
+#include "../../../../../../../boost/libs/outcome/include/boost/outcome/experimental/status-code/quick_status_code_from_enum.hpp"
 

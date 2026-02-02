@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/math/include/boost/math/special_functions/detail/lgamma_small.hpp"
+#include "../../../../../../../boost/libs/math/include/boost/math/special_functions/detail/lgamma_small.hpp"
 

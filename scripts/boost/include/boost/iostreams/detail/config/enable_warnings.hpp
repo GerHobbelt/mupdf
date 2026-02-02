@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/iostreams/include/boost/iostreams/detail/config/enable_warnings.hpp"
+#include "../../../../../../../boost/libs/iostreams/include/boost/iostreams/detail/config/enable_warnings.hpp"
 

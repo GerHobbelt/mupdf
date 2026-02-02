@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/compute/include/boost/compute/algorithm/detail/reduce_on_gpu.hpp"
+#include "../../../../../../../boost/libs/compute/include/boost/compute/algorithm/detail/reduce_on_gpu.hpp"
 

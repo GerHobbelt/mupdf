@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/algorithm/include/boost/algorithm/cxx11/is_permutation.hpp"
+#include "../../../../../../boost/libs/algorithm/include/boost/algorithm/cxx11/is_permutation.hpp"
 

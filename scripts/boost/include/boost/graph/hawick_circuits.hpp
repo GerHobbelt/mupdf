@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/graph/include/boost/graph/hawick_circuits.hpp"
+#include "../../../../../boost/libs/graph/include/boost/graph/hawick_circuits.hpp"
 

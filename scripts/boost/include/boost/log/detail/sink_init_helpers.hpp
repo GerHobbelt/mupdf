@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/log/include/boost/log/detail/sink_init_helpers.hpp"
+#include "../../../../../../boost/libs/log/include/boost/log/detail/sink_init_helpers.hpp"
 

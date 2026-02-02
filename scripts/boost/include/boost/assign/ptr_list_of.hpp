@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/assign/include/boost/assign/ptr_list_of.hpp"
+#include "../../../../../boost/libs/assign/include/boost/assign/ptr_list_of.hpp"
 

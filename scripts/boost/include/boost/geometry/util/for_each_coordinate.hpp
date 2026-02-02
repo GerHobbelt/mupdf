@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/util/for_each_coordinate.hpp"
+#include "../../../../../../boost/libs/geometry/include/boost/geometry/util/for_each_coordinate.hpp"
 

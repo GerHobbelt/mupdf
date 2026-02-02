@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/asio/include/boost/asio/ssl/detail/stream_core.hpp"
+#include "../../../../../../../boost/libs/asio/include/boost/asio/ssl/detail/stream_core.hpp"
 

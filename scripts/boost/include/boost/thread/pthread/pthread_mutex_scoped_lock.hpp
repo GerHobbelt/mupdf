@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/thread/include/boost/thread/pthread/pthread_mutex_scoped_lock.hpp"
+#include "../../../../../../boost/libs/thread/include/boost/thread/pthread/pthread_mutex_scoped_lock.hpp"
 

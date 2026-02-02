@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/python/include/boost/python/object/add_to_namespace.hpp"
+#include "../../../../../../boost/libs/python/include/boost/python/object/add_to_namespace.hpp"
 

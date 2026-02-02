@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/thread/include/boost/thread/lockable_traits.hpp"
+#include "../../../../../boost/libs/thread/include/boost/thread/lockable_traits.hpp"
 

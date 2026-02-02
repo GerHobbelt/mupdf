@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/multiprecision/include/boost/multiprecision/traits/std_integer_traits.hpp"
+#include "../../../../../../boost/libs/multiprecision/include/boost/multiprecision/traits/std_integer_traits.hpp"
 

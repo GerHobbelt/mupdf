@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/dll/include/boost/dll/import_mangled.hpp"
+#include "../../../../../boost/libs/dll/include/boost/dll/import_mangled.hpp"
 

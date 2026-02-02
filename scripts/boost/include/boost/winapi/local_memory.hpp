@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/winapi/include/boost/winapi/local_memory.hpp"
+#include "../../../../../boost/libs/winapi/include/boost/winapi/local_memory.hpp"
 

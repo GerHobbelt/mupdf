@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/mysql/include/boost/mysql/impl/internal/sansio/auth_plugin_common.hpp"
+#include "../../../../../../../../boost/libs/mysql/include/boost/mysql/impl/internal/sansio/auth_plugin_common.hpp"
 

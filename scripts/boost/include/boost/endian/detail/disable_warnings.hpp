@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/endian/include/boost/endian/detail/disable_warnings.hpp"
+#include "../../../../../../boost/libs/endian/include/boost/endian/detail/disable_warnings.hpp"
 

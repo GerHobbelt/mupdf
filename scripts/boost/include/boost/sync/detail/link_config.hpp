@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/sync/include/boost/sync/detail/link_config.hpp"
+#include "../../../../../../boost/libs/sync/include/boost/sync/detail/link_config.hpp"
 

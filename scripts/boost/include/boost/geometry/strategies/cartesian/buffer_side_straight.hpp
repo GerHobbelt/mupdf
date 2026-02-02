@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/strategies/cartesian/buffer_side_straight.hpp"
+#include "../../../../../../../boost/libs/geometry/include/boost/geometry/strategies/cartesian/buffer_side_straight.hpp"
 

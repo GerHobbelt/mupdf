@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/scope/include/boost/scope/fd_resource_traits.hpp"
+#include "../../../../../boost/libs/scope/include/boost/scope/fd_resource_traits.hpp"
 

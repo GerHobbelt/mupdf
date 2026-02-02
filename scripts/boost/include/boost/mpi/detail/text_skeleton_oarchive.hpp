@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/mpi/include/boost/mpi/detail/text_skeleton_oarchive.hpp"
+#include "../../../../../../boost/libs/mpi/include/boost/mpi/detail/text_skeleton_oarchive.hpp"
 

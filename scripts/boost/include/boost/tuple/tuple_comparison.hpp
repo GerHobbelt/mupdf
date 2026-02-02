@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/tuple/include/boost/tuple/tuple_comparison.hpp"
+#include "../../../../../boost/libs/tuple/include/boost/tuple/tuple_comparison.hpp"
 

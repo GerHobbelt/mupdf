@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/type_traits/include/boost/type_traits/has_right_shift.hpp"
+#include "../../../../../boost/libs/type_traits/include/boost/type_traits/has_right_shift.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/utility/include/boost/operators_v1.hpp"
+#include "../../../../boost/libs/utility/include/boost/operators_v1.hpp"
 

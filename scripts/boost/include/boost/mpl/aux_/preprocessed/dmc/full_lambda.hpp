@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/mpl/include/boost/mpl/aux_/preprocessed/dmc/full_lambda.hpp"
+#include "../../../../../../../../boost/libs/mpl/include/boost/mpl/aux_/preprocessed/dmc/full_lambda.hpp"
 

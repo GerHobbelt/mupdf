@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/contract/include/boost/contract/detail/tvariadic.hpp"
+#include "../../../../../../boost/libs/contract/include/boost/contract/detail/tvariadic.hpp"
 

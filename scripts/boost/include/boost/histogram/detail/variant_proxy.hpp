@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/histogram/include/boost/histogram/detail/variant_proxy.hpp"
+#include "../../../../../../boost/libs/histogram/include/boost/histogram/detail/variant_proxy.hpp"
 

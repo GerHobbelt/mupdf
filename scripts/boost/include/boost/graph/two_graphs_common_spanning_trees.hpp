@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/graph/include/boost/graph/two_graphs_common_spanning_trees.hpp"
+#include "../../../../../boost/libs/graph/include/boost/graph/two_graphs_common_spanning_trees.hpp"
 

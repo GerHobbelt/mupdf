@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/smart_ptr/include/boost/smart_ptr/bad_weak_ptr.hpp"
+#include "../../../../../boost/libs/smart_ptr/include/boost/smart_ptr/bad_weak_ptr.hpp"
 

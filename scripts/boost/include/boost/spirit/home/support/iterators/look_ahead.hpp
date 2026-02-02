@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/spirit/include/boost/spirit/home/support/iterators/look_ahead.hpp"
+#include "../../../../../../../../boost/libs/spirit/include/boost/spirit/home/support/iterators/look_ahead.hpp"
 

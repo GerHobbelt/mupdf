@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/vmd/include/boost/vmd/not_equal.hpp"
+#include "../../../../../boost/libs/vmd/include/boost/vmd/not_equal.hpp"
 

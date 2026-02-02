@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/winapi/include/boost/winapi/dll.hpp"
+#include "../../../../../boost/libs/winapi/include/boost/winapi/dll.hpp"
 

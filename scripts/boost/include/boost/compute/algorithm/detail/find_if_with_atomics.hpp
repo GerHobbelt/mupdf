@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/compute/include/boost/compute/algorithm/detail/find_if_with_atomics.hpp"
+#include "../../../../../../../boost/libs/compute/include/boost/compute/algorithm/detail/find_if_with_atomics.hpp"
 

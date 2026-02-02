@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/strategies/cartesian/centroid_weighted_length.hpp"
+#include "../../../../../../../boost/libs/geometry/include/boost/geometry/strategies/cartesian/centroid_weighted_length.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/log/include/boost/log/sinks/block_on_overflow.hpp"
+#include "../../../../../../boost/libs/log/include/boost/log/sinks/block_on_overflow.hpp"
 

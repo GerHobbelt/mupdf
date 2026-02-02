@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/ratio/include/boost/ratio/detail/is_evenly_divisible_by.hpp"
+#include "../../../../../../boost/libs/ratio/include/boost/ratio/detail/is_evenly_divisible_by.hpp"
 

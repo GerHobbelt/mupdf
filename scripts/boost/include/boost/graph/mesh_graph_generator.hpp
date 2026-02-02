@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/graph/include/boost/graph/mesh_graph_generator.hpp"
+#include "../../../../../boost/libs/graph/include/boost/graph/mesh_graph_generator.hpp"
 

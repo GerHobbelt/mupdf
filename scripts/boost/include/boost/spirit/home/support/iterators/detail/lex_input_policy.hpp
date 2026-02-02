@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/spirit/include/boost/spirit/home/support/iterators/detail/lex_input_policy.hpp"
+#include "../../../../../../../../../boost/libs/spirit/include/boost/spirit/home/support/iterators/detail/lex_input_policy.hpp"
 

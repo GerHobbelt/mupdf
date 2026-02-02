@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/math/include/boost/math/statistics/z_test.hpp"
+#include "../../../../../../boost/libs/math/include/boost/math/statistics/z_test.hpp"
 

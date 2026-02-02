@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/rational/include/boost/rational.hpp"
+#include "../../../../boost/libs/rational/include/boost/rational.hpp"
 

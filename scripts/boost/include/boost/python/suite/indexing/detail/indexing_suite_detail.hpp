@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/python/include/boost/python/suite/indexing/detail/indexing_suite_detail.hpp"
+#include "../../../../../../../../boost/libs/python/include/boost/python/suite/indexing/detail/indexing_suite_detail.hpp"
 

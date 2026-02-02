@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/python/include/boost/python/detail/copy_ctor_mutates_rhs.hpp"
+#include "../../../../../../boost/libs/python/include/boost/python/detail/copy_ctor_mutates_rhs.hpp"
 

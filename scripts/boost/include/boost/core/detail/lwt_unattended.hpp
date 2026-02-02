@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/core/include/boost/core/detail/lwt_unattended.hpp"
+#include "../../../../../../boost/libs/core/include/boost/core/detail/lwt_unattended.hpp"
 

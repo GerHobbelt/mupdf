@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/wave/include/boost/wave/cpplexer/validate_universal_char.hpp"
+#include "../../../../../../boost/libs/wave/include/boost/wave/cpplexer/validate_universal_char.hpp"
 

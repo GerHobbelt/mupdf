@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/gil/include/boost/gil/extension/toolbox/metafunctions/is_bit_aligned.hpp"
+#include "../../../../../../../../boost/libs/gil/include/boost/gil/extension/toolbox/metafunctions/is_bit_aligned.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/gil/include/boost/gil/detail/std_common_type.hpp"
+#include "../../../../../../boost/libs/gil/include/boost/gil/detail/std_common_type.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/accumulators/include/boost/accumulators/statistics/parameters/quantile_probability.hpp"
+#include "../../../../../../../boost/libs/accumulators/include/boost/accumulators/statistics/parameters/quantile_probability.hpp"
 

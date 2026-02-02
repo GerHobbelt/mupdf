@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/atomic/include/boost/atomic/detail/atomic_flag_impl.hpp"
+#include "../../../../../../boost/libs/atomic/include/boost/atomic/detail/atomic_flag_impl.hpp"
 

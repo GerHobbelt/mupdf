@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/graph/include/boost/graph/boykov_kolmogorov_max_flow.hpp"
+#include "../../../../../boost/libs/graph/include/boost/graph/boykov_kolmogorov_max_flow.hpp"
 

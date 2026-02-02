@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/math/include/boost/math/special_functions/detail/hypergeometric_rational.hpp"
+#include "../../../../../../../boost/libs/math/include/boost/math/special_functions/detail/hypergeometric_rational.hpp"
 

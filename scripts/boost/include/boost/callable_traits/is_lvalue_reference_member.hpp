@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/callable_traits/include/boost/callable_traits/is_lvalue_reference_member.hpp"
+#include "../../../../../boost/libs/callable_traits/include/boost/callable_traits/is_lvalue_reference_member.hpp"
 

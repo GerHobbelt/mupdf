@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/python/include/boost/python/object/iterator_core.hpp"
+#include "../../../../../../boost/libs/python/include/boost/python/object/iterator_core.hpp"
 

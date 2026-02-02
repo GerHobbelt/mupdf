@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/config/include/boost/config/assert_cxx11.hpp"
+#include "../../../../../boost/libs/config/include/boost/config/assert_cxx11.hpp"
 

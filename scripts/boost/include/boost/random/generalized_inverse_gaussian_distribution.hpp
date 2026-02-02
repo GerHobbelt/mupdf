@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/random/include/boost/random/generalized_inverse_gaussian_distribution.hpp"
+#include "../../../../../boost/libs/random/include/boost/random/generalized_inverse_gaussian_distribution.hpp"
 

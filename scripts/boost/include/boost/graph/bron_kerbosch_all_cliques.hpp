@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/graph/include/boost/graph/bron_kerbosch_all_cliques.hpp"
+#include "../../../../../boost/libs/graph/include/boost/graph/bron_kerbosch_all_cliques.hpp"
 

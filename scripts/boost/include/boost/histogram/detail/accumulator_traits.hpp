@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/histogram/include/boost/histogram/detail/accumulator_traits.hpp"
+#include "../../../../../../boost/libs/histogram/include/boost/histogram/detail/accumulator_traits.hpp"
 

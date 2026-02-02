@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/gil/include/boost/gil/planar_pixel_reference.hpp"
+#include "../../../../../boost/libs/gil/include/boost/gil/planar_pixel_reference.hpp"
 

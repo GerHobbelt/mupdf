@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/spirit/include/boost/spirit/home/karma/detail/unused_delimiter.hpp"
+#include "../../../../../../../../boost/libs/spirit/include/boost/spirit/home/karma/detail/unused_delimiter.hpp"
 

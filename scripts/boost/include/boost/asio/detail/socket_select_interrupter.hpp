@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/asio/include/boost/asio/detail/socket_select_interrupter.hpp"
+#include "../../../../../../boost/libs/asio/include/boost/asio/detail/socket_select_interrupter.hpp"
 

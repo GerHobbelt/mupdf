@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/predef/include/boost/predef/architecture/m68k.h"
+#include "../../../../../../boost/libs/predef/include/boost/predef/architecture/m68k.h"
 

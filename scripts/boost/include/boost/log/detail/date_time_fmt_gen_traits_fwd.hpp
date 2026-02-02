@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/log/include/boost/log/detail/date_time_fmt_gen_traits_fwd.hpp"
+#include "../../../../../../boost/libs/log/include/boost/log/detail/date_time_fmt_gen_traits_fwd.hpp"
 

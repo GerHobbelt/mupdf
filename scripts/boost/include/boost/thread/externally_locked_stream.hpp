@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/thread/include/boost/thread/externally_locked_stream.hpp"
+#include "../../../../../boost/libs/thread/include/boost/thread/externally_locked_stream.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/wave/include/boost/wave/cpplexer/cpp_lex_interface.hpp"
+#include "../../../../../../boost/libs/wave/include/boost/wave/cpplexer/cpp_lex_interface.hpp"
 

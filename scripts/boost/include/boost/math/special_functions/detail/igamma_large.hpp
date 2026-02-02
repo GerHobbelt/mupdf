@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/math/include/boost/math/special_functions/detail/igamma_large.hpp"
+#include "../../../../../../../boost/libs/math/include/boost/math/special_functions/detail/igamma_large.hpp"
 

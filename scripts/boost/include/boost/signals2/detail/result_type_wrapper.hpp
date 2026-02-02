@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/signals2/include/boost/signals2/detail/result_type_wrapper.hpp"
+#include "../../../../../../boost/libs/signals2/include/boost/signals2/detail/result_type_wrapper.hpp"
 

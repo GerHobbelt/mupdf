@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/tti/include/boost/tti/detail/dmem_type.hpp"
+#include "../../../../../../boost/libs/tti/include/boost/tti/detail/dmem_type.hpp"
 

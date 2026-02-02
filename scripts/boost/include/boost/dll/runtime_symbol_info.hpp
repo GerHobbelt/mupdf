@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/dll/include/boost/dll/runtime_symbol_info.hpp"
+#include "../../../../../boost/libs/dll/include/boost/dll/runtime_symbol_info.hpp"
 

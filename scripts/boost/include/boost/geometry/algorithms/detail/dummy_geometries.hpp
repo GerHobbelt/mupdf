@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/algorithms/detail/dummy_geometries.hpp"
+#include "../../../../../../../boost/libs/geometry/include/boost/geometry/algorithms/detail/dummy_geometries.hpp"
 

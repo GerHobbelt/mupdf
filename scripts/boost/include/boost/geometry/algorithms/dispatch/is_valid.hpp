@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/algorithms/dispatch/is_valid.hpp"
+#include "../../../../../../../boost/libs/geometry/include/boost/geometry/algorithms/dispatch/is_valid.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/tti/include/boost/tti/detail/dcomp_mem_fun_template.hpp"
+#include "../../../../../../boost/libs/tti/include/boost/tti/detail/dcomp_mem_fun_template.hpp"
 

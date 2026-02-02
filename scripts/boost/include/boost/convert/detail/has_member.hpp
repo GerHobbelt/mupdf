@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/convert/include/boost/convert/detail/has_member.hpp"
+#include "../../../../../../boost/libs/convert/include/boost/convert/detail/has_member.hpp"
 

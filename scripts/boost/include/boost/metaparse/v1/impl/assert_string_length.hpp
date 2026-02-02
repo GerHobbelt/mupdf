@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/metaparse/include/boost/metaparse/v1/impl/assert_string_length.hpp"
+#include "../../../../../../../boost/libs/metaparse/include/boost/metaparse/v1/impl/assert_string_length.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/property_map_parallel/include/boost/property_map/parallel/global_index_map.hpp"
+#include "../../../../../../boost/libs/property_map_parallel/include/boost/property_map/parallel/global_index_map.hpp"
 

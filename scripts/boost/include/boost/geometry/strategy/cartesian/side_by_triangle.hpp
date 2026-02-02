@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/strategy/cartesian/side_by_triangle.hpp"
+#include "../../../../../../../boost/libs/geometry/include/boost/geometry/strategy/cartesian/side_by_triangle.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/test/include/boost/test/data/for_each_sample.hpp"
+#include "../../../../../../boost/libs/test/include/boost/test/data/for_each_sample.hpp"
 

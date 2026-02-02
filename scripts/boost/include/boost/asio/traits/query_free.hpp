@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/asio/include/boost/asio/traits/query_free.hpp"
+#include "../../../../../../boost/libs/asio/include/boost/asio/traits/query_free.hpp"
 

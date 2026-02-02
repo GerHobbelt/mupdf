@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/spirit/include/boost/spirit/home/support/detail/lexer/parser/tokeniser/re_tokeniser.hpp"
+#include "../../../../../../../../../../../boost/libs/spirit/include/boost/spirit/home/support/detail/lexer/parser/tokeniser/re_tokeniser.hpp"
 

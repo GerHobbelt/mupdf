@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/thread/include/boost/thread/is_locked_by_this_thread.hpp"
+#include "../../../../../boost/libs/thread/include/boost/thread/is_locked_by_this_thread.hpp"
 

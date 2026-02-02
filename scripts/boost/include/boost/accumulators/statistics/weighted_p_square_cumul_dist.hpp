@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/accumulators/include/boost/accumulators/statistics/weighted_p_square_cumul_dist.hpp"
+#include "../../../../../../boost/libs/accumulators/include/boost/accumulators/statistics/weighted_p_square_cumul_dist.hpp"
 

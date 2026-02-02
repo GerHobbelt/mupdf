@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/atomic/include/boost/atomic/detail/wait_ops_freebsd_umtx.hpp"
+#include "../../../../../../boost/libs/atomic/include/boost/atomic/detail/wait_ops_freebsd_umtx.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/exception/include/boost/exception/detail/shared_ptr.hpp"
+#include "../../../../../../boost/libs/exception/include/boost/exception/detail/shared_ptr.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/system/include/boost/system/is_error_condition_enum.hpp"
+#include "../../../../../boost/libs/system/include/boost/system/is_error_condition_enum.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/range/include/boost/range/detail/str_types.hpp"
+#include "../../../../../../boost/libs/range/include/boost/range/detail/str_types.hpp"
 

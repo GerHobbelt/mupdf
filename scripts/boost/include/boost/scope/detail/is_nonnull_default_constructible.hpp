@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/scope/include/boost/scope/detail/is_nonnull_default_constructible.hpp"
+#include "../../../../../../boost/libs/scope/include/boost/scope/detail/is_nonnull_default_constructible.hpp"
 

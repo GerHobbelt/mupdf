@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/strategies/geographic/closest_points_pt_seg.hpp"
+#include "../../../../../../../boost/libs/geometry/include/boost/geometry/strategies/geographic/closest_points_pt_seg.hpp"
 

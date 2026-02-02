@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/iterators/detail/segment_iterator/range_segment_iterator.hpp"
+#include "../../../../../../../../boost/libs/geometry/include/boost/geometry/iterators/detail/segment_iterator/range_segment_iterator.hpp"
 

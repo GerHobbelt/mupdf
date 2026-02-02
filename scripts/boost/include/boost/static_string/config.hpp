@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/static_string/include/boost/static_string/config.hpp"
+#include "../../../../../boost/libs/static_string/include/boost/static_string/config.hpp"
 

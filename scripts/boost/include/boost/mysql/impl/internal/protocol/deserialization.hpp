@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/mysql/include/boost/mysql/impl/internal/protocol/deserialization.hpp"
+#include "../../../../../../../../boost/libs/mysql/include/boost/mysql/impl/internal/protocol/deserialization.hpp"
 

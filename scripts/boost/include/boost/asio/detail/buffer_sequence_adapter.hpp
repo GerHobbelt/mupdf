@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/asio/include/boost/asio/detail/buffer_sequence_adapter.hpp"
+#include "../../../../../../boost/libs/asio/include/boost/asio/detail/buffer_sequence_adapter.hpp"
 

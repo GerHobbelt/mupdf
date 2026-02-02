@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/serialization/include/boost/serialization/is_bitwise_serializable.hpp"
+#include "../../../../../boost/libs/serialization/include/boost/serialization/is_bitwise_serializable.hpp"
 

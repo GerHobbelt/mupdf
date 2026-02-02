@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/log/include/boost/log/detail/attribute_get_value_impl.hpp"
+#include "../../../../../../boost/libs/log/include/boost/log/detail/attribute_get_value_impl.hpp"
 

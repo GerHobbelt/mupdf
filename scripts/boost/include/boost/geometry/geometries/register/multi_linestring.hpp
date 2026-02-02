@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/geometries/register/multi_linestring.hpp"
+#include "../../../../../../../boost/libs/geometry/include/boost/geometry/geometries/register/multi_linestring.hpp"
 

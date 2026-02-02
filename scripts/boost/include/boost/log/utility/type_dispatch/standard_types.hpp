@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/log/include/boost/log/utility/type_dispatch/standard_types.hpp"
+#include "../../../../../../../boost/libs/log/include/boost/log/utility/type_dispatch/standard_types.hpp"
 

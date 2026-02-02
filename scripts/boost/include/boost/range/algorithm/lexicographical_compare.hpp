@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/range/include/boost/range/algorithm/lexicographical_compare.hpp"
+#include "../../../../../../boost/libs/range/include/boost/range/algorithm/lexicographical_compare.hpp"
 

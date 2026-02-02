@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/gil/include/boost/gil/extension/toolbox/color_converters/rgb_to_luminance.hpp"
+#include "../../../../../../../../boost/libs/gil/include/boost/gil/extension/toolbox/color_converters/rgb_to_luminance.hpp"
 

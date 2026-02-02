@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/gil/include/boost/gil/extension/toolbox/metafunctions/is_homogeneous.hpp"
+#include "../../../../../../../../boost/libs/gil/include/boost/gil/extension/toolbox/metafunctions/is_homogeneous.hpp"
 

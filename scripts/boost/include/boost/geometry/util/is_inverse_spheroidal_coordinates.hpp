@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/util/is_inverse_spheroidal_coordinates.hpp"
+#include "../../../../../../boost/libs/geometry/include/boost/geometry/util/is_inverse_spheroidal_coordinates.hpp"
 

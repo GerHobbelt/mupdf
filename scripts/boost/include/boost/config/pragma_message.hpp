@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/config/include/boost/config/pragma_message.hpp"
+#include "../../../../../boost/libs/config/include/boost/config/pragma_message.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/strategies/cartesian/side_rounded_input.hpp"
+#include "../../../../../../../boost/libs/geometry/include/boost/geometry/strategies/cartesian/side_rounded_input.hpp"
 

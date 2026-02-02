@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/test/include/boost/test/output/junit_log_formatter.hpp"
+#include "../../../../../../boost/libs/test/include/boost/test/output/junit_log_formatter.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/algorithm/include/boost/algorithm/searching/knuth_morris_pratt.hpp"
+#include "../../../../../../boost/libs/algorithm/include/boost/algorithm/searching/knuth_morris_pratt.hpp"
 

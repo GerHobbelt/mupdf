@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/algorithms/detail/overlay/graph/is_operation_included.hpp"
+#include "../../../../../../../../../boost/libs/geometry/include/boost/geometry/algorithms/detail/overlay/graph/is_operation_included.hpp"
 

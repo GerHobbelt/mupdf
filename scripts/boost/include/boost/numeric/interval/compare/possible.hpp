@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/numeric/interval/include/boost/numeric/interval/compare/possible.hpp"
+#include "../../../../../../../boost/libs/numeric/interval/include/boost/numeric/interval/compare/possible.hpp"
 

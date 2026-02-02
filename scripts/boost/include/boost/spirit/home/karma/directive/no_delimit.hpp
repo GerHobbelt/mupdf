@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/spirit/include/boost/spirit/home/karma/directive/no_delimit.hpp"
+#include "../../../../../../../../boost/libs/spirit/include/boost/spirit/home/karma/directive/no_delimit.hpp"
 

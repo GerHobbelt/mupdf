@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/graph_parallel/include/boost/graph/distributed/rmat_graph_generator.hpp"
+#include "../../../../../../boost/libs/graph_parallel/include/boost/graph/distributed/rmat_graph_generator.hpp"
 

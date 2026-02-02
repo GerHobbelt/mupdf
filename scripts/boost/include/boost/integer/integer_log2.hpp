@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/integer/include/boost/integer/integer_log2.hpp"
+#include "../../../../../boost/libs/integer/include/boost/integer/integer_log2.hpp"
 

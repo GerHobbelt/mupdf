@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/python/include/boost/python/return_opaque_pointer.hpp"
+#include "../../../../../boost/libs/python/include/boost/python/return_opaque_pointer.hpp"
 

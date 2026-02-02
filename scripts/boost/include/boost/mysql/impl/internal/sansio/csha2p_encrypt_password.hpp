@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/mysql/include/boost/mysql/impl/internal/sansio/csha2p_encrypt_password.hpp"
+#include "../../../../../../../../boost/libs/mysql/include/boost/mysql/impl/internal/sansio/csha2p_encrypt_password.hpp"
 

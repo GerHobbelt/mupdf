@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/atomic/include/boost/atomic/wait_result.hpp"
+#include "../../../../../boost/libs/atomic/include/boost/atomic/wait_result.hpp"
 

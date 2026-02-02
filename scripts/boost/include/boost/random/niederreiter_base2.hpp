@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/random/include/boost/random/niederreiter_base2.hpp"
+#include "../../../../../boost/libs/random/include/boost/random/niederreiter_base2.hpp"
 

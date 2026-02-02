@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/property_tree/include/boost/property_tree/detail/xml_parser_writer_settings.hpp"
+#include "../../../../../../boost/libs/property_tree/include/boost/property_tree/detail/xml_parser_writer_settings.hpp"
 

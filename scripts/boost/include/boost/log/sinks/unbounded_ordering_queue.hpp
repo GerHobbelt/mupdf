@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/log/include/boost/log/sinks/unbounded_ordering_queue.hpp"
+#include "../../../../../../boost/libs/log/include/boost/log/sinks/unbounded_ordering_queue.hpp"
 

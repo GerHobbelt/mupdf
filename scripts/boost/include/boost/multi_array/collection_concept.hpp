@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/multi_array/include/boost/multi_array/collection_concept.hpp"
+#include "../../../../../boost/libs/multi_array/include/boost/multi_array/collection_concept.hpp"
 

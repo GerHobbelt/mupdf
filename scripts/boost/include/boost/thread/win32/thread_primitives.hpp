@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/thread/include/boost/thread/win32/thread_primitives.hpp"
+#include "../../../../../../boost/libs/thread/include/boost/thread/win32/thread_primitives.hpp"
 

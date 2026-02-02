@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/compute/include/boost/compute/utility/wait_list.hpp"
+#include "../../../../../../boost/libs/compute/include/boost/compute/utility/wait_list.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/spirit/include/boost/spirit/home/x3/support/traits/tuple_traits.hpp"
+#include "../../../../../../../../../boost/libs/spirit/include/boost/spirit/home/x3/support/traits/tuple_traits.hpp"
 

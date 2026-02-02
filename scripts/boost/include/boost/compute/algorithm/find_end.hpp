@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/compute/include/boost/compute/algorithm/find_end.hpp"
+#include "../../../../../../boost/libs/compute/include/boost/compute/algorithm/find_end.hpp"
 

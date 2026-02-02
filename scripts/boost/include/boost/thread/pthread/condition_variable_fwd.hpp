@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/thread/include/boost/thread/pthread/condition_variable_fwd.hpp"
+#include "../../../../../../boost/libs/thread/include/boost/thread/pthread/condition_variable_fwd.hpp"
 

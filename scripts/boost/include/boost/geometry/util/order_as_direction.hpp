@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/util/order_as_direction.hpp"
+#include "../../../../../../boost/libs/geometry/include/boost/geometry/util/order_as_direction.hpp"
 

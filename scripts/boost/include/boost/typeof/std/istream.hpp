@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/typeof/include/boost/typeof/std/istream.hpp"
+#include "../../../../../../boost/libs/typeof/include/boost/typeof/std/istream.hpp"
 

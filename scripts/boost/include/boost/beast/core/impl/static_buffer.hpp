@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/beast/include/boost/beast/core/impl/static_buffer.hpp"
+#include "../../../../../../../boost/libs/beast/include/boost/beast/core/impl/static_buffer.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/wave/include/boost/wave/util/cpp_macromap_predef.hpp"
+#include "../../../../../../boost/libs/wave/include/boost/wave/util/cpp_macromap_predef.hpp"
 

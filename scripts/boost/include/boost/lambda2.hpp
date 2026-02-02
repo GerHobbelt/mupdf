@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/lambda2/include/boost/lambda2.hpp"
+#include "../../../../boost/libs/lambda2/include/boost/lambda2.hpp"
 

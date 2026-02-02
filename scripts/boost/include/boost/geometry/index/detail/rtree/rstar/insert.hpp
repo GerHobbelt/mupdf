@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/index/detail/rtree/rstar/insert.hpp"
+#include "../../../../../../../../../boost/libs/geometry/include/boost/geometry/index/detail/rtree/rstar/insert.hpp"
 

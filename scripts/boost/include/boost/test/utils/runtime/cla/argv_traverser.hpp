@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/test/include/boost/test/utils/runtime/cla/argv_traverser.hpp"
+#include "../../../../../../../../boost/libs/test/include/boost/test/utils/runtime/cla/argv_traverser.hpp"
 

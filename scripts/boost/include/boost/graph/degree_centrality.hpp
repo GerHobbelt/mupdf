@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/graph/include/boost/graph/degree_centrality.hpp"
+#include "../../../../../boost/libs/graph/include/boost/graph/degree_centrality.hpp"
 

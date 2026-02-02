@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/spirit/include/boost/spirit/home/classic/actor/push_front_actor.hpp"
+#include "../../../../../../../../boost/libs/spirit/include/boost/spirit/home/classic/actor/push_front_actor.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/formulas/authalic_radius_sqr.hpp"
+#include "../../../../../../boost/libs/geometry/include/boost/geometry/formulas/authalic_radius_sqr.hpp"
 

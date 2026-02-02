@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/gil/include/boost/gil/io/path_spec.hpp"
+#include "../../../../../../boost/libs/gil/include/boost/gil/io/path_spec.hpp"
 

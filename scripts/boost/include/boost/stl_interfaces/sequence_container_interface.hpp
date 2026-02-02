@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/stl_interfaces/include/boost/stl_interfaces/sequence_container_interface.hpp"
+#include "../../../../../boost/libs/stl_interfaces/include/boost/stl_interfaces/sequence_container_interface.hpp"
 

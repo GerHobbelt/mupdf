@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/compute/include/boost/compute/interop/qt/qtcore.hpp"
+#include "../../../../../../../boost/libs/compute/include/boost/compute/interop/qt/qtcore.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/geometries/infinite_line.hpp"
+#include "../../../../../../boost/libs/geometry/include/boost/geometry/geometries/infinite_line.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/fusion/include/boost/fusion/view/detail/strictest_traversal.hpp"
+#include "../../../../../../../boost/libs/fusion/include/boost/fusion/view/detail/strictest_traversal.hpp"
 

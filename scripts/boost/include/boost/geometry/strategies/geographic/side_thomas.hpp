@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/strategies/geographic/side_thomas.hpp"
+#include "../../../../../../../boost/libs/geometry/include/boost/geometry/strategies/geographic/side_thomas.hpp"
 

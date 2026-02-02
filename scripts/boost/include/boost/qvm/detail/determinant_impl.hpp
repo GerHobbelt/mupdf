@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/qvm/include/boost/qvm/detail/determinant_impl.hpp"
+#include "../../../../../../boost/libs/qvm/include/boost/qvm/detail/determinant_impl.hpp"
 

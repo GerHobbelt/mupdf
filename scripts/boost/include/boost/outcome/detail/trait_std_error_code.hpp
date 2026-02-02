@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/outcome/include/boost/outcome/detail/trait_std_error_code.hpp"
+#include "../../../../../../boost/libs/outcome/include/boost/outcome/detail/trait_std_error_code.hpp"
 

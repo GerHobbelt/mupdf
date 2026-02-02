@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/python/include/boost/python/converter/shared_ptr_deleter.hpp"
+#include "../../../../../../boost/libs/python/include/boost/python/converter/shared_ptr_deleter.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/spirit/include/boost/spirit/home/karma/auxiliary/eol.hpp"
+#include "../../../../../../../../boost/libs/spirit/include/boost/spirit/home/karma/auxiliary/eol.hpp"
 

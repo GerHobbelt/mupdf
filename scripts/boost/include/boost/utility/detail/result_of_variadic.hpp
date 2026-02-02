@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/utility/include/boost/utility/detail/result_of_variadic.hpp"
+#include "../../../../../../boost/libs/utility/include/boost/utility/detail/result_of_variadic.hpp"
 

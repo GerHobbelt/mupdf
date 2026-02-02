@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/contract/include/boost/contract/detail/type_traits/member_function_types.hpp"
+#include "../../../../../../../boost/libs/contract/include/boost/contract/detail/type_traits/member_function_types.hpp"
 

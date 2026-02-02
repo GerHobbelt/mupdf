@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/smart_ptr/include/boost/smart_ptr/detail/sp_type_traits.hpp"
+#include "../../../../../../boost/libs/smart_ptr/include/boost/smart_ptr/detail/sp_type_traits.hpp"
 

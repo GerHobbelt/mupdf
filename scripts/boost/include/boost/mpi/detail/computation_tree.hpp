@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/mpi/include/boost/mpi/detail/computation_tree.hpp"
+#include "../../../../../../boost/libs/mpi/include/boost/mpi/detail/computation_tree.hpp"
 

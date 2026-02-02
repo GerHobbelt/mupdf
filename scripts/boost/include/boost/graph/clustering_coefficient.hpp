@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/graph/include/boost/graph/clustering_coefficient.hpp"
+#include "../../../../../boost/libs/graph/include/boost/graph/clustering_coefficient.hpp"
 

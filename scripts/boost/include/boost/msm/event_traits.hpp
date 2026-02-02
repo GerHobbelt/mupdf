@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/msm/include/boost/msm/event_traits.hpp"
+#include "../../../../../boost/libs/msm/include/boost/msm/event_traits.hpp"
 

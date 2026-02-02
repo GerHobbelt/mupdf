@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/strategies/azimuth.hpp"
+#include "../../../../../../boost/libs/geometry/include/boost/geometry/strategies/azimuth.hpp"
 

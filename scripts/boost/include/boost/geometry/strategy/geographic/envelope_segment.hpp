@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/strategy/geographic/envelope_segment.hpp"
+#include "../../../../../../../boost/libs/geometry/include/boost/geometry/strategy/geographic/envelope_segment.hpp"
 

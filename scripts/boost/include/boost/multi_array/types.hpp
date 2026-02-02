@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/multi_array/include/boost/multi_array/types.hpp"
+#include "../../../../../boost/libs/multi_array/include/boost/multi_array/types.hpp"
 

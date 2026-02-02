@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/local_function/include/boost/local_function.hpp"
+#include "../../../../boost/libs/local_function/include/boost/local_function.hpp"
 

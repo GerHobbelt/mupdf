@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/poly_collection/include/boost/poly_collection/detail/is_equality_comparable.hpp"
+#include "../../../../../../boost/libs/poly_collection/include/boost/poly_collection/detail/is_equality_comparable.hpp"
 

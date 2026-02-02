@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/proto/include/boost/proto/detail/deduce_domain_n.hpp"
+#include "../../../../../../boost/libs/proto/include/boost/proto/detail/deduce_domain_n.hpp"
 

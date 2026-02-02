@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/log/include/boost/log/detail/attr_output_terminal.hpp"
+#include "../../../../../../boost/libs/log/include/boost/log/detail/attr_output_terminal.hpp"
 

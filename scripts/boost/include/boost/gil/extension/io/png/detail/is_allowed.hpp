@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/gil/include/boost/gil/extension/io/png/detail/is_allowed.hpp"
+#include "../../../../../../../../../boost/libs/gil/include/boost/gil/extension/io/png/detail/is_allowed.hpp"
 

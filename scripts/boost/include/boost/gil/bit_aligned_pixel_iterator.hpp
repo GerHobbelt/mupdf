@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/gil/include/boost/gil/bit_aligned_pixel_iterator.hpp"
+#include "../../../../../boost/libs/gil/include/boost/gil/bit_aligned_pixel_iterator.hpp"
 

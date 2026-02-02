@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/mysql/include/boost/mysql/impl/internal/protocol/impl/span_string.hpp"
+#include "../../../../../../../../../boost/libs/mysql/include/boost/mysql/impl/internal/protocol/impl/span_string.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/asio/include/boost/asio/io_context_strand.hpp"
+#include "../../../../../boost/libs/asio/include/boost/asio/io_context_strand.hpp"
 

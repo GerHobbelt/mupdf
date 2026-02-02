@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/config/include/boost/config/abi/msvc_suffix.hpp"
+#include "../../../../../../boost/libs/config/include/boost/config/abi/msvc_suffix.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/ratio/include/boost/ratio/detail/gcd_lcm.hpp"
+#include "../../../../../../boost/libs/ratio/include/boost/ratio/detail/gcd_lcm.hpp"
 

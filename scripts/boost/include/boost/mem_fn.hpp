@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/bind/include/boost/mem_fn.hpp"
+#include "../../../../boost/libs/bind/include/boost/mem_fn.hpp"
 

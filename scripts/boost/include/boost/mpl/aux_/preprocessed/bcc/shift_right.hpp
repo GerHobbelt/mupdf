@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/mpl/include/boost/mpl/aux_/preprocessed/bcc/shift_right.hpp"
+#include "../../../../../../../../boost/libs/mpl/include/boost/mpl/aux_/preprocessed/bcc/shift_right.hpp"
 

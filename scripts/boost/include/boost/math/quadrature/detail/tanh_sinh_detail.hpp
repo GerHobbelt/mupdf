@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/math/include/boost/math/quadrature/detail/tanh_sinh_detail.hpp"
+#include "../../../../../../../boost/libs/math/include/boost/math/quadrature/detail/tanh_sinh_detail.hpp"
 

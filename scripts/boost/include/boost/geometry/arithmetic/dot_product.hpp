@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/arithmetic/dot_product.hpp"
+#include "../../../../../../boost/libs/geometry/include/boost/geometry/arithmetic/dot_product.hpp"
 

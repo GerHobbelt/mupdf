@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/mysql/include/boost/mysql/column_type.hpp"
+#include "../../../../../boost/libs/mysql/include/boost/mysql/column_type.hpp"
 

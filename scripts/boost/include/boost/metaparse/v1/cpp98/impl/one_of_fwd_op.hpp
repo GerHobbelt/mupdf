@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/metaparse/include/boost/metaparse/v1/cpp98/impl/one_of_fwd_op.hpp"
+#include "../../../../../../../../boost/libs/metaparse/include/boost/metaparse/v1/cpp98/impl/one_of_fwd_op.hpp"
 

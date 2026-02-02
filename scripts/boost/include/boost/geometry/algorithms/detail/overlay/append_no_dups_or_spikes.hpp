@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/algorithms/detail/overlay/append_no_dups_or_spikes.hpp"
+#include "../../../../../../../../boost/libs/geometry/include/boost/geometry/algorithms/detail/overlay/append_no_dups_or_spikes.hpp"
 

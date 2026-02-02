@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/mpl/include/boost/mpl/stable_partition.hpp"
+#include "../../../../../boost/libs/mpl/include/boost/mpl/stable_partition.hpp"
 

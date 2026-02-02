@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/signals2/include/boost/signals2/slot_base.hpp"
+#include "../../../../../boost/libs/signals2/include/boost/signals2/slot_base.hpp"
 

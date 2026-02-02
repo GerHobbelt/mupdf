@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/compat/include/boost/compat/bind_front.hpp"
+#include "../../../../../boost/libs/compat/include/boost/compat/bind_front.hpp"
 

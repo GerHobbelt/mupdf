@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/msm/include/boost/msm/front/euml/querying.hpp"
+#include "../../../../../../../boost/libs/msm/include/boost/msm/front/euml/querying.hpp"
 

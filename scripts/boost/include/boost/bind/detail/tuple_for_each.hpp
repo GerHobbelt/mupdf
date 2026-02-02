@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/bind/include/boost/bind/detail/tuple_for_each.hpp"
+#include "../../../../../../boost/libs/bind/include/boost/bind/detail/tuple_for_each.hpp"
 

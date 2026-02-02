@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/gil/include/boost/gil/extension/io/bmp/detail/scanline_read.hpp"
+#include "../../../../../../../../../boost/libs/gil/include/boost/gil/extension/io/bmp/detail/scanline_read.hpp"
 

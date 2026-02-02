@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/detail/include/boost/detail/numeric_traits.hpp"
+#include "../../../../../boost/libs/detail/include/boost/detail/numeric_traits.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/coroutine/include/boost/coroutine/posix/segmented_stack_allocator.hpp"
+#include "../../../../../../boost/libs/coroutine/include/boost/coroutine/posix/segmented_stack_allocator.hpp"
 

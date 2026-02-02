@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/mpl/include/boost/mpl/map/aux_/preprocessed/no_ctps/map10.hpp"
+#include "../../../../../../../../../boost/libs/mpl/include/boost/mpl/map/aux_/preprocessed/no_ctps/map10.hpp"
 

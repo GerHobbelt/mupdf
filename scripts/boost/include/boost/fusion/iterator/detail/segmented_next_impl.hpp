@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/fusion/include/boost/fusion/iterator/detail/segmented_next_impl.hpp"
+#include "../../../../../../../boost/libs/fusion/include/boost/fusion/iterator/detail/segmented_next_impl.hpp"
 

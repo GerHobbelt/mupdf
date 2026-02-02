@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/sync/include/boost/sync/condition_variables/condition_variable.hpp"
+#include "../../../../../../boost/libs/sync/include/boost/sync/condition_variables/condition_variable.hpp"
 

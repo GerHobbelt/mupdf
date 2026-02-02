@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/test/include/boost/test/debug_config.hpp"
+#include "../../../../../boost/libs/test/include/boost/test/debug_config.hpp"
 

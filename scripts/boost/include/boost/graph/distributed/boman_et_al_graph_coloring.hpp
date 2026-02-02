@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/graph_parallel/include/boost/graph/distributed/boman_et_al_graph_coloring.hpp"
+#include "../../../../../../boost/libs/graph_parallel/include/boost/graph/distributed/boman_et_al_graph_coloring.hpp"
 

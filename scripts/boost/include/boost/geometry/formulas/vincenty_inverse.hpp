@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/formulas/vincenty_inverse.hpp"
+#include "../../../../../../boost/libs/geometry/include/boost/geometry/formulas/vincenty_inverse.hpp"
 

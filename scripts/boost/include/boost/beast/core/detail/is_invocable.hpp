@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/beast/include/boost/beast/core/detail/is_invocable.hpp"
+#include "../../../../../../../boost/libs/beast/include/boost/beast/core/detail/is_invocable.hpp"
 

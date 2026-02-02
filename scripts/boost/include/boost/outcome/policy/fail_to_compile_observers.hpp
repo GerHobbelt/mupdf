@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/outcome/include/boost/outcome/policy/fail_to_compile_observers.hpp"
+#include "../../../../../../boost/libs/outcome/include/boost/outcome/policy/fail_to_compile_observers.hpp"
 

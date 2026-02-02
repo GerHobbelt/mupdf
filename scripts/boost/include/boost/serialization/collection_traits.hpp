@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/serialization/include/boost/serialization/collection_traits.hpp"
+#include "../../../../../boost/libs/serialization/include/boost/serialization/collection_traits.hpp"
 

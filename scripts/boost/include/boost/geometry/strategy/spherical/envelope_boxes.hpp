@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/strategy/spherical/envelope_boxes.hpp"
+#include "../../../../../../../boost/libs/geometry/include/boost/geometry/strategy/spherical/envelope_boxes.hpp"
 

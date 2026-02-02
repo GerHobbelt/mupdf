@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/lexical_cast/include/boost/detail/basic_pointerbuf.hpp"
+#include "../../../../../boost/libs/lexical_cast/include/boost/detail/basic_pointerbuf.hpp"
 

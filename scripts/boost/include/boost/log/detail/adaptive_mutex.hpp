@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/log/include/boost/log/detail/adaptive_mutex.hpp"
+#include "../../../../../../boost/libs/log/include/boost/log/detail/adaptive_mutex.hpp"
 

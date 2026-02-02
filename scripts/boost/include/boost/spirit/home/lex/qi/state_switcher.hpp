@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/spirit/include/boost/spirit/home/lex/qi/state_switcher.hpp"
+#include "../../../../../../../../boost/libs/spirit/include/boost/spirit/home/lex/qi/state_switcher.hpp"
 

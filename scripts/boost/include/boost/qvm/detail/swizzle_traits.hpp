@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/qvm/include/boost/qvm/detail/swizzle_traits.hpp"
+#include "../../../../../../boost/libs/qvm/include/boost/qvm/detail/swizzle_traits.hpp"
 

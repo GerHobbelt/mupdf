@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/asio/include/boost/asio/ssl/detail/openssl_types.hpp"
+#include "../../../../../../../boost/libs/asio/include/boost/asio/ssl/detail/openssl_types.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/proto/include/boost/proto/detail/preprocessed/poly_function_traits.hpp"
+#include "../../../../../../../boost/libs/proto/include/boost/proto/detail/preprocessed/poly_function_traits.hpp"
 

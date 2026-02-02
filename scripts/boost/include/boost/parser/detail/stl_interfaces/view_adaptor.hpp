@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/parser/include/boost/parser/detail/stl_interfaces/view_adaptor.hpp"
+#include "../../../../../../../boost/libs/parser/include/boost/parser/detail/stl_interfaces/view_adaptor.hpp"
 

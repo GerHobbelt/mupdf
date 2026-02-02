@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/spirit/include/boost/spirit/home/lex/lexer/pass_flags.hpp"
+#include "../../../../../../../../boost/libs/spirit/include/boost/spirit/home/lex/lexer/pass_flags.hpp"
 

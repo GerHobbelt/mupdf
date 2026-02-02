@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/config/include/boost/config/platform/haiku.hpp"
+#include "../../../../../../boost/libs/config/include/boost/config/platform/haiku.hpp"
 

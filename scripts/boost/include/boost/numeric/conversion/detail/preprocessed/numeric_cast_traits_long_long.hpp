@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/numeric/conversion/include/boost/numeric/conversion/detail/preprocessed/numeric_cast_traits_long_long.hpp"
+#include "../../../../../../../../boost/libs/numeric/conversion/include/boost/numeric/conversion/detail/preprocessed/numeric_cast_traits_long_long.hpp"
 

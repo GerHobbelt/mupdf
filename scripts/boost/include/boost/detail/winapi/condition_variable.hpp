@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/winapi/include/boost/detail/winapi/condition_variable.hpp"
+#include "../../../../../../boost/libs/winapi/include/boost/detail/winapi/condition_variable.hpp"
 

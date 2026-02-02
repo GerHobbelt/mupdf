@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/python/include/boost/python/docstring_options.hpp"
+#include "../../../../../boost/libs/python/include/boost/python/docstring_options.hpp"
 

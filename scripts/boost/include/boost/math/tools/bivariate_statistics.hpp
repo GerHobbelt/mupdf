@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/math/include/boost/math/tools/bivariate_statistics.hpp"
+#include "../../../../../../boost/libs/math/include/boost/math/tools/bivariate_statistics.hpp"
 

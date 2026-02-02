@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/mysql/include/boost/mysql/impl/internal/protocol/impl/serialization_context.hpp"
+#include "../../../../../../../../../boost/libs/mysql/include/boost/mysql/impl/internal/protocol/impl/serialization_context.hpp"
 

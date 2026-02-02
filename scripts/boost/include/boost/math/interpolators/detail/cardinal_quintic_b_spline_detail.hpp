@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/math/include/boost/math/interpolators/detail/cardinal_quintic_b_spline_detail.hpp"
+#include "../../../../../../../boost/libs/math/include/boost/math/interpolators/detail/cardinal_quintic_b_spline_detail.hpp"
 

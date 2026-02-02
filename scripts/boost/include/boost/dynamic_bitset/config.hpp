@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/dynamic_bitset/include/boost/dynamic_bitset/config.hpp"
+#include "../../../../../boost/libs/dynamic_bitset/include/boost/dynamic_bitset/config.hpp"
 

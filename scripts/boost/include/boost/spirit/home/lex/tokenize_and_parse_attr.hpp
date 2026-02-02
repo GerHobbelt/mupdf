@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/spirit/include/boost/spirit/home/lex/tokenize_and_parse_attr.hpp"
+#include "../../../../../../../boost/libs/spirit/include/boost/spirit/home/lex/tokenize_and_parse_attr.hpp"
 

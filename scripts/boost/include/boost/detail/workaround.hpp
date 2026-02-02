@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/config/include/boost/detail/workaround.hpp"
+#include "../../../../../boost/libs/config/include/boost/detail/workaround.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/policies/predicate_based_interrupt_policy.hpp"
+#include "../../../../../../boost/libs/geometry/include/boost/geometry/policies/predicate_based_interrupt_policy.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/spirit/include/boost/spirit/home/qi/operator/not_predicate.hpp"
+#include "../../../../../../../../boost/libs/spirit/include/boost/spirit/home/qi/operator/not_predicate.hpp"
 

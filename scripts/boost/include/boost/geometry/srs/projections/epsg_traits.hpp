@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/srs/projections/epsg_traits.hpp"
+#include "../../../../../../../boost/libs/geometry/include/boost/geometry/srs/projections/epsg_traits.hpp"
 

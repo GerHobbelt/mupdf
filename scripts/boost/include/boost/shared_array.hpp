@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/smart_ptr/include/boost/shared_array.hpp"
+#include "../../../../boost/libs/smart_ptr/include/boost/shared_array.hpp"
 

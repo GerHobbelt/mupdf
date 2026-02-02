@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/asio/include/boost/asio/impl/buffered_read_stream.hpp"
+#include "../../../../../../boost/libs/asio/include/boost/asio/impl/buffered_read_stream.hpp"
 

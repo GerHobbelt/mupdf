@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/iostreams/include/boost/iostreams/output_sequence.hpp"
+#include "../../../../../boost/libs/iostreams/include/boost/iostreams/output_sequence.hpp"
 

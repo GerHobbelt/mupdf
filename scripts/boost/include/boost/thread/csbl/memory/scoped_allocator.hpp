@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/thread/include/boost/thread/csbl/memory/scoped_allocator.hpp"
+#include "../../../../../../../boost/libs/thread/include/boost/thread/csbl/memory/scoped_allocator.hpp"
 

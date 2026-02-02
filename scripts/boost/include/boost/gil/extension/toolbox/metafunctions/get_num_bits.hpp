@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/gil/include/boost/gil/extension/toolbox/metafunctions/get_num_bits.hpp"
+#include "../../../../../../../../boost/libs/gil/include/boost/gil/extension/toolbox/metafunctions/get_num_bits.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/mpi/include/boost/mpi/error_string.hpp"
+#include "../../../../../boost/libs/mpi/include/boost/mpi/error_string.hpp"
 

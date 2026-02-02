@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/hana/include/boost/hana/fwd/adapt_struct.hpp"
+#include "../../../../../../boost/libs/hana/include/boost/hana/fwd/adapt_struct.hpp"
 

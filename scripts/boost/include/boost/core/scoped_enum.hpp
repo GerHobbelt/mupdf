@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/core/include/boost/core/scoped_enum.hpp"
+#include "../../../../../boost/libs/core/include/boost/core/scoped_enum.hpp"
 

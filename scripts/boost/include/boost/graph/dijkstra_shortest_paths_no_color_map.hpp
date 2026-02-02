@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/graph/include/boost/graph/dijkstra_shortest_paths_no_color_map.hpp"
+#include "../../../../../boost/libs/graph/include/boost/graph/dijkstra_shortest_paths_no_color_map.hpp"
 

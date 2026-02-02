@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/formulas/vertex_latitude.hpp"
+#include "../../../../../../boost/libs/geometry/include/boost/geometry/formulas/vertex_latitude.hpp"
 

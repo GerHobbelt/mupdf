@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/spirit/include/boost/spirit/include/support_extended_variant.hpp"
+#include "../../../boost/libs/spirit/include/boost/spirit/include/support_extended_variant.hpp"
 

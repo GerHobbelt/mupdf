@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/math/include/boost/math/distributions/students_t.hpp"
+#include "../../../../../../boost/libs/math/include/boost/math/distributions/students_t.hpp"
 

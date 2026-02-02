@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/strategies/spherical/side_by_cross_track.hpp"
+#include "../../../../../../../boost/libs/geometry/include/boost/geometry/strategies/spherical/side_by_cross_track.hpp"
 

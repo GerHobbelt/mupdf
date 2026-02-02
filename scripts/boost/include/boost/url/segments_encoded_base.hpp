@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/url/include/boost/url/segments_encoded_base.hpp"
+#include "../../../../../boost/libs/url/include/boost/url/segments_encoded_base.hpp"
 

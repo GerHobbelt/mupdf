@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/spirit/include/boost/spirit/home/classic/meta/as_parser.hpp"
+#include "../../../../../../../../boost/libs/spirit/include/boost/spirit/home/classic/meta/as_parser.hpp"
 

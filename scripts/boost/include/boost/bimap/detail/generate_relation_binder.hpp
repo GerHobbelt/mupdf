@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/bimap/include/boost/bimap/detail/generate_relation_binder.hpp"
+#include "../../../../../../boost/libs/bimap/include/boost/bimap/detail/generate_relation_binder.hpp"
 

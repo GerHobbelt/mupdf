@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/random/include/boost/random/seed_seq.hpp"
+#include "../../../../../boost/libs/random/include/boost/random/seed_seq.hpp"
 

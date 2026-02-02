@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/contract/include/boost/contract/detail/auto_ptr.hpp"
+#include "../../../../../../boost/libs/contract/include/boost/contract/detail/auto_ptr.hpp"
 

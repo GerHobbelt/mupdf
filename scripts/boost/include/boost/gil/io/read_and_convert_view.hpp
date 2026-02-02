@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/gil/include/boost/gil/io/read_and_convert_view.hpp"
+#include "../../../../../../boost/libs/gil/include/boost/gil/io/read_and_convert_view.hpp"
 

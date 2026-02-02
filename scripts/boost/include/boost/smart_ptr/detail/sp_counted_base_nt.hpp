@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/smart_ptr/include/boost/smart_ptr/detail/sp_counted_base_nt.hpp"
+#include "../../../../../../boost/libs/smart_ptr/include/boost/smart_ptr/detail/sp_counted_base_nt.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/strategies/agnostic/simplify_douglas_peucker.hpp"
+#include "../../../../../../../boost/libs/geometry/include/boost/geometry/strategies/agnostic/simplify_douglas_peucker.hpp"
 

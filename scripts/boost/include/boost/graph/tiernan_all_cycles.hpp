@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/graph/include/boost/graph/tiernan_all_cycles.hpp"
+#include "../../../../../boost/libs/graph/include/boost/graph/tiernan_all_cycles.hpp"
 

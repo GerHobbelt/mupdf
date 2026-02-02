@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/mysql/include/boost/mysql/impl/internal/sansio/reset_connection.hpp"
+#include "../../../../../../../../boost/libs/mysql/include/boost/mysql/impl/internal/sansio/reset_connection.hpp"
 

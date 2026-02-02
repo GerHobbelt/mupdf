@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/numeric/ublas/include/boost/numeric/ublas/opencl/transpose.hpp"
+#include "../../../../../../../boost/libs/numeric/ublas/include/boost/numeric/ublas/opencl/transpose.hpp"
 

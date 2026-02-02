@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/mpl/include/boost/mpl/aux_/is_msvc_eti_arg.hpp"
+#include "../../../../../../boost/libs/mpl/include/boost/mpl/aux_/is_msvc_eti_arg.hpp"
 

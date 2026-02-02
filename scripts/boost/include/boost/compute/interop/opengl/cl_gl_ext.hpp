@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/compute/include/boost/compute/interop/opengl/cl_gl_ext.hpp"
+#include "../../../../../../../boost/libs/compute/include/boost/compute/interop/opengl/cl_gl_ext.hpp"
 

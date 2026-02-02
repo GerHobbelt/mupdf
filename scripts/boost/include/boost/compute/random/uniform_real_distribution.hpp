@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/compute/include/boost/compute/random/uniform_real_distribution.hpp"
+#include "../../../../../../boost/libs/compute/include/boost/compute/random/uniform_real_distribution.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/atomic/include/boost/atomic/detail/type_traits/is_floating_point.hpp"
+#include "../../../../../../../boost/libs/atomic/include/boost/atomic/detail/type_traits/is_floating_point.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/numeric/ublas/include/boost/numeric/ublas/operation/num_columns.hpp"
+#include "../../../../../../../boost/libs/numeric/ublas/include/boost/numeric/ublas/operation/num_columns.hpp"
 

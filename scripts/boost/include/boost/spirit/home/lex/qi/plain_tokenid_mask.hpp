@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/spirit/include/boost/spirit/home/lex/qi/plain_tokenid_mask.hpp"
+#include "../../../../../../../../boost/libs/spirit/include/boost/spirit/home/lex/qi/plain_tokenid_mask.hpp"
 

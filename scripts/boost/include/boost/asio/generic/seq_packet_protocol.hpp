@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/asio/include/boost/asio/generic/seq_packet_protocol.hpp"
+#include "../../../../../../boost/libs/asio/include/boost/asio/generic/seq_packet_protocol.hpp"
 

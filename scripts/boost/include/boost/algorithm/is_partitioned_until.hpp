@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/algorithm/include/boost/algorithm/is_partitioned_until.hpp"
+#include "../../../../../boost/libs/algorithm/include/boost/algorithm/is_partitioned_until.hpp"
 

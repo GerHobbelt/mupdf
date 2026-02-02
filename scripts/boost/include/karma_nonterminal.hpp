@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/spirit/include/boost/spirit/include/karma_nonterminal.hpp"
+#include "../../../boost/libs/spirit/include/boost/spirit/include/karma_nonterminal.hpp"
 

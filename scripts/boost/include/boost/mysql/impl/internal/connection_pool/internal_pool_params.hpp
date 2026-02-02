@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/mysql/include/boost/mysql/impl/internal/connection_pool/internal_pool_params.hpp"
+#include "../../../../../../../../boost/libs/mysql/include/boost/mysql/impl/internal/connection_pool/internal_pool_params.hpp"
 

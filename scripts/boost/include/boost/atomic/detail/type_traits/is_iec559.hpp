@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/atomic/include/boost/atomic/detail/type_traits/is_iec559.hpp"
+#include "../../../../../../../boost/libs/atomic/include/boost/atomic/detail/type_traits/is_iec559.hpp"
 

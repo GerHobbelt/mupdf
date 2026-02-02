@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/thread/include/boost/thread/futures/is_future_type.hpp"
+#include "../../../../../../boost/libs/thread/include/boost/thread/futures/is_future_type.hpp"
 

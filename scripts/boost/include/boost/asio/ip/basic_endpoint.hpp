@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/asio/include/boost/asio/ip/basic_endpoint.hpp"
+#include "../../../../../../boost/libs/asio/include/boost/asio/ip/basic_endpoint.hpp"
 

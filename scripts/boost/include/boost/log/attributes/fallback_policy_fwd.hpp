@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/log/include/boost/log/attributes/fallback_policy_fwd.hpp"
+#include "../../../../../../boost/libs/log/include/boost/log/attributes/fallback_policy_fwd.hpp"
 

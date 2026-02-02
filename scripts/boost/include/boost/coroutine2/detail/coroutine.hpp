@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/coroutine2/include/boost/coroutine2/detail/coroutine.hpp"
+#include "../../../../../../boost/libs/coroutine2/include/boost/coroutine2/detail/coroutine.hpp"
 

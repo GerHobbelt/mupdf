@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/strategies/spherical/point_in_point.hpp"
+#include "../../../../../../../boost/libs/geometry/include/boost/geometry/strategies/spherical/point_in_point.hpp"
 

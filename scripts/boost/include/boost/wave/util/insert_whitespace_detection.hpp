@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/wave/include/boost/wave/util/insert_whitespace_detection.hpp"
+#include "../../../../../../boost/libs/wave/include/boost/wave/util/insert_whitespace_detection.hpp"
 

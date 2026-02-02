@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/ptr_container/include/boost/ptr_container/detail/serialize_ptr_map_adapter.hpp"
+#include "../../../../../../boost/libs/ptr_container/include/boost/ptr_container/detail/serialize_ptr_map_adapter.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/spirit/include/boost/spirit/home/classic/dynamic/lazy.hpp"
+#include "../../../../../../../../boost/libs/spirit/include/boost/spirit/home/classic/dynamic/lazy.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/numeric/conversion/include/boost/numeric/conversion/sign_mixture_enum.hpp"
+#include "../../../../../../boost/libs/numeric/conversion/include/boost/numeric/conversion/sign_mixture_enum.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/spirit/include/boost/spirit/include/classic_flush_multi_pass.hpp"
+#include "../../../boost/libs/spirit/include/boost/spirit/include/classic_flush_multi_pass.hpp"
 

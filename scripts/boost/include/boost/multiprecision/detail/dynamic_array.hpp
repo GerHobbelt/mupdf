@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/multiprecision/include/boost/multiprecision/detail/dynamic_array.hpp"
+#include "../../../../../../boost/libs/multiprecision/include/boost/multiprecision/detail/dynamic_array.hpp"
 

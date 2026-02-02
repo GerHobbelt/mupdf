@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/qvm/include/boost/qvm/quat_traits_defaults.hpp"
+#include "../../../../../boost/libs/qvm/include/boost/qvm/quat_traits_defaults.hpp"
 

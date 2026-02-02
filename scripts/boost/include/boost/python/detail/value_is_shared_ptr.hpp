@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/python/include/boost/python/detail/value_is_shared_ptr.hpp"
+#include "../../../../../../boost/libs/python/include/boost/python/detail/value_is_shared_ptr.hpp"
 

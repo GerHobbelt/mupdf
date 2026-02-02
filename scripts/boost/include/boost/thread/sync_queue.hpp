@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/thread/include/boost/thread/sync_queue.hpp"
+#include "../../../../../boost/libs/thread/include/boost/thread/sync_queue.hpp"
 

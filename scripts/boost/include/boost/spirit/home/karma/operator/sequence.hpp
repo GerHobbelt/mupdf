@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/spirit/include/boost/spirit/home/karma/operator/sequence.hpp"
+#include "../../../../../../../../boost/libs/spirit/include/boost/spirit/home/karma/operator/sequence.hpp"
 

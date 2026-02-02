@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/polygon/include/boost/polygon/detail/max_cover.hpp"
+#include "../../../../../../boost/libs/polygon/include/boost/polygon/detail/max_cover.hpp"
 

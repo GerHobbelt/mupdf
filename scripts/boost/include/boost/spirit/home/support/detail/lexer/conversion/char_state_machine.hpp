@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/spirit/include/boost/spirit/home/support/detail/lexer/conversion/char_state_machine.hpp"
+#include "../../../../../../../../../../boost/libs/spirit/include/boost/spirit/home/support/detail/lexer/conversion/char_state_machine.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/dll/include/boost/dll/shared_library_load_mode.hpp"
+#include "../../../../../boost/libs/dll/include/boost/dll/shared_library_load_mode.hpp"
 

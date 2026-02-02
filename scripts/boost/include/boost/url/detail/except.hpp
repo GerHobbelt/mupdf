@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/url/include/boost/url/detail/except.hpp"
+#include "../../../../../../boost/libs/url/include/boost/url/detail/except.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/numeric/odeint/include/boost/numeric/odeint/external/mpi/mpi.hpp"
+#include "../../../../../../../../boost/libs/numeric/odeint/include/boost/numeric/odeint/external/mpi/mpi.hpp"
 

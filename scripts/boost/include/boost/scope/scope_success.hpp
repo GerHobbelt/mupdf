@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/scope/include/boost/scope/scope_success.hpp"
+#include "../../../../../boost/libs/scope/include/boost/scope/scope_success.hpp"
 

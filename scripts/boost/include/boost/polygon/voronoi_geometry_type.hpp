@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/polygon/include/boost/polygon/voronoi_geometry_type.hpp"
+#include "../../../../../boost/libs/polygon/include/boost/polygon/voronoi_geometry_type.hpp"
 

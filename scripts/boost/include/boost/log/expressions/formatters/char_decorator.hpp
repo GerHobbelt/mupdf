@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/log/include/boost/log/expressions/formatters/char_decorator.hpp"
+#include "../../../../../../../boost/libs/log/include/boost/log/expressions/formatters/char_decorator.hpp"
 

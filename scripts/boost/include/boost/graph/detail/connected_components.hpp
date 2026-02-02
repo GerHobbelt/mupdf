@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/graph/include/boost/graph/detail/connected_components.hpp"
+#include "../../../../../../boost/libs/graph/include/boost/graph/detail/connected_components.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/spirit/include/boost/spirit/home/classic/iterator/multi_pass.hpp"
+#include "../../../../../../../../boost/libs/spirit/include/boost/spirit/home/classic/iterator/multi_pass.hpp"
 

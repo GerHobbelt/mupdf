@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/mpi/include/boost/mpi/detail/mpi_datatype_primitive.hpp"
+#include "../../../../../../boost/libs/mpi/include/boost/mpi/detail/mpi_datatype_primitive.hpp"
 

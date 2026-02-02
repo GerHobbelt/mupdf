@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/math/include/boost/math/common_factor_ct.hpp"
+#include "../../../../../boost/libs/math/include/boost/math/common_factor_ct.hpp"
 

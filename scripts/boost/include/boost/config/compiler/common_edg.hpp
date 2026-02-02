@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/config/include/boost/config/compiler/common_edg.hpp"
+#include "../../../../../../boost/libs/config/include/boost/config/compiler/common_edg.hpp"
 

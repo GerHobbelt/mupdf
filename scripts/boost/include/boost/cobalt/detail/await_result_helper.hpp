@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/cobalt/include/boost/cobalt/detail/await_result_helper.hpp"
+#include "../../../../../../boost/libs/cobalt/include/boost/cobalt/detail/await_result_helper.hpp"
 

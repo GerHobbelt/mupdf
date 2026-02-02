@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/wave/include/boost/wave/cpplexer/detect_include_guards.hpp"
+#include "../../../../../../boost/libs/wave/include/boost/wave/cpplexer/detect_include_guards.hpp"
 

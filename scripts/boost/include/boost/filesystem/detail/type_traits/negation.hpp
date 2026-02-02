@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/filesystem/include/boost/filesystem/detail/type_traits/negation.hpp"
+#include "../../../../../../../boost/libs/filesystem/include/boost/filesystem/detail/type_traits/negation.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/safe_numerics/include/boost/safe_numerics/range_value.hpp"
+#include "../../../../../boost/libs/safe_numerics/include/boost/safe_numerics/range_value.hpp"
 

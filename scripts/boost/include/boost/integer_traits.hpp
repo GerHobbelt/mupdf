@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/integer/include/boost/integer_traits.hpp"
+#include "../../../../boost/libs/integer/include/boost/integer_traits.hpp"
 

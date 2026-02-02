@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/fusion/include/boost/fusion/adapted/boost_array/detail/is_sequence_impl.hpp"
+#include "../../../../../../../../boost/libs/fusion/include/boost/fusion/adapted/boost_array/detail/is_sequence_impl.hpp"
 

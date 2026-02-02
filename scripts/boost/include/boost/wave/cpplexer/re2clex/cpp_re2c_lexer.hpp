@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/wave/include/boost/wave/cpplexer/re2clex/cpp_re2c_lexer.hpp"
+#include "../../../../../../../boost/libs/wave/include/boost/wave/cpplexer/re2clex/cpp_re2c_lexer.hpp"
 

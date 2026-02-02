@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/index/detail/is_bounding_geometry.hpp"
+#include "../../../../../../../boost/libs/geometry/include/boost/geometry/index/detail/is_bounding_geometry.hpp"
 

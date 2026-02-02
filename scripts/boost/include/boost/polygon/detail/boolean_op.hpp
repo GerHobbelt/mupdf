@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/polygon/include/boost/polygon/detail/boolean_op.hpp"
+#include "../../../../../../boost/libs/polygon/include/boost/polygon/detail/boolean_op.hpp"
 

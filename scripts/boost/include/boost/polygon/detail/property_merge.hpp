@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/polygon/include/boost/polygon/detail/property_merge.hpp"
+#include "../../../../../../boost/libs/polygon/include/boost/polygon/detail/property_merge.hpp"
 

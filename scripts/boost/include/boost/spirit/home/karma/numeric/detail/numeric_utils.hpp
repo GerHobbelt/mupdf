@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/spirit/include/boost/spirit/home/karma/numeric/detail/numeric_utils.hpp"
+#include "../../../../../../../../../boost/libs/spirit/include/boost/spirit/home/karma/numeric/detail/numeric_utils.hpp"
 

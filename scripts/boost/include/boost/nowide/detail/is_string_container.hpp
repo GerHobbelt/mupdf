@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/nowide/include/boost/nowide/detail/is_string_container.hpp"
+#include "../../../../../../boost/libs/nowide/include/boost/nowide/detail/is_string_container.hpp"
 

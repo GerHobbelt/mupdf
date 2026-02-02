@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/graph/include/boost/graph/erdos_renyi_generator.hpp"
+#include "../../../../../boost/libs/graph/include/boost/graph/erdos_renyi_generator.hpp"
 

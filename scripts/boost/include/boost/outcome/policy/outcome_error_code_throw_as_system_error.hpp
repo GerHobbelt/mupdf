@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/outcome/include/boost/outcome/policy/outcome_error_code_throw_as_system_error.hpp"
+#include "../../../../../../boost/libs/outcome/include/boost/outcome/policy/outcome_error_code_throw_as_system_error.hpp"
 

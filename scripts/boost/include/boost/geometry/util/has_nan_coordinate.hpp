@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/util/has_nan_coordinate.hpp"
+#include "../../../../../../boost/libs/geometry/include/boost/geometry/util/has_nan_coordinate.hpp"
 

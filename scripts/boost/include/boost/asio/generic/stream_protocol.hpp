@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/asio/include/boost/asio/generic/stream_protocol.hpp"
+#include "../../../../../../boost/libs/asio/include/boost/asio/generic/stream_protocol.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/function_types/include/boost/function_types/is_function_pointer.hpp"
+#include "../../../../../boost/libs/function_types/include/boost/function_types/is_function_pointer.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/spirit/include/boost/spirit/home/karma/stream/format_manip.hpp"
+#include "../../../../../../../../boost/libs/spirit/include/boost/spirit/home/karma/stream/format_manip.hpp"
 

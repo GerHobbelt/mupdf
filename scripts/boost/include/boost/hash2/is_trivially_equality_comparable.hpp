@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/hash2/include/boost/hash2/is_trivially_equality_comparable.hpp"
+#include "../../../../../boost/libs/hash2/include/boost/hash2/is_trivially_equality_comparable.hpp"
 

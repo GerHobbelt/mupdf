@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/strategies/geographic/buffer_helper.hpp"
+#include "../../../../../../../boost/libs/geometry/include/boost/geometry/strategies/geographic/buffer_helper.hpp"
 

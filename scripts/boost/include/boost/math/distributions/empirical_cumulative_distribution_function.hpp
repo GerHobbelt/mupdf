@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/math/include/boost/math/distributions/empirical_cumulative_distribution_function.hpp"
+#include "../../../../../../boost/libs/math/include/boost/math/distributions/empirical_cumulative_distribution_function.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/align/include/boost/align/detail/is_alignment.hpp"
+#include "../../../../../../boost/libs/align/include/boost/align/detail/is_alignment.hpp"
 

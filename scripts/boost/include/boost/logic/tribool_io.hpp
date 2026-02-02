@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/logic/include/boost/logic/tribool_io.hpp"
+#include "../../../../../boost/libs/logic/include/boost/logic/tribool_io.hpp"
 

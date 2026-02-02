@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/wave/include/boost/wave/wave_config_constant.hpp"
+#include "../../../../../boost/libs/wave/include/boost/wave/wave_config_constant.hpp"
 

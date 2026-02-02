@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/math/include/boost/math/interpolators/bilinear_uniform.hpp"
+#include "../../../../../../boost/libs/math/include/boost/math/interpolators/bilinear_uniform.hpp"
 

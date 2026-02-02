@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/atomic/include/boost/atomic/detail/has_posix_clock_traits.hpp"
+#include "../../../../../../boost/libs/atomic/include/boost/atomic/detail/has_posix_clock_traits.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/endian/include/boost/endian/detail/integral_by_size.hpp"
+#include "../../../../../../boost/libs/endian/include/boost/endian/detail/integral_by_size.hpp"
 

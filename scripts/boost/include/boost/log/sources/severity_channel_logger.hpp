@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/log/include/boost/log/sources/severity_channel_logger.hpp"
+#include "../../../../../../boost/libs/log/include/boost/log/sources/severity_channel_logger.hpp"
 

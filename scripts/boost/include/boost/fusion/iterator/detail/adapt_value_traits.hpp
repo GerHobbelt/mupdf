@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/fusion/include/boost/fusion/iterator/detail/adapt_value_traits.hpp"
+#include "../../../../../../../boost/libs/fusion/include/boost/fusion/iterator/detail/adapt_value_traits.hpp"
 

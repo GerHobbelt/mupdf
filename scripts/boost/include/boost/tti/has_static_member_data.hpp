@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/tti/include/boost/tti/has_static_member_data.hpp"
+#include "../../../../../boost/libs/tti/include/boost/tti/has_static_member_data.hpp"
 

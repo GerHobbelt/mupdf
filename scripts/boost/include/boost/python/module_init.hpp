@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/python/include/boost/python/module_init.hpp"
+#include "../../../../../boost/libs/python/include/boost/python/module_init.hpp"
 

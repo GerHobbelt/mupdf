@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/wave/include/boost/wave/grammars/cpp_value_error.hpp"
+#include "../../../../../../boost/libs/wave/include/boost/wave/grammars/cpp_value_error.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/algorithm/include/boost/algorithm/string/std_containers_traits.hpp"
+#include "../../../../../../boost/libs/algorithm/include/boost/algorithm/string/std_containers_traits.hpp"
 

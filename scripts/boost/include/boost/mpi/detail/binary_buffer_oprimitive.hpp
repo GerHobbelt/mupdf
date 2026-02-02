@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/mpi/include/boost/mpi/detail/binary_buffer_oprimitive.hpp"
+#include "../../../../../../boost/libs/mpi/include/boost/mpi/detail/binary_buffer_oprimitive.hpp"
 

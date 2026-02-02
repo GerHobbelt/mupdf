@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/polygon/include/boost/polygon/detail/iterator_geometry_to_set.hpp"
+#include "../../../../../../boost/libs/polygon/include/boost/polygon/detail/iterator_geometry_to_set.hpp"
 

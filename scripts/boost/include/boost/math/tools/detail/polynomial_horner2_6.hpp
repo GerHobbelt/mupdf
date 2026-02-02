@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/math/include/boost/math/tools/detail/polynomial_horner2_6.hpp"
+#include "../../../../../../../boost/libs/math/include/boost/math/tools/detail/polynomial_horner2_6.hpp"
 

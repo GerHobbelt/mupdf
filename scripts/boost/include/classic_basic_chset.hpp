@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/spirit/include/boost/spirit/include/classic_basic_chset.hpp"
+#include "../../../boost/libs/spirit/include/boost/spirit/include/classic_basic_chset.hpp"
 

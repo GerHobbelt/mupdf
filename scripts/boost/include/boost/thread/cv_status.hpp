@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/thread/include/boost/thread/cv_status.hpp"
+#include "../../../../../boost/libs/thread/include/boost/thread/cv_status.hpp"
 

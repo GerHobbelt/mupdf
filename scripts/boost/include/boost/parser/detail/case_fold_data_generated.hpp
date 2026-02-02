@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/parser/include/boost/parser/detail/case_fold_data_generated.hpp"
+#include "../../../../../../boost/libs/parser/include/boost/parser/detail/case_fold_data_generated.hpp"
 

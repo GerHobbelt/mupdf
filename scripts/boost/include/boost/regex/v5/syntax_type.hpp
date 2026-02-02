@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/regex/include/boost/regex/v5/syntax_type.hpp"
+#include "../../../../../../boost/libs/regex/include/boost/regex/v5/syntax_type.hpp"
 

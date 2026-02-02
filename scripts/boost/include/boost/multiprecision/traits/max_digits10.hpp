@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/multiprecision/include/boost/multiprecision/traits/max_digits10.hpp"
+#include "../../../../../../boost/libs/multiprecision/include/boost/multiprecision/traits/max_digits10.hpp"
 

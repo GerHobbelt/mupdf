@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/metaparse/include/boost/metaparse/foldr_reject_incomplete1.hpp"
+#include "../../../../../boost/libs/metaparse/include/boost/metaparse/foldr_reject_incomplete1.hpp"
 

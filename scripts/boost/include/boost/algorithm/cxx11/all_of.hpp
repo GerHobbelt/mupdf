@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/algorithm/include/boost/algorithm/cxx11/all_of.hpp"
+#include "../../../../../../boost/libs/algorithm/include/boost/algorithm/cxx11/all_of.hpp"
 

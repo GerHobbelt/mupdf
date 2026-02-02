@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/tti/include/boost/tti/tti.hpp"
+#include "../../../../../boost/libs/tti/include/boost/tti/tti.hpp"
 

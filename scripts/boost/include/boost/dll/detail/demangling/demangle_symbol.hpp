@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/dll/include/boost/dll/detail/demangling/demangle_symbol.hpp"
+#include "../../../../../../../boost/libs/dll/include/boost/dll/detail/demangling/demangle_symbol.hpp"
 

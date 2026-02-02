@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/random/include/boost/random/non_central_chi_squared_distribution.hpp"
+#include "../../../../../boost/libs/random/include/boost/random/non_central_chi_squared_distribution.hpp"
 

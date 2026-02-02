@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/util/compress_variant.hpp"
+#include "../../../../../../boost/libs/geometry/include/boost/geometry/util/compress_variant.hpp"
 

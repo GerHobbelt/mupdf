@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/variant/include/boost/variant/detail/std_hash.hpp"
+#include "../../../../../../boost/libs/variant/include/boost/variant/detail/std_hash.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/polygon/include/boost/polygon/segment_utils.hpp"
+#include "../../../../../boost/libs/polygon/include/boost/polygon/segment_utils.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/iostreams/include/boost/iostreams/detail/broken_overload_resolution/stream_buffer.hpp"
+#include "../../../../../../../boost/libs/iostreams/include/boost/iostreams/detail/broken_overload_resolution/stream_buffer.hpp"
 

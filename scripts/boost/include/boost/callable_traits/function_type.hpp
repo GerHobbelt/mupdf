@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/callable_traits/include/boost/callable_traits/function_type.hpp"
+#include "../../../../../boost/libs/callable_traits/include/boost/callable_traits/function_type.hpp"
 

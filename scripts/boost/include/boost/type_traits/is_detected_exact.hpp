@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/type_traits/include/boost/type_traits/is_detected_exact.hpp"
+#include "../../../../../boost/libs/type_traits/include/boost/type_traits/is_detected_exact.hpp"
 

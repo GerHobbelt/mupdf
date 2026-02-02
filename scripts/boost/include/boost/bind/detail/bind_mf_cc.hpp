@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/bind/include/boost/bind/detail/bind_mf_cc.hpp"
+#include "../../../../../../boost/libs/bind/include/boost/bind/detail/bind_mf_cc.hpp"
 

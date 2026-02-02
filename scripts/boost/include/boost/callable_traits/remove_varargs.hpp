@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/callable_traits/include/boost/callable_traits/remove_varargs.hpp"
+#include "../../../../../boost/libs/callable_traits/include/boost/callable_traits/remove_varargs.hpp"
 

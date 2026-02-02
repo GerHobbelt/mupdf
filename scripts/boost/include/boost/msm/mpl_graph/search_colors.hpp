@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/msm/include/boost/msm/mpl_graph/search_colors.hpp"
+#include "../../../../../../boost/libs/msm/include/boost/msm/mpl_graph/search_colors.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/spirit/include/boost/spirit/home/karma/detail/pass_container.hpp"
+#include "../../../../../../../../boost/libs/spirit/include/boost/spirit/home/karma/detail/pass_container.hpp"
 

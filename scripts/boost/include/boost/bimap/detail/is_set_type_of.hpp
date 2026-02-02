@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/bimap/include/boost/bimap/detail/is_set_type_of.hpp"
+#include "../../../../../../boost/libs/bimap/include/boost/bimap/detail/is_set_type_of.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/outcome/include/boost/outcome/std_outcome.hpp"
+#include "../../../../../boost/libs/outcome/include/boost/outcome/std_outcome.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/proto/include/boost/proto/literal.hpp"
+#include "../../../../../boost/libs/proto/include/boost/proto/literal.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/exception/include/boost/exception/errinfo_type_info_name.hpp"
+#include "../../../../../boost/libs/exception/include/boost/exception/errinfo_type_info_name.hpp"
 

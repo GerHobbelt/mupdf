@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/iostreams/include/boost/iostreams/detail/bool_trait_def.hpp"
+#include "../../../../../../boost/libs/iostreams/include/boost/iostreams/detail/bool_trait_def.hpp"
 

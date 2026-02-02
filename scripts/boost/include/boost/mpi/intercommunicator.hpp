@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/mpi/include/boost/mpi/intercommunicator.hpp"
+#include "../../../../../boost/libs/mpi/include/boost/mpi/intercommunicator.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/compute/include/boost/compute/type_traits/make_vector_type.hpp"
+#include "../../../../../../boost/libs/compute/include/boost/compute/type_traits/make_vector_type.hpp"
 

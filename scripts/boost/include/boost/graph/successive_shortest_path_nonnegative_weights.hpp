@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/graph/include/boost/graph/successive_shortest_path_nonnegative_weights.hpp"
+#include "../../../../../boost/libs/graph/include/boost/graph/successive_shortest_path_nonnegative_weights.hpp"
 

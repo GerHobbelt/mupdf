@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/math/include/boost/math/distributions/non_central_beta.hpp"
+#include "../../../../../../boost/libs/math/include/boost/math/distributions/non_central_beta.hpp"
 

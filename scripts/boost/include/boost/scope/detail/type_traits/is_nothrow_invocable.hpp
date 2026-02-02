@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/scope/include/boost/scope/detail/type_traits/is_nothrow_invocable.hpp"
+#include "../../../../../../../boost/libs/scope/include/boost/scope/detail/type_traits/is_nothrow_invocable.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/log/include/boost/log/sinks/unbounded_fifo_queue.hpp"
+#include "../../../../../../boost/libs/log/include/boost/log/sinks/unbounded_fifo_queue.hpp"
 

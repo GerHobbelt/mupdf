@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/locale/include/boost/locale/detail/allocator_traits.hpp"
+#include "../../../../../../boost/libs/locale/include/boost/locale/detail/allocator_traits.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/spirit/include/boost/spirit/home/classic/dynamic/rule_alias.hpp"
+#include "../../../../../../../../boost/libs/spirit/include/boost/spirit/home/classic/dynamic/rule_alias.hpp"
 

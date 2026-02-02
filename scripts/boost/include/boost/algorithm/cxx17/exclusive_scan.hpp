@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/algorithm/include/boost/algorithm/cxx17/exclusive_scan.hpp"
+#include "../../../../../../boost/libs/algorithm/include/boost/algorithm/cxx17/exclusive_scan.hpp"
 

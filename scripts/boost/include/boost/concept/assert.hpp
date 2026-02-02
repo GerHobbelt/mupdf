@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/concept_check/include/boost/concept/assert.hpp"
+#include "../../../../../boost/libs/concept_check/include/boost/concept/assert.hpp"
 

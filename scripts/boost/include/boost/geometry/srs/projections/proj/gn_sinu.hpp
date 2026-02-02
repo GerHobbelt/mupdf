@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/srs/projections/proj/gn_sinu.hpp"
+#include "../../../../../../../../boost/libs/geometry/include/boost/geometry/srs/projections/proj/gn_sinu.hpp"
 

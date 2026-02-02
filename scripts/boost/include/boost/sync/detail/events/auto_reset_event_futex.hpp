@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/sync/include/boost/sync/detail/events/auto_reset_event_futex.hpp"
+#include "../../../../../../../boost/libs/sync/include/boost/sync/detail/events/auto_reset_event_futex.hpp"
 

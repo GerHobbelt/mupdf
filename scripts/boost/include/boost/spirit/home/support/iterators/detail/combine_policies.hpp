@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/spirit/include/boost/spirit/home/support/iterators/detail/combine_policies.hpp"
+#include "../../../../../../../../../boost/libs/spirit/include/boost/spirit/home/support/iterators/detail/combine_policies.hpp"
 

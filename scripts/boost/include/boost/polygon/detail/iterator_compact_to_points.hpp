@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/polygon/include/boost/polygon/detail/iterator_compact_to_points.hpp"
+#include "../../../../../../boost/libs/polygon/include/boost/polygon/detail/iterator_compact_to_points.hpp"
 

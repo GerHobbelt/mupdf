@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/stacktrace/include/boost/stacktrace/detail/void_ptr_cast.hpp"
+#include "../../../../../../boost/libs/stacktrace/include/boost/stacktrace/detail/void_ptr_cast.hpp"
 

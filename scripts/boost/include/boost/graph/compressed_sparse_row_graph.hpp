@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/graph/include/boost/graph/compressed_sparse_row_graph.hpp"
+#include "../../../../../boost/libs/graph/include/boost/graph/compressed_sparse_row_graph.hpp"
 

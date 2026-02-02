@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/thread/include/boost/thread/csbl/tuple.hpp"
+#include "../../../../../../boost/libs/thread/include/boost/thread/csbl/tuple.hpp"
 

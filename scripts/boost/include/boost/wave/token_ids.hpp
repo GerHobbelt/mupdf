@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/wave/include/boost/wave/token_ids.hpp"
+#include "../../../../../boost/libs/wave/include/boost/wave/token_ids.hpp"
 

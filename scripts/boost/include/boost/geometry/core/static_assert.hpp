@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/core/static_assert.hpp"
+#include "../../../../../../boost/libs/geometry/include/boost/geometry/core/static_assert.hpp"
 

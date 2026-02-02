@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/metaparse/include/boost/metaparse/v1/cpp11/one_char_except_c.hpp"
+#include "../../../../../../../boost/libs/metaparse/include/boost/metaparse/v1/cpp11/one_char_except_c.hpp"
 

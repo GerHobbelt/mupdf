@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/atomic/include/boost/atomic/detail/type_traits/has_unique_object_representations.hpp"
+#include "../../../../../../../boost/libs/atomic/include/boost/atomic/detail/type_traits/has_unique_object_representations.hpp"
 

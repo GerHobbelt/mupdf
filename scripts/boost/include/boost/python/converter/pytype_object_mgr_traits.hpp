@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/python/include/boost/python/converter/pytype_object_mgr_traits.hpp"
+#include "../../../../../../boost/libs/python/include/boost/python/converter/pytype_object_mgr_traits.hpp"
 

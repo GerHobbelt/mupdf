@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/function/include/boost/function/function10.hpp"
+#include "../../../../../boost/libs/function/include/boost/function/function10.hpp"
 

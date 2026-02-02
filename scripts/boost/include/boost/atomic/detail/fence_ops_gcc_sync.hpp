@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/atomic/include/boost/atomic/detail/fence_ops_gcc_sync.hpp"
+#include "../../../../../../boost/libs/atomic/include/boost/atomic/detail/fence_ops_gcc_sync.hpp"
 

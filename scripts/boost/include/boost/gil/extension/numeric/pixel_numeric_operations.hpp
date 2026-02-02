@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/gil/include/boost/gil/extension/numeric/pixel_numeric_operations.hpp"
+#include "../../../../../../../boost/libs/gil/include/boost/gil/extension/numeric/pixel_numeric_operations.hpp"
 

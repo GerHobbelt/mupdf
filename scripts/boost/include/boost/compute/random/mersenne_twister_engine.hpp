@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/compute/include/boost/compute/random/mersenne_twister_engine.hpp"
+#include "../../../../../../boost/libs/compute/include/boost/compute/random/mersenne_twister_engine.hpp"
 

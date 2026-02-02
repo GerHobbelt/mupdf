@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/uuid/include/boost/uuid/detail/static_assert.hpp"
+#include "../../../../../../boost/libs/uuid/include/boost/uuid/detail/static_assert.hpp"
 

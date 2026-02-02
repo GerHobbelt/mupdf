@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/bind/include/boost/is_placeholder.hpp"
+#include "../../../../boost/libs/core/include/boost/is_placeholder.hpp"
 

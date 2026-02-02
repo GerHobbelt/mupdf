@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/index/detail/algorithms/segment_intersection.hpp"
+#include "../../../../../../../../boost/libs/geometry/include/boost/geometry/index/detail/algorithms/segment_intersection.hpp"
 

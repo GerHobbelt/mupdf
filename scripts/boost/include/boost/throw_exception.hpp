@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/throw_exception/include/boost/throw_exception.hpp"
+#include "../../../../boost/libs/throw_exception/include/boost/throw_exception.hpp"
 

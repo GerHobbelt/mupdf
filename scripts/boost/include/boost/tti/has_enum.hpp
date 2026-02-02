@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/tti/include/boost/tti/has_enum.hpp"
+#include "../../../../../boost/libs/tti/include/boost/tti/has_enum.hpp"
 

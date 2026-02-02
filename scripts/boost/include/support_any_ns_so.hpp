@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/spirit/include/boost/spirit/include/support_any_ns_so.hpp"
+#include "../../../boost/libs/spirit/include/boost/spirit/include/support_any_ns_so.hpp"
 

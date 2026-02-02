@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/log/include/boost/log/detail/unary_function_terminal.hpp"
+#include "../../../../../../boost/libs/log/include/boost/log/detail/unary_function_terminal.hpp"
 

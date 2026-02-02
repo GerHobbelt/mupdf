@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/thread/include/boost/thread/thread_functors.hpp"
+#include "../../../../../boost/libs/thread/include/boost/thread/thread_functors.hpp"
 

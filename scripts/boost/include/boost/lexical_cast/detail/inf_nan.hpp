@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/lexical_cast/include/boost/lexical_cast/detail/inf_nan.hpp"
+#include "../../../../../../boost/libs/lexical_cast/include/boost/lexical_cast/detail/inf_nan.hpp"
 

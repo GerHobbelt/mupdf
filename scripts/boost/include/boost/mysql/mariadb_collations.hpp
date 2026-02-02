@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/mysql/include/boost/mysql/mariadb_collations.hpp"
+#include "../../../../../boost/libs/mysql/include/boost/mysql/mariadb_collations.hpp"
 

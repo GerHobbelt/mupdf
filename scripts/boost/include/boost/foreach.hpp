@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/foreach/include/boost/foreach.hpp"
+#include "../../../../boost/libs/foreach/include/boost/foreach.hpp"
 

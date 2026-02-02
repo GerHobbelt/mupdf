@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/log/include/boost/log/keywords/auto_newline_mode.hpp"
+#include "../../../../../../boost/libs/log/include/boost/log/keywords/auto_newline_mode.hpp"
 

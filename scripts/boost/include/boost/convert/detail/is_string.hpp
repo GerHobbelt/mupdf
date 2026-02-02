@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/convert/include/boost/convert/detail/is_string.hpp"
+#include "../../../../../../boost/libs/convert/include/boost/convert/detail/is_string.hpp"
 

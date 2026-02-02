@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/gil/include/boost/gil/extension/numeric/channel_numeric_operations.hpp"
+#include "../../../../../../../boost/libs/gil/include/boost/gil/extension/numeric/channel_numeric_operations.hpp"
 

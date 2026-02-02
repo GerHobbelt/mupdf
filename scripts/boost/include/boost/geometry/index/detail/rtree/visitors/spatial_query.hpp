@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/geometry/include/boost/geometry/index/detail/rtree/visitors/spatial_query.hpp"
+#include "../../../../../../../../../boost/libs/geometry/include/boost/geometry/index/detail/rtree/visitors/spatial_query.hpp"
 

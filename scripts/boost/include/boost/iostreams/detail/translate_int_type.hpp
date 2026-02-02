@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/iostreams/include/boost/iostreams/detail/translate_int_type.hpp"
+#include "../../../../../../boost/libs/iostreams/include/boost/iostreams/detail/translate_int_type.hpp"
 

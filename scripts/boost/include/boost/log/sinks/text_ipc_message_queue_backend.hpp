@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/log/include/boost/log/sinks/text_ipc_message_queue_backend.hpp"
+#include "../../../../../../boost/libs/log/include/boost/log/sinks/text_ipc_message_queue_backend.hpp"
 

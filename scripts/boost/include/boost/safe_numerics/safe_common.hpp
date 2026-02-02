@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/safe_numerics/include/boost/safe_numerics/safe_common.hpp"
+#include "../../../../../boost/libs/safe_numerics/include/boost/safe_numerics/safe_common.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/mysql/include/boost/mysql/common_server_errc.hpp"
+#include "../../../../../boost/libs/mysql/include/boost/mysql/common_server_errc.hpp"
 

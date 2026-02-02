@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/mysql/include/boost/mysql/impl/internal/call_next_char.hpp"
+#include "../../../../../../../boost/libs/mysql/include/boost/mysql/impl/internal/call_next_char.hpp"
 

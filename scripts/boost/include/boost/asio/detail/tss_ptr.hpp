@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/asio/include/boost/asio/detail/tss_ptr.hpp"
+#include "../../../../../../boost/libs/asio/include/boost/asio/detail/tss_ptr.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/json/include/boost/json/detail/writer.hpp"
+#include "../../../../../../boost/libs/json/include/boost/json/detail/writer.hpp"
 

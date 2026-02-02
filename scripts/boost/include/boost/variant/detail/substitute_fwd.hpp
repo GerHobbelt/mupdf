@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/variant/include/boost/variant/detail/substitute_fwd.hpp"
+#include "../../../../../../boost/libs/variant/include/boost/variant/detail/substitute_fwd.hpp"
 

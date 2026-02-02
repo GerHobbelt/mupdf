@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/compat/include/boost/compat/integer_sequence.hpp"
+#include "../../../../../boost/libs/compat/include/boost/compat/integer_sequence.hpp"
 

@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/atomic/include/boost/atomic/detail/caps_arch_msvc_x86.hpp"
+#include "../../../../../../boost/libs/atomic/include/boost/atomic/detail/caps_arch_msvc_x86.hpp"
 

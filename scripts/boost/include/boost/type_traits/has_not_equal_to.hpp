@@ -6,5 +6,5 @@
 
 //#pragma once
 
-#include "../../../thirdparty/owemdjee/boost/libs/type_traits/include/boost/type_traits/has_not_equal_to.hpp"
+#include "../../../../../boost/libs/type_traits/include/boost/type_traits/has_not_equal_to.hpp"
 
