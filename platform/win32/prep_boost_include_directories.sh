@@ -39,6 +39,14 @@ EOF
 	fi
 done
 
+
+cp ../../boost_obsoleted_static_assert.hpp.tpl   ./boost/static_assert.hpp
+
+
+# all generated header files MUST be inside the ./boost/ subdirectory; any that aren't are internal and should be removed here.
+rm -f *.hpp
+
+
 echo "Done!"
 
 popd
