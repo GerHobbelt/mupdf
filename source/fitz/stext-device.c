@@ -751,7 +751,9 @@ fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int 
 		cur_block = NULL;
 	cur_line = cur_block ? cur_block->u.t.last_line : NULL;
 
-	if (cur_line && glyph < 0)
+	/* We use glyph == -2 to indicate a no-glyph char from an actualtext. The position
+	 * is valid though, so we want to advance the pen for these. */
+	if (cur_line && glyph == -1)
 	{
 		/* Don't advance pen or break lines for no-glyph characters in a cluster */
 		add_char_to_line(ctx, dev, page, cur_line, trm, font, size, c, (dev->opts.flags & FZ_STEXT_ACCURATE_BBOXES) ? glyph : NON_ACCURATE_GLYPH, &dev->pen, &dev->pen, bidi, dev->color, 0, flags, dev->opts.flags);
@@ -922,6 +924,10 @@ fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int 
 		dev->start = p;
 		dev->delayed_new_line = 0;
 	}
+
+	/* Henceforth treat such non-glyphs in the usual way. */
+	if (glyph == -2)
+		glyph = -1;
 
 	/* Add synthetic space */
 	if (add_space && !(dev->opts.flags & FZ_STEXT_INHIBIT_SPACES))
@@ -1251,13 +1257,32 @@ rune_index(const char *utf8, size_t idx)
 }
 
 static void
-flush_actualtext(fz_context *ctx, fz_stext_device *dev, const char *actualtext, int i)
+flush_actualtext(fz_context *ctx, fz_stext_device *dev, const char *actualtext, int i, float adv)
 {
 	if (*actualtext == 0)
 		return;
 
 	if (!dev->last.valid)
 		return;
+
+	if (adv != 0)
+	{
+		const char *at = actualtext;
+		int j = i;
+
+		while (end < 0 || (end >= 0 && i < end))
+		{
+			int rune;
+			at += fz_chartorune(&rune, at);
+
+			if (rune == 0)
+				break;
+			j++;
+		}
+
+		if (j != i)
+			adv /= (j - i);
+	}
 
 	while (1)
 	{
@@ -1273,9 +1298,9 @@ flush_actualtext(fz_context *ctx, fz_stext_device *dev, const char *actualtext, 
 
 		fz_add_stext_char(ctx, dev, dev->last.font,
 			rune,
-			-1,
+			-2,
 			dev->last.trm,
-			0,
+			adv,
 			dev->last.wmode,
 			dev->last.bidi_level,
 			(i == 0) && (dev->opts.flags & FZ_STEXT_PRESERVE_SPANS),
@@ -1412,7 +1437,7 @@ do_extract_within_actualtext(fz_context *ctx, fz_stext_device *dev, fz_text_span
 
 	/* We found a matching postfix. It seems likely that this is going to be the only
 	 * text object we get, so send any remaining actualtext now. */
-	flush_actualtext(ctx, dev, actualtext, i);
+	flush_actualtext(ctx, dev, actualtext, i, 0);
 
 	/* Send the postfix */
 	if (end != span->len)
@@ -1592,25 +1617,29 @@ fz_stext_end_metatext(fz_context *ctx, fz_device *dev)
 	/* If we have a 'last' text position, send the content after that. */
 	if (tdev->last.valid)
 	{
-		flush_actualtext(ctx, tdev, tdev->metatext->text, 0);
+		flush_actualtext(ctx, tdev, tdev->metatext->text, 0, 0);
 		pop_metatext(ctx, tdev);
 		return;
 	}
 
-	/* If we have collected a rectangle for content that encloses the actual text,
-	 * send the content there. */
-	if (!fz_is_empty_rect(tdev->metatext->bounds))
+	/* Unless we have collected a rectangle for content that encloses the actual text,
+	 * we can't do anything. */
+	if (fz_is_empty_rect(tdev->metatext->bounds))
 	{
+		fz_warn(ctx, "Actualtext with no position. Text may be lost or mispositioned.");
+		pop_metatext(ctx, tdev);
+	}
+	else
+	{
+		/* We have a rectangle, so send the text to fill that. */
 		tdev->last.trm.a = tdev->metatext->bounds.x1 - tdev->metatext->bounds.x0;
 		tdev->last.trm.b = 0;
 		tdev->last.trm.c = 0;
-		tdev->last.trm.d = tdev->metatext->bounds.y1 - tdev->metatext->bounds.y0;
+		tdev->last.trm.d = tdev->metatext->bounds.y0 - tdev->metatext->bounds.y1;
 		tdev->last.trm.e = tdev->metatext->bounds.x0;
-		tdev->last.trm.f = tdev->metatext->bounds.y0;
+		tdev->last.trm.f = tdev->metatext->bounds.y1;
 		tdev->last.valid = 1;
 	}
-	else
-		fz_warn(ctx, "Actualtext with no position. Text may be lost or mispositioned.");
 
 	fz_var(myfont);
 
@@ -1621,7 +1650,7 @@ fz_stext_end_metatext(fz_context *ctx, fz_device *dev)
 			myfont = fz_new_base14_font(ctx, "Helvetica");
 			tdev->last.font = myfont;
 		}
-		flush_actualtext(ctx, tdev, tdev->metatext->text, 0);
+		flush_actualtext(ctx, tdev, tdev->metatext->text, 0, 1);
 		pop_metatext(ctx, tdev);
 	}
 	fz_always(ctx)
