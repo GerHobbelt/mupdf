@@ -576,7 +576,7 @@ pnm_binary_read_image(fz_context *ctx, struct info *pnm, const unsigned char *p,
 					p++;
 			}
 		}
-		else if (pnm->maxval < 255)
+		else if (pnm->maxval < 256)
 		{
 			for (y = 0; y < h; y++)
 				for (x = 0; x < w; x++)
@@ -762,10 +762,10 @@ pam_binary_read_image(fz_context *ctx, struct info *pnm, const unsigned char *p,
 		if (pnm->maxval == 255)
 			p += size;
 		else if (bitmap && packed)
-			p += ((w + 7) / 8) * h;
+			p += ((n * w + 7) / 8) * h;
 		else if (bitmap)
 			p += size;
-		else if (pnm->maxval < 255)
+		else if (pnm->maxval < 256)
 			p += size;
 		else
 			p += 2 * size;
@@ -807,6 +807,7 @@ pam_binary_read_image(fz_context *ctx, struct info *pnm, const unsigned char *p,
 			else if (bitmap && packed)
 			{
 				for (y = 0; y < h; y++)
+				{
 					for (x = 0; x < w; x++)
 					{
 						for (k = 0; k < n; k++)
@@ -815,9 +816,10 @@ pam_binary_read_image(fz_context *ctx, struct info *pnm, const unsigned char *p,
 							if ((x & 0x7) == 7)
 								p++;
 						}
-						if (w & 0x7)
-							p++;
 					}
+					if (w & 0x7)
+						p++;
+				}
 			}
 			else if (bitmap)
 			{
@@ -826,7 +828,7 @@ pam_binary_read_image(fz_context *ctx, struct info *pnm, const unsigned char *p,
 						for (k = 0; k < n; k++)
 							*dp++ = *p++ ? 0xff : 0x00;
 			}
-			else if (pnm->maxval < 255)
+			else if (pnm->maxval < 256)
 			{
 				for (y = 0; y < h; y++)
 					for (x = 0; x < w; x++)
