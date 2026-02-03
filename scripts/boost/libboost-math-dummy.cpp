@@ -78,6 +78,7 @@
 #include <boost/math/cstdfloat/cstdfloat_types.hpp>
 #include <boost/math/differentiation/autodiff.hpp>
 #include <boost/math/differentiation/autodiff_cpp11.hpp>
+#include <boost/math/differentiation/autodiff_reverse.hpp>
 #include <boost/math/differentiation/finite_difference.hpp>
 #include <boost/math/differentiation/lanczos_smoothing.hpp>
 #include <boost/math/distributions.hpp>
@@ -215,6 +216,8 @@
 #include <boost/math/special_functions/legendre_stieltjes.hpp>
 #include <boost/math/special_functions/log1p.hpp>
 #include <boost/math/special_functions/logaddexp.hpp>
+#include <boost/math/special_functions/logistic_sigmoid.hpp>
+#include <boost/math/special_functions/logit.hpp>
 #include <boost/math/special_functions/logsumexp.hpp>
 #include <boost/math/special_functions/math_fwd.hpp>
 #include <boost/math/special_functions/modf.hpp>

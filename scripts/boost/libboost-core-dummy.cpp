@@ -63,6 +63,7 @@
 #include <boost/core/verbose_terminate_handler.hpp>
 #include <boost/core/yield_primitives.hpp>
 #include <boost/get_pointer.hpp>
+#include <boost/is_placeholder.hpp>
 #include <boost/iterator.hpp>
 #include <boost/non_type.hpp>
 #include <boost/noncopyable.hpp>

@@ -21,5 +21,6 @@
 #include <boost/compat/move_only_function.hpp>
 #include <boost/compat/shared_lock.hpp>
 #include <boost/compat/to_array.hpp>
+#include <boost/compat/to_underlying.hpp>
 #include <boost/compat/type_traits.hpp>
 

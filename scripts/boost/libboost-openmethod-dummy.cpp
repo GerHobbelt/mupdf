@@ -11,28 +11,6 @@
 #pragma warning(disable: 4266)
 #endif
 
-#include <boost/decimal.hpp>
-#include <boost/decimal/cfenv.hpp>
-#include <boost/decimal/cfloat.hpp>
-#include <boost/decimal/charconv.hpp>
-#include <boost/decimal/cmath.hpp>
-#include <boost/decimal/cstdio.hpp>
-#include <boost/decimal/cstdlib.hpp>
-#include <boost/decimal/decimal128_t.hpp>
-#include <boost/decimal/decimal32_t.hpp>
-#include <boost/decimal/decimal64_t.hpp>
-#include <boost/decimal/decimal_fast128_t.hpp>
-#include <boost/decimal/decimal_fast32_t.hpp>
-#include <boost/decimal/decimal_fast64_t.hpp>
-#include <boost/decimal/fmt_format.hpp>
-#include <boost/decimal/format.hpp>
-#include <boost/decimal/fwd.hpp>
-#include <boost/decimal/hash.hpp>
-#include <boost/decimal/iostream.hpp>
-#include <boost/decimal/literals.hpp>
-#include <boost/decimal/numbers.hpp>
-#include <boost/decimal/string.hpp>
-#include <boost/decimal/uint128_t.hpp>
 #include <boost/openmethod.hpp>
 #include <boost/openmethod/core.hpp>
 #include <boost/openmethod/default_registry.hpp>

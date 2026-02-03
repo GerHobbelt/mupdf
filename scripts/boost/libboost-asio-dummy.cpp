@@ -89,6 +89,7 @@
 #include <boost/asio/execution/context.hpp>
 #include <boost/asio/execution/context_as.hpp>
 #include <boost/asio/execution/executor.hpp>
+#include <boost/asio/execution/inline_exception_handling.hpp>
 #include <boost/asio/execution/invocable_archetype.hpp>
 #include <boost/asio/execution/mapping.hpp>
 #include <boost/asio/execution/occupancy.hpp>
@@ -107,6 +108,8 @@
 #include <boost/asio/handler_continuation_hook.hpp>
 #include <boost/asio/high_resolution_timer.hpp>
 #include <boost/asio/immediate.hpp>
+#include <boost/asio/inline_executor.hpp>
+#include <boost/asio/inline_or_executor.hpp>
 #include <boost/asio/io_context.hpp>
 #include <boost/asio/io_context_strand.hpp>
 #include <boost/asio/ip/address.hpp>
@@ -157,6 +160,7 @@
 #include <boost/asio/read_until.hpp>
 #include <boost/asio/readable_pipe.hpp>
 #include <boost/asio/recycling_allocator.hpp>
+#include <boost/asio/redirect_disposition.hpp>
 #include <boost/asio/redirect_error.hpp>
 #include <boost/asio/registered_buffer.hpp>
 #include <boost/asio/require.hpp>

@@ -14,7 +14,10 @@
 #include <boost/uuid.hpp>
 #include <boost/uuid/basic_name_generator.hpp>
 #include <boost/uuid/basic_random_generator.hpp>
+#include <boost/uuid/constants.hpp>
 #include <boost/uuid/entropy_error.hpp>
+#include <boost/uuid/generators.hpp>
+#include <boost/uuid/invalid_uuid.hpp>
 #include <boost/uuid/name_generator.hpp>
 #include <boost/uuid/name_generator_md5.hpp>
 #include <boost/uuid/name_generator_sha1.hpp>

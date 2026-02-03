@@ -33,21 +33,4 @@
 #include <boost/decimal/numbers.hpp>
 #include <boost/decimal/string.hpp>
 #include <boost/decimal/uint128_t.hpp>
-#include <boost/openmethod.hpp>
-#include <boost/openmethod/core.hpp>
-#include <boost/openmethod/default_registry.hpp>
-#include <boost/openmethod/initialize.hpp>
-#include <boost/openmethod/inplace_vptr.hpp>
-#include <boost/openmethod/interop/std_shared_ptr.hpp>
-#include <boost/openmethod/interop/std_unique_ptr.hpp>
-#include <boost/openmethod/macros.hpp>
-#include <boost/openmethod/policies/default_error_handler.hpp>
-#include <boost/openmethod/policies/fast_perfect_hash.hpp>
-#include <boost/openmethod/policies/static_rtti.hpp>
-#include <boost/openmethod/policies/std_rtti.hpp>
-#include <boost/openmethod/policies/stderr_output.hpp>
-#include <boost/openmethod/policies/throw_error_handler.hpp>
-#include <boost/openmethod/policies/vptr_map.hpp>
-#include <boost/openmethod/policies/vptr_vector.hpp>
-#include <boost/openmethod/preamble.hpp>
 

@@ -11,6 +11,45 @@
 #pragma warning(disable: 4266)
 #endif
 
+#include <boost/decimal.hpp>
+#include <boost/decimal/cfenv.hpp>
+#include <boost/decimal/cfloat.hpp>
+#include <boost/decimal/charconv.hpp>
+#include <boost/decimal/cmath.hpp>
+#include <boost/decimal/cstdio.hpp>
+#include <boost/decimal/cstdlib.hpp>
+#include <boost/decimal/decimal128_t.hpp>
+#include <boost/decimal/decimal32_t.hpp>
+#include <boost/decimal/decimal64_t.hpp>
+#include <boost/decimal/decimal_fast128_t.hpp>
+#include <boost/decimal/decimal_fast32_t.hpp>
+#include <boost/decimal/decimal_fast64_t.hpp>
+#include <boost/decimal/fmt_format.hpp>
+#include <boost/decimal/format.hpp>
+#include <boost/decimal/fwd.hpp>
+#include <boost/decimal/hash.hpp>
+#include <boost/decimal/iostream.hpp>
+#include <boost/decimal/literals.hpp>
+#include <boost/decimal/numbers.hpp>
+#include <boost/decimal/string.hpp>
+#include <boost/decimal/uint128_t.hpp>
+#include <boost/openmethod.hpp>
+#include <boost/openmethod/core.hpp>
+#include <boost/openmethod/default_registry.hpp>
+#include <boost/openmethod/initialize.hpp>
+#include <boost/openmethod/inplace_vptr.hpp>
+#include <boost/openmethod/interop/std_shared_ptr.hpp>
+#include <boost/openmethod/interop/std_unique_ptr.hpp>
+#include <boost/openmethod/macros.hpp>
+#include <boost/openmethod/policies/default_error_handler.hpp>
+#include <boost/openmethod/policies/fast_perfect_hash.hpp>
+#include <boost/openmethod/policies/static_rtti.hpp>
+#include <boost/openmethod/policies/std_rtti.hpp>
+#include <boost/openmethod/policies/stderr_output.hpp>
+#include <boost/openmethod/policies/throw_error_handler.hpp>
+#include <boost/openmethod/policies/vptr_map.hpp>
+#include <boost/openmethod/policies/vptr_vector.hpp>
+#include <boost/openmethod/preamble.hpp>
 #include <boost/test/auto_unit_test.hpp>
 #include <boost/test/data/config.hpp>
 #include <boost/test/data/dataset.hpp>

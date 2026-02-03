@@ -19,6 +19,5 @@
 #include <boost/bind/placeholders.hpp>
 #include <boost/bind/protect.hpp>
 #include <boost/bind/std_placeholders.hpp>
-#include <boost/is_placeholder.hpp>
 #include <boost/mem_fn.hpp>
 

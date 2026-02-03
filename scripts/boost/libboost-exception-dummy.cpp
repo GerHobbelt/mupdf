@@ -28,6 +28,8 @@
 #include <boost/exception/get_error_info.hpp>
 #include <boost/exception/info.hpp>
 #include <boost/exception/info_tuple.hpp>
+#include <boost/exception/serialization/boost_json_encoder.hpp>
+#include <boost/exception/serialization/nlohmann_json_encoder.hpp>
 #include <boost/exception/to_string.hpp>
 #include <boost/exception/to_string_stub.hpp>
 #include <boost/exception_ptr.hpp>

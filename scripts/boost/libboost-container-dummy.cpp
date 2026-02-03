@@ -55,6 +55,7 @@
 #include <boost/container/string.hpp>
 #include <boost/container/throw_exception.hpp>
 #include <boost/container/uses_allocator.hpp>
+#include <boost/container/uses_allocator_construction.hpp>
 #include <boost/container/uses_allocator_fwd.hpp>
 #include <boost/container/vector.hpp>
 

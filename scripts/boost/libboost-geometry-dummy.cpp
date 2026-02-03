@@ -428,6 +428,7 @@
 #include <boost/geometry/strategies/cartesian/point_in_poly_franklin.hpp>
 #include <boost/geometry/strategies/cartesian/point_in_poly_winding.hpp>
 #include <boost/geometry/strategies/cartesian/point_order.hpp>
+#include <boost/geometry/strategies/cartesian/side_3d_rounded_input.hpp>
 #include <boost/geometry/strategies/cartesian/side_rounded_input.hpp>
 #include <boost/geometry/strategies/cartesian/turn_in_ring_winding.hpp>
 #include <boost/geometry/strategies/centroid.hpp>
@@ -547,6 +548,8 @@
 #include <boost/geometry/strategies/relate/geographic.hpp>
 #include <boost/geometry/strategies/relate/services.hpp>
 #include <boost/geometry/strategies/relate/spherical.hpp>
+#include <boost/geometry/strategies/relate3/cartesian.hpp>
+#include <boost/geometry/strategies/relate3/services.hpp>
 #include <boost/geometry/strategies/side.hpp>
 #include <boost/geometry/strategies/side_info.hpp>
 #include <boost/geometry/strategies/simplify/cartesian.hpp>

@@ -19,6 +19,8 @@
 #include <boost/leaf/config/tls_cpp11.hpp>
 #include <boost/leaf/config/tls_freertos.hpp>
 #include <boost/leaf/config/tls_globals.hpp>
+#include <boost/leaf/config/tls_win32.hpp>
+#include <boost/leaf/config/visibility.hpp>
 #include <boost/leaf/context.hpp>
 #include <boost/leaf/diagnostics.hpp>
 #include <boost/leaf/error.hpp>
@@ -27,5 +29,7 @@
 #include <boost/leaf/on_error.hpp>
 #include <boost/leaf/pred.hpp>
 #include <boost/leaf/result.hpp>
+#include <boost/leaf/serialization/boost_json_encoder.hpp>
+#include <boost/leaf/serialization/nlohmann_json_encoder.hpp>
 #include <boost/leaf/to_variant.hpp>
 
