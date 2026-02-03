@@ -11,5 +11,5 @@
 #pragma warning(disable: 4266)
 #endif
 
-//#include <boost/static_assert.hpp>
+#include <boost/static_assert.hpp>
 
