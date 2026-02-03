@@ -1338,10 +1338,10 @@ flush_actualtext(fz_context *ctx, fz_stext_device *dev, const char *actualtext, 
 		const char *at = actualtext;
 		int j = i;
 
-		while (end < 0 || (end >= 0 && i < end))
+		while (1)
 		{
 			int rune;
-			at += fz_chartorune(&rune, at);
+			at += fz_chartorune_unsafe(&rune, at);
 
 			if (rune == 0)
 				break;
