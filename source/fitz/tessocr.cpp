@@ -188,7 +188,15 @@ static int
 send_var(fz_context *ctx, tesseract::TessBaseAPI *api, const char *key, const char *val)
 {
 	if (!api->SetVariable(key, val == NULL ? "true" : val))
+	{
+		{
+			if (val == NULL)
+				fz_throw(ctx, FZ_ERROR_ARGUMENT, "Invalid tesseract option \"%s\"", key);
+			else
+				fz_throw(ctx, FZ_ERROR_ARGUMENT, "Invalid tesseract option \"%s\"=\"%s\"", key, val);
+		}
 		return 1;
+	}
 
 	return 0;
 }

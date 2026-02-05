@@ -550,6 +550,7 @@ done_SC:
 				gstate = ensure_pushed(ctx, p);
 				if (p->super.chain->op_Tz)
 					p->super.chain->op_Tz(ctx, p->super.chain, gstate->pending.text.scale*100);
+			}
 			if (gstate->pending.text.font != gstate->sent.text.font ||
 				gstate->pending.text.size != gstate->sent.text.size ||
 				gstate->pending.text.fontname != gstate->sent.text.fontname)
@@ -2070,6 +2071,7 @@ pdf_filter_Td(fz_context *ctx, pdf_processor *proc, float tx, float ty)
 	if (fz_is_empty_rect(p->gstate->clip_rect))
 		return;
 
+	p->Tm_adjust = 0;
 	filter_flush(ctx, p, FLUSH_OP);
 	pdf_tos_translate(&p->tos, tx, ty);
 }

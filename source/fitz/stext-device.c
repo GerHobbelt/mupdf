@@ -122,6 +122,10 @@ typedef struct
 	fz_stext_page *page;
 	int id;
 	fz_point pen, start;
+	// maybe_bullet: True if the 'start' position recorded was done so after either some actualtext
+	// on an image, or after a glyph that's known to be used for bullets. This is used to stop us
+	// spotting an 'indented' paragraph, because it's possibly just a bulleted list.
+	int maybe_bullet;
 	fz_point lag_pen;
 	fz_matrix trm;
 	int new_obj;
@@ -152,6 +156,9 @@ typedef struct
 	int rect_max;
 	int rect_len;
 	rect_details *rects;
+
+	fz_stext_block *lazy_vectors;
+	fz_stext_block *lazy_vectors_tail;
 } fz_stext_device;
 
 const char *fz_stext_options_usage =
@@ -323,9 +330,8 @@ add_block_to_page(fz_context *ctx, fz_stext_page *page, int type, int id)
 	}
 	else if (!page->last_block)
 	{
-		page->last_block = block;
-		if (!page->first_block)
-			page->first_block = block;
+		assert(!page->first_block);
+		page->first_block = page->last_block = block;
 	}
 	else
 	{
@@ -333,6 +339,59 @@ add_block_to_page(fz_context *ctx, fz_stext_page *page, int type, int id)
 		page->last_block = block;
 	}
 	return block;
+}
+
+static fz_stext_block *
+add_lazy_vector(fz_context *ctx, fz_stext_page *page, fz_stext_device *tdev, int id)
+{
+	fz_stext_block *block = fz_pool_alloc(ctx, page->pool, sizeof *page->first_block);
+	block->bbox = fz_empty_rect;
+	block->prev = tdev->lazy_vectors_tail;
+	block->type = FZ_STEXT_BLOCK_VECTOR;
+	block->id = id;
+
+	if (tdev->lazy_vectors == NULL)
+		tdev->lazy_vectors = block;
+	else
+		tdev->lazy_vectors_tail->next = block;
+	tdev->lazy_vectors_tail = block;
+
+	return block;
+}
+
+static void
+flush_lazy_vectors(fz_context *ctx, fz_stext_page *page, fz_stext_device *tdev)
+{
+	if (tdev->lazy_vectors == NULL)
+		return;
+
+	if (page->last_struct)
+	{
+		if (page->last_struct->last_block)
+		{
+			page->last_struct->last_block->next = tdev->lazy_vectors;
+			tdev->lazy_vectors->prev = page->last_struct->last_block;
+			page->last_struct->last_block = tdev->lazy_vectors_tail;
+		}
+		else
+		{
+			page->last_struct->first_block = tdev->lazy_vectors;
+			page->last_struct->last_block = tdev->lazy_vectors_tail;
+		}
+	}
+	else if (!page->last_block)
+	{
+		page->first_block = tdev->lazy_vectors;
+		page->last_block = tdev->lazy_vectors_tail;
+	}
+	else
+	{
+		page->last_block->next = tdev->lazy_vectors;
+		tdev->lazy_vectors->prev = page->last_block;
+		page->last_block = tdev->lazy_vectors_tail;
+	}
+
+	tdev->lazy_vectors = tdev->lazy_vectors_tail = NULL;
 }
 
 static fz_stext_block *
@@ -580,9 +639,10 @@ check_for_fake_bold(fz_context *ctx, fz_stext_block *block, fz_font *font, int c
 							{
 								/* OK, we can be bold. */
 								ch->flags |= FZ_STEXT_BOLD;
-								return 1;
 							}
-							/* Ignore this and keep going */
+							/* Whether we have recorded this as being bold or not, still
+							 * claim we did, so we swallow the space and don't reemit it. */
+							return 1;
 						}
 						else
 						{
@@ -597,6 +657,65 @@ check_for_fake_bold(fz_context *ctx, fz_stext_block *block, fz_font *font, int c
 	}
 
 	return 0;
+}
+
+static int
+plausible_bullet(int c)
+{
+	return (c == '*' ||
+		c == 0x00B7 || /* Middle Dot */
+		c == 0x2022 || /* Bullet */
+		c == 0x2023 || /* Triangular Bullet */
+		c == 0x2043 || /* Hyphen Bullet */
+		c == 0x204C || /* Back leftwards bullet */
+		c == 0x204D || /* Back rightwards bullet */
+		c == 0x2219 || /* Bullet operator */
+		c == 0x25C9 || /* Fisheye */
+		c == 0x25CB || /* White circle */
+		c == 0x25CF || /* Black circle */
+		c == 0x25D8 || /* Inverse Bullet */
+		c == 0x25E6 || /* White Bullet */
+		c == 0x2619 || /* Reversed Rotated Floral Heart Bullet / Fleuron */
+		c == 0x261a || /* Black left pointing index */
+		c == 0x261b || /* Black right pointing index */
+		c == 0x261c || /* White left pointing index */
+		c == 0x261d || /* White up pointing index */
+		c == 0x261e || /* White right pointing index */
+		c == 0x261f || /* White down pointing index */
+		c == 0x2765 || /* Rotated Heavy Heart Black Heart Bullet */
+		c == 0x2767 || /* Rotated Floral Heart Bullet / Fleuron */
+		c == 0x29BE || /* Circled White Bullet */
+		c == 0x29BF || /* Circled Bullet */
+		c == 0x2660 || /* Black Spade suit */
+		c == 0x2661 || /* White Heart suit */
+		c == 0x2662 || /* White Diamond suit */
+		c == 0x2663 || /* Black Club suit */
+		c == 0x2664 || /* White Spade suit */
+		c == 0x2665 || /* Black Heart suit */
+		c == 0x2666 || /* Black Diamond suit */
+		c == 0x2667 || /* White Clud suit */
+		c == 0x1F446 || /* WHITE UP POINTING BACKHAND INDEX */
+		c == 0x1F447 || /* WHITE DOWN POINTING BACKHAND INDEX */
+		c == 0x1F448 || /* WHITE LEFT POINTING BACKHAND INDEX */
+		c == 0x1F449 || /* WHITE RIGHT POINTING BACKHAND INDEX */
+		c == 0x1f597 || /* White down pointing left hand index */
+		c == 0x1F598 || /* SIDEWAYS WHITE LEFT POINTING INDEX */
+		c == 0x1F599 || /* SIDEWAYS WHITE RIGHT POINTING INDEX */
+		c == 0x1F59A || /* SIDEWAYS BLACK LEFT POINTING INDEX */
+		c == 0x1F59B || /* SIDEWAYS BLACK RIGHT POINTING INDEX */
+		c == 0x1F59C || /* BLACK LEFT POINTING BACKHAND INDEX */
+		c == 0x1F59D || /* BLACK RIGHT POINTING BACKHAND INDEX */
+		c == 0x1F59E || /* SIDEWAYS WHITE UP POINTING INDEX */
+		c == 0x1F59F || /* SIDEWAYS WHITE DOWN POINTING INDEX */
+		c == 0x1F5A0 || /* SIDEWAYS BLACK UP POINTING INDEX */
+		c == 0x1F5A1 || /* SIDEWAYS BLACK DOWN POINTING INDEX */
+		c == 0x1F5A2 || /* BLACK UP POINTING BACKHAND INDEX */
+		c == 0x1F5A3 || /* BLACK DOWN POINTING BACKHAND INDEX */
+		c == 0x1FBC1 || /* LEFT THIRD WHITE RIGHT POINTING INDEX */
+		c == 0x1FBC2 || /* MIDDLE THIRD WHITE RIGHT POINTING INDEX */
+		c == 0x1FBC3 || /* RIGHT THIRD WHITE RIGHT POINTING INDEX */
+		c == 0xFFFD || /* UNICODE_REPLACEMENT_CHARACTER */
+		0);
 }
 
 static void
@@ -665,6 +784,8 @@ fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int 
 		q.y = trm.f;
 	}
 
+	//printf("%g,%g \"%c\" %g,%g\n", p.x, p.y, c, q.x, q.y);
+
 	if ((dev->opts.flags & FZ_STEXT_COLLECT_STYLES) != 0)
 	{
 		if (glyph == -1)
@@ -686,7 +807,9 @@ fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int 
 		cur_block = NULL;
 	cur_line = cur_block ? cur_block->u.t.last_line : NULL;
 
-	if (cur_line && glyph < 0)
+	/* We use glyph == -2 to indicate a no-glyph char from an actualtext. The position
+	 * is valid though, so we want to advance the pen for these. */
+	if (cur_line && glyph == -1)
 	{
 		/* Don't advance pen or break lines for no-glyph characters in a cluster */
 		add_char_to_line(ctx, page, cur_line, trm, font, size, c, (dev->flags & FZ_STEXT_ACCURATE_BBOXES) ? glyph : NON_ACCURATE_GLYPH, &dev->pen, &dev->pen, bidi, dev->color, 0, flags, dev->flags);
@@ -709,8 +832,10 @@ fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int 
 		/* Largely supplanted by the check_for_fake_bold mechanism above,
 		 * but we leave this in for backward compatibility as it's cheap,
 		 * and works even when FZ_STEXT_COLLECT_STYLES is not set. */
-		dist = hypotf(q.x - dev->pen.x, q.y - dev->pen.y) / size;
-		if (dist < FAKE_BOLD_MAX_DIST && c == dev->lastchar)
+		dist = hypotf(p.x - dev->lag_pen.x, p.y - dev->lag_pen.y) / size;
+		/* This can trigger improperly for glyphs that come from actualtext
+		 * as they are frequently overlaid. Therefore rely on glyph >= 0. */
+		if (dist < FAKE_BOLD_MAX_DIST && c == dev->lastchar && glyph >= 0)
 			return;
 
 		/* Calculate how far we've moved since the last character. */
@@ -823,7 +948,7 @@ fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int 
 		{
 			/* Check indent to spot text-indent style paragraphs */
 			if (wmode == 0 && cur_line && dev->new_obj)
-				if ((p.x - dev->start.x) > 0.5f)
+				if ((p.x - dev->start.x) > 0.5f && !dev->maybe_bullet)
 					new_para = 1;
 			new_line = 1;
 		}
@@ -839,6 +964,7 @@ fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int 
 	/* Start a new block (but only at the beginning of a text object) */
 	if (new_para || !cur_block)
 	{
+		flush_lazy_vectors(ctx, page, dev);
 		cur_block = add_text_block_to_page(ctx, page, dev->id);
 		cur_line = cur_block->u.t.last_line;
 	}
@@ -851,7 +977,15 @@ fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int 
 	{
 		cur_line = add_line_to_block(ctx, page, cur_block, &ndir, wmode, bidi);
 		dev->start = p;
+		if (glyph == -2)
+			dev->maybe_bullet = 1;
+		else
+			dev->maybe_bullet = plausible_bullet(c);
 	}
+
+	/* Henceforth treat such non-glyphs in the usual way. */
+	if (glyph == -2)
+		glyph = -1;
 
 	/* Add synthetic space */
 	if (add_space && !(dev->flags & FZ_STEXT_INHIBIT_SPACES))
@@ -1057,7 +1191,7 @@ rune_index(const char *utf8, size_t idx)
 }
 
 static void
-flush_actualtext(fz_context *ctx, fz_stext_device *dev, const char *actualtext, int i, int end)
+flush_actualtext(fz_context *ctx, fz_stext_device *dev, const char *actualtext, int i, int end, float adv)
 {
 	if (*actualtext == 0)
 		return;
@@ -1069,6 +1203,25 @@ flush_actualtext(fz_context *ctx, fz_stext_device *dev, const char *actualtext, 
 		if (dev->last.clipped)
 			return;
 
+	if (adv != 0)
+	{
+		const char *at = actualtext;
+		int j = i;
+
+		while (end < 0 || (end >= 0 && i < end))
+		{
+			int rune;
+			at += fz_chartorune(&rune, at);
+
+			if (rune == 0)
+				break;
+			j++;
+		}
+
+		if (j != i)
+			adv /= (j - i);
+	}
+
 	while (end < 0 || (end >= 0 && i < end))
 	{
 		int rune;
@@ -1077,11 +1230,14 @@ flush_actualtext(fz_context *ctx, fz_stext_device *dev, const char *actualtext, 
 		if (rune == 0)
 			break;
 
+		dev->last.trm.e = dev->pen.x;
+		dev->last.trm.f = dev->pen.y;
+
 		fz_add_stext_char(ctx, dev, dev->last.font,
 			rune,
-			-1,
+			-2,
 			dev->last.trm,
-			0,
+			adv,
 			dev->last.wmode,
 			dev->last.bidi_level,
 			(i == 0) && (dev->flags & FZ_STEXT_PRESERVE_SPANS),
@@ -1226,7 +1382,7 @@ do_extract_within_actualtext(fz_context *ctx, fz_stext_device *dev, fz_text_span
 
 	/* We found a matching postfix. It seems likely that this is going to be the only
 	 * text object we get, so send any remaining actualtext now. */
-	flush_actualtext(ctx, dev, actualtext, i, i + (int)strlen(actualtext) - (span->len - end));
+	flush_actualtext(ctx, dev, actualtext, i, i + (int)strlen(actualtext) - (span->len - end), 0);
 
 	/* Send the postfix */
 	if (end != span->len)
@@ -1350,7 +1506,7 @@ fz_stext_begin_metatext(fz_context *ctx, fz_device *dev, fz_metatext meta, const
 	char *new_text = NULL;
 
 	if (mt != NULL && meta == FZ_METATEXT_ACTUALTEXT)
-		flush_actualtext(ctx, tdev, mt->text, 0, -1);
+		flush_actualtext(ctx, tdev, mt->text, 0, -1, 0);
 
 	if (meta == FZ_METATEXT_ACTUALTEXT)
 		tdev->last.valid = 0;
@@ -1412,30 +1568,30 @@ fz_stext_end_metatext(fz_context *ctx, fz_device *dev)
 	/* If we have a 'last' text position, send the content after that. */
 	if (tdev->last.valid)
 	{
-		flush_actualtext(ctx, tdev, tdev->metatext->text, 0, -1);
+		flush_actualtext(ctx, tdev, tdev->metatext->text, 0, -1, 0);
 		pop_metatext(ctx, tdev);
 		tdev->last.valid = 0;
 		return;
 	}
 
-	/* If we have collected a rectangle for content that encloses the actual text,
-	 * send the content there. */
-	if (!fz_is_empty_rect(tdev->metatext->bounds))
-	{
-		tdev->last.trm.a = tdev->metatext->bounds.x1 - tdev->metatext->bounds.x0;
-		tdev->last.trm.b = 0;
-		tdev->last.trm.c = 0;
-		tdev->last.trm.d = tdev->metatext->bounds.y1 - tdev->metatext->bounds.y0;
-		tdev->last.trm.e = tdev->metatext->bounds.x0;
-		tdev->last.trm.f = tdev->metatext->bounds.y0;
-	}
-	else
+	/* Unless we have collected a rectangle for content that encloses the actual text,
+	 * we can't do anything. */
+	if (fz_is_empty_rect(tdev->metatext->bounds))
 	{
 		if ((dev->flags & (FZ_STEXT_CLIP | FZ_STEXT_CLIP_RECT)) == 0 && tdev->metatext->text[0])
 			fz_warn(ctx, "Actualtext with no position. Text may be lost or mispositioned.");
 		pop_metatext(ctx, tdev);
 		return;
 	}
+
+	/* We have a rectangle, so send the text to fill that. */
+	tdev->last.trm.a = tdev->metatext->bounds.x1 - tdev->metatext->bounds.x0;
+	tdev->last.trm.b = 0;
+	tdev->last.trm.c = 0;
+	tdev->last.trm.d = tdev->metatext->bounds.y0 - tdev->metatext->bounds.y1;
+	tdev->last.trm.e = tdev->metatext->bounds.x0;
+	tdev->last.trm.f = tdev->metatext->bounds.y1;
+	tdev->last.valid = 1;
 
 	fz_var(myfont);
 
@@ -1446,7 +1602,7 @@ fz_stext_end_metatext(fz_context *ctx, fz_device *dev)
 			myfont = fz_new_base14_font(ctx, "Helvetica");
 			tdev->last.font = myfont;
 		}
-		flush_actualtext(ctx, tdev, tdev->metatext->text, 0, -1);
+		flush_actualtext(ctx, tdev, tdev->metatext->text, 0, -1, 1);
 		pop_metatext(ctx, tdev);
 	}
 	fz_always(ctx)
@@ -1835,6 +1991,8 @@ fz_stext_close_device(fz_context *ctx, fz_device *dev)
 	if ((tdev->flags & FZ_STEXT_DEHYPHENATE) && fz_is_unicode_hyphen(tdev->lastchar) && tdev->lastline != NULL)
 		tdev->lastline->flags |= FZ_STEXT_LINE_FLAGS_JOINED;
 
+	flush_lazy_vectors(ctx, page, tdev);
+
 	fixup_bboxes_and_bidi(ctx, page->first_block);
 
 	if (tdev->opts.flags & FZ_STEXT_COLLECT_STYLES)
@@ -1951,6 +2109,8 @@ fz_apply_stext_options(fz_context *ctx, fz_stext_options *opts, fz_options *stri
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_ACCURATE_BBOXES);
 	if (fz_options_has_true_key(ctx, string, "vectors"))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_COLLECT_VECTORS);
+	if (fz_options_has_true_key(ctx, string, "lazy-vectors"))
+		SETCLEARBOOL(opts->flags, b, FZ_STEXT_LAZY_VECTORS);
 	if (fz_options_has_true_key(ctx, string, "ignore-actualtext"))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_IGNORE_ACTUALTEXT);
 	if (fz_options_has_true_key(ctx, string, "segment"))
@@ -2172,7 +2332,10 @@ add_vector(fz_context *ctx, fz_stext_page *page, fz_stext_device *tdev, fz_rect 
 			return;
 	}
 
-	b = add_block_to_page(ctx, page, FZ_STEXT_BLOCK_VECTOR, id);
+	if (tdev->flags & FZ_STEXT_LAZY_VECTORS)
+		b = add_lazy_vector(ctx, page, tdev, id);
+	else
+		b = add_block_to_page(ctx, page, FZ_STEXT_BLOCK_VECTOR, id);
 
 	b->bbox = bbox;
 	b->u.v.flags = flags;
