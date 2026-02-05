@@ -1060,6 +1060,7 @@
 #include <boost/cstdint.hpp>
 #include <boost/cxx11_char_types.hpp>
 #include <boost/limits.hpp>
+#include <boost/static_assert.hpp>
 #include <boost/container/adaptive_pool.hpp>
 #include <boost/container/allocator.hpp>
 #include <boost/container/allocator_traits.hpp>

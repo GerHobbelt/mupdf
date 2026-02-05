@@ -78,4 +78,5 @@
 #include <boost/cstdint.hpp>
 #include <boost/cxx11_char_types.hpp>
 #include <boost/limits.hpp>
+#include <boost/static_assert.hpp>
 
