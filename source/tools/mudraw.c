@@ -476,7 +476,7 @@ static int usage(void)
 		"\t-P\tparallel interpretation/rendering (disabled in this non-threading build)\n"
 #endif
 		"\t-N\tdisable ICC workflow (\"N\"o color management)\n"
-		"\t-M -\tSpot/overprint rendering mode\n"
+		"\t-M -\tControl spot/overprint rendering\n"
 #if FZ_ENABLE_SPOT_RENDERING
 		"\t\t 0 = No spot rendering\n"
 		"\t\t 1 = Overprint simulation (default)\n"
