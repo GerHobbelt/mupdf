@@ -633,16 +633,15 @@ tiff_paste_subsampled_tile(fz_context *ctx, struct tiff *tiff, unsigned char *ti
 				k = sx = sy = 0;
 				offset = offsets;
 
-				dst += sw * 3;
-
 				x += sw;
+				if (x < w)
+					dst += sw * 3;
+
 				if (x >= col + tw)
 				{
-					dst -= (x - (col + tw)) * 3;
-					dst += (sh - 1) * w * 3;
-					dst += col * 3;
 					x = col;
 					y += sh;
+					dst = &tiff->samples[y * tiff->stride + x * 3];
 				}
 			}
 		}
@@ -829,13 +828,13 @@ static inline unsigned readshort(struct tiff *tiff)
 
 static inline unsigned tiff_readlong(struct tiff *tiff)
 {
-	int a = tiff_readbyte(tiff);
-	int b = tiff_readbyte(tiff);
-	int c = tiff_readbyte(tiff);
-	int d = tiff_readbyte(tiff);
+	unsigned int a = tiff_readbyte(tiff);
+	unsigned int b = tiff_readbyte(tiff);
+	unsigned int c = tiff_readbyte(tiff);
+	unsigned int d = tiff_readbyte(tiff);
 	if (tiff->order == TII)
-		return (unsigned)((d << 24) | (c << 16) | (b << 8) | a);
-	return (unsigned)((a << 24) | (b << 16) | (c << 8) | d);
+		return (d << 24) | (c << 16) | (b << 8) | a;
+	return (a << 24) | (b << 16) | (c << 8) | d;
 }
 
 static void

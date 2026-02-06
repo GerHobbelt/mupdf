@@ -154,6 +154,7 @@ static struct tool_spec {
 	{ {.fa = cmapdump_main }, "cmapdump", "dump CMap resource as C source file" },
 #endif
 #endif
+	{ {.fa = mugrep_main }, "grep", "search for text" },
 	{ {.fa = mutrace_main }, "trace", "trace device calls" },
 #if FZ_ENABLE_BARCODE
 	{ {.fa = mubar_main }, "barcode", "encode/decode barcodes" },

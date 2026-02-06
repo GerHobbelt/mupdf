@@ -7,6 +7,10 @@ source from the Git repository:
 
 	git clone --recursive git://git.ghostscript.com/mupdf.git
 
+You will also need to initialize the submodules if you cloned from git:
+
+	git submodule update --init --depth 1
+
 ## Build on Windows
 
 For Windows use the Visual Studio solution file in `platform/win32/mupdf.sln`.

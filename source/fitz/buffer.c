@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2024 Artifex Software, Inc.
+// Copyright (C) 2004-2026 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -99,6 +99,22 @@ fz_new_buffer_from_copied_data(fz_context *ctx, const unsigned char *data, size_
 	b->len = size;
 	memcpy(b->data, data, size);
 	return b;
+}
+
+fz_buffer *
+fz_new_buffer_from_printf(fz_context *ctx, const char *fmt, ...)
+{
+	size_t len;
+	fz_buffer *buf;
+	va_list ap;
+	va_start(ap, fmt);
+	len = fz_vsnprintf(NULL, 0, fmt, ap);
+	va_end(ap);
+	buf = fz_new_buffer(ctx, len+1);
+	va_start(ap, fmt);
+	fz_append_vprintf(ctx, buf, fmt, ap);
+	va_end(ap);
+	return buf;
 }
 
 fz_buffer *fz_clone_buffer(fz_context *ctx, fz_buffer *buf)
@@ -227,10 +243,19 @@ fz_resize_buffer(fz_context *ctx, fz_buffer *buf, size_t size)
 void
 fz_grow_buffer(fz_context *ctx, fz_buffer *buf)
 {
-	size_t newsize = (buf->cap * 3) / 2;
-	newsize = (newsize + 15) & ~15;   // 'align' upwards to 16-byte sizes
-	if (newsize == 0)
+	size_t newsize = 256;
+	if (buf->cap == SIZE_MAX)
+		fz_throw(ctx, FZ_ERROR_SYSTEM, "buffer too large");
+	else if (buf->cap == 0)
 		newsize = 256;
+	else
+	{
+		newsize = buf->cap + (buf->cap >> 1);
+		newsize = (newsize + 15) & ~15;   // 'align' upwards to 16-byte sizes
+		// check for integer overflow
+		if (newsize < buf->cap)
+			newsize = SIZE_MAX;
+	}
 	fz_resize_buffer(ctx, buf, newsize);
 }
 
@@ -242,7 +267,13 @@ fz_ensure_buffer(fz_context *ctx, fz_buffer *buf, size_t min)
 		newsize = 16;
 	while (newsize < min)
 	{
-		newsize = (newsize * 3) / 2;
+		size_t tmp = newsize + (newsize >> 1);
+		tmp = (tmp + 15) & ~15;                 // 'align' upwards to 16-byte sizes
+		// check for integer overflow
+		if (tmp < newsize)
+			newsize = min;
+		else
+			newsize = tmp;
 	}
 
 	if (newsize > buf->cap)
@@ -333,6 +364,8 @@ fz_slice_buffer(fz_context *ctx, fz_buffer *buf, int64_t start, int64_t end)
 void
 fz_append_buffer(fz_context *ctx, fz_buffer *buf, fz_buffer *extra)
 {
+	if (extra == NULL)
+		return;
 	if (buf->cap - buf->len < extra->len)
 	{
 		buf->data = (unsigned char *)fz_realloc(ctx, buf->data, buf->len + extra->len);
@@ -386,7 +419,7 @@ fz_append_rune(fz_context *ctx, fz_buffer *buf, int c)
 }
 
 void
-fz_append_int32_be(fz_context *ctx, fz_buffer *buf, int x)
+fz_append_uint32_be(fz_context *ctx, fz_buffer *buf, uint32_t x)
 {
 	fz_append_byte(ctx, buf, (x >> 24) & 0xFF);
 	fz_append_byte(ctx, buf, (x >> 16) & 0xFF);
@@ -395,14 +428,14 @@ fz_append_int32_be(fz_context *ctx, fz_buffer *buf, int x)
 }
 
 void
-fz_append_int16_be(fz_context *ctx, fz_buffer *buf, int x)
+fz_append_uint16_be(fz_context *ctx, fz_buffer *buf, uint16_t x)
 {
 	fz_append_byte(ctx, buf, (x >> 8) & 0xFF);
 	fz_append_byte(ctx, buf, (x) & 0xFF);
 }
 
 void
-fz_append_int32_le(fz_context *ctx, fz_buffer *buf, int x)
+fz_append_uint32_le(fz_context *ctx, fz_buffer *buf, uint32_t x)
 {
 	fz_append_byte(ctx, buf, (x)&0xFF);
 	fz_append_byte(ctx, buf, (x>>8)&0xFF);
@@ -411,10 +444,34 @@ fz_append_int32_le(fz_context *ctx, fz_buffer *buf, int x)
 }
 
 void
-fz_append_int16_le(fz_context *ctx, fz_buffer *buf, int x)
+fz_append_uint16_le(fz_context *ctx, fz_buffer *buf, uint16_t x)
 {
 	fz_append_byte(ctx, buf, (x)&0xFF);
 	fz_append_byte(ctx, buf, (x>>8)&0xFF);
+}
+
+void
+fz_append_int32_be(fz_context *ctx, fz_buffer *buf, int32_t x)
+{
+	fz_append_uint32_be(ctx, buf, x);
+}
+
+void
+fz_append_int16_be(fz_context *ctx, fz_buffer *buf, int16_t x)
+{
+	fz_append_uint16_be(ctx, buf, x);
+}
+
+void
+fz_append_int32_le(fz_context *ctx, fz_buffer *buf, int32_t x)
+{
+	fz_append_uint32_le(ctx, buf, x);
+}
+
+void
+fz_append_int16_le(fz_context *ctx, fz_buffer *buf, int16_t x)
+{
+	fz_append_uint16_le(ctx, buf, x);
 }
 
 void

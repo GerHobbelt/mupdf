@@ -284,10 +284,12 @@
     <ClInclude Include="../../include/mupdf/fitz/hash.h" />
     <ClInclude Include="../../include/mupdf/fitz/heap-imp.h" />
     <ClInclude Include="../../include/mupdf/fitz/heap.h" />
+    <ClInclude Include="../../include/mupdf/fitz/hyphen.h" />
     <ClInclude Include="../../include/mupdf/fitz/image.h" />
     <ClInclude Include="../../include/mupdf/fitz/json.h" />
     <ClInclude Include="../../include/mupdf/fitz/link.h" />
     <ClInclude Include="../../include/mupdf/fitz/log.h" />
+    <ClInclude Include="../../include/mupdf/fitz/options.h" />
     <ClInclude Include="../../include/mupdf/fitz/outline.h" />
     <ClInclude Include="../../include/mupdf/fitz/output-svg.h" />
     <ClInclude Include="../../include/mupdf/fitz/output.h" />
@@ -455,6 +457,7 @@
     <ClCompile Include="../../source/dll/pch.cpp" />
     <ClCompile Include="../../source/dll/tesseract_missing_apis.cpp" />
     <ClCompile Include="../../source/fitz/archive.c" />
+    <ClCompile Include="../../source/fitz/barcode.c" />
     <ClCompile Include="../../source/fitz/barcode.cpp" />
     <ClCompile Include="../../source/fitz/bbox-device.c" />
     <ClCompile Include="../../source/fitz/bidi-std.c" />
@@ -521,6 +524,7 @@
     <ClCompile Include="../../source/fitz/harfbuzz.c" />
     <ClCompile Include="../../source/fitz/hash.c" />
     <ClCompile Include="../../source/fitz/heap.c" />
+    <ClCompile Include="../../source/fitz/hyphen.c" />
     <ClCompile Include="../../source/fitz/image.c" />
     <ClCompile Include="../../source/fitz/jbig2enc-wrap.cpp" />
     <ClCompile Include="../../source/fitz/jmemcust.c" />
@@ -546,6 +550,7 @@
     <ClCompile Include="../../source/fitz/memory.c" />
     <ClCompile Include="../../source/fitz/noto.c" />
     <ClCompile Include="../../source/fitz/ocr-device.c" />
+    <ClCompile Include="../../source/fitz/options.c" />
     <ClCompile Include="../../source/fitz/outline.c" />
     <ClCompile Include="../../source/fitz/output-cbz.c" />
     <ClCompile Include="../../source/fitz/output-csv.c" />
@@ -570,14 +575,18 @@
     <ClCompile Include="../../source/fitz/printf.c" />
     <ClCompile Include="../../source/fitz/random.c" />
     <ClCompile Include="../../source/fitz/raw-device.c" />
+    <ClCompile Include="../../source/fitz/regexp.c" />
     <ClCompile Include="../../source/fitz/separation.c" />
     <ClCompile Include="../../source/fitz/shade.c" />
     <ClCompile Include="../../source/fitz/skew.c" />
     <ClCompile Include="../../source/fitz/statistics-device.c" />
     <ClCompile Include="../../source/fitz/stext-boxer.c" />
+    <ClCompile Include="../../source/fitz/stext-classify.c" />
     <ClCompile Include="../../source/fitz/stext-device.c" />
+    <ClCompile Include="../../source/fitz/stext-iterator.c" />
     <ClCompile Include="../../source/fitz/stext-output.c" />
     <ClCompile Include="../../source/fitz/stext-para.c" />
+    <ClCompile Include="../../source/fitz/stext-raft.c" />
     <ClCompile Include="../../source/fitz/stext-search.c" />
     <ClCompile Include="../../source/fitz/stext-table.c" />
     <ClCompile Include="../../source/fitz/store.c" />
@@ -610,6 +619,7 @@
     <ClCompile Include="../../source/fitz/xml.c" />
     <ClCompile Include="../../source/fitz/xmltext-device.c" />
     <ClCompile Include="../../source/fitz/zip.c" />
+    <ClCompile Include="../../source/fitz/zxingbarcode.cpp" />
     <ClCompile Include="../../source/helpers/cpu_core_count.cpp" />
     <ClCompile Include="../../source/helpers/dir.c" />
     <ClCompile Include="../../source/helpers/dummy.c" />
@@ -664,6 +674,7 @@
     <ClCompile Include="../../source/pdf/pdf-op-filter.c" />
     <ClCompile Include="../../source/pdf/pdf-op-mcid.c" />
     <ClCompile Include="../../source/pdf/pdf-op-run.c" />
+    <ClCompile Include="../../source/pdf/pdf-op-vectorize.c" />
     <ClCompile Include="../../source/pdf/pdf-outline.c" />
     <ClCompile Include="../../source/pdf/pdf-page.c" />
     <ClCompile Include="../../source/pdf/pdf-parse.c" />
@@ -720,6 +731,9 @@
     <ClInclude Include="../../source/fitz/icc/cmyk.icc.h" />
     <ClInclude Include="../../source/fitz/icc/gray.icc.h" />
     <ClInclude Include="../../source/fitz/icc/lab.icc.h" />
+    <ClInclude Include="../../source/fitz/icc/ps_cmyk.icc.h" />
+    <ClInclude Include="../../source/fitz/icc/ps_gray.icc.h" />
+    <ClInclude Include="../../source/fitz/icc/ps_rgb.icc.h" />
     <ClInclude Include="../../source/fitz/icc/rgb.icc.h" />
     <ClInclude Include="../../source/fitz/icc34.h" />
     <ClInclude Include="../../source/fitz/image-imp.h" />
@@ -733,6 +747,7 @@
     <ClInclude Include="../../source/fitz/utfdata.h" />
     <ClInclude Include="../../source/fitz/xml-imp.h" />
     <ClInclude Include="../../source/fitz/z-imp.h" />
+    <ClInclude Include="../../source/fitz/zxingbarcode.h" />
     <ClInclude Include="../../source/html/css-properties.h" />
     <ClInclude Include="../../source/html/html-imp.h" />
     <ClInclude Include="../../source/pdf/annotation-icons.h" />

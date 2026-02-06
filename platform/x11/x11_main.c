@@ -883,8 +883,6 @@ static void usage(const char *argv0)
 	fprintf(stderr, "usage: %s [options] file.pdf [page]\n", argv0);
 	fprintf(stderr, "  -p -  password\n");
 	fprintf(stderr, "  -r -  resolution\n");
-	fprintf(stderr, "  -c -  display ICC profile\n");
-	fprintf(stderr, "  -b -  set progressive image mode using the specified KBPS rate\n");
 	fprintf(stderr, "  -e -  max to-screen zoom percentage (default: 90)\n");
 	fprintf(stderr, "  -A -  set anti-aliasing quality in bits (0=off, 8=best)\n");
 	fprintf(stderr, "  -C -  RRGGBB (tint color in hexadecimal syntax)\n");
@@ -894,6 +892,17 @@ static void usage(const char *argv0)
 	fprintf(stderr, "  -S -  font size for EPUB layout\n");
 	fprintf(stderr, "  -U -  user style sheet for EPUB layout\n");
 	fprintf(stderr, "  -X    disable document styles for EPUB layout\n");
+	fprintf(stderr, "  -c -  display ICC output profile\n");
+#ifdef HAVE_CURL
+	fprintf(stderr, "  -b -  emulate progressive image loading mode using the specified KBPS rate\n");
+#endif
+	fprintf(stderr, "  -v    show version\n");
+	exit(1);
+}
+
+static void version(void)
+{
+	fprintf(stderr, "mupdf-x11 version %s\n", FZ_VERSION);
 	exit(1);
 }
 
@@ -926,7 +935,7 @@ int main(int argc, char **argv)
 
 	pdfapp_init(ctx, &gapp);
 
-	while ((c = fz_getopt(argc, argv, "Ip:r:A:C:W:H:S:U:Xb:e:c:")) != -1)
+	while ((c = fz_getopt(argc, argv, "Ip:r:A:C:W:H:S:U:Xb:e:c:v")) != -1)
 	{
 		switch (c)
 		{
@@ -947,7 +956,8 @@ int main(int argc, char **argv)
 		case 'X': gapp.layout_use_doc_css = 0; break;
 		case 'b': kbps = fz_atoi(fz_optarg); break;
 		case 'e': gapp.maxpercentage = fz_clampi(fz_atof(fz_optarg), 0, 100); break;
-		default: usage(argv[0]);
+		case 'v': version(); break;
+		default: usage(argv[0]); break;
 		}
 	}
 

@@ -38,7 +38,7 @@ typedef struct
 	int funcs;
 } recolor_details;
 
-#define FUNSEGS 64 /* size of sampled mesh for function-based shadings */
+#define FUNSEGS 256 /* size of sampled mesh for function-based shadings */
 #define FUNBPS 8 /* Bits per sample in output functions */
 
 static void
@@ -626,10 +626,8 @@ fz_recolor_shade_type6(fz_context *ctx, pdf_obj *shade, recolor_details *rd)
 
 			for (i = startpt; i < 12; i++)
 			{
-				unsigned int x_bits = fz_read_bits(ctx, stream, bpcoord);
-				unsigned int y_bits = fz_read_bits(ctx, stream, bpcoord);
-				fz_write_bits(ctx, out, x_bits, bpcoord);
-				fz_write_bits(ctx, out, y_bits, bpcoord);
+				(void) fz_read_bits(ctx, stream, bpcoord);
+				(void) fz_read_bits(ctx, stream, bpcoord);
 			}
 
 			for (i = startcolor; i < 4; i++)

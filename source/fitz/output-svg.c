@@ -34,14 +34,15 @@ typedef struct
 	int count;
 	fz_output *out;
 	int id;
-	fz_svg_options opts;
+	fz_svg_device_options opts;
 } fz_svg_writer;
 
 const char *fz_svg_write_options_usage =
 	"SVG output options:\n"
-	"  text=text: Emit text as <text> elements (inaccurate fonts).\n"
-	"  text=path: Emit text as <path> elements (accurate fonts).\n"
+	"  text=text:       Emit text as <text> elements (inaccurate fonts).\n"
+	"  text=path:       Emit text as <path> elements (accurate fonts).\n"
 	"  no-reuse-images: Do not reuse images using <symbol> definitions.\n"
+	"  resolution:      Resolution to use when rasterizing elements.\n"
 	"\n"
 	;
 
@@ -90,7 +91,7 @@ svg_begin_page(fz_context *ctx, fz_document_writer *wri_, fz_rect mediabox)
 			fz_throw(ctx, FZ_ERROR_ARGUMENT, "cannot write multiple pages to a single SVG output");
 	}
 
-	return fz_new_svg_device_with_id(ctx, wri->out, w, h, wri->opts.text_format, wri->opts.reuse_images, &wri->id);
+	return fz_new_svg_device_with_options(ctx, wri->out, w, h, &wri->opts, &wri->id);
 }
 
 static void
@@ -128,11 +129,7 @@ fz_new_svg_writer(fz_context *ctx, const char *path, const char *options)
 
 	fz_try(ctx)
 	{
-		fz_parse_svg_options(ctx, &wri->opts, options);
-		if (!wri->opts.text_format)
-			wri->opts.text_format = FZ_SVG_TEXT_AS_PATH;
-		if (!wri->opts.reuse_images)
-			wri->opts.reuse_images = 1;
+		fz_parse_svg_device_options(ctx, &wri->opts, options);
 		wri->path = fz_strdup(ctx, path ? path : "out-%04d.svg");
 	}
 	fz_catch(ctx)
@@ -151,11 +148,7 @@ fz_new_svg_writer_with_output(fz_context *ctx, fz_output *out, const char *optio
 
 	fz_try(ctx)
 	{
-		fz_parse_svg_options(ctx, &wri->opts, options);
-		if (!wri->opts.text_format)
-			wri->opts.text_format = FZ_SVG_TEXT_AS_PATH;
-		if (!wri->opts.reuse_images)
-			wri->opts.reuse_images = 1;
+		fz_parse_svg_device_options(ctx, &wri->opts, options);
 		wri->out = out;
 	}
 	fz_catch(ctx)

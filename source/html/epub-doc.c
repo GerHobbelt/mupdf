@@ -479,7 +479,7 @@ make_error_page(fz_context *ctx, const char *path)
 	fz_try(ctx)
 	{
 		out = fz_new_output_with_buffer(ctx, buf);
-		fz_write_printf(ctx, out, "<HTML><BODY><P>Missing or unknown chapter: '%s'.</P></BODY></HTML>",
+		fz_write_printf(ctx, out, "<html><body><p><i>Error: cannot find chapter: missing or unknown chapter: '%<'.</i></p></body></html>",
 			path ? path : "<no name>");
 		fz_close_output(ctx, out);
 	}
@@ -736,6 +736,38 @@ path_from_idref(char *path, fz_xml *manifest, const char *base_uri, const char *
 	return fz_cleanname(fz_urldecode(path));
 }
 
+static const char *
+rel_path_from_prop(fz_xml *manifest, const char *prop)
+{
+	fz_xml *item;
+	if (!prop)
+		return NULL;
+	item = fz_xml_find_down(manifest, "item");
+	while (item)
+	{
+		const char *id = fz_xml_att(item, "properties");
+		if (id && !strcmp(id, prop))
+			return fz_xml_att(item, "href");
+		item = fz_xml_find_next(item, "item");
+	}
+	return NULL;
+}
+
+static const char *
+path_from_prop(char *path, fz_xml *manifest, const char *base_uri, const char *prop, int n)
+{
+	const char *rel_path = rel_path_from_prop(manifest, prop);
+	if (!rel_path)
+	{
+		path[0] = 0;
+		return NULL;
+	}
+	fz_strlcpy(path, base_uri, n);
+	fz_strlcat(path, "/", n);
+	fz_strlcat(path, rel_path, n);
+	return fz_cleanname(fz_urldecode(path));
+}
+
 static fz_outline *
 epub_parse_ncx_imp(fz_context *ctx, epub_document *doc, fz_xml *node, char *base_uri)
 {
@@ -802,6 +834,106 @@ epub_parse_ncx(fz_context *ctx, epub_document *doc, const char *path)
 	{
 		fz_drop_buffer(ctx, buf);
 		fz_drop_xml(ctx, ncx);
+	}
+	fz_catch(ctx)
+		fz_rethrow(ctx);
+}
+
+static fz_outline *
+epub_parse_nav_imp(fz_context *ctx, epub_document *doc, fz_xml *ol, char *base_uri)
+{
+	/* see https://www.w3.org/TR/epub-33/#sec-nav
+
+		<nav epub:type="toc">
+			<h1> ... </h1>
+			<ol>
+				<li>
+					<a> or <span> -- label
+					<ol> -- optional
+						... recursive
+					</ol>
+				</li> -- repeat
+			</ol>
+		</nav>
+
+	*/
+
+	char path[2048];
+	fz_outline *outline, *head, **tailp;
+	fz_xml *li, *li_a, *li_ol;
+
+	head = NULL;
+	tailp = &head;
+
+	fz_try(ctx)
+	{
+		li = fz_xml_find_down(ol, "li");
+		while (li)
+		{
+			li_a = fz_xml_down(li);
+			li_ol = fz_xml_next(li_a);
+
+			*tailp = outline = fz_new_outline(ctx);
+			tailp = &(*tailp)->next;
+
+			outline->is_open = 1;
+			outline->page = fz_make_location(-1, -1);
+
+			if (fz_xml_is_tag(li_a, "a"))
+			{
+				char *href = fz_xml_att(li_a, "href");
+				if (href)
+				{
+					fz_strlcpy(path, base_uri, sizeof path);
+					fz_strlcat(path, "/", sizeof path);
+					fz_strlcat(path, href, sizeof path);
+					fz_urldecode(path);
+					fz_cleanname(path);
+					outline->uri = fz_strdup(ctx, path);
+				}
+			}
+
+			outline->title = fz_new_text_from_xml(ctx, li_a);
+
+			if (fz_xml_is_tag(li_ol, "ol"))
+				outline->down = epub_parse_nav_imp(ctx, doc, li_ol, base_uri);
+
+			li = fz_xml_find_next(li, "li");
+		}
+	}
+	fz_catch(ctx)
+	{
+		fz_drop_outline(ctx, head);
+		fz_rethrow(ctx);
+	}
+
+	return head;
+}
+static void
+epub_parse_nav(fz_context *ctx, epub_document *doc, const char *path)
+{
+	fz_archive *zip = doc->zip;
+	fz_buffer *buf = NULL;
+	fz_xml_doc *nav_doc = NULL;
+	fz_xml *nav;
+	char base_uri[2048];
+
+	fz_var(buf);
+	fz_var(nav_doc);
+
+	fz_try(ctx)
+	{
+		fz_dirname(base_uri, path, sizeof base_uri);
+		buf = fz_read_archive_entry(ctx, zip, path);
+		nav_doc = fz_parse_xml(ctx, buf, 0);
+		nav = fz_xml_find_dfs(fz_xml_root(nav_doc), "nav", "epub:type", "toc");
+		if (nav)
+			doc->outline = epub_parse_nav_imp(ctx, doc, fz_xml_find_down(nav, "ol"), base_uri);
+	}
+	fz_always(ctx)
+	{
+		fz_drop_buffer(ctx, buf);
+		fz_drop_xml(ctx, nav_doc);
 	}
 	fz_catch(ctx)
 		fz_rethrow(ctx);
@@ -969,6 +1101,10 @@ epub_parse_header(fz_context *ctx, epub_document *doc)
 		{
 			epub_parse_ncx(ctx, doc, ncx);
 		}
+		else if (path_from_prop(ncx, manifest, base_uri, "nav", sizeof(ncx)))
+		{
+			epub_parse_nav(ctx, doc, ncx);
+		}
 
 		doc->spine = NULL;
 		tailp = &doc->spine;
@@ -1127,9 +1263,8 @@ epub_open_document(fz_context *ctx, const fz_document_handler *handler, fz_strea
 		zip = fz_open_archive_with_stream(ctx, file);
 	}
 
-
 	fz_try(ctx)
-		doc = epub_init(ctx, zip, file);
+		doc = epub_init(ctx, zip, accel);
 	fz_always(ctx)
 		fz_drop_stream(ctx, file2);
 	fz_catch(ctx)

@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2024 Artifex Software, Inc.
+// Copyright (C) 2004-2025 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -146,8 +146,8 @@ struct info
 };
 
 #define read8(p) ((p)[0])
-#define read16(p) (((p)[1] << 8) | (p)[0])
-#define read32(p) (((p)[3] << 24) | ((p)[2] << 16) | ((p)[1] << 8) | (p)[0])
+#define read16(p) fz_unpack_uint16_le(p)
+#define read32(p) fz_unpack_uint32_le(p)
 
 #define DPM_TO_DPI(dpm) ((dpm) * 25.4f / 1000.0f)
 
@@ -706,11 +706,7 @@ bmp_read_bitmap(fz_context *ctx, struct info *info, const unsigned char *begin, 
 		case 32:
 			for (x = 0; x < width; x++)
 			{
-				uint32_t sample =
-					(((uint32_t) sp[3]) << 24) |
-					(((uint32_t) sp[2]) << 16) |
-					(((uint32_t) sp[1]) <<  8) |
-					(((uint32_t) sp[0]) <<  0);
+				uint32_t sample = read32(sp);
 				uint32_t r = (sample & info->rmask) >> info->rshift;
 				uint32_t g = (sample & info->gmask) >> info->gshift;
 				uint32_t b = (sample & info->bmask) >> info->bshift;
@@ -737,9 +733,7 @@ bmp_read_bitmap(fz_context *ctx, struct info *info, const unsigned char *begin, 
 		case 16:
 			for (x = 0; x < width; x++)
 			{
-				uint16_t sample =
-					(((uint16_t)sp[1]) << 8) |
-					(((uint16_t)sp[0]) << 0);
+				uint16_t sample = read16(sp);
 				uint16_t r = (sample & info->rmask) >> info->rshift;
 				uint16_t g = (sample & info->gmask) >> info->gshift;
 				uint16_t b = (sample & info->bmask) >> info->bshift;
@@ -1513,7 +1507,7 @@ fz_load_bmp_subimage_count(fz_context *ctx, const unsigned char *buf, size_t len
 			nextoffset = 0;
 		}
 
-		if (end - begin < nextoffset)
+		if ((uint32_t) (end - begin) < nextoffset)
 		{
 			fz_warn(ctx, "treating invalid next subimage offset as end of file");
 			nextoffset = 0;

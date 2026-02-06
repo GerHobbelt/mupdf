@@ -138,6 +138,7 @@ typedef struct fz_ocr_device_s
 
 	char *language;
 	char *datadir;
+	fz_options *options;
 } fz_ocr_device;
 
 static void
@@ -318,14 +319,14 @@ fz_ocr_end_group(fz_context *ctx, fz_device *dev)
 }
 
 static int
-fz_ocr_begin_tile(fz_context *ctx, fz_device *dev, fz_rect area, fz_rect view, float xstep, float ystep, fz_matrix ctm, int id)
+fz_ocr_begin_tile(fz_context *ctx, fz_device *dev, fz_rect area, fz_rect view, float xstep, float ystep, fz_matrix ctm, int id, int doc_id)
 {
 	fz_ocr_device *ocr = (fz_ocr_device *)dev;
 
 	/* Always pass 0 as tile id here so that neither device can
 	 * disagree about whether the contents need to be sent. */
-	(void)fz_begin_tile_id(ctx, ocr->list_dev, area, view, xstep, ystep, ctm, 0);
-	(void)fz_begin_tile_id(ctx, ocr->draw_dev, area, view, xstep, ystep, ctm, 0);
+	(void)fz_begin_tile_tid(ctx, ocr->list_dev, area, view, xstep, ystep, ctm, 0, 0);
+	(void)fz_begin_tile_tid(ctx, ocr->draw_dev, area, view, xstep, ystep, ctm, 0, 0);
 
 	return 0;
 }
@@ -394,6 +395,7 @@ drop_ocr_device(fz_context *ctx, fz_ocr_device *ocr)
 	fz_free(ctx, ocr->chars);
 	fz_free(ctx, ocr->language);
 	fz_free(ctx, ocr->datadir);
+	fz_drop_options(ctx, ocr->options);
 }
 
 static void
@@ -880,11 +882,11 @@ rewrite_end_group(fz_context *ctx, fz_device *dev)
 }
 
 static int
-rewrite_begin_tile(fz_context *ctx, fz_device *dev, fz_rect area, fz_rect view, float xstep, float ystep, fz_matrix ctm, int id)
+rewrite_begin_tile(fz_context *ctx, fz_device *dev, fz_rect area, fz_rect view, float xstep, float ystep, fz_matrix ctm, int id, int doc_id)
 {
 	fz_rewrite_device *rewrite = (fz_rewrite_device *)dev;
 
-	return fz_begin_tile_id(ctx, rewrite->target, area, view, xstep, ystep, ctm, id);
+	return fz_begin_tile_tid(ctx, rewrite->target, area, view, xstep, ystep, ctm, id, doc_id);
 }
 
 static void
@@ -1058,7 +1060,7 @@ fz_ocr_close_device(fz_context *ctx, fz_device *dev)
 	fz_close_device(ctx, ocr->draw_dev);
 
 	/* Now run the OCR */
-	tessapi = ocr_init(ctx, ocr->language, ocr->datadir);
+	tessapi = ocr_init(ctx, ocr->language, ocr->datadir, ocr->options);
 
 	fz_try(ctx)
 	{
@@ -1112,6 +1114,21 @@ fz_new_ocr_device(fz_context *ctx,
 		int (*progress)(fz_context *, void *, int),
 		void *progress_arg)
 {
+	return fz_new_ocr_device_with_options(ctx, target, ctm, mediabox, with_list, language, datadir, progress, progress_arg, NULL);
+}
+
+fz_device *
+fz_new_ocr_device_with_options(fz_context *ctx,
+		fz_device *target,
+		fz_matrix ctm,
+		fz_rect mediabox,
+		int with_list,
+		const char *language,
+		const char *datadir,
+		int (*progress)(fz_context *, void *, int),
+		void *progress_arg,
+		fz_options *options)
+{
 #if !FZ_ENABLE_OCR
 	fz_throw(ctx, FZ_ERROR_UNSUPPORTED, "OCR Disabled in this build");
 #else
@@ -1164,6 +1181,8 @@ fz_new_ocr_device(fz_context *ctx,
 		fz_rect bbox;
 		fz_irect ibox;
 		fz_point res;
+
+		dev->options = fz_keep_options(ctx, options);
 
 		dev->target = target;
 		dev->mediabox = mediabox;

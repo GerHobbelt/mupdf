@@ -36,9 +36,11 @@ static fz_context* ctx = NULL;
 static int usage(void)
 {
 	fz_info(ctx,
-		"Usage: mutool trace [options] file [pages]\n"
+		"usage: mutool trace [options] file [pages]\n"
 		"\t-o -\toutput file name (default is stdout)\n"
 		"\t-p -\tpassword\n"
+		"\n"
+		"\t-b -\tuse named page box (MediaBox, CropBox, BleedBox, TrimBox, or ArtBox)\n"
 		"\n"
 		"\t-W -\tpage width for EPUB layout\n"
 		"\t-H -\tpage height for EPUB layout\n"
@@ -59,6 +61,7 @@ static float layout_h = FZ_DEFAULT_LAYOUT_H;
 static float layout_em = FZ_DEFAULT_LAYOUT_EM;
 static const char *layout_css = NULL;
 static int layout_use_doc_css = 1;
+static int page_box = FZ_CROP_BOX;
 
 static int use_display_list = 0;
 
@@ -75,7 +78,7 @@ static void runpage(fz_context *ctx, fz_document *doc, fz_output *out, int numbe
 	fz_try(ctx)
 	{
 		page = fz_load_page(ctx, doc, number - 1);
-		mediabox = fz_bound_page(ctx, page);
+		mediabox = fz_bound_page_box(ctx, page, page_box);
 		fz_write_printf(ctx, out, "<page pagenum=\"%d\" mediabox=\"%R\">\n",
 				number, &mediabox);
 		dev = fz_new_trace_device(ctx, out);
@@ -133,11 +136,12 @@ int mutrace_main(int argc, const char** argv)
 	layout_em = FZ_DEFAULT_LAYOUT_EM;
 	layout_css = NULL;
 	layout_use_doc_css = 1;
+	page_box = FZ_CROP_BOX;
 
 	use_display_list = 0;
 
 	fz_getopt_reset();
-	while ((c = fz_getopt(argc, argv, "o:p:W:H:S:U:Xdh")) != -1)
+	while ((c = fz_getopt(argc, argv, "o:p:b:W:H:S:U:Xdh")) != -1)
 	{
 		switch (c)
 		{
@@ -152,6 +156,15 @@ int mutrace_main(int argc, const char** argv)
 		case 'X': layout_use_doc_css = 0; break;
 
 		case 'd': use_display_list = 1; break;
+
+		case 'b':
+			page_box = fz_box_type_from_string(fz_optarg);
+			if (page_box == FZ_UNKNOWN_BOX)
+			{
+				fz_error(ctx, "Invalid box type: %s\n", fz_optarg);
+				return 1;
+			}
+			break;
 		}
 	}
 

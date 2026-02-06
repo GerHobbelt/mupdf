@@ -209,6 +209,10 @@
 
 #endif
 
+/* Choose which hyphenation patterns to include. */
+/* #define FZ_ENABLE_HYPHEN 1 */
+/* #define FZ_ENABLE_HYPHEN_ALL 1 */
+
 /* ---------- DO NOT EDIT ANYTHING UNDER THIS LINE ---------- */
 
 #ifndef FZ_ENABLE_SPOT_RENDERING
@@ -249,6 +253,14 @@
 #ifndef FZ_ENABLE_RENDER_CORE 
 #define FZ_ENABLE_RENDER_CORE 1
 #endif
+
+#ifndef FZ_ENABLE_HYPHEN
+#define FZ_ENABLE_HYPHEN 1
+#endif /* FZ_ENABLE_HYPHEN */
+
+#ifndef FZ_ENABLE_HYPHEN_ALL
+#define FZ_ENABLE_HYPHEN_ALL 1
+#endif /* FZ_ENABLE_HYPHEN_ALL */
 
 #ifndef FZ_ENABLE_PDF
 #define FZ_ENABLE_PDF FZ_ENABLE_RENDER_CORE
@@ -395,6 +407,11 @@
 
 #ifndef FZ_ENABLE_BUILTIN_FONTS
 #define FZ_ENABLE_BUILTIN_FONTS FZ_ENABLE_PDF
+#endif
+
+#if FZ_ENABLE_HTML_ENGINE == 0
+#undef FZ_ENABLE_HYPHEN
+#define FZ_ENABLE_HYPHEN 0
 #endif
 
 #if !defined(HAVE_LEPTONICA) || !defined(HAVE_TESSERACT)

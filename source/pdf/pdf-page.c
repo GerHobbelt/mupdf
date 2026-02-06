@@ -32,6 +32,20 @@
 
 static void pdf_adjust_page_labels(fz_context *ctx, pdf_document *doc, int index, int adjust);
 
+void
+pdf_set_page_tree_cache(fz_context *ctx, pdf_document *doc, int enabled)
+{
+	if (enabled)
+	{
+		doc->use_page_tree_map = 1;
+	}
+	else
+	{
+		pdf_drop_page_tree_internal(ctx, doc);
+		doc->use_page_tree_map = 0;
+	}
+}
+
 int
 pdf_count_pages(fz_context *ctx, pdf_document *doc)
 {
@@ -45,6 +59,10 @@ pdf_count_pages(fz_context *ctx, pdf_document *doc)
 	else
 		pages = pdf_to_int(ctx, pdf_dict_getp(ctx, pdf_trailer(ctx, doc), "Root/Pages/Count"));
 	if (pages < 0)
+		fz_throw(ctx, FZ_ERROR_FORMAT, "Invalid number of pages");
+	/* set an upper bound to cope with malicious /Count entries; as there
+	 * can't possibly be more pages than objects in the file! */
+	if (pages >= pdf_xref_len(ctx, doc))
 		fz_throw(ctx, FZ_ERROR_FORMAT, "Invalid number of pages");
 	return pages;
 }
@@ -359,13 +377,13 @@ pdf_lookup_page_loc(fz_context *ctx, pdf_document *doc, int needle, pdf_obj **pa
 pdf_obj *
 pdf_lookup_page_obj(fz_context *ctx, pdf_document *doc, int needle)
 {
-	if (doc->fwd_page_map == NULL && !doc->page_tree_broken)
+	if (doc->fwd_page_map == NULL && doc->use_page_tree_map)
 	{
 		fz_try(ctx)
 			pdf_load_page_tree_internal(ctx, doc);
 		fz_catch(ctx)
 		{
-			doc->page_tree_broken = 1;
+			doc->use_page_tree_map = 0;
 			fz_rethrow_if(ctx, FZ_ERROR_SYSTEM);
 			fz_report_error(ctx);
 			fz_warn(ctx, "Page tree load failed. Falling back to slow lookup");
@@ -476,13 +494,13 @@ pdf_lookup_page_number_fast(fz_context *ctx, pdf_document *doc, int needle)
 int
 pdf_lookup_page_number(fz_context *ctx, pdf_document *doc, pdf_obj *page)
 {
-	if (doc->rev_page_map == NULL && !doc->page_tree_broken)
+	if (doc->rev_page_map == NULL && doc->use_page_tree_map)
 	{
 		fz_try(ctx)
 			pdf_load_page_tree_internal(ctx, doc);
 		fz_catch(ctx)
 		{
-			doc->page_tree_broken = 1;
+			doc->use_page_tree_map = 0;
 			fz_report_error(ctx);
 			fz_warn(ctx, "Page tree load failed. Falling back to slow lookup.");
 		}
@@ -1747,9 +1765,10 @@ pdf_lookup_page_label_imp(fz_context *ctx, pdf_obj *node, int index, struct page
 static struct page_label_range
 pdf_lookup_page_label(fz_context *ctx, pdf_document *doc, int index)
 {
-	struct page_label_range range = { 0, NULL };
 	pdf_obj *root = pdf_dict_get(ctx, pdf_trailer(ctx, doc), PDF_NAME(Root));
 	pdf_obj *labels = pdf_dict_get(ctx, root, PDF_NAME(PageLabels));
+	pdf_obj *nums = pdf_dict_get(ctx, labels, PDF_NAME(Nums));
+	struct page_label_range range = { 0, NULL, 0, nums };
 	pdf_lookup_page_label_imp(ctx, labels, index, &range);
 	return range;
 }
@@ -2058,7 +2077,7 @@ pdf_page_label(fz_context *ctx, pdf_document *doc, int index, char *buf, size_t 
 	if (range.label)
 		pdf_format_page_label(ctx, index - range.offset, range.label, buf, size);
 	else
-		fz_snprintf(buf, size, "%z", index + 1);
+		fz_snprintf(buf, size, "%d", index + 1);
 }
 
 void

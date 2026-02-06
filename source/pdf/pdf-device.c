@@ -126,7 +126,11 @@ pdf_dev_stroke_state(fz_context *ctx, pdf_device *pdev, const fz_stroke_state *s
 
 	if (stroke_state == gs->stroke_state)
 		return;
-	if (gs->stroke_state && !memcmp(stroke_state, gs->stroke_state, sizeof(*stroke_state)))
+	if (gs->stroke_state &&
+		!memcmp(stroke_state, gs->stroke_state, sizeof(*stroke_state))
+		&& gs->stroke_state->dash_len == stroke_state->dash_len &&
+			(stroke_state->dash_len == 0 ||
+			!memcmp(&gs->stroke_state->dash_list[0], &stroke_state->dash_list[0], sizeof(stroke_state->dash_list[0]) * stroke_state->dash_len)))
 		return;
 	if (!gs->stroke_state || gs->stroke_state->linewidth != stroke_state->linewidth)
 	{
@@ -221,6 +225,21 @@ pdf_dev_path(fz_context *ctx, pdf_device *pdev, const fz_path *path)
 	fz_rect bounds;
 
 	if (fz_path_is_rect_with_bounds(ctx, path, fz_identity, &bounds))
+	{
+		fz_append_printf(ctx, gs->buf, "%g %g %g %g re\n", bounds.x0, bounds.y0, bounds.x1-bounds.x0, bounds.y1-bounds.y0);
+		return;
+	}
+
+	fz_walk_path(ctx, path, &pdf_dev_path_proc, (void *)gs->buf);
+}
+
+static void
+pdf_dev_stroked_path(fz_context *ctx, pdf_device *pdev, const fz_path *path)
+{
+	gstate *gs = CURRENT_GSTATE(pdev);
+	fz_rect bounds;
+
+	if (fz_path_is_closed(ctx, path) && fz_path_is_rect_with_bounds(ctx, path, fz_identity, &bounds))
 	{
 		fz_append_printf(ctx, gs->buf, "%g %g %g %g re\n", bounds.x0, bounds.y0, bounds.x1-bounds.x0, bounds.y1-bounds.y0);
 		return;
@@ -781,7 +800,7 @@ pdf_dev_stroke_path(fz_context *ctx, fz_device *dev, const fz_path *path, const 
 	pdf_dev_color(ctx, pdev, colorspace, color, 1, color_params);
 	pdf_dev_ctm(ctx, pdev, ctm);
 	pdf_dev_stroke_state(ctx, pdev, stroke);
-	pdf_dev_path(ctx, pdev, path);
+	pdf_dev_stroked_path(ctx, pdev, path);
 	fz_append_string(ctx, gs->buf, "S\n");
 }
 
@@ -812,7 +831,7 @@ pdf_dev_clip_stroke_path(fz_context *ctx, fz_device *dev, const fz_path *path, c
 	 * with the next calls to the device interface until the next pop
 	 * when we pop the group. */
 	pdf_dev_ctm(ctx, pdev, ctm);
-	pdf_dev_path(ctx, pdev, path);
+	pdf_dev_stroked_path(ctx, pdev, path);
 	gs = CURRENT_GSTATE(pdev);
 	fz_append_string(ctx, gs->buf, "W n\n");
 }
@@ -1025,23 +1044,10 @@ pdf_dev_fill_image_mask(fz_context *ctx, fz_device *dev, fz_image *image, fz_mat
 }
 
 static void
-pdf_dev_clip_image_mask(fz_context *ctx, fz_device *dev, fz_image *image, fz_matrix ctm, fz_rect scissor)
-{
-	pdf_device *pdev = (pdf_device*)dev;
-
-	fz_warn(ctx, "the pdf device does not support image masks; output may be incomplete");
-
-	/* FIXME */
-	pdf_dev_end_text(ctx, pdev);
-	pdf_dev_push(ctx, pdev);
-}
-
-static void
 pdf_dev_pop_clip(fz_context *ctx, fz_device *dev)
 {
 	pdf_device *pdev = (pdf_device*)dev;
 
-	/* FIXME */
 	pdf_dev_end_text(ctx, pdev);
 	pdf_dev_pop(ctx, pdev);
 }
@@ -1124,6 +1130,65 @@ pdf_dev_end_mask(fz_context *ctx, fz_device *dev, fz_function *tr)
 	gs->on_pop_arg = NULL;
 	pdf_drop_obj(ctx, form_ref);
 	fz_append_string(ctx, gs->buf, "q\n");
+	gs->ctm = fz_identity;
+}
+
+static void
+pdf_dev_clip_image_mask(fz_context *ctx, fz_device *dev, fz_image *image, fz_matrix ctm, fz_rect scissor)
+{
+	pdf_device *pdev = (pdf_device*)dev;
+	gstate *gs;
+	pdf_obj *smask = NULL;
+	char egsname[32];
+	pdf_obj *egs = NULL;
+	pdf_obj *egss;
+	pdf_obj *form_ref;
+	fz_rect bbox = fz_transform_rect(fz_unit_rect, ctm);
+	float black = 1;
+
+	/* Put the image mask into a softmask, and select that. */
+
+	fz_var(smask);
+	fz_var(egs);
+
+	pdf_dev_end_text(ctx, pdev);
+
+	pdf_dev_ctm(ctx, pdev, fz_identity);
+
+	/* Make a new form to contain the contents of the softmask */
+	pdf_dev_new_form(ctx, &form_ref, pdev, bbox, 0, 0, 1, fz_device_gray(ctx));
+
+	fz_try(ctx)
+	{
+		fz_snprintf(egsname, sizeof(egsname), "CM%d", pdev->num_smasks++);
+		egss = pdf_dict_get(ctx, pdev->resources, PDF_NAME(ExtGState));
+		if (!egss)
+			egss = pdf_dict_put_dict(ctx, pdev->resources, PDF_NAME(ExtGState), 10);
+		egs = pdf_dict_puts_dict(ctx, egss, egsname, 1);
+
+		pdf_dict_put(ctx, egs, PDF_NAME(Type), PDF_NAME(ExtGState));
+		smask = pdf_dict_put_dict(ctx, egs, PDF_NAME(SMask), 4);
+
+		pdf_dict_put(ctx, smask, PDF_NAME(Type), PDF_NAME(Mask));
+		pdf_dict_put(ctx, smask, PDF_NAME(S), PDF_NAME(Alpha));
+		pdf_dict_put(ctx, smask, PDF_NAME(G), form_ref);
+
+		gs = CURRENT_GSTATE(pdev);
+		fz_append_printf(ctx, gs->buf, "/CM%d gs\n", pdev->num_smasks-1);
+	}
+	fz_catch(ctx)
+	{
+		pdf_drop_obj(ctx, form_ref);
+		fz_rethrow(ctx);
+	}
+
+	/* Now, everything we get until the end_mask needs to go into a
+	 * new buffer, which will be the stream contents for the form. */
+	pdf_dev_push_new_buf(ctx, pdev, fz_new_buffer(ctx, 1024), NULL, form_ref);
+
+	pdf_dev_fill_image_mask(ctx, dev, image, ctm, fz_device_gray(ctx), &black, 1, fz_default_color_params);
+
+	pdf_dev_end_mask(ctx, dev, NULL);
 }
 
 static void
@@ -1184,9 +1249,11 @@ pdf_dev_end_group(fz_context *ctx, fz_device *dev)
 }
 
 static int
-pdf_dev_begin_tile(fz_context *ctx, fz_device *dev, fz_rect area, fz_rect view, float xstep, float ystep, fz_matrix ctm, int id)
+pdf_dev_begin_tile(fz_context *ctx, fz_device *dev, fz_rect area, fz_rect view, float xstep, float ystep, fz_matrix ctm, int id, int doc_id)
 {
 	pdf_device *pdev = (pdf_device*)dev;
+
+	fz_warn(ctx, "tiled patterns are not supported in the pdf-write device");
 
 	/* FIXME */
 	pdf_dev_end_text(ctx, pdev);

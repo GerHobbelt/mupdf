@@ -283,14 +283,24 @@ stdio_write(fz_context* ctx, DWORD channel, const void* buffer, size_t count)
 
 #endif
 
+static int64_t stdout_offset = 0;
+
 static int
 stdout_write(fz_context *ctx, fz_output* out, const void *buffer, size_t count)
 {
+	stdout_offset += count;
+
 #ifdef _WIN32
 	return stdio_write(ctx, STD_OUTPUT_HANDLE, buffer, count);
 #else
 	return file_write(ctx, stdout, buffer, count);
 #endif
+}
+
+static int64_t
+stdout_tell(fz_context *ctx, void *opaque)
+{
+	return stdout_offset;
 }
 
 static void
@@ -319,7 +329,7 @@ static fz_output fz_stdout_global = {
 	NULL,
 	stdout_write,
 	NULL,
-	NULL,
+	stdout_tell,
 	stdout_flush_on_close,
 	stdout_flush_on_drop,
 };
@@ -896,13 +906,16 @@ fz_new_output_with_path(fz_context *ctx, const char *filename, int append)
 	{
 #ifdef _WIN32
 		/* Windows specific code to make stdout binary to prevent automatic character conversions in image data. */
-		setmode(fileno(stdout), O_BINARY);
+		(void)setmode(fileno(stdout), O_BINARY);
 #endif
 		return fz_stdout(ctx);
 	}
 
 	if (!strcmp(filename, "/dev/stderr"))
 	{
+#ifdef _WIN32
+		(void)setmode(fileno(stderr), O_BINARY);
+#endif
 		return fz_stderr(ctx);
 	}
 
@@ -1000,6 +1013,8 @@ buffer_drop(fz_context *ctx, fz_output* out)
 static void
 buffer_reset(fz_context *ctx, void *opaque)
 {
+	fz_buffer *buffer = opaque;
+	fz_clear_buffer(ctx, buffer);
 }
 
 fz_output *

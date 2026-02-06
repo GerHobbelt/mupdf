@@ -100,9 +100,15 @@ fz_new_font(fz_context *ctx, const char *name, int use_glyph_bbox, int glyph_cou
 	font->refs = 1;
 
 	if (name)
+	{
 		fz_strncpy_s(ctx, font->name, name, sizeof font->name);
+		fz_strncpy_s(ctx, font->family, name, sizeof font->family);
+	}
 	else
+	{
 		fz_strncpy_s(ctx, font->name, "(null)", sizeof font->name);
+		fz_strncpy_s(ctx, font->family, "(null)", sizeof font->family);
+	}
 
 	font->ft_face = NULL;
 	font->flags.ft_substitute = 0;
@@ -779,6 +785,9 @@ fz_new_font_from_buffer(fz_context *ctx, const char *name, fz_buffer *buffer, in
 	}
 	assert(font != NULL);
 
+	if (face->family_name)
+		fz_strncpy_s(ctx, font->family, face->family_name, sizeof font->family);
+
 	font->ft_face = face;
 	fz_set_font_bbox(ctx, font,
 		(float) face->bbox.xMin / face->units_per_EM,
@@ -1416,6 +1425,9 @@ struct closure {
 	fz_context *ctx;
 	fz_path *path;
 	fz_matrix trm;
+	int pending_move;
+	float e;
+	float f;
 };
 
 static int move_to(const FT_Vector *p, void *cc_)
@@ -1424,6 +1436,8 @@ static int move_to(const FT_Vector *p, void *cc_)
 	fz_context *ctx = cc->ctx;
 	fz_path *path = cc->path;
 	fz_point pt;
+
+	cc->pending_move = 0;
 
 	pt = fz_transform_point_xy(p->x, p->y, cc->trm);
 	fz_moveto(ctx, path, pt.x, pt.y);
@@ -1437,6 +1451,12 @@ static int line_to(const FT_Vector *p, void *cc_)
 	fz_path *path = cc->path;
 	fz_point pt;
 
+	if (cc->pending_move)
+	{
+		cc->pending_move = 0;
+		fz_moveto(ctx, cc->path, cc->e, cc->f);
+	}
+
 	pt = fz_transform_point_xy(p->x, p->y, cc->trm);
 	fz_lineto(ctx, path, pt.x, pt.y);
 	return 0;
@@ -1448,6 +1468,12 @@ static int conic_to(const FT_Vector *c, const FT_Vector *p, void *cc_)
 	fz_context *ctx = cc->ctx;
 	fz_path *path = cc->path;
 	fz_point ct, pt;
+
+	if (cc->pending_move)
+	{
+		cc->pending_move = 0;
+		fz_moveto(ctx, cc->path, cc->e, cc->f);
+	}
 
 	ct = fz_transform_point_xy(c->x, c->y, cc->trm);
 	pt = fz_transform_point_xy(p->x, p->y, cc->trm);
@@ -1462,6 +1488,12 @@ static int cubic_to(const FT_Vector *c1, const FT_Vector *c2, const FT_Vector *p
 	fz_context *ctx = cc->ctx;
 	fz_path *path = cc->path;
 	fz_point c1t, c2t, pt;
+
+	if (cc->pending_move)
+	{
+		cc->pending_move = 0;
+		fz_moveto(ctx, cc->path, cc->e, cc->f);
+	}
 
 	c1t = fz_transform_point_xy(c1->x, c1->y, cc->trm);
 	c2t = fz_transform_point_xy(c2->x, c2->y, cc->trm);
@@ -1522,9 +1554,12 @@ fz_outline_ft_glyph(fz_context *ctx, fz_font *font, int gid, fz_matrix trm)
 		cc.ctx = ctx;
 		cc.path = fz_new_path(ctx);
 		cc.trm = fz_concat(fz_scale(recip, recip), trm);
-		fz_moveto(ctx, cc.path, cc.trm.e, cc.trm.f);
+		cc.pending_move = 1;
+		cc.e = cc.trm.e;
+		cc.f = cc.trm.f;
 		FT_Outline_Decompose(&face->glyph->outline, &outline_funcs, &cc);
-		fz_closepath(ctx, cc.path);
+		if (cc.pending_move == 0)
+			fz_closepath(ctx, cc.path);
 	}
 	fz_always(ctx)
 	{
@@ -1637,17 +1672,14 @@ fz_prepare_t3_glyph(fz_context *ctx, fz_font *font, int gid)
 	}
 	fz_catch(ctx)
 		fz_rethrow(ctx);
+
 	if (fz_display_list_is_empty(ctx, font->t3lists[gid]))
 	{
-		fz_rect *r = get_gid_bbox(ctx, font, gid);
-		/* If empty, no need for a huge bbox, especially as the logic
-		 * in the 'else if' can make it huge. */
-		r->x0 = font->flags.invalid_bbox ? 0 : font->bbox.x0;
-		r->y0 = font->flags.invalid_bbox ? 0 : font->bbox.y0;
-		r->x1 = r->x0 + .00001f;
-		r->y1 = r->y0 + .00001f;
+		fz_drop_display_list(ctx, font->t3lists[gid]);
+		font->t3lists[gid] = NULL;
 	}
-	else if (font->t3flags[gid] & FZ_DEVFLAG_BBOX_DEFINED)
+
+	if (font->t3flags[gid] & FZ_DEVFLAG_BBOX_DEFINED)
 	{
 		fz_rect *r = get_gid_bbox(ctx, font, gid);
 		*r = fz_transform_rect(d1_rect, font->t3matrix);
@@ -1658,6 +1690,11 @@ fz_prepare_t3_glyph(fz_context *ctx, fz_font *font, int gid)
 			 * incompatible with it. Either way, don't trust the d1 rect
 			 * and calculate it from the contents. */
 			fz_bound_t3_glyph(ctx, font, gid);
+			/* If we've still got an empty region, then just live with the
+			 * d1_rect. This is important for selection rectangles for empty
+			 * glyphs. */
+			if (fz_is_empty_rect(*r))
+				*r = fz_transform_rect(d1_rect, font->t3matrix);
 		}
 	}
 	else
@@ -1696,7 +1733,11 @@ fz_render_t3_glyph_pixmap(fz_context *ctx, fz_font *font, int gid, fz_matrix trm
 
 	list = font->t3lists[gid];
 	if (!list)
-		return NULL;
+	{
+		glyph = fz_new_pixmap(ctx, model, 1, 1, NULL/* FIXME */, 1);
+		fz_clear_pixmap(ctx, glyph);
+		return glyph;
+	}
 
 	if (font->t3flags[gid] & FZ_DEVFLAG_MASK)
 	{
@@ -2439,16 +2480,12 @@ fz_extract_ttf_from_ttc(fz_context *ctx, fz_font *font)
 		/* Calculate the new sum. */
 		for (j = 0; j < len; j += 4)
 		{
-			uint32_t v = (data[j]<<24) | (data[j+1]<<16) | (data[j+2]<<8) | (data[j+3]);
-			sum += v;
+			sum += fz_unpack_uint32(data + j);
 		}
 		sum = 0xb1b0afba-sum;
 
 		/* Insert it. */
-		data[csumpos] = sum>>24;
-		data[csumpos+1] = sum>>16;
-		data[csumpos+2] = sum>>8;
-		data[csumpos+3] = sum;
+		fz_pack_uint32(data + csumpos, sum);
 	}
 
 	return buf;

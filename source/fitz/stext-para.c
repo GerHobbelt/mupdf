@@ -191,6 +191,7 @@ static fz_stext_block *split_block_at_line(fz_context *ctx, stext_pos *pos, fz_s
 	}
 	block->next = newblock;
 	newblock->type = FZ_STEXT_BLOCK_TEXT;
+	newblock->id = block->id;
 	newblock->u.t.flags = block->u.t.flags;
 	newblock->u.t.first_line = line;
 	newblock->u.t.last_line = block->u.t.last_line;
@@ -1560,12 +1561,15 @@ do_para_break(fz_context *ctx, fz_stext_page *page, fz_stext_block **pfirst, fz_
 
 			/* Think about breaking lines at Titles. */
 			/* First, underlined ones. */
-			if (detect_underlined_titles(ctx, &pos, block))
-				next_block = block->next; /* We split the block! */
-			if (block->type != FZ_STEXT_BLOCK_TEXT)
+			if (!in_header)
 			{
-				next_block = block;
-				break;
+				if (detect_underlined_titles(ctx, &pos, block))
+					next_block = block->next; /* We split the block! */
+				if (block->type != FZ_STEXT_BLOCK_TEXT)
+				{
+					next_block = block;
+					break;
+				}
 			}
 
 #ifdef DEBUG_PARA_SPLITS

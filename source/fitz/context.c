@@ -246,6 +246,7 @@ fz_drop_context(fz_context *ctx)
 	fz_drop_tuning_context(ctx);
 	fz_drop_colorspace_context(ctx);
 	fz_drop_font_context(ctx);
+	fz_drop_hyph_context(ctx);
 #endif
 
 	fz_flush_warnings(ctx);
@@ -405,6 +406,7 @@ fz_new_context_imp(const fz_alloc_context *alloc, const fz_locks_context *locks,
 		fz_new_glyph_cache_context(ctx);
 		fz_new_colorspace_context(ctx);
 		fz_new_font_context(ctx);
+		fz_new_hyph_context(ctx);
 		fz_new_document_handler_context(ctx);
 		fz_new_archive_handler_context(ctx);
 		fz_new_style_context(ctx);
@@ -454,6 +456,7 @@ fz_clone_context(fz_context *ctx)
 	fz_keep_style_context(new_ctx);
 	fz_keep_tuning_context(new_ctx);
 	fz_keep_font_context(new_ctx);
+	fz_keep_hyph_context(new_ctx);
 	fz_keep_colorspace_context(new_ctx);
 	fz_keep_store_context(new_ctx);
 	fz_keep_glyph_cache(new_ctx);
@@ -542,4 +545,17 @@ void __cdecl fz_drop_global_context(void)
 int fz_has_locking_support(fz_context* ctx)
 {
 	return !(ctx == NULL || (ctx->locks.lock == fz_locks_default.lock && ctx->locks.unlock == fz_locks_default.unlock));
+}
+
+int fz_new_document_id(fz_context *ctx)
+{
+	int id;
+
+	fz_lock(ctx, FZ_LOCK_ALLOC);
+	while (ctx->master && ctx->master != ctx)
+		ctx = ctx->master;
+	id = ctx->next_document_id++;
+	fz_unlock(ctx, FZ_LOCK_ALLOC);
+
+	return id;
 }

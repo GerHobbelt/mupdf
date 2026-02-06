@@ -119,6 +119,8 @@ int pdfrecolor_main(int argc, const char** argv)
 	 * the simplest way. */
 	fz_register_document_handlers(ctx);
 
+	fz_var(doc);
+
 	fz_try(ctx)
 	{
 		/* Load the input document. */

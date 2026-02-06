@@ -794,9 +794,12 @@ fz_irect fz_translate_irect(fz_irect a, int xoff, int yoff);
 int fz_contains_rect(fz_rect a, fz_rect b);
 
 /**
-	Returns true if rect a overlaps rect b.
+	Test rectangle overlap.
+
+	Returns true if the area of the overlap is
+	non zero.
 */
-int fz_rects_overlap(fz_rect a, fz_rect b);
+int fz_overlaps_rect(fz_rect a, fz_rect b);
 
 /**
 	Apply a transformation to a point.

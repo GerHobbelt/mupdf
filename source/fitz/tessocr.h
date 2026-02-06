@@ -31,7 +31,7 @@ extern "C" {
 
 #if FZ_ENABLE_OCR 
 
-void *ocr_init(fz_context *ctx, const char *language, const char *datadir);
+void *ocr_init(fz_context *ctx, const char *language, const char *datadir, fz_options *options);
 
 void ocr_fin(fz_context *ctx, void *api);
 

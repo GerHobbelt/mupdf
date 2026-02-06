@@ -593,6 +593,9 @@ static int usage(void)
 		"\n"
 		"  -V    display the version of this application and terminate\n"
 		"\n"
+		"\t-i\tignore errors\n"
+		"\t-v\tshow version\n"
+		"\n"
 		"\tpages\tcomma separated list of page numbers and ranges\n",
 		X_RESOLUTION, Y_RESOLUTION, PAPER_WIDTH, PAPER_HEIGHT
 	);

@@ -30,6 +30,7 @@
 #include "mupdf/fitz/shade.h"
 #include "mupdf/fitz/path.h"
 #include "mupdf/fitz/text.h"
+#include "mupdf/fitz/options.h"
 
 #include "plf_nanotimer_c_api.h"
 
@@ -329,7 +330,7 @@ struct fz_device
 	void (*begin_group)(fz_context *, fz_device *, fz_rect area, fz_colorspace *cs, int isolated, int knockout, int blendmode, float alpha);
 	void (*end_group)(fz_context *, fz_device *);
 
-	int (*begin_tile)(fz_context *, fz_device *, fz_rect area, fz_rect view, float xstep, float ystep, fz_matrix ctm, int id);
+	int (*begin_tile)(fz_context *, fz_device *, fz_rect area, fz_rect view, float xstep, float ystep, fz_matrix ctm, int id, int doc_id);
 	void (*end_tile)(fz_context *, fz_device *);
 
 	void (*render_flags)(fz_context *, fz_device *, int set, int clear);
@@ -375,6 +376,7 @@ void fz_begin_group(fz_context *ctx, fz_device *dev, fz_rect area, fz_colorspace
 void fz_end_group(fz_context *ctx, fz_device *dev);
 void fz_begin_tile(fz_context *ctx, fz_device *dev, fz_rect area, fz_rect view, float xstep, float ystep, fz_matrix ctm);
 int fz_begin_tile_id(fz_context *ctx, fz_device *dev, fz_rect area, fz_rect view, float xstep, float ystep, fz_matrix ctm, int id);
+int fz_begin_tile_tid(fz_context *ctx, fz_device *dev, fz_rect area, fz_rect view, float xstep, float ystep, fz_matrix ctm, int id, int doc_id);
 void fz_end_tile(fz_context *ctx, fz_device *dev);
 void fz_render_flags(fz_context *ctx, fz_device *dev, int set, int clear);
 void fz_set_default_colorspaces(fz_context *ctx, fz_device *dev, fz_default_colorspaces *default_cs);
@@ -789,9 +791,23 @@ typedef struct
 FZ_DATA extern const char *fz_draw_options_usage;
 
 /**
+	Initialise a draw_options struct to sensible values.
+*/
+void fz_init_draw_options(fz_context *ctx, fz_draw_options *options);
+
+/**
 	Parse draw device options from a comma separated key-value string.
+
+	This initialises the options struct first.
 */
 fz_draw_options *fz_parse_draw_options(fz_context *ctx, fz_draw_options *options, const char *string);
+
+/**
+	Parse draw device options from a comma separated key-value string.
+
+	This assumes that the options struct has been initialised already.
+*/
+fz_draw_options *fz_apply_draw_options(fz_context *ctx, fz_draw_options *draw_options, fz_options *options);
 
 /**
 	Create a new pixmap and draw device, using the specified options.

@@ -99,6 +99,7 @@ struct fz_colorspace_context
 {
 	int ctx_refs;
 	fz_colorspace *gray, *rgb, *bgr, *cmyk, *lab;
+	fz_colorspace *ps_gray, *ps_rgb, *ps_bgr, *ps_cmyk;
 	int gamma_blending;
 #if FZ_ENABLE_ICC
 	void *icc_instance;

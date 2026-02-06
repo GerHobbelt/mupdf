@@ -290,7 +290,6 @@ typedef struct
 	pdf_document *doc;
 	int structparents;
 	pdf_processor *mine;
-	pdf_processor *chain;
 	pdf_filter_options *global_options;
 	op_usage_t *op_usage;
 	fz_buffer *buffer;
@@ -1418,7 +1417,7 @@ pdf_close_opcount_processor(fz_context *ctx, pdf_processor *proc)
 	pdf_opcount_processor *p = (pdf_opcount_processor*)proc;
 
 	pdf_close_processor(ctx, p->mine);
-	pdf_close_processor(ctx, p->chain);
+	pdf_close_processor(ctx, p->super.chain);
 }
 
 static void
@@ -1593,7 +1592,7 @@ pdf_new_opcount_filter(
 	proc->super.op_END = pdf_opcount_END;
 
 	proc->global_options = global_options;
-	proc->chain = chain;
+	proc->super.chain = chain;
 
 	return (pdf_processor*)proc;
 }
@@ -1846,7 +1845,7 @@ visited:
 			else if (pdf_is_array(ctx, obj))
 				goto step_next_array_child;
 			else
-				assert(!!"Never happens");
+				fz_throw(ctx, FZ_ERROR_GENERIC, "this should never happen!");
 		}
 	}
 	while (ws->len > 0);
@@ -1889,6 +1888,9 @@ filter_file(fz_context *ctx, fz_output *out, const char *filename)
 	{
 		pdf = pdf_open_document(ctx, filename);
 
+		/* ensure we don't get tripped up by repair */
+		pdf_check_document(ctx, pdf);
+
 		n = pdf_xref_len(ctx, pdf);
 		oi = fz_malloc_array(ctx, n, obj_info_t);
 		memset(oi, 0, n * sizeof(obj_info_t));
@@ -1899,14 +1901,13 @@ filter_file(fz_context *ctx, fz_output *out, const char *filename)
 				for (; i <n; i++)
 				{
 					pdf_xref_entry *entry = pdf_cache_object(ctx, pdf, i);
-					int is_in_objstm = entry->type == 'o';
 					pdf_obj *type, *subtype;
 					char text[128];
 
-					if (entry->obj == NULL)
+					if (entry == NULL || entry->obj == NULL)
 						continue;
-					oi[i].is_in_objstm = is_in_objstm;
-					if (!is_in_objstm)
+					oi[i].is_in_objstm = entry->type == 'o';
+					if (!oi[i].is_in_objstm)
 					{
 						sprintf(text, "%d 0 obj\nendobj\n", i);
 						oi[i].overhead = strlen(text);
@@ -2059,7 +2060,7 @@ filter_file(fz_context *ctx, fz_output *out, const char *filename)
 static int usage(void)
 {
 	fprintf(stderr,
-		"usage: mutool audit [options] input.pdf+\n"
+		"usage: mutool audit [options] input.pdf [input2.pdf ...]\n"
 		"\t-o -\toutput file\n"
 	);
 	return EXIT_FAILURE;

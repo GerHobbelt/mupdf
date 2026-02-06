@@ -47,6 +47,21 @@ typedef struct
 
 fz_svg_options *fz_parse_svg_options(fz_context *ctx, fz_svg_options *opts, const char *options);
 
+typedef struct fz_svg_device_options fz_svg_device_options;
+
+struct fz_svg_device_options {
+	int text_format;
+	int reuse_images;
+	int resolution;
+	int *id;
+};
+
+void fz_init_svg_device_options(fz_context *ctx, fz_svg_device_options *opts);
+void fz_parse_svg_device_options(fz_context *ctx, fz_svg_device_options *opts, const char *args);
+void fz_apply_svg_device_options(fz_context *ctx, fz_svg_device_options *opts, fz_options *options);
+
+fz_device *fz_new_svg_device_with_options(fz_context *ctx, fz_output *out, float page_width, float page_height, fz_svg_device_options *opts, int *id);
+
 /**
 	Create a device that outputs (single page) SVG files to
 	the given output stream.
@@ -70,6 +85,8 @@ fz_device *fz_new_svg_device(fz_context *ctx, fz_output *out, float page_width, 
 		visual appearance.
 
 	reuse_images: Share image resources using <symbol> definitions.
+
+	resolution: Resolution to use when rasterizing shadings (and such) to images.
 
 	id: ID parameter to keep generated IDs unique across SVG files.
 */

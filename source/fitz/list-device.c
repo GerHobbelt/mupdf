@@ -1239,10 +1239,11 @@ typedef struct
 	float ystep;
 	fz_rect view;
 	int id;
+	int doc_id;
 } fz_list_tile_data;
 
 static int
-fz_list_begin_tile(fz_context *ctx, fz_device *dev, fz_rect area, fz_rect view, float xstep, float ystep, fz_matrix ctm, int id)
+fz_list_begin_tile(fz_context *ctx, fz_device *dev, fz_rect area, fz_rect view, float xstep, float ystep, fz_matrix ctm, int id, int doc_id)
 {
 	fz_list_tile_data tile;
 
@@ -1250,6 +1251,7 @@ fz_list_begin_tile(fz_context *ctx, fz_device *dev, fz_rect area, fz_rect view, 
 	tile.ystep = ystep;
 	tile.view = view;
 	tile.id = id;
+	tile.doc_id = doc_id;
 	fz_append_display_node(
 		ctx,
 		dev,
@@ -2062,7 +2064,7 @@ visible:
 				data = (fz_list_tile_data *)node;
 				tiled++;
 				tile_rect = data->view;
-				cached = fz_begin_tile_id(ctx, dev, rect, tile_rect, data->xstep, data->ystep, trans_ctm, data->id);
+				cached = fz_begin_tile_tid(ctx, dev, rect, tile_rect, data->xstep, data->ystep, trans_ctm, data->id, data->doc_id);
 				if (cached)
 					tile_skip_depth = 1;
 				break;

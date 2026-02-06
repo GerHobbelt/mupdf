@@ -59,6 +59,9 @@ typedef struct fz_css_value_s fz_css_value;
 typedef struct fz_css_number_s fz_css_number;
 typedef struct fz_css_color_s fz_css_color;
 
+/* Enable the following to get sequence numbers in the html boxes to aid debugging. */
+//#define DEBUG_HTML_SEQ
+
 struct fz_html_font_face_s
 {
 	char *family;
@@ -144,19 +147,23 @@ enum
 	PRO_BORDER_BOTTOM_COLOR,
 	PRO_BORDER_BOTTOM_STYLE,
 	PRO_BORDER_BOTTOM_WIDTH,
+	PRO_BORDER_COLLAPSE,
 	PRO_BORDER_LEFT_COLOR,
 	PRO_BORDER_LEFT_STYLE,
 	PRO_BORDER_LEFT_WIDTH,
 	PRO_BORDER_RIGHT_COLOR,
 	PRO_BORDER_RIGHT_STYLE,
 	PRO_BORDER_RIGHT_WIDTH,
+	PRO_BORDER_SPACING,
 	PRO_BORDER_TOP_COLOR,
 	PRO_BORDER_TOP_STYLE,
 	PRO_BORDER_TOP_WIDTH,
-	PRO_BORDER_SPACING,
+	PRO_CLEAR,
 	PRO_COLOR,
+	PRO_COLUMNS,
 	PRO_DIRECTION,
 	PRO_DISPLAY,
+	PRO_FLOAT,
 	PRO_FONT,
 	PRO_FONT_FAMILY,
 	PRO_FONT_SIZE,
@@ -164,6 +171,11 @@ enum
 	PRO_FONT_VARIANT,
 	PRO_FONT_WEIGHT,
 	PRO_HEIGHT,
+	PRO_HYPHENS,
+	PRO_INSET_BOTTOM,
+	PRO_INSET_LEFT,
+	PRO_INSET_RIGHT,
+	PRO_INSET_TOP,
 	PRO_LEADING,
 	PRO_LETTER_SPACING,
 	PRO_LINE_HEIGHT,
@@ -182,15 +194,16 @@ enum
 	PRO_PADDING_TOP,
 	PRO_PAGE_BREAK_AFTER,
 	PRO_PAGE_BREAK_BEFORE,
+	PRO_POSITION,
 	PRO_QUOTES,
 	PRO_SRC,
 	PRO_TEXT_ALIGN,
 	PRO_TEXT_DECORATION,
 	PRO_TEXT_FILL_COLOR,
 	PRO_TEXT_INDENT,
-	PRO_TEXT_TRANSFORM,
-	PRO_TEXT_STROKE_WIDTH,
 	PRO_TEXT_STROKE_COLOR,
+	PRO_TEXT_STROKE_WIDTH,
+	PRO_TEXT_TRANSFORM,
 	PRO_VERTICAL_ALIGN,
 	PRO_VISIBILITY,
 	PRO_WHITE_SPACE,
@@ -202,6 +215,7 @@ enum
 	NUM_PROPERTIES,
 
 	/* Short-hand properties (always expanded when applied, never used as is): */
+	PRO_BACKGROUND,
 	PRO_BORDER,
 	PRO_BORDER_BOTTOM,
 	PRO_BORDER_COLOR,
@@ -210,6 +224,7 @@ enum
 	PRO_BORDER_STYLE,
 	PRO_BORDER_TOP,
 	PRO_BORDER_WIDTH,
+	PRO_INSET,
 	PRO_LIST_STYLE,
 	PRO_MARGIN,
 	PRO_PADDING,
@@ -222,14 +237,15 @@ struct fz_css_match_s
 	fz_css_value *value[NUM_PROPERTIES];
 };
 
-enum { DIS_NONE, DIS_BLOCK, DIS_INLINE, DIS_LIST_ITEM, DIS_INLINE_BLOCK, DIS_TABLE, DIS_TABLE_GROUP, DIS_TABLE_ROW, DIS_TABLE_CELL };
+enum { DIS_NONE, DIS_BLOCK, DIS_INLINE, DIS_LIST_ITEM, DIS_INLINE_BLOCK, DIS_TABLE, DIS_TABLE_GROUP, DIS_TABLE_ROW, DIS_TABLE_CELL, DIS_TABLE_COLGROUP, DIS_TABLE_COL };
 enum { POS_STATIC, POS_RELATIVE, POS_ABSOLUTE, POS_FIXED };
 enum { TA_LEFT, TA_RIGHT, TA_CENTER, TA_JUSTIFY };
-enum { VA_BASELINE, VA_SUB, VA_SUPER, VA_TOP, VA_BOTTOM, VA_TEXT_TOP, VA_TEXT_BOTTOM };
-enum { BS_NONE, BS_SOLID };
+enum { VA_BASELINE, VA_SUB, VA_SUPER, VA_TOP, VA_BOTTOM, VA_TEXT_TOP, VA_TEXT_BOTTOM, VA_MIDDLE };
+enum { BS_NONE, BS_SOLID, BS_DOTTED, BS_DASHED, BS_DOUBLE, BS_GROOVE, BS_RIDGE, BS_INSET, BS_OUTSET };
 enum { V_VISIBLE, V_HIDDEN, V_COLLAPSE };
 enum { PB_AUTO, PB_ALWAYS, PB_AVOID, PB_LEFT, PB_RIGHT };
 enum { TD_NONE, TD_UNDERLINE, TD_LINE_THROUGH };
+enum { HYP_NONE, HYP_MANUAL, HYP_AUTO };
 
 enum {
 	WS_COLLAPSE = 1,
@@ -274,31 +290,16 @@ struct fz_css_color_s
 
 struct fz_css_style_s
 {
+	fz_font *font;
 	fz_css_number font_size;
 	fz_css_number width, height;
 	fz_css_number margin[4];
 	fz_css_number padding[4];
 	fz_css_number border_width[4];
+	fz_css_number inset[4];
 	fz_css_number border_spacing;
 	fz_css_number text_indent;
 	fz_css_number text_stroke_width;
-	unsigned int visibility : 2;
-	unsigned int white_space : 3;
-	unsigned int text_align : 2;
-	unsigned int vertical_align : 3;
-	unsigned int list_style_type : 4;
-	unsigned int page_break_before : 3;
-	unsigned int page_break_after : 3;
-	unsigned int border_style_0 : 1;
-	unsigned int border_style_1 : 1;
-	unsigned int border_style_2 : 1;
-	unsigned int border_style_3 : 1;
-	unsigned int small_caps : 1;
-	unsigned int text_decoration: 2;
-	unsigned int overflow_wrap : 1;
-	/* Ensure the extra bits in the bitfield are copied
-	 * on structure copies. */
-	unsigned int blank : 3;
 	fz_css_number line_height;
 	fz_css_number leading;
 	fz_css_color background_color;
@@ -306,7 +307,32 @@ struct fz_css_style_s
 	fz_css_color color;
 	fz_css_color text_fill_color;
 	fz_css_color text_stroke_color;
-	fz_font *font;
+
+	/* First group of 32 */
+	unsigned int rowspan : 10; /* Needs to be able to represent 1-1000 */
+	unsigned int colspan : 10; /* Needs to be able to represent 1-1000 */
+	unsigned int white_space : 3;
+	unsigned int vertical_align : 3;
+	unsigned int page_break_before : 3;
+	unsigned int page_break_after : 3;
+
+	/* Second group of 32 */
+	unsigned int visibility : 2;
+	unsigned int text_align : 2;
+	unsigned int direction : 2;
+	unsigned int list_style_type : 4;
+	unsigned int border_style_0 : 4;
+	unsigned int border_style_1 : 4;
+	unsigned int border_style_2 : 4;
+	unsigned int border_style_3 : 4;
+	unsigned int small_caps : 1;
+	unsigned int text_decoration: 2;
+	unsigned int overflow_wrap : 1;
+	unsigned int position : 2;
+
+	/* Third group of 32 */
+	unsigned int border_collapse : 1;
+	unsigned int hyphens : 2;
 };
 
 struct fz_css_style_splay_s {
@@ -359,6 +385,12 @@ enum
 	FZ_HTML_RESTARTER_FLAGS_NO_OVERFLOW = 1
 };
 
+enum
+{
+	FZ_HTML_RESTARTER_START_END_FLAGS_LEFT_SIDE = 1,
+	FZ_HTML_RESTARTER_START_END_FLAGS_SPECIFIC_SIDE = 2
+};
+
 typedef struct {
 	/* start will be filled in on entry with the first node to start
 	 * operation on. NULL means start 'immediately'. As we traverse
@@ -371,6 +403,11 @@ typedef struct {
 	 * at which we should start. */
 	fz_html_flow *start_flow;
 
+	/* If the SPECIFIC_SIDE bit is set, then we should only restart
+	 * layout if we are on appropriate side (as given by the LEFT_SIDE
+	 * bit). */
+	int start_flags;
+
 
 	/* end should be NULL on entry. On exit, if it's NULL, then we
 	 * finished. Otherwise, this is where we should restart the
@@ -380,6 +417,11 @@ typedef struct {
 	/* If end is a BOX_FLOW, then end_flow will be the flow entry at which
 	 * we should restart next time. */
 	fz_html_flow *end_flow;
+
+	/* If the SPECIFIC_SIDE bit is set, then the next layout should only
+	 * restart if we are on appropriate side (as given by the LEFT_SIDE
+	 * bit). */
+	int end_flags;
 
 
 	/* Workspace used on the traversal of the tree to store a good place
@@ -391,6 +433,8 @@ typedef struct {
 	fz_html_restart_reason reason;
 
 	int flags;
+
+	int left_page;
 } fz_html_restarter;
 
 struct fz_story
@@ -443,12 +487,17 @@ struct fz_html_box_s
 	unsigned int is_first_flow : 1; /* for text-indent */
 	unsigned int markup_dir : 2;
 	unsigned int heading : 3;
-	unsigned int list_item : 21;
+	unsigned int list_item : 16;
+	unsigned int suppress_border: 4;
+	unsigned int collapsed_cell : 1;
 
 	fz_html_box *up, *down, *next;
 
 	const char *tag, *id, *href;
 	const fz_css_style *style;
+#ifdef DEBUG_HTML_SEQ
+	int seq;
+#endif
 
 	union {
 		/* Only needed during build stage */
@@ -546,6 +595,7 @@ void fz_match_css_at_page(fz_context *ctx, fz_css_match *match, fz_css *css);
 int fz_get_css_match_display(fz_css_match *node);
 void fz_default_css_style(fz_context *ctx, fz_css_style *style);
 void fz_apply_css_style(fz_context *ctx, fz_html_font_set *set, fz_css_style *style, fz_css_match *match);
+fz_css_color fz_css_color_from_string(const char *str);
 
 /*
 	Lookup style in the splay tree, returning a pointer
@@ -557,6 +607,7 @@ const fz_css_style *fz_css_enlist(fz_context *ctx, const fz_css_style *style, fz
 float fz_from_css_number(fz_css_number number, float em, float percent_value, float auto_value);
 float fz_from_css_number_scale(fz_css_number number, float scale);
 int fz_css_number_defined(fz_css_number number);
+int fz_css_number_defined_not_auto(fz_css_number number);
 
 fz_html_font_set *fz_new_html_font_set(fz_context *ctx);
 void fz_add_html_font_face(fz_context *ctx, fz_html_font_set *set,
@@ -595,6 +646,45 @@ fz_html *fz_parse_html(fz_context *ctx,
 	int try_xml, int try_html5, int patch_mobi);
 
 fz_buffer *fz_txt_buffer_to_html(fz_context *ctx, fz_buffer *in);
+
+/* The only styles valid on cols are:
+ *
+ *   width
+ *   visibility
+ *   background
+ *      background-color
+ *      background-image      UNSUPPORTED
+ *      background-position   UNSUPPORTED
+ *      background-size       UNSUPPORTED
+ *      background-repeat     UNSUPPORTED
+ *      background-origin     UNSUPPORTED
+ *      background-clip       UNSUPPORTED
+ *      background-attachment UNSUPPORTED
+ *   border
+ *      border-width
+ *      border-style
+ *      border-color
+ *
+ * We want to record both what these values are, and whether the col
+ * actually had them.
+ **/
+typedef struct
+{
+	unsigned int has_bg_col : 1;
+	unsigned int has_border_col : 4;
+	unsigned int has_border_width : 4;
+	unsigned int has_visibility : 1;
+	unsigned int has_width : 1;
+	fz_css_color background_color;
+	fz_css_color border_color[4];
+	fz_css_number border_width[4];
+	unsigned int visibility;
+	fz_css_number width;
+} col_style;
+
+/* Retrieve the col_style information. */
+void
+fz_css_colstyle(col_style *cs, fz_css_match *match);
 
 #ifdef __cplusplus
 }

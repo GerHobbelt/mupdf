@@ -256,8 +256,22 @@ fz_trace_clip_stroke_path(fz_context *ctx, fz_device *dev_, const fz_path *path,
 {
 	fz_trace_device *dev = (fz_trace_device*)dev_;
 	fz_output *out = dev->out;
+	int i;
+
 	fz_trace_indent(ctx, out, dev->depth);
 	fz_write_printf(ctx, out, "<clip_stroke_path");
+	fz_write_printf(ctx, out, " linewidth=\"%g\"", stroke->linewidth);
+	fz_write_printf(ctx, out, " miterlimit=\"%g\"", stroke->miterlimit);
+	fz_write_printf(ctx, out, " linecap=\"%d,%d,%d\"", stroke->start_cap, stroke->dash_cap, stroke->end_cap);
+	fz_write_printf(ctx, out, " linejoin=\"%d\"", stroke->linejoin);
+	if (stroke->dash_len)
+	{
+		fz_write_printf(ctx, out, " dash_phase=\"%g\" dash=\"", stroke->dash_phase);
+		for (i = 0; i < stroke->dash_len; i++)
+			fz_write_printf(ctx, out, "%s%g", i > 0 ? " " : "", stroke->dash_list[i]);
+		fz_write_printf(ctx, out, "\"");
+	}
+
 	fz_trace_matrix(ctx, out, &ctm);
 	fz_write_printf(ctx, out, ">\n");
 	fz_trace_path(ctx, dev, path);
@@ -507,12 +521,12 @@ fz_trace_end_group(fz_context *ctx, fz_device *dev_)
 }
 
 static int
-fz_trace_begin_tile(fz_context *ctx, fz_device *dev_, fz_rect area, fz_rect view, float xstep, float ystep, fz_matrix ctm, int id)
+fz_trace_begin_tile(fz_context *ctx, fz_device *dev_, fz_rect area, fz_rect view, float xstep, float ystep, fz_matrix ctm, int id, int doc_id)
 {
 	fz_trace_device *dev = (fz_trace_device*)dev_;
 	fz_output *out = dev->out;
 	fz_trace_indent(ctx, out, dev->depth);
-	fz_write_printf(ctx, out, "<tile id=\"%d\"", id);
+	fz_write_printf(ctx, out, "<tile id=\"%d\" doc_id=\"%d\"", id, doc_id);
 	fz_write_printf(ctx, out, " area=%jR", &area);
 	fz_write_printf(ctx, out, " view=%jR", &view);
 	fz_write_printf(ctx, out, " xstep=\"%g\" ystep=\"%g\"", xstep, ystep);

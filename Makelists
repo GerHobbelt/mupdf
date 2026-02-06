@@ -991,7 +991,6 @@ endif
 
 ifeq ($(HAVE_NEON),yes)
 TESSERACT_DEFINES += -DHAVE_NEON
-TESSERACT_BUILD_CFLAGS += -mfpu=neon
 endif
 # Always include the neon code - it will compile to nothing if
 # neon isn't enabled. We need to always include it, because it
@@ -1003,7 +1002,9 @@ TESSERACT_BUILD_CFLAGS += $(TESSERACT_DEFINES)
 
 # --- ZXINGCPP (optional) ---
 
+ifeq ($(USE_ZXINGCPP),yes)
 ZXINGCPP_LANGFLAGS = -std=c++20
+endif
 
 ZXINGCPP_CFLAGS += -Ithirdparty/zxing-cpp/core/src
 ZXINGCPP_CFLAGS += -DZXING_EXPERIMENTAL_API

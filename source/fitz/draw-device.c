@@ -104,12 +104,15 @@ typedef struct {
 	fz_pixmap *shape;
 	fz_pixmap *group_alpha;
 	int blendmode;
-	int id, encache;
+	int id;
+	int doc_id;
+	int encache;
 	float alpha;
 	fz_matrix ctm;
 	float xstep, ystep;
 	fz_irect area;
 	int flags;
+	int in_smask;
 } fz_draw_state;
 
 typedef struct fz_draw_device
@@ -482,10 +485,28 @@ colors_supported(fz_context *ctx, fz_colorspace *cs, fz_pixmap *dest)
 	return 0;
 }
 
+static int
+cs_has_matching_colorant(fz_context *ctx, fz_colorspace *src, const char *name)
+{
+	int sn = fz_colorspace_n(ctx, src);
+	int i;
+	for (i = 0; i < sn; i++)
+	{
+		const char *sname = fz_colorspace_colorant(ctx, src, i);
+		if (!sname)
+			continue;
+		if (name && !strcmp(name, sname))
+			return 1;
+		if (!strcmp(sname, "All"))
+			return 1;
+	}
+	return 0;
+}
+
 static fz_overprint *
 set_op_from_spaces(fz_context *ctx, fz_overprint *op, const fz_pixmap *dest, fz_colorspace *src, int opm)
 {
-	int dn, sn, i, j, dc;
+	int dn, sn, i, j, dc, nseps, k;
 
 	if (!op)
 		return NULL;
@@ -493,6 +514,7 @@ set_op_from_spaces(fz_context *ctx, fz_overprint *op, const fz_pixmap *dest, fz_
 	if (fz_colorspace_is_indexed(ctx, src))
 		src = fz_base_colorspace(ctx, src);
 
+	/* We can only do overprint with subtractive colorspaces. */
 	if (!fz_colorspace_is_subtractive(ctx, dest->colorspace))
 		return NULL;
 	if (fz_colorspace_is_gray(ctx, src))
@@ -511,11 +533,19 @@ set_op_from_spaces(fz_context *ctx, fz_overprint *op, const fz_pixmap *dest, fz_
 	sn = fz_colorspace_n(ctx, src);
 	dn = dest->n - dest->alpha;
 	dc = dn - dest->s;
+	nseps = fz_count_separations(ctx, dest->seps);
 
-	/* If a source colorant is not mentioned in the destination
-	 * colorants (either process or spots), then it will be mapped
-	 * to process colorants. In this case, the process colorants
-	 * can never be protected.
+	/* The purpose of this routine is to figure out which colorants in the
+	 * destination space should be "protected", by overprint.
+	 *
+	 * Loop 1 figures out whether process colors can be protected or not.
+	 * If they can, then Loop 2 figures out protection for those colors.
+	 * Then Loop 3 figures out protection for the spot colors. */
+
+	/* Loop 1: Are there any source colorants that are not mentioned in
+	 * the destination colorants (either process or spots)? If so, then
+	 * it will be mapped to process colorants, and overprint can't apply
+	 * to the process colorants.
 	 */
 	for (j = 0; j < sn; j++)
 	{
@@ -526,6 +556,8 @@ set_op_from_spaces(fz_context *ctx, fz_overprint *op, const fz_pixmap *dest, fz_
 			break;
 		if (!strcmp(sname, "All") || !strcmp(sname, "None"))
 			continue;
+
+		/* Does name appear in the process colors? */
 		for (i = 0; i < dc; i++)
 		{
 			const char *name = fz_colorspace_colorant(ctx, dest->colorspace, i);
@@ -535,59 +567,56 @@ set_op_from_spaces(fz_context *ctx, fz_overprint *op, const fz_pixmap *dest, fz_
 				break;
 		}
 		if (i != dc)
-			continue;
-		for (; i < dn; i++)
+			continue; /* Yes! Keep looking for one that doesn't. */
+
+		/* Does name appear in the (active) spots? */
+		for (k = 0; k < nseps; k++)
 		{
-			const char *name = fz_separation_name(ctx, dest->seps, i - dc);
-			if (!name)
+			const char *name = fz_separation_name(ctx, dest->seps, k);
+			if (!name || fz_separation_current_behavior(ctx, dest->seps, k) != FZ_SEPARATION_SPOT)
 				continue;
 			if (!strcmp(name, sname))
 				break;
 		}
-		if (i == dn)
+		if (k == nseps)
 		{
-			/* This source colorant wasn't mentioned */
+			/* No! This source colorant wasn't mentioned. Stop searching. */
 			break;
 		}
 	}
+	/* If j == sn, then we did not find any source colorants that would be mapped
+	 * to process colors. So we can figure out protection for those colors. */
 	if (j == sn)
 	{
-		/* We did not find any source colorants that weren't mentioned, so
-		 * process colorants might not be touched... */
+		/* Loop 2: Figure out protection for process colors. */
 		for (i = 0; i < dc; i++)
 		{
 			const char *name = fz_colorspace_colorant(ctx, dest->colorspace, i);
 
-			for (j = 0; j < sn; j++)
+			if (!cs_has_matching_colorant(ctx, src, name))
 			{
-				const char *sname = fz_colorspace_colorant(ctx, src, j);
-				if (!name || !sname)
-					continue;
-				if (!strcmp(name, sname))
-					break;
-				if (!strcmp(sname, "All"))
-					break;
-			}
-			if (j == sn)
+				/* Destination colorant i (a process color) does not correspond to
+				 * any source colorant. Therefore set overprint for it. */
 				fz_set_overprint(op, i);
+			}
 		}
 	}
-	for (i = dc; i < dn; i++)
+	/* Loop 3: Now figure out protection for spot colors in the destination. */
+	i = dc;
+	for (k = 0; k < nseps; k++)
 	{
-		const char *name = fz_separation_name(ctx, dest->seps, i - dc);
+		const char *name = fz_separation_name(ctx, dest->seps, k);
 
-		for (j = 0; j < sn; j++)
+		/* Ignore any spots that are not being handled as spots! */
+		if (fz_separation_current_behavior(ctx, dest->seps, k) != FZ_SEPARATION_SPOT)
+			continue;
+		if (!cs_has_matching_colorant(ctx, src, name))
 		{
-			const char *sname = fz_colorspace_colorant(ctx, src, j);
-			if (!name || !sname)
-				continue;
-			if (!strcmp(name, sname))
-				break;
-			if (!strcmp(sname, "All"))
-				break;
-		}
-		if (j == sn)
+			/* Destination spot i does not correspond to any source colorant.
+			 * Therefore set overprint for it. */
 			fz_set_overprint(op, i);
+		}
+		i++;
 	}
 
 	return op;
@@ -739,6 +768,10 @@ fz_draw_fill_path(fz_context *ctx, fz_device *devp, const fz_path *path, int eve
 	fz_overprint *eop;
 	fz_cookie *cookie = ctx->cookie;
 
+	assert((color_params.ri & FZ_RI_IN_SOFTMASK) == 0);
+	if (state->in_smask)
+		color_params.ri |= FZ_RI_IN_SOFTMASK;
+
 	if (dev->top == 0 && dev->resolve_spots)
 		state = push_group_for_separations(ctx, dev, color_params, dev->default_cs);
 
@@ -805,6 +838,10 @@ fz_draw_stroke_path(fz_context *ctx, fz_device *devp, const fz_path *path, const
 	fz_overprint op = { { 0 } };
 	fz_overprint *eop;
 	fz_cookie* cookie = ctx->cookie;
+
+	assert((color_params.ri & FZ_RI_IN_SOFTMASK) == 0);
+	if (state->in_smask)
+		color_params.ri |= FZ_RI_IN_SOFTMASK;
 
 	if (dev->top == 0 && dev->resolve_spots)
 		state = push_group_for_separations(ctx, dev, color_params, dev->default_cs);
@@ -1064,6 +1101,10 @@ fz_draw_fill_text(fz_context *ctx, fz_device *devp, const fz_text *text, fz_matr
 	fz_overprint *eop;
 	fz_cookie* cookie = ctx->cookie;
 
+	assert((color_params.ri & FZ_RI_IN_SOFTMASK) == 0);
+	if (state->in_smask)
+		color_params.ri |= FZ_RI_IN_SOFTMASK;
+
 	if (dev->top == 0 && dev->resolve_spots)
 		state = push_group_for_separations(ctx, dev, color_params, dev->default_cs);
 
@@ -1167,6 +1208,10 @@ fz_draw_stroke_text(fz_context *ctx, fz_device *devp, const fz_text *text, const
 	fz_overprint op = { { 0 } };
 	fz_overprint *eop;
 	fz_cookie* cookie = ctx->cookie;
+
+	assert((color_params.ri & FZ_RI_IN_SOFTMASK) == 0);
+	if (state->in_smask)
+		color_params.ri |= FZ_RI_IN_SOFTMASK;
 
 	if (dev->top == 0 && dev->resolve_spots)
 		state = push_group_for_separations(ctx, dev, color_params, dev->default_cs);
@@ -1518,6 +1563,10 @@ fz_draw_fill_shade(fz_context *ctx, fz_device *devp, fz_shade *shade, fz_matrix 
 	fz_colorspace *colorspace = fz_default_colorspace(ctx, dev->default_cs, shade->colorspace);
 	fz_cookie* cookie = ctx->cookie;
 
+	assert((color_params.ri & FZ_RI_IN_SOFTMASK) == 0);
+	if (state->in_smask)
+		color_params.ri |= FZ_RI_IN_SOFTMASK;
+
 	if (dev->top == 0 && dev->resolve_spots)
 		state = push_group_for_separations(ctx, dev, color_params, dev->default_cs);
 
@@ -1845,6 +1894,10 @@ fz_draw_fill_image(fz_context *ctx, fz_device *devp, fz_image *image, fz_matrix 
 	if (alpha == 0)
 		return;
 
+	assert((color_params.ri & FZ_RI_IN_SOFTMASK) == 0);
+	if (state->in_smask)
+		color_params.ri |= FZ_RI_IN_SOFTMASK;
+
 	if (dev->top == 0 && dev->resolve_spots)
 		state = push_group_for_separations(ctx, dev, color_params, dev->default_cs);
 	model = state->dest->colorspace;
@@ -1963,6 +2016,10 @@ fz_draw_fill_image_mask(fz_context *ctx, fz_device *devp, fz_image *image, fz_ma
 	if (alpha == 0)
 		return;
 
+	assert((color_params.ri & FZ_RI_IN_SOFTMASK) == 0);
+	if (state->in_smask)
+		color_params.ri |= FZ_RI_IN_SOFTMASK;
+
 	if (dev->top == 0 && dev->resolve_spots)
 		state = push_group_for_separations(ctx, dev, color_params, dev->default_cs);
 
@@ -1982,7 +2039,7 @@ fz_draw_fill_image_mask(fz_context *ctx, fz_device *devp, fz_image *image, fz_ma
 	if (fz_is_empty_irect(src_area))
 		return;
 
-	pixmap = fz_get_pixmap_from_image(ctx, image, &src_area, &local_ctm, &dx, &dy);
+	pixmap = fz_get_pixmap_mask_from_image(ctx, image, &src_area, &local_ctm, &dx, &dy, state->in_smask);
 
 	fz_var(pixmap);
 
@@ -2092,7 +2149,7 @@ fz_draw_clip_image_mask(fz_context *ctx, fz_device *devp, fz_image *image, fz_ma
 
 	fz_try(ctx)
 	{
-		pixmap = fz_get_pixmap_from_image(ctx, image, &src_area, &local_ctm, &dx, &dy);
+		pixmap = fz_get_pixmap_mask_from_image(ctx, image, &src_area, &local_ctm, &dx, &dy, state->in_smask);
 
 		state[1].mask = fz_new_pixmap_with_bbox(ctx, NULL, bbox, NULL, 1);
 		fz_clear_pixmap(ctx, state[1].mask);
@@ -2276,6 +2333,7 @@ fz_draw_begin_mask(fz_context *ctx, fz_device *devp, fz_rect area, int luminosit
 		float bc;
 		if (!colorspace)
 			colorspace = fz_device_gray(ctx);
+		color_params.ri |= FZ_RI_IN_SOFTMASK;
 		fz_convert_color(ctx, colorspace, colorfv, fz_device_gray(ctx), &bc, NULL, color_params);
 		fz_clear_pixmap_with_value(ctx, dest, bc * 255 + 0.5f);
 		if (shape)
@@ -2296,6 +2354,7 @@ fz_draw_begin_mask(fz_context *ctx, fz_device *devp, fz_rect area, int luminosit
 	dump_spaces(dev->top-1, "Mask begin\n");
 #endif
 	state[1].scissor = bbox;
+	state[1].in_smask = 1;
 }
 
 static void
@@ -2360,6 +2419,7 @@ fz_draw_end_mask(fz_context *ctx, fz_device *devp, fz_function *tr)
 		fz_throw(ctx, FZ_ERROR_ARGUMENT, "unexpected end mask");
 
 	state = convert_stack(ctx, dev, "mask");
+	state[1].in_smask = 0;
 
 #ifdef DUMP_GROUP_BLENDS
 	dump_spaces(dev->top-1, "Mask -> Clip: ");
@@ -2426,7 +2486,7 @@ fz_draw_begin_group(fz_context *ctx, fz_device *devp, fz_rect area, fz_colorspac
 	fz_irect bbox;
 	fz_pixmap *dest;
 	fz_draw_state *state = &dev->stack[dev->top];
-	fz_colorspace *model = state->dest->colorspace;
+	fz_colorspace *model;
 	fz_rect trect;
 	fz_cookie* cookie = ctx->cookie;
 
@@ -2437,6 +2497,7 @@ fz_draw_begin_group(fz_context *ctx, fz_device *devp, fz_rect area, fz_colorspac
 	if (fz_get_gamma_blending(ctx) && fz_colorspace_is_subtractive(ctx, cs))
 		cs = NULL;
 
+	model = state->dest->colorspace;
 	if (cs != NULL)
 		model = fz_default_colorspace(ctx, dev->default_cs, cs);
 
@@ -2517,12 +2578,17 @@ fz_draw_end_group(fz_context* ctx, fz_device* devp)
 	int isolated;
 	float alpha;
 	fz_draw_state* state;
+	fz_color_params color_params = fz_default_color_params;
 	fz_cookie* cookie = ctx->cookie;
 
 	if (dev->top == 0)
 		fz_throw(ctx, FZ_ERROR_ARGUMENT, "unexpected end group");
 
 	state = pop_stack(ctx, dev, "group");
+
+	assert((color_params.ri & FZ_RI_IN_SOFTMASK) == 0);
+	if (state[1].in_smask)
+		color_params.ri |= FZ_RI_IN_SOFTMASK;
 
 	fz_try(ctx)
 	{
@@ -2558,7 +2624,7 @@ fz_draw_end_group(fz_context* ctx, fz_device* devp)
 
 		if (state[0].dest->colorspace != state[1].dest->colorspace)
 		{
-			fz_pixmap *converted = fz_convert_pixmap(ctx, state[1].dest, state[0].dest->colorspace, NULL, dev->default_cs, fz_default_color_params, 1);
+			fz_pixmap *converted = fz_convert_pixmap(ctx, state[1].dest, state[0].dest->colorspace, NULL, dev->default_cs, color_params, 1);
 			fz_drop_pixmap(ctx, state[1].dest);
 			state[1].dest = converted;
 		}
@@ -2634,6 +2700,7 @@ typedef struct
 	int refs;
 	float ctm[4];
 	int id;
+	int doc_id;
 	char has_shape;
 	char has_group_alpha;
 	fz_colorspace *cs;
@@ -2653,6 +2720,7 @@ fz_make_hash_tile_key(fz_context *ctx, fz_store_hash *hash, void *key_)
 	tile_key *key = key_;
 
 	hash->u.im.id = key->id;
+	hash->u.im.doc_id = key->doc_id;
 	hash->u.im.has_shape = key->has_shape;
 	hash->u.im.has_group_alpha = key->has_group_alpha;
 	hash->u.im.m[0] = key->ctm[0];
@@ -2687,6 +2755,7 @@ fz_cmp_tile_key(fz_context *ctx, void *k0_, void *k1_)
 	tile_key *k0 = k0_;
 	tile_key *k1 = k1_;
 	return k0->id == k1->id &&
+		k0->doc_id == k1->doc_id &&
 		k0->has_shape == k1->has_shape &&
 		k0->has_group_alpha == k1->has_group_alpha &&
 		k0->ctm[0] == k1->ctm[0] &&
@@ -2700,8 +2769,8 @@ static void
 fz_format_tile_key(fz_context *ctx, char *s, size_t n, void *key_)
 {
 	tile_key *key = (tile_key *)key_;
-	fz_snprintf(s, n, "(tile id=%x, ctm=%g %g %g %g, cs=%x, shape=%d, ga=%d)",
-			key->id, key->ctm[0], key->ctm[1], key->ctm[2], key->ctm[3], key->cs,
+	fz_snprintf(s, n, "(tile id=%x, doc_id=%x, ctm=%g %g %g %g, cs=%x, shape=%d, ga=%d)",
+			key->id, key->doc_id, key->ctm[0], key->ctm[1], key->ctm[2], key->ctm[3], key->cs,
 			key->has_shape, key->has_group_alpha);
 }
 
@@ -2752,7 +2821,7 @@ fz_tile_size(fz_context *ctx, tile_record *tile)
 }
 
 static int
-fz_draw_begin_tile(fz_context *ctx, fz_device *devp, fz_rect area, fz_rect view, float xstep, float ystep, fz_matrix in_ctm, int id)
+fz_draw_begin_tile(fz_context *ctx, fz_device *devp, fz_rect area, fz_rect view, float xstep, float ystep, fz_matrix in_ctm, int id, int doc_id)
 {
 	fz_draw_device *dev = (fz_draw_device*)devp;
 	fz_matrix ctm = fz_concat(in_ctm, dev->transform);
@@ -2807,6 +2876,7 @@ fz_draw_begin_tile(fz_context *ctx, fz_device *devp, fz_rect area, fz_rect view,
 		tk.ctm[2] = ctm.c;
 		tk.ctm[3] = ctm.d;
 		tk.id = id;
+		tk.doc_id = doc_id;
 		tk.cs = state[1].dest->colorspace;
 		tk.has_shape = (state[1].shape != NULL);
 		tk.has_group_alpha = (state[1].group_alpha != NULL);
@@ -2821,6 +2891,7 @@ fz_draw_begin_tile(fz_context *ctx, fz_device *devp, fz_rect area, fz_rect view,
 			state[1].xstep = xstep;
 			state[1].ystep = ystep;
 			state[1].id = id;
+			state[1].doc_id = doc_id;
 			state[1].encache = 0;
 			state[1].area = fz_irect_from_rect(area);
 			state[1].ctm = ctm;
@@ -2855,6 +2926,7 @@ fz_draw_begin_tile(fz_context *ctx, fz_device *devp, fz_rect area, fz_rect view,
 	state[1].xstep = xstep;
 	state[1].ystep = ystep;
 	state[1].id = id;
+	state[1].doc_id = doc_id;
 	state[1].encache = 1;
 	state[1].area = fz_irect_from_rect(area);
 	state[1].ctm = ctm;
@@ -3011,6 +3083,7 @@ fz_draw_end_tile(fz_context *ctx, fz_device *devp)
 				key = fz_malloc_struct(ctx, tile_key);
 				key->refs = 1;
 				key->id = state[1].id;
+				key->doc_id = state[1].doc_id;
 				key->ctm[0] = ctm.a;
 				key->ctm[1] = ctm.b;
 				key->ctm[2] = ctm.c;
@@ -3330,11 +3403,8 @@ static int parse_aa_opts(const char *val)
 	return 8;
 }
 
-fz_draw_options *
-fz_parse_draw_options(fz_context *ctx, fz_draw_options *opts, const char *args)
+void fz_init_draw_options(fz_context *ctx, fz_draw_options *opts)
 {
-	const char *val;
-
 	memset(opts, 0, sizeof *opts);
 
 	opts->x_resolution = 96;
@@ -3347,19 +3417,46 @@ fz_parse_draw_options(fz_context *ctx, fz_draw_options *opts, const char *args)
 	opts->graphics = fz_aa_level(ctx);
 	opts->text = fz_text_aa_level(ctx);
 
-	if (fz_has_option(ctx, args, "rotate", &val))
+}
+
+fz_draw_options *
+fz_parse_draw_options(fz_context *ctx, fz_draw_options *opts, const char *args)
+{
+	fz_options *options = fz_new_options_from_string(ctx, args);
+	fz_draw_options *out;
+
+	fz_init_draw_options(ctx, opts);
+
+	fz_try(ctx)
+	{
+		out = fz_apply_draw_options(ctx, opts, options);
+		fz_warn_on_unused_options(ctx, options);
+	}
+	fz_always(ctx)
+		fz_drop_options(ctx, options);
+	fz_catch(ctx)
+		fz_rethrow(ctx);
+
+	return out;
+}
+
+fz_draw_options *fz_apply_draw_options(fz_context *ctx, fz_draw_options *opts, fz_options *args)
+{
+	const char *val;
+
+	if (fz_options_has_key(ctx, args, "rotate", &val))
 		opts->rotate = fz_atoi(val);
-	if (fz_has_option(ctx, args, "resolution", &val))
+	if (fz_options_has_key(ctx, args, "resolution", &val))
 		opts->x_resolution = opts->y_resolution = fz_atoi(val);
-	if (fz_has_option(ctx, args, "x-resolution", &val))
+	if (fz_options_has_key(ctx, args, "x-resolution", &val))
 		opts->x_resolution = fz_atoi(val);
-	if (fz_has_option(ctx, args, "y-resolution", &val))
+	if (fz_options_has_key(ctx, args, "y-resolution", &val))
 		opts->y_resolution = fz_atoi(val);
-	if (fz_has_option(ctx, args, "width", &val))
+	if (fz_options_has_key(ctx, args, "width", &val))
 		opts->width = fz_atoi(val);
-	if (fz_has_option(ctx, args, "height", &val))
+	if (fz_options_has_key(ctx, args, "height", &val))
 		opts->height = fz_atoi(val);
-	if (fz_has_option(ctx, args, "colorspace", &val))
+	if (fz_options_has_key(ctx, args, "colorspace", &val))
 	{
 		if (fz_option_eq(val, "gray") || fz_option_eq(val, "grey") || fz_option_eq(val, "mono"))
 			opts->colorspace = fz_device_gray(ctx);
@@ -3370,11 +3467,11 @@ fz_parse_draw_options(fz_context *ctx, fz_draw_options *opts, const char *args)
 		else
 			fz_throw(ctx, FZ_ERROR_ARGUMENT, "unknown colorspace in options");
 	}
-	if (fz_has_option(ctx, args, "alpha", &val))
+	if (fz_options_has_key(ctx, args, "alpha", &val))
 		opts->alpha = fz_option_eq(val, "yes");
-	if (fz_has_option(ctx, args, "graphics", &val))
+	if (fz_options_has_key(ctx, args, "graphics", &val))
 		opts->text = opts->graphics = parse_aa_opts(val);
-	if (fz_has_option(ctx, args, "text", &val))
+	if (fz_options_has_key(ctx, args, "text", &val))
 		opts->text = parse_aa_opts(val);
 
 	/* Sanity check values */
@@ -3444,6 +3541,20 @@ fz_new_draw_device_with_options(fz_context *ctx, const fz_draw_options *opts, fz
 		fz_rethrow(ctx);
 	}
 	return dev;
+}
+
+static int
+drop_tile_doc(fz_context *ctx, void *doc_id, void *key_)
+{
+	tile_key *key = (tile_key *)key_;
+
+	return (key->doc_id == (int)(intptr_t)doc_id);
+}
+
+void
+fz_drop_drawn_tiles_for_document(fz_context *ctx, fz_document *doc)
+{
+	fz_filter_store(ctx, drop_tile_doc, (void *)(intptr_t)doc->id, &fz_tile_store_type);
 }
 
 #endif

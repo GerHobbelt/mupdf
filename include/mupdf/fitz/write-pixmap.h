@@ -104,7 +104,11 @@ void fz_pcl_preset(fz_context *ctx, fz_pcl_options *opts, const char *preset);
 		is_ljet4pjl	Disable/Enable HP 4PJL model-specific output
 		is_oce9050	Disable/Enable Oce 9050 model-specific output
 */
+void fz_init_pcl_options(fz_context *ctx, fz_pcl_options *opts);
+
 fz_pcl_options *fz_parse_pcl_options(fz_context *ctx, fz_pcl_options *opts, const char *args);
+
+void fz_apply_pcl_options(fz_context *ctx, fz_pcl_options *opts, fz_options *args);
 
 /**
 	Create a new band writer, outputting monochrome pcl.
@@ -157,7 +161,9 @@ typedef struct
 		compression=flate: Flate compression
 		strip-height=n: Strip height (default 16)
 */
+void fz_init_pclm_options(fz_context *ctx, fz_pclm_options *opts);
 fz_pclm_options *fz_parse_pclm_options(fz_context *ctx, fz_pclm_options *opts, const char *args);
+void fz_apply_pclm_options(fz_context *ctx, fz_pclm_options *opts, fz_options *args);
 
 /**
 	Create a new band writer, outputting pclm
@@ -193,6 +199,8 @@ typedef struct
 
 	/* Updated as we move through the job */
 	int page_count;
+
+	fz_options *options;
 } fz_pdfocr_options;
 
 /**
@@ -206,7 +214,9 @@ typedef struct
 		ocr-language=<lang>: OCR Language (default eng)
 		ocr-datadir=<datadir>: OCR data path (default rely on TESSDATA_PREFIX)
 */
+void fz_init_pdfocr_options(fz_context *ctx, fz_pdfocr_options *opts);
 fz_pdfocr_options *fz_parse_pdfocr_options(fz_context *ctx, fz_pdfocr_options *opts, const char *args);
+void fz_apply_pdfocr_options(fz_context *ctx, fz_pdfocr_options *opts, fz_options *options);
 
 /**
 	Create a new band writer, outputting pdfocr.
@@ -253,7 +263,7 @@ void fz_save_pixmap_as_jpeg(fz_context *ctx, const fz_pixmap *pixmap, const char
 /**
 	Write a (Greyscale or RGB) pixmap as a png.
 */
-void fz_write_pixmap_as_png(fz_context *ctx, fz_output *out, const fz_pixmap *pixmap);
+void fz_write_pixmap_as_png(fz_context *ctx, fz_output *out, fz_pixmap *pixmap);
 
 /**
 	Pixmap data as JP2K with no subsampling.
@@ -484,11 +494,13 @@ fz_band_writer *fz_new_pbm_band_writer(fz_context *ctx, fz_output *out);
 	Save a pixmap as a pbm. (Performing halftoning).
 */
 void fz_save_pixmap_as_pbm(fz_context *ctx, const fz_pixmap *pixmap, const char *filename);
+void fz_write_pixmap_as_pkm(fz_context *ctx, fz_output *out, const fz_pixmap *pixmap);
 
 /**
 	Save a CMYK bitmap as a pkm.
 */
 void fz_save_bitmap_as_pkm(fz_context *ctx, const fz_bitmap *bitmap, const char *filename);
+void fz_write_pixmap_as_pbm(fz_context *ctx, fz_output *out, const fz_pixmap *pixmap);
 
 /**
 	Write a CMYK bitmap as a pkm.
@@ -588,10 +600,20 @@ typedef struct
 	char page_size_name[64];
 } fz_pwg_options;
 
-/*
-	Parse PWG options.
+/**
+	Init pwg options to a sensible default.
+*/
+void fz_init_pwg_options(fz_context *ctx, fz_pwg_options *opts);
+
+/**
+	Initialise a pwg options struct, and parse the given options string.
 */
 fz_pwg_options *fz_parse_pwg_options(fz_context *ctx, fz_pwg_options *opts, const char *args);
+
+/**
+	Apply the given options to an initialised pwg options struct.
+*/
+void fz_apply_pwg_options(fz_context *ctx, fz_pwg_options *opts, fz_options *args);
 
 /**
 	Save a pixmap as a PWG.

@@ -62,6 +62,12 @@ typedef long long            int64_t;
 typedef unsigned long long   uint64_t;
 #endif
 
+#if defined(_MSC_VER)
+static inline int strcasecmp(const char* a, const char* b) {
+	return stricmp(a, b);
+}
+#endif
+
 #define SIZE_LABEL_SUFFIX				 "_size"
 #define SIZE_TYPE						 uint32_t
 
@@ -247,24 +253,20 @@ typedef struct {
 
 typedef enum
 {
-    TARGET_UNKNOWN, TARGET_x86, TARGET_x64, TARGET_arm64
-} Target;
+    MACHINE_UNKNOWN = 0, 
+	MACHINE_X86, 
+	MACHINE_X64, 
+	MACHINE_ARM64
+} machine_type;
 
-static int check_64bit(const char *arg, int *x86_32, Target* target)
+static int check_machine(const char *arg, machine_type *machine)
 {
-	if ((strcmp(arg, "64bit") == 0) || (strcmp(arg, "x64") == 0))
-		*target = TARGET_x64;
-	else if ((strcmp(arg, "arm64") == 0) || (strcmp(arg, "ARM64") == 0))
-		*target = TARGET_arm64;
-	else if ((strcmp(arg, "32bit") == 0) || (strcmp(arg, "Win32") == 0))
-		*target = TARGET_x86;
-	else
-		return 0;
-
-	if ((strcmp(arg, "64bit") == 0) || (strcmp(arg, "x64") == 0) || (strcmp(arg, "arm64") == 0) || (strcmp(arg, "ARM64") == 0))
-		*x86_32 = 0; /* 0 = 64bit */
-	else if ((strcmp(arg, "32bit") == 0) || (strcmp(arg, "Win32") == 0))
-		*x86_32 = 1; /* 1 = 32bit */
+	if ((strcasecmp(arg, "32bit") == 0) || (strcasecmp(arg, "Win32") == 0))
+		*machine = MACHINE_X86;
+	else if ((strcasecmp(arg, "64bit") == 0) || (strcasecmp(arg, "x64") == 0))
+		*machine = MACHINE_X64;
+	else if ((strcasecmp(arg, "ARM64") == 0) || (strcasecmp(arg, "aarch64") == 0))
+		*machine = MACHINE_ARM64;
 	else
 		return 0;
 	return 1;
@@ -274,13 +276,14 @@ int
 #ifdef DDKBUILD
 __cdecl
 #endif
-main (int argc, const char** argv)
+main(int argc, const char** argv)
 {
 	const uint16_t endian_test = 0xBE00;
 	int x86_32, short_label, short_size, last_arg;
+	machine_type machine;
 	int i, r = 1;
-	char* label;
-	FILE *fd = NULL;
+	char* label = NULL;
+	FILE* fd = NULL;
 	size_t size, alloc_size;
 	size_t padding_length;
 	uint8_t* buffer = NULL;
@@ -289,18 +292,19 @@ main (int argc, const char** argv)
 	IMAGE_SYMBOL* symbol_table;
 	IMAGE_STRINGS* string_table;
 	SIZE_TYPE* data_size;
-	Target target = TARGET_UNKNOWN;
 
 	if ((argc < 3) || (argc > 5)) {
-		fprintf(stderr, "\nUsage: bin2coff bin obj [label] [64bit|Win32|x64]\n\n");
+		fprintf(stderr, "\nUsage: bin2coff bin obj [label] [64bit|Win32|x64|ARM64|aarch64]\n\n");
 		fprintf(stderr, "  bin  : source binary data\n");
 		fprintf(stderr, "  obj  : target object file, in MS COFF format.\n");
 		fprintf(stderr, "  label: identifier for the extern data. If not provided, the name of the\n");
 		fprintf(stderr, "         binary file without extension is used.\n");
-		fprintf(stderr, "  64bit:\n  Win32:\n  x64  :\n  arm64:\n  ARM64:  produce an object that is compatible with\n");
-        fprintf(stderr, "         the specified architecture. For 64bit/x64 and arm64, symbols are\n");
-        fprintf(stderr, "         generated without leading underscores, and for arm64 the data is\n");
-        fprintf(stderr, "         aligned to 4-byte boundaries; machine type is set appropriately.\n\n");
+		fprintf(stderr, "  Win32:\n  x86  : produce a 32 bit compatible object - \n");
+		fprintf(stderr, "         machine type is set to x86.\n\n");
+		fprintf(stderr, "  64bit:\n  x64  : produce a 64 bit compatible object - symbols are generated without\n");
+		fprintf(stderr, "         leading underscores and machine type is set to x86_x64.\n\n");
+		fprintf(stderr, "  ARM64:\n  aarch64: produce an ARM 64 bit compatible object -\n");
+		fprintf(stderr, "         machine type is set to ARM64.\n\n");
 		fprintf(stderr, "With your linker set properly, typical access from a C source is:\n\n");
 		fprintf(stderr, "    extern uint8_t  label[]     /* binary data         */\n");
 		fprintf(stderr, "    extern uint32_t label_size  /* size of binary data */\n\n");
@@ -322,16 +326,18 @@ main (int argc, const char** argv)
 	size = (size_t)ftell(fd);
 	fseek(fd, 0, SEEK_SET);
 
-	x86_32 = 0;
+	machine = MACHINE_UNKNOWN;
 	last_arg = argc;
-	if (argc >= 4 && check_64bit(argv[3], &x86_32, &target))
+	if (argc >= 4 && check_machine(argv[3], &machine))
 		last_arg = 4;
-	else if (argc >= 5 && check_64bit(argv[4], &x86_32, &target))
+	else if (argc >= 5 && check_machine(argv[4], &machine))
 		last_arg = 5;
 	else
-		target = TARGET_x64;
+		machine = MACHINE_X64;
 
-	if (target == TARGET_arm64)	{
+	x86_32 = (machine == MACHINE_X86 ? 1 : 0);
+
+	if (machine == MACHINE_ARM64) {
 		padding_length = (4 - (size % 4)) % 4;
 	}
 	else {
@@ -341,19 +347,20 @@ main (int argc, const char** argv)
 	/* Label setup */
 	if (argc < last_arg) {
 		char* s = strdup(argv[1]);
-		for (i=(int)strlen(s)-1; i>=0; i--) {
+		for (i = (int)strlen(s) - 1; i >= 0; i--) {
 			if (s[i] == '.') {
 				s[i] = 0;
 				break;
 			}
 		}
 		label = s;
-	} else {
+	}
+	else {
 		label = strdup(argv[3]);
 	}
 
 	{
-		char *s = label;
+		char* s = label;
 
 		while (*s) {
 			if (*s == '-')
@@ -364,7 +371,7 @@ main (int argc, const char** argv)
 
 	short_label = (strlen(label) + x86_32) <= IMAGE_SIZEOF_SHORT_NAME;
 	short_size = (strlen(label) + x86_32 + strlen(SIZE_LABEL_SUFFIX)) <= IMAGE_SIZEOF_SHORT_NAME;
-	alloc_size = sizeof(IMAGE_FILE_HEADER) + sizeof(IMAGE_SECTION_HEADER) + size + padding_length + sizeof(SIZE_TYPE) + 2*sizeof(IMAGE_SYMBOL) + sizeof(IMAGE_STRINGS);
+	alloc_size = sizeof(IMAGE_FILE_HEADER) + sizeof(IMAGE_SECTION_HEADER) + size + padding_length + sizeof(SIZE_TYPE) + 2 * sizeof(IMAGE_SYMBOL) + sizeof(IMAGE_STRINGS);
 	if (!short_label) {
 		alloc_size += x86_32 + strlen(label) + 1;
 	}
@@ -380,24 +387,24 @@ main (int argc, const char** argv)
 	file_header = (IMAGE_FILE_HEADER*)&buffer[0];
 	section_header = (IMAGE_SECTION_HEADER*)&buffer[sizeof(IMAGE_FILE_HEADER)];
 	symbol_table = (IMAGE_SYMBOL*)&buffer[sizeof(IMAGE_FILE_HEADER) + sizeof(IMAGE_SECTION_HEADER) + size + sizeof(SIZE_TYPE)];
-	string_table = (IMAGE_STRINGS*)&buffer[sizeof(IMAGE_FILE_HEADER) + sizeof(IMAGE_SECTION_HEADER) + size + sizeof(SIZE_TYPE) + 2*sizeof(IMAGE_SYMBOL)];
+	string_table = (IMAGE_STRINGS*)&buffer[sizeof(IMAGE_FILE_HEADER) + sizeof(IMAGE_SECTION_HEADER) + size + sizeof(SIZE_TYPE) + 2 * sizeof(IMAGE_SYMBOL)];
 
 	/* Populate file header */
-    switch (target)
-    {
-    case TARGET_x86:
-        file_header->Machine = IMAGE_FILE_MACHINE_I386;
-        break;
-    case TARGET_x64:
-        file_header->Machine = IMAGE_FILE_MACHINE_AMD64;
-        break;
-    case TARGET_arm64:
-        file_header->Machine = IMAGE_FILE_MACHINE_ARM64;
-        break;
+	switch (machine) {
+	case MACHINE_X86:
+		file_header->Machine = IMAGE_FILE_MACHINE_I386;
+		break;
+	case MACHINE_X64:
+		file_header->Machine = IMAGE_FILE_MACHINE_AMD64;
+		break;
+	case MACHINE_ARM64:
+		file_header->Machine = IMAGE_FILE_MACHINE_ARM64;
+		break;
 	default:
 		assert(!"Unsupported target; code flow should never get here!");
 		return EXIT_FAILURE;
-    }
+	}
+
 	file_header->NumberOfSections = 1;
 	file_header->PointerToSymbolTable = sizeof(IMAGE_FILE_HEADER) + sizeof(IMAGE_SECTION_HEADER) + (uint32_t)size + 4 + padding_length;
 	file_header->NumberOfSymbols = 2;
@@ -416,7 +423,7 @@ main (int argc, const char** argv)
 	}
 	fclose(fd); fd = NULL;
 
-	uint8_t *padding_ptr = &buffer[sizeof(IMAGE_FILE_HEADER) + sizeof(IMAGE_SECTION_HEADER) + size];
+	uint8_t* padding_ptr = &buffer[sizeof(IMAGE_FILE_HEADER) + sizeof(IMAGE_SECTION_HEADER) + size];
 	if (padding_length) {
 		memset(padding_ptr, 0, padding_length);
 	}
@@ -428,7 +435,8 @@ main (int argc, const char** argv)
 	if (short_label) {
 		symbol_table[0].N.ShortName[0] = '_';
 		strcpy(&symbol_table[0].N.ShortName[x86_32], label);
-	} else {
+	}
+	else {
 		symbol_table[0].N.LongName.Zeroes = 0;
 		symbol_table[0].N.LongName.Offset = sizeof(IMAGE_STRINGS);
 	}
@@ -442,10 +450,11 @@ main (int argc, const char** argv)
 	if (short_size) {
 		symbol_table[1].N.ShortName[1] = '_';
 		strcpy(&symbol_table[1].N.ShortName[x86_32], label);
-		strcpy(&symbol_table[1].N.ShortName[x86_32+strlen(label)], SIZE_LABEL_SUFFIX);
-	} else {
+		strcpy(&symbol_table[1].N.ShortName[x86_32 + strlen(label)], SIZE_LABEL_SUFFIX);
+	}
+	else {
 		symbol_table[1].N.LongName.Zeroes = 0;
-		symbol_table[1].N.LongName.Offset = sizeof(IMAGE_STRINGS) + ((short_label)?0:(x86_32 + (uint32_t)strlen(label) + 1));
+		symbol_table[1].N.LongName.Offset = sizeof(IMAGE_STRINGS) + ((short_label) ? 0 : (x86_32 + (uint32_t)strlen(label) + 1));
 	}
 	symbol_table[1].Type = IMAGE_SYM_TYPE_NULL;
 	symbol_table[1].StorageClass = IMAGE_SYM_CLASS_EXTERNAL;
@@ -482,7 +491,9 @@ main (int argc, const char** argv)
 	r = 0;
 
 err:
-	if (fd != NULL) fclose(fd);
+	if (fd != NULL) {
+		fclose(fd);
+	}
 	free(buffer);
 	return r;
 }

@@ -134,7 +134,9 @@ typedef struct fz_stext_grid_positions fz_stext_grid_positions;
 	between characters.
 
 	FZ_STEXT_DEHYPHENATE: If this option is set, hyphens at the
-	end of a line will be removed and the lines will be merged.
+	end of a line will be recorded as being soft-hyphens; when flattened
+	soft-hyphens at the end of lines will cause the lines to be
+	joined.
 
 	FZ_STEXT_PRESERVE_SPANS: If this option is set, spans on the same line
 	will not be merged. Each line will thus be a span of text with the same
@@ -142,10 +144,10 @@ typedef struct fz_stext_grid_positions fz_stext_grid_positions;
 
 	FZ_STEXT_CLIP: If this option is set, characters that would be entirely
 	clipped away by the current clipping path (or, more accurate, the smallest
-	bbox that contains the current clipping path) will be ignored. The
-	clip path is guaranteed to be smaller then the page mediabox, hence
-	this option subsumes an older, now deprecated, FZ_STEXT_MEDIABOX_CLIP
-	option.
+	bbox that contains the current clipping path) will be ignored. The bboxes
+	of images will be similarly reduced in size. The clip path is guaranteed
+	to be smaller then the page mediabox, hence this option subsumes an older,
+	now deprecated, FZ_STEXT_MEDIABOX_CLIP option.
 
 	FZ_STEXT_CLIP_RECT: If this option is set, characters that would be entirely
 	clipped away by the specified 'clip' rectangle in the options struct
@@ -227,6 +229,7 @@ enum
 	FZ_STEXT_CLIP_RECT = 1 << 23,
 	FZ_STEXT_ACCURATE_ASCENDERS = 1 << 24,
 	FZ_STEXT_ACCURATE_SIDE_BEARINGS = 1 << 25,
+	FZ_STEXT_LAZY_VECTORS = 1 << 26,
 
 	/* An old, deprecated option. */
 	FZ_STEXT_MEDIABOX_CLIP = FZ_STEXT_CLIP
@@ -337,12 +340,24 @@ enum
  *	the logical data, a caller now has to do a depth-first traversal.
  */
 
+typedef struct
+{
+	fz_rect mediabox;
+	int chapter;
+	int page;
+} fz_stext_page_details;
+
 /**
 	A text page is a list of blocks, together with an overall
 	bounding box.
+
+	The name of this structure is now slightly out of date. It
+	should really be fz_stext_document, cos it can contain
+	content from multiple pages.
 */
 typedef struct
 {
+	int refs;
 	fz_pool *pool;
 	fz_rect mediabox;
 	fz_stext_block *first_block;
@@ -353,7 +368,20 @@ typedef struct
 	 * not be used by anything outside of the stext device. */
 	fz_stext_block *last_block;
 	fz_stext_struct *last_struct;
+
+	/* An array of fz_stext_page_details */
+	fz_pool_array *id_list;
 } fz_stext_page;
+
+/**
+	Take a new reference to an fz_stext_page.
+*/
+fz_stext_page *fz_keep_stext_page(fz_context *ctx, fz_stext_page *page);
+
+/**
+	Helper function to retrieve the details for a given id from a block.
+*/
+fz_stext_page_details *fz_stext_page_details_for_block(fz_context *ctx, fz_stext_page *page, fz_stext_block *block);
 
 enum
 {
@@ -389,6 +417,36 @@ enum
 	FZ_STEXT_VECTOR_CONTINUES = 4
 };
 
+enum
+{
+	/* Indicates that cell contents cross the right hand edge. */
+	FZ_STEXT_GRID_H_CROSSED = 1,
+	/* Indicates that cell contents cross the bottom edge. */
+	FZ_STEXT_GRID_V_CROSSED = 2,
+	/* Indicates that the cell has a border on the left hand edge. */
+	FZ_STEXT_GRID_L_BORDER = 4,
+	/* Indicates that the cell has a border on the top edge. */
+	FZ_STEXT_GRID_T_BORDER = 8,
+	/* Indicates that the cell has content (which may be a space!) */
+	FZ_STEXT_GRID_FULL = 16,
+};
+
+/* This structure is experimental, and subject to change. */
+typedef struct
+{
+	/* A 2x2 table, will be represented as a 3x3 set of
+	 * cells. The rightmost column and bottommost row
+	 * exist just to give information about borders on
+	 * the edges. For such a table w=h=3.
+	 */
+	int w;
+	int h;
+	/* Followed by w*h entries. */
+	struct {
+		unsigned int flags;
+	} info[FZ_FLEXIBLE_ARRAY];
+} fz_stext_grid_info;
+
 /**
 	A text block is a list of lines of text (typically a paragraph),
 	or an image.
@@ -396,23 +454,30 @@ enum
 struct fz_stext_block
 {
 	int type;
+	int id;
 	fz_rect bbox;
 	union {
 		struct { fz_stext_line *first_line, *last_line; int flags;} t;
 		struct { fz_matrix transform; fz_image *image; } i;
 		struct { fz_stext_struct *down; int index; } s;
 		struct { uint32_t flags; uint32_t argb; } v;
-		struct { fz_stext_grid_positions *xs; fz_stext_grid_positions *ys; } b;
+		struct { fz_stext_grid_positions *xs; fz_stext_grid_positions *ys; fz_stext_grid_info *info; } b;
 	} u;
 	fz_stext_block *prev, *next;
 };
+
+typedef enum
+{
+	FZ_STEXT_LINE_FLAGS_JOINED = 1
+} fz_stext_line_flags;
 
 /**
 	A text line is a list of characters that share a common baseline.
 */
 struct fz_stext_line
 {
-	int wmode; /* 0 for horizontal, 1 for vertical */
+	uint8_t wmode; /* 0 for horizontal, 1 for vertical */
+	uint8_t flags;
 	fz_point dir; /* normalized direction of baseline */
 	fz_rect bbox;
 	fz_stext_char *first_char, *last_char;
@@ -447,6 +512,7 @@ enum
 	FZ_STEXT_CLIPPED = 64,
 	FZ_STEXT_UNICODE_IS_CID = 128,
 	FZ_STEXT_UNICODE_IS_GID = 256,
+	FZ_STEXT_SYNTHETIC_LARGE = 512,
 };
 
 /**
@@ -551,6 +617,8 @@ struct fz_stext_options
 	fz_process_stext_styles_f* print_styles;
 };
 
+void fz_init_stext_options(fz_context *ctx, fz_stext_options *opts);
+
 /**
 	Create an empty text page.
 
@@ -599,6 +667,7 @@ void fz_print_stext_page_as_empty_box(fz_context *ctx, fz_output *out, fz_stext_
 
 /**
 	Search for occurrence of 'needle' in text page.
+	Case insensitive match.
 
 	Return the number of quads and store hit quads in the passed in
 	array.
@@ -681,6 +750,16 @@ const fz_quad *fz_search_stext_next_quad(fz_context *ctx, fz_search_stext_state 
 typedef int (fz_search_callback_fn)(fz_context *ctx, void *opaque, int num_quads, fz_quad *hit_bbox);
 
 /**
+	Callback function for use in searching.
+
+	Called with the list of quads that correspond to a single hit.
+
+	The callback should return with 0 to continue the search, or 1 to abort it.
+	All other values are reserved at this point.
+*/
+typedef int (fz_match_callback_fn)(fz_context *ctx, void *opaque, int num_quads, fz_quad *hit_bbox, int chapter, int page);
+
+/**
 	Search for occurrence of 'needle' in text page.
 
 	Call callback once for each hit. This callback will receive
@@ -694,7 +773,6 @@ typedef int (fz_search_callback_fn)(fz_context *ctx, void *opaque, int num_quads
 	without notice.
 */
 int fz_search_stext_page_cb(fz_context *ctx, fz_stext_page *text, const char *needle, fz_search_callback_fn *cb, void *opaque);
-
 
 /**
 	Return a list of quads to highlight lines inside the selection
@@ -808,11 +886,20 @@ const char* fz_get_ligature_replacement(int c);
 int fz_is_whitespace(int c);
 
 /**
+	Parse stext device options from an fz_options struct
+	into an already initialised opts structure.
+*/
+void fz_apply_stext_options(fz_context *ctx, fz_stext_options *opts, fz_options *options);
+
+/**
 	Perform segmentation analysis on an (unstructured) page to look for
 	recursive subdivisions.
 
 	Essentially this code attempts to split the page horizontally and/or
 	vertically repeatedly into smaller and smaller "segments" (divisions).
+
+	This minimises the reordering of the content, but some reordering
+	may be unavoidable.
 
 	Returns 0 if no changes were made to the document.
 
@@ -820,6 +907,32 @@ int fz_is_whitespace(int c);
 	versions!
 */
 int fz_segment_stext_page(fz_context *ctx, fz_stext_page *page);
+
+/**
+	Perform segmentation analysis on a rectangle of a given
+	stext page.
+
+	Like fz_segment_stext_page, this attempts to split the given page
+	region horizontally and/or vertically repeatedly into smaller and
+	smaller "segments".
+
+	This works for pages with structure too, but splitting with
+	rectangles that cut across structure blocks may not behave as
+	expected.
+
+	This minimises the reordering of the content (as viewed from the
+	perspective of a depth first traversal), but some reordering may
+	be unavoidable.
+
+	This function accepts smaller gaps for segmentation than the full
+	page segmentation does.
+
+	Returns 0 if no changes were made to the document.
+
+	This is experimental code, and may change (or be removed) in future
+	versions!
+*/
+int fz_segment_stext_rect(fz_context *ctx, fz_stext_page *page, fz_rect rect);
 
 /**
 	Attempt to break paragraphs at plausible places.
@@ -831,6 +944,12 @@ void fz_paragraph_break(fz_context *ctx, fz_stext_page *page);
 	information.
 */
 void fz_table_hunt(fz_context *ctx, fz_stext_page *page);
+
+/**
+	Hunt for possible tables within a specific rect on a page, and
+	update the stext with information.
+*/
+void fz_table_hunt_within_bounds(fz_context *ctx, fz_stext_page *page, fz_rect bounds);
 
 /**
 	Interpret the bounded contents of a given stext page as
@@ -866,6 +985,42 @@ fz_find_table_within_bounds(fz_context *ctx, fz_stext_page *page, fz_rect bounds
 	options: Options to configure the stext device.
 */
 fz_device *fz_new_stext_device(fz_context *ctx, fz_stext_page *page, const fz_stext_options *options);
+
+/**
+	Create a device to extract the text on a page into an existing
+	fz_stext_page structure.
+
+	Gather the text on a page into blocks and lines.
+
+	The reading order is taken from the order the text is drawn in
+	the source file, so may not be accurate.
+
+	stext_page: The text page to which content should be added. This will
+	usually be a newly created (empty) text page, but it can be one
+	containing data already (for example when merging multiple
+	pages, or watermarking).
+
+	options: Options to configure the stext device.
+
+	The next 2 parameters are copied into the fz_stext_page structure's
+	ids section, so only have to be valid if you expect to interrogate
+	that section later.
+
+	chapter_num: The chapter number that this page came from.
+
+	page_num: The page number that this page came from.
+
+	The final parameter is copied into the fz_stext_page structure's
+	ids section. The mediabox for the enture fz_stext_page is unioned
+	with this, so pass fz_empty_bbox if you don't care about getting
+	a valid value back from the ids section, but you don't want to
+	upset the value in the page->mediabox field.
+
+	mediabox: The mediabox for this page.
+*/
+fz_device *
+fz_new_stext_device_for_page(fz_context *ctx, fz_stext_page *stext_page, const fz_stext_options *opts, int chapter_num, int page_num, fz_rect mediabox);
+
 
 /**
 	Create a device to OCR the text on the page.
@@ -912,7 +1067,306 @@ fz_device *fz_new_stext_device(fz_context *ctx, fz_stext_page *page, const fz_st
 fz_device *fz_new_ocr_device(fz_context *ctx, fz_device *target, fz_matrix ctm, fz_rect mediabox, int with_list, const char *language,
 			const char *datadir, int (*progress)(fz_context *, void *, int), void *progress_arg);
 
+fz_device *fz_new_ocr_device_with_options(fz_context *ctx, fz_device *target, fz_matrix ctm, fz_rect mediabox, int with_list, const char *language,
+			const char *datadir, int (*progress)(fz_context *, void *, int), void *progress_arg, fz_options *options);
+
 fz_document *fz_open_reflowed_document(fz_context *ctx, fz_document *underdoc, const fz_stext_options *opts);
+
+/**
+	Simple function to return if a given unicode char is equivalent to a space.
+*/
+int fz_is_unicode_space_equivalent(int c);
+
+/**
+	Simple function to return if a given unicode char is whitespace.
+*/
+int fz_is_unicode_whitespace(int c);
+
+/**
+	Simple function to return if a given unicode char is a hyphen.
+*/
+int fz_is_unicode_hyphen(int c);
+
+typedef struct fz_search fz_search;
+
+typedef enum
+{
+	FZ_SEARCH_EXACT = 0,
+	FZ_SEARCH_IGNORE_CASE = 1,
+	FZ_SEARCH_IGNORE_DIACRITICS = 2,
+	FZ_SEARCH_REGEXP = 4,
+	FZ_SEARCH_KEEP_LINES = 8,
+	FZ_SEARCH_KEEP_PARAGRAPHS = 16,
+	FZ_SEARCH_KEEP_HYPHENS = 32
+} fz_search_options;
+
+FZ_DATA extern const char *fz_search_options_usage;
+
+void fz_init_search_options(fz_context *ctx, fz_search_options *options);
+
+fz_search_options *fz_parse_search_options(fz_context *ctx, fz_search_options *options, const char *args);
+
+void fz_apply_search_options(fz_context *ctx, fz_search_options *options, fz_options *opts);
+
+/**
+	Create a new search.
+*/
+fz_search *fz_new_search(fz_context *ctx);
+
+/**
+	Change the options/needle to be used for a search.
+
+	If the needle is invalid (in the case of regexps, it fails to compile)
+	it will throw an error.
+
+	If the needle changes, the current position of the search within the
+	text is kept.
+
+	If the options change, the search position may revert to the beginning
+	of the current page.
+*/
+void fz_search_set_options(fz_context *ctx, fz_search *search, fz_search_options options, const char *needle);
+
+typedef enum
+{
+	/* Ran out of stext to search. Please feed me some more. */
+	FZ_SEARCH_MORE_INPUT = 0,
+
+	/* We have a match. match structure has been populated. */
+	FZ_SEARCH_MATCH = 1,
+
+	/* Search complete */
+	FZ_SEARCH_COMPLETE
+} fz_search_reason;
+
+typedef struct
+{
+	fz_quad quad;
+	int seq;
+	int chapter_num;
+	int page_num;
+} fz_match_quad;
+
+typedef struct
+{
+	fz_stext_page *page;
+	fz_stext_struct *parent;
+	fz_stext_block *block;
+	fz_stext_line *line;
+	fz_stext_char *ch;
+} fz_stext_position;
+
+typedef struct
+{
+	int num_quads;
+	fz_match_quad *quads;
+	fz_stext_position begin;
+	fz_stext_position end;
+}
+fz_search_result_details;
+
+/**
+	Structure used to represent the 'result' of a search.
+*/
+typedef struct
+{
+	fz_search_reason reason;
+	union
+	{
+		struct
+		{
+			int seq_needed;
+		} more_input;
+		struct
+		{
+			fz_search_result_details *result;
+		} match;
+	} u;
+} fz_search_result;
+
+/**
+	Continue searching for the next match.
+
+	Will return with a search result.
+
+	If it asks for more stext, feed it with the requested page (or
+	NULL to tell it it's the end of the document) before calling
+	this again.
+
+	Several pages may be requested before searching begins.
+*/
+fz_search_result fz_search_forwards(fz_context *ctx, fz_search *search);
+
+/**
+	Continue searching backwards for the next match.
+
+	Will return asking for more stext, having matched, or having
+	completed the search.
+
+	If it asks for more stext, then any further calls to this
+	function will give the same result, until stext is supplied,
+	or a NULL stext is fed in to indicate the end of the document.
+
+	Several pages may be requested before searching begins.
+*/
+fz_search_result fz_search_backwards(fz_context *ctx, fz_search *search);
+
+/**
+	Supply more stext to be searched; ownership of the stext page is
+	passed in.
+
+	This can be called immediately after an fz_search has been created
+	to give it the first page to search, or it will be requested as soon
+	as the first search operation is done on that page.
+
+	If we are calling this in response to fz_search_forwards telling
+	us that we need another page, page will be the stext for the next
+	page.
+
+	If we are calling this in response to fz_search_backwards telling
+	is that we need another page, page will be the stext for the previous
+	page.
+
+	seq is a simple integer value that will be parrotted back to us in the
+	match (typically the page number within the document).
+
+	The search function will retain the page for a while. When it has
+	finished with it, it will call fz_drop_stext_page() to release it.
+
+	Pass page = NULL to indicate that there are no more pages (in this
+	direction) to be fed.
+*/
+void fz_feed_search(fz_context *ctx, fz_search *search, fz_stext_page *page, int seq);
+
+/**
+	Free the search structures.
+*/
+void fz_drop_search(fz_context *ctx, fz_search *search);
+
+/**
+	Search for occurrence of 'needle' in text page, matching in a given
+	style.
+
+	Return the number of quads and store hit quads in the passed in
+	array.
+
+	NOTE: This is an experimental interface and subject to change
+	without notice.
+*/
+int fz_match_stext_page(fz_context *ctx, fz_stext_page *text, const char *needle, int *hit_mark, fz_quad *hit_bbox, int hit_max, fz_search_options options);
+
+/**
+	Search for occurrence of 'needle' in text page.
+
+	Call callback once for each hit. This callback will receive
+	(potentially) multiple quads for each hit.
+
+	Returns the number of hits - note that this is potentially
+	different from (i.e. is not greater than) the number of quads
+	as returned by the non callback API.
+
+	NOTE: This is an experimental interface and subject to change
+	without notice.
+*/
+int fz_match_stext_page_cb(fz_context *ctx, fz_stext_page *page, const char *needle, fz_match_callback_fn *cb, void *opaque, fz_search_options options);
+
+/*
+	Allocator function to make a new STRUCT stext block to be used in
+	a given page (and it's 'down' structure, initially empty). Not
+	linked in to the overall page structure yet.
+*/
+fz_stext_block *fz_new_stext_struct(fz_context *ctx, fz_stext_page *page, fz_structure standard, const char *raw, int index);
+
+/* Iterators for walking over stext pages */
+
+/*
+	Iterator definition. The parts of this are subject to change.
+*/
+typedef struct
+{
+	fz_stext_page *page;
+	fz_stext_struct *parent;
+	fz_stext_block *block;
+} fz_stext_page_block_iterator;
+
+/*
+	Create a new iterator, initialised to point at the first block on the page.
+*/
+fz_stext_page_block_iterator fz_stext_page_block_iterator_begin(fz_stext_page *page);
+
+/*
+	Create a new iterator, initialised to point at the first non-struct block on the page
+	in depth first search order.
+*/
+fz_stext_page_block_iterator fz_stext_page_block_iterator_begin_dfs(fz_stext_page *page);
+
+/*
+	Move to the next block (never moving upwards).
+
+	If there is no next block, iterator.block is returned as NULL.
+*/
+fz_stext_page_block_iterator fz_stext_page_block_iterator_next(fz_stext_page_block_iterator pos);
+
+/*
+	On a structure block, this moves the iterator down to the first child of
+	that block.
+
+	On any other block, this does nothing.
+*/
+fz_stext_page_block_iterator fz_stext_page_block_iterator_down(fz_stext_page_block_iterator pos);
+
+/*
+	Move up to the parent of the current block.
+
+	If there is no parent, iterator.block is return as NULL.
+*/
+fz_stext_page_block_iterator fz_stext_page_block_iterator_up(fz_stext_page_block_iterator pos);
+
+/*
+	Move to the next block (in a depth first traversal style).
+
+	The iterator never stops on struct blocks, and instead steps into them.
+	At the end of a set of child blocks, it will move back to the parent and
+	continue from there.
+*/
+fz_stext_page_block_iterator fz_stext_page_block_iterator_next_dfs(fz_stext_page_block_iterator pos);
+
+/*
+	Return true if the iterator is at the end of a list of blocks.
+	(No attempt is made to account for whether there is more data after a
+	parent block).
+*/
+int fz_stext_page_block_iterator_eod(fz_stext_page_block_iterator pos);
+
+/*
+	Return true if the iterator is at the end of a depth first traversal
+	of the stext page.
+*/
+int fz_stext_page_block_iterator_eod_dfs(fz_stext_page_block_iterator pos);
+
+/*
+	Update a given stext page so that the contents within it that fall
+	within the given rectangle are contained within a structure tag of the
+	given classification.
+
+	The code tries not to change the ordering of content as seen from
+	a depth first traversal as it does this.
+
+	This is an experimental interface. It may be updated or removed in
+	future with no warning!
+*/
+void
+fz_classify_stext_rect(fz_context *ctx, fz_stext_page *page, fz_structure classification, fz_rect rect);
+
+/*
+	Remove any prefix of large white rectangular vectors that (almost)
+	fills the page from the stext.
+
+	This is an experimental interface. It may be updated or removed in
+	future with no warning!
+*/
+int
+fz_stext_remove_page_fill(fz_context *ctx, fz_stext_page *page);
 
 typedef struct
 {
@@ -922,7 +1376,55 @@ typedef struct
 	int combine_image;
 } fz_image_raft_options;
 
-void fz_stext_raft_images(fz_context *ctx, fz_stext_page *stext, fz_image_raft_options *options);
+void
+fz_stext_raft_images(fz_context *ctx, fz_stext_page *stext, fz_image_raft_options *options);
+
+/*
+	Flotilla/Raft handling
+
+	We call any 2-dimensional area that's covered by (some type of) content
+	a raft. i.e. it's made up of several distinct objects ("planks") lashed
+	together into something that covers a large flat area (a "raft").
+
+	The set of all such non-overlapping rafts on a page can be called a
+	"flotilla".
+
+	For instance, the borders and/or backgrounds from a table would form a
+	raft behind the text content. And the boundaries of that raft might
+	help us distinguish that table from an adjacent table on a different
+	raft.
+
+	While we could theoretically make rafts from anything, images and
+	vectors seem like the best bet. We could make rafts from mixed images
+	and vectors, but to start with, I think we'll get best results from
+	images and vectors separately.
+*/
+typedef struct fz_flotilla fz_flotilla;
+
+/*
+	Construct a flotilla from all the (rectangular) vectors on a page.
+*/
+fz_flotilla *
+fz_new_flotilla_from_stext_page_vectors(fz_context *ctx, fz_stext_page *page);
+
+/*
+	Drop the flotilla.
+*/
+void
+fz_drop_flotilla(fz_context *ctx, fz_flotilla *f);
+
+/*
+	How many rafts in this flotilla?
+*/
+int
+fz_flotilla_size(fz_context *ctx, fz_flotilla *flot);
+
+/*
+	Return the bounds of the ith raft in the flotilla.
+*/
+fz_rect
+fz_flotilla_raft_area(fz_context *ctx, fz_flotilla *flot, int i);
+
 
 #ifdef __cplusplus
 }
