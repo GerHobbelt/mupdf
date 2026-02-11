@@ -23,6 +23,8 @@
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
 
+#if FZ_ENABLE_PDF 
+
 #include "pdf-imp.h"
 
 #include <string.h>
@@ -635,3 +637,5 @@ pdf_new_vectorize_filter(
 
 	return (pdf_processor*)proc;
 }
+
+#endif

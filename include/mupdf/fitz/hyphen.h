@@ -28,6 +28,12 @@
 #include "mupdf/fitz/context.h"
 #include "mupdf/fitz/text.h"
 
+#if FZ_ENABLE_RENDER_CORE 
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef struct fz_hyphenator fz_hyphenator;
 typedef struct fz_hyph_trie fz_hyph_trie;
 
@@ -54,5 +60,11 @@ void fz_hyphenate_word(fz_context *ctx, fz_hyphenator *hyph, const char *input, 
 void fz_drop_hyphenator(fz_context *ctx, fz_hyphenator *hyph);
 
 fz_hyphenator *fz_lookup_hyphenator(fz_context *ctx, fz_text_language lang);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // FZ_ENABLE_RENDER_CORE 
 
 #endif

@@ -410,8 +410,7 @@ typedef struct
 	int (*text_filter)(fz_context *ctx, void *opaque, int *ucsbuf, int ucslen, fz_matrix trm, fz_matrix ctm, fz_rect bbox, int tr, float ca, float CA);
 	void (*after_text_object)(fz_context *ctx, void *opaque, pdf_document *doc, pdf_processor *chain, fz_matrix ctm);
 	int (*culler)(fz_context *ctx, void *opaque, fz_rect bbox, fz_cull_type type);
-}
-pdf_sanitize_filter_options;
+} pdf_sanitize_filter_options;
 
 /*
 	A sanitize filter factory.
@@ -443,8 +442,7 @@ typedef struct
 {
 	void *opaque;
 	/* To be expanded */
-}
-pdf_vectorize_filter_options;
+} pdf_vectorize_filter_options;
 
 pdf_processor *pdf_new_vectorize_filter(fz_context *ctx, pdf_document *doc, pdf_processor *chain, int structparents, fz_matrix transform, pdf_filter_options *options, void *vopts);
 

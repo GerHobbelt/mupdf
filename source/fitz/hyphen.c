@@ -22,6 +22,8 @@
 
 #include "mupdf/fitz.h"
 
+#if FZ_ENABLE_RENDER_CORE 
+
 #ifdef HAVE_OBJCOPY
 
 extern const unsigned char _binary_resources_hyphen_hyph_std_zip_start;
@@ -405,3 +407,5 @@ fz_hyphenate_word(fz_context *ctx, fz_hyphenator *hyph, const char *input, int i
 	}
 	output[k] = 0;
 }
+
+#endif

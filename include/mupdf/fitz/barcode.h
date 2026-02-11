@@ -32,6 +32,8 @@
 
 #if FZ_ENABLE_RENDER_CORE 
 
+#if FZ_ENABLE_BARCODE
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -143,6 +145,8 @@ char *fz_decode_barcode_from_display_list(fz_context *ctx, fz_barcode_type *type
 
 #ifdef __cplusplus
 }
+#endif
+
 #endif
 
 #endif

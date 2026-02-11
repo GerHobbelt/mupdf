@@ -22,6 +22,8 @@
 
 #include "mupdf/fitz.h"
 
+#if FZ_ENABLE_RENDER_CORE 
+
 fz_stext_page_block_iterator fz_stext_page_block_iterator_begin(fz_stext_page *page)
 {
 	fz_stext_page_block_iterator pos;
@@ -140,3 +142,5 @@ int fz_stext_page_block_iterator_eod_dfs(fz_stext_page_block_iterator pos)
 		pos.parent = pos.parent->parent;
 	}
 }
+
+#endif

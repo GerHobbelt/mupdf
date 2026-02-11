@@ -24,6 +24,8 @@
 
 #include <assert.h>
 
+#if FZ_ENABLE_RENDER_CORE 
+
 static int
 raftable(fz_stext_block *pos, fz_image_raft_options *options, fz_rect r)
 {
@@ -460,3 +462,5 @@ fz_flotilla_raft_area(fz_context *ctx, fz_flotilla *flot, int i)
 		fz_throw(ctx, FZ_ERROR_ARGUMENT, "out of range raft in flotilla");
 	return flot->rafts[i].area;
 }
+
+#endif

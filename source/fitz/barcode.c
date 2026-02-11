@@ -23,14 +23,11 @@
 #include "mupdf/fitz.h"
 
 #if FZ_ENABLE_BARCODE
+
 #include "zxingbarcode.h"
-#endif
 
 fz_pixmap *fz_new_barcode_pixmap(fz_context *ctx, fz_barcode_type type, const char *value, int size, int ec_level, int quiet, int hrt)
 {
-#if !FZ_ENABLE_BARCODE
-	fz_throw(ctx, FZ_ERROR_UNSUPPORTED, "Barcode functionality not included");
-#else
 	char exception[256] = { 0 };
 	unsigned char *ret;
 	fz_pixmap *pix;
@@ -64,14 +61,10 @@ fz_pixmap *fz_new_barcode_pixmap(fz_context *ctx, fz_barcode_type type, const ch
 	fz_catch(ctx)
 		fz_rethrow(ctx);
 	return pix;
-#endif
 }
 
 char *fz_decode_barcode_from_pixmap(fz_context *ctx, fz_barcode_type *type, fz_pixmap *pix, int rotate)
 {
-#if !FZ_ENABLE_BARCODE
-	fz_throw(ctx, FZ_ERROR_UNSUPPORTED, "Barcode functionality not included");
-#else
 	char *ret, *contents;
 	char exception[256] = { 0 };
 	if (pix == NULL)
@@ -91,7 +84,6 @@ char *fz_decode_barcode_from_pixmap(fz_context *ctx, fz_barcode_type *type, fz_p
 	fz_catch(ctx)
 		fz_rethrow(ctx);
 	return contents;
-#endif
 }
 
 static const char *fz_barcode_type_strings[FZ_BARCODE__LIMIT] =
@@ -223,3 +215,5 @@ char *fz_decode_barcode_from_page(fz_context *ctx, fz_barcode_type *type, fz_pag
 
 	return str;
 }
+
+#endif

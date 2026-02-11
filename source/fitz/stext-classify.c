@@ -22,6 +22,8 @@
 
 #include "mupdf/fitz.h"
 
+#if FZ_ENABLE_RENDER_CORE 
+
 /*
 	We use this operation twice below, hence it's a separate function,
 	but it seems a bit odd, so it's not exposed as an API one yet.
@@ -460,3 +462,5 @@ fz_classify_stext_rect(fz_context *ctx, fz_stext_page *page, fz_structure classi
 		pos = fz_stext_page_block_iterator_next_or_up(pos);
 	}
 }
+
+#endif
