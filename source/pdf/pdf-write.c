@@ -476,6 +476,11 @@ static void renumberobjs(fz_context *ctx, pdf_document *doc, pdf_write_state *op
 		/* Create new table for the reordered, compacted xref */
 		newxref = Memento_label(fz_malloc_array(ctx, xref_len + 3, pdf_xref_entry), "pdf_xref_entries");
 		newxref[0] = *pdf_get_xref_entry_no_null(ctx, doc, 0);
+		for (num = 1; num < xref_len; num++)
+		{
+			newxref[num].stm_buf = NULL;
+			newxref[num].obj = NULL;
+		}
 
 		/* Move used objects into the new compacted xref */
 		newlen = 0;
@@ -509,7 +514,15 @@ static void renumberobjs(fz_context *ctx, pdf_document *doc, pdf_write_state *op
 	}
 	fz_catch(ctx)
 	{
-		fz_free(ctx, newxref);
+		if (newxref)
+		{
+			for (num = 1; num < xref_len; num++)
+			{
+				pdf_drop_obj(ctx, newxref[num].obj);
+				fz_drop_buffer(ctx, newxref[num].stm_buf);
+			}
+			fz_free(ctx, newxref);
+		}
 		fz_free(ctx, new_use_list);
 		fz_rethrow(ctx);
 	}

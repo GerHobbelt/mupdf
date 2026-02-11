@@ -822,7 +822,6 @@ void pdf_replace_xref(fz_context *ctx, pdf_document *doc, pdf_xref_entry *entrie
 	int *xref_index = NULL;
 	pdf_xref *xref = NULL;
 	pdf_xref_subsec *sub;
-	int e;
 
 	fz_var(xref_index);
 	fz_var(xref);
@@ -837,13 +836,6 @@ void pdf_replace_xref(fz_context *ctx, pdf_document *doc, pdf_xref_entry *entrie
 	{
 		fz_free(ctx, xref);
 		fz_free(ctx, xref_index);
-		for (e = 0; e < n; e++)
-		{
-			pdf_xref_entry *entry = &entries[e];
-			pdf_drop_obj(ctx, entry->obj);
-			fz_drop_buffer(ctx, entry->stm_buf);
-		}
-		fz_free(ctx, entries);
 		fz_rethrow(ctx);
 	}
 
