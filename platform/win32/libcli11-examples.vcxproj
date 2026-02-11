@@ -52,16 +52,16 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -74,7 +74,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -91,8 +91,8 @@
       <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -245,6 +245,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/cli11/examples/close_match.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/cli11/examples/config_app.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/cli11/examples/custom_parse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cli11/examples/custom_validator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cli11/examples/date_validator.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/cli11/examples/digit_args.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/cli11/examples/enum.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/cli11/examples/enum_ostream.cpp" />
@@ -285,6 +287,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/cli11/include/CLI/ConfigFwd.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/cli11/include/CLI/Encoding.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/cli11/include/CLI/Error.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cli11/include/CLI/ExtraValidators.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/cli11/include/CLI/Formatter.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/cli11/include/CLI/FormatterFwd.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/cli11/include/CLI/Macros.hpp" />
@@ -299,6 +302,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/cli11/include/CLI/impl/Argv_inl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/cli11/include/CLI/impl/Config_inl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/cli11/include/CLI/impl/Encoding_inl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cli11/include/CLI/impl/ExtraValidators_inl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/cli11/include/CLI/impl/Formatter_inl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/cli11/include/CLI/impl/Option_inl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/cli11/include/CLI/impl/Split_inl.hpp" />
@@ -306,6 +310,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/cli11/include/CLI/impl/Validators_inl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/cli11/tests/app_helper.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/cli11/tests/catch.hpp" />
+    <Image Include="../../thirdparty/owemdjee/cli11/book/images/help_output1.png" />
     <Image Include="../../thirdparty/owemdjee/cli11/docs/CLI11_100.png" />
     <Image Include="../../thirdparty/owemdjee/cli11/docs/CLI11_300.png" />
     <Text Include="../../thirdparty/owemdjee/cli11/BUILD.bazel" />
@@ -359,8 +364,10 @@
     <Text Include="../../thirdparty/owemdjee/cli11/tests/data/unicode.txt" />
     <Text Include="../../thirdparty/owemdjee/cli11/tests/find_package_tests/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/cli11/tests/mesonTest/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cli11/tests/module_test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cli11/tests/module_test/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/cli11/tests/module_test/cmodule.ixx" />
     <Text Include="../../thirdparty/owemdjee/cli11/tests/package_config_tests/CMakeLists.txt" />
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
-  

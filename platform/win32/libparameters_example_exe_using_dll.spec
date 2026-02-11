@@ -6,7 +6,8 @@ also-ignore:
 	/examples/[^c]
 	/examples/.[^r]
 	
-	crossing-dll-main
+	crossing-dll
+	dll-base
 	
 	monolithic
 	
