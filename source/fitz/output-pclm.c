@@ -52,7 +52,6 @@ fz_parse_pclm_options(fz_context *ctx, fz_pclm_options *opts, const char *args)
 		fz_drop_options(ctx, options);
 	fz_catch(ctx)
 		fz_rethrow(ctx);
-
 	return opts;
 }
 
