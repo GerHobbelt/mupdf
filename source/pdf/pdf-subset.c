@@ -534,7 +534,13 @@ do_adjust_simple_font(fz_context *ctx, pdf_document *doc, font_usage_t *font, in
 
 	pdf_dict_put_int(ctx, obj, PDF_NAME(FirstChar), new_firstchar);
 	pdf_dict_put_int(ctx, obj, PDF_NAME(LastChar), new_lastchar);
-	if (old_widths)
+
+	if (!old_widths)
+		return;
+
+	pdf_keep_obj(ctx, old_widths);
+
+	fz_try(ctx)
 	{
 		int j = 0;
 		widths = pdf_dict_put_array(ctx, obj, PDF_NAME(Widths), new_lastchar - new_firstchar + 1);
@@ -549,6 +555,10 @@ do_adjust_simple_font(fz_context *ctx, pdf_document *doc, font_usage_t *font, in
 				pdf_array_push_int(ctx, widths, 0);
 		}
 	}
+	fz_always(ctx)
+		pdf_drop_obj(ctx, old_widths);
+	fz_catch(ctx)
+		fz_rethrow(ctx);
 }
 
 static void
