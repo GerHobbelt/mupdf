@@ -52,16 +52,16 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -74,7 +74,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -91,8 +91,8 @@
       <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBURL;URL_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -206,6 +206,26 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/url/doc/modules/ROOT/examples/example/file_router.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/doc/modules/ROOT/examples/example/finicky.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/doc/modules/ROOT/examples/example/magnet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/doc/modules/ROOT/examples/example/mailto.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/doc/modules/ROOT/examples/example/qrcode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/doc/modules/ROOT/examples/example/router.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/doc/modules/ROOT/examples/example/sanitize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/doc/modules/ROOT/examples/unit/doc_3_urls.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/doc/modules/ROOT/examples/unit/doc_grammar.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/doc/modules/ROOT/examples/unit/snippets.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/example/file_router/file_router.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/example/finicky/finicky.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/example/magnet/magnet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/example/mailto/mailto.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/example/qrcode/qrcode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/example/router/detail/impl/router.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/example/router/impl/matches.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/example/router/router.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/example/sanitize/sanitize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/example/suffix_list/suffix_list.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/url/extra/test_main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/url/src/authority_view.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/url/src/decode_view.cpp" />
@@ -274,6 +294,100 @@
     <ClCompile Include="../../thirdparty/owemdjee/url/src/url_base.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/url/src/url_view.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/url/src/url_view_base.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/src/v1/core/parse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/src/v1/core/url_parser_context.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/src/v1/domain/idna.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/src/v1/network/ipv4_address.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/src/v1/network/ipv6_address.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/src/v1/url/url.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/src/v1/url/url_search_parameters.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/cmake_test/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/extra/test_suite.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/limits/limits.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/authority_view.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/compat/ada.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/decode_view.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/doc_3_urls.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/doc_grammar.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/encode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/encoding_opts.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/error.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/error_types.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/example/router/router.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/format.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/grammar.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/grammar/alnum_chars.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/grammar/alpha_chars.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/grammar/charset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/grammar/ci_string.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/grammar/dec_octet_rule.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/grammar/delim_rule.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/grammar/digit_chars.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/grammar/grammar_error.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/grammar/grammar_parse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/grammar/hexdig_chars.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/grammar/literal_rule.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/grammar/lut_chars.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/grammar/not_empty_rule.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/grammar/optional_rule.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/grammar/range_rule.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/grammar/recycled.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/grammar/string_token.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/grammar/string_view_base.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/grammar/token_rule.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/grammar/tuple_rule.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/grammar/type_traits.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/grammar/unsigned_rule.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/grammar/variant_rule.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/grammar/vchars.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/host_type.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/ignore_case.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/ipv4_address.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/ipv6_address.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/natvis.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/optional.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/param.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/params_base.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/params_encoded_base.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/params_encoded_ref.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/params_encoded_view.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/params_ref.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/params_view.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/parse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/parse_path.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/parse_query.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/pct_string_view.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/rfc/absolute_uri_rule.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/rfc/authority_rule.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/rfc/gen_delim_chars.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/rfc/ipv4_address_rule.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/rfc/ipv6_address_rule.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/rfc/origin_form_rule.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/rfc/pchars.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/rfc/pct_encoded_rule.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/rfc/query_rule.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/rfc/relative_ref_rule.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/rfc/reserved_chars.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/rfc/sub_delim_chars.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/rfc/unreserved_chars.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/rfc/uri_reference_rule.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/rfc/uri_rule.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/scheme.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/segments_base.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/segments_encoded_base.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/segments_encoded_ref.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/segments_encoded_view.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/segments_ref.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/segments_view.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/snippets.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/static_url.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/string_view.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/url.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/url_base.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/url_view.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/url_view_base.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/urls.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/test/unit/variant.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/url/doc/javadoc.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/url/example/magnet/filter_view.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/url/example/mailto/rfc.hpp" />
@@ -677,3 +791,4 @@
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
+  

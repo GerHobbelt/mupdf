@@ -3814,6 +3814,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/openmethod/doc/modules/ROOT/examples/hello_world.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/openmethod/doc/modules/ROOT/examples/inplace_vptr.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/openmethod/doc/modules/ROOT/examples/matrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/boost/libs/openmethod/doc/modules/ROOT/examples/matrix_intrusive_vptr.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/openmethod/doc/modules/ROOT/examples/next.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/openmethod/doc/modules/ROOT/examples/rolex/1/employee.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/openmethod/doc/modules/ROOT/examples/rolex/1/main.cpp" />
@@ -3865,6 +3866,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/openmethod/test/test_core.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/openmethod/test/test_custom_rtti.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/openmethod/test/test_dispatch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/boost/libs/openmethod/test/test_dispatch_intrusive_ptr.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/openmethod/test/test_inplace_vptr.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/openmethod/test/test_n2216.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/openmethod/test/test_namespaces.cpp" />
@@ -3873,6 +3875,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/openmethod/test/test_rolex.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/openmethod/test/test_runtime_errors.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/openmethod/test/test_shared_virtual_ptr_value_semantics.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/boost/libs/openmethod/test/test_smart_virtual_ptr_value_semantics.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/openmethod/test/test_static_list.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/openmethod/test/test_static_rtti.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/openmethod/test/test_unique_virtual_ptr_value_semantics.cpp" />
@@ -15516,6 +15519,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/openmethod/include/boost/openmethod/detail/static_list.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/openmethod/include/boost/openmethod/initialize.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/openmethod/include/boost/openmethod/inplace_vptr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/openmethod/include/boost/openmethod/interop/boost_intrusive_ptr.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/openmethod/include/boost/openmethod/interop/std_shared_ptr.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/openmethod/include/boost/openmethod/interop/std_unique_ptr.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/openmethod/include/boost/openmethod/macros.hpp" />
@@ -15537,14 +15541,17 @@
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/optional/include/boost/optional/bad_optional_access.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/optional/include/boost/optional/detail/experimental_traits.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/optional/include/boost/optional/detail/optional_aligned_storage.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/optional/include/boost/optional/detail/optional_common_defs.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/optional/include/boost/optional/detail/optional_config.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/optional/include/boost/optional/detail/optional_factory_support.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/optional/include/boost/optional/detail/optional_hash.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/optional/include/boost/optional/detail/optional_nonmember_interface.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/optional/include/boost/optional/detail/optional_reference_spec.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/optional/include/boost/optional/detail/optional_relops.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/optional/include/boost/optional/detail/optional_select_implementation.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/optional/include/boost/optional/detail/optional_swap.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/optional/include/boost/optional/detail/optional_trivially_copyable_base.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/optional/include/boost/optional/detail/optional_utility.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/optional/include/boost/optional/detail/union_optional.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/optional/include/boost/optional/optional.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/optional/include/boost/optional/optional_fwd.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/optional/include/boost/optional/optional_io.hpp" />
@@ -15785,9 +15792,11 @@
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/pfr/include/boost/pfr/detail/core17.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/pfr/include/boost/pfr/detail/core17_generated.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/pfr/include/boost/pfr/detail/core26.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/pfr/include/boost/pfr/detail/core26_reflection.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/pfr/include/boost/pfr/detail/core_name.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/pfr/include/boost/pfr/detail/core_name14_disabled.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/pfr/include/boost/pfr/detail/core_name20_static.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/pfr/include/boost/pfr/detail/core_name26_reflection.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/pfr/include/boost/pfr/detail/detectors.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/pfr/include/boost/pfr/detail/fake_object.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/pfr/include/boost/pfr/detail/fields_count.hpp" />
@@ -24312,6 +24321,7 @@
     <Text Include="../../thirdparty/owemdjee/boost/libs/conversion/meta/libraries.json" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/convert/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/convert/README.md" />
+    <Text Include="../../thirdparty/owemdjee/boost/libs/convert/build.jam" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/convert/doc/generate-html.sh" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/convert/doc/html/BOOST_CNV_PARAM_S_idm12086.html" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/convert/doc/html/BOOST_CNV_PARAM_S_idm12432.html" />
@@ -28780,6 +28790,7 @@
     <Text Include="../../thirdparty/owemdjee/boost/libs/msm/meta/libraries.json" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/multi_array/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/multi_array/appveyor.yml" />
+    <Text Include="../../thirdparty/owemdjee/boost/libs/multi_array/build.jam" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/multi_array/doc/build.jam" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/multi_array/doc/index.html" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/multi_array/doc/iterator_categories.html" />
@@ -31541,6 +31552,7 @@
     <Text Include="../../thirdparty/owemdjee/boost/libs/random/random-performance.html" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/random/random-variate.html" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/range/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/boost/libs/range/build.jam" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/range/doc/Jamfile.v2" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/range/doc/mfc_atl.rst" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/range/index.html" />
@@ -32740,6 +32752,7 @@
     <Text Include="../../thirdparty/owemdjee/boost/libs/units/README.md" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/units/appveyor.yml" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/units/boost.css" />
+    <Text Include="../../thirdparty/owemdjee/boost/libs/units/build.jam" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/units/covscan.sh" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/units/doc/Jamfile.v2" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/units/example/Jamfile.v2" />
@@ -32754,7 +32767,6 @@
     <Text Include="../../thirdparty/owemdjee/boost/libs/unordered/build.jam" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/unordered/doc/Jamfile.v2" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/unordered/doc/antora.yml" />
-    <Text Include="../../thirdparty/owemdjee/boost/libs/unordered/doc/antora_docs.sh" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/unordered/doc/build_antora.sh" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/unordered/doc/modules/ROOT/nav.adoc" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/unordered/doc/modules/ROOT/pages/benchmarks.adoc" />
