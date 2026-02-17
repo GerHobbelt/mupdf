@@ -406,6 +406,7 @@ function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
   if (is_backref_up_the_tree) {
     rootDir = path.dirname(path.dirname(rootDir)) + '/';
   }
+  if (DEBUG >= 2) console.error("rootDir for ignores[] checking:", {rootDir, sourcesPath, files })
 
   let a = files.map((f) => {
     //if (DEBUG > 2) console.error("files.map:", {f, dst: f.replace(rootDir, ''), sourcesPath, rootDir })

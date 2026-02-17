@@ -1,0 +1,721 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{EE87C242-327A-4626-8C72-C0BB1CB6899E}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPINYIN;PINYIN_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/libpinyin/src;../../thirdparty/owemdjee/glib2/glib;../../thirdparty/owemdjee/libpinyin/src/include;../../thirdparty/owemdjee/glib2;../../scripts/libglib2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPINYIN;PINYIN_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPINYIN;PINYIN_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/libpinyin/src;../../thirdparty/owemdjee/glib2/glib;../../thirdparty/owemdjee/libpinyin/src/include;../../thirdparty/owemdjee/glib2;../../scripts/libglib2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPINYIN;PINYIN_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/libpinyin/src;../../thirdparty/owemdjee/glib2/glib;../../thirdparty/owemdjee/libpinyin/src/include;../../thirdparty/owemdjee/glib2;../../scripts/libglib2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPINYIN;PINYIN_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPINYIN;PINYIN_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/libpinyin/src;../../thirdparty/owemdjee/glib2/glib;../../thirdparty/owemdjee/libpinyin/src/include;../../thirdparty/owemdjee/glib2;../../scripts/libglib2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPINYIN;PINYIN_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/libpinyin/src;../../thirdparty/owemdjee/glib2/glib;../../thirdparty/owemdjee/libpinyin/src/include;../../thirdparty/owemdjee/glib2;../../scripts/libglib2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPINYIN;PINYIN_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPINYIN;PINYIN_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/libpinyin/src;../../thirdparty/owemdjee/glib2/glib;../../thirdparty/owemdjee/libpinyin/src/include;../../thirdparty/owemdjee/glib2;../../scripts/libglib2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPINYIN;PINYIN_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/libpinyin/src;../../thirdparty/owemdjee/glib2/glib;../../thirdparty/owemdjee/libpinyin/src/include;../../thirdparty/owemdjee/glib2;../../scripts/libglib2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPINYIN;PINYIN_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPINYIN;PINYIN_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/libpinyin/src;../../thirdparty/owemdjee/glib2/glib;../../thirdparty/owemdjee/libpinyin/src/include;../../thirdparty/owemdjee/glib2;../../scripts/libglib2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/pinyin/big-blurb.cpp" />
+    <Image Include="../../thirdparty/owemdjee/pinyin/assets/pinyin-favicon.png" />
+    <Image Include="../../thirdparty/owemdjee/pinyin/assets/pinyin.png" />
+    <Image Include="../../thirdparty/owemdjee/pinyin/docs/public/favicon.png" />
+    <Image Include="../../thirdparty/owemdjee/pinyin/docs/public/logo.png" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/README.md" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/babel.config.js" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/benchmark/benchmark.js" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/benchmark/long.js" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/benchmark/short.js" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/bin/pinyin" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/en-US/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/en-US/EXAMPLE.mdx" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/en-US/_meta.json" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/en-US/api/v2/index.md" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/en-US/api/v3/index.md" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/en-US/api/v4/index.md" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/en-US/index.md" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/en-US/pinyin-table.mdx" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/ko-KR/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/ko-KR/EXAMPLE.mdx" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/ko-KR/_meta.json" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/ko-KR/api/v2/index.md" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/ko-KR/api/v3/index.md" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/ko-KR/api/v4/index.md" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/ko-KR/index.md" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/ko-KR/pinyin-table.mdx" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/CNAME" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/a.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/ai.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/an.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/ang.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/ao.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/ba.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/bai.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/ban.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/bang.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/bao.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/bei.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/ben.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/beng.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/bi.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/bian.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/biao.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/bie.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/bin.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/bing.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/bo.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/bu.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/ca.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/cai.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/can.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/cang.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/cao.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/ce.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/cen.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/ceng.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/cha.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/chai.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/chan.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/chang.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/chao.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/che.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/chen.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/cheng.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/chi.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/chong.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/chou.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/chu.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/chua.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/chuai.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/chuan.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/chuang.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/chui.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/chun.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/chuo.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/ci.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/cong.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/cou.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/cu.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/cuan.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/cui.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/cun.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/cuo.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/da.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/dai.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/dan.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/dang.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/dao.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/de.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/dei.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/den.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/deng.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/di.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/dian.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/diao.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/die.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/ding.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/diu.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/dong.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/dou.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/du.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/duan.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/dui.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/dun.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/duo.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/e.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/ei.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/en.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/eng.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/er.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/fa.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/fan.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/fang.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/fei.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/fen.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/feng.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/fo.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/fou.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/fu.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/ga.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/gai.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/gan.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/gang.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/gao.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/ge.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/gei.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/gen.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/geng.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/gong.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/gou.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/gu.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/gua.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/guai.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/guan.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/guang.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/gui.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/gun.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/guo.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/ha.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/hai.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/han.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/hang.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/hao.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/he.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/hei.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/hen.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/heng.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/hong.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/hou.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/hu.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/hua.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/huai.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/huan.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/huang.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/hui.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/hun.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/huo (1).mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/huo.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/ji.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/jia.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/jian.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/jiang.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/jiao.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/jie.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/jin.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/jing.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/jiong.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/jiu.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/ju.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/juan.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/jue.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/jun.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/ka.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/kai.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/kan.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/kang.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/kao.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/ke.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/kei.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/ken.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/keng.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/kong.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/kou.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/ku.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/kua.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/kuai.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/kuan.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/kuang.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/kui.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/kun.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/kuo.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/la.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/lai.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/lan.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/lang.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/lao.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/le.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/lei.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/leng.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/li.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/lia.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/lian.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/liang.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/liao.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/lie.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/lin.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/ling.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/liu.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/long.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/lou.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/lu.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/luan.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/lun.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/luo.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/lv.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/lve.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/ma.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/mai.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/man.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/mang.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/mao.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/me.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/mei.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/men.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/meng.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/mi.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/mian.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/miao.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/mie.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/min.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/ming.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/miu.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/mo.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/mou.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/mu.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/na.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/nai.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/nan.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/nang.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/nao.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/ne.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/nei.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/nen.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/neng.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/ni.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/nian.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/niang.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/niao.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/nie.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/nin.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/ning.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/niu.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/nong.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/nou.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/nu.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/nuan.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/nuo.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/nv.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/nve.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/o.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/ou.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/pa.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/pai.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/pan.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/pang.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/pao.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/pei.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/pen.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/peng.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/pi.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/pian.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/piao.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/pie.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/pin.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/ping.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/po.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/pou.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/pu.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/qi.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/qia.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/qian.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/qiang.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/qiao.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/qie.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/qin.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/qing.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/qiong.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/qiu.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/qu.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/quan.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/que.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/qun.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/ran.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/rang.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/rao.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/re.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/ren.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/reng.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/ri.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/rong.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/rou.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/ru.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/rua.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/ruan.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/rui.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/run.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/ruo.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/sa.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/sai.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/san.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/sang.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/sao.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/se.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/sen.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/seng.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/sha.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/shai.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/shan.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/shang.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/shao.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/she.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/shei.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/shen.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/sheng.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/shi.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/shou.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/shu.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/shua.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/shuai.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/shuan.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/shuang.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/shui.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/shun.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/shuo.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/si.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/song.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/sou.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/su.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/suan.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/sui.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/sun.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/suo.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/ta.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/tai.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/tan.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/tang.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/tao.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/te.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/teng.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/ti.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/tian.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/tiao.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/tie.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/ting.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/tong.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/tou.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/tu.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/tuan.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/tui.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/tun.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/tuo.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/wa.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/wai.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/wan.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/wang.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/wei.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/wen.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/weng.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/wo.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/wu.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/xi.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/xia.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/xian.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/xiang.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/xiao.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/xie.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/xin.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/xing.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/xiong.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/xiu.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/xu.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/xuan.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/xue.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/xun.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/ya.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/yan.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/yang.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/yao.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/ye.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/yi.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/yin.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/ying.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/yong.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/you.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/yu.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/yuan.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/yue.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/yun.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/za.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/zai.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/zan.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/zang.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/zao.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/ze.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/zei.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/zen.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/zeng.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/zha.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/zhai.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/zhan.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/zhang.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/zhao.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/zhe.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/zhei.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/zhen.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/zheng.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/zhi.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/zhong.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/zhou.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/zhu.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/zhua.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/zhuai.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/zhuan.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/zhuang.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/zhui.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/zhun.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/zhuo.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/zi.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/zong.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/zou.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/zu.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/zuan.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/zui.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/audio/zuo.mp3" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/public/styles/global.css" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/zh-CN/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/zh-CN/EXAMPLE.mdx" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/zh-CN/_meta.json" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/zh-CN/api/v2/index.md" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/zh-CN/api/v3/index.md" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/zh-CN/api/v4/index.md" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/zh-CN/index.md" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/zh-CN/pinyin-table.mdx" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/zh-TW/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/zh-TW/EXAMPLE.mdx" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/zh-TW/_meta.json" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/zh-TW/api/v2/index.md" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/zh-TW/api/v3/index.md" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/zh-TW/api/v4/index.md" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/zh-TW/index.md" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/docs/zh-TW/pinyin-table.mdx" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/index.ts" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/package.json" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/pnpm-lock.yaml" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/rollup.config.js" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/rspress.config.ts" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/src/PinyinBase.ts" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/src/constant.ts" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/src/data/compound_surname.ts" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/src/data/dict-zi.ts" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/src/data/dict.bin" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/src/data/phrases-dict.ts" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/src/data/surname.ts" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/src/declare.ts" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/src/format.ts" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/src/phonetic-symbol.ts" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/src/pinyin-web.ts" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/src/pinyin.ts" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/src/segment-web.ts" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/src/segment.ts" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/src/util.ts" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/test/cli.test.ts" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/test/segment-web.test.ts" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/test/segment.test.ts" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/test/test.ts" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/test/util.test.ts" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/tools/a2b.js" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/tools/ci/phrases.js" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/tools/combo-dict.js" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/tools/debug.ts" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/tools/dict/dict-ci.js" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/tools/dict/dict-pinyin.js" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/tools/dict/dict-zi-frequent.js" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/tools/dict/dict-zi-infrequent.js" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/tools/dict/dict-zi-web.js" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/tools/dict/dict-zi.js" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/tools/double-width-char.js" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/tools/example/index.module.css" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/tools/example/index.tsx" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/tools/infrequent.js" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/tools/phonetics.js" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/tools/pinyin-table/context.tsx" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/tools/pinyin-table/pinyin-table.css" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/tools/pinyin-table/pinyin-table.tsx" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/tools/robot-ci.js" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/tools/robot-frequent.js" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/tools/robot-infrequent.js" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/tools/robot-zdic-zi.js" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/tools/robot-zi.js" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/tools/segment.js" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/tools/urlencode.js" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/tools/zi/all.js" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/tools/zi/frequent.js" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/tools/zi/frequent2.js" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/tools/zi/infrequent.js" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/tsconfig-amd.json" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/tsconfig-es5.json" />
+    <Text Include="../../thirdparty/owemdjee/pinyin/tsconfig.json" />
+  </ItemGroup>
+  <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+</Project>
