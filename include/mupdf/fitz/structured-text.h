@@ -147,6 +147,17 @@ typedef struct fz_stext_grid_positions fz_stext_grid_positions;
 	details (currently just the bbox) of vector graphics. This is intended
 	to be of use in segmentation analysis.
 
+	FZ_STEXT_LAZY_VECTORS: If this option is set, we will defer collected
+	vectors to the end of the text run they appear in. This prevents vector
+	drawn strikeouts, or diacritics/accents/marks from breaking the flow
+	of text.
+
+	FZ_STEXT_FUZZY_VECTORS: If this option is set, we 'fuzzily' collect
+	rectangular vectors of the same colour together. This enables us to
+	spot where 'pixels' or 'slices' of vectors are used to create the
+	appearance of characters on the page without exploding the storage
+	and processing time requirements.
+
 	FZ_STEXT_IGNORE_ACTUALTEXT: If this option is set, we will no longer
 	replace text by the ActualText replacement specified in the document.
 
@@ -203,6 +214,7 @@ enum
 	FZ_STEXT_ACCURATE_ASCENDERS = (1<<18),
 	FZ_STEXT_ACCURATE_SIDE_BEARINGS = (1<<19),
 	FZ_STEXT_LAZY_VECTORS = (1<<20),
+	FZ_STEXT_FUZZY_VECTORS = (1<<21),
 
 	/* An old, deprecated option. */
 	FZ_STEXT_MEDIABOX_CLIP = FZ_STEXT_CLIP
@@ -594,6 +606,22 @@ void fz_print_stext_trailer_as_xhtml(fz_context *ctx, fz_output *out);
 	Output structured text to a file in XML format.
 */
 void fz_print_stext_page_as_xml(fz_context *ctx, fz_output *out, fz_stext_page *page, int id);
+
+/**
+	Output structured text to a file in XML format, with flags
+	to control how much of the structure is displayed.
+*/
+typedef enum {
+	FZ_STEXT_XML_FLAGS_CHARS = 1,
+	FZ_STEXT_XML_FLAGS_POINTERS = 2
+} fz_stext_xml_flags;
+void fz_print_stext_page_as_xml_with_flags(fz_context *ctx, fz_output *out, fz_stext_page *page, int id, fz_stext_xml_flags flags);
+
+/**
+	Convenience function to call the above.
+*/
+void fz_debug_stext_page(fz_context *ctx, fz_stext_page *page, int id);
+
 
 /**
 	Output structured text to a file in JSON format.
@@ -1244,5 +1272,13 @@ fz_flotilla_size(fz_context *ctx, fz_flotilla *flot);
 */
 fz_rect
 fz_flotilla_raft_area(fz_context *ctx, fz_flotilla *flot, int i);
+
+/*
+	Internal debugging function to verify the soundness
+	of an stext page.
+
+	title: optional string to be printed.
+*/
+void fz_verify_stext_page(fz_context *ctx, fz_stext_page *page, const char *title);
 
 #endif

@@ -3536,7 +3536,6 @@ pdf_new_run_processor(fz_context *ctx, pdf_document *doc, fz_device *dev, fz_mat
 	if (dev->begin_structure || dev->end_structure)
 		proc->process_structure = 1;
 
-
 	fz_try(ctx)
 	{
 		proc->path = fz_new_path(ctx);
