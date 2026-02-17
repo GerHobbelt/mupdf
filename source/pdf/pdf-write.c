@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2025 Artifex Software, Inc.
+// Copyright (C) 2004-2026 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -831,6 +831,7 @@ static void copystream(fz_context *ctx, pdf_document *doc, pdf_write_state *opts
 	fz_var(buf);
 	fz_var(tmp_comp);
 	fz_var(tmp_hex);
+	fz_var(tmp_unhex);
 	fz_var(obj);
 
 	fz_try(ctx)
@@ -2387,25 +2388,25 @@ unpack_objstm_objs(fz_context *ctx, pdf_document *doc, int xref_len)
 	}
 }
 
-void
+int
 pdf_check_document(fz_context *ctx, pdf_document *doc)
 {
 	int num;
+	int repaired_before;
 
 	if (doc->checked)
-		return;
-	doc->checked = 1;
+		return 0;
+
+	repaired_before = doc->repair_attempted;
 
 	for (num = 1; num < pdf_xref_len(ctx, doc); ++num)
 	{
 		if (pdf_object_exists(ctx, doc, num))
-		{
-			fz_try(ctx)
-				(void) pdf_cache_object(ctx, doc, num);
-			fz_catch(ctx)
-				fz_report_error(ctx);
-		}
+			(void) pdf_cache_object(ctx, doc, num);
 	}
+	doc->checked = 1;
+
+	return repaired_before != doc->repair_attempted;
 }
 
 static void
@@ -3031,7 +3032,7 @@ pdf_writer_drop_writer(fz_context *ctx, fz_document_writer *wri_)
 fz_document_writer *
 fz_new_pdf_writer_with_output(fz_context *ctx, fz_output *out, const char *options)
 {
-	pdf_writer *wri;
+	pdf_writer *wri = NULL;
 
 	fz_var(wri);
 
@@ -3045,7 +3046,8 @@ fz_new_pdf_writer_with_output(fz_context *ctx, fz_output *out, const char *optio
 	fz_catch(ctx)
 	{
 		fz_drop_output(ctx, out);
-		pdf_drop_document(ctx, wri->pdf);
+		if (wri)
+			pdf_drop_document(ctx, wri->pdf);
 		fz_free(ctx, wri);
 		fz_rethrow(ctx);
 	}
