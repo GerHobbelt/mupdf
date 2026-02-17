@@ -7,3 +7,5 @@ also-ignore:
 	x11/
 	ogc/
 	
+	/src/cocoa/
+	

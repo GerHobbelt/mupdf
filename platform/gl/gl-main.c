@@ -534,7 +534,7 @@ static void save_history(void)
 		fz_drop_pool(ctx, pool);
 		fz_drop_output(ctx, out);
 	}
-	fz_catch(ctx) {
+	fz_catch(ctx)
 	{
 		fz_report_error(ctx);
 		fz_warn(ctx, "Can't write history file.");

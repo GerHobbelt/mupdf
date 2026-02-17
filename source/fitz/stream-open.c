@@ -231,12 +231,7 @@ fz_open_file_ptr(fz_context *ctx, FILE *file, const char *name, int del_on_drop)
 				fz_warn(ctx, "close error: %s", fz_ctx_get_system_errormsg(ctx));
 			}
 
-#ifdef _WIN32
-			if (wide)
-				_wunlink((const wchar_t *)name);
-			else
-#endif
-				unlink(name);
+			unlink(name);
 		}
 		if (state_to_free)
 			close_and_drop_file(ctx, state_to_free);

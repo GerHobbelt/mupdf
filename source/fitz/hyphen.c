@@ -226,7 +226,7 @@ fz_hyphenate_insert_pattern(fz_context *ctx, fz_hyphenator *hyph, const char *s)
 	/* count number of chars in pattern */
 	n = 0;
 	patlen = 0;
-	for (i = 0; s[i] != 0; i += fz_chartorune(&r, s+i)) {
+	for (i = 0; s[i] != 0; i += fz_chartorune_unsafe(&r, s+i)) {
 		n++;
 		if (!ISDIGIT(s[i]))
 			patlen++;
@@ -237,7 +237,7 @@ fz_hyphenate_insert_pattern(fz_context *ctx, fz_hyphenator *hyph, const char *s)
 
 	/* extract interleaved values and chars */
 	for (k = i = 0; i < n;) {
-		i += fz_chartorune(&r, s+i);
+		i += fz_chartorune_unsafe(&r, s+i);
 		if (ISDIGIT(r)) {
 			patval[k] *= 10;
 			patval[k] += r - '0';
@@ -269,7 +269,7 @@ fz_hyphenate_insert_exception(fz_context *ctx, fz_hyphenator *hyph, const char *
 
 	/* count number of chars in pattern */
 	patlen = 2;
-	for (i = 0; s[i]; i += fz_chartorune(&r, s+i))
+	for (i = 0; s[i]; i += fz_chartorune_unsafe(&r, s+i))
 		if (s[i] != '-')
 			patlen++;
 
@@ -282,7 +282,7 @@ fz_hyphenate_insert_exception(fz_context *ctx, fz_hyphenator *hyph, const char *
 
 	/* create interleaved values and chars */
 	for (k = 1, i = 0; s[i];) {
-		i += fz_chartorune(&r, s+i);
+		i += fz_chartorune_unsafe(&r, s+i);
 		if (r == '-') {
 			patval[k] = 63;
 		} else {
@@ -350,7 +350,7 @@ fz_hyphenate_word(fz_context *ctx, fz_hyphenator *hyph, const char *input, int i
 	/* clear value buffer and decode utf-8 */
 	word[0] = '.';
 	for (i = 0, n = 1; n < 63 && i < input_size && input[i]; ++n) {
-		i += fz_chartorune(orig + n, input + i);
+		i += fz_chartorune_unsafe(orig + n, input + i);
 		word[n] = fz_tolower(orig[n]);
 		vals[n] = 0;
 	}

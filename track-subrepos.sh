@@ -15,7 +15,7 @@ else
 	else
 		${GPP} -p
 		git reset --hard
-		/z/tools/merge_tracked_git_original_4_branch.sh -m 5
+		/z/tools/merge_tracked_git_original_4_branch.sh -m 2
 		git reset --hard
 	fi
 fi

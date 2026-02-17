@@ -634,14 +634,14 @@ static inline int canon(int c)
 static const char *match_exact(const char *h, const char *n)
 {
 	int hc, nc;
-	h += fz_chartorune(&hc, h);
-	n += fz_chartorune(&nc, n);
+	h += fz_chartorune_unsafe(&hc, h);
+	n += fz_chartorune_unsafe(&nc, n);
 	while (hc == nc)
 	{
-		n += fz_chartorune(&nc, n);
+		n += fz_chartorune_unsafe(&nc, n);
 		if (nc == 0)
 			return h;
-		h += fz_chartorune(&hc, h);
+		h += fz_chartorune_unsafe(&hc, h);
 	}
 	return NULL;
 }
@@ -658,7 +658,7 @@ static const char *find_exact(fz_context *ctx, void *dummy, const char *s, const
 			*endp = end;
 			return s;
 		}
-		s += fz_chartorune(&c, s);
+		s += fz_chartorune_unsafe(&c, s);
 	}
 	*endp = NULL;
 	return NULL;
@@ -1094,7 +1094,7 @@ do_transform(fz_context *ctx, fz_text_transform transform, char *output, size_t 
 	while (1)
 	{
 		int c;
-		int inlen = fz_chartorune(&c, &input[pos]);
+		int inlen = fz_chartorune_unsafe(&c, &input[pos]);
 
 		if (c == 0)
 			break;
@@ -1571,7 +1571,7 @@ ensure_haystack_for_page(fz_context *ctx, fz_search *search, search_page *page)
 	s = page->haystack;
 	while (*s)
 	{
-		s += fz_chartorune(&c, s);
+		s += fz_chartorune_unsafe(&c, s);
 		if (!fz_is_unicode_whitespace(c))
 			return 0;
 	}

@@ -466,7 +466,7 @@ generate_text_run(fz_context *ctx, fz_html_box *box, fz_html_box *flow, const ch
 	while (text < end)
 	{
 		prev = text;
-		text += fz_chartorune(&c, text);
+		text += fz_chartorune_unsafe(&c, text);
 		if (c == 0xAD) /* soft hyphen */
 		{
 			if (mark != prev)
@@ -605,7 +605,7 @@ static void generate_text(fz_context *ctx, fz_html_box *box, const char *text, i
 			{
 				// split word into letter and non-letter runs for hyphenator
 				const char *p = mark;
-				n = fz_chartorune(&c, p);
+				n = fz_chartorune_unsafe(&c, p);
 				while (p < text)
 				{
 					p += n;
@@ -613,7 +613,7 @@ static void generate_text(fz_context *ctx, fz_html_box *box, const char *text, i
 					{
 						while (p < text)
 						{
-							n = fz_chartorune(&c, p);
+							n = fz_chartorune_unsafe(&c, p);
 							if (!fz_isletter_or_apos(c))
 								break;
 							p += n;
@@ -624,7 +624,7 @@ static void generate_text(fz_context *ctx, fz_html_box *box, const char *text, i
 					{
 						while (p < text)
 						{
-							n = fz_chartorune(&c, p);
+							n = fz_chartorune_unsafe(&c, p);
 							if (fz_isletter_or_apos(c))
 								break;
 							p += n;

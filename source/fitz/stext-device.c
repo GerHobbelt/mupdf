@@ -2729,7 +2729,7 @@ add_vector(fz_context *ctx, fz_stext_page *page, fz_stext_device *tdev, fz_rect 
 	{
 		fz_stext_block *prev;
 		/* Find b = the previous block. */
-		if (tdev->flags & FZ_STEXT_LAZY_VECTORS)
+		if (tdev->opts.flags & FZ_STEXT_LAZY_VECTORS)
 			b = tdev->lazy_vectors_tail;
 		else if (page->last_struct)
 			b = page->last_struct->last_block;
@@ -2791,7 +2791,7 @@ add_vector(fz_context *ctx, fz_stext_page *page, fz_stext_device *tdev, fz_rect 
 					prev->bbox.x1 = fz_max(prev->bbox.x1, b->bbox.x1);
 					return;
 				}
-				if (tdev->flags & FZ_STEXT_FUZZY_VECTORS)
+				if (tdev->opts.flags & FZ_STEXT_FUZZY_VECTORS)
 				{
 					/* Be more forgiving in how we merge vectors */
 					/* We need to be careful not to merge together differently oriented borders for table cells.
@@ -2831,7 +2831,7 @@ add_vector(fz_context *ctx, fz_stext_page *page, fz_stext_device *tdev, fz_rect 
 						prev->bbox.y1 = fz_max(prev->bbox.y1, b->bbox.y1);
 						/* Unlink b (so, fiddle with b->prev, which is not necessarily prev!) */
 						b->prev->next = NULL;
-						if (tdev->flags & FZ_STEXT_LAZY_VECTORS)
+						if (tdev->opts.flags & FZ_STEXT_LAZY_VECTORS)
 							tdev->lazy_vectors_tail = b->prev;
 						else if (page->last_struct)
 							page->last_struct->last_block = b->prev;
