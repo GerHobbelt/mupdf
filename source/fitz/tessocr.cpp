@@ -106,97 +106,11 @@ tess_file_reader(const STRING& fname, GenericVector<char> *out)
 }
 #endif
 
-static const char *
-find_equals_or_end(const char **ep, const char *s)
-{
-	const char *e = s;
-
-	while (*e)
-	{
-		if (*e == '=' || *e == ',')
-			break;
-		e++;
-	}
-
-	/* Skip back over any spaces */
-	*ep = e;
-	while (*ep != s)
-	{
-		if ((*ep)[-1] != ' ')
-			break;
-		(*ep)--;
-	}
-
-	return e;
-}
-
-static const char *
-find_val(const char **val, const char **valend, const char *s)
-{
-	/* If there isn't an equals, just stop. */
-	if (*s != '=')
-	{
-		*val = NULL;
-		*valend = NULL;
-		return s;
-	}
-
-	/* Skip over the equals. */
-	s++;
-
-	while (*s == ' ')
-		s++;
-
-	/* If it's a quoted string... */
-	if (*s == '"')
-	{
-		s++;
-		*val = s;
-		while (*s)
-		{
-			if (*s == '\"')
-				break;
-			s++;
-		}
-		*valend = s;
-		/* Step over the close quote if there is one. */
-		if (*s)
-			s++;
-	}
-	else
-	{
-		/* Otherwise, just return until , or the end. */
-		*val = s;
-		while (*s)
-		{
-			if (*s == ',')
-				break;
-			s++;
-		}
-		*valend = s;
-	}
-
-	/* Skip anything until the end or the next comma.
-	 * Only whitespace, probably. */
-	while (*s && *s != ',')
-		s++;
-
-	return s;
-}
-
 static int
 send_var(fz_context *ctx, tesseract::TessBaseAPI *api, const char *key, const char *val)
 {
 	if (!api->SetVariable(key, val == NULL ? "true" : val))
-	{
-		{
-			if (val == NULL)
-				fz_throw(ctx, FZ_ERROR_ARGUMENT, "Invalid tesseract option \"%s\"", key);
-			else
-				fz_throw(ctx, FZ_ERROR_ARGUMENT, "Invalid tesseract option \"%s\"=\"%s\"", key, val);
-		}
 		return 1;
-	}
 
 	return 0;
 }
@@ -237,10 +151,10 @@ void *ocr_init(fz_context *ctx, const char *language, const char *datadir, fz_op
 	{
 		const char *key, *val;
 
-		key = fz_get_option(ctx, options, i, &val);
+		key = fz_get_option_by_index(ctx, options, i, &val);
 
 		if (send_var(ctx, api, key, val) == 0)
-			fz_access_option(ctx, options, i);
+			fz_access_option_by_index(ctx, options, i);
 	}
 
 	return api;

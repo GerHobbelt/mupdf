@@ -1422,34 +1422,34 @@ fz_init_svg_device_options(fz_context *ctx, fz_svg_device_options *opts)
 void
 fz_parse_svg_device_options(fz_context *ctx, fz_svg_device_options *opts, const char *args)
 {
-	fz_options *options = fz_new_options_from_string(ctx, args);
-
-	fz_init_svg_device_options(ctx, opts);
-
+	fz_options *options = fz_new_options(ctx, args);
 	fz_try(ctx)
+	{
+		fz_init_svg_device_options(ctx, opts);
 		fz_apply_svg_device_options(ctx, opts, options);
+		fz_throw_on_unused_options(ctx, options, "svg");
+	}
 	fz_always(ctx)
 		fz_drop_options(ctx, options);
 	fz_catch(ctx)
 		fz_rethrow(ctx);
 }
 
+static const fz_option_enums svg_text_opt_enum[] =
+{
+	{ "text", FZ_SVG_TEXT_AS_TEXT },
+	{ "path", FZ_SVG_TEXT_AS_PATH },
+	{ NULL, -1 }
+};
+
 void fz_apply_svg_device_options(fz_context *ctx, fz_svg_device_options *opts, fz_options *args)
 {
-	const char *val;
+	if (fz_lookup_option_enum(ctx, args, "text", &opts->text_format, svg_text_opt_enum) < 0)
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "Unknown text option");
+	fz_lookup_option_boolean(ctx, args, "no-reuse-images", &opts->reuse_images);
+	fz_lookup_option_integer(ctx, args, "resolution", &opts->resolution);
 
-	if (fz_options_has_key(ctx, args, "text", &val))
-	{
-		if (fz_option_eq(val, "text"))
-			opts->text_format = FZ_SVG_TEXT_AS_TEXT;
-		else if (fz_option_eq(val, "path"))
-			opts->text_format = FZ_SVG_TEXT_AS_PATH;
-	}
-	if (fz_options_has_key(ctx, args, "no-reuse-images", &val))
-		if (fz_option_eq(val, "yes"))
-			opts->reuse_images = 0;
-	if (fz_options_has_key(ctx, args, "resolution", &val))
-		opts->resolution = fz_atoi(val);
+	fz_validate_options(ctx, args, "svg-device");
 }
 
 fz_device *fz_new_svg_device_with_options(fz_context *ctx, fz_output *out, float page_width, float page_height, fz_svg_device_options *opts)

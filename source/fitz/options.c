@@ -24,27 +24,30 @@
 
 enum
 {
-	ACCESSED = 1
+	ACCESSED = 1,
+	INVALID = 2,
+	NOTIFIED = 4
 };
 
-static void
-drop_opt(fz_context *ctx, fz_option *opt)
+fz_options *
+fz_new_options(fz_context *ctx, const char *string)
 {
-	fz_free(ctx, opt);
-}
-
-void
-fz_drop_options(fz_context *ctx, fz_options *opts)
-{
-	if (fz_drop_imp(ctx, opts, &opts->refs))
+	fz_options *opts = NULL;
+	fz_pool *pool = fz_new_pool(ctx);
+	fz_try(ctx)
 	{
-		int i;
-
-		for (i = 0; i < opts->len; i++)
-			drop_opt(ctx, opts->opts[i]);
-		fz_free(ctx, opts->opts);
-		fz_free(ctx, opts);
+		opts = fz_pool_alloc_struct(ctx, pool, fz_options);
+		opts->pool = pool;
+		opts->refs = 1;
+		if (string)
+			fz_parse_options(ctx, opts, string);
 	}
+	fz_catch(ctx)
+	{
+		fz_drop_pool(ctx, pool);
+		fz_rethrow(ctx);
+	}
+	return opts;
 }
 
 fz_options *
@@ -53,284 +56,665 @@ fz_keep_options(fz_context *ctx, fz_options *opts)
 	return fz_keep_imp(ctx, opts, &opts->refs);
 }
 
-static int
-isws(char c)
+void
+fz_drop_options(fz_context *ctx, fz_options *opts)
 {
-	return c == 32 || c == 9 || c == 8 || c == 10 || c == 12 || c == 13;
+	if (fz_drop_imp(ctx, opts, &opts->refs))
+	{
+		fz_option *opt;
+		int bad = 0;
+
+		for (opt = opts->head; opt; opt = opt->next)
+			if (!(opt->flags & NOTIFIED) && (!(opt->flags & ACCESSED) || (opt->flags & INVALID)))
+				bad = 1;
+		if (bad)
+			fz_warn(ctx, "dropping unprocessed options");
+		fz_drop_pool(ctx, opts->pool);
+	}
 }
 
 static void
-add_option(fz_context *ctx, fz_options *opts, const char *key_start, const char *key_end, const char *val_start, const char *val_end)
-{
-	size_t z = key_end - key_start + 1;
-	fz_option *o;
-
-	if (val_start != NULL)
-		z += val_end - val_start + 1;
-
-	o = fz_malloc_flexible(ctx, fz_option, key, z);
-
-	memcpy(o->key, key_start, key_end - key_start);
-	o->key[key_end - key_start] = 0;
-	if (val_start)
+add_option(fz_context *ctx, fz_options *optlist,
+	const char *key_start, const char *key_end,
+	const char *val_start, const char *val_end,
+	void (*unescape)(char *)
+) {
+	fz_option *opt = fz_pool_alloc_struct(ctx, optlist->pool, fz_option);
+	opt->flags = 0;
+	opt->key = fz_pool_strndup(ctx, optlist->pool, key_start, key_end - key_start);
+	opt->val = fz_pool_strndup(ctx, optlist->pool, val_start, val_end - val_start);
+	if (unescape)
 	{
-		o->val = o->key + (key_end - key_start) + 1;
-		memcpy(o->val, val_start, val_end - val_start);
-		o->val[val_end - val_start] = 0;
+		unescape(opt->key);
+		unescape(opt->val);
 	}
-	else
-		o->val = NULL;
-
-	if (opts->len == opts->max)
-	{
-		int newmax = opts->max * 2;
-		if (newmax == 0)
-			newmax = 4;
-		fz_try(ctx)
-		{
-			opts->opts = fz_realloc(ctx, opts->opts, sizeof(opts->opts[0]) * newmax);
-			opts->max = newmax;
-		}
-		fz_catch(ctx)
-		{
-			drop_opt(ctx, o);
-			fz_rethrow(ctx);
-		}
-	}
-
-	opts->opts[opts->len] = o;
-	opts->len++;
+	opt->next = optlist->head;
+	optlist->head = opt;
 }
 
-
-void
-fz_add_options_from_string(fz_context *ctx, fz_options *options, const char *option_string)
+static void unescape_csv(char *s)
 {
-	const char *s;
-
-	if (option_string == NULL)
-		return;
-
-	s = option_string;
-
-	while (1)
+	char *p = s;
+	while (*s)
 	{
-		const char *key_start, *key_end;
-		const char *val_start = NULL;
-		const char *val_end = NULL;
-		/* Skip any whitespace */
-		while (isws(*s))
-			s++;
-
-		/* Quit if we've hit the end. */
-		if (*s == 0)
-			break;
-
-		if (*s == '=')
-			fz_throw(ctx, FZ_ERROR_ARGUMENT, "Value with no Key found in options string");
-
-		if (*s == '\"')
+		if (s[0] == '"' && s[1] == '"')
 		{
-			/* Quoted key. Weird, but we'll take it. */
-			s++; /* Skip quote */
-			key_start = s;
-			/* Look for the end */
-			while (*s && *s != '"')
-				s++;
-			if (*s == 0)
-				fz_throw(ctx, FZ_ERROR_ARGUMENT, "Mismatched quotation in options string");
-			key_end = s;
-			s++; /* Skip quote */
-			/* Skip whitespace */
-			while (isws(*s))
-				s++;
+			*p++ = '"';
+			s += 2;
 		}
 		else
 		{
-			/* Look for the end */
-			key_start = key_end = s;
-			while (*s && *s != '=' && *s != ',')
-			{
-				if (!isws(*s))
-					key_end = s+1;
-				s++;
-			}
+			*p++ = *s++;
 		}
-		if (key_start == key_end)
-			fz_throw(ctx, FZ_ERROR_ARGUMENT, "Empty key found in options string");
+	}
+	*p = 0;
+}
+
+static int ishex(int a)
+{
+	return (a >= 'A' && a <= 'F') ||
+		(a >= 'a' && a <= 'f') ||
+		(a >= '0' && a <= '9');
+}
+
+static int unhex(int c)
+{
+	if (c >= 'A' && c <= 'F') return c - 'A' + 0xA;
+	if (c >= 'a' && c <= 'f') return c - 'a' + 0xA;
+	if (c >= '0' && c <= '9') return c - '0';
+	return 0;
+}
+
+static void unescape_url(char *s)
+{
+	char *p = s;
+	while (*s)
+	{
+		if (s[0] == '%' && ishex(s[1]) && ishex(s[2]))
+		{
+			*p++ = (unhex(s[1]) << 4) | unhex(s[2]);
+			s += 3;
+		}
+		else
+		{
+			*p++ = *s++;
+		}
+	}
+	*p = 0;
+}
+
+static void unescape_json(char *s)
+{
+	char *p = s;
+	while (*s)
+	{
+		if (s[0] == '\\' && s[1])
+		{
+			*p++ = s[1]; // TODO: unescaping non-identity (\n, \t, etc)?
+			s += 2;
+		}
+		else
+		{
+			*p++ = *s++;
+		}
+	}
+	*p = 0;
+}
+
+static void fz_parse_options_csv(fz_context *ctx, fz_options *options, const char *s)
+{
+	/* simple list of comma separated key=value pairs */
+	/* values may be enclosed in double-quotes; use two double-quotes ("") to represent a double-quote within */
+	// example: rotate=90,bbox="0,0,200,100",title="Hello world!"
+	const char *k, *kk, *v, *vv;
+	while (*s)
+	{
+		while(*s == ',')
+			s++;
+		k = s;
+		while (*s && *s != ',' && *s != '=')
+			++s;
+		kk = s;
 		if (*s == '=')
 		{
-			s++; /* Skip '=' */
-			/* Skip whitespace */
-			while (isws(*s))
-				s++;
+			++s;
 			if (*s == '"')
 			{
-				/* Quoted value */
-				s++; /* Skip quote */
-				val_start = s;
-				/* Look for the end */
-				while (*s && *s != '"')
-					s++;
-				if (*s == 0)
-					fz_throw(ctx, FZ_ERROR_ARGUMENT, "Mismatched quotation in options string");
-				val_end = s;
-				s++; /* Skip quote */
-				/* Skip whitespace */
-				while (isws(*s))
-					s++;
+				++s;
+				v = s;
+				while (*s)
+				{
+					// un-escape double quote ("")
+					if (*s == '"')
+					{
+						if (s[1] == '"')
+							++s;
+						else
+							break;
+					}
+					++s;
+				}
+				vv = s;
+				if (*s == '"')
+					++s;
 			}
 			else
 			{
-				/* Look for the end */
-				val_start = val_end = s;
-				while (*s && *s != '=' && *s != ',')
-				{
-					if (!isws(*s))
-						val_end = s+1;
-					s++;
-				}
+				v = s;
+				while (*s && *s != ',')
+					++s;
+				vv = s;
 			}
 		}
-		if (val_start == val_end)
-			val_start = val_end = NULL;
-		add_option(ctx, options, key_start, key_end, val_start, val_end);
-		if (*s == 0)
-			break;
-		s++; /* Skip the ',' */
+		else
+		{
+			v = vv = s;
+		}
+		add_option(ctx, options, k, kk, v, vv, unescape_csv);
 	}
 }
 
-fz_options *
-fz_new_options_from_string(fz_context *ctx, const char *option_string)
+static void fz_parse_options_querystring(fz_context *ctx, fz_options *options, const char *s)
 {
-	fz_options *opts = fz_malloc_struct(ctx, fz_options);
-
-	opts->refs = 1;
-
-	fz_try(ctx)
+	/* simple list of & separated key=value pairs; use %XX url-escape for special characters in keys and values */
+	// example: ?rotate=90&bbox=0,0,200,100&title=Hello world!
+	const char *k, *kk, *v, *vv;
+	while (*s)
 	{
-		fz_add_options_from_string(ctx, opts, option_string);
+		k = s;
+		while (*s && *s != '&' && *s != '=')
+			++s;
+		kk = s;
+		if (*s == '=')
+		{
+			++s;
+			v = s;
+			while (*s && *s != '&')
+				++s;
+			vv = s;
+		}
+		else
+		{
+			v = vv = s;
+		}
+		add_option(ctx, options, k, kk, v, vv, unescape_url);
 	}
-	fz_catch(ctx)
-	{
-		fz_drop_options(ctx, opts);
-		fz_rethrow(ctx);
-	}
+}
 
-	return opts;
+static int iswhite(int c)
+{
+	return c == ' ' || (c >= 8 && c <= 13);
+}
+
+static int opt_isdigit(int c)
+{
+	return (c >= '0' && c <= '9');
+}
+
+static int isnumber(int c)
+{
+	return (c >= '0' && c <= '9') || c == '.' || c == '-';
+}
+
+static void fz_parse_options_json(fz_context *ctx, fz_options *options, const char *s)
+{
+	/* subset of JSON supporting only one top-level object and primitive (boolean,number,string) values */
+	/* values may also be a simple (flat) array of numbers (general arrays are not supported) */
+	// example: {"rotate":90,"bbox":[0,0,200,100],"title":"Hello, world!"}
+	const char *k, *kk, *v, *vv;
+
+	while (iswhite(*s))
+		++s;
+
+	while (*s && *s != '}')
+	{
+		while (iswhite(*s))
+			++s;
+
+		// key
+		if (*s == '"')
+		{
+			++s;
+			k = s;
+			while (*s && *s != '"')
+			{
+				if (s[0] == '\\' && s[1])
+					++s;
+				++s;
+			}
+			kk = s;
+			if (*s == '"')
+				++s;
+		}
+		else
+		{
+			fz_throw(ctx, FZ_ERROR_ARGUMENT, "invalid option syntax (expected string)");
+		}
+
+		while (iswhite(*s))
+			++s;
+
+		// colon
+		if (*s == ':')
+			++s;
+		else
+			fz_throw(ctx, FZ_ERROR_ARGUMENT, "invalid option syntax (expected ':')");
+
+		while (iswhite(*s))
+			++s;
+
+		// value
+		if (*s == '"')
+		{
+			// string
+			++s;
+			v = s;
+			while (*s && *s != '"')
+			{
+				if (s[0] == '\\' && s[1])
+					++s;
+				++s;
+			}
+			vv = s;
+			if (*s == '"')
+				++s;
+		}
+		else if (*s == '[')
+		{
+			// array (treat as string of comma separated numbers)
+			++s;
+			v = s;
+			while (*s && *s != ']') {
+				if (!iswhite(*s) && !isnumber(*s) && *s != ',')
+					fz_throw(ctx, FZ_ERROR_ARGUMENT, "invalid option syntax (non-number in array)");
+				++s;
+			}
+			vv = s;
+			if (*s == ']')
+				++s;
+		}
+		else if (*s == '-' || (*s >= '0' && *s <= '9'))
+		{
+			// number
+			v = s;
+			if (*s == '-')
+				++s;
+			while (opt_isdigit(*s))
+				++s;
+			if (*s == '.')
+			{
+				++s;
+				while (opt_isdigit(*s))
+					++s;
+			}
+			if (*s == 'e' || *s == 'E')
+			{
+				++s;
+				if (*s == '+' || *s == '-')
+					++s;
+				while (opt_isdigit(*s))
+					++s;
+			}
+			vv = s;
+		}
+		else if (s[0] == 't' && s[1] == 'r' && s[2] == 'u' && s[3] == 'e')
+		{
+			// true
+			v = s;
+			s += 4;
+			vv = s;
+		}
+		else if (s[0] == 'f' && s[1] == 'a' && s[2] == 'l' && s[3] == 's' && s[4] == 'e')
+		{
+			// false
+			v = s;
+			s += 5;
+			vv = s;
+		}
+		else
+		{
+			fz_throw(ctx, FZ_ERROR_ARGUMENT, "invalid option syntax (expected boolean, number, or string)");
+		}
+
+
+		while (iswhite(*s))
+			++s;
+
+		if (*s == 0)
+			fz_throw(ctx, FZ_ERROR_ARGUMENT, "invalid option syntax (unterminated token)");
+
+		// optional comma
+		if (*s != ',' && *s != '}')
+			fz_throw(ctx, FZ_ERROR_ARGUMENT, "invalid option syntax (expected ',' or '}')");
+
+		add_option(ctx, options, k, kk, v, vv, unescape_json);
+	}
+}
+
+void
+fz_parse_options(fz_context *ctx, fz_options *options, const char *s)
+{
+	if (s[0] == 0)
+		return;
+	if (s[0] == '{')
+		fz_parse_options_json(ctx, options, s+1);
+	else if (s[0] == '?')
+		fz_parse_options_querystring(ctx, options, s+1);
+	else
+		fz_parse_options_csv(ctx, options, s);
+}
+
+static fz_option *
+lookup_option(fz_context *ctx, fz_options *options, const char *key)
+{
+	fz_option *opt;
+	if (options)
+	{
+		for (opt = options->head; opt; opt = opt->next)
+			if (!strcmp(opt->key, key))
+				return opt;
+	}
+	return NULL;
+}
+
+static int is_yes_option(const char *val)
+{
+	return (
+		!strcmp(val, "") ||
+		!strcmp(val, "1") ||
+		!fz_strcasecmp(val, "true") ||
+		!fz_strcasecmp(val, "yes") ||
+		!fz_strcasecmp(val, "on") ||
+		!fz_strcasecmp(val, "enable") ||
+		!fz_strcasecmp(val, "enabled")
+	);
+}
+
+static int is_no_option(const char *val)
+{
+	return (
+		!strcmp(val, "0") ||
+		!fz_strcasecmp(val, "false") ||
+		!fz_strcasecmp(val, "no") ||
+		!fz_strcasecmp(val, "off") ||
+		!fz_strcasecmp(val, "disable") ||
+		!fz_strcasecmp(val, "disabled")
+	);
 }
 
 int
-fz_options_has_key(fz_context *ctx, fz_options *options, const char *key, const char **val)
+fz_lookup_option(fz_context *ctx, fz_options *options, const char *key, const char **val)
 {
-	int i;
-
-	if (val)
-		*val = NULL;
-
-	if (!options)
-		return 0;
-
-	for (i = 0; i < options->len; i++)
-		if (!strcmp(key, options->opts[i]->key))
-		{
-			if (val)
-				*val = options->opts[i]->val;
-			options->opts[i]->flags |= ACCESSED;
-			return 1;
-		}
-
+	fz_option *opt = lookup_option(ctx, options, key);
+	if (opt)
+	{
+		opt->flags |= ACCESSED;
+		opt->flags &= ~INVALID;
+		return *val = opt->val, 1;
+	}
 	return 0;
 }
 
 int
-fz_options_has_true_key(fz_context *ctx, fz_options *options, const char *key)
+fz_lookup_option_yes(fz_context *ctx, fz_options *options, const char *key)
 {
-	char *val;
-
-	if (!fz_options_has_key(ctx, options, key, &val))
+	fz_option *opt = lookup_option(ctx, options, key);
+	if (!opt)
 		return 0;
 
-	if (val == NULL)
+	opt->flags |= ACCESSED;
+	if (is_yes_option(opt->val))
+	{
+		opt->flags &= ~INVALID;
 		return 1;
-
-	if (!strcmp(val, "0") ||
-		!fz_strcasecmp(val, "false") ||
-		!fz_strcasecmp(val, "no") ||
-		!fz_strcasecmp(val, "disabled"))
+	}
+	if (is_no_option(opt->val))
+	{
+		opt->flags &= ~INVALID;
 		return 0;
-
-	return 1;
+	}
+	opt->flags |= INVALID; // not a boolean
+	return -1;
 }
 
 int
-fz_options_has_bool_key(fz_context *ctx, fz_options *options, const char *key, int *b)
+fz_lookup_option_boolean(fz_context *ctx, fz_options *options, const char *key, int *x)
 {
-	char *val;
-
-	if (!fz_options_has_key(ctx, options, key, &val))
+	fz_option *opt = lookup_option(ctx, options, key);
+	if (!opt)
 		return 0;
 
-	if (val == NULL ||
-		!strcmp(val, "1") ||
-		!fz_strcasecmp(val, "true") ||
-		!fz_strcasecmp(val, "yes") ||
-		!fz_strcasecmp(val, "enabled"))
+	opt->flags |= ACCESSED;
+	if (is_yes_option(opt->val))
 	{
-		*b = 1;
+		opt->flags &= ~INVALID;
+		*x = 1;
+		return 1;
 	}
-	else if (!strcmp(val, "0") ||
-		!fz_strcasecmp(val, "false") ||
-		!fz_strcasecmp(val, "no") ||
-		!fz_strcasecmp(val, "disabled"))
+	if (is_no_option(opt->val))
 	{
-		*b = 0;
+		opt->flags &= ~INVALID;
+		*x = 0;
+		return 1;
 	}
-	else
+	opt->flags |= INVALID; // not a boolean
+	return -1;
+}
+
+int
+fz_lookup_option_float(fz_context *ctx, fz_options *options, const char *key, float *x)
+{
+	fz_option *opt = lookup_option(ctx, options, key);
+	float v;
+	char *tail;
+	if (!opt)
 		return 0;
 
+	opt->flags |= ACCESSED;
+	v = fz_strtof(opt->val, &tail);
+	if (tail > opt->val && *tail == 0)
+	{
+		opt->flags &= ~INVALID;
+		*x = v;
+		return 1;
+	}
+	opt->flags |= INVALID; // not a float
+	return -1;
+}
+
+int
+fz_lookup_option_integer(fz_context *ctx, fz_options *options, const char *key, int *x)
+{
+	fz_option *opt = lookup_option(ctx, options, key);
+	char *tail;
+	int v;
+	if (!opt)
+		return 0;
+
+	opt->flags |= ACCESSED;
+	v = strtol(opt->val, &tail, 10);
+	if (tail > opt->val && *tail == 0)
+	{
+		opt->flags &= ~INVALID;
+		*x = v;
 	return 1;
+	}
+	opt->flags |= INVALID; // not an integer
+	return -1;
+}
+
+int
+fz_lookup_option_unsigned(fz_context *ctx, fz_options *options, const char *key, unsigned int *x)
+{
+	fz_option *opt = lookup_option(ctx, options, key);
+	char *tail;
+	int v;
+	if (!opt)
+		return 0;
+
+	opt->flags |= ACCESSED;
+	v = strtoul(opt->val, &tail, 10);
+	if (tail > opt->val && *tail == 0)
+	{
+		opt->flags &= ~INVALID;
+		*x = v;
+		return 1;
+	}
+	opt->flags |= INVALID; // not an integer
+	return -1;
+}
+
+int
+fz_lookup_option_enum(fz_context *ctx, fz_options *options, const char *key, int *x,
+	const fz_option_enums *enum_list)
+{
+	fz_option *opt = lookup_option(ctx, options, key);
+	int i;
+	if (!opt)
+		return 0;
+
+	opt->flags |= ACCESSED;
+	for (i = 0; enum_list[i].key; ++i)
+		if (!strcmp(enum_list[i].key, opt->val))
+		{
+			opt->flags &= ~INVALID;
+			*x = enum_list[i].val;
+			return 1;
+		}
+	*x = enum_list[i].val;
+	opt->flags |= INVALID; // not in the list of valid values
+	return -1;
 }
 
 /**
-	If any options are set but not used, warn on them.
+	If any options are used as inappropriate types, throw on them.
 */
-void fz_warn_on_unused_options(fz_context *ctx, fz_options *options)
+void fz_validate_options(fz_context *ctx, fz_options *options, const char *prefix)
 {
-	int i;
+	fz_option *opt;
+	int invalid = 0;
 
 	if (!options)
 		return;
 
-	for (i = 0; i < options->len; i++)
-		if ((options->opts[i]->flags & ACCESSED) == 0)
-			fz_warn(ctx, "Unknown option: %s", options->opts[i]->key);
+	for (opt = options->head; opt; opt = opt->next)
+	{
+		if (opt->flags & INVALID)
+		{
+			opt->flags |= NOTIFIED; /* So check_unused_options() does not throw again. */
+			invalid = 1;
+			if (opt->val && opt->val[0])
+				fz_warn(ctx, "invalid %s option: %s=%s", prefix, opt->key, opt->val);
+			else
+				fz_warn(ctx, "invalid %s option: %s", prefix, opt->key);
+		}
+	}
+	/* Just throw once at the end so that all invalid options are reported, rather than just the first. */
+	if (invalid)
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "invalid %s options found", prefix);
+}
+
+static int check_unused_options(fz_context *ctx, fz_options *options, const char *prefix)
+{
+	fz_option *opt;
+	int unused = 0;
+	int invalid = 0;
+	if (!options)
+		return 0;
+
+	for (opt = options->head; opt; opt = opt->next)
+	{
+		if ((opt->flags & INVALID) && (opt->flags & NOTIFIED) == 0)
+		{
+			opt->flags |= NOTIFIED;
+			invalid = 1;
+			if (prefix && prefix[0])
+				fz_throw(ctx, FZ_ERROR_ARGUMENT, "invalid %s option: %s=%s", prefix, opt->key, opt->val);
+			else
+				fz_throw(ctx, FZ_ERROR_ARGUMENT, "invalid option: %s=%s", opt->key, opt->val);
+		}
+		if (!(opt->flags & ACCESSED))
+		{
+			unused = 1;
+			if (prefix && prefix[0])
+				fz_warn(ctx, "unknown %s option: %s=%s", prefix, opt->key, opt->val);
+			else
+				fz_warn(ctx, "unknown option: %s=%s", opt->key, opt->val);
+		}
+	}
+	if (invalid)
+	{
+		if (prefix && prefix[0])
+			fz_throw(ctx, FZ_ERROR_ARGUMENT, "invalid %s options found", prefix);
+		else
+			fz_throw(ctx, FZ_ERROR_ARGUMENT, "invalid options found");
+	}
+
+	return unused;
+}
+
+void fz_throw_on_unused_options(fz_context *ctx, fz_options *options, const char *prefix)
+{
+	if (check_unused_options(ctx, options, prefix))
+	{
+		if (prefix && prefix[0])
+			fz_throw(ctx, FZ_ERROR_ARGUMENT, "Unused %s arguments found", prefix);
+		else
+			fz_throw(ctx, FZ_ERROR_ARGUMENT, "Unused arguments found");
+	}
+}
+
+void fz_warn_on_unused_options(fz_context *ctx, fz_options *options, const char *prefix)
+{
+	if (check_unused_options(ctx, options, prefix))
+	{
+		if (prefix && prefix[0])
+			fz_warn(ctx, "Unused %s arguments found", prefix);
+		else
+			fz_warn(ctx, "Unused arguments found");
+	}
 }
 
 int fz_count_options(fz_context *ctx, fz_options *options)
 {
-	if (!options)
-		return 0;
-
-	return options->len;
+	fz_option *opt;
+	int n = 0;
+	if (options)
+		for (opt = options->head; opt; opt = opt->next)
+			++n;
+	return n;
 }
 
-const char *fz_get_option(fz_context *ctx, fz_options *options, int i, const char **val)
+const char *fz_get_option_by_index(fz_context *ctx, fz_options *options, int i, const char **val)
 {
-	if (!options || i < 0 || i >= options->len)
-		fz_throw(ctx, FZ_ERROR_ARGUMENT, "Invalid option");
-
-	if (val)
-		*val = options->opts[i]->val;
-
-	return options->opts[i]->key;
+	fz_option *opt;
+	int n = 0;
+	if (options)
+	{
+		for (opt = options->head; opt; opt = opt->next)
+		{
+			if (i == n)
+				return *val = opt->val, opt->key;
+			++n;
+		}
+	}
+	fz_throw(ctx, FZ_ERROR_ARGUMENT, "Invalid option index");
 }
 
-void fz_access_option(fz_context *ctx, fz_options *options, int i)
+void fz_access_option_by_index(fz_context *ctx, fz_options *options, int i)
 {
-	if (!options || i < 0 || i >= options->len)
-		fz_throw(ctx, FZ_ERROR_ARGUMENT, "Invalid option");
-
-	options->opts[i]->flags |= ACCESSED;
+	fz_option *opt;
+	int n = 0;
+	if (options)
+	{
+		for (opt = options->head; opt; opt = opt->next)
+		{
+			if (i == n)
+			{
+				opt->flags |= ACCESSED;
+				return;
+			}
+		}
+	}
+	fz_throw(ctx, FZ_ERROR_ARGUMENT, "Invalid option index");
 }
