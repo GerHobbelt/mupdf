@@ -686,7 +686,7 @@ static void drawband(fz_context *ctx, fz_page *page, fz_display_list *list, fz_m
 static void worker_thread(void *arg);
 #endif
 
-static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, int pagenum, fz_cookie *cookie, int start, int interptime, char *fname, int bg, fz_separations *seps, pdf_document *pdfout, fz_output *out)
+static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, int pagenum, fz_cookie *cookie, int start, int interptime, char *fname, int bg, fz_separations *seps, pdf_document *pdfout_, fz_output *out_)
 {
 	fz_rect mediabox;
 	fz_device *dev = NULL;
@@ -716,9 +716,9 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 
 		fz_try(ctx)
 		{
-			fz_write_printf(ctx, out, "<page number=\"%d\" mediabox=\"%g %g %g %g\">\n",
+			fz_write_printf(ctx, out_, "<page number=\"%d\" mediabox=\"%g %g %g %g\">\n",
 				pagenum, tmediabox.x0, tmediabox.y0, tmediabox.x1, tmediabox.y1);
-			dev = fz_new_trace_device(ctx, out);
+			dev = fz_new_trace_device(ctx, out_);
 			apply_kill_switch(dev);
 			if (output_format == OUT_OCR_TRACE)
 			{
@@ -738,7 +738,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			fz_close_device(ctx, pre_ocr_dev);
 			fz_drop_device(ctx, pre_ocr_dev);
 			pre_ocr_dev = NULL;
-			fz_write_printf(ctx, out, "</page>\n");
+			fz_write_printf(ctx, out_, "</page>\n");
 		}
 		fz_always(ctx)
 		{
@@ -763,15 +763,15 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			ctm = fz_pre_scale(fz_rotate(rotation), zoom, zoom);
 			tmediabox = fz_transform_rect(mediabox, ctm);
 
-			fz_write_printf(ctx, out, "<page mediabox=\"%g %g %g %g\">\n",
+			fz_write_printf(ctx, out_, "<page mediabox=\"%g %g %g %g\">\n",
 					tmediabox.x0, tmediabox.y0, tmediabox.x1, tmediabox.y1);
-			dev = fz_new_xmltext_device(ctx, out);
+			dev = fz_new_xmltext_device(ctx, out_);
 			apply_kill_switch(dev);
 			if (list)
 				fz_run_display_list(ctx, list, dev, ctm, fz_infinite_rect, cookie);
 			else
 				fz_run_page(ctx, page, dev, ctm, cookie);
-			fz_write_printf(ctx, out, "</page>\n");
+			fz_write_printf(ctx, out_, "</page>\n");
 			fz_close_device(ctx, dev);
 		}
 		fz_always(ctx)
@@ -806,7 +806,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			else
 				fz_run_page(ctx, page, dev, ctm, cookie);
 			fz_close_device(ctx, dev);
-			fz_write_printf(ctx, out, "<page bbox=\"%R\" mediabox=\"%R\" />\n", &bbox, &tmediabox);
+			fz_write_printf(ctx, out_, "<page bbox=\"%R\" mediabox=\"%R\" />\n", &bbox, &tmediabox);
 		}
 		fz_always(ctx)
 		{
@@ -879,7 +879,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			pre_ocr_dev = NULL;
 			if (output_format == OUT_STEXT_XML || output_format == OUT_OCR_STEXT_XML)
 			{
-				fz_print_stext_page_as_xml(ctx, out, text, pagenum);
+				fz_print_stext_page_as_xml(ctx, out_, text, pagenum);
 			}
 			else if (output_format == OUT_STEXT_JSON || output_format == OUT_OCR_STEXT_JSON)
 			{
@@ -887,21 +887,21 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 				if (first || output_file_per_page)
 					first = 0;
 				else
-					fz_write_string(ctx, out, ",");
-				fz_print_stext_page_as_json(ctx, out, text, 1);
+					fz_write_string(ctx, out_, ",");
+				fz_print_stext_page_as_json(ctx, out_, text, 1);
 			}
 			else if (output_format == OUT_HTML || output_format == OUT_OCR_HTML)
 			{
-				fz_print_stext_page_as_html(ctx, out, text, pagenum);
+				fz_print_stext_page_as_html(ctx, out_, text, pagenum);
 			}
 			else if (output_format == OUT_XHTML || output_format == OUT_OCR_XHTML)
 			{
-				fz_print_stext_page_as_xhtml(ctx, out, text, pagenum);
+				fz_print_stext_page_as_xhtml(ctx, out_, text, pagenum);
 			}
 			else if (output_format == OUT_TEXT || output_format == OUT_OCR_TEXT)
 			{
-				fz_print_stext_page_as_text(ctx, out, text);
-				fz_write_printf(ctx, out, "\f\n");
+				fz_print_stext_page_as_text(ctx, out_, text);
+				fz_write_printf(ctx, out_, "\f\n");
 			}
 		}
 		fz_always(ctx)
@@ -931,7 +931,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			 * when writing PDFs. Rotation is taken care of by the pdf_add_page call. */
 			pdf_obj *page_obj;
 
-			dev = pdf_page_write(ctx, pdfout, mediabox, &resources, &contents);
+			dev = pdf_page_write(ctx, pdfout_, mediabox, &resources, &contents);
 			apply_kill_switch(dev);
 			if (list)
 				fz_run_display_list(ctx, list, dev, fz_identity, fz_infinite_rect, cookie);
@@ -941,8 +941,8 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			fz_drop_device(ctx, dev);
 			dev = NULL;
 
-			page_obj = pdf_add_page(ctx, pdfout, mediabox, rotation, resources, contents);
-			pdf_insert_page(ctx, pdfout, -1, page_obj);
+			page_obj = pdf_add_page(ctx, pdfout_, mediabox, rotation, resources, contents);
+			pdf_insert_page(ctx, pdfout_, -1, page_obj);
 			pdf_drop_obj(ctx, page_obj);
 		}
 		fz_always(ctx)
@@ -974,7 +974,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			opts.reuse_images = 1;
 			opts.resolution = resolution;
 			opts.id = 0;
-			dev = fz_new_svg_device_with_options(ctx, out, tbounds.x1-tbounds.x0, tbounds.y1-tbounds.y0, &opts);
+			dev = fz_new_svg_device_with_options(ctx, out_, tbounds.x1-tbounds.x0, tbounds.y1-tbounds.y0, &opts);
 			apply_kill_switch(dev);
 			if (lowmemory)
 				fz_enable_device_hints(ctx, dev, FZ_NO_CACHE);
@@ -1141,28 +1141,28 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			if (output_format != OUT_NONE)
 			{
 				if (output_format == OUT_PGM || output_format == OUT_PPM || output_format == OUT_PNM)
-					bander = fz_new_pnm_band_writer(ctx, out);
+					bander = fz_new_pnm_band_writer(ctx, out_);
 				else if (output_format == OUT_PAM)
-					bander = fz_new_pam_band_writer(ctx, out);
+					bander = fz_new_pam_band_writer(ctx, out_);
 				else if (output_format == OUT_PNG)
-					bander = fz_new_png_band_writer(ctx, out);
+					bander = fz_new_png_band_writer(ctx, out_);
 				else if (output_format == OUT_PBM)
-					bander = fz_new_pbm_band_writer(ctx, out);
+					bander = fz_new_pbm_band_writer(ctx, out_);
 				else if (output_format == OUT_PKM)
-					bander = fz_new_pkm_band_writer(ctx, out);
+					bander = fz_new_pkm_band_writer(ctx, out_);
 				else if (output_format == OUT_PS)
-					bander = fz_new_ps_band_writer(ctx, out);
+					bander = fz_new_ps_band_writer(ctx, out_);
 				else if (output_format == OUT_PSD)
-					bander = fz_new_psd_band_writer(ctx, out);
+					bander = fz_new_psd_band_writer(ctx, out_);
 				else if (output_format == OUT_PWG)
 				{
 					fz_pwg_options opts;
 					fz_init_pwg_options(ctx, &opts);
 					fz_apply_pwg_options(ctx, &opts, user_options);
 					if (out_cs == CS_MONO)
-						bander = fz_new_mono_pwg_band_writer(ctx, out, &opts);
+						bander = fz_new_mono_pwg_band_writer(ctx, out_, &opts);
 					else
-						bander = fz_new_pwg_band_writer(ctx, out, &opts);
+						bander = fz_new_pwg_band_writer(ctx, out_, &opts);
 				}
 				else if (output_format == OUT_PCL)
 				{
@@ -1170,9 +1170,9 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 					fz_init_pcl_options(ctx, &opts);
 					fz_apply_pcl_options(ctx, &opts, user_options);
 					if (out_cs == CS_MONO)
-						bander = fz_new_mono_pcl_band_writer(ctx, out, &opts);
+						bander = fz_new_mono_pcl_band_writer(ctx, out_, &opts);
 					else
-						bander = fz_new_color_pcl_band_writer(ctx, out, &opts);
+						bander = fz_new_color_pcl_band_writer(ctx, out_, &opts);
 				}
 				if (bander)
 				{
@@ -1212,7 +1212,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 #if FZ_ENABLE_JPX
 					if (output_format == OUT_J2K)
 					{
-						fz_write_pixmap_as_jpx(ctx, out, pix, 80);
+						fz_write_pixmap_as_jpx(ctx, out_, pix, 80);
 					}
 #else
 					fz_throw(ctx, FZ_ERROR_GENERIC, "JPX support disabled");
@@ -2090,8 +2090,8 @@ int mudraw_main(int argc, char **argv)
 	fz_document *doc = NULL;
 	int c;
 	fz_context *ctx;
-	trace_info trace_info = { 0, 0, 0, 0, 0, 0 };
-	fz_alloc_context trace_alloc_ctx = { &trace_info, trace_malloc, trace_realloc, trace_free };
+	trace_info info = { 0, 0, 0, 0, 0, 0 };
+	fz_alloc_context trace_alloc_ctx = { &info, trace_malloc, trace_realloc, trace_free };
 	fz_alloc_context *alloc_ctx = NULL;
 	fz_locks_context *locks = NULL;
 	size_t max_store = FZ_STORE_DEFAULT;
@@ -2193,9 +2193,9 @@ int mudraw_main(int argc, char **argv)
 			break;
 #endif
 		case 'm':
-			if (fz_optarg[0] == 's') trace_info.mem_limit = fz_atoi64(&fz_optarg[1]);
-			else if (fz_optarg[0] == 'a') trace_info.alloc_limit = fz_atoi64(&fz_optarg[1]);
-			else trace_info.mem_limit = fz_atoi64(fz_optarg);
+			if (fz_optarg[0] == 's') info.mem_limit = fz_atoi64(&fz_optarg[1]);
+			else if (fz_optarg[0] == 'a') info.alloc_limit = fz_atoi64(&fz_optarg[1]);
+			else info.mem_limit = fz_atoi64(fz_optarg);
 			break;
 		case 'L': lowmemory = 1; break;
 		case 'P':
@@ -2293,7 +2293,7 @@ int mudraw_main(int argc, char **argv)
 	}
 #endif
 
-	if (trace_info.mem_limit || trace_info.alloc_limit || showmemory)
+	if (info.mem_limit || info.alloc_limit || showmemory)
 		alloc_ctx = &trace_alloc_ctx;
 
 	if (lowmemory)
@@ -2845,10 +2845,10 @@ int mudraw_main(int argc, char **argv)
 	fin_mudraw_locks();
 #endif /* DISABLE_MUTHREADS */
 
-	if (trace_info.mem_limit || trace_info.alloc_limit || showmemory)
+	if (info.mem_limit || info.alloc_limit || showmemory)
 	{
 		char buf[200];
-		fz_snprintf(buf, sizeof buf, "Memory use total=%zu peak=%zu current=%zu\nAllocations total=%zu\n", trace_info.total, trace_info.peak, trace_info.current, trace_info.allocs);
+		fz_snprintf(buf, sizeof buf, "Memory use total=%zu peak=%zu current=%zu\nAllocations total=%zu\n", info.total, info.peak, info.current, info.allocs);
 		fprintf(stderr, "%s", buf);
 	}
 
