@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2025 Artifex Software, Inc.
+// Copyright (C) 2004-2026 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -1513,16 +1513,24 @@ pdf_show_char(fz_context *ctx, pdf_run_processor *pr, int cid, fz_text_language 
 		pdf_gstate *fill_gstate = NULL;
 		pdf_gstate *stroke_gstate = NULL;
 		pdf_gsave(ctx, pr);
-		gstate = pr->gstate + pr->gtop;
-		if (gstate->fill.kind == PDF_MAT_PATTERN && gstate->fill.gstate_num >= 0)
-			fill_gstate = pr->gstate + gstate->fill.gstate_num;
-		if (gstate->stroke.kind == PDF_MAT_PATTERN && gstate->stroke.gstate_num >= 0)
-			stroke_gstate = pr->gstate + gstate->stroke.gstate_num;
-		pdf_drop_font(ctx, gstate->text.font);
-		gstate->text.font = NULL; /* don't inherit the current font... */
-		fz_render_t3_glyph_direct(ctx, pr->dev, fontdesc->font, gid, composed, gstate, pr->default_cs, fill_gstate, stroke_gstate);
-		pr->dev->flags = old_flags;
-		pdf_grestore(ctx, pr);
+		fz_try(ctx)
+		{
+			gstate = pr->gstate + pr->gtop;
+			if (gstate->fill.kind == PDF_MAT_PATTERN && gstate->fill.gstate_num >= 0)
+				fill_gstate = pr->gstate + gstate->fill.gstate_num;
+			if (gstate->stroke.kind == PDF_MAT_PATTERN && gstate->stroke.gstate_num >= 0)
+				stroke_gstate = pr->gstate + gstate->stroke.gstate_num;
+			pdf_drop_font(ctx, gstate->text.font);
+			gstate->text.font = NULL; /* don't inherit the current font... */
+			fz_render_t3_glyph_direct(ctx, pr->dev, fontdesc->font, gid, composed, gstate, pr->default_cs, fill_gstate, stroke_gstate);
+		}
+		fz_always(ctx)
+		{
+			pr->dev->flags = old_flags;
+			pdf_grestore(ctx, pr);
+		}
+		fz_catch(ctx)
+			fz_rethrow(ctx);
 		/* Render text invisibly so that it can still be extracted. */
 		pr->tos.text_mode = 3;
 	}
@@ -2509,17 +2517,15 @@ pop_marked_content(fz_context *ctx, pdf_run_processor *proc, int neat)
 static void
 clear_marked_content(fz_context *ctx, pdf_run_processor *pr)
 {
-	if (pr->marked_content == NULL)
-		return;
+	while (pr->marked_content)
+		pop_marked_content(ctx, pr, 1);
+}
 
-	fz_try(ctx)
-		while (pr->marked_content)
-			pop_marked_content(ctx, pr, 1);
-	fz_always(ctx)
-		while (pr->marked_content)
-			pop_marked_content(ctx, pr, 0);
-	fz_catch(ctx)
-		fz_rethrow(ctx);
+static void
+drop_marked_content(fz_context *ctx, pdf_run_processor *pr)
+{
+	while (pr->marked_content)
+		pop_marked_content(ctx, pr, 0);
 }
 
 static void
@@ -2693,10 +2699,11 @@ pdf_run_xobject(fz_context *ctx, pdf_run_processor *pr, pdf_obj *xobj, pdf_obj *
 		{
 			fz_set_default_colorspaces(ctx, pr->dev, save_default_cs);
 		}
+		clear_marked_content(ctx, pr);
 	}
 	fz_always(ctx)
 	{
-		clear_marked_content(ctx, pr);
+		drop_marked_content(ctx, pr);
 		pr->marked_content = save_marked_content;
 		pr->default_cs = save_default_cs;
 		fz_drop_default_colorspaces(ctx, xobj_default_cs);
@@ -3490,8 +3497,7 @@ pdf_drop_run_processor(fz_context *ctx, pdf_processor *proc)
 		fz_free(ctx, stk);
 	}
 
-	while (pr->marked_content)
-		pop_marked_content(ctx, pr, 0);
+	drop_marked_content(ctx, pr);
 
 	pdf_drop_obj(ctx, pr->mcid_sent);
 
@@ -3680,7 +3686,6 @@ pdf_new_run_processor(fz_context *ctx, pdf_document *doc, fz_device *dev, fz_mat
 
 	if (dev->begin_structure || dev->end_structure)
 		proc->process_structure = 1;
-
 
 	fz_try(ctx)
 	{

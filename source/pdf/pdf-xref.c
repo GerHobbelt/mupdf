@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2025 Artifex Software, Inc.
+// Copyright (C) 2004-2026 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -832,6 +832,7 @@ void pdf_replace_xref(fz_context *ctx, pdf_document *doc, pdf_xref_entry *entrie
 	int *xref_index = NULL;
 	pdf_xref *xref = NULL;
 	pdf_xref_subsec *sub = NULL;
+	int num;
 
 	fz_var(xref_index);
 	fz_var(xref);
@@ -846,6 +847,15 @@ void pdf_replace_xref(fz_context *ctx, pdf_document *doc, pdf_xref_entry *entrie
 	{
 		fz_free(ctx, xref);
 		fz_free(ctx, xref_index);
+		if (entries)
+		{
+			for (num = 0; num < n; num++)
+			{
+				pdf_drop_obj(ctx, entries[num].obj);
+				fz_drop_buffer(ctx, entries[num].stm_buf);
+			}
+			fz_free(ctx, entries);
+		}
 		fz_rethrow(ctx);
 	}
 	assert(sub != NULL);

@@ -2,7 +2,7 @@
 
 #if 0
 
-/* Copyright (C) 2009-2025 Artifex Software, Inc.
+/* Copyright (C) 2009-2026 Artifex Software, Inc.
    All Rights Reserved.
 
    This software is provided AS-IS with no warranty, either express or
@@ -517,6 +517,7 @@ static struct {
     int            hideRefChangeBacktraces;
     int            abortOnLeak;
     int            abortOnCorruption;
+    int            abortOnSegv;
     size_t         maxMemory;
     size_t         alloc;
     size_t         peakAlloc;
@@ -2362,6 +2363,10 @@ void Memento_fin(void)
         fprintf(stderr, "Calling abort() because blocks were leaked and MEMENTO_ABORT_ON_LEAK is set.\n");
         abort();
     }
+    if (memento.segv && memento.abortOnSegv) {
+        fprintf(stderr, "Calling abort() because the program has a segmentation violation and MEMENTO_ABORT_ON_SEGV is set.\n");
+        abort();
+    }
 }
 
 /* Reads number from <text> using strtol().
@@ -2599,6 +2604,9 @@ static void Memento_init(void)
 
     env = getenv("MEMENTO_ABORT_ON_LEAK");
     memento.abortOnLeak = (env ? atoi(env) : 0);
+
+    env = getenv("MEMENTO_ABORT_ON_SEGV");
+    memento.abortOnSegv = (env ? atoi(env) : 0);
 
     env = getenv("MEMENTO_ABORT_ON_CORRUPTION");
     memento.abortOnCorruption = (env ? atoi(env) : 0);
@@ -4401,6 +4409,21 @@ int Memento_setVerbose(int x)
 {
     memento.verbose = x;
     return x;
+}
+
+void Memento_abortOnLeak(int enable)
+{
+	memento.abortOnLeak = enable;
+}
+
+void Memento_abortOnCorruption(int enable)
+{
+	memento.abortOnCorruption = enable;
+}
+
+void Memento_abortOnSegv(int enable)
+{
+	memento.abortOnSegv = enable;
 }
 
 int Memento_addBacktraceLimitFnname(const char *fnname)

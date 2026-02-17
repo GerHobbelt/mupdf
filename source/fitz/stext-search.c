@@ -51,12 +51,13 @@ void fz_init_search_options(fz_context *ctx, fz_search_options *opts)
 
 fz_search_options *fz_parse_search_options(fz_context *ctx, fz_search_options *opts, const char *args)
 {
-	fz_options *options = fz_new_options_from_string(ctx, args);
-
-	fz_init_search_options(ctx, opts);
-
+	fz_options *options = fz_new_options(ctx, args);
 	fz_try(ctx)
+	{
+		fz_init_search_options(ctx, opts);
 		fz_apply_search_options(ctx, opts, options);
+		fz_throw_on_unused_options(ctx, options, "search");
+	}
 	fz_always(ctx)
 		fz_drop_options(ctx, options);
 	fz_catch(ctx)
@@ -70,13 +71,15 @@ void fz_apply_search_options(fz_context *ctx, fz_search_options *opts, fz_option
 	fz_search_options mask = *opts;
 
 	// TODO: stricter parsing of options bitmask string
-	if (fz_options_has_true_key(ctx, args, "exact")) mask |= FZ_SEARCH_EXACT;
-	if (fz_options_has_true_key(ctx, args, "ignore-case")) mask |= FZ_SEARCH_IGNORE_CASE;
-	if (fz_options_has_true_key(ctx, args, "ignore-diacritics")) mask |= FZ_SEARCH_IGNORE_DIACRITICS;
-	if (fz_options_has_true_key(ctx, args, "regexp")) mask |= FZ_SEARCH_REGEXP;
-	if (fz_options_has_true_key(ctx, args, "keep-lines")) mask |= FZ_SEARCH_KEEP_LINES;
-	if (fz_options_has_true_key(ctx, args, "keep-paragraphs")) mask |= FZ_SEARCH_KEEP_PARAGRAPHS;
-	if (fz_options_has_true_key(ctx, args, "keep-hyphens")) mask |= FZ_SEARCH_KEEP_HYPHENS;
+	if (fz_lookup_option_yes(ctx, args, "exact")) mask |= FZ_SEARCH_EXACT;
+	if (fz_lookup_option_yes(ctx, args, "ignore-case")) mask |= FZ_SEARCH_IGNORE_CASE;
+	if (fz_lookup_option_yes(ctx, args, "ignore-diacritics")) mask |= FZ_SEARCH_IGNORE_DIACRITICS;
+	if (fz_lookup_option_yes(ctx, args, "regexp")) mask |= FZ_SEARCH_REGEXP;
+	if (fz_lookup_option_yes(ctx, args, "keep-lines")) mask |= FZ_SEARCH_KEEP_LINES;
+	if (fz_lookup_option_yes(ctx, args, "keep-paragraphs")) mask |= FZ_SEARCH_KEEP_PARAGRAPHS;
+	if (fz_lookup_option_yes(ctx, args, "keep-hyphens")) mask |= FZ_SEARCH_KEEP_HYPHENS;
+
+	fz_validate_options(ctx, args, "search");
 
 	*opts = mask;
 }
@@ -2251,7 +2254,6 @@ fz_search_result fz_search_backwards(fz_context *ctx, fz_search *search)
 		/* So we've found a match. */
 		result.reason = FZ_SEARCH_MATCH;
 		result.u.match.result = &search->details;
-		return result;
 	}
 	else
 	{
@@ -2276,8 +2278,6 @@ failed_to_match:
 
 		result.reason = FZ_SEARCH_MORE_INPUT;
 		result.u.more_input.seq_needed = search->current_page.seq-1;
-
-		return result;
 	}
 
 	return result;

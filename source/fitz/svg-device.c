@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2024 Artifex Software, Inc.
+// Copyright (C) 2004-2026 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -35,7 +35,7 @@ typedef struct
 	fz_rect view;
 	fz_rect area;
 	fz_point step;
-} tile;
+} svg_tile;
 
 typedef struct
 {
@@ -43,13 +43,13 @@ typedef struct
 	fz_font *font;
 	int max_sentlist;
 	char *sentlist;
-} font;
+} svg_font;
 
 typedef struct
 {
 	int id;
 	fz_image *image;
-} image;
+} svg_image;
 
 typedef struct svg_layer_dict
 {
@@ -85,15 +85,15 @@ typedef struct
 
 	int num_tiles;
 	int max_tiles;
-	tile *tiles;
+	svg_tile *tiles;
 
 	int num_fonts;
 	int max_fonts;
-	font *fonts;
+	svg_font *fonts;
 
 	int num_images;
 	int max_images;
-	image *images;
+	svg_image *images;
 
 	svg_layer *current_layers;
 	svg_layer_dict *layer_dict;
@@ -489,13 +489,13 @@ svg_dev_text_span(fz_context *ctx, svg_device *sdev, fz_matrix ctm, const fz_tex
 	fz_append_printf(ctx, out, "</text>\n");
 }
 
-static font *
+static svg_font *
 svg_dev_text_span_as_paths_defs(fz_context *ctx, fz_device *dev, fz_text_span *span, fz_matrix ctm)
 {
 	svg_device *sdev = (svg_device*)dev;
 	fz_buffer *out;
 	int i, font_idx;
-	font *fnt;
+	svg_font *fnt;
 
 	for (font_idx = 0; font_idx < sdev->num_fonts; font_idx++)
 	{
@@ -510,8 +510,8 @@ svg_dev_text_span_as_paths_defs(fz_context *ctx, fz_device *dev, fz_text_span *s
 			int newmax = sdev->max_fonts * 2;
 			if (newmax == 0)
 				newmax = 4;
-			sdev->fonts = fz_realloc_array(ctx, sdev->fonts, newmax, font);
-			memset(&sdev->fonts[font_idx], 0, (newmax - font_idx) * sizeof(font));
+			sdev->fonts = fz_realloc_array(ctx, sdev->fonts, newmax, svg_font);
+			memset(&sdev->fonts[font_idx], 0, (newmax - font_idx) * sizeof(svg_font));
 			sdev->max_fonts = newmax;
 		}
 		sdev->fonts[font_idx].id = sdev->id++;
@@ -598,7 +598,7 @@ svg_dev_data_text(fz_context *ctx, fz_buffer *out, int c)
 
 static void
 svg_dev_text_span_as_paths_fill(fz_context *ctx, fz_device *dev, const fz_text_span *span, fz_matrix ctm,
-	fz_colorspace *colorspace, const float *color, float alpha, font *fnt, fz_color_params color_params)
+	fz_colorspace *colorspace, const float *color, float alpha, svg_font *fnt, fz_color_params color_params)
 {
 	svg_device *sdev = (svg_device*)dev;
 	fz_buffer *out = sdev->out;
@@ -636,7 +636,7 @@ svg_dev_text_span_as_paths_fill(fz_context *ctx, fz_device *dev, const fz_text_s
 static void
 svg_dev_text_span_as_paths_stroke(fz_context *ctx, fz_device *dev, const fz_text_span *span,
 	const fz_stroke_state *stroke, fz_matrix ctm,
-	fz_colorspace *colorspace, const float *color, float alpha, font *fnt, fz_color_params color_params)
+	fz_colorspace *colorspace, const float *color, float alpha, svg_font *fnt, fz_color_params color_params)
 {
 	svg_device *sdev = (svg_device*)dev;
 	fz_buffer *out = sdev->out;
@@ -786,7 +786,7 @@ svg_dev_fill_text(fz_context *ctx, fz_device *dev, const fz_text *text, fz_matri
 {
 	svg_device *sdev = (svg_device*)dev;
 	fz_buffer *out = sdev->out;
-	font *fnt;
+	svg_font *fnt;
 	fz_text_span *span;
 
 	if (sdev->text_as_text)
@@ -814,7 +814,7 @@ svg_dev_stroke_text(fz_context *ctx, fz_device *dev, const fz_text *text, const 
 {
 	svg_device *sdev = (svg_device*)dev;
 	fz_buffer *out = sdev->out;
-	font *fnt;
+	svg_font *fnt;
 	fz_text_span *span;
 
 	if (sdev->text_as_text)
@@ -845,7 +845,7 @@ svg_dev_clip_text(fz_context *ctx, fz_device *dev, const fz_text *text, fz_matri
 	fz_rect bounds;
 	int num = sdev->id++;
 	float white[3] = { 1, 1, 1 };
-	font *fnt;
+	svg_font *fnt;
 	fz_text_span *span;
 
 	bounds = fz_bound_text(ctx, text, NULL, ctm);
@@ -885,7 +885,7 @@ svg_dev_clip_stroke_text(fz_context *ctx, fz_device *dev, const fz_text *text, c
 	fz_rect bounds;
 	int num = sdev->id++;
 	float white[3] = { 255, 255, 255 };
-	font *fnt;
+	svg_font *fnt;
 	fz_text_span *span;
 
 	bounds = fz_bound_text(ctx, text, NULL, ctm);
@@ -967,7 +967,7 @@ svg_send_image(fz_context *ctx, svg_device *sdev, fz_image *img, fz_color_params
 			int new_max = sdev->max_images * 2;
 			if (new_max == 0)
 				new_max = 32;
-			sdev->images = fz_realloc_array(ctx, sdev->images, new_max, image);
+			sdev->images = fz_realloc_array(ctx, sdev->images, new_max, svg_image);
 			sdev->max_images = new_max;
 		}
 
@@ -1266,13 +1266,13 @@ svg_dev_begin_tile(fz_context *ctx, fz_device *dev, fz_rect area, fz_rect view, 
 	svg_device *sdev = (svg_device*)dev;
 	fz_buffer *out;
 	int num;
-	tile *t;
+	svg_tile *t;
 
 	if (sdev->num_tiles == sdev->max_tiles)
 	{
 		int n = (sdev->num_tiles == 0 ? 4 : sdev->num_tiles * 2);
 
-		sdev->tiles = fz_realloc_array(ctx, sdev->tiles, n, tile);
+		sdev->tiles = fz_realloc_array(ctx, sdev->tiles, n, svg_tile);
 		sdev->max_tiles = n;
 	}
 	num = sdev->num_tiles++;
@@ -1318,7 +1318,7 @@ svg_dev_end_tile(fz_context *ctx, fz_device *dev)
 	svg_device *sdev = (svg_device*)dev;
 	fz_buffer *out = sdev->out;
 	int num, cp = -1;
-	tile *t;
+	svg_tile *t;
 	fz_matrix inverse;
 	float x, y, w, h;
 
@@ -1513,34 +1513,34 @@ fz_init_svg_device_options(fz_context *ctx, fz_svg_device_options *opts)
 void
 fz_parse_svg_device_options(fz_context *ctx, fz_svg_device_options *opts, const char *args)
 {
-	fz_options *options = fz_new_options_from_string(ctx, args);
-
-	fz_init_svg_device_options(ctx, opts);
-
+	fz_options *options = fz_new_options(ctx, args);
 	fz_try(ctx)
+	{
+		fz_init_svg_device_options(ctx, opts);
 		fz_apply_svg_device_options(ctx, opts, options);
+		fz_throw_on_unused_options(ctx, options, "svg");
+	}
 	fz_always(ctx)
 		fz_drop_options(ctx, options);
 	fz_catch(ctx)
 		fz_rethrow(ctx);
 }
 
+static const fz_option_enums svg_text_opt_enum[] =
+{
+	{ "text", FZ_SVG_TEXT_AS_TEXT },
+	{ "path", FZ_SVG_TEXT_AS_PATH },
+	{ NULL, -1 }
+};
+
 void fz_apply_svg_device_options(fz_context *ctx, fz_svg_device_options *opts, fz_options *args)
 {
-	const char *val;
+	if (fz_lookup_option_enum(ctx, args, "text", &opts->text_format, svg_text_opt_enum) < 0)
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "Unknown text option");
+	fz_lookup_option_boolean(ctx, args, "no-reuse-images", &opts->reuse_images);
+	fz_lookup_option_integer(ctx, args, "resolution", &opts->resolution);
 
-	if (fz_options_has_key(ctx, args, "text", &val))
-	{
-		if (fz_option_eq(val, "text"))
-			opts->text_format = FZ_SVG_TEXT_AS_TEXT;
-		else if (fz_option_eq(val, "path"))
-			opts->text_format = FZ_SVG_TEXT_AS_PATH;
-	}
-	if (fz_options_has_key(ctx, args, "no-reuse-images", &val))
-		if (fz_option_eq(val, "yes"))
-			opts->reuse_images = 0;
-	if (fz_options_has_key(ctx, args, "resolution", &val))
-		opts->resolution = fz_atoi(val);
+	fz_validate_options(ctx, args, "svg-device");
 }
 
 fz_device *fz_new_svg_device_with_options(fz_context *ctx, fz_output *out, float page_width, float page_height, fz_svg_device_options *opts, int *id)

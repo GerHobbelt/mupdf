@@ -2264,17 +2264,17 @@ void fz_init_stext_options(fz_context *ctx, fz_stext_options *opts)
 fz_stext_options *
 fz_parse_stext_options(fz_context *ctx, fz_stext_options *opts, const char *string)
 {
-	fz_options *options = fz_new_options_from_string(ctx, string);
-
-	fz_init_stext_options(ctx, opts);
-
+	fz_options *options = fz_new_options(ctx, string);
 	fz_try(ctx)
+	{
+		fz_init_stext_options(ctx, opts);
 		fz_apply_stext_options(ctx, opts, options);
+		fz_throw_on_unused_options(ctx, options, "stext");
+	}
 	fz_always(ctx)
 		fz_drop_options(ctx, options);
 	fz_catch(ctx)
 		fz_rethrow(ctx);
-
 	return opts;
 }
 
@@ -2289,19 +2289,19 @@ fz_apply_stext_options(fz_context *ctx, fz_stext_options *opts, fz_options *stri
 
 	/* when adding options, remember to update fz_stext_options_usage above */
 
-	if (fz_has_option(ctx, string, "preserve-ligatures", &val))
+	if (fz_lookup_option_boolean(ctx, string, "preserve-ligatures", &b))
 	{
 		opts->flags_conf_mask |= FZ_STEXT_PRESERVE_LIGATURES;
 		if (fz_option_eq(val, "yes"))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_PRESERVE_LIGATURES);
 	}
-	if (fz_has_option(ctx, string, "preserve-whitespace", &val))
+	if (fz_lookup_option_yes(ctx, string, "preserve-whitespace"))
 	{
 		opts->flags_conf_mask |= FZ_STEXT_PRESERVE_WHITESPACE;
 		if (fz_option_eq(val, "yes"))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_PRESERVE_WHITESPACE);
 	}
-	if (fz_has_option(ctx, string, "preserve-images", &val))
+	if (fz_lookup_option_yes(ctx, string, "preserve-images"))
 	{
 		opts->flags_conf_mask |= FZ_STEXT_PRESERVE_IMAGES;
 		if (fz_option_eq(val, "yes"))
@@ -2327,97 +2327,103 @@ fz_apply_stext_options(fz_context *ctx, fz_stext_options *opts, fz_options *stri
 		if (fz_option_eq(val, "no"))
 			opts->flags |= FZ_STEXT_NO_REUSE_IMAGES;
 	}
-	if (fz_has_option(ctx, string, "inhibit-spaces", &val))
+	if (fz_lookup_option_yes(ctx, string, "inhibit-spaces"))
 	{
 		opts->flags_conf_mask |= FZ_STEXT_INHIBIT_SPACES;
 		if (fz_option_eq(val, "yes"))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_INHIBIT_SPACES);
 	}
-	if (fz_has_option(ctx, string, "dehyphenate", &val))
+	if (fz_lookup_option_yes(ctx, string, "dehyphenate"))
 	{
 		opts->flags_conf_mask |= FZ_STEXT_DEHYPHENATE;
 		if (fz_option_eq(val, "yes"))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_DEHYPHENATE);
 	}
-	if (fz_has_option(ctx, string, "preserve-spans", &val))
+	if (fz_lookup_option_yes(ctx, string, "preserve-spans"))
 	{
 		opts->flags_conf_mask |= FZ_STEXT_PRESERVE_SPANS;
 		if (fz_option_eq(val, "yes"))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_PRESERVE_SPANS);
 	}
-	if (fz_has_option(ctx, string, "structured", &val))
+	if (fz_lookup_option_yes(ctx, string, "structured"))
 	{
 		opts->flags_conf_mask |= FZ_STEXT_COLLECT_STRUCTURE;
 		if (fz_option_eq(val, "yes"))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_COLLECT_STRUCTURE);
 	}
-	if (fz_has_option(ctx, string, "use-cid-for-unknown-unicode", &val))
+	if (fz_lookup_option_yes(ctx, string, "use-cid-for-unknown-unicode"))
 	{
 		opts->flags_conf_mask |= FZ_STEXT_USE_CID_FOR_UNKNOWN_UNICODE;
 		if (fz_option_eq(val, "yes"))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_USE_CID_FOR_UNKNOWN_UNICODE);
 	}
-	if (fz_has_option(ctx, string, "use-gid-for-unknown-unicode", &val))
+	if (fz_lookup_option_yes(ctx, string, "use-gid-for-unknown-unicode"))
 	{
 		opts->flags_conf_mask |= FZ_STEXT_USE_GID_FOR_UNKNOWN_UNICODE;
 		if (fz_option_eq(val, "yes"))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_USE_GID_FOR_UNKNOWN_UNICODE);
 	}
-	if (fz_has_option(ctx, string, "accurate-bboxes", &val))
+	if (fz_lookup_option_yes(ctx, string, "accurate-bboxes"))
 	{
 		opts->flags_conf_mask |= FZ_STEXT_ACCURATE_BBOXES;
 		if (fz_option_eq(val, "yes"))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_ACCURATE_BBOXES);
 	}
-	if (fz_has_option(ctx, string, "vectors", &val))
+	if (fz_lookup_option_yes(ctx, string, "vectors"))
 	{
 		opts->flags_conf_mask |= FZ_STEXT_COLLECT_VECTORS;
 		if (fz_option_eq(val, "yes"))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_COLLECT_VECTORS);
 	}
-	if (fz_has_option(ctx, string, "lazy-vectors", &val))
+	if (fz_lookup_option_yes(ctx, string, "lazy-vectors"))
 	{
 		opts->flags_conf_mask |= FZ_STEXT_LAZY_VECTORS;
 		if (fz_option_eq(val, "yes"))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_LAZY_VECTORS);
 	}
-	if (fz_has_option(ctx, string, "ignore-actualtext", &val))
+	if (fz_lookup_option_yes(ctx, string, "fuzzy-vectors"))
+	{
+		opts->flags_conf_mask |= FZ_STEXT_FUZZY_VECTORS;
+		if (fz_option_eq(val, "yes"))
+		SETCLEARBOOL(opts->flags, b, FZ_STEXT_FUZZY_VECTORS);
+	}
+	if (fz_lookup_option_yes(ctx, string, "ignore-actualtext"))
 	{
 		opts->flags_conf_mask |= FZ_STEXT_IGNORE_ACTUALTEXT;
 		if (fz_option_eq(val, "yes"))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_IGNORE_ACTUALTEXT);
 	}
-	if (fz_has_option(ctx, string, "segment", &val))
+	if (fz_lookup_option_yes(ctx, string, "segment"))
 	{
 		opts->flags_conf_mask |= FZ_STEXT_SEGMENT;
 		if (fz_option_eq(val, "yes"))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_SEGMENT);
 	}
-	if (fz_has_option(ctx, string, "paragraph-break", &val))
+	if (fz_lookup_option_yes(ctx, string, "paragraph-break"))
 	{
 		opts->flags_conf_mask |= FZ_STEXT_PARAGRAPH_BREAK;
 		if (fz_option_eq(val, "yes"))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_PARAGRAPH_BREAK);
 	}
-	if (fz_has_option(ctx, string, "table-hunt", &val))
+	if (fz_lookup_option_yes(ctx, string, "table-hunt"))
 	{
 		opts->flags_conf_mask |= FZ_STEXT_TABLE_HUNT;
 		if (fz_option_eq(val, "yes"))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_TABLE_HUNT);
 	}
-	if (fz_has_option(ctx, string, "collect-styles", &val))
+	if (fz_lookup_option_yes(ctx, string, "collect-styles"))
 	{
 		opts->flags_conf_mask |= FZ_STEXT_COLLECT_STYLES;
 		if (fz_option_eq(val, "yes"))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_COLLECT_STYLES);
 	}
-	if (fz_has_option(ctx, string, "accurate-ascenders", &val))
+	if (fz_lookup_option_yes(ctx, string, "accurate-ascenders"))
 	{
 		opts->flags_conf_mask |= FZ_STEXT_ACCURATE_ASCENDERS;
 		if (fz_option_eq(val, "yes"))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_ACCURATE_ASCENDERS);
 	}
-	if (fz_has_option(ctx, string, "accurate-side-bearings", &val))
+	if (fz_lookup_option_yes(ctx, string, "accurate-side-bearings"))
 	{
 		opts->flags_conf_mask |= FZ_STEXT_ACCURATE_SIDE_BEARINGS;
 		if (fz_option_eq(val, "yes"))
@@ -2429,13 +2435,13 @@ fz_apply_stext_options(fz_context *ctx, fz_stext_options *opts, fz_options *stri
 		if (fz_option_eq(val, "yes"))
 			opts->flags |= FZ_STEXT_GLYPH_BBOX;
 	}
-	if (fz_has_option(ctx, string, "mediabox-clip", &val))
+	if (fz_lookup_option(ctx, string, "mediabox-clip", &val))
 	{
 		fz_warn(ctx, "The 'mediabox-clip' option has been deprecated. Use 'clip' instead.");
-		if (fz_option_eq(val, "no"))
+		if (!strcmp(val, "no"))
 			opts->flags ^= FZ_STEXT_CLIP;
 	}
-	if (fz_has_option(ctx, string, "clip", &val))
+	if (fz_lookup_option(ctx, string, "clip", &val))
 	{
 		opts->flags_conf_mask |= FZ_STEXT_CLIP;
 		if (fz_option_eq(val, "no"))
@@ -2443,7 +2449,7 @@ fz_apply_stext_options(fz_context *ctx, fz_stext_options *opts, fz_options *stri
 		else
 			opts->flags |= FZ_STEXT_CLIP;
 	}
-	if (fz_has_option(ctx, string, "clip-rect", &val))
+	if (fz_lookup_option(ctx, string, "clip-rect", &val))
 	{
 		opts->flags_conf_mask |= FZ_STEXT_CLIP_RECT;
 		if (val_is_rect(val, &opts->clip))
@@ -2469,7 +2475,7 @@ fz_apply_stext_options(fz_context *ctx, fz_stext_options *opts, fz_options *stri
 			}
 		}
 	}
-	if (fz_options_has_key(ctx, string, "resolution", &val))
+	if (fz_lookup_option(ctx, string, "resolution", &val))
 	{
 		opts->flags_conf_mask |= FZ_STEXT_RESOLUTION;
 		float v = fz_atof(val);
@@ -2479,6 +2485,9 @@ fz_apply_stext_options(fz_context *ctx, fz_stext_options *opts, fz_options *stri
 			opts->scale = v / 96.0f; /* HTML base resolution is 96ppi */
 		}
 	}
+
+	fz_validate_options(ctx, string, "stext");
+
 	return opts;
 }
 
@@ -2712,6 +2721,129 @@ add_vector(fz_context *ctx, fz_stext_page *page, fz_stext_device *tdev, fz_rect 
 		bbox = fz_intersect_rect(bbox, r);
 		if (!fz_is_valid_rect(bbox))
 			return;
+	}
+
+	/* Can we just add this one onto the previous one? */
+	/* Only if it's a small rectangle... */
+	if ((flags & FZ_STEXT_VECTOR_IS_RECTANGLE) && bbox.x1 - bbox.x0 <= 2 && bbox.y1 - bbox.y0 <= 2)
+	{
+		fz_stext_block *prev;
+		/* Find b = the previous block. */
+		if (tdev->flags & FZ_STEXT_LAZY_VECTORS)
+			b = tdev->lazy_vectors_tail;
+		else if (page->last_struct)
+			b = page->last_struct->last_block;
+		else
+			b = page->last_block;
+
+		if (b && b->type == FZ_STEXT_BLOCK_VECTOR && b->u.v.argb == argb && b->u.v.flags == flags)
+		{
+			/* Maybe we can join it? */
+			float fudge = 0.001f;
+			if (b->bbox.x0 == bbox.x0 && b->bbox.x1 == bbox.x1 && b->bbox.y1 + fudge >= bbox.y0 && b->bbox.y0 - fudge <= bbox.y1)
+			{
+				/* Stacks vertically. */
+				b->bbox.y0 = fz_min(b->bbox.y0, bbox.y0);
+				b->bbox.y1 = fz_max(b->bbox.y1, bbox.y1);
+				return;
+			}
+			else if (b->bbox.y0 == bbox.y0 && b->bbox.y1 == bbox.y1 && b->bbox.x1 + fudge >= bbox.x0 && b->bbox.x0 - fudge <= bbox.x1)
+			{
+				/* Stacks horizontally. */
+				b->bbox.x0 = fz_min(b->bbox.x0, bbox.x0);
+				b->bbox.x1 = fz_max(b->bbox.x1, bbox.x1);
+				return;
+			}
+
+			/* So, we can't add our new vector onto the previous one. But can we merge the 2 previous ones? */
+			/* The intent here is that we allow a set of vector 'blocks' to be merged together, perhaps:
+			 *    ABC
+			 * Then we allow another set to be merged together, perhaps DE:
+			 *    ABC
+			 *    DE
+			 * Then when we get another block that can't be merged into DE (perhaps F):
+			 *    ABC
+			 *    DE
+			 *    F
+			 * We'll consider ABC and DE for merging. Whatevever block that F ends up
+			 * in later (maybe FGH):
+			 *    ABC
+			 *    DE
+			 *    FGH
+			 * will be considered for merging later. We can always do this "exactly" (if the blocks
+			 * line up precisely), but to do this 'lossily', we guard it with 'FUZZY_VECTORS'.
+			 */
+			prev = b->prev;
+			while (prev && prev->type == FZ_STEXT_BLOCK_VECTOR && (prev->u.v.flags & FZ_STEXT_VECTOR_IS_RECTANGLE))
+			{
+				/* Lossless merging. */
+				if (prev->bbox.x0 == b->bbox.x0 && prev->bbox.x1 == b->bbox.x1 && prev->bbox.y1 + fudge >= b->bbox.y0 && prev->bbox.y0 - fudge <= b->bbox.y1)
+				{
+					/* Stacks exactly vertically. Very rarely hit. */
+					prev->bbox.y0 = fz_min(prev->bbox.y0, b->bbox.y0);
+					prev->bbox.y1 = fz_max(prev->bbox.y1, b->bbox.y1);
+					return;
+				}
+				else if (prev->bbox.y0 == b->bbox.y0 && prev->bbox.y1 == b->bbox.y1 && prev->bbox.x1 + fudge >= b->bbox.x0 && prev->bbox.x0 - fudge <= b->bbox.x1)
+				{
+					/* Stacks horizontally.  Very rarely hit. */
+					prev->bbox.x0 = fz_min(prev->bbox.x0, b->bbox.x0);
+					prev->bbox.x1 = fz_max(prev->bbox.x1, b->bbox.x1);
+					return;
+				}
+				if (tdev->flags & FZ_STEXT_FUZZY_VECTORS)
+				{
+					/* Be more forgiving in how we merge vectors */
+					/* We need to be careful not to merge together differently oriented borders for table cells.
+					 *        C
+					 *        |
+					 *        v
+					 *     +-----+-----+
+					 * A-> |     |     |
+					 *     +-----+-----+
+					 * B-> |     |     |
+					 *     +-----+-----+
+					 *
+					 * It'd be fine to merge borders A and B together, because it still signifies the same
+					 * edges. It would NOT be fine to merge A and C together, because we'd lose the sense
+					 * of them being borders, and just have a blob that covered the cell.
+					 * The fudge2 logic below should hopefully allow for this, as well as allowing us to
+					 * match blocks like:
+					 *    ABC
+					 *   DE FG
+					 *    HIJ
+					 *   KL MN
+					 *    OPQ
+					 */
+					float fudge2 = 2;
+					if ((fabsf(prev->bbox.x0 - b->bbox.x0) <= fudge2 || fabsf(prev->bbox.x1 - b->bbox.x1) <= fudge2) && prev->bbox.y1 + fudge >= b->bbox.y0 && prev->bbox.y0 - fudge <= b->bbox.y1)
+					{
+						/* Stacks vertically. */
+						goto join;
+					}
+					else if ((fabsf(prev->bbox.y0 - b->bbox.y0) <= fudge2 || fabsf(prev->bbox.y1 - b->bbox.y1) <= fudge2) && prev->bbox.x1 + fudge >= b->bbox.x0 && prev->bbox.x0 - fudge <= b->bbox.x1)
+					{
+						/* Stacks horizontally. */
+	join:
+						prev->bbox.x0 = fz_min(prev->bbox.x0, b->bbox.x0);
+						prev->bbox.x1 = fz_max(prev->bbox.x1, b->bbox.x1);
+						prev->bbox.y0 = fz_min(prev->bbox.y0, b->bbox.y0);
+						prev->bbox.y1 = fz_max(prev->bbox.y1, b->bbox.y1);
+						/* Unlink b (so, fiddle with b->prev, which is not necessarily prev!) */
+						b->prev->next = NULL;
+						if (tdev->flags & FZ_STEXT_LAZY_VECTORS)
+							tdev->lazy_vectors_tail = b->prev;
+						else if (page->last_struct)
+							page->last_struct->last_block = b->prev;
+						else
+							page->last_block = b->prev;
+						break;
+					}
+				}
+				/* Now, allow for looking further back. */
+				prev = prev->prev;
+			}
+		}
 	}
 
 	if (tdev->opts.flags & FZ_STEXT_LAZY_VECTORS)

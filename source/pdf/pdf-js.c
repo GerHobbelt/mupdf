@@ -654,7 +654,7 @@ static void util_printf_d(fz_context *ctx, fz_buffer *out, int ds, int sign, int
 	if (value < 0)
 	{
 		sign = '-';
-		a = -value;
+		a = -(unsigned)value; // cast to avoid UB on -INT_MIN
 	}
 	else
 	{
@@ -674,7 +674,7 @@ static void util_printf_d(fz_context *ctx, fz_buffer *out, int ds, int sign, int
 		}
 	} while (a);
 
-	if (sign)
+	if (sign && w)
 	{
 		if (pad == '0')
 			while (i < w - 1)
@@ -811,6 +811,8 @@ static void util_printf(js_State *J)
 					w = w * 10 + (c - '0');
 					c = *fmt++;
 				}
+				if (w < 0)
+					w = 0;
 				if (!c)
 					break;
 
@@ -823,6 +825,8 @@ static void util_printf(js_State *J)
 						p = p * 10 + (c - '0');
 						c = *fmt++;
 					}
+					if (p < 0)
+						p = 0;
 				}
 				else
 				{

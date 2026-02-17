@@ -752,7 +752,7 @@ fz_draw_stroke_path(fz_context *ctx, fz_device *devp, const fz_path *path, const
 	fz_colorspace *colorspace_in, const float *color, float alpha, fz_color_params color_params);
 
 static void
-fz_draw_fill_path(fz_context *ctx, fz_device *devp, const fz_path *path, int even_odd, fz_matrix in_ctm,
+fz_draw_fill_path_aux(fz_context *ctx, fz_device *devp, const fz_path *path, int even_odd, fz_matrix in_ctm,
 	fz_colorspace *colorspace_in, const float *color, float alpha, fz_color_params color_params)
 {
 	fz_draw_device *dev = (fz_draw_device*)devp;
@@ -768,7 +768,6 @@ fz_draw_fill_path(fz_context *ctx, fz_device *devp, const fz_path *path, int eve
 	fz_overprint *eop;
 	fz_cookie *cookie = ctx->cookie;
 
-	assert((color_params.ri & FZ_RI_IN_SOFTMASK) == 0);
 	if (state->in_smask)
 		color_params.ri |= FZ_RI_IN_SOFTMASK;
 
@@ -820,7 +819,15 @@ fz_draw_fill_path(fz_context *ctx, fz_device *devp, const fz_path *path, int eve
 }
 
 static void
-fz_draw_stroke_path(fz_context *ctx, fz_device *devp, const fz_path *path, const fz_stroke_state *stroke, fz_matrix in_ctm,
+fz_draw_fill_path(fz_context *ctx, fz_device *devp, const fz_path *path, int even_odd, fz_matrix in_ctm,
+	fz_colorspace *colorspace_in, const float *color, float alpha, fz_color_params color_params)
+{
+	assert((color_params.ri & FZ_RI_IN_SOFTMASK) == 0);
+	fz_draw_fill_path_aux(ctx, devp, path, even_odd, in_ctm, colorspace_in, color, alpha, color_params);
+}
+
+static void
+fz_draw_stroke_path_aux(fz_context *ctx, fz_device *devp, const fz_path *path, const fz_stroke_state *stroke, fz_matrix in_ctm,
 	fz_colorspace *colorspace_in, const float *color, float alpha, fz_color_params color_params)
 {
 	fz_draw_device *dev = (fz_draw_device*)devp;
@@ -839,7 +846,6 @@ fz_draw_stroke_path(fz_context *ctx, fz_device *devp, const fz_path *path, const
 	fz_overprint *eop;
 	fz_cookie* cookie = ctx->cookie;
 
-	assert((color_params.ri & FZ_RI_IN_SOFTMASK) == 0);
 	if (state->in_smask)
 		color_params.ri |= FZ_RI_IN_SOFTMASK;
 
@@ -907,6 +913,14 @@ fz_draw_stroke_path(fz_context *ctx, fz_device *devp, const fz_path *path, const
 
 	if ((state->blendmode & FZ_BLEND_KNOCKOUT) && alpha != 1 && !cookie->d.render_rough_approx)
 		fz_knockout_end(ctx, dev);
+}
+
+static void
+fz_draw_stroke_path(fz_context *ctx, fz_device *devp, const fz_path *path, const fz_stroke_state *stroke, fz_matrix in_ctm,
+	fz_colorspace *colorspace_in, const float *color, float alpha, fz_color_params color_params)
+{
+	assert((color_params.ri & FZ_RI_IN_SOFTMASK) == 0);
+	fz_draw_stroke_path_aux(ctx, devp, path, stroke, in_ctm, colorspace_in, color, alpha, color_params);
 }
 
 static void
@@ -1172,7 +1186,7 @@ fz_draw_fill_text(fz_context *ctx, fz_device *devp, const fz_text *text, fz_matr
 				if (path)
 				{
 					fz_try(ctx)
-						fz_draw_fill_path(ctx, devp, path, 0, in_ctm, colorspace, color, alpha, color_params);
+						fz_draw_fill_path_aux(ctx, devp, path, 0, in_ctm, colorspace, color, alpha, color_params);
 					fz_always(ctx)
 						fz_drop_path(ctx, path);
 					fz_catch(ctx)
@@ -1277,7 +1291,7 @@ fz_draw_stroke_text(fz_context *ctx, fz_device *devp, const fz_text *text, const
 				else
 				{
 					fz_try(ctx)
-						fz_draw_stroke_path(ctx, devp, path, stroke, in_ctm, colorspace, color, alpha, color_params);
+						fz_draw_stroke_path_aux(ctx, devp, path, stroke, in_ctm, colorspace, color, alpha, color_params);
 					fz_always(ctx)
 						fz_drop_path(ctx, path);
 					fz_catch(ctx)
@@ -1395,7 +1409,7 @@ fz_draw_clip_text(fz_context *ctx, fz_device *devp, const fz_text *text, fz_matr
 						state[1].mask = NULL;
 						fz_try(ctx)
 						{
-							fz_draw_fill_path(ctx, devp, path, 0, in_ctm, fz_device_gray(ctx), &white, 1, fz_default_color_params);
+							fz_draw_fill_path_aux(ctx, devp, path, 0, in_ctm, fz_device_gray(ctx), &white, 1, fz_default_color_params);
 						}
 						fz_always(ctx)
 						{
@@ -1520,7 +1534,7 @@ fz_draw_clip_stroke_text(fz_context *ctx, fz_device *devp, const fz_text *text, 
 						state[0].mask = NULL;
 						fz_try(ctx)
 						{
-							fz_draw_stroke_path(ctx, devp, path, stroke, in_ctm, fz_device_gray(ctx), &white, 1, fz_default_color_params);
+							fz_draw_stroke_path_aux(ctx, devp, path, stroke, in_ctm, fz_device_gray(ctx), &white, 1, fz_default_color_params);
 						}
 						fz_always(ctx)
 						{
@@ -3392,16 +3406,6 @@ const char *fz_draw_options_usage =
 	"\t\tapp=any part of pixel\n"
 	"\n";
 
-static int parse_aa_opts(const char *val)
-{
-	if (fz_option_eq(val, "cop"))
-		return 9;
-	if (fz_option_eq(val, "app"))
-		return 10;
-	if (val[0] == 'a' && val[1] == 'a' && val[2] >= '0' && val[2] <= '9')
-		return  fz_clampi(fz_atoi(&val[2]), 0, 8);
-	return 8;
-}
 
 void fz_init_draw_options(fz_context *ctx, fz_draw_options *opts)
 {
@@ -3422,57 +3426,88 @@ void fz_init_draw_options(fz_context *ctx, fz_draw_options *opts)
 fz_draw_options *
 fz_parse_draw_options(fz_context *ctx, fz_draw_options *opts, const char *args)
 {
-	fz_options *options = fz_new_options_from_string(ctx, args);
-	fz_draw_options *out;
-
-	fz_init_draw_options(ctx, opts);
+	fz_options *options = fz_new_options(ctx, args);
 
 	fz_try(ctx)
 	{
-		out = fz_apply_draw_options(ctx, opts, options);
-		fz_warn_on_unused_options(ctx, options);
+		fz_init_draw_options(ctx, opts);
+		fz_apply_draw_options(ctx, opts, options);
+		fz_warn_on_unused_options(ctx, options, "draw");
 	}
 	fz_always(ctx)
 		fz_drop_options(ctx, options);
 	fz_catch(ctx)
 		fz_rethrow(ctx);
 
-	return out;
+	return opts;
 }
 
-fz_draw_options *fz_apply_draw_options(fz_context *ctx, fz_draw_options *opts, fz_options *args)
+static const fz_option_enums colorspace_opts[] =
 {
-	const char *val;
+	{ "gray", 1 },
+	{ "grey", 1 },
+	{ "mono", 1 },
+	{ "rgb", 3 },
+	{ "cmyk", 4 },
+	{ NULL, -1 }
+};
 
-	if (fz_options_has_key(ctx, args, "rotate", &val))
-		opts->rotate = fz_atoi(val);
-	if (fz_options_has_key(ctx, args, "resolution", &val))
-		opts->x_resolution = opts->y_resolution = fz_atoi(val);
-	if (fz_options_has_key(ctx, args, "x-resolution", &val))
-		opts->x_resolution = fz_atoi(val);
-	if (fz_options_has_key(ctx, args, "y-resolution", &val))
-		opts->y_resolution = fz_atoi(val);
-	if (fz_options_has_key(ctx, args, "width", &val))
-		opts->width = fz_atoi(val);
-	if (fz_options_has_key(ctx, args, "height", &val))
-		opts->height = fz_atoi(val);
-	if (fz_options_has_key(ctx, args, "colorspace", &val))
+static const fz_option_enums aa_opts[] =
+{
+	{ "aa0", 0 },
+	{ "aa1", 1 },
+	{ "aa2", 2 },
+	{ "aa3", 3 },
+	{ "aa4", 4 },
+	{ "aa5", 5 },
+	{ "aa6", 6 },
+	{ "aa7", 7 },
+	{ "aa8", 8 },
+	{ "cop", 9 },
+	{ "app", 10 },
+	{ NULL, -1 }
+};
+
+void fz_apply_draw_options(fz_context *ctx, fz_draw_options *opts, fz_options *args)
+{
+	int i;
+
+	fz_lookup_option_integer(ctx, args, "rotate", &opts->rotate);
+	fz_lookup_option_integer(ctx, args, "resolution", &opts->x_resolution);
+	fz_lookup_option_integer(ctx, args, "resolution", &opts->y_resolution);
+	fz_lookup_option_integer(ctx, args, "x-resolution", &opts->x_resolution);
+	fz_lookup_option_integer(ctx, args, "y-resolution", &opts->y_resolution);
+	fz_lookup_option_integer(ctx, args, "width", &opts->width);
+	fz_lookup_option_integer(ctx, args, "height", &opts->height);
+
+	if (fz_lookup_option_enum(ctx, args, "colorspace", &i, colorspace_opts))
 	{
-		if (fz_option_eq(val, "gray") || fz_option_eq(val, "grey") || fz_option_eq(val, "mono"))
+		switch (i)
+		{
+		case 1:
 			opts->colorspace = fz_device_gray(ctx);
-		else if (fz_option_eq(val, "rgb"))
+			break;
+		case 3:
 			opts->colorspace = fz_device_rgb(ctx);
-		else if (fz_option_eq(val, "cmyk"))
+			break;
+		case 4:
 			opts->colorspace = fz_device_cmyk(ctx);
-		else
+			break;
+		default:
 			fz_throw(ctx, FZ_ERROR_ARGUMENT, "unknown colorspace in options");
+		}
 	}
-	if (fz_options_has_key(ctx, args, "alpha", &val))
-		opts->alpha = fz_option_eq(val, "yes");
-	if (fz_options_has_key(ctx, args, "graphics", &val))
-		opts->text = opts->graphics = parse_aa_opts(val);
-	if (fz_options_has_key(ctx, args, "text", &val))
-		opts->text = parse_aa_opts(val);
+
+	fz_lookup_option_boolean(ctx, args, "alpha", &opts->alpha);
+
+	if (fz_lookup_option_enum(ctx, args, "graphics", &opts->graphics, aa_opts))
+	{
+		opts->text = opts->graphics;
+		if (opts->graphics == -1)
+			fz_throw(ctx, FZ_ERROR_ARGUMENT, "unknown graphics value in options");
+	}
+	if (fz_lookup_option_enum(ctx, args, "text", &opts->text, aa_opts) < 0)
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "unknown text value in options");
 
 	/* Sanity check values */
 	if (opts->x_resolution <= 0) opts->x_resolution = 96;
@@ -3480,7 +3515,7 @@ fz_draw_options *fz_apply_draw_options(fz_context *ctx, fz_draw_options *opts, f
 	if (opts->width < 0) opts->width = 0;
 	if (opts->height < 0) opts->height = 0;
 
-	return opts;
+	fz_validate_options(ctx, args, "draw");
 }
 
 fz_device *

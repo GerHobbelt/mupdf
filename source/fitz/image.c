@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2025 Artifex Software, Inc.
+// Copyright (C) 2004-2026 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -1115,6 +1115,8 @@ fz_get_pixmap_from_image(fz_context *ctx, const fz_image *image, const fz_irect 
 	fz_catch(ctx)
 	{
 		/* Do nothing */
+		if (fz_caught(ctx) == FZ_ERROR_SYSTEM)
+			fz_drop_pixmap(ctx, tile);
 		fz_rethrow_if(ctx, FZ_ERROR_SYSTEM);
 		fz_report_error(ctx);
 	}
@@ -1778,7 +1780,7 @@ display_list_image_get_pixmap(fz_context *ctx, const fz_image *image_, fz_irect 
 {
 	const fz_display_list_image *image = (const fz_display_list_image *)image_;
 	fz_matrix ctm;
-	fz_device *dev;
+	fz_device *dev = NULL;
 	fz_pixmap *pix;
 
 	fz_var(dev);

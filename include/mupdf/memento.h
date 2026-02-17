@@ -2,7 +2,7 @@
 
 #if 0
 
-/* Copyright (C) 2009-2022 Artifex Software, Inc.
+/* Copyright (C) 2009-2026 Artifex Software, Inc.
    All Rights Reserved.
 
    This software is provided AS-IS with no warranty, either express or
@@ -284,6 +284,9 @@ void Memento_stats(void);
 void *Memento_label(void *, const char *);
 void Memento_tick(void);
 int Memento_setVerbose(int verbose_flag);
+void Memento_abortOnLeak(int);
+void Memento_abortOnCorruption(int);
+void Memento_abortOnSegfault(int);
 
 /* Terminate backtraces if we see specified function name. E.g.
 'cfunction_call' will exclude Python interpreter functions when Python calls C

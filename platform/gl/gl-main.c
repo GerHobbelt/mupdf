@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2025 Artifex Software, Inc.
+// Copyright (C) 2004-2026 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -1031,9 +1031,9 @@ void load_page(void)
 					dn = pdf_signature_get_widget_signatory(ctx, verifier, w);
 					if (dn)
 					{
-						char *s = pdf_signature_format_distinguished_name(ctx, dn);
-						fz_strncpy_s(ctx, buf, s, sizeof buf);
-						fz_free(ctx, s);
+						char *str = pdf_signature_format_distinguished_name(ctx, dn);
+						fz_strncpy_s(ctx, buf, str, sizeof buf);
+						fz_free(ctx, str);
 						pdf_signature_drop_distinguished_name(ctx, dn);
 					}
 					else

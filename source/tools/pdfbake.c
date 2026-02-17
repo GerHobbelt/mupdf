@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2024 Artifex Software, Inc.
+// Copyright (C) 2004-2026 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -53,8 +53,7 @@ int pdfbake_main(int argc, const char **argv)
 	const char *output = "out.pdf";
 	const char *flags = "garbage";
 	const char *input;
-	int c;
-	int errors = 0;
+	int c, code = EXIT_SUCCESS;
 
 	while ((c = fz_getopt(argc, argv, "AFO:")) != -1)
 	{
@@ -100,12 +99,11 @@ int pdfbake_main(int argc, const char **argv)
 	fz_catch(ctx)
 	{
 		fz_report_error(ctx);
-		errors++;
+		code = EXIT_FAILURE;
 	}
 
 	pdf_drop_document(ctx, doc);
 	fz_flush_warnings(ctx);
 	fz_drop_context(ctx);
-
-	return errors != 0;
+	return code;
 }

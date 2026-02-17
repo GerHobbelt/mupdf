@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2025 Artifex Software, Inc.
+// Copyright (C) 2004-2026 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -1197,9 +1197,8 @@ load_cid_font(fz_context *ctx, pdf_document *doc, pdf_obj *dict, pdf_obj *encodi
 {
 	pdf_obj *widths;
 	pdf_obj *descriptor;
-	pdf_font_desc *fontdesc = NULL;
+	pdf_font_desc *fontdesc;
 	fz_buffer *buf = NULL;
-	pdf_cmap *cmap;
 	FT_Face face;
 	char collection[256];
 	const char *basefont;
@@ -1208,8 +1207,9 @@ load_cid_font(fz_context *ctx, pdf_document *doc, pdf_obj *dict, pdf_obj *encodi
 	pdf_obj *obj;
 	int dw;
 
-	fz_var(fontdesc);
 	fz_var(buf);
+
+	fontdesc = pdf_new_font_desc(ctx);
 
 	fz_try(ctx)
 	{
@@ -1239,11 +1239,11 @@ load_cid_font(fz_context *ctx, pdf_document *doc, pdf_obj *dict, pdf_obj *encodi
 
 		if (pdf_is_name(ctx, encoding))
 		{
-			cmap = pdf_load_system_cmap(ctx, pdf_to_name(ctx, encoding));
+			fontdesc->encoding = pdf_load_system_cmap(ctx, pdf_to_name(ctx, encoding));
 		}
 		else if (pdf_is_indirect(ctx, encoding))
 		{
-			cmap = pdf_load_embedded_cmap(ctx, doc, encoding);
+			fontdesc->encoding = pdf_load_embedded_cmap(ctx, doc, encoding);
 		}
 		else
 		{
@@ -1252,9 +1252,6 @@ load_cid_font(fz_context *ctx, pdf_document *doc, pdf_obj *dict, pdf_obj *encodi
 
 		/* Load font file */
 
-		fontdesc = pdf_new_font_desc(ctx);
-
-		fontdesc->encoding = cmap;
 		fontdesc->size += pdf_cmap_size(ctx, fontdesc->encoding);
 
 		pdf_set_font_wmode(ctx, fontdesc, pdf_cmap_wmode(ctx, fontdesc->encoding));
@@ -1561,7 +1558,7 @@ pdf_load_font_descriptor(fz_context *ctx, pdf_document *doc, pdf_font_desc *font
 		fontdesc->descent < FZ_MAX_TRUSTWORTHY_DESCENT * 1000)
 	{
 		if (fontdesc->ascent != 0 || fontdesc->descent != 0)
-			fz_warn(ctx, "bogus font ascent/descent values (%g / %g)", fontdesc->ascent, fontdesc->descent);
+			fz_warn(ctx, "bogus font (%s) ascent/descent values (%g / %g)", fontname, fontdesc->ascent, fontdesc->descent);
 		fontdesc->font->ascender = 0.8f;
 		fontdesc->font->descender = -0.2f;
 		fontdesc->font->ascdesc_src = FZ_ASCDESC_DEFAULT;
