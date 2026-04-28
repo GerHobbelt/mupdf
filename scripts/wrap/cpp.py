@@ -272,7 +272,7 @@ def write_call_arg(
     return have_used_this
 
 
-def make_fncall( tu, cursor, return_type, fncall, out, refcheck_if, trace_if):
+def make_fncall( tu, cursor, return_type, fncall, out, refcheck_if, trace_if, locking):
     '''
     Writes a low-level function call to <out>, using fz_context_s from
     internal_context_get() and with fz_try...fz_catch that converts to C++
@@ -292,7 +292,7 @@ def make_fncall( tu, cursor, return_type, fncall, out, refcheck_if, trace_if):
     # time from 548.1s to 543.2s.
     #
     use_fz_try = True
-
+    lock_args = list()
     if cursor.spelling in (
             'pdf_specifics',
             ):
@@ -305,7 +305,27 @@ def make_fncall( tu, cursor, return_type, fncall, out, refcheck_if, trace_if):
         for arg in parse.get_args( tu, cursor, include_fz_context=True):
             if parse.is_pointer_to( arg.cursor.type, 'fz_context'):
                 uses_fz_context = True
-                break
+            if locking:
+                if cursor.spelling.startswith((f'fz_keep_', 'fz_drop_', 'pdf_keep_', 'pdf_drop_')):
+                    # We never do locking for keep/drop, because it is
+                    # unnecessary. Also, after deletion, any attempt to release
+                    # locks fails because the lock(s) have been deleted.
+                    pass
+                elif arg.alt:
+                    for structname in (
+                            'fz_document',
+                            'fz_page',
+                            'pdf_document',
+                            'pdf_page',
+                            'pdf_annot',
+                            'pdf_obj',
+                            ):
+                        if parse.is_pointer_to( arg.cursor.type, structname):
+                            # We need to lock+unlock this arg.
+                            lock_args.append(arg.name)
+                            # We need a fz_context in order to lock/unlock documents/devices.
+                            uses_fz_context = True
+
     if uses_fz_context:
         context_get = rename.internal( 'context_get')
         throw_exception = rename.internal( 'throw_exception')
@@ -382,8 +402,42 @@ def make_fncall( tu, cursor, return_type, fncall, out, refcheck_if, trace_if):
         out.write( f'        }}\n')
         out.write( f'    #endif\n')
 
+    # Do locking.
+    if locking:
+        out.write(f'\n')
+        if lock_args:
+            out.write(f'    /* Locking may be required for {len(lock_args)} args. */\n')
+            out.write(f'    std::recursive_mutex* mutexes[{len(lock_args)}];\n')
+            out.write(f'    std::recursive_mutex** mutexes_end = mutexes;\n')
+            out.write(f'    \n')
+            out.write(f'    if (!{lock_arg_name()} && internal_use_locking)\n')
+            out.write(f'    {{\n')
+            out.write(f'        /* We need to do locking. */\n')
+            for argname in lock_args:
+                out.write(f'        *mutexes_end++ = internal_get_mutex(auto_ctx, {argname});\n')
+            out.write(f'        /* Sort mutexes by raw address to impose consistent locking order that avoids deadlocks. */\n')
+            out.write(f'        std::sort(mutexes, mutexes_end);\n')
+            out.write(f'        /* Remove null or duplicate mutexes. */\n')
+            out.write(f'        std::recursive_mutex** m0 = mutexes;\n')
+            out.write(f'        for (std::recursive_mutex** m=mutexes; m!=mutexes_end; ++m)\n')
+            out.write(f'        {{\n')
+            out.write(f'            if (*m && (m == mutexes || m[0] != m[-1]))\n')
+            out.write(f'                *m0++ = *m;\n')
+            out.write(f'        }}\n')
+            out.write(f'        mutexes_end = m0;\n')
+            out.write(f'        /* Lock the mutexes. */\n')
+            out.write(f'        for (std::recursive_mutex** m=mutexes; m!=mutexes_end; ++m)\n')
+            out.write(f'        {{\n')
+            out.write(f'            (*m)->lock();\n')
+            out.write(f'        }}\n')
+            out.write(f'    }}\n')
+        else:
+            out.write(f'    /* Locking not required. */\n')
+
     # Now output the function call.
     #
+    out.write(f'\n')
+    out.write(f'    /* Call the underlying mupdf c function. */\n')
     if return_type != 'void':
         out.write(  f'    {return_type} ret;\n')
 
@@ -393,7 +447,7 @@ def make_fncall( tu, cursor, return_type, fncall, out, refcheck_if, trace_if):
 
     indent = ''
     if uses_fz_context and use_fz_try:
-        out.write(      f'    fz_try(auto_ctx) {{\n')
+        out.write(f'    fz_try(auto_ctx) {{\n')
         indent = '    '
 
     if cursor.spelling == 'fz_warn':
@@ -411,12 +465,25 @@ def make_fncall( tu, cursor, return_type, fncall, out, refcheck_if, trace_if):
         out.write(      f'    }}\n')
 
     if cursor.spelling == 'fz_warn':
+        assert not lock_args
         if use_fz_try:
             out.write(      f'    fz_always(auto_ctx) {{\n')
             out.write(      f'        va_end(ap);\n')
             out.write(      f'    }}\n')
         else:
             out.write(      f'    va_end(ap);\n')
+
+    if locking:
+        if lock_args:
+            if use_fz_try:
+                out.write(f'    fz_always(auto_ctx) {{\n')
+            out.write(f'        /* Unlock the mutexes. */\n')
+            out.write(f'        for (std::recursive_mutex** m=mutexes; m!=mutexes_end; ++m)\n')
+            out.write(f'        {{\n')
+            out.write(f'            (*m)->unlock();\n')
+            out.write(f'        }}\n')
+            if use_fz_try:
+                out.write(f'    }}\n')
 
     if uses_fz_context and use_fz_try:
         out.write(      f'    fz_catch(auto_ctx) {{\n')
@@ -487,6 +554,16 @@ class Generated:
         Saves state to .pickle file, to be loaded later via pickle.load().
         '''
         to_pickle( self, f'{dirpath}/generated.pickle')
+
+
+def lock_arg_type():
+    return 'bool'
+
+def lock_arg_name():
+    return 'fzlocked'
+
+def lock_arg_default():
+    return 'false'
 
 
 def make_outparam_helper(
@@ -803,6 +880,7 @@ def function_wrapper(
         generated,
         refcheck_if,
         trace_if,
+        locking,
         ):
     '''
     Writes low-level C++ wrapper fn, converting any fz_try..fz_catch exception
@@ -826,6 +904,8 @@ def function_wrapper(
     trace_if:
         A '#if*' statement that determines whether runtime diagnostics are
         compiled in.
+    locking:
+        .
 
     Example generated function:
 
@@ -897,6 +977,10 @@ def function_wrapper(
     if cursor.type.is_function_variadic():
         name_args_h += f'{comma}...'
         name_args_cpp += f'{comma}...'
+    else:
+        if locking:
+            name_args_h += f'{comma}{lock_arg_type()} {lock_arg_name()}={lock_arg_default()}'
+            name_args_cpp += f'{comma}{lock_arg_type()} {lock_arg_name()}'
 
     name_args_h += ')'
     name_args_cpp += ')'
@@ -918,7 +1002,7 @@ def function_wrapper(
         else:
             fncall += f'{arg.separator}{arg.name}'
     fncall += ')'
-    make_fncall( tu, cursor, return_type, fncall, out_cpp, refcheck_if, trace_if)
+    make_fncall( tu, cursor, return_type, fncall, out_cpp, refcheck_if, trace_if, locking)
     out_cpp.write( '}\n')
     out_cpp.write( '\n')
 
@@ -1590,7 +1674,7 @@ def make_extra( out_extra_h, out_extra_cpp):
     out_extra_cpp.write( g_extra_definitions)
 
 
-def make_internal_functions( namespace, out_h, out_cpp, refcheck_if, trace_if):
+def make_internal_functions( namespace, out_h, out_cpp, refcheck_if, trace_if, locking):
     '''
     Writes internal support functions.
 
@@ -1634,11 +1718,33 @@ def make_internal_functions( namespace, out_h, out_cpp, refcheck_if, trace_if):
             '''
             ))
 
+    if locking:
+        out_h.write(
+                textwrap.dedent(
+                f'''
+                /* The following functions return the std::recursive_mutex to be locked while
+                using the specified objects. */
+
+                static inline std::recursive_mutex* internal_get_mutex(fz_context* ctx, fz_document* document)  {{ return (document) ? (std::recursive_mutex*) document->external_mutex : nullptr; }}
+                static inline std::recursive_mutex* internal_get_mutex(fz_context* ctx, fz_device* device)      {{ return (device) ? (std::recursive_mutex*) device->external_mutex : nullptr; }}
+
+                static inline std::recursive_mutex* internal_get_mutex(fz_context* ctx, fz_page* p)         {{ return (p) ? internal_get_mutex(ctx, p->doc) : nullptr; }}
+                static inline std::recursive_mutex* internal_get_mutex(fz_context* ctx, pdf_document* d)    {{ return (d) ? internal_get_mutex(ctx, &d->super) : nullptr; }}
+                static inline std::recursive_mutex* internal_get_mutex(fz_context* ctx, pdf_page* p)        {{ return (p) ? internal_get_mutex(ctx, &p->super) : nullptr; }}
+                static inline std::recursive_mutex* internal_get_mutex(fz_context* ctx, pdf_annot* a)       {{ return internal_get_mutex(ctx, pdf_annot_page(ctx, a)); }}
+                static inline std::recursive_mutex* internal_get_mutex(fz_context* ctx, pdf_obj* o)         {{ return internal_get_mutex(ctx, pdf_get_bound_document(ctx, o)); }}
+
+                FZ_DATA extern bool internal_use_locking;
+                '''
+                ))
+
     out_cpp.write(
             textwrap.dedent(
             '''
             #include "mupdf/exceptions.h"
             #include "mupdf/internal.h"
+            #include "mupdf/fitz.h"
+            #include "mupdf/pdf.h"
 
             #include <iostream>
             #include <thread>
@@ -1720,6 +1826,10 @@ def make_internal_functions( namespace, out_h, out_cpp, refcheck_if, trace_if):
                     m_locks.user = this;
                     m_locks.lock = lock;
                     m_locks.unlock = unlock;
+                    m_locks.create_external_mutex = {'create_mutex' if locking else 'nullptr'};
+                    m_locks.destroy_external_mutex = {'destroy_mutex' if locking else 'nullptr'};
+                    m_locks.set_tls_context = {'set_tls_context' if locking else 'nullptr'};
+                    m_locks.get_tls_context = {'get_tls_context' if locking else 'nullptr'};
                     m_ctx = nullptr;
                     bool multithreaded = true;
                     const char* s = getenv( "MUPDF_mt_ctx");
@@ -1737,6 +1847,7 @@ def make_internal_functions( namespace, out_h, out_cpp, refcheck_if, trace_if):
                     }}
                     fz_drop_context( m_ctx);
                     m_multithreaded = multithreaded;
+                    {'internal_use_locking = multithreaded;' if locking else ''}
                     if (s_trace)
                     {{
                         std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << "(): "
@@ -1768,6 +1879,39 @@ def make_internal_functions( namespace, out_h, out_cpp, refcheck_if, trace_if):
                     internal_assert( self->m_multithreaded);
                     self->m_mutexes[lock].unlock();
                 }}
+            ''')
+
+    if locking:
+        cpp_text += textwrap.indent(
+                textwrap.dedent(
+                    f'''
+                    static void* create_mutex(void*)
+                    {{
+                        if (!internal_use_locking)
+                            return nullptr;
+                        void* ret = new std::recursive_mutex;
+                        //std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << "(): " << " returning " << ret << "\\n";
+                        return ret;
+                    }}
+                    static void destroy_mutex(void*, void* mutex)
+                    {{
+                        //std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << "(): " << " freeing " << mutex << "\\n";
+                        delete (std::recursive_mutex*) mutex;
+                    }}
+                    static void set_tls_context(void *user, fz_context *)
+                    {{
+                        // Nothing to do.
+                    }}
+                    static fz_context* get_tls_context(void *)
+                    {{
+                        return {rename.internal("context_get")}();
+                    }}
+
+                    '''),
+                '    ')
+
+    cpp_text += textwrap.dedent(
+            f'''
                 ~{rename.internal("state")}()
                 {{
                     if (s_trace)
@@ -1902,6 +2046,22 @@ def make_internal_functions( namespace, out_h, out_cpp, refcheck_if, trace_if):
                 s_state.reinit( false /*multithreaded*/);
             }}
             ''')
+
+    if locking:
+        cpp_text += textwrap.dedent(
+                f'''
+                bool internal_use_locking;
+
+                FZ_FUNCTION void use_locking(bool yes)
+                {{
+                    if (0)
+                    {{
+                        std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << "(): Reinitialising as single-threaded.\\n";
+                    }}
+                    internal_use_locking = yes;
+                }}
+
+                ''')
     out_cpp.write( cpp_text)
 
     make_namespace_close( namespace, out_cpp)
@@ -1956,6 +2116,7 @@ def make_function_wrappers(
         generated,
         refcheck_if,
         trace_if,
+        locking,
         ):
     '''
     Generates C++ source code containing wrappers for all fz_*() functions.
@@ -2326,7 +2487,7 @@ def make_function_wrappers(
     out_exceptions_cpp.write( f'}}\n')
     out_exceptions_cpp.write( '\n')
 
-    make_internal_functions( namespace, out_internal_h, out_internal_cpp, refcheck_if, trace_if)
+    make_internal_functions( namespace, out_internal_h, out_internal_cpp, refcheck_if, trace_if, locking)
 
     # Generate wrappers for each function that we find.
     #
@@ -2369,6 +2530,7 @@ def make_function_wrappers(
                 generated,
                 refcheck_if,
                 trace_if,
+                locking,
                 )
         if not fnname.startswith( ( 'fz_keep_', 'fz_drop_', 'pdf_keep_', 'pdf_drop_')):
             function_wrapper_class_aware(
@@ -2383,6 +2545,7 @@ def make_function_wrappers(
                     out_h=out_functions_h2,
                     out_cpp=out_functions_cpp2,
                     generated=generated,
+                    locking=locking,
                     )
 
         python.cppyy_add_outparams_wrapper( tu, fnname, cursor, state.state_, generated)
@@ -2783,12 +2946,14 @@ def class_find_destructor_fns( tu, struct_name, base_name):
     return destructor_fns
 
 
-def num_instances(refcheck_if, delta, name):
+def num_instances(refcheck_if, delta, name, locking):
     '''
     Returns C++ code to embed in a wrapper class constructor/destructor function
     to update the class static `s_num_instances` variable.
     '''
     ret = ''
+    if locking:
+        return ret
     ret += f'    {refcheck_if}\n'
     if delta == +1:
         ret += '    ++s_num_instances;\n'
@@ -2809,6 +2974,7 @@ def class_constructor_default(
         out_cpp,
         refcheck_if,
         trace_if,
+        locking,
         ):
     '''
     Generates constructor that sets each member to default value.
@@ -2847,7 +3013,7 @@ def class_constructor_default(
             out_cpp.write( '    }\n')
             out_cpp.write( '    #endif\n')
 
-    out_cpp.write(num_instances(refcheck_if, +1, classname))
+    out_cpp.write(num_instances(refcheck_if, +1, classname, locking))
 
     out_cpp.write( f'}};\n')
 
@@ -2864,6 +3030,7 @@ def class_copy_constructor(
         out_cpp,
         refcheck_if,
         trace_if,
+        locking,
         ):
     '''
     Generate a copy constructor and operator= by finding a suitable fz_keep_*()
@@ -2937,7 +3104,7 @@ def class_copy_constructor(
             out_cpp.write(f'        s_{classname}_refs_check.add( this, __FILE__, __LINE__, __FUNCTION__);\n')
             out_cpp.write( '    }\n')
             out_cpp.write( '    #endif\n')
-        out_cpp.write(num_instances(refcheck_if, +1, classname))
+        out_cpp.write(num_instances(refcheck_if, +1, classname, locking))
         out_cpp.write( '}\n')
         out_cpp.write( '\n')
 
@@ -3030,6 +3197,7 @@ def function_wrapper_class_aware_body(
         wrap_return,
         refcheck_if,
         trace_if,
+        locking,
         ):
     '''
     Writes function or method body to <out_cpp> that calls a generated C++ wrapper
@@ -3159,6 +3327,8 @@ def function_wrapper_class_aware_body(
                     state.state_.show_details(fnname),
                     )
             sep = ', '
+        if locking:
+            out_cpp.write(f'{sep}{lock_arg_name()}')
         out_cpp.write( f');\n')
 
         if state.state_.show_details(fnname):
@@ -3253,7 +3423,7 @@ def function_wrapper_class_aware_body(
             out_cpp.write( f'    #endif\n')
 
     if class_constructor:
-        out_cpp.write(num_instances(refcheck_if, +1, class_name))
+        out_cpp.write(num_instances(refcheck_if, +1, class_name, locking))
 
     if not return_void and not class_constructor:
         out_cpp.write( f'    return ret;\n')
@@ -3280,6 +3450,7 @@ def function_wrapper_class_aware(
         duplicate_type=None,
         generated=None,
         debug=None,
+        locking=None,
         ):
     '''
     Writes a function or class method that calls <fnname>.
@@ -3329,6 +3500,8 @@ def function_wrapper_class_aware(
             SWIG-generated method to call our *_outparams_fn() alternative.
         debug
             Show extra diagnostics.
+        locking:
+            Generate thread-safe code.
     '''
     verbose = state.state_.show_details( fnname)
     if fn_cursor and fn_cursor.type.is_function_variadic() and fnname != 'fz_warn':
@@ -3423,6 +3596,10 @@ def function_wrapper_class_aware(
     if fn_cursor.type.is_function_variadic():
         decl_h += f'{comma}...'
         decl_cpp += f'{comma}...'
+    else:
+        if locking:
+            decl_h += f'{comma}{lock_arg_type()} {lock_arg_name()}={lock_arg_default()}'
+            decl_cpp += f'{comma}{lock_arg_type()} {lock_arg_name()}'
 
     decl_h += ')'
     decl_cpp += ')'
@@ -3642,6 +3819,7 @@ def function_wrapper_class_aware(
             wrap_return,
             refcheck_if,
             trace_if,
+            locking,
             )
 
     if struct_name:
@@ -3674,6 +3852,7 @@ def class_custom_method(
         out_cpp,
         refcheck_if,
         trace_if,
+        locking,
         ):
     '''
     Writes custom method as specified by <extramethod>.
@@ -3752,9 +3931,9 @@ def class_custom_method(
         out_cpp.write( f'    }}\n')
         out_cpp.write( f'    #endif\n')
     if is_constructor:
-        out_cpp.write( num_instances(refcheck_if, +1, classname))
+        out_cpp.write( num_instances(refcheck_if, +1, classname, locking))
     if is_destructor:
-        out_cpp.write( num_instances(refcheck_if, -1, classname))
+        out_cpp.write( num_instances(refcheck_if, -1, classname, locking))
 
     out_cpp.write( body[end:])
 
@@ -3788,6 +3967,7 @@ def class_raw_constructor(
         out_cpp,
         refcheck_if,
         trace_if,
+        locking,
         ):
     '''
     Create a raw constructor - a constructor taking a pointer to underlying
@@ -3843,7 +4023,7 @@ def class_raw_constructor(
             out_cpp.write( f'    }}\n')
             out_cpp.write( f'    #endif\n')
 
-        out_cpp.write(num_instances(refcheck_if, +1, classname))
+        out_cpp.write(num_instances(refcheck_if, +1, classname, locking))
 
         out_cpp.write( '}\n')
         out_cpp.write( '\n')
@@ -3866,7 +4046,7 @@ def class_raw_constructor(
                 else:
                     out_cpp.write( f'    this->{c.spelling} = internal.{c.spelling};\n')
 
-            out_cpp.write(num_instances(refcheck_if, +1, classname))
+            out_cpp.write(num_instances(refcheck_if, +1, classname, locking))
             out_cpp.write( '}\n')
             out_cpp.write( '\n')
 
@@ -4027,6 +4207,7 @@ def class_destructor(
         out_cpp,
         refcheck_if,
         trace_if,
+        locking,
         ):
     if len(destructor_fns) > 1:
         # Use function with shortest name.
@@ -4057,7 +4238,7 @@ def class_destructor(
             out_cpp.write(  '    }\n')
             out_cpp.write( f'    #endif\n')
 
-        out_cpp.write(num_instances(refcheck_if, -1, classname))
+        out_cpp.write(num_instances(refcheck_if, -1, classname, locking))
 
         out_cpp.write(  '}\n')
         out_cpp.write( '\n')
@@ -4072,7 +4253,7 @@ def class_destructor(
         out_cpp.write( f'{refcheck_if}\n')
         out_cpp.write( f'FZ_FUNCTION {classname}::~{classname}()\n')
         out_cpp.write(  '{\n')
-        out_cpp.write(num_instances(refcheck_if, -1, classname))
+        out_cpp.write(num_instances(refcheck_if, -1, classname, locking))
         out_cpp.write(  '}\n')
         out_cpp.write( '#endif\n')
         out_cpp.write( '\n')
@@ -4599,6 +4780,7 @@ def class_wrapper(
         generated,
         refcheck_if,
         trace_if,
+        locking,
         ):
     '''
     Creates source for a class called <classname> that wraps <struct_name>,
@@ -4729,6 +4911,7 @@ def class_wrapper(
                     extras=extras,
                     struct_cursor=struct_cursor,
                     duplicate_type=duplicate_type,
+                    locking=locking,
                     )
         except Clang6FnArgsBug as e:
             jlib.log( 'Unable to wrap function {fnname} because: {e}')
@@ -4751,6 +4934,7 @@ def class_wrapper(
                 out_cpp,
                 refcheck_if,
                 trace_if,
+                locking,
                 )
         num_constructors += 1
 
@@ -4772,6 +4956,7 @@ def class_wrapper(
                 out_cpp,
                 refcheck_if,
                 trace_if,
+                locking,
                 )
     elif extras.copyable:
         out_h.write( '\n')
@@ -4794,6 +4979,7 @@ def class_wrapper(
                     out_cpp,
                     refcheck_if,
                     trace_if,
+                    locking,
                     )
             num_constructors += 1
 
@@ -4848,6 +5034,7 @@ def class_wrapper(
                 class_static=True,
                 struct_cursor=struct_cursor,
                 generated=generated,
+                locking=locking,
                 )
 
     # Extra methods that wrap fz_*() fns.
@@ -4872,6 +5059,7 @@ def class_wrapper(
                 struct_cursor=struct_cursor,
                 generated=generated,
                 debug=state.state_.show_details(fnname),
+                locking=locking,
                 )
 
     # Custom methods.
@@ -4889,6 +5077,7 @@ def class_wrapper(
                 out_cpp,
                 refcheck_if,
                 trace_if,
+                locking,
                 )
         if is_constructor:
             num_constructors += 1
@@ -4918,6 +5107,7 @@ def class_wrapper(
                 out_cpp,
                 refcheck_if,
                 trace_if,
+                locking,
                 )
 
     # Accessor methods to POD data.
@@ -4954,6 +5144,7 @@ def class_wrapper(
                 out_cpp,
                 refcheck_if,
                 trace_if,
+                locking,
                 )
 
     # If class has '{structname}* m_internal;', provide access to m_iternal as
@@ -4978,6 +5169,7 @@ def class_wrapper(
                 out_cpp,
                 refcheck_if,
                 trace_if,
+                locking,
                 )
         class_custom_method(
                 tu,
@@ -5007,6 +5199,7 @@ def class_wrapper(
                 out_cpp,
                 refcheck_if,
                 trace_if,
+                locking,
                 )
 
     # Class members.
@@ -5320,6 +5513,7 @@ def cpp_source(
         refcheck_if,
         trace_if,
         debug,
+        locking,
         ):
     '''
     Generates all .h and .cpp files.
@@ -5619,7 +5813,16 @@ def cpp_source(
 
     out_hs.internal.write( textwrap.dedent(
             '''
+            #include <algorithm>
             #include <iostream>
+            '''))
+
+    if locking:
+        out_hs.internal.write( textwrap.dedent('''
+            #include <mutex>
+
+            #include "mupdf/fitz.h"
+            #include "mupdf/pdf.h"
 
             '''))
 
@@ -5808,6 +6011,7 @@ def cpp_source(
             generated,
             refcheck_if,
             trace_if,
+            locking,
             )
 
     fn_usage = dict()
@@ -5964,6 +6168,7 @@ def cpp_source(
                     generated,
                     refcheck_if,
                     trace_if,
+                    locking,
                     )
         if is_container:
             generated.container_classnames.append( classname)
@@ -5977,8 +6182,13 @@ def cpp_source(
             This should be called before any other use of MuPDF.
             */
             FZ_FUNCTION void reinit_singlethreaded();
-
             '''))
+
+    if locking:
+        out_hs.functions.write( textwrap.dedent('''
+                FZ_FUNCTION void use_locking(bool yes);
+
+                '''))
 
     # Generate num_instances diagnostic fn.
     out_hs.classes.write('\n')
