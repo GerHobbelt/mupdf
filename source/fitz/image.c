@@ -995,18 +995,12 @@ void fz_default_image_decode(void *arg, int w, int h, int l2factor, fz_irect *su
 static fz_pixmap *
 fz_find_image_tile(fz_context *ctx, fz_image *image, fz_image_key *key, fz_matrix *ctm)
 {
-	fz_pixmap *tile;
-	do
+	fz_pixmap *tile = fz_find_item(ctx, fz_drop_pixmap_imp, key, &fz_image_store_type);
+	if (tile)
 	{
-		tile = fz_find_item(ctx, fz_drop_pixmap_imp, key, &fz_image_store_type);
-		if (tile)
-		{
-			update_ctm_for_subarea(ctm, &key->rect, image->w, image->h);
-			return tile;
-		}
-		key->l2factor--;
+		update_ctm_for_subarea(ctm, &key->rect, image->w, image->h);
+		return tile;
 	}
-	while (key->l2factor >= 0);
 	return NULL;
 }
 
