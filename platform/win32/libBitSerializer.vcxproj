@@ -229,6 +229,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/BitSerializer/src/msgpack/msgpack_archive.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitSerializer/src/msgpack/msgpack_readers.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitSerializer/src/msgpack/msgpack_writers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BitSerializer/src/testing_tools/perf_utils.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitSerializer/tests/integration_tests/convert_api_tests/convert_tests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitSerializer/tests/integration_tests/csv_archive_tests/csv_archive_tests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitSerializer/tests/integration_tests/msgpack_archive_tests/msgpack_archive_tests.cpp" />
@@ -258,7 +259,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/BitSerializer/tests/unit_tests/convert_tests/utf8_encoding_tests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitSerializer/tests/unit_tests/convert_tests/utf_transcoding_tests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitSerializer/tests/unit_tests/core_tests/archive_base_tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitSerializer/tests/unit_tests/core_tests/attribute_value_tests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitSerializer/tests/unit_tests/core_tests/bin_timestamp_tests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitSerializer/tests/unit_tests/core_tests/key_value_tests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitSerializer/tests/unit_tests/core_tests/refine_tests.cpp" />
@@ -279,6 +279,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/BitSerializer/tests/unit_tests/std_types_tests/std_types_tests.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/BitSerializer/benchmarks/archives/benchmark_base.h" />
     <ClInclude Include="../../thirdparty/owemdjee/BitSerializer/benchmarks/archives/competitors/bitserializer_benchmark.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BitSerializer/benchmarks/archives/competitors/nlohmannjson_benchmark.h" />
     <ClInclude Include="../../thirdparty/owemdjee/BitSerializer/benchmarks/archives/competitors/pugixml_benchmark.h" />
     <ClInclude Include="../../thirdparty/owemdjee/BitSerializer/benchmarks/archives/competitors/rapidjson_benchmark.h" />
     <ClInclude Include="../../thirdparty/owemdjee/BitSerializer/benchmarks/archives/competitors/rapidyaml_benchmark.h" />
@@ -299,6 +300,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/BitSerializer/include/bitserializer/convert.h" />
     <ClInclude Include="../../thirdparty/owemdjee/BitSerializer/include/bitserializer/csv_archive.h" />
     <ClInclude Include="../../thirdparty/owemdjee/BitSerializer/include/bitserializer/export.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BitSerializer/include/bitserializer/key_value.h" />
     <ClInclude Include="../../thirdparty/owemdjee/BitSerializer/include/bitserializer/msgpack_archive.h" />
     <ClInclude Include="../../thirdparty/owemdjee/BitSerializer/include/bitserializer/pugixml_archive.h" />
     <ClInclude Include="../../thirdparty/owemdjee/BitSerializer/include/bitserializer/rapidjson_archive.h" />
@@ -313,11 +315,13 @@
     <ClInclude Include="../../thirdparty/owemdjee/BitSerializer/include/bitserializer/serialization_detail/generic_map.h" />
     <ClInclude Include="../../thirdparty/owemdjee/BitSerializer/include/bitserializer/serialization_detail/generic_set.h" />
     <ClInclude Include="../../thirdparty/owemdjee/BitSerializer/include/bitserializer/serialization_detail/key_value.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitSerializer/include/bitserializer/serialization_detail/key_value_proxy.h" />
     <ClInclude Include="../../thirdparty/owemdjee/BitSerializer/include/bitserializer/serialization_detail/object_traits.h" />
     <ClInclude Include="../../thirdparty/owemdjee/BitSerializer/include/bitserializer/serialization_detail/serialization_base_types.h" />
     <ClInclude Include="../../thirdparty/owemdjee/BitSerializer/include/bitserializer/serialization_detail/serialization_context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BitSerializer/include/bitserializer/serialization_detail/serialization_dispatch.h" />
     <ClInclude Include="../../thirdparty/owemdjee/BitSerializer/include/bitserializer/serialization_detail/serialization_options.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BitSerializer/include/bitserializer/serialization_detail/validators.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/BitSerializer/include/bitserializer/serialization_options.h" />
     <ClInclude Include="../../thirdparty/owemdjee/BitSerializer/include/bitserializer/types/std/array.h" />
     <ClInclude Include="../../thirdparty/owemdjee/BitSerializer/include/bitserializer/types/std/atomic.h" />
     <ClInclude Include="../../thirdparty/owemdjee/BitSerializer/include/bitserializer/types/std/bitset.h" />

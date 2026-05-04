@@ -33,25 +33,25 @@
     <Filter Include="Header Files\devices\cpu\bnns">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0007}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\devices\cpu\dnnl">
+    <Filter Include="Header Files\devices\cuda">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0008}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\devices\cuda">
+    <Filter Include="Header Files\devices\gpu">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0009}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\devices\gpu">
+    <Filter Include="Header Files\devices\hip">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0010}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\devices\hip">
+    <Filter Include="Header Files\devices\metal">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0011}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\devices\metal">
+    <Filter Include="Header Files\devices\sycl">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0012}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\devices\sycl">
+    <Filter Include="Header Files\external">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0013}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\external">
+    <Filter Include="Header Files\external\level_zero">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0014}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\include">
@@ -141,17 +141,14 @@
     <Filter Include="Source Files\devices\cpu\bnns">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0043}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\devices\cpu\dnnl">
+    <Filter Include="Source Files\devices\cuda">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0044}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\devices\cuda">
+    <Filter Include="Source Files\devices\hip">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0045}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\devices\hip">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0046}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\devices\sycl">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0047}</UniqueIdentifier>
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0046}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -305,6 +302,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/devices/cpu/cpu_conv.cpp">
       <Filter>Source Files\devices\cpu</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/devices/cpu/cpu_conv_amx.cpp">
+      <Filter>Source Files\devices\cpu</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/devices/cpu/cpu_device.cpp">
       <Filter>Source Files\devices\cpu</Filter>
     </ClCompile>
@@ -328,18 +328,6 @@
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/devices/cpu/cpu_upsample.cpp">
       <Filter>Source Files\devices\cpu</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/devices/cpu/dnnl/dnnl_common.cpp">
-      <Filter>Source Files\devices\cpu\dnnl</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/devices/cpu/dnnl/dnnl_conv.cpp">
-      <Filter>Source Files\devices\cpu\dnnl</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/devices/cpu/dnnl/dnnl_engine.cpp">
-      <Filter>Source Files\devices\cpu\dnnl</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/devices/cpu/dnnl/dnnl_tensor.cpp">
-      <Filter>Source Files\devices\cpu\dnnl</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/devices/cpu/tasking.cpp">
       <Filter>Source Files\devices\cpu</Filter>
@@ -539,6 +527,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/core/tensor_accessor.h">
       <Filter>Header Files\core</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/core/tensor_desc.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/core/tensor_layout.h">
       <Filter>Header Files\core</Filter>
     </ClInclude>
@@ -587,6 +578,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/devices/cpu/cpu_conv.h">
       <Filter>Header Files\devices\cpu</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/devices/cpu/cpu_conv_amx.h">
+      <Filter>Header Files\devices\cpu</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/devices/cpu/cpu_device.h">
       <Filter>Header Files\devices\cpu</Filter>
     </ClInclude>
@@ -607,18 +601,6 @@
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/devices/cpu/cpu_upsample.h">
       <Filter>Header Files\devices\cpu</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/devices/cpu/dnnl/dnnl_common.h">
-      <Filter>Header Files\devices\cpu\dnnl</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/devices/cpu/dnnl/dnnl_conv.h">
-      <Filter>Header Files\devices\cpu\dnnl</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/devices/cpu/dnnl/dnnl_engine.h">
-      <Filter>Header Files\devices\cpu\dnnl</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/devices/cpu/dnnl/dnnl_tensor.h">
-      <Filter>Header Files\devices\cpu\dnnl</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/devices/cpu/tasking.h">
       <Filter>Header Files\devices\cpu</Filter>
@@ -716,6 +698,12 @@
     <ClInclude Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/external/catch.hpp">
       <Filter>Header Files\external</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/external/level_zero/ze_intel_gpu.h">
+      <Filter>Header Files\external\level_zero</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/external/level_zero/ze_stypes.h">
+      <Filter>Header Files\external\level_zero</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/include/OpenImageDenoise/oidn.h">
       <Filter>Header Files\include\OpenImageDenoise</Filter>
     </ClInclude>
@@ -755,9 +743,6 @@
     <Text Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/cmake/FindLevelZero.cmake">
       <Filter>Misc Files\cmake</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/cmake/FindOpenImageIO.cmake">
-      <Filter>Misc Files\cmake</Filter>
-    </Text>
     <Text Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/cmake/FindTBB.cmake">
       <Filter>Misc Files\cmake</Filter>
     </Text>
@@ -768,9 +753,6 @@
       <Filter>Misc Files\cmake</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/cmake/oidn_common_external.cmake">
-      <Filter>Misc Files\cmake</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/cmake/oidn_dnnl.cmake">
       <Filter>Misc Files\cmake</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/cmake/oidn_ispc.cmake">
@@ -896,9 +878,6 @@
     <Text Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/readme.pdf">
       <Filter>Misc Files</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/requirements.txt">
-      <Filter>Misc Files</Filter>
-    </Text>
     <Text Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/scripts/blob_to_cpp.py">
       <Filter>Misc Files\scripts</Filter>
     </Text>
@@ -924,9 +903,6 @@
       <Filter>Misc Files\scripts</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/third-party-programs-DPCPP.txt">
-      <Filter>Misc Files</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/third-party-programs-oneDNN.txt">
       <Filter>Misc Files</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/third-party-programs-oneTBB.txt">
@@ -969,6 +945,9 @@
       <Filter>Misc Files\training</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/training/preprocess.py">
+      <Filter>Misc Files\training</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/training/requirements.txt">
       <Filter>Misc Files\training</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/training/result.py">

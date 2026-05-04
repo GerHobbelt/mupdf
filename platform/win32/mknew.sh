@@ -1655,6 +1655,53 @@ lemon-sliced
 ckdl
 libspng
 
+charls
+PlotGenCpp
+plf_hive
+proxy
+fastcgipp
+plotlypp
+plf_rand
+plf_reorderase
+plf_indiesort
+plf_queue
+plf_bitsets
+plf_stack
+plf_colony
+plf_list
+libyuv
+libcappuccino
+fcgi2
+executors
+executors-impl
+execution
+crossguid
+meta
+args
+glucose
+TinyMPC
+DySECT
+lpqfilter
+bitfilters
+
+DueFlashStorage
+ArduinoCore-sam
+printf
+libmemory
+libc
+picolibc
+avr-libc
+lwmem
+FakeIt
+trompeloeil
+cmake_template
+bitfield_array
+data_seek_cache
+scales_chords_modes
+enhanced_linn_sequencer
+fixed_space_std_allocator
+adsr_curve_tweens
+
 
 EOT
 ) | grep -e "$FILTER"
@@ -1817,6 +1864,7 @@ OpenCL-Guide
 wuffs
 Image-Compression-Benchmark
 habla-el-babbla
+fcgi_spec
 
 EOT
 ) | grep -e "$FILTER"

@@ -256,6 +256,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/devices/cpu/cpu_autoexposure.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/devices/cpu/cpu_common.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/devices/cpu/cpu_conv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/devices/cpu/cpu_conv_amx.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/devices/cpu/cpu_device.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/devices/cpu/cpu_engine.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/devices/cpu/cpu_image_copy.cpp" />
@@ -264,10 +265,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/devices/cpu/cpu_output_process.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/devices/cpu/cpu_pool.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/devices/cpu/cpu_upsample.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/devices/cpu/dnnl/dnnl_common.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/devices/cpu/dnnl/dnnl_conv.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/devices/cpu/dnnl/dnnl_engine.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/devices/cpu/dnnl/dnnl_tensor.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/devices/cpu/tasking.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/devices/cuda/cuda_device.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/devices/cuda/cuda_external_buffer.cpp" />
@@ -334,6 +331,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/core/subdevice.h" />
     <ClInclude Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/core/tensor.h" />
     <ClInclude Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/core/tensor_accessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/core/tensor_desc.h" />
     <ClInclude Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/core/tensor_layout.h" />
     <ClInclude Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/core/tensor_reorder.h" />
     <ClInclude Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/core/thread.h" />
@@ -350,6 +348,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/devices/cpu/cpu_autoexposure.h" />
     <ClInclude Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/devices/cpu/cpu_common.h" />
     <ClInclude Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/devices/cpu/cpu_conv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/devices/cpu/cpu_conv_amx.h" />
     <ClInclude Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/devices/cpu/cpu_device.h" />
     <ClInclude Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/devices/cpu/cpu_engine.h" />
     <ClInclude Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/devices/cpu/cpu_image_copy.h" />
@@ -357,10 +356,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/devices/cpu/cpu_output_process.h" />
     <ClInclude Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/devices/cpu/cpu_pool.h" />
     <ClInclude Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/devices/cpu/cpu_upsample.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/devices/cpu/dnnl/dnnl_common.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/devices/cpu/dnnl/dnnl_conv.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/devices/cpu/dnnl/dnnl_engine.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/devices/cpu/dnnl/dnnl_tensor.h" />
     <ClInclude Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/devices/cpu/tasking.h" />
     <ClInclude Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/devices/cuda/cuda_conv.h" />
     <ClInclude Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/devices/cuda/cuda_device.h" />
@@ -393,6 +388,8 @@
     <ClInclude Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/devices/sycl/sycl_engine.h" />
     <ClInclude Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/devices/sycl/sycl_external_buffer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/external/catch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/external/level_zero/ze_intel_gpu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/external/level_zero/ze_stypes.h" />
     <ClInclude Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/include/OpenImageDenoise/oidn.h" />
     <ClInclude Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/include/OpenImageDenoise/oidn.hpp" />
     <ResourceCompile Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/common/oidn.rc" />
@@ -406,12 +403,10 @@
     <Text Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/apps/utils/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/cmake/Config.cmake.in" />
     <Text Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/cmake/FindLevelZero.cmake" />
-    <Text Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/cmake/FindOpenImageIO.cmake" />
     <Text Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/cmake/FindTBB.cmake" />
     <Text Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/cmake/oidn_bnns.cmake" />
     <Text Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/cmake/oidn_common.cmake" />
     <Text Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/cmake/oidn_common_external.cmake" />
-    <Text Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/cmake/oidn_dnnl.cmake" />
     <Text Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/cmake/oidn_ispc.cmake" />
     <Text Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/cmake/oidn_macros.cmake" />
     <Text Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/cmake/oidn_metal.cmake" />
@@ -453,7 +448,6 @@
     <Text Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/doc/webtemplate.html" />
     <Text Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/include/OpenImageDenoise/config.h.in" />
     <Text Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/readme.pdf" />
-    <Text Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/requirements.txt" />
     <Text Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/scripts/blob_to_cpp.py" />
     <Text Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/scripts/build.py" />
     <Text Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/scripts/build_src.py" />
@@ -463,7 +457,6 @@
     <Text Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/scripts/store-files.sh" />
     <Text Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/scripts/test.py" />
     <Text Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/third-party-programs-DPCPP.txt" />
-    <Text Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/third-party-programs-oneDNN.txt" />
     <Text Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/third-party-programs-oneTBB.txt" />
     <Text Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/third-party-programs.txt" />
     <Text Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/training/color.py" />
@@ -478,6 +471,7 @@
     <Text Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/training/loss.py" />
     <Text Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/training/model.py" />
     <Text Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/training/preprocess.py" />
+    <Text Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/training/requirements.txt" />
     <Text Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/training/result.py" />
     <Text Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/training/split_exr.py" />
     <Text Include="../../thirdparty/owemdjee/oidn-OpenImageDenoise/training/ssim.py" />

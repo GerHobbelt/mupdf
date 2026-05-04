@@ -354,6 +354,8 @@ const projectMap = {
 	"libparameters_example_zeroing": "libparameters",
 	"libparameters_example_dll": "libparameters",
 	"libparameters_example_exe_using_dll": "libparameters",
+	
+	"fcgi_spec": "spec",
 };
 
 testpath = `${scriptpath}/../../thirdparty/owemdjee/${projname_alt}`;
