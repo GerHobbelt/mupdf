@@ -1195,7 +1195,7 @@ pdf_show_path(fz_context *ctx, pdf_run_processor *pr, int doclose, int dofill, i
  */
 
 static pdf_gstate *
-pdf_flush_text(fz_context *ctx, pdf_run_processor *pr)
+pdf_flush_text_imp(fz_context *ctx, pdf_run_processor *pr, int force_flush)
 {
 	pdf_gstate *gstate = pr->gstate + pr->gtop;
 	fz_text *text;
@@ -1206,11 +1206,16 @@ pdf_flush_text(fz_context *ctx, pdf_run_processor *pr)
 	softmask_save softmask = { NULL };
 	int knockout_group = 0;
 
+	/* Don't flush if we're accumulating text in a clip path. */
+	if (!force_flush && (pr->tos.text_mode & 4))
+		return gstate;
+
 	text = pdf_tos_get_text(ctx, &pr->tos);
 	if (!text)
 		return gstate;
 
 	pop_any_pending_mcid_changes(ctx, pr);
+
 	/* If we are going to output text, we need to have flushed any begin layers first. */
 	flush_begin_layer(ctx, pr);
 
@@ -1339,6 +1344,12 @@ pdf_flush_text(fz_context *ctx, pdf_run_processor *pr)
 	}
 
 	return pr->gstate + pr->gtop;
+}
+
+static inline pdf_gstate *
+pdf_flush_text(fz_context *ctx, pdf_run_processor *pr)
+{
+	return pdf_flush_text_imp(ctx, pr, 0);
 }
 
 static int
@@ -2957,7 +2968,7 @@ static void pdf_run_BT(fz_context *ctx, pdf_processor *proc)
 static void pdf_run_ET(fz_context *ctx, pdf_processor *proc)
 {
 	pdf_run_processor *pr = (pdf_run_processor *)proc;
-	pdf_flush_text(ctx, pr);
+	pdf_flush_text_imp(ctx, pr, 1);
 }
 
 /* text state */
