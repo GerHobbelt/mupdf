@@ -219,9 +219,9 @@ static void silence(void *user, const char *message) {}
 int mugrep_main(int argc, char **argv)
 {
 	fz_document *doc = NULL;
-	char *password = NULL; /* don't throw errors if encrypted */
-	char *filename;
-	char *pattern;
+	const char *password = NULL; /* don't throw errors if encrypted */
+	const char *filename;
+	const char *pattern;
 	int result = EXIT_FAILURE;
 	int quiet = 0;
 	int c;
