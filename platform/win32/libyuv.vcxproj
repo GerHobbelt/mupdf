@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{E247EF44-6727-4787-B439-FE9348823B3F}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBYUV;YUV_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBYUV;YUV_STATICLIB;IDN2_STATIC;IDN2_BUILDING;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBYUV;YUV_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBYUV;YUV_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBYUV;YUV_STATICLIB;IDN2_STATIC;IDN2_BUILDING;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBYUV;YUV_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBYUV;YUV_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBYUV;YUV_STATICLIB;IDN2_STATIC;IDN2_BUILDING;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBYUV;YUV_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBYUV;YUV_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBYUV;YUV_STATICLIB;IDN2_STATIC;IDN2_BUILDING;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBYUV;YUV_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/source/compare.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/source/compare_common.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/source/compare_gcc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/source/compare_neon.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/source/compare_neon64.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/source/compare_win.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/source/convert.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/source/convert_argb.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/source/convert_from.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/source/convert_from_argb.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/source/convert_jpeg.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/source/convert_to_argb.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/source/convert_to_i420.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/source/cpu_id.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/source/mjpeg_decoder.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/source/mjpeg_validate.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/source/planar_functions.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/source/rotate.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/source/rotate_any.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/source/rotate_argb.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/source/rotate_common.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/source/rotate_gcc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/source/rotate_lsx.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/source/rotate_neon.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/source/rotate_neon64.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/source/rotate_sme.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/source/rotate_win.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/source/row_any.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/source/row_common.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/source/row_gcc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/source/row_lasx.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/source/row_lsx.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/source/row_neon.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/source/row_neon64.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/source/row_rvv.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/source/row_sme.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/source/row_sve.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/source/row_win.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/source/scale.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/source/scale_any.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/source/scale_argb.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/source/scale_common.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/source/scale_gcc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/source/scale_lsx.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/source/scale_neon.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/source/scale_neon64.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/source/scale_rgb.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/source/scale_rvv.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/source/scale_sme.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/source/scale_uv.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/source/scale_win.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/source/video_common.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/unit_test/basictypes_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/unit_test/color_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/unit_test/compare_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/unit_test/convert_argb_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/unit_test/convert_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/unit_test/cpu_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/unit_test/cpu_thread_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/unit_test/math_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/unit_test/planar_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/unit_test/rotate_argb_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/unit_test/rotate_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/unit_test/scale_argb_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/unit_test/scale_plane_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/unit_test/scale_rgb_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/unit_test/scale_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/unit_test/scale_uv_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/unit_test/unit_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/unit_test/video_common_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/util/color.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/util/compare.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/util/cpuid.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/util/i444tonv12_eg.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/util/psnr.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/util/psnr_main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/util/ssim.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/util/yuvconstants.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyuv/util/yuvconvert.cc" />
+    <ClInclude Include="../../thirdparty/owemdjee/libyuv/include/libyuv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libyuv/include/libyuv/basic_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libyuv/include/libyuv/compare.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libyuv/include/libyuv/compare_row.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libyuv/include/libyuv/convert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libyuv/include/libyuv/convert_argb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libyuv/include/libyuv/convert_from.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libyuv/include/libyuv/convert_from_argb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libyuv/include/libyuv/cpu_id.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libyuv/include/libyuv/cpu_support.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libyuv/include/libyuv/loongson_intrinsics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libyuv/include/libyuv/mjpeg_decoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libyuv/include/libyuv/planar_functions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libyuv/include/libyuv/rotate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libyuv/include/libyuv/rotate_argb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libyuv/include/libyuv/rotate_row.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libyuv/include/libyuv/row.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libyuv/include/libyuv/row_sve.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libyuv/include/libyuv/scale.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libyuv/include/libyuv/scale_argb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libyuv/include/libyuv/scale_rgb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libyuv/include/libyuv/scale_row.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libyuv/include/libyuv/scale_uv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libyuv/include/libyuv/version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libyuv/include/libyuv/video_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libyuv/unit_test/unit_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libyuv/util/psnr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libyuv/util/ssim.h" />
+    <Image Include="../../thirdparty/owemdjee/libyuv/unit_test/testdata/test0.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libyuv/unit_test/testdata/test1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libyuv/unit_test/testdata/test2.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libyuv/unit_test/testdata/test3.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libyuv/unit_test/testdata/test4.jpg" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/AUTHORS" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/Android.mk" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/CM_linux_packages.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/DEPS" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/DIR_METADATA" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/OWNERS" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/PATENTS" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/PRESUBMIT.py" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/README.chromium" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/codereview.settings" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/docs/deprecated_builds.md" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/docs/environment_variables.md" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/docs/feature_detection.md" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/docs/filtering.md" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/docs/formats.md" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/docs/getting_started.md" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/docs/rotation.md" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/download_vs_toolchain.py" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/infra/config/OWNERS" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/infra/config/PRESUBMIT.py" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/infra/config/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/infra/config/codereview.settings" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/infra/config/commit-queue.cfg" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/infra/config/cr-buildbucket.cfg" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/infra/config/luci-logdog.cfg" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/infra/config/luci-milo.cfg" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/infra/config/luci-scheduler.cfg" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/infra/config/main.star" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/infra/config/project.cfg" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/infra/config/realms.cfg" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/linux.mk" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/public.mk" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/pylintrc" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/riscv_script/prepare_toolchain_qemu.sh" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/riscv_script/riscv-clang.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/riscv_script/run_qemu.sh" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/source/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/tools_libyuv/OWNERS" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/tools_libyuv/autoroller/roll_deps.py" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/tools_libyuv/autoroller/unittests/roll_deps_test.py" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/tools_libyuv/autoroller/unittests/testdata/DEPS" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/tools_libyuv/autoroller/unittests/testdata/DEPS.chromium.new" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/tools_libyuv/get_landmines.py" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/tools_libyuv/msan/OWNERS" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/tools_libyuv/msan/blacklist.txt" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/tools_libyuv/ubsan/OWNERS" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/tools_libyuv/ubsan/blacklist.txt" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/tools_libyuv/ubsan/vptr_blacklist.txt" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/unit_test/testdata/arm_v7.txt" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/unit_test/testdata/mips.txt" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/unit_test/testdata/mips_loongson2k.txt" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/unit_test/testdata/mips_loongson3.txt" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/unit_test/testdata/mips_loongson_mmi.txt" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/unit_test/testdata/riscv64.txt" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/unit_test/testdata/riscv64_rvv.txt" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/unit_test/testdata/riscv64_rvv_zvfh.txt" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/unit_test/testdata/tegra3.txt" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/util/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libyuv/winarm.mk" />
+  </ItemGroup>
+  <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+</Project>
+  

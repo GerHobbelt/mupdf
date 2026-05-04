@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{E247EF44-6727-4787-B439-FE93488877C9}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEXECUTORS_IMPL;EXECUTORS_IMPL_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEXECUTORS_IMPL;EXECUTORS_IMPL_STATICLIB;IDN2_STATIC;IDN2_BUILDING;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEXECUTORS_IMPL;EXECUTORS_IMPL_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEXECUTORS_IMPL;EXECUTORS_IMPL_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEXECUTORS_IMPL;EXECUTORS_IMPL_STATICLIB;IDN2_STATIC;IDN2_BUILDING;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEXECUTORS_IMPL;EXECUTORS_IMPL_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEXECUTORS_IMPL;EXECUTORS_IMPL_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEXECUTORS_IMPL;EXECUTORS_IMPL_STATICLIB;IDN2_STATIC;IDN2_BUILDING;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEXECUTORS_IMPL;EXECUTORS_IMPL_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEXECUTORS_IMPL;EXECUTORS_IMPL_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEXECUTORS_IMPL;EXECUTORS_IMPL_STATICLIB;IDN2_STATIC;IDN2_BUILDING;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEXECUTORS_IMPL;EXECUTORS_IMPL_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/actor/actor_1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/actor/actor_2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/adapter/logging.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/adapter/strand.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/async/async_1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/async/async_2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/async/async_3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/async_ops/async_op_1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/async_ops/async_op_2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/async_ops/polymorphic_async_op_1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/async_ops/polymorphic_async_op_2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/custom_thread_pool/thread_pool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/for_each/for_each_n_1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/for_each/for_each_n_2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/for_each/for_each_n_3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/for_each/for_each_n_4.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/for_each/for_each_n_5.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/inline/inline_1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/inline/inline_2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/inline/inline_3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/inline/inline_4.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/inline/inline_5.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/invoke/invoke_1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/invoke/invoke_2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/invoke/invoke_3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/nested/oneway_always_blocking_calls_oneway_always_blocking.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/nested/oneway_always_blocking_calls_oneway_never_blocking.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/nested/oneway_always_blocking_calls_oneway_never_blocking_continuation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/nested/oneway_always_blocking_calls_oneway_possibly_blocking.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/nested/oneway_never_blocking_calls_oneway_always_blocking.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/nested/oneway_never_blocking_calls_oneway_never_blocking.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/nested/oneway_never_blocking_calls_oneway_never_blocking_continuation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/nested/oneway_never_blocking_calls_oneway_possibly_blocking.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/nested/oneway_possibly_blocking_calls_oneway_always_blocking.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/nested/oneway_possibly_blocking_calls_oneway_never_blocking.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/nested/oneway_possibly_blocking_calls_oneway_never_blocking_continuation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/nested/oneway_possibly_blocking_calls_oneway_possibly_blocking.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/nested/polymorphic_oneway_always_blocking_calls_oneway_always_blocking.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/nested/polymorphic_oneway_always_blocking_calls_oneway_never_blocking.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/nested/polymorphic_oneway_always_blocking_calls_oneway_never_blocking_continuation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/nested/polymorphic_oneway_always_blocking_calls_oneway_possibly_blocking.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/nested/polymorphic_oneway_never_blocking_calls_oneway_always_blocking.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/nested/polymorphic_oneway_never_blocking_calls_oneway_never_blocking.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/nested/polymorphic_oneway_never_blocking_calls_oneway_never_blocking_continuation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/nested/polymorphic_oneway_never_blocking_calls_oneway_possibly_blocking.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/nested/polymorphic_oneway_possibly_blocking_calls_oneway_always_blocking.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/nested/polymorphic_oneway_possibly_blocking_calls_oneway_never_blocking.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/nested/polymorphic_oneway_possibly_blocking_calls_oneway_never_blocking_continuation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/nested/polymorphic_oneway_possibly_blocking_calls_oneway_possibly_blocking.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/pipeline/pipeline.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/properties/adapted_and_not_preferable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/properties/adapted_and_preferable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/properties/not_adapted_and_not_preferable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/properties/not_adapted_and_preferable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/properties/priority.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/reduce/reduce_1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/reduce/reduce_2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/reduce/reduce_3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/reduce/reduce_4.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/reduce/reduce_5.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/simple/allocator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/simple/bulk_oneway_always_blocking.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/simple/bulk_oneway_never_blocking.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/simple/bulk_oneway_possibly_blocking.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/simple/oneway_always_blocking.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/simple/oneway_never_blocking.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/simple/oneway_never_blocking_continuation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/simple/oneway_possibly_blocking.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/simple/polymorphic_bulk_oneway_always_blocking.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/simple/polymorphic_bulk_oneway_never_blocking.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/simple/polymorphic_bulk_oneway_possibly_blocking.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/simple/polymorphic_oneway_always_blocking.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/simple/polymorphic_oneway_never_blocking.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/simple/polymorphic_oneway_never_blocking_continuation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/examples/simple/polymorphic_oneway_possibly_blocking.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/tests/executor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/executors-impl/tests/static_thread_pool.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/examples/for_each/for_each_n.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/examples/for_each/noexcept_function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/examples/for_each/noexcept_iterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/examples/for_each/par.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/examples/for_each/query_or.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/examples/for_each/throwing_iterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/examples/reduce/noexcept_function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/examples/reduce/noexcept_iterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/examples/reduce/par.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/examples/reduce/query_or.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/examples/reduce/reduce.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/examples/reduce/throwing_iterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/include/bits/execution/adapter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/include/bits/execution/allocator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/include/bits/execution/bad_executor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/include/bits/execution/blocking.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/include/bits/execution/blocking_adaptation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/include/bits/execution/bulk_guarantee.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/include/bits/execution/bulk_oneway.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/include/bits/execution/bulk_oneway_executor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/include/bits/execution/context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/include/bits/execution/enumeration.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/include/bits/execution/enumerator_adapter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/include/bits/execution/executor_concept.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/include/bits/execution/executor_index.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/include/bits/execution/executor_shape.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/include/bits/execution/is_bulk_oneway_executor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/include/bits/execution/is_executor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/include/bits/execution/is_interface_property.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/include/bits/execution/is_oneway_executor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/include/bits/execution/mapping.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/include/bits/execution/occupancy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/include/bits/execution/oneway.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/include/bits/execution/oneway_executor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/include/bits/execution/outstanding_work.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/include/bits/execution/relationship.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/include/bits/execution/static_thread_pool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/include/bits/properties/can_prefer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/include/bits/properties/can_query.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/include/bits/properties/can_require.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/include/bits/properties/can_require_concept.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/include/bits/properties/is_applicable_property.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/include/bits/properties/prefer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/include/bits/properties/prefer_free_traits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/include/bits/properties/prefer_only.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/include/bits/properties/query.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/include/bits/properties/query_free_traits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/include/bits/properties/query_member_traits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/include/bits/properties/query_static_member_traits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/include/bits/properties/query_static_traits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/include/bits/properties/require.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/include/bits/properties/require_concept.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/include/bits/properties/require_concept_free_traits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/include/bits/properties/require_concept_member_traits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/include/bits/properties/require_concept_static_traits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/include/bits/properties/require_free_traits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/include/bits/properties/require_member_traits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/executors-impl/include/bits/properties/require_static_traits.h" />
+    <Text Include="../../thirdparty/owemdjee/executors-impl/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/executors-impl/README.md" />
+    <Text Include="../../thirdparty/owemdjee/executors-impl/cmake/StdExecutorsConfig.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/executors-impl/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/executors-impl/examples/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/executors-impl/examples/actor/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/executors-impl/examples/actor/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/executors-impl/examples/adapter/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/executors-impl/examples/adapter/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/executors-impl/examples/async/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/executors-impl/examples/async/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/executors-impl/examples/async_ops/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/executors-impl/examples/async_ops/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/executors-impl/examples/custom_thread_pool/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/executors-impl/examples/for_each/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/executors-impl/examples/for_each/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/executors-impl/examples/inline/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/executors-impl/examples/inline/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/executors-impl/examples/invoke/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/executors-impl/examples/invoke/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/executors-impl/examples/nested/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/executors-impl/examples/nested/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/executors-impl/examples/pipeline/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/executors-impl/examples/pipeline/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/executors-impl/examples/properties/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/executors-impl/examples/properties/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/executors-impl/examples/reduce/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/executors-impl/examples/simple/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/executors-impl/examples/simple/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/executors-impl/include/execution" />
+    <Text Include="../../thirdparty/owemdjee/executors-impl/include/properties" />
+    <Text Include="../../thirdparty/owemdjee/executors-impl/include/thread_pool" />
+    <Text Include="../../thirdparty/owemdjee/executors-impl/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/executors-impl/tests/Makefile" />
+  </ItemGroup>
+  <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+</Project>
+  

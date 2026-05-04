@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{E247EF44-6727-4787-B439-FE9348252342}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLWMEM;LWMEM_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLWMEM;LWMEM_STATICLIB;IDN2_STATIC;IDN2_BUILDING;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLWMEM;LWMEM_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLWMEM;LWMEM_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLWMEM;LWMEM_STATICLIB;IDN2_STATIC;IDN2_BUILDING;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLWMEM;LWMEM_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLWMEM;LWMEM_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLWMEM;LWMEM_STATICLIB;IDN2_STATIC;IDN2_BUILDING;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLWMEM;LWMEM_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLWMEM;LWMEM_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLWMEM;LWMEM_STATICLIB;IDN2_STATIC;IDN2_BUILDING;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLWMEM;LWMEM_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/docs/examples_src/example_alloc_from_region.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/docs/examples_src/example_minimal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/docs/examples_src/example_realloc_custom_realloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/docs/examples_src/example_realloc_custom_realloc_log.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/docs/examples_src/example_realloc_custom_realloc_log_2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/docs/examples_src/example_realloc_enlarge_1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/docs/examples_src/example_realloc_enlarge_1_log.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/docs/examples_src/example_realloc_enlarge_2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/docs/examples_src/example_realloc_enlarge_2_log.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/docs/examples_src/example_realloc_enlarge_3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/docs/examples_src/example_realloc_enlarge_3_log.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/docs/examples_src/example_realloc_enlarge_3a.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/docs/examples_src/example_realloc_enlarge_3a_log.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/docs/examples_src/example_realloc_enlarge_3b.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/docs/examples_src/example_realloc_enlarge_3b_log.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/docs/examples_src/example_realloc_enlarge_3c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/docs/examples_src/example_realloc_enlarge_3c_log.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/docs/examples_src/example_realloc_enlarge_3d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/docs/examples_src/example_realloc_enlarge_3d_log.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/docs/examples_src/example_realloc_enlarge_full.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/docs/examples_src/example_realloc_enlarge_full_log.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/docs/examples_src/example_realloc_first_malloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/docs/examples_src/example_realloc_first_malloc_log.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/docs/examples_src/example_realloc_new_size_smaller_fragmented.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/docs/examples_src/example_realloc_region.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/docs/examples_src/example_realloc_region_log.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/docs/examples_src/example_realloc_shrink.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/docs/examples_src/example_realloc_shrink_fragmented.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/docs/examples_src/example_realloc_shrink_fragmented_log.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/docs/examples_src/example_realloc_shrink_log.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/docs/examples_src/example_regions_definitions.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/docs/examples_src/example_regions_definitions_custom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/examples/lib/FreeRTOS/CMSIS_RTOS/cmsis_os.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/examples/lib/FreeRTOS/CMSIS_RTOS/cpu_utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/examples/lib/FreeRTOS/CMSIS_RTOS_V2/cmsis_os2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/examples/lib/FreeRTOS/croutine.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/examples/lib/FreeRTOS/event_groups.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/examples/lib/FreeRTOS/list.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/examples/lib/FreeRTOS/portable/GCC/ARM_CM4F/port.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/examples/lib/FreeRTOS/portable/MemMang/heap_1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/examples/lib/FreeRTOS/portable/MemMang/heap_2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/examples/lib/FreeRTOS/portable/MemMang/heap_3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/examples/lib/FreeRTOS/portable/MemMang/heap_4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/examples/lib/FreeRTOS/portable/MemMang/heap_5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/examples/lib/FreeRTOS/queue.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/examples/lib/FreeRTOS/stream_buffer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/examples/lib/FreeRTOS/tasks.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/examples/lib/FreeRTOS/timers.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/examples/lib/st/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_dma.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/examples/lib/st/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_exti.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/examples/lib/st/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_gpio.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/examples/lib/st/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_lpuart.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/examples/lib/st/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_pwr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/examples/lib/st/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_rcc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/examples/lib/st/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_usart.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/examples/lib/st/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/examples/stm32/lwmem_rtos_stm32l496_discovery/src/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/examples/stm32/lwmem_rtos_stm32l496_discovery/src/stm32l4xx_it.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/examples/stm32/lwmem_rtos_stm32l496_discovery/src/syscalls.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/examples/stm32/lwmem_rtos_stm32l496_discovery/src/system_stm32l4xx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/examples/stm32/lwmem_stm32l496_discovery/src/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/examples/stm32/lwmem_stm32l496_discovery/src/stm32l4xx_it.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/examples/stm32/lwmem_stm32l496_discovery/src/syscalls.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/examples/stm32/lwmem_stm32l496_discovery/src/system_stm32l4xx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/examples/win32/lwmem_basic/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/examples/win32/lwmem_multi_ins_multi_region/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/examples/win32/lwmem_multi_region/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/examples/win32/lwmem_os/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/lwmem/src/lwmem/lwmem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/lwmem/src/lwmem/lwmem.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/lwmem/src/system/lwmem_sys_cmsis_os.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/lwmem/src/system/lwmem_sys_threadx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/lwmem/src/system/lwmem_sys_win32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/tests/test_available_mem/lwmem_test_available_mem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/tests/test_main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/tests/test_memory_structure/lwmem_test_memory_structure.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/tests/test_region_allocation/lwmem_test_region_allocation.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/tests/test_region_size_alignment/lwmem_test_region.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/tests/test_simple_config/lwmem_test_simple.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/tests/test_statistics/lwmem_test_statistic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lwmem/tests/test_stats_compile/lwmem_test_stats_compile.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/FreeRTOS/CMSIS_RTOS/cmsis_os.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/FreeRTOS/CMSIS_RTOS/cpu_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/FreeRTOS/CMSIS_RTOS_V2/cmsis_os.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/FreeRTOS/CMSIS_RTOS_V2/cmsis_os2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/FreeRTOS/include/FreeRTOS.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/FreeRTOS/include/FreeRTOSConfig_template.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/FreeRTOS/include/StackMacros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/FreeRTOS/include/croutine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/FreeRTOS/include/deprecated_definitions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/FreeRTOS/include/event_groups.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/FreeRTOS/include/list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/FreeRTOS/include/message_buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/FreeRTOS/include/mpu_prototypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/FreeRTOS/include/mpu_wrappers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/FreeRTOS/include/portable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/FreeRTOS/include/projdefs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/FreeRTOS/include/queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/FreeRTOS/include/semphr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/FreeRTOS/include/stack_macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/FreeRTOS/include/stream_buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/FreeRTOS/include/task.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/FreeRTOS/include/timers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/FreeRTOS/portable/GCC/ARM_CM4F/portmacro.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/st/CMSIS/Device/ST/STM32L4xx/Include/stm32l496xx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/st/CMSIS/Device/ST/STM32L4xx/Include/stm32l4xx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/st/CMSIS/Device/ST/STM32L4xx/Include/system_stm32l4xx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/st/CMSIS/Include/arm_common_tables.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/st/CMSIS/Include/arm_const_structs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/st/CMSIS/Include/arm_math.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/st/CMSIS/Include/cmsis_armcc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/st/CMSIS/Include/cmsis_armcc_V6.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/st/CMSIS/Include/cmsis_armclang.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/st/CMSIS/Include/cmsis_compiler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/st/CMSIS/Include/cmsis_gcc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/st/CMSIS/Include/cmsis_iccarm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/st/CMSIS/Include/cmsis_version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/st/CMSIS/Include/core_armv8mbl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/st/CMSIS/Include/core_armv8mml.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/st/CMSIS/Include/core_cm0.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/st/CMSIS/Include/core_cm0plus.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/st/CMSIS/Include/core_cm1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/st/CMSIS/Include/core_cm23.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/st/CMSIS/Include/core_cm3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/st/CMSIS/Include/core_cm33.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/st/CMSIS/Include/core_cm4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/st/CMSIS/Include/core_cm7.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/st/CMSIS/Include/core_cmFunc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/st/CMSIS/Include/core_cmInstr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/st/CMSIS/Include/core_cmSimd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/st/CMSIS/Include/core_sc000.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/st/CMSIS/Include/core_sc300.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/st/CMSIS/Include/mpu_armv7.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/st/CMSIS/Include/mpu_armv8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/st/CMSIS/Include/tz_context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/st/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_bus.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/st/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_cortex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/st/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_dma.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/st/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_exti.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/st/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_gpio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/st/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_lpuart.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/st/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_pwr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/st/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_rcc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/st/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_system.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/st/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_usart.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/lib/st/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/stm32/lwmem_rtos_stm32l496_discovery/inc/FreeRTOSConfig.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/stm32/lwmem_rtos_stm32l496_discovery/inc/lwmem_opts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/stm32/lwmem_rtos_stm32l496_discovery/inc/main.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/stm32/lwmem_rtos_stm32l496_discovery/inc/stm32_assert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/stm32/lwmem_rtos_stm32l496_discovery/inc/stm32l4xx_hal_conf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/stm32/lwmem_rtos_stm32l496_discovery/inc/stm32l4xx_it.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/stm32/lwmem_stm32l496_discovery/inc/lwmem_opts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/stm32/lwmem_stm32l496_discovery/inc/main.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/stm32/lwmem_stm32l496_discovery/inc/stm32_assert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/stm32/lwmem_stm32l496_discovery/inc/stm32l4xx_hal_conf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/stm32/lwmem_stm32l496_discovery/inc/stm32l4xx_it.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/win32/lwmem_basic/lwmem_opts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/win32/lwmem_multi_ins_multi_region/lwmem_opts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/win32/lwmem_multi_region/lwmem_opts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/examples/win32/lwmem_os/lwmem_opts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/lwmem/src/include/lwmem/lwmem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/lwmem/src/include/lwmem/lwmem.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/lwmem/src/include/lwmem/lwmem_opt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/lwmem/src/include/lwmem/lwmem_opts_template.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/lwmem/src/include/system/lwmem_sys.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/tests/test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/tests/test_available_mem/lwmem_opts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/tests/test_memory_structure/lwmem_opts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/tests/test_region_allocation/lwmem_opts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/tests/test_region_size_alignment/lwmem_opts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/tests/test_simple_config/lwmem_opts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/tests/test_statistics/lwmem_opts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lwmem/tests/test_stats_compile/lwmem_opts.h" />
+    <Image Include="../../thirdparty/owemdjee/lwmem/docs/static/dark-light/moon.png" />
+    <Image Include="../../thirdparty/owemdjee/lwmem/docs/static/dark-light/sun.png" />
+    <Image Include="../../thirdparty/owemdjee/lwmem/docs/static/images/logo_tm.png" />
+    <Image Include="../../thirdparty/owemdjee/lwmem/docs/static/images/logo_tm_full.png" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/AUTHORS" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/CMakePresets.json" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/README.md" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/cmake/i686-w64-mingw32-gcc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/cmake/x86_64-w64-mingw32-gcc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/docs/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/docs/api-reference/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/docs/api-reference/lwmem.rst" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/docs/api-reference/lwmem_opt.rst" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/docs/api-reference/lwmem_sys.rst" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/docs/authors/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/docs/changelog/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/docs/conf.py" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/docs/doxyfile.doxy" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/docs/examples/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/docs/get-started/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/docs/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/docs/make.bat" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/docs/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/docs/static/css/common.css" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/docs/static/css/custom.css" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/docs/static/dark-light/checked.svg" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/docs/static/dark-light/common-dark-light.css" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/docs/static/dark-light/dark-mode-toggle.mjs" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/docs/static/dark-light/dark.css" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/docs/static/dark-light/light.css" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/docs/static/dark-light/moon.svg" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/docs/static/dark-light/sun.svg" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/docs/static/dark-light/unchecked.svg" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/docs/static/images/logo.svg" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/docs/static/images/lwmem_arch" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/docs/static/images/lwmem_arch.svg" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/docs/static/images/structure_alloc_free_steps.svg" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/docs/static/images/structure_default.svg" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/docs/static/images/structure_first_alloc.svg" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/docs/static/images/structure_realloc_enlarge_1.svg" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/docs/static/images/structure_realloc_enlarge_2.svg" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/docs/static/images/structure_realloc_enlarge_3.svg" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/docs/static/images/structure_realloc_shrink.svg" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/docs/static/images/structure_realloc_shrink_fragmented.svg" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/docs/user-manual/how-it-works.rst" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/docs/user-manual/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/docs/user-manual/instances.rst" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/docs/user-manual/light-version.rst" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/docs/user-manual/realloc-algorithm.rst" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/docs/user-manual/thread-safety.rst" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/examples/lib/FreeRTOS/include/stdint.readme" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/examples/lib/FreeRTOS/portable/MemMang/ReadMe.url" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/examples/stm32/lwmem_rtos_stm32l496_discovery/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/examples/stm32/lwmem_rtos_stm32l496_discovery/CMakePresets.json" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/examples/stm32/lwmem_rtos_stm32l496_discovery/STM32CubeIDE/startup/startup_stm32l496xx.s" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/examples/stm32/lwmem_rtos_stm32l496_discovery/cmake/gcc-arm-none-eabi.cmake" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/examples/stm32/lwmem_stm32l496_discovery/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/examples/stm32/lwmem_stm32l496_discovery/CMakePresets.json" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/examples/stm32/lwmem_stm32l496_discovery/STM32CubeIDE/startup/startup_stm32l496xx.s" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/examples/stm32/lwmem_stm32l496_discovery/cmake/gcc-arm-none-eabi.cmake" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/examples/win32/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/examples/win32/CMakePresets.json" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/examples/win32/README.md" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/examples/win32/build_all_examples.py" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/library.json" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/lwmem/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/lwmem/library.cmake" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/tests/test.py" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/tests/test_available_mem/cmake.cmake" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/tests/test_memory_structure/cmake.cmake" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/tests/test_region_allocation/cmake.cmake" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/tests/test_region_size_alignment/cmake.cmake" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/tests/test_simple_config/cmake.cmake" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/tests/test_statistics/cmake.cmake" />
+    <Text Include="../../thirdparty/owemdjee/lwmem/tests/test_stats_compile/cmake.cmake" />
+    <Xml Include="../../thirdparty/owemdjee/lwmem/docs/static/images/structure_alloc_free_steps.xml" />
+    <Xml Include="../../thirdparty/owemdjee/lwmem/docs/static/images/structure_default.xml" />
+    <Xml Include="../../thirdparty/owemdjee/lwmem/docs/static/images/structure_first_alloc.xml" />
+    <Xml Include="../../thirdparty/owemdjee/lwmem/docs/static/images/structure_realloc_cases.xml" />
+    <Xml Include="../../thirdparty/owemdjee/lwmem/docs/static/images/structure_realloc_enlarge_1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/lwmem/docs/static/images/structure_realloc_enlarge_2.xml" />
+    <Xml Include="../../thirdparty/owemdjee/lwmem/docs/static/images/structure_realloc_enlarge_3.xml" />
+    <Xml Include="../../thirdparty/owemdjee/lwmem/docs/static/images/structure_realloc_shrink.xml" />
+    <Xml Include="../../thirdparty/owemdjee/lwmem/docs/static/images/structure_realloc_shrink_fragmented.xml" />
+  </ItemGroup>
+  <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+</Project>
+  

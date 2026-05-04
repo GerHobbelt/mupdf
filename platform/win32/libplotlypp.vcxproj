@@ -1,0 +1,487 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{E247EF44-6727-4787-B439-FE9348A6EC7E}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPLOTLYPP;PLOTLYPP_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPLOTLYPP;PLOTLYPP_STATICLIB;IDN2_STATIC;IDN2_BUILDING;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPLOTLYPP;PLOTLYPP_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPLOTLYPP;PLOTLYPP_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPLOTLYPP;PLOTLYPP_STATICLIB;IDN2_STATIC;IDN2_BUILDING;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPLOTLYPP;PLOTLYPP_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPLOTLYPP;PLOTLYPP_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPLOTLYPP;PLOTLYPP_STATICLIB;IDN2_STATIC;IDN2_BUILDING;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPLOTLYPP;PLOTLYPP_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPLOTLYPP;PLOTLYPP_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPLOTLYPP;PLOTLYPP_STATICLIB;IDN2_STATIC;IDN2_BUILDING;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPLOTLYPP;PLOTLYPP_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/plotlypp/examples/3d_charts.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/plotlypp/examples/basic_charts.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/plotlypp/examples/example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/plotlypp/examples/financial_charts.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/plotlypp/examples/maps.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/plotlypp/examples/math_utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/plotlypp/examples/module_example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/plotlypp/examples/scientific_charts.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/plotlypp/examples/statistical_charts.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/plotlypp/examples/subplots.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/examples/3d_charts.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/examples/basic_charts.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/examples/export.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/examples/financial_charts.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/examples/maps.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/examples/math_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/examples/scientific_charts.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/examples/statistical_charts.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/examples/subplots.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/contrib/eigen_support.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/detail/flaglist_helpers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/detail/mdspan_support.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/figure.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/json.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/layout/impl/layout_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/layout/layout.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/plotly_min_js.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/trace.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/bar.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/barpolar.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/box.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/candlestick.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/carpet.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/choropleth.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/choroplethmap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/choroplethmapbox.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/cone.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/contour.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/contourcarpet.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/densitymap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/densitymapbox.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/funnel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/funnelarea.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/heatmap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/histogram.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/histogram2d.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/histogram2dcontour.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/icicle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/image.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/impl/bar_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/impl/barpolar_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/impl/box_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/impl/candlestick_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/impl/carpet_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/impl/choropleth_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/impl/choroplethmap_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/impl/choroplethmapbox_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/impl/cone_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/impl/contour_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/impl/contourcarpet_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/impl/densitymap_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/impl/densitymapbox_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/impl/funnel_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/impl/funnelarea_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/impl/heatmap_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/impl/histogram2d_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/impl/histogram2dcontour_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/impl/histogram_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/impl/icicle_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/impl/image_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/impl/indicator_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/impl/isosurface_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/impl/mesh3d_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/impl/ohlc_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/impl/parcats_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/impl/parcoords_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/impl/pie_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/impl/sankey_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/impl/scatter3d_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/impl/scatter_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/impl/scattercarpet_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/impl/scattergeo_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/impl/scattergl_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/impl/scattermap_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/impl/scattermapbox_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/impl/scatterpolar_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/impl/scatterpolargl_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/impl/scattersmith_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/impl/scatterternary_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/impl/splom_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/impl/streamtube_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/impl/sunburst_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/impl/surface_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/impl/table_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/impl/treemap_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/impl/violin_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/impl/volume_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/impl/waterfall_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/indicator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/isosurface.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/mesh3d.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/ohlc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/parcats.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/parcoords.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/pie.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/sankey.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/scatter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/scatter3d.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/scattercarpet.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/scattergeo.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/scattergl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/scattermap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/scattermapbox.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/scatterpolar.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/scatterpolargl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/scattersmith.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/scatterternary.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/splom.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/streamtube.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/sunburst.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/surface.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/table.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/treemap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/violin.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/volume.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traces/waterfall.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/plotlypp/include/plotlypp/warnings.hpp" />
+    <Image Include="../../thirdparty/owemdjee/plotlypp/examples/output/png_exports/area_polar_chart.png" />
+    <Image Include="../../thirdparty/owemdjee/plotlypp/examples/output/png_exports/asymmetric_error_bars.png" />
+    <Image Include="../../thirdparty/owemdjee/plotlypp/examples/output/png_exports/basic_funnel.png" />
+    <Image Include="../../thirdparty/owemdjee/plotlypp/examples/output/png_exports/basic_horizontal_violin_plot.png" />
+    <Image Include="../../thirdparty/owemdjee/plotlypp/examples/output/png_exports/basic_overlaid_area.png" />
+    <Image Include="../../thirdparty/owemdjee/plotlypp/examples/output/png_exports/basic_pie.png" />
+    <Image Include="../../thirdparty/owemdjee/plotlypp/examples/output/png_exports/bubble_chart_sized_by_variable.png" />
+    <Image Include="../../thirdparty/owemdjee/plotlypp/examples/output/png_exports/bubble_with_marker_size_and_color.png" />
+    <Image Include="../../thirdparty/owemdjee/plotlypp/examples/output/png_exports/carpet_with_scatter_trace.png" />
+    <Image Include="../../thirdparty/owemdjee/plotlypp/examples/output/png_exports/categorical_dot_plot.png" />
+    <Image Include="../../thirdparty/owemdjee/plotlypp/examples/output/png_exports/colored_and_styled_histograms.png" />
+    <Image Include="../../thirdparty/owemdjee/plotlypp/examples/output/png_exports/colored_box_plot.png" />
+    <Image Include="../../thirdparty/owemdjee/plotlypp/examples/output/png_exports/colorscale_for_contour_plot.png" />
+    <Image Include="../../thirdparty/owemdjee/plotlypp/examples/output/png_exports/continuous_filled_error_bars.png" />
+    <Image Include="../../thirdparty/owemdjee/plotlypp/examples/output/png_exports/data_labels_on_plot.png" />
+    <Image Include="../../thirdparty/owemdjee/plotlypp/examples/output/png_exports/donut.png" />
+    <Image Include="../../thirdparty/owemdjee/plotlypp/examples/output/png_exports/gen2d_histogram_bivariate_normal.png" />
+    <Image Include="../../thirdparty/owemdjee/plotlypp/examples/output/png_exports/gen2d_histogram_contour.png" />
+    <Image Include="../../thirdparty/owemdjee/plotlypp/examples/output/png_exports/gen3d_line_spiral.png" />
+    <Image Include="../../thirdparty/owemdjee/plotlypp/examples/output/png_exports/gen3d_scatter_with_colorscaling_and_marker_styling.png" />
+    <Image Include="../../thirdparty/owemdjee/plotlypp/examples/output/png_exports/gen3d_subplots.png" />
+    <Image Include="../../thirdparty/owemdjee/plotlypp/examples/output/png_exports/gen3d_surface_contours.png" />
+    <Image Include="../../thirdparty/owemdjee/plotlypp/examples/output/png_exports/gen3d_surface_torus.png" />
+    <Image Include="../../thirdparty/owemdjee/plotlypp/examples/output/png_exports/grouped_bar.png" />
+    <Image Include="../../thirdparty/owemdjee/plotlypp/examples/output/png_exports/grouped_scatter.png" />
+    <Image Include="../../thirdparty/owemdjee/plotlypp/examples/output/png_exports/horizontal_bar.png" />
+    <Image Include="../../thirdparty/owemdjee/plotlypp/examples/output/png_exports/indicator.png" />
+    <Image Include="../../thirdparty/owemdjee/plotlypp/examples/output/png_exports/inset_graph.png" />
+    <Image Include="../../thirdparty/owemdjee/plotlypp/examples/output/png_exports/light_tile.png" />
+    <Image Include="../../thirdparty/owemdjee/plotlypp/examples/output/png_exports/line_and_scatter_with_names_axes_title.png" />
+    <Image Include="../../thirdparty/owemdjee/plotlypp/examples/output/png_exports/line_dashes.png" />
+    <Image Include="../../thirdparty/owemdjee/plotlypp/examples/output/png_exports/lines_on_maps.png" />
+    <Image Include="../../thirdparty/owemdjee/plotlypp/examples/output/png_exports/mesh_cube.png" />
+    <Image Include="../../thirdparty/owemdjee/plotlypp/examples/output/png_exports/mixed_subplots.png" />
+    <Image Include="../../thirdparty/owemdjee/plotlypp/examples/output/png_exports/multiple_3d_isosurfaces.png" />
+    <Image Include="../../thirdparty/owemdjee/plotlypp/examples/output/png_exports/multiple_3d_surface_plots.png" />
+    <Image Include="../../thirdparty/owemdjee/plotlypp/examples/output/png_exports/multiple_subplots_with_shared_axes.png" />
+    <Image Include="../../thirdparty/owemdjee/plotlypp/examples/output/png_exports/multiple_trace_radar_chart.png" />
+    <Image Include="../../thirdparty/owemdjee/plotlypp/examples/output/png_exports/outline_map_locations.png" />
+    <Image Include="../../thirdparty/owemdjee/plotlypp/examples/output/png_exports/scatter_tile_maps.png" />
+    <Image Include="../../thirdparty/owemdjee/plotlypp/examples/output/png_exports/scatter_with_color_dimension.png" />
+    <Image Include="../../thirdparty/owemdjee/plotlypp/examples/output/png_exports/simple_volume_plot.png" />
+    <Image Include="../../thirdparty/owemdjee/plotlypp/examples/output/png_exports/smith_chart_subplots_with_stlying.png" />
+    <Image Include="../../thirdparty/owemdjee/plotlypp/examples/output/png_exports/subplots_domain_layout.png" />
+    <Image Include="../../thirdparty/owemdjee/plotlypp/examples/output/png_exports/subplots_grid_layout.png" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/README.md" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/Warnings.cmake" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/README.md" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/area_polar_chart.html" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/asymmetric_error_bars.html" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/basic_funnel.html" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/basic_horizontal_violin_plot.html" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/basic_overlaid_area.html" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/basic_pie.html" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/bubble_chart_sized_by_variable.html" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/bubble_with_marker_size_and_color.html" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/carpet_with_scatter_trace.html" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/categorical_dot_plot.html" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/colored_and_styled_histograms.html" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/colored_box_plot.html" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/colorscale_for_contour_plot.html" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/continuous_filled_error_bars.html" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/data_labels_on_plot.html" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/donut.html" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/gen2d_histogram_bivariate_normal.html" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/gen2d_histogram_contour.html" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/gen3d_line_spiral.html" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/gen3d_scatter_with_colorscaling_and_marker_styling.html" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/gen3d_subplots.html" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/gen3d_surface_contours.html" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/gen3d_surface_torus.html" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/grouped_bar.html" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/grouped_scatter.html" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/horizontal_bar.html" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/index.html" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/indicator.html" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/inset_graph.html" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/js/plotly.min.js" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/json/area_polar_chart.json" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/json/asymmetric_error_bars.json" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/json/basic_funnel.json" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/json/basic_horizontal_violin_plot.json" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/json/basic_overlaid_area.json" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/json/basic_pie.json" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/json/bubble_chart_sized_by_variable.json" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/json/bubble_with_marker_size_and_color.json" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/json/carpet_with_scatter_trace.json" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/json/categorical_dot_plot.json" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/json/colored_and_styled_histograms.json" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/json/colored_box_plot.json" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/json/colorscale_for_contour_plot.json" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/json/continuous_filled_error_bars.json" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/json/data_labels_on_plot.json" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/json/donut.json" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/json/gen2d_histogram_bivariate_normal.json" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/json/gen2d_histogram_contour.json" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/json/gen3d_line_spiral.json" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/json/gen3d_scatter_with_colorscaling_and_marker_styling.json" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/json/gen3d_subplots.json" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/json/gen3d_surface_contours.json" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/json/gen3d_surface_torus.json" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/json/grouped_bar.json" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/json/grouped_scatter.json" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/json/horizontal_bar.json" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/json/indicator.json" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/json/inset_graph.json" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/json/light_tile.json" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/json/line_and_scatter_with_names_axes_title.json" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/json/line_dashes.json" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/json/lines_on_maps.json" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/json/mesh_cube.json" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/json/mixed_subplots.json" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/json/multiple_3d_isosurfaces.json" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/json/multiple_3d_surface_plots.json" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/json/multiple_subplots_with_shared_axes.json" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/json/multiple_trace_radar_chart.json" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/json/outline_map_locations.json" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/json/scatter_tile_maps.json" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/json/scatter_with_color_dimension.json" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/json/simple_volume_plot.json" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/json/smith_chart_subplots_with_stlying.json" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/json/subplots_domain_layout.json" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/json/subplots_grid_layout.json" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/light_tile.html" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/line_and_scatter_with_names_axes_title.html" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/line_dashes.html" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/lines_on_maps.html" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/mesh_cube.html" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/mixed_subplots.html" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/multiple_3d_isosurfaces.html" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/multiple_3d_surface_plots.html" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/multiple_subplots_with_shared_axes.html" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/multiple_trace_radar_chart.html" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/outline_map_locations.html" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/scatter_tile_maps.html" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/scatter_with_color_dimension.html" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/simple_volume_plot.html" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/smith_chart_subplots_with_stlying.html" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/subplots_domain_layout.html" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/examples/output/subplots_grid_layout.html" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/generator/gallery_gen.py" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/generator/parse.py" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/generator/plotly.min.js" />
+    <Text Include="../../thirdparty/owemdjee/plotlypp/generator/schema.json" />
+  </ItemGroup>
+  <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+</Project>
+  

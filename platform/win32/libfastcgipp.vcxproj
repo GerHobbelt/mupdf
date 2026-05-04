@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{E247EF44-6727-4787-B439-FE93484B2A6A}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFASTCGIPP;FASTCGIPP_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFASTCGIPP;FASTCGIPP_STATICLIB;IDN2_STATIC;IDN2_BUILDING;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFASTCGIPP;FASTCGIPP_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFASTCGIPP;FASTCGIPP_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFASTCGIPP;FASTCGIPP_STATICLIB;IDN2_STATIC;IDN2_BUILDING;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFASTCGIPP;FASTCGIPP_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFASTCGIPP;FASTCGIPP_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFASTCGIPP;FASTCGIPP_STATICLIB;IDN2_STATIC;IDN2_BUILDING;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFASTCGIPP;FASTCGIPP_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFASTCGIPP;FASTCGIPP_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFASTCGIPP;FASTCGIPP_STATICLIB;IDN2_STATIC;IDN2_BUILDING;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFASTCGIPP;FASTCGIPP_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/fastcgipp/examples/echo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastcgipp/examples/email.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastcgipp/examples/gnu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastcgipp/examples/helloworld.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastcgipp/examples/sessions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastcgipp/examples/sql.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastcgipp/examples/timer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastcgipp/src/address.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastcgipp/src/block.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastcgipp/src/chunkstreambuf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastcgipp/src/connection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastcgipp/src/curl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastcgipp/src/curler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastcgipp/src/email.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastcgipp/src/fcgistreambuf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastcgipp/src/http.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastcgipp/src/log.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastcgipp/src/mailer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastcgipp/src/manager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastcgipp/src/parameters.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastcgipp/src/poll.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastcgipp/src/protocol.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastcgipp/src/request.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastcgipp/src/results.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastcgipp/src/sockets.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastcgipp/src/transceiver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastcgipp/src/webstreambuf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastcgipp/tests/curl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastcgipp/tests/fcgistreambuf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastcgipp/tests/http.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastcgipp/tests/protocol.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastcgipp/tests/sockets.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastcgipp/tests/sql.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastcgipp/tests/transceiver.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fastcgipp/include/fastcgi++/address.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fastcgipp/include/fastcgi++/block.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fastcgipp/include/fastcgi++/chunkstreambuf.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fastcgipp/include/fastcgi++/curl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fastcgipp/include/fastcgi++/curler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fastcgipp/include/fastcgi++/email.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fastcgipp/include/fastcgi++/endian.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fastcgipp/include/fastcgi++/fcgistreambuf.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fastcgipp/include/fastcgi++/http.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fastcgipp/include/fastcgi++/log.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fastcgipp/include/fastcgi++/mailer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fastcgipp/include/fastcgi++/manager.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fastcgipp/include/fastcgi++/message.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fastcgipp/include/fastcgi++/poll.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fastcgipp/include/fastcgi++/protocol.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fastcgipp/include/fastcgi++/request.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fastcgipp/include/fastcgi++/sockets.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fastcgipp/include/fastcgi++/sql/connection.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fastcgipp/include/fastcgi++/sql/parameters.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fastcgipp/include/fastcgi++/sql/results.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fastcgipp/include/fastcgi++/sql/types.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fastcgipp/include/fastcgi++/transceiver.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fastcgipp/include/fastcgi++/webstreambuf.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fastcgipp/include/gnu.png.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fastcgipp/include/sqlTraits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fastcgipp/tests/multipartParam.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fastcgipp/tests/multipartPost.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fastcgipp/tests/urlencodedParam.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fastcgipp/tests/urlencodedPost.hpp" />
+    <Text Include="../../thirdparty/owemdjee/fastcgipp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/fastcgipp/COPYING" />
+    <Text Include="../../thirdparty/owemdjee/fastcgipp/README.md" />
+    <Text Include="../../thirdparty/owemdjee/fastcgipp/cmake/FastcgippConfig.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/fastcgipp/doc/Doxyfile.in" />
+    <Text Include="../../thirdparty/owemdjee/fastcgipp/doc/echo.dox" />
+    <Text Include="../../thirdparty/owemdjee/fastcgipp/doc/examples.dox" />
+    <Text Include="../../thirdparty/owemdjee/fastcgipp/doc/gnu.dox" />
+    <Text Include="../../thirdparty/owemdjee/fastcgipp/doc/helloworld.dox" />
+    <Text Include="../../thirdparty/owemdjee/fastcgipp/doc/sessions.dox" />
+    <Text Include="../../thirdparty/owemdjee/fastcgipp/doc/sql.dox" />
+    <Text Include="../../thirdparty/owemdjee/fastcgipp/doc/timer.dox" />
+    <Text Include="../../thirdparty/owemdjee/fastcgipp/examples/sql-finish.sh" />
+    <Text Include="../../thirdparty/owemdjee/fastcgipp/examples/sql-start.sh" />
+    <Text Include="../../thirdparty/owemdjee/fastcgipp/include/config.hpp.in" />
+    <Text Include="../../thirdparty/owemdjee/fastcgipp/tests/sql.sh.in" />
+    <Xml Include="../../thirdparty/owemdjee/fastcgipp/doc/DoxygenLayout.xml" />
+  </ItemGroup>
+  <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+</Project>
+  
