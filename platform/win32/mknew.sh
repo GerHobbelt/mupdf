@@ -1701,6 +1701,8 @@ scales_chords_modes
 enhanced_linn_sequencer
 fixed_space_std_allocator
 adsr_curve_tweens
+flash_wear_leveling_management
+specialty_histograms
 
 
 EOT
