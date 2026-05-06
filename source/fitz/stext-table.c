@@ -27,6 +27,8 @@
 
 /* #define DEBUG_WRITE_AS_PS */
 
+/* #define DEBUG_TABLE_SPLITS */
+
 /* #define DEBUG_TABLE_STRUCTURE */
 
 /* #define DEBUG_TABLE_HUNT */
@@ -1107,6 +1109,8 @@ typedef struct
 	int h_crossed;
 	int v_crossed;
 	int full;
+	fz_rect content;
+	float fontsize;
 } cell_t;
 
 typedef struct
@@ -1196,7 +1200,7 @@ split_grid_pos(fz_context *ctx, grid_walker_data *gd, int row, int i, int early)
 	cells = gd->cells = fz_realloc_flexible(ctx, gd->cells, cells_t, cell, (gd->cells->w + (1-row)) * (gd->cells->h + row));
 	/* If both pass, then we're safe to shuffle the data. */
 
-#ifdef DEBUG_TABLE_STRUCTURE
+#ifdef DEBUG_TABLE_SPLITS
 	printf("Before split %s %d\n", row ? "row" : "col", i);
 	asciiart_table(gd);
 #endif
@@ -1263,10 +1267,6 @@ split_grid_pos(fz_context *ctx, grid_walker_data *gd, int row, int i, int early)
 		}
 	}
 
-#ifdef DEBUG_TABLE_STRUCTURE
-	printf("After split\n");
-	asciiart_table(gd);
-#endif
 	return pos;
 }
 
@@ -1292,7 +1292,7 @@ find_grid_pos(fz_context *ctx, grid_walker_data *gd, int row, float x, int inacc
 
 	assert(x >= pos->list[0].min && x <= pos->list[pos->len-1].max);
 
-#ifdef DEBUG_TABLE_STRUCTURE
+#ifdef DEBUG_TABLE_SPLITS
 	printf("Looking for %g in %s splits:\n", x, row ? "row" : "col");
 	for (i = 0; i < pos->len; i++)
 	{
@@ -1341,7 +1341,7 @@ find_grid_pos(fz_context *ctx, grid_walker_data *gd, int row, float x, int inacc
 		{
 			/* Split i into i and i+1, and make i the new one. */
 			assert(i > 0);
-#ifdef DEBUG_TABLE_STRUCTURE
+#ifdef DEBUG_TABLE_SPLITS
 			printf("Splitting before %d\n", i);
 #endif
 			pos = split_grid_pos(ctx, gd, row, i, 1);
@@ -1349,6 +1349,10 @@ find_grid_pos(fz_context *ctx, grid_walker_data *gd, int row, float x, int inacc
 			pos->list[i].pos = x;
 			pos->list[i].max = pos->list[i+1].min = (pos->list[i+1].pos + x)/2;
 			pos->list[i].reinforcement = 1;
+#ifdef DEBUG_TABLE_SPLITS
+			printf("After split\n");
+			asciiart_table(gd);
+#endif
 			return i;
 		}
 		else if (x <= pos->list[i].max)
@@ -1397,23 +1401,31 @@ split:
 			if (pos->list[i].pos > x)
 			{
 				/* Make i the new one */
-#ifdef DEBUG_TABLE_STRUCTURE
+#ifdef DEBUG_TABLE_SPLITS
 				printf("Splitting %d (early)\n", i);
 #endif
 				pos->list[i].pos = x;
 				pos->list[i].max = pos->list[i+1].min = (pos->list[i+1].pos + x)/2;
 				pos->list[i].reinforcement = 1;
+#ifdef DEBUG_TABLE_SPLITS
+				printf("After split\n");
+				asciiart_table(gd);
+#endif
 				return i;
 			}
 			else
 			{
 				/* Make i+1 the new one */
-#ifdef DEBUG_TABLE_STRUCTURE
+#ifdef DEBUG_TABLE_SPLITS
 				printf("Splitting %d (late)\n", i);
 #endif
 				pos->list[i+1].pos = x;
 				pos->list[i].max = pos->list[i+1].min = (pos->list[i].pos + x)/2;
 				pos->list[i].reinforcement = 1;
+#ifdef DEBUG_TABLE_SPLITS
+				printf("After split\n");
+				asciiart_table(gd);
+#endif
 				return i+1;
 			}
 		}
@@ -1785,9 +1797,10 @@ is_numeric(int c)
 }
 
 static int
-mark_cells_for_content(fz_context *ctx, grid_walker_data *gd, fz_rect s)
+mark_cells_for_content(fz_context *ctx, grid_walker_data *gd, fz_rect s, float baseline, float fontsize)
 {
 	fz_rect r = fz_intersect_rect(gd->bounds, s);
+	fz_rect line_ext = { r.x0, fz_max(r.y0, baseline-fontsize), r.x1, baseline };
 	int x0, x1, y0, y1, x, y;
 
 	/* Check for non-validity rather than empty here, as e.g.
@@ -1817,7 +1830,16 @@ mark_cells_for_content(fz_context *ctx, grid_walker_data *gd, fz_rect s)
 	}
 	for (y = y0; y <= y1; y++)
 		for (x = x0; x <= x1; x++)
-			get_cell(gd->cells, x, y)->full++;
+		{
+			cell_t *c = get_cell(gd->cells, x, y);
+			c->full++;
+			if (fontsize != 0)
+			{
+				c->content = fz_union_rect(c->content, line_ext);
+				if (fontsize > c->fontsize)
+					c->fontsize = fontsize;
+			}
+		}
 
 	return 0;
 }
@@ -1983,7 +2005,7 @@ calculate_spanned_content(fz_context *ctx, grid_walker_data *gd, fz_stext_block 
 			switch (classify_vector(ctx, gd, block->bbox, !!(block->u.v.flags & FZ_STEXT_VECTOR_IS_RECTANGLE)))
 			{
 			case VECTOR_IS_CONTENT:
-				mark_cells_for_content(ctx, gd, block->bbox);
+				mark_cells_for_content(ctx, gd, block->bbox, 0, 0);
 				break;
 			case VECTOR_IS_BORDER:
 			case VECTOR_IS_IGNORABLE:
@@ -2041,7 +2063,7 @@ calculate_spanned_content(fz_context *ctx, grid_walker_data *gd, fz_stext_block 
 					}
 					else
 						was_numeric = is_numeric(ch->c);
-					duff += mark_cells_for_content(ctx, gd, fz_rect_from_quad(ch->quad));
+					duff += mark_cells_for_content(ctx, gd, fz_rect_from_quad(ch->quad), ch->origin.y, ch->size);
 				}
 			}
 		}
@@ -2067,6 +2089,12 @@ asciiart_table(grid_walker_data *gd)
 	int h = gd->ypos->len;
 	int x, y;
 
+	for (x = 0; x < w; x++)
+	{
+		for (y = 0; y < x; y++)
+			printf("| ");
+		printf("(%d:%g %g %g)\n", x, gd->xpos->list[x].min, gd->xpos->list[x].pos, gd->xpos->list[x].max);
+	}
 	for (y = 0; y < h; y++)
 	{
 		for (x = 0; x < w-1; x++)
@@ -2092,7 +2120,7 @@ asciiart_table(grid_walker_data *gd)
 				printf(" ");
 			}
 		}
-		printf("+\n");
+		printf("+ (%d:%g %g %g)\n", y, gd->ypos->list[y].min, gd->ypos->list[y].pos, gd->ypos->list[y].max);
 		if (y == h-1)
 			break;
 		for (x = 0; x < w; x++)
@@ -2479,42 +2507,69 @@ move_contained_content(fz_context *ctx, fz_stext_page *page, fz_stext_struct *de
 				{
 					/* Need to walk the line and just take parts */
 					fz_stext_line *newline = NULL;
-					fz_stext_char *ch, *next_ch, *prev_ch = NULL;
+					fz_stext_char *ch, *ch2, *next_ch, *prev_ch = NULL;
 
-					for (ch = line->first_char; ch != NULL; ch = next_ch)
+					/* We need to be careful to use the vextent from chars that share a baseline,
+					 * not the vextent of individual chars, less we cut through a line and lose
+					 * half the chars. */
+					for (ch = line->first_char; ch != NULL; ch = ch->next)
 					{
 						fz_rect crect = fz_rect_from_quad(ch->quad);
-						float x = (crect.x0 + crect.x1)/2;
-						float y = (crect.y0 + crect.y1)/2;
-						next_ch = ch->next;
-						if (r.x0 > x || r.x1 < x || r.y0 > y || r.y1 < y)
+						float vmin = crect.y0;
+						float vmax = crect.y1;
+						float x, y;
+
+						/* Find the next run of chars that have the same baseline, and their combined vextent. */
+						for (ch2 = ch->next; ch2 != NULL; ch2 = ch2->next)
 						{
-							prev_ch = ch;
-							continue;
+							if (ch2->origin.y != ch->origin.y)
+								break;
+							crect = fz_rect_from_quad(ch2->quad);
+							if (crect.y0 < vmin)
+								vmin = crect.y0;
+							if (crect.y1 > vmax)
+								vmax = crect.y1;
 						}
-						/* Take this char */
-						if (newline == NULL)
+
+						/* So ch to ch2 (not inclusive) all have the same baseline. */
+						y = (vmin + vmax)/2;
+
+						for (ch = line->first_char; ch != ch2; ch = next_ch)
 						{
-							newline = fz_pool_alloc(ctx, page->pool, sizeof(*newline));
-							newline->dir = line->dir;
-							newline->wmode = line->wmode;
-							newline->bbox = fz_empty_rect;
+							crect = fz_rect_from_quad(ch->quad);
+							x = (crect.x0 + crect.x1)/2;
+							next_ch = ch->next;
+							if (r.x0 > x || r.x1 < x || r.y0 > y || r.y1 < y)
+							{
+								prev_ch = ch;
+								continue;
+							}
+							/* Take this char */
+							if (newline == NULL)
+							{
+								newline = fz_pool_alloc(ctx, page->pool, sizeof(*newline));
+								newline->dir = line->dir;
+								newline->wmode = line->wmode;
+								newline->bbox = fz_empty_rect;
+							}
+							/* Unlink char */
+							if (prev_ch == NULL)
+								line->first_char = next_ch;
+							else
+								prev_ch->next = next_ch;
+							if (next_ch == NULL)
+								line->last_char = prev_ch;
+							/* Relink char */
+							ch->next = NULL;
+							if (newline->last_char == NULL)
+								newline->first_char = ch;
+							else
+								newline->last_char->next = ch;
+							newline->last_char = ch;
+							newline->bbox = fz_union_rect(newline->bbox, crect);
 						}
-						/* Unlink char */
-						if (prev_ch == NULL)
-							line->first_char = next_ch;
-						else
-							prev_ch->next = next_ch;
-						if (next_ch == NULL)
-							line->last_char = prev_ch;
-						/* Relink char */
-						ch->next = NULL;
-						if (newline->last_char == NULL)
-							newline->first_char = ch;
-						else
-							newline->last_char->next = ch;
-						newline->last_char = ch;
-						newline->bbox = fz_union_rect(newline->bbox, crect);
+						if (ch == NULL)
+							break;
 					}
 					if (line->first_char == NULL)
 					{
@@ -3094,6 +3149,8 @@ merge_column(grid_walker_data *gd, int x)
 		d->h_line = s[0].h_line; /* == s[1].h_line */
 		d->v_crossed = s[0].v_crossed;
 		d->v_line = s[0].v_line;
+		d->content = fz_union_rect(s[0].content, s[1].content);
+		d->fontsize = fz_max(s[0].fontsize, s[1].fontsize);
 		if (x < gd->cells->w - 2)
 			memmove(d+1, s+2, sizeof(*d) * (gd->cells->w - 2 - x));
 	}
@@ -3188,6 +3245,8 @@ merge_row(grid_walker_data *gd, int y)
 			d->full = d[w].full;
 		if (d->v_crossed == 0)
 			d->v_crossed = d[w].v_crossed;
+		d->content = fz_union_rect(d->content, d[w].content);
+		d->fontsize = fz_max(d->fontsize, d[w].fontsize);
 		d++;
 	}
 	if (y < gd->cells->h - 2)
@@ -3228,14 +3287,6 @@ merge_rows(grid_walker_data *gd)
 		}
 		if (x == gd->cells->w-1)
 			goto merge_row;
-		/* We only ever want to merge rows if content crossed between them somewhere.
-		 * Don't use uncertainty for this, because uncertainty doesn't allow for
-		 * whitespace. */
-		for (x = 0; x < gd->cells->w-1; x++)
-			if (get_cell(gd->cells, x, y+1)->h_crossed == 1)
-				break;
-		if (x == gd->cells->w-1)
-			continue;
 		/* This requires all the pairs of cells in those 2 rows to be mergeable. */
 		for (x = 0; x < gd->cells->w-1; x++)
 		{
@@ -3250,9 +3301,18 @@ merge_rows(grid_walker_data *gd)
 			/* If we differ in v linedness, we can't merge */
 			if (!!a->v_line != !!b->v_line)
 				goto cant_merge;
-			/* If both are full, we can only merge if we cross. */
-			if (a->full && b->full && b->h_crossed)
-				continue;
+			/* If both are full... */
+			if (a->full && b->full)
+			{
+				float fs;
+				/* We can merge if we cross. */
+				if (b->h_crossed)
+					continue;
+				/* We can merge if the line spacing looks reasonable. */
+				fs = fz_max(a->fontsize, b->fontsize);
+				if (a->content.y1 + fs/2 >= b->content.y0)
+					continue;
+			}
 			/* Otherwise we can't merge */
 			break;
 		}
@@ -3564,6 +3624,18 @@ score_table(fz_context *ctx, grid_walker_data *gd)
 	return score / (float)num_cells / 2.0;
 }
 
+static void
+init_cell_regions(fz_context *ctx, cells_t *cells)
+{
+	int i;
+	int n = cells->w * cells->h;
+	cell_t *c = cells->cell;
+
+	for (i = 0; i < n; i++, c++)
+		c->content = fz_empty_rect;
+}
+
+
 static int
 find_table(fz_context *ctx, grid_walker_data *gd, fz_stext_block *content)
 {
@@ -3574,6 +3646,13 @@ find_table(fz_context *ctx, grid_walker_data *gd, fz_stext_block *content)
 
 	fz_try(ctx)
 	{
+#ifdef DEBUG_TABLE_STRUCTURE
+		printf("Hunting in: %g %g %g %g\n",
+			gd->bounds.x0,
+			gd->bounds.y0,
+			gd->bounds.x1,
+			gd->bounds.y1);
+#endif
 		if (all_blocks_are_justified_or_headers(ctx, content, gd->bounds))
 			break;
 
@@ -3591,6 +3670,11 @@ find_table(fz_context *ctx, grid_walker_data *gd, fz_stext_block *content)
 		gd->ypos = make_table_positions(ctx, &ys, gd->bounds.y0, gd->bounds.y1);
 		gd->cells = new_cells(ctx, gd->xpos->len, gd->ypos->len);
 
+#ifdef DEBUG_TABLE_STRUCTURE
+		printf("Grid from scanning content:\n");
+		asciiart_table(gd);
+#endif
+
 		bg = walk_for_background(ctx, gd, content);
 		if (bg == BACKGROUND_FOUND)
 			gd->has_background = 1;
@@ -3601,12 +3685,20 @@ find_table(fz_context *ctx, grid_walker_data *gd, fz_stext_block *content)
 		 * pass then marks them. */
 		walk_grid_lines(ctx, gd, content);
 		walk_grid_lines2(ctx, gd, content);
+
+#ifdef DEBUG_TABLE_STRUCTURE
+		printf("Grid after considering vectors:\n");
+		asciiart_table(gd);
+#endif
+
+		init_cell_regions(ctx, gd->cells);
 		/* Now, we walk the content looking for content that crosses
 		 * these grid lines. This allows us to spot spanned cells. */
 		if (calculate_spanned_content(ctx, gd, content))
 			break; /* Unlikely to be a table. */
 
 #ifdef DEBUG_TABLE_STRUCTURE
+		printf("Grid after patterning content:\n");
 		asciiart_table(gd);
 #endif
 		/* Now, can we remove some columns or rows? i.e. have we oversegmented? */
@@ -3624,6 +3716,16 @@ find_table(fz_context *ctx, grid_walker_data *gd, fz_stext_block *content)
 		found = 1;
 
 		gd->score = score_table(ctx, gd);
+#ifdef DEBUG_TABLE_STRUCTURE
+		printf("%d x %d table found in: %g %g %g %g with score %g\n",
+			gd->xpos->len,
+			gd->ypos->len,
+			gd->bounds.x0,
+			gd->bounds.y0,
+			gd->bounds.x1,
+			gd->bounds.y1,
+			gd->score);
+#endif
 	}
 	fz_always(ctx)
 	{
@@ -3750,6 +3852,70 @@ list_tables(fz_context *ctx, fz_potential_table_list *list, const char *title)
 }
 #endif
 
+static void
+cull_unhelpful_background_fills(fz_context *ctx, fz_stext_page *page)
+{
+	fz_stext_page_block_iterator iter, iter2, iter3;
+
+	for (iter = fz_stext_page_block_iterator_begin_dfs(page);
+		!fz_stext_page_block_iterator_eod_dfs(iter);
+		iter = fz_stext_page_block_iterator_next_dfs(iter))
+	{
+		fz_stext_block *block = iter.block;
+		/* We are only interested in rectangular, solid filled vectors here */
+		if (block->type != FZ_STEXT_BLOCK_VECTOR ||
+			(block->u.v.flags & FZ_STEXT_VECTOR_IS_RECTANGLE) == 0 ||
+			(block->u.v.flags & FZ_STEXT_VECTOR_IS_STROKED) != 0 ||
+			(block->u.v.argb>>24) != 0xFF)
+			continue;
+		/* So, that vector can 'mask' any vectors that follow it that are
+		 * entirely contained within it, with the same colors. */
+		/* We want to walk forward from where we currently are, but never go higher in
+		 * the heirarchy. */
+		iter2 = fz_stext_page_block_iterator_begin_from_dfs(page, iter.block, iter.parent);
+		for (iter2 = fz_stext_page_block_iterator_next(iter2);
+			!fz_stext_page_block_iterator_eod_dfs(iter2);
+			iter2 = fz_stext_page_block_iterator_next_dfs(iter2))
+		{
+			fz_stext_block *block2 = iter2.block;
+			fz_stext_block *next;
+			/* We are looking for any rectangular non-stroked vector of a matching color
+			 * that is contained in the original one. */
+			if ((block2->type != FZ_STEXT_BLOCK_VECTOR) ||
+				(block2->u.v.flags & FZ_STEXT_VECTOR_IS_RECTANGLE) == 0 ||
+				(block2->u.v.flags & FZ_STEXT_VECTOR_IS_STROKED) != 0 ||
+				(block2->u.v.argb != block->u.v.argb) ||
+				(!fz_contains_rect(block->bbox, block2->bbox)))
+					continue; /* Keep hunting */
+
+			/* So we have a candidate vector. In order for us to be able to safely remove
+			 * this vector as being 'unhelpful' then there cannot be anything in between the
+			 * block, and block2 that overlaps block2. */
+			iter3 = fz_stext_page_block_iterator_begin_from_dfs(page, iter.block, iter.parent);
+			for (iter3 = fz_stext_page_block_iterator_next(iter3);
+				iter2.block != iter3.block;
+				iter3 = fz_stext_page_block_iterator_next_dfs(iter3))
+			{
+				fz_stext_block *block3 = iter3.block;
+				if (fz_overlaps_rect(block2->bbox, block3->bbox))
+					break;
+			}
+			if (iter2.block != iter3.block)
+				continue;
+
+			/* Remove this vector. It's masked by the outside one. */
+			next = block2->next;
+			block2->prev->next = next;
+			if (next)
+				next->prev = block2->prev;
+			else if (iter.parent)
+				iter.parent->last_block = block2->prev;
+			else
+				iter.page->last_block = block2->prev;
+		}
+	}
+}
+
 static float
 scaled_table_score(fz_potential_table_list *list, int k)
 {
@@ -3798,6 +3964,8 @@ hunt_potential_tables(fz_context *ctx, fz_stext_page *page, fz_potential_table_l
 
 	fz_try(ctx)
 	{
+		cull_unhelpful_background_fills(ctx, page);
+
 #ifdef DEBUG_TABLE_SCORES
 		list_tables(ctx, list, "pre find_table");
 #endif
