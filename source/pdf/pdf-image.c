@@ -43,7 +43,7 @@ pdf_load_image_imp(fz_context *ctx, pdf_document *doc, pdf_resource_stack *rdb, 
 	int indexed;
 	fz_image *mask = NULL; /* explicit mask/soft mask image */
 	int use_colorkey = 0;
-	int use_matte = 0;
+	int use_matte;
 	fz_colorspace *colorspace = NULL;
 	float decode[FZ_MAX_COLORS * 2];
 	int colorkey[FZ_MAX_COLORS * 2];
@@ -83,9 +83,9 @@ pdf_load_image_imp(fz_context *ctx, pdf_document *doc, pdf_resource_stack *rdb, 
 	if (bpc > 16)
 		fz_throw(ctx, FZ_ERROR_SYNTAX, "image depth is too large: %d", bpc);
 	if (SIZE_MAX / w < (size_t)(bpc+7)/8)
-		fz_throw(ctx, FZ_ERROR_SYNTAX, "image is far too wide (abs. max. width: %1.0lf px)", floor((SIZE_MAX * 8.0) / (bpc+7)));
-	if (SIZE_MAX / h < w * (size_t)((bpc+7)/8))
-		fz_throw(ctx, FZ_ERROR_SYNTAX, "image is too large (abs. max. single dimension for square image: %1.0lf px)", floor(sqrt((SIZE_MAX * 8.0) / (bpc+7.0))));
+		fz_throw(ctx, FZ_ERROR_SYNTAX, "image is far too wide (abs. max. width: %1.0lf px)", floor((SIZE_MAX * 8.0) / (bpc + 7)));
+	if (SIZE_MAX / h < w * (size_t)((bpc + 7) / 8))
+		fz_throw(ctx, FZ_ERROR_SYNTAX, "image is too large (abs. max. single dimension for square image: %1.0lf px)", floor(sqrt((SIZE_MAX * 8.0) / (bpc + 7.0))));
 
 	fz_var(mask);
 	fz_var(image);
@@ -590,10 +590,12 @@ pdf_add_image(fz_context *ctx, pdf_document *doc, fz_image *image)
 	fz_pixmap *pixmap = NULL;
 	pdf_obj *imobj = NULL;
 	pdf_obj *dp;
+	pdf_obj *ref;
 	fz_buffer *buffer = NULL;
 	fz_compressed_buffer *cbuffer;
 	fz_pixmap *smask_pixmap = NULL;
 	fz_image *smask_image = NULL;
+	pdf_image_resource_key key;
 	int i, n;
 
 	fz_var(pixmap);
@@ -601,6 +603,10 @@ pdf_add_image(fz_context *ctx, pdf_document *doc, fz_image *image)
 	fz_var(imobj);
 	fz_var(smask_pixmap);
 	fz_var(smask_image);
+
+	imobj = pdf_find_image_resource(ctx, doc, image, &key);
+	if (imobj)
+		return imobj;
 
 	pdf_begin_operation(ctx, doc, "Add image");
 
@@ -871,6 +877,8 @@ unknown_compression:
 
 		pdf_update_stream(ctx, doc, imobj, buffer, 1);
 		pdf_end_operation(ctx, doc);
+
+		ref = pdf_insert_image_resource(ctx, doc, &key, imobj);
 	}
 	fz_always(ctx)
 	{
@@ -878,14 +886,14 @@ unknown_compression:
 		fz_drop_pixmap(ctx, smask_pixmap);
 		fz_drop_pixmap(ctx, pixmap);
 		fz_drop_buffer(ctx, buffer);
+		pdf_drop_obj(ctx, imobj);
 	}
 	fz_catch(ctx)
 	{
-		pdf_drop_obj(ctx, imobj);
 		pdf_abandon_operation(ctx, doc);
 		fz_rethrow(ctx);
 	}
-	return imobj;
+	return ref;
 }
 
 #endif

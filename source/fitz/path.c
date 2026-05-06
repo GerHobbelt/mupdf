@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2025 Artifex Software, Inc.
+// Copyright (C) 2004-2026 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -268,9 +268,11 @@ fz_pack_path(fz_context *ctx, uint8_t *pack_, const fz_path *path)
 			pack->rectilinear_bounds = path->rectilinear_bounds;
 
 			ptr = (uint8_t *)&pack[1];
-			memcpy(ptr, path->coords, sizeof(float) * path->coord_len);
+			if (path->coord_len > 0)
+				memcpy(ptr, path->coords, sizeof(float) * path->coord_len);
 			ptr += sizeof(float) * path->coord_len;
-			memcpy(ptr, path->cmds, sizeof(uint8_t) * path->cmd_len);
+			if (path->cmd_len > 0)
+				memcpy(ptr, path->cmds, sizeof(uint8_t) * path->cmd_len);
 		}
 
 		return size;
@@ -750,6 +752,9 @@ void fz_walk_path(fz_context *ctx, const fz_path *path, const fz_path_walker *pr
 	float x = NAN, y = NAN, sx = NAN, sy = NAN;
 	uint8_t *cmds;
 	float *coords;
+
+	if (path == NULL)
+		return;
 
 	switch (path->packed)
 	{
@@ -1409,12 +1414,12 @@ fz_transform_path(fz_context *ctx, fz_path *path, fz_matrix ctm)
 				break;
 			}
 		}
-		if (path->cmd_len + extra_cmd < path->cmd_cap)
+		if (path->cmd_len + extra_cmd > path->cmd_cap)
 		{
 			path->cmds = fz_realloc_array(ctx, path->cmds, path->cmd_len + extra_cmd, unsigned char);
 			path->cmd_cap = path->cmd_len + extra_cmd;
 		}
-		if (path->coord_len + extra_coord < path->coord_cap)
+		if (path->coord_len + extra_coord > path->coord_cap)
 		{
 			path->coords = fz_realloc_array(ctx, path->coords, path->coord_len + extra_coord, float);
 			path->coord_cap = path->coord_len + extra_coord;

@@ -73,12 +73,7 @@ static void
 pop_gstate(fz_context *ctx, pdf_font_analysis_processor *p)
 {
 	gstate *gs = p->gs;
-	gstate *old;
-
-	if (gs == NULL)
-		return;
-
-	old = gs->next;
+	gstate *old = gs->next;
 	pdf_drop_font(ctx, gs->font);
 	fz_free(ctx, gs);
 	p->gs = old;
@@ -88,7 +83,6 @@ static void
 drop_processor(fz_context *ctx, pdf_processor *proc)
 {
 	pdf_font_analysis_processor *p = (pdf_font_analysis_processor*)proc;
-
 	while (p->gs)
 		pop_gstate(ctx, p);
 }
@@ -98,6 +92,10 @@ font_analysis_Q(fz_context *ctx, pdf_processor *proc)
 {
 	pdf_font_analysis_processor *p = (pdf_font_analysis_processor*)proc;
 
+	/* never pop the last state; in case we would underflow */
+	if (p->gs == NULL || p->gs->next == NULL)
+		return;
+
 	pop_gstate(ctx, p);
 }
 
@@ -105,18 +103,11 @@ static void
 font_analysis_q(fz_context *ctx, pdf_processor *proc)
 {
 	pdf_font_analysis_processor *p = (pdf_font_analysis_processor*)proc;
-	gstate *gs = p->gs;
 	gstate *new_gs = fz_malloc_struct(ctx, gstate);
+	new_gs->current_font = p->gs->current_font;
+	new_gs->font = pdf_keep_font(ctx, p->gs->font);
+	new_gs->next = p->gs;
 	p->gs = new_gs;
-
-	if (gs)
-	{
-		*new_gs = *gs;
-		new_gs->next = gs;
-	}
-
-	pdf_keep_font(ctx, new_gs->font);
-
 }
 
 static void
@@ -124,7 +115,7 @@ font_analysis_Tf(fz_context *ctx, pdf_processor *proc, const char *name, pdf_fon
 {
 	pdf_font_analysis_processor *p = (pdf_font_analysis_processor*)proc;
 	pdf_obj *dict = pdf_lookup_resource(ctx, proc->rstack, PDF_NAME(Font), name);
-	pdf_obj *subtype, *fontdesc = NULL;
+	pdf_obj *subtype = NULL, *fontdesc = NULL;
 	pdf_obj *fontfile = NULL;
 	pdf_obj *key = NULL;
 	int num, gen, i;

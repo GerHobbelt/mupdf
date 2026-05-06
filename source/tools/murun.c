@@ -6910,7 +6910,8 @@ stext_walk(js_State *J, fz_stext_block *block)
 			{
 				js_pushnull(J);
 				ffi_pushrect(J, block->bbox);
-				js_call(J, 1);
+				js_pushnumber(J, block->u.t.flags);
+				js_call(J, 2);
 				js_pop(J, 1);
 			}
 
@@ -6940,7 +6941,8 @@ stext_walk(js_State *J, fz_stext_block *block)
 						ffi_pushquad(J, ch->quad);
 						ffi_pushrgb(J, ch->argb);
 						js_pushnumber(J, ch->flags);
-						js_call(J, 7);
+						js_pushnumber(J, ch->bidi);
+						js_call(J, 8);
 						js_pop(J, 1);
 					}
 				}
@@ -6992,6 +6994,8 @@ stext_walk(js_State *J, fz_stext_block *block)
 				js_setproperty(J, -2, "isStroked");
 				js_pushboolean(J, block->u.v.flags & FZ_STEXT_VECTOR_IS_RECTANGLE);
 				js_setproperty(J, -2, "isRectangle");
+				js_pushboolean(J, block->u.v.flags & FZ_STEXT_VECTOR_CONTINUES);
+				js_setproperty(J, -2, "continues");
 				ffi_pushrgb(J, block->u.v.argb);
 				js_call(J, 4);
 				js_pop(J, 1);
@@ -7200,6 +7204,8 @@ static void ffi_StructuredText_asText(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
 	fz_stext_page *page = js_touserdata(J, 0, "fz_stext_page");
+	int flatten = js_isdefined(J, 1);
+	int flags = js_tointeger(J, 1);
 	const char *data = NULL;
 	fz_buffer *buf = NULL;
 	fz_output *out = NULL;
@@ -7209,10 +7215,17 @@ static void ffi_StructuredText_asText(js_State *J)
 
 	fz_try(ctx)
 	{
-		buf = fz_new_buffer(ctx, 1024);
-		out = fz_new_output_with_buffer(ctx, buf);
-		fz_print_stext_page_as_text(ctx, out, page);
-		fz_close_output(ctx, out);
+		if (flatten)
+		{
+			buf = fz_new_buffer_from_flattened_stext_page(ctx, page, flags, NULL);
+		}
+		else
+		{
+			buf = fz_new_buffer(ctx, 1024);
+			out = fz_new_output_with_buffer(ctx, buf);
+			fz_print_stext_page_as_text(ctx, out, page);
+			fz_close_output(ctx, out);
+		}
 		data = fz_string_from_buffer(ctx, buf);
 	}
 	fz_always(ctx)
@@ -10951,6 +10964,32 @@ static void ffi_PDFAnnotation_addInkListStrokeVertex(js_State *J)
 		rethrow(J);
 }
 
+static void ffi_PDFAnnotation_getName(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	pdf_annot *annot = ffi_toannot(J, 0);
+	const char *name = NULL;
+
+	fz_try(ctx)
+		name = pdf_annot_name(ctx, annot);
+	fz_catch(ctx)
+		rethrow(J);
+
+	js_pushstring(J, name);
+}
+
+static void ffi_PDFAnnotation_setName(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	pdf_annot *annot = ffi_toannot(J, 0);
+	const char *name = js_tostring(J, 1);
+
+	fz_try(ctx)
+		pdf_set_annot_name(ctx, annot, name);
+	fz_catch(ctx)
+		rethrow(J);
+}
+
 static void ffi_PDFAnnotation_hasAuthor(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
@@ -10985,6 +11024,44 @@ static void ffi_PDFAnnotation_setAuthor(js_State *J)
 
 	fz_try(ctx)
 		pdf_set_annot_author(ctx, annot, author);
+	fz_catch(ctx)
+		rethrow(J);
+}
+
+static void ffi_PDFAnnotation_hasSubject(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	pdf_annot *annot = ffi_toannot(J, 0);
+	int has;
+	fz_try(ctx)
+		has = pdf_annot_has_subject(ctx, annot);
+	fz_catch(ctx)
+		rethrow(J);
+	js_pushboolean(J, has);
+}
+
+static void ffi_PDFAnnotation_getSubject(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	pdf_annot *annot = ffi_toannot(J, 0);
+	const char *subject = NULL;
+
+	fz_try(ctx)
+		subject = pdf_annot_subject(ctx, annot);
+	fz_catch(ctx)
+		rethrow(J);
+
+	js_pushstring(J, subject);
+}
+
+static void ffi_PDFAnnotation_setSubject(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	pdf_annot *annot = ffi_toannot(J, 0);
+	const char *subject = js_tostring(J, 1);
+
+	fz_try(ctx)
+		pdf_set_annot_subject(ctx, annot, subject);
 	fz_catch(ctx)
 		rethrow(J);
 }
@@ -13152,7 +13229,7 @@ int murun_main(int argc, const char** argv)
 		jsB_propfun(J, "StructuredText.asJSON", ffi_StructuredText_asJSON, 1);
 		jsB_propfun(J, "StructuredText.asXML", ffi_StructuredText_asXML, 0);
 		jsB_propfun(J, "StructuredText.asHTML", ffi_StructuredText_asHTML, 1);
-		jsB_propfun(J, "StructuredText.asText", ffi_StructuredText_asText, 0);
+		jsB_propfun(J, "StructuredText.asText", ffi_StructuredText_asText, 1);
 		jsB_propfun(J, "StructuredText.classifyRect", ffi_StructuredText_classifyRect, 2);
 		jsB_propfun(J, "StructuredText.tableHunt", ffi_StructuredText_tableHunt, 0);
 		jsB_propfun(J, "StructuredText.segment", ffi_StructuredText_segment, 0);
@@ -13382,9 +13459,14 @@ int murun_main(int argc, const char** argv)
 		jsB_propfun(J, "PDFAnnotation.setInteriorColor", ffi_PDFAnnotation_setInteriorColor, 1);
 		jsB_propfun(J, "PDFAnnotation.getOpacity", ffi_PDFAnnotation_getOpacity, 0);
 		jsB_propfun(J, "PDFAnnotation.setOpacity", ffi_PDFAnnotation_setOpacity, 1);
+		jsB_propfun(J, "PDFAnnotation.getName", ffi_PDFAnnotation_getName, 0);
+		jsB_propfun(J, "PDFAnnotation.setName", ffi_PDFAnnotation_setName, 1);
 		jsB_propfun(J, "PDFAnnotation.hasAuthor", ffi_PDFAnnotation_hasAuthor, 0);
 		jsB_propfun(J, "PDFAnnotation.getAuthor", ffi_PDFAnnotation_getAuthor, 0);
 		jsB_propfun(J, "PDFAnnotation.setAuthor", ffi_PDFAnnotation_setAuthor, 1);
+		jsB_propfun(J, "PDFAnnotation.hasSubject", ffi_PDFAnnotation_hasSubject, 0);
+		jsB_propfun(J, "PDFAnnotation.getSubject", ffi_PDFAnnotation_getSubject, 0);
+		jsB_propfun(J, "PDFAnnotation.setSubject", ffi_PDFAnnotation_setSubject, 1);
 		jsB_propfun(J, "PDFAnnotation.getCreationDate", ffi_PDFAnnotation_getCreationDate, 0);
 		jsB_propfun(J, "PDFAnnotation.setCreationDate", ffi_PDFAnnotation_setCreationDate, 1);
 		jsB_propfun(J, "PDFAnnotation.getModificationDate", ffi_PDFAnnotation_getModificationDate, 0);
@@ -13739,9 +13821,9 @@ int murun_main(int argc, const char** argv)
 		jsB_enum(J, "LinkDestination", "LINK_DEST_FIT_R", FZ_LINK_DEST_FIT_R);
 		jsB_enum(J, "LinkDestination", "LINK_DEST_XYZ", FZ_LINK_DEST_XYZ);
 
-		jsB_enum(J, "OutlineIterator", "ITERATOR_DID_NOT_MOVE", -1);
-		jsB_enum(J, "OutlineIterator", "ITERATOR_AT_ITEM", 0);
-		jsB_enum(J, "OutlineIterator", "ITERATOR_AT_EMPTY", 1);
+		jsB_enum(J, "OutlineIterator", "ITERATOR_DID_NOT_MOVE", FZ_OUTLINE_ITERATOR_DID_NOT_MOVE);
+		jsB_enum(J, "OutlineIterator", "ITERATOR_AT_ITEM", FZ_OUTLINE_ITERATOR_AT_ITEM);
+		jsB_enum(J, "OutlineIterator", "ITERATOR_AT_EMPTY", FZ_OUTLINE_ITERATOR_AT_EMPTY);
 
 		jsB_enum(J, "OutlineIterator", "FLAG_BOLD", FZ_OUTLINE_FLAG_BOLD);
 		jsB_enum(J, "OutlineIterator", "FLAG_ITALIC", FZ_OUTLINE_FLAG_ITALIC);
@@ -13751,6 +13833,7 @@ int murun_main(int argc, const char** argv)
 		jsB_enum(J, "Page", "BLEED_BOX", FZ_BLEED_BOX);
 		jsB_enum(J, "Page", "TRIM_BOX", FZ_TRIM_BOX);
 		jsB_enum(J, "Page", "ART_BOX", FZ_ART_BOX);
+		jsB_enum(J, "Page", "UNKNOWN_BOX", FZ_UNKNOWN_BOX);
 
 		jsB_enum(J, "Pixmap", "DESKEW_BORDER_INCREASE", FZ_DESKEW_BORDER_INCREASE);
 		jsB_enum(J, "Pixmap", "DESKEW_BORDER_MAINTAIN", FZ_DESKEW_BORDER_MAINTAIN);
@@ -13773,6 +13856,9 @@ int murun_main(int argc, const char** argv)
 		jsB_enum(J, "StructuredText", "SEARCH_IGNORE_CASE", FZ_SEARCH_IGNORE_CASE);
 		jsB_enum(J, "StructuredText", "SEARCH_IGNORE_DIACRITICS", FZ_SEARCH_IGNORE_DIACRITICS);
 		jsB_enum(J, "StructuredText", "SEARCH_REGEXP", FZ_SEARCH_REGEXP);
+		jsB_enum(J, "StructuredText", "SEARCH_KEEP_LINES", FZ_SEARCH_KEEP_LINES);
+		jsB_enum(J, "StructuredText", "SEARCH_KEEP_PARAGRAPHS", FZ_SEARCH_KEEP_PARAGRAPHS);
+		jsB_enum(J, "StructuredText", "SEARCH_KEEP_HYPHENS", FZ_SEARCH_KEEP_HYPHENS);
 
 		jsB_enum(J, "StructuredText", "FLAGS_STRIKEOUT", FZ_STEXT_STRIKEOUT);
 		jsB_enum(J, "StructuredText", "FLAGS_UNDERLINE", FZ_STEXT_UNDERLINE);
@@ -13787,6 +13873,14 @@ int murun_main(int argc, const char** argv)
 
 		jsB_enum(J, "StructuredText", "VECTOR_IS_STROKED", FZ_STEXT_VECTOR_IS_STROKED);
 		jsB_enum(J, "StructuredText", "VECTOR_IS_RECTANGLE", FZ_STEXT_VECTOR_IS_RECTANGLE);
+
+		jsB_enum(J, "StructuredText", "TEXT_JUSTIFY_UNKNOWN", FZ_STEXT_TEXT_JUSTIFY_UNKNOWN);
+		jsB_enum(J, "StructuredText", "TEXT_JUSTIFY_LEFT", FZ_STEXT_TEXT_JUSTIFY_LEFT);
+		jsB_enum(J, "StructuredText", "TEXT_JUSTIFY_CENTER", FZ_STEXT_TEXT_JUSTIFY_CENTER);
+		jsB_enum(J, "StructuredText", "TEXT_JUSTIFY_RIGHT", FZ_STEXT_TEXT_JUSTIFY_RIGHT);
+		jsB_enum(J, "StructuredText", "TEXT_JUSTIFY_FULL", FZ_STEXT_TEXT_JUSTIFY_FULL);
+
+		jsB_enum(J, "StructuredText", "VECTOR_CONTINUES", FZ_STEXT_VECTOR_CONTINUES);
 	}
 
 #if FZ_ENABLE_PDF
@@ -13908,14 +14002,21 @@ int murun_main(int argc, const char** argv)
 		jsB_enum(J, "PDFWidget", "FIELD_IS_NO_EXPORT", PDF_FIELD_IS_NO_EXPORT);
 		jsB_enum(J, "PDFWidget", "TX_FIELD_IS_MULTILINE", PDF_TX_FIELD_IS_MULTILINE);
 		jsB_enum(J, "PDFWidget", "TX_FIELD_IS_PASSWORD", PDF_TX_FIELD_IS_PASSWORD);
+		jsB_enum(J, "PDFWidget", "TX_FIELD_IS_FILE_SELECT", PDF_TX_FIELD_IS_FILE_SELECT);
+		jsB_enum(J, "PDFWidget", "TX_FIELD_IS_DO_NOT_SPELL_CHECK", PDF_TX_FIELD_IS_DO_NOT_SPELL_CHECK);
+		jsB_enum(J, "PDFWidget", "TX_FIELD_IS_DO_NOT_SCROLL", PDF_TX_FIELD_IS_DO_NOT_SCROLL);
 		jsB_enum(J, "PDFWidget", "TX_FIELD_IS_COMB", PDF_TX_FIELD_IS_COMB);
+		jsB_enum(J, "PDFWidget", "TX_FIELD_IS_RICH_TEXT", PDF_TX_FIELD_IS_RICH_TEXT);
 		jsB_enum(J, "PDFWidget", "BTN_FIELD_IS_NO_TOGGLE_TO_OFF", PDF_BTN_FIELD_IS_NO_TOGGLE_TO_OFF);
 		jsB_enum(J, "PDFWidget", "BTN_FIELD_IS_RADIO", PDF_BTN_FIELD_IS_RADIO);
 		jsB_enum(J, "PDFWidget", "BTN_FIELD_IS_PUSHBUTTON", PDF_BTN_FIELD_IS_PUSHBUTTON);
+		jsB_enum(J, "PDFWidget", "BTN_FIELD_IS_RADIOS_IN_UNISON", PDF_BTN_FIELD_IS_RADIOS_IN_UNISON);
 		jsB_enum(J, "PDFWidget", "CH_FIELD_IS_COMBO", PDF_CH_FIELD_IS_COMBO);
 		jsB_enum(J, "PDFWidget", "CH_FIELD_IS_EDIT", PDF_CH_FIELD_IS_EDIT);
 		jsB_enum(J, "PDFWidget", "CH_FIELD_IS_SORT", PDF_CH_FIELD_IS_SORT);
 		jsB_enum(J, "PDFWidget", "CH_FIELD_IS_MULTI_SELECT", PDF_CH_FIELD_IS_MULTI_SELECT);
+		jsB_enum(J, "PDFWidget", "CH_FIELD_IS_DO_NOT_SPELL_CHECK", PDF_CH_FIELD_IS_DO_NOT_SPELL_CHECK);
+		jsB_enum(J, "PDFWidget", "CH_FIELD_IS_COMMIT_ON_SEL_CHANGE", PDF_CH_FIELD_IS_COMMIT_ON_SEL_CHANGE);
 #endif
 	}
 

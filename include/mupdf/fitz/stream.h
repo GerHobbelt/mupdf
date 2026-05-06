@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2004-2026 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -541,7 +541,7 @@ static inline int fz_is_eof(fz_context *ctx, fz_stream *stm)
 */
 static inline unsigned int fz_read_bits(fz_context *ctx, fz_stream *stm, int n)
 {
-	int x;
+	unsigned int x;
 
 	ASSERT0(n > 1 && n < 8 * (int) sizeof(int));
 

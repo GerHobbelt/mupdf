@@ -32,6 +32,7 @@
 static char *
 xps_parse_float_array(fz_context *ctx, xps_document *doc, char *s, int num, int *obtained, float *x)
 {
+	char *s0;
 	int k = 0;
 
 	if (s == NULL || *s == 0)
@@ -45,7 +46,14 @@ xps_parse_float_array(fz_context *ctx, xps_document *doc, char *s, int num, int 
 	{
 		while (*s == 0x0d || *s == '\t' || *s == ' ' || *s == 0x0a)
 			s++;
+		s0 = s;
 		x[k] = fz_strtof(s, &s);
+		if (s == s0)
+		{
+			if (obtained)
+				*obtained = k;
+			return NULL;
+		}
 		while (*s == 0x0d || *s == '\t' || *s == ' ' || *s == 0x0a)
 			s++;
 		if (*s == ',')
@@ -583,6 +591,11 @@ xps_parse_poly_quadratic_bezier_segment(fz_context *ctx, xps_document *doc, fz_p
 		while (*s == ' ') s++;
 		x[n] = y[n] = 0;
 		s = xps_parse_point(ctx, doc, s, &x[n], &y[n]);
+		if (!s)
+		{
+			fz_warn(ctx, "PolyQuadraticBezierSegment element has malformed points");
+			return;
+		}
 		n ++;
 		if (n == 2)
 		{
@@ -632,6 +645,11 @@ xps_parse_poly_bezier_segment(fz_context *ctx, xps_document *doc, fz_path *path,
 		while (*s == ' ') s++;
 		x[n] = y[n] = 0;
 		s = xps_parse_point(ctx, doc, s, &x[n], &y[n]);
+		if (!s)
+		{
+			fz_warn(ctx, "PolyBezierSegment element has malformed points");
+			return;
+		}
 		n ++;
 		if (n == 3)
 		{
@@ -671,6 +689,11 @@ xps_parse_poly_line_segment(fz_context *ctx, xps_document *doc, fz_path *path, f
 		while (*s == ' ') s++;
 		x = y = 0;
 		s = xps_parse_point(ctx, doc, s, &x, &y);
+		if (!s)
+		{
+			fz_warn(ctx, "PolyLineSegment element has malformed points");
+			return;
+		}
 		if (stroking && !is_stroked)
 			fz_moveto(ctx, path, x, y);
 		else

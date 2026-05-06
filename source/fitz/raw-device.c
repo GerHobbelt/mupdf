@@ -234,7 +234,7 @@ fz_raw_end_group(fz_context *ctx, fz_device *dev_)
 }
 
 static int
-fz_raw_begin_tile(fz_context *ctx, fz_device *dev_, fz_rect area, fz_rect view, float xstep, float ystep, fz_matrix ctm, int id)
+fz_raw_begin_tile(fz_context *ctx, fz_device *dev_, fz_rect area, fz_rect view, float xstep, float ystep, fz_matrix ctm, int id, int doc_id)
 {
 	return 0;
 }

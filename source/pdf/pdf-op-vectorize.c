@@ -255,11 +255,11 @@ show_space(fz_context *ctx, pdf_vectorize_processor *pr, float tadj)
 }
 
 static void
-do_show_string(fz_context *ctx, pdf_vectorize_processor *pr, unsigned char *buf, size_t len)
+do_show_string(fz_context *ctx, pdf_vectorize_processor *pr, const unsigned char *buf, size_t len)
 {
 	vectorize_gstate *gstate = pr->gstate;
 	pdf_font_desc *fontdesc = gstate->text.font;
-	unsigned char *end = buf + len;
+	const unsigned char *end = buf + len;
 	unsigned int cpt;
 	int cid;
 
@@ -283,7 +283,7 @@ do_show_string(fz_context *ctx, pdf_vectorize_processor *pr, unsigned char *buf,
 }
 
 static void
-show_string(fz_context *ctx, pdf_vectorize_processor *pr, unsigned char *buf, size_t len)
+show_string(fz_context *ctx, pdf_vectorize_processor *pr, const unsigned char *buf, size_t len)
 {
 	vectorize_gstate *gstate = pr->gstate;
 	pdf_font_desc *fontdesc = gstate->text.font;
@@ -472,19 +472,19 @@ pdf_vectorize_TJ(fz_context *ctx, pdf_processor *proc, pdf_obj *obj)
 }
 
 static void
-pdf_vectorize_Tj(fz_context *ctx, pdf_processor *proc, char *str, size_t len)
+pdf_vectorize_Tj(fz_context *ctx, pdf_processor *proc, const char *str, size_t len)
 {
 	pdf_vectorize_processor *p = (pdf_vectorize_processor*)proc;
 
-	show_string(ctx, p, (unsigned char *)str, len);
+	show_string(ctx, p, (const unsigned char *)str, len);
 }
 
 static void
-pdf_vectorize_squote(fz_context *ctx, pdf_processor *proc, char *str, size_t len)
+pdf_vectorize_squote(fz_context *ctx, pdf_processor *proc, const char *str, size_t len)
 {
 	pdf_vectorize_processor *p = (pdf_vectorize_processor*)proc;
 
-	show_string(ctx, p, (unsigned char*)str, len);
+	show_string(ctx, p, (const unsigned char*)str, len);
 }
 
 static void

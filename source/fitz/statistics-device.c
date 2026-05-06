@@ -465,7 +465,7 @@ fz_stats_end_group(fz_context* ctx, fz_device* dev)
 }
 
 static int
-fz_stats_begin_tile(fz_context* ctx, fz_device* dev, fz_rect area, fz_rect pattern_bbox_view, float xstep, float ystep, fz_matrix ctm, int id)
+fz_stats_begin_tile(fz_context* ctx, fz_device* dev, fz_rect area, fz_rect pattern_bbox_view, float xstep, float ystep, fz_matrix ctm, int id, int doc_id)
 {
 	fz_stats_device* writer = (fz_stats_device*)dev;
 

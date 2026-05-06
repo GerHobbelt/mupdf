@@ -263,7 +263,7 @@ void fz_save_pixmap_as_jpeg(fz_context *ctx, const fz_pixmap *pixmap, const char
 /**
 	Write a (Greyscale or RGB) pixmap as a png.
 */
-void fz_write_pixmap_as_png(fz_context *ctx, fz_output *out, fz_pixmap *pixmap);
+void fz_write_pixmap_as_png(fz_context *ctx, fz_output *out, const fz_pixmap *pixmap);
 
 /**
 	Pixmap data as JP2K with no subsampling.

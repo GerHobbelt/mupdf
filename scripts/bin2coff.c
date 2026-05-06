@@ -284,7 +284,7 @@ main(int argc, const char** argv)
 	int i, r = 1;
 	char* label = NULL;
 	FILE* fd = NULL;
-	size_t size, alloc_size;
+	size_t size, alloc_size, padded_size;
 	size_t padding_length;
 	uint8_t* buffer = NULL;
 	IMAGE_FILE_HEADER* file_header;
@@ -338,7 +338,7 @@ main(int argc, const char** argv)
 	x86_32 = (machine == MACHINE_X86 ? 1 : 0);
 
 	if (machine == MACHINE_ARM64) {
-		padding_length = (4 - (size % 4)) % 4;
+		padding_length = (sizeof(SIZE_TYPE) - (size % sizeof(SIZE_TYPE))) % sizeof(SIZE_TYPE);
 	}
 	else {
 		padding_length = 0;
@@ -371,7 +371,8 @@ main(int argc, const char** argv)
 
 	short_label = (strlen(label) + x86_32) <= IMAGE_SIZEOF_SHORT_NAME;
 	short_size = (strlen(label) + x86_32 + strlen(SIZE_LABEL_SUFFIX)) <= IMAGE_SIZEOF_SHORT_NAME;
-	alloc_size = sizeof(IMAGE_FILE_HEADER) + sizeof(IMAGE_SECTION_HEADER) + size + padding_length + sizeof(SIZE_TYPE) + 2 * sizeof(IMAGE_SYMBOL) + sizeof(IMAGE_STRINGS);
+	padded_size = size +  + padding_length;
+	alloc_size = sizeof(IMAGE_FILE_HEADER) + sizeof(IMAGE_SECTION_HEADER) + padded_size + sizeof(SIZE_TYPE) + 2*sizeof(IMAGE_SYMBOL) + sizeof(IMAGE_STRINGS);
 	if (!short_label) {
 		alloc_size += x86_32 + strlen(label) + 1;
 	}
@@ -386,8 +387,8 @@ main(int argc, const char** argv)
 	}
 	file_header = (IMAGE_FILE_HEADER*)&buffer[0];
 	section_header = (IMAGE_SECTION_HEADER*)&buffer[sizeof(IMAGE_FILE_HEADER)];
-	symbol_table = (IMAGE_SYMBOL*)&buffer[sizeof(IMAGE_FILE_HEADER) + sizeof(IMAGE_SECTION_HEADER) + size + sizeof(SIZE_TYPE)];
-	string_table = (IMAGE_STRINGS*)&buffer[sizeof(IMAGE_FILE_HEADER) + sizeof(IMAGE_SECTION_HEADER) + size + sizeof(SIZE_TYPE) + 2 * sizeof(IMAGE_SYMBOL)];
+	symbol_table = (IMAGE_SYMBOL*)&buffer[sizeof(IMAGE_FILE_HEADER) + sizeof(IMAGE_SECTION_HEADER) + padded_size + sizeof(SIZE_TYPE)];
+	string_table = (IMAGE_STRINGS*)&buffer[sizeof(IMAGE_FILE_HEADER) + sizeof(IMAGE_SECTION_HEADER) + padded_size + sizeof(SIZE_TYPE) + 2*sizeof(IMAGE_SYMBOL)];
 
 	/* Populate file header */
 	switch (machine) {
@@ -406,13 +407,13 @@ main(int argc, const char** argv)
 	}
 
 	file_header->NumberOfSections = 1;
-	file_header->PointerToSymbolTable = sizeof(IMAGE_FILE_HEADER) + sizeof(IMAGE_SECTION_HEADER) + (uint32_t)size + 4 + padding_length;
+	file_header->PointerToSymbolTable = sizeof(IMAGE_FILE_HEADER) + sizeof(IMAGE_SECTION_HEADER) + (uint32_t)padded_size + 4;
 	file_header->NumberOfSymbols = 2;
 	file_header->Characteristics = IMAGE_FILE_LINE_NUMS_STRIPPED;
 
 	/* Populate data section header */
 	strncpy(section_header->Name, ".data", IMAGE_SIZEOF_SHORT_NAME);
-	section_header->SizeOfRawData = (uint32_t)size + 4 + padding_length;
+	section_header->SizeOfRawData = (uint32_t)padded_size + 4;
 	section_header->PointerToRawData = sizeof(IMAGE_FILE_HEADER) + sizeof(IMAGE_SECTION_HEADER);
 	section_header->Characteristics = IMAGE_SCN_CNT_INITIALIZED_DATA | IMAGE_SCN_ALIGN_16BYTES | IMAGE_SCN_MEM_READ | IMAGE_SCN_MEM_WRITE;
 
@@ -421,14 +422,10 @@ main(int argc, const char** argv)
 		fprintf(stderr, "Couldn't read file '%s'.\n", argv[1]);
 		goto err;
 	}
+	if (size != padded_size)
+		memset(&buffer[sizeof(IMAGE_FILE_HEADER) + sizeof(IMAGE_SECTION_HEADER) + size], 0, padded_size - size);
 	fclose(fd); fd = NULL;
-
-	uint8_t* padding_ptr = &buffer[sizeof(IMAGE_FILE_HEADER) + sizeof(IMAGE_SECTION_HEADER) + size];
-	if (padding_length) {
-		memset(padding_ptr, 0, padding_length);
-	}
-	padding_ptr += padding_length;
-	data_size = (SIZE_TYPE*)padding_ptr;
+	data_size = (SIZE_TYPE*)&buffer[sizeof(IMAGE_FILE_HEADER) + sizeof(IMAGE_SECTION_HEADER) + padded_size];
 	*data_size = (SIZE_TYPE)size;
 
 	/* Populate symbol table */
@@ -459,7 +456,7 @@ main(int argc, const char** argv)
 	symbol_table[1].Type = IMAGE_SYM_TYPE_NULL;
 	symbol_table[1].StorageClass = IMAGE_SYM_CLASS_EXTERNAL;
 	symbol_table[1].SectionNumber = 1;
-	symbol_table[1].Value = (int32_t)size + padding_length;	/* Offset within the section */
+	symbol_table[1].Value = (int32_t)padded_size;	/* Offset within the section */
 
 	/* Populate string table */
 	string_table->TotalSize = sizeof(IMAGE_STRINGS);

@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2025 Artifex Software, Inc.
+// Copyright (C) 2004-2026 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -495,30 +495,78 @@ static void layout_line(fz_context *ctx, float indent, float page_w, float line_
 		node->x = x;
 		x += w;
 
-		switch (node->box->style->vertical_align)
-		{
-		default:
-		case VA_BASELINE:
-		case VA_SUB:
-		case VA_SUPER:
-		case VA_MIDDLE:
-			va = node->box->s.layout.baseline;
-			break;
-
-		case VA_TOP:
-		case VA_TEXT_TOP:
-			va = -baseline + node->box->s.layout.em * 0.8f;
-			break;
-		case VA_BOTTOM:
-		case VA_TEXT_BOTTOM:
-			va = -baseline + line_h - node->box->s.layout.em * 0.2f;
-			break;
-		}
-
 		if (node->type == FLOW_IMAGE)
-			node->y = y + baseline - node->h;
+		{
+			switch (node->box->style->vertical_align)
+			{
+			default:
+			case VA_BASELINE:
+				node->y = y + baseline - node->h;
+				break;
+			case VA_SUB:
+				node->y = y + baseline - node->h + node->box->s.layout.em / 5;
+				break;
+			case VA_SUPER:
+				node->y = y + baseline - node->h - node->box->s.layout.em / 3;
+				break;
+			case VA_MIDDLE:
+				// middle of the element with the baseline plus half the x-height of the parent
+				node->y = y + baseline - node->box->s.layout.em * 0.25f - node->h * 0.5f;
+				break;
+			case VA_TOP:
+				node->y = y;
+				break;
+			case VA_TEXT_TOP:
+				node->y = y + baseline - node->box->s.layout.em * 0.8f;
+				break;
+			case VA_BOTTOM:
+				node->y = y + line_h - node->h;
+				break;
+			case VA_TEXT_BOTTOM:
+				node->y = y + baseline + node->box->s.layout.em * 0.2f - node->h;
+				break;
+			case VA_PERCENT:
+			case VA_LENGTH:
+				node->y = y + baseline - node->h -
+					fz_from_css_number(
+						node->box->style->vertical_align_number,
+						node->box->s.layout.em,
+						fz_from_css_number_scale(node->box->style->line_height, node->box->s.layout.em),
+						0
+					);
+				break;
+			}
+		}
 		else
 		{
+			switch (node->box->style->vertical_align)
+			{
+			default:
+			case VA_BASELINE:
+			case VA_SUB:
+			case VA_SUPER:
+			case VA_MIDDLE:
+				va = node->box->s.layout.baseline;
+				break;
+
+			case VA_TOP:
+			case VA_TEXT_TOP:
+				va = -baseline + node->box->s.layout.em * 0.8f;
+				break;
+			case VA_BOTTOM:
+			case VA_TEXT_BOTTOM:
+				va = -baseline + line_h - node->box->s.layout.em * 0.2f;
+				break;
+			case VA_PERCENT:
+			case VA_LENGTH:
+				va = -fz_from_css_number(
+					node->box->style->vertical_align_number,
+					node->box->s.layout.em,
+					fz_from_css_number_scale(node->box->style->line_height, node->box->s.layout.em),
+					0
+				);
+				break;
+			}
 			node->y = y + baseline + va;
 			node->h = node->box->s.layout.em;
 		}
@@ -1026,6 +1074,10 @@ static void layout_flow(fz_context *ctx, layout_data *ld, fz_html_box *box, fz_h
 				break_at = desperate;
 				break_w = desperate_w;
 			}
+
+			/* text-indent on right side is already baked into break_w */
+			if (box->markup_dir == FZ_BIDI_RTL)
+				indent = 0;
 
 			if (flush_line(ctx, box, ld, break_w, line_align, indent, line, break_at, restart))
 				return;
@@ -2278,15 +2330,6 @@ cell_rowspan(fz_html_box *cell)
 	if (r < 1)
 		return 1;
 	return r;
-}
-
-static inline int
-cell_colspan(fz_html_box *cell)
-{
-	int c = cell->style->colspan;
-	if (c < 1)
-		return 1;
-	return c;
 }
 
 static void

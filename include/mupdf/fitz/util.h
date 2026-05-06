@@ -216,4 +216,9 @@ fz_buffer *fz_new_buffer_from_page_with_format(fz_context *ctx, fz_page *page, c
 
 #endif
 
+/**
+	Returns a page rendered with text from the given rectangles culled.
+*/
+fz_pixmap *fz_draw_page_culling_text(fz_context *ctx, fz_page *page, fz_matrix ctm, int n, const fz_rect *rects);
+
 #endif

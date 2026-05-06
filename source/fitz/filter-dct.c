@@ -215,6 +215,7 @@ next_dctd(fz_context *ctx, fz_stream *stm, size_t max)
 	j_decompress_ptr cinfo = &state->cinfo;
 	unsigned char *p = state->buffer;
 	unsigned char *ep;
+	size_t n;
 	int c;
 
 	if (max > sizeof(state->buffer))
@@ -293,8 +294,13 @@ next_dctd(fz_context *ctx, fz_stream *stm, size_t max)
 			state->wp = state->scanline;
 		}
 
-		while (state->rp < state->wp && p < ep)
-			*p++ = *state->rp++;
+		n = fz_minz(state->wp - state->rp, ep - p);
+		if (n > 0)
+		{
+			memcpy(p, state->rp, n);
+			p += n;
+			state->rp += n;
+		}
 
 		while (p < ep)
 		{
@@ -317,8 +323,13 @@ next_dctd(fz_context *ctx, fz_stream *stm, size_t max)
 				state->wp = state->scanline + state->stride;
 			}
 
-			while (state->rp < state->wp && p < ep)
-				*p++ = *state->rp++;
+			n = fz_minz(state->wp - state->rp, ep - p);
+			if (n > 0)
+			{
+				memcpy(p, state->rp, n);
+				p += n;
+				state->rp += n;
+			}
 		}
 		stm->rp = state->buffer;
 		stm->wp = p;
