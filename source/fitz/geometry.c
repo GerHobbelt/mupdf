@@ -938,16 +938,18 @@ int fz_is_quad_intersecting_quad(fz_quad a, fz_quad b)
 	return !fz_is_empty_rect(fz_intersect_rect(ar, br));
 }
 
-/* Multiply/add and check 32-bit overflow */
+/* ckd_mul, ckd_add and ckd_sub on signed integers */
 
-int fz_checked_mul_i32(int32_t *out, int32_t a, int32_t b)
+#ifndef HAVE_STDCKDINT_H
+
+int fz_ckd_mul_i32(int32_t *out, int32_t a, int32_t b)
 {
 	int64_t big = (int64_t)a * (int64_t)b;
 	*out = (int32_t)big;
-	return (int64_t)*out == big;
+	return (int64_t)*out != big;
 }
 
-int fz_checked_add_i32(int32_t *out, int32_t a, int32_t b)
+int fz_ckd_add_i32(int32_t *out, int32_t a, int32_t b)
 {
 	*out = a + b;
 	// adding + to - will never overflow.
@@ -957,7 +959,7 @@ int fz_checked_add_i32(int32_t *out, int32_t a, int32_t b)
 	return ((a < 0) == (b < 0) && (a < 0) != (*out < 0));
 }
 
-int fz_checked_sub_i32(int32_t *out, int32_t a, int32_t b)
+int fz_ckd_sub_i32(int32_t *out, int32_t a, int32_t b)
 {
 	*out = a - b;
 	// subtracting + from + will never overflow.
@@ -968,51 +970,72 @@ int fz_checked_sub_i32(int32_t *out, int32_t a, int32_t b)
 	return ((a < 0) != (b < 0) && (a < 0) != (*out < 0));
 }
 
-int fz_checked_mul_u32(uint32_t *out, uint32_t a, uint32_t b)
+int fz_ckd_mul_int(int *out, int a, int b)
+{
+	int64_t big = (int64_t)a * (int64_t)b;
+	*out = (int)big;
+	return (int64_t)*out != big;
+}
+
+int fz_ckd_add_int(int *out, int a, int b)
+{
+	*out = a + b;
+	return ((a < 0) == (b < 0) && (a < 0) != (*out < 0));
+}
+
+int fz_ckd_sub_int(int *out, int a, int b)
+{
+	*out = a - b;
+	return ((a < 0) != (b < 0) && (a < 0) != (*out < 0));
+}
+
+/* ckd_mul, ckd_add and ckd_sub on unsigned integers */
+
+int fz_ckd_mul_u32(uint32_t *out, uint32_t a, uint32_t b)
 {
 	uint64_t big = (uint64_t)a * (uint64_t)b;
 	*out = (uint32_t)big;
-	return (uint64_t)*out == big;
+	return (uint64_t)*out != big;
 }
 
-int fz_checked_add_u32(uint32_t *out, uint32_t a, uint32_t b)
+int fz_ckd_add_u32(uint32_t *out, uint32_t a, uint32_t b)
 {
 	*out = a + b;
 	return *out < a;
 }
 
-int fz_checked_sub_u32(uint32_t *out, uint32_t a, uint32_t b)
+int fz_ckd_sub_u32(uint32_t *out, uint32_t a, uint32_t b)
 {
 	*out = a - b;
 	return a < b;
 }
 
-int fz_checked_mul_int(int *out, int a, int b)
+int fz_ckd_mul_uint(unsigned int *out, unsigned int a, unsigned int b)
 {
-	int64_t big = (int64_t)a * (int64_t)b;
-	*out = (int32_t)big;
-	return (int64_t)*out == big;
+	uint64_t big = (uint64_t)a * (uint64_t)b;
+	*out = (unsigned int)big;
+	return (uint64_t)*out != big;
 }
 
-int fz_checked_add_int(int *out, int a, int b)
+int fz_ckd_add_uint(unsigned int *out, unsigned int a, unsigned int b)
 {
 	*out = a + b;
 	return *out < a;
 }
 
-int fz_checked_sub_int(int *out, int a, int b)
+int fz_ckd_sub_uint(unsigned int *out, unsigned int a, unsigned int b)
 {
 	*out = a - b;
 	return a < b;
 }
 
-int fz_checked_mul_size(size_t *out, size_t a, size_t b)
+int fz_ckd_mul_size(size_t *out, size_t a, size_t b)
 {
 	// TODO: if size_t is 64-bit!
 	if (a <= UINT32_MAX && b <= UINT32_MAX)
 	{
 		uint32_t x;
-		if (fz_checked_mul_u32(&x, a, b))
+		if (fz_ckd_mul_u32(&x, a, b))
 			return 1;
 		*out = x;
 		return 0;
@@ -1020,14 +1043,16 @@ int fz_checked_mul_size(size_t *out, size_t a, size_t b)
 	return 1;
 }
 
-int fz_checked_add_size(size_t *out, size_t a, size_t b)
+int fz_ckd_add_size(size_t *out, size_t a, size_t b)
 {
 	*out = a + b;
 	return *out < a;
 }
 
-int fz_checked_sub_size(size_t *out, size_t a, size_t b)
+int fz_ckd_sub_size(size_t *out, size_t a, size_t b)
 {
 	*out = a - b;
 	return a < b;
 }
+
+#endif

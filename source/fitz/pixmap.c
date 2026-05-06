@@ -36,13 +36,16 @@
 fz_pixmap *
 fz_keep_pixmap(fz_context *ctx, fz_pixmap *pix)
 {
-	return fz_keep_storable(ctx, &pix->storable);
+	if (pix)
+		return fz_keep_storable(ctx, &pix->storable);
+	return NULL;
 }
 
 void
 fz_drop_pixmap(fz_context *ctx, fz_pixmap *pix)
 {
-	fz_drop_storable(ctx, &pix->storable);
+	if (pix)
+		fz_drop_storable(ctx, &pix->storable);
 }
 
 void
@@ -1412,6 +1415,8 @@ fz_new_pixmap_from_float_data(fz_context *ctx, fz_colorspace *cs, int w, int h, 
 
 			mu /= nsamples;
 			d0 = maxsample - minsample;
+			if (d0 == 0)
+				d0 = 1;
 			k1 = (MAXLD - MINLD) / d0;
 			sigma = d0 / KIMKAUTZC1;
 			sigmasq2 = sigma * sigma * 2;

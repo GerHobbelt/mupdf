@@ -1009,22 +1009,53 @@ int fz_is_quad_inside_rect(fz_quad needle, fz_rect haystack);
 int fz_is_quad_intersecting_quad(fz_quad a, fz_quad b);
 
 /* Checked integer arithmetic helpers -- return whether operation succeeded without overflow or underflow. */
+/* Use builtin C23 ckd_mul, ckd_add, ckd_sub if available. */
 
-int fz_checked_mul_i32(int32_t *out, int32_t a, int32_t b);
-int fz_checked_add_i32(int32_t *out, int32_t a, int32_t b);
-int fz_checked_sub_i32(int32_t *out, int32_t a, int32_t b);
+#ifdef HAVE_STDCKDINT_H
 
-int fz_checked_mul_u32(uint32_t *out, uint32_t a, uint32_t b);
-int fz_checked_add_u32(uint32_t *out, uint32_t a, uint32_t b);
-int fz_checked_sub_u32(uint32_t *out, uint32_t a, uint32_t b);
+#include <stdckdint.h>
 
-int fz_checked_mul_int(int *out, int a, int b);
-int fz_checked_add_int(int *out, int a, int b);
-int fz_checked_sub_int(int *out, int a, int b);
+#define fz_ckd_mul_i32 ckd_mul
+#define fz_ckd_mul_u32 ckd_mul
+#define fz_ckd_mul_int ckd_mul
+#define fz_ckd_mul_uint ckd_mul
+#define fz_ckd_mul_size ckd_mul
 
-int fz_checked_mul_size(size_t *out, size_t a, size_t b);
-int fz_checked_add_size(size_t *out, size_t a, size_t b);
-int fz_checked_sub_size(size_t *out, size_t a, size_t b);
+#define fz_ckd_add_i32 ckd_add
+#define fz_ckd_add_u32 ckd_add
+#define fz_ckd_add_int ckd_add
+#define fz_ckd_add_uint ckd_add
+#define fz_ckd_add_size ckd_add
+
+#define fz_ckd_sub_i32 ckd_sub
+#define fz_ckd_sub_u32 ckd_sub
+#define fz_ckd_sub_int ckd_sub
+#define fz_ckd_sub_uint ckd_sub
+#define fz_ckd_sub_size ckd_sub
+
+#else
+
+int fz_ckd_mul_i32(int32_t *out, int32_t a, int32_t b);
+int fz_ckd_add_i32(int32_t *out, int32_t a, int32_t b);
+int fz_ckd_sub_i32(int32_t *out, int32_t a, int32_t b);
+
+int fz_ckd_mul_u32(uint32_t *out, uint32_t a, uint32_t b);
+int fz_ckd_add_u32(uint32_t *out, uint32_t a, uint32_t b);
+int fz_ckd_sub_u32(uint32_t *out, uint32_t a, uint32_t b);
+
+int fz_ckd_mul_int(int *out, int a, int b);
+int fz_ckd_add_int(int *out, int a, int b);
+int fz_ckd_sub_int(int *out, int a, int b);
+
+int fz_ckd_mul_uint(unsigned int *out, unsigned int a, unsigned int b);
+int fz_ckd_add_uint(unsigned int *out, unsigned int a, unsigned int b);
+int fz_ckd_sub_uint(unsigned int *out, unsigned int a, unsigned int b);
+
+int fz_ckd_mul_size(size_t *out, size_t a, size_t b);
+int fz_ckd_add_size(size_t *out, size_t a, size_t b);
+int fz_ckd_sub_size(size_t *out, size_t a, size_t b);
+
+#endif
 
 #ifdef __cplusplus
 }

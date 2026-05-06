@@ -105,17 +105,16 @@ static inline void fz_unlock_jbig2(fz_context* ctx)
 fz_jbig2_globals *
 fz_keep_jbig2_globals(fz_context *ctx, fz_jbig2_globals *globals)
 {
-	if (!globals)
-		return NULL;
-	return fz_keep_storable(ctx, &globals->storable);
+	if (globals)
+		return fz_keep_storable(ctx, &globals->storable);
+	return NULL;
 }
 
 void
 fz_drop_jbig2_globals(fz_context *ctx, fz_jbig2_globals *globals)
 {
-	if (!globals)
-		return;
-	fz_drop_storable(ctx, &globals->storable);
+	if (globals)
+		fz_drop_storable(ctx, &globals->storable);
 }
 
 void

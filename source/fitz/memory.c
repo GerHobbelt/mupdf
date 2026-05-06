@@ -134,16 +134,35 @@ fz_malloc_no_throw(fz_context *ctx, size_t size   FZDBG_DECL_ARGS)
 	return do_scavenging_malloc(ctx, size   FZDBG_PASS);
 }
 
+void *
+fz_malloc_array_imp(fz_context *ctx, size_t nmemb, size_t size)
+{
+	size_t total;
+	if (fz_ckd_mul_size(&total, nmemb, size))
+		fz_throw(ctx, FZ_ERROR_SYSTEM, "malloc array (%zu x %zu bytes) failed (overflow)", nmemb, size);
+	return fz_malloc(ctx, total);
+}
+
+void *
+fz_realloc_array_imp(fz_context *ctx, void *p, size_t nmemb, size_t size)
+{
+	size_t total;
+	if (fz_ckd_mul_size(&total, nmemb, size))
+		fz_throw(ctx, FZ_ERROR_SYSTEM, "realloc array (%zu x %zu bytes) failed (overflow)", nmemb, size);
+	return fz_realloc(ctx, p, total);
+}
+
 #undef fz_calloc
 void *
 fz_calloc(fz_context *ctx, size_t count, size_t size   FZDBG_DECL_ARGS)
 {
 	void *p;
+	size_t total;
 	if (count == 0 || size == 0)
 		return NULL;
-	if (count > SIZE_MAX / size)
-		fz_throw(ctx, FZ_ERROR_LIMIT, "calloc (%zu x %zu bytes) failed (size_t overflow)", count, size);
-	p = do_scavenging_malloc(ctx, count * size   FZDBG_PASS);
+	if (fz_ckd_mul_size(&total, count, size))
+		fz_throw(ctx, FZ_ERROR_SYSTEM, "calloc (%zu x %zu bytes) failed (overflow)", count, size);
+	p = do_scavenging_malloc(ctx, total   FZDBG_PASS);
 	if (!p)
 	{
 		errno = ENOMEM;
@@ -158,13 +177,14 @@ void *
 fz_calloc_no_throw(fz_context *ctx, size_t count, size_t size   FZDBG_DECL_ARGS)
 {
 	void *p;
+	size_t total;
 	if (count == 0 || size == 0)
 		return NULL;
-	if (count > SIZE_MAX / size)
+	if (fz_ckd_mul_size(&total, count, size))
 		return NULL;
-	p = do_scavenging_malloc(ctx, count * size   FZDBG_PASS);
+	p = do_scavenging_malloc(ctx, total   FZDBG_PASS);
 	if (p)
-		memset(p, 0, count * size);
+		memset(p, 0, total);
 	return p;
 }
 

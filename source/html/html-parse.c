@@ -775,9 +775,12 @@ static void fz_drop_story_imp(fz_context *ctx, fz_storable *stor)
 static void
 fz_drop_html_tree(fz_context *ctx, fz_html_tree *tree)
 {
-	fz_defer_reap_start(ctx);
-	fz_drop_storable(ctx, &tree->storable);
-	fz_defer_reap_end(ctx);
+	if (tree)
+	{
+		fz_defer_reap_start(ctx);
+		fz_drop_storable(ctx, &tree->storable);
+		fz_defer_reap_end(ctx);
+	}
 }
 
 void fz_drop_html(fz_context *ctx, fz_html *html)
@@ -795,7 +798,9 @@ void fz_drop_story(fz_context *ctx, fz_story *story)
 
 fz_html *fz_keep_html(fz_context *ctx, fz_html *html)
 {
-	return fz_keep_storable(ctx, &html->tree.storable);
+	if (html)
+		return fz_keep_storable(ctx, &html->tree.storable);
+	return NULL;
 }
 
 static fz_html_box *new_box(fz_context *ctx, struct genstate *g, fz_xml *node, int type, fz_css_style *style)

@@ -67,12 +67,14 @@ struct fz_path
 {
 	int8_t refs;
 	uint8_t packed;
+	uint8_t only_right_angles;
 	int cmd_len, cmd_cap;
 	unsigned char *cmds;
 	int coord_len, coord_cap;
 	float *coords;
 	fz_point current;
 	fz_point begin;
+	fz_rect rectilinear_bounds;
 };
 
 typedef struct
@@ -81,6 +83,7 @@ typedef struct
 	uint8_t packed;
 	uint8_t coord_len;
 	uint8_t cmd_len;
+	fz_rect rectilinear_bounds;
 } fz_packed_path;
 
 /*
@@ -99,8 +102,9 @@ typedef struct
 enum
 {
 	FZ_PATH_UNPACKED = 0,
-	FZ_PATH_PACKED_FLAT = 1,
-	FZ_PATH_PACKED_OPEN = 2
+	FZ_PATH_PACKED_OPEN = 1,
+	FZ_PATH_PACKED_FLAT = 2,
+	FZ_PATH_PACKED_FLAT_ONLY_RIGHT_ANGLES = 3
 };
 
 #define LAST_CMD(path) ((path)->cmd_len > 0 ? (path)->cmds[(path)->cmd_len-1] : 0)
@@ -117,6 +121,8 @@ fz_new_path(fz_context *ctx)
 	path->current.y = 0;
 	path->begin.x = 0;
 	path->begin.y = 0;
+	path->rectilinear_bounds = fz_empty_rect;
+	path->only_right_angles = 1;
 
 	return path;
 }
@@ -161,7 +167,7 @@ fz_drop_path(fz_context *ctx, const fz_path *pathc)
 
 	if (fz_drop_imp8(ctx, path, &path->refs))
 	{
-		if (path->packed != FZ_PATH_PACKED_FLAT)
+		if (path->packed < FZ_PATH_PACKED_FLAT)
 		{
 			fz_free(ctx, path->cmds);
 			fz_free(ctx, path->coords);
@@ -182,6 +188,7 @@ int fz_packed_path_size(const fz_path *path)
 	case FZ_PATH_PACKED_OPEN:
 		return sizeof(fz_path);
 	case FZ_PATH_PACKED_FLAT:
+	case FZ_PATH_PACKED_FLAT_ONLY_RIGHT_ANGLES:
 	{
 		fz_packed_path *pack = (fz_packed_path *)path;
 		return sizeof(fz_packed_path) + sizeof(float) * pack->coord_len + sizeof(uint8_t) * pack->cmd_len;
@@ -198,7 +205,7 @@ fz_pack_path(fz_context *ctx, uint8_t *pack_, const fz_path *path)
 	uint8_t *ptr;
 	size_t size;
 
-	if (path->packed == FZ_PATH_PACKED_FLAT)
+	if (path->packed >= FZ_PATH_PACKED_FLAT)
 	{
 		fz_packed_path *pack = (fz_packed_path *)path;
 		fz_packed_path *out = (fz_packed_path *)pack_;
@@ -206,11 +213,8 @@ fz_pack_path(fz_context *ctx, uint8_t *pack_, const fz_path *path)
 
 		if (out)
 		{
+			memcpy(out, pack, size);
 			out->refs = 1;
-			out->packed = FZ_PATH_PACKED_FLAT;
-			out->coord_len = pack->coord_len;
-			out->cmd_len = pack->cmd_len;
-			memcpy(&out[1], &pack[1], size - sizeof(*out));
 		}
 		return size;
 	}
@@ -246,6 +250,8 @@ fz_pack_path(fz_context *ctx, uint8_t *pack_, const fz_path *path)
 			}
 			memcpy(pack->coords, path->coords, sizeof(float) * path->coord_len);
 			memcpy(pack->cmds, path->cmds, sizeof(uint8_t) * path->cmd_len);
+			pack->rectilinear_bounds = path->rectilinear_bounds;
+			pack->only_right_angles = path->only_right_angles;
 		}
 		return sizeof(fz_path);
 	}
@@ -256,9 +262,11 @@ fz_pack_path(fz_context *ctx, uint8_t *pack_, const fz_path *path)
 		if (pack != NULL)
 		{
 			pack->refs = 1;
-			pack->packed = FZ_PATH_PACKED_FLAT;
+			pack->packed = (path->only_right_angles ? FZ_PATH_PACKED_FLAT_ONLY_RIGHT_ANGLES : FZ_PATH_PACKED_FLAT);
 			pack->cmd_len = path->cmd_len;
 			pack->coord_len = path->coord_len;
+			pack->rectilinear_bounds = path->rectilinear_bounds;
+
 			ptr = (uint8_t *)&pack[1];
 			memcpy(ptr, path->coords, sizeof(float) * path->coord_len);
 			ptr += sizeof(float) * path->coord_len;
@@ -315,9 +323,21 @@ push_ord(fz_context *ctx, fz_path *path, float xy, int isx)
 	path->coords[path->coord_len++] = xy;
 
 	if (isx)
+	{
 		path->current.x = xy;
+		if (xy < path->rectilinear_bounds.x0)
+			path->rectilinear_bounds.x0 = xy;
+		if (path->rectilinear_bounds.x1 < xy)
+			path->rectilinear_bounds.x1 = xy;
+	}
 	else
+	{
 		path->current.y = xy;
+		if (xy < path->rectilinear_bounds.y0)
+			path->rectilinear_bounds.y0 = xy;
+		if (path->rectilinear_bounds.y1 < xy)
+			path->rectilinear_bounds.y1 = xy;
+	}
 }
 
 fz_point
@@ -349,6 +369,19 @@ fz_moveto(fz_context *ctx, fz_path *path, float x, float y)
 	path->begin = path->current;
 }
 
+static void
+update_bounds(fz_path *path, float x, float y)
+{
+	if (x < path->rectilinear_bounds.x0)
+		path->rectilinear_bounds.x0 = x;
+	if (path->rectilinear_bounds.x1 < x)
+		path->rectilinear_bounds.x1 = x;
+	if (y < path->rectilinear_bounds.y0)
+		path->rectilinear_bounds.y0 = y;
+	if (path->rectilinear_bounds.y1 < y)
+		path->rectilinear_bounds.y1 = y;
+}
+
 void
 fz_lineto(fz_context *ctx, fz_path *path, float x, float y)
 {
@@ -366,8 +399,10 @@ fz_lineto(fz_context *ctx, fz_path *path, float x, float y)
 		return;
 	}
 
+	if (LAST_CMD(path) == FZ_MOVETO)
+		update_bounds(path, x0, y0);
 	/* (Anything other than MoveTo) followed by (LineTo the same place) is a nop */
-	if (LAST_CMD(path) != FZ_MOVETO && x0 == x && y0 == y)
+	else if (x0 == x && y0 == y)
 		return;
 
 	if (x0 == x)
@@ -393,6 +428,8 @@ fz_lineto(fz_context *ctx, fz_path *path, float x, float y)
 	{
 		push_cmd(ctx, path, FZ_LINETO);
 		push_coord(ctx, path, x, y);
+		update_bounds(path, x, y);
+		path->only_right_angles = 0;
 	}
 }
 
@@ -415,6 +452,9 @@ fz_curveto(fz_context *ctx, fz_path *path,
 		fz_warn(ctx, "curveto with no current point");
 		return;
 	}
+
+	if (LAST_CMD(path) == FZ_MOVETO)
+		update_bounds(path, x0, y0);
 
 	/* Check for degenerate cases: */
 	if (x0 == x1 && y0 == y1)
@@ -450,8 +490,12 @@ fz_curveto(fz_context *ctx, fz_path *path,
 
 	push_cmd(ctx, path, FZ_CURVETO);
 	push_coord(ctx, path, x1, y1);
+	update_bounds(path, x1, y1);
 	push_coord(ctx, path, x2, y2);
+	update_bounds(path, x2, y2);
 	push_coord(ctx, path, x3, y3);
+	update_bounds(path, x3, y3);
+	path->only_right_angles = 0;
 }
 
 void
@@ -473,6 +517,9 @@ fz_quadto(fz_context *ctx, fz_path *path,
 		return;
 	}
 
+	if (LAST_CMD(path) == FZ_MOVETO)
+		update_bounds(path, x0, y0);
+
 	/* Check for degenerate cases: */
 	if ((x0 == x1 && y0 == y1) || (x1 == x2 && y1 == y2))
 	{
@@ -485,7 +532,10 @@ fz_quadto(fz_context *ctx, fz_path *path,
 
 	push_cmd(ctx, path, FZ_QUADTO);
 	push_coord(ctx, path, x1, y1);
+	update_bounds(path, x1, y1);
 	push_coord(ctx, path, x2, y2);
+	update_bounds(path, x2, y2);
+	path->only_right_angles = 0;
 }
 
 void
@@ -505,6 +555,9 @@ fz_curvetov(fz_context *ctx, fz_path *path, float x2, float y2, float x3, float 
 		return;
 	}
 
+	if (LAST_CMD(path) == FZ_MOVETO)
+		update_bounds(path, x0, y0);
+
 	/* Check for degenerate cases: */
 	if (x2 == x3 && y2 == y3)
 	{
@@ -522,7 +575,10 @@ fz_curvetov(fz_context *ctx, fz_path *path, float x2, float y2, float x3, float 
 
 	push_cmd(ctx, path, FZ_CURVETOV);
 	push_coord(ctx, path, x2, y2);
+	update_bounds(path, x2, y2);
 	push_coord(ctx, path, x3, y3);
+	update_bounds(path, x3, y3);
+	path->only_right_angles = 0;
 }
 
 void
@@ -542,6 +598,9 @@ fz_curvetoy(fz_context *ctx, fz_path *path, float x1, float y1, float x3, float 
 		return;
 	}
 
+	if (LAST_CMD(path) == FZ_MOVETO)
+		update_bounds(path, x0, y0);
+
 	/* Check for degenerate cases: */
 	if (x1 == x3 && y1 == y3)
 	{
@@ -554,7 +613,10 @@ fz_curvetoy(fz_context *ctx, fz_path *path, float x1, float y1, float x3, float 
 
 	push_cmd(ctx, path, FZ_CURVETOY);
 	push_coord(ctx, path, x1, y1);
+	update_bounds(path, x1, y1);
 	push_coord(ctx, path, x3, y3);
+	update_bounds(path, x3, y3);
+	path->only_right_angles = 0;
 }
 
 void
@@ -570,6 +632,9 @@ fz_closepath(fz_context *ctx, fz_path *path)
 		fz_warn(ctx, "closepath with no current point");
 		return;
 	}
+
+	if (path->begin.x != path->current.x && path->begin.y != path->current.y)
+		path->only_right_angles = 0;
 
 	switch(LAST_CMD(path))
 	{
@@ -640,7 +705,9 @@ fz_rectto(fz_context *ctx, fz_path *path, float x1, float y1, float x2, float y2
 
 	push_cmd(ctx, path, FZ_RECTTO);
 	push_coord(ctx, path, x1, y1);
+	update_bounds(path, x1, y1);
 	push_coord(ctx, path, x2, y2);
+	update_bounds(path, x2, y2);
 
 	path->current = path->begin;
 }
@@ -693,6 +760,7 @@ void fz_walk_path(fz_context *ctx, const fz_path *path, const fz_path_walker *pr
 		cmds = path->cmds;
 		break;
 	case FZ_PATH_PACKED_FLAT:
+	case FZ_PATH_PACKED_FLAT_ONLY_RIGHT_ANGLES:
 		cmd_len = ((fz_packed_path *)path)->cmd_len;
 		coords = (float *)&((fz_packed_path *)path)[1];
 		cmds = (uint8_t *)&coords[((fz_packed_path *)path)->coord_len];
@@ -1009,12 +1077,21 @@ bound_curveto(fz_context *ctx, void *arg_, float x1, float y1, float x2, float y
 	arg->prev = p;
 }
 
+static void
+bound_closepath(fz_context *ctx, void *arg_)
+{
+	bound_path_arg *arg = (bound_path_arg *)arg_;
+	if (arg->only_right_angles && !eq0(arg->prev.x - arg->move.x) && !eq0(arg->prev.y - arg->move.y))
+		arg->only_right_angles = 0;
+	arg->prev = arg->move;
+}
+
 static const fz_path_walker bound_path_walker =
 {
 	bound_moveto,
 	bound_lineto,
 	bound_curveto,
-	NULL
+	bound_closepath
 };
 
 static fz_rect
@@ -1064,6 +1141,29 @@ fz_bound_path(fz_context *ctx, const fz_path *path, const fz_stroke_state *strok
 {
 	bound_path_arg arg;
 
+	if (!path)
+		return fz_empty_rect;
+
+	/* Fast-path using cached fill bounds (path-space) when CTM is rectilinear. */
+	if (fz_is_rectilinear(ctm))
+	{
+		if (path->packed >= FZ_PATH_PACKED_FLAT)
+		{
+			fz_packed_path *ppath = (fz_packed_path *)path;
+			fz_rect r = fz_transform_rect(ppath->rectilinear_bounds, ctm);
+			if (stroke)
+				r = adjust_rect_for_stroke(ctx, r, stroke, ctm, path->packed == FZ_PATH_PACKED_FLAT_ONLY_RIGHT_ANGLES);
+			return r;
+		}
+		else
+		{
+			fz_rect r = fz_transform_rect(path->rectilinear_bounds, ctm);
+			if (stroke)
+				r = adjust_rect_for_stroke(ctx, r, stroke, ctm, path->only_right_angles);
+			return r;
+		}
+	}
+
 	arg.ctm = ctm;
 	arg.rect = fz_empty_rect;
 	arg.trailing_move = 0;
@@ -1098,6 +1198,7 @@ fz_transform_path(fz_context *ctx, fz_path *path, fz_matrix ctm)
 	if (ctm.b == 0 && ctm.c == 0)
 	{
 		/* Simple, in place transform */
+		path->rectilinear_bounds = fz_transform_rect(path->rectilinear_bounds, ctm);
 		i = 0;
 		k = 0;
 		while (i < path->cmd_len)
@@ -1183,6 +1284,7 @@ fz_transform_path(fz_context *ctx, fz_path *path, fz_matrix ctm)
 	else if (ctm.a == 0 && ctm.d == 0)
 	{
 		/* In place transform with command rewriting */
+		path->rectilinear_bounds = fz_transform_rect(path->rectilinear_bounds, ctm);
 		i = 0;
 		k = 0;
 		while (i < path->cmd_len)
@@ -1322,6 +1424,10 @@ fz_transform_path(fz_context *ctx, fz_path *path, fz_matrix ctm)
 		memmove(path->coords + extra_coord, path->coords, path->coord_len * sizeof(float));
 		path->coord_len += extra_coord;
 
+		/* For now, we'll set only_right_angles to 0. This isn't perfect, but it's certainly
+		 * safe, and, frankly, we'd be very lucky to transform a path using such a transform
+		 * and to hit the only_right_angles case. */
+		path->only_right_angles = 0;
 		for (cmd_write = 0, cmd_read = extra_cmd, coord_write = 0, coord_read = extra_coord; cmd_read < path->cmd_len; i += 2)
 		{
 			uint8_t cmd = path->cmds[cmd_write++] = path->cmds[cmd_read++];
@@ -1376,6 +1482,10 @@ fz_transform_path(fz_context *ctx, fz_path *path, fz_matrix ctm)
 				path->cmds[cmd_write++] = FZ_LINETO;
 				path->cmds[cmd_write++] = FZ_LINETO;
 				path->cmds[cmd_write++] = FZ_LINETOCLOSE;
+				path->rectilinear_bounds = fz_include_point_in_rect(path->rectilinear_bounds, p);
+				path->rectilinear_bounds = fz_include_point_in_rect(path->rectilinear_bounds, p1);
+				path->rectilinear_bounds = fz_include_point_in_rect(path->rectilinear_bounds, p2);
+				path->rectilinear_bounds = fz_include_point_in_rect(path->rectilinear_bounds, p3);
 				n = 0;
 				break;
 			case FZ_HORIZTO:
@@ -1384,6 +1494,7 @@ fz_transform_path(fz_context *ctx, fz_path *path, fz_matrix ctm)
 				path->coords[coord_write++] = p.x;
 				path->coords[coord_write++] = p.y;
 				path->cmds[cmd_write-1] = FZ_LINETO;
+				path->rectilinear_bounds = fz_include_point_in_rect(path->rectilinear_bounds, p);
 				n = 0;
 				break;
 			case FZ_HORIZTOCLOSE:
@@ -1393,6 +1504,7 @@ fz_transform_path(fz_context *ctx, fz_path *path, fz_matrix ctm)
 				path->coords[coord_write++] = p.x;
 				path->coords[coord_write++] = p.y;
 				path->cmds[cmd_write-1] = FZ_LINETOCLOSE;
+				path->rectilinear_bounds = fz_include_point_in_rect(path->rectilinear_bounds, p);
 				q = s;
 				n = 0;
 				break;
@@ -1402,6 +1514,7 @@ fz_transform_path(fz_context *ctx, fz_path *path, fz_matrix ctm)
 				path->coords[coord_write++] = p.x;
 				path->coords[coord_write++] = p.y;
 				path->cmds[cmd_write-1] = FZ_LINETO;
+				path->rectilinear_bounds = fz_include_point_in_rect(path->rectilinear_bounds, p);
 				n = 0;
 				break;
 			case FZ_VERTTOCLOSE:
@@ -1411,6 +1524,7 @@ fz_transform_path(fz_context *ctx, fz_path *path, fz_matrix ctm)
 				path->coords[coord_write++] = p.x;
 				path->coords[coord_write++] = p.y;
 				path->cmds[cmd_write-1] = FZ_LINETOCLOSE;
+				path->rectilinear_bounds = fz_include_point_in_rect(path->rectilinear_bounds, p);
 				q = s;
 				n = 0;
 				break;
@@ -1424,6 +1538,7 @@ fz_transform_path(fz_context *ctx, fz_path *path, fz_matrix ctm)
 				p = fz_transform_point(q, ctm);
 				path->coords[coord_write++] = p.x;
 				path->coords[coord_write++] = p.y;
+				path->rectilinear_bounds = fz_include_point_in_rect(path->rectilinear_bounds, p);
 				n--;
 			}
 			switch (cmd)
@@ -1679,8 +1794,11 @@ fz_clone_path(fz_context *ctx, fz_path *path)
 			new_path->coords = Memento_label(clone_block(ctx, path->coords, sizeof(float)*path->coord_cap), "path_coords");
 			new_path->current = path->current;
 			new_path->begin = path->begin;
+			new_path->rectilinear_bounds = path->rectilinear_bounds;
+			new_path->only_right_angles = path->only_right_angles;
 			break;
 		case FZ_PATH_PACKED_FLAT:
+		case FZ_PATH_PACKED_FLAT_ONLY_RIGHT_ANGLES:
 			{
 				uint8_t *data;
 				float *xy;
@@ -1750,6 +1868,8 @@ fz_clone_path(fz_context *ctx, fz_path *path)
 						break;
 					}
 				}
+				new_path->rectilinear_bounds = ppath->rectilinear_bounds;
+				new_path->only_right_angles = (path->packed == FZ_PATH_PACKED_FLAT_ONLY_RIGHT_ANGLES ? 1 : 0);
 			}
 		default:
 			assert(!"Unknown packing method found in path");

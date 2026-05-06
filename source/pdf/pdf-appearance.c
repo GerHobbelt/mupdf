@@ -22,6 +22,7 @@
 
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
+#include "../fitz/context-imp.h"
 #include "pdf-annot-imp.h"
 #include "mupdf/ucdn.h"
 
