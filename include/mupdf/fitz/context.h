@@ -169,9 +169,6 @@ void fz_vlog_error_printf(fz_context *ctx, const char *fmt, va_list ap);
 */
 void fz_log_error(fz_context *ctx, const char *str);
 
-void fz_start_throw_on_repair(fz_context *ctx);
-void fz_end_throw_on_repair(fz_context *ctx);
-
 /**
 	Now, a debugging feature. If FZ_VERBOSE_EXCEPTIONS is 1 then
 	some of the above functions are replaced by versions that print
@@ -659,9 +656,12 @@ void fz_disable_icc(fz_context *ctx);
 	Throws exception in the event of failure to allocate.
 */
 #define fz_malloc_array(CTX, COUNT, TYPE) \
-	((TYPE*)Memento_label(fz_malloc(CTX, (COUNT) * sizeof(TYPE)), #TYPE "[]"))
+	((TYPE*)Memento_label(fz_malloc_array_imp((CTX), (COUNT), sizeof(TYPE)), #TYPE "[]"))
 #define fz_realloc_array(CTX, OLD, COUNT, TYPE) \
-	((TYPE*)Memento_label(fz_realloc(CTX, OLD, (COUNT) * sizeof(TYPE)), #TYPE "[]"))
+	((TYPE*)Memento_label(fz_realloc_array_imp((CTX), (OLD), (COUNT), sizeof(TYPE)), #TYPE "[]"))
+
+void *fz_malloc_array_imp(fz_context *ctx, size_t nmemb, size_t size);
+void *fz_realloc_array_imp(fz_context *ctx, void *p, size_t nmemb, size_t size);
 
 /**
 	Allocate uninitialized memory of a given size.
@@ -878,7 +878,7 @@ struct fz_context
 #if FZ_ENABLE_ICC
 	int icc_enabled;
 #endif
-	int throw_on_repair;
+	int internal_throw_on_repair;
 
 	/* TODO: should these be unshared? */
 	fz_document_handler_context *handler;
@@ -919,8 +919,19 @@ fz_unlock(fz_context *ctx, int lock)
 
 /* Lock-safe reference counting functions */
 
+#define fz_keep_imp(C,P,R) fz_keep_imp_aux((C), (P), (P) ? (R) : NULL)
+#define fz_keep_imp8(C,P,R) fz_keep_imp8_aux((C), (P), (P) ? (R) : NULL)
+#define fz_keep_imp16(C,P,R) fz_keep_imp16_aux((C), (P), (P) ? (R) : NULL)
+
+#define fz_keep_imp_locked(C,P,R) fz_keep_imp_locked_aux((C), (P), (P) ? (R) : NULL)
+#define fz_keep_imp8_locked(C,P,R) fz_keep_imp8_locked_aux((C), (P), (P) ? (R) : NULL)
+
+#define fz_drop_imp(C,P,R) fz_drop_imp_aux((C), (P), (P) ? (R) : NULL)
+#define fz_drop_imp8(C,P,R) fz_drop_imp8_aux((C), (P), (P) ? (R) : NULL)
+#define fz_drop_imp16(C,P,R) fz_drop_imp16_aux((C), (P), (P) ? (R) : NULL)
+
 static inline void *
-fz_keep_imp(fz_context *ctx, void *p, int *refs)
+fz_keep_imp_aux(fz_context *ctx, void *p, int *refs)
 {
 	if (p)
 	{
@@ -937,7 +948,7 @@ fz_keep_imp(fz_context *ctx, void *p, int *refs)
 }
 
 static inline void *
-fz_keep_imp_locked(fz_context *ctx FZ_UNUSED, void *p, int *refs)
+fz_keep_imp_locked_aux(fz_context *ctx FZ_UNUSED, void *p, int *refs)
 {
 	if (p)
 	{
@@ -952,7 +963,7 @@ fz_keep_imp_locked(fz_context *ctx FZ_UNUSED, void *p, int *refs)
 }
 
 static inline void *
-fz_keep_imp8_locked(fz_context *ctx FZ_UNUSED, void *p, int8_t *refs)
+fz_keep_imp8_locked_aux(fz_context *ctx FZ_UNUSED, void *p, int8_t *refs)
 {
 	if (p)
 	{
@@ -967,7 +978,7 @@ fz_keep_imp8_locked(fz_context *ctx FZ_UNUSED, void *p, int8_t *refs)
 }
 
 static inline void *
-fz_keep_imp8(fz_context *ctx, void *p, int8_t *refs)
+fz_keep_imp8_aux(fz_context *ctx, void *p, int8_t *refs)
 {
 	if (p)
 	{
@@ -984,7 +995,7 @@ fz_keep_imp8(fz_context *ctx, void *p, int8_t *refs)
 }
 
 static inline void *
-fz_keep_imp16(fz_context *ctx, void *p, int16_t *refs)
+fz_keep_imp16_aux(fz_context *ctx, void *p, int16_t *refs)
 {
 	if (p)
 	{
@@ -1001,7 +1012,7 @@ fz_keep_imp16(fz_context *ctx, void *p, int16_t *refs)
 }
 
 static inline int
-fz_drop_imp(fz_context *ctx, void *p, int *refs)
+fz_drop_imp_aux(fz_context *ctx, void *p, int *refs)
 {
 	if (p)
 	{
@@ -1022,7 +1033,7 @@ fz_drop_imp(fz_context *ctx, void *p, int *refs)
 }
 
 static inline int
-fz_drop_imp8(fz_context *ctx, void *p, int8_t *refs)
+fz_drop_imp8_aux(fz_context *ctx, void *p, int8_t *refs)
 {
 	if (p)
 	{
@@ -1043,7 +1054,7 @@ fz_drop_imp8(fz_context *ctx, void *p, int8_t *refs)
 }
 
 static inline int
-fz_drop_imp16(fz_context *ctx, void *p, int16_t *refs)
+fz_drop_imp16_aux(fz_context *ctx, void *p, int16_t *refs)
 {
 	if (p)
 	{

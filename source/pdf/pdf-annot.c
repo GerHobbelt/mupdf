@@ -1277,6 +1277,8 @@ static pdf_obj *rect_subtypes[] = {
 	PDF_NAME(Sound),
 	PDF_NAME(Movie),
 	PDF_NAME(Widget),
+	PDF_NAME(3D),
+	PDF_NAME(RichMedia),
 	NULL,
 };
 

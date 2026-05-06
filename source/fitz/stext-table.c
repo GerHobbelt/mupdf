@@ -863,7 +863,7 @@ sanitize_positions(fz_context *ctx, div_list *xs)
 				wind += xs->list[i].freq;
 			}
 			assert(i < xs->len);
-			for (; xs->list[i].left == 0 && i < xs->len; i++)
+			for (; i < xs->len && xs->list[i].left == 0; i++)
 			{
 				wind -= xs->list[i].freq;
 			}

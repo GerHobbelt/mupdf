@@ -2451,6 +2451,7 @@ pdf_check_document(fz_context *ctx, pdf_document *doc)
 {
 	int num;
 	int repaired_before;
+	int errored = 0;
 
 	if (doc->checked)
 		return 0;
@@ -2460,11 +2461,22 @@ pdf_check_document(fz_context *ctx, pdf_document *doc)
 	for (num = 1; num < pdf_xref_len(ctx, doc); ++num)
 	{
 		if (pdf_object_exists(ctx, doc, num))
-			(void) pdf_cache_object(ctx, doc, num);
+		{
+			fz_try(ctx)
+			{
+				(void) pdf_cache_object(ctx, doc, num);
+			}
+			fz_catch(ctx)
+			{
+				fz_rethrow_if(ctx, FZ_ERROR_SYSTEM);
+				errored = 1;
+				fz_report_error(ctx);
+			}
+		}
 	}
 	doc->checked = 1;
 
-	return repaired_before != doc->repair_attempted;
+	return repaired_before != doc->repair_attempted || errored;
 }
 
 static void

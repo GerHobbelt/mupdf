@@ -64,6 +64,13 @@ typedef unsigned __int64 uint64_t;
 #include <stdint.h> /* needed for int64_t */
 #endif
 
+/* Detect if we can use stdckdint.h */
+#ifdef __has_include
+#if __has_include(<stdckdint.h>)
+#define HAVE_STDCKDINT_H 1
+#endif
+#endif
+
 #include "mupdf/memento.h"
 #include "mupdf/fitz/track-usage.h"
 
@@ -338,6 +345,13 @@ int fz_mkdir(char *path);
 #else
 #define FZ_POINTER_ALIGN_MOD FZ_MEMORY_BLOCK_ALIGN_MOD
 #endif
+#endif
+
+#ifdef __SANITIZE_ADDRESS__
+/* The undefined behavior sanitizer complains about misaligned loads even though they should be okay. */
+/* Note: we can't detect sanitize=undefined, but we always set it together with sanitize=address which we can detect. */
+#undef FZ_POINTER_ALIGN_MOD
+#define FZ_POINTER_ALIGN_MOD FZ_MEMORY_BLOCK_ALIGN_MOD
 #endif
 
 #ifdef CLUSTER

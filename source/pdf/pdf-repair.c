@@ -794,12 +794,12 @@ pdf_repair_xref_base(fz_context *ctx, pdf_document *doc)
 		pdf_drop_obj(ctx, id);
 		pdf_drop_obj(ctx, obj);
 		pdf_drop_obj(ctx, info);
-		if (ctx->throw_on_repair)
+		if (ctx->internal_throw_on_repair)
 			fz_throw(ctx, FZ_ERROR_REPAIRED, "Error during repair attempt");
 		fz_rethrow(ctx);
 	}
 
-	if (ctx->throw_on_repair)
+	if (ctx->internal_throw_on_repair)
 	{
 		pdf_drop_root_list(ctx, roots);
 		fz_throw(ctx, FZ_ERROR_REPAIRED, "File repaired");

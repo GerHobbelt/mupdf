@@ -223,7 +223,7 @@ pnm_read_int(fz_context *ctx, const unsigned char *p, const unsigned char *e, in
 	{
 		if (number)
 		{
-			if (fz_checked_mul_int(number, *number, 10) || fz_checked_add_int(number, *number, *p - '0'))
+			if (fz_ckd_mul_int(number, *number, 10) || fz_ckd_add_int(number, *number, *p - '0'))
 				fz_throw(ctx, FZ_ERROR_FORMAT, "integer overflow in pnm image");
 		}
 		p++;
@@ -909,7 +909,7 @@ pfm_binary_read_image(fz_context *ctx, struct info *pnm, const unsigned char *p,
 	h = pnm->height;
 	n = fz_colorspace_n(ctx, pnm->cs);
 
-	if (fz_checked_mul_size(&size, w, h) || fz_checked_mul_size(&size, size, n) || fz_checked_mul_size(&size, size, sizeof (float)))
+	if (fz_ckd_mul_size(&size, w, h) || fz_ckd_mul_size(&size, size, n) || fz_ckd_mul_size(&size, size, sizeof (float)))
 		fz_throw(ctx, FZ_ERROR_LIMIT, "image too large");
 
 	if (e < p || (size_t)(e - p) < size)
