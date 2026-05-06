@@ -57,6 +57,16 @@ pdf_is_stream(fz_context *ctx, pdf_obj *ref)
 	return 0;
 }
 
+static int64_t
+pdf_stream_length(fz_context *ctx, pdf_document *doc, pdf_obj *dict)
+{
+	/* Return sanity-checked stream length: cannot be negative or larger than the file. */
+	int64_t len = pdf_dict_get_int64(ctx, dict, PDF_NAME(Length));
+	if (len < 0 || len > doc->file_size)
+		len = 0;
+	return len;
+}
+
 /*
  * Scan stream dictionary for an explicit /Crypt filter
  */
@@ -347,9 +357,7 @@ pdf_open_raw_filter(fz_context *ctx, fz_stream *file_stm, pdf_document *doc, pdf
 	}
 
 	hascrypt = pdf_stream_has_crypt(ctx, stmobj);
-	len = pdf_dict_get_int64(ctx, stmobj, PDF_NAME(Length));
-	if (len < 0)
-		len = 0;
+	len = pdf_stream_length(ctx, doc, stmobj);
 	null_stm = fz_open_endstream_filter(ctx, file_stm, (uint64_t)len, offset);
 	if (doc->crypt && !hascrypt)
 	{
@@ -509,16 +517,13 @@ pdf_load_raw_stream_number(fz_context *ctx, pdf_document *doc, int num)
 	dict = pdf_load_object(ctx, doc, num);
 
 	fz_try(ctx)
-		len = pdf_dict_get_int64(ctx, dict, PDF_NAME(Length));
+		len = pdf_stream_length(ctx, doc, dict);
 	fz_always(ctx)
 		pdf_drop_obj(ctx, dict);
 	fz_catch(ctx)
 		fz_rethrow(ctx);
 
 	stm = pdf_open_raw_stream_number(ctx, doc, num);
-
-	if (len < 0)
-		len = 1024;
 
 	fz_try(ctx)
 		buf = fz_read_all(ctx, stm, (size_t)len);
@@ -633,14 +638,13 @@ pdf_load_image_stream(fz_context *ctx, pdf_document *doc, int num, fz_compressio
 	dict = pdf_load_object(ctx, doc, num);
 	fz_try(ctx)
 	{
-		int64_t ilen = pdf_dict_get_int64(ctx, dict, PDF_NAME(Length));
-		if (ilen < 0)
-			ilen = 0;
+		int64_t ilen = pdf_stream_length(ctx, doc, dict);
+
+		/* In 32 bit builds, we might find a length being too large for a size_t. */
 		len = (size_t)ilen;
-		/* In 32 bit builds, we might find a length being too
-		 * large for a size_t. */
 		if ((int64_t)len != ilen)
-			fz_throw(ctx, FZ_ERROR_LIMIT, "Stream too large");
+			fz_throw(ctx, FZ_ERROR_LIMIT, "stream is too large for 32-bit systems");
+
 		obj = pdf_dict_get(ctx, dict, PDF_NAME(Filter));
 		len = pdf_guess_filter_length(len, pdf_to_name(ctx, obj));
 		n = pdf_array_len(ctx, obj);

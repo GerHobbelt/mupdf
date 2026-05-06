@@ -2083,64 +2083,65 @@ void
 fz_apply_stext_options(fz_context *ctx, fz_stext_options *opts, fz_options *string)
 {
 	const char *val;
+	float x;
 	int b;
 
 	/* when adding options, remember to update fz_stext_options_usage above */
 
 	if (fz_lookup_option_boolean(ctx, string, "preserve-ligatures", &b))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_PRESERVE_LIGATURES);
-	if (fz_lookup_option_yes(ctx, string, "preserve-whitespace"))
+	if (fz_lookup_option_boolean(ctx, string, "preserve-whitespace", &b))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_PRESERVE_WHITESPACE);
-	if (fz_lookup_option_yes(ctx, string, "preserve-images"))
+	if (fz_lookup_option_boolean(ctx, string, "preserve-images", &b))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_PRESERVE_IMAGES);
-	if (fz_lookup_option_yes(ctx, string, "inhibit-spaces"))
+	if (fz_lookup_option_boolean(ctx, string, "inhibit-spaces", &b))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_INHIBIT_SPACES);
-	if (fz_lookup_option_yes(ctx, string, "dehyphenate"))
+	if (fz_lookup_option_boolean(ctx, string, "dehyphenate", &b))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_DEHYPHENATE);
-	if (fz_lookup_option_yes(ctx, string, "preserve-spans"))
+	if (fz_lookup_option_boolean(ctx, string, "preserve-spans", &b))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_PRESERVE_SPANS);
-	if (fz_lookup_option_yes(ctx, string, "structured"))
+	if (fz_lookup_option_boolean(ctx, string, "structured", &b))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_COLLECT_STRUCTURE);
-	if (fz_lookup_option_yes(ctx, string, "use-cid-for-unknown-unicode"))
+	if (fz_lookup_option_boolean(ctx, string, "use-cid-for-unknown-unicode", &b))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_USE_CID_FOR_UNKNOWN_UNICODE);
-	if (fz_lookup_option_yes(ctx, string, "use-gid-for-unknown-unicode"))
+	if (fz_lookup_option_boolean(ctx, string, "use-gid-for-unknown-unicode", &b))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_USE_GID_FOR_UNKNOWN_UNICODE);
-	if (fz_lookup_option_yes(ctx, string, "accurate-bboxes"))
+	if (fz_lookup_option_boolean(ctx, string, "accurate-bboxes", &b))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_ACCURATE_BBOXES);
-	if (fz_lookup_option_yes(ctx, string, "vectors"))
+	if (fz_lookup_option_boolean(ctx, string, "vectors", &b))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_COLLECT_VECTORS);
-	if (fz_lookup_option_yes(ctx, string, "lazy-vectors"))
+	if (fz_lookup_option_boolean(ctx, string, "lazy-vectors", &b))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_LAZY_VECTORS);
-	if (fz_lookup_option_yes(ctx, string, "fuzzy-vectors"))
+	if (fz_lookup_option_boolean(ctx, string, "fuzzy-vectors", &b))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_FUZZY_VECTORS);
-	if (fz_lookup_option_yes(ctx, string, "ignore-actualtext"))
+	if (fz_lookup_option_boolean(ctx, string, "ignore-actualtext", &b))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_IGNORE_ACTUALTEXT);
-	if (fz_lookup_option_yes(ctx, string, "segment"))
+	if (fz_lookup_option_boolean(ctx, string, "segment", &b))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_SEGMENT);
-	if (fz_lookup_option_yes(ctx, string, "paragraph-break"))
+	if (fz_lookup_option_boolean(ctx, string, "paragraph-break", &b))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_PARAGRAPH_BREAK);
-	if (fz_lookup_option_yes(ctx, string, "table-hunt"))
+	if (fz_lookup_option_boolean(ctx, string, "table-hunt", &b))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_TABLE_HUNT);
-	if (fz_lookup_option_yes(ctx, string, "collect-styles"))
+	if (fz_lookup_option_boolean(ctx, string, "collect-styles", &b))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_COLLECT_STYLES);
-	if (fz_lookup_option_yes(ctx, string, "accurate-ascenders"))
+	if (fz_lookup_option_boolean(ctx, string, "accurate-ascenders", &b))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_ACCURATE_ASCENDERS);
-	if (fz_lookup_option_yes(ctx, string, "accurate-side-bearings"))
+	if (fz_lookup_option_boolean(ctx, string, "accurate-side-bearings", &b))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_ACCURATE_SIDE_BEARINGS);
 
-	if (fz_lookup_option(ctx, string, "mediabox-clip", &val))
+	if (fz_lookup_option_boolean(ctx, string, "mediabox-clip", &b))
 	{
 		fz_warn(ctx, "The 'mediabox-clip' option has been deprecated. Use 'clip' instead.");
-		if (!strcmp(val, "no"))
-			opts->flags ^= FZ_STEXT_CLIP;
+		SETCLEARBOOL(opts->flags, b, FZ_STEXT_CLIP);
 	}
-	if (fz_lookup_option(ctx, string, "clip", &val) && !strcmp(val, "no"))
-		opts->flags ^= FZ_STEXT_CLIP;
+	if (fz_lookup_option_boolean(ctx, string, "clip", &b))
+		SETCLEARBOOL(opts->flags, b, FZ_STEXT_CLIP);
+
 	if (fz_lookup_option(ctx, string, "clip-rect", &val) && val_is_rect(val, &opts->clip))
 		opts->flags |= FZ_STEXT_CLIP_RECT;
 
-	if (fz_lookup_option(ctx, string, "resolution", &val))
-		opts->scale = fz_atof(val) / 96.0f; /* HTML base resolution is 96ppi */
+	if (fz_lookup_option_float(ctx, string, "resolution", &x))
+		opts->scale = x / 96.0f; /* HTML base resolution is 96ppi */
 
 	fz_validate_options(ctx, string, "stext");
 }
