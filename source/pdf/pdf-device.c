@@ -151,9 +151,9 @@ pdf_dev_stroke_state(fz_context *ctx, pdf_device *pdev, const fz_stroke_state *s
 			join = FZ_LINEJOIN_MITER;
 		fz_append_printf(ctx, gs->buf, "%d j\n", join);
 	}
-	if (!gs->stroke_state || gs->stroke_state->miterlimit != stroke_state->miterlimit)
+	if (!gs->stroke_state || fz_max(1.0f, gs->stroke_state->miterlimit) != fz_max(1.0f, stroke_state->miterlimit))
 	{
-		fz_append_printf(ctx, gs->buf, "%g M\n", stroke_state->miterlimit);
+		fz_append_printf(ctx, gs->buf, "%g M\n", fz_max(1.0f, stroke_state->miterlimit));
 	}
 	if (gs->stroke_state == NULL && stroke_state->dash_len == 0)
 	{
@@ -249,6 +249,17 @@ pdf_dev_stroked_path(fz_context *ctx, pdf_device *pdev, const fz_path *path)
 }
 
 static void
+pdf_dev_end_text(fz_context *ctx, pdf_device *pdev)
+{
+	gstate *gs = CURRENT_GSTATE(pdev);
+
+	if (!pdev->in_text)
+		return;
+	pdev->in_text = 0;
+	fz_append_string(ctx, gs->buf, "ET\n");
+}
+
+static void
 pdf_dev_ctm(fz_context *ctx, pdf_device *pdev, fz_matrix ctm)
 {
 	fz_matrix inverse;
@@ -256,6 +267,7 @@ pdf_dev_ctm(fz_context *ctx, pdf_device *pdev, fz_matrix ctm)
 
 	if (memcmp(&gs->ctm, &ctm, sizeof(ctm)) == 0)
 		return;
+	pdf_dev_end_text(ctx, pdev);
 	inverse = fz_invert_matrix(gs->ctm);
 	inverse = fz_concat(ctm, inverse);
 	gs->ctm = ctm;
@@ -635,17 +647,6 @@ pdf_dev_begin_text(fz_context *ctx, pdf_device *pdev, int trm)
 		fz_append_string(ctx, gs->buf, "BT\n");
 		pdev->in_text = 1;
 	}
-}
-
-static void
-pdf_dev_end_text(fz_context *ctx, pdf_device *pdev)
-{
-	gstate *gs = CURRENT_GSTATE(pdev);
-
-	if (!pdev->in_text)
-		return;
-	pdev->in_text = 0;
-	fz_append_string(ctx, gs->buf, "ET\n");
 }
 
 static int
