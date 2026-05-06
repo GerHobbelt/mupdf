@@ -796,7 +796,7 @@ do_image_rewrite(fz_context *ctx, void *opaque, fz_image **image, fz_matrix ctm,
 				break;
 		if (i == uilist->len)
 		{
-			assert("This should never happen" == NULL);
+			assert(!"This should never happen");
 			return;
 		}
 		dpi = uilist->img[i].dpi;

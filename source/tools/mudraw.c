@@ -1297,12 +1297,13 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 		fz_try(ctx)
 		{
 			fz_svg_device_options opts;
-			memset(&opts, 0, sizeof opts);
+
+			fz_init_svg_device_options(ctx, &opts);
 			
 			opts.text_format = ((stext_options.flags & FZ_STEXT_NO_TEXT_AS_PATH) ? FZ_SVG_TEXT_AS_TEXT : FZ_SVG_TEXT_AS_PATH);
 			opts.reuse_images = !(stext_options.flags & FZ_STEXT_NO_REUSE_IMAGES);
 			opts.resolution = resolution;
-			opts.id = 0;
+			//opts.id = NULL;
 
 			fz_apply_svg_device_options(ctx, &opts, user_options);
 

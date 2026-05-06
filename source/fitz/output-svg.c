@@ -46,27 +46,6 @@ const char *fz_svg_write_options_usage =
 	"\n"
 	;
 
-fz_svg_options *
-fz_parse_svg_options(fz_context *ctx, fz_svg_options *opts, const char *options)
-{
-	const char *val;
-
-	memset(opts, 0, sizeof *opts);
-
-	if (fz_has_option(ctx, options, "text", &val))
-	{
-		if (fz_option_eq(val, "text"))
-			opts->text_format = FZ_SVG_TEXT_AS_TEXT;
-		else if (fz_option_eq(val, "path"))
-			opts->text_format = FZ_SVG_TEXT_AS_PATH;
-	}
-	if (fz_has_option(ctx, options, "no-reuse-images", &val))
-		if (fz_option_eq(val, "yes"))
-			opts->reuse_images = 0;
-
-	return opts;
-}
-
 static fz_device *
 svg_begin_page(fz_context *ctx, fz_document_writer *wri_, fz_rect mediabox)
 {
@@ -91,7 +70,7 @@ svg_begin_page(fz_context *ctx, fz_document_writer *wri_, fz_rect mediabox)
 			fz_throw(ctx, FZ_ERROR_ARGUMENT, "cannot write multiple pages to a single SVG output");
 	}
 
-	return fz_new_svg_device_with_options(ctx, wri->out, w, h, &wri->opts, &wri->id);
+	return fz_new_svg_device_with_options(ctx, wri->out, w, h, &wri->opts);
 }
 
 static void
@@ -123,13 +102,13 @@ svg_drop_writer(fz_context *ctx, fz_document_writer *wri_)
 }
 
 fz_document_writer *
-fz_new_svg_writer(fz_context *ctx, const char *path, const char *options)
+fz_new_svg_writer(fz_context *ctx, const char *path, const char *args)
 {
 	fz_svg_writer *wri = fz_new_derived_document_writer(ctx, fz_svg_writer, svg_begin_page, svg_end_page, NULL, svg_drop_writer);
 
 	fz_try(ctx)
 	{
-		fz_parse_svg_device_options(ctx, &wri->opts, options);
+		fz_parse_svg_device_options(ctx, &wri->opts, args);
 		wri->path = fz_strdup(ctx, path ? path : "out-%04d.svg");
 	}
 	fz_catch(ctx)
@@ -142,13 +121,13 @@ fz_new_svg_writer(fz_context *ctx, const char *path, const char *options)
 }
 
 fz_document_writer *
-fz_new_svg_writer_with_output(fz_context *ctx, fz_output *out, const char *options)
+fz_new_svg_writer_with_output(fz_context *ctx, fz_output *out, const char *args)
 {
 	fz_svg_writer *wri = fz_new_derived_document_writer(ctx, fz_svg_writer, svg_begin_page, svg_end_page, NULL, svg_drop_writer);
 
 	fz_try(ctx)
 	{
-		fz_parse_svg_device_options(ctx, &wri->opts, options);
+		fz_parse_svg_device_options(ctx, &wri->opts, args);
 		wri->out = out;
 	}
 	fz_catch(ctx)

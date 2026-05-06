@@ -297,7 +297,10 @@ void fz_image_info_from_buffer(fz_context *ctx, fz_buffer *buffer, int *w, int *
 	of the data.
 */
 fz_image *fz_new_image_from_buffer(fz_context *ctx, fz_buffer *buffer);
+
+#if FZ_ENABLE_JPX
 fz_image *fz_new_jpx_image_from_buffer(fz_context *ctx, fz_buffer *buffer, fz_colorspace *cs);
+#endif
 
 /**
 	Create a new image from the contents

@@ -536,7 +536,7 @@ begin_softmask(fz_context *ctx, pdf_run_processor *pr, softmask_save *save, fz_r
 			pdf_store_item(ctx, softmask, csm, sizeof(*csm));
 		}
 
-		fz_run_display_list(ctx, csm->list, pr->dev, fz_identity, mask_bbox, NULL);
+		fz_run_display_list(ctx, csm->list, pr->dev, fz_identity, mask_bbox);
 #endif
 		gstate = pr->gstate + pr->gtop;
 		gstate->blendmode = saved_blendmode;
@@ -1318,9 +1318,9 @@ pdf_flush_text(fz_context *ctx, pdf_run_processor *pr)
 		}
 
 		if (dofill && gstate->fill.alpha != 0 && (gstate->fill.alpha != 1.0f || gstate->blendmode != FZ_BLEND_NORMAL))
-			knockout_group = !knockout_now;
+			push_new_knockout = !knockout_now;
 		else if (dostroke && gstate->stroke.alpha != 0 && (gstate->stroke.alpha != 1.0f || gstate->blendmode != FZ_BLEND_NORMAL))
-			knockout_group = !knockout_now;
+			push_new_knockout = !knockout_now;
 
 		/* If we were inside a knockout group on entry, and we've pushed a blending
 		 * group since, we need to repush a knockout group now. */

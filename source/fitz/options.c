@@ -417,7 +417,7 @@ lookup_option(fz_context *ctx, fz_options *options, const char *key)
 	return NULL;
 }
 
-static int is_yes_option(const char *val)
+int fz_is_yes_option(const char *val)
 {
 	return (
 		!strcmp(val, "") ||
@@ -430,7 +430,7 @@ static int is_yes_option(const char *val)
 	);
 }
 
-static int is_no_option(const char *val)
+int fz_is_no_option(const char *val)
 {
 	return (
 		!strcmp(val, "0") ||
@@ -450,7 +450,8 @@ fz_lookup_option(fz_context *ctx, fz_options *options, const char *key, const ch
 	{
 		opt->flags |= ACCESSED;
 		opt->flags &= ~INVALID;
-		return *val = opt->val, 1;
+		*val = opt->val;
+		return 1;
 	}
 	return 0;
 }
@@ -463,12 +464,12 @@ fz_lookup_option_yes(fz_context *ctx, fz_options *options, const char *key)
 		return 0;
 
 	opt->flags |= ACCESSED;
-	if (is_yes_option(opt->val))
+	if (fz_is_yes_option(opt->val))
 	{
 		opt->flags &= ~INVALID;
 		return 1;
 	}
-	if (is_no_option(opt->val))
+	if (fz_is_no_option(opt->val))
 	{
 		opt->flags &= ~INVALID;
 		return 0;
@@ -485,13 +486,13 @@ fz_lookup_option_boolean(fz_context *ctx, fz_options *options, const char *key, 
 		return 0;
 
 	opt->flags |= ACCESSED;
-	if (is_yes_option(opt->val))
+	if (fz_is_yes_option(opt->val))
 	{
 		opt->flags &= ~INVALID;
 		*x = 1;
 		return 1;
 	}
-	if (is_no_option(opt->val))
+	if (fz_is_no_option(opt->val))
 	{
 		opt->flags &= ~INVALID;
 		*x = 0;

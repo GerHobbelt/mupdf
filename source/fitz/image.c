@@ -1651,6 +1651,8 @@ fz_new_image_from_buffer(fz_context *ctx, fz_buffer *buffer)
 	return image;
 }
 
+#if FZ_ENABLE_JPX
+
 fz_image *
 fz_new_jpx_image_from_buffer(fz_context *ctx, fz_buffer *buffer, fz_colorspace *defcs)
 {
@@ -1658,8 +1660,9 @@ fz_new_jpx_image_from_buffer(fz_context *ctx, fz_buffer *buffer, fz_colorspace *
 	fz_colorspace *cs = NULL;
 	int w, h, xres, yres;
 	fz_image *img = NULL;
+	uint8_t orientation = 0;
 
-	fz_load_jpx_info(ctx, buffer->data, buffer->len, &w, &h, &xres, &yres, &cs, defcs);
+	fz_load_jpx_info(ctx, buffer->data, buffer->len, &w, &h, &xres, &yres, &cs, defcs, &orientation);
 
 	fz_try(ctx)
 	{
@@ -1667,7 +1670,8 @@ fz_new_jpx_image_from_buffer(fz_context *ctx, fz_buffer *buffer, fz_colorspace *
 		bc->buffer = fz_keep_buffer(ctx, buffer);
 		bc->params.type = FZ_IMAGE_JPX;
 
-		img =  fz_new_image_from_compressed_buffer(ctx, w, h, 8, cs, xres, yres, 0, 0, NULL, NULL, bc, NULL);
+		img = fz_new_image_from_compressed_buffer(ctx, w, h, 8, cs, xres, yres, 0, 0, NULL, NULL, bc, NULL, NULL);
+		img->orientation = orientation;
 	}
 	fz_always(ctx)
 		fz_drop_colorspace(ctx, cs);
@@ -1676,6 +1680,8 @@ fz_new_jpx_image_from_buffer(fz_context *ctx, fz_buffer *buffer, fz_colorspace *
 
 	return img;
 }
+
+#endif
 
 int
 fz_compressed_image_type(fz_context *ctx, fz_image *image)

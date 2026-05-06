@@ -1524,7 +1524,7 @@ pdf_count_q_balance(fz_context *ctx, pdf_document *doc, pdf_obj *res, pdf_obj *s
 	proc = pdf_new_balance_processor(ctx, &end_q, &min_q, &min_op_q);
 	fz_try(ctx)
 	{
-		pdf_process_contents(ctx, proc, doc, res, stm, NULL, NULL);
+		pdf_process_contents(ctx, proc, doc, res, stm, NULL);
 		pdf_close_processor(ctx, proc);
 	}
 	fz_always(ctx)

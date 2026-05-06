@@ -269,7 +269,7 @@ pdf_load_jpx_as_compressed_image_mask(fz_context *ctx, pdf_document *doc, pdf_ob
 	fz_var(buf);
 	fz_var(img);
 
-	buf = pdf_load_image_stream(ctx, doc, pdf_to_num(ctx, dict), &params, NULL, 0);
+	buf = pdf_load_image_stream(ctx, doc, pdf_to_num(ctx, dict), &params, NULL, NULL, 0);
 	fz_try(ctx)
 	{
 		img = fz_new_jpx_image_from_buffer(ctx, buf, fz_device_gray(ctx));

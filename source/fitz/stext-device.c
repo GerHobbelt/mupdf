@@ -2304,159 +2304,137 @@ fz_apply_stext_options(fz_context *ctx, fz_stext_options *opts, fz_options *stri
 {
 	const char *val;
 	float x;
-	int b;
+	int b = 0;
 
 	/* when adding options, remember to update fz_stext_options_usage above */
 
 	if (fz_lookup_option_boolean(ctx, string, "preserve-ligatures", &b))
 	{
 		opts->flags_conf_mask |= FZ_STEXT_PRESERVE_LIGATURES;
-		if (fz_option_eq(val, "yes"))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_PRESERVE_LIGATURES);
 	}
 	if (fz_lookup_option_boolean(ctx, string, "preserve-whitespace", &b))
 	{
 		opts->flags_conf_mask |= FZ_STEXT_PRESERVE_WHITESPACE;
-		if (fz_option_eq(val, "yes"))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_PRESERVE_WHITESPACE);
 	}
 	if (fz_lookup_option_boolean(ctx, string, "preserve-images", &b))
 	{
 		opts->flags_conf_mask |= FZ_STEXT_PRESERVE_IMAGES;
-		if (fz_option_eq(val, "yes"))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_PRESERVE_IMAGES);
 	}
-	if (fz_has_option(ctx, string, "reference-images", &val))
+	if (fz_lookup_option(ctx, string, "reference-images", &val))
 	{
 		opts->flags_conf_mask |= FZ_STEXT_REFERENCE_IMAGES;
-		if (!fz_option_eq(val, "no"))
+		if (fz_is_no_option(val) || fz_is_yes_option(val))
 		{
-			opts->flags |= FZ_STEXT_REFERENCE_IMAGES;
-			if (!fz_option_eq(val, "yes"))
-			{
-				char pathbuf[PATH_MAX];
-				fz_copy_option(ctx, val, pathbuf, sizeof(pathbuf));
-				opts->reference_image_path_template = fz_strdup(ctx, pathbuf);
-			}
+			SETCLEARBOOL(opts->flags, b, FZ_STEXT_REFERENCE_IMAGES);
+		}
+		else
+		{
+			opts->reference_image_path_template = fz_strdup(ctx, val);
+			SETCLEARBOOL(opts->flags, TRUE, FZ_STEXT_REFERENCE_IMAGES);
 		}
 	}
-	if (fz_has_option(ctx, string, "reuse-images", &val))
+	if (fz_lookup_option_boolean(ctx, string, "reuse-images", &b))
 	{
 		opts->flags_conf_mask |= FZ_STEXT_NO_REUSE_IMAGES;
-		if (fz_option_eq(val, "no"))
-			opts->flags |= FZ_STEXT_NO_REUSE_IMAGES;
+		SETCLEARBOOL(opts->flags, !b, FZ_STEXT_NO_REUSE_IMAGES);
 	}
 	if (fz_lookup_option_boolean(ctx, string, "inhibit-spaces", &b))
 	{
 		opts->flags_conf_mask |= FZ_STEXT_INHIBIT_SPACES;
-		if (fz_option_eq(val, "yes"))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_INHIBIT_SPACES);
 	}
 	if (fz_lookup_option_boolean(ctx, string, "dehyphenate", &b))
 	{
 		opts->flags_conf_mask |= FZ_STEXT_DEHYPHENATE;
-		if (fz_option_eq(val, "yes"))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_DEHYPHENATE);
 	}
 	if (fz_lookup_option_boolean(ctx, string, "preserve-spans", &b))
 	{
 		opts->flags_conf_mask |= FZ_STEXT_PRESERVE_SPANS;
-		if (fz_option_eq(val, "yes"))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_PRESERVE_SPANS);
 	}
 	if (fz_lookup_option_boolean(ctx, string, "structured", &b))
 	{
 		opts->flags_conf_mask |= FZ_STEXT_COLLECT_STRUCTURE;
-		if (fz_option_eq(val, "yes"))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_COLLECT_STRUCTURE);
 	}
 	if (fz_lookup_option_boolean(ctx, string, "use-cid-for-unknown-unicode", &b))
 	{
 		opts->flags_conf_mask |= FZ_STEXT_USE_CID_FOR_UNKNOWN_UNICODE;
-		if (fz_option_eq(val, "yes"))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_USE_CID_FOR_UNKNOWN_UNICODE);
 	}
 	if (fz_lookup_option_boolean(ctx, string, "use-gid-for-unknown-unicode", &b))
 	{
 		opts->flags_conf_mask |= FZ_STEXT_USE_GID_FOR_UNKNOWN_UNICODE;
-		if (fz_option_eq(val, "yes"))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_USE_GID_FOR_UNKNOWN_UNICODE);
 	}
 	if (fz_lookup_option_boolean(ctx, string, "accurate-bboxes", &b))
 	{
 		opts->flags_conf_mask |= FZ_STEXT_ACCURATE_BBOXES;
-		if (fz_option_eq(val, "yes"))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_ACCURATE_BBOXES);
 	}
 	if (fz_lookup_option_boolean(ctx, string, "vectors", &b))
 	{
 		opts->flags_conf_mask |= FZ_STEXT_COLLECT_VECTORS;
-		if (fz_option_eq(val, "yes"))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_COLLECT_VECTORS);
 	}
 	if (fz_lookup_option_boolean(ctx, string, "lazy-vectors", &b))
 	{
 		opts->flags_conf_mask |= FZ_STEXT_LAZY_VECTORS;
-		if (fz_option_eq(val, "yes"))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_LAZY_VECTORS);
 	}
 	if (fz_lookup_option_boolean(ctx, string, "fuzzy-vectors", &b))
 	{
 		opts->flags_conf_mask |= FZ_STEXT_FUZZY_VECTORS;
-		if (fz_option_eq(val, "yes"))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_FUZZY_VECTORS);
 	}
 	if (fz_lookup_option_boolean(ctx, string, "ignore-actualtext", &b))
 	{
 		opts->flags_conf_mask |= FZ_STEXT_IGNORE_ACTUALTEXT;
-		if (fz_option_eq(val, "yes"))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_IGNORE_ACTUALTEXT);
 	}
 	if (fz_lookup_option_boolean(ctx, string, "segment", &b))
 	{
 		opts->flags_conf_mask |= FZ_STEXT_SEGMENT;
-		if (fz_option_eq(val, "yes"))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_SEGMENT);
 	}
 	if (fz_lookup_option_boolean(ctx, string, "paragraph-break", &b))
 	{
 		opts->flags_conf_mask |= FZ_STEXT_PARAGRAPH_BREAK;
-		if (fz_option_eq(val, "yes"))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_PARAGRAPH_BREAK);
 	}
 	if (fz_lookup_option_boolean(ctx, string, "table-hunt", &b))
 	{
 		opts->flags_conf_mask |= FZ_STEXT_TABLE_HUNT;
-		if (fz_option_eq(val, "yes"))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_TABLE_HUNT);
 	}
 	if (fz_lookup_option_boolean(ctx, string, "collect-styles", &b))
 	{
 		opts->flags_conf_mask |= FZ_STEXT_COLLECT_STYLES;
-		if (fz_option_eq(val, "yes"))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_COLLECT_STYLES);
 	}
 	if (fz_lookup_option_boolean(ctx, string, "accurate-ascenders", &b))
 	{
 		opts->flags_conf_mask |= FZ_STEXT_ACCURATE_ASCENDERS;
-		if (fz_option_eq(val, "yes"))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_ACCURATE_ASCENDERS);
 	}
 	if (fz_lookup_option_boolean(ctx, string, "accurate-side-bearings", &b))
 	{
 		opts->flags_conf_mask |= FZ_STEXT_ACCURATE_SIDE_BEARINGS;
-		if (fz_option_eq(val, "yes"))
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_ACCURATE_SIDE_BEARINGS);
 	}
-	if (fz_has_option(ctx, string, "glyph-bbox", &val))
+	if (fz_lookup_option_boolean(ctx, string, "glyph-bbox", &b))
 	{
 		opts->flags_conf_mask |= FZ_STEXT_GLYPH_BBOX;
-		if (fz_option_eq(val, "yes"))
-			opts->flags |= FZ_STEXT_GLYPH_BBOX;
+		SETCLEARBOOL(opts->flags, b, FZ_STEXT_GLYPH_BBOX);
 	}
 	if (fz_lookup_option_boolean(ctx, string, "mediabox-clip", &b))
 	{
 		fz_warn(ctx, "The 'mediabox-clip' option has been deprecated. Use 'clip' instead.");
+		opts->flags_conf_mask |= FZ_STEXT_CLIP;
 		SETCLEARBOOL(opts->flags, b, FZ_STEXT_CLIP);
 	}
 	if (fz_lookup_option_boolean(ctx, string, "clip", &b))
@@ -2470,24 +2448,22 @@ fz_apply_stext_options(fz_context *ctx, fz_stext_options *opts, fz_options *stri
 		if (val_is_rect(val, &opts->clip))
 			opts->flags |= FZ_STEXT_CLIP_RECT;
 	}
-	if (fz_has_option(ctx, string, "text-as-path", &val))
+	if (fz_lookup_option_boolean(ctx, string, "text-as-path", &b))
 	{
 		opts->flags_conf_mask |= FZ_STEXT_NO_TEXT_AS_PATH;
-		if (fz_option_eq(val, "no"))
-			opts->flags |= FZ_STEXT_NO_TEXT_AS_PATH;
+		SETCLEARBOOL(opts->flags, !b, FZ_STEXT_NO_TEXT_AS_PATH);
 	}
-	if (fz_has_option(ctx, string, "external-styles", &val))
+	if (fz_lookup_option(ctx, string, "external-styles", &val))
 	{
 		opts->flags_conf_mask |= FZ_STEXT_EXTERNAL_STYLES;
-		if (!fz_option_eq(val, "no"))
+		if (fz_is_no_option(val) || fz_is_yes_option(val))
 		{
-			opts->flags |= FZ_STEXT_EXTERNAL_STYLES;
-			if (!fz_option_eq(val, "yes"))
-			{
-				char pathbuf[PATH_MAX];
-				fz_copy_option(ctx, val, pathbuf, sizeof(pathbuf));
-				opts->external_styles_path_template = fz_strdup(ctx, pathbuf);
-			}
+			SETCLEARBOOL(opts->flags, b, FZ_STEXT_EXTERNAL_STYLES);
+		}
+		else
+		{
+			opts->external_styles_path_template = fz_strdup(ctx, val);
+			SETCLEARBOOL(opts->flags, TRUE, FZ_STEXT_EXTERNAL_STYLES);
 		}
 	}
 	if (fz_lookup_option_float(ctx, string, "resolution", &x))
@@ -2496,13 +2472,11 @@ fz_apply_stext_options(fz_context *ctx, fz_stext_options *opts, fz_options *stri
 		// do accept a horribly wide resolution range, but do not accept totally ludicrous values:
 		if (x >= 2 && x <= 10e3)
 		{
-		opts->scale = x / 96.0f; /* HTML base resolution is 96ppi */
+			opts->scale = x / 96.0f; /* HTML base resolution is 96ppi */
 		}
 	}
 
 	fz_validate_options(ctx, string, "stext");
-
-	return opts;
 }
 
 fz_stext_options *

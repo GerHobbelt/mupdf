@@ -31,7 +31,6 @@
 #include "mupdf/assertions.h"
 
 #if FZ_ENABLE_RENDER_CORE
- 
 
 const char *fz_search_options_usage =
 	"Search options:\n"

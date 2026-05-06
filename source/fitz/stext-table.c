@@ -2453,8 +2453,8 @@ fz_verify_stext_page(fz_context *ctx, fz_stext_page *page, const char *title)
 	if (fail == 0)
 		return;
 
-	fz_print_stext_page_as_xml_with_flags(ctx, fz_stddbg(ctx), page, 0, FZ_STEXT_XML_FLAGS_POINTERS | ((fail & 2) ? FZ_STEXT_XML_FLAGS_CHARS : 0));
-	assert("SText verification failed" == NULL);
+	fz_print_stext_page_as_xml_with_flags(ctx, fz_stddbg(ctx), page, 0, fz_identity, FZ_STEXT_XML_FLAGS_POINTERS | ((fail & 2) ? FZ_STEXT_XML_FLAGS_CHARS : 0));
+	assert(!"SText verification failed");
 }
 
 static fz_rect

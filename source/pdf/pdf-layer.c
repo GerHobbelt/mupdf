@@ -461,7 +461,7 @@ pdf_layer_config_name(fz_context *ctx, pdf_document *doc, int config_num)
 	if (config_num == -1 && !name)
 		return "Default";
 	else
-		return pdf_to_text_string(ctx, name);
+		return pdf_to_text_string(ctx, name, NULL);
 }
 
 void
@@ -727,7 +727,7 @@ calc_ve_state(fz_context *ctx, pdf_document *doc, pdf_obj *rdb, const char *usag
 }
 
 static int
-pdf_is_ocg_hidden_imp(fz_context *ctx, pdf_document *doc, pdf_resource_stack *rdb, const char *usage, pdf_obj *ocg, pdf_cycle_list *cycle_up)
+pdf_is_ocg_hidden_imp(fz_context *ctx, pdf_document *doc, pdf_obj *rdb, const char *usage, pdf_obj *ocg, pdf_cycle_list *cycle_up)
 {
 	pdf_cycle_list cycle;
 	pdf_ocg_descriptor *desc = pdf_read_ocg(ctx, doc);

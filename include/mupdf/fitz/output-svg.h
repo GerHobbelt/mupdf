@@ -39,14 +39,6 @@ enum {
 	FZ_SVG_TEXT_AS_TEXT = 1,
 };
 
-typedef struct
-{
-	int text_format;
-	int reuse_images;
-} fz_svg_options;
-
-fz_svg_options *fz_parse_svg_options(fz_context *ctx, fz_svg_options *opts, const char *options);
-
 typedef struct fz_svg_device_options fz_svg_device_options;
 
 struct fz_svg_device_options {
@@ -60,7 +52,7 @@ void fz_init_svg_device_options(fz_context *ctx, fz_svg_device_options *opts);
 void fz_parse_svg_device_options(fz_context *ctx, fz_svg_device_options *opts, const char *args);
 void fz_apply_svg_device_options(fz_context *ctx, fz_svg_device_options *opts, fz_options *options);
 
-fz_device *fz_new_svg_device_with_options(fz_context *ctx, fz_output *out, float page_width, float page_height, fz_svg_device_options *opts, int *id);
+fz_device *fz_new_svg_device_with_options(fz_context *ctx, fz_output *out, float page_width, float page_height, fz_svg_device_options *opts);
 
 /**
 	Create a device that outputs (single page) SVG files to

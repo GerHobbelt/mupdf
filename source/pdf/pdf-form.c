@@ -383,18 +383,18 @@ static pdf_obj *specified_fields(fz_context *ctx, pdf_document *doc, pdf_obj *fi
 			{
 				pdf_obj *field = pdf_array_get(ctx, fields, i);
 				if (pdf_is_string(ctx, field))
-					field = pdf_lookup_field(ctx, form, pdf_to_str_buf(ctx, field));
+					field = pdf_lookup_field(ctx, formfields, pdf_to_str_buf(ctx, field));
 				if (field)
-					add_field_hierarchy_to_array(ctx, result, field, fields, exclude);
+					add_field_hierarchy_to_array(ctx, result, formfields, exclude, fields, field);
 			}
 		}
 		else
 		{
-			n = pdf_array_len(ctx, form);
+			n = pdf_array_len(ctx, formfields);
 			for (i = 0; i < n; i++)
 			{
-				pdf_obj *field = pdf_array_get(ctx, form, i);
-				add_field_hierarchy_to_array(ctx, result, field, fields, exclude);
+				pdf_obj *field = pdf_array_get(ctx, formfields, i);
+				add_field_hierarchy_to_array(ctx, result, formfields, exclude, fields, field);
 			}
 		}
 	}
@@ -780,10 +780,10 @@ static void update_checkbox_selector(fz_context *ctx, pdf_document *doc, pdf_obj
 	}
 }
 
-static int set_checkbox_value(fz_context *ctx, pdf_document *doc, pdf_obj *field, const char *val, int ignore_trigger_events)
+static int set_checkbox_value(fz_context *ctx, pdf_document *doc, pdf_obj *field, const char *val, int is_being_edited)
 {
 	update_checkbox_selector(ctx, doc, field, val);
-	update_field_value(ctx, doc, field, val, ignore_trigger_events);
+	update_field_value(ctx, doc, field, val, is_being_edited);
 	return 1;
 }
 

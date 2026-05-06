@@ -1543,7 +1543,7 @@ void fz_apply_svg_device_options(fz_context *ctx, fz_svg_device_options *opts, f
 	fz_validate_options(ctx, args, "svg-device");
 }
 
-fz_device *fz_new_svg_device_with_options(fz_context *ctx, fz_output *out, float page_width, float page_height, fz_svg_device_options *opts, int *id)
+fz_device *fz_new_svg_device_with_options(fz_context *ctx, fz_output *out, float page_width, float page_height, fz_svg_device_options *opts)
 {
 	svg_device *dev = fz_new_derived_device(ctx, svg_device);
 

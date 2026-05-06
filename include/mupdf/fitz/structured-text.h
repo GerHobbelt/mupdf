@@ -670,13 +670,12 @@ typedef enum {
 	FZ_STEXT_XML_FLAGS_CHARS = 1,
 	FZ_STEXT_XML_FLAGS_POINTERS = 2
 } fz_stext_xml_flags;
-void fz_print_stext_page_as_xml_with_flags(fz_context *ctx, fz_output *out, fz_stext_page *page, int id, fz_stext_xml_flags flags);
+void fz_print_stext_page_as_xml_with_flags(fz_context *ctx, fz_output *out, fz_stext_page *page, int id, fz_matrix ctm, fz_stext_xml_flags flags);
 
 /**
 	Convenience function to call the above.
 */
-void fz_debug_stext_page(fz_context *ctx, fz_stext_page *page, int id);
-
+void fz_debug_stext_page(fz_context *ctx, fz_stext_page *page, int id, fz_matrix ctm);
 
 /**
 	Output structured text to a file in JSON format.

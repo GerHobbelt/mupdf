@@ -192,6 +192,16 @@ const char *fz_get_option_by_index(fz_context *ctx, fz_options *options, int i, 
 void fz_access_option_by_index(fz_context *ctx, fz_options *options, int i);
 
 /**
+	Check if the given option value represents 'true'. It does when it's either empty or one of: 1, true, yes, on, enable, enabled.
+*/
+int fz_is_yes_option(const char *val);
+
+/**
+	Check if the given option value represents 'false'. It does when it's one of: 0, false, no, off, disable, disabled.
+*/
+int fz_is_no_option(const char *val);
+
+/**
 	Implementation details: subject to change. Only public for
 	SWIG built wrappers.
 */
