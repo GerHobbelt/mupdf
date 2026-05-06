@@ -756,9 +756,9 @@ make_table_positions(fz_context *ctx, div_list *xs, float min, float max)
 	}
 	assert(i < len || wind == 0);
 	pos->list[edges].pos = max;
-	pos->list[edges].min = fz_min(xs->list[i-1].pos, max);
+	pos->list[edges].min = i == 0 ? max : fz_min(xs->list[i-1].pos, max);
 	pos->list[edges].max = max;
-	assert(max >= xs->list[i-1].pos);
+	assert(i == 0 || max >= xs->list[i-1].pos);
 	pos->list[edges].uncertainty = 0;
 	pos->list[edges].reinforcement = 0;
 	pos->max_uncertainty = hi;
@@ -2519,7 +2519,8 @@ move_contained_content(fz_context *ctx, fz_stext_page *page, fz_stext_struct *de
 					/* We need to be careful to use the vextent from chars that share a baseline,
 					 * not the vextent of individual chars, less we cut through a line and lose
 					 * half the chars. */
-					for (ch = line->first_char; ch != NULL; ch = ch->next)
+					/* prev_ch is the previous character left behind in the original line. */
+					for (ch = line->first_char; ch != NULL; )
 					{
 						fz_rect crect = fz_rect_from_quad(ch->quad);
 						float vmin = crect.y0;
@@ -2541,13 +2542,15 @@ move_contained_content(fz_context *ctx, fz_stext_page *page, fz_stext_struct *de
 						/* So ch to ch2 (not inclusive) all have the same baseline. */
 						y = (vmin + vmax)/2;
 
-						for (ch = line->first_char; ch != ch2; ch = next_ch)
+						for (; ch != ch2; ch = next_ch)
 						{
 							crect = fz_rect_from_quad(ch->quad);
 							x = (crect.x0 + crect.x1)/2;
 							next_ch = ch->next;
 							if (r.x0 > x || r.x1 < x || r.y0 > y || r.y1 < y)
 							{
+								/* This character is outside the region
+								 * we are keeping, so it is left behind. */
 								prev_ch = ch;
 								continue;
 							}
@@ -2575,8 +2578,6 @@ move_contained_content(fz_context *ctx, fz_stext_page *page, fz_stext_struct *de
 							newline->last_char = ch;
 							newline->bbox = fz_union_rect(newline->bbox, crect);
 						}
-						if (ch == NULL)
-							break;
 					}
 					if (line->first_char == NULL)
 					{
@@ -3675,6 +3676,8 @@ find_table(fz_context *ctx, grid_walker_data *gd, fz_stext_block *content)
 
 		gd->xpos = make_table_positions(ctx, &xs, gd->bounds.x0, gd->bounds.x1);
 		gd->ypos = make_table_positions(ctx, &ys, gd->bounds.y0, gd->bounds.y1);
+		if (gd->xpos->len <= 2 || gd->ypos->len <= 2)
+			break;
 		gd->cells = new_cells(ctx, gd->xpos->len, gd->ypos->len);
 
 #ifdef DEBUG_TABLE_STRUCTURE
@@ -4044,7 +4047,8 @@ hunt_potential_tables(fz_context *ctx, fz_stext_page *page, fz_potential_table_l
 #ifdef DEBUG_TABLE_SCORES
 		list_tables(ctx, list, "pre sort");
 #endif
-		qsort(&list->tables[0], list->len, sizeof(list->tables[0]), table_size_cmp);
+		if (list->len > 0)
+			qsort(&list->tables[0], list->len, sizeof(list->tables[0]), table_size_cmp);
 #ifdef DEBUG_TABLE_SCORES
 		list_tables(ctx, list, "pre cull");
 #endif
