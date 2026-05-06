@@ -1065,53 +1065,67 @@ fz_get_pixmap_from_image(fz_context *ctx, fz_image *image, const fz_irect *subar
 		return image->get_pixmap(ctx, image, NULL, image->w, image->h, &l2factor_remaining);
 	}
 
-	/* What is our ideal factor? We search for the largest factor where
-	 * we can subdivide and stay larger than the required size. We add
-	 * a fudge factor of +2 here to allow for the possibility of
-	 * expansion due to grid fitting. */
-	l2factor = 0;
-	if (w > 0 && h > 0)
+	if (ctx->tuning->image_rendering == FZ_IMAGE_RENDERING_QUALITY)
 	{
-		while (image->w>>(l2factor+1) >= w+2 && image->h>>(l2factor+1) >= h+2 && l2factor < 6)
-			l2factor++;
-	}
-
-	/* First, look through the store for existing tiles */
-	if (subarea)
-	{
-		fz_compute_image_key(ctx, image, ctm, &key, subarea, l2factor, &w, &h, dw, dh);
+		/* Always resampling from original data; don't use box-filtered power-of-two scaling levels. */
+		l2factor = 0;
+		fz_compute_image_key(ctx, image, ctm, &key, NULL, 0, &w, &h, dw, dh);
 		tile = fz_find_image_tile(ctx, image, &key, ctm);
 		if (tile)
 			return tile;
+
+		tile = image->get_pixmap(ctx, image, NULL, w, h, NULL);
 	}
-
-	/* No subarea given, or no tile for subarea found; try entire image */
-	fz_compute_image_key(ctx, image, ctm, &key, NULL, l2factor, &w, &h, dw, dh);
-	tile = fz_find_image_tile(ctx, image, &key, ctm);
-	if (tile)
-		return tile;
-
-	/* Neither subarea nor full image tile found; prepare the subarea key again */
-	if (subarea)
-		fz_compute_image_key(ctx, image, ctm, &key, subarea, l2factor, &w, &h, dw, dh);
-
-	/* We'll have to decode the image; request the correct amount of downscaling. */
-	l2factor_remaining = l2factor;
-	tile = image->get_pixmap(ctx, image, &key.rect, w, h, &l2factor_remaining);
-
-	/* Update the ctm to allow for subareas. */
-	update_ctm_for_subarea(ctm, &key.rect, image->w, image->h);
-
-	/* l2factor_remaining is updated to the amount of subscaling left to do */
-	assert(l2factor_remaining >= 0 && l2factor_remaining <= 6);
-	if (l2factor_remaining)
+	else
 	{
-		fz_try(ctx)
-			fz_subsample_pixmap(ctx, tile, l2factor_remaining);
-		fz_catch(ctx)
+		/* What is our ideal factor? We search for the largest factor where
+		 * we can subdivide and stay larger than the required size. We add
+		 * a fudge factor of +2 here to allow for the possibility of
+		 * expansion due to grid fitting. */
+		l2factor = 0;
+		if (w > 0 && h > 0)
 		{
-			fz_drop_pixmap(ctx, tile);
-			fz_rethrow(ctx);
+			while (image->w>>(l2factor+1) >= w+2 && image->h>>(l2factor+1) >= h+2 && l2factor < 6)
+				l2factor++;
+		}
+
+		/* First, look through the store for existing tiles */
+		if (subarea)
+		{
+			fz_compute_image_key(ctx, image, ctm, &key, subarea, l2factor, &w, &h, dw, dh);
+			tile = fz_find_image_tile(ctx, image, &key, ctm);
+			if (tile)
+				return tile;
+		}
+
+		/* No subarea given, or no tile for subarea found; try entire image */
+		fz_compute_image_key(ctx, image, ctm, &key, NULL, l2factor, &w, &h, dw, dh);
+		tile = fz_find_image_tile(ctx, image, &key, ctm);
+		if (tile)
+			return tile;
+
+		/* Neither subarea nor full image tile found; prepare the subarea key again */
+		if (subarea)
+			fz_compute_image_key(ctx, image, ctm, &key, subarea, l2factor, &w, &h, dw, dh);
+
+		/* We'll have to decode the image; request the correct amount of downscaling. */
+		l2factor_remaining = l2factor;
+		tile = image->get_pixmap(ctx, image, &key.rect, w, h, &l2factor_remaining);
+
+		/* Update the ctm to allow for subareas. */
+		update_ctm_for_subarea(ctm, &key.rect, image->w, image->h);
+
+		/* l2factor_remaining is updated to the amount of subscaling left to do */
+		assert(l2factor_remaining >= 0 && l2factor_remaining <= 6);
+		if (l2factor_remaining)
+		{
+			fz_try(ctx)
+				fz_subsample_pixmap(ctx, tile, l2factor_remaining);
+			fz_catch(ctx)
+			{
+				fz_drop_pixmap(ctx, tile);
+				fz_rethrow(ctx);
+			}
 		}
 	}
 
