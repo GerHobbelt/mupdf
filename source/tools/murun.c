@@ -6417,7 +6417,8 @@ stext_walk(js_State *J, fz_stext_block *block)
 			{
 				js_pushnull(J);
 				ffi_pushrect(J, block->bbox);
-				js_call(J, 1);
+				js_pushnumber(J, block->u.t.flags);
+				js_call(J, 2);
 				js_pop(J, 1);
 			}
 
@@ -6447,7 +6448,8 @@ stext_walk(js_State *J, fz_stext_block *block)
 						ffi_pushquad(J, ch->quad);
 						ffi_pushrgb(J, ch->argb);
 						js_pushnumber(J, ch->flags);
-						js_call(J, 7);
+						js_pushnumber(J, ch->bidi);
+						js_call(J, 8);
 						js_pop(J, 1);
 					}
 				}
@@ -6499,6 +6501,8 @@ stext_walk(js_State *J, fz_stext_block *block)
 				js_setproperty(J, -2, "isStroked");
 				js_pushboolean(J, block->u.v.flags & FZ_STEXT_VECTOR_IS_RECTANGLE);
 				js_setproperty(J, -2, "isRectangle");
+				js_pushboolean(J, block->u.v.flags & FZ_STEXT_VECTOR_CONTINUES);
+				js_setproperty(J, -2, "continues");
 				ffi_pushrgb(J, block->u.v.argb);
 				js_call(J, 4);
 				js_pop(J, 1);
@@ -13246,9 +13250,9 @@ int murun_main(int argc, char **argv)
 		jsB_enum(J, "LinkDestination", "LINK_DEST_FIT_R", FZ_LINK_DEST_FIT_R);
 		jsB_enum(J, "LinkDestination", "LINK_DEST_XYZ", FZ_LINK_DEST_XYZ);
 
-		jsB_enum(J, "OutlineIterator", "ITERATOR_DID_NOT_MOVE", -1);
-		jsB_enum(J, "OutlineIterator", "ITERATOR_AT_ITEM", 0);
-		jsB_enum(J, "OutlineIterator", "ITERATOR_AT_EMPTY", 1);
+		jsB_enum(J, "OutlineIterator", "ITERATOR_DID_NOT_MOVE", FZ_OUTLINE_ITERATOR_DID_NOT_MOVE);
+		jsB_enum(J, "OutlineIterator", "ITERATOR_AT_ITEM", FZ_OUTLINE_ITERATOR_AT_ITEM);
+		jsB_enum(J, "OutlineIterator", "ITERATOR_AT_EMPTY", FZ_OUTLINE_ITERATOR_AT_EMPTY);
 
 		jsB_enum(J, "OutlineIterator", "FLAG_BOLD", FZ_OUTLINE_FLAG_BOLD);
 		jsB_enum(J, "OutlineIterator", "FLAG_ITALIC", FZ_OUTLINE_FLAG_ITALIC);
@@ -13258,6 +13262,7 @@ int murun_main(int argc, char **argv)
 		jsB_enum(J, "Page", "BLEED_BOX", FZ_BLEED_BOX);
 		jsB_enum(J, "Page", "TRIM_BOX", FZ_TRIM_BOX);
 		jsB_enum(J, "Page", "ART_BOX", FZ_ART_BOX);
+		jsB_enum(J, "Page", "UNKNOWN_BOX", FZ_UNKNOWN_BOX);
 
 		jsB_enum(J, "Pixmap", "DESKEW_BORDER_INCREASE", FZ_DESKEW_BORDER_INCREASE);
 		jsB_enum(J, "Pixmap", "DESKEW_BORDER_MAINTAIN", FZ_DESKEW_BORDER_MAINTAIN);
@@ -13280,6 +13285,9 @@ int murun_main(int argc, char **argv)
 		jsB_enum(J, "StructuredText", "SEARCH_IGNORE_CASE", FZ_SEARCH_IGNORE_CASE);
 		jsB_enum(J, "StructuredText", "SEARCH_IGNORE_DIACRITICS", FZ_SEARCH_IGNORE_DIACRITICS);
 		jsB_enum(J, "StructuredText", "SEARCH_REGEXP", FZ_SEARCH_REGEXP);
+		jsB_enum(J, "StructuredText", "SEARCH_KEEP_LINES", FZ_SEARCH_KEEP_LINES);
+		jsB_enum(J, "StructuredText", "SEARCH_KEEP_PARAGRAPHS", FZ_SEARCH_KEEP_PARAGRAPHS);
+		jsB_enum(J, "StructuredText", "SEARCH_KEEP_HYPHENS", FZ_SEARCH_KEEP_HYPHENS);
 
 		jsB_enum(J, "StructuredText", "FLAGS_STRIKEOUT", FZ_STEXT_STRIKEOUT);
 		jsB_enum(J, "StructuredText", "FLAGS_UNDERLINE", FZ_STEXT_UNDERLINE);
@@ -13294,6 +13302,14 @@ int murun_main(int argc, char **argv)
 
 		jsB_enum(J, "StructuredText", "VECTOR_IS_STROKED", FZ_STEXT_VECTOR_IS_STROKED);
 		jsB_enum(J, "StructuredText", "VECTOR_IS_RECTANGLE", FZ_STEXT_VECTOR_IS_RECTANGLE);
+
+		jsB_enum(J, "StructuredText", "TEXT_JUSTIFY_UNKNOWN", FZ_STEXT_TEXT_JUSTIFY_UNKNOWN);
+		jsB_enum(J, "StructuredText", "TEXT_JUSTIFY_LEFT", FZ_STEXT_TEXT_JUSTIFY_LEFT);
+		jsB_enum(J, "StructuredText", "TEXT_JUSTIFY_CENTER", FZ_STEXT_TEXT_JUSTIFY_CENTER);
+		jsB_enum(J, "StructuredText", "TEXT_JUSTIFY_RIGHT", FZ_STEXT_TEXT_JUSTIFY_RIGHT);
+		jsB_enum(J, "StructuredText", "TEXT_JUSTIFY_FULL", FZ_STEXT_TEXT_JUSTIFY_FULL);
+
+		jsB_enum(J, "StructuredText", "VECTOR_CONTINUES", FZ_STEXT_VECTOR_CONTINUES);
 	}
 
 #if FZ_ENABLE_PDF
@@ -13415,14 +13431,21 @@ int murun_main(int argc, char **argv)
 		jsB_enum(J, "PDFWidget", "FIELD_IS_NO_EXPORT", PDF_FIELD_IS_NO_EXPORT);
 		jsB_enum(J, "PDFWidget", "TX_FIELD_IS_MULTILINE", PDF_TX_FIELD_IS_MULTILINE);
 		jsB_enum(J, "PDFWidget", "TX_FIELD_IS_PASSWORD", PDF_TX_FIELD_IS_PASSWORD);
+		jsB_enum(J, "PDFWidget", "TX_FIELD_IS_FILE_SELECT", PDF_TX_FIELD_IS_FILE_SELECT);
+		jsB_enum(J, "PDFWidget", "TX_FIELD_IS_DO_NOT_SPELL_CHECK", PDF_TX_FIELD_IS_DO_NOT_SPELL_CHECK);
+		jsB_enum(J, "PDFWidget", "TX_FIELD_IS_DO_NOT_SCROLL", PDF_TX_FIELD_IS_DO_NOT_SCROLL);
 		jsB_enum(J, "PDFWidget", "TX_FIELD_IS_COMB", PDF_TX_FIELD_IS_COMB);
+		jsB_enum(J, "PDFWidget", "TX_FIELD_IS_RICH_TEXT", PDF_TX_FIELD_IS_RICH_TEXT);
 		jsB_enum(J, "PDFWidget", "BTN_FIELD_IS_NO_TOGGLE_TO_OFF", PDF_BTN_FIELD_IS_NO_TOGGLE_TO_OFF);
 		jsB_enum(J, "PDFWidget", "BTN_FIELD_IS_RADIO", PDF_BTN_FIELD_IS_RADIO);
 		jsB_enum(J, "PDFWidget", "BTN_FIELD_IS_PUSHBUTTON", PDF_BTN_FIELD_IS_PUSHBUTTON);
+		jsB_enum(J, "PDFWidget", "BTN_FIELD_IS_RADIOS_IN_UNISON", PDF_BTN_FIELD_IS_RADIOS_IN_UNISON);
 		jsB_enum(J, "PDFWidget", "CH_FIELD_IS_COMBO", PDF_CH_FIELD_IS_COMBO);
 		jsB_enum(J, "PDFWidget", "CH_FIELD_IS_EDIT", PDF_CH_FIELD_IS_EDIT);
 		jsB_enum(J, "PDFWidget", "CH_FIELD_IS_SORT", PDF_CH_FIELD_IS_SORT);
 		jsB_enum(J, "PDFWidget", "CH_FIELD_IS_MULTI_SELECT", PDF_CH_FIELD_IS_MULTI_SELECT);
+		jsB_enum(J, "PDFWidget", "CH_FIELD_IS_DO_NOT_SPELL_CHECK", PDF_CH_FIELD_IS_DO_NOT_SPELL_CHECK);
+		jsB_enum(J, "PDFWidget", "CH_FIELD_IS_COMMIT_ON_SEL_CHANGE", PDF_CH_FIELD_IS_COMMIT_ON_SEL_CHANGE);
 #endif
 	}
 
