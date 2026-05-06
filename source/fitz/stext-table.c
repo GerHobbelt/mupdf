@@ -1341,6 +1341,11 @@ find_grid_pos(fz_context *ctx, grid_walker_data *gd, int row, float x, int inacc
 		{
 			/* Split i into i and i+1, and make i the new one. */
 			assert(i > 0);
+			if (x >= pos->list[i].min - WIGGLE_ROOM)
+			{
+				/* Never split into regions that would be too small. */
+				return i;
+			}
 #ifdef DEBUG_TABLE_SPLITS
 			printf("Splitting before %d\n", i);
 #endif
@@ -1429,6 +1434,11 @@ split:
 				return i+1;
 			}
 		}
+		else if (x <= pos->list[i].max + WIGGLE_ROOM)
+		{
+			/* Never split into regions that would be too small. */
+			return i;
+		}
 	}
 	assert("Never happens" == NULL);
 
@@ -1477,7 +1487,7 @@ add_v_line(fz_context *ctx, grid_walker_data *gd, float y0, float y1, float x0, 
 
 /* Lookup the position of a rectangle, reinforcing as appropriate. */
 static void
-add_hv_line(fz_context *ctx, grid_walker_data *gd, float x0, float x1, float y0, float y1, int stroked)
+add_hv_line(fz_context *ctx, grid_walker_data *gd, float x0, float x1, float y0, float y1)
 {
 	(void)find_grid_pos(ctx, gd, 0, x0, 0);
 	(void)find_grid_pos(ctx, gd, 0, x1, 0);
@@ -1518,7 +1528,7 @@ add_v_line2(fz_context *ctx, grid_walker_data *gd, float y0, float y1, float x0,
 /* Add a rectangle (with no reinforcement).
  * Record which cells that was a border for. */
 static void
-add_hv_line2(fz_context *ctx, grid_walker_data *gd, float x0, float x1, float y0, float y1, int stroked)
+add_hv_line2(fz_context *ctx, grid_walker_data *gd, float x0, float x1, float y0, float y1)
 {
 	int ix0 = find_grid_pos(ctx, gd, 0, x0, 1);
 	int ix1 = find_grid_pos(ctx, gd, 0, x1, 1);
@@ -1526,18 +1536,15 @@ add_hv_line2(fz_context *ctx, grid_walker_data *gd, float x0, float x1, float y0
 	int iy1 = find_grid_pos(ctx, gd, 1, y1, 1);
 	int i;
 
-	if (stroked)
+	for (i = ix0; i < ix1; i++)
 	{
-		for (i = ix0; i < ix1; i++)
-		{
-			get_cell(gd->cells, i, iy0)->h_line++;
-			get_cell(gd->cells, i, iy1)->h_line++;
-		}
-		for (i = iy0; i < iy1; i++)
-		{
-			get_cell(gd->cells, ix0, i)->v_line++;
-			get_cell(gd->cells, ix1, i)->v_line++;
-		}
+		get_cell(gd->cells, i, iy0)->h_line++;
+		get_cell(gd->cells, i, iy1)->h_line++;
+	}
+	for (i = iy0; i < iy1; i++)
+	{
+		get_cell(gd->cells, ix0, i)->v_line++;
+		get_cell(gd->cells, ix1, i)->v_line++;
 	}
 }
 
@@ -1728,17 +1735,17 @@ walk_grid_lines(fz_context *ctx, grid_walker_data *gd, fz_stext_block *block)
 			if (w > h && h < 2)
 			{
 				/* Thin, tall line */
-				(void) add_h_line(ctx, gd, r.x0, r.x1, r.y0, r.y1);
+				add_h_line(ctx, gd, r.x0, r.x1, r.y0, r.y1);
 			}
 			else if (w < h && w < 2)
 			{
 				/* Thin, wide line */
-				(void) add_v_line(ctx, gd, r.y0, r.y1, r.x0, r.x1);
+				add_v_line(ctx, gd, r.y0, r.y1, r.x0, r.x1);
 			}
 			else
 			{
 				/* Rectangle */
-				(void) add_hv_line(ctx, gd, r.x0, r.x1, r.y0, r.y1, block->u.v.flags & FZ_STEXT_VECTOR_IS_STROKED);
+				add_hv_line(ctx, gd, r.x0, r.x1, r.y0, r.y1);
 			}
 		}
 	}
@@ -1774,17 +1781,17 @@ walk_grid_lines2(fz_context *ctx, grid_walker_data *gd, fz_stext_block *block)
 			if (w > h && h < 2)
 			{
 				/* Thin, wide line */
-				(void) add_h_line2(ctx, gd, r.x0, r.x1, r.y0, r.y1);
+				add_h_line2(ctx, gd, r.x0, r.x1, r.y0, r.y1);
 			}
 			else if (w < h && w < 2)
 			{
 				/* Thin, wide line */
-				(void) add_v_line2(ctx, gd, r.y0, r.y1, r.x0, r.x1);
+				add_v_line2(ctx, gd, r.y0, r.y1, r.x0, r.x1);
 			}
 			else
 			{
 				/* Rectangle */
-				(void) add_hv_line2(ctx, gd, r.x0, r.x1, r.y0, r.y1, block->u.v.flags & FZ_STEXT_VECTOR_IS_STROKED);
+				add_hv_line2(ctx, gd, r.x0, r.x1, r.y0, r.y1);
 			}
 		}
 	}
@@ -4179,6 +4186,104 @@ fz_table_hunt(fz_context *ctx, fz_stext_page *page)
 }
 
 static void
+push_trimmed_segment(fz_context *ctx, fz_potential_table_list *list, fz_stext_page *page, fz_stext_struct *parent, fz_rect bounds)
+{
+	fz_stext_page_block_iterator iter;
+	int reduced = 0;
+
+	/* Skip over a prefix of simple lines */
+	for (iter = fz_stext_page_block_iterator_begin_from_dfs(page, parent ? parent->first_block : page->first_block, parent);
+		!fz_stext_page_block_iterator_eod_dfs(iter);
+		iter = fz_stext_page_block_iterator_next_dfs(iter))
+	{
+		fz_stext_line *line;
+		while (1)
+		{
+			/* While we have a block of text at the top of our bounds. */
+			if (iter.block->type != FZ_STEXT_BLOCK_TEXT)
+				break;
+			if (iter.block->bbox.y0 != bounds.y0)
+				break;
+			/* Skip over single span lines at the top of the bounds */
+			line = iter.block->u.t.first_line;
+			while (line)
+			{
+				if (line->bbox.y0 != bounds.y0)
+					goto prefix_ended;
+				if (line->next == NULL)
+				{
+					/* Skip this line */
+					bounds.y0 = line->bbox.y1;
+					reduced = 1;
+				}
+				else if (line->next->bbox.y0 >= line->bbox.y1)
+				{
+					/* Skip this line. */
+					bounds.y0 = line->next->bbox.y0;
+					reduced = 1;
+				}
+				else
+					goto prefix_ended;
+				line = line->next;
+			}
+			iter = fz_stext_page_block_iterator_next_dfs(iter);
+			if (fz_stext_page_block_iterator_eod_dfs(iter))
+				goto prefix_ended;
+			bounds.y0 = iter.block->bbox.y0;
+		}
+	}
+prefix_ended:
+
+	/* Now do all that again, but for the suffix. */
+	/* Skip over a suffix of simple lines */
+	for (iter = fz_stext_page_block_iterator_begin_from_rdfs(page, parent ? parent->last_block : page->last_block, parent);
+		!fz_stext_page_block_iterator_eod_rdfs(iter);
+		iter = fz_stext_page_block_iterator_next_rdfs(iter))
+	{
+		fz_stext_line *line;
+		while (1)
+		{
+			/* While we have a block of text at the bottom of our bounds. */
+			if (iter.block->type != FZ_STEXT_BLOCK_TEXT)
+				break;
+			if (iter.block->bbox.y1 != bounds.y1)
+				break;
+			/* Skip over single span lines at the bottom of the bounds */
+			line = iter.block->u.t.last_line;
+			while (line)
+			{
+				if (line->bbox.y1 != bounds.y1)
+					goto suffix_ended;
+				if (line->prev == NULL)
+				{
+					/* Skip this line */
+					bounds.y1 = line->bbox.y0;
+					reduced = 1;
+				}
+				else if (line->prev->bbox.y1 <= line->bbox.y0)
+				{
+					/* Skip this line. */
+					bounds.y1 = line->prev->bbox.y1;
+					reduced = 1;
+				}
+				else
+				{
+					goto suffix_ended;
+				}
+				line = line->prev;
+			}
+			iter = fz_stext_page_block_iterator_next_rdfs(iter);
+			if (fz_stext_page_block_iterator_eod_rdfs(iter))
+				goto suffix_ended;
+			bounds.y1 = iter.block->bbox.y1;
+		}
+	}
+suffix_ended:
+	if (reduced)
+		fz_push_potential_table(ctx, list, bounds, 0);
+}
+
+static void
 push_segment_areas(fz_context *ctx, fz_potential_table_list *list, fz_stext_page *page, fz_stext_struct *parent, fz_rect bounds, fz_rect parentr)
 {
 	fz_stext_block *first_block = parent ? parent->first_block : page->first_block;
@@ -4186,15 +4291,21 @@ push_segment_areas(fz_context *ctx, fz_potential_table_list *list, fz_stext_page
 
 	for (block = first_block; block != NULL; block = block->next)
 	{
+		fz_rect r;
 		if (block->type != FZ_STEXT_BLOCK_STRUCT || block->u.s.down == NULL)
 			continue;
-		if (fz_is_empty_rect(fz_intersect_rect(block->bbox, bounds)))
+		r = fz_intersect_rect(block->bbox, bounds);
+		if (fz_is_empty_rect(r))
 			continue;
 		push_segment_areas(ctx, list, page, block->u.s.down, bounds, block->bbox);
 		if (block->u.s.down->standard == FZ_STRUCTURE_DIV && !strcmp(block->u.s.down->raw, "Split") && fz_contains_rect(bounds, block->bbox))
 		{
 			assert(fz_contains_rect(parentr, block->bbox));
+			/* The whole segment area is a possible table. */
 			fz_push_potential_table(ctx, list, block->bbox, 0);
+
+			/* Now consider trimming some text lines off the top and bottom (for title and caption lines) */
+			push_trimmed_segment(ctx, list, page, block->u.s.down, r);
 		}
 	}
 }
