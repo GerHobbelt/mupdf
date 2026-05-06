@@ -338,6 +338,9 @@ struct fz_device
 	int container_len;
 	int container_cap;
 	fz_device_container_stack *container;
+
+	/* For simplicity, every device has a passthrough entry, but not every device uses it. */
+	fz_device *passthrough;
 };
 
 /**
@@ -387,6 +390,20 @@ fz_device *fz_new_device_of_size(fz_context *ctx, int size);
 	((TYPE *)Memento_label(fz_new_device_of_size(ctx,sizeof(TYPE)),#TYPE))
 
 /**
+	Create a passthrough device.
+
+	The device is created with stub functions that do nothing except
+	pass calls through to the given sub device. This includes
+	close and drop!
+
+	The caller of this function can then override any functions it
+	wants to handle itself.
+*/
+fz_device *fz_new_passthrough_device_of_size(fz_context *ctx, fz_device *passthrough, int size);
+#define fz_new_derived_passthrough_device(CTX, PASSTHRU, TYPE) \
+	((TYPE *)Memento_label(fz_new_passthrough_device_of_size(ctx,PASSTHRU,sizeof(TYPE)),#TYPE))
+
+/**
 	Signal the end of input, and flush any buffered output.
 	This is NOT called implicitly on fz_drop_device. This
 	may throw exceptions.
@@ -431,7 +448,8 @@ enum
 	/* Hints */
 	FZ_DONT_INTERPOLATE_IMAGES = 1,
 	FZ_NO_CACHE = 2,
-	FZ_DONT_DECODE_IMAGES = 4
+	FZ_DONT_DECODE_IMAGES = 4,
+	FZ_NO_TILING = 8
 };
 
 /**
@@ -543,6 +561,46 @@ enum
 	/* If clear, just look at colorspaces for shadings. */
 	FZ_TEST_OPT_SHADINGS = 2
 };
+
+/**
+	Options for the culling device.
+
+	cull_gylph is called when the cull device needs a decision
+	about whether a given glyph should be culled or not. Return 0
+	to keep, 1 to cull, all other values reserved.
+
+	drop is called when the culling device is closed.
+*/
+typedef struct
+{
+	void *opaque;
+
+	int (*cull_glyph)(fz_context *ctx, void *opaque, fz_rect rect);
+
+	void (*drop)(fz_context *ctx, void *opaque);
+} fz_culling_options;
+
+/**
+	Create an 'cull' device.
+
+	This device passes through all calls to the 'passthrough' device, except
+	for text operations that may be culled.
+
+	The decision as to whether to cull a glyph or not is made by calling the
+	'cull_glyph' function in the options structure with the rectangle that
+	would be affected. If the function returns 0, the glyph is passed through.
+	if the function returns 1, the glyph is dropped. All other values reserved.
+*/
+fz_device *fz_new_culling_device(fz_context *ctx, fz_device *passthrough, fz_culling_options *opts);
+
+/**
+	Create an culling device that will drop any glyphs that significantly
+	overlap any of the given list of rects.
+
+	The rect list is copied into the device, so does not need to exist
+	beyond this call.
+*/
+fz_device *fz_new_culling_device_with_rects(fz_context *ctx, fz_device *passthrough, int n, const fz_rect *rects);
 
 /**
 	Create a device to draw on a pixmap.
