@@ -169,9 +169,6 @@ void fz_vlog_error_printf(fz_context *ctx, const char *fmt, va_list ap);
 */
 void fz_log_error(fz_context *ctx, const char *str);
 
-void fz_start_throw_on_repair(fz_context *ctx);
-void fz_end_throw_on_repair(fz_context *ctx);
-
 /**
 	Now, a debugging feature. If FZ_VERBOSE_EXCEPTIONS is 1 then
 	some of the above functions are replaced by versions that print
@@ -878,7 +875,7 @@ struct fz_context
 #if FZ_ENABLE_ICC
 	int icc_enabled;
 #endif
-	int throw_on_repair;
+	int internal_throw_on_repair;
 
 	/* TODO: should these be unshared? */
 	fz_document_handler_context *handler;
