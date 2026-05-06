@@ -1819,15 +1819,16 @@ fz_search_result fz_search_forwards(fz_context *ctx, fz_search *search)
 	if (ensure_haystack_for_page(ctx, search, &search->current_page))
 	{
 		/* current_page is empty. */
+
+		/* and no more pages */
 		if (search->current_page.end_of_doc || search->next_page.end_of_doc)
 		{
 			result.reason = FZ_SEARCH_COMPLETE;
 			return result;
 		}
 
-		/* Ditch current, and move next_page down. Then ask for a new next page. */
-		advance_page(ctx, search, &search->previous_page, &search->current_page);
-		advance_page(ctx, search, &search->current_page, &search->next_page);
+		/* Ditch current page, then ask for the next page to take its place. */
+		drop_page(ctx, &search->current_page);
 
 		result.reason = FZ_SEARCH_MORE_INPUT;
 		result.u.more_input.seq_needed = search->current_page.seq+1;
@@ -2077,15 +2078,16 @@ fz_search_result fz_search_backwards(fz_context *ctx, fz_search *search)
 	if (ensure_haystack_for_page(ctx, search, &search->current_page))
 	{
 		/* current_page is empty. */
+
+		/* and no more pages */
 		if (search->current_page.end_of_doc || search->next_page.end_of_doc)
 		{
 			result.reason = FZ_SEARCH_COMPLETE;
 			return result;
 		}
 
-		/* Ditch current, and move previous_page up. Then ask for a new previous_page. */
-		advance_page(ctx, search, &search->next_page, &search->current_page);
-		advance_page(ctx, search, &search->current_page, &search->previous_page);
+		/* Ditch current page, then ask for the previous page to fill its place. */
+		drop_page(ctx, &search->current_page);
 
 		result.reason = FZ_SEARCH_MORE_INPUT;
 		result.u.more_input.seq_needed = search->current_page.seq-1;
