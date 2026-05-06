@@ -140,7 +140,7 @@ fz_malloc_array_imp(fz_context *ctx, size_t nmemb, size_t size)
 	size_t total;
 	if (fz_ckd_mul_size(&total, nmemb, size))
 		fz_throw(ctx, FZ_ERROR_SYSTEM, "malloc array (%zu x %zu bytes) failed (overflow)", nmemb, size);
-	return fz_malloc(ctx, total);
+	return fz_malloc(ctx, total   FZDBG_THIS_POS());
 }
 
 void *

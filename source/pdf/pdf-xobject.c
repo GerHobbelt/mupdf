@@ -23,6 +23,8 @@
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
 
+#include "../fitz/context-imp.h"
+
 #if FZ_ENABLE_PDF
 
 pdf_obj *

@@ -201,7 +201,7 @@ static void close_and_drop_file(fz_context *ctx, fz_stream *stm)
 static fz_stream *
 fz_open_file_ptr(fz_context *ctx, FILE *file, const char *name, int del_on_drop)
 {
-	fz_stream *stm;
+	fz_stream *stm = NULL;
 	fz_file_stream *state = NULL;
 	fz_file_stream *state_to_free = NULL;
 
@@ -221,6 +221,7 @@ fz_open_file_ptr(fz_context *ctx, FILE *file, const char *name, int del_on_drop)
 	}
 	fz_catch(ctx)
 	{
+		ASSERT(stm == NULL);
 		if (state == NULL && del_on_drop)
 		{
 			int n = fclose(file);
@@ -233,8 +234,10 @@ fz_open_file_ptr(fz_context *ctx, FILE *file, const char *name, int del_on_drop)
 
 			unlink(name);
 		}
-		if (state_to_free)
-			close_and_drop_file(ctx, state_to_free);
+		if (state_to_free) {
+			fz_stream s = { .state = state_to_free };
+			close_and_drop_file(ctx, &s);
+		}
 		fz_rethrow(ctx);
 	}
 

@@ -488,7 +488,7 @@ pdf_vectorize_squote(fz_context *ctx, pdf_processor *proc, const char *str, size
 }
 
 static void
-pdf_vectorize_dquote(fz_context *ctx, pdf_processor *proc, float aw, float ac, char *str, size_t len)
+pdf_vectorize_dquote(fz_context *ctx, pdf_processor *proc, float aw, float ac, const char *str, size_t len)
 {
 	pdf_vectorize_processor *p = (pdf_vectorize_processor*)proc;
 
@@ -577,7 +577,7 @@ pdf_new_vectorize_filter(
 	pdf_filter_options *options,
 	void *vopts_)
 {
-	pdf_vectorize_processor *proc = pdf_new_processor(ctx, sizeof *proc);
+	pdf_vectorize_processor *proc = (pdf_vectorize_processor *)pdf_new_processor(ctx, sizeof *proc);
 	pdf_vectorize_filter_options *vopts = vopts_;
 
 	proc->super.close_processor = pdf_close_vectorize_processor;
