@@ -23,6 +23,8 @@
 
 #include "glyphbox.h"
 
+#include "mupdf/ucdn.h"
+
 #include <float.h>
 #include <string.h>
 
@@ -717,6 +719,7 @@ plausible_bullet(int c)
 		c == 0x1FBC2 || /* MIDDLE THIRD WHITE RIGHT POINTING INDEX */
 		c == 0x1FBC3 || /* RIGHT THIRD WHITE RIGHT POINTING INDEX */
 		c == 0xFFFD || /* UNICODE_REPLACEMENT_CHARACTER */
+		(c >= '0' && c <= '9') ||
 		0);
 }
 
@@ -1055,6 +1058,17 @@ fz_add_stext_char(fz_context *ctx,
 		case 0xFB06: /* st */
 			fz_add_stext_char_imp(ctx, dev, font, 's', glyph, trm, adv, wmode, bidi, force_new_line, flags);
 			fz_add_stext_char_imp(ctx, dev, font, 't', -1, trm, 0, wmode, bidi, 0, flags);
+			return;
+		}
+
+		/* alphabetic and arabic presentation forms */
+		if ((c >= 0xfb00 && c <= 0xfdff) || (c >= 0xfe70 && c <= 0xfefc))
+		{
+			uint32_t lig[18];
+			int i, n = ucdn_compat_decompose(c, lig);
+			fz_add_stext_char_imp(ctx, dev, font, lig[0], glyph, trm, adv, wmode, bidi, force_new_line, flags);
+			for (i = 1; i < n; ++i)
+				fz_add_stext_char_imp(ctx, dev, font, lig[i], -1, trm, 0, wmode, bidi, 0, flags);
 			return;
 		}
 	}
@@ -2495,12 +2509,37 @@ maybe_rect(fz_context *ctx, split_path_data *sp)
 	int i;
 	fz_rect leftovers;
 
+	if (sp->count >= 3)
+	{
+		/* Allow for multiple monotonic points in a horizontal or vertical line,
+		 * such as seen in borders of tables where each column or row is written
+		 * individually. (e.g. move 0 0 line 100 0 line 200 0 line 300 0) */
+		if (feq(sp->p[sp->count-1].x, sp->p[sp->count-2].x) &&
+			feq(sp->p[sp->count-1].x, sp->p[sp->count-3].x) &&
+			((sp->p[sp->count-1].y <= sp->p[sp->count-2].y && sp->p[sp->count-2].y <= sp->p[sp->count-3].y) ||
+			(sp->p[sp->count-1].y >= sp->p[sp->count-2].y && sp->p[sp->count-2].y >= sp->p[sp->count-3].y)))
+		{
+			/*  y---->y---->y - Remove the central y */
+			sp->p[sp->count-2].y = sp->p[sp->count-1].y;
+			sp->count--;
+		}
+		else if (feq(sp->p[sp->count-1].y, sp->p[sp->count-2].y) &&
+			feq(sp->p[sp->count-1].y, sp->p[sp->count-3].y) &&
+			((sp->p[sp->count-1].x <= sp->p[sp->count-2].x && sp->p[sp->count-2].x <= sp->p[sp->count-3].x) ||
+			(sp->p[sp->count-1].x >= sp->p[sp->count-2].x && sp->p[sp->count-2].x >= sp->p[sp->count-3].x)))
+		{
+			/*  x---->x---->x - Remove the central x */
+			sp->p[sp->count-2].x = sp->p[sp->count-1].x;
+			sp->count--;
+		}
+	}
+
 	if (sp->count >= 0)
 	{
 		if (sp->count == 3)
 		{
 			/* Allow for "moveto A, lineto B, lineto A, close" */
-			if (feq(sp->p[0].x, sp->p[2].x) || feq(sp->p[0].y, sp->p[2].y))
+			if (feq(sp->p[0].x, sp->p[2].x) && feq(sp->p[0].y, sp->p[2].y))
 				sp->count = 2;
 		}
 		if (sp->count == 2)
@@ -2625,11 +2664,12 @@ fz_path_walker split_path_rects =
 };
 
 static void
-add_vectors_from_path(fz_context *ctx, fz_stext_page *page, fz_stext_device *tdev, const fz_path *path, fz_matrix ctm, fz_colorspace *cs, const float *color, float alpha, fz_color_params cp, int stroke, float exp)
+add_vectors_from_path(fz_context *ctx, fz_stext_page *page, fz_stext_device *tdev, const fz_path *path, fz_matrix ctm, fz_colorspace *cs, const float *color, float alpha, fz_color_params cp, const fz_stroke_state *stroke, float exp)
 {
 	int have_leftovers;
 	split_path_data sp;
 	int id = tdev->id;
+	int trailing_moves_acceptable = (stroke == NULL || stroke->end_cap != FZ_LINECAP_ROUND);
 
 	sp.dev = tdev;
 	sp.ctm = ctm;
@@ -2646,9 +2686,10 @@ add_vectors_from_path(fz_context *ctx, fz_stext_page *page, fz_stext_device *tde
 
 	have_leftovers = fz_is_valid_rect(sp.leftovers);
 
-	maybe_rect(ctx, &sp);
+	if (!trailing_moves_acceptable || sp.count != 1)
+		maybe_rect(ctx, &sp);
 
-	if (fz_is_valid_rect(sp.pending))
+	if ((!trailing_moves_acceptable || sp.count != 1) && fz_is_valid_rect(sp.pending))
 		add_vector(ctx, page, sp.dev, sp.pending, sp.flags | FZ_STEXT_VECTOR_IS_RECTANGLE | (have_leftovers ? FZ_STEXT_VECTOR_CONTINUES : 0), sp.argb, id, exp);
 	if (have_leftovers)
 		add_vector(ctx, page, sp.dev, sp.leftovers, sp.flags, sp.argb, id, exp);
@@ -2670,7 +2711,7 @@ fz_stext_fill_path(fz_context *ctx, fz_device *dev, const fz_path *path, int eve
 		check_for_strikeout(ctx, tdev, page, path, ctm);
 
 	if (tdev->flags & FZ_STEXT_COLLECT_VECTORS)
-		add_vectors_from_path(ctx, page, tdev, path, ctm, cs, color, alpha, cp, 0, 0);
+		add_vectors_from_path(ctx, page, tdev, path, ctm, cs, color, alpha, cp, NULL, 0);
 }
 
 static void
@@ -2690,7 +2731,7 @@ fz_stext_stroke_path(fz_context *ctx, fz_device *dev, const fz_path *path, const
 		check_for_strikeout(ctx, tdev, page, path, ctm);
 
 	if (tdev->flags & FZ_STEXT_COLLECT_VECTORS)
-		add_vectors_from_path(ctx, page, tdev, path, ctm, cs, color, alpha, cp, 1, exp);
+		add_vectors_from_path(ctx, page, tdev, path, ctm, cs, color, alpha, cp, ss, exp);
 }
 
 static void

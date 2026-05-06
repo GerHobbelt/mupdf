@@ -6711,6 +6711,8 @@ static void ffi_StructuredText_asText(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
 	fz_stext_page *page = js_touserdata(J, 0, "fz_stext_page");
+	int flatten = js_isdefined(J, 1);
+	int flags = js_tointeger(J, 1);
 	const char *data = NULL;
 	fz_buffer *buf = NULL;
 	fz_output *out = NULL;
@@ -6720,10 +6722,17 @@ static void ffi_StructuredText_asText(js_State *J)
 
 	fz_try(ctx)
 	{
-		buf = fz_new_buffer(ctx, 1024);
-		out = fz_new_output_with_buffer(ctx, buf);
-		fz_print_stext_page_as_text(ctx, out, page);
-		fz_close_output(ctx, out);
+		if (flatten)
+		{
+			buf = fz_new_buffer_from_flattened_stext_page(ctx, page, flags, NULL);
+		}
+		else
+		{
+			buf = fz_new_buffer(ctx, 1024);
+			out = fz_new_output_with_buffer(ctx, buf);
+			fz_print_stext_page_as_text(ctx, out, page);
+			fz_close_output(ctx, out);
+		}
 		data = fz_string_from_buffer(ctx, buf);
 	}
 	fz_always(ctx)
@@ -12670,7 +12679,7 @@ int murun_main(int argc, char **argv)
 		jsB_propfun(J, "StructuredText.asJSON", ffi_StructuredText_asJSON, 1);
 		jsB_propfun(J, "StructuredText.asXML", ffi_StructuredText_asXML, 0);
 		jsB_propfun(J, "StructuredText.asHTML", ffi_StructuredText_asHTML, 1);
-		jsB_propfun(J, "StructuredText.asText", ffi_StructuredText_asText, 0);
+		jsB_propfun(J, "StructuredText.asText", ffi_StructuredText_asText, 1);
 		jsB_propfun(J, "StructuredText.classifyRect", ffi_StructuredText_classifyRect, 2);
 		jsB_propfun(J, "StructuredText.tableHunt", ffi_StructuredText_tableHunt, 0);
 		jsB_propfun(J, "StructuredText.segment", ffi_StructuredText_segment, 0);
