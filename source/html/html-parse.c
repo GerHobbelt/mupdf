@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2025 Artifex Software, Inc.
+// Copyright (C) 2004-2026 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -779,7 +779,8 @@ fz_drop_html_tree(fz_context *ctx, fz_html_tree *tree)
 
 void fz_drop_html(fz_context *ctx, fz_html *html)
 {
-	fz_drop_html_tree(ctx, &html->tree);
+	if (html)
+		fz_drop_html_tree(ctx, &html->tree);
 }
 
 void fz_drop_story(fz_context *ctx, fz_story *story)
