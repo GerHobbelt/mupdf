@@ -1623,6 +1623,8 @@ static void add_quad(fz_context *ctx, fz_search *search, fz_stext_position *pos,
 static void
 ensure_combined_spun_haystack(fz_context *ctx, fz_search *search)
 {
+	size_t i;
+
 	if (search->combined_spun_haystack != NULL)
 		return;
 
@@ -1632,10 +1634,14 @@ ensure_combined_spun_haystack(fz_context *ctx, fz_search *search)
 		search->combined_spun_haystack = search->combined_haystack;
 		search->combined_spun_split = search->combined_split;
 		search->combined_spun_length = search->combined_length;
+
+		search->combined_index = fz_malloc_array(ctx, search->combined_spun_length, size_t);
+
+		for (i = 0; i < search->combined_spun_length; ++i)
+			search->combined_index[i] = i;
 	}
 	else
 	{
-		size_t i;
 		search->combined_spun_haystack = transform_text_with_index(ctx, search->transform, search->combined_haystack, &search->combined_index);
 		search->combined_spun_length = strlen(search->combined_spun_haystack);
 		/* combined_spun_split needs to be the index into the combined_spun_haystack that corresponds to the split point
