@@ -24,6 +24,8 @@
 
 #include "color-imp.h"
 
+#if FZ_ENABLE_RENDER_CORE 
+
 typedef struct
 {
 	fz_device super;
@@ -327,7 +329,7 @@ fz_draw_page_culling_text(fz_context *ctx, fz_page *page, fz_matrix ctm, int n, 
 		draw_dev = fz_new_draw_device(ctx, ctm, pix);
 		cull_dev = fz_new_culling_device_with_rects(ctx, draw_dev, n, rects);
 
-		fz_run_page(ctx, page, cull_dev, fz_identity, NULL);
+		fz_run_page(ctx, page, cull_dev, fz_identity);
 		fz_close_device(ctx, cull_dev);
 		fz_close_device(ctx, draw_dev);
 	}
@@ -341,3 +343,5 @@ fz_draw_page_culling_text(fz_context *ctx, fz_page *page, fz_matrix ctm, int n, 
 
 	return pix;
 }
+
+#endif // FZ_ENABLE_RENDER_CORE 

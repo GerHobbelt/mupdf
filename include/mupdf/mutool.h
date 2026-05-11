@@ -14,6 +14,7 @@ int mudraw_main(int argc, const char** argv);
 #if !defined(MURASTER_STANDALONE)
 int muraster_main(int argc, const char** argv);
 #endif
+int mugrep_main(int argc, const char** argv);
 int mutrace_main(int argc, const char** argv);
 int murun_main(int argc, const char** argv);
 

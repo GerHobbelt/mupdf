@@ -1113,7 +1113,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			// hence we should *postpone* bubbling up the OCR error, if one occurs.
 			fz_stext_options page_stext_options = stext_options;
 
-			if (output_format != OUT_TEXT)
+			if (output_format->format != OUT_TEXT)
 			{
 				stext_options.flags |= FZ_STEXT_ACCURATE_BBOXES;
 				stext_options.flags |= FZ_STEXT_COLLECT_STYLES;

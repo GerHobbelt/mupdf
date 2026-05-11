@@ -666,7 +666,7 @@ ocg_intents_include(fz_context *ctx, pdf_ocg_descriptor *desc, const char *name)
 
 
 static int
-pdf_is_ocg_hidden_imp(fz_context* ctx, pdf_document* doc, pdf_obj* rdb, const char* usage, pdf_obj* ocg, pdf_cycle_list* cycle_up);
+pdf_is_ocg_hidden_imp(fz_context* ctx, pdf_document* doc, pdf_resource_stack* rdb, const char* usage, pdf_obj* ocg, pdf_cycle_list* cycle_up);
 
 /*
 Compute the state of a /VE entry (visibility expression).
@@ -674,7 +674,7 @@ Recursive function: parameter ve may be an array or a dict.
 Return true for ON, false for OFF.
 */
 static int
-calc_ve_state(fz_context *ctx, pdf_document *doc, pdf_obj *rdb, const char *usage, pdf_obj *ve, pdf_cycle_list* cycle_up)
+calc_ve_state(fz_context *ctx, pdf_document *doc, pdf_resource_stack* rdb, const char *usage, pdf_obj *ve, pdf_cycle_list* cycle_up)
 {
 	int i, ve_len = pdf_array_len(ctx, ve);
 	pdf_obj *obj;
@@ -727,7 +727,7 @@ calc_ve_state(fz_context *ctx, pdf_document *doc, pdf_obj *rdb, const char *usag
 }
 
 static int
-pdf_is_ocg_hidden_imp(fz_context *ctx, pdf_document *doc, pdf_obj *rdb, const char *usage, pdf_obj *ocg, pdf_cycle_list *cycle_up)
+pdf_is_ocg_hidden_imp(fz_context *ctx, pdf_document *doc, pdf_resource_stack *rdb, const char *usage, pdf_obj *ocg, pdf_cycle_list *cycle_up)
 {
 	pdf_cycle_list cycle;
 	pdf_ocg_descriptor *desc = pdf_read_ocg(ctx, doc);
