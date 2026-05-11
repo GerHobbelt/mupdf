@@ -1370,8 +1370,8 @@ typedef uint64_t uintmax_t;
 #endif // NTDDI_VERSION
 
 #ifndef _WIN32_WINNT
-#define _WIN32_WINNT 0x0A00
-#endif // _WIN32_WINNT
+#define _WIN32_WINNT	_WIN32_WINNT_WIN10
+#endif
 
 #ifndef WINVER
 #define WINVER 0x0A00
