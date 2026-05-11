@@ -589,17 +589,20 @@ struct fz_stext_struct
  *                                  :   :
  */
 
+ typedef struct
+ {
+	int reinforcement;
+	float pos;
+	float min;
+	float max;
+	int uncertainty;
+ } fz_stext_grid_divider;
+
  struct fz_stext_grid_positions
  {
 	int len;
 	int max_uncertainty;
-	struct {
-		int reinforcement;
-		float pos;
-		float min;
-		float max;
-		int uncertainty;
-	} list[FZ_FLEXIBLE_ARRAY];
+	fz_stext_grid_divider list[FZ_FLEXIBLE_ARRAY];
  };
 
 FZ_DATA extern const char *fz_stext_options_usage;
@@ -933,6 +936,43 @@ void fz_table_hunt_within_bounds(fz_context *ctx, fz_stext_page *page, fz_rect b
 */
 fz_stext_block *
 fz_find_table_within_bounds(fz_context *ctx, fz_stext_page *page, fz_rect bounds);
+
+/**
+	Interpret the contents of a given stext page that fall within
+	a given grid as a table.
+
+	The page contents will be rewritten to contain a Table
+	structure with the identified content in it.
+
+	This uses the same logic as for fz_table_hunt, without the
+	actual hunting, and the grid detection phase. fz_table_hunt
+	hunts to find possible bounds for multiple tables on the
+	page; this routine just finds a single table contained within
+	the given rectangle. The grid detection phase is skipped, and
+	we just use the grid as given to us. We still perform the
+	cell analysis stage though, so the grid can be refined.
+
+	Returns the stext_block list that contains the content of
+	the table, or NULL if no table is found that scores below
+	limit.
+*/
+fz_stext_block *
+fz_find_table_within_grid(fz_context *ctx, fz_stext_page *page, fz_stext_grid_positions *xpos, fz_stext_grid_positions *ypos, float limit);
+
+/**
+	Try to guess at the table structure within given bounds.
+
+	If no table can be found, we return 0. If we find one we
+	return non-zero. (Currently, 1, other values reserved
+	for the future.)
+
+	In the case of a non-zero return. xposp and ypos are returned
+	as pointers to fz_stext_grid_positions records that must be
+	freed.
+*/
+int
+fz_propose_table_within_bounds(fz_context *ctx, fz_stext_page *page, fz_rect bounds, fz_stext_grid_positions **xposp, fz_stext_grid_positions **yposp);
+
 
 /**
 	Create a device to extract the text on a page.

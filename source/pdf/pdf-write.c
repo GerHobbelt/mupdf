@@ -2171,14 +2171,14 @@ pdf_apply_write_options(fz_context *ctx, pdf_write_options *opts, fz_options *ar
 	opts->permissions = ~0;
 	fz_lookup_option_integer(ctx, args, "permissions", &opts->permissions);
 
-	if (fz_lookup_option_boolean(ctx, args, "garbage", &opts->do_garbage))
+	if (fz_lookup_option_boolean(ctx, args, "garbage", &opts->do_garbage) > 0)
 	{}
-	else if (fz_lookup_option_integer(ctx, args, "garbage", &opts->do_garbage))
+	else if (fz_lookup_option_integer(ctx, args, "garbage", &opts->do_garbage) > 0)
 	{}
 	else if (fz_lookup_option_enum(ctx, args, "garbage", &opts->do_garbage, garbage_opts) < 0)
 		fz_throw(ctx, FZ_ERROR_ARGUMENT, "unknown garbage option in options");
 
-	if (fz_lookup_option_boolean(ctx, args, "appearance", &opts->do_appearance))
+	if (fz_lookup_option_boolean(ctx, args, "appearance", &opts->do_appearance) > 0)
 	{}
 	else if (fz_lookup_option_enum(ctx, args, "appearance", &opts->do_appearance, appearance_opts) < 0)
 		fz_throw(ctx, FZ_ERROR_ARGUMENT, "unknown appearance option in options");
@@ -2703,8 +2703,13 @@ do_pdf_save_document(fz_context *ctx, pdf_document *doc, pdf_write_state *opts, 
 		/* First, we do a prepass across the document to load all the objects
 		 * into memory. We'll end up doing this later on anyway, but by doing
 		 * it here, we force any repairs to happen before writing proper
-		 * starts. */
-		pdf_check_document(ctx, doc);
+		 * starts.
+		 *
+		 * Note that we can skip this step when saving incrementally, because in
+		 * that case we only touch new objects which we know cannot trigger a repair.
+		 */
+		if (!in_opts->do_incremental)
+			pdf_check_document(ctx, doc);
 
 		xref_len = pdf_xref_len(ctx, doc);
 		assert(xref_len >= 3);

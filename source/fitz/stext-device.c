@@ -141,7 +141,6 @@ typedef struct
 	fz_matrix trm;
 	fz_stext_options opts;
 	int delayed_new_line;
-	int new_obj;
 	int lastchar;
 	fz_stext_line *lastline;
 	int lastbidi;
@@ -856,7 +855,7 @@ fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int 
 
 	if ((dev->opts.flags & FZ_STEXT_COLLECT_STYLES) != 0)
 	{
-		if (glyph == -1)
+		if (glyph < 0)
 		{
 			if (dev->last_was_fake_bold)
 				return;
@@ -875,7 +874,7 @@ fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int 
 		cur_block = NULL;
 	cur_line = cur_block ? cur_block->u.t.last_line : NULL;
 
-	/* We use glyph == -2 to indicate a no-glyph char from an actualtext. The position
+	/* We use glyph == -2 to indicate the first no-glyph char from an actualtext. The position
 	 * is valid though, so we want to advance the pen for these. */
 	if (cur_line && glyph == -1)
 	{
@@ -1015,7 +1014,7 @@ fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int 
 		else if (fabsf(base_offset) <= PARAGRAPH_DIST)
 		{
 			/* Check indent to spot text-indent style paragraphs */
-			if (wmode == 0 && cur_line && dev->new_obj)
+			if (wmode == 0 && cur_line)
 				if ((p.x - dev->start.x) > (dev->pen.x - dev->start.x) * 0.5f && !dev->maybe_bullet)
 					new_para = 1;
 			new_line = 1;
@@ -1060,7 +1059,7 @@ fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int 
 		glyph = -1;
 
 	/* Add synthetic space */
-	if (add_space && !(dev->opts.flags & FZ_STEXT_INHIBIT_SPACES))
+	if (c != ' ' && add_space && !(dev->opts.flags & FZ_STEXT_INHIBIT_SPACES))
 	{
 		add_char_to_line(ctx, dev, page, cur_line, trm, font, size, ' ', (dev->opts.flags & FZ_STEXT_ACCURATE_BBOXES) ? NON_ACCURATE_GLYPH_ADDED_SPACE : NON_ACCURATE_GLYPH, &dev->pen, &p, bidi, dev->color, add_space, flags, dev->opts.flags);
 		if (dev->delayed_new_line)
@@ -1087,7 +1086,6 @@ fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int 
 	dev->lag_pen = p;
 	dev->pen = q;
 
-	dev->new_obj = 0;
 	dev->trm = trm;
 }
 
@@ -1402,6 +1400,8 @@ rune_index(const char *utf8, size_t idx)
 static void
 flush_actualtext(fz_context *ctx, fz_stext_device *dev, const char *actualtext, int i, float adv)
 {
+	int glyph = -2;
+
 	if (*actualtext == 0)
 		return;
 
@@ -1411,25 +1411,6 @@ flush_actualtext(fz_context *ctx, fz_stext_device *dev, const char *actualtext, 
 	if (dev->opts.flags & (FZ_STEXT_CLIP | FZ_STEXT_CLIP_RECT))
 		if (dev->last.clipped)
 			return;
-
-	if (adv != 0)
-	{
-		const char *at = actualtext;
-		int j = i;
-
-		while (1)
-		{
-			int rune;
-			at += fz_chartorune_unsafe(&rune, at);
-
-			if (rune == 0)
-				break;
-			j++;
-		}
-
-		if (j != i)
-			adv /= (j - i);
-	}
 
 	while (1)
 	{
@@ -1443,19 +1424,18 @@ flush_actualtext(fz_context *ctx, fz_stext_device *dev, const char *actualtext, 
 			if (dev->last.clipped)
 				continue;
 
-		dev->last.trm.e = dev->pen.x;
-		dev->last.trm.f = dev->pen.y;
-
 		fz_add_stext_char(ctx, dev, dev->last.font,
 			rune,
-			-2,
+			glyph,
 			dev->last.trm,
-			adv,
+			0,
 			dev->last.wmode,
 			dev->last.bidi_level,
 			(i == 0) && (dev->opts.flags & FZ_STEXT_PRESERVE_SPANS),
 			dev->last.flags);
 		i++;
+
+		glyph = -1; /* -1 for all but first glyph in the actualtext run */
 	}
 }
 
@@ -1478,9 +1458,9 @@ do_extract_within_actualtext(fz_context *ctx, fz_stext_device *dev, fz_text_span
 
 	/* Now, we HOPE that the creator of a PDF will minimise the actual text
 	 * differences, so that we'll get:
-	 *   "Politicians <Actualtext="lie">fib</ActualText>, always."
+	 *   "Politicians <ActualText="lie">fib</ActualText>, always."
 	 * rather than:
-	 *   "<Actualtext="Politicians lie, always">Politicians fib, always.</ActualText>
+	 *   "<ActualText="Politicians lie, always">Politicians fib, always.</ActualText>
 	 * but experience with PDF files tells us that this won't always be the case.
 	 *
 	 * We try to minimise the actualtext section here, just in case.
@@ -1646,7 +1626,6 @@ fz_stext_fill_text(fz_context *ctx, fz_device *dev, const fz_text *text, fz_matr
 	if (text == tdev->lasttext && (tdev->opts.flags & FZ_STEXT_COLLECT_STYLES) == 0)
 		return;
 	tdev->color = hexrgba_from_color(ctx, colorspace, color, alpha);
-	tdev->new_obj = 1;
 	for (span = text->head; span; span = span->next)
 		fz_stext_extract(ctx, tdev, span, ctm, FZ_STEXT_FILLED);
 	fz_drop_text(ctx, tdev->lasttext);
@@ -1662,7 +1641,6 @@ fz_stext_stroke_text(fz_context *ctx, fz_device *dev, const fz_text *text, const
 	if (text == tdev->lasttext && (tdev->opts.flags & FZ_STEXT_COLLECT_STYLES) == 0)
 		return;
 	tdev->color = hexrgba_from_color(ctx, colorspace, color, alpha);
-	tdev->new_obj = 1;
 	for (span = text->head; span; span = span->next)
 		fz_stext_extract(ctx, tdev, span, ctm, FZ_STEXT_STROKED);
 	fz_drop_text(ctx, tdev->lasttext);
@@ -1677,7 +1655,6 @@ fz_stext_clip_text(fz_context *ctx, fz_device *dev, const fz_text *text, fz_matr
 	if (text == tdev->lasttext && (tdev->opts.flags & FZ_STEXT_COLLECT_STYLES) == 0)
 		return;
 	tdev->color = 0;
-	tdev->new_obj = 1;
 	for (span = text->head; span; span = span->next)
 		fz_stext_extract(ctx, tdev, span, ctm, FZ_STEXT_FILLED | FZ_STEXT_CLIPPED);
 	fz_drop_text(ctx, tdev->lasttext);
@@ -1692,7 +1669,6 @@ fz_stext_clip_stroke_text(fz_context *ctx, fz_device *dev, const fz_text *text, 
 	if (text == tdev->lasttext && (tdev->opts.flags & FZ_STEXT_COLLECT_STYLES) == 0)
 		return;
 	tdev->color = 0;
-	tdev->new_obj = 1;
 	for (span = text->head; span; span = span->next)
 		fz_stext_extract(ctx, tdev, span, ctm, FZ_STEXT_STROKED | FZ_STEXT_CLIPPED);
 	fz_drop_text(ctx, tdev->lasttext);
@@ -1707,7 +1683,6 @@ fz_stext_ignore_text(fz_context *ctx, fz_device *dev, const fz_text *text, fz_ma
 	if (text == tdev->lasttext && (tdev->opts.flags & FZ_STEXT_COLLECT_STYLES) == 0)
 		return;
 	tdev->color = 0;
-	tdev->new_obj = 1;
 	for (span = text->head; span; span = span->next)
 		fz_stext_extract(ctx, tdev, span, ctm, 0);
 	fz_drop_text(ctx, tdev->lasttext);
@@ -1783,6 +1758,9 @@ fz_stext_end_metatext(fz_context *ctx, fz_device *dev)
 	/* If we have a 'last' text position, send the content after that. */
 	if (tdev->last.valid)
 	{
+		tdev->last.trm.e = tdev->pen.x;
+		tdev->last.trm.f = tdev->pen.y;
+
 		flush_actualtext(ctx, tdev, tdev->metatext->text, 0, 0);
 		pop_metatext(ctx, tdev);
 		tdev->last.valid = 0;
@@ -1794,7 +1772,7 @@ fz_stext_end_metatext(fz_context *ctx, fz_device *dev)
 	if (fz_is_empty_rect(tdev->metatext->bounds))
 	{
 		if ((dev->flags & (FZ_STEXT_CLIP | FZ_STEXT_CLIP_RECT)) == 0 && tdev->metatext->text[0])
-			fz_warn(ctx, "Actualtext with no position. Text may be lost or mispositioned.");
+			fz_warn(ctx, "ActualText with no position. Text may be lost or mispositioned.");
 		pop_metatext(ctx, tdev);
 		return;
 	}

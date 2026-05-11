@@ -1184,23 +1184,13 @@ as_xml(fz_context *ctx, fz_stext_block *block, fz_output *out, fz_stext_xml_flag
 						if (fz_quad_is_axis_oriented(ch->quad))
 						{
 							fz_rect bb = fz_rect_from_quad(ch->quad);
-							fz_write_printf(ctx, out, "<char rect=\"%R\" x=\"%g\" y=\"%g\" bidi=\"%d\" color=\"#%06x\" alpha=\"#%02x\" flags=\"%d\" c=\"",
-								&bb,
-								ch->origin.x, ch->origin.y,
-								ch->bidi,
-								ch->argb & 0xFFFFFF,
-								ch->argb>>24,
-								ch->flags);
+							fz_write_printf(ctx, out, "<char rect=\"%R\" c=\"",
+								&bb);
 						}
 						else
 						{
-							fz_write_printf(ctx, out, "<char quad=\"%Z\" x=\"%g\" y=\"%g\" bidi=\"%d\" color=\"#%06x\" alpha=\"#%02x\" flags=\"%d\" c=\"",
-								&ch->quad,
-								ch->origin.x, ch->origin.y,
-								ch->bidi,
-								ch->argb & 0xFFFFFF,
-								ch->argb>>24,
-								ch->flags);
+							fz_write_printf(ctx, out, "<char quad=\"%Z\" c=\"",
+								&ch->quad);
 						}
 						xml_write_char(ctx, out, ch->c);
 						if (!fz_is_valid_xml_char(ch->c))
@@ -1211,7 +1201,12 @@ as_xml(fz_context *ctx, fz_stext_block *block, fz_output *out, fz_stext_xml_flag
 							for (i = 0; i < n; i++)
 								fz_write_printf(ctx, out, "%02x", text[i]);
 						}
-						fz_write_string(ctx, out, "\"/>\n");
+						fz_write_printf(ctx, out, "\" x=\"%g\" y=\"%g\" bidi=\"%d\" color=\"#%06x\" alpha=\"#%02x\" flags=\"%d\"/>\n",
+								ch->origin.x, ch->origin.y,
+								ch->bidi,
+								ch->argb & 0xFFFFFF,
+								ch->argb >> 24,
+								ch->flags);
 					}
 
 					if (font)
