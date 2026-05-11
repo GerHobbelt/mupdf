@@ -517,6 +517,15 @@ void fz_tune_image_decode(fz_context *ctx, fz_tune_image_decode_fn *image_decode
 void fz_tune_image_scale(fz_context *ctx, fz_tune_image_scale_fn *image_scale, void *arg);
 
 /**
+	Set the behavior for image rendering and resampling.
+*/
+enum {
+	FZ_IMAGE_RENDERING_QUALITY = 0,
+	FZ_IMAGE_RENDERING_SPEED = 1,
+};
+void fz_tune_image_rendering(fz_context *ctx, int behavior);
+
+/**
 	Get the number of bits of antialiasing we are
 	using (for graphics). Between 0 and 8.
 */
