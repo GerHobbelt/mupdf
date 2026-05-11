@@ -1,4 +1,10 @@
+//
+// symlink-like file is generated using the platform/win32/prep_boost_include_directories.sh shell script.
+//
+// ** DO NOT EDIT ** (adjust the regenerator shell script mentioned above instead!)
+//
 
 //#pragma once
 
-// obsoleted. Rolled into boost/config and assumes your compiler is modern enough to carry this one itself!
+#include "../../../../boost/libs/config/include/boost/static_assert.hpp"
+
