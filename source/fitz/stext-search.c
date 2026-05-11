@@ -1633,6 +1633,8 @@ static void add_quad(fz_context *ctx, fz_search *search, fz_stext_position *pos,
 static void
 ensure_combined_spun_haystack(fz_context *ctx, fz_search *search)
 {
+	size_t i;
+
 	if (search->combined_spun_haystack != NULL)
 		return;
 
@@ -1642,10 +1644,14 @@ ensure_combined_spun_haystack(fz_context *ctx, fz_search *search)
 		search->combined_spun_haystack = search->combined_haystack;
 		search->combined_spun_split = search->combined_split;
 		search->combined_spun_length = search->combined_length;
+
+		search->combined_index = fz_malloc_array(ctx, search->combined_spun_length, size_t);
+
+		for (i = 0; i < search->combined_spun_length; ++i)
+			search->combined_index[i] = i;
 	}
 	else
 	{
-		size_t i;
 		search->combined_spun_haystack = transform_text_with_index(ctx, search->transform, search->combined_haystack, &search->combined_index);
 		search->combined_spun_length = strlen(search->combined_spun_haystack);
 		/* combined_spun_split needs to be the index into the combined_spun_haystack that corresponds to the split point
@@ -1823,15 +1829,16 @@ fz_search_result fz_search_forwards(fz_context *ctx, fz_search *search)
 	if (ensure_haystack_for_page(ctx, search, &search->current_page))
 	{
 		/* current_page is empty. */
+
+		/* and no more pages */
 		if (search->current_page.end_of_doc || search->next_page.end_of_doc)
 		{
 			result.reason = FZ_SEARCH_COMPLETE;
 			return result;
 		}
 
-		/* Ditch current, and move next_page down. Then ask for a new next page. */
-		advance_page(ctx, search, &search->previous_page, &search->current_page);
-		advance_page(ctx, search, &search->current_page, &search->next_page);
+		/* Ditch current page, then ask for the next page to take its place. */
+		drop_page(ctx, &search->current_page);
 
 		result.reason = FZ_SEARCH_MORE_INPUT;
 		result.u.more_input.seq_needed = search->current_page.seq+1;
@@ -2081,15 +2088,16 @@ fz_search_result fz_search_backwards(fz_context *ctx, fz_search *search)
 	if (ensure_haystack_for_page(ctx, search, &search->current_page))
 	{
 		/* current_page is empty. */
+
+		/* and no more pages */
 		if (search->current_page.end_of_doc || search->next_page.end_of_doc)
 		{
 			result.reason = FZ_SEARCH_COMPLETE;
 			return result;
 		}
 
-		/* Ditch current, and move previous_page up. Then ask for a new previous_page. */
-		advance_page(ctx, search, &search->next_page, &search->current_page);
-		advance_page(ctx, search, &search->current_page, &search->previous_page);
+		/* Ditch current page, then ask for the previous page to fill its place. */
+		drop_page(ctx, &search->current_page);
 
 		result.reason = FZ_SEARCH_MORE_INPUT;
 		result.u.more_input.seq_needed = search->current_page.seq-1;

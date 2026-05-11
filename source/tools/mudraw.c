@@ -735,6 +735,8 @@ file_level_trailers(fz_context *ctx)
 	}
 	if (output_format->format == OUT_STEXT_JSON || output_format->format == OUT_OCR_STEXT_JSON)
 		fz_write_printf(ctx, out, "]}");
+	if (output_format->format == OUT_TEXT_FLAT)
+		fz_write_string(ctx, out, "\n");
 
 	if (output_format->format == OUT_HTML || output_format->format == OUT_OCR_HTML)
 		fz_print_stext_trailer_as_html(ctx, out);
@@ -1218,7 +1220,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			else if (output_format->format == OUT_EMPTY_BOX)
 			{
 				fz_print_stext_page_as_empty_box(ctx, out, text);
-				fz_write_printf(ctx, out, "\f\n");
+				fz_write_string(ctx, out, "\f\n");
 			}
 			else if (output_format->format == OUT_TEXT_FLAT)
 			{

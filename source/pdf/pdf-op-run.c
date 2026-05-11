@@ -1241,7 +1241,7 @@ pdf_show_path(fz_context *ctx, pdf_run_processor *pr, int doclose, int dofill, i
  */
 
 static pdf_gstate *
-pdf_flush_text(fz_context *ctx, pdf_run_processor *pr)
+pdf_flush_text_imp(fz_context *ctx, pdf_run_processor *pr, int flush_clip)
 {
 	pdf_gstate *gstate = pr->gstate + pr->gtop;
 	fz_text *text;
@@ -1253,11 +1253,15 @@ pdf_flush_text(fz_context *ctx, pdf_run_processor *pr)
 	int knockout_on_entry, knockout_now;
 	int push_new_knockout = 0;
 
-	text = pdf_tos_get_text(ctx, &pr->tos);
+	if (flush_clip)
+		text = pdf_tos_get_clip_text(ctx, &pr->tos);
+	else
+		text = pdf_tos_get_text(ctx, &pr->tos);
 	if (!text)
 		return gstate;
 
 	pop_any_pending_mcid_changes(ctx, pr);
+
 	/* If we are going to output text, we need to have flushed any begin layers first. */
 	flush_begin_layer(ctx, pr);
 
@@ -1273,6 +1277,11 @@ pdf_flush_text(fz_context *ctx, pdf_run_processor *pr)
 	case 6: dofill = dostroke = doclip = 1; break;
 	case 7: doclip = 1; break;
 	}
+
+	if (flush_clip)
+		dostroke = dofill = 0;
+	else
+		doclip = 0;
 
 	if (pr->super.hidden)
 		dostroke = dofill = 0;
@@ -1424,6 +1433,18 @@ pdf_flush_text(fz_context *ctx, pdf_run_processor *pr)
 	return pr->gstate + pr->gtop;
 }
 
+static inline pdf_gstate *
+pdf_flush_text(fz_context *ctx, pdf_run_processor *pr)
+{
+	return pdf_flush_text_imp(ctx, pr, 0);
+}
+
+static inline pdf_gstate *
+pdf_flush_clip_text(fz_context *ctx, pdf_run_processor *pr)
+{
+	return pdf_flush_text_imp(ctx, pr, 1);
+}
+
 static int
 guess_bidi_level(int bidiclass, int cur_bidi)
 {
@@ -1501,6 +1522,13 @@ pdf_show_char(fz_context *ctx, pdf_run_processor *pr, int cid, fz_text_language 
 	/* If Type3 and tr != 3, then use textrender mode 0. */
 	if (fontdesc->font->t3procs && pr->tos.text_mode != 3)
 		pr->tos.text_mode = 0;
+
+	/* Colored Type3 glyphs shall not be rendered with pattern fills. */
+	if (fontdesc->font->t3procs && (fontdesc->font->t3flags[gid] & FZ_DEVFLAG_COLOR))
+	{
+		if (gstate->fill.kind != PDF_MAT_COLOR)
+			render_direct = 1;
+	}
 
 	if (render_direct && pr->tos.text_mode != 3 /* or 7, by type3_hitr */)
 	{
@@ -1587,6 +1615,13 @@ pdf_show_char(fz_context *ctx, pdf_run_processor *pr, int cid, fz_text_language 
 
 	/* add glyph to textobject */
 	fz_show_glyph_aux(ctx, pr->tos.text, fontdesc->font, trm, adv, gid, ucsbuf[0], cid, fontdesc->wmode, pr->bidi, FZ_BIDI_NEUTRAL, lang);
+
+	/* add glyph to clip accumulator */
+	if (pr->tos.text_mode & 4)
+	{
+		pdf_tos_accumulate_clip(ctx, &pr->tos);
+		fz_show_glyph_aux(ctx, pr->tos.clip_text, fontdesc->font, trm, adv, gid, ucsbuf[0], cid, fontdesc->wmode, pr->bidi, FZ_BIDI_NEUTRAL, lang);
+	}
 
 	/* add filler glyphs for one-to-many unicode mapping */
 	for (i = 1; i < ucslen; i++)
@@ -2926,6 +2961,16 @@ static void pdf_run_cm(fz_context *ctx, pdf_processor *proc, float a, float b, f
 	pdf_gstate *gstate = pdf_flush_text(ctx, pr);
 	fz_matrix m;
 
+	if (pr->tos.clip_text)
+	{
+		// FIXME: We can't handle changing CTM while accumulating text clips!
+		// To do so we would need to retroactively change the TRM to apply the CTM change
+		// to glyphs in the current clip_text object. Fortunately we have never seen
+		// any files that would require this to happen.
+		fz_warn(ctx, "ignoring CTM change for accumulated glyph clip paths");
+		fz_throw(ctx, FZ_ERROR_GENERIC, "CTM CHANGE IN CLIP TEXT!!!");
+	}
+
 	m.a = a;
 	m.b = b;
 	m.c = c;
@@ -3072,6 +3117,7 @@ static void pdf_run_ET(fz_context *ctx, pdf_processor *proc)
 {
 	pdf_run_processor *pr = (pdf_run_processor *)proc;
 	pdf_flush_text(ctx, pr);
+	pdf_flush_clip_text(ctx, pr);
 	pdf_flush_tk_group(ctx, pr);
 }
 
@@ -3483,6 +3529,7 @@ pdf_drop_run_processor(fz_context *ctx, pdf_processor *proc)
 
 	fz_drop_path(ctx, pr->path);
 	fz_drop_text(ctx, pr->tos.text);
+	fz_drop_text(ctx, pr->tos.clip_text);
 
 	fz_drop_default_colorspaces(ctx, pr->default_cs);
 
