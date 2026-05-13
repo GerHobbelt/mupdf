@@ -139,6 +139,11 @@ fz_unicode_from_glyph_name(const char *name)
 		code = read_num(buf+1, 16);
 	else if (buf[0] == 'a' && buf[1] != 0 && buf[2] != 0)
 		code = read_num(buf+1, 10);
+	/* Distiller 3.x CFF fonts: glyph name "C<n>" encodes Unicode codepoint <n>
+	   in decimal. Mirrors PDF.js (src/core/fonts.js) and Poppler
+	   (poppler/GfxFont.cc parseNumericName). */
+	else if (buf[0] == 'C' && buf[1] >= '0' && buf[1] <= '9')
+		code = read_num(buf+1, 10);
 	else
 		code = read_num(buf, 10);
 
