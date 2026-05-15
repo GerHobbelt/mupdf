@@ -2,14 +2,14 @@
 
 This is a fork of [ArtifexSoftware/mupdf](https://github.com/ArtifexSoftware/mupdf). It exists to ship a small fix to MuPDF's glyph-name decoder that upstream does not currently carry.
 
-The `fork` branch is based on the upstream tag **1.27.2** and contains a single extra commit.
+The `fork` branch is based on the upstream tag **1.27.2** and contains a small set of extra commits.
 
 ## What's different from upstream
 
 | File | Change |
 |---|---|
 | `source/fitz/encodings.c` | One extra branch in `fz_unicode_from_glyph_name` to handle Distiller 3.x `C<n>` glyph names |
-| `source/pdf/pdf-op-run.c` | Guard against excessively deep acyclic Form XObject nesting in the page interpreter |
+| `source/pdf/pdf-op-run.c` | (1) Guard against excessively deep acyclic Form XObject nesting in the page interpreter; (2) memoize marked-content MCID lookups so pathological tagged PDFs don't degrade to O(n²) per page |
 | `FORK.md` | This file |
 
 That's the entire delta. The glyph-name patch is 5 added lines; see the commit `Recognise Distiller 3.x C<n> glyph names in fz_unicode_from_glyph_name` for full context.
@@ -29,6 +29,14 @@ Affected corpus: older academic PDFs from Distiller 3.x (Elsevier, Wiley, etc., 
 MuPDF 1.27.2's PDF run processor detects cyclic Form XObject recursion, but it does not cap long acyclic Form XObject chains. A real pdfTeX 1.40.25 pdf contains figure XObjects with deeply nested transparency-group forms. Native MuPDF recovers with `exception stack overflow!` warnings and keeps rendering/extracting, but the WASM build can exhaust/corrupt the linear-memory stack and trap with `RuntimeError: memory access out of bounds`.
 
 The local patch adds an explicit Form XObject nesting cap in `source/pdf/pdf-op-run.c:pdf_run_xobject`. Once the cap is reached, the interpreter warns and skips that nested XObject instead of recursing further. This matches MuPDF's existing behavior of tolerating bad or excessive page content where possible, and prevents a single page from killing the cached WASM instance.
+
+## Marked-content MCID lookup memoization
+
+`pdf_lookup_mcid_in_mcids` (`source/pdf/pdf-op-run.c`) resolves a marked-content `MCID` to its structure-tree element. Its O(1) fast path assumes the per-page `ParentTree` array is indexed by MCID; when that misses it falls back to a linear scan of every element, resolving an indirect object for every entry of each element's `/K` array.
+
+Some producers (observed: Foxit PhantomPDF Printer 9.7.1) write **document-cumulative** MCID values into page content streams instead of the spec's per-page 0-based values. The MCID then always exceeds the per-page array length, so the fast path misses on *every* `BDC`/`EMC`/text operator. On a page with hundreds of marked-content operators and a structure element carrying a large aggregated `/K` array (e.g. an `/S /Link` element with thousands of entries), the recovery scan reruns per operator and the page degrades to O(operators × elements × K-length) — tens of seconds per page, affecting every code path that interprets the page (text extraction, rendering, OCR detection).
+
+The local patch adds a lazily-built per-page index (`build_mcid_index` in `pdf-op-run.c`) mapping every integer MCID value to its structure element. The recovery path consults the index instead of rescanning, turning each lookup into O(1) amortized. It is a pure memoization of the existing recovery scan: first element in array order still wins, misses still return `NULL`, so extraction output is unchanged.
 
 ## Building the WebAssembly module
 
