@@ -55,6 +55,10 @@ enum
 	PDF_MAT_SHADE,
 };
 
+/* WASM builds can trap before native stack-overflow recovery catches very deep,
+ * acyclic Form XObject chains. Cap nesting before the C stack is exhausted. */
+#define PDF_MAX_XOBJECT_DEPTH 24
+
 typedef struct
 {
 	int kind;
@@ -137,6 +141,7 @@ struct pdf_run_processor
 
 	/* xobject cycle detector */
 	pdf_cycle_list *cycle;
+	int xobject_depth;
 
 	pdf_obj *role_map;
 
@@ -2498,7 +2503,13 @@ pdf_run_xobject(fz_context *ctx, pdf_run_processor *pr, pdf_obj *xobj, pdf_obj *
 	pdf_cycle_list *cycle_up = pr->cycle;
 	if (xobj == NULL || pdf_cycle(ctx, &cycle_here, cycle_up, xobj))
 		return;
+	if (pr->xobject_depth >= PDF_MAX_XOBJECT_DEPTH)
+	{
+		fz_warn(ctx, "ignoring too deeply nested XObject");
+		return;
+	}
 	pr->cycle = &cycle_here;
+	pr->xobject_depth++;
 
 	pop_any_pending_mcid_changes(ctx, pr);
 	flush_begin_layer(ctx, pr);
@@ -2643,6 +2654,7 @@ pdf_run_xobject(fz_context *ctx, pdf_run_processor *pr, pdf_obj *xobj, pdf_obj *
 		fz_drop_default_colorspaces(ctx, xobj_default_cs);
 		fz_drop_colorspace(ctx, cs);
 		pr->cycle = cycle_up;
+		pr->xobject_depth--;
 		pr->struct_parent = save_struct_parent;
 		pr->mcids = save_mcids;
 	}

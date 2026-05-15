@@ -9,9 +9,10 @@ The `fork` branch is based on the upstream tag **1.27.2** and contains a single 
 | File | Change |
 |---|---|
 | `source/fitz/encodings.c` | One extra branch in `fz_unicode_from_glyph_name` to handle Distiller 3.x `C<n>` glyph names |
+| `source/pdf/pdf-op-run.c` | Guard against excessively deep acyclic Form XObject nesting in the page interpreter |
 | `FORK.md` | This file |
 
-That's the entire delta. The patch is 5 added lines; see the commit `Recognise Distiller 3.x C<n> glyph names in fz_unicode_from_glyph_name` for full context.
+That's the entire delta. The glyph-name patch is 5 added lines; see the commit `Recognise Distiller 3.x C<n> glyph names in fz_unicode_from_glyph_name` for full context.
 
 ## Why the patch exists
 
@@ -22,6 +23,12 @@ Both PDF.js (`src/core/fonts.js`) and Poppler (`poppler/GfxFont.cc parseNumericN
 The patch adds a conservative `C<n>` branch alongside the existing `a<n>` one, before the `FZ_REPLACEMENT_CHARACTER` fallback. AGL lookup still runs first, so real AGL names like `C` aren't affected.
 
 Affected corpus: older academic PDFs from Distiller 3.x (Elsevier, Wiley, etc., circa 2000–2003) with `AdvTimes*`, `AdvPi*`, `AdvP*` fonts.
+
+## WASM Form XObject nesting guard
+
+MuPDF 1.27.2's PDF run processor detects cyclic Form XObject recursion, but it does not cap long acyclic Form XObject chains. A real pdfTeX 1.40.25 pdf contains figure XObjects with deeply nested transparency-group forms. Native MuPDF recovers with `exception stack overflow!` warnings and keeps rendering/extracting, but the WASM build can exhaust/corrupt the linear-memory stack and trap with `RuntimeError: memory access out of bounds`.
+
+The local patch adds an explicit Form XObject nesting cap in `source/pdf/pdf-op-run.c:pdf_run_xobject`. Once the cap is reached, the interpreter warns and skips that nested XObject instead of recursing further. This matches MuPDF's existing behavior of tolerating bad or excessive page content where possible, and prevents a single page from killing the cached WASM instance.
 
 ## Building the WebAssembly module
 
