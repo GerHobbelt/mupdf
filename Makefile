@@ -568,6 +568,9 @@ extract-test:
 	$(MAKE) debug
 	$(MAKE) -C thirdparty/extract mutool=../../build/debug/mutool test-mutool
 
+fork-regression-test: $(OUT)/mutool
+	MUTOOL="$(CURDIR)/$(OUT)/mutool" bash scripts/run-fork-regression-tests.sh
+
 TAG_HDR_FILES=$(shell git ls-files | grep -v '^\(docs\|scripts\|generated\)' | grep '\.h$$')
 TAG_SRC_FILES=$(shell git ls-files | grep -v '^\(docs\|scripts\|generated\)' | grep -v '\.h$$')
 
