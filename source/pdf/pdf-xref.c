@@ -2343,7 +2343,7 @@ pdf_obj_read(fz_context *ctx, pdf_document *doc, int64_t *offset, int *nump, pdf
 	 * whenever we read an object it should just go into the
 	 * previous xref.
 	 */
-	tok = pdf_repair_obj(ctx, doc, buf, &stmofs, NULL, NULL, NULL, page, &newtmpofs, NULL);
+	tok = pdf_repair_obj(ctx, doc, buf, &stmofs, NULL, NULL, NULL, page, &newtmpofs, NULL, NULL);
 
 	do /* So we can break out of it */
 	{
@@ -3548,7 +3548,7 @@ pdf_load_hint_object(fz_context *ctx, pdf_document *doc)
 			tok = pdf_lex(ctx, doc->file, buf);
 			if (tok != PDF_TOK_OBJ)
 				break;
-			(void)pdf_repair_obj(ctx, doc, buf, NULL, NULL, NULL, NULL, &page, NULL, NULL);
+			(void)pdf_repair_obj(ctx, doc, buf, NULL, NULL, NULL, NULL, &page, NULL, NULL, NULL);
 			pdf_load_hints(ctx, doc, num);
 		}
 	}

@@ -37,6 +37,14 @@
  * swallowing the objects that follow it (see pdf_repair_obj). */
 #define PDF_REPAIR_ENDSTREAM_SLACK 2048
 
+/* During repair a bare '<<' (one not preceded by 'N G obj') is treated as a
+ * possible file trailer. A real trailer dictionary is tiny — a handful of
+ * keys plus two short /ID strings. This bounds how far parsing such a dict
+ * may advance the file pointer: a parse that runs past this is not a trailer
+ * but a runaway chasing a missing terminator, and is rewound (see
+ * pdf_repair_xref_base). Generous enough to never reject a genuine trailer. */
+#define PDF_REPAIR_TRAILER_MAX 16384
+
 struct entry
 {
 	int num;
@@ -90,18 +98,27 @@ pdf_drop_root_list(fz_context *ctx, pdf_root_list *roots)
 }
 
 int
-pdf_repair_obj(fz_context *ctx, pdf_document *doc, pdf_lexbuf *buf, int64_t *stmofsp, int64_t *stmlenp, pdf_obj **encrypt, pdf_obj **id, pdf_obj **page, int64_t *tmpofs, pdf_obj **root)
+pdf_repair_obj(fz_context *ctx, pdf_document *doc, pdf_lexbuf *buf, int64_t *stmofsp, int64_t *stmlenp, pdf_obj **encrypt, pdf_obj **id, pdf_obj **page, int64_t *tmpofs, pdf_obj **root, int *brokenp)
 {
 	fz_stream *file = doc->file;
 	pdf_token tok;
 	int64_t stm_len;
 	int64_t local_ofs;
+	int64_t content_start;
 	int have_length = 0;
 
 	if (tmpofs == NULL)
 		tmpofs = &local_ofs;
 	if (stmofsp == NULL)
 		stmofsp = &local_ofs;
+
+	/* Set when the object's dictionary could not be parsed and the scan
+	 * was rewound (see below). The caller must not record such an object:
+	 * it would point the rebuilt xref at an unparsable offset and, for an
+	 * incrementally-updated PDF, a broken trailing copy would overwrite an
+	 * earlier valid definition of the same object number. */
+	if (brokenp)
+		*brokenp = 0;
 
 	*stmofsp = 0;
 	if (stmlenp)
@@ -112,6 +129,11 @@ pdf_repair_obj(fz_context *ctx, pdf_document *doc, pdf_lexbuf *buf, int64_t *stm
 	*tmpofs = fz_tell(ctx, file);
 	if (*tmpofs < 0)
 		fz_throw(ctx, FZ_ERROR_SYSTEM, "cannot tell in file");
+
+	/* Offset of the object's content, just past 'N G obj'. If parsing
+	 * the object's dictionary runs away (see below) the scan is rewound
+	 * here so the outer repair loop can resync. */
+	content_start = *tmpofs;
 
 	/* On entry to this function, we know that we've just seen
 	 * '<int> <int> obj'. We expect the next thing we see to be a
@@ -126,6 +148,7 @@ pdf_repair_obj(fz_context *ctx, pdf_document *doc, pdf_lexbuf *buf, int64_t *stm
 	if (tok == PDF_TOK_OPEN_DICT)
 	{
 		pdf_obj *obj, *dict = NULL;
+		int dict_failed = 0;
 
 		fz_try(ctx)
 		{
@@ -135,12 +158,47 @@ pdf_repair_obj(fz_context *ctx, pdf_document *doc, pdf_lexbuf *buf, int64_t *stm
 		{
 			fz_rethrow_if(ctx, FZ_ERROR_TRYLATER);
 			fz_rethrow_if(ctx, FZ_ERROR_SYSTEM);
-			/* Don't let a broken object at EOF overwrite a good one */
-			if (file->eof)
-				fz_rethrow(ctx);
-			/* Silently swallow the error */
-			fz_report_error(ctx);
-			dict = pdf_new_dict(ctx, doc, 2);
+			if (brokenp == NULL)
+			{
+				/* Callers without a resync loop — progressive / hint
+				 * object reading in pdf-xref.c — keep the original
+				 * contract: a truncated object at EOF must not overwrite
+				 * a good one, so rethrow; any other broken dictionary is
+				 * swallowed as an empty dict and parsing continues so
+				 * the caller still advances past the object. The rewind
+				 * path below only fits the repair scan, which can
+				 * resync; it would strand these callers on the same
+				 * bytes. */
+				if (file->eof)
+					fz_rethrow(ctx);
+				fz_report_error(ctx);
+				dict = pdf_new_dict(ctx, doc, 2);
+			}
+			else
+			{
+				/* Repair scan. pdf_parse_dict / pdf_parse_array do not
+				 * stop at object boundaries, so an unclosed array or
+				 * string here has consumed every following object — up
+				 * to EOF for a truncated file. Do not record this
+				 * runaway extent and do not abort: rewind to the
+				 * object's content start and let the outer scan resync
+				 * on the 'N G obj' definitions that were swallowed (the
+				 * page tree and /Root catalog are typically among them).
+				 * Matches Poppler, which reconstructs such files. */
+				fz_report_error(ctx);
+				dict_failed = 1;
+			}
+		}
+
+		if (dict_failed)
+		{
+			/* Only reached for the repair-scan caller (brokenp != NULL). */
+			pdf_drop_obj(ctx, dict);
+			fz_seek(ctx, file, content_start, 0);
+			if (stmlenp)
+				*stmlenp = -1;
+			*brokenp = 1;
+			return PDF_TOK_NULL;
 		}
 
 		/* We must be careful not to try to resolve any indirections
@@ -585,12 +643,13 @@ pdf_repair_xref_base(fz_context *ctx, pdf_document *doc)
 			else if (tok == PDF_TOK_OBJ)
 			{
 				pdf_obj *root = NULL;
+				int obj_broken = 0;
 
 				fz_try(ctx)
 				{
 					stm_len = 0;
 					stm_ofs = 0;
-					tok = pdf_repair_obj(ctx, doc, buf, &stm_ofs, &stm_len, &encrypt, &id, NULL, &tmpofs, &root);
+					tok = pdf_repair_obj(ctx, doc, buf, &stm_ofs, &stm_len, &encrypt, &id, NULL, &tmpofs, &root, &obj_broken);
 					if (root)
 						add_root(ctx, roots, root);
 				}
@@ -601,10 +660,18 @@ pdf_repair_xref_base(fz_context *ctx, pdf_document *doc)
 				fz_catch(ctx)
 				{
 					int errcode = fz_caught(ctx);
-					/* If we haven't seen a root yet, there is nothing
-					 * we can do, but give up. Otherwise, we'll make
-					 * do. */
-					if (roots->len == 0 ||
+					/* A truncated PDF typically fails here on its last,
+					 * incomplete object (e.g. an array or dict that runs
+					 * off the end of the file). Give up the whole
+					 * document only when nothing usable has been
+					 * recovered yet, or on an unrecoverable error class.
+					 * As long as at least one object has been collected
+					 * the rebuilt xref is worth keeping: even with no
+					 * /Root seen, pdf_repair_trailer scans the recovered
+					 * objects for a /Type /Catalog. Aborting on roots->len
+					 * alone discards otherwise intact documents whose
+					 * trailer simply lies past the truncation point. */
+					if ((roots->len == 0 && listlen == 0) ||
 						errcode == FZ_ERROR_TRYLATER ||
 						errcode == FZ_ERROR_SYSTEM)
 					{
@@ -616,6 +683,13 @@ pdf_repair_xref_base(fz_context *ctx, pdf_document *doc)
 					fz_warn(ctx, "cannot parse object (%d %d R) - ignoring rest of file", num, gen);
 					break;
 				}
+
+				/* The object's dictionary did not parse; pdf_repair_obj
+				 * rewound the scan. Do not record it — a later truncated
+				 * copy must not overwrite an earlier valid one — and let
+				 * the loop resync on the objects it swallowed. */
+				if (obj_broken)
+					goto have_next_token;
 
 				if (num <= 0 || num > PDF_MAX_OBJECT_NUMBER)
 				{
@@ -650,7 +724,10 @@ pdf_repair_xref_base(fz_context *ctx, pdf_document *doc)
 			else if (tok == PDF_TOK_OPEN_DICT)
 			{
 				pdf_obj *dictobj;
+				int64_t dict_start = tmpofs;
+				int dict_bad = 0;
 
+				dict = NULL;
 				fz_try(ctx)
 				{
 					dict = pdf_parse_dict(ctx, doc, doc->file, buf);
@@ -659,11 +736,31 @@ pdf_repair_xref_base(fz_context *ctx, pdf_document *doc)
 				{
 					fz_rethrow_if(ctx, FZ_ERROR_TRYLATER);
 					fz_rethrow_if(ctx, FZ_ERROR_SYSTEM);
-					/* If this was the real trailer dict
-					 * it was broken, in which case we are
-					 * in trouble. Keep going though in
-					 * case this was just a bogus dict. */
+					/* The dict failed to parse. It may have been the
+					 * real trailer (broken), or a bogus '<<' in loose
+					 * bytes. Either way the file pointer is now wherever
+					 * the failed parse gave up — see the resync below. */
 					fz_report_error(ctx);
+					dict_bad = 1;
+				}
+
+				/* A real trailer dictionary is small. If parsing one
+				 * failed, or it ran far past any plausible trailer size,
+				 * this '<<' was not a trailer: pdf_parse_dict / pdf_parse_array
+				 * chase a missing terminator (e.g. an unterminated hex
+				 * string in a damaged /ID array, common where two PDFs are
+				 * concatenated and the seam falls mid-token) and consume
+				 * tokens across object boundaries, swallowing every
+				 * 'N G obj' in between. Rewind to just past the '<<' and
+				 * let the outer scan resync on those objects instead of
+				 * losing the rest of the document. */
+				if (dict_bad || fz_tell(ctx, doc->file) - dict_start > PDF_REPAIR_TRAILER_MAX)
+				{
+					pdf_drop_obj(ctx, dict);
+					if (!dict_bad)
+						fz_warn(ctx, "ignoring oversized dictionary - not a trailer");
+					fz_seek(ctx, doc->file, dict_start, 0);
+					(void)pdf_lex(ctx, doc->file, buf); /* consume the '<<' */
 					continue;
 				}
 

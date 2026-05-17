@@ -10,7 +10,7 @@ The `fork` branch is based on the upstream tag **1.27.2** and contains a small s
 |---|---|
 | `source/fitz/encodings.c` | One extra branch in `fz_unicode_from_glyph_name` to handle Distiller 3.x `C<n>` glyph names |
 | `source/pdf/pdf-op-run.c` | (1) Guard against excessively deep acyclic Form XObject nesting in the page interpreter; (2) memoize marked-content MCID lookups so pathological tagged PDFs don't degrade to O(n²) per page |
-| `source/pdf/pdf-repair.c` | Bound the `endstream` scan so a corrupt stream with a missing terminator cannot swallow the objects that follow it |
+| `source/pdf/pdf-repair.c` | (1) Bound the `endstream` scan so a corrupt stream with a missing terminator cannot swallow the objects that follow it; (2) rewind and resync — instead of aborting or skipping ahead — when a runaway dictionary/array parse consumes objects past its boundary |
 | `source/pdf/pdf-page.c` | Tolerate dangling/non-page kids in the page tree, and rebuild the page map if a mid-walk repair drops it, so a truncated PDF still yields the pages it does have |
 | `source/pdf/pdf-type3.c`, `source/fitz/font.c`, `include/mupdf/fitz/glyph-cache.h` | Deduplicate Type 3 `CharProcs`: load each distinct glyph stream once and share its display list across the many character codes an `/Encoding` maps onto it |
 | `FORK.md` | This file |
@@ -48,6 +48,23 @@ When MuPDF rebuilds the xref of a damaged PDF, `pdf_repair_obj` (`source/pdf/pdf
 That fallback scan is unbounded. A corrupt or truncated stream whose `endstream` keyword is missing entirely (observed: truncated/zero-padded academic PDFs where a large image XObject's terminator was lost) makes the scan run on to the *next* stream's `endstream` — often hundreds of kilobytes later. Every `N G obj` definition in between is then consumed as stream body and never registered in the rebuilt xref. The page tree and most page objects vanish, and the whole document extracts as zero pages. Poppler recovers these files because its reconstruction does not let a stream hide subsequent objects.
 
 The local patch bounds the fallback scan to `PDF_REPAIR_ENDSTREAM_SLACK` (2 KiB) bytes past the declared `/Length`. If `endstream` is not found within that window the declared `/Length` is trusted and the outer scan resyncs on the following objects. This only affects streams that are already malformed (a well-formed stream's `endstream` is found by the exact-offset check and never reaches the scan), so well-formed PDFs are unaffected.
+
+## Repair: rewind on a runaway dictionary/array parse
+
+`pdf_parse_dict` and `pdf_parse_array` (`source/pdf/pdf-parse.c`) do not stop at object boundaries — an unclosed `[` or `<<`, or an unterminated hex string, makes them consume tokens forward (across `N G obj` / `endobj` / stream bodies) until they find a terminator or hit EOF. During an xref rebuild that is destructive: the repair scan parses two kinds of dictionary, and either can run away on a damaged file:
+
+- **A bare `<<`** (not preceded by `N G obj`), treated by the scan as a possible file trailer. Observed: a PDF formed by concatenating two documents where the seam falls inside the first trailer's `/ID` array, leaving an unterminated hex string. `pdf_parse_dict` chases the missing `>` for ~140 KB, swallowing the second document's catalog and page tree.
+- **An object's own dictionary**, parsed by `pdf_repair_obj`. Observed: truncated academic PDFs (CNKI `ReaderEx`) whose final object — a `ToUnicode` CMap — is cut mid-array; the unclosed array runs to EOF, consuming every object after it, including the `/Root` catalog and `/Pages` tree.
+
+In both cases upstream then either aborts the whole repair (`roots->len == 0` — no `/Root` seen yet) or `continue`s from wherever the failed parse stopped, skipping every object the runaway consumed. The document extracts as zero pages even though Poppler reconstructs it.
+
+The local patch makes a failed/runaway dictionary parse **rewind and resync** instead:
+
+- The object scan no longer gives up on `roots->len == 0` alone. As long as one object has been recovered the rebuilt xref is kept — `pdf_repair_trailer` later scans the recovered objects for a `/Type /Catalog`, so a `/Root` past the truncation point is not needed.
+- When a bare-`<<` trailer parse fails, or advances the file pointer past `PDF_REPAIR_TRAILER_MAX` (16 KiB — far more than any real trailer), the scan rewinds to just past the `<<` and resyncs on the `N G obj` definitions that follow.
+- When an object's dictionary fails to parse, `pdf_repair_obj` rewinds to the object's content start and returns, so the outer scan re-finds the swallowed objects rather than recording the runaway extent or aborting. The broken object is *not* recorded (signalled to the caller via a new `brokenp` out-param) — so in an incrementally-updated PDF a truncated trailing copy cannot overwrite an earlier valid definition of the same object number. This rewind/resync path is gated on `brokenp`: callers that pass `NULL` (the progressive/hint object readers in `pdf-xref.c`, which have no resync loop) keep the original behavior — rethrow a truncated object at EOF, swallow any other broken dictionary as empty — so they are never left stranded on the same bytes.
+
+Repair only walks already-damaged files, and a well-formed dictionary parse never fails or runs long, so well-formed PDFs are unaffected. The result matches Poppler, which reconstructs all three observed files.
 
 ## Page tree: tolerate dangling kids and mid-walk repair
 
