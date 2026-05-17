@@ -19,6 +19,8 @@
 // For commercial licensing, see <https://www.artifex.com/> or contact
 // Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
 // CA 94129, USA, for further information.
+// 
+// Modified by Joscha Legewie on 2026-05-16; see FORK.md.
 
 #include "mupdf/fitz.h"
 #include "pdf-imp.h"
@@ -26,6 +28,14 @@
 #include <string.h>
 
 /* Scan file for objects and reconstruct xref table */
+
+/* When a stream dictionary declares an explicit /Length but the
+ * 'endstream' keyword is not found at that offset, pdf_repair_obj scans
+ * forward for it. This bounds that scan: 'endstream' is allowed at most
+ * this many bytes past the declared length before the scan gives up and
+ * trusts /Length. It prevents a single corrupt/truncated stream from
+ * swallowing the objects that follow it (see pdf_repair_obj). */
+#define PDF_REPAIR_ENDSTREAM_SLACK 2048
 
 struct entry
 {
@@ -86,6 +96,7 @@ pdf_repair_obj(fz_context *ctx, pdf_document *doc, pdf_lexbuf *buf, int64_t *stm
 	pdf_token tok;
 	int64_t stm_len;
 	int64_t local_ofs;
+	int have_length = 0;
 
 	if (tmpofs == NULL)
 		tmpofs = &local_ofs;
@@ -170,7 +181,14 @@ pdf_repair_obj(fz_context *ctx, pdf_document *doc, pdf_lexbuf *buf, int64_t *stm
 
 		obj = pdf_dict_get(ctx, dict, PDF_NAME(Length));
 		if (!pdf_is_indirect(ctx, obj) && pdf_is_int(ctx, obj))
+		{
 			stm_len = pdf_to_int64(ctx, obj);
+			/* An explicit, non-negative /Length — including /Length 0 —
+			 * is enough to bound the endstream scan below. A negative or
+			 * indirect /Length is treated as absent (unbounded scan). */
+			if (stm_len >= 0)
+				have_length = 1;
+		}
 
 		if (doc->file_reading_linearly && page)
 		{
@@ -231,17 +249,52 @@ pdf_repair_obj(fz_context *ctx, pdf_document *doc, pdf_lexbuf *buf, int64_t *stm
 
 		(void)fz_read(ctx, file, (unsigned char *) buf->scratch, 9);
 
-		while (memcmp(buf->scratch, "endstream", 9) != 0)
+		/* Scan for the 'endstream' keyword. When the dictionary
+		 * declared an explicit /Length, bound the scan: if 'endstream'
+		 * is not within PDF_REPAIR_ENDSTREAM_SLACK bytes of the declared
+		 * length the stream is corrupt or truncated rather than merely
+		 * mis-declared. An unbounded scan would run on to the next
+		 * 'endstream' keyword anywhere in the file, swallowing every
+		 * object in between (page objects, the page tree, ...) and
+		 * destroying an otherwise recoverable document. In that case
+		 * trust the declared /Length and let the outer scan resync on
+		 * the objects that follow. */
 		{
-			c = fz_read_byte(ctx, file);
-			if (c == EOF)
-				break;
-			memmove(&buf->scratch[0], &buf->scratch[1], 8);
-			buf->scratch[8] = c;
-		}
+			/* Bound the scan whenever the dictionary carried an explicit
+			 * /Length — /Length 0 included: a corrupt empty stream with a
+			 * missing endstream must not scan on unbounded. A stream with
+			 * no usable /Length keeps the unbounded scan (scan_end < 0). */
+			int64_t scan_end = have_length
+				? *stmofsp + stm_len + PDF_REPAIR_ENDSTREAM_SLACK
+				: -1;
 
-		if (stmlenp)
-			*stmlenp = fz_tell(ctx, file) - *stmofsp - 9;
+			while (memcmp(buf->scratch, "endstream", 9) != 0)
+			{
+				/* buf->scratch is a 9-byte sliding window and fz_tell()
+				 * sits just past it, so an 'endstream' in the window
+				 * starts 9 bytes back and the next slide's window starts
+				 * at fz_tell()-8. Abort only once even that next
+				 * candidate start would fall past scan_end, so a
+				 * terminator at the very end of the slack window is
+				 * still matched. */
+				if (scan_end >= 0 && fz_tell(ctx, file) - 8 > scan_end)
+				{
+					fz_warn(ctx, "endstream not found near declared /Length; trusting /Length");
+					fz_seek(ctx, file, *stmofsp + stm_len, 0);
+					if (stmlenp)
+						*stmlenp = stm_len;
+					goto atobjend;
+				}
+				c = fz_read_byte(ctx, file);
+				if (c == EOF)
+					break;
+				memmove(&buf->scratch[0], &buf->scratch[1], 8);
+				buf->scratch[8] = c;
+			}
+
+			if (stmlenp)
+				*stmlenp = fz_tell(ctx, file) - *stmofsp - 9;
+		}
 
 atobjend:
 		*tmpofs = fz_tell(ctx, file);

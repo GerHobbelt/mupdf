@@ -10,9 +10,11 @@ The `fork` branch is based on the upstream tag **1.27.2** and contains a small s
 |---|---|
 | `source/fitz/encodings.c` | One extra branch in `fz_unicode_from_glyph_name` to handle Distiller 3.x `C<n>` glyph names |
 | `source/pdf/pdf-op-run.c` | (1) Guard against excessively deep acyclic Form XObject nesting in the page interpreter; (2) memoize marked-content MCID lookups so pathological tagged PDFs don't degrade to O(n²) per page |
+| `source/pdf/pdf-repair.c` | Bound the `endstream` scan so a corrupt stream with a missing terminator cannot swallow the objects that follow it |
+| `source/pdf/pdf-page.c` | Tolerate dangling/non-page kids in the page tree, and rebuild the page map if a mid-walk repair drops it, so a truncated PDF still yields the pages it does have |
 | `FORK.md` | This file |
 
-That's the entire delta. The glyph-name patch is 5 added lines; see the commit `Recognise Distiller 3.x C<n> glyph names in fz_unicode_from_glyph_name` for full context.
+The glyph-name patch is 5 added lines; see the commit `Recognise Distiller 3.x C<n> glyph names in fz_unicode_from_glyph_name` for full context.
 
 ## Why the patch exists
 
@@ -37,6 +39,28 @@ The local patch adds an explicit Form XObject nesting cap in `source/pdf/pdf-op-
 Some producers (observed: Foxit PhantomPDF Printer 9.7.1) write **document-cumulative** MCID values into page content streams instead of the spec's per-page 0-based values. The MCID then always exceeds the per-page array length, so the fast path misses on *every* `BDC`/`EMC`/text operator. On a page with hundreds of marked-content operators and a structure element carrying a large aggregated `/K` array (e.g. an `/S /Link` element with thousands of entries), the recovery scan reruns per operator and the page degrades to O(operators × elements × K-length) — tens of seconds per page, affecting every code path that interprets the page (text extraction, rendering, OCR detection).
 
 The local patch adds a lazily-built per-page index (`build_mcid_index` in `pdf-op-run.c`) mapping every integer MCID value to its structure element. The recovery path consults the index instead of rescanning, turning each lookup into O(1) amortized. It is a pure memoization of the existing recovery scan: first element in array order still wins, misses still return `NULL`, so extraction output is unchanged.
+
+## Repair: bounded `endstream` scan
+
+When MuPDF rebuilds the xref of a damaged PDF, `pdf_repair_obj` (`source/pdf/pdf-repair.c`) locates each stream's end. For a stream whose dictionary declares an explicit `/Length` it first checks whether `endstream` sits at that offset; if not, it falls back to scanning the file byte-by-byte for the next `endstream` keyword.
+
+That fallback scan is unbounded. A corrupt or truncated stream whose `endstream` keyword is missing entirely (observed: truncated/zero-padded academic PDFs where a large image XObject's terminator was lost) makes the scan run on to the *next* stream's `endstream` — often hundreds of kilobytes later. Every `N G obj` definition in between is then consumed as stream body and never registered in the rebuilt xref. The page tree and most page objects vanish, and the whole document extracts as zero pages. Poppler recovers these files because its reconstruction does not let a stream hide subsequent objects.
+
+The local patch bounds the fallback scan to `PDF_REPAIR_ENDSTREAM_SLACK` (2 KiB) bytes past the declared `/Length`. If `endstream` is not found within that window the declared `/Length` is trusted and the outer scan resyncs on the following objects. This only affects streams that are already malformed (a well-formed stream's `endstream` is found by the exact-offset check and never reaches the scan), so well-formed PDFs are unaffected.
+
+## Page tree: tolerate dangling kids and mid-walk repair
+
+`pdf_load_page_tree_imp` / `pdf_load_page_tree_internal` (`source/pdf/pdf-page.c`) build the page map by walking `/Root/Pages`. Upstream, the walk throws `non-page object in page tree` the moment it meets a kid that is neither a `/Page` nor a `/Pages` node, which aborts the whole document. A truncated PDF routinely has page-tree kids that point at objects missing from the file (they resolve to `null`), so a document with, say, 7 of 24 pages still present extracts as zero pages even though the 7 are intact.
+
+A second problem compounds it: resolving such a dangling kid can trigger document repair *in the middle of the walk*, and repair drops the partially-built page maps (`pdf_drop_page_tree_internal`) from under the running walk.
+
+The local patch makes the page-tree walk tolerant:
+
+- A kid that is neither a page nor a page-tree node is skipped with a warning instead of aborting the walk; `pdf_load_page_tree_internal` then shrinks `/Root/Pages/Count` to the number of pages actually found, so the count and the map agree.
+- A kid that omits `/Type` is classified structurally (`/Kids` → internal node, `/MediaBox` → leaf page), matching the existing tolerance of the slow-lookup path.
+- If a repair runs mid-walk and drops the maps, the walk detects the dropped maps, abandons cleanly (no NULL dereference), and `pdf_load_page_tree_internal` rebuilds from scratch — repair runs at most once, so the rebuild walks a stable, fully repaired tree.
+
+The result matches native `mutool`'s and Poppler's behavior of extracting the pages a damaged document does have instead of failing the whole file.
 
 ## Building the WebAssembly module
 
