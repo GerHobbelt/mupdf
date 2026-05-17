@@ -20,6 +20,8 @@
 // Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
 // CA 94129, USA, for further information.
 
+// Modified by Joscha Legewie on 2026-05-17; see FORK.md.
+
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
 
@@ -41,6 +43,7 @@ pdf_load_type3_font(fz_context *ctx, pdf_document *doc, pdf_resource_stack *rdb,
 {
 	char buf[256];
 	const char *estrings[256];
+	int proc_num[256];
 	pdf_font_desc *fontdesc = NULL;
 	pdf_obj *encoding;
 	pdf_obj *widths;
@@ -189,16 +192,45 @@ pdf_load_type3_font(fz_context *ctx, pdf_document *doc, pdf_resource_stack *rdb,
 		}
 
 		for (i = 0; i < 256; i++)
+			proc_num[i] = 0;
+
+		for (i = 0; i < 256; i++)
 		{
 			if (estrings[i])
 			{
 				obj = pdf_dict_gets(ctx, charprocs, estrings[i]);
 				if (pdf_is_stream(ctx, obj))
 				{
-					font->t3procs[i] = pdf_load_stream(ctx, obj);
-					fz_trim_buffer(ctx, font->t3procs[i]);
-					fontdesc->size += fz_buffer_storage(ctx, font->t3procs[i], NULL);
-					fontdesc->size += 0; // TODO: display list size calculation
+					int num = pdf_to_num(ctx, obj);
+					int j, shared = 0;
+
+					/* An /Encoding can map many character codes onto the
+					 * same CharProcs stream. Load each distinct stream
+					 * once and share the buffer, so a font that encodes a
+					 * handful of glyphs under hundreds of codes does not
+					 * allocate hundreds of identical buffers. */
+					if (num > 0)
+					{
+						for (j = 0; j < i; j++)
+						{
+							if (font->t3procs[j] && proc_num[j] == num)
+							{
+								font->t3procs[i] = fz_keep_buffer(ctx, font->t3procs[j]);
+								shared = 1;
+								break;
+							}
+						}
+					}
+
+					if (!shared)
+					{
+						font->t3procs[i] = pdf_load_stream(ctx, obj);
+						fz_trim_buffer(ctx, font->t3procs[i]);
+						fontdesc->size += fz_buffer_storage(ctx, font->t3procs[i], NULL);
+						fontdesc->size += 0; // TODO: display list size calculation
+					}
+
+					proc_num[i] = num;
 				}
 			}
 		}
@@ -224,7 +256,25 @@ void pdf_load_type3_glyphs(fz_context *ctx, pdf_document *doc, pdf_font_desc *fo
 		{
 			if (fontdesc->font->t3procs[i])
 			{
-				fz_prepare_t3_glyph(ctx, fontdesc->font, i);
+				int j, found = 0;
+
+				/* Codes that share a CharProcs stream (see
+				 * pdf_load_type3_font) also share its prepared display
+				 * list: alias an already-prepared glyph instead of
+				 * building an identical display list for every code. */
+				for (j = 0; j < i; j++)
+				{
+					if (fontdesc->font->t3procs[j] == fontdesc->font->t3procs[i])
+					{
+						fz_alias_t3_glyph(ctx, fontdesc->font, i, j);
+						found = 1;
+						break;
+					}
+				}
+
+				if (!found)
+					fz_prepare_t3_glyph(ctx, fontdesc->font, i);
+
 				fontdesc->size += 0; // TODO: display list size calculation
 			}
 		}

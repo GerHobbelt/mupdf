@@ -12,6 +12,7 @@ The `fork` branch is based on the upstream tag **1.27.2** and contains a small s
 | `source/pdf/pdf-op-run.c` | (1) Guard against excessively deep acyclic Form XObject nesting in the page interpreter; (2) memoize marked-content MCID lookups so pathological tagged PDFs don't degrade to O(n²) per page |
 | `source/pdf/pdf-repair.c` | Bound the `endstream` scan so a corrupt stream with a missing terminator cannot swallow the objects that follow it |
 | `source/pdf/pdf-page.c` | Tolerate dangling/non-page kids in the page tree, and rebuild the page map if a mid-walk repair drops it, so a truncated PDF still yields the pages it does have |
+| `source/pdf/pdf-type3.c`, `source/fitz/font.c`, `include/mupdf/fitz/glyph-cache.h` | Deduplicate Type 3 `CharProcs`: load each distinct glyph stream once and share its display list across the many character codes an `/Encoding` maps onto it |
 | `FORK.md` | This file |
 
 The glyph-name patch is 5 added lines; see the commit `Recognise Distiller 3.x C<n> glyph names in fz_unicode_from_glyph_name` for full context.
@@ -61,6 +62,43 @@ The local patch makes the page-tree walk tolerant:
 - If a repair runs mid-walk and drops the maps, the walk detects the dropped maps, abandons cleanly (no NULL dereference), and `pdf_load_page_tree_internal` rebuilds from scratch — repair runs at most once, so the rebuild walks a stable, fully repaired tree.
 
 The result matches native `mutool`'s and Poppler's behavior of extracting the pages a damaged document does have instead of failing the whole file.
+
+## Type 3 font: deduplicate shared CharProcs
+
+A Type 3 font defines each glyph as a PDF content stream listed in its
+`/CharProcs` dictionary, and its `/Encoding /Differences` array maps character
+codes to those glyphs by name. Nothing stops an `/Encoding` from mapping many
+codes onto the *same* `CharProcs` stream.
+
+`pdf_load_type3_font` (`source/pdf/pdf-type3.c`) loaded a glyph per *encoded
+code*: it called `pdf_load_stream` once for every code, so a font that maps 200
+codes onto one glyph allocated 200 identical `fz_buffer`s. `pdf_load_type3_glyphs`
+then ran `fz_prepare_t3_glyph` once per code, building 200 identical display
+lists. Every Type 3 `fz_font` is pinned for the document's lifetime
+(`doc->type3_fonts`, for `fz_decouple_type3_font`), so none of that memory is
+reclaimable until the document closes.
+
+Some producers (observed: `pdftk-java` + iText output of scanned CJK documents)
+emit thousands of such Type 3 fonts, each with a handful of real glyphs spread
+over a wide encoding. The duplication multiplies memory ~50–100× — a 33 MB / 403
+page document expanded the MuPDF heap past 3 GB and, in the WASM build, hit the
+2 GB ceiling and failed extraction with `realloc failed`.
+
+The local patch deduplicates by `CharProcs` stream object number:
+
+- `pdf_load_type3_font` loads each distinct stream once and shares the
+  `fz_buffer` (via `fz_keep_buffer`) for every other code mapped to it.
+- `pdf_load_type3_glyphs` detects codes that share a `t3procs` buffer and aliases
+  the already-prepared glyph — `fz_alias_t3_glyph` (new, `source/fitz/font.c`,
+  declared in `include/mupdf/fitz/glyph-cache.h`) shares the display list (via
+  `fz_keep_display_list`) and copies the device flags and glyph bbox.
+
+Codes that resolve to the same `CharProcs` stream are by definition the same
+glyph program, so the shared display list, flags and bbox are identical to what
+per-code preparation produced; extraction and rendering output are unchanged.
+Per-code advance widths (`t3widths`) are still loaded individually. The fix is
+refcount-safe: `fz_drop_font` drops all 256 `t3procs`/`t3lists` entries, and the
+shared buffers/display lists are released when their last reference goes.
 
 ## Building the WebAssembly module
 

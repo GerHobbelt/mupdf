@@ -19,6 +19,8 @@
 // For commercial licensing, see <https://www.artifex.com/> or contact
 // Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
 // CA 94129, USA, for further information.
+//
+// Modified by Joscha Legewie on 2026-05-17; see FORK.md.
 
 #ifndef MUPDF_FITZ_GLYPH_CACHE_H
 #define MUPDF_FITZ_GLYPH_CACHE_H
@@ -68,6 +70,19 @@ void fz_render_t3_glyph_direct(fz_context *ctx, fz_device *dev, fz_font *font, i
 	file while playing a displaylist back.
 */
 void fz_prepare_t3_glyph(fz_context *ctx, fz_font *font, int gid);
+
+/**
+	Alias a prepared type3 glyph.
+
+	Make dst_gid share src_gid's already-prepared display list, device
+	flags and glyph bbox. Used to deduplicate identical CharProcs that an
+	/Encoding maps onto many character codes: without this each code is
+	prepared into its own display list, which can balloon memory for
+	documents containing many such fonts.
+
+	src_gid must already have been prepared with fz_prepare_t3_glyph.
+*/
+void fz_alias_t3_glyph(fz_context *ctx, fz_font *font, int dst_gid, int src_gid);
 
 /**
 	Dump debug statistics for the glyph cache.

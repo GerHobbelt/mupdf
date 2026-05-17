@@ -19,6 +19,8 @@
 // For commercial licensing, see <https://www.artifex.com/> or contact
 // Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
 // CA 94129, USA, for further information.
+//
+// Modified by Joscha Legewie on 2026-05-17; see FORK.md.
 
 #include "mupdf/fitz.h"
 #include "mupdf/ucdn.h"
@@ -1620,6 +1622,23 @@ fz_bound_t3_glyph(fz_context *ctx, fz_font *font, int gid)
 	/* Update font bbox with glyph's computed bbox if the font bbox is invalid */
 	if (font->flags.invalid_bbox)
 		font->bbox = fz_union_rect(font->bbox, *r);
+}
+
+void
+fz_alias_t3_glyph(fz_context *ctx, fz_font *font, int dst_gid, int src_gid)
+{
+	fz_rect *src_bbox, *dst_bbox;
+
+	/* Resolve the bbox slots first: get_gid_bbox may allocate and throw.
+	 * Take the display list reference last so nothing leaks on a throw. */
+	src_bbox = get_gid_bbox(ctx, font, src_gid);
+	dst_bbox = get_gid_bbox(ctx, font, dst_gid);
+	if (src_bbox && dst_bbox)
+		*dst_bbox = *src_bbox;
+
+	font->t3flags[dst_gid] = font->t3flags[src_gid];
+	font->t3lists[dst_gid] = font->t3lists[src_gid] ?
+		fz_keep_display_list(ctx, font->t3lists[src_gid]) : NULL;
 }
 
 void
