@@ -141,15 +141,32 @@ fz_unicode_from_glyph_name(const char *name)
 		code = read_num(buf+1, 16);
 	else if (buf[0] == 'a' && buf[1] != 0 && buf[2] != 0)
 		code = read_num(buf+1, 10);
-	/* Distiller 3.x CFF fonts: glyph name "C<n>" encodes Unicode codepoint <n>
-	   in decimal. Mirrors PDF.js (src/core/fonts.js) and Poppler
-	   (poppler/GfxFont.cc parseNumericName). */
-	else if (buf[0] == 'C' && buf[1] >= '0' && buf[1] <= '9')
-		code = read_num(buf+1, 10);
 	else
 		code = read_num(buf, 10);
 
 	return (code > 0 && code <= 0x10ffff) ? code : FZ_REPLACEMENT_CHARACTER;
+}
+
+int
+fz_unicode_from_numeric_glyph_name(const char *name)
+{
+	/* Some legacy producers (notably Acrobat Distiller 3.x CFF subsets) name
+	   glyphs "C<n>" where <n> is the Unicode codepoint in decimal, with no
+	   ToUnicode CMap, so the normal glyph-name lookup returns U+FFFD.
+	   Decoding "C<n>" is only a heuristic guess: other producers use "C<n>"
+	   as an arbitrary glyph-index name, where this returns a wrong-but-
+	   plausible character. It is therefore exposed as an explicit opt-in
+	   fallback (FZ_STEXT_USE_GLYPH_NAME_FOR_UNKNOWN_UNICODE), applied by the
+	   stext device only after the normal lookup has already failed, so the
+	   default extraction still emits a detectable U+FFFD. Mirrors PDF.js
+	   (src/core/fonts.js) and Poppler (poppler/GfxFont.cc parseNumericName). */
+	if (name && name[0] == 'C' && name[1] >= '0' && name[1] <= '9')
+	{
+		int code = read_num(name + 1, 10);
+		if (code > 0 && code <= 0x10ffff)
+			return code;
+	}
+	return FZ_REPLACEMENT_CHARACTER;
 }
 
 static const char *empty_dup_list[] = { 0 };

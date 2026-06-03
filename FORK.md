@@ -1,6 +1,6 @@
 # Fork notes
 
-This is a fork of [ArtifexSoftware/mupdf](https://github.com/ArtifexSoftware/mupdf). It exists to ship a small fix to MuPDF's glyph-name decoder that upstream does not currently carry.
+This is a fork of [ArtifexSoftware/mupdf](https://github.com/ArtifexSoftware/mupdf). It carries a small set of text-extraction and damaged-PDF robustness fixes that upstream does not currently ship.
 
 The `fork` branch is based on the upstream tag **1.27.2** and contains a small set of extra commits.
 
@@ -8,24 +8,46 @@ The `fork` branch is based on the upstream tag **1.27.2** and contains a small s
 
 | File | Change |
 |---|---|
-| `source/fitz/encodings.c` | One extra branch in `fz_unicode_from_glyph_name` to handle Distiller 3.x `C<n>` glyph names |
+| `source/fitz/encodings.c`, `include/mupdf/fitz/font.h` | New `fz_unicode_from_numeric_glyph_name` helper that decodes Distiller 3.x `C<n>` glyph names — exposed as an opt-in stext fallback, never applied unconditionally |
+| `source/fitz/stext-device.c`, `include/mupdf/fitz/structured-text.h` | New `use-glyph-name-for-unknown-unicode` stext option (`FZ_STEXT_USE_GLYPH_NAME_FOR_UNKNOWN_UNICODE`) that applies the `C<n>` decode when a glyph's normal unicode lookup has already failed |
 | `source/pdf/pdf-op-run.c` | (1) Guard against excessively deep acyclic Form XObject nesting in the page interpreter; (2) memoize marked-content MCID lookups so pathological tagged PDFs don't degrade to O(n²) per page |
 | `source/pdf/pdf-repair.c` | (1) Bound the `endstream` scan so a corrupt stream with a missing terminator cannot swallow the objects that follow it; (2) rewind and resync — instead of aborting or skipping ahead — when a runaway dictionary/array parse consumes objects past its boundary |
 | `source/pdf/pdf-page.c` | Tolerate dangling/non-page kids in the page tree, and rebuild the page map if a mid-walk repair drops it, so a truncated PDF still yields the pages it does have |
 | `source/pdf/pdf-type3.c`, `source/fitz/font.c`, `include/mupdf/fitz/glyph-cache.h` | Deduplicate Type 3 `CharProcs`: load each distinct glyph stream once and share its display list across the many character codes an `/Encoding` maps onto it |
 | `FORK.md` | This file |
 
-The glyph-name patch is 5 added lines; see the commit `Recognise Distiller 3.x C<n> glyph names in fz_unicode_from_glyph_name` for full context.
-
-## Why the patch exists
+## Why the glyph-name option exists
 
 Older Acrobat Distiller (3.x) embeds CFF/Type 1C fonts whose glyph names are of the form `C<n>` (e.g. `C57`, `C98`, `C108`) — where `<n>` is the Unicode codepoint in decimal. The fonts have no ToUnicode CMap, so MuPDF's `fz_unicode_from_glyph_name` (`source/fitz/encodings.c`) falls through to `FZ_REPLACEMENT_CHARACTER` and text extraction returns `U+FFFD` for every glyph.
 
-Both PDF.js (`src/core/fonts.js`) and Poppler (`poppler/GfxFont.cc parseNumericName`) handle this glyph naming convention. PyMuPDF works around it by enabling `FZ_STEXT_USE_CID_FOR_UNKNOWN_UNICODE` (an upstream MuPDF flag), but does not carry a C-source patch.
+Both PDF.js (`src/core/fonts.js`) and Poppler (`poppler/GfxFont.cc parseNumericName`) handle this glyph naming convention. PyMuPDF works around it by enabling `FZ_STEXT_USE_CID_FOR_UNKNOWN_UNICODE` (an upstream MuPDF flag) — but for this corpus the CID/GID fallbacks are a no-op, because neither the character code nor the glyph index equals the codepoint; the only carrier of the codepoint is the glyph **name**.
 
-The patch adds a conservative `C<n>` branch alongside the existing `a<n>` one, before the `FZ_REPLACEMENT_CHARACTER` fallback. AGL lookup still runs first, so real AGL names like `C` aren't affected.
+Decoding `C<n>` is a heuristic guess: other producers use `C<n>` as an arbitrary glyph-index name, where the decode yields a wrong-but-plausible character (e.g. `±` → `6`) that is impossible to detect downstream. Applying it unconditionally would therefore silently corrupt those files and destroy the `U+FFFD` signal callers rely on to detect unmapped text and route to OCR.
+
+So the decode is **opt-in**, mirroring MuPDF's own `use-cid-for-unknown-unicode` / `use-gid-for-unknown-unicode` mechanism:
+
+- `fz_unicode_from_glyph_name` keeps upstream behaviour (no `C<n>` branch), so default extraction still emits a detectable `U+FFFD`.
+- `fz_unicode_from_numeric_glyph_name` (`source/fitz/encodings.c`) decodes `C<n>` and is called by the stext device only when `FZ_STEXT_USE_GLYPH_NAME_FOR_UNKNOWN_UNICODE` is set and the normal unicode lookup has already returned `U+FFFD`. The glyph name is read back from the font via `fz_get_glyph_name`. It is checked before the CID and GID fallbacks (it is the most specific signal).
+
+This lets a caller extract once with the option off to detect a genuinely unmapped text layer, then re-extract just those pages with the option on to recover born-digital text instead of OCRing — keeping both the recovery and the detection signal.
 
 Affected corpus: older academic PDFs from Distiller 3.x (Elsevier, Wiley, etc., circa 2000–2003) with `AdvTimes*`, `AdvPi*`, `AdvP*` fonts.
+
+Verify with `mutool run` and a small script file (NB: `mutool run` takes a
+script path, not an inline `-e` snippet; and `mutool draw -O` is the *spots*
+option and does **not** parse stext flags):
+
+```sh
+cat > /tmp/check.js <<'JS'
+var p = Document.openDocument(scriptArgs[0]).loadPage(0);
+print(p.toStructuredText("preserve-whitespace").asText().slice(0, 80));
+print(p.toStructuredText("preserve-whitespace,use-glyph-name-for-unknown-unicode").asText().slice(0, 80));
+JS
+mutool run /tmp/check.js sample.pdf
+```
+
+The first line is `U+FFFD` runs; the second is readable English. The fork
+regression runner (`make fork-regression-test`) asserts this automatically.
 
 ## WASM Form XObject nesting guard
 
@@ -150,7 +172,8 @@ export PATH="$HOME/.local/bin:$PATH"
 
 ## Verifying the fix
 
-A one-page Distiller 3.x sample is the canonical regression check. On the patched build:
+A one-page Distiller 3.x sample is the canonical regression check. The option
+must be **off by default** (detectable `U+FFFD`) and **recover when on**:
 
 ```js
 import * as fs from "node:fs"
@@ -163,21 +186,26 @@ const doc = mupdf.Document.openDocument(
   fs.readFileSync("sample.pdf"),
   "application/pdf",
 )
-const text = doc.loadPage(0).toStructuredText("preserve-whitespace").asText()
-console.log(text)
+const page = doc.loadPage(0)
+// Off: still U+FFFD runs (so the unmapped text layer stays detectable).
+console.log(page.toStructuredText("preserve-whitespace").asText())
+// On: readable English.
+console.log(
+  page.toStructuredText("preserve-whitespace,use-glyph-name-for-unknown-unicode").asText()
+)
 ```
 
-The output should be readable English starting with the article body ("Management of risks, uncertainties and opportunities on projects…") and containing "International Journal of Project Management 19 (2001) 89±101". On an unpatched build the same page returns 3438 glyphs of `U+FFFD`.
+With the option on the output is readable English starting with the article body ("Management of risks, uncertainties and opportunities on projects…") and containing "International Journal of Project Management 19 (2001) 89±101". With the option off — and on a fully unpatched build with any options — the same page returns runs of `U+FFFD`.
 
 ## Keeping in sync with upstream
 
-The `fork` branch contains the encodings patch plus this `FORK.md` on top of upstream tag `1.27.2`. To rebase onto a newer MuPDF release:
+The `fork` branch contains the patches listed above plus this `FORK.md` on top of upstream tag `1.27.2`. To rebase onto a newer MuPDF release, cherry-pick the fork commits onto the new tag:
 
 ```sh
 git remote add upstream https://github.com/ArtifexSoftware/mupdf
 git fetch upstream --tags
 git checkout -b fork-<new-tag> <new-tag>
-git cherry-pick <encodings.c patch sha> <FORK.md sha>
+git cherry-pick <fork commit shas...>
 # then bump the version references in FORK.md to <new-tag> and amend
 ```
 

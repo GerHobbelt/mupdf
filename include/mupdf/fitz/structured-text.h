@@ -190,6 +190,14 @@ typedef struct fz_stext_grid_positions fz_stext_grid_positions;
 	Setting both FZ_STEXT_USE_CID_FOR_UNKNOWN_UNICODE and
 	FZ_STEXT_USE_GID_FOR_UNKNOWN_UNICODE will give undefined behaviour.
 
+	FZ_STEXT_USE_GLYPH_NAME_FOR_UNKNOWN_UNICODE: If this option is set,
+	then in the event that we fail to find a unicode value for a given
+	character, we attempt to recover one from a numeric glyph name of the
+	form "C<n>" (decimal Unicode codepoint), as emitted by some legacy
+	producers (e.g. Acrobat Distiller 3.x CFF subsets). This is a heuristic
+	guess and may produce wrong-but-plausible characters for fonts that use
+	"C<n>" as a glyph-index name; it is checked before the CID/GID fallback.
+
 */
 enum
 {
@@ -215,6 +223,7 @@ enum
 	FZ_STEXT_ACCURATE_SIDE_BEARINGS = (1<<19),
 	FZ_STEXT_LAZY_VECTORS = (1<<20),
 	FZ_STEXT_FUZZY_VECTORS = (1<<21),
+	FZ_STEXT_USE_GLYPH_NAME_FOR_UNKNOWN_UNICODE = (1<<22),
 
 	/* An old, deprecated option. */
 	FZ_STEXT_MEDIABOX_CLIP = FZ_STEXT_CLIP
