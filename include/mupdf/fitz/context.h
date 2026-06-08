@@ -1247,7 +1247,6 @@ struct fz_context
 #if FZ_ENABLE_ICC
     int icc_enabled;
 #endif
-	int internal_throw_on_repair;
     int within_throw_call;
 
     /* TODO: should these be unshared? */
