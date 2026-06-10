@@ -39,6 +39,8 @@
 #endif
 
 #include "mupdf/assertions.h"
+#include "mupdf/fitz/opj_malloc_repl.h"
+
 #include <string.h>
 
 #if JPX_ENABLE_IMG_SUPPORT
@@ -193,7 +195,7 @@ static void * fz_opj_aligned_malloc_n(size_t alignment, size_t size)
 	ptr = fz_opj_malloc(size);
 	if (ptr == NULL)
 		return NULL;
-	off = alignment-(((int)(intptr_t)ptr) & (alignment - 1));
+	off = alignment - (((int)(intptr_t)ptr) & (alignment - 1));
 	ptr[off-1] = (uint8_t)off;
 	return ptr + off;
 }
@@ -212,6 +214,7 @@ void fz_opj_aligned_free(void* ptr_)
 {
 	uint8_t *ptr = (uint8_t *)ptr_;
 	uint8_t off;
+
 	if (ptr == NULL)
 		return;
 
@@ -219,11 +222,15 @@ void fz_opj_aligned_free(void* ptr_)
 	fz_opj_free((void *)(((unsigned char *)ptr) - off));
 }
 
-#if 0
+#ifdef OPJ_HAS_ALIGNED_REALLOC
 /* UNUSED currently, and moderately tricky, so deferred until required */
 void * fz_opj_aligned_realloc(void *ptr, size_t size)
 {
-	return fz_opj_realloc(ptr, size);
+	fz_throw(NULL, FZ_ERROR_UNSUPPORTED, "TODO: missing opj_aligned_realloc implementation");
+}
+void* fz_opj_aligned_32_realloc(void* ptr, size_t size)
+{
+	fz_throw(NULL, FZ_ERROR_UNSUPPORTED, "TODO: missing opj_aligned_32_realloc implementation");
 }
 #endif
 
