@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{E247EF44-6727-4787-B439-FE93483B0983}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCMAKE_INIT;CMAKE_INIT_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCMAKE_INIT;CMAKE_INIT_STATICLIB;IDN2_STATIC;IDN2_BUILDING;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCMAKE_INIT;CMAKE_INIT_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCMAKE_INIT;CMAKE_INIT_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCMAKE_INIT;CMAKE_INIT_STATICLIB;IDN2_STATIC;IDN2_BUILDING;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCMAKE_INIT;CMAKE_INIT_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCMAKE_INIT;CMAKE_INIT_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCMAKE_INIT;CMAKE_INIT_STATICLIB;IDN2_STATIC;IDN2_BUILDING;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCMAKE_INIT;CMAKE_INIT_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCMAKE_INIT;CMAKE_INIT_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCMAKE_INIT;CMAKE_INIT_STATICLIB;IDN2_STATIC;IDN2_BUILDING;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCMAKE_INIT;CMAKE_INIT_STATICLIB;BUILDING_LIBIDN2;IDN2_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/cmake-init/source/baselib/source/baselib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake-init/source/examples/fibcmd/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake-init/source/examples/fibgui/MainWindow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake-init/source/examples/fibgui/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake-init/source/fiblib/source/Fibonacci.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake-init/source/tests/fiblib-test/fibonacci_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmake-init/source/tests/fiblib-test/main.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake-init/source/baselib/include/baselib/baselib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake-init/source/examples/fibgui/MainWindow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake-init/source/fiblib/include/fiblib/CTFibonacci.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmake-init/source/fiblib/include/fiblib/Fibonacci.h" />
+    <Image Include="../../thirdparty/owemdjee/cmake-init/cmake-init-logo.png" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/ADAPT.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/AUTHORS" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/Dockerfile" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/appveyor.yml" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/cmake-init-logo.svg" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/cmake/CheckTemplate.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/cmake/ClangTidy.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/cmake/CompileOptions.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/cmake/ComponentInstall.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/cmake/Coverage.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/cmake/Cppcheck.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/cmake/Custom.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/cmake/FindASSIMP.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/cmake/FindEGL.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/cmake/FindFFMPEG.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/cmake/FindGLESv2.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/cmake/FindGLEW.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/cmake/FindGTK3.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/cmake/FindGTK4.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/cmake/FindHIDAPI.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/cmake/FindSDL2.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/cmake/Findclang_tidy.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/cmake/Findcppcheck.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/cmake/Findgcov.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/cmake/Findgoogletest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/cmake/Findlcov.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/cmake/Findnodejs.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/cmake/Gcov.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/cmake/GenerateTemplateExportHeader.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/cmake/GetGitRevisionDescription.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/cmake/GetGitRevisionDescription.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/cmake/HealthCheck.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/cmake/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/cmake/RuntimeDependencies.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/configure" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/data/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/deploy/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/deploy/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/deploy/packages/pack-template.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/deploy/ubuntu-ppa/debian/changelog" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/deploy/ubuntu-ppa/debian/compat" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/deploy/ubuntu-ppa/debian/control" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/deploy/ubuntu-ppa/debian/copyright" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/deploy/ubuntu-ppa/debian/rules" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/deploy/ubuntu-ppa/debian/source/format" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/deploy/ubuntu-ppa/recipe.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/docs/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/docs/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/docs/api-docs/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/docs/manual/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/docs/manual/cmake-init.tex" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/source/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/source/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/source/baselib/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/source/codegeneration/template_api.h.in" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/source/codegeneration/template_msvc_api.h.in" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/source/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/source/examples/fibcmd/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/source/examples/fibgui/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/source/fiblib/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/source/fiblib/include/fiblib/CTFibonacci.inl" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/source/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/source/tests/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/source/tests/fiblib-test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/source/version.h.in" />
+    <Text Include="../../thirdparty/owemdjee/cmake-init/template-config.cmake" />
+  </ItemGroup>
+  <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+</Project>
+  

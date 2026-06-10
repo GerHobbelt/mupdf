@@ -1,0 +1,455 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{9B4525CF-1B43-40FF-9872-9D1EDA6F8E55}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/cli11/include;../../thirdparty/owemdjee/cli11/examples;../../thirdparty/owemdjee/json/include;../../thirdparty/monolithic_tmplt;../../scripts/catch2/include;../../thirdparty/owemdjee/Catch2/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>CATCH_CONFIG_NO_PREFIX_ALL;CLI11_CATCH3;BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/cli11/include;../../thirdparty/owemdjee/cli11/examples;../../thirdparty/owemdjee/json/include;../../thirdparty/monolithic_tmplt;../../scripts/catch2/include;../../thirdparty/owemdjee/Catch2/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/cli11/include;../../thirdparty/owemdjee/cli11/examples;../../thirdparty/owemdjee/json/include;../../thirdparty/monolithic_tmplt;../../scripts/catch2/include;../../thirdparty/owemdjee/Catch2/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>CATCH_CONFIG_NO_PREFIX_ALL;CLI11_CATCH3;BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/cli11/include;../../thirdparty/owemdjee/cli11/examples;../../thirdparty/owemdjee/json/include;../../thirdparty/monolithic_tmplt;../../scripts/catch2/include;../../thirdparty/owemdjee/Catch2/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/cli11/include;../../thirdparty/owemdjee/cli11/examples;../../thirdparty/owemdjee/json/include;../../thirdparty/monolithic_tmplt;../../scripts/catch2/include;../../thirdparty/owemdjee/Catch2/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>CATCH_CONFIG_NO_PREFIX_ALL;CLI11_CATCH3;BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/cli11/include;../../thirdparty/owemdjee/cli11/examples;../../thirdparty/owemdjee/json/include;../../thirdparty/monolithic_tmplt;../../scripts/catch2/include;../../thirdparty/owemdjee/Catch2/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/cli11/include;../../thirdparty/owemdjee/cli11/examples;../../thirdparty/owemdjee/json/include;../../thirdparty/monolithic_tmplt;../../scripts/catch2/include;../../thirdparty/owemdjee/Catch2/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>CATCH_CONFIG_NO_PREFIX_ALL;CLI11_CATCH3;BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/cli11/include;../../thirdparty/owemdjee/cli11/examples;../../thirdparty/owemdjee/json/include;../../thirdparty/monolithic_tmplt;../../scripts/catch2/include;../../thirdparty/owemdjee/Catch2/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ProjectReference Include="libassert.vcxproj">
+      <Project>{0B51171B-B10E-4EAC-8FFA-19226AD14240}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libCatch2.vcxproj">
+      <Project>{0B51171B-B10E-4EAC-8FFA-19226A4FA880}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcli11.vcxproj">
+      <Project>{82a39750-1f70-45a8-945f-e8461b0c3d7e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcpptrace.vcxproj">
+      <Project>{0B51171B-B10E-4EAC-8FFA-19226A59D404}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfmt.vcxproj">
+      <Project>{0B51171B-B10E-4EAC-8FFA-19226A9FA520}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsystem_override.vcxproj">
+      <Project>{0B51171B-B10E-4EAC-8FFA-19226A8BB47B}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Detours.vcxproj">
+      <Project>{4c2a66ce-a3c0-4f63-abd9-65e3e728040b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libdebugbreak.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0f0f12}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../source/system_override/force_link_dependency_helper.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acf/benchmarks/bulk-insert-and-query.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acf/benchmarks/conext-figure5.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acf/benchmarks/conext-table3.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acf/example/test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acf/example/test_acf_ops.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acf/example/test_bits.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acf/example/test_churn.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acf/example/test_ext_throughput.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acf/example/test_fill_varied_throughput.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acf/example/test_fp.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acf/example/test_micro.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acf/example/test_micro_throughput.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acf/example/test_splinter_adversarial.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acf/example/test_splinter_inc_throughput.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acf/example/test_splinter_ops.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acf/example/test_splinter_throughput.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acf/example/test_splinter_zipfian_histogram.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acf/example/test_zipf_throughput.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acf/src/hashutil.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acf/src/printutil.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acfsim/example/test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acfsim/example/test_acf_ops.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acfsim/example/test_bits.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acfsim/example/test_churn.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acfsim/example/test_ext_throughput.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acfsim/example/test_fill_varied_throughput.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acfsim/example/test_fp.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acfsim/example/test_micro.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acfsim/example/test_micro_read.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acfsim/example/test_micro_throughput.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acfsim/example/test_micro_write.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acfsim/example/test_splinter_adversarial.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acfsim/example/test_splinter_inc_throughput.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acfsim/example/test_splinter_ops.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acfsim/example/test_splinter_throughput.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acfsim/example/test_splinter_zipfian_histogram.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acfsim/example/test_zipf_throughput.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acfsim/src/hashutil.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acfsim/src/printutil.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cf/benchmarks/bulk-insert-and-query.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cf/benchmarks/conext-figure5.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cf/benchmarks/conext-table3.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cf/example/test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cf/example/test_ext_throughput.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cf/example/test_hash_accesses.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cf/example/test_micro_super.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cf/example/test_micro_throughput.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cf/example/test_splinter_adversarial.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cf/example/test_splinter_ops.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cf/example/test_splinter_throughput.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cf/example/test_splinter_zipfian_histogram.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cf/src/hashutil.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cf/src/printutil.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cqf/src/bm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cqf/src/gqf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cqf/src/gqf_file.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cqf/src/hashutil.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cqf/src/partitioned_counter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cqf/src/test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cqf/src/test_adversarial.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cqf/src/test_ext_throughput.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cqf/src/test_fill_varied_throughput.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cqf/src/test_hash_accesses.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cqf/src/test_micro_super.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cqf/src/test_micro_throughput.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cqf/src/test_partitioned_counter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cqf/src/test_splinter_adversarial.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cqf/src/test_splinter_ops.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cqf/src/test_splinter_throughput.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cqf/src/test_splinter_zipfian_histogram.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cqf/src/test_threadsafe.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cqf/src/zipf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/taf/src/arcd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/taf/src/bit_util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/taf/src/exaf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/taf/src/murmur3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/taf/src/rsqf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/taf/src/set.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/taf/src/splinter_taf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/taf/src/taf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/taf/src/taf.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/taf/src/taf_sim.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/taf/src/utaf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/src/bm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/src/gqf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/src/gqf_backup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/src/gqf_file.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/src/hash_table.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/src/hashutil.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/src/ll_table.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/src/partitioned_counter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/src/taf.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/src/test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/src/test_adversarial.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/src/test_bulk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/src/test_deletions.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/src/test_ext_churn.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/src/test_ext_inc_throughput.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/src/test_ext_throughput.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/src/test_fill_varied_throughput.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/src/test_hash_accesses.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/src/test_hash_table.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/src/test_merge.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/src/test_micro_read.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/src/test_micro_throughput.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/src/test_micro_write.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/src/test_near_full.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/src/test_partitioned_counter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/src/test_progress.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/src/test_resize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/src/test_splinter_adversarial.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/src/test_splinter_inserts.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/src/test_splinter_inserts_2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/src/test_splinter_ops.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/src/test_splinter_throughput.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/src/test_splinter_zipfian_histogram.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/src/test_threadsafe.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/src/test_throughput.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/src/test_whitelist.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/src/test_zipf_throughput.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/src/testbackup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/adaptiveqf/src/zipf.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/include/gqf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/include/gqf_file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/include/gqf_int.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/include/gqf_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/include/hashutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/include/ll_table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/include/partitioned_counter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/include/sglib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/include/zipf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acf/benchmarks/random.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acf/benchmarks/timing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acf/src/bitsutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acf/src/cuckoofilter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acf/src/debug.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acf/src/hashutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acf/src/mirroredtable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acf/src/packedtable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acf/src/permencoding.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acf/src/printutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acf/src/simd-block.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acf/src/singletable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acfsim/src/bitsutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acfsim/src/cuckoofilter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acfsim/src/debug.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acfsim/src/hashutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acfsim/src/mirroredtable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acfsim/src/packedtable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acfsim/src/permencoding.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acfsim/src/printutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acfsim/src/simd-block.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acfsim/src/singletable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cf/benchmarks/random.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cf/benchmarks/timing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cf/src/bitsutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cf/src/cuckoofilter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cf/src/debug.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cf/src/hashutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cf/src/packedtable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cf/src/permencoding.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cf/src/printutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cf/src/simd-block.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cf/src/singletable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cqf/include/gqf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cqf/include/gqf_file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cqf/include/gqf_int.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cqf/include/gqf_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cqf/include/hashutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cqf/include/partitioned_counter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cqf/include/zipf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/taf/src/arcd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/taf/src/bit_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/taf/src/constants.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/taf/src/exaf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/taf/src/ext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/taf/src/macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/taf/src/murmur3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/taf/src/remainder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/taf/src/rsqf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/taf/src/set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/taf/src/splinter_taf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/taf/src/taf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/taf/src/taf_sim.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/taf/src/utaf.h" />
+    <Text Include="../../thirdparty/owemdjee/adaptiveqf/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/adaptiveqf/README.md" />
+    <Text Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acf/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acf/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acf/README.md" />
+    <Text Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acf/benchmarks/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acf/test" />
+    <Text Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acf/test_bits" />
+    <Text Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acfsim/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/acfsim/README.md" />
+    <Text Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cf/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cf/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cf/README.md" />
+    <Text Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cf/benchmarks/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cf/test" />
+    <Text Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cf/test_hash_accesses" />
+    <Text Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cqf/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cqf/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cqf/README.md" />
+    <Text Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cqf/scripts/merge_into_develop.sh" />
+    <Text Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cqf/scripts/merge_into_master.sh" />
+    <Text Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cqf/test" />
+    <Text Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cqf/test_pc" />
+    <Text Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/cqf/test_threadsafe" />
+    <Text Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/taf/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/taf/README.md" />
+    <Text Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/taf/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/taf/src/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/taf/src/progress.csv" />
+    <Text Include="../../thirdparty/owemdjee/adaptiveqf/other_filters/taf/src/target/hash_accesses.txt" />
+  </ItemGroup>
+  <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+</Project>

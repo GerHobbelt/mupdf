@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{B5DEF5CF-BF5B-46CA-8A6D-D203B2A67BB7}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/cli11/include;../../thirdparty/owemdjee/cli11/examples;../../thirdparty/owemdjee/json/include;../../thirdparty/monolithic_tmplt;../../scripts/catch2/include;../../thirdparty/owemdjee/Catch2/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>CATCH_CONFIG_NO_PREFIX_ALL;CLI11_CATCH3;BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/cli11/include;../../thirdparty/owemdjee/cli11/examples;../../thirdparty/owemdjee/json/include;../../thirdparty/monolithic_tmplt;../../scripts/catch2/include;../../thirdparty/owemdjee/Catch2/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/cli11/include;../../thirdparty/owemdjee/cli11/examples;../../thirdparty/owemdjee/json/include;../../thirdparty/monolithic_tmplt;../../scripts/catch2/include;../../thirdparty/owemdjee/Catch2/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>CATCH_CONFIG_NO_PREFIX_ALL;CLI11_CATCH3;BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/cli11/include;../../thirdparty/owemdjee/cli11/examples;../../thirdparty/owemdjee/json/include;../../thirdparty/monolithic_tmplt;../../scripts/catch2/include;../../thirdparty/owemdjee/Catch2/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/cli11/include;../../thirdparty/owemdjee/cli11/examples;../../thirdparty/owemdjee/json/include;../../thirdparty/monolithic_tmplt;../../scripts/catch2/include;../../thirdparty/owemdjee/Catch2/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>CATCH_CONFIG_NO_PREFIX_ALL;CLI11_CATCH3;BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/cli11/include;../../thirdparty/owemdjee/cli11/examples;../../thirdparty/owemdjee/json/include;../../thirdparty/monolithic_tmplt;../../scripts/catch2/include;../../thirdparty/owemdjee/Catch2/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/cli11/include;../../thirdparty/owemdjee/cli11/examples;../../thirdparty/owemdjee/json/include;../../thirdparty/monolithic_tmplt;../../scripts/catch2/include;../../thirdparty/owemdjee/Catch2/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>CATCH_CONFIG_NO_PREFIX_ALL;CLI11_CATCH3;BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/cli11/include;../../thirdparty/owemdjee/cli11/examples;../../thirdparty/owemdjee/json/include;../../thirdparty/monolithic_tmplt;../../scripts/catch2/include;../../thirdparty/owemdjee/Catch2/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ProjectReference Include="libassert.vcxproj">
+      <Project>{0B51171B-B10E-4EAC-8FFA-19226AD14240}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libCatch2.vcxproj">
+      <Project>{0B51171B-B10E-4EAC-8FFA-19226A4FA880}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcli11.vcxproj">
+      <Project>{82a39750-1f70-45a8-945f-e8461b0c3d7e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcpptrace.vcxproj">
+      <Project>{0B51171B-B10E-4EAC-8FFA-19226A59D404}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfmt.vcxproj">
+      <Project>{0B51171B-B10E-4EAC-8FFA-19226A9FA520}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsystem_override.vcxproj">
+      <Project>{0B51171B-B10E-4EAC-8FFA-19226A8BB47B}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Detours.vcxproj">
+      <Project>{4c2a66ce-a3c0-4f63-abd9-65e3e728040b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libdebugbreak.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0f0f12}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../source/system_override/force_link_dependency_helper.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/FakeIt/tests/VirtualOffsetSelectorTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FakeIt/tests/argument_matching_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FakeIt/tests/cpp14_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FakeIt/tests/custom_event_formatting_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FakeIt/tests/custom_testing_framework_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FakeIt/tests/default_behaviore_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FakeIt/tests/default_event_formatting_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FakeIt/tests/dtor_mocking_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FakeIt/tests/event_notification_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FakeIt/tests/functional.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FakeIt/tests/gcc_stubbing_multiple_values_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FakeIt/tests/gcc_type_info_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FakeIt/tests/miscellaneous_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FakeIt/tests/move_only_return_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FakeIt/tests/moving_mocks_around.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FakeIt/tests/msc_stubbing_multiple_values_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FakeIt/tests/msc_type_info_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FakeIt/tests/overloadded_methods_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FakeIt/tests/referece_types_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FakeIt/tests/remove_const_volatile_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FakeIt/tests/return_template_specialization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FakeIt/tests/rvalue_arguments_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FakeIt/tests/sequence_verification_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FakeIt/tests/spying_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FakeIt/tests/streaming_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FakeIt/tests/stubbing_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FakeIt/tests/tpunit++main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FakeIt/tests/type_info_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FakeIt/tests/verification_errors_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FakeIt/tests/verification_tests.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/config/boost/BoostTestFakeit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/config/boost/fakeit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/config/boost/fakeit_instance.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/config/catch/CatchFakeit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/config/catch/fakeit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/config/catch/fakeit_instance.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/config/cute/CuteFakeit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/config/cute/fakeit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/config/cute/fakeit_instance.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/config/doctest/DoctestFakeit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/config/doctest/fakeit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/config/doctest/fakeit_instance.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/config/gtest/GTestFakeit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/config/gtest/fakeit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/config/gtest/fakeit_instance.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/config/mettle/MettleFakeit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/config/mettle/fakeit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/config/mettle/fakeit_instance.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/config/mstest/MsTestFakeit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/config/mstest/fakeit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/config/mstest/fakeit_instance.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/config/nunit/NUnitFakeit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/config/nunit/fakeit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/config/nunit/fakeit_instance.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/config/qtest/QTestFakeit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/config/qtest/fakeit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/config/qtest/fakeit_instance.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/config/standalone/StandaloneFakeit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/config/standalone/fakeit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/config/standalone/fakeit_instance.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/config/tpunit/TpUnitFakeit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/config/tpunit/fakeit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/config/tpunit/fakeit_instance.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/fakeit/Action.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/fakeit/ActionSequence.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/fakeit/ActualInvocation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/fakeit/ActualInvocationHandler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/fakeit/ActualInvocationsSource.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/fakeit/DefaultEventFormatter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/fakeit/DefaultEventLogger.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/fakeit/DefaultFakeit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/fakeit/DomainObjects.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/fakeit/EventFormatter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/fakeit/EventHandler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/fakeit/FakeFunctor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/fakeit/FakeitContext.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/fakeit/FakeitEvents.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/fakeit/FakeitExceptions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/fakeit/Functional.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/fakeit/Invocation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/fakeit/MatchAnalysis.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/fakeit/MatchersCollector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/fakeit/MethodMockingContext.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/fakeit/Mock.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/fakeit/MockImpl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/fakeit/Prototype.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/fakeit/Quantifier.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/fakeit/RecordedMethodBody.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/fakeit/Sequence.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/fakeit/SequenceVerificationExpectation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/fakeit/SequenceVerificationProgress.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/fakeit/SortInvocations.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/fakeit/SpyFunctor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/fakeit/SpyWithoutVerifyFunctor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/fakeit/SpyingContext.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/fakeit/StubbingContext.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/fakeit/StubbingImpl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/fakeit/StubbingProgress.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/fakeit/ThrowFalseEventHandler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/fakeit/UnverifiedFunctor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/fakeit/UsingFunctor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/fakeit/UsingProgress.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/fakeit/VerifyFunctor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/fakeit/VerifyNoOtherInvocationsFunctor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/fakeit/VerifyNoOtherInvocationsVerificationProgress.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/fakeit/WhenFunctor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/fakeit/Xaction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/fakeit/api_functors.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/fakeit/api_macros.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/fakeit/argument_matchers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/fakeit/fakeit_root.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/fakeit/invocation_matchers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/mockutils/DefaultValue.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/mockutils/Destructible.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/mockutils/DynamicProxy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/mockutils/FakeObject.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/mockutils/Finally.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/mockutils/Formatter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/mockutils/Macros.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/mockutils/MethodInvocationHandler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/mockutils/MethodProxy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/mockutils/MethodProxyCreator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/mockutils/TupleDispatcher.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/mockutils/TuplePrinter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/mockutils/VTUtils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/mockutils/VirtualOffestSelector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/mockutils/VirtualTable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/mockutils/gcc/VirtualTable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/mockutils/gcc/is_simple_inheritance_layout.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/mockutils/mscpp/VirtualTable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/mockutils/smart_ptr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/mockutils/to_string.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/mockutils/type_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/include/mockutils/union_cast.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/single_header/boost/fakeit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/single_header/catch/fakeit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/single_header/cute/fakeit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/single_header/doctest/fakeit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/single_header/gtest/fakeit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/single_header/mettle/fakeit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/single_header/mstest/fakeit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/single_header/nunit/fakeit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/single_header/qtest/fakeit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/single_header/standalone/fakeit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/single_header/tpunit/fakeit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/tests/testutils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FakeIt/tests/tpunit++.hpp" />
+    <Text Include="../../thirdparty/owemdjee/FakeIt/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/FakeIt/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/FakeIt/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/FakeIt/README.md" />
+    <Text Include="../../thirdparty/owemdjee/FakeIt/appveyor.yml" />
+    <Text Include="../../thirdparty/owemdjee/FakeIt/benchmark/README.md" />
+    <Text Include="../../thirdparty/owemdjee/FakeIt/benchmark/create_benchmark.py" />
+    <Text Include="../../thirdparty/owemdjee/FakeIt/config/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/FakeIt/generate_fakeit_single_header.py" />
+    <Text Include="../../thirdparty/owemdjee/FakeIt/include/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/FakeIt/single_header/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/FakeIt/tests/CMakeLists.txt" />
+  </ItemGroup>
+  <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+</Project>

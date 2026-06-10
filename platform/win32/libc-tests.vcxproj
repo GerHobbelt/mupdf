@@ -1,0 +1,575 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{EC9C50B1-CC4D-4141-8063-19873E598879}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBYAML;YAML_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/libyaml/include;../../scripts/libyaml/include;../../thirdparty/owemdjee/libyaml/tests;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>YAML_DECLARE_STATIC;BUILD_MONOLITHIC;BUILDING_LIBYAML;YAML_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBYAML;YAML_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/libyaml/include;../../scripts/libyaml/include;../../thirdparty/owemdjee/libyaml/tests;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBYAML;YAML_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/libyaml/include;../../scripts/libyaml/include;../../thirdparty/owemdjee/libyaml/tests;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>YAML_DECLARE_STATIC;BUILD_MONOLITHIC;BUILDING_LIBYAML;YAML_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBYAML;YAML_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/libyaml/include;../../scripts/libyaml/include;../../thirdparty/owemdjee/libyaml/tests;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBYAML;YAML_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/libyaml/include;../../scripts/libyaml/include;../../thirdparty/owemdjee/libyaml/tests;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>YAML_DECLARE_STATIC;BUILD_MONOLITHIC;BUILDING_LIBYAML;YAML_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBYAML;YAML_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/libyaml/include;../../scripts/libyaml/include;../../thirdparty/owemdjee/libyaml/tests;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBYAML;YAML_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/libyaml/include;../../scripts/libyaml/include;../../thirdparty/owemdjee/libyaml/tests;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>YAML_DECLARE_STATIC;BUILD_MONOLITHIC;BUILDING_LIBYAML;YAML_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBYAML;YAML_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/libyaml/include;../../scripts/libyaml/include;../../thirdparty/owemdjee/libyaml/tests;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/libc/arch/aarch64/src/__aeabi_atexit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/arch/arm/src/__aeabi_atexit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/arch/x86/libc/rand.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/arch/x86_64/libc/rand.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/assert/assert.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/crt/_Exit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/crt/abort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/crt/at_exit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/crt/at_quick_exit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/crt/crt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/crt/crtbegin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/crt/crtend.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/crt/cxa_atexit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/crt/exit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/crt/quick_exit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/crt/stack_protection.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/ctype/isalnum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/ctype/isalpha.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/ctype/isascii.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/ctype/isblank.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/ctype/iscntrl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/ctype/isdigit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/ctype/isgraph.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/ctype/islower.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/ctype/isprint.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/ctype/ispunct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/ctype/isspace.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/ctype/isupper.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/ctype/isxdigit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/ctype/toascii.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/ctype/tolower.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/ctype/toupper.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/locale/langinfo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/math/fabs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/math/fabsf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/stdio/asprintf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/stdio/putchar.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/stdio/putchar_native.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/stdio/puts.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/stdio/vasprintf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/stdlib/abs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/stdlib/atof.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/stdlib/atoi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/stdlib/atol.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/stdlib/atoll.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/stdlib/bsearch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/stdlib/calloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/stdlib/div.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/stdlib/heapsort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/stdlib/heapsort_r.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/stdlib/imaxabs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/stdlib/imaxdiv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/stdlib/labs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/stdlib/ldiv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/stdlib/llabs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/stdlib/lldiv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/stdlib/qsort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/stdlib/qsort_r.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/stdlib/rand.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/stdlib/realloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/stdlib/strtol.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/stdlib/strtold.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/stdlib/strtoll.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/stdlib/strtoul.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/stdlib/strtoull.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/string/memchr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/string/memcmp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/string/memcpy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/string/memmem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/string/memmove.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/string/memrchr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/string/memset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/string/strcat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/string/strchr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/string/strchrnul.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/string/strcmp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/string/strcoll.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/string/strcpy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/string/strcspn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/string/strdup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/string/strerror.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/string/strerror_r.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/string/strlen.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/string/strncat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/string/strncmp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/string/strncpy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/string/strndup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/string/strnlen.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/string/strnstr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/string/strpbrk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/string/strrchr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/string/strspn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/string/strstr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/string/strtok.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/string/strxfrm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/support/fls.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/support/flsl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/support/flsll.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/time/asctime.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/time/asctime_r.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/wchar/iswalnum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/wchar/iswalpha.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/wchar/iswblank.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/wchar/iswcntrl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/wchar/iswctype.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/wchar/iswdigit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/wchar/iswgraph.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/wchar/iswlower.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/wchar/iswprint.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/wchar/iswpunct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/wchar/iswspace.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/wchar/iswupper.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/wchar/iswxdigit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/wchar/towccase.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/wchar/towctrans.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/wchar/towlower.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/wchar/towupper.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/wchar/wcswidth.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/wchar/wctrans.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/wchar/wctype.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/src/wchar/wcwidth.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/app/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/app/stackcheck_main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/crt/crt_init_array.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/crt/crt_tests.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/ctype/ctype_tests.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/ctype/isalnum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/ctype/isalpha.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/ctype/isascii.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/ctype/isblank.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/ctype/iscntrl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/ctype/isdigit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/ctype/isgraph.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/ctype/islower.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/ctype/isprint.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/ctype/ispunct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/ctype/isspace.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/ctype/isupper.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/ctype/isxdigit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/ctype/toascii.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/ctype/tolower.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/ctype/toupper.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/includes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/stdlib/abs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/stdlib/atof.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/stdlib/atoi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/stdlib/atol.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/stdlib/atoll.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/stdlib/bsearch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/stdlib/calloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/stdlib/div.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/stdlib/heapsort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/stdlib/heapsort_r.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/stdlib/imaxabs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/stdlib/imaxdiv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/stdlib/labs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/stdlib/ldiv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/stdlib/llabs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/stdlib/lldiv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/stdlib/qsort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/stdlib/qsort_r.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/stdlib/rand.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/stdlib/realloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/stdlib/stdlib_tests.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/stdlib/strtod.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/stdlib/strtof.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/stdlib/strtol.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/stdlib/strtoll.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/stdlib/strtoul.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/stdlib/strtoull.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/string/memcmp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/string/memcpy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/string/memmem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/string/memmove.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/string/memset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/string/strcat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/string/strchr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/string/strcmp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/string/strcpy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/string/strdup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/string/string_tests.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/string/strlen.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/string/strncat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/string/strncmp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/string/strncpy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/string/strndup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/string/strnlen.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/string/strnstr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/string/strrchr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/string/strstr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/string/strtok.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/test/rand.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libc/test/test/ulpsDistance.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/aarch64/include/_endian.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/aarch64/include/_limits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/aarch64/include/_types/_float.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/aarch64/include/_types/_int16_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/aarch64/include/_types/_int32_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/aarch64/include/_types/_int64_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/aarch64/include/_types/_int8_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/aarch64/include/_types/_intmax_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/aarch64/include/_types/_intptr_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/aarch64/include/_types/_ptrdiff_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/aarch64/include/_types/_setjmp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/aarch64/include/_types/_size_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/aarch64/include/_types/_time_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/aarch64/include/_types/_uint16_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/aarch64/include/_types/_uint32_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/aarch64/include/_types/_uint64_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/aarch64/include/_types/_uint8_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/aarch64/include/_types/_uintmax_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/aarch64/include/_types/_uintptr_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/aarch64/include/_types/_wchar_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/aarch64/include/_types/_wint_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/arm/include/_endian.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/arm/include/_limits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/arm/include/_types/_float.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/arm/include/_types/_int16_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/arm/include/_types/_int32_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/arm/include/_types/_int64_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/arm/include/_types/_int8_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/arm/include/_types/_intmax_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/arm/include/_types/_intptr_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/arm/include/_types/_ptrdiff_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/arm/include/_types/_setjmp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/arm/include/_types/_size_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/arm/include/_types/_time_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/arm/include/_types/_uint16_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/arm/include/_types/_uint32_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/arm/include/_types/_uint64_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/arm/include/_types/_uint8_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/arm/include/_types/_uintmax_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/arm/include/_types/_uintptr_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/arm/include/_types/_wchar_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/arm/include/_types/_wint_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/x86/include/_endian.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/x86/include/_limits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/x86/include/_types/_float.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/x86/include/_types/_int16_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/x86/include/_types/_int32_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/x86/include/_types/_int64_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/x86/include/_types/_int8_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/x86/include/_types/_intmax_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/x86/include/_types/_intptr_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/x86/include/_types/_ptrdiff_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/x86/include/_types/_setjmp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/x86/include/_types/_size_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/x86/include/_types/_time_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/x86/include/_types/_uint16_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/x86/include/_types/_uint32_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/x86/include/_types/_uint64_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/x86/include/_types/_uint8_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/x86/include/_types/_uintmax_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/x86/include/_types/_uintptr_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/x86/include/_types/_wchar_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/x86/include/_types/_wint_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/x86_64/include/_endian.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/x86_64/include/_limits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/x86_64/include/_types/_float.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/x86_64/include/_types/_int16_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/x86_64/include/_types/_int32_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/x86_64/include/_types/_int64_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/x86_64/include/_types/_int8_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/x86_64/include/_types/_intmax_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/x86_64/include/_types/_intptr_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/x86_64/include/_types/_ptrdiff_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/x86_64/include/_types/_setjmp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/x86_64/include/_types/_size_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/x86_64/include/_types/_time_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/x86_64/include/_types/_uint16_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/x86_64/include/_types/_uint32_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/x86_64/include/_types/_uint64_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/x86_64/include/_types/_uint8_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/x86_64/include/_types/_uintmax_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/x86_64/include/_types/_uintptr_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/x86_64/include/_types/_wchar_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/arch/x86_64/include/_types/_wint_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/include/assert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/include/complex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/include/crt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/include/ctype.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/include/endian.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/include/errno.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/include/float.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/include/inttypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/include/langinfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/include/limits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/include/locale.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/include/math.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/include/memory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/include/nl_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/include/setjmp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/include/stdarg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/include/stdbool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/include/stddef.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/include/stdint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/include/stdio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/include/stdlib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/include/string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/include/strings.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/include/time.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/include/wchar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/include/wctype.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/src/crt/__dso_handle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/src/ctype/alpha.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/src/ctype/nonspacing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/src/ctype/punct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/src/string/__strerror.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/src/string/strchrnul.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/src/wchar/_towcase.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/src/wchar/alpha.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/src/wchar/nonspacing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/src/wchar/punct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/src/wchar/wide.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/test/crt/crt_tests.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/test/ctype/ctype_tests.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/test/stdlib/stdlib_tests.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/test/string/string_tests.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/test/test/test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/test/test/ulpsDistance.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libc/test/tests.h" />
+    <Text Include="../../thirdparty/owemdjee/libc/BuildOptions.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libc/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libc/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/libc/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/libc/Makefile-cmake" />
+    <Text Include="../../thirdparty/owemdjee/libc/Packaging.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libc/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libc/arch/aarch64/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libc/arch/aarch64/src/crt0.S" />
+    <Text Include="../../thirdparty/owemdjee/libc/arch/aarch64/src/crti.s" />
+    <Text Include="../../thirdparty/owemdjee/libc/arch/aarch64/src/crtn.s" />
+    <Text Include="../../thirdparty/owemdjee/libc/arch/aarch64/src/longjmp.s" />
+    <Text Include="../../thirdparty/owemdjee/libc/arch/aarch64/src/setjmp.s" />
+    <Text Include="../../thirdparty/owemdjee/libc/arch/arm/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libc/arch/arm/src/crt0.S" />
+    <Text Include="../../thirdparty/owemdjee/libc/arch/arm/src/longjmp.s" />
+    <Text Include="../../thirdparty/owemdjee/libc/arch/arm/src/setjmp.s" />
+    <Text Include="../../thirdparty/owemdjee/libc/arch/x86/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libc/arch/x86/src/crti.s" />
+    <Text Include="../../thirdparty/owemdjee/libc/arch/x86/src/crtn.s" />
+    <Text Include="../../thirdparty/owemdjee/libc/arch/x86/src/longjmp.s" />
+    <Text Include="../../thirdparty/owemdjee/libc/arch/x86/src/setjmp.s" />
+    <Text Include="../../thirdparty/owemdjee/libc/arch/x86_64/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libc/arch/x86_64/src/crti.s" />
+    <Text Include="../../thirdparty/owemdjee/libc/arch/x86_64/src/crtn.s" />
+    <Text Include="../../thirdparty/owemdjee/libc/arch/x86_64/src/longjmp.s" />
+    <Text Include="../../thirdparty/owemdjee/libc/arch/x86_64/src/setjmp.s" />
+    <Text Include="../../thirdparty/owemdjee/libc/docs/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/libc/docs/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/libc/docs/Doxyfile" />
+    <Text Include="../../thirdparty/owemdjee/libc/docs/LICENSES.md" />
+    <Text Include="../../thirdparty/owemdjee/libc/docs/architecture/decisions/0001-record-architecture-decisions.md" />
+    <Text Include="../../thirdparty/owemdjee/libc/docs/architecture/decisions/0002-crt-initialization-symbol-types.md" />
+    <Text Include="../../thirdparty/owemdjee/libc/docs/licenses/printf_LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/libc/docs/project-history/2020/2020-05/2020-05-07T21-11-03Z_note_AmNIQO0ZxVGx99Li.md" />
+    <Text Include="../../thirdparty/owemdjee/libc/docs/project-history/2020/2020-05/2020-05-07T21-11-19Z_note_q_7AT2uMY6sf2xRq.md" />
+    <Text Include="../../thirdparty/owemdjee/libc/docs/software_inventory.xlsx" />
+    <Text Include="../../thirdparty/owemdjee/libc/meson.options" />
+    <Text Include="../../thirdparty/owemdjee/libc/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libc/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libc/test/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libc/tools/Jenkinsfile" />
+  </ItemGroup>
+  <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+</Project>

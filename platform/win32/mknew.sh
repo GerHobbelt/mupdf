@@ -1643,7 +1643,18 @@ hdf5-examples
 hdf5_plugins
 tar2h5
 libscientific
+
+cmake-cpp
+cmake-init
+cpp-project
+cpptemplate
 cleanCppProject
+cmake_examples
+cmake_template
+googletest-ci-cpp-template
+ModernCppStarter
+modern-cpp-template
+
 aocl-blas
 Cougar
 libunisani
@@ -1703,6 +1714,15 @@ fixed_space_std_allocator
 adsr_curve_tweens
 flash_wear_leveling_management
 specialty_histograms
+fpm
+DueTimer
+function2
+jthread
+str-buf-stream-fmt-noheap
+uclibc-ng
+uClibc
+
+
 
 
 EOT
@@ -1795,6 +1815,17 @@ msvc_sln_cleaner
 pccts
 pikchr-cmd
 lemon
+
+cmake-cpp
+cmake-init
+cpp-project
+cpptemplate
+cleanCppProject
+cmake_examples
+cmake_template
+googletest-ci-cpp-template
+ModernCppStarter
+modern-cpp-template
 
 
 EOT

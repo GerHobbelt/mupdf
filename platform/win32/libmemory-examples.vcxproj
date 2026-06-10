@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{723E8354-CACF-43C4-A0ED-E48C36C50AC6}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/cli11/include;../../thirdparty/owemdjee/cli11/examples;../../thirdparty/owemdjee/json/include;../../thirdparty/monolithic_tmplt;../../scripts/catch2/include;../../thirdparty/owemdjee/Catch2/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>CATCH_CONFIG_NO_PREFIX_ALL;CLI11_CATCH3;BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/cli11/include;../../thirdparty/owemdjee/cli11/examples;../../thirdparty/owemdjee/json/include;../../thirdparty/monolithic_tmplt;../../scripts/catch2/include;../../thirdparty/owemdjee/Catch2/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/cli11/include;../../thirdparty/owemdjee/cli11/examples;../../thirdparty/owemdjee/json/include;../../thirdparty/monolithic_tmplt;../../scripts/catch2/include;../../thirdparty/owemdjee/Catch2/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>CATCH_CONFIG_NO_PREFIX_ALL;CLI11_CATCH3;BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/cli11/include;../../thirdparty/owemdjee/cli11/examples;../../thirdparty/owemdjee/json/include;../../thirdparty/monolithic_tmplt;../../scripts/catch2/include;../../thirdparty/owemdjee/Catch2/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/cli11/include;../../thirdparty/owemdjee/cli11/examples;../../thirdparty/owemdjee/json/include;../../thirdparty/monolithic_tmplt;../../scripts/catch2/include;../../thirdparty/owemdjee/Catch2/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>CATCH_CONFIG_NO_PREFIX_ALL;CLI11_CATCH3;BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/cli11/include;../../thirdparty/owemdjee/cli11/examples;../../thirdparty/owemdjee/json/include;../../thirdparty/monolithic_tmplt;../../scripts/catch2/include;../../thirdparty/owemdjee/Catch2/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/cli11/include;../../thirdparty/owemdjee/cli11/examples;../../thirdparty/owemdjee/json/include;../../thirdparty/monolithic_tmplt;../../scripts/catch2/include;../../thirdparty/owemdjee/Catch2/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>CATCH_CONFIG_NO_PREFIX_ALL;CLI11_CATCH3;BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/cli11/include;../../thirdparty/owemdjee/cli11/examples;../../thirdparty/owemdjee/json/include;../../thirdparty/monolithic_tmplt;../../scripts/catch2/include;../../thirdparty/owemdjee/Catch2/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ProjectReference Include="libassert.vcxproj">
+      <Project>{0B51171B-B10E-4EAC-8FFA-19226AD14240}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libCatch2.vcxproj">
+      <Project>{0B51171B-B10E-4EAC-8FFA-19226A4FA880}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcli11.vcxproj">
+      <Project>{82a39750-1f70-45a8-945f-e8461b0c3d7e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcpptrace.vcxproj">
+      <Project>{0B51171B-B10E-4EAC-8FFA-19226A59D404}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfmt.vcxproj">
+      <Project>{0B51171B-B10E-4EAC-8FFA-19226A9FA520}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsystem_override.vcxproj">
+      <Project>{0B51171B-B10E-4EAC-8FFA-19226A8BB47B}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Detours.vcxproj">
+      <Project>{4c2a66ce-a3c0-4f63-abd9-65e3e728040b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libdebugbreak.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0f0f12}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../source/system_override/force_link_dependency_helper.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/memory/cmake/get_align_of.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/memory/cmake/get_node_size.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/memory/example/allocator_storage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/memory/example/joint_allocation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/memory/example/taking_allocators.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/memory/example/tracking.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/memory/example/using_allocators.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/memory/src/debugging.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/memory/src/detail/align.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/memory/src/detail/assert.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/memory/src/detail/debug_helpers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/memory/src/detail/free_list.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/memory/src/detail/free_list_array.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/memory/src/detail/small_free_list.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/memory/src/error.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/memory/src/heap_allocator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/memory/src/iteration_allocator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/memory/src/malloc_allocator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/memory/src/memory_arena.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/memory/src/memory_pool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/memory/src/memory_pool_collection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/memory/src/memory_stack.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/memory/src/new_allocator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/memory/src/static_allocator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/memory/src/temporary_allocator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/memory/src/virtual_memory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/memory/test/aligned_allocator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/memory/test/allocator_traits.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/memory/test/default_allocator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/memory/test/detail/align.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/memory/test/detail/debug_helpers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/memory/test/detail/free_list.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/memory/test/detail/free_list_array.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/memory/test/detail/ilog2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/memory/test/detail/memory_stack.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/memory/test/fallback_allocator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/memory/test/iteration_allocator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/memory/test/joint_allocator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/memory/test/memory_arena.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/memory/test/memory_pool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/memory/test/memory_pool_collection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/memory/test/memory_resource_adapter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/memory/test/memory_stack.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/memory/test/profiling.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/memory/test/segregator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/memory/test/smart_ptr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/memory/test/test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/memory/tool/node_size_debugger.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/memory/include/foonathan/memory/aligned_allocator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/memory/include/foonathan/memory/allocator_storage.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/memory/include/foonathan/memory/allocator_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/memory/include/foonathan/memory/config.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/memory/include/foonathan/memory/container.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/memory/include/foonathan/memory/debugging.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/memory/include/foonathan/memory/default_allocator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/memory/include/foonathan/memory/deleter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/memory/include/foonathan/memory/detail/align.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/memory/include/foonathan/memory/detail/assert.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/memory/include/foonathan/memory/detail/container_node_sizes.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/memory/include/foonathan/memory/detail/debug_helpers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/memory/include/foonathan/memory/detail/ebo_storage.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/memory/include/foonathan/memory/detail/free_list.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/memory/include/foonathan/memory/detail/free_list_array.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/memory/include/foonathan/memory/detail/ilog2.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/memory/include/foonathan/memory/detail/lowlevel_allocator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/memory/include/foonathan/memory/detail/memory_stack.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/memory/include/foonathan/memory/detail/small_free_list.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/memory/include/foonathan/memory/detail/utility.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/memory/include/foonathan/memory/error.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/memory/include/foonathan/memory/fallback_allocator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/memory/include/foonathan/memory/heap_allocator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/memory/include/foonathan/memory/iteration_allocator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/memory/include/foonathan/memory/joint_allocator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/memory/include/foonathan/memory/malloc_allocator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/memory/include/foonathan/memory/memory_arena.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/memory/include/foonathan/memory/memory_pool.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/memory/include/foonathan/memory/memory_pool_collection.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/memory/include/foonathan/memory/memory_pool_type.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/memory/include/foonathan/memory/memory_resource_adapter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/memory/include/foonathan/memory/memory_stack.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/memory/include/foonathan/memory/namespace_alias.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/memory/include/foonathan/memory/new_allocator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/memory/include/foonathan/memory/segregator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/memory/include/foonathan/memory/smart_ptr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/memory/include/foonathan/memory/static_allocator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/memory/include/foonathan/memory/std_allocator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/memory/include/foonathan/memory/temporary_allocator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/memory/include/foonathan/memory/threading.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/memory/include/foonathan/memory/tracking.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/memory/include/foonathan/memory/virtual_memory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/memory/src/detail/free_list_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/memory/test/benchmark.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/memory/test/test_allocator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/memory/tool/node_size_debugger.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/memory/tool/test_types.hpp" />
+    <Text Include="../../thirdparty/owemdjee/memory/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/memory/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/memory/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/memory/README.md" />
+    <Text Include="../../thirdparty/owemdjee/memory/cmake/atomic.cmake" />
+    <Text Include="../../thirdparty/owemdjee/memory/cmake/configuration.cmake" />
+    <Text Include="../../thirdparty/owemdjee/memory/cmake/container_node_sizes_impl.hpp.in" />
+    <Text Include="../../thirdparty/owemdjee/memory/cmake/get_container_node_sizes.cmake" />
+    <Text Include="../../thirdparty/owemdjee/memory/doc/Doxyfile" />
+    <Text Include="../../thirdparty/owemdjee/memory/doc/adapters_storage.md" />
+    <Text Include="../../thirdparty/owemdjee/memory/doc/concepts.md" />
+    <Text Include="../../thirdparty/owemdjee/memory/doc/debug_error.md" />
+    <Text Include="../../thirdparty/owemdjee/memory/doc/external_usage.md" />
+    <Text Include="../../thirdparty/owemdjee/memory/doc/footer.html" />
+    <Text Include="../../thirdparty/owemdjee/memory/doc/header.html" />
+    <Text Include="../../thirdparty/owemdjee/memory/doc/index.md" />
+    <Text Include="../../thirdparty/owemdjee/memory/doc/installation.md" />
+    <Text Include="../../thirdparty/owemdjee/memory/doc/internal_usage.md" />
+    <Text Include="../../thirdparty/owemdjee/memory/doc/options.md" />
+    <Text Include="../../thirdparty/owemdjee/memory/doc/publish-docs.sh" />
+    <Text Include="../../thirdparty/owemdjee/memory/doc/stylesheet.css" />
+    <Text Include="../../thirdparty/owemdjee/memory/doc/tutorial.md" />
+    <Text Include="../../thirdparty/owemdjee/memory/doc/writing_allocators.md" />
+    <Text Include="../../thirdparty/owemdjee/memory/example/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/memory/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/memory/src/config.hpp.in" />
+    <Text Include="../../thirdparty/owemdjee/memory/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/memory/tool/CMakeLists.txt" />
+    <Xml Include="../../thirdparty/owemdjee/memory/doc/DoxygenLayout.xml" />
+  </ItemGroup>
+  <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+</Project>
