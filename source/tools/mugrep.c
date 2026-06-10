@@ -141,7 +141,7 @@ show_match_snippet(char *file_name, int page_number, fz_stext_position begin, fz
 }
 
 static int
-mugrep_run(char *filename, fz_document *doc, char *pattern, fz_search_options options, fz_stext_options *stext_options, int verbose)
+mugrep_run(const char *filename, fz_document *doc, const char *pattern, fz_search_options options, fz_stext_options *stext_options, int verbose)
 {
 	int page_count = fz_count_pages(ctx, doc);
 	fz_search *search = NULL;
@@ -214,9 +214,10 @@ mugrep_run(char *filename, fz_document *doc, char *pattern, fz_search_options op
 	return found;
 }
 
-static void silence(void *user, const char *message) {}
+// this one should match this prototype: typedef void fz_error_print_callback(fz_context* ctx, void* user, const char* message);
+static void silence(fz_context* ctx, void *user, const char *message) {}
 
-int mugrep_main(int argc, char **argv)
+int mugrep_main(int argc, const char **argv)
 {
 	fz_document *doc = NULL;
 	const char *password = NULL; /* don't throw errors if encrypted */
