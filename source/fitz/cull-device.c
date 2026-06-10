@@ -520,7 +520,7 @@ fz_new_pixmap_from_culled_display_list(fz_context *ctx, fz_display_list *list, f
 		draw_dev = fz_new_draw_device(ctx, ctm, pix);
 		cull_dev = fz_new_culling_device(ctx, draw_dev, opts);
 
-		fz_run_display_list(ctx, list, cull_dev, fz_identity, fz_infinite_rect, NULL);
+		fz_run_display_list(ctx, list, cull_dev, fz_identity, fz_infinite_rect);
 		fz_close_device(ctx, cull_dev);
 		fz_close_device(ctx, draw_dev);
 	}
