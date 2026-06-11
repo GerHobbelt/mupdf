@@ -115,7 +115,7 @@ static void fz_new_tuning_context(fz_context *ctx)
 		ctx->tuning->refs = 1;
 		ctx->tuning->image_decode = fz_default_image_decode;
 		ctx->tuning->image_scale = fz_default_image_scale;
-		ctx->tuning->image_rendering = FZ_IMAGE_RENDERING_QUALITY;
+		ctx->tuning->image_rendering = FZ_IMAGE_RENDERING_BALANCE;
 	}
 }
 

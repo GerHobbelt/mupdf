@@ -520,8 +520,30 @@ void fz_tune_image_scale(fz_context *ctx, fz_tune_image_scale_fn *image_scale, v
 	Set the behavior for image rendering and resampling.
 */
 enum {
-	FZ_IMAGE_RENDERING_QUALITY = 0,
-	FZ_IMAGE_RENDERING_SPEED = 1,
+	// We may box filter images down by a power of 2, before scaling
+	// accurately to get the final results. Rendering will be stable.
+	// This may be faster and may use less memory than 'QUALITY'
+	// rendering, for a (probably imperceptible) degradation of quality.
+	FZ_IMAGE_RENDERING_BALANCE = 0,
+
+	// We will never box filter images, and instead will always scale
+	// accurately. Rendering will be stable. This may be slower and
+	// may use more memory than 'HYBRID' rendering, for a (probably
+	// imperceptible) improvement in quality.
+	FZ_IMAGE_RENDERING_QUALITY = 1,
+
+	// We will box filter images down by a power of 2, before scaling
+	// accurately to get the final results. We will accept image
+	// tiles that have previously been box scaled and cached at higher
+	// quality than we need, thus saving us the decode again, at the
+	// cost of "rendering instability". i.e. the exact results of
+	// rendering may differ according to the order of rendering
+	// operations that have happened in the past. The quality
+	// differences here are rarely spotted, and very minor, but
+	// genuinely exist. In an interactive application, these are
+	// well within acceptability, but in an system where results are
+	// being compared pixel-by-pixel, this is probably best avoided.
+	FZ_IMAGE_RENDERING_SPEED = 2,
 };
 void fz_tune_image_rendering(fz_context *ctx, int behavior);
 
@@ -716,11 +738,11 @@ void fz_free(fz_context *ctx, void *p);
 	Flexible array member allocation helpers.
 */
 #define fz_malloc_flexible(ctx, T, M, count) \
-	Memento_label(fz_calloc(ctx, 1, offsetof(T, M) + sizeof(*((T*)0)->M) * (count)), #T)
+	((T*)Memento_label(fz_calloc(ctx, 1, offsetof(T, M) + sizeof(*((T*)0)->M) * (count)), #T))
 #define fz_realloc_flexible(ctx, p, T, M, count) \
-	Memento_label(fz_realloc(ctx, p, offsetof(T, M) + sizeof(*((T*)0)->M) * (count)), #T)
+	((T*)Memento_label(fz_realloc(ctx, p, offsetof(T, M) + sizeof(*((T*)0)->M) * (count)), #T))
 #define fz_pool_alloc_flexible(ctx, pool, T, M, count) \
-	fz_pool_alloc(ctx, pool, offsetof(T, M) + sizeof(*((T*)0)->M) * (count))
+	((T*)fz_pool_alloc(ctx, pool, offsetof(T, M) + sizeof(*((T*)0)->M) * (count)))
 #define fz_sizeof_flexible(T, M, count) \
 	(offsetof(T, M) + sizeof(*((T*)0)->M) * (count))
 
