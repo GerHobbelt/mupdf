@@ -1,6 +1,5 @@
 
 directories:
-    ../../docs/examples/
     ../../source/tools/
 
 sources:    
