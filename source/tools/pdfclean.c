@@ -267,9 +267,7 @@ int pdfclean_main(int argc, const char** argv)
 	}
 
 	// for example, specify '-d' decompress TWICE, together with one '-z' RECOMPRESS to get PRETTY processing too!
-	if ((opts.write.do_ascii || opts.write.do_decompress) && !opts.write.do_compress)
-		opts.write.do_pretty = !tighten;
-
+	// ^^^ TODO!
 	if (pretty < 0)
 	{
 		if ((opts.write.do_ascii || opts.write.do_decompress) && !opts.write.do_compress)
