@@ -81,8 +81,9 @@ typedef struct
 	int use_attrs;
 	int x;
 	int y;
+	int max_tables;
 	int num_tables;
-	table tables[256];
+	table *tables;
 	fz_flotilla *flotilla;
 	fz_stext_block *stext;
 } walk_data;
@@ -983,13 +984,13 @@ refine_dividers_with_vectors(fz_context *ctx, walk_data *wd, fz_stext_block *blo
 static int
 extract_table_details(fz_context *ctx, walk_data *wd, pdf_obj *selem, fz_stext_struct *str)
 {
-	fz_stext_block *table = str->up;
+	fz_stext_block *tab = str->up;
 	fz_buffer *buf = NULL;
 	int n, i;
 
-	//fz_write_printf(ctx, wd->out, "Page=%d Table bbox=%g %g %g %g\n", wd->page+1, table->bbox.x0, table->bbox.y0, table->bbox.x1, table->bbox.y1);
+	//fz_write_printf(ctx, wd->out, "Page=%d Table bbox=%g %g %g %g\n", wd->page+1, tab->bbox.x0, tab->bbox.y0, tab->bbox.x1, tab->bbox.y1);
 
-	wd->bbox = table->bbox;
+	wd->bbox = tab->bbox;
 
 	/* Increase the bbox to allow for the raft it's on. */
 
@@ -1025,6 +1026,15 @@ extract_table_details(fz_context *ctx, walk_data *wd, pdf_obj *selem, fz_stext_s
 	refine_dividers_with_vectors(ctx, wd, wd->stext);
 
 	//asciiart_table(ctx, wd->out, &wd->cs);
+
+	if (wd->num_tables == wd->max_tables)
+	{
+		int newmax = wd->max_tables * 2;
+		if (newmax == 0)
+			newmax = 32;
+		wd->tables = fz_realloc_array(ctx, wd->tables, newmax, table);
+		wd->max_tables = newmax;
+	}
 
 	wd->tables[wd->num_tables].buf = buf;
 	wd->tables[wd->num_tables].r = wd->bbox;
