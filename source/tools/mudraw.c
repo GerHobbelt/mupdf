@@ -261,6 +261,10 @@ static fz_cookie master_cookie = { 0 };
 */
 #ifndef DISABLE_MUTHREADS
 
+// forward declaration:
+static void worker_thread(void* arg);
+
+
 static mu_mutex mutexes[FZ_LOCK_MAX];
 
 static void mudraw_lock(void *user, int lock)
@@ -1848,7 +1852,7 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum, fz_navigati
 				if (output_file_per_page)
 				{
 #if FZ_ENABLE_PDF
-					if (output_format == OUT_PDF)
+					if (output_format->format == OUT_PDF)
 					{
 						bgprint.pdfout_path = fz_strdup(ctx, output_path);
 						bgprint.pdfout = pdfout;
@@ -1877,7 +1881,7 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum, fz_navigati
 		if (output_file_per_page)
 		{
 #if FZ_ENABLE_PDF
-			if (output_format == OUT_PDF && pdfout)
+			if (output_format->format == OUT_PDF && pdfout)
 				pdf_save_document(ctx, pdfout, output_path, NULL);
 			else
 #endif
@@ -1894,7 +1898,7 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum, fz_navigati
 		if (output_file_per_page)
 		{
 #if FZ_ENABLE_PDF
-			if (output_format == OUT_PDF && pdfout)
+			if (output_format->format == OUT_PDF && pdfout)
 			{
 				pdf_drop_document(ctx, pdfout);
 				pdfout = NULL;
@@ -2372,6 +2376,7 @@ static void apply_layer_config(fz_context *ctx, fz_document *doc, const char *lc
 				if (creator)
 					fz_scatnprintf(msgbuf, sizeof(msgbuf), " Creator=\"%s\"", creator);
 				fz_info(ctx, "%s", msgbuf);
+			}
 		}
 		return;
 	}

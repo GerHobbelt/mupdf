@@ -118,7 +118,7 @@ show_match_rec(fz_stext_block *block, fz_stext_line *begin_line, fz_stext_char *
 }
 
 static void
-show_match_snippet(char *file_name, int page_number, fz_stext_position begin, fz_stext_position end)
+show_match_snippet(const char *file_name, int page_number, fz_stext_position begin, fz_stext_position end)
 {
 	int last = 0;
 

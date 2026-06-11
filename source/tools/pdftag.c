@@ -561,7 +561,7 @@ struct_gather_end_group(fz_context *ctx, fz_device *dev)
 }
 
 static int
-struct_gather_begin_tile(fz_context *ctx, fz_device *dev, fz_rect area, fz_rect view, float xstep, float ystep, fz_matrix ctm, int id)
+struct_gather_begin_tile(fz_context *ctx, fz_device *dev, fz_rect area, fz_rect view, float xstep, float ystep, fz_matrix ctm, int id, int doc_id)
 {
 	do_begin(ctx, dev, "TILE");
 	return 0;
