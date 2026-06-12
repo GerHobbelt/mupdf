@@ -496,8 +496,36 @@ add_char_to_line(fz_context *ctx, fz_stext_page *page, fz_stext_line *line, fz_m
 	}
 	else
 	{
-		a.x = 1;
-		d.x = 0;
+		/* 竖排书写模式。
+		 *
+		 * trm.{e,f} 是字形（横排）原点在设备空间中的位置，字形通过对其
+		 * 轮廓施加 trm 绘制出来。基于 advance 的 p..q 方框锚定在该原点上、
+		 * 沿前进方向向下延伸整整一个 advance，导致它落在字形实际墨迹的
+		 * 下方（字体竖排度量给出的竖排原点位移已折进 trm，却没有计入
+		 * p..q）。
+		 *
+		 * 修正办法是对一个 glyph-local 的方框施加 trm 来构造 quad，这样
+		 * 折进 trm 的竖排原点位移就会被正确计入。accurate 模式下使用字形
+		 * 的真实轮廓；非 accurate 模式下改用字体整体 bbox（即其 em 方框
+		 * 范围）。两种情况下结果都会落在字形真正被绘制的位置。合成空格
+		 * 没有墨迹，因此保留零宽的 advance 方框。 */
+		if (glyph != NON_ACCURATE_GLYPH_ADDED_SPACE && !(synthetic && glyph < 0))
+		{
+			fz_rect bounds = (glyph >= 0)
+				? fz_bound_glyph(ctx, font, glyph, fz_identity)
+				: font->bbox;
+			/* 保持与下方基于 advance 的回退分支相同的角点角色：ll/ul 是
+			 * advance 起始端的两个角，lr/ur 是结束端的两个角；ll/lr 在 d
+			 * 一侧，ul/ur 在 a 一侧。 */
+			ch->quad.ll = fz_transform_point(fz_make_point(bounds.x0, bounds.y0), trm);
+			ch->quad.ul = fz_transform_point(fz_make_point(bounds.x1, bounds.y0), trm);
+			ch->quad.lr = fz_transform_point(fz_make_point(bounds.x0, bounds.y1), trm);
+			ch->quad.ur = fz_transform_point(fz_make_point(bounds.x1, bounds.y1), trm);
+			return ch;
+		}
+
+		/* 合成空格：没有轮廓可测量，回退为零宽的、基于 advance 的方框。 */
+		a.x = d.x = 0;
 		a.y = 0;
 		d.y = 0;
 	}

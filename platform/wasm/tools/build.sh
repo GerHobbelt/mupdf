@@ -14,8 +14,8 @@
 
 EMSDK=${EMSDK:-/opt/emsdk}
 BUILD=${BUILD:-small}
-DEFINES=${DEFINES:--DTOFU -DTOFU_CJK_EXT -DFZ_ENABLE_HYPHEN=0}
-FEATURES=${FEATURES:-brotli=no mujs=no extract=no xps=no svg=no}
+DEFINES=${DEFINES:--DTOFU -DTOFU_CJK -DFZ_ENABLE_HYPHEN=0}
+FEATURES=${FEATURES:-brotli=no mujs=no html=no xps=no svg=no extract=no}
 
 if [ "$BUILD" = "memento" ]
 then
@@ -46,12 +46,13 @@ echo "LINKING"
 
 emcc -o dist/mupdf-wasm.js \
 	-I ../../include \
-	-Os -g2 \
+	-Os \
 	$MEMENTO \
 	--no-entry \
 	-mno-nontrapping-fptoint \
 	-fwasm-exceptions \
 	-sSUPPORT_LONGJMP=wasm \
+	-sENVIRONMENT='"web,webview,worker"' \
 	-sMODULARIZE=1 \
 	-sEXPORT_ES6=1 \
 	-sEXPORT_NAME='"libmupdf_wasm"' \
