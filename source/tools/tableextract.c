@@ -684,6 +684,36 @@ next_x_cell(fz_context *ctx, walk_children_data *wcd)
 }
 
 static void
+next_row(fz_context *ctx, walk_children_data *wcd)
+{
+	table *tab = wcd->table;
+	cells *cs = &tab->cs;
+	int i;
+	while (1)
+	{
+		if (wcd->y == cs->h-1)
+		{
+			tab->broken = 1;
+			fz_warn(ctx, "Too many TRs!");
+			return;
+		}
+		wcd->y++;
+		/* Find the first cell in this row that is a valid start point. */
+		for (i = 0; i < cs->w; i++)
+		{
+			cell *c = get_cell(ctx, cs, i, wcd->y);
+			if (c->rowspan != -1 && c->colspan != -1)
+				break; /* This cell carries on either from before or above */
+		}
+		/* If there was such a cell, we can start on this row. */
+		if (i < cs->w)
+			break;
+		/* Otherwise loop and try again */
+	}
+	wcd->x = 0;
+}
+
+static void
 walk_children(fz_context *ctx, walk_children_data *wcd, fz_stext_block *block)
 {
 	int comma = 0;
@@ -744,8 +774,7 @@ walk_children(fz_context *ctx, walk_children_data *wcd, fz_stext_block *block)
 							}
 							fz_write_printf(ctx, out, "\"");
 						}
-						wcd->x += c->rowspan-1;
-						wcd->x += c->rowspan-1;
+						wcd->x += c->colspan;
 					}
 
 					if (c->rowspan != 1)
@@ -759,8 +788,7 @@ walk_children(fz_context *ctx, walk_children_data *wcd, fz_stext_block *block)
 				{
 					if (block->u.s.down->standard == FZ_STRUCTURE_TR)
 					{
-						wcd->y++;
-						wcd->x = 0;
+						next_row(ctx, wcd);
 					}
 					fz_write_printf(ctx, out, "{ \"type\": \"%s\"\n", fz_structure_to_string(block->u.s.down->standard));
 					walk_children(ctx, wcd, block->u.s.down->first_block);
