@@ -823,6 +823,16 @@ fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int 
 		return;
 	}
 
+	/* Don't move pen for marking non-spacing characters */
+	if (ucdn_get_general_category(c) == UCDN_GENERAL_CATEGORY_MN)
+	{
+		add_char_to_line(ctx, page, cur_line, trm, font, size, c, (dev->flags & FZ_STEXT_ACCURATE_BBOXES) ? glyph : NON_ACCURATE_GLYPH, &dev->pen, &dev->pen, bidi, dev->color, 0, flags, dev->flags);
+		dev->lastbidi = bidi;
+		dev->lastchar = c;
+		dev->lastline = cur_line;
+		return;
+	}
+
 	if (cur_line == NULL || cur_line->wmode != wmode || vec_dot(&ndir, &cur_line->dir) < 0.999f)
 	{
 		/* If the matrix has changed rotation, or the wmode is different (or if we don't have a line at all),
@@ -1731,8 +1741,17 @@ fixup_bboxes_and_bidi(fz_context *ctx, fz_stext_block *block)
 	for ( ; block != NULL; block = block->next)
 	{
 		if (block->type == FZ_STEXT_BLOCK_STRUCT)
+		{
 			if (block->u.s.down)
+			{
+				fz_stext_block *block2;
 				fixup_bboxes_and_bidi(ctx, block->u.s.down->first_block);
+				for (block2 = block->u.s.down->first_block; block2 != NULL; block2 = block2->next)
+				{
+					block->bbox = fz_union_rect(block->bbox, block2->bbox);
+				}
+			}
+		}
 		if (block->type != FZ_STEXT_BLOCK_TEXT)
 			continue;
 		for (line = block->u.t.first_line; line; line = line->next)
