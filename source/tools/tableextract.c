@@ -711,7 +711,7 @@ walk_children(fz_context *ctx, walk_children_data *wcd, fz_stext_block *block)
 					int i;
 					cell *c = next_x_cell(ctx, wcd);
 
-					fz_write_printf(ctx, out, "{\"type\": \"%s\", \"page\": %d, \"rect\": [%01g, %01g, %01g, %01g]",
+					fz_write_printf(ctx, out, "{\"type\": \"%s\", \"page\": %d, \"rect\": [%01f, %01f, %01f, %01f]",
 						fz_structure_to_string(block->u.s.down->standard), tab->page, block->bbox.x0, block->bbox.y0, block->bbox.x1, block->bbox.y1);
 
 					for (i = 0; i < tab->num_tds; i++)
@@ -733,7 +733,7 @@ walk_children(fz_context *ctx, walk_children_data *wcd, fz_stext_block *block)
 							fz_write_printf(ctx, out, ", \"text\": \"");
 							for (j = 0; j < m; j++)
 							{
-								char ch = s[j];
+								unsigned char ch = s[j];
 								if (ch == '\"')
 									ch = '\'';
 								if (ch == '\\')
@@ -782,7 +782,7 @@ generate_table_json(fz_context *ctx, fz_output *out, table *tab)
 
 	fz_write_printf(ctx, out, "{ \"type\": \"Table\",\n");
 	fz_write_printf(ctx, out, "\"page\": %d,\n", tab->page);
-	fz_write_printf(ctx, out, "\"rect\": [%01g, %01g, %01g, %01g],\n", tab->r.x0, tab->r.y0, tab->r.x1, tab->r.y1);
+	fz_write_printf(ctx, out, "\"rect\": [%01f, %01f, %01f, %01f],\n", tab->r.x0, tab->r.y0, tab->r.x1, tab->r.y1);
 	if (tab->overlap)
 		fz_write_printf(ctx, out, "\"overlap\" : true, \n");
 	if (tab->broken)
@@ -801,7 +801,7 @@ generate_table_json(fz_context *ctx, fz_output *out, table *tab)
 	{
 		if (i != 0)
 			fz_write_printf(ctx, out, ",");
-		fz_write_printf(ctx, out, "\"%d\": %01g", i, tab->ys.div[i].pos);
+		fz_write_printf(ctx, out, "\"%d\": %01f", i, tab->ys.div[i].pos);
 	}
 	fz_write_printf(ctx, out, "},\n");
 
@@ -811,7 +811,7 @@ generate_table_json(fz_context *ctx, fz_output *out, table *tab)
 	{
 		if (i != 0)
 			fz_write_printf(ctx, out, ",");
-		fz_write_printf(ctx, out, "\"%d\": %01g", i, tab->xs.div[i].pos);
+		fz_write_printf(ctx, out, "\"%d\": %01f", i, tab->xs.div[i].pos);
 	}
 	fz_write_printf(ctx, out, "}\n");
 	wcd.out = out;
@@ -923,7 +923,7 @@ extract_table_details(fz_context *ctx, walk_data *wd, pdf_obj *selem, fz_stext_s
 	fz_buffer *buf = NULL;
 	int n, i;
 
-	//fz_write_printf(ctx, wd->out, "Page=%d Table bbox=%01g %01g %01g %01g\n", wd->page+1, tab->bbox.x0, tab->bbox.y0, tab->bbox.x1, tab->bbox.y1);
+	//fz_write_printf(ctx, wd->out, "Page=%d Table bbox=%01f %01f %01f %01f\n", wd->page+1, tab->bbox.x0, tab->bbox.y0, tab->bbox.x1, tab->bbox.y1);
 
 	wd->bbox = tab->bbox;
 
@@ -947,12 +947,13 @@ extract_table_details(fz_context *ctx, walk_data *wd, pdf_obj *selem, fz_stext_s
 	wd->y = -1;
 	walk_table_elems(ctx, wd, selem);
 
-	if (wd->cs.w && wd->cs.h)
-	{
-		(void)get_cell(ctx, &wd->cs, wd->cs.w, wd->cs.h);
-		wd->cs.w++;
-		wd->cs.h++;
-	}
+	/* If we haven't found a table by now, bale. */
+	if (wd->cs.w == 0 || wd->cs.h == 0)
+		return 0;
+
+	(void)get_cell(ctx, &wd->cs, wd->cs.w, wd->cs.h);
+	wd->cs.w++;
+	wd->cs.h++;
 
 	/* Now look at the content */
 	stretch_cells_with_content(ctx, wd, selem, wd->bbox, str->first_block);
@@ -1160,6 +1161,7 @@ int main(int argc, const char *argv[])
 	int pages = 0;
 	fz_page *page = NULL;
 
+
 	ctx = fz_new_context(NULL, NULL, FZ_STORE_DEFAULT);
 	if (ctx == NULL)
 	{
@@ -1286,8 +1288,8 @@ int main(int argc, const char *argv[])
 				fz_write_printf(ctx, out, ", ");
 			fz_write_printf(ctx, out, "{ \"index\": %d, ", i);
 			fz_write_printf(ctx, out, "\"rotation\": 0, ", 0); // FIXME
-			fz_write_printf(ctx, out, "\"mediabox\": [ %01g, %01g ], ", bounds.x1 - bounds.x0, bounds.y1 - bounds.y0); // FIXME
-			fz_write_printf(ctx, out, "\"displayed\": [ %01g, %01g ] ", bounds.x1 - bounds.x0, bounds.y1 - bounds.y0); // FIXME
+			fz_write_printf(ctx, out, "\"mediabox\": [ %01f, %01f ], ", bounds.x1 - bounds.x0, bounds.y1 - bounds.y0); // FIXME
+			fz_write_printf(ctx, out, "\"displayed\": [ %01f, %01f ] ", bounds.x1 - bounds.x0, bounds.y1 - bounds.y0); // FIXME
 			fz_write_printf(ctx, out, "}\n");
 		}
 		fz_write_printf(ctx, out, "],\n");
