@@ -1445,6 +1445,18 @@ pdf_flush_clip_text(fz_context *ctx, pdf_run_processor *pr)
 	return pdf_flush_text_imp(ctx, pr, 1);
 }
 
+static inline pdf_gstate *
+pdf_flush_text(fz_context *ctx, pdf_run_processor *pr)
+{
+	return pdf_flush_text_imp(ctx, pr, 0);
+}
+
+static inline pdf_gstate *
+pdf_flush_clip_text(fz_context *ctx, pdf_run_processor *pr)
+{
+	return pdf_flush_text_imp(ctx, pr, 1);
+}
+
 static int
 guess_bidi_level(int bidiclass, int cur_bidi)
 {
