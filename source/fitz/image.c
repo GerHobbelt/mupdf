@@ -881,10 +881,13 @@ compressed_image_get_pixmap(fz_context *ctx, const fz_image *image_, fz_irect *s
 
 				fz_mask_color_key(ctx, keyed, tile->n, 8, image->super.colorkey, indexed);
 			}
-			fz_catch(ctx)
+			fz_always(ctx)
 			{
 				fz_drop_stream(ctx, unpstream);
 				fz_drop_stream(ctx, sample_stream);
+			}
+			fz_catch(ctx)
+			{
 				fz_drop_pixmap(ctx, keyed);
 				fz_rethrow(ctx);
 			}

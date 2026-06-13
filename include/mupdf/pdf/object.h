@@ -130,9 +130,11 @@ struct pdf_cycle_list {
 };
 
 /**
-	Mark & detect cycles in the `pdf_obj` graph.
+	Check for a cycle (or stack overflow) in PDF structures.
 
-	Return 1 (non-zero) when a cycle has been detected. Return 0 when there's no cycle (yet).
+	Returns 1 if a cycle found.
+	Returns -1 if we pass some arbitrary depth (currently 256).
+	Otherwise returns 0.
 
 	`here`: references the current (*callee's*) stack-based mark instance, which will be initialized.
 

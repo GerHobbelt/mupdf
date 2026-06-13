@@ -48,9 +48,10 @@ pdf_load_image_imp(fz_context *ctx, pdf_document *doc, pdf_resource_stack *rdb, 
 	float decode[FZ_MAX_COLORS * 2];
 	int colorkey[FZ_MAX_COLORS * 2];
 	int matte[FZ_MAX_COLORS * 2];
-	int stride;
+	int stride, size;
 	int is_jpx;
 	pdf_obj *intent;
+	size_t z;
 
 	int i;
 	fz_compressed_buffer *buffer;
@@ -82,9 +83,9 @@ pdf_load_image_imp(fz_context *ctx, pdf_document *doc, pdf_resource_stack *rdb, 
 		fz_throw(ctx, FZ_ERROR_SYNTAX, "image depth is zero (or less)");
 	if (bpc > 16)
 		fz_throw(ctx, FZ_ERROR_SYNTAX, "image depth is too large: %d", bpc);
-	if (SIZE_MAX / w < (size_t)(bpc+7)/8)
-		fz_throw(ctx, FZ_ERROR_SYNTAX, "image is far too wide (abs. max. width: %1.0lf px)", floor((SIZE_MAX * 8.0) / (bpc + 7)));
-	if (SIZE_MAX / h < w * (size_t)((bpc + 7) / 8))
+	if (fz_ckd_add_size(&z, bpc, 7) ||
+		fz_ckd_mul_size(&z, z/8, w) ||
+		fz_ckd_mul_size(&z, z, h))
 		fz_throw(ctx, FZ_ERROR_SYNTAX, "image is too large (abs. max. single dimension for square image: %1.0lf px)", floor(sqrt((SIZE_MAX * 8.0) / (bpc + 7.0))));
 
 	fz_var(mask);
@@ -114,8 +115,11 @@ pdf_load_image_imp(fz_context *ctx, pdf_document *doc, pdf_resource_stack *rdb, 
 			n = 1;
 		}
 
-		if (SIZE_MAX / n < h * ((size_t)w) * ((bpc+7)/8))
-			fz_throw(ctx, FZ_ERROR_SYNTAX, "image is too large (max. single dimension for square image: %1.0lf px)", floor(sqrt((SIZE_MAX * 8.0) / (n * (bpc+7.0)))));
+		if (fz_ckd_add_size(&z, bpc, 7) ||
+			fz_ckd_mul_size(&z, z/8, w) ||
+			fz_ckd_mul_size(&z, z, h) ||
+			fz_ckd_mul_size(&z, z, n))
+			fz_throw(ctx, FZ_ERROR_SYNTAX, "image is too large (max. single dimension for square image: %1.0lf px)", floor(sqrt((SIZE_MAX * 8.0) / (n * (bpc + 7.0)))));
 
 		obj = pdf_dict_geta(ctx, dict, PDF_NAME(Decode), PDF_NAME(D));
 		if (pdf_is_array(ctx, obj))
@@ -211,9 +215,14 @@ pdf_load_image_imp(fz_context *ctx, pdf_document *doc, pdf_resource_stack *rdb, 
 		else
 		{
 			/* Inline stream */
-			stride = (w * n * bpc + 7) / 8;
+			if (fz_ckd_mul_int(&stride, w, n) || fz_ckd_mul_int(&stride, stride, bpc))
+				fz_throw(ctx, FZ_ERROR_SYNTAX, "integer overflow in inline image size");
+			stride = fz_bytes_from_bits(stride);
+			if (fz_ckd_mul_int(&size, stride, h))
+				fz_throw(ctx, FZ_ERROR_SYNTAX, "integer overflow in inline image size");
+
 			image = fz_new_image_from_compressed_buffer(ctx, w, h, bpc, colorspace, 96, 96, interpolate, imagemask, decode, use_colorkey ? colorkey : NULL, NULL, mask, use_matte ? matte : NULL);
-			pdf_load_compressed_inline_image(ctx, doc, dict, stride * h, cstm, indexed, (fz_compressed_image *)image);
+			pdf_load_compressed_inline_image(ctx, doc, dict, size, cstm, indexed, (fz_compressed_image *)image);
 		}
 		if (pdf_name_eq(ctx, intent, PDF_NAME(Perceptual)))
 			image->has_intent = 1, image->intent = FZ_RI_PERCEPTUAL;

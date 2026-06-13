@@ -2100,7 +2100,7 @@ static int usage(void)
 
 int pdfaudit_main(int argc, const char **argv)
 {
-	const char *outfile = "-";
+	const char *outfile = "/dev/stdout";
 	int c;
 	int errors = 0;
 	int append = 0;

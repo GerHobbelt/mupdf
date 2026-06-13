@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2024 Artifex Software, Inc.
+// Copyright (C) 2004-2026 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -520,7 +520,7 @@ static int
 count_siblings_after(fz_xml *node)
 {
 	int count = 0;
-	for (; node; node = fz_xml_next(node))
+	for (node = fz_xml_next(node); node; node = fz_xml_next(node))
 		if (fz_xml_tag(node) != NULL)
 			++count;
 	return count;
@@ -543,7 +543,7 @@ count_siblings_of_type_after(fz_xml *node)
 {
 	const char *tag = fz_xml_tag(node);
 	int count = 0;
-	for (; node; node = fz_xml_next(node))
+	for (node = fz_xml_next(node); node; node = fz_xml_next(node))
 		if (fz_xml_is_tag(node, tag))
 			++count;
 	return count;
@@ -581,7 +581,7 @@ match_an_plus_b_microsyntax(fz_xml *node, const char *val, int (*callback)(fz_xm
 	// - A is 1 for nth-child(n+B) -- same as nth-child(1n+B)
 	// - A is -1 for nth-child(-n+B) -- same as nth-child(-1n+B)
 
-	int a, b, n;
+	int a, b, n = -1;
 	int m = (int)strlen(val);
 
 	if (sscanf(val, " even %n", &n) == 0 && n == m)
