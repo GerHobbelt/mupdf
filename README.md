@@ -526,7 +526,6 @@ architecture.
 
 Discord (for questions and discussion with the MuPDF developers):
     https://artifex.com/discord/artifex
-    https://discord.gg/taPnFQp5gb
 
 For commercial support and licensing enquiries:
     sales@artifex.com
