@@ -184,10 +184,7 @@ int pdftrim_main(int argc, const char** argv)
 	int n, i;
 	const char *infile = NULL;
 	const char *outputfile = NULL;
-	const char *imagefile = NULL;
-	const char *profilefile = NULL;
 	int code = EXIT_SUCCESS;
-	const char *colorspace = NULL;
 	int exclude = 0;
 	const char *boxname = NULL;
 	fz_box_type box = FZ_CROP_BOX;

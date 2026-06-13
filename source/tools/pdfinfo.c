@@ -957,7 +957,7 @@ printinfo(fz_context* ctx, globals* glo, int show, int page)
 		fz_write_printf(ctx, out, "Shading patterns (%d):\n", glo->shadings);
 		for (i = 0; i < glo->shadings; i++)
 		{
-			char* shadingtype[] =
+			static const char* shadingtype[] =
 			{
 				"",
 				"Function",
@@ -985,13 +985,13 @@ printinfo(fz_context* ctx, globals* glo, int show, int page)
 		{
 			if (pdf_to_int(ctx, glo->pattern[i].u.pattern.type) == 1)
 			{
-				char* painttype[] =
+				static const char* painttype[] =
 				{
 					"",
 					"Colored",
 					"Uncolored",
 				};
-				char* tilingtype[] =
+				static const char* tilingtype[] =
 				{
 					"",
 					"Constant",

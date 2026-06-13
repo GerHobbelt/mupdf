@@ -51,8 +51,6 @@ int pdfrecolor_main(int argc, const char** argv)
 	int n, i, c;
 	const char *infile = NULL;
 	const char *outputfile = NULL;
-	const char *imagefile = NULL;
-	const char *profilefile = NULL;
 	int code = EXIT_SUCCESS;
 	const char *colorspace = NULL;
 	int remove_oi = 0;
