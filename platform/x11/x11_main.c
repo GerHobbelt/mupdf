@@ -952,8 +952,8 @@ int main(int argc, char **argv)
 		case 'W': gapp.layout_w = fz_atof(fz_optarg); break;
 		case 'H': gapp.layout_h = fz_atof(fz_optarg); break;
 		case 'S': gapp.layout_em = fz_atof(fz_optarg); break;
-		case 'U': gapp.layout_css = fz_optarg; break;
-		case 'X': gapp.layout_use_doc_css = 0; break;
+		case 'U': gapp.user_css = fz_optarg; break;
+		case 'X': gapp.publisher_css = 0; break;
 		case 'b': kbps = fz_atoi(fz_optarg); break;
 		case 'e': gapp.maxpercentage = fz_clampi(fz_atof(fz_optarg), 0, 100); break;
 		case 'v': version(); break;

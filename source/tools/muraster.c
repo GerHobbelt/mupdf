@@ -420,7 +420,8 @@ static float layout_w = FZ_DEFAULT_LAYOUT_W;
 static float layout_h = FZ_DEFAULT_LAYOUT_H;
 static float layout_em = FZ_DEFAULT_LAYOUT_EM;
 static const char *layout_css = NULL;
-static int layout_use_doc_css = 1;
+static const char *layout_css_data = NULL;
+static int layout_publisher_css = 1;
 static float min_line_width = 0.0f;
 
 static int showtime = 0;
@@ -1939,7 +1940,7 @@ int main(int argc, const char** argv)
 		case 'H': layout_h = fz_atof(fz_optarg); break;
 		case 'S': layout_em = fz_atof(fz_optarg); break;
 		case 'U': layout_css = fz_optarg; break;
-		case 'X': layout_use_doc_css = 0; break;
+		case 'X': layout_publisher_css = 0; break;
 
 		case 's':
 			if (strchr(fz_optarg, 't')) ++showtime;
@@ -2131,9 +2132,7 @@ int main(int argc, const char** argv)
 #endif /* DISABLE_MUTHREADS */
 
 		if (layout_css)
-			fz_load_user_css(ctx, layout_css);
-
-		fz_set_use_document_css(ctx, layout_use_doc_css);
+			layout_css_data = fz_read_text_file(ctx, layout_css);
 
 		// default output format: first slot in the lookup table:
 		output_format = &suffix_table[0];
@@ -2250,6 +2249,8 @@ int main(int argc, const char** argv)
 						fz_throw(ctx, FZ_ERROR_ARGUMENT, "cannot authenticate password: %s", filename);
 					}
 
+					fz_style_document(ctx, doc, layout_publisher_css, layout_css_data);
+					
 					layouttime = gettime();
 					fz_layout_document(ctx, doc, layout_w, layout_h, layout_em);
 					(void) fz_count_pages(ctx, doc);   // added to ensure a more proper layouttime figure
@@ -2384,6 +2385,8 @@ int main(int argc, const char** argv)
 		}
 	}
 
+	fz_free(ctx, layout_css_data);
+	
 	if (!errored)
 	{
 		fz_close_output(ctx, out);

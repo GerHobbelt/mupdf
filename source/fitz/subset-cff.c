@@ -296,7 +296,7 @@ index_load(fz_context *ctx, index_t *index, const uint8_t *base, uint32_t len, u
 	data_offset = 3 + (index->count+1) * os - 1;
 	index->data_offset = data_offset + offset;
 
-	if (data_offset > len)
+	if (index->data_offset > len)
 		fz_throw(ctx, FZ_ERROR_FORMAT, "Truncated index");
 
 	data += 3;
@@ -312,7 +312,7 @@ index_load(fz_context *ctx, index_t *index, const uint8_t *base, uint32_t len, u
 			fz_throw(ctx, FZ_ERROR_FORMAT, "Index not monotonic");
 		prev = v;
 	}
-	if (v > len)
+	if (index->data_offset + v > len)
 		fz_throw(ctx, FZ_ERROR_FORMAT, "Truncated index");
 
 	data += prev - 1;
@@ -1092,14 +1092,14 @@ overflow:
 
 			case 20: /* put */
 				ATLEAST(2);
-				if ((int)stack[sp-1] < 0 || (unsigned int)stack[sp-1] > sizeof(trans)/sizeof(*trans))
+				if ((int)stack[sp-1] < 0 || (unsigned int)stack[sp-1] >= sizeof(trans)/sizeof(*trans))
 					fz_throw(ctx, FZ_ERROR_FORMAT, "Transient array over/underflow");
 				trans[(int)stack[sp-1]] = stack[sp-2];
 				sp -= 2;
 				break;
 			case 21: /* get */
 				ATLEAST(1);
-				if ((int)stack[sp-1] < 0 || (unsigned int)stack[sp-1] > sizeof(trans)/sizeof(*trans))
+				if ((int)stack[sp-1] < 0 || (unsigned int)stack[sp-1] >= sizeof(trans)/sizeof(*trans))
 					fz_throw(ctx, FZ_ERROR_FORMAT, "Transient array over/underflow");
 				stack[sp-1] = trans[(int)stack[sp-1]];
 				break;
@@ -1472,9 +1472,13 @@ get_charset_len(fz_context *ctx, cff_t *cff)
 
 	fmt = *d++;
 	n = cff->charstrings_index.count;
+	if (n == 0)
+		fz_throw(ctx, FZ_ERROR_FORMAT, "corrupt charset");
 
 	if (fmt == 0)
 	{
+		if (charset_offset + 1 + (uint32_t)(n - 1) * 2 > cff->len)
+			fz_throw(ctx, FZ_ERROR_FORMAT, "corrupt charset");
 		cff->unpacked_charset = fz_malloc(ctx, sizeof(uint16_t) * n);
 		cff->unpacked_charset_len = cff->unpacked_charset_max = n;
 		cff->unpacked_charset[0] = 0;
@@ -1624,7 +1628,7 @@ load_charset_for_cidfont(fz_context *ctx, cff_t *cff)
 	uint32_t n = cff->charstrings_index.count;
 	uint32_t i;
 
-	if (charset_offset + 1 > cff->len)
+	if (n == 0 || charset_offset + 1 > cff->len)
 		fz_throw(ctx, FZ_ERROR_FORMAT, "corrupt charset");
 
 	fmt = *d++;
@@ -1634,6 +1638,8 @@ load_charset_for_cidfont(fz_context *ctx, cff_t *cff)
 
 	if (fmt == 0)
 	{
+		if (charset_offset + 1 + (uint32_t)(n - 1) * 2 > cff->len)
+			fz_throw(ctx, FZ_ERROR_FORMAT, "corrupt charset");
 		for (i = 1; i < n; i++)
 		{
 			cff->gid_to_cid[i] = get16(d);
