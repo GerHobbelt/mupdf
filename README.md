@@ -518,7 +518,7 @@ and their license terms (MIT, BSD, zlib, and similar permissive licenses).
 10. REPORTING BUGS
 ------------------
 Bug tracker (Ghostscript Bugzilla, component: MuPDF):
-    http://bugs.ghostscript.com/
+    https://bugs.ghostscript.com/
 
 When reporting a bug involving a specific file, please attach the file to
 the bug report. Include the MuPDF version (mutool -v) and your OS and
@@ -526,6 +526,7 @@ architecture.
 
 Discord (for questions and discussion with the MuPDF developers):
     https://artifex.com/discord/artifex
+    https://discord.gg/taPnFQp5gb
 
 For commercial support and licensing enquiries:
     sales@artifex.com
