@@ -510,6 +510,21 @@ function fromString(ptr: Pointer<"char">): string {
 	return libmupdf.UTF8ToString(ptr)
 }
 
+let gbkDecoder: TextDecoder
+function GBKToString(ptr: number) {
+	try {
+		const heap = libmupdf.HEAPU8
+		if (ptr < 0 || ptr >= heap.length) return ""
+		let index = 0
+		while (heap[ptr + index] !== 0) index++
+		const gbkBuffer = heap.subarray(ptr, ptr + index)
+		if (!gbkDecoder) gbkDecoder = new TextDecoder("gbk")
+		return gbkDecoder.decode(gbkBuffer)
+	} catch {
+		return ""
+	}
+}
+
 function fromStringFree(ptr: Pointer<"char">): string {
 	let str = libmupdf.UTF8ToString(ptr)
 	Free(ptr)
@@ -2418,6 +2433,7 @@ export class PDFDocument extends Document {
 	// PRIVATE
 	constructor(clone: PDFDocument)
 	constructor(pointer: Pointer<"any_document">)
+	constructor(data: Buffer | ArrayBuffer | Uint8Array | Stream)
 
 	constructor(arg1?: Pointer<"any_document"> | Buffer | ArrayBuffer | Uint8Array | Stream | PDFDocument | string) {
 		if (typeof arg1 === "undefined")
@@ -4239,7 +4255,7 @@ declare global {
 
 globalThis.$libmupdf_load_font_file = function (name, script, bold, italic) {
 	if ($libmupdf_load_font_file_js) {
-		var font = $libmupdf_load_font_file_js(fromString(name), fromString(script), bold, italic)
+		var font = $libmupdf_load_font_file_js(GBKToString(name), GBKToString(script), bold, italic)
 		if (font) {
 			checkType(font, Font)
 			return font.pointer

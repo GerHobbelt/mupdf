@@ -360,6 +360,7 @@ pnm_ascii_read_image(fz_context *ctx, struct info *pnm, const unsigned char *p, 
 		p = pnm_read_whites_and_eols(ctx, p, e, 1);
 
 		pnm->maxval = 1;
+		pnm->bitmap = 1;
 	}
 	else
 	{
@@ -368,6 +369,7 @@ pnm_ascii_read_image(fz_context *ctx, struct info *pnm, const unsigned char *p, 
 		p = pnm_read_int(ctx, p, e, &pnm->height);
 		p = pnm_read_whites_and_eols(ctx, p, e, 1);
 
+		pnm->bitmap = 0;
 		pnm->maxval = 0;
 		p = pnm_read_comments(ctx, p, e, 1);
 		p = pnm_read_int(ctx, p, e, &pnm->maxval);
@@ -496,6 +498,7 @@ pnm_binary_read_image(fz_context *ctx, struct info *pnm, const unsigned char *p,
 		p = pnm_read_whites_and_eols(ctx, p, e, 1);
 
 		pnm->maxval = 1;
+		pnm->bitmap = 1;
 	}
 	else
 	{

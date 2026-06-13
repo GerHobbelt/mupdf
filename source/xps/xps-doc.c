@@ -531,6 +531,7 @@ xps_recognize_doc_content(fz_context *ctx, const fz_document_handler *handler, f
 	fz_xml *xml = NULL;
 	fz_xml *pos;
 	fz_buffer *buf = NULL;
+	fz_buffer *buf2 = NULL;
 
 	if (state)
 		*state = NULL;
@@ -541,6 +542,7 @@ xps_recognize_doc_content(fz_context *ctx, const fz_document_handler *handler, f
 	fz_var(ret);
 	fz_var(xml);
 	fz_var(buf);
+	fz_var(buf2);
 
 	fz_try(ctx)
 	{
@@ -566,8 +568,9 @@ xps_recognize_doc_content(fz_context *ctx, const fz_document_handler *handler, f
 	}
 	fz_always(ctx)
 	{
-		fz_drop_xml(ctx, xml);
 		fz_drop_buffer(ctx, buf);
+		fz_drop_buffer(ctx, buf2);
+		fz_drop_xml(ctx, xml);
 		fz_drop_archive(ctx, arch);
 	}
 	fz_catch(ctx)

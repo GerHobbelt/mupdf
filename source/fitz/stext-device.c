@@ -496,6 +496,59 @@ add_char_to_line(fz_context *ctx, fz_stext_page *page, fz_stext_line *line, fz_m
 	}
 	else
 	{
+		/* 竖排书写模式。
+		 *
+		 * trm.{e,f} 是字形（横排）原点在设备空间中的位置，字形通过对其
+		 * 轮廓施加 trm 绘制出来。基于 advance 的 p..q 方框锚定在该原点上、
+		 * 沿前进方向向下延伸整整一个 advance，导致它落在字形实际墨迹的
+		 * 下方（字体竖排度量给出的竖排原点位移已折进 trm，却没有计入
+		 * p..q）。
+		 *
+		 * 修正办法是对一个 glyph-local 的方框施加 trm 来构造 quad，这样
+		 * 折进 trm 的竖排原点位移就会被正确计入。accurate 模式下使用字形
+		 * 的真实轮廓；非 accurate 模式下改用字体整体 bbox（即其 em 方框
+		 * 范围）。两种情况下结果都会落在字形真正被绘制的位置。合成空格
+		 * 没有墨迹，因此保留零宽的 advance 方框。
+		 *
+		 * Vertical writing mode.
+		 *
+		 * `trm.{e,f}` is the position in device space of the origin of the glyph (horizontal), 
+		 * which is drawn by applying `trm` to its outline. The `advance`-based `p..q` box is 
+		 * anchored at this origin and extends down a full `advance` in the forward direction, 
+		 * causing it to fall below the actual ink of the glyph (the vertical origin displacement 
+		 * given by the font vertical metric is folded into `trm`, but not `p..q`).
+		 *
+		 * The correction is to apply trm to a `glyph-local` box to construct a `quad`, so that 
+		 * the vertical origin displacement folded into `trm` will be correctly accounted for. 
+		 * In `accurate` mode, the true outline of the glyph is used; in non-`accurate` mode, 
+		 * the overall `bbox` of the font (that is, its em box range) is used instead. 
+		 * In both cases the result will fall where the glyph was actually drawn. Synthetic spaces 
+		 * have no inking, so a zero-width `advance` box remains.
+		 */
+		if (glyph != NON_ACCURATE_GLYPH_ADDED_SPACE && !(synthetic && glyph < 0))
+		{
+			fz_rect bounds = (glyph >= 0)
+				? fz_bound_glyph(ctx, font, glyph, fz_identity)
+				: font->bbox;
+			/* 保持与下方基于 advance 的回退分支相同的角点角色：ll/ul 是
+			 * advance 起始端的两个角，lr/ur 是结束端的两个角；ll/lr 在 d
+			 * 一侧，ul/ur 在 a 一侧。
+			 *
+			 * Keep the same corner roles as in the `advance`-based fallback branch below: 
+			 * `ll/ul` are the two corners at the start of `advance`, and `lr/ur` are the two corners 
+			 * at the end; `ll/lr` is on the `d` side, and `ul/ur` is on the `a` side.
+			 */
+			ch->quad.ll = fz_transform_point(fz_make_point(bounds.x0, bounds.y0), trm);
+			ch->quad.ul = fz_transform_point(fz_make_point(bounds.x1, bounds.y0), trm);
+			ch->quad.lr = fz_transform_point(fz_make_point(bounds.x0, bounds.y1), trm);
+			ch->quad.ur = fz_transform_point(fz_make_point(bounds.x1, bounds.y1), trm);
+			return ch;
+		}
+
+		/* 合成空格：没有轮廓可测量，回退为零宽的、基于 advance 的方框。
+		 *
+		 * Synthetic Space: No outline to measure, falling back to a zero-width, `advance`-based box.
+		 */
 		a.x = 1;
 		d.x = 0;
 		a.y = 0;
