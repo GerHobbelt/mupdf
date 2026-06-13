@@ -22,6 +22,7 @@
 
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
+#include "pdf-imp.h"
 
 #include "utf.h"
 
@@ -354,6 +355,15 @@ int pdf_is_dict(fz_context *ctx, pdf_obj *obj)
 {
 	RESOLVE(obj);
 	return OBJ_IS_DICT(obj);
+}
+
+pdf_obj *
+pdf_ensure_indirect(fz_context *ctx, pdf_obj *obj)
+{
+	if (!pdf_is_indirect(ctx, obj))
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "Indirect object required");
+
+	return obj;
 }
 
 /* safe, silent failure, no error reporting on type mismatches */
@@ -5101,11 +5111,17 @@ void pdf_print_obj_to_json(fz_context* ctx, fz_output* out, pdf_obj* obj, int fl
 	https://www.geeksforgeeks.org/floyds-cycle-finding-algorithm/
 */
 pdf_obj *
-pdf_dict_get_inheritable(fz_context *ctx, pdf_obj *node, pdf_obj *key)
+pdf_dict_get_inheritable(fz_context *ctx, pdf_obj *start, pdf_obj *key)
 {
-	pdf_obj *slow = node;
-	int halfbeat = 11; /* Don't start moving slow pointer for a while. */
+	pdf_obj *node;
+	pdf_obj *slow;
+	int halfbeat;
+	int repaired = 0;
 
+retry_after_repair:
+	node = start;
+	slow = node;
+	halfbeat = 11; /* Don't start moving slow pointer for a while. */
 	while (node)
 	{
 		pdf_obj *val = pdf_dict_get(ctx, node, key);
@@ -5113,7 +5129,15 @@ pdf_dict_get_inheritable(fz_context *ctx, pdf_obj *node, pdf_obj *key)
 			return val;
 		node = pdf_dict_get(ctx, node, PDF_NAME(Parent));
 		if (node == slow)
+		{
+			if (repaired == 0)
+			{
+				repaired = 1;
+				pdf_repair_page_tree_parents(ctx, pdf_get_bound_document(ctx, start));
+				goto retry_after_repair;
+			}
 			fz_throw(ctx, FZ_ERROR_FORMAT, "cycle in resources");
+		}
 		if (--halfbeat == 0)
 		{
 			slow = pdf_dict_get(ctx, slow, PDF_NAME(Parent));
@@ -5122,14 +5146,21 @@ pdf_dict_get_inheritable(fz_context *ctx, pdf_obj *node, pdf_obj *key)
 	}
 
 	return NULL;
+
 }
 
 pdf_obj *
-pdf_dict_getp_inheritable(fz_context *ctx, pdf_obj *node, const char *path)
+pdf_dict_getp_inheritable(fz_context *ctx, pdf_obj *start, const char *path)
 {
-	pdf_obj *slow = node;
-	int halfbeat = 11; /* Don't start moving slow pointer for a while. */
+	pdf_obj *node;
+	pdf_obj *slow;
+	int halfbeat;
+	int repaired = 0;
 
+retry_after_repair:
+	node = start;
+	slow = node;
+	halfbeat = 11; /* Don't start moving slow pointer for a while. */
 	while (node)
 	{
 		pdf_obj *val = pdf_dict_getp(ctx, node, path);
@@ -5137,7 +5168,15 @@ pdf_dict_getp_inheritable(fz_context *ctx, pdf_obj *node, const char *path)
 			return val;
 		node = pdf_dict_get(ctx, node, PDF_NAME(Parent));
 		if (node == slow)
+		{
+			if (repaired == 0)
+			{
+				repaired = 1;
+				pdf_repair_page_tree_parents(ctx, pdf_get_bound_document(ctx, start));
+				goto retry_after_repair;
+			}
 			fz_throw(ctx, FZ_ERROR_FORMAT, "cycle in resources");
+		}
 		if (--halfbeat == 0)
 		{
 			slow = pdf_dict_get(ctx, slow, PDF_NAME(Parent));
@@ -5149,11 +5188,17 @@ pdf_dict_getp_inheritable(fz_context *ctx, pdf_obj *node, const char *path)
 }
 
 pdf_obj *
-pdf_dict_gets_inheritable(fz_context *ctx, pdf_obj *node, const char *key)
+pdf_dict_gets_inheritable(fz_context *ctx, pdf_obj *start, const char *key)
 {
-	pdf_obj *slow = node;
-	int halfbeat = 11; /* Don't start moving slow pointer for a while. */
+	pdf_obj *node;
+	pdf_obj *slow;
+	int halfbeat;
+	int repaired = 0;
 
+retry_after_repair:
+	node = start;
+	slow = node;
+	halfbeat = 11; /* Don't start moving slow pointer for a while. */
 	while (node)
 	{
 		pdf_obj *val = pdf_dict_gets(ctx, node, key);
@@ -5161,7 +5206,15 @@ pdf_dict_gets_inheritable(fz_context *ctx, pdf_obj *node, const char *key)
 			return val;
 		node = pdf_dict_get(ctx, node, PDF_NAME(Parent));
 		if (node == slow)
+		{
+			if (repaired == 0)
+			{
+				repaired = 1;
+				pdf_repair_page_tree_parents(ctx, pdf_get_bound_document(ctx, start));
+				goto retry_after_repair;
+			}
 			fz_throw(ctx, FZ_ERROR_FORMAT, "cycle in resources");
+		}
 		if (--halfbeat == 0)
 		{
 			slow = pdf_dict_get(ctx, slow, PDF_NAME(Parent));
