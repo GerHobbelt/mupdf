@@ -59,6 +59,7 @@ typedef struct
 	int overlap;
 	int broken;
 	int out_of_order;
+	int off_page;
 	int has_attrs;
 	dividers xs;
 	dividers ys;
@@ -72,6 +73,7 @@ typedef struct
 {
 	int page;
 	fz_rect bbox;
+	fz_rect page_bounds;
 	dividers xs;
 	dividers ys;
 	cells cs;
@@ -81,8 +83,9 @@ typedef struct
 	int use_attrs;
 	int x;
 	int y;
+	int max_tables;
 	int num_tables;
-	table tables[256];
+	table *tables;
 	fz_flotilla *flotilla;
 	fz_stext_block *stext;
 } walk_data;
@@ -166,9 +169,9 @@ scribble_box(fz_context *ctx, fz_pixmap *pix, fz_rect bbox, uint32_t col, float 
 }
 
 static void
-output_divs(fz_context *ctx, fz_pixmap *pix, table *table)
+output_divs(fz_context *ctx, fz_pixmap *pix, table *tab)
 {
-	dividers *ds = &table->xs;
+	dividers *ds = &tab->xs;
 	int i, n = ds->n;
 	fz_rect bbox;
 
@@ -176,96 +179,26 @@ output_divs(fz_context *ctx, fz_pixmap *pix, table *table)
 	{
 		bbox.x0 = ds->div[i].min;
 		bbox.x1 = ds->div[i].max;
-		bbox.y0 = table->ys.div[0].min;
-		bbox.y1 = table->ys.div[table->ys.n-1].max;
+		bbox.y0 = tab->ys.div[0].min;
+		bbox.y1 = tab->ys.div[tab->ys.n-1].max;
 		scribble_box(ctx, pix, bbox, 0x00ff00, 0.2f, 0);
 		bbox.x0 = ds->div[i].pos;
 		bbox.x1 = ds->div[i].pos;
 		scribble_box(ctx, pix, bbox, 0x00ff00, 1, 1);
 	}
 
-	ds = &table->ys;
+	ds = &tab->ys;
 	n = ds->n;
 	for (i = 0; i < n; i++)
 	{
 		bbox.y0 = ds->div[i].min;
 		bbox.y1 = ds->div[i].max;
-		bbox.x0 = table->xs.div[0].min;
-		bbox.x1 = table->xs.div[table->xs.n-1].max;
+		bbox.x0 = tab->xs.div[0].min;
+		bbox.x1 = tab->xs.div[tab->xs.n-1].max;
 		scribble_box(ctx, pix, bbox, 0x00ff00, 0.2f, 0);
 		bbox.y0 = ds->div[i].pos;
 		bbox.y1 = ds->div[i].pos;
 		scribble_box(ctx, pix, bbox, 0x00ff00, 1, 1);
-	}
-}
-
-static void
-add_cell(fz_context *ctx, walk_data *wd, fz_rect r)
-{
-	int i, x, y;
-	int w = wd->xs.n;
-	int h = wd->ys.n;
-	int left, right, top, bottom;
-
-	if (w == 0 || h == 0)
-		return;
-
-	for (i = 0; i < w; i++)
-		if (wd->xs.div[i].min > r.x0)
-			break;
-	left = i > 0 ? i-1 : i;
-
-	for (; i < w; i++)
-		if (r.x1 <= wd->xs.div[i].max)
-			break;
-	right = i < w ? i-1 : w-1;
-
-	for (i = 0; i < h; i++)
-		if (wd->ys.div[i].min > r.y0)
-			break;
-	top = i > 0 ? i-1 : i;
-
-	for (; i < h; i++)
-		if (r.y1 <= wd->ys.div[i].max)
-			break;
-	bottom = i < h ? i-1 : h-1;
-
-	//printf("x %g->%g = %d->%d\n", r.x0, r.x1, left, right);
-	//printf("y %g->%g = %d->%d\n", r.y0, r.y1, top, bottom);
-
-	for (y = top; y <= bottom; y++)
-	{
-		for (x = left; x <= right; x++)
-		{
-			cell *c = get_cell(ctx, &wd->cs, x, y);
-			c->full = 1;
-			if (x != left)
-				c->x_crossed = 1;
-			if (y != top)
-				c->y_crossed = 1;
-			if (x == left && y == top)
-				c->content_rect = r;
-			else
-				c->content_rect = fz_empty_rect;
-		}
-	}
-}
-
-static void
-walk_for_cells2(fz_context *ctx, walk_data *wd, fz_stext_block *block)
-{
-	for (; block != NULL; block = block->next)
-	{
-		if (block->type == FZ_STEXT_BLOCK_STRUCT && block->u.s.down != NULL)
-		{
-			if (block->u.s.down->standard == FZ_STRUCTURE_TH ||
-				block->u.s.down->standard == FZ_STRUCTURE_TD)
-			{
-				add_cell(ctx, wd, block->bbox);
-			}
-			else
-				walk_for_cells2(ctx, wd, block->u.s.down->first_block);
-		}
 	}
 }
 
@@ -738,10 +671,10 @@ static cell *
 next_x_cell(fz_context *ctx, walk_children_data *wcd)
 {
 	cell *c;
-	table *table = wcd->table;
+	table *tab = wcd->table;
 	while (1)
 	{
-		c = get_cell(ctx, &table->cs, wcd->x, wcd->y);
+		c = get_cell(ctx, &tab->cs, wcd->x, wcd->y);
 		assert(c->rowspan != 0 && c->colspan != 0);
 		if (c->rowspan >= 1)
 			break;
@@ -751,11 +684,41 @@ next_x_cell(fz_context *ctx, walk_children_data *wcd)
 }
 
 static void
+next_row(fz_context *ctx, walk_children_data *wcd)
+{
+	table *tab = wcd->table;
+	cells *cs = &tab->cs;
+	int i;
+	while (1)
+	{
+		if (wcd->y == cs->h-1)
+		{
+			tab->broken = 1;
+			fz_warn(ctx, "Too many TRs!");
+			return;
+		}
+		wcd->y++;
+		/* Find the first cell in this row that is a valid start point. */
+		for (i = 0; i < cs->w; i++)
+		{
+			cell *c = get_cell(ctx, cs, i, wcd->y);
+			if (c->rowspan != -1 && c->colspan != -1)
+				break; /* This cell carries on either from before or above */
+		}
+		/* If there was such a cell, we can start on this row. */
+		if (i < cs->w)
+			break;
+		/* Otherwise loop and try again */
+	}
+	wcd->x = 0;
+}
+
+static void
 walk_children(fz_context *ctx, walk_children_data *wcd, fz_stext_block *block)
 {
 	int comma = 0;
 	fz_output *out = wcd->out;
-	table *table = wcd->table;
+	table *tab = wcd->table;
 
 	if (!block)
 		return;
@@ -777,41 +740,41 @@ walk_children(fz_context *ctx, walk_children_data *wcd, fz_stext_block *block)
 				{
 					int i;
 					cell *c = next_x_cell(ctx, wcd);
-					int x = wcd->x;
-					int y = wcd->y;
 
-					fz_write_printf(ctx, out, "{\"type\": \"%s\", \"page\": %d, \"rect\": [%g, %g, %g, %g]",
-						fz_structure_to_string(block->u.s.down->standard), table->page, block->bbox.x0, block->bbox.y0, block->bbox.x1, block->bbox.y1);
+					fz_write_printf(ctx, out, "{\"type\": \"%s\", \"page\": %d, \"rect\": [%01f, %01f, %01f, %01f]",
+						fz_structure_to_string(block->u.s.down->standard), tab->page, block->bbox.x0, block->bbox.y0, block->bbox.x1, block->bbox.y1);
 
-					for (i = 0; i < table->num_tds; i++)
+					for (i = 0; i < tab->num_tds; i++)
 					{
-						if (table->tds[i].x == wcd->x && table->tds[i].y == wcd->y)
+						if (tab->tds[i].x == wcd->x && tab->tds[i].y == wcd->y)
 							break;
 					}
-					if (i == table->num_tds)
+					if (i == tab->num_tds)
 					{
-						table->broken = 1;
+						tab->broken = 1;
 						fz_warn(ctx, "TH/TDs don't match up!");
-						printf("TH/TDs don't match up!");
 					}
 					else
 					{
 						if (c->buf)
 						{
 							size_t j, m = c->buf->len;
-							char *s = c->buf->data;
+							unsigned char *s = c->buf->data;
 							fz_write_printf(ctx, out, ", \"text\": \"");
 							for (j = 0; j < m; j++)
 							{
-								char ch = s[j];
+								unsigned char ch = s[j];
 								if (ch == '\"')
 									ch = '\'';
+								if (ch == '\\')
+									fz_write_printf(ctx, out, "\\");
+								if (ch < 32 || ch == 127)
+									ch = '.';
 								fz_write_printf(ctx, out, "%c", ch);
 							}
 							fz_write_printf(ctx, out, "\"");
 						}
-						wcd->x += c->rowspan-1;
-						wcd->x += c->rowspan-1;
+						wcd->x += c->colspan;
 					}
 
 					if (c->rowspan != 1)
@@ -825,8 +788,7 @@ walk_children(fz_context *ctx, walk_children_data *wcd, fz_stext_block *block)
 				{
 					if (block->u.s.down->standard == FZ_STRUCTURE_TR)
 					{
-						wcd->y++;
-						wcd->x = 0;
+						next_row(ctx, wcd);
 					}
 					fz_write_printf(ctx, out, "{ \"type\": \"%s\"\n", fz_structure_to_string(block->u.s.down->standard));
 					walk_children(ctx, wcd, block->u.s.down->first_block);
@@ -841,76 +803,78 @@ walk_children(fz_context *ctx, walk_children_data *wcd, fz_stext_block *block)
 }
 
 static void
-generate_table_json(fz_context *ctx, fz_output *out, table *table)
+generate_table_json(fz_context *ctx, fz_output *out, table *tab)
 {
 	int i, n;
 	walk_children_data wcd = { 0 };
 
 	fz_write_printf(ctx, out, "{ \"type\": \"Table\",\n");
-	fz_write_printf(ctx, out, "\"page\": %d,\n", table->page);
-	fz_write_printf(ctx, out, "\"rect\": [%g, %g, %g, %g],\n", table->r.x0, table->r.y0, table->r.x1, table->r.y1);
-	if (table->overlap)
+	fz_write_printf(ctx, out, "\"page\": %d,\n", tab->page);
+	fz_write_printf(ctx, out, "\"rect\": [%01f, %01f, %01f, %01f],\n", tab->r.x0, tab->r.y0, tab->r.x1, tab->r.y1);
+	if (tab->overlap)
 		fz_write_printf(ctx, out, "\"overlap\" : true, \n");
-	if (table->broken)
+	if (tab->broken)
 		fz_write_printf(ctx, out, "\"broken\" : true, \n");
-	if (table->out_of_order)
+	if (tab->out_of_order)
 		fz_write_printf(ctx, out, "\"out_of_order\" : true, \n");
-	if (table->has_attrs)
+	if (tab->has_attrs)
 		fz_write_printf(ctx, out, "\"has_attrs\" : true, \n");
+	if (tab->off_page)
+		fz_write_printf(ctx, out, "\"off_page\" : true, \n");
 
 	//printf("Table\n");
 	fz_write_printf(ctx, out, "\"h_lines\": {");
-	n = table->ys.n;
+	n = tab->ys.n;
 	for (i = 0; i < n; i++)
 	{
 		if (i != 0)
 			fz_write_printf(ctx, out, ",");
-		fz_write_printf(ctx, out, "\"%d\": %g", i, table->ys.div[i].pos);
+		fz_write_printf(ctx, out, "\"%d\": %01f", i, tab->ys.div[i].pos);
 	}
 	fz_write_printf(ctx, out, "},\n");
 
 	fz_write_printf(ctx, out, "\"v_lines\": {");
-	n = table->xs.n;
+	n = tab->xs.n;
 	for (i = 0; i < n; i++)
 	{
 		if (i != 0)
 			fz_write_printf(ctx, out, ",");
-		fz_write_printf(ctx, out, "\"%d\": %g", i, table->xs.div[i].pos);
+		fz_write_printf(ctx, out, "\"%d\": %01f", i, tab->xs.div[i].pos);
 	}
 	fz_write_printf(ctx, out, "}\n");
 	wcd.out = out;
 	wcd.x = 0;
 	wcd.y = -1;
-	wcd.table = table;
-	walk_children(ctx, &wcd, table->top_block);
+	wcd.table = tab;
+	walk_children(ctx, &wcd, tab->top_block);
 	fz_write_printf(ctx, out, "}\n");
 }
 
 static int
-detect_out_of_order(fz_context *ctx, table* table)
+detect_out_of_order(fz_context *ctx, table* tab)
 {
 	int ooo = 0;
-	int i, n = table->xs.n;
+	int i, n = tab->xs.n;
 
 	for (i = 0; i < n; i++)
 	{
-		if (table->xs.div[i].min > table->xs.div[i].max)
+		if (tab->xs.div[i].min > tab->xs.div[i].max)
 			ooo = 1;
 	}
 	for (i = 0; i < n-1; i++)
 	{
-		if (table->xs.div[i].max > table->xs.div[i+1].min)
+		if (tab->xs.div[i].max > tab->xs.div[i+1].min)
 			ooo = 1;
 	}
-	n = table->ys.n;
+	n = tab->ys.n;
 	for (i = 0; i < n; i++)
 	{
-		if (table->ys.div[i].min > table->ys.div[i].max)
+		if (tab->ys.div[i].min > tab->ys.div[i].max)
 			ooo = 1;
 	}
 	for (i = 0; i < n-1; i++)
 	{
-		if (table->ys.div[i].max > table->ys.div[i+1].min)
+		if (tab->ys.div[i].max > tab->ys.div[i+1].min)
 			ooo = 1;
 	}
 
@@ -983,13 +947,13 @@ refine_dividers_with_vectors(fz_context *ctx, walk_data *wd, fz_stext_block *blo
 static int
 extract_table_details(fz_context *ctx, walk_data *wd, pdf_obj *selem, fz_stext_struct *str)
 {
-	fz_stext_block *table = str->up;
+	fz_stext_block *tab = str->up;
 	fz_buffer *buf = NULL;
 	int n, i;
 
-	//fz_write_printf(ctx, wd->out, "Page=%d Table bbox=%g %g %g %g\n", wd->page+1, table->bbox.x0, table->bbox.y0, table->bbox.x1, table->bbox.y1);
+	//fz_write_printf(ctx, wd->out, "Page=%d Table bbox=%01f %01f %01f %01f\n", wd->page+1, tab->bbox.x0, tab->bbox.y0, tab->bbox.x1, tab->bbox.y1);
 
-	wd->bbox = table->bbox;
+	wd->bbox = tab->bbox;
 
 	/* Increase the bbox to allow for the raft it's on. */
 
@@ -1011,12 +975,13 @@ extract_table_details(fz_context *ctx, walk_data *wd, pdf_obj *selem, fz_stext_s
 	wd->y = -1;
 	walk_table_elems(ctx, wd, selem);
 
-	if (wd->cs.w && wd->cs.h)
-	{
-		cell *c = get_cell(ctx, &wd->cs, wd->cs.w, wd->cs.h);
-		wd->cs.w++;
-		wd->cs.h++;
-	}
+	/* If we haven't found a table by now, bale. */
+	if (wd->cs.w == 0 || wd->cs.h == 0)
+		return 0;
+
+	(void)get_cell(ctx, &wd->cs, wd->cs.w, wd->cs.h);
+	wd->cs.w++;
+	wd->cs.h++;
 
 	/* Now look at the content */
 	stretch_cells_with_content(ctx, wd, selem, wd->bbox, str->first_block);
@@ -1026,6 +991,16 @@ extract_table_details(fz_context *ctx, walk_data *wd, pdf_obj *selem, fz_stext_s
 
 	//asciiart_table(ctx, wd->out, &wd->cs);
 
+	if (wd->num_tables == wd->max_tables)
+	{
+		int newmax = wd->max_tables * 2;
+		if (newmax == 0)
+			newmax = 32;
+		wd->tables = fz_realloc_array(ctx, wd->tables, newmax, table);
+		wd->max_tables = newmax;
+	}
+
+	memset(&wd->tables[wd->num_tables], 0, sizeof(wd->tables[0]));
 	wd->tables[wd->num_tables].buf = buf;
 	wd->tables[wd->num_tables].r = wd->bbox;
 	wd->tables[wd->num_tables].xs = wd->xs;
@@ -1034,6 +1009,7 @@ extract_table_details(fz_context *ctx, walk_data *wd, pdf_obj *selem, fz_stext_s
 	wd->tables[wd->num_tables].cs = wd->cs;
 	wd->tables[wd->num_tables].top_block = str->first_block;
 	wd->tables[wd->num_tables].out_of_order = detect_out_of_order(ctx, &wd->tables[wd->num_tables]);
+	wd->tables[wd->num_tables].off_page = fz_is_empty_rect(fz_intersect_rect(wd->page_bounds, wd->bbox));
 	memset(&wd->cs, 0, sizeof(wd->cs));
 	wd->tables[wd->num_tables].tds = fz_malloc_array(ctx, wd->num_tds, td_obj);
 	memcpy(wd->tables[wd->num_tables].tds, wd->tds, wd->num_tds * sizeof(td_obj));
@@ -1108,30 +1084,32 @@ detect_overlapping_tables(walk_data *wd)
 
 static fz_pixmap *pix = NULL;
 static int pix_for_page = -1;
-bitmap_debugging(fz_context *ctx, fz_document *doc, table *table, const char *rootname, int table_num)
+
+static void
+bitmap_debugging(fz_context *ctx, fz_document *doc, table *tab, const char *rootname, int table_num)
 {
 	int x, y;
 	fz_pixmap *pix2;
 	char png[4096];
 
-	if (pix_for_page != table->page)
+	if (pix_for_page != tab->page)
 	{
-		pix = fz_new_pixmap_from_page_number(ctx, doc, table->page, fz_identity, fz_device_rgb(ctx), 0);
-		pix_for_page = table->page;
+		pix = fz_new_pixmap_from_page_number(ctx, doc, tab->page, fz_identity, fz_device_rgb(ctx), 0);
+		pix_for_page = tab->page;
 	}
 
 	pix2 = fz_clone_pixmap(ctx, pix);
-	scribble_box(ctx, pix2, table->r, 0xff0000, 0.2f, 0);
+	scribble_box(ctx, pix2, tab->r, 0xff0000, 0.2f, 0);
 	sprintf(png, "%s.%d_0.png", rootname, table_num);
 	fz_save_pixmap_as_png(ctx, pix2, png);
 	fz_drop_pixmap(ctx, pix2);
 
 	pix2 = fz_clone_pixmap(ctx, pix);
-	for (y = 0; y < table->cs.h; y++)
+	for (y = 0; y < tab->cs.h; y++)
 	{
-		for (x = 0; x < table->cs.w; x++)
+		for (x = 0; x < tab->cs.w; x++)
 		{
-			fz_rect r = get_cell(ctx, &table->cs, x, y)->content_rect;
+			fz_rect r = get_cell(ctx, &tab->cs, x, y)->content_rect;
 			if (!fz_is_empty_rect(r))
 				scribble_box(ctx, pix2, r, 0x0000ff, 0.2f, 0);
 		}
@@ -1141,11 +1119,62 @@ bitmap_debugging(fz_context *ctx, fz_document *doc, table *table, const char *ro
 	fz_drop_pixmap(ctx, pix2);
 
 	pix2 = fz_clone_pixmap(ctx, pix);
-	output_divs(ctx, pix2, table);
+	output_divs(ctx, pix2, tab);
 	sprintf(png, "%s.%d_2.png", rootname, table_num);
 	fz_save_pixmap_as_png(ctx, pix2, png);
 	fz_drop_pixmap(ctx, pix2);
 	pix2 = NULL;
+}
+
+static fz_rect
+walk_for_shrink(fz_context *ctx, fz_stext_block *block)
+{
+	fz_rect bounds = fz_empty_rect;
+
+	for (; block != NULL; block = block->next)
+	{
+		fz_stext_line *line;
+		fz_stext_char *ch;
+
+		if (block->type == FZ_STEXT_BLOCK_STRUCT)
+		{
+			if (block->u.s.down)
+				block->bbox = walk_for_shrink(ctx, block->u.s.down->first_block);
+			else
+				block->bbox = fz_empty_rect;
+		}
+		if (block->type != FZ_STEXT_BLOCK_TEXT)
+		{
+			bounds = fz_union_rect(bounds, block->bbox);
+			continue;
+		}
+
+		block->bbox = fz_empty_rect;
+		for (line = block->u.t.first_line; line != NULL; line = line->next)
+		{
+			line->bbox = fz_empty_rect;
+
+			for (ch = line->first_char; ch != NULL; ch = ch->next)
+			{
+				fz_rect r = fz_rect_from_quad(ch->quad);
+
+				if (r.x0 == r.x1 || r.y0 == r.y1)
+					continue;
+
+				line->bbox = fz_union_rect(line->bbox, r);
+			}
+			block->bbox = fz_union_rect(block->bbox, line->bbox);
+		}
+		bounds = fz_union_rect(bounds, block->bbox);
+	}
+
+	return bounds;
+}
+
+static void
+fz_stext_shrink_text_bboxes_for_whitespace(fz_context *ctx, fz_stext_page *page)
+{
+	(void)walk_for_shrink(ctx, page->first_block);
 }
 
 static walk_data wd = { 0 };
@@ -1155,9 +1184,11 @@ int main(int argc, const char *argv[])
 	fz_context *ctx;
 	fz_document *doc = NULL;
 	fz_stext_page **stexts = NULL;
-	fz_output *out;
+	fz_output *out = NULL;
 	int exit_code = 0;
 	int pages = 0;
+	fz_page *page = NULL;
+
 
 	ctx = fz_new_context(NULL, NULL, FZ_STORE_DEFAULT);
 	if (ctx == NULL)
@@ -1169,6 +1200,8 @@ int main(int argc, const char *argv[])
 	fz_var(doc);
 	fz_var(stexts);
 	fz_var(pages);
+	fz_var(out);
+	fz_var(page);
 
 	fz_try(ctx)
 	{
@@ -1231,10 +1264,25 @@ int main(int argc, const char *argv[])
 
 		for (i = 0; i < pages; i++)
 		{
-			int got = 0;
-
+			page = fz_load_page(ctx, doc, i);
 			wd.page = i;
-			stexts[i] = fz_new_stext_page_from_page_number(ctx, doc, i, &opts);
+			wd.page_bounds = fz_bound_page(ctx, page);
+			stexts[i] = fz_new_stext_page_from_page(ctx, page, &opts);
+			fz_drop_page(ctx, page);
+			page = NULL;
+
+			fz_stext_remove_page_fill(ctx, stexts[i]);
+
+			fz_stext_shrink_text_bboxes_for_whitespace(ctx, stexts[i]);
+
+			{
+				fz_output *out2;
+				sprintf(json, "%s.%d.stext", argv[1], i);
+				out2 = fz_new_output_with_path(ctx, json, 0);
+				fz_print_stext_page_as_xml(ctx, out2, stexts[i], 0);
+				fz_close_output(ctx, out2);
+				fz_drop_output(ctx, out2);
+			}
 
 			wd.flotilla = fz_new_flotilla_from_stext_page_vectors(ctx, stexts[i]);
 
@@ -1243,7 +1291,7 @@ int main(int argc, const char *argv[])
 			{
 				wd.stext = stexts[i]->first_block;
 				if (block->type == FZ_STEXT_BLOCK_STRUCT)
-					got = find_table_in_struct(ctx, &wd, str, block->u.s.down);
+					find_table_in_struct(ctx, &wd, str, block->u.s.down);
 			}
 
 			fz_drop_flotilla(ctx, wd.flotilla);
@@ -1259,15 +1307,17 @@ int main(int argc, const char *argv[])
 		fz_write_printf(ctx, out, "\"pages_meta\": [\n");
 		for (i = 0; i < pages; i++)
 		{
-			fz_page *page = fz_load_page(ctx, doc, i);
-			fz_rect bounds = fz_bound_page(ctx, page);
+			fz_rect bounds;
+			page = fz_load_page(ctx, doc, i);
+			bounds = fz_bound_page(ctx, page);
 			fz_drop_page(ctx, page);
+			page = NULL;
 			if (i != 0)
 				fz_write_printf(ctx, out, ", ");
 			fz_write_printf(ctx, out, "{ \"index\": %d, ", i);
 			fz_write_printf(ctx, out, "\"rotation\": 0, ", 0); // FIXME
-			fz_write_printf(ctx, out, "\"mediabox\": [ %g, %g ], ", bounds.x1 - bounds.x0, bounds.y1 - bounds.y0); // FIXME
-			fz_write_printf(ctx, out, "\"displayed\": [ %g, %g ] ", bounds.x1 - bounds.x0, bounds.y1 - bounds.y0); // FIXME
+			fz_write_printf(ctx, out, "\"mediabox\": [ %01f, %01f ], ", bounds.x1 - bounds.x0, bounds.y1 - bounds.y0); // FIXME
+			fz_write_printf(ctx, out, "\"displayed\": [ %01f, %01f ] ", bounds.x1 - bounds.x0, bounds.y1 - bounds.y0); // FIXME
 			fz_write_printf(ctx, out, "}\n");
 		}
 		fz_write_printf(ctx, out, "],\n");
@@ -1276,17 +1326,17 @@ int main(int argc, const char *argv[])
 
 		for (i = 0; i < wd.num_tables; i++)
 		{
-			table *table = &wd.tables[i];
+			table *tab = &wd.tables[i];
 
 			if (i != 0)
 				fz_write_printf(ctx, out, ",\n");
 
-			generate_table_json(ctx, out, table);
+			generate_table_json(ctx, out, tab);
 
-			if (!table->has_attrs || table->broken || table->overlap || table->out_of_order || table->xs.n <= 2 || table->ys.n <= 2)
+			if (!tab->has_attrs || tab->broken || tab->overlap || tab->out_of_order || tab->xs.n <= 2 || tab->ys.n <= 2 || tab->off_page)
 				continue;
 
-			bitmap_debugging(ctx, doc, table, argv[1], i);
+			bitmap_debugging(ctx, doc, tab, argv[1], i);
 
 		}
 
@@ -1300,6 +1350,7 @@ int main(int argc, const char *argv[])
 		for (i = 0; i < pages; i++)
 			fz_drop_stext_page(ctx, stexts[i]);
 		fz_free(ctx, stexts);
+		fz_drop_page(ctx, page);
 		fz_drop_document(ctx, doc);
 		fz_drop_output(ctx, out);
 		fz_drop_pixmap(ctx, pix);
