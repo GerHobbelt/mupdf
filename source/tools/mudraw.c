@@ -393,7 +393,7 @@ static int subpix_y_power = 1;
 
 static int out_cs = CS_UNSET;
 static const char *proof_filename = NULL;
-fz_colorspace *proof_cs = NULL;
+static fz_colorspace *proof_cs = NULL;
 static const char *icc_filename = NULL;
 static int use_gamma = 0;
 static float gamma_value = 1;
@@ -455,8 +455,10 @@ static struct {
 	fz_separations *seps;
 	fz_navigation *pagenav;
 #if 0  // these are kept in the global variables instead...
+#if FZ_ENABLE_PDF
 	const char *pdfout_path;
 	pdf_document *pdfout;
+#endif
 	fz_output *out;
 #endif
 	fz_cookie cookie;
@@ -2257,6 +2259,17 @@ static void bgprint_worker(void *arg)
 			int start = gettime();
 			// TODO [GHo]: umm, doesn't this nuke the info that is copied from the ctx master cookie elsewhere in this sourcefile?
 			fz_clean_cookie(ctx, &bgprint.cookie);
+			// TODO [GHo]: the crux of the multiple-worker dodrawpage() calls set is that those workers each work on a different
+			// *band* of the same, single, document page.
+			//
+			// What we have NOT yet properly answered in the code chunk below (nor has the original code for this same chunk if I am any judge)
+			// is the question WHEN and WHO is (deciding to) saving the produced result set: all those bands together form a single page,
+			// but when is that page *really done*? 
+			// So I consider this code chunk b0rked until further notice: it will require further rework to ensure that any and all out-of-order
+			// work on any of the bands is properly completed before we continue and go write the result to the designated output!
+			//
+			// **TODO**, therefore!
+			//
 			fz_try(bgprint.ctx)
 			{
 				dodrawpage(bgprint.ctx, bgprint.page, bgprint.list, pagenum, start, bgprint.interptime, bgprint.filename, 1, bgprint.seps, bgprint.pagenav);
@@ -2275,12 +2288,14 @@ static void bgprint_worker(void *arg)
 				fz_drop_separations(bgprint.ctx, bgprint.seps);
 				fz_drop_navigation(bgprint.ctx, bgprint.pagenav);
 				fz_drop_page(bgprint.ctx, bgprint.page);
-				pdf_drop_document(bgprint.ctx, pdfout);
-				fz_free(bgprint.ctx, pdfoutpath);
 				fz_drop_output(bgprint.ctx, out);
-				pdfout = NULL;
-				pdfoutpath = NULL;
 				out = NULL;
+#if FZ_ENABLE_PDF
+				pdf_drop_document(bgprint.ctx, pdfout);
+				pdfout = NULL;
+				fz_free(bgprint.ctx, pdfoutpath);
+				pdfoutpath = NULL;
+#endif
 			}
 			fz_catch(bgprint.ctx)
 			{

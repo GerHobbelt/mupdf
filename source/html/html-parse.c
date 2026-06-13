@@ -256,6 +256,9 @@ struct genstate
 	fz_css_style_splay *styles;
 
 	int publisher_css;
+
+	int depth;
+	int depth_warned;
 };
 
 static int iswhite(int c)
@@ -1388,6 +1391,17 @@ static void gen2_tag(fz_context *ctx, struct genstate *g, fz_html_box *root_box,
 	if (display == DIS_NONE)
 		return;
 
+	if (g->depth > 100)
+	{
+		if (g->depth_warned == 0)
+		{
+			fz_warn(ctx, "Tag depth limit exceeded. Output may be truncated.");
+			g->depth_warned = 1;
+		}
+		return;
+	}
+	g->depth++;
+
 	tag = fz_xml_tag(node);
 
 	if (style->direction == FZ_BIDI_UNSET)
@@ -1523,6 +1537,7 @@ end:
 	g->markup_dir = save_markup_dir;
 	g->markup_lang = save_markup_lang;
 	g->href = save_href;
+	g->depth--;
 }
 
 static void gen2_children(fz_context *ctx, struct genstate *g, fz_html_box *root_box, fz_xml *root_node, fz_css_match *root_match)
@@ -2038,6 +2053,7 @@ xml_to_boxes(fz_context *ctx,
 	g.href = NULL;
 	g.styles = NULL;
 	g.publisher_css = publisher_css;
+	g.depth = 0;
 
 	if (rtitle)
 		*rtitle = NULL;

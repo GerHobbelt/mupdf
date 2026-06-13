@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2025 Artifex Software, Inc.
+// Copyright (C) 2004-2026 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -289,7 +289,7 @@ static void fill_closepath(fz_context *ctx, void *arg)
 		fz_throw(ctx, FZ_ERROR_LIBRARY, "extract_closepath() failed in fill");
 }
 
-void dev_fill_path(fz_context *ctx, fz_device *dev_, const fz_path *path, int even_odd,
+static void dev_fill_path(fz_context *ctx, fz_device *dev_, const fz_path *path, int even_odd,
 		fz_matrix matrix, fz_colorspace * colorspace, const float *color, float alpha,
 		fz_color_params color_params)
 {

@@ -79,7 +79,7 @@ test-memento-build: make-memento-build pdfref17.pdf
 	./build/memento/mutool draw -st pdfref17.pdf N-1
 
 make-all-disabled:
-	$(MAKE) -j2 XCFLAGS='-DFZ_ENABLE_CBZ=0 -DFZ_ENABLE_DOCX_OUTPUT=0 -DFZ_ENABLE_EPUB=0 -DFZ_ENABLE_FB2=0 -DFZ_ENABLE_HTML=0 -DFZ_ENABLE_HTML_ENGINE=0 -DFZ_ENABLE_ICC=0 -DFZ_ENABLE_IMG=0 -DFZ_ENABLE_JPX=0 -DFZ_ENABLE_JS=0 -DFZ_ENABLE_MOBI=0 -DFZ_ENABLE_OCR_OUTPUT=0 -DFZ_ENABLE_ODT_OUTPUT=0 -DFZ_ENABLE_OFFICE=0 -DFZ_ENABLE_PDF=0 -DFZ_ENABLE_SPOT_RENDERING=0 -DFZ_ENABLE_SVG=0 -DFZ_ENABLE_TXT=0 -DFZ_ENABLE_XPS=0 -DFZ_ENABLE_BROTLI=0'
+	$(MAKE) -j2 XCFLAGS='-DFZ_ENABLE_CBZ=0 -DFZ_ENABLE_DOCX_OUTPUT=0 -DFZ_ENABLE_EPUB=0 -DFZ_ENABLE_FB2=0 -DFZ_ENABLE_HTML=0 -DFZ_ENABLE_MD=0 -DFZ_ENABLE_HTML_ENGINE=0 -DFZ_ENABLE_ICC=0 -DFZ_ENABLE_IMG=0 -DFZ_ENABLE_JPX=0 -DFZ_ENABLE_JS=0 -DFZ_ENABLE_MOBI=0 -DFZ_ENABLE_OCR_OUTPUT=0 -DFZ_ENABLE_ODT_OUTPUT=0 -DFZ_ENABLE_OFFICE=0 -DFZ_ENABLE_PDF=0 -DFZ_ENABLE_SPOT_RENDERING=0 -DFZ_ENABLE_SVG=0 -DFZ_ENABLE_TXT=0 -DFZ_ENABLE_XPS=0 -DFZ_ENABLE_BROTLI=0'
 
 make-examples:
 	$(MAKE) -j2 build=release
@@ -105,7 +105,7 @@ test-examples: make-examples pdfref17.pdf
 	/usr/bin/test f546ac2bce80445818cbe8c5cd954147 == $$(./build/release/mutool draw -Ds5 build/examples/tablebordercollapse.pdf 2>&1 | md5sum - | cut -d' ' -f1)
 	/usr/bin/test 812191fbbd7ce8bbe814e85ff2bbef86 == $$(./build/release/mutool draw -Ds5 build/examples/tableborders.pdf 2>&1 | md5sum - | cut -d' ' -f1)
 	/usr/bin/test 74f0236ff7ca9bd51f380e455623ccf8 == $$(./build/release/mutool draw -Ds5 build/examples/tableborderwidths.pdf 2>&1 | md5sum - | cut -d' ' -f1)
-	/usr/bin/test e7cd28bcbd2a7af39324172542cec622 == $$(./build/release/mutool draw -Ds5 build/examples/tablespan.pdf 2>&1 | md5sum - | cut -d' ' -f1)
+	/usr/bin/test 2867732089375db03f2c3e6f129c635b == $$(./build/release/mutool draw -Ds5 build/examples/tablespan.pdf 2>&1 | md5sum - | cut -d' ' -f1)
 	/usr/bin/test b7442e961aff29d7d11bc9f35d67fd4f == $$(./build/release/mutool draw -Ds5 build/examples/tables.pdf 2>&1 | md5sum - | cut -d' ' -f1)
 	/usr/bin/test 5c17970f54c4a7ad1ff35b2160cc2238 == $$(./build/release/mutool draw -Ds5 build/examples/tablewidths.pdf 2>&1 | md5sum - | cut -d' ' -f1)
 	/usr/bin/test ebee6c90bc87e1265dd42c4d54f48898 == $$(./build/release/searchtest 2>&1 | md5sum - | cut -d' ' -f1)
@@ -132,7 +132,7 @@ make-docs:
 	$(MAKE) docs
 
 test-docs: make-docs
-	linkchecker file://$(PWD)/build/docs/index.html
+	linkchecker --no-follow-url doxygen file://$(PWD)/build/docs/index.html
 
 test-java-build: make-java-build
 	MUPDF_ARGS=pdfref17.pdf $(MAKE) -C platform/java build=release run

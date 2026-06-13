@@ -1377,8 +1377,8 @@ WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShow
         case 'H': gapp.layout_h = fz_atoi(fz_optarg); break;
         case 'S': gapp.layout_em = fz_atoi(fz_optarg); break;
         case 'b': kbps = fz_atoi(fz_optarg); break;
-        case 'U': gapp.layout_css = fz_optarg; break;
-        case 'X': gapp.layout_use_doc_css = 0; break;
+		case 'U': gapp.user_css = fz_optarg; break;
+		case 'X': gapp.publisher_css = 0; break;
 		case 'e': gapp.maxpercentage = fz_clampi(fz_atof(fz_optarg), 0, 100); break;
         default: 
             usage(argv[0]);
