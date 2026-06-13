@@ -355,6 +355,7 @@ pnm_ascii_read_image(fz_context *ctx, struct info *pnm, const unsigned char *p, 
 	p = pnm_read_int(ctx, p, e, &pnm->width);
 	p = pnm_read_whites_and_eols(ctx, p, e, 1);
 
+	pnm->bitmap = !!bitmap;
 	if (bitmap)
 	{
 		pnm->height = 0;
@@ -492,6 +493,7 @@ pnm_binary_read_image(fz_context *ctx, struct info *pnm, const unsigned char *p,
 	p = pnm_read_int(ctx, p, e, &pnm->width);
 	p = pnm_read_whites_and_eols(ctx, p, e, 1);
 
+	pnm->bitmap = !!bitmap;
 	if (bitmap)
 	{
 		pnm->height = 0;
