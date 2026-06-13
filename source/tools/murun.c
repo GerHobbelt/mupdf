@@ -4101,6 +4101,11 @@ static void ffi_Buffer_slice(js_State *J)
 	ffi_pushbuffer_own(J, copy);
 }
 
+static void ffi_new_Document(js_State *J)
+{
+	js_error(J, "Document is not callable");
+}
+
 static void ffi_Document_openDocument(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
@@ -12951,14 +12956,6 @@ int murun_main(int argc, const char** argv)
 	}
 	js_setregistry(J, "fz_document");
 
-	js_newobject(J);
-	{
-		jsB_propfun(J, "Document.openDocument", ffi_Document_openDocument, 4);
-		jsB_propfun(J, "Document.recognize", ffi_Document_recognize, 1);
-		jsB_propfun(J, "Document.recognizeContent", ffi_Document_recognizeContent, 3);
-	}
-	js_setglobal(J, "Document");
-
 #if FZ_ENABLE_HTML_ENGINE
 	js_getregistry(J, "Userdata");
 	js_newobjectx(J);
@@ -13696,6 +13693,15 @@ int murun_main(int argc, const char** argv)
 		}
 		js_pop(J, 1);
 #endif
+
+		jsB_propcon(J, "fz_document", "Document", ffi_new_Document, 0);
+		js_getglobal(J, "Document");
+		{
+			jsB_propfun(J, "Document.openDocument", ffi_Document_openDocument, 4);
+			jsB_propfun(J, "Document.recognize", ffi_Document_recognize, 1);
+			jsB_propfun(J, "Document.recognizeContent", ffi_Document_recognizeContent, 3);
+		}
+		js_pop(J, 1);
 
 		jsB_propcon(J, "fz_archive", "Archive", ffi_new_Archive, 1);
 		jsB_propcon(J, "fz_multi_archive", "MultiArchive", ffi_new_MultiArchive, 1);
