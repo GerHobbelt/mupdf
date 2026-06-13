@@ -1,4 +1,4 @@
-// Copyright (C) 2023-2024 Artifex Software, Inc.
+// Copyright (C) 2023-2026 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -226,7 +226,8 @@ static const fz_htdoc_format_t fz_htdoc_txt =
 {
 	"Text",
 	txt_to_html,
-	0, 1, 0
+	0, 1,
+	FZ_HTML_FLAVOR_DEFAULT
 };
 
 static fz_document *
@@ -245,7 +246,7 @@ static const char *txt_extensions[] =
 
 static const char *txt_mimetypes[] =
 {
-	"text.plain",
+	"text/plain",
 	NULL
 };
 

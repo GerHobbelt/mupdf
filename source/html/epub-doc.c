@@ -508,7 +508,7 @@ epub_parse_chapter(fz_context *ctx, epub_document *doc, epub_chapter *ch)
 			error = 1;
 			buf = make_error_page(ctx, ch->path);
 		}
-		html = fz_parse_html(ctx, doc->set, zip, base_uri, buf, doc->super.user_css, 1, 1, 0, doc->super.publisher_css);
+		html = fz_parse_html(ctx, doc->set, zip, base_uri, buf, doc->super.user_css, 1, 1, FZ_HTML_FLAVOR_DEFAULT, doc->super.publisher_css);
 		if (html)
 			html->error |= error;
 	}

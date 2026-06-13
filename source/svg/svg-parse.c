@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2004-2026 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -266,8 +266,8 @@ svg_parse_number_from_style(fz_context *ctx, svg_document *doc, const char *styl
 {
 	if (style)
 	{
-		char* end;
-		const char* p = strstr(style, att);
+		const char *p = strstr(style, att);
+		char *end;
 		if (p)
 		{
 			size_t n = strlen(att);
@@ -324,8 +324,8 @@ svg_parse_string_from_style(fz_context *ctx, svg_document *doc, const char *styl
 	char *buf, int buf_size, const char *value)
 {
 	char* end;
-	const char* p;
 	char quote;
+	const char* p;
 	if (style)
 	{
 		p = strstr(style, att);
