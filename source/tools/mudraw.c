@@ -452,9 +452,11 @@ static struct {
 	int interptime;
 	fz_separations *seps;
 	fz_navigation *pagenav;
-	char *pdfout_path;
+#if 0  // these are kept in the global variables instead...
+	const char *pdfout_path;
 	pdf_document *pdfout;
 	fz_output *out;
+#endif
 	fz_cookie cookie;
 } bgprint = { 0 };
 
@@ -934,7 +936,7 @@ static void calc_page_render_details(fz_context* ctx, fz_page* page, fz_rect med
 	resolution = best_res;
 }
 
-static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, int pagenum, int start, int interptime, const char *fname, int bg, fz_separations *seps, fz_navigation *pagenav, pdf_document *pdfout_, fz_output *out_)
+static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, int pagenum, int start, int interptime, const char *fname, int bg, fz_separations *seps, fz_navigation *pagenav)
 {
 	fz_rect mediabox;
 	fz_device *dev = NULL;
@@ -972,7 +974,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 		fz_try(ctx)
 		{
 			fz_write_printf(ctx, out, "<page number=\"%d\" ctm=\"%M\" bbox=\"%R\" mediabox=\"%R\">\n", pagenum, &ctm, &mediabox, &tmediabox);
-			dev = fz_new_trace_device(ctx, out_);
+			dev = fz_new_trace_device(ctx, out);
 			apply_kill_switch(dev);
 			if (output_format->format == OUT_OCR_TRACE)
 			{
@@ -994,7 +996,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			fz_close_device(ctx, pre_ocr_dev);
 			fz_drop_device(ctx, pre_ocr_dev);
 			pre_ocr_dev = NULL;
-			fz_write_printf(ctx, out_, "</page>\n");
+			fz_write_printf(ctx, out, "</page>\n");
 		}
 		fz_always(ctx)
 		{
@@ -1024,7 +1026,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 
 			fz_write_printf(ctx, out, "<page pagenum=\"%d\" ctm=\"%M\" bbox=\"%R\" mediabox=\"%R\">\n", pagenum, &ctm, &mediabox, &tmediabox);
 
-			dev = fz_new_xmltext_device(ctx, out_);
+			dev = fz_new_xmltext_device(ctx, out);
 			apply_kill_switch(dev);
 			if (output_format->format == OUT_OCR_XMLTEXT)
 			{
@@ -1038,7 +1040,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 				fz_run_display_list(ctx, list, dev, ctm, fz_infinite_rect);
 			else
 				fz_run_page(ctx, page, dev, ctm);
-			fz_write_printf(ctx, out_, "</page>\n");
+			fz_write_printf(ctx, out, "</page>\n");
 			fz_close_device(ctx, dev);
 			fz_drop_device(ctx, dev);
 			dev = NULL;
@@ -1230,7 +1232,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			{
 				/* FIXME: At some point, we could get the flatten options from options maybe? */
 				buf = fz_new_buffer_from_flattened_stext_page(ctx, text, FZ_TEXT_FLATTEN_ALL, NULL);
-				fz_write_buffer(ctx, out_, buf);
+				fz_write_buffer(ctx, out, buf);
 			}
 		}
 		fz_always(ctx)
@@ -1262,7 +1264,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			 * when writing PDFs. Rotation is taken care of by the pdf_add_page call. */
 			pdf_obj *page_obj;
 
-			dev = pdf_page_write(ctx, pdfout_, mediabox, &resources, &contents);
+			dev = pdf_page_write(ctx, pdfout, mediabox, &resources, &contents);
 			apply_kill_switch(dev);
 			fz_throw_on_unused_options(ctx, user_options, "device");
 			if (list)
@@ -1273,8 +1275,8 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			fz_drop_device(ctx, dev);
 			dev = NULL;
 
-			page_obj = pdf_add_page(ctx, pdfout_, mediabox, rotation, resources, contents);
-			pdf_insert_page(ctx, pdfout_, -1, page_obj);
+			page_obj = pdf_add_page(ctx, pdfout, mediabox, rotation, resources, contents);
+			pdf_insert_page(ctx, pdfout, -1, page_obj);
 			pdf_drop_obj(ctx, page_obj);
 		}
 		fz_always(ctx)
@@ -1313,7 +1315,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 
 			fz_apply_svg_device_options(ctx, &opts, user_options);
 
-			dev = fz_new_svg_device_with_options(ctx, out_, tbounds.x1-tbounds.x0, tbounds.y1-tbounds.y0, &opts);
+			dev = fz_new_svg_device_with_options(ctx, out, tbounds.x1-tbounds.x0, tbounds.y1-tbounds.y0, &opts);
 			apply_kill_switch(dev);
 			if (lowmemory)
 				fz_enable_device_hints(ctx, dev, FZ_NO_CACHE);
@@ -1382,15 +1384,14 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 					workers[i].num = i;
 					fail |= mu_create_semaphore(&workers[i].start);
 					fail |= mu_create_semaphore(&workers[i].stop);
-					printf("create worker_thread %d\n", i);
+					fz_info(ctx, "create worker_thread %d\n", i);
 					fail |= mu_create_thread(&workers[i].thread, worker_thread, &workers[i]);
 					if (!fail)
 						num_workers++;
 				}
 				if (fail)
 				{
-					fprintf(stderr, "worker startup failed\n");
-					exit(1);
+					fz_throw(ctx, FZ_ERROR_GENERIC, "worker startup failed.\n");
 				}
 			}
 
@@ -1719,7 +1720,6 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum, fz_navigati
 	int start;
 	fz_separations *seps = NULL;
 	const char *features = "";
-	char output_path[512];
 
 	fz_var(list);
 	fz_var(dev);
@@ -1849,12 +1849,13 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum, fz_navigati
 				bgprint.pagenum = pagenum;
 				bgprint.interptime = start;
 				bgprint.error = 0;
+#if 0
 				if (output_file_per_page)
 				{
 #if FZ_ENABLE_PDF
 					if (output_format->format == OUT_PDF)
 					{
-						bgprint.pdfout_path = fz_strdup(ctx, output_path);
+						bgprint.pdfout_path = fz_strdup(ctx, pdfoutpath);
 						bgprint.pdfout = pdfout;
 						pdfout = NULL;
 					}
@@ -1865,6 +1866,8 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum, fz_navigati
 						out = NULL;
 					}
 				}
+#endif
+
 #ifndef DISABLE_MUTHREADS
 				fz_keep_navigation(ctx, pagenav);
 				mu_trigger_semaphore(&bgprint.start);
@@ -1875,14 +1878,14 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum, fz_navigati
 		{
 			if (verbosity >= 1 || showfeatures || showtime || showmd5)
 				fz_info(ctx, "page %d file %s features %s", pagenum, filename, features);
-			dodrawpage(ctx, page, list, pagenum, start, 0, filename, 0, seps, pagenav, pdfout, out);
+			dodrawpage(ctx, page, list, pagenum, start, 0, filename, 0, seps, pagenav);
 		}
 
 		if (output_file_per_page)
 		{
 #if FZ_ENABLE_PDF
-			if (output_format->format == OUT_PDF && pdfout)
-				pdf_save_document(ctx, pdfout, output_path, NULL);
+			if (output_format->format == OUT_PDF && pdfout && pdfoutpath)
+				pdf_save_document(ctx, pdfout, pdfoutpath, NULL);
 			else
 #endif
 			if (out)
@@ -1898,10 +1901,12 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum, fz_navigati
 		if (output_file_per_page)
 		{
 #if FZ_ENABLE_PDF
-			if (output_format->format == OUT_PDF && pdfout)
+			if (output_format->format == OUT_PDF)
 			{
-				pdf_drop_document(ctx, pdfout);
+				pdf_drop_document(bgprint.ctx, pdfout);
+				fz_free(bgprint.ctx, pdfoutpath);
 				pdfout = NULL;
+				pdfoutpath = NULL;
 			}
 			else
 #endif
@@ -2252,14 +2257,14 @@ static void bgprint_worker(void *arg)
 			fz_clean_cookie(ctx, &bgprint.cookie);
 			fz_try(bgprint.ctx)
 			{
-				dodrawpage(bgprint.ctx, bgprint.page, bgprint.list, pagenum, start, bgprint.interptime, bgprint.filename, 1, bgprint.seps, bgprint.pagenav, bgprint.pdfout, bgprint.out);
+				dodrawpage(bgprint.ctx, bgprint.page, bgprint.list, pagenum, start, bgprint.interptime, bgprint.filename, 1, bgprint.seps, bgprint.pagenav);
 #if FZ_ENABLE_PDF
-				if (bgprint.pdfout_path && bgprint.pdfout)
-					pdf_save_document(bgprint.ctx, bgprint.pdfout, bgprint.pdfout_path, NULL);
+				if (pdfoutpath && pdfout)
+					pdf_save_document(bgprint.ctx, pdfout, pdfoutpath, NULL);
 				else
 #endif
-				if (bgprint.out)
-					fz_close_output(bgprint.ctx, bgprint.out);
+				if (out)
+					fz_close_output(bgprint.ctx, out);
 				DEBUG_THREADS(fz_info(ctx, "BGPrint completed page %d\n", pagenum));
 			}
 			fz_always(bgprint.ctx)
@@ -2268,12 +2273,12 @@ static void bgprint_worker(void *arg)
 				fz_drop_separations(bgprint.ctx, bgprint.seps);
 				fz_drop_navigation(bgprint.ctx, bgprint.pagenav);
 				fz_drop_page(bgprint.ctx, bgprint.page);
-				pdf_drop_document(bgprint.ctx, bgprint.pdfout);
-				fz_free(bgprint.ctx, bgprint.pdfout_path);
-				fz_drop_output(bgprint.ctx, bgprint.out);
-				bgprint.pdfout = NULL;
-				bgprint.pdfout_path = NULL;
-				bgprint.out = NULL;
+				pdf_drop_document(bgprint.ctx, pdfout);
+				fz_free(bgprint.ctx, pdfoutpath);
+				fz_drop_output(bgprint.ctx, out);
+				pdfout = NULL;
+				pdfoutpath = NULL;
+				out = NULL;
 			}
 			fz_catch(bgprint.ctx)
 			{
@@ -2305,7 +2310,7 @@ static void list_layers(fz_context *ctx, fz_document *doc)
 	for (k = 0; k < n; ++k) {
 		const char *name = pdf_layer_name(ctx, pdoc, k);
 		int state = pdf_layer_is_enabled(ctx, pdoc, k);
-		fprintf(stderr, "layer %d (%s): %s\n", k+1, state ? "on" : "off", name);
+		fz_info(ctx, "layer %d (%s): %s\n", k+1, state ? "on" : "off", name);
 	}
 #endif
 }
@@ -2325,7 +2330,7 @@ static void toggle_layers(fz_context *ctx, fz_document *doc)
 		else if (layer_off[i] >= 1 && layer_off[i] <= n)
 			pdf_enable_layer(ctx, pdoc, layer_off[i] - 1, 0);
 		else
-			fprintf(stderr, "invalid layer: %d\n", layer_off[i]);
+			fz_error(ctx, "invalid layer: %d\n", layer_off[i]);
 	}
 
 	for (i = 0; i < layer_on_len; ++i)
@@ -2336,7 +2341,7 @@ static void toggle_layers(fz_context *ctx, fz_document *doc)
 		else if (layer_on[i] >= 1 && layer_on[i] <= n)
 			pdf_enable_layer(ctx, pdoc, layer_on[i] - 1, 1);
 		else
-			fprintf(stderr, "invalid layer: %d\n", layer_on[i]);
+			fz_error(ctx, "invalid layer: %d\n", layer_on[i]);
 	}
 #endif
 }
@@ -2370,11 +2375,15 @@ static void apply_layer_config(fz_context *ctx, fz_document *doc, const char *lc
 			{
 				fz_snprintf(msgbuf, sizeof(msgbuf), "%3d:", config);
 				name = pdf_layer_config_name(ctx, pdoc, config);
-				if (name)
-					fz_scatnprintf(msgbuf, sizeof(msgbuf), " Name=\"%s\"", name);
+				if (name) {
+					size_t l1 = strlen(msgbuf);
+					fz_snprintf(msgbuf + l1, sizeof(msgbuf) - l1, " Name=\"%s\"", name);
+				}
 				creator = pdf_layer_config_creator(ctx, pdoc, config);
-				if (creator)
-					fz_scatnprintf(msgbuf, sizeof(msgbuf), " Creator=\"%s\"", creator);
+				if (creator) {
+					size_t l1 = strlen(msgbuf);
+					fz_snprintf(msgbuf + l1, sizeof(msgbuf) - l1, " Creator=\"%s\"", creator);
+				}
 				fz_info(ctx, "%s", msgbuf);
 			}
 		}
@@ -2417,11 +2426,15 @@ static void apply_layer_config(fz_context *ctx, fz_document *doc, const char *lc
 	fz_info(ctx, "Layer Config %d (final):", config);
 	strcpy(msgbuf, " ");
 	name = pdf_layer_config_name(ctx, pdoc, config);
-	if (name)
-		fz_scatnprintf(msgbuf, sizeof(msgbuf), " Name=\"%s\"", name);
+	if (name) {
+		size_t l1 = strlen(msgbuf);
+		fz_snprintf(msgbuf + l1, sizeof(msgbuf) - l1, " Name=\"%s\"", name);
+	}
 	creator = pdf_layer_config_creator(ctx, pdoc, config);
-	if (creator)
-		fz_scatnprintf(msgbuf, sizeof(msgbuf), " Creator=\"%s\"", creator);
+	if (creator) {
+		size_t l1 = strlen(msgbuf);
+		fz_snprintf(msgbuf + l1, sizeof(msgbuf) - l1, " Creator=\"%s\"", creator);
+	}
 	fz_info(ctx, "%s\n", msgbuf);
 
 	n = pdf_count_layer_config_ui(ctx, pdoc);
@@ -2885,7 +2898,7 @@ int main(int argc, const char** argv)
 	fz_alloc_context trace_alloc_ctx = { &trace_info, trace_malloc, trace_realloc, trace_free };
 	fz_alloc_context *alloc_ctx = NULL;
 	size_t max_store = FZ_STORE_DEFAULT;
-	char *options_string = NULL;
+	const char *options_string = NULL;
 
 	fz_var(doc);
 
@@ -3064,7 +3077,7 @@ int main(int argc, const char** argv)
 			page_box = fz_box_type_from_string(fz_optarg);
 			if (page_box == FZ_UNKNOWN_BOX)
 			{
-				fprintf(stderr, "Invalid box type: %s\n", fz_optarg);
+				fz_error(ctx, "Invalid box type: %s\n", fz_optarg);
 				return 1;
 			}
 			break;
@@ -3166,9 +3179,9 @@ int main(int argc, const char** argv)
 			break;
 #endif
 		case 'm':
-			if (fz_optarg[0] == 's') info.mem_limit = fz_atoi64(&fz_optarg[1]);
-			else if (fz_optarg[0] == 'a') info.alloc_limit = fz_atoi64(&fz_optarg[1]);
-			else info.mem_limit = fz_atoi64(fz_optarg);
+			if (fz_optarg[0] == 's') trace_info.mem_limit = fz_atoi64(&fz_optarg[1]);
+			else if (fz_optarg[0] == 'a') trace_info.alloc_limit = fz_atoi64(&fz_optarg[1]);
+			else trace_info.mem_limit = fz_atoi64(fz_optarg);
 			break;
 		case 'L': lowmemory = 1; break;
 		case 'P':
@@ -3186,16 +3199,16 @@ int main(int argc, const char** argv)
 		case 'z':
 			if (layer_off_len == nelem(layer_off))
 			{
-				fprintf(stderr, "too many layers to turn off\n");
-				exit(1);
+				fz_error(ctx, "too many layers to turn off\n");
+				return EXIT_FAILURE;
 			}
 			layer_off[layer_off_len++] = !strcmp(fz_optarg, "all") ? -1 : fz_atoi(fz_optarg);
 			break;
 		case 'Z':
 			if (layer_on_len == nelem(layer_on))
 			{
-				fprintf(stderr, "too many layers to turn on\n");
-				exit(1);
+				fz_error(ctx, "too many layers to turn on\n");
+				return EXIT_FAILURE;
 			}
 			layer_on[layer_on_len++] = !strcmp(fz_optarg, "all") ? -1 : fz_atoi(fz_optarg);
 			break;
@@ -3278,7 +3291,7 @@ int main(int argc, const char** argv)
 		}
 	}
 
-	if (info.mem_limit || info.alloc_limit || showmemory)
+	if (trace_info.mem_limit || trace_info.alloc_limit || showmemory)
 		alloc_ctx = &trace_alloc_ctx;
 
 	if (lowmemory)
@@ -3289,7 +3302,7 @@ int main(int argc, const char** argv)
 	// check if global CTX has locking, because if it has none,
 	// then we CANNOT use bands or threads!
 	ASSERT(ctx != NULL);
-	if (!fz_has_locking_support(ctx))
+	if (!fz_has_locking_support(ctx) && num_workers > 0)
 	{
 		fz_error(ctx, "cannot use multiple threads without locking support. Falling back to single thread processing.");
 		num_workers = 0;
@@ -3743,7 +3756,7 @@ int main(int argc, const char** argv)
 		}
 
 #if FZ_ENABLE_PDF
-		if (output_format == OUT_PDF ||
+		if (output_format->format == OUT_PDF ||
 			output_format->format == OUT_OCR_PDF)
 		{
 			pdf_init_write_options(ctx, &pdfopts);
@@ -3767,7 +3780,7 @@ int main(int argc, const char** argv)
 			fz_try(ctx)
 			{
 #if FZ_ENABLE_OCR_OUTPUT && FZ_ENABLE_OCR
-				tess_api = ocr_init(ctx, ocr_language, ocr_datadir);
+				tess_api = ocr_init(ctx, ocr_language, ocr_datadir, user_options);
 #else
 				fz_throw(ctx, FZ_ERROR_GENERIC, "OCR not supported in this build");
 #endif
