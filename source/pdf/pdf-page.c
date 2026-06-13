@@ -19,6 +19,8 @@
 // For commercial licensing, see <https://www.artifex.com/> or contact
 // Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
 // CA 94129, USA, for further information.
+//
+// Modified by Joscha Legewie on 2026-05-16; see FORK.md.
 
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
@@ -76,8 +78,35 @@ static int
 pdf_load_page_tree_imp(fz_context *ctx, pdf_document *doc, pdf_obj *node, int idx, pdf_cycle_list *cycle_up)
 {
 	pdf_cycle_list cycle;
-	pdf_obj *type = pdf_dict_get(ctx, node, PDF_NAME(Type));
-	if (pdf_name_eq(ctx, type, PDF_NAME(Pages)))
+	pdf_obj *type;
+	int is_pages, is_page;
+
+	/* Resolving a kid below can hit a dangling reference that triggers
+	 * document repair, and repair drops the page maps this walk is
+	 * filling (see pdf_drop_page_tree_internal in pdf_repair_xref_base).
+	 * Once the maps are gone, abandon the walk; the caller
+	 * (pdf_load_page_tree_internal) detects the dropped maps and rebuilds
+	 * from scratch against the fully repaired tree. */
+	if (doc->fwd_page_map == NULL)
+		return idx;
+
+	type = pdf_dict_get(ctx, node, PDF_NAME(Type));
+	is_pages = pdf_name_eq(ctx, type, PDF_NAME(Pages));
+	is_page = pdf_name_eq(ctx, type, PDF_NAME(Page));
+
+	/* Some producers omit /Type on page-tree nodes. Recover the node
+	 * kind structurally (a /Kids array means an internal node, a
+	 * /MediaBox means a leaf page), matching the tolerant slow-lookup
+	 * path in pdf_lookup_page_loc_imp. */
+	if (!is_pages && !is_page && pdf_is_dict(ctx, node))
+	{
+		if (pdf_dict_get(ctx, node, PDF_NAME(Kids)))
+			is_pages = 1;
+		else if (pdf_dict_get(ctx, node, PDF_NAME(MediaBox)))
+			is_page = 1;
+	}
+
+	if (is_pages)
 	{
 		pdf_obj *kids = pdf_dict_get(ctx, node, PDF_NAME(Kids));
 		int i, n = pdf_array_len(ctx, kids);
@@ -86,13 +115,19 @@ pdf_load_page_tree_imp(fz_context *ctx, pdf_document *doc, pdf_obj *node, int id
 		for (i = 0; i < n; ++i)
 			idx = pdf_load_page_tree_imp(ctx, doc, pdf_array_get(ctx, kids, i), idx, &cycle);
 	}
-	else if (pdf_name_eq(ctx, type, PDF_NAME(Page)))
+	else if (is_page)
 	{
-		if (idx >= doc->map_page_count)
-			fz_throw(ctx, FZ_ERROR_FORMAT, "too many kids in page tree");
-		doc->rev_page_map[idx].page = idx;
-		doc->rev_page_map[idx].object = pdf_to_num(ctx, node);
-		doc->fwd_page_map[idx] = pdf_keep_obj(ctx, node);
+		/* doc->fwd_page_map can be dropped by a repair triggered while
+		 * resolving /Type or /Kids just above; guard the writes so the
+		 * walk degrades to a no-op rather than dereferencing NULL. */
+		if (doc->fwd_page_map)
+		{
+			if (idx >= doc->map_page_count)
+				fz_throw(ctx, FZ_ERROR_FORMAT, "too many kids in page tree");
+			doc->rev_page_map[idx].page = idx;
+			doc->rev_page_map[idx].object = pdf_to_num(ctx, node);
+			doc->fwd_page_map[idx] = pdf_keep_obj(ctx, node);
+		}
 		++idx;
 	}
 	else if (type == NULL)
@@ -101,7 +136,15 @@ pdf_load_page_tree_imp(fz_context *ctx, pdf_document *doc, pdf_obj *node, int id
 	}
 	else
 	{
-		fz_throw(ctx, FZ_ERROR_FORMAT, "non-page object in page tree (%s)", pdf_to_name_not_null(ctx, type));
+		/* A kid that is neither a page nor a page-tree node. This is
+		 * most often a dangling indirect reference to an object that is
+		 * missing from a truncated or corrupt file. Skip it instead of
+		 * aborting the whole document, so the pages that do resolve are
+		 * still extracted. The caller (pdf_load_page_tree_internal)
+		 * shrinks Root/Pages/Count to the number actually found. */
+		fz_warn(ctx, "skipping non-page object in page tree (%s)", pdf_to_name_not_null(ctx, type));
+		
+		// TODO [Gho]: mark this as a page error (flagged) so the caller will be able to realize there's something subtly rotten about this page/PDF.
 	}
 	return idx;
 }
@@ -149,23 +192,43 @@ pdf_load_page_tree_internal(fz_context *ctx, pdf_document *doc)
 	 * stuff that hits the document at a time. */
 	fz_try(ctx)
 	{
-		int idx;
+		int idx, count;
 
-		doc->map_page_count = pdf_count_pages(ctx, doc);
 		while (1)
 		{
-			doc->rev_page_map = Memento_label(fz_calloc(ctx, doc->map_page_count, sizeof(pdf_rev_page_map)), "pdf_rev_page_map");
-			doc->fwd_page_map = Memento_label(fz_calloc(ctx, doc->map_page_count, sizeof(pdf_obj *)), "pdf_fwd_page_map");
+			/* Free the maps from any previous iteration (a corrected
+			 * page count, or a repair that ran during the walk). On the
+			 * first iteration this is a no-op. */
+			pdf_drop_page_tree_internal(ctx, doc);
+			count = pdf_count_pages(ctx, doc);
+			doc->map_page_count = count;
+			doc->rev_page_map = Memento_label(fz_calloc(ctx, count, sizeof(pdf_rev_page_map)), "pdf_rev_page_map");
+			doc->fwd_page_map = Memento_label(fz_calloc(ctx, count, sizeof(pdf_obj *)), "pdf_fwd_page_map");
 			idx = pdf_load_page_tree_imp(ctx, doc, pdf_dict_getp(ctx, pdf_trailer(ctx, doc), "Root/Pages"), 0, NULL);
+			if (count > 0 && doc->fwd_page_map == NULL)
+			{
+				/* A dangling reference triggered document repair during
+				 * the walk and repair dropped the maps. Repair runs at
+				 * most once, so rebuilding now walks a stable, fully
+				 * repaired page tree.
+				 *
+				 * The `count > 0` guard is essential: fz_calloc returns
+				 * NULL for a zero-page document too, and that NULL is not
+				 * a dropped map — without the guard a /Count 0 document
+				 * (or a damaged tree this patch shrank to zero) would
+				 * retry forever. */
+				continue;
+			}
 			if (idx < doc->map_page_count)
 			{
-				/* The document claims more pages that it has. Fix that. */
+				/* The document claims more pages than it has (e.g. a
+				 * truncated file whose tail page objects are missing).
+				 * Shrink Root/Pages/Count and rebuild so the count and
+				 * the maps agree. */
 				fz_warn(ctx, "Document claims to have %d pages, but only has %d.", doc->map_page_count, idx);
-				/* This put drops the page tree! */
 				pdf_begin_implicit_operation(ctx, doc);
 				in_op = 1;
 				pdf_dict_putp_drop(ctx, pdf_trailer(ctx, doc), "Root/Pages/Count", pdf_new_int(ctx, idx));
-				doc->map_page_count = idx;
 				pdf_end_operation(ctx, doc);
 				in_op = 0;
 				continue;

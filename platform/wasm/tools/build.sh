@@ -52,6 +52,7 @@ emcc -o dist/mupdf-wasm.js \
 	-mno-nontrapping-fptoint \
 	-fwasm-exceptions \
 	-sSUPPORT_LONGJMP=wasm \
+	-sENVIRONMENT='"web,webview,worker"' \
 	-sMODULARIZE=1 \
 	-sEXPORT_ES6=1 \
 	-sEXPORT_NAME='"libmupdf_wasm"' \

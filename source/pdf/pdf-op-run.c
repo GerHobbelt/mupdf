@@ -19,6 +19,8 @@
 // For commercial licensing, see <https://www.artifex.com/> or contact
 // Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
 // CA 94129, USA, for further information.
+//
+// Modified by Joscha Legewie on 2026-05-15; see FORK.md.
 
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
@@ -58,6 +60,10 @@ enum
 	PDF_MAT_PATTERN,
 	PDF_MAT_SHADE,
 };
+
+/* WASM builds can trap before native stack-overflow recovery catches very deep,
+ * acyclic Form XObject chains. Cap nesting before the C stack is exhausted. */
+#define PDF_MAX_XOBJECT_DEPTH 24
 
 typedef struct
 {
@@ -145,6 +151,7 @@ struct pdf_run_processor
 
 	/* xobject cycle detector */
 	pdf_cycle_list *cycle;
+	int xobject_depth;
 
 	pdf_obj *role_map;
 
@@ -155,6 +162,13 @@ struct pdf_run_processor
 	int struct_parent;
 	pdf_obj *mcids;
 	int broken_struct_tree;
+
+	/* Lazily-built index mapping every integer MCID value in the
+	 * current `mcids` array to its structure element. `mcid_index_src`
+	 * records which `mcids` array the index was built for, so it is
+	 * rebuilt when `mcids` changes. See build_mcid_index(). */
+	pdf_obj *mcid_index_src;
+	fz_hash_table *mcid_index;
 
 	/* Pending begin layers */
 	begin_layer_stack *begin_layer;
@@ -1702,10 +1716,76 @@ pdf_lookup_mcid_in_mcids(fz_context *ctx, int id, pdf_obj *mcids)
 	return NULL;
 }
 
+/*
+ * Build (once per `mcids` array) an index mapping every integer MCID value
+ * found in any structure element's /K entry to that element.
+ *
+ * pdf_lookup_mcid_in_mcids() has an O(1) fast path (the MCID is the array
+ * index), but when it misses it falls back to a linear scan of every element,
+ * and that scan resolves an indirect object for every entry of each element's
+ * /K array. Some producers (e.g. Foxit PhantomPDF Printer) write
+ * document-cumulative MCID values into page content streams instead of the
+ * spec's per-page 0-based values, so the fast path misses on EVERY marked
+ * content operator. On a page with hundreds of BDC operators and a structure
+ * element carrying a large aggregated /K array, that recovery scan is repeated
+ * per operator and the page degrades to O(operators * elements * K-length) -
+ * tens of seconds per page.
+ *
+ * The index makes each lookup O(1) amortised: one scan per page instead of one
+ * per operator. It is purely a memoisation of the recovery scan and preserves
+ * its result - first element in array order wins (fz_hash_insert keeps the
+ * existing entry), misses still return NULL.
+ */
+static void
+build_mcid_index(fz_context *ctx, pdf_run_processor *proc)
+{
+	pdf_obj *mcids = proc->mcids;
+	int i, n;
+
+	/* `mcids` comes from the structure tree, whose objects live for the
+	 * document's lifetime, so pointer identity is a stable "already built"
+	 * marker. The initial NULL == NULL case is also handled correctly. */
+	if (proc->mcid_index_src == mcids)
+		return;
+
+	fz_drop_hash_table(ctx, proc->mcid_index);
+	proc->mcid_index = NULL;
+	proc->mcid_index_src = mcids;
+
+	if (!pdf_is_array(ctx, mcids))
+		return;
+
+	proc->mcid_index = fz_new_hash_table(ctx, 512, sizeof(int), -1, NULL);
+	n = pdf_array_len(ctx, mcids);
+	for (i = 0; i < n; i++)
+	{
+		pdf_obj *el = pdf_array_get(ctx, mcids, i);
+		pdf_obj *k = pdf_dict_get(ctx, el, PDF_NAME(K));
+		if (pdf_is_int(ctx, k))
+		{
+			int key = pdf_to_int(ctx, k);
+			fz_hash_insert(ctx, proc->mcid_index, &key, el);
+		}
+		else if (pdf_is_array(ctx, k))
+		{
+			int j, m = pdf_array_len(ctx, k);
+			for (j = 0; j < m; j++)
+			{
+				pdf_obj *o = pdf_array_get(ctx, k, j);
+				if (pdf_is_int(ctx, o))
+				{
+					int key = pdf_to_int(ctx, o);
+					fz_hash_insert(ctx, proc->mcid_index, &key, el);
+				}
+			}
+		}
+	}
+}
+
 static pdf_obj *
 lookup_mcid(fz_context *ctx, pdf_run_processor *proc, pdf_obj *val)
 {
-	pdf_obj *mcid;
+	pdf_obj *mcid, *el, *k;
 	int id;
 
 	if (proc->struct_parent == -1)
@@ -1719,7 +1799,19 @@ lookup_mcid(fz_context *ctx, pdf_run_processor *proc, pdf_obj *val)
 		return NULL;
 
 	id = pdf_to_int(ctx, mcid);
-	return pdf_lookup_mcid_in_mcids(ctx, id, proc->mcids);
+
+	/* Fast path: spec-conformant /K arrays are indexed directly by MCID. */
+	el = pdf_array_get(ctx, proc->mcids, id);
+	k = pdf_dict_get(ctx, el, PDF_NAME(K));
+	if (int_in_singleton_or_array(ctx, k, id))
+		return el;
+
+	/* Recovery: consult the per-page MCID index instead of re-running the
+	 * O(n) linear scan inside pdf_lookup_mcid_in_mcids() for every operator. */
+	build_mcid_index(ctx, proc);
+	if (proc->mcid_index)
+		return fz_hash_find(ctx, proc->mcid_index, &id);
+	return NULL;
 }
 
 static fz_text_language
@@ -2624,7 +2716,13 @@ pdf_run_xobject(fz_context *ctx, pdf_run_processor *pr, pdf_obj *xobj, pdf_obj *
 	pdf_cycle_list *cycle_up = pr->cycle;
 	if (xobj == NULL || pdf_cycle(ctx, &cycle_here, cycle_up, xobj))
 		return;
+	if (pr->xobject_depth >= PDF_MAX_XOBJECT_DEPTH)
+	{
+		fz_warn(ctx, "ignoring too deeply nested XObject");
+		return;
+	}
 	pr->cycle = &cycle_here;
+	pr->xobject_depth++;
 
 	pop_any_pending_mcid_changes(ctx, pr);
 	flush_begin_layer(ctx, pr);
@@ -2769,6 +2867,7 @@ pdf_run_xobject(fz_context *ctx, pdf_run_processor *pr, pdf_obj *xobj, pdf_obj *
 		fz_drop_default_colorspaces(ctx, xobj_default_cs);
 		fz_drop_colorspace(ctx, cs);
 		pr->cycle = cycle_up;
+		pr->xobject_depth--;
 		pr->struct_parent = save_struct_parent;
 		pr->mcids = save_mcids;
 	}
@@ -3572,6 +3671,8 @@ pdf_drop_run_processor(fz_context *ctx, pdf_processor *proc)
 	drop_marked_content(ctx, pr);
 
 	pdf_drop_obj(ctx, pr->mcid_sent);
+
+	fz_drop_hash_table(ctx, pr->mcid_index);
 
 	pdf_drop_document(ctx, pr->doc);
 	pdf_drop_obj(ctx, pr->role_map);
