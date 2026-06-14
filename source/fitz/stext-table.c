@@ -27,15 +27,14 @@
 
 #if FZ_ENABLE_RENDER_CORE 
 
-/* #define DEBUG_WRITE_AS_PS */
+#if 0
+#define DEBUG_WRITE_AS_PS
+#define DEBUG_TABLE_SPLITS 
+#define DEBUG_TABLE_STRUCTURE 
+#define DEBUG_TABLE_HUNT 
+#define DEBUG_TABLE_SCORES
+#endif
 
-/* #define DEBUG_TABLE_SPLITS */
-
-/* #define DEBUG_TABLE_STRUCTURE */
-
-/* #define DEBUG_TABLE_HUNT */
-
-/* #define DEBUG_TABLE_SCORES */
 
 /*
  * The algorithm.
@@ -3022,7 +3021,7 @@ transcribe_table(fz_context *ctx, grid_walker_data *gd, fz_stext_page *page, fz_
 	r.y1 = gd->ypos->list[h-1].pos;
 #ifdef DEBUG_TABLE_STRUCTURE
 	printf("Region %g %g %g %g\n", r.x0, r.y0, r.x1, r.y1);
-	fz_print_stext_page_as_xml(ctx, fz_stdout(ctx), page, 0);
+	fz_print_stext_page_as_xml(ctx, fz_stdout(ctx), page, 0, fz_identity);
 #endif
 	top.block = *first_block;
 	top.parent = parent;

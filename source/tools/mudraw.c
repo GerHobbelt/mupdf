@@ -2953,8 +2953,8 @@ int main(int argc, const char** argv)
 	layout_w = FZ_DEFAULT_LAYOUT_W;
 	layout_h = FZ_DEFAULT_LAYOUT_H;
 	layout_em = FZ_DEFAULT_LAYOUT_EM;
-	layout_css = NULL;
-	layout_use_doc_css = 1;
+	layout_user_css = NULL;
+	layout_user_css_data = NULL;
 	min_line_width = 0.0f;
 
 	showfeatures = 0;
