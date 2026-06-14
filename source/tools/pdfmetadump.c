@@ -1503,8 +1503,8 @@ show_annot_info(fz_context* ctx, fz_output* out, fz_matrix ctm, pdf_annot* annot
 		{
 			write_item_bool(ctx, out, "IsEmbeddedFile", pdf_is_embedded_file(ctx, fs));
 
-			pdf_embedded_file_params fs_params = { NULL };
-			pdf_get_embedded_file_params(ctx, fs, &fs_params);
+			pdf_filespec_params fs_params = { NULL };
+			pdf_get_filespec_params(ctx, fs, &fs_params);
 			write_item(ctx, out, "EmbeddedFileName", fs_params.filename);
 			write_item(ctx, out, "EmbeddedFileType", fs_params.mimetype);
 			write_item_int(ctx, out, "EmbeddedFileSize", fs_params.size);
