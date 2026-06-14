@@ -1247,6 +1247,7 @@ struct fz_context
 #if FZ_ENABLE_ICC
     int icc_enabled;
 #endif
+    int within_throw_call;
 
     /* TODO: should these be unshared? */
     fz_document_handler_context *handler;
