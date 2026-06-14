@@ -172,9 +172,6 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\docs\examples\storytest.c" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="bin2coff.vcxproj">
       <Project>{bfe316b3-bd90-433a-a20d-c73975f1caa7}</Project>
     </ProjectReference>
@@ -338,6 +335,12 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../MuPDF.docs/examples/storytest.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../source/system_override/force_link_dependency_helper.cpp" />
+  </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
   

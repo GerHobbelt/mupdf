@@ -1,4 +1,4 @@
 
 sources:
-	..\..\docs\examples\storytest.c
+	..\..\MuPDF.docs\examples\storytest.c
 	
