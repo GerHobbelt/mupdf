@@ -659,7 +659,7 @@ static inline int is_marking_nonspacing(const char *h)
 	int hc;
 	if (*h < 0)
 	{
-		(void)fz_chartorune(&hc, h);
+		(void)fz_chartorune_unsafe(&hc, h);
 		if (ucdn_get_general_category(hc) == UCDN_GENERAL_CATEGORY_MN)
 			return 1;
 	}
@@ -670,14 +670,14 @@ static const char *match_exact(const char *h, const char *n)
 {
 	int hc, nc;
 	do {
-		n += fz_chartorune(&nc, n);
+		n += fz_chartorune_unsafe(&nc, n);
 		if (nc == 0)
 		{
 			if (is_marking_nonspacing(h))
 				return NULL;
 			return h;
 		}
-		h += fz_chartorune(&hc, h);
+		h += fz_chartorune_unsafe(&hc, h);
 	} while (hc == nc);
 	return NULL;
 }
@@ -1530,7 +1530,7 @@ ensure_haystack_for_page(fz_context *ctx, fz_search *search, search_page *page)
 	s = page->haystack;
 	while (*s)
 	{
-		s += fz_chartorune(&c, s);
+		s += fz_chartorune_unsafe(&c, s);
 		if (!fz_is_unicode_whitespace(c))
 			return 0;
 	}

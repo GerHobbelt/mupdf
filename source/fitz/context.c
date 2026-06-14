@@ -168,11 +168,6 @@ void fz_tune_image_rendering(fz_context *ctx, int quality)
 	ctx->tuning->image_rendering = quality;
 }
 
-void fz_tune_image_rendering(fz_context *ctx, int quality)
-{
-	ctx->tuning->image_rendering = quality;
-}
-
 #endif // FZ_ENABLE_RENDER_CORE 
 
 static void fz_init_random_context(fz_context *ctx)

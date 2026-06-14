@@ -71,14 +71,15 @@ int pdf_xobject_transparency(fz_context *ctx, pdf_obj *xobj)
 }
 
 fz_colorspace *
-pdf_xobject_colorspace(fz_context *ctx, pdf_obj *xobj)
+pdf_xobject_colorspace(fz_context *ctx, pdf_document* doc, pdf_obj *xobj)
 {
 	fz_colorspace *colorspace = NULL;
+	int xref_base;
 
 	fz_var(colorspace);
 
 retry:
-	fz_start_throw_on_repair(ctx);
+	pdf_start_throw_on_repair(ctx, doc, &xref_base);
 	fz_try(ctx)
 	{
 		pdf_obj *cs;
@@ -92,7 +93,7 @@ retry:
 		colorspace = pdf_load_colorspace(ctx, cs);
 	}
 	fz_always(ctx)
-		fz_end_throw_on_repair(ctx);
+		pdf_end_throw_on_repair(ctx, doc, xref_base);
 	fz_catch(ctx)
 	{
 		if (fz_caught(ctx) == FZ_ERROR_REPAIRED)

@@ -878,6 +878,8 @@ parse_inline_image(fz_context *ctx, pdf_processor *proc, pdf_csi *csi, fz_stream
 static void
 pdf_process_extgstate(fz_context *ctx, pdf_processor *proc, pdf_csi *csi, pdf_obj *dict)
 {
+	pdf_document* doc = csi->doc;
+	assert(doc != NULL);
 	pdf_obj *obj;
 
 	obj = pdf_dict_get(ctx, dict, PDF_NAME(LW));
@@ -995,7 +997,7 @@ pdf_process_extgstate(fz_context *ctx, pdf_processor *proc, pdf_csi *csi, pdf_ob
 
 			xobj = pdf_dict_get(ctx, obj, PDF_NAME(G));
 
-			softmask_cs = pdf_xobject_colorspace(ctx, xobj);
+			softmask_cs = pdf_xobject_colorspace(ctx, doc, xobj);
 			fz_try(ctx)
 			{
 				if (softmask_cs)

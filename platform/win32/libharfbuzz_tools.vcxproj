@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{1912F440-4AAE-4CD8-807C-2575981D6426}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../scripts/harfbuzz/src;../../thirdparty/lcms2/include;../../scripts/freetype;../../scripts/libpng;../../scripts/libtiff;../../scripts/libjpeg-turbo;../../thirdparty/jbig2dec;../../thirdparty/owemdjee/libjpeg-turbo/src;../../thirdparty/openjpeg/src/lib/openjp2;../../thirdparty/freetype/include;../../thirdparty/freetype/include/freetype;../../thirdparty/harfbuzz/src;../../thirdparty/gumbo-parser/src;../../thirdparty/gumbo-parser/visualc/include;../../thirdparty/libpng;../../thirdparty/libtiff/libtiff;../../thirdparty/zlib;../../include/;../../include/mupdf;../../scripts/zlib;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/glfw/include;../../scripts/glfw;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>FZ_DO_NOT_VALIDATE_BOOL_FOR_ASSERT;HAVE_MUPDF;MUJS_ALL_FILES;WITH_GZFILEOP;BUILD_MONOLITHIC;FT2_BUILD_LIBRARY;OPJ_STATIC;USE_JPIP=1;FT_CONFIG_MODULES_H="slimftmodules.h";FT_CONFIG_OPTIONS_H="slimftoptions.h";JBIG_EXTERNAL_MEMENTO_H="memento.h";HAVE_FALLBACK=1;HAVE_OT;HAVE_UCDN;HB_NO_MT;hb_malloc_impl=fz_hb_malloc;hb_calloc_impl=fz_hb_calloc;hb_realloc_impl=fz_hb_realloc;hb_free_impl=fz_hb_free;HAVE_FREETYPE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../scripts/harfbuzz/src;../../thirdparty/lcms2/include;../../scripts/freetype;../../scripts/libpng;../../scripts/libtiff;../../scripts/libjpeg-turbo;../../thirdparty/jbig2dec;../../thirdparty/owemdjee/libjpeg-turbo/src;../../thirdparty/openjpeg/src/lib/openjp2;../../thirdparty/freetype/include;../../thirdparty/freetype/include/freetype;../../thirdparty/harfbuzz/src;../../thirdparty/gumbo-parser/src;../../thirdparty/gumbo-parser/visualc/include;../../thirdparty/libpng;../../thirdparty/libtiff/libtiff;../../thirdparty/zlib;../../include/;../../include/mupdf;../../scripts/zlib;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/glfw/include;../../scripts/glfw;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>FZ_DO_NOT_VALIDATE_BOOL_FOR_ASSERT;HAVE_MUPDF;MUJS_ALL_FILES;WITH_GZFILEOP;BUILD_MONOLITHIC;FT2_BUILD_LIBRARY;OPJ_STATIC;USE_JPIP=1;FT_CONFIG_MODULES_H="slimftmodules.h";FT_CONFIG_OPTIONS_H="slimftoptions.h";HAVE_FALLBACK=1;HAVE_OT;HAVE_UCDN;HB_NO_MT;hb_malloc_impl=fz_hb_malloc;hb_calloc_impl=fz_hb_calloc;hb_realloc_impl=fz_hb_realloc;hb_free_impl=fz_hb_free;HAVE_FREETYPE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../scripts/harfbuzz/src;../../thirdparty/lcms2/include;../../scripts/freetype;../../scripts/libpng;../../scripts/libtiff;../../scripts/libjpeg-turbo;../../thirdparty/jbig2dec;../../thirdparty/owemdjee/libjpeg-turbo/src;../../thirdparty/openjpeg/src/lib/openjp2;../../thirdparty/freetype/include;../../thirdparty/freetype/include/freetype;../../thirdparty/harfbuzz/src;../../thirdparty/gumbo-parser/src;../../thirdparty/gumbo-parser/visualc/include;../../thirdparty/libpng;../../thirdparty/libtiff/libtiff;../../thirdparty/zlib;../../include/;../../include/mupdf;../../scripts/zlib;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/glfw/include;../../scripts/glfw;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>FZ_DO_NOT_VALIDATE_BOOL_FOR_ASSERT;HAVE_MUPDF;MUJS_ALL_FILES;WITH_GZFILEOP;BUILD_MONOLITHIC;FT2_BUILD_LIBRARY;OPJ_STATIC;USE_JPIP=1;FT_CONFIG_MODULES_H="slimftmodules.h";FT_CONFIG_OPTIONS_H="slimftoptions.h";JBIG_EXTERNAL_MEMENTO_H="memento.h";HAVE_FALLBACK=1;HAVE_OT;HAVE_UCDN;HB_NO_MT;hb_malloc_impl=fz_hb_malloc;hb_calloc_impl=fz_hb_calloc;hb_realloc_impl=fz_hb_realloc;hb_free_impl=fz_hb_free;HAVE_FREETYPE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../scripts/harfbuzz/src;../../thirdparty/lcms2/include;../../scripts/freetype;../../scripts/libpng;../../scripts/libtiff;../../scripts/libjpeg-turbo;../../thirdparty/jbig2dec;../../thirdparty/owemdjee/libjpeg-turbo/src;../../thirdparty/openjpeg/src/lib/openjp2;../../thirdparty/freetype/include;../../thirdparty/freetype/include/freetype;../../thirdparty/harfbuzz/src;../../thirdparty/gumbo-parser/src;../../thirdparty/gumbo-parser/visualc/include;../../thirdparty/libpng;../../thirdparty/libtiff/libtiff;../../thirdparty/zlib;../../include/;../../include/mupdf;../../scripts/zlib;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/glfw/include;../../scripts/glfw;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>FZ_DO_NOT_VALIDATE_BOOL_FOR_ASSERT;HAVE_MUPDF;MUJS_ALL_FILES;WITH_GZFILEOP;BUILD_MONOLITHIC;FT2_BUILD_LIBRARY;OPJ_STATIC;USE_JPIP=1;FT_CONFIG_MODULES_H="slimftmodules.h";FT_CONFIG_OPTIONS_H="slimftoptions.h";HAVE_FALLBACK=1;HAVE_OT;HAVE_UCDN;HB_NO_MT;hb_malloc_impl=fz_hb_malloc;hb_calloc_impl=fz_hb_calloc;hb_realloc_impl=fz_hb_realloc;hb_free_impl=fz_hb_free;HAVE_FREETYPE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/harfbuzz/src/main.cc" />
+    <ClCompile Include="../../thirdparty/harfbuzz/util/gpu/demo-atlas.cc" />
+    <ClCompile Include="../../thirdparty/harfbuzz/util/gpu/demo-buffer.cc" />
+    <ClCompile Include="../../thirdparty/harfbuzz/util/gpu/demo-font.cc" />
+    <ClCompile Include="../../thirdparty/harfbuzz/util/gpu/demo-glstate.cc" />
+    <ClCompile Include="../../thirdparty/harfbuzz/util/gpu/demo-renderer-d3d11.cc" />
+    <ClCompile Include="../../thirdparty/harfbuzz/util/gpu/demo-renderer-gl.cc" />
+    <ClCompile Include="../../thirdparty/harfbuzz/util/gpu/demo-shader.cc" />
+    <ClCompile Include="../../thirdparty/harfbuzz/util/gpu/demo-view.cc" />
+    <ClCompile Include="../../thirdparty/harfbuzz/util/gpu/web/hb-gpu-web-webgpu.cc" />
+    <ClCompile Include="../../thirdparty/harfbuzz/util/gpu/web/hb-gpu-web.cc" />
+    <ClCompile Include="../../thirdparty/harfbuzz/util/hb-draw-all.c" />
+    <ClCompile Include="../../thirdparty/harfbuzz/util/hb-fc-list.c" />
+    <ClCompile Include="../../thirdparty/harfbuzz/util/hb-fc.cc" />
+    <ClCompile Include="../../thirdparty/harfbuzz/util/hb-ft-raster-all.cc" />
+    <ClCompile Include="../../thirdparty/harfbuzz/util/hb-ft-raster.cc" />
+    <ClCompile Include="../../thirdparty/harfbuzz/util/hb-gpu-encode-all.cc" />
+    <ClCompile Include="../../thirdparty/harfbuzz/util/hb-gpu-util.cc" />
+    <ClCompile Include="../../thirdparty/harfbuzz/util/hb-info.cc" />
+    <ClCompile Include="../../thirdparty/harfbuzz/util/hb-paint-all.c" />
+    <ClCompile Include="../../thirdparty/harfbuzz/util/hb-raster-all.cc" />
+    <ClCompile Include="../../thirdparty/harfbuzz/util/hb-raster.cc" />
+    <ClCompile Include="../../thirdparty/harfbuzz/util/hb-shape-util.cc" />
+    <ClCompile Include="../../thirdparty/harfbuzz/util/hb-subset-util.cc" />
+    <ClCompile Include="../../thirdparty/harfbuzz/util/hb-vector-svg-all.c" />
+    <ClCompile Include="../../thirdparty/harfbuzz/util/hb-vector-util.cc" />
+    <ClCompile Include="../../thirdparty/harfbuzz/util/hb-view.cc" />
+    <ClInclude Include="../../thirdparty/harfbuzz/util/ansi-print.hh" />
+    <ClInclude Include="../../thirdparty/harfbuzz/util/batch.hh" />
+    <ClInclude Include="../../thirdparty/harfbuzz/util/draw-output-color.hh" />
+    <ClInclude Include="../../thirdparty/harfbuzz/util/face-options.hh" />
+    <ClInclude Include="../../thirdparty/harfbuzz/util/font-options.hh" />
+    <ClInclude Include="../../thirdparty/harfbuzz/util/gpu-output.hh" />
+    <ClInclude Include="../../thirdparty/harfbuzz/util/gpu/default-font.hh" />
+    <ClInclude Include="../../thirdparty/harfbuzz/util/gpu/default-text-combined.hh" />
+    <ClInclude Include="../../thirdparty/harfbuzz/util/gpu/default-text-en.hh" />
+    <ClInclude Include="../../thirdparty/harfbuzz/util/gpu/default-text-fa.hh" />
+    <ClInclude Include="../../thirdparty/harfbuzz/util/gpu/default-text.hh" />
+    <ClInclude Include="../../thirdparty/harfbuzz/util/gpu/demo-atlas.h" />
+    <ClInclude Include="../../thirdparty/harfbuzz/util/gpu/demo-buffer.h" />
+    <ClInclude Include="../../thirdparty/harfbuzz/util/gpu/demo-common.h" />
+    <ClInclude Include="../../thirdparty/harfbuzz/util/gpu/demo-font.h" />
+    <ClInclude Include="../../thirdparty/harfbuzz/util/gpu/demo-fragment-glsl.hh" />
+    <ClInclude Include="../../thirdparty/harfbuzz/util/gpu/demo-glstate.h" />
+    <ClInclude Include="../../thirdparty/harfbuzz/util/gpu/demo-renderer.h" />
+    <ClInclude Include="../../thirdparty/harfbuzz/util/gpu/demo-shader-hlsl.hh" />
+    <ClInclude Include="../../thirdparty/harfbuzz/util/gpu/demo-shader-msl.hh" />
+    <ClInclude Include="../../thirdparty/harfbuzz/util/gpu/demo-shader-wgsl.hh" />
+    <ClInclude Include="../../thirdparty/harfbuzz/util/gpu/demo-shader.h" />
+    <ClInclude Include="../../thirdparty/harfbuzz/util/gpu/demo-vertex-glsl.hh" />
+    <ClInclude Include="../../thirdparty/harfbuzz/util/gpu/demo-view.h" />
+    <ClInclude Include="../../thirdparty/harfbuzz/util/gpu/matrix4x4.hh" />
+    <ClInclude Include="../../thirdparty/harfbuzz/util/gpu/trackball.hh" />
+    <ClInclude Include="../../thirdparty/harfbuzz/util/gpu/web/config-override.h" />
+    <ClInclude Include="../../thirdparty/harfbuzz/util/gpu/web/config.h" />
+    <ClInclude Include="../../thirdparty/harfbuzz/util/gpu/web/gl-stub.h" />
+    <ClInclude Include="../../thirdparty/harfbuzz/util/hb-fc.h" />
+    <ClInclude Include="../../thirdparty/harfbuzz/util/helper-cairo-ansi.hh" />
+    <ClInclude Include="../../thirdparty/harfbuzz/util/helper-cairo-ft.hh" />
+    <ClInclude Include="../../thirdparty/harfbuzz/util/helper-cairo.hh" />
+    <ClInclude Include="../../thirdparty/harfbuzz/util/helper-extents-overlay.hh" />
+    <ClInclude Include="../../thirdparty/harfbuzz/util/helper-image-output.hh" />
+    <ClInclude Include="../../thirdparty/harfbuzz/util/helper-subset.hh" />
+    <ClInclude Include="../../thirdparty/harfbuzz/util/main-font-text.hh" />
+    <ClInclude Include="../../thirdparty/harfbuzz/util/options.hh" />
+    <ClInclude Include="../../thirdparty/harfbuzz/util/output-options.hh" />
+    <ClInclude Include="../../thirdparty/harfbuzz/util/raster-output.hh" />
+    <ClInclude Include="../../thirdparty/harfbuzz/util/shape-consumer.hh" />
+    <ClInclude Include="../../thirdparty/harfbuzz/util/shape-format.hh" />
+    <ClInclude Include="../../thirdparty/harfbuzz/util/shape-options.hh" />
+    <ClInclude Include="../../thirdparty/harfbuzz/util/shape-output.hh" />
+    <ClInclude Include="../../thirdparty/harfbuzz/util/text-options.hh" />
+    <ClInclude Include="../../thirdparty/harfbuzz/util/vector-output.hh" />
+    <ClInclude Include="../../thirdparty/harfbuzz/util/view-cairo.hh" />
+    <ClInclude Include="../../thirdparty/harfbuzz/util/view-options.hh" />
+    <Font Include="../../thirdparty/harfbuzz/util/gpu/default-font.ttf" />
+    <Image Include="../../thirdparty/harfbuzz/HarfBuzz.png" />
+    <Image Include="../../thirdparty/harfbuzz/docs/HarfBuzz.png" />
+    <Image Include="../../thirdparty/harfbuzz/docs/favicon.ico" />
+    <Image Include="../../thirdparty/harfbuzz/docs/hb-gpu.png" />
+    <Image Include="../../thirdparty/harfbuzz/docs/hb-raster.png" />
+    <Image Include="../../thirdparty/harfbuzz/docs/hb-shape.png" />
+    <Image Include="../../thirdparty/harfbuzz/docs/hb-subset.png" />
+    <Image Include="../../thirdparty/harfbuzz/docs/hb-vector.png" />
+    <Image Include="../../thirdparty/harfbuzz/xkcd.png" />
+    <Text Include="../../thirdparty/harfbuzz/AGENTS.md" />
+    <Text Include="../../thirdparty/harfbuzz/AUTHORS" />
+    <Text Include="../../thirdparty/harfbuzz/BUILD.md" />
+    <Text Include="../../thirdparty/harfbuzz/CLAUDE.md" />
+    <Text Include="../../thirdparty/harfbuzz/CMakeLists.txt" />
+    <Text Include="../../thirdparty/harfbuzz/CODE_OF_AI_CONDUCT.md" />
+    <Text Include="../../thirdparty/harfbuzz/CONFIG.md" />
+    <Text Include="../../thirdparty/harfbuzz/COPYING" />
+    <Text Include="../../thirdparty/harfbuzz/NEWS" />
+    <Text Include="../../thirdparty/harfbuzz/README.md" />
+    <Text Include="../../thirdparty/harfbuzz/README.mingw.md" />
+    <Text Include="../../thirdparty/harfbuzz/README.python.md" />
+    <Text Include="../../thirdparty/harfbuzz/RELEASING.md" />
+    <Text Include="../../thirdparty/harfbuzz/SECURITY.md" />
+    <Text Include="../../thirdparty/harfbuzz/TESTING.md" />
+    <Text Include="../../thirdparty/harfbuzz/THANKS" />
+    <Text Include="../../thirdparty/harfbuzz/docs/HarfBuzz.svg" />
+    <Text Include="../../thirdparty/harfbuzz/docs/features.dot" />
+    <Text Include="../../thirdparty/harfbuzz/docs/harfbuzz-overrides.txt" />
+    <Text Include="../../thirdparty/harfbuzz/docs/harfbuzz-sections.txt" />
+    <Text Include="../../thirdparty/harfbuzz/docs/repacker.md" />
+    <Text Include="../../thirdparty/harfbuzz/docs/serializer.md" />
+    <Text Include="../../thirdparty/harfbuzz/docs/subset-preprocessing.md" />
+    <Text Include="../../thirdparty/harfbuzz/docs/version.xml.in" />
+    <Text Include="../../thirdparty/harfbuzz/docs/wasm-shaper.md" />
+    <Text Include="../../thirdparty/harfbuzz/meson_options.txt" />
+    <Text Include="../../thirdparty/harfbuzz/replace-enum-strings.cmake" />
+    <Text Include="../../thirdparty/harfbuzz/src/ms-use/COPYING" />
+    <Text Include="../../thirdparty/harfbuzz/src/ms-use/IndicPositionalCategory-Additional.txt" />
+    <Text Include="../../thirdparty/harfbuzz/src/ms-use/IndicShapingInvalidCluster.txt" />
+    <Text Include="../../thirdparty/harfbuzz/src/ms-use/IndicSyllabicCategory-Additional.txt" />
+    <Text Include="../../thirdparty/harfbuzz/util/gpu/default-text.txt" />
+    <Text Include="../../thirdparty/harfbuzz/util/gpu/demo-fragment.glsl" />
+    <Text Include="../../thirdparty/harfbuzz/util/gpu/demo-shader.hlsl" />
+    <Text Include="../../thirdparty/harfbuzz/util/gpu/demo-shader.msl" />
+    <Text Include="../../thirdparty/harfbuzz/util/gpu/demo-shader.wgsl" />
+    <Text Include="../../thirdparty/harfbuzz/util/gpu/demo-vertex.glsl" />
+    <Text Include="../../thirdparty/harfbuzz/util/gpu/gen-default-texts.py" />
+    <Text Include="../../thirdparty/harfbuzz/util/gpu/hexify" />
+    <Text Include="../../thirdparty/harfbuzz/util/gpu/stringize" />
+    <Text Include="../../thirdparty/harfbuzz/util/gpu/web/build-webgpu.sh" />
+    <Text Include="../../thirdparty/harfbuzz/util/gpu/web/build.sh" />
+    <Text Include="../../thirdparty/harfbuzz/util/gpu/web/dom.html" />
+    <Text Include="../../thirdparty/harfbuzz/util/gpu/web/shell.html" />
+    <Xml Include="../../thirdparty/harfbuzz/docs/harfbuzz-docs.xml" />
+    <Xml Include="../../thirdparty/harfbuzz/docs/usermanual-buffers-language-script-and-direction.xml" />
+    <Xml Include="../../thirdparty/harfbuzz/docs/usermanual-clusters.xml" />
+    <Xml Include="../../thirdparty/harfbuzz/docs/usermanual-fonts-and-faces.xml" />
+    <Xml Include="../../thirdparty/harfbuzz/docs/usermanual-getting-started.xml" />
+    <Xml Include="../../thirdparty/harfbuzz/docs/usermanual-glyph-information.xml" />
+    <Xml Include="../../thirdparty/harfbuzz/docs/usermanual-install-harfbuzz.xml" />
+    <Xml Include="../../thirdparty/harfbuzz/docs/usermanual-integration.xml" />
+    <Xml Include="../../thirdparty/harfbuzz/docs/usermanual-object-model.xml" />
+    <Xml Include="../../thirdparty/harfbuzz/docs/usermanual-opentype-features.xml" />
+    <Xml Include="../../thirdparty/harfbuzz/docs/usermanual-shaping-concepts.xml" />
+    <Xml Include="../../thirdparty/harfbuzz/docs/usermanual-utilities.xml" />
+    <Xml Include="../../thirdparty/harfbuzz/docs/usermanual-what-is-harfbuzz.xml" />
+  </ItemGroup>
+  <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+</Project>

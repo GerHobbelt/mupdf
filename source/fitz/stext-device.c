@@ -943,7 +943,7 @@ fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int 
 	/* Don't move pen for marking non-spacing characters */
 	if (ucdn_get_general_category(c) == UCDN_GENERAL_CATEGORY_MN)
 	{
-		add_char_to_line(ctx, page, cur_line, trm, font, size, c, (dev->flags & FZ_STEXT_ACCURATE_BBOXES) ? glyph : NON_ACCURATE_GLYPH, &dev->pen, &dev->pen, bidi, dev->color, 0, flags, dev->flags);
+		add_char_to_line(ctx, dev, page, cur_line, trm, font, size, c, (dev->opts.flags & FZ_STEXT_ACCURATE_BBOXES) ? glyph : NON_ACCURATE_GLYPH, &dev->pen, &dev->pen, bidi, dev->color, 0, flags, dev->opts.flags);
 		dev->lastbidi = bidi;
 		dev->lastchar = c;
 		dev->lastline = cur_line;

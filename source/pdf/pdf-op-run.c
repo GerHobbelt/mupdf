@@ -1459,18 +1459,6 @@ pdf_flush_clip_text(fz_context *ctx, pdf_run_processor *pr)
 	return pdf_flush_text_imp(ctx, pr, 1);
 }
 
-static inline pdf_gstate *
-pdf_flush_text(fz_context *ctx, pdf_run_processor *pr)
-{
-	return pdf_flush_text_imp(ctx, pr, 0);
-}
-
-static inline pdf_gstate *
-pdf_flush_clip_text(fz_context *ctx, pdf_run_processor *pr)
-{
-	return pdf_flush_text_imp(ctx, pr, 1);
-}
-
 static int
 guess_bidi_level(int bidiclass, int cur_bidi)
 {
@@ -2742,6 +2730,9 @@ pdf_run_xobject(fz_context *ctx, pdf_run_processor *pr, pdf_obj *xobj, pdf_obj *
 
 	fz_try(ctx)
 	{
+		doc = pdf_get_bound_document(ctx, xobj);
+		assert(doc != NULL);
+
 		set_struct_parent(ctx, pr, pdf_dict_get_int_default(ctx, xobj, PDF_NAME(StructParent), -1));
 
 		oc = pdf_dict_get(ctx, xobj, PDF_NAME(OC));
@@ -2774,7 +2765,7 @@ pdf_run_xobject(fz_context *ctx, pdf_run_processor *pr, pdf_obj *xobj, pdf_obj *
 			gstate = begin_softmask(ctx, pr, &softmask, bbox);
 
 			if (isolated)
-				cs = pdf_xobject_colorspace(ctx, xobj);
+				cs = pdf_xobject_colorspace(ctx, doc, xobj);
 			fz_begin_group(ctx, pr->dev, bbox,
 					cs,
 					(is_smask ? 1 : isolated),
@@ -2817,8 +2808,6 @@ pdf_run_xobject(fz_context *ctx, pdf_run_processor *pr, pdf_obj *xobj, pdf_obj *
 			fz_set_default_colorspaces(ctx, pr->dev, xobj_default_cs);
 			pr->default_cs = xobj_default_cs;
 		}
-
-		doc = pdf_get_bound_document(ctx, xobj);
 
 		oldbot = pr->gbot;
 		pr->gbot = pr->gtop;
