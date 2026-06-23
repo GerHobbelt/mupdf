@@ -92,6 +92,7 @@ fz_unicode_from_glyph_name(const char *name)
 	int l = 0;
 	int r = nelem(single_name_list) - 1;
 	int code = 0;
+	size_t z;
 
 	fz_strlcpy(buf, name, sizeof buf);
 
@@ -133,11 +134,19 @@ fz_unicode_from_glyph_name(const char *name)
 			return single_code_list[m];
 	}
 
-	if (buf[0] == 'u' && buf[1] == 'n' && buf[2] == 'i' && strlen(buf) == 7)
+	z = strlen(buf);
+	if (z == 7 && buf[0] == 'u' && buf[1] == 'n' && buf[2] == 'i')
 		code = read_num(buf+3, 16);
 	else if (buf[0] == 'u')
 		code = read_num(buf+1, 16);
-	else if (buf[0] == 'a' && buf[1] != 0 && buf[2] != 0)
+	else if (buf[0] == 'a' && z >= 3)
+		code = read_num(buf+1, 10);
+	/* Additional cases from bug 709466, inspired by the handling in pdf.js */
+	else if (buf[0] == 'G' && z == 3)
+		code = read_num(buf+1, 16);
+	else if (buf[0] == 'g' && z == 5)
+		code = read_num(buf+1, 16);
+	else if ((buf[0] == 'C' || buf[0] == 'c') && z >= 3 && z <= 4)
 		code = read_num(buf+1, 10);
 
 	else if (buf[0] == 'G')
