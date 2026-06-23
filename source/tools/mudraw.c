@@ -368,6 +368,7 @@ static int max_num_workers = 0;
 static int num_workers = 0;
 static worker_t *workers;
 static fz_band_writer *bander = NULL;
+static int external_access = 0;
 
 static const char *layer_config = NULL;
 static int layer_list = 0;
@@ -483,6 +484,7 @@ static int usage(void)
 		"\t-m -\tlimit memory usage in bytes\n"
 		"\t-L\tlow memory mode (avoid caching, clear objects after each page)\n"
 		"\t-O -\toptions\n"
+		"\t-E\tallow access to directory containing file for external resources\n"
 #ifndef DISABLE_MUTHREADS
 		"\t-P\tparallel interpretation/rendering\n"
 #else
@@ -2146,7 +2148,7 @@ int mudraw_main(int argc, char **argv)
 
 	fz_var(doc);
 
-	while ((c = fz_getopt(argc, argv, "qp:o:F:R:r:w:h:fB:c:e:G:Is:A:DiW:H:S:T:t:d:U:XLvPl:y:Yz:Z:M:NO:am:Kb:k:")) != -1)
+	while ((c = fz_getopt(argc, argv, "qp:o:F:R:r:w:h:fB:c:Ee:G:Is:A:DiW:H:S:T:t:d:U:XLvPl:y:Yz:Z:M:NO:am:Kb:k:")) != -1)
 	{
 		switch (c)
 		{
@@ -2178,6 +2180,7 @@ int mudraw_main(int argc, char **argv)
 		case 'e': proof_filename = fz_optarg; break;
 		case 'G': gamma_value = fz_atof(fz_optarg); break;
 		case 'I': invert++; break;
+		case 'E': external_access = 1; break;
 
 		case 'W': layout_w = fz_atof(fz_optarg); break;
 		case 'H': layout_h = fz_atof(fz_optarg); break;
@@ -2651,11 +2654,21 @@ int mudraw_main(int argc, char **argv)
 				time_t atime;
 				time_t dtime;
 				int layouttime;
+				fz_archive *dir = NULL;
+
+				fz_var(dir);
 
 				fz_try(ctx)
 				{
 					filename = argv[fz_optind++];
 					files++;
+
+					if (external_access)
+					{
+						char dirname[PATH_MAX];
+						fz_dirname(dirname, filename, sizeof dirname);
+						dir = fz_open_directory(ctx, dirname);
+					}
 
 					if (!useaccel)
 						accel = NULL;
@@ -2684,7 +2697,7 @@ int mudraw_main(int argc, char **argv)
 						}
 					}
 
-					doc = fz_open_accelerated_document(ctx, filename, accel);
+					doc = fz_open_accelerated_document_with_dir(ctx, filename, accel, dir);
 
 #ifdef CLUSTER
 					/* Load and then drop the outline if we're running under the cluster.
