@@ -6494,7 +6494,7 @@ stext_walk(js_State *J, fz_stext_block *block)
 				js_pushboolean(J, block->u.v.flags & FZ_STEXT_VECTOR_CONTINUES);
 				js_setproperty(J, -2, "continues");
 				ffi_pushrgb(J, block->u.v.argb);
-				js_call(J, 4);
+				js_call(J, 3);
 				js_pop(J, 1);
 			}
 			break;
@@ -13467,6 +13467,7 @@ int murun_main(int argc, char **argv)
 		jsB_enum(J, "StructuredText", "FLAGS_UNICODE_IS_CID", FZ_STEXT_UNICODE_IS_CID);
 		jsB_enum(J, "StructuredText", "FLAGS_UNICODE_IS_GID", FZ_STEXT_UNICODE_IS_GID);
 		jsB_enum(J, "StructuredText", "FLAGS_SYNTHETIC_LARGE", FZ_STEXT_SYNTHETIC_LARGE);
+		jsB_enum(J, "StructuredText", "FLAGS_HIGHLIGHT", FZ_STEXT_HIGHLIGHT);
 
 		jsB_enum(J, "StructuredText", "VECTOR_IS_STROKED", FZ_STEXT_VECTOR_IS_STROKED);
 		jsB_enum(J, "StructuredText", "VECTOR_IS_RECTANGLE", FZ_STEXT_VECTOR_IS_RECTANGLE);
