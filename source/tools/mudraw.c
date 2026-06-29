@@ -2787,6 +2787,7 @@ int mudraw_main(int argc, char **argv)
 				{
 					fz_drop_document(ctx, doc);
 					doc = NULL;
+					fz_drop_archive(ctx, dir);
 				}
 				fz_catch(ctx)
 				{
@@ -2802,7 +2803,6 @@ int mudraw_main(int argc, char **argv)
 		fz_catch(ctx)
 		{
 			bgprint_flush();
-			fz_drop_document(ctx, doc);
 			fz_report_error(ctx);
 			fz_log_error_printf(ctx, "cannot draw '%s'", filename);
 			errored = 1;
