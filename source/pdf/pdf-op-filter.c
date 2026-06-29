@@ -29,15 +29,19 @@
 
 typedef enum
 {
+	/* These bits represent the pending state we might need to flush. */
 	FLUSH_CTM = 1,
 	FLUSH_COLOR_F = 2,
 	FLUSH_COLOR_S = 4,
 	FLUSH_TEXT = 8,
 	FLUSH_OP = 16,
+	FLUSH_STROKE_STATE = 32,
 
+	/* These combinations of bits represent the reasons why we might need to flush. */
 	FLUSH_ALL = 15,
-	FLUSH_STROKE = 1+4,
-	FLUSH_FILL = 1+2
+	FLUSH_STROKE = FLUSH_CTM + FLUSH_COLOR_S + FLUSH_STROKE_STATE,
+	FLUSH_FILL = FLUSH_CTM + FLUSH_COLOR_F,
+	FLUSH_CLIP = FLUSH_CTM + FLUSH_TEXT + FLUSH_OP
 } gstate_flush_flags;
 
 typedef struct pdf_filter_gstate_sc
@@ -64,6 +68,8 @@ typedef struct pdf_filter_gstate
 		fz_linejoin linejoin;
 		float linewidth;
 		float miterlimit;
+		float phase;
+		pdf_obj *dash;
 	} stroke;
 	pdf_text_state text;
 } pdf_filter_gstate;
@@ -195,10 +201,36 @@ filter_push(fz_context *ctx, pdf_sanitize_processor *p)
 	new_gstate->next = gstate;
 	p->gstate = new_gstate;
 
+	fz_keep_colorspace(ctx, gstate->pending.CS.cs);
+	fz_keep_colorspace(ctx, gstate->pending.cs.cs);
 	pdf_keep_font(ctx, new_gstate->pending.text.font);
 	fz_keep_string(ctx, new_gstate->pending.text.fontname);
+	fz_keep_colorspace(ctx, gstate->sent.CS.cs);
+	fz_keep_colorspace(ctx, gstate->sent.cs.cs);
 	pdf_keep_font(ctx, new_gstate->sent.text.font);
 	fz_keep_string(ctx, new_gstate->sent.text.fontname);
+	pdf_keep_obj(ctx, new_gstate->pending.stroke.dash);
+	pdf_keep_obj(ctx, new_gstate->sent.stroke.dash);
+}
+
+static void
+drop_gstate(fz_context *ctx, pdf_sanitize_processor *p)
+{
+	filter_gstate *gstate = p->gstate;
+	filter_gstate *old = gstate->next;
+
+	fz_drop_colorspace(ctx, gstate->pending.CS.cs);
+	fz_drop_colorspace(ctx, gstate->pending.cs.cs);
+	pdf_drop_font(ctx, gstate->pending.text.font);
+	fz_drop_string(ctx, gstate->pending.text.fontname);
+	fz_drop_colorspace(ctx, gstate->sent.CS.cs);
+	fz_drop_colorspace(ctx, gstate->sent.cs.cs);
+	pdf_drop_font(ctx, gstate->sent.text.font);
+	fz_drop_string(ctx, gstate->sent.text.fontname);
+	pdf_drop_obj(ctx, gstate->pending.stroke.dash);
+	pdf_drop_obj(ctx, gstate->sent.stroke.dash);
+	fz_free(ctx, gstate);
+	p->gstate = old;
 }
 
 static int
@@ -215,12 +247,7 @@ filter_pop(fz_context *ctx, pdf_sanitize_processor *p)
 		if (p->super.chain->op_Q)
 			p->super.chain->op_Q(ctx, p->super.chain);
 
-	pdf_drop_font(ctx, gstate->pending.text.font);
-	fz_drop_string(ctx, gstate->pending.text.fontname);
-	pdf_drop_font(ctx, gstate->sent.text.font);
-	fz_drop_string(ctx, gstate->sent.text.fontname);
-	fz_free(ctx, gstate);
-	p->gstate = old;
+	drop_gstate(ctx, p);
 	return 0;
 }
 
@@ -272,9 +299,13 @@ ensure_pushed(fz_context *ctx, pdf_sanitize_processor *p)
 	 * So put, gstate->pending back to sanity. */
 	pdf_drop_font(ctx, gstate->pending.text.font);
 	fz_drop_string(ctx, gstate->pending.text.fontname);
+	fz_drop_colorspace(ctx, gstate->pending.CS.cs);
+	fz_drop_colorspace(ctx, gstate->pending.cs.cs);
 	gstate->pending = p->gstate->next->sent;
 	pdf_keep_font(ctx, gstate->pending.text.font);
 	fz_keep_string(ctx, gstate->pending.text.fontname);
+	fz_keep_colorspace(ctx, gstate->pending.CS.cs);
+	fz_keep_colorspace(ctx, gstate->pending.cs.cs);
 
 	return p->gstate;
 }
@@ -293,6 +324,15 @@ static void filter_flush(fz_context *ctx, pdf_sanitize_processor *p, int flush)
 
 	if (flush & FLUSH_OP)
 		gstate = ensure_pushed(ctx, p);
+
+	if (flush & FLUSH_TEXT)
+	{
+		int sane_tr = gstate->pending.text.render+1;
+		if (sane_tr & 1)
+			flush |= FLUSH_COLOR_F;
+		if (sane_tr & 2)
+			flush |= FLUSH_COLOR_S;
+	}
 
 	if (flush & FLUSH_CTM)
 	{
@@ -401,7 +441,9 @@ static void filter_flush(fz_context *ctx, pdf_sanitize_processor *p, int flush)
 		}
 
 done_sc:
+		fz_drop_colorspace(ctx, gstate->sent.cs.cs);
 		gstate->sent.cs = gstate->pending.cs;
+		fz_keep_colorspace(ctx, gstate->sent.cs.cs);
 		gstate->sent.sc = gstate->pending.sc;
 	}
 
@@ -484,11 +526,13 @@ done_sc:
 		}
 
 done_SC:
+		fz_drop_colorspace(ctx, gstate->sent.CS.cs);
 		gstate->sent.CS = gstate->pending.CS;
+		fz_keep_colorspace(ctx, gstate->sent.CS.cs);
 		gstate->sent.SC = gstate->pending.SC;
 	}
 
-	if (flush & FLUSH_STROKE)
+	if (flush & FLUSH_STROKE_STATE)
 	{
 		if (gstate->pending.stroke.linecap != gstate->sent.stroke.linecap)
 		{
@@ -514,7 +558,16 @@ done_SC:
 			if (p->super.chain->op_M)
 				p->super.chain->op_M(ctx, p->super.chain, gstate->pending.stroke.miterlimit);
 		}
+		if (gstate->pending.stroke.phase != gstate->sent.stroke.phase ||
+			pdf_objcmp(ctx, gstate->pending.stroke.dash, gstate->sent.stroke.dash))
+		{
+			gstate = ensure_pushed(ctx, p);
+			if (p->super.chain->op_d)
+				p->super.chain->op_d(ctx, p->super.chain, gstate->pending.stroke.dash, gstate->pending.stroke.phase);
+		}
+		pdf_drop_obj(ctx, gstate->sent.stroke.dash);
 		gstate->sent.stroke = gstate->pending.stroke;
+		gstate->sent.stroke.dash = pdf_keep_obj(ctx, gstate->sent.stroke.dash);
 	}
 
 	if (flush & FLUSH_TEXT)
@@ -1155,9 +1208,9 @@ pdf_filter_d(fz_context *ctx, pdf_processor *proc, pdf_obj *array, float phase)
 	if (fz_is_empty_rect(p->gstate->clip_rect))
 		return;
 
-	filter_flush(ctx, p, FLUSH_OP);
-	if (p->super.chain->op_d)
-		p->super.chain->op_d(ctx, p->super.chain, array, phase);
+	pdf_drop_obj(ctx, p->gstate->pending.stroke.dash);
+	p->gstate->pending.stroke.dash = pdf_keep_obj(ctx, array);
+	p->gstate->pending.stroke.phase = phase;
 }
 
 static void
@@ -1806,7 +1859,7 @@ pdf_filter_B(fz_context *ctx, pdf_processor *proc)
 	if (fz_is_empty_rect(p->gstate->clip_rect))
 		return;
 
-	if (cull_path(ctx, p, FZ_CULL_PATH_FILL_STROKE, FLUSH_ALL))
+	if (cull_path(ctx, p, FZ_CULL_PATH_FILL_STROKE, FLUSH_ALL | FLUSH_STROKE_STATE))
 		return;
 
 	if (p->super.chain->op_B)
@@ -1821,7 +1874,7 @@ pdf_filter_Bstar(fz_context *ctx, pdf_processor *proc)
 	if (fz_is_empty_rect(p->gstate->clip_rect))
 		return;
 
-	if (cull_path(ctx, p, FZ_CULL_PATH_FILL_STROKE, FLUSH_ALL))
+	if (cull_path(ctx, p, FZ_CULL_PATH_FILL_STROKE, FLUSH_ALL | FLUSH_STROKE_STATE))
 		return;
 
 	if (p->super.chain->op_Bstar)
@@ -1836,7 +1889,7 @@ pdf_filter_b(fz_context *ctx, pdf_processor *proc)
 	if (fz_is_empty_rect(p->gstate->clip_rect))
 		return;
 
-	if (cull_path(ctx, p, FZ_CULL_PATH_FILL_STROKE, FLUSH_ALL))
+	if (cull_path(ctx, p, FZ_CULL_PATH_FILL_STROKE, FLUSH_ALL | FLUSH_STROKE_STATE))
 		return;
 
 	if (p->super.chain->op_b)
@@ -1851,7 +1904,7 @@ pdf_filter_bstar(fz_context *ctx, pdf_processor *proc)
 	if (fz_is_empty_rect(p->gstate->clip_rect))
 		return;
 
-	if (cull_path(ctx, p, FZ_CULL_PATH_FILL_STROKE, FLUSH_ALL))
+	if (cull_path(ctx, p, FZ_CULL_PATH_FILL_STROKE, FLUSH_ALL | FLUSH_STROKE_STATE))
 		return;
 
 	if (p->super.chain->op_bstar)
@@ -1866,7 +1919,7 @@ pdf_filter_n(fz_context *ctx, pdf_processor *proc)
 	if (fz_is_empty_rect(p->gstate->clip_rect))
 		return;
 
-	if (cull_path(ctx, p, FZ_CULL_PATH_DROP, FLUSH_ALL))
+	if (cull_path(ctx, p, FZ_CULL_PATH_DROP, (p->gstate->clip_op == NO_CLIP_OP ? FLUSH_OP : FLUSH_CLIP)))
 		return;
 
 	if (p->super.chain->op_n)
@@ -2260,7 +2313,8 @@ pdf_filter_CS(fz_context *ctx, pdf_processor *proc, const char *name, fz_colorsp
 		return;
 
 	fz_strlcpy(gstate->pending.CS.name, name, sizeof gstate->pending.CS.name);
-	gstate->pending.CS.cs = cs;
+	fz_drop_colorspace(ctx, gstate->pending.CS.cs);
+	gstate->pending.CS.cs = fz_keep_colorspace(ctx, cs);
 	copy_resource(ctx, p, PDF_NAME(ColorSpace), name);
 	set_default_cs_values(&gstate->pending.SC, name, cs);
 }
@@ -2275,7 +2329,8 @@ pdf_filter_cs(fz_context *ctx, pdf_processor *proc, const char *name, fz_colorsp
 		return;
 
 	fz_strlcpy(gstate->pending.cs.name, name, sizeof gstate->pending.cs.name);
-	gstate->pending.cs.cs = cs;
+	fz_drop_colorspace(ctx, gstate->pending.cs.cs);
+	gstate->pending.cs.cs = fz_keep_colorspace(ctx, cs);
 	copy_resource(ctx, p, PDF_NAME(ColorSpace), name);
 	set_default_cs_values(&gstate->pending.sc, name, cs);
 }
@@ -2827,18 +2882,9 @@ static void
 pdf_drop_sanitize_processor(fz_context *ctx, pdf_processor *proc)
 {
 	pdf_sanitize_processor *p = (pdf_sanitize_processor*)proc;
-	filter_gstate *gs = p->gstate;
 
-	while (gs)
-	{
-		filter_gstate *next = gs->next;
-		pdf_drop_font(ctx, gs->pending.text.font);
-		fz_drop_string(ctx, gs->pending.text.fontname);
-		pdf_drop_font(ctx, gs->sent.text.font);
-		fz_drop_string(ctx, gs->sent.text.fontname);
-		fz_free(ctx, gs);
-		gs = next;
-	}
+	while (p->gstate)
+		drop_gstate(ctx, p);
 
 	while (p->new_rstack)
 	{
