@@ -57,7 +57,7 @@ pdf_obj_num_is_stream(fz_context *ctx, pdf_document *doc, int num)
 int
 pdf_is_stream(fz_context *ctx, pdf_obj *ref)
 {
-	pdf_document *doc = pdf_get_indirect_document(ctx, ref);
+	pdf_document *doc = pdf_get_bound_document(ctx, ref);
 	if (doc)
 		return pdf_obj_num_is_stream(ctx, doc, pdf_to_num(ctx, ref));
 	return 0;
@@ -394,13 +394,37 @@ static fz_stream *
 pdf_open_filter(fz_context *ctx, pdf_document *doc, fz_stream *file_stm, pdf_obj *stmobj, int num, int64_t offset, fz_compression_params *imparams, pdf_cycle_list *cycle, int might_be_image)
 {
 	pdf_obj *filters = pdf_dict_geta(ctx, stmobj, PDF_NAME(Filter), PDF_NAME(F));
-	pdf_obj *params = pdf_dict_geta(ctx, stmobj, PDF_NAME(DecodeParms), PDF_NAME(DP));
 	int orig_num, orig_gen;
 	fz_stream *rstm, *fstm = NULL;
+	const char *filename = NULL;
+	pdf_obj *parm_name = PDF_NAME(DecodeParms);
 
-	rstm = pdf_open_raw_filter(ctx, file_stm, doc, stmobj, num, &orig_num, &orig_gen, offset);
+	if (pdf_is_string(ctx, filters))
+		filename = pdf_to_text_string(ctx, filters);
+	else if (pdf_is_dict(ctx, filters))
+	{
+		pdf_filespec_params fs;
+		pdf_get_filespec_params(ctx, filters, &fs);
+		filename = fs.filename;
+	}
+
+	if (filename)
+	{
+		if (doc->archive == NULL)
+		{
+			fz_warn(ctx, "Cannot open external file resource without an archive");
+			return NULL;
+		}
+		rstm = fz_open_archive_entry(ctx, doc->archive, filename);
+		filters = pdf_dict_get(ctx, stmobj, PDF_NAME(FFilter));
+		parm_name = PDF_NAME(FDecodeParms);
+	}
+	else
+		rstm = pdf_open_raw_filter(ctx, file_stm, doc, stmobj, num, &orig_num, &orig_gen, offset);
+
 	fz_try(ctx)
 	{
+		pdf_obj *params = pdf_dict_geta(ctx, stmobj, parm_name, PDF_NAME(DP));
 		if (pdf_is_name(ctx, filters))
 			fstm = build_filter(ctx, rstm, doc, filters, params, orig_num, orig_gen, imparams, cycle, might_be_image);
 		else if (pdf_array_len(ctx, filters) > 0)
@@ -659,7 +683,11 @@ pdf_load_image_stream(fz_context *ctx, pdf_document *doc, int num, fz_compressio
 		if ((int64_t)len != ilen)
 			fz_throw(ctx, FZ_ERROR_LIMIT, "stream is too large for 32-bit systems");
 
-		obj = pdf_dict_get(ctx, dict, PDF_NAME(Filter));
+		obj = pdf_dict_get(ctx, dict, PDF_NAME(F));
+		if (obj)
+			obj = pdf_dict_get(ctx, dict, PDF_NAME(FFilter));
+		else
+			obj = pdf_dict_get(ctx, dict, PDF_NAME(Filter));
 		len = pdf_guess_filter_length(len, pdf_to_name(ctx, obj));
 		n = pdf_array_len(ctx, obj);
 		for (i = 0; i < n; i++)

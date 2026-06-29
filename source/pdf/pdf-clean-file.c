@@ -577,10 +577,11 @@ void pdf_clean_file(fz_context *ctx, const char *infile, const char *outfile, co
 
 				while ((pagelist = fz_parse_page_range(ctx, pagelist, &spage, &epage, pagecount)))
 				{
-					if (len + (epage - spage + 1) >= cap)
+					int rangelen = (abs(epage - spage) + 1);
+					if (len + rangelen >= cap)
 					{
 						int n = cap ? cap * 2 : 8;
-						while (len + (epage - spage + 1) >= n)
+						while (len + rangelen >= n)
 							n *= 2;
 						pages = fz_realloc_array(ctx, pages, n, int);
 						cap = n;

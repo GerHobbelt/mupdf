@@ -255,10 +255,14 @@ pdf_load_inline_image(fz_context *ctx, pdf_document *doc, pdf_resource_stack *rd
 int
 pdf_is_jpx_image(fz_context *ctx, pdf_obj *dict)
 {
-	pdf_obj *filter;
+	pdf_obj *f, *filter;
 	int i, n;
 
-	filter = pdf_dict_get(ctx, dict, PDF_NAME(Filter));
+	f = pdf_dict_get(ctx, dict, PDF_NAME(F));
+	if (f)
+		filter = pdf_dict_get(ctx, dict, PDF_NAME(FFilter));
+	else
+		filter = pdf_dict_get(ctx, dict, PDF_NAME(Filter));
 	if (pdf_name_eq(ctx, filter, PDF_NAME(JPXDecode)))
 		return 1;
 	n = pdf_array_len(ctx, filter);

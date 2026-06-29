@@ -506,11 +506,16 @@ fz_open_document_with_buffer(fz_context *ctx, const char *magic, fz_buffer *buff
 fz_document *
 fz_open_accelerated_document(fz_context *ctx, const char *filename, const char *accel)
 {
+	return fz_open_accelerated_document_with_dir(ctx, filename, accel, NULL);
+}
+
+fz_document *
+fz_open_accelerated_document_with_dir(fz_context *ctx, const char *filename, const char *accel, fz_archive *dir)
+{
 	const fz_document_handler *handler;
 	fz_stream *file = NULL;
 	fz_stream *afile = NULL;
 	fz_document *doc = NULL;
-	fz_archive *dir = NULL;
 	char dirname[PATH_MAX];
 	void *state = NULL;
 	fz_document_recognize_state_free_fn *free_state = NULL;
@@ -518,7 +523,7 @@ fz_open_accelerated_document(fz_context *ctx, const char *filename, const char *
 	if (filename == NULL)
 		fz_throw(ctx, FZ_ERROR_ARGUMENT, "no document to open");
 
-	if (fz_is_directory(ctx, filename))
+	if (dir == NULL && fz_is_directory(ctx, filename))
 	{
 		/* Cannot accelerate directories, currently. */
 		dir = fz_open_directory(ctx, filename);

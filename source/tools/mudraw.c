@@ -419,6 +419,7 @@ static int max_num_workers = 0;
 static int num_workers = 0;
 static worker_t *workers = NULL;
 static fz_band_writer *bander = NULL;
+static int external_access = 0;
 
 static const char *layer_config = NULL;
 static int layer_list = 0;
@@ -604,6 +605,7 @@ static int usage(void)
 		"  -i    ignore errors\n"
 		"  -L    low memory mode (avoid caching, clear objects after each page)\n"
 		"  -O -  options\n"
+		"  -E    allow access to directory containing file for external resources\n"
 		"  -C    enable making hyperlinks (html output only)\n"
 		"  -N    disable ICC workflow (\"N\"o color management)\n"
 		"  -M -  Control spot/overprint rendering mode\n"
@@ -2926,6 +2928,7 @@ int main(int argc, const char** argv)
 	out = NULL;
 	output_pagenum = 0;
 	output_file_per_page = 0;
+    external_access = 0;
 
 	format = NULL;
 	output_format = NULL;
@@ -3069,7 +3072,7 @@ int main(int argc, const char** argv)
 	atexit(mu_drop_context);
 
 	fz_getopt_reset();
-	while ((c = fz_getopt(argc, argv, "qQp:o:F:R:r:w:h:fB:c:e:gG:Is:A:DiW:H:S:T:t:d:U:LvVPl:y:Yz:Z:M:NO:am:x:Xhj:J:Kb:k:n:C")) != -1)
+	while ((c = fz_getopt(argc, argv, "qQp:o:F:R:r:w:h:fB:c:Ee:gG:Is:A:DiW:H:S:T:t:d:U:LvVPl:y:Yz:Z:M:NO:am:x:Xhj:J:Kb:k:n:C")) != -1)
 	{
 		switch (c)
 		{
@@ -3110,6 +3113,8 @@ int main(int argc, const char** argv)
 #endif
 			break;
 		case 'I': invert++; break;
+		case 'E': external_access = 1; break;
+
 		case 'j': parse_render_options(ctx, &master_cookie, fz_optarg); break;
 		case 'J': fz_default_png_compression_level(fz_atoi(fz_optarg)); break;
 
@@ -3887,16 +3892,27 @@ int main(int argc, const char** argv)
 				time_t atime;
 				time_t dtime;
 				int layouttime;
+				fz_archive *dir = NULL;
+
 				fz_stream *filef = NULL;
 				fz_stream *accelf = NULL;
 
 				fz_var(filef);
 				fz_var(accelf);
 
+				fz_var(dir);
+
 				fz_try(ctx)
 				{
 					filename = argv[fz_optind++];
 					files++;
+
+					if (external_access)
+					{
+						char dirname[PATH_MAX];
+						fz_dirname(dirname, filename, sizeof dirname);
+						dir = fz_open_directory(ctx, dirname);
+					}
 
 					if (!useaccel)
 						accel = NULL;
@@ -3927,6 +3943,9 @@ int main(int argc, const char** argv)
 					if (accel)
 						accelf = fz_open_file(ctx, accel);
 					doc = fz_open_accelerated_document_with_stream(ctx, filename, filef, accelf);
+
+					TODO TODO TODO:
+					doc = fz_open_accelerated_document_with_dir(ctx, filename, accel, dir);
 
 #ifdef CLUSTER
 					/* Load and then drop the outline if we're running under the cluster.

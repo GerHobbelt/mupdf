@@ -79,6 +79,7 @@ struct info
 			pdf_obj *filter;
 			pdf_obj *cs;
 			pdf_obj *altcs;
+			int external;
 		} image;
 		struct {
 			pdf_obj *obj;
@@ -377,6 +378,7 @@ gatherimages(fz_context *ctx, globals *glo, int page, pdf_obj *pageref, pdf_obj 
 		pdf_obj *height;
 		pdf_obj *bpc = NULL;
 		pdf_obj *filter = NULL;
+		pdf_obj *f;
 		pdf_obj *cs = NULL;
 		pdf_obj *altcs;
 		int k;
@@ -392,7 +394,11 @@ gatherimages(fz_context *ctx, globals *glo, int page, pdf_obj *pageref, pdf_obj 
 		if (!pdf_name_eq(ctx, type, PDF_NAME(Image)))
 			continue;
 
-		filter = pdf_dict_get(ctx, imagedict, PDF_NAME(Filter));
+		f = pdf_dict_get(ctx, imagedict, PDF_NAME(Filter));
+		if (f)
+			filter = pdf_dict_get(ctx, imagedict, PDF_NAME(FFilter));
+		else
+			filter = pdf_dict_get(ctx, imagedict, PDF_NAME(Filter));
 
 		altcs = NULL;
 		cs = pdf_dict_get(ctx, imagedict, PDF_NAME(ColorSpace));
@@ -432,6 +438,7 @@ gatherimages(fz_context *ctx, globals *glo, int page, pdf_obj *pageref, pdf_obj 
 		glo->image[glo->images - 1].u.image.filter = filter;
 		glo->image[glo->images - 1].u.image.cs = cs;
 		glo->image[glo->images - 1].u.image.altcs = altcs;
+		glo->image[glo->images - 1].u.image.external = (f != NULL);
 	}
 }
 
@@ -937,13 +944,14 @@ printinfo(fz_context* ctx, globals* glo, int show, int page)
 					fz_strncpy_s(ctx, altcs, "Sep", 4);
 			}
 
-			fz_write_printf(ctx, out, " ] %dx%d %dbpc %s%s%s (%d 0 R)\n",
+			fz_write_printf(ctx, out, " ] %dx%d %dbpc %s%s%s %s (%d 0 R)\n",
 				pdf_to_int(ctx, glo->image[i].u.image.width),
 				pdf_to_int(ctx, glo->image[i].u.image.height),
 				glo->image[i].u.image.bpc ? pdf_to_int(ctx, glo->image[i].u.image.bpc) : 1,
 				glo->image[i].u.image.cs ? cs : "ImageMask",
 				glo->image[i].u.image.altcs ? " " : "",
 				glo->image[i].u.image.altcs ? altcs : "",
+				glo->image[i].u.image.external ? "external" : "",
 				pdf_to_num(ctx, glo->image[i].u.image.obj));
 
 			fz_free(ctx, cs);
