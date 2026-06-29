@@ -538,7 +538,7 @@ static void show_sig_dialog(pdf_annot *widget)
 		{
 			sig_readonly = pdf_annot_is_readonly(ctx, widget);
 
-			sig_valid_until = pdf_validate_signature(ctx, widget);
+			sig_valid_until = pdf_validate_signature_widget(ctx, widget);
 
 			verifier = pkcs7_openssl_new_verifier(ctx);
 

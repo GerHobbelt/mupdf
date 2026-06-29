@@ -68,6 +68,7 @@ static void verify_signature(fz_context *ctx, pdf_document *doc, pdf_obj *signat
 	pdf_pkcs7_verifier *verifier;
 	int edits;
 	pdf_pkcs7_distinguished_name *dn = NULL;
+	int valid_until;
 
 	fz_info(ctx, "Verifying signature %d:\n", pdf_to_num(ctx, signature));
 
@@ -107,6 +108,18 @@ static void verify_signature(fz_context *ctx, pdf_document *doc, pdf_obj *signat
 			fz_info(ctx, "\tThe signature is valid but there have been edits since signing.\n");
 		else
 			fz_info(ctx, "\tThe document is unchanged since signing.\n");
+
+		valid_until = pdf_validate_signature(ctx, doc, signature);
+		if (valid_until < 0)
+			fz_info(ctx, "\tThe fields signed by this signature have unsaved changes that will invalidate the signature.\n");
+		else if (valid_until == 0)
+			fz_info(ctx, "\tThe fields signed by this signature are unchanged.\n");
+		else if (valid_until == 1)
+			fz_info(ctx, "\tThis signature was invalidated in the last update by the signed fields being changed.\n");
+		else if (valid_until == 2)
+			fz_info(ctx, "\tThis signature was invalidated in the penultimate update by the signed fields being changed.\n");
+		else
+			fz_info(ctx, "\tThis signature was invalidated %d updates ago by the signed fields being changed.\n", valid_until);
 	}
 	fz_always(ctx)
 	{
