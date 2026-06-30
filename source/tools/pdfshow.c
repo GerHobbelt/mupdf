@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2025 Artifex Software, Inc.
+// Copyright (C) 2004-2026 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -43,16 +43,18 @@ static fz_output* out = NULL;
 static pdf_object_labels *labels = NULL;
 static int showbinary = 0;
 static int showdecode = 1;
+static int showversion = 0;
 static int do_tight = 0;
 static int do_repair = 0;
 static int do_label = 0;
 static int showcolumn = 0;
 static int resolve = 0;
+static int external_access = 0;
 
 static int usage(fz_context* ctx)
 {
 	fz_info(ctx,
-		"usage: mutool show [options] file.pdf ( trailer | xref | pages | grep | outline | js | form | <path> | streams ) *\n"
+		"usage: mutool show [options] file.pdf ( trailer | xref | pages | grep | outline | js | form | versions | <path> | streams ) *\n"
 		"\t-p -\tpassword\n"
 		"\t-o -\toutput file\n"
 		"\t-e\tleave stream contents in their original form\n"
@@ -61,6 +63,8 @@ static int usage(fz_context* ctx)
 		"\t-r\tforce repair before showing any objects\n"
 		"\t-L\tshow object labels\n"
 		"\t-R\tresolve all objects\n"
+		"\t-E\tallow access to directory containing file for external resources\n"
+		"\t-v -\tshow version of file (0 is latest, higher numbers are older)\n"
 		"\tpath: path to an object, starting with either an object number,\n"
 		"\t\t'pages', 'trailer', or a property in the trailer;\n"
 		"\t\tpath elements separated by '.' or '/'. Path elements must be\n"
@@ -677,6 +681,9 @@ static void show(fz_context *ctx, const char *sel)
 		showjs(ctx);
 	else if (!strcmp(sel, "form"))
 		showform(ctx);
+	else if (!strcmp(sel, "versions"))
+		fz_write_printf(ctx, out, "document contains %d versions\n",
+			pdf_count_versions(ctx, doc) + pdf_count_unsaved_versions(ctx, doc));
 	else
 		showpathroot(ctx, sel);
 }
@@ -688,6 +695,7 @@ int pdfshow_main(int argc, const char** argv)
 	const char* output = NULL;
 	int c;
 	int errored = 0;
+	fz_archive *dir = NULL;
 
 	doc = NULL;
 	out = NULL;
@@ -717,7 +725,7 @@ int pdfshow_main(int argc, const char** argv)
 	}
 
 	fz_getopt_reset();
-	while ((c = fz_getopt(argc, argv, "p:o:beghrLR")) != -1)
+	while ((c = fz_getopt(argc, argv, "p:o:beghrLEv:R")) != -1)
 	{
 		switch (c)
 		{
@@ -729,6 +737,8 @@ int pdfshow_main(int argc, const char** argv)
 		case 'r': do_repair = 1; break;
 		case 'L': do_label = 1; break;
 		case 'R': resolve = PDF_PRINT_RESOLVE_ALL_INDIRECT; break;
+		case 'E': external_access = 1; break;
+		case 'v': showversion = atoi(fz_optarg); break;
 		default: return usage(ctx);
 		}
 	}
@@ -762,7 +772,24 @@ int pdfshow_main(int argc, const char** argv)
 	fz_var(labels);
 	fz_try(ctx)
 	{
-		doc = pdf_open_document(ctx, filename);
+		if (external_access)
+		{
+			char dirname[PATH_MAX];
+			fz_dirname(dirname, filename, sizeof dirname);
+			dir = fz_open_directory(ctx, dirname);
+		}
+
+		doc = pdf_open_document_with_dir(ctx, filename, dir);
+
+		if (showversion)
+		{
+			int versions = pdf_count_versions(ctx, doc) + pdf_count_unsaved_versions(ctx, doc);
+
+			if (showversion < 0 || showversion > versions)
+				fz_throw(ctx, FZ_ERROR_ARGUMENT, "version out of range [0, %d]", versions - 1);
+			doc->xref_base = showversion;
+		}
+
 		if (pdf_needs_password(ctx, doc))
 			if (!pdf_authenticate_password(ctx, doc, password))
 				fz_warn(ctx, "cannot authenticate password: %s", filename);
@@ -826,6 +853,7 @@ int pdfshow_main(int argc, const char** argv)
 		fz_drop_output(ctx, out);
 		pdf_drop_object_labels(ctx, labels);
 		pdf_drop_document(ctx, doc);
+		fz_drop_archive(ctx, dir);
 	}
 	fz_catch(ctx)
 	{

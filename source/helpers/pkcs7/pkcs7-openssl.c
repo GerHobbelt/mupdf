@@ -216,29 +216,26 @@ static long stream_callback_ctrl(BIO *b, int cmd, bio_info_cb *fp)
 	return 1;
 }
 
-static BIO *BIO_new_stream(fz_context *ctx, fz_stream *stm)
+static BIO *BIO_new_stream(fz_context *ctx, fz_stream *stm, BIO_METHOD **methods)
 {
-	static BIO_METHOD *methods = NULL;
 	BIO *bio;
 	BIO_stream_data *data;
 
-	if (!methods)
-	{
-		methods = BIO_meth_new(BIO_TYPE_NONE, "segment reader");
-		if (!methods)
-			return NULL;
+	*methods = BIO_meth_new(BIO_TYPE_NONE, "segment reader");
+	if (!(*methods))
+		return NULL;
 
-		BIO_meth_set_read(methods, stream_read);
-		BIO_meth_set_ctrl(methods, stream_ctrl);
-		BIO_meth_set_create(methods, stream_new);
-		BIO_meth_set_destroy(methods, stream_free);
-		BIO_meth_set_callback_ctrl(methods, stream_callback_ctrl);
-	}
+	BIO_meth_set_read(*methods, stream_read);
+	BIO_meth_set_ctrl(*methods, stream_ctrl);
+	BIO_meth_set_create(*methods, stream_new);
+	BIO_meth_set_destroy(*methods, stream_free);
+	BIO_meth_set_callback_ctrl(*methods, stream_callback_ctrl);
 
-	bio = BIO_new(methods);
+	bio = BIO_new(*methods);
 	if (!bio)
 	{
-		BIO_meth_free(methods);
+		BIO_meth_free(*methods);
+		*methods = NULL;
 		return NULL;
 	}
 	data = BIO_get_data(bio);
@@ -461,6 +458,7 @@ check_digest(fz_context *ctx, pdf_pkcs7_verifier *verifier, fz_stream *stm, unsi
 	BIO *bsig = NULL;
 	BIO *bdata = NULL;
 	int res = PDF_SIGNATURE_ERROR_UNKNOWN;
+	BIO_METHOD *methods = NULL;
 
 	if (sig_len > INT_MAX)
 		fz_throw(ctx, FZ_ERROR_LIMIT, "Signature length too large");
@@ -470,7 +468,7 @@ check_digest(fz_context *ctx, pdf_pkcs7_verifier *verifier, fz_stream *stm, unsi
 	if (pk7sig == NULL)
 		goto exit;
 
-	bdata = BIO_new_stream(ctx, stm);
+	bdata = BIO_new_stream(ctx, stm, &methods);
 	if (bdata == NULL)
 		goto exit;
 
@@ -478,6 +476,7 @@ check_digest(fz_context *ctx, pdf_pkcs7_verifier *verifier, fz_stream *stm, unsi
 
 exit:
 	BIO_free(bdata);
+	BIO_meth_free(methods);
 	PKCS7_free(pk7sig);
 	BIO_free(bsig);
 
@@ -704,13 +703,14 @@ static int signer_create_digest(fz_context *ctx, pdf_pkcs7_signer *signer, fz_st
 	BIO *bp7 = NULL;
 	PKCS7 *p7 = NULL;
 	PKCS7_SIGNER_INFO *si;
+	BIO_METHOD *methods = NULL;
 
 	unsigned char *p7_ptr;
 	size_t p7_len;
 
 	if (in != NULL)
 	{
-		bdata = BIO_new_stream(ctx, in);
+		bdata = BIO_new_stream(ctx, in, &methods);
 		if (bdata == NULL)
 			goto exit;
 	}
@@ -757,6 +757,9 @@ static int signer_create_digest(fz_context *ctx, pdf_pkcs7_signer *signer, fz_st
 	BIO_free(bdata);
 	bdata = NULL;
 
+	BIO_meth_free(methods);
+	methods = NULL;
+
 	bp7 = BIO_new(BIO_s_mem());
 	if (bp7 == NULL || !i2d_PKCS7_bio(bp7, p7))
 		goto exit;
@@ -775,6 +778,7 @@ exit:
 	BIO_free_all(bp7in);
 	PKCS7_free(p7);
 	BIO_free(bdata);
+	BIO_meth_free(methods);
 
 	return res;
 }
