@@ -105,7 +105,7 @@
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/libparameters/include;../../thirdparty/owemdjee/libparameters/src;../../include;../../thirdparty/owemdjee/filesystem/include;../../thirdparty/tesseract/include;../../thirdparty/owemdjee/spdlog/include;../../scripts/result-cpp/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPARAMETERS;PARAMETERS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>PARAMETERS_DYNAMICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
@@ -141,7 +141,7 @@
     <ClCompile>
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/libparameters/include;../../thirdparty/owemdjee/libparameters/src;../../include;../../thirdparty/owemdjee/filesystem/include;../../thirdparty/tesseract/include;../../thirdparty/owemdjee/spdlog/include;../../scripts/result-cpp/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPARAMETERS;PARAMETERS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>PARAMETERS_DYNAMICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
@@ -181,7 +181,7 @@
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/libparameters/include;../../thirdparty/owemdjee/libparameters/src;../../include;../../thirdparty/owemdjee/filesystem/include;../../thirdparty/tesseract/include;../../thirdparty/owemdjee/spdlog/include;../../scripts/result-cpp/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPARAMETERS;PARAMETERS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>PARAMETERS_DYNAMICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
@@ -217,7 +217,7 @@
     <ClCompile>
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/libparameters/include;../../thirdparty/owemdjee/libparameters/src;../../include;../../thirdparty/owemdjee/filesystem/include;../../thirdparty/tesseract/include;../../thirdparty/owemdjee/spdlog/include;../../scripts/result-cpp/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILDING_LIBPARAMETERS;PARAMETERS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>PARAMETERS_DYNAMICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
@@ -260,7 +260,7 @@
       <Project>{0b51171b-b10e-4eac-8ffa-19226a9fa520}</Project>
     </ProjectReference>
     <ProjectReference Include="libparameters_example_dll.vcxproj">
-      <Project>{0B51171B-B10E-4EAC-8FFA-19226A976298}</Project>
+      <Project>{0b51171b-b10e-4eac-8ffa-19226a976298}</Project>
     </ProjectReference>
     <ProjectReference Include="libsystem_override.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a8bb47b}</Project>
@@ -274,15 +274,104 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="../../thirdparty/owemdjee/libparameters/examples/crossing-the-dll-boundary/crossing-demo-main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/CString.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/ConfigFile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/CurrentApplicationDefault.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/DiagnsoticsHelperGlobals.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/FindParam.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/GlobalParams.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/History.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/InternalDevDiagnsotics.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/ParamArrayType.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/ParamArrayType_BooleanBaseType.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/ParamArrayType_DoubleBaseType.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/ParamArrayType_FloatBaseType.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/ParamArrayType_NumericBaseType.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/ParamArrayType_StringBaseType.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/ParamArrayType_UserDefinedClassBaseType.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/ParamBaseType.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/ParamCoreType_Boolean.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/ParamCoreType_FloatingPoint.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/ParamCoreType_Integer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/ParamCoreType_String.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/ParamCoreType_UserDefinedClass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/ParamsVector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/ParamsVectorSet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/PrintParams.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/ReadWriteConfigFile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/ReportFile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/ReportWriters.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/Reporting.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/ResetToDefaults.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/SetApplicationName.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/Snapshots.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/SurplusParamsVector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/TemplatesImplementationInstantiation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/Utilities.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/amalgamation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/empty.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/fmt-format-EnumHelpers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/paramsAssist.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/paramsFundamentals.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/verify_hdr_CString.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/verify_hdr_HelperMacros.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/verify_hdr_c_interface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/verify_hdr_configreader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/verify_hdr_dll_export_helper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/verify_hdr_fmt_support.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/verify_hdr_helpers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/verify_hdr_impl_internal_collision_helpers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/verify_hdr_impl_internal_cstring.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/verify_hdr_impl_internal_dev_diagnostics.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/verify_hdr_impl_internal_helpers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/verify_hdr_impl_internal_owner_mark_helpers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/verify_hdr_impl_internal_string_fmt_helpers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/verify_hdr_parameter_access_metrics.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/verify_hdr_parameter_class_assistant.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/verify_hdr_parameter_class_base.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/verify_hdr_parameter_class_base_template.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/verify_hdr_parameter_class_fundamentals.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/verify_hdr_parameter_class_ref_typed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/verify_hdr_parameter_class_shorthand.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/verify_hdr_parameter_class_shorthand_fmt_helpers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/verify_hdr_parameter_class_small_value_typed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/verify_hdr_parameter_class_string.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/verify_hdr_parameter_class_userdef.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/verify_hdr_parameter_class_value_typed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/verify_hdr_parameter_class_vector_base.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/verify_hdr_parameter_class_vector_ref_typed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/verify_hdr_parameter_class_vector_value_typed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/verify_hdr_parameter_classes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/verify_hdr_parameter_globals.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/verify_hdr_parameter_history.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/verify_hdr_parameter_history_record.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/verify_hdr_parameter_history_store.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/verify_hdr_parameter_set_instances.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/verify_hdr_parameter_sets.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/verify_hdr_parameter_snapshots.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/verify_hdr_parameter_surplus_sets.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/verify_hdr_parameters.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/verify_hdr_reportwriter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/verify_hdr_sourceref_defend.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/verify_hdr_sourceref_defstart.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/verify_hdr_stdioconfigreader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/verify_hdr_stdioreportwriter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/verify_hdr_stringconfigreader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/verify_hdr_stringreportwriter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libparameters/src/verify_hdr_utilities.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/CString.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/HelperMacros.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/c_interface.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/configreader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/dll_export_helper.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/fmt-support.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/helpers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/impl/internal_collision_helpers.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/impl/internal_cstring.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/impl/internal_dev_diagnostics.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/impl/internal_helpers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/impl/internal_owner_mark_helpers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/impl/internal_string_fmt_helpers.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/parameter_access_metrics.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/parameter_class_assistant.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/parameter_class_base.h" />
@@ -313,11 +402,15 @@
     <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/stringconfigreader.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/stringreportwriter.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libparameters/include/parameters/utilities.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libparameters/src/internal_helpers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libparameters/src/logchannel_helpers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libparameters/src/os_platform_helpers.hpp" />
     <Text Include="../../thirdparty/owemdjee/libparameters/LICENSE" />
     <Text Include="../../thirdparty/owemdjee/libparameters/README.md" />
     <Text Include="../../thirdparty/owemdjee/libparameters/docs/libparameters/Design Notes.md" />
     <Text Include="../../thirdparty/owemdjee/libparameters/docs/libparameters/Parameter History and Stack - considerations.md" />
     <Text Include="../../thirdparty/owemdjee/libparameters/docs/libparameters/libparameters Design Specification.md" />
+    <Text Include="../../thirdparty/owemdjee/libparameters/src/mk_headerfile_test_cpp_files.sh" />
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>

@@ -1,7 +1,8 @@
 
 also-ignore:
 	/tests/
-	/src/
+	
+	/src/test_compile_phase.cpp
 	
 	/examples/[^c]
 	/examples/.[^r]
