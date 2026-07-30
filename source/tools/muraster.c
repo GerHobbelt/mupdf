@@ -272,12 +272,6 @@ enum {
 	OUT_PKM
 };
 
-enum {
-	CS_GRAY = FZ_COLORSPACE_GRAY,
-	CS_RGB = FZ_COLORSPACE_RGB,
-	CS_CMYK = FZ_COLORSPACE_CMYK
-};
-
 typedef struct
 {
 	const char *suffix;
@@ -287,23 +281,23 @@ typedef struct
 
 static const suffix_t suffix_table[] =
 {
-	{ ".png", OUT_PNG, CS_RGB },
-	{ ".webp", OUT_WEBP, CS_RGB },
+	{ ".png", OUT_PNG, FZ_COLORSPACE_RGB },
+	{ ".webp", OUT_WEBP, FZ_COLORSPACE_RGB },
 	{ ".tiff", OUT_TIFF, 0 },
 #if FZ_PLOTTERS_G || FZ_PLOTTERS_N
-	{ ".pgm", OUT_PGM, CS_GRAY },
+	{ ".pgm", OUT_PGM, FZ_COLORSPACE_GRAY },
 #endif
 #if FZ_PLOTTERS_RGB || FZ_PLOTTERS_N
-	{ ".ppm", OUT_PPM, CS_RGB },
+	{ ".ppm", OUT_PPM, FZ_COLORSPACE_RGB },
 #endif
 #if FZ_PLOTTERS_CMYK || FZ_PLOTTERS_N
-	{ ".pam", OUT_PAM, CS_CMYK },
+	{ ".pam", OUT_PAM, FZ_COLORSPACE_CMYK },
 #endif
 #if FZ_PLOTTERS_G || FZ_PLOTTERS_N
-	{ ".pbm", OUT_PBM, CS_GRAY },
+	{ ".pbm", OUT_PBM, FZ_COLORSPACE_GRAY },
 #endif
 #if FZ_PLOTTERS_CMYK || FZ_PLOTTERS_N
-	{ ".pkm", OUT_PKM, CS_CMYK }
+	{ ".pkm", OUT_PKM, FZ_COLORSPACE_CMYK }
 #endif
 };
 
@@ -1061,15 +1055,15 @@ initialise_banding(fz_context *ctx, render_details *render, int color)
 #if GREY_FALLBACK != 0
 	if (color == 0)
 	{
-		if (render->colorspace == CS_RGB)
+		if (render->colorspace == FZ_COLORSPACE_RGB)
 		{
 			/* Fallback from PPM to PGM */
-			render->colorspace = CS_GRAY;
+			render->colorspace = FZ_COLORSPACE_GRAY;
 			render->format = OUT_PGM;
 		}
-		else if (render->colorspace == CS_CMYK)
+		else if (render->colorspace == FZ_COLORSPACE_CMYK)
 		{
-			render->colorspace = CS_GRAY;
+			render->colorspace = FZ_COLORSPACE_GRAY;
 			if (render->format == OUT_PKM)
 				render->format = OUT_PBM;
 			else
@@ -1080,14 +1074,14 @@ initialise_banding(fz_context *ctx, render_details *render, int color)
 
 	switch (render->colorspace)
 	{
-	case CS_GRAY:
+	case FZ_COLORSPACE_GRAY:
 		bpp = 1;
 		break;
-	case CS_RGB:
+	case FZ_COLORSPACE_RGB:
 		bpp = 2;
 		break;
 	default:
-	case CS_CMYK:
+	case FZ_COLORSPACE_CMYK:
 		bpp = 3;
 		break;
 	}
@@ -2171,13 +2165,13 @@ int main(int argc, const char** argv)
 
 		switch (output_format->cs)
 		{
-		case CS_GRAY:
+		case FZ_COLORSPACE_GRAY:
 			colorspace = fz_device_gray(ctx);
 			break;
-		case CS_RGB:
+		case FZ_COLORSPACE_RGB:
 			colorspace = fz_device_rgb(ctx);
 			break;
-		case CS_CMYK:
+		case FZ_COLORSPACE_CMYK:
 			colorspace = fz_device_cmyk(ctx);
 			break;
 		}
