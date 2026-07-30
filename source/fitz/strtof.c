@@ -277,6 +277,12 @@ diy_to_float(strtof_fp_t x, int negative)
 	return tmp.f;
 }
 
+#if defined(_MSC_VER)
+#pragma warning(push)
+// warning C4756 : overflow in constant arithmetic
+#pragma warning(disable : 4756)
+#endif
+
 static float
 scale_integer_to_float(uint32_t M, int N, int negative)
 {
@@ -473,3 +479,7 @@ fz_strtof(const char *string, char **tailptr)
 	SET_TAILPTR(tailptr, s);
 	return scale_integer_to_float(M, N, negative);
 }
+
+#if defined(_MSC_VER)
+#pragma warning(pop)
+#endif

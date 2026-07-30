@@ -635,6 +635,12 @@ fz_expand_rect(fz_rect a, float expand)
 	return a;
 }
 
+#if defined(_MSC_VER)
+#pragma warning(push)
+// warning C4756 : overflow in constant arithmetic
+#pragma warning(disable : 4756)
+#endif
+
 float
 fz_rect_area(fz_rect r)
 {
@@ -646,6 +652,9 @@ fz_rect_area(fz_rect r)
 	return (r.x1 - r.x0) * (r.y1 - r.y0);
 }
 
+#if defined(_MSC_VER)
+#pragma warning(pop)
+#endif
 
 
 /* Adding a point to an invalid rectangle makes the zero area rectangle
