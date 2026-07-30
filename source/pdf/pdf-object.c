@@ -31,7 +31,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
-#include <zlib.h> /* for crc32 */
+#include <zlib-ng.h> /* for crc32 */
 
 #if FZ_ENABLE_PDF
 
@@ -5573,7 +5573,7 @@ void pdf_verify_name_table_sanity(fz_context* ctx)
 
 /* We use zlib's crc32 routine, despite it having an awful signature. */
 
-#define CRC32(SUM, P) crc32(SUM, (const Bytef *)&(P), (uInt)(sizeof(P)))
+#define CRC32(SUM, P) zng_crc32(SUM, (const Bytef *)&(P), (uInt)(sizeof(P)))
 
 static uLong
 crc32_buffer(uLong sum, const fz_buffer *buf)
@@ -5586,7 +5586,7 @@ crc32_buffer(uLong sum, const fz_buffer *buf)
 		size_t len2 = len;
 		if (len2 > UINT_MAX)
 			len2 = UINT_MAX;
-		sum = crc32(sum, data, (uInt)len2);
+		sum = zng_crc32(sum, data, (uInt)len2);
 		data += len2;
 		len -= len2;
 	}
@@ -5604,7 +5604,7 @@ crc32_block(uLong sum, const void *p, size_t len)
 		size_t len2 = len;
 		if (len2 > UINT_MAX)
 			len2 = UINT_MAX;
-		sum = crc32(sum, data, (uInt)len2);
+		sum = zng_crc32(sum, data, (uInt)len2);
 		data += len2;
 		len -= len2;
 	}
