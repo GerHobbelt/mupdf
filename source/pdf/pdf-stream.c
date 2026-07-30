@@ -400,7 +400,7 @@ pdf_open_filter(fz_context *ctx, pdf_document *doc, fz_stream *file_stm, pdf_obj
 	pdf_obj *parm_name = PDF_NAME(DecodeParms);
 
 	if (pdf_is_string(ctx, filters))
-		filename = pdf_to_text_string(ctx, filters);
+		filename = pdf_to_text_string(ctx, filters, NULL);
 	else if (pdf_is_dict(ctx, filters))
 	{
 		pdf_filespec_params fs;
@@ -418,6 +418,7 @@ pdf_open_filter(fz_context *ctx, pdf_document *doc, fz_stream *file_stm, pdf_obj
 		rstm = fz_open_archive_entry(ctx, doc->archive, filename);
 		filters = pdf_dict_get(ctx, stmobj, PDF_NAME(FFilter));
 		parm_name = PDF_NAME(FDecodeParms);
+		// TODO: destroy filename? (heap leak)
 	}
 	else
 		rstm = pdf_open_raw_filter(ctx, file_stm, doc, stmobj, num, &orig_num, &orig_gen, offset);
