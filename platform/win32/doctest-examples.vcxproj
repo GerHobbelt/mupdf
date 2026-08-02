@@ -52,16 +52,16 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -74,7 +74,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -91,8 +91,8 @@
       <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -104,7 +104,7 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/cli11/include;../../thirdparty/owemdjee/cli11/examples;../../thirdparty/owemdjee/json/include;../../thirdparty/monolithic_tmplt;../../scripts/catch2/include;../../thirdparty/owemdjee/Catch2/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/cli11/include;../../thirdparty/owemdjee/cli11/examples;../../thirdparty/owemdjee/json/include;../../thirdparty/monolithic_tmplt;../../scripts/catch2/include;../../thirdparty/owemdjee/Catch2/src;../../thirdparty/owemdjee/doctest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>CATCH_CONFIG_NO_PREFIX_ALL;CLI11_CATCH3;BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -130,7 +130,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/cli11/include;../../thirdparty/owemdjee/cli11/examples;../../thirdparty/owemdjee/json/include;../../thirdparty/monolithic_tmplt;../../scripts/catch2/include;../../thirdparty/owemdjee/Catch2/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/cli11/include;../../thirdparty/owemdjee/cli11/examples;../../thirdparty/owemdjee/json/include;../../thirdparty/monolithic_tmplt;../../scripts/catch2/include;../../thirdparty/owemdjee/Catch2/src;../../thirdparty/owemdjee/doctest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>CATCH_CONFIG_NO_PREFIX_ALL;CLI11_CATCH3;BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -159,7 +159,7 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/cli11/include;../../thirdparty/owemdjee/cli11/examples;../../thirdparty/owemdjee/json/include;../../thirdparty/monolithic_tmplt;../../scripts/catch2/include;../../thirdparty/owemdjee/Catch2/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/cli11/include;../../thirdparty/owemdjee/cli11/examples;../../thirdparty/owemdjee/json/include;../../thirdparty/monolithic_tmplt;../../scripts/catch2/include;../../thirdparty/owemdjee/Catch2/src;../../thirdparty/owemdjee/doctest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>CATCH_CONFIG_NO_PREFIX_ALL;CLI11_CATCH3;BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -185,7 +185,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/cli11/include;../../thirdparty/owemdjee/cli11/examples;../../thirdparty/owemdjee/json/include;../../thirdparty/monolithic_tmplt;../../scripts/catch2/include;../../thirdparty/owemdjee/Catch2/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/cli11/include;../../thirdparty/owemdjee/cli11/examples;../../thirdparty/owemdjee/json/include;../../thirdparty/monolithic_tmplt;../../scripts/catch2/include;../../thirdparty/owemdjee/Catch2/src;../../thirdparty/owemdjee/doctest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>CATCH_CONFIG_NO_PREFIX_ALL;CLI11_CATCH3;BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -218,6 +218,9 @@
     <ProjectReference Include="libcpptrace.vcxproj">
       <Project>{0B51171B-B10E-4EAC-8FFA-19226A59D404}</Project>
     </ProjectReference>
+    <ProjectReference Include="libdoctest.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff9ca9ca}</Project>
+    </ProjectReference>
     <ProjectReference Include="libfmt.vcxproj">
       <Project>{0B51171B-B10E-4EAC-8FFA-19226A9FA520}</Project>
     </ProjectReference>
@@ -235,41 +238,6 @@
     <ClCompile Include="../../source/system_override/force_link_dependency_helper.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/doctest/doctest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/doctest/parts/private/assert/data.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/doctest/parts/private/assert/expression.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/doctest/parts/private/assert/handler.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/doctest/parts/private/assert/message.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/doctest/parts/private/assert/result.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/doctest/parts/private/assert/type.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/doctest/parts/private/color.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/doctest/parts/private/context.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/doctest/parts/private/context/options.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/doctest/parts/private/context_scope.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/doctest/parts/private/context_state.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/doctest/parts/private/debugger.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/doctest/parts/private/exception_translator.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/doctest/parts/private/exceptions.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/doctest/parts/private/filters.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/doctest/parts/private/main.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/doctest/parts/private/matchers/approx.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/doctest/parts/private/matchers/contains.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/doctest/parts/private/matchers/is_nan.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/doctest/parts/private/path.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/doctest/parts/private/reporter.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/doctest/parts/private/reporters/common.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/doctest/parts/private/reporters/console.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/doctest/parts/private/reporters/debug_output_window.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/doctest/parts/private/reporters/junit.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/doctest/parts/private/reporters/xml.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/doctest/parts/private/signals.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/doctest/parts/private/string.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/doctest/parts/private/subcase.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/doctest/parts/private/test_case.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/doctest/parts/private/test_suite.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/doctest/parts/private/timer.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/doctest/parts/private/traversal.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/doctest/parts/private/xml.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/doctest/examples/all_features/alternative_macros.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/doctest/examples/all_features/assert_returns_disabled.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/doctest/examples/all_features/assert_returns_disabled_evaluate.cpp" />
@@ -279,6 +247,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/doctest/examples/all_features/coverage_maxout.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/doctest/examples/all_features/double_stringification.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/doctest/examples/all_features/enums.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/doctest/examples/all_features/focus.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/doctest/examples/all_features/generators.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/doctest/examples/all_features/logging.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/doctest/examples/all_features/main.cpp" />
@@ -312,109 +281,11 @@
     <ClCompile Include="../../thirdparty/owemdjee/doctest/scripts/how_stuff_works/testing_crash_scenarios.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/doctest/scripts/playground/main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/doctest/scripts/playground/test.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/tests/doctest/assert/test_check_message.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/tests/doctest/assert/test_expression.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/tests/doctest/assert/test_message.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/tests/doctest/assert/test_throws.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/tests/doctest/assert/test_type.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/tests/doctest/matchers/test_approx.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/tests/doctest/matchers/test_contains.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/tests/doctest/matchers/test_is_nan.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/tests/doctest/test_color.ansi.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/tests/doctest/test_color.none.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/tests/doctest/test_color.win32.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/tests/doctest/test_context_options.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/tests/doctest/test_debugger.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/tests/doctest/test_exception_translator.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/tests/doctest/test_filters.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/tests/doctest/test_path.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/tests/doctest/test_platform.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/tests/doctest/test_string.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/tests/doctest/test_traversal.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/tests/doctest/test_xml.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/tests/regression/test.443/namespace1.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/tests/regression/test.443/namespace2.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/tests/regression/test.443/namespace3.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/tests/regression/test.443/namespace4.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/tests/regression/test.443/namespace5.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/tests/regression/test.443/namespace6.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/tests/regression/test.443/namespace7.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/tests/regression/test.443/namespace8.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/tests/regression/test.443/namespace9.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/tests/regression/test.630.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/tests/regression/test.651.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/tests/regression/test.782.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/tests/regression/test.786.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/tests/regression/test.873.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/doctest/tests/regression/test.915.cpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/doctest.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/extensions/doctest_format.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/extensions/doctest_mpi.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/extensions/doctest_util.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/extensions/mpi_reporter.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/extensions/mpi_sub_comm.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/parts/doctest_fwd.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/parts/private/assert/handler.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/parts/private/atomic.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/parts/private/context_scope.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/parts/private/context_state.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/parts/private/exception_translator.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/parts/private/exceptions.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/parts/private/ext/windows.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/parts/private/filters.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/parts/private/reporter.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/parts/private/reporters/common.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/parts/private/reporters/console.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/parts/private/reporters/debug_output_window.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/parts/private/reporters/junit.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/parts/private/reporters/xml.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/parts/private/signals.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/parts/private/test_case.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/parts/private/timer.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/parts/private/traversal.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/parts/private/xml.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/parts/public/assert/comparator.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/parts/public/assert/data.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/parts/public/assert/expression.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/parts/public/assert/handler.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/parts/public/assert/message.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/parts/public/assert/result.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/parts/public/assert/type.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/parts/public/color.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/parts/public/compiler.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/parts/public/config.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/parts/public/context.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/parts/public/context/options.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/parts/public/context_scope.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/parts/public/debugger.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/parts/public/decorators.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/parts/public/exception_translator.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/parts/public/exceptions.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/parts/public/generator.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/parts/public/macros.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/parts/public/matchers/approx.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/parts/public/matchers/contains.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/parts/public/matchers/is_nan.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/parts/public/path.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/parts/public/platform.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/parts/public/reporter.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/parts/public/std/fwd.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/parts/public/std/type_traits.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/parts/public/std/utility.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/parts/public/string.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/parts/public/subcase.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/parts/public/test_case.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/parts/public/test_suite.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/parts/public/utility.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/parts/public/version.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/parts/public/warnings.h" />
     <ClInclude Include="../../thirdparty/owemdjee/doctest/examples/all_features/doctest_proxy.h" />
     <ClInclude Include="../../thirdparty/owemdjee/doctest/examples/all_features/header.h" />
     <ClInclude Include="../../thirdparty/owemdjee/doctest/examples/combining_the_same_tests_built_differently_in_multiple_shared_objects/foo.h" />
     <ClInclude Include="../../thirdparty/owemdjee/doctest/examples/installed_doctest_cmake/dll/dll.h" />
     <ClInclude Include="../../thirdparty/owemdjee/doctest/examples/installed_doctest_cmake/dll/exporting.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/tests/common/utils/callback.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/doctest/tests/common/utils/text.h" />
     <Image Include="../../thirdparty/owemdjee/doctest/scripts/data/benchmarks/asserts.png" />
     <Image Include="../../thirdparty/owemdjee/doctest/scripts/data/benchmarks/header.png" />
     <Image Include="../../thirdparty/owemdjee/doctest/scripts/data/benchmarks/implement.png" />
@@ -500,6 +371,9 @@
     <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/first_last.txt" />
     <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/first_last_junit.txt" />
     <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/first_last_xml.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/focus.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/focus_junit.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/focus_xml.txt" />
     <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/generators.cpp.txt" />
     <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/generators.cpp_junit.txt" />
     <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/generators.cpp_xml.txt" />
@@ -616,9 +490,6 @@
     <Text Include="../../thirdparty/owemdjee/doctest/scripts/release_process.md" />
     <Text Include="../../thirdparty/owemdjee/doctest/scripts/update_stuff.py" />
     <Text Include="../../thirdparty/owemdjee/doctest/scripts/version.txt" />
-    <Text Include="../../thirdparty/owemdjee/doctest/tests/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/doctest/tests/common/CMakeLists.txt" />
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
-  
