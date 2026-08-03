@@ -11,7 +11,9 @@
 #pragma warning(disable: 4266)
 #endif
 
+#include <boost/lockfree/bounded_ticket_queue.hpp>
 #include <boost/lockfree/lockfree_forward.hpp>
+#include <boost/lockfree/mpsc_weak_queue.hpp>
 #include <boost/lockfree/policies.hpp>
 #include <boost/lockfree/queue.hpp>
 #include <boost/lockfree/spsc_queue.hpp>

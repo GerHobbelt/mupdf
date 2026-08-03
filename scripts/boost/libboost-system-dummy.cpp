@@ -26,5 +26,6 @@
 #include <boost/system/result.hpp>
 #include <boost/system/system_category.hpp>
 #include <boost/system/system_error.hpp>
+#include <boost/system/unwrap_and_invoke.hpp>
 #include <boost/system/windows_error.hpp>
 

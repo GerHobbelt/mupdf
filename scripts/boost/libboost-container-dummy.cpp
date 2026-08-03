@@ -19,6 +19,7 @@
 #include <boost/container/devector.hpp>
 #include <boost/container/flat_map.hpp>
 #include <boost/container/flat_set.hpp>
+#include <boost/container/hub.hpp>
 #include <boost/container/list.hpp>
 #include <boost/container/map.hpp>
 #include <boost/container/new_allocator.hpp>
@@ -30,6 +31,7 @@
 #include <boost/container/pmr/flat_map.hpp>
 #include <boost/container/pmr/flat_set.hpp>
 #include <boost/container/pmr/global_resource.hpp>
+#include <boost/container/pmr/hub.hpp>
 #include <boost/container/pmr/list.hpp>
 #include <boost/container/pmr/map.hpp>
 #include <boost/container/pmr/memory_resource.hpp>
@@ -37,6 +39,7 @@
 #include <boost/container/pmr/polymorphic_allocator.hpp>
 #include <boost/container/pmr/pool_options.hpp>
 #include <boost/container/pmr/resource_adaptor.hpp>
+#include <boost/container/pmr/segtor.hpp>
 #include <boost/container/pmr/set.hpp>
 #include <boost/container/pmr/slist.hpp>
 #include <boost/container/pmr/small_vector.hpp>
@@ -47,6 +50,7 @@
 #include <boost/container/pmr/vector.hpp>
 #include <boost/container/scoped_allocator.hpp>
 #include <boost/container/scoped_allocator_fwd.hpp>
+#include <boost/container/segtor.hpp>
 #include <boost/container/set.hpp>
 #include <boost/container/slist.hpp>
 #include <boost/container/small_vector.hpp>

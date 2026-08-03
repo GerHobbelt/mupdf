@@ -90,6 +90,8 @@
 #include <boost/graph/leda_graph.hpp>
 #include <boost/graph/lookup_edge.hpp>
 #include <boost/graph/loop_erased_random_walk.hpp>
+#include <boost/graph/louvain_clustering.hpp>
+#include <boost/graph/louvain_quality_functions.hpp>
 #include <boost/graph/make_biconnected_planar.hpp>
 #include <boost/graph/make_connected.hpp>
 #include <boost/graph/make_maximal_planar.hpp>

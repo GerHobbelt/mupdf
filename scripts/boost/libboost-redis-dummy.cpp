@@ -22,10 +22,13 @@
 #include <boost/redis/ignore.hpp>
 #include <boost/redis/logger.hpp>
 #include <boost/redis/operation.hpp>
+#include <boost/redis/push_parser.hpp>
 #include <boost/redis/request.hpp>
+#include <boost/redis/resp3/flat_tree.hpp>
 #include <boost/redis/resp3/node.hpp>
 #include <boost/redis/resp3/parser.hpp>
 #include <boost/redis/resp3/serialization.hpp>
+#include <boost/redis/resp3/tree.hpp>
 #include <boost/redis/resp3/type.hpp>
 #include <boost/redis/response.hpp>
 #include <boost/redis/src.hpp>

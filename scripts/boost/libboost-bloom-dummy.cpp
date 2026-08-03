@@ -11,4 +11,10 @@
 #pragma warning(disable: 4266)
 #endif
 
+#include <boost/bloom.hpp>
+#include <boost/bloom/block.hpp>
+#include <boost/bloom/fast_multiblock32.hpp>
+#include <boost/bloom/fast_multiblock64.hpp>
+#include <boost/bloom/filter.hpp>
+#include <boost/bloom/multiblock.hpp>
 

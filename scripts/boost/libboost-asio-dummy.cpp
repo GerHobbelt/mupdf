@@ -100,6 +100,7 @@
 #include <boost/asio/executor.hpp>
 #include <boost/asio/executor_work_guard.hpp>
 #include <boost/asio/file_base.hpp>
+#include <boost/asio/fwd.hpp>
 #include <boost/asio/generic/basic_endpoint.hpp>
 #include <boost/asio/generic/datagram_protocol.hpp>
 #include <boost/asio/generic/raw_protocol.hpp>

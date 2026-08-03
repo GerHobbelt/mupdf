@@ -145,7 +145,12 @@
 #include <boost/math/octonion.hpp>
 #include <boost/math/optimization/cma_es.hpp>
 #include <boost/math/optimization/differential_evolution.hpp>
+#include <boost/math/optimization/gradient_descent.hpp>
+#include <boost/math/optimization/gradient_optimizers.hpp>
 #include <boost/math/optimization/jso.hpp>
+#include <boost/math/optimization/lbfgs.hpp>
+#include <boost/math/optimization/minimizer.hpp>
+#include <boost/math/optimization/nesterov.hpp>
 #include <boost/math/optimization/random_search.hpp>
 #include <boost/math/policies/error_handling.hpp>
 #include <boost/math/policies/policy.hpp>

@@ -35,6 +35,10 @@
 #include <boost/msm/backmp11/common_types.hpp>
 #include <boost/msm/backmp11/event_traits.hpp>
 #include <boost/msm/backmp11/favor_compile_time.hpp>
+#include <boost/msm/backmp11/observer.hpp>
+#include <boost/msm/backmp11/serialization/boost_json.hpp>
+#include <boost/msm/backmp11/serialization/boost_serialization.hpp>
+#include <boost/msm/backmp11/serialization/nlohmann_json.hpp>
 #include <boost/msm/backmp11/state_machine.hpp>
 #include <boost/msm/backmp11/state_machine_config.hpp>
 #include <boost/msm/common.hpp>

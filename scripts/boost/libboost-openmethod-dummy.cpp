@@ -16,6 +16,7 @@
 #include <boost/openmethod/default_registry.hpp>
 #include <boost/openmethod/initialize.hpp>
 #include <boost/openmethod/inplace_vptr.hpp>
+#include <boost/openmethod/interop/boost_intrusive_ptr.hpp>
 #include <boost/openmethod/interop/std_shared_ptr.hpp>
 #include <boost/openmethod/interop/std_unique_ptr.hpp>
 #include <boost/openmethod/macros.hpp>
