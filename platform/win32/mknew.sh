@@ -1722,6 +1722,12 @@ str-buf-stream-fmt-noheap
 uclibc-ng
 uClibc
 
+embedded.MCU.experiments
+
+cmark-gfm
+saucer
+tinyusb
+typed_fixed_point_and_fractional_arith
 
 
 
@@ -1815,6 +1821,8 @@ msvc_sln_cleaner
 pccts
 pikchr-cmd
 lemon
+
+BOSSA
 
 cmake-cpp
 cmake-init

@@ -2,40 +2,11 @@
 
 cat > /tmp/projects-to-do.lst <<EOT
 
-bitfield_array
-data_seek_cache
-scales_chords_modes
-enhanced_linn_sequencer
-fixed_space_std_allocator
-adsr_curve_tweens
-flash_wear_leveling_management
-specialty_histograms
 str-buf-stream-fmt-noheap
-
-doctest
-
-cmake-cpp
-cmake-init
-cpp-project
-cpptemplate
-cleanCppProject
-cmake_examples
-cmake_template
-googletest-ci-cpp-template
-ModernCppStarter
-modern-cpp-template
-
-libdiagnostics
-libparameters
-libpathutils
-libchiaroscuramente
-libchopshop
-chewing_text_cud
-text-wrangler
-worde_butcher
-libhashish
-politician
-libunisani
+uclibc-ng
+uClibc
+cmark-gfm
+typed_fixed_point_and_fractional_arith
 
 
 

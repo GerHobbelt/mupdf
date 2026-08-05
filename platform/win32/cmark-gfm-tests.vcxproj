@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{C229889F-677B-4BAF-B00D-64E0BBF7E885}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBYAML;YAML_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/libyaml/include;../../scripts/libyaml/include;../../thirdparty/owemdjee/libyaml/tests;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>YAML_DECLARE_STATIC;BUILD_MONOLITHIC;BUILDING_LIBYAML;YAML_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBYAML;YAML_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/libyaml/include;../../scripts/libyaml/include;../../thirdparty/owemdjee/libyaml/tests;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBYAML;YAML_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/libyaml/include;../../scripts/libyaml/include;../../thirdparty/owemdjee/libyaml/tests;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>YAML_DECLARE_STATIC;BUILD_MONOLITHIC;BUILDING_LIBYAML;YAML_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBYAML;YAML_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/libyaml/include;../../scripts/libyaml/include;../../thirdparty/owemdjee/libyaml/tests;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBYAML;YAML_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/libyaml/include;../../scripts/libyaml/include;../../thirdparty/owemdjee/libyaml/tests;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>YAML_DECLARE_STATIC;BUILD_MONOLITHIC;BUILDING_LIBYAML;YAML_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBYAML;YAML_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/libyaml/include;../../scripts/libyaml/include;../../thirdparty/owemdjee/libyaml/tests;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBYAML;YAML_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/libyaml/include;../../scripts/libyaml/include;../../thirdparty/owemdjee/libyaml/tests;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>YAML_DECLARE_STATIC;BUILD_MONOLITHIC;BUILDING_LIBYAML;YAML_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBYAML;YAML_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/libyaml/include;../../scripts/libyaml/include;../../thirdparty/owemdjee/libyaml/tests;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/cmark-gfm/CheckFileOffsetBits.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmark-gfm/api_test/cplusplus.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmark-gfm/api_test/harness.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmark-gfm/api_test/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmark-gfm/extensions/autoheaderid.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmark-gfm/extensions/autolink.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmark-gfm/extensions/core-extensions.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmark-gfm/extensions/ext_scanners.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmark-gfm/extensions/strikethrough.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmark-gfm/extensions/table.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmark-gfm/extensions/tagfilter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmark-gfm/extensions/tasklist.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmark-gfm/src/arena.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmark-gfm/src/blocks.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmark-gfm/src/buffer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmark-gfm/src/cmark.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmark-gfm/src/cmark_ctype.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmark-gfm/src/commonmark.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmark-gfm/src/footnotes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmark-gfm/src/houdini_href_e.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmark-gfm/src/houdini_html_e.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmark-gfm/src/houdini_html_u.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmark-gfm/src/html.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmark-gfm/src/inlines.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmark-gfm/src/iterator.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmark-gfm/src/latex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmark-gfm/src/linked_list.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmark-gfm/src/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmark-gfm/src/man.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmark-gfm/src/map.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmark-gfm/src/node.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmark-gfm/src/plaintext.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmark-gfm/src/plugin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmark-gfm/src/references.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmark-gfm/src/registry.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmark-gfm/src/render.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmark-gfm/src/scanners.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmark-gfm/src/syntax_extension.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmark-gfm/src/utf8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmark-gfm/src/xml.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmark-gfm/api_test/cplusplus.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmark-gfm/api_test/harness.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmark-gfm/extensions/autoheaderid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmark-gfm/extensions/autolink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmark-gfm/extensions/cmark-gfm-core-extensions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmark-gfm/extensions/ext_scanners.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmark-gfm/extensions/strikethrough.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmark-gfm/extensions/table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmark-gfm/extensions/tagfilter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmark-gfm/extensions/tasklist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmark-gfm/src/buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmark-gfm/src/case_fold_switch.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmark-gfm/src/chunk.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmark-gfm/src/cmark-gfm-extension_api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmark-gfm/src/cmark-gfm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmark-gfm/src/cmark_ctype.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmark-gfm/src/entities.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmark-gfm/src/footnotes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmark-gfm/src/houdini.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmark-gfm/src/html.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmark-gfm/src/inlines.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmark-gfm/src/iterator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmark-gfm/src/map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmark-gfm/src/node.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmark-gfm/src/parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmark-gfm/src/plugin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmark-gfm/src/references.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmark-gfm/src/registry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmark-gfm/src/render.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmark-gfm/src/scanners.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmark-gfm/src/syntax_extension.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmark-gfm/src/utf8.h" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/COPYING" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/CheckFileOffsetBits.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/FindAsan.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/Makefile.nmake" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/api_test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/appveyor.yml" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/bench/samples/block-bq-flat.md" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/bench/samples/block-bq-nested.md" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/bench/samples/block-code.md" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/bench/samples/block-fences.md" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/bench/samples/block-heading.md" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/bench/samples/block-hr.md" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/bench/samples/block-html.md" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/bench/samples/block-lheading.md" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/bench/samples/block-list-flat.md" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/bench/samples/block-list-nested.md" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/bench/samples/block-ref-flat.md" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/bench/samples/block-ref-nested.md" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/bench/samples/inline-autolink.md" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/bench/samples/inline-backticks.md" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/bench/samples/inline-em-flat.md" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/bench/samples/inline-em-nested.md" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/bench/samples/inline-em-worst.md" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/bench/samples/inline-entity.md" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/bench/samples/inline-escape.md" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/bench/samples/inline-html.md" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/bench/samples/inline-links-flat.md" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/bench/samples/inline-links-nested.md" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/bench/samples/inline-newlines.md" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/bench/samples/lorem1.md" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/bench/samples/rawtabs.md" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/bench/statistics.py" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/bench/stats.py" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/benchmarks.md" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/changelog.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/data/CaseFolding.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/extensions/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/man/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/man/make_man_page.py" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/man/man1/cmark-gfm.1" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/man/man3/cmark-gfm.3" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/nmake.bat" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/src/cmark-gfm_version.h.in" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/src/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/src/libcmark-gfm.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/suppressions" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/test/afl_test_cases/test.md" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/test/cmark.py" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/test/entity_tests.py" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/test/extensions-full-info-string.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/test/extensions-table-prefer-style-attributes.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/test/extensions.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/test/normalize.py" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/test/pathological_tests.py" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/test/regression.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/test/roundtrip_tests.py" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/test/smart_punct.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/test/spec.txt" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/test/spec_tests.py" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/toolchain-mingw32.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/tools/Dockerfile" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/tools/appveyor-build.bat" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/tools/make_entities_inc.py" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/tools/mkcasefold.pl" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/tools/xml2md.xsl" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/tools/xml2md_gfm.xsl" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/why-cmark-and-not-x.md" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/wrappers/wrapper.js" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/wrappers/wrapper.py" />
+    <Text Include="../../thirdparty/owemdjee/cmark-gfm/wrappers/wrapper_ext.py" />
+  </ItemGroup>
+  <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+</Project>

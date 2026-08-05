@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{6F36367F-5495-44C3-A500-84EE6B63069B}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/cli11/include;../../thirdparty/owemdjee/cli11/examples;../../thirdparty/owemdjee/json/include;../../thirdparty/monolithic_tmplt;../../scripts/catch2/include;../../thirdparty/owemdjee/Catch2/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>CATCH_CONFIG_NO_PREFIX_ALL;CLI11_CATCH3;BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/cli11/include;../../thirdparty/owemdjee/cli11/examples;../../thirdparty/owemdjee/json/include;../../thirdparty/monolithic_tmplt;../../scripts/catch2/include;../../thirdparty/owemdjee/Catch2/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/cli11/include;../../thirdparty/owemdjee/cli11/examples;../../thirdparty/owemdjee/json/include;../../thirdparty/monolithic_tmplt;../../scripts/catch2/include;../../thirdparty/owemdjee/Catch2/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>CATCH_CONFIG_NO_PREFIX_ALL;CLI11_CATCH3;BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/cli11/include;../../thirdparty/owemdjee/cli11/examples;../../thirdparty/owemdjee/json/include;../../thirdparty/monolithic_tmplt;../../scripts/catch2/include;../../thirdparty/owemdjee/Catch2/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/cli11/include;../../thirdparty/owemdjee/cli11/examples;../../thirdparty/owemdjee/json/include;../../thirdparty/monolithic_tmplt;../../scripts/catch2/include;../../thirdparty/owemdjee/Catch2/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>CATCH_CONFIG_NO_PREFIX_ALL;CLI11_CATCH3;BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/cli11/include;../../thirdparty/owemdjee/cli11/examples;../../thirdparty/owemdjee/json/include;../../thirdparty/monolithic_tmplt;../../scripts/catch2/include;../../thirdparty/owemdjee/Catch2/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/cli11/include;../../thirdparty/owemdjee/cli11/examples;../../thirdparty/owemdjee/json/include;../../thirdparty/monolithic_tmplt;../../scripts/catch2/include;../../thirdparty/owemdjee/Catch2/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>CATCH_CONFIG_NO_PREFIX_ALL;CLI11_CATCH3;BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLI11_EXAMPLES;CLI11_EXAMPLES_STATICLIB;BUILDING_LIBCLI11;CLI11_STATICLIB;BUILDING_CLI11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/libassert/include;../../thirdparty/owemdjee/magic_enum/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/cpptrace/include;../../thirdparty/owemdjee/debugbreak;../../thirdparty/owemdjee/cli11/include;../../thirdparty/owemdjee/cli11/examples;../../thirdparty/owemdjee/json/include;../../thirdparty/monolithic_tmplt;../../scripts/catch2/include;../../thirdparty/owemdjee/Catch2/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ProjectReference Include="libassert.vcxproj">
+      <Project>{0B51171B-B10E-4EAC-8FFA-19226AD14240}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libCatch2.vcxproj">
+      <Project>{0B51171B-B10E-4EAC-8FFA-19226A4FA880}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcli11.vcxproj">
+      <Project>{82a39750-1f70-45a8-945f-e8461b0c3d7e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcpptrace.vcxproj">
+      <Project>{0B51171B-B10E-4EAC-8FFA-19226A59D404}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfmt.vcxproj">
+      <Project>{0B51171B-B10E-4EAC-8FFA-19226A9FA520}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsystem_override.vcxproj">
+      <Project>{0B51171B-B10E-4EAC-8FFA-19226A8BB47B}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Detours.vcxproj">
+      <Project>{4c2a66ce-a3c0-4f63-abd9-65e3e728040b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libdebugbreak.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0f0f12}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../source/system_override/force_link_dependency_helper.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/examples/desktop/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/examples/embedding/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/examples/expose/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/examples/loop/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/examples/multiple/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/examples/pdf/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/src/app.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/src/error.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/src/error.impl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/src/glaze.request.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/src/glaze.serializer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/src/gtk.app.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/src/gtk.app.impl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/src/gtk.error.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/src/gtk.icon.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/src/gtk.window.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/src/gtk.window.impl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/src/module/qt.module.stable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/src/module/unstable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/src/module/wkg.module.stable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/src/module/wv2.module.stable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/src/qt.app.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/src/qt.app.impl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/src/qt.error.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/src/qt.icon.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/src/qt.icon.impl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/src/qt.navigation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/src/qt.permission.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/src/qt.scheme.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/src/qt.url.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/src/qt.webview.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/src/qt.webview.impl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/src/qt.window.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/src/qt.window.impl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/src/request.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/src/rfl.request.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/src/rfl.serializer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/src/smartview.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/src/webview.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/src/webview.impl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/src/win32.app.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/src/win32.app.impl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/src/win32.error.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/src/win32.icon.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/src/win32.utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/src/win32.window.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/src/win32.window.impl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/src/window.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/src/wkg.navigation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/src/wkg.permission.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/src/wkg.scheme.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/src/wkg.scheme.impl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/src/wkg.url.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/src/wkg.webview.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/src/wkg.webview.impl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/src/wv2.navigation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/src/wv2.permission.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/src/wv2.scheme.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/src/wv2.url.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/src/wv2.webview.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/src/wv2.webview.impl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/tests/src/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/tests/src/regression.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/tests/src/smartview.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/tests/src/webview.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/saucer/tests/src/window.test.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/cmake/toolchain/zig.fix.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/include/saucer/app.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/include/saucer/error/error.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/include/saucer/executor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/include/saucer/icon.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/include/saucer/modules/module.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/include/saucer/modules/stable/qt.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/include/saucer/modules/stable/webkit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/include/saucer/modules/stable/webkitgtk.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/include/saucer/modules/stable/webview2.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/include/saucer/navigation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/include/saucer/permission.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/include/saucer/scheme.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/include/saucer/script.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/include/saucer/serializers/data.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/include/saucer/serializers/format/args.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/include/saucer/serializers/format/unquoted.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/include/saucer/serializers/glaze/glaze.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/include/saucer/serializers/rflpp/rflpp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/include/saucer/serializers/serializer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/include/saucer/smartview.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/include/saucer/stash/stash.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/include/saucer/traits/traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/include/saucer/url.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/include/saucer/utils/cstring.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/include/saucer/utils/overload.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/include/saucer/utils/required.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/include/saucer/utils/tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/include/saucer/webview.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/include/saucer/window.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/private/saucer/app.impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/private/saucer/cocoa.app.impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/private/saucer/cocoa.icon.impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/private/saucer/cocoa.utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/private/saucer/cocoa.window.impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/private/saucer/error.impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/private/saucer/gtk.app.impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/private/saucer/gtk.error.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/private/saucer/gtk.icon.impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/private/saucer/gtk.utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/private/saucer/gtk.window.impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/private/saucer/handle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/private/saucer/instantiate.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/private/saucer/invoke.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/private/saucer/lease.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/private/saucer/qt.app.impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/private/saucer/qt.error.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/private/saucer/qt.icon.impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/private/saucer/qt.navigation.impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/private/saucer/qt.permission.impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/private/saucer/qt.scheme.impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/private/saucer/qt.url.impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/private/saucer/qt.utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/private/saucer/qt.webview.impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/private/saucer/qt.window.impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/private/saucer/ref_obj.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/private/saucer/request.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/private/saucer/request.utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/private/saucer/scripts.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/private/saucer/webview.impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/private/saucer/win32.app.impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/private/saucer/win32.error.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/private/saucer/win32.icon.impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/private/saucer/win32.utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/private/saucer/win32.window.impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/private/saucer/window.impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/private/saucer/wk.navigation.impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/private/saucer/wk.permission.impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/private/saucer/wk.scheme.impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/private/saucer/wk.url.impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/private/saucer/wk.webview.impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/private/saucer/wkg.navigation.impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/private/saucer/wkg.permission.impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/private/saucer/wkg.scheme.impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/private/saucer/wkg.url.impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/private/saucer/wkg.webview.impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/private/saucer/wv2.navigation.impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/private/saucer/wv2.permission.impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/private/saucer/wv2.scheme.impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/private/saucer/wv2.url.impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/private/saucer/wv2.webview.impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/tests/include/runner.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/tests/include/test.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/saucer/tests/include/utils.hpp" />
+    <Text Include="../../thirdparty/owemdjee/saucer/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/saucer/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/saucer/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/saucer/README.md" />
+    <Text Include="../../thirdparty/owemdjee/saucer/SECURITY.md" />
+    <Text Include="../../thirdparty/owemdjee/saucer/cmake/cpm.cmake" />
+    <Text Include="../../thirdparty/owemdjee/saucer/cmake/module.cmake" />
+    <Text Include="../../thirdparty/owemdjee/saucer/cmake/nuget.cmake" />
+    <Text Include="../../thirdparty/owemdjee/saucer/cmake/toolchain/zig.cmake" />
+    <Text Include="../../thirdparty/owemdjee/saucer/examples/desktop/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/saucer/examples/embedding/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/saucer/examples/embedding/content/src/index.html" />
+    <Text Include="../../thirdparty/owemdjee/saucer/examples/embedding/content/src/index.js" />
+    <Text Include="../../thirdparty/owemdjee/saucer/examples/embedding/content/style/style.css" />
+    <Text Include="../../thirdparty/owemdjee/saucer/examples/expose/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/saucer/examples/loop/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/saucer/examples/multiple/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/saucer/examples/pdf/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/saucer/include/saucer/app.inl" />
+    <Text Include="../../thirdparty/owemdjee/saucer/include/saucer/error/error.inl" />
+    <Text Include="../../thirdparty/owemdjee/saucer/include/saucer/serializers/format/args.inl" />
+    <Text Include="../../thirdparty/owemdjee/saucer/include/saucer/serializers/format/unquoted.inl" />
+    <Text Include="../../thirdparty/owemdjee/saucer/include/saucer/serializers/glaze/glaze.inl" />
+    <Text Include="../../thirdparty/owemdjee/saucer/include/saucer/serializers/rflpp/rflpp.inl" />
+    <Text Include="../../thirdparty/owemdjee/saucer/include/saucer/serializers/serializer.inl" />
+    <Text Include="../../thirdparty/owemdjee/saucer/include/saucer/smartview.inl" />
+    <Text Include="../../thirdparty/owemdjee/saucer/include/saucer/stash/stash.inl" />
+    <Text Include="../../thirdparty/owemdjee/saucer/include/saucer/traits/traits.inl" />
+    <Text Include="../../thirdparty/owemdjee/saucer/include/saucer/utils/cstring.inl" />
+    <Text Include="../../thirdparty/owemdjee/saucer/include/saucer/utils/overload.inl" />
+    <Text Include="../../thirdparty/owemdjee/saucer/include/saucer/utils/required.inl" />
+    <Text Include="../../thirdparty/owemdjee/saucer/include/saucer/utils/tuple.inl" />
+    <Text Include="../../thirdparty/owemdjee/saucer/include/saucer/webview.inl" />
+    <Text Include="../../thirdparty/owemdjee/saucer/include/saucer/window.inl" />
+    <Text Include="../../thirdparty/owemdjee/saucer/private/saucer/cocoa.utils.inl" />
+    <Text Include="../../thirdparty/owemdjee/saucer/private/saucer/gtk.utils.inl" />
+    <Text Include="../../thirdparty/owemdjee/saucer/private/saucer/handle.inl" />
+    <Text Include="../../thirdparty/owemdjee/saucer/private/saucer/invoke.inl" />
+    <Text Include="../../thirdparty/owemdjee/saucer/private/saucer/lease.inl" />
+    <Text Include="../../thirdparty/owemdjee/saucer/private/saucer/qt.utils.inl" />
+    <Text Include="../../thirdparty/owemdjee/saucer/private/saucer/ref_obj.inl" />
+    <Text Include="../../thirdparty/owemdjee/saucer/private/saucer/request.utils.inl" />
+    <Text Include="../../thirdparty/owemdjee/saucer/template/config.hpp.in" />
+    <Text Include="../../thirdparty/owemdjee/saucer/tests/CMakeLists.txt" />
+  </ItemGroup>
+  <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+</Project>
