@@ -349,6 +349,7 @@ const projectMap = {
 	"libbloom": "bloom",
 	"libbloomd": "libbloom",
 	"libiconv_prepare": "libiconv",
+	"libparameters_example_upani_01_lib": "libparameters",
 	"libparameters_example_upani_01": "libparameters",
 	"libparameters_example_upani_02": "libparameters",
 	"libparameters_example_zeroing": "libparameters",

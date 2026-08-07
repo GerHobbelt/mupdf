@@ -2,3 +2,4 @@
 also-ignore:
 	/tmp/
 	
+	/test
