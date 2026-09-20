@@ -223,6 +223,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/cuda/cuda_ops.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/cv2/opencv.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/math/cuda/negpos_def.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/math/energy_stft_segmentation.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/math/math.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/math/segment_extraction.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/math/segment_sum.cc" />
@@ -267,6 +268,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/shared/api/chat_template.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/shared/api/image_processor.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/shared/api/image_resample.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/shared/api/nemo_mel_spectrogram.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/shared/api/speech_extractor.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/shared/api/tokenizer_impl.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/shared/extensions.cc" />
@@ -292,6 +294,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/static_test/test_base64.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/static_test/test_cuda_eager.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/static_test/test_math.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/static_test/test_nemo_mel.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/static_test/test_sampling.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/static_test/test_strings.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/static_test/test_tensor_api.cc" />
@@ -367,6 +370,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/math/cuda/negpos_def.h" />
     <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/math/dlib/inverse.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/math/dlib/stft_norm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/math/energy_stft_segmentation.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/math/negpos.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/math/segment_extraction.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/operators/math/segment_sum.hpp" />
@@ -417,7 +421,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/shared/api/image_transforms_mllama.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/shared/api/image_transforms_phi_3.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/shared/api/image_transforms_phi_4.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/shared/api/image_transforms_qwen2_5.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/shared/api/minja.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/shared/api/nemo_mel_spectrogram.h" />
     <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/shared/api/runner.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/shared/api/speech_extractor.h" />
     <ClInclude Include="../../thirdparty/owemdjee/onnxruntime-extensions/shared/api/speech_features.hpp" />
@@ -695,6 +701,8 @@
     <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/phi-4-base/tokenizer_config.json" />
     <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/phi-4-mini-reasoning/tokenizer.json" />
     <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/phi-4-mini-reasoning/tokenizer_config.json" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/phi-4-mini/tokenizer.json" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/phi-4-mini/tokenizer_config.json" />
     <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/ppp_vision/FastestDet.onnx" />
     <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/ppp_vision/TF.ImageNetLabels.txt" />
     <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/ppp_vision/create_boxdrawing_model.py" />
@@ -711,6 +719,13 @@
     <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/processor/mllama/llama_3_image.json" />
     <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/processor/phi_3_image.json" />
     <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/processor/proctest.py" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/qwen2.5/tokenizer.json" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/qwen2.5/tokenizer_config.json" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/qwen2.5vl/pixel_values_reference.txt" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/qwen2.5vl/vision_processor.json" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/qwen3/tokenizer.json" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/qwen3/tokenizer_config.json" />
+    <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/qwen3vl/vision_processor.json" />
     <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/rwkv_vocab_v20230424.txt" />
     <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/sentencepiece.bpe.model" />
     <Text Include="../../thirdparty/owemdjee/onnxruntime-extensions/test/data/string_mapping.txt" />

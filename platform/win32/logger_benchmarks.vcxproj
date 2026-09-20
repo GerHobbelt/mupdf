@@ -191,6 +191,7 @@
     <ClCompile Include="../../source/system_override/force_link_dependency_helper.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/logger_benchmarks/benchmarks/backend_total_time/boost_log_backend_total_time.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/logger_benchmarks/benchmarks/backend_total_time/bqlog_backend_total_time.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/logger_benchmarks/benchmarks/backend_total_time/bqlog_binary_backend_total_time.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/logger_benchmarks/benchmarks/backend_total_time/fmtlog_backend_total_time.cpp" />
@@ -202,6 +203,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/logger_benchmarks/benchmarks/backend_total_time/reckless_backend_total_time.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/logger_benchmarks/benchmarks/backend_total_time/spdlog_backend_total_time.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/logger_benchmarks/benchmarks/backend_total_time/xtr_backend_total_time.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/logger_benchmarks/benchmarks/call_site_latency/benchmark_boost_log_call_site_latency.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/logger_benchmarks/benchmarks/call_site_latency/benchmark_bqlog_call_site_latency.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/logger_benchmarks/benchmarks/call_site_latency/benchmark_fmtlog_call_site_latency.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/logger_benchmarks/benchmarks/call_site_latency/benchmark_g3log_call_site_latency.cpp" />
@@ -218,10 +220,12 @@
     <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/benchmarks/call_site_latency/call_site_latency_bench_common.h" />
     <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/Backend.h" />
     <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/BackendTscClock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/BinaryDataDeferredFormatCodec.h" />
     <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/CsvWriter.h" />
     <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/DeferredFormatCodec.h" />
     <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/DirectFormatCodec.h" />
     <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/Frontend.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/HelperMacros.h" />
     <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/LogFunctions.h" />
     <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/LogMacros.h" />
     <ClInclude Include="../../thirdparty/owemdjee/logger_benchmarks/quill/include/quill/Logger.h" />
@@ -315,6 +319,7 @@
     <Text Include="../../thirdparty/owemdjee/logger_benchmarks/benchmarks/backend_total_time/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/logger_benchmarks/benchmarks/call_site_latency/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/logger_benchmarks/cmake/Utility.cmake" />
+    <Text Include="../../thirdparty/owemdjee/logger_benchmarks/generate_tables.py" />
     <Text Include="../../thirdparty/owemdjee/logger_benchmarks/quill/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/logger_benchmarks/quill/cmake/CodeCoverage.cmake" />
     <Text Include="../../thirdparty/owemdjee/logger_benchmarks/quill/cmake/Doctest.cmake" />
@@ -342,6 +347,7 @@
     <Text Include="../../thirdparty/owemdjee/logger_benchmarks/results/int_int_large_string/bench_results_7.txt" />
     <Text Include="../../thirdparty/owemdjee/logger_benchmarks/results/int_int_large_string/bench_results_8.txt" />
     <Text Include="../../thirdparty/owemdjee/logger_benchmarks/run_all.py" />
+    <Text Include="../../thirdparty/owemdjee/logger_benchmarks/setup_boost_simple.py" />
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>

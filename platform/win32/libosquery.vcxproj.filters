@@ -217,10 +217,10 @@
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0068}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\osquery\tables\networking">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0070}</UniqueIdentifier>
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0069}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\osquery\tables\networking\darwin">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0069}</UniqueIdentifier>
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0070}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\osquery\tables\networking\linux">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0071}</UniqueIdentifier>
@@ -2591,6 +2591,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/networking/posix/utils.cpp">
       <Filter>Source Files\osquery\tables\networking\posix</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/networking/tests/curl_tests.cpp">
+      <Filter>Source Files\osquery\tables\networking\tests</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/networking/tests/linux/iptables_tests.cpp">
       <Filter>Source Files\osquery\tables\networking\tests\linux</Filter>
     </ClCompile>
@@ -2637,6 +2640,9 @@
       <Filter>Source Files\osquery\tables\system\darwin</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/darwin/block_devices.cpp">
+      <Filter>Source Files\osquery\tables\system\darwin</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/darwin/certificate_trust_settings.cpp">
       <Filter>Source Files\osquery\tables\system\darwin</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/darwin/cpu_info.cpp">
@@ -2733,9 +2739,6 @@
       <Filter>Source Files\osquery\tables\system\darwin</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/darwin/smc_keys.cpp">
-      <Filter>Source Files\osquery\tables\system\darwin</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/darwin/startup_items.cpp">
       <Filter>Source Files\osquery\tables\system\darwin</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/darwin/sysctl_utils.cpp">
@@ -2984,9 +2987,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/tests/darwin/smc_tests.cpp">
       <Filter>Source Files\osquery\tables\system\tests\darwin</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/tests/darwin/startup_items_tests.cpp">
-      <Filter>Source Files\osquery\tables\system\tests\darwin</Filter>
-    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/tests/darwin/system_extensions_test.cpp">
       <Filter>Source Files\osquery\tables\system\tests\darwin</Filter>
     </ClCompile>
@@ -3022,6 +3022,9 @@
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/tests/linux/yum_sources_tests.cpp">
       <Filter>Source Files\osquery\tables\system\tests\linux</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/tests/npm_packages_tests.cpp">
+      <Filter>Source Files\osquery\tables\system\tests</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/osquery/osquery/tables/system/tests/posix/augeas_tests.cpp">
       <Filter>Source Files\osquery\tables\system\tests\posix</Filter>
@@ -3797,6 +3800,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/osquery/tests/integration/tables/carves.cpp">
       <Filter>Source Files\tests\integration\tables</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/osquery/tests/integration/tables/certificate_trust_settings.cpp">
+      <Filter>Source Files\tests\integration\tables</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/osquery/tests/integration/tables/certificates.cpp">
       <Filter>Source Files\tests\integration\tables</Filter>
     </ClCompile>
@@ -4185,6 +4191,9 @@
       <Filter>Source Files\tests\integration\tables</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/osquery/tests/integration/tables/package_receipts.cpp">
+      <Filter>Source Files\tests\integration\tables</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/osquery/tests/integration/tables/password_policy.cpp">
       <Filter>Source Files\tests\integration\tables</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/osquery/tests/integration/tables/patches.cpp">
@@ -5002,6 +5011,9 @@
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/tables/events/windows/windows_events.h">
       <Filter>Header Files\osquery\tables\events\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/tables/networking/curl.h">
+      <Filter>Header Files\osquery\tables\networking</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/osquery/osquery/tables/networking/darwin/wifi_utils.h">
       <Filter>Header Files\osquery\tables\networking\darwin</Filter>
@@ -6260,6 +6272,9 @@
     <Text Include="../../thirdparty/owemdjee/osquery/osquery/worker/system/CMakeLists.txt">
       <Filter>Misc Files\osquery\worker\system</Filter>
     </Text>
+    <Text Include="../../thirdparty/owemdjee/osquery/packs/README.md">
+      <Filter>Misc Files\packs</Filter>
+    </Text>
     <Text Include="../../thirdparty/owemdjee/osquery/packs/hardware-monitoring.conf">
       <Filter>Misc Files\packs</Filter>
     </Text>
@@ -6388,9 +6403,6 @@
     </Text>
     <Text Include="../../thirdparty/owemdjee/osquery/tools/ci/scripts/cve/validate_manifest_libraries_versions.py">
       <Filter>Misc Files\tools\ci\scripts\cve</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/osquery/tools/ci/scripts/install_openssl_formula_dependencies.ps1">
-      <Filter>Misc Files\tools\ci\scripts</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/osquery/tools/ci/scripts/macos/build_universal_package_data.sh">
       <Filter>Misc Files\tools\ci\scripts\macos</Filter>

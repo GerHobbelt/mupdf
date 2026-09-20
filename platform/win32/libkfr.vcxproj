@@ -224,6 +224,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/kfr/src/audio/mf_coder.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/kfr/src/audio/mp3_coder.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/kfr/src/audio/raw_coder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/kfr/src/audio/version.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/kfr/src/audio/w64_coder.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/kfr/src/audio/wave_coder.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/kfr/src/capi/capi.cpp" />
@@ -238,6 +239,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/kfr/src/dsp/fir.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/kfr/src/dsp/iir_design.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/kfr/src/dsp/sample_rate_conversion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/kfr/src/dsp/speaker.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/kfr/src/dsp/version.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/kfr/src/io/audiofile-impl.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/kfr/src/io/file.cpp" />
@@ -266,6 +268,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/kfr/tests/unit/base/univector.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/kfr/tests/unit/dsp/biquad.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/kfr/tests/unit/dsp/biquad_design.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/kfr/tests/unit/dsp/dcremove.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/kfr/tests/unit/dsp/delay.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/kfr/tests/unit/dsp/dsp.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/kfr/tests/unit/dsp/ebu.cpp" />
@@ -298,6 +301,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/kfr/tests/unit/simd/shuffle.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/kfr/tests/unit/simd/simd.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/kfr/tests/unit/simd/vec.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/kfr/tests/usage-config/kfr-app.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/kfr/tests/usage-manual/kfr-app.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/kfr/tools/ebu_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/kfr/tools/sample_rate_converter.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/kfr/include/kfr/all.hpp" />
@@ -484,6 +489,7 @@
     <Text Include="../../thirdparty/owemdjee/kfr/LICENSE.txt" />
     <Text Include="../../thirdparty/owemdjee/kfr/README.md" />
     <Text Include="../../thirdparty/owemdjee/kfr/ci/build_capi_win.cmd" />
+    <Text Include="../../thirdparty/owemdjee/kfr/ci/llvm-linux.sh" />
     <Text Include="../../thirdparty/owemdjee/kfr/ci/run.cmd" />
     <Text Include="../../thirdparty/owemdjee/kfr/ci/run.sh" />
     <Text Include="../../thirdparty/owemdjee/kfr/cmake-format.yaml" />
@@ -494,12 +500,13 @@
     <Text Include="../../thirdparty/owemdjee/kfr/cmake/config.cmake.in" />
     <Text Include="../../thirdparty/owemdjee/kfr/cmake/ios.cmake" />
     <Text Include="../../thirdparty/owemdjee/kfr/cmake/link_as_whole.cmake" />
+    <Text Include="../../thirdparty/owemdjee/kfr/cmake/macos-merge-binaries.cmake" />
     <Text Include="../../thirdparty/owemdjee/kfr/cmake/ports/alac/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/kfr/cmake/ports/alac/portfile.cmake" />
     <Text Include="../../thirdparty/owemdjee/kfr/cmake/ports/alac/vcpkg.json" />
+    <Text Include="../../thirdparty/owemdjee/kfr/cmake/riscv64.cmake" />
     <Text Include="../../thirdparty/owemdjee/kfr/cmake/target_set_arch.cmake" />
     <Text Include="../../thirdparty/owemdjee/kfr/docs/README.md" />
-    <Text Include="../../thirdparty/owemdjee/kfr/docs/cxxdox.yml" />
     <Text Include="../../thirdparty/owemdjee/kfr/docs/docs/basics.md" />
     <Text Include="../../thirdparty/owemdjee/kfr/docs/docs/benchmarking.md" />
     <Text Include="../../thirdparty/owemdjee/kfr/docs/docs/bq.md" />
@@ -519,6 +526,7 @@
     <Text Include="../../thirdparty/owemdjee/kfr/docs/docs/file_support.md" />
     <Text Include="../../thirdparty/owemdjee/kfr/docs/docs/fir.md" />
     <Text Include="../../thirdparty/owemdjee/kfr/docs/docs/fir_gallery.md" />
+    <Text Include="../../thirdparty/owemdjee/kfr/docs/docs/iir.md" />
     <Text Include="../../thirdparty/owemdjee/kfr/docs/docs/iir_gallery.md" />
     <Text Include="../../thirdparty/owemdjee/kfr/docs/docs/img/audio_draft_quality.svg" />
     <Text Include="../../thirdparty/owemdjee/kfr/docs/docs/img/audio_high_quality.svg" />
@@ -545,6 +553,7 @@
     <Text Include="../../thirdparty/owemdjee/kfr/docs/docs/img/butterworth_lowpass24.svg" />
     <Text Include="../../thirdparty/owemdjee/kfr/docs/docs/img/chebyshev1_lowpass8.svg" />
     <Text Include="../../thirdparty/owemdjee/kfr/docs/docs/img/chebyshev2_lowpass8.svg" />
+    <Text Include="../../thirdparty/owemdjee/kfr/docs/docs/img/elliptic_lowpass10.svg" />
     <Text Include="../../thirdparty/owemdjee/kfr/docs/docs/img/filtered_noise.svg" />
     <Text Include="../../thirdparty/owemdjee/kfr/docs/docs/img/filtered_noise2.svg" />
     <Text Include="../../thirdparty/owemdjee/kfr/docs/docs/img/filtered_noise3.svg" />
@@ -572,6 +581,7 @@
     <Text Include="../../thirdparty/owemdjee/kfr/docs/docs/index.md" />
     <Text Include="../../thirdparty/owemdjee/kfr/docs/docs/installation.md" />
     <Text Include="../../thirdparty/owemdjee/kfr/docs/docs/js/math.js" />
+    <Text Include="../../thirdparty/owemdjee/kfr/docs/docs/kb.md" />
     <Text Include="../../thirdparty/owemdjee/kfr/docs/docs/normalize.md" />
     <Text Include="../../thirdparty/owemdjee/kfr/docs/docs/plot.md" />
     <Text Include="../../thirdparty/owemdjee/kfr/docs/docs/read_audio.md" />
@@ -579,8 +589,10 @@
     <Text Include="../../thirdparty/owemdjee/kfr/docs/docs/src_gallery.md" />
     <Text Include="../../thirdparty/owemdjee/kfr/docs/docs/upgrade5.md" />
     <Text Include="../../thirdparty/owemdjee/kfr/docs/docs/upgrade6.md" />
+    <Text Include="../../thirdparty/owemdjee/kfr/docs/docs/upgrade7.md" />
     <Text Include="../../thirdparty/owemdjee/kfr/docs/docs/whatsnew5.md" />
     <Text Include="../../thirdparty/owemdjee/kfr/docs/docs/whatsnew6.md" />
+    <Text Include="../../thirdparty/owemdjee/kfr/docs/docs/whatsnew7.md" />
     <Text Include="../../thirdparty/owemdjee/kfr/docs/docs/window_gallery.md" />
     <Text Include="../../thirdparty/owemdjee/kfr/docs/docs/without_cmake.md" />
     <Text Include="../../thirdparty/owemdjee/kfr/docs/mkdocs.yml" />
@@ -965,6 +977,8 @@
     <Text Include="../../thirdparty/owemdjee/kfr/tests/test-audio/testdata_2c_s16.flac" />
     <Text Include="../../thirdparty/owemdjee/kfr/tests/test-audio/testdata_2c_s16.w64" />
     <Text Include="../../thirdparty/owemdjee/kfr/tests/test-audio/testdata_2c_s24.flac" />
+    <Text Include="../../thirdparty/owemdjee/kfr/tests/usage-config/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/kfr/tests/usage-manual/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/kfr/tools/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/kfr/update-sources.py" />
   </ItemGroup>

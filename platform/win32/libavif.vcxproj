@@ -310,6 +310,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/libavif/tests/gtest/aviftest_helpers.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libavif/tests/gtest/aviftilingtest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libavif/tests/gtest/aviftransformtest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libavif/tests/gtest/aviftunetest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libavif/tests/gtest/avifutilstest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libavif/tests/gtest/avify4mtest.cc" />
     <ClInclude Include="../../thirdparty/owemdjee/libavif/apps/avifgainmaputil/combine_command.h" />
@@ -336,6 +337,8 @@
     <Image Include="../../thirdparty/owemdjee/libavif/tests/data/ArcTriomphe-cHRM-red-green-swap-reference.png" />
     <Image Include="../../thirdparty/owemdjee/libavif/tests/data/ArcTriomphe-cHRM-red-green-swap.png" />
     <Image Include="../../thirdparty/owemdjee/libavif/tests/data/abc.png" />
+    <Image Include="../../thirdparty/owemdjee/libavif/tests/data/apple_gainmap_new.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libavif/tests/data/apple_gainmap_old.jpg" />
     <Image Include="../../thirdparty/owemdjee/libavif/tests/data/circle-trns-after-plte.png" />
     <Image Include="../../thirdparty/owemdjee/libavif/tests/data/circle-trns-before-plte.png" />
     <Image Include="../../thirdparty/owemdjee/libavif/tests/data/dog_exif_extended_xmp_icc.jpg" />
@@ -345,6 +348,7 @@
     <Image Include="../../thirdparty/owemdjee/libavif/tests/data/ffffcc-srgb.png" />
     <Image Include="../../thirdparty/owemdjee/libavif/tests/data/ffffff-gamma1.6.png" />
     <Image Include="../../thirdparty/owemdjee/libavif/tests/data/ffffff-gamma2.2.png" />
+    <Image Include="../../thirdparty/owemdjee/libavif/tests/data/kodim03_grayscale_cicp.png" />
     <Image Include="../../thirdparty/owemdjee/libavif/tests/data/kodim03_grayscale_gamma1.6-reference.png" />
     <Image Include="../../thirdparty/owemdjee/libavif/tests/data/kodim03_grayscale_gamma1.6.png" />
     <Image Include="../../thirdparty/owemdjee/libavif/tests/data/paris_exif_orientation_5.jpg" />
@@ -352,6 +356,7 @@
     <Image Include="../../thirdparty/owemdjee/libavif/tests/data/paris_exif_xmp_gainmap_littleendian.jpg" />
     <Image Include="../../thirdparty/owemdjee/libavif/tests/data/paris_exif_xmp_icc.jpg" />
     <Image Include="../../thirdparty/owemdjee/libavif/tests/data/paris_exif_xmp_icc_gainmap_bigendian.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libavif/tests/data/paris_exif_xmp_modified_icc.jpg" />
     <Image Include="../../thirdparty/owemdjee/libavif/tests/data/paris_extended_xmp.jpg" />
     <Image Include="../../thirdparty/owemdjee/libavif/tests/data/paris_icc_exif_xmp.png" />
     <Image Include="../../thirdparty/owemdjee/libavif/tests/data/paris_icc_exif_xmp_at_end.png" />
@@ -376,6 +381,7 @@
     <Text Include="../../thirdparty/owemdjee/libavif/cmake/Modules/Findsvt.cmake" />
     <Text Include="../../thirdparty/owemdjee/libavif/cmake/Modules/LocalAom.cmake" />
     <Text Include="../../thirdparty/owemdjee/libavif/cmake/Modules/LocalAvm.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libavif/cmake/Modules/LocalAvm.diff" />
     <Text Include="../../thirdparty/owemdjee/libavif/cmake/Modules/LocalDav1d.cmake" />
     <Text Include="../../thirdparty/owemdjee/libavif/cmake/Modules/LocalFuzztest.cmake" />
     <Text Include="../../thirdparty/owemdjee/libavif/cmake/Modules/LocalGTest.cmake" />
@@ -482,6 +488,7 @@
     <Text Include="../../thirdparty/owemdjee/libavif/tests/test_cmd_avifgainmaputil.sh" />
     <Text Include="../../thirdparty/owemdjee/libavif/tests/test_cmd_avm.sh" />
     <Text Include="../../thirdparty/owemdjee/libavif/tests/test_cmd_avm_lossless.sh" />
+    <Text Include="../../thirdparty/owemdjee/libavif/tests/test_cmd_depth_extension.sh" />
     <Text Include="../../thirdparty/owemdjee/libavif/tests/test_cmd_enc_boxes_golden.sh" />
     <Text Include="../../thirdparty/owemdjee/libavif/tests/test_cmd_enc_gainmap_boxes_golden.sh" />
     <Text Include="../../thirdparty/owemdjee/libavif/tests/test_cmd_gainmap.sh" />
@@ -492,12 +499,16 @@
     <Text Include="../../thirdparty/owemdjee/libavif/tests/test_cmd_progressive.sh" />
     <Text Include="../../thirdparty/owemdjee/libavif/tests/test_cmd_stdin.sh" />
     <Text Include="../../thirdparty/owemdjee/libavif/tests/test_cmd_targetsize.sh" />
+    <Text Include="../../thirdparty/owemdjee/libavif/tests/test_cmd_transform.sh" />
+    <Xml Include="../../thirdparty/owemdjee/libavif/tests/data/goldens/apple_gainmap_new.jpg.avif.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libavif/tests/data/goldens/apple_gainmap_old.jpg.avif.xml" />
     <Xml Include="../../thirdparty/owemdjee/libavif/tests/data/goldens/circle-trns-after-plte.png.avif.xml" />
     <Xml Include="../../thirdparty/owemdjee/libavif/tests/data/goldens/dog_exif_extended_xmp_icc.jpg.avif.xml" />
     <Xml Include="../../thirdparty/owemdjee/libavif/tests/data/goldens/kodim03_23_animation.avif.xml" />
     <Xml Include="../../thirdparty/owemdjee/libavif/tests/data/goldens/kodim03_23_animation_keyframes.avif.xml" />
     <Xml Include="../../thirdparty/owemdjee/libavif/tests/data/goldens/kodim03_yuv420_8bpc.y4m.avif.xml" />
     <Xml Include="../../thirdparty/owemdjee/libavif/tests/data/goldens/paris_exif_xmp_gainmap_bigendian.jpg.avif.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libavif/tests/data/goldens/paris_exif_xmp_gainmap_bigendian_grid.avif.xml" />
     <Xml Include="../../thirdparty/owemdjee/libavif/tests/data/goldens/paris_exif_xmp_gainmap_bigendian_ignore.jpg.avif.xml" />
     <Xml Include="../../thirdparty/owemdjee/libavif/tests/data/goldens/paris_exif_xmp_gainmap_littleendian.jpg.avif.xml" />
     <Xml Include="../../thirdparty/owemdjee/libavif/tests/data/goldens/paris_exif_xmp_icc_gainmap_bigendian.jpg.avif.xml" />

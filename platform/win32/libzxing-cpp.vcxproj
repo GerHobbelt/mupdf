@@ -216,7 +216,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/zxing-cpp/core/src/CharacterSet.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/zxing-cpp/core/src/ConcentricFinder.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/zxing-cpp/core/src/Content.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/zxing-cpp/core/src/DecodeHints.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/zxing-cpp/core/src/CreateBarcode.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/zxing-cpp/core/src/ECI.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/zxing-cpp/core/src/Error.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/zxing-cpp/core/src/GTIN.cpp" />
@@ -236,7 +236,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/zxing-cpp/core/src/ResultPoint.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/zxing-cpp/core/src/TextDecoder.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/zxing-cpp/core/src/TextEncoder.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/zxing-cpp/core/src/TextUtfEncoding.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/zxing-cpp/core/src/Utf.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/zxing-cpp/core/src/WhiteRectDetector.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/zxing-cpp/core/src/WriteBarcode.cpp" />
@@ -420,6 +419,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/zxing-cpp/wrappers/wasm/BarcodeWriter.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/zxing-cpp/wrappers/winrt/BarcodeReader.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/core/src/Barcode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/core/src/BarcodeData.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/core/src/BarcodeFormat.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/core/src/BinaryBitmap.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/core/src/BitArray.h" />
@@ -429,11 +429,11 @@
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/core/src/BitMatrixIO.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/core/src/BitSource.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/core/src/ByteArray.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/core/src/ByteMatrix.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/core/src/CharacterSet.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/core/src/ConcentricFinder.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/core/src/Content.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/core/src/DecodeHints.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/core/src/ContentType.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/core/src/CreateBarcode.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/core/src/DecoderResult.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/core/src/DetectorResult.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/core/src/ECI.h" />
@@ -464,13 +464,12 @@
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/core/src/ReedSolomonDecoder.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/core/src/ReedSolomonEncoder.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/core/src/RegressionLine.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/core/src/Result.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/core/src/ResultPoint.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/core/src/Scope.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/core/src/StructuredAppend.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/core/src/SymbologyIdentifier.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/core/src/TextDecoder.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/core/src/TextEncoder.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/core/src/TextUtfEncoding.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/core/src/ThresholdBinarizer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/core/src/TritMatrix.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/core/src/Utf.h" />
@@ -479,7 +478,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/core/src/ZXAlgorithms.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/core/src/ZXConfig.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/core/src/ZXTestSupport.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/core/src/ZXVersion.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/core/src/ZXingC.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/core/src/ZXingCpp.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zxing-cpp/core/src/aztec/AZDecoder.h" />
@@ -2852,6 +2850,7 @@
     <Text Include="../../thirdparty/owemdjee/zxing-cpp/wrappers/kn/settings.gradle.kts" />
     <Text Include="../../thirdparty/owemdjee/zxing-cpp/wrappers/kn/src/nativeInterop/cinterop/libZXing.def" />
     <Text Include="../../thirdparty/owemdjee/zxing-cpp/wrappers/python/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/zxing-cpp/wrappers/python/LICENSE" />
     <Text Include="../../thirdparty/owemdjee/zxing-cpp/wrappers/python/MANIFEST.in" />
     <Text Include="../../thirdparty/owemdjee/zxing-cpp/wrappers/python/README.md" />
     <Text Include="../../thirdparty/owemdjee/zxing-cpp/wrappers/python/core" />

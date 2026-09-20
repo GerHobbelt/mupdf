@@ -255,6 +255,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/apphelpers/DisplayViewHelpers.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/apphelpers/LegacyViewingPipeline.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/apphelpers/MixingHelpers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/apphelpers/mergeconfigs/MergeConfigsHelpers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/apphelpers/mergeconfigs/OCIOMYaml.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/apphelpers/mergeconfigs/SectionMerger.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/builtinconfigs/BuiltinConfigRegistry.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/builtinconfigs/CGConfig.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/builtinconfigs/StudioConfig.cpp" />
@@ -310,6 +313,11 @@
     <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gamma/GammaOpData.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gamma/GammaOpGPU.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gamma/GammaOpUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gradinghuecurve/GradingHueCurve.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gradinghuecurve/GradingHueCurveOp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gradinghuecurve/GradingHueCurveOpCPU.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gradinghuecurve/GradingHueCurveOpData.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gradinghuecurve/GradingHueCurveOpGPU.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gradingprimary/GradingPrimary.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gradingprimary/GradingPrimaryOp.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gradingprimary/GradingPrimaryOpCPU.cpp" />
@@ -367,6 +375,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/ExposureContrastTransform.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/FileTransform.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/FixedFunctionTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/GradingHueCurveTransform.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/GradingPrimaryTransform.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/GradingRGBCurveTransform.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/GradingToneTransform.cpp" />
@@ -400,6 +409,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ociodisplay/d_main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ociolutimage/li_main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ociomakeclf/mkc_main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ociomergeconfigs/main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioperf/prf_main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ociowrite/ow_main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/apputils/argparse.cpp" />
@@ -463,6 +473,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/apphelpers/ColorSpaceHelpers.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/apphelpers/LegacyViewingPipeline.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/apphelpers/MixingHelpers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/apphelpers/mergeconfigs/MergeConfigsHelpers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/apphelpers/mergeconfigs/OCIOMYaml.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/apphelpers/mergeconfigs/SectionMerger.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/builtinconfigs/BuiltinConfigRegistry.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/builtinconfigs/CGConfig.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/builtinconfigs/StudioConfig.h" />
@@ -504,6 +517,11 @@
     <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gamma/GammaOpData.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gamma/GammaOpGPU.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gamma/GammaOpUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gradinghuecurve/GradingHueCurve.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gradinghuecurve/GradingHueCurveOp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gradinghuecurve/GradingHueCurveOpCPU.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gradinghuecurve/GradingHueCurveOpData.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gradinghuecurve/GradingHueCurveOpGPU.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gradingprimary/GradingPrimary.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gradingprimary/GradingPrimaryOp.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gradingprimary/GradingPrimaryOpCPU.h" />
@@ -558,6 +576,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/ExposureContrastTransform.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/FileTransform.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/FixedFunctionTransform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/GradingHueCurveTransform.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/GradingPrimaryTransform.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/GradingRGBCurveTransform.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/GradingToneTransform.h" />
@@ -865,6 +884,7 @@
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/releases/ocio_2_2.rst" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/releases/ocio_2_3.rst" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/releases/ocio_2_4.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/releases/ocio_2_5.rst" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/requirements.txt" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/LICENSE" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/README.md" />
@@ -1044,6 +1064,7 @@
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ociodisplay/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ociolutimage/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ociomakeclf/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ociomergeconfigs/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioperf/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/README.md" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/icons/opencolorio-icon-color.svg" />

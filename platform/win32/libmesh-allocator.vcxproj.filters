@@ -24,38 +24,41 @@
     <Filter Include="Header Files\src\static">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0004}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\src">
+    <Filter Include="Misc Files\scripts">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0005}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\support">
+    <Filter Include="Misc Files\src">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0006}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\theory">
+    <Filter Include="Misc Files\support">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0007}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\theory\bounds">
+    <Filter Include="Misc Files\theory">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0008}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\theory\dumps">
+    <Filter Include="Misc Files\theory\bounds">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0009}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files">
+    <Filter Include="Misc Files\theory\dumps">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0010}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files\theory">
+    <Filter Include="Resource Files">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0011}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\src">
+    <Filter Include="Resource Files\theory">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0012}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\src\testing">
+    <Filter Include="Source Files\src">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0013}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\src\testing\benchmark">
+    <Filter Include="Source Files\src\testing">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0014}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\src\testing\unit">
+    <Filter Include="Source Files\src\testing\benchmark">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0015}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src\testing\unit">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0016}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -80,6 +83,12 @@
     <ClCompile Include="../../thirdparty/owemdjee/mesh-allocator/src/measure_rss.cc">
       <Filter>Source Files\src</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/mesh-allocator/src/memory_stats_linux.cc">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/mesh-allocator/src/memory_stats_macos.cc">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/mesh-allocator/src/meshable_arena.cc">
       <Filter>Source Files\src</Filter>
     </ClCompile>
@@ -92,7 +101,16 @@
     <ClCompile Include="../../thirdparty/owemdjee/mesh-allocator/src/runtime.cc">
       <Filter>Source Files\src</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/mesh-allocator/src/testing/benchmark/index_compute_benchmark.cc">
+      <Filter>Source Files\src\testing\benchmark</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/mesh-allocator/src/testing/benchmark/larson.cc">
+      <Filter>Source Files\src\testing\benchmark</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/mesh-allocator/src/testing/benchmark/local_refill.cc">
+      <Filter>Source Files\src\testing\benchmark</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/mesh-allocator/src/testing/benchmark/malloc_benchmark.cc">
       <Filter>Source Files\src\testing\benchmark</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/mesh-allocator/src/testing/big-alloc.c">
@@ -119,16 +137,34 @@
     <ClCompile Include="../../thirdparty/owemdjee/mesh-allocator/src/testing/unit/bitmap_test.cc">
       <Filter>Source Files\src\testing\unit</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/mesh-allocator/src/testing/unit/cacheline_padding_test.cc">
+      <Filter>Source Files\src\testing\unit</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/mesh-allocator/src/testing/unit/concurrent_mesh_test.cc">
       <Filter>Source Files\src\testing\unit</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/mesh-allocator/src/testing/unit/fork_test.cc">
+      <Filter>Source Files\src\testing\unit</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/mesh-allocator/src/testing/unit/macos_memory_test.cc">
+      <Filter>Source Files\src\testing\unit</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/mesh-allocator/src/testing/unit/mesh_memory_test.cc">
+      <Filter>Source Files\src\testing\unit</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/mesh-allocator/src/testing/unit/mesh_test.cc">
+      <Filter>Source Files\src\testing\unit</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/mesh-allocator/src/testing/unit/pending_list_test.cc">
       <Filter>Source Files\src\testing\unit</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/mesh-allocator/src/testing/unit/rng_test.cc">
       <Filter>Source Files\src\testing\unit</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/mesh-allocator/src/testing/unit/size_class_test.cc">
+      <Filter>Source Files\src\testing\unit</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/mesh-allocator/src/testing/unit/thread_exit_test.cc">
       <Filter>Source Files\src\testing\unit</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/mesh-allocator/src/testing/unit/triple_mesh_test.cc">
@@ -152,16 +188,31 @@
     <ClInclude Include="../../thirdparty/owemdjee/mesh-allocator/src/common.h">
       <Filter>Header Files\src</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/mesh-allocator/src/dispatch_utils.h">
+      <Filter>Header Files\src</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/mesh-allocator/src/fixed_array.h">
       <Filter>Header Files\src</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/mesh-allocator/src/global_heap.h">
       <Filter>Header Files\src</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/mesh-allocator/src/global_heap_impl.h">
+      <Filter>Header Files\src</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/mesh-allocator/src/ifunc_resolver.h">
+      <Filter>Header Files\src</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/mesh-allocator/src/internal.h">
       <Filter>Header Files\src</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/mesh-allocator/src/measure_rss.h">
+      <Filter>Header Files\src</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/mesh-allocator/src/memory_stats.h">
+      <Filter>Header Files\src</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/mesh-allocator/src/memory_stats_macos.h">
       <Filter>Header Files\src</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/mesh-allocator/src/meshable_arena.h">
@@ -197,7 +248,13 @@
     <ClInclude Include="../../thirdparty/owemdjee/mesh-allocator/src/runtime.h">
       <Filter>Header Files\src</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/mesh-allocator/src/runtime_impl.h">
+      <Filter>Header Files\src</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/mesh-allocator/src/shuffle_vector.h">
+      <Filter>Header Files\src</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/mesh-allocator/src/size_class_reciprocals.h">
       <Filter>Header Files\src</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/mesh-allocator/src/static/if.h">
@@ -224,7 +281,13 @@
     <Image Include="../../thirdparty/owemdjee/mesh-allocator/theory/maxvdeg+1imp++32,80.png">
       <Filter>Resource Files\theory</Filter>
     </Image>
+    <Text Include="../../thirdparty/owemdjee/mesh-allocator/AGENTS.md">
+      <Filter>Misc Files</Filter>
+    </Text>
     <Text Include="../../thirdparty/owemdjee/mesh-allocator/AUTHORS">
+      <Filter>Misc Files</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/mesh-allocator/CLAUDE.md">
       <Filter>Misc Files</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/mesh-allocator/CMakeLists.txt">
@@ -236,7 +299,13 @@
     <Text Include="../../thirdparty/owemdjee/mesh-allocator/Dockerfile">
       <Filter>Misc Files</Filter>
     </Text>
+    <Text Include="../../thirdparty/owemdjee/mesh-allocator/GEMINI.md">
+      <Filter>Misc Files</Filter>
+    </Text>
     <Text Include="../../thirdparty/owemdjee/mesh-allocator/LICENSE">
+      <Filter>Misc Files</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/mesh-allocator/MODULE.bazel">
       <Filter>Misc Files</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/mesh-allocator/Makefile">
@@ -253,6 +322,12 @@
     </Text>
     <Text Include="../../thirdparty/owemdjee/mesh-allocator/mesh-pldi19-powers.pdf">
       <Filter>Misc Files</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/mesh-allocator/scripts/install-hooks.sh">
+      <Filter>Misc Files\scripts</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/mesh-allocator/scripts/pre-commit">
+      <Filter>Misc Files\scripts</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/mesh-allocator/src/BUILD">
       <Filter>Misc Files\src</Filter>

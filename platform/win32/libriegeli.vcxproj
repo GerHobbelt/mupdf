@@ -218,6 +218,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/base/byte_fill.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/base/chain.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/base/compact_string.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/base/cord_iterator_span.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/base/cord_utils.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/base/debug.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/base/errno_mapping.cc" />
@@ -330,11 +331,12 @@
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/lz4/lz4_dictionary.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/lz4/lz4_reader.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/lz4/lz4_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/field_handlers.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/parse_message.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/serialize_message.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/serialized_message_assembler.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/serialized_message_backward_writer.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/serialized_message_reader.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/serialized_message_rewriter.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/serialized_message_writer.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/text_parse_message.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/text_print_message.cc" />
@@ -394,6 +396,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/compact_string.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/compare.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/constexpr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/cord_iterator_span.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/cord_utils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/debug.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/dependency.h" />
@@ -428,6 +431,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/shared_buffer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/shared_ptr.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/sized_shared_buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/small_int_map.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/stable_dependency.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/status.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/stream_utils.h" />
@@ -439,6 +443,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/type_traits.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/types.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/unicode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/base/uninitialized_vector.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/brotli/brotli_allocator.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/brotli/brotli_dictionary.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/brotli/brotli_reader.h" />
@@ -501,6 +506,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/string_writer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/stringify.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/stringify_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/vector_writer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/wrapping_backward_writer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/wrapping_reader.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/bytes/wrapping_writer.h" />
@@ -562,13 +568,19 @@
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/lz4/lz4_dictionary.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/lz4/lz4_reader.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/lz4/lz4_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/context_projection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/dynamic_field_handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/field_handler_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/field_handlers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/map_entry_field.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/message_wire_format.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/parse_message.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/serialize_message.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/serialized_message_assembler.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/serialized_message_backward_writer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/serialized_message_internal.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/serialized_message_reader.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/serialized_message_rewriter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/serialized_message_reader_internal.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/serialized_message_writer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/text_parse_message.h" />
     <ClInclude Include="../../thirdparty/owemdjee/riegeli/riegeli/messages/text_print_message.h" />

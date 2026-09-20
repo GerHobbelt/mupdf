@@ -212,6 +212,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/override/memcpy.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/override/new.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/override/rust.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/snmalloc/test/vcpkg-consumer/test_header_only.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/snmalloc/test/vcpkg-consumer/test_static_shim.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/aal/aal.h" />
     <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/aal/aal_arm.h" />
     <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/aal/aal_cheri.h" />
@@ -261,6 +263,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/ds_aal/ds_aal.h" />
     <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/ds_aal/flaglock.h" />
     <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/ds_aal/prevent_fork.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/ds_aal/seqset.h" />
     <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/ds_aal/singleton.h" />
     <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/ds_core/bits.h" />
     <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/ds_core/cheri.h" />
@@ -271,7 +274,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/ds_core/mitigations.h" />
     <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/ds_core/ptrwrap.h" />
     <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/ds_core/redblacktree.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/ds_core/seqset.h" />
     <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/ds_core/tid.h" />
     <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/global/bounds_checks.h" />
     <ClInclude Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/global/global.h" />
@@ -349,6 +351,7 @@
     <Text Include="../../thirdparty/owemdjee/snmalloc/benchmark/Dockerfile" />
     <Text Include="../../thirdparty/owemdjee/snmalloc/ci/README.md" />
     <Text Include="../../thirdparty/owemdjee/snmalloc/ci/Toolchain.cmake" />
+    <Text Include="../../thirdparty/owemdjee/snmalloc/claude.md" />
     <Text Include="../../thirdparty/owemdjee/snmalloc/docs/AddressSpace.md" />
     <Text Include="../../thirdparty/owemdjee/snmalloc/docs/BUILDING.md" />
     <Text Include="../../thirdparty/owemdjee/snmalloc/docs/PORTING.md" />
@@ -373,12 +376,28 @@
     <Text Include="../../thirdparty/owemdjee/snmalloc/docs/security/data/res_sn-0.6.0-checks.csv" />
     <Text Include="../../thirdparty/owemdjee/snmalloc/docs/security/data/res_sn-0.6.0-memcpy.csv" />
     <Text Include="../../thirdparty/owemdjee/snmalloc/docs/security/data/res_sn-0.6.0.csv" />
+    <Text Include="../../thirdparty/owemdjee/snmalloc/examples/bench_contention.rs" />
+    <Text Include="../../thirdparty/owemdjee/snmalloc/ports/snmalloc/portfile.cmake" />
+    <Text Include="../../thirdparty/owemdjee/snmalloc/ports/snmalloc/usage" />
+    <Text Include="../../thirdparty/owemdjee/snmalloc/ports/snmalloc/vcpkg.json" />
     <Text Include="../../thirdparty/owemdjee/snmalloc/security.md" />
+    <Text Include="../../thirdparty/owemdjee/snmalloc/snmalloc-rs/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/snmalloc/snmalloc-rs/Cargo.toml" />
+    <Text Include="../../thirdparty/owemdjee/snmalloc/snmalloc-rs/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/snmalloc/snmalloc-rs/README.md" />
+    <Text Include="../../thirdparty/owemdjee/snmalloc/snmalloc-rs/snmalloc-sys/Cargo.toml" />
+    <Text Include="../../thirdparty/owemdjee/snmalloc/snmalloc-rs/snmalloc-sys/build.rs" />
+    <Text Include="../../thirdparty/owemdjee/snmalloc/snmalloc-rs/snmalloc-sys/src/lib.rs" />
+    <Text Include="../../thirdparty/owemdjee/snmalloc/snmalloc-rs/src/lib.rs" />
+    <Text Include="../../thirdparty/owemdjee/snmalloc/snmalloc-rs/xtask/Cargo.toml" />
+    <Text Include="../../thirdparty/owemdjee/snmalloc/snmalloc-rs/xtask/src/main.rs" />
     <Text Include="../../thirdparty/owemdjee/snmalloc/snmalloc.pdf" />
     <Text Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/README.md" />
     <Text Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/stl/README.md" />
     <Text Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/stl/cxx/README.md" />
     <Text Include="../../thirdparty/owemdjee/snmalloc/src/snmalloc/stl/gnu/README.md" />
+    <Text Include="../../thirdparty/owemdjee/snmalloc/test/vcpkg-consumer/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/snmalloc/vcpkg.json" />
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>

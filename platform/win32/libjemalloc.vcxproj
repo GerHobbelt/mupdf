@@ -209,13 +209,13 @@
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/arena.c" />
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/background_thread.c" />
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/base.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/batcher.c" />
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/bin.c" />
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/bin_info.c" />
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/bitmap.c" />
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/buf_writer.c" />
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/cache_bin.c" />
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/ckh.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/conf.c" />
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/counter.c" />
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/ctl.c" />
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/decay.c" />
@@ -233,7 +233,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/fxp.c" />
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/hook.c" />
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/hpa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/hpa_central.c" />
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/hpa_hooks.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/hpa_utils.c" />
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/hpdata.c" />
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/inspect.c" />
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/jemalloc.c" />
@@ -247,7 +249,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/pa_extra.c" />
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/pac.c" />
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/pages.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/pai.c" />
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/peak_event.c" />
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/prof.c" />
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/prof_data.c" />
@@ -256,7 +257,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/prof_stack_range.c" />
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/prof_stats.c" />
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/prof_sys.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/prof_threshold.c" />
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/psset.c" />
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/rtree.c" />
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/safety_check.c" />
@@ -269,6 +269,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/tcache.c" />
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/test_hooks.c" />
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/thread_event.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/thread_event_registry.c" />
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/ticker.c" />
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/tsd.c" />
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/util.c" />
@@ -291,9 +292,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/background_thread_inlines.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/background_thread_structs.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/base.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/batcher.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/bin.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/bin_info.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/bin_inlines.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/bin_stats.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/bin_types.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/bit_util.h" />
@@ -301,6 +302,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/buf_writer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/cache_bin.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/ckh.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/conf.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/counter.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/ctl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/decay.h" />
@@ -321,6 +323,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/hash.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/hook.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/hpa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/hpa_central.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/hpa_hooks.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/hpa_opts.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/hpa_utils.h" />
@@ -335,6 +338,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/jemalloc_internal_macros.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/jemalloc_internal_overrides.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/jemalloc_internal_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/jemalloc_probe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/jemalloc_probe_custom.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/jemalloc_probe_stap.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/large_externs.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/lockedint.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/log.h" />
@@ -360,7 +366,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/prof_stats.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/prof_structs.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/prof_sys.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/prof_threshold.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/prof_types.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/psset.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/ql.h" />
@@ -387,6 +392,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/tcache_types.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/test_hooks.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/thread_event.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/thread_event_registry.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/ticker.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/tsd.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/tsd_generic.h" />
@@ -440,11 +446,13 @@
     <Text Include="../../thirdparty/owemdjee/jemalloc/m4/ax_cxx_compile_stdcxx.m4" />
     <Text Include="../../thirdparty/owemdjee/jemalloc/msvc/projects/vc2019/jemalloc/jemalloc.vcxproj.user" />
     <Text Include="../../thirdparty/owemdjee/jemalloc/run_tests.sh" />
+    <Text Include="../../thirdparty/owemdjee/jemalloc/scripts/README_GH_ACTIONS.md" />
     <Text Include="../../thirdparty/owemdjee/jemalloc/scripts/check-formatting.sh" />
     <Text Include="../../thirdparty/owemdjee/jemalloc/scripts/check_trailing_whitespace.sh" />
     <Text Include="../../thirdparty/owemdjee/jemalloc/scripts/freebsd/before_install.sh" />
     <Text Include="../../thirdparty/owemdjee/jemalloc/scripts/freebsd/before_script.sh" />
     <Text Include="../../thirdparty/owemdjee/jemalloc/scripts/freebsd/script.sh" />
+    <Text Include="../../thirdparty/owemdjee/jemalloc/scripts/gen_gh_actions.py" />
     <Text Include="../../thirdparty/owemdjee/jemalloc/scripts/gen_run_tests.py" />
     <Text Include="../../thirdparty/owemdjee/jemalloc/scripts/gen_travis.py" />
     <Text Include="../../thirdparty/owemdjee/jemalloc/scripts/linux/before_install.sh" />

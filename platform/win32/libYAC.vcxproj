@@ -253,9 +253,12 @@
     <ClCompile Include="../../thirdparty/owemdjee/YACLib/test/example/exe/strand.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/YACLib/test/example/exe/thread_pool.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/YACLib/test/test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/YACLib/test/unit/algo/join.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/YACLib/test/unit/algo/wait.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/YACLib/test/unit/algo/wait_group.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/YACLib/test/unit/algo/when.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/YACLib/test/unit/algo/when_all.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/YACLib/test/unit/algo/when_all_tuple.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/YACLib/test/unit/algo/when_any.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/YACLib/test/unit/async/connect.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/YACLib/test/unit/async/core_size.cpp" />
@@ -302,10 +305,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/async/connect.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/async/contract.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/async/detail/wait_impl.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/async/detail/when_all_impl.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/async/detail/when_any_impl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/async/detail/when_impl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/async/future.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/async/join.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/async/make.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/async/promise.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/async/run.hpp" />
@@ -317,6 +319,11 @@
     <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/async/wait.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/async/wait_for.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/async/wait_until.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/async/when/all.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/async/when/all_tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/async/when/any.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/async/when/join.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/async/when/when.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/async/when_all.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/async/when_any.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/coro/await.hpp" />
@@ -393,6 +400,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/log.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/runtime/fair_thread_pool.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/util/cast.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/util/combinator_strategy.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/util/detail/atomic_counter.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/util/detail/atomic_event.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/util/detail/default_deleter.hpp" />
@@ -412,7 +420,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/util/func.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/util/helper.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/util/intrusive_ptr.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/util/order_policy.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/util/ref.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/util/result.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/YACLib/include/yaclib/util/type_traits.hpp" />
@@ -449,6 +456,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/YACLib/test/util/helpers.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/YACLib/test/util/inline_helper.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/YACLib/test/util/time.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/YACLib/test/util/when_suite.hpp" />
     <Text Include="../../thirdparty/owemdjee/YACLib/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/YACLib/LICENSE" />
     <Text Include="../../thirdparty/owemdjee/YACLib/README.md" />

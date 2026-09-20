@@ -220,6 +220,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/examples/post_library_png.so.c" />
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/examples/simple_example.c" />
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/gramatron/hashmap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/gramatron/json-parser.c" />
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/gramatron/test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/libprotobuf-mutator-example/lpm_aflpp_custom_mutator_input.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/libprotobuf-mutator-example/vuln.c" />
@@ -346,6 +347,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/qemu_mode/unsigaction/unsigaction.c" />
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/src/afl-analyze.c" />
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/src/afl-cc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/src/afl-cmin.c" />
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/src/afl-common.c" />
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/src/afl-forkserver.c" />
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/src/afl-gotcpu.c" />
@@ -369,6 +371,11 @@
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/test/test-ijon-complete.c" />
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/test/test-int_cases.c" />
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/test/test-multiple-mutators.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/test/test-nautilus-target.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/test/test-pcguard-atomicrmw.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/test/test-pcguard-cmpxchg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/test/test-setjmp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/test/test-showmap-exit.c" />
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/test/test-uint_cases.c" />
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/test/test-unsigaction.c" />
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/test/unittests/unit_hash.c" />
@@ -412,6 +419,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/utils/replay_record/persistent_demo_replay.c" />
     <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/config.h" />
     <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/gramatron/hashmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/gramatron/json-parser.h" />
     <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/gramatron/test.h" />
     <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/gramatron/utarray.h" />
     <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/gramatron/uthash.h" />
@@ -494,7 +502,7 @@
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/README.md" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/TODO.md" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/afl-addseeds" />
-    <Text Include="../../thirdparty/owemdjee/AFLplusplus/afl-cmin" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/afl-cmin.awk" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/afl-cmin.bash" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/afl-cmin.py" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/afl-persistent-config" />
@@ -531,7 +539,6 @@
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/examples/example.py" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/examples/simple-chunk-replace.py" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/examples/wrapper_afl_min.py" />
-    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/gramatron/JSONC_VERSION" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/gramatron/README.md" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/gramatron/build_gramatron_mutator.sh" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/gramatron/grammars/js/source.json" />
@@ -543,6 +550,7 @@
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/gramatron/preprocess/construct_automata.py" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/gramatron/preprocess/gnf_converter.py" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/gramatron/preprocess/prep_automaton.sh" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/gramatron/run-test.sh" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/grammar_mutator/GRAMMAR_VERSION" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/grammar_mutator/README.md" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/grammar_mutator/build_grammar_mutator.sh" />
@@ -550,7 +558,14 @@
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/libafl_base/Cargo.toml" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/libafl_base/Makefile" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/libafl_base/README.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/libafl_base/rustfmt.toml" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/libafl_base/src/lib.rs" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/libafl_nautilus/Cargo.toml" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/libafl_nautilus/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/libafl_nautilus/README.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/libafl_nautilus/rustfmt.toml" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/libafl_nautilus/src/bin/dump_inputs.rs" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/libafl_nautilus/src/lib.rs" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/libprotobuf-mutator-example/README.md" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/radamsa/GNUmakefile" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/radamsa/LICENSE" />
@@ -570,6 +585,7 @@
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/rust/example_lain_post_process/Cargo.toml" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/rust/example_lain_post_process/rust-toolchain" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/rust/example_lain_post_process/src/lain_mutator.rs" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/rust/rustfmt.toml" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/symcc/Makefile" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/symcc/README.md" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/symqemu/Makefile" />
@@ -580,6 +596,7 @@
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/docs/COPYING" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/docs/Changelog.md" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/docs/FAQ.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/docs/FrameShift.md" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/docs/IJON.md" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/docs/INSTALL.md" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/docs/README.md" />
@@ -588,7 +605,6 @@
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/docs/custom_mutators.md" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/docs/env_variables.md" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/docs/features.md" />
-    <Text Include="../../thirdparty/owemdjee/AFLplusplus/docs/ideas.md" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/docs/important_changes.md" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/docs/resources/1_instrument_target.drawio.svg" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/docs/resources/2_prepare_campaign.drawio.svg" />
@@ -724,9 +740,13 @@
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/qemu_mode/util/qemu_get_symbol_addr.sh" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/src/Makefile" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/src/README.md" />
-    <Text Include="../../thirdparty/owemdjee/AFLplusplus/test/checkcommit.sh" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/test/test-afl-showmap-streaming.sh" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/test/test-all.sh" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/test/test-basic.sh" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/test/test-cmplog-annotate.sh" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/test/test-cmplog-bitint.sh" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/test/test-cmplog-loops.sh" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/test/test-cmplog-routines-pass.sh" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/test/test-compilers.sh" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/test/test-custom-mutators.sh" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/test/test-fpExtra.sh" />
@@ -736,7 +756,11 @@
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/test/test-libextensions.sh" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/test/test-llvm-lto.sh" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/test/test-llvm.sh" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/test/test-nautilus-grammar.json" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/test/test-nautilus.sh" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/test/test-neverzero.sh" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/test/test-nyx-mode.sh" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/test/test-pcguard-atomic.sh" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/test/test-performance.sh" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/test/test-post.sh" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/test/test-pre.sh" />
@@ -818,6 +842,7 @@
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/afl_network_proxy/README.md" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/afl_proxy/Makefile" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/afl_proxy/README.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/afl_showmap_streaming/afl_showmap_streaming_mode.py" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/afl_untracer/Makefile" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/afl_untracer/README.md" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/afl_untracer/TODO" />
@@ -870,6 +895,8 @@
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/replay_record/Makefile" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/replay_record/README.md" />
     <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/target_intelligence/README.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/unstable_edges/README.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/unstable_edges/symbolize_unstable.py" />
     <Xml Include="../../thirdparty/owemdjee/AFLplusplus/testcases/others/xml/small_document.xml" />
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />

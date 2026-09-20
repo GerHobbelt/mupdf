@@ -134,6 +134,14 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
+    <ProjectReference Include="libharfbuzz.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-258957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libharfbuzz_tools.vcxproj">
+      <Project>{1912f440-4aae-4cd8-807c-2575981d6426}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="../../thirdparty/harfbuzz/perf/benchmark-font.cc" />
     <ClCompile Include="../../thirdparty/harfbuzz/perf/benchmark-gpu.cc" />
     <ClCompile Include="../../thirdparty/harfbuzz/perf/benchmark-map.cc" />
@@ -2766,14 +2774,6 @@
     <Xml Include="../../thirdparty/harfbuzz/docs/usermanual-shaping-concepts.xml" />
     <Xml Include="../../thirdparty/harfbuzz/docs/usermanual-utilities.xml" />
     <Xml Include="../../thirdparty/harfbuzz/docs/usermanual-what-is-harfbuzz.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="libharfbuzz.vcxproj">
-      <Project>{5edcf4fd-0291-4fb9-8d96-258957ca5e3c}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libharfbuzz_tools.vcxproj">
-      <Project>{1912f440-4aae-4cd8-807c-2575981d6426}</Project>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>

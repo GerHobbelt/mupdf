@@ -207,6 +207,8 @@
   </ImportGroup>
   <ItemGroup>
     <ClCompile Include="../../thirdparty/owemdjee/pcm/examples/c_example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/examples/numa_node_example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/examples/numa_to_socket_example.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pcm/src/MacMSRDriver/MSRAccessor.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pcm/src/MacMSRDriver/PCIDriverInterface.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pcm/src/MacMSRDriver/PcmMsr/PcmMsr.cpp" />
@@ -233,6 +235,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/pcm/src/pcm-accel.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pcm/src/pcm-core.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pcm/src/pcm-iio-pmu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/pcm-iio-topology.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pcm/src/pcm-iio.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pcm/src/pcm-latency.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pcm/src/pcm-memory.cpp" />
@@ -277,9 +280,14 @@
     <ClCompile Include="../../thirdparty/owemdjee/pcm/src/windows/pcm.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pcm/src/windows/stdafx.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pcm/src/winpmem/winpmem.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/tests/cache_verification_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pcm/tests/daemon_alignment_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/tests/numa_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/tests/numa_to_socket_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pcm/tests/urltest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pcm/tests/utests/lspci-utest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/tests/utests/pcm-iio-utest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/tests/utests/read-number-utest.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pcm/src/MacMSRDriver/MSRAccessor.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcm/src/MacMSRDriver/MSRKernel.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcm/src/MacMSRDriver/PCIDriverInterface.h" />
@@ -307,6 +315,8 @@
     <ClInclude Include="../../thirdparty/owemdjee/pcm/src/pci.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcm/src/pcm-accel-common.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcm/src/pcm-iio-pmu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcm/src/pcm-iio-topology.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcm/src/pcm-pcie-collector.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcm/src/pcm-pcie.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcm/src/pmt.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcm/src/resctrl.h" />
@@ -338,6 +348,7 @@
     <Text Include="../../thirdparty/owemdjee/pcm/LICENSE" />
     <Text Include="../../thirdparty/owemdjee/pcm/README.md" />
     <Text Include="../../thirdparty/owemdjee/pcm/SECURITY.md" />
+    <Text Include="../../thirdparty/owemdjee/pcm/_codeql_detected_source_root" />
     <Text Include="../../thirdparty/owemdjee/pcm/_service" />
     <Text Include="../../thirdparty/owemdjee/pcm/appveyor.yml" />
     <Text Include="../../thirdparty/owemdjee/pcm/cmake/CPM.cmake" />
@@ -352,6 +363,7 @@
     <Text Include="../../thirdparty/owemdjee/pcm/doc/LATENCY-OPTIMIZED-MODE.md" />
     <Text Include="../../thirdparty/owemdjee/pcm/doc/LINUX_HOWTO.txt" />
     <Text Include="../../thirdparty/owemdjee/pcm/doc/MAC_HOWTO.txt" />
+    <Text Include="../../thirdparty/owemdjee/pcm/doc/NUMA_NODE_API.md" />
     <Text Include="../../thirdparty/owemdjee/pcm/doc/PCM-EXPORTER.md" />
     <Text Include="../../thirdparty/owemdjee/pcm/doc/PCM-SENSOR-SERVER-README.md" />
     <Text Include="../../thirdparty/owemdjee/pcm/doc/PCM_ACCEL_README.md" />
@@ -365,7 +377,6 @@
     <Text Include="../../thirdparty/owemdjee/pcm/examples/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/pcm/pcm-kubernetes.yaml.experimental" />
     <Text Include="../../thirdparty/owemdjee/pcm/pcm.spec" />
-    <Text Include="../../thirdparty/owemdjee/pcm/scripts/bhs-die-stat.sh" />
     <Text Include="../../thirdparty/owemdjee/pcm/scripts/bhs-power-mode.ps1" />
     <Text Include="../../thirdparty/owemdjee/pcm/scripts/bhs-power-mode.sh" />
     <Text Include="../../thirdparty/owemdjee/pcm/scripts/build.sh" />
@@ -395,6 +406,7 @@
     <Text Include="../../thirdparty/owemdjee/pcm/scripts/single_header.awk" />
     <Text Include="../../thirdparty/owemdjee/pcm/scripts/single_header.sh" />
     <Text Include="../../thirdparty/owemdjee/pcm/scripts/topotop" />
+    <Text Include="../../thirdparty/owemdjee/pcm/scripts/ufs-die-stat.sh" />
     <Text Include="../../thirdparty/owemdjee/pcm/src/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/pcm/src/MacMSRDriver/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/pcm/src/MacMSRDriver/PcmMsr/CMakeLists.txt" />

@@ -279,11 +279,31 @@
     <ClCompile Include="../../source/system_override/force_link_dependency_helper.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/source/greeter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/source/all-sequencer-stuff.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/source/arpeggiator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/source/base.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/source/chords.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/source/display.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/source/editor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/source/live-play.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/source/ls_sequencer.ino.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/source/mode-switch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/source/patterns.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/source/pulse-driver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/source/render.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/source/sequencer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/source/utils.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/standalone/source/main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/test/source/greeter_tests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/test/source/main.cpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/include/sequencer/greeter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/include/sequencer/arpeggio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/include/sequencer/array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/include/sequencer/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/include/sequencer/bitset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/include/sequencer/format.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/include/sequencer/patterns.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/include/sequencer/render.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/include/sequencer/sequencer.h" />
     <Image Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/Bits n pieces about microtonality, just tuning and The Edo/IMG-20260516215608871.png" />
     <Image Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/Bits n pieces about microtonality, just tuning and The Edo/IMG-20260516215608997.jpg" />
     <Image Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/Bits n pieces about microtonality, just tuning and The Edo/IMG-20260516215609094.jpg" />
@@ -301,14 +321,10 @@
     <Image Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/Bits n pieces about microtonality, just tuning and The Edo/IMG-20260516215610506.jpg" />
     <Image Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/Bits n pieces about microtonality, just tuning and The Edo/IMG-20260516215610584.jpg" />
     <Image Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/Bits n pieces about microtonality, just tuning and The Edo/IMG-20260516215610661.jpg" />
-    <Text Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/Bits n pieces about microtonality, just tuning and The Edo.md" />
     <Text Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/CMakePresets.json" />
     <Text Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/LICENSE" />
-    <Text Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/Music Jargon (relevant for sequencers and related tools).md" />
-    <Text Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/Notes on sound design, sequencing, sequencers, etc.md" />
     <Text Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/README.md" />
-    <Text Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/The bit about latency and jitter.md" />
     <Text Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/all/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/cmake/AddUninstallTarget.cmake" />
     <Text Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/cmake/CPM.cmake" />
@@ -318,13 +334,14 @@
     <Text Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/cmake/tools.cmake" />
     <Text Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/cmake/version.h.in" />
     <Text Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/codecov.yaml" />
+    <Text Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/documentation/Bits n pieces about microtonality, just tuning and The Edo.md" />
     <Text Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/documentation/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/documentation/Doxyfile" />
+    <Text Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/documentation/Music Jargon (relevant for sequencers and related tools).md" />
+    <Text Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/documentation/Notes on sound design, sequencing, sequencers, etc.md" />
+    <Text Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/documentation/The bit about latency and jitter.md" />
     <Text Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/documentation/conf.py" />
     <Text Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/documentation/pages/about.dox" />
-    <Text Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/include/sequencer/array" />
-    <Text Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/include/sequencer/bitset" />
-    <Text Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/include/sequencer/format" />
     <Text Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/standalone/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/enhanced_linn_sequencer/test/CMakeLists.txt" />
   </ItemGroup>

@@ -92,9 +92,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/base.c">
       <Filter>Source Files\src</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/batcher.c">
-      <Filter>Source Files\src</Filter>
-    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/bin.c">
       <Filter>Source Files\src</Filter>
     </ClCompile>
@@ -111,6 +108,9 @@
       <Filter>Source Files\src</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/ckh.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/conf.c">
       <Filter>Source Files\src</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/counter.c">
@@ -164,7 +164,13 @@
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/hpa.c">
       <Filter>Source Files\src</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/hpa_central.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/hpa_hooks.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/hpa_utils.c">
       <Filter>Source Files\src</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/hpdata.c">
@@ -206,9 +212,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/pages.c">
       <Filter>Source Files\src</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/pai.c">
-      <Filter>Source Files\src</Filter>
-    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/peak_event.c">
       <Filter>Source Files\src</Filter>
     </ClCompile>
@@ -231,9 +234,6 @@
       <Filter>Source Files\src</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/prof_sys.c">
-      <Filter>Source Files\src</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/prof_threshold.c">
       <Filter>Source Files\src</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/psset.c">
@@ -270,6 +270,9 @@
       <Filter>Source Files\src</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/thread_event.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/thread_event_registry.c">
       <Filter>Source Files\src</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/jemalloc/src/ticker.c">
@@ -338,13 +341,13 @@
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/base.h">
       <Filter>Header Files\include\jemalloc\internal</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/batcher.h">
-      <Filter>Header Files\include\jemalloc\internal</Filter>
-    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/bin.h">
       <Filter>Header Files\include\jemalloc\internal</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/bin_info.h">
+      <Filter>Header Files\include\jemalloc\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/bin_inlines.h">
       <Filter>Header Files\include\jemalloc\internal</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/bin_stats.h">
@@ -366,6 +369,9 @@
       <Filter>Header Files\include\jemalloc\internal</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/ckh.h">
+      <Filter>Header Files\include\jemalloc\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/conf.h">
       <Filter>Header Files\include\jemalloc\internal</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/counter.h">
@@ -428,6 +434,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/hpa.h">
       <Filter>Header Files\include\jemalloc\internal</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/hpa_central.h">
+      <Filter>Header Files\include\jemalloc\internal</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/hpa_hooks.h">
       <Filter>Header Files\include\jemalloc\internal</Filter>
     </ClInclude>
@@ -468,6 +477,15 @@
       <Filter>Header Files\include\jemalloc\internal</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/jemalloc_internal_types.h">
+      <Filter>Header Files\include\jemalloc\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/jemalloc_probe.h">
+      <Filter>Header Files\include\jemalloc\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/jemalloc_probe_custom.h">
+      <Filter>Header Files\include\jemalloc\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/jemalloc_probe_stap.h">
       <Filter>Header Files\include\jemalloc\internal</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/large_externs.h">
@@ -543,9 +561,6 @@
       <Filter>Header Files\include\jemalloc\internal</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/prof_sys.h">
-      <Filter>Header Files\include\jemalloc\internal</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/prof_threshold.h">
       <Filter>Header Files\include\jemalloc\internal</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/prof_types.h">
@@ -624,6 +639,9 @@
       <Filter>Header Files\include\jemalloc\internal</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/thread_event.h">
+      <Filter>Header Files\include\jemalloc\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/thread_event_registry.h">
       <Filter>Header Files\include\jemalloc\internal</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/jemalloc/include/jemalloc/internal/ticker.h">
@@ -785,6 +803,9 @@
     <Text Include="../../thirdparty/owemdjee/jemalloc/run_tests.sh">
       <Filter>Misc Files</Filter>
     </Text>
+    <Text Include="../../thirdparty/owemdjee/jemalloc/scripts/README_GH_ACTIONS.md">
+      <Filter>Misc Files\scripts</Filter>
+    </Text>
     <Text Include="../../thirdparty/owemdjee/jemalloc/scripts/check-formatting.sh">
       <Filter>Misc Files\scripts</Filter>
     </Text>
@@ -799,6 +820,9 @@
     </Text>
     <Text Include="../../thirdparty/owemdjee/jemalloc/scripts/freebsd/script.sh">
       <Filter>Misc Files\scripts\freebsd</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/jemalloc/scripts/gen_gh_actions.py">
+      <Filter>Misc Files\scripts</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/jemalloc/scripts/gen_run_tests.py">
       <Filter>Misc Files\scripts</Filter>

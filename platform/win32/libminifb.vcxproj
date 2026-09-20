@@ -216,6 +216,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/minifb/src/dos/vesa.c" />
     <ClCompile Include="../../thirdparty/owemdjee/minifb/src/gl/MiniFB_GL.c" />
     <ClCompile Include="../../thirdparty/owemdjee/minifb/src/wayland/WaylandMiniFB.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/minifb/src/wayland/generated/fractional-scale-v1-protocol.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/minifb/src/wayland/generated/xdg-decoration-protocol.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/minifb/src/wayland/generated/xdg-output-unstable-v1-protocol.c" />
     <ClCompile Include="../../thirdparty/owemdjee/minifb/src/wayland/generated/xdg-shell-protocol.c" />
     <ClCompile Include="../../thirdparty/owemdjee/minifb/src/web/WebMiniFB.c" />
     <ClCompile Include="../../thirdparty/owemdjee/minifb/src/windows/WinMiniFB.c" />
@@ -223,16 +226,19 @@
     <ClCompile Include="../../thirdparty/owemdjee/minifb/tests/android/app/src/main/cpp/noise.c" />
     <ClCompile Include="../../thirdparty/owemdjee/minifb/tests/dos/dos.c" />
     <ClCompile Include="../../thirdparty/owemdjee/minifb/tests/fullscreen.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/minifb/tests/hide_cursor.c" />
     <ClCompile Include="../../thirdparty/owemdjee/minifb/tests/hidpi.c" />
     <ClCompile Include="../../thirdparty/owemdjee/minifb/tests/input_events.c" />
     <ClCompile Include="../../thirdparty/owemdjee/minifb/tests/input_events_cpp.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/minifb/tests/multiple_windows.c" />
     <ClCompile Include="../../thirdparty/owemdjee/minifb/tests/noise.c" />
     <ClCompile Include="../../thirdparty/owemdjee/minifb/tests/timer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/minifb/tests/version_info.c" />
     <ClInclude Include="../../thirdparty/owemdjee/minifb/include/MiniFB.h" />
     <ClInclude Include="../../thirdparty/owemdjee/minifb/include/MiniFB_cpp.h" />
     <ClInclude Include="../../thirdparty/owemdjee/minifb/include/MiniFB_enums.h" />
     <ClInclude Include="../../thirdparty/owemdjee/minifb/include/MiniFB_ios.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/minifb/include/MiniFB_keylist.h" />
     <ClInclude Include="../../thirdparty/owemdjee/minifb/src/MiniFB_internal.h" />
     <ClInclude Include="../../thirdparty/owemdjee/minifb/src/WindowData.h" />
     <ClInclude Include="../../thirdparty/owemdjee/minifb/src/android/WindowData_Android.h" />
@@ -247,6 +253,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/minifb/src/macosx/OSXWindow.h" />
     <ClInclude Include="../../thirdparty/owemdjee/minifb/src/macosx/WindowData_OSX.h" />
     <ClInclude Include="../../thirdparty/owemdjee/minifb/src/wayland/WindowData_Way.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/minifb/src/wayland/generated/fractional-scale-v1-client-protocol.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/minifb/src/wayland/generated/xdg-decoration-client-protocol.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/minifb/src/wayland/generated/xdg-output-unstable-v1-client-protocol.h" />
     <ClInclude Include="../../thirdparty/owemdjee/minifb/src/wayland/generated/xdg-shell-client-protocol.h" />
     <ClInclude Include="../../thirdparty/owemdjee/minifb/src/windows/WindowData_Win.h" />
     <ClInclude Include="../../thirdparty/owemdjee/minifb/src/x11/WindowData_X11.h" />
@@ -256,9 +265,15 @@
     <Image Include="../../thirdparty/owemdjee/minifb/tests/android/app/src/main/res/mipmap-mdpi/ic_launcher.png" />
     <Image Include="../../thirdparty/owemdjee/minifb/tests/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png" />
     <Image Include="../../thirdparty/owemdjee/minifb/tests/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" />
+    <Text Include="../../thirdparty/owemdjee/minifb/CHANGELOG.md" />
     <Text Include="../../thirdparty/owemdjee/minifb/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/minifb/LICENSE" />
     <Text Include="../../thirdparty/owemdjee/minifb/README.md" />
+    <Text Include="../../thirdparty/owemdjee/minifb/cmake/minifb-config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/minifb/cmake/minifb_cmake_helpers.cmake" />
+    <Text Include="../../thirdparty/owemdjee/minifb/cmake/versioning.cmake" />
+    <Text Include="../../thirdparty/owemdjee/minifb/include/minifb_version.h.in" />
+    <Text Include="../../thirdparty/owemdjee/minifb/scripts/generate-protocols.sh" />
     <Text Include="../../thirdparty/owemdjee/minifb/tests/android/app/src/main/cpp/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/minifb/tests/android/gradle/wrapper/gradle-wrapper.jar" />
     <Text Include="../../thirdparty/owemdjee/minifb/tests/android/gradle/wrapper/gradle-wrapper.properties" />
@@ -273,8 +288,6 @@
     <Text Include="../../thirdparty/owemdjee/minifb/tests/web/multiple_windows.html" />
     <Text Include="../../thirdparty/owemdjee/minifb/tests/web/noise.html" />
     <Text Include="../../thirdparty/owemdjee/minifb/tests/web/timer.html" />
-    <Text Include="../../thirdparty/owemdjee/minifb/tundra.lua" />
-    <Text Include="../../thirdparty/owemdjee/minifb/units.lua" />
     <Xml Include="../../thirdparty/owemdjee/minifb/tests/android/app/src/main/AndroidManifest.xml" />
     <Xml Include="../../thirdparty/owemdjee/minifb/tests/android/app/src/main/res/values/strings.xml" />
   </ItemGroup>

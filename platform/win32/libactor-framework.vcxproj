@@ -249,6 +249,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/examples/web_socket/quote-server.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/examples/web_socket/stock-ticker.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/abstract_actor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/abstract_actor.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/abstract_blocking_actor.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/abstract_mailbox.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/abstract_scheduled_actor.cpp" />
@@ -261,9 +262,11 @@
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/actor_companion.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/actor_companion.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/actor_config.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/actor_config.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/actor_control_block.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/actor_factory.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/actor_from_state.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/actor_launcher.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/actor_pool.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/actor_pool.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/actor_proxy.cpp" />
@@ -284,6 +287,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/async/consumer_adapter.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/async/execution_context.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/async/file.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/async/mock_consumer.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/async/mock_producer.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/async/producer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/async/producer_adapter.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/async/promise.test.cpp" />
@@ -316,6 +321,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/config_value.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/config_value_reader.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/config_value_writer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/console_printer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/const_typed_message_view.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/constructor_attach.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/cow_string.test.cpp" />
@@ -327,10 +333,12 @@
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detached_actors.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/abstract_worker.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/abstract_worker_hub.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/actor_system_access.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/actor_system_config_access.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/actor_system_impl.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/aligned_alloc.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/assert.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/asynchronous_actor_clock.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/asynchronous_actor_clock.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/asynchronous_logger.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/atomic_ref_counted.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/base64.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/base64.test.cpp" />
@@ -341,9 +349,13 @@
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/blocking_behavior.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/bounds_checker.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/cleanup_and_release.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/cleanup_and_release.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/config_consumer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/config_consumer.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/counted_disposable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/counted_disposable.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/critical.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/current_actor.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/daemons.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/default_mailbox.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/default_mailbox.test.cpp" />
@@ -351,15 +363,14 @@
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/format.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/format.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/get_process_id.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/glob_match.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/ieee_754.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/invoke_result_visitor.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/json.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/latch.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/latch.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/log_level_map.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/log_level_map.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/mailbox_factory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/match_wildcard_pattern.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/match_wildcard_pattern.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/mbr_list.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/message_builder_element.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/message_data.cpp" />
@@ -384,6 +395,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/private_thread.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/private_thread_pool.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/private_thread_pool.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/response_promise_state.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/rfc3629.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/rfc3629.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/ring_buffer.test.cpp" />
@@ -420,7 +432,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/observable.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/observable_builder.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/observe_on.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/op/auto_connect.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/op/buffer.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/op/cache.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/op/cell.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/op/concat.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/op/debounce.test.cpp" />
@@ -437,6 +451,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/op/prefix_and_tail.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/op/publish.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/op/pullable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/op/ref_count.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/op/retry.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/op/sample.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/op/throttle_first.test.cpp" />
@@ -450,7 +465,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/string.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/subscription.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/forwarding_actor_proxy.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/function_view.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/handles.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/hash/fnv.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/hash/sha1.cpp" />
@@ -490,6 +504,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/log/event.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/log/event.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/logger.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/logger.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/mail_cache.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/mail_cache.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/mailbox_element.cpp" />
@@ -506,7 +521,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/meta/handler.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/meta/handler.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/metaprogramming.test.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/mixin/requester.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/monitor.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/mtl.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/node_id.cpp" />
@@ -515,13 +529,10 @@
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/or_else.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/parser_state.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/pec.test.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/policy/select_all.test.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/policy/select_any.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/proxy_registry.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/raise_error.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/ref_counted.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/request_timeout.test.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/response_handle.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/response_promise.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/response_promise.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/result.test.cpp" />
@@ -555,6 +566,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/telemetry/gauge.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/telemetry/histogram.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/telemetry/importer/process.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/telemetry/importer/process.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/telemetry/label.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/telemetry/label.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/telemetry/label_view.cpp" />
@@ -567,7 +579,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/thread_hook.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/thread_hook.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/timestamp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/timestamp.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/type_id.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/type_id.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/type_id_list.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/type_id_list.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/typed_actor.test.cpp" />
@@ -636,6 +650,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_io/caf/policy/udp.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_io/main.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_net/caf/detail/connection_acceptor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_net/caf/detail/connection_guard.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_net/caf/detail/flow_bridge_initializer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_net/caf/detail/rfc6455.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_net/caf/detail/rfc6455.test.cpp" />
@@ -669,6 +684,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_net/caf/net/http/request_header.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_net/caf/net/http/request_header.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_net/caf/net/http/responder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_net/caf/net/http/responder.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_net/caf/net/http/response.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_net/caf/net/http/response_header.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_net/caf/net/http/response_header.test.cpp" />
@@ -681,6 +697,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_net/caf/net/http/upper_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_net/caf/net/http/v1.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_net/caf/net/http/with.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_net/caf/net/http/with.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_net/caf/net/ip.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_net/caf/net/ip.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_net/caf/net/lp/framing.cpp" />
@@ -708,6 +725,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_net/caf/net/socket_event_layer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_net/caf/net/socket_guard.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_net/caf/net/socket_manager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_net/caf/net/socket_manager.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_net/caf/net/ssl/connection.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_net/caf/net/ssl/context.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/libcaf_net/caf/net/ssl/context.test.cpp" />
@@ -784,6 +802,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/robot/logging/driver.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/robot/middleman/driver.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/actor-framework/robot/stream/driver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/actor-framework/robot/type-id/driver.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/examples/qtsupport/chatwidget.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/abstract_actor.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/abstract_blocking_actor.hpp" />
@@ -799,6 +818,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/actor_control_block.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/actor_factory.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/actor_from_state.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/actor_launcher.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/actor_pool.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/actor_proxy.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/actor_registry.hpp" />
@@ -806,6 +826,8 @@
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/actor_system_config.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/actor_system_module.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/actor_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/add_ref.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/adopt_ref.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/after.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/all.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/allowed_unsafe_message_type.hpp" />
@@ -819,6 +841,8 @@
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/async/file.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/async/future.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/async/fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/async/mock_consumer.test.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/async/mock_producer.test.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/async/policy.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/async/producer.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/async/producer_adapter.hpp" />
@@ -840,9 +864,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/byte_reader.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/byte_span.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/byte_writer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/caf_deprecated.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/caf_main.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/callback.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/catch_all.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/chrono.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/chunk.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/chunked_string.hpp" />
@@ -853,6 +877,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/config_value.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/config_value_reader.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/config_value_writer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/console_printer.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/const_typed_message_view.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/cow_string.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/cow_tuple.hpp" />
@@ -868,6 +893,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/abstract_worker_hub.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/actor_system_access.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/actor_system_config_access.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/actor_system_impl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/algorithms.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/aligned_alloc.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/append_hex.hpp" />
@@ -876,6 +902,8 @@
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/as_mutable_ref.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/assert.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/async_cell.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/asynchronous_actor_clock.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/asynchronous_logger.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/atomic_ref_counted.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/base64.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/beacon.hpp" />
@@ -891,7 +919,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/concepts.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/config_consumer.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/consumer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/counted_disposable.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/critical.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/current_actor.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/daemons.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/default_invoke_result_visitor.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/default_mailbox.hpp" />
@@ -903,7 +933,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/forward_like.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/functor_attachable.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/get_process_id.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/glob_match.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/ieee_754.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/implicit_conversions.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/init_fun_factory.hpp" />
@@ -911,16 +940,17 @@
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/invoke_result_visitor.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/is_complete.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/json.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/latch.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/log_level.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/log_level_map.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/mailbox_factory.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/make_meta_object.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/mask_bits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/match_wildcard_pattern.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/mbr_list.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/message_builder_element.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/message_data.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/meta_object.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/metaprogramming.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/monitor_action.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/mtl_util.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/nearly_equal.hpp" />
@@ -928,6 +958,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/offset_at.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/overload.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/padded_size.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/panic.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/parse.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/parser/add_ascii.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/parser/ascii_to_int.hpp" />
@@ -954,7 +985,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/print.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/private_thread.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/private_thread_pool.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/profiled_send.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/response_promise_state.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/response_type_check.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/rfc3629.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/ring_buffer.hpp" />
@@ -962,7 +993,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/select_all.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/send_type_check.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/set_thread_name.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/source_location.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/spawn_fwd.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/spawnable.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/detail/split_join.hpp" />
@@ -996,6 +1026,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/byte.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/coordinated.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/coordinator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/event.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/fwd.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/gen/empty.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/gen/from_callable.hpp" />
@@ -1008,11 +1039,14 @@
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/observable_builder.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/observable_decl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/observer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/op/auto_connect.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/op/base.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/op/buffer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/op/cache.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/op/cell.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/op/cold.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/op/concat.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/op/connectable.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/op/debounce.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/op/defer.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/op/empty.hpp" />
@@ -1030,6 +1064,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/op/prefix_and_tail.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/op/publish.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/op/pullable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/op/ref_count.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/op/retry.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/op/sample.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/op/state.hpp" />
@@ -1063,8 +1098,8 @@
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/flow/subscription.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/format_string_with_location.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/format_to_error.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/format_to_unexpected.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/forwarding_actor_proxy.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/function_view.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/fwd.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/hash/fnv.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/hash/sha1.hpp" />
@@ -1075,7 +1110,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/inspector_access_base.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/inspector_access_type.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/interface_mismatch.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/internal/fast_pimpl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/internal/json_node.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/internal/stringification_inspector_node.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/intrusive/forward_iterator.hpp" />
@@ -1098,7 +1132,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/ipv6_subnet.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/is_actor_handle.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/is_error_code_enum.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/is_timeout_or_catch_all.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/is_typed_actor.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/json.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/json_array.hpp" />
@@ -1133,9 +1166,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/node_id.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/none.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/once.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/others.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/parser_state.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/pec.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/placement_ptr.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/policy/arg.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/policy/select_all.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/policy/select_all_tag.hpp" />
@@ -1148,7 +1181,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/ref.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/ref_counted.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/repeat.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/response_handle.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/response_promise.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/response_type.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/result.hpp" />
@@ -1172,6 +1204,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/stream.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/string_algorithms.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/system_messages.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/telemetry/actor_metrics.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/telemetry/collector/prometheus.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/telemetry/counter.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/telemetry/gauge.hpp" />
@@ -1196,6 +1229,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/type_id_list.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/type_list.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/typed_actor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/typed_actor_pack.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/typed_actor_pointer.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/typed_actor_view.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_core/caf/typed_actor_view_base.hpp" />
@@ -1282,6 +1316,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_io/caf/policy/udp.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_net/caf/detail/connection_acceptor.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_net/caf/detail/connection_factory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_net/caf/detail/connection_guard.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_net/caf/detail/flow_bridge_initializer.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_net/caf/detail/infer_actor_shell_ptr_type.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_net/caf/detail/rfc6455.hpp" />
@@ -1353,6 +1388,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_net/caf/net/socket_guard.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_net/caf/net/socket_id.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_net/caf/net/socket_manager.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_net/caf/net/ssl/backend.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_net/caf/net/ssl/connection.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_net/caf/net/ssl/context.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/actor-framework/libcaf_net/caf/net/ssl/dtls.hpp" />
@@ -1441,7 +1477,6 @@
     <Text Include="../../thirdparty/owemdjee/actor-framework/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/actor-framework/CODE_OF_CONDUCT.md" />
     <Text Include="../../thirdparty/owemdjee/actor-framework/CONTRIBUTING.md" />
-    <Text Include="../../thirdparty/owemdjee/actor-framework/Jenkinsfile" />
     <Text Include="../../thirdparty/owemdjee/actor-framework/LICENSE" />
     <Text Include="../../thirdparty/owemdjee/actor-framework/README.md" />
     <Text Include="../../thirdparty/owemdjee/actor-framework/cmake/CAFConfig.cmake.in" />
@@ -1547,10 +1582,13 @@
     <Text Include="../../thirdparty/owemdjee/actor-framework/scripts/build-ios-universal.sh" />
     <Text Include="../../thirdparty/owemdjee/actor-framework/scripts/caf-prof" />
     <Text Include="../../thirdparty/owemdjee/actor-framework/scripts/demystify.py" />
+    <Text Include="../../thirdparty/owemdjee/actor-framework/scripts/forbidden-includes-check.py" />
+    <Text Include="../../thirdparty/owemdjee/actor-framework/scripts/get-next-free-block-offset.py" />
     <Text Include="../../thirdparty/owemdjee/actor-framework/scripts/get-release-version.sh" />
     <Text Include="../../thirdparty/owemdjee/actor-framework/scripts/indent_trace_log.py" />
     <Text Include="../../thirdparty/owemdjee/actor-framework/scripts/make_release.bash" />
     <Text Include="../../thirdparty/owemdjee/actor-framework/scripts/obs-commit-version.sh" />
+    <Text Include="../../thirdparty/owemdjee/actor-framework/scripts/websocket-close-frame-test.py" />
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>

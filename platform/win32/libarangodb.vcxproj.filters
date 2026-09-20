@@ -12014,9 +12014,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/ClusterGraphDatalake.cpp">
       <Filter>Source Files\arangod\Graph</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/ClusterTraverserCache.cpp">
-      <Filter>Source Files\arangod\Graph</Filter>
-    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Cursors/DBServerIndexCursor.cpp">
       <Filter>Source Files\arangod\Graph\Cursors</Filter>
     </ClCompile>
@@ -12095,10 +12092,16 @@
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Providers/ProviderTracer.cpp">
       <Filter>Source Files\arangod\Graph\Providers</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Providers/SingleServer/EdgeLookup.cpp">
+      <Filter>Source Files\arangod\Graph\Providers\SingleServer</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Providers/SingleServer/NeighbourCache.cpp">
       <Filter>Source Files\arangod\Graph\Providers\SingleServer</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Providers/SingleServer/SingleServerNeighbourProvider.cpp">
+      <Filter>Source Files\arangod\Graph\Providers\SingleServer</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Providers/SingleServer/VertexLookup.cpp">
       <Filter>Source Files\arangod\Graph\Providers\SingleServer</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Providers/SingleServerProvider.cpp">
@@ -12115,15 +12118,6 @@
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Steps/SingleServerProviderStep.cpp">
       <Filter>Source Files\arangod\Graph\Steps</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/TraverserCache.cpp">
-      <Filter>Source Files\arangod\Graph</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/TraverserCacheFactory.cpp">
-      <Filter>Source Files\arangod\Graph</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/TraverserDocumentCache.cpp">
-      <Filter>Source Files\arangod\Graph</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/TraverserOptions.cpp">
       <Filter>Source Files\arangod\Graph</Filter>
@@ -12621,6 +12615,9 @@
       <Filter>Source Files\arangod\RestHandler</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/RestHandler/RestAdminDatabaseHandler.cpp">
+      <Filter>Source Files\arangod\RestHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/RestHandler/RestAdminDeploymentHandler.cpp">
       <Filter>Source Files\arangod\RestHandler</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/RestHandler/RestAdminExecuteHandler.cpp">
@@ -13149,6 +13146,9 @@
       <Filter>Source Files\arangod\RocksDBEngine</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/RocksDBEngine/RocksDBVectorIndex.cpp">
+      <Filter>Source Files\arangod\RocksDBEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/RocksDBEngine/RocksDBVectorIndexList.cpp">
       <Filter>Source Files\arangod\RocksDBEngine</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/arangod/RocksDBEngine/RocksDBWalAccess.cpp">
@@ -14805,9 +14805,6 @@
       <Filter>Source Files\tests\Geo</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/Graph/AllShortestPathsFinderTest.cpp">
-      <Filter>Source Files\tests\Graph</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/Graph/ClusterTraverserCacheTest.cpp">
       <Filter>Source Files\tests\Graph</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/arangodb/tests/Graph/DBServerEdgeCursorTest.cpp">
@@ -21191,6 +21188,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Aql/TraverserEngineShardLists.h">
       <Filter>Header Files\arangod\Aql</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Aql/TypedAstNodes.h">
+      <Filter>Header Files\arangod\Aql</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Aql/UpdateReplaceModifier.h">
       <Filter>Header Files\arangod\Aql</Filter>
     </ClInclude>
@@ -21641,9 +21641,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/ClusterGraphDatalake.h">
       <Filter>Header Files\arangod\Graph</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/ClusterTraverserCache.h">
-      <Filter>Header Files\arangod\Graph</Filter>
-    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Cursors/DBServerEdgeCursor.h">
       <Filter>Header Files\arangod\Graph\Cursors</Filter>
     </ClInclude>
@@ -21734,6 +21731,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Providers/ProviderTracer.h">
       <Filter>Header Files\arangod\Graph\Providers</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Providers/SingleServer/EdgeLookup.h">
+      <Filter>Header Files\arangod\Graph\Providers\SingleServer</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Providers/SingleServer/ExpansionInfo.h">
       <Filter>Header Files\arangod\Graph\Providers\SingleServer</Filter>
     </ClInclude>
@@ -21741,6 +21741,9 @@
       <Filter>Header Files\arangod\Graph\Providers\SingleServer</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Providers/SingleServer/SingleServerNeighbourProvider.h">
+      <Filter>Header Files\arangod\Graph\Providers\SingleServer</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Providers/SingleServer/VertexLookup.h">
       <Filter>Header Files\arangod\Graph\Providers\SingleServer</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Providers/SingleServerProvider.h">
@@ -21772,15 +21775,6 @@
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/Steps/VertexDescription.h">
       <Filter>Header Files\arangod\Graph\Steps</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/TraverserCache.h">
-      <Filter>Header Files\arangod\Graph</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/TraverserCacheFactory.h">
-      <Filter>Header Files\arangod\Graph</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/TraverserDocumentCache.h">
-      <Filter>Header Files\arangod\Graph</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/Graph/TraverserOptions.h">
       <Filter>Header Files\arangod\Graph</Filter>
@@ -22583,6 +22577,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/RestHandler/RestAdminDatabaseHandler.h">
       <Filter>Header Files\arangod\RestHandler</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/RestHandler/RestAdminDeploymentHandler.h">
+      <Filter>Header Files\arangod\RestHandler</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/RestHandler/RestAdminExecuteHandler.h">
       <Filter>Header Files\arangod\RestHandler</Filter>
     </ClInclude>
@@ -23136,6 +23133,9 @@
       <Filter>Header Files\arangod\RocksDBEngine</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/RocksDBEngine/RocksDBVectorIndex.h">
+      <Filter>Header Files\arangod\RocksDBEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/RocksDBEngine/RocksDBVectorIndexList.h">
       <Filter>Header Files\arangod\RocksDBEngine</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/arangodb/arangod/RocksDBEngine/RocksDBWalAccess.h">
@@ -25199,15 +25199,6 @@
     <Image Include="../../thirdparty/owemdjee/arangodb/js/apps/system/_admin/aardvark/APP/frontend/img/ArangoDB-Foxx-logo-bg.png">
       <Filter>Resource Files\js\apps\system\_admin\aardvark\APP\frontend\img</Filter>
     </Image>
-    <Image Include="../../thirdparty/owemdjee/arangodb/js/apps/system/_admin/aardvark/APP/frontend/img/ArangoDB-Logo-New-V3-1.png">
-      <Filter>Resource Files\js\apps\system\_admin\aardvark\APP\frontend\img</Filter>
-    </Image>
-    <Image Include="../../thirdparty/owemdjee/arangodb/js/apps/system/_admin/aardvark/APP/frontend/img/ArangoDB-community-edition-Web-UI.png">
-      <Filter>Resource Files\js\apps\system\_admin\aardvark\APP\frontend\img</Filter>
-    </Image>
-    <Image Include="../../thirdparty/owemdjee/arangodb/js/apps/system/_admin/aardvark/APP/frontend/img/ArangoDB-enterprise-edition-Web-UI.png">
-      <Filter>Resource Files\js\apps\system\_admin\aardvark\APP\frontend\img</Filter>
-    </Image>
     <Image Include="../../thirdparty/owemdjee/arangodb/js/apps/system/_admin/aardvark/APP/frontend/img/ammap/arrowDown.gif">
       <Filter>Resource Files\js\apps\system\_admin\aardvark\APP\frontend\img\ammap</Filter>
     </Image>
@@ -25246,15 +25237,6 @@
     </Image>
     <Image Include="../../thirdparty/owemdjee/arangodb/js/apps/system/_admin/aardvark/APP/frontend/img/ammap/xIconH.gif">
       <Filter>Resource Files\js\apps\system\_admin\aardvark\APP\frontend\img\ammap</Filter>
-    </Image>
-    <Image Include="../../thirdparty/owemdjee/arangodb/js/apps/system/_admin/aardvark/APP/frontend/img/arangodb-edition-login-optimized.png">
-      <Filter>Resource Files\js\apps\system\_admin\aardvark\APP\frontend\img</Filter>
-    </Image>
-    <Image Include="../../thirdparty/owemdjee/arangodb/js/apps/system/_admin/aardvark/APP/frontend/img/arangodb_logo_letter.png">
-      <Filter>Resource Files\js\apps\system\_admin\aardvark\APP\frontend\img</Filter>
-    </Image>
-    <Image Include="../../thirdparty/owemdjee/arangodb/js/apps/system/_admin/aardvark/APP/frontend/img/arangodb_logo_small.png">
-      <Filter>Resource Files\js\apps\system\_admin\aardvark\APP\frontend\img</Filter>
     </Image>
     <Image Include="../../thirdparty/owemdjee/arangodb/js/apps/system/_admin/aardvark/APP/frontend/img/check_radio_sheet.png">
       <Filter>Resource Files\js\apps\system\_admin\aardvark\APP\frontend\img</Filter>
@@ -41672,16 +41654,16 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/js/apps/system/_admin/aardvark/APP/frontend/html/documentation.html">
       <Filter>Misc Files\js\apps\system\_admin\aardvark\APP\frontend\html</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/js/apps/system/_admin/aardvark/APP/frontend/img/arangodb-dark.svg">
+    <Text Include="../../thirdparty/owemdjee/arangodb/js/apps/system/_admin/aardvark/APP/frontend/img/arango-black.svg">
       <Filter>Misc Files\js\apps\system\_admin\aardvark\APP\frontend\img</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/js/apps/system/_admin/aardvark/APP/frontend/img/arangodb-edition-optimized.svg">
+    <Text Include="../../thirdparty/owemdjee/arangodb/js/apps/system/_admin/aardvark/APP/frontend/img/arango-icon.svg">
+      <Filter>Misc Files\js\apps\system\_admin\aardvark\APP\frontend\img</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/arangodb/js/apps/system/_admin/aardvark/APP/frontend/img/arango-white.svg">
       <Filter>Misc Files\js\apps\system\_admin\aardvark\APP\frontend\img</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/js/apps/system/_admin/aardvark/APP/frontend/img/arangodb-icon.svg">
-      <Filter>Misc Files\js\apps\system\_admin\aardvark\APP\frontend\img</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/js/apps/system/_admin/aardvark/APP/frontend/img/arangodb-vertical-light.svg">
       <Filter>Misc Files\js\apps\system\_admin\aardvark\APP\frontend\img</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/js/apps/system/_admin/aardvark/APP/frontend/img/cpu.svg">
@@ -44075,7 +44057,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/js/client/modules/@arangodb/testutils/sutcheckers/graphs.js">
       <Filter>Misc Files\js\client\modules\@arangodb\testutils\sutcheckers</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/js/client/modules/@arangodb/testutils/sutcheckers/tasks.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/js/client/modules/@arangodb/testutils/sutcheckers/tasks-sjs.js">
       <Filter>Misc Files\js\client\modules\@arangodb\testutils\sutcheckers</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/js/client/modules/@arangodb/testutils/sutcheckers/transactions.js">
@@ -45242,13 +45224,13 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/Zkd/CMakeLists.txt">
       <Filter>Misc Files\tests\Zkd</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/arangojs-test-definitions.txt">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/arangojs-test-definitions.yml">
       <Filter>Misc Files\tests</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/go-test-definitions.txt">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/go-test-definitions.yml">
       <Filter>Misc Files\tests</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/java-test-definitions.txt">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/java-test-definitions.yml">
       <Filter>Misc Files\tests</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/README">
@@ -45311,7 +45293,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-bind.js">
       <Filter>Misc Files\tests\js\client\aql</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-call-apply.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-call-apply-sjs.js">
       <Filter>Misc Files\tests\js\client\aql</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-collect-output-aggregation-optimization-cluster.js">
@@ -45398,7 +45380,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-fullcount.js">
       <Filter>Misc Files\tests\js\client\aql</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-functions-brute.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-functions-brute-sjs.js">
       <Filter>Misc Files\tests\js\client\aql</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-functions-date.js">
@@ -45533,7 +45515,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-graph-traverser-potentialErrors.js">
       <Filter>Misc Files\tests\js\client\aql</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-graph-traverser-pruneTraversal.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-graph-traverser-pruneTraversal-sjs.js">
       <Filter>Misc Files\tests\js\client\aql</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-graph-traverser-simpleInboundOutbound.js">
@@ -45546,6 +45528,9 @@
       <Filter>Misc Files\tests\js\client\aql</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-graph-weighted-traversal.js">
+      <Filter>Misc Files\tests\js\client\aql</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-graph-with-clause.js">
       <Filter>Misc Files\tests\js\client\aql</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-graph.js">
@@ -45743,7 +45728,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-multi-modify.js">
       <Filter>Misc Files\tests\js\client\aql</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-multiple-snippets-javascript-cluster.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-multiple-snippets-javascript-cluster-sjs.js">
       <Filter>Misc Files\tests\js\client\aql</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-object-enumeration.js">
@@ -45833,13 +45818,13 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-optimizer-query-stats.js">
       <Filter>Misc Files\tests\js\client\aql</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-optimizer-rule-async-prefetch-cluster.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-optimizer-rule-async-prefetch-cluster-sjs.js">
       <Filter>Misc Files\tests\js\client\aql</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-optimizer-rule-async-prefetch-noncluster-fp.js">
       <Filter>Misc Files\tests\js\client\aql</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-optimizer-rule-async-prefetch-noncluster.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-optimizer-rule-async-prefetch-noncluster-sjs.js">
       <Filter>Misc Files\tests\js\client\aql</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-optimizer-rule-collect-in-cluster.js">
@@ -45983,7 +45968,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-optimizer-useindexes.js">
       <Filter>Misc Files\tests\js\client\aql</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-optimizer-v8.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-optimizer-v8-sjs.js">
       <Filter>Misc Files\tests\js\client\aql</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-options-verification.js">
@@ -46022,7 +46007,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-projections.js">
       <Filter>Misc Files\tests\js\client\aql</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-prune-expressions.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-prune-expressions-sjs.js">
       <Filter>Misc Files\tests\js\client\aql</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-queries-array-nested.js">
@@ -46271,37 +46256,37 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-vector-functions.js">
       <Filter>Misc Files\tests\js\client\aql</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-view-arangosearch-ddl-combined.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-view-arangosearch-ddl-combined-sjs.js">
       <Filter>Misc Files\tests\js\client\aql</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-view-arangosearch-feature.js">
       <Filter>Misc Files\tests\js\client\aql</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-view-arangosearch-noncluster.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-view-arangosearch-noncluster-sjs.js">
       <Filter>Misc Files\tests\js\client\aql</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-view-arangosearch-parallelisation-nocov.js">
       <Filter>Misc Files\tests\js\client\aql</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-view-arangosearch-s1r1-cluster.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-view-arangosearch-s1r1-cluster-sjs.js">
       <Filter>Misc Files\tests\js\client\aql</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-view-arangosearch-s1r2-cluster.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-view-arangosearch-s1r2-cluster-sjs.js">
       <Filter>Misc Files\tests\js\client\aql</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-view-arangosearch-s4r1-cluster.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-view-arangosearch-s4r1-cluster-sjs.js">
       <Filter>Misc Files\tests\js\client\aql</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-view-arangosearch-s4r3-cluster.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-view-arangosearch-s4r3-cluster-sjs.js">
       <Filter>Misc Files\tests\js\client\aql</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-view-arangosearch-server.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-view-arangosearch-server-sjs.js">
       <Filter>Misc Files\tests\js\client\aql</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-view-bitset-join.js">
       <Filter>Misc Files\tests\js\client\aql</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-view-search-alias-noncluster.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-view-search-alias-noncluster-sjs.js">
       <Filter>Misc Files\tests\js\client\aql</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/aql-vpack-externals.js">
@@ -46329,6 +46314,9 @@
       <Filter>Misc Files\tests\js\client\aql\vector</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/vector/aql-vector-create-and-remove.js">
+      <Filter>Misc Files\tests\js\client\aql\vector</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/vector/aql-vector-filter.js">
       <Filter>Misc Files\tests\js\client\aql\vector</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/aql/vector/aql-vector-full-count.js">
@@ -46367,13 +46355,13 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/authentication/dump-api-cluster.js">
       <Filter>Misc Files\tests\js\client\authentication</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/authentication/foxx-arango-auth-spec.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/authentication/foxx-arango-auth-spec-sjs.js">
       <Filter>Misc Files\tests\js\client\authentication</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/authentication/restore.js">
       <Filter>Misc Files\tests\js\client\authentication</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/authentication/statistics-cluster.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/authentication/statistics-cluster-sjs.js">
       <Filter>Misc Files\tests\js\client\authentication</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/authentication/user-access-right-collection-level-create-spec.js">
@@ -46424,7 +46412,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/authentication/user-access-right-drop-view-arangosearch-spec.js">
       <Filter>Misc Files\tests\js\client\authentication</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/authentication/user-access-right-foxx-queue-general-spec.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/authentication/user-access-right-foxx-queue-general-spec-sjs.js">
       <Filter>Misc Files\tests\js\client\authentication</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/authentication/user-access-right-foxx-spec.js">
@@ -46436,61 +46424,61 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/authentication/user-access-right-read-view-arangosearch-spec.js">
       <Filter>Misc Files\tests\js\client\authentication</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/authentication/user-access-right-task-collection-level-create-spec.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/authentication/user-access-right-task-collection-level-create-spec-sjs.js">
       <Filter>Misc Files\tests\js\client\authentication</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/authentication/user-access-right-task-collection-level-drop-spec.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/authentication/user-access-right-task-collection-level-drop-spec-sjs.js">
       <Filter>Misc Files\tests\js\client\authentication</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/authentication/user-access-right-task-collection-level-read-spec.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/authentication/user-access-right-task-collection-level-read-spec-sjs.js">
       <Filter>Misc Files\tests\js\client\authentication</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/authentication/user-access-right-task-collection-level-truncate-spec.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/authentication/user-access-right-task-collection-level-truncate-spec-sjs.js">
       <Filter>Misc Files\tests\js\client\authentication</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/authentication/user-access-right-task-collection-level-update-spec.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/authentication/user-access-right-task-collection-level-update-spec-sjs.js">
       <Filter>Misc Files\tests\js\client\authentication</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/authentication/user-access-right-task-collection-spec.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/authentication/user-access-right-task-collection-spec-sjs.js">
       <Filter>Misc Files\tests\js\client\authentication</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/authentication/user-access-right-task-create-a-user-spec.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/authentication/user-access-right-task-create-a-user-spec-sjs.js">
       <Filter>Misc Files\tests\js\client\authentication</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/authentication/user-access-right-task-create-db-spec.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/authentication/user-access-right-task-create-db-spec-sjs.js">
       <Filter>Misc Files\tests\js\client\authentication</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/authentication/user-access-right-task-create-graph-spec.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/authentication/user-access-right-task-create-graph-spec-sjs.js">
       <Filter>Misc Files\tests\js\client\authentication</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/authentication/user-access-right-task-create-view-arangosearch-search-alias-spec.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/authentication/user-access-right-task-create-view-arangosearch-search-alias-spec-sjs.js">
       <Filter>Misc Files\tests\js\client\authentication</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/authentication/user-access-right-task-create-view-arangosearch-spec.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/authentication/user-access-right-task-create-view-arangosearch-spec-sjs.js">
       <Filter>Misc Files\tests\js\client\authentication</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/authentication/user-access-right-task-drop-a-user-spec.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/authentication/user-access-right-task-drop-a-user-spec-sjs.js">
       <Filter>Misc Files\tests\js\client\authentication</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/authentication/user-access-right-task-drop-db-spec.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/authentication/user-access-right-task-drop-db-spec-sjs.js">
       <Filter>Misc Files\tests\js\client\authentication</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/authentication/user-access-right-task-drop-graph-spec.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/authentication/user-access-right-task-drop-graph-spec-sjs.js">
       <Filter>Misc Files\tests\js\client\authentication</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/authentication/user-access-right-task-drop-view-arangosearch-spec.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/authentication/user-access-right-task-drop-view-arangosearch-spec-sjs.js">
       <Filter>Misc Files\tests\js\client\authentication</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/authentication/user-access-right-task-read-view-arangosearch-spec.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/authentication/user-access-right-task-read-view-arangosearch-spec-sjs.js">
       <Filter>Misc Files\tests\js\client\authentication</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/authentication/user-access-right-task-repeatable-update-a-user-spec.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/authentication/user-access-right-task-repeatable-update-a-user-spec-sjs.js">
       <Filter>Misc Files\tests\js\client\authentication</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/authentication/user-access-right-task-update-a-user-spec.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/authentication/user-access-right-task-update-a-user-spec-sjs.js">
       <Filter>Misc Files\tests\js\client\authentication</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/authentication/user-access-right-task-update-view-arangosearch.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/authentication/user-access-right-task-update-view-arangosearch-sjs.js">
       <Filter>Misc Files\tests\js\client\authentication</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/authentication/user-access-right-update-a-user-spec.js">
@@ -46529,7 +46517,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/communication/test-communication-cluster.js">
       <Filter>Misc Files\tests\js\client\communication</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/communication/test-kill.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/communication/test-kill-sjs.js">
       <Filter>Misc Files\tests\js\client\communication</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/dump/check-foxx.js">
@@ -46850,10 +46838,10 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/load-balancing/load-balancing-cursor-noauth-cluster.js">
       <Filter>Misc Files\tests\js\client\load-balancing</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/load-balancing/load-balancing-foxx-installation-noauth-cluster-nocov.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/load-balancing/load-balancing-foxx-installation-noauth-cluster-nocov-sjs.js">
       <Filter>Misc Files\tests\js\client\load-balancing</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/load-balancing/load-balancing-foxx-queues-noauth-cluster.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/load-balancing/load-balancing-foxx-queues-noauth-cluster-sjs.js">
       <Filter>Misc Files\tests\js\client\load-balancing</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/load-balancing/load-balancing-key-generator-noauth-cluster.js">
@@ -46862,10 +46850,10 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/load-balancing/load-balancing-queries-noauth-cluster.js">
       <Filter>Misc Files\tests\js\client\load-balancing</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/load-balancing/load-balancing-tasks-auth-cluster.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/load-balancing/load-balancing-tasks-auth-cluster-sjs.js">
       <Filter>Misc Files\tests\js\client\load-balancing</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/load-balancing/load-balancing-tasks-noauth-cluster.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/load-balancing/load-balancing-tasks-noauth-cluster-sjs.js">
       <Filter>Misc Files\tests\js\client\load-balancing</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/load-balancing/load-balancing-transactions-auth-cluster.js">
@@ -46907,7 +46895,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/attributes.js">
       <Filter>Misc Files\tests\js\client\recovery</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/big-transaction-durability.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/big-transaction-durability-sjs.js">
       <Filter>Misc Files\tests\js\client\recovery</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/check-warnings-exitzero.js">
@@ -47018,7 +47006,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/flush-drop-database-and-fail.js">
       <Filter>Misc Files\tests\js\client\recovery</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/foxx-directories.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/foxx-directories-sjs.js">
       <Filter>Misc Files\tests\js\client\recovery</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/index-cache-enabled.js">
@@ -47033,13 +47021,13 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/indexes-geo-potslot.js">
       <Filter>Misc Files\tests\js\client\recovery</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/indexes-geo.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/indexes-geo-sjssimple.js">
       <Filter>Misc Files\tests\js\client\recovery</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/indexes-hash.js">
       <Filter>Misc Files\tests\js\client\recovery</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/indexes-persistent-nosync.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/indexes-persistent-nosync-sjs.js">
       <Filter>Misc Files\tests\js\client\recovery</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/indexes-persistent-restore.js">
@@ -47063,7 +47051,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/indexes.js">
       <Filter>Misc Files\tests\js\client\recovery</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/insert-update-remove.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/insert-update-remove-sjs.js">
       <Filter>Misc Files\tests\js\client\recovery</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/insert-update-replace.js">
@@ -47105,7 +47093,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/many-updates.js">
       <Filter>Misc Files\tests\js\client\recovery</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/multi-database-durability.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/multi-database-durability-sjs.js">
       <Filter>Misc Files\tests\js\client\recovery</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/no-shutdown-info-with-flush.js">
@@ -47195,7 +47183,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/search/view-arangosearch-link-populate-drop-view-no-flushthread.js">
       <Filter>Misc Files\tests\js\client\recovery\search</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/search/view-arangosearch-link-populate-fail.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/search/view-arangosearch-link-populate-fail-sjs.js">
       <Filter>Misc Files\tests\js\client\recovery\search</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/search/view-arangosearch-link-populate-no-callbacks.js">
@@ -47216,22 +47204,22 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/search/view-arangosearch-link-populate-remove.js">
       <Filter>Misc Files\tests\js\client\recovery\search</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/search/view-arangosearch-link-populate-transaction-abort-no-flushthread.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/search/view-arangosearch-link-populate-transaction-abort-no-flushthread-sjs.js">
       <Filter>Misc Files\tests\js\client\recovery\search</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/search/view-arangosearch-link-populate-transaction-abort.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/search/view-arangosearch-link-populate-transaction-abort-sjs.js">
       <Filter>Misc Files\tests\js\client\recovery\search</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/search/view-arangosearch-link-populate-transaction-multiple-batches-no-flushthread.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/search/view-arangosearch-link-populate-transaction-multiple-batches-no-flushthread-sjs.js">
       <Filter>Misc Files\tests\js\client\recovery\search</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/search/view-arangosearch-link-populate-transaction-no-flushthread.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/search/view-arangosearch-link-populate-transaction-no-flushthread-sjs.js">
       <Filter>Misc Files\tests\js\client\recovery\search</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/search/view-arangosearch-link-populate-transaction-single-batch-no-flushthread.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/search/view-arangosearch-link-populate-transaction-single-batch-no-flushthread-sjs.js">
       <Filter>Misc Files\tests\js\client\recovery\search</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/search/view-arangosearch-link-populate-transaction.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/search/view-arangosearch-link-populate-transaction-sjs.js">
       <Filter>Misc Files\tests\js\client\recovery\search</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/search/view-arangosearch-link-populate-truncate-no-flushthread.js">
@@ -47300,7 +47288,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/search/view-search-alias-populate-drop-view-no-flushthread.js">
       <Filter>Misc Files\tests\js\client\recovery\search</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/search/view-search-alias-populate-fail.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/search/view-search-alias-populate-fail-sjs.js">
       <Filter>Misc Files\tests\js\client\recovery\search</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/search/view-search-alias-populate-no-callbacks.js">
@@ -47321,22 +47309,22 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/search/view-search-alias-populate-remove.js">
       <Filter>Misc Files\tests\js\client\recovery\search</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/search/view-search-alias-populate-transaction-abort-no-flushthread.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/search/view-search-alias-populate-transaction-abort-no-flushthread-sjs.js">
       <Filter>Misc Files\tests\js\client\recovery\search</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/search/view-search-alias-populate-transaction-abort.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/search/view-search-alias-populate-transaction-abort-sjs.js">
       <Filter>Misc Files\tests\js\client\recovery\search</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/search/view-search-alias-populate-transaction-multiple-batches-no-flushthread.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/search/view-search-alias-populate-transaction-multiple-batches-no-flushthread-sjs.js">
       <Filter>Misc Files\tests\js\client\recovery\search</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/search/view-search-alias-populate-transaction-no-flushthread.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/search/view-search-alias-populate-transaction-no-flushthread-sjs.js">
       <Filter>Misc Files\tests\js\client\recovery\search</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/search/view-search-alias-populate-transaction-single-batch-no-flushthread.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/search/view-search-alias-populate-transaction-single-batch-no-flushthread-sjs.js">
       <Filter>Misc Files\tests\js\client\recovery\search</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/search/view-search-alias-populate-transaction.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/search/view-search-alias-populate-transaction-sjs.js">
       <Filter>Misc Files\tests\js\client\recovery\search</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/search/view-search-alias-populate-truncate-no-flushthread.js">
@@ -47357,13 +47345,13 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/search/view-search-alias-view-create-drop.js">
       <Filter>Misc Files\tests\js\client\recovery\search</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/transaction-durability-multiple.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/transaction-durability-multiple-sjs.js">
       <Filter>Misc Files\tests\js\client\recovery</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/transaction-durability.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/transaction-durability-sjs.js">
       <Filter>Misc Files\tests\js\client\recovery</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/transaction-just-committed.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/transaction-just-committed-sjs.js">
       <Filter>Misc Files\tests\js\client\recovery</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/transaction-no-abort.js">
@@ -47384,13 +47372,13 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/view-arangosearch-link-rename-collection-noncluster.js">
       <Filter>Misc Files\tests\js\client\recovery</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/view-arangosearch-link-three-transactions-noncluster.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/view-arangosearch-link-three-transactions-noncluster-sjs.js">
       <Filter>Misc Files\tests\js\client\recovery</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/view-arangosearch-link-three-transactions_stage1-noncluster.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/view-arangosearch-link-three-transactions_stage1-noncluster-sjs.js">
       <Filter>Misc Files\tests\js\client\recovery</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/view-arangosearch-link-three-transactions_stage2-noncluster.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/view-arangosearch-link-three-transactions_stage2-noncluster-sjs.js">
       <Filter>Misc Files\tests\js\client\recovery</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/recovery/view-arangosearch-rename-no-flushthread-noncluster.js">
@@ -47537,7 +47525,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/restart/test-coordinator-unreachable-cluster.js">
       <Filter>Misc Files\tests\js\client\restart</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/restart/test-foxx-selfheal-cluster-nocov.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/restart/test-foxx-selfheal-cluster-nocov-sjs.js">
       <Filter>Misc Files\tests\js\client\restart</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/restart/test-restart-cluster.js">
@@ -47549,7 +47537,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/restart/test-restart-with-graphs-cluster.js">
       <Filter>Misc Files\tests\js\client\restart</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/restart/test-soft-shutdown-cluster-nocov.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/restart/test-soft-shutdown-cluster-nocov-sjs.js">
       <Filter>Misc Files\tests\js\client\restart</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/auto-refill-index-caches-on-followers-off-cluster-fp.js">
@@ -47588,13 +47576,13 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/edge-index-compression-on-noncluster.js">
       <Filter>Misc Files\tests\js\client\server_parameters</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/exclusive-collections-off.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/exclusive-collections-off-sjs.js">
       <Filter>Misc Files\tests\js\client\server_parameters</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/exclusive-collections-on-noncluster.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/exclusive-collections-on-noncluster-sjs.js">
       <Filter>Misc Files\tests\js\client\server_parameters</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/exclusive-collections-on.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/exclusive-collections-on-sjs.js">
       <Filter>Misc Files\tests\js\client\server_parameters</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/fill-block-cache-off-noncluster.js">
@@ -47612,34 +47600,34 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/fill-index-cache-on-startup-noncluster-on.js">
       <Filter>Misc Files\tests\js\client\server_parameters</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/foxx-allow-install-from-remote-off-nightly.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/foxx-allow-install-from-remote-off-nightly-sjs.js">
       <Filter>Misc Files\tests\js\client\server_parameters</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/foxx-allow-install-from-remote-on-nightly.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/foxx-allow-install-from-remote-on-nightly-sjs.js">
       <Filter>Misc Files\tests\js\client\server_parameters</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/foxx-enable-false.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/foxx-enable-false-sjs.js">
       <Filter>Misc Files\tests\js\client\server_parameters</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/foxx-enable-true.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/foxx-enable-true-sjs.js">
       <Filter>Misc Files\tests\js\client\server_parameters</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/http-handle-content-encoding.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/http-handle-content-encoding-sjs.js">
       <Filter>Misc Files\tests\js\client\server_parameters</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/http-permanently-redirect-root-off.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/http-permanently-redirect-root-off-sjsapi.js">
       <Filter>Misc Files\tests\js\client\server_parameters</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/http-permanently-redirect-root-on.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/http-permanently-redirect-root-on-sjsapi.js">
       <Filter>Misc Files\tests\js\client\server_parameters</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/http-redirect-root-to-301.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/http-redirect-root-to-301-sjsapi.js">
       <Filter>Misc Files\tests\js\client\server_parameters</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/http-redirect-root-to-302.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/http-redirect-root-to-302-sjs.js">
       <Filter>Misc Files\tests\js\client\server_parameters</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/javascript-user-defined-functions-off.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/javascript-user-defined-functions-off-sjs.js">
       <Filter>Misc Files\tests\js\client\server_parameters</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/legacy-sorting-cluster.js">
@@ -47756,7 +47744,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/test-allow-collections-in-expressions-on.js">
       <Filter>Misc Files\tests\js\client\server_parameters</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/test-copy-installation.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/test-copy-installation-sjs.js">
       <Filter>Misc Files\tests\js\client\server_parameters</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/test-early-connections-noncluster.js">
@@ -47774,10 +47762,10 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/test-export-document-metrics-on-noncluster.js">
       <Filter>Misc Files\tests\js\client\server_parameters</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/test-export-shard-usage-metrics-bytes-per-shard-cluster-fp.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/test-export-shard-usage-metrics-bytes-per-shard-cluster-fp-sjs.js">
       <Filter>Misc Files\tests\js\client\server_parameters</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/test-export-shard-usage-metrics-bytes-per-shard-per-user-cluster-fp.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/test-export-shard-usage-metrics-bytes-per-shard-per-user-cluster-fp-sjs.js">
       <Filter>Misc Files\tests\js\client\server_parameters</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/test-export-shard-usage-metrics-per-shard-cluster.js">
@@ -47816,31 +47804,31 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/test-failed-write-concern-cluster-503.js">
       <Filter>Misc Files\tests\js\client\server_parameters</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/test-global-memory-limit.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/test-global-memory-limit-sjs.js">
       <Filter>Misc Files\tests\js\client\server_parameters</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/test-idle-timeouts.js">
       <Filter>Misc Files\tests\js\client\server_parameters</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/test-javascript-disabled.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/test-javascript-disabled-sjs.js">
       <Filter>Misc Files\tests\js\client\server_parameters</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/test-javascript-tasks-off-allow-admin-execute.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/test-javascript-tasks-off-allow-admin-execute-sjs.js">
       <Filter>Misc Files\tests\js\client\server_parameters</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/test-javascript-tasks-off.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/test-javascript-tasks-off-sjs.js">
       <Filter>Misc Files\tests\js\client\server_parameters</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/test-javascript-tasks-on.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/test-javascript-tasks-on-sjs.js">
       <Filter>Misc Files\tests\js\client\server_parameters</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/test-javascript-transactions-off-allow-admin-execute.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/test-javascript-transactions-off-allow-admin-execute-sjs.js">
       <Filter>Misc Files\tests\js\client\server_parameters</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/test-javascript-transactions-off.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/test-javascript-transactions-off-sjs.js">
       <Filter>Misc Files\tests\js\client\server_parameters</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/test-javascript-transactions-on.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/test-javascript-transactions-on-sjs.js">
       <Filter>Misc Files\tests\js\client\server_parameters</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/test-log-api-enabled-false.js">
@@ -47924,7 +47912,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/test-telemetrics-false-auth.js">
       <Filter>Misc Files\tests\js\client\server_parameters</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/test-telemetrics-true-auth.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/test-telemetrics-true-auth-sjs.js">
       <Filter>Misc Files\tests\js\client\server_parameters</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/test-transaction-idle-timeout-high.js">
@@ -47933,7 +47921,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/test-transaction-idle-timeout-low.js">
       <Filter>Misc Files\tests\js\client\server_parameters</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/test-use-splice-syscall.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/test-use-splice-syscall-sjs.js">
       <Filter>Misc Files\tests\js\client\server_parameters</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/wal-archive-size-limit-large-noncluster.js">
@@ -47948,19 +47936,19 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_parameters/www-authenticate.js">
       <Filter>Misc Files\tests\js\client\server_parameters</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_permissions/test-admin-execute-allowed.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_permissions/test-admin-execute-allowed-sjs.js">
       <Filter>Misc Files\tests\js\client\server_permissions</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_permissions/test-admin-execute-disallowed.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_permissions/test-admin-execute-disallowed-sjs.js">
       <Filter>Misc Files\tests\js\client\server_permissions</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_permissions/test-api-transaction-hardened.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_permissions/test-api-transaction-hardened-sjs.js">
       <Filter>Misc Files\tests\js\client\server_permissions</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_permissions/test-api-transaction-restricted.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_permissions/test-api-transaction-restricted-sjs.js">
       <Filter>Misc Files\tests\js\client\server_permissions</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_permissions/test-api-transaction-unrestricted.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_permissions/test-api-transaction-unrestricted-sjs.js">
       <Filter>Misc Files\tests\js\client\server_permissions</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_permissions/test-cluster-jwt-policy-all.js">
@@ -47972,19 +47960,19 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_permissions/test-cluster-jwt-policy-write.js">
       <Filter>Misc Files\tests\js\client\server_permissions</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_permissions/test-foxx-apis-off.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_permissions/test-foxx-apis-off-sjs.js">
       <Filter>Misc Files\tests\js\client\server_permissions</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_permissions/test-foxx-apis-on.js">
       <Filter>Misc Files\tests\js\client\server_permissions</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_permissions/test-foxx-service-access-denied.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_permissions/test-foxx-service-access-denied-sjs.js">
       <Filter>Misc Files\tests\js\client\server_permissions</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_permissions/test-hardened-rest-apis.js">
       <Filter>Misc Files\tests\js\client\server_permissions</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_permissions/test-oasis.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_permissions/test-oasis-sjs.js">
       <Filter>Misc Files\tests\js\client\server_permissions</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_permissions/test-options-api-admin-noncluster.js">
@@ -47993,7 +47981,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_permissions/test-options-api-admin-off-noncluster.js">
       <Filter>Misc Files\tests\js\client\server_permissions</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_permissions/test-options-api-disabled.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_permissions/test-options-api-disabled-sjs.js">
       <Filter>Misc Files\tests\js\client\server_permissions</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_permissions/test-options-api-jwt-noncluster.js">
@@ -48014,7 +48002,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_permissions/test-support-info-api-admin-off-noncluster.js">
       <Filter>Misc Files\tests\js\client\server_permissions</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_permissions/test-support-info-api-disabled.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_permissions/test-support-info-api-disabled-sjsapi.js">
       <Filter>Misc Files\tests\js\client\server_permissions</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_permissions/test-support-info-api-jwt-noncluster.js">
@@ -48026,7 +48014,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_permissions/test-switched-off-log-api.js">
       <Filter>Misc Files\tests\js\client\server_permissions</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_permissions/test-tasks.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_permissions/test-tasks-sjs.js">
       <Filter>Misc Files\tests\js\client\server_permissions</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/server_permissions/test-unhardened-rest-apis.js">
@@ -48044,7 +48032,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/api-job-different-protocols.js">
       <Filter>Misc Files\tests\js\client\shell</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/api/aardvark-graphvisualizer.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/api/aardvark-graphvisualizer-sjs.js">
       <Filter>Misc Files\tests\js\client\shell\api</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/api/analyzer.js">
@@ -48062,13 +48050,13 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/api/aql-builtin.js">
       <Filter>Misc Files\tests\js\client\shell\api</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/api/aqlfunction.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/api/aqlfunction-sjs.js">
       <Filter>Misc Files\tests\js\client\shell\api</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/api/collection-noncluster.js">
       <Filter>Misc Files\tests\js\client\shell\api</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/api/cursor-noncluster.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/api/cursor-noncluster-sjs.js">
       <Filter>Misc Files\tests\js\client\shell\api</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/api/cursor.js">
@@ -48110,7 +48098,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/api/index.js">
       <Filter>Misc Files\tests\js\client\shell\api</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/api/multi/async.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/api/multi/async-sjs.js">
       <Filter>Misc Files\tests\js\client\shell\api\multi</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/api/multi/attributes.js">
@@ -48170,7 +48158,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/api/multi/edges.js">
       <Filter>Misc Files\tests\js\client\shell\api\multi</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/api/multi/foxx-spec.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/api/multi/foxx-spec-sjs.js">
       <Filter>Misc Files\tests\js\client\shell\api\multi</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/api/multi/general-graph.js">
@@ -48188,13 +48176,13 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/api/multi/miscellaneous.js">
       <Filter>Misc Files\tests\js\client\shell\api\multi</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/api/multi/statistics-spec-noncluster.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/api/multi/statistics-spec-noncluster-sjs.js">
       <Filter>Misc Files\tests\js\client\shell\api\multi</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/api/multi/transactions-cluster.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/api/multi/transactions-cluster-sjs.js">
       <Filter>Misc Files\tests\js\client\shell\api\multi</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/api/multi/transactions.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/api/multi/transactions-sjs.js">
       <Filter>Misc Files\tests\js\client\shell\api\multi</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/api/query-analysis.js">
@@ -48203,22 +48191,22 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/api/simple-all.js">
       <Filter>Misc Files\tests\js\client\shell\api</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/api/simple-any.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/api/simple-any-sjssimple.js">
       <Filter>Misc Files\tests\js\client\shell\api</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/api/simple-example.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/api/simple-example-sjssimple.js">
       <Filter>Misc Files\tests\js\client\shell\api</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/api/simple-modify-example-cluster.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/api/simple-modify-example-cluster-sjssimple.js">
       <Filter>Misc Files\tests\js\client\shell\api</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/api/simple-modify-example.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/api/simple-modify-example-sjssimple.js">
       <Filter>Misc Files\tests\js\client\shell\api</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/api/simple-range.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/api/simple-range-sjssimple.js">
       <Filter>Misc Files\tests\js\client\shell\api</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/api/statistics.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/api/statistics-sjs.js">
       <Filter>Misc Files\tests\js\client\shell\api</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/api/support-info.js">
@@ -48254,7 +48242,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/arangosearch-update-consistency-view.js">
       <Filter>Misc Files\tests\js\client\shell</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/exclusive-collections-noncluster.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/exclusive-collections-noncluster-sjs.js">
       <Filter>Misc Files\tests\js\client\shell</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/general-graph-creation-cluster-spec.js">
@@ -48269,7 +48257,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-admin-cluster-maintenance-dbservers.js">
       <Filter>Misc Files\tests\js\client\shell\multi</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-admin-execute-formats.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-admin-execute-formats-sjs.js">
       <Filter>Misc Files\tests\js\client\shell\multi</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-admin-license.js">
@@ -48284,10 +48272,10 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-aql-kill-nocov.js">
       <Filter>Misc Files\tests\js\client\shell\multi</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-aqlfunctions.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-aqlfunctions-sjs.js">
       <Filter>Misc Files\tests\js\client\shell\multi</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-arango-agency-javascript-cluster.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-arango-agency-javascript-cluster-sjs.js">
       <Filter>Misc Files\tests\js\client\shell\multi</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-async-request.js">
@@ -48326,40 +48314,40 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-extended-database-names.js">
       <Filter>Misc Files\tests\js\client\shell\multi</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-foxx-cors-spec.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-foxx-cors-spec-sjs.js">
       <Filter>Misc Files\tests\js\client\shell\multi</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-foxx-interface.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-foxx-interface-sjs.js">
       <Filter>Misc Files\tests\js\client\shell\multi</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-foxx-manager-install-spec.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-foxx-manager-install-spec-sjs.js">
       <Filter>Misc Files\tests\js\client\shell\multi</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-foxx-manager-nightly-spec.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-foxx-manager-nightly-spec-sjs.js">
       <Filter>Misc Files\tests\js\client\shell\multi</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-foxx-manager-spec.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-foxx-manager-spec-sjs.js">
       <Filter>Misc Files\tests\js\client\shell\multi</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-foxx-multiple-databases.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-foxx-multiple-databases-sjs.js">
       <Filter>Misc Files\tests\js\client\shell\multi</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-foxx-paths-spec.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-foxx-paths-spec-sjs.js">
       <Filter>Misc Files\tests\js\client\shell\multi</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-foxx-queue-spec.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-foxx-queue-spec-sjs.js">
       <Filter>Misc Files\tests\js\client\shell\multi</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-fuerte-response.js">
       <Filter>Misc Files\tests\js\client\shell\multi</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-fulltext.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-fulltext-sjssimple.js">
       <Filter>Misc Files\tests\js\client\shell\multi</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-global-shard-statistics-cluster.js">
       <Filter>Misc Files\tests\js\client\shell\multi</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-graph-transaction.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-graph-transaction-sjs.js">
       <Filter>Misc Files\tests\js\client\shell\multi</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-http-headers-cluster.js">
@@ -48386,7 +48374,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-queries-all-databases.js">
       <Filter>Misc Files\tests\js\client\shell\multi</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-query-stream.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-query-stream-sjs.js">
       <Filter>Misc Files\tests\js\client\shell\multi</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-rep_li_cat_ion-noncluster.js">
@@ -48395,7 +48383,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-revisions-noncluster.js">
       <Filter>Misc Files\tests\js\client\shell\multi</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-simple-query.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-simple-query-sjssimple.js">
       <Filter>Misc Files\tests\js\client\shell\multi</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-statement.js">
@@ -48404,10 +48392,10 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-supervision-maintenance-cluster.js">
       <Filter>Misc Files\tests\js\client\shell\multi</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-tasks.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-tasks-sjs.js">
       <Filter>Misc Files\tests\js\client\shell\multi</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-transactions.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-transactions-sjs.js">
       <Filter>Misc Files\tests\js\client\shell\multi</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-validation.js">
@@ -48425,7 +48413,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-view-search-alias.js">
       <Filter>Misc Files\tests\js\client\shell\multi</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-vpack.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/multi/shell-vpack-sjs.js">
       <Filter>Misc Files\tests\js\client\shell\multi</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/recording.js">
@@ -48455,7 +48443,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-aql-tag-spec.js">
       <Filter>Misc Files\tests\js\client\shell</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-aql-v8.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-aql-v8-sjs.js">
       <Filter>Misc Files\tests\js\client\shell</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-arango-secure-installation-noncluster.js">
@@ -48482,7 +48470,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-cache-cleanup-noncluster.js">
       <Filter>Misc Files\tests\js\client\shell</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-client.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-client-sjs.js">
       <Filter>Misc Files\tests\js\client\shell</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-cluster-collection-selectivity.js">
@@ -48533,7 +48521,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-community-sharding-hash-cluster.js">
       <Filter>Misc Files\tests\js\client\shell</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-correctness.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-correctness-sjs.js">
       <Filter>Misc Files\tests\js\client\shell</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-create-database-failure-cluster-fp.js">
@@ -48545,10 +48533,13 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-database-failures-creation-cluster-fp.js">
       <Filter>Misc Files\tests\js\client\shell</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-database-noncluster.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-database-noncluster-sjs.js">
       <Filter>Misc Files\tests\js\client\shell</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-debug-dump.js">
+      <Filter>Misc Files\tests\js\client\shell</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-deployment-id.js">
       <Filter>Misc Files\tests\js\client\shell</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-distributeShardsLike-cluster.js">
@@ -48563,7 +48554,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-document.js">
       <Filter>Misc Files\tests\js\client\shell</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-download.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-download-sjsapi.js">
       <Filter>Misc Files\tests\js\client\shell</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-drop-database-with-stopped-server-cluster.js">
@@ -48629,7 +48620,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-general-graph-creation-cluster.js">
       <Filter>Misc Files\tests\js\client\shell</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-general-graph.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-general-graph-sjs.js">
       <Filter>Misc Files\tests\js\client\shell</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-graph-measurement.js">
@@ -48677,7 +48668,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-index-figures-noncluster-spec.js">
       <Filter>Misc Files\tests\js\client\shell</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-index-geo.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-index-geo-sjssimple.js">
       <Filter>Misc Files\tests\js\client\shell</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-index-link-parallel-drop-create.js">
@@ -48689,7 +48680,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-index-selection.js">
       <Filter>Misc Files\tests\js\client\shell</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-index-selectivity-estimates-noncluster.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-index-selectivity-estimates-noncluster-sjs.js">
       <Filter>Misc Files\tests\js\client\shell</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-index-stored-values.js">
@@ -48728,7 +48719,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-logger-metrics-cluster.js">
       <Filter>Misc Files\tests\js\client\shell</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-med-queue-blocked-cluster-nocov-fp.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-med-queue-blocked-cluster-nocov-fp-sjs.js">
       <Filter>Misc Files\tests\js\client\shell</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-move-shard-collection-creation-cluster.js">
@@ -48806,7 +48797,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-replication-vpack-cluster.js">
       <Filter>Misc Files\tests\js\client\shell</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-request.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-request-sjsapi.js">
       <Filter>Misc Files\tests\js\client\shell</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-responsibleservers-cluster.js">
@@ -48842,7 +48833,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-statistics-collection-cluster.js">
       <Filter>Misc Files\tests\js\client\shell</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-statistics.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-statistics-sjs.js">
       <Filter>Misc Files\tests\js\client\shell</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-total-sst-files-metric-noncluster.js">
@@ -48851,13 +48842,13 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-transaction-commit-abort-overwhelm-cluster.js">
       <Filter>Misc Files\tests\js\client\shell</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-transactions-memory-usage-noncluster.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-transactions-memory-usage-noncluster-sjs.js">
       <Filter>Misc Files\tests\js\client\shell</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-transactions-view-noncluster.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-transactions-sjs.js">
       <Filter>Misc Files\tests\js\client\shell</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-transactions.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-transactions-view-noncluster-sjs.js">
       <Filter>Misc Files\tests\js\client\shell</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-ttl-nocov.js">
@@ -48875,7 +48866,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-users.js">
       <Filter>Misc Files\tests\js\client\shell</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-verify-sst-noncluster.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-verify-sst-noncluster-sjssimple.js">
       <Filter>Misc Files\tests\js\client\shell</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/shell-version-check-spec.js">
@@ -48908,7 +48899,7 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/transaction/shell-transaction-intermediate-commit-babies-cluster-fp.js">
       <Filter>Misc Files\tests\js\client\shell\transaction</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/transaction/shell-transaction-intermediate-commit-cluster-fp.js">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/transaction/shell-transaction-intermediate-commit-cluster-fp-sjs.js">
       <Filter>Misc Files\tests\js\client\shell\transaction</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/client/shell/transaction/shell-transaction-part1-R1.js">
@@ -49910,13 +49901,16 @@
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/js/transform/poc/tests/test.js">
       <Filter>Misc Files\tests\js\transform\poc\tests</Filter>
     </Text>
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/kafka-test-definitions.yml">
+      <Filter>Misc Files\tests</Filter>
+    </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/sepp/CMakeLists.txt">
       <Filter>Misc Files\tests\sepp</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tests/sepp/sample-config.json">
       <Filter>Misc Files\tests\sepp</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/arangodb/tests/test-definitions.txt">
+    <Text Include="../../thirdparty/owemdjee/arangodb/tests/test-definitions.yml">
       <Filter>Misc Files\tests</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/arangodb/tsan_arangodb_suppressions.txt">

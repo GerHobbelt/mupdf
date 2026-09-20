@@ -206,7 +206,7 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/doc/main/reference/examples/blocked_nd_range_ctad_example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/doc/main/reference/examples/assertion_handler.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/oneTBB/doc/main/reference/examples/custom_mutex_chmap_example.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/oneTBB/doc/main/reference/examples/fixed_pool_example.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/oneTBB/doc/main/reference/examples/helpers_for_expressing_graphs_preview_api_example.cpp" />
@@ -217,12 +217,16 @@
     <ClCompile Include="../../thirdparty/owemdjee/oneTBB/doc/main/reference/examples/memory_pool_example.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/oneTBB/doc/main/reference/examples/parallel_phase_example.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/oneTBB/doc/main/reference/examples/rvalue_reduce.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/doc/main/reference/examples/task_group_extensions_bypassing.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/doc/main/reference/examples/task_group_extensions_reduction.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/oneTBB/doc/main/reference/examples/try_put_and_wait_example.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/examples/blocked_nd_range_example.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/examples/flow_graph_examples.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/examples/guiding_task_scheduler_execution.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/examples/parallel_for_lambda_example_1.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/examples/parallel_for_lambda_example_2.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/examples/parallel_for_os_example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/examples/task_examples.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/examples/tbb_mixing_other_runtimes_example.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/common/gui/convideo.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/common/gui/d2dvideo.cpp" />
@@ -422,6 +426,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_blocked_range.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_broadcast_node.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_buffer_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_cgroup_support.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_collaborative_call_once.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_composite_node.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_concurrent_hash_map.cpp" />
@@ -477,6 +482,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_priority_queue_node.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_profiling.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_queue_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_resource_limited_node.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_resumable_tasks.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_scheduler_mix.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_semaphore.cpp" />
@@ -621,6 +627,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/detail/_flow_graph_node_impl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/detail/_flow_graph_node_set_impl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/detail/_flow_graph_nodes_deduction.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/detail/_flow_graph_resource_limiting.h" />
     <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/detail/_flow_graph_tagged_buffer_impl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/detail/_flow_graph_trace_impl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/detail/_flow_graph_types_impl.h" />
@@ -846,6 +853,8 @@
     <Image Include="../../thirdparty/owemdjee/oneTBB/doc/main/reference/Resources/fg_api_graph_structure.png" />
     <Image Include="../../thirdparty/owemdjee/oneTBB/doc/main/reference/Resources/make_edges_example.png" />
     <Image Include="../../thirdparty/owemdjee/oneTBB/doc/main/reference/Resources/make_edges_usage.png" />
+    <Image Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Images/concurrent_tasks.png" />
+    <Image Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Images/concurrent_tasks_canceled.png" />
     <Image Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Images/dependence_graph.jpg" />
     <Image Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Images/execution_timeline2node.jpg" />
     <Image Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Images/execution_timeline_dependence.jpg" />
@@ -948,6 +957,9 @@
     <Image Include="../../thirdparty/owemdjee/oneTBB/rfcs/proposed/task_group_dynamic_dependencies/assets/wavefront_recursive_eager_second_division_west.png" />
     <Image Include="../../thirdparty/owemdjee/oneTBB/rfcs/proposed/task_group_dynamic_dependencies/assets/wavefront_recursive_eager_second_division_west_new_dependencies.png" />
     <Image Include="../../thirdparty/owemdjee/oneTBB/rfcs/proposed/task_group_dynamic_dependencies/assets/wavefront_recursive_no_dependencies.png" />
+    <Image Include="../../thirdparty/owemdjee/oneTBB/rfcs/proposed/task_group_wait_single_task/avoid_bypass_graph.png" />
+    <Image Include="../../thirdparty/owemdjee/oneTBB/rfcs/proposed/task_group_wait_single_task/notify_list_before_completion.png" />
+    <Image Include="../../thirdparty/owemdjee/oneTBB/rfcs/proposed/task_group_wait_single_task/wait_context_part_of_state.png" />
     <Image Include="../../thirdparty/owemdjee/oneTBB/rfcs/supported/control_groups/speedup-chart.png" />
     <ResourceCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/polygon_overlay/gui/polygon_overlay.rc" />
     <ResourceCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/seismic/gui/seismic.rc" />
@@ -1029,7 +1041,7 @@
     <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/intro/limitations.rst" />
     <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/intro/notation.rst" />
     <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/intro/testing_approach.rst" />
-    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/reference/blocked_nd_range_ctad.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/reference/assertion_handler.rst" />
     <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/reference/concurrent_lru_cache_cls.rst" />
     <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/reference/constructors_for_nodes.rst" />
     <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/reference/custom_mutex_chmap.rst" />
@@ -1045,6 +1057,8 @@
     <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/reference/scalable_memory_pools/malloc_replacement_log.rst" />
     <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/reference/scalable_memory_pools/memory_pool_allocator_cls.rst" />
     <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/reference/scalable_memory_pools/memory_pool_cls.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/reference/task_group_bypass_support.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/reference/task_group_dynamic_dependencies.rst" />
     <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/reference/task_group_extensions.rst" />
     <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/reference/try_put_and_wait.rst" />
     <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/reference/type_specified_message_keys.rst" />
@@ -1105,6 +1119,7 @@
     <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Parallelizing_Flow_Graph.rst" />
     <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Parallelizing_Simple_Loops_os.rst" />
     <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Parallelizing_Simple_Loops_toctree.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Parallelizing_with_Tasks.rst" />
     <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Partitioner_Summary.rst" />
     <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Predefined_Node_Types.rst" />
     <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Reader_Writer_Mutexes.rst" />
@@ -1140,6 +1155,8 @@
     <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/concurrent_hash_map.rst" />
     <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/concurrent_vector_ug.rst" />
     <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/create_token_based_system.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/creating_tasks_with_parallel_invoke.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/creating_tasks_with_task_group.rst" />
     <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/design_patterns/Agglomeration.rst" />
     <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/design_patterns/Design_Patterns.rst" />
     <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/design_patterns/Divide_and_Conquer.rst" />
@@ -1160,6 +1177,7 @@
     <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/parallel_for_toctree.rst" />
     <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/parallel_reduce.rst" />
     <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/std_invoke.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/task_group_thread_safety.rst" />
     <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/title.rst" />
     <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/use_concurrency_limits.rst" />
     <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/use_graph_reset.rst" />
@@ -1270,8 +1288,9 @@
     <Text Include="../../thirdparty/owemdjee/oneTBB/python/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/oneTBB/python/README.md" />
     <Text Include="../../thirdparty/owemdjee/oneTBB/python/TBB.py" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/python/pyproject.toml" />
     <Text Include="../../thirdparty/owemdjee/oneTBB/python/rml/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/oneTBB/python/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/python/setup.py.in" />
     <Text Include="../../thirdparty/owemdjee/oneTBB/python/tbb/__init__.py" />
     <Text Include="../../thirdparty/owemdjee/oneTBB/python/tbb/__main__.py" />
     <Text Include="../../thirdparty/owemdjee/oneTBB/python/tbb/pool.py" />
@@ -1279,24 +1298,29 @@
     <Text Include="../../thirdparty/owemdjee/oneTBB/rfcs/README.md" />
     <Text Include="../../thirdparty/owemdjee/oneTBB/rfcs/archived/README.md" />
     <Text Include="../../thirdparty/owemdjee/oneTBB/rfcs/experimental/README.md" />
-    <Text Include="../../thirdparty/owemdjee/oneTBB/rfcs/experimental/blocked_nd_range_ctad/README.md" />
     <Text Include="../../thirdparty/owemdjee/oneTBB/rfcs/experimental/flow_graph_msg_keys/README.md" />
     <Text Include="../../thirdparty/owemdjee/oneTBB/rfcs/experimental/flow_graph_node_sets/README.md" />
     <Text Include="../../thirdparty/owemdjee/oneTBB/rfcs/experimental/parallel_phase_for_task_arena/README.md" />
     <Text Include="../../thirdparty/owemdjee/oneTBB/rfcs/proposed/README.md" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/rfcs/proposed/core_types/README.md" />
     <Text Include="../../thirdparty/owemdjee/oneTBB/rfcs/proposed/flow_graph_serializers/README.md" />
     <Text Include="../../thirdparty/owemdjee/oneTBB/rfcs/proposed/flow_graph_serializers/README.qmd" />
     <Text Include="../../thirdparty/owemdjee/oneTBB/rfcs/proposed/flow_graph_serializers/custom.scss" />
     <Text Include="../../thirdparty/owemdjee/oneTBB/rfcs/proposed/flow_graph_serializers/functions.R" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/rfcs/proposed/flow_graph_serializers/resource_consumer_node_api.md" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/rfcs/proposed/global_control_fast_leave/README.md" />
     <Text Include="../../thirdparty/owemdjee/oneTBB/rfcs/proposed/numa_support/README.md" />
-    <Text Include="../../thirdparty/owemdjee/oneTBB/rfcs/proposed/numa_support/create-numa-arenas.md" />
     <Text Include="../../thirdparty/owemdjee/oneTBB/rfcs/proposed/task_arena_waiting/readme.md" />
-    <Text Include="../../thirdparty/owemdjee/oneTBB/rfcs/proposed/task_arena_waiting/task_group_interop.md" />
     <Text Include="../../thirdparty/owemdjee/oneTBB/rfcs/proposed/task_group_dynamic_dependencies/README.md" />
     <Text Include="../../thirdparty/owemdjee/oneTBB/rfcs/proposed/task_group_dynamic_dependencies/extended_semantics.md" />
     <Text Include="../../thirdparty/owemdjee/oneTBB/rfcs/proposed/task_group_dynamic_dependencies/implementation_details.md" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/rfcs/proposed/task_group_wait_single_task/README.md" />
     <Text Include="../../thirdparty/owemdjee/oneTBB/rfcs/supported/README.md" />
     <Text Include="../../thirdparty/owemdjee/oneTBB/rfcs/supported/assertion_handler/README.md" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/rfcs/supported/blocked_nd_range_ctad/README.md" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/rfcs/supported/numa_support/create-numa-arenas.md" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/rfcs/supported/task_arena_waiting/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/rfcs/supported/task_arena_waiting/task_group_interop.md" />
     <Text Include="../../thirdparty/owemdjee/oneTBB/rfcs/template.md" />
     <Text Include="../../thirdparty/owemdjee/oneTBB/src/tbb/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/oneTBB/src/tbb/def/lin32-tbb.def" />

@@ -385,6 +385,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/nanomsg-nng/src/supplemental/http/http_server.c" />
     <ClCompile Include="../../thirdparty/owemdjee/nanomsg-nng/src/supplemental/http/http_server_test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/nanomsg-nng/src/supplemental/tls/mbedtls/mbedtls.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nanomsg-nng/src/supplemental/tls/openssl/openssl.c" />
     <ClCompile Include="../../thirdparty/owemdjee/nanomsg-nng/src/supplemental/tls/tls_common.c" />
     <ClCompile Include="../../thirdparty/owemdjee/nanomsg-nng/src/supplemental/tls/tls_dialer.c" />
     <ClCompile Include="../../thirdparty/owemdjee/nanomsg-nng/src/supplemental/tls/tls_listener.c" />
@@ -502,7 +503,6 @@
     <Text Include="../../thirdparty/owemdjee/nanomsg-nng/docs/BUILD_CROSSCOMPILE.adoc" />
     <Text Include="../../thirdparty/owemdjee/nanomsg-nng/docs/BUILD_IOS.adoc" />
     <Text Include="../../thirdparty/owemdjee/nanomsg-nng/docs/BUILD_TLS.md" />
-    <Text Include="../../thirdparty/owemdjee/nanomsg-nng/docs/BUILD_ZEROTIER.adoc" />
     <Text Include="../../thirdparty/owemdjee/nanomsg-nng/docs/CONTRIBUTING.adoc" />
     <Text Include="../../thirdparty/owemdjee/nanomsg-nng/docs/LICENSE.adoc" />
     <Text Include="../../thirdparty/owemdjee/nanomsg-nng/docs/RATIONALE.adoc" />
@@ -510,11 +510,6 @@
     <Text Include="../../thirdparty/owemdjee/nanomsg-nng/docs/book.toml" />
     <Text Include="../../thirdparty/owemdjee/nanomsg-nng/docs/man/libnng.3.adoc" />
     <Text Include="../../thirdparty/owemdjee/nanomsg-nng/docs/man/nng.7.adoc" />
-    <Text Include="../../thirdparty/owemdjee/nanomsg-nng/docs/man/nng_aio_finish.3.adoc" />
-    <Text Include="../../thirdparty/owemdjee/nanomsg-nng/docs/man/nng_aio_get_input.3.adoc" />
-    <Text Include="../../thirdparty/owemdjee/nanomsg-nng/docs/man/nng_aio_reset.3.adoc" />
-    <Text Include="../../thirdparty/owemdjee/nanomsg-nng/docs/man/nng_aio_set_output.3.adoc" />
-    <Text Include="../../thirdparty/owemdjee/nanomsg-nng/docs/man/nng_aio_start.3.adoc" />
     <Text Include="../../thirdparty/owemdjee/nanomsg-nng/docs/man/nng_device.3.adoc" />
     <Text Include="../../thirdparty/owemdjee/nanomsg-nng/docs/man/nng_dial.3.adoc" />
     <Text Include="../../thirdparty/owemdjee/nanomsg-nng/docs/man/nng_dialer.5.adoc" />
@@ -524,7 +519,7 @@
     <Text Include="../../thirdparty/owemdjee/nanomsg-nng/docs/man/nng_dialer_id.3.adoc" />
     <Text Include="../../thirdparty/owemdjee/nanomsg-nng/docs/man/nng_dialer_set.3.adoc" />
     <Text Include="../../thirdparty/owemdjee/nanomsg-nng/docs/man/nng_dialer_start.3.adoc" />
-    <Text Include="../../thirdparty/owemdjee/nanomsg-nng/docs/man/nng_http_handler_free.3http.adoc" />
+    <Text Include="../../thirdparty/owemdjee/nanomsg-nng/docs/man/nng_dialer_start_aio.3.adoc" />
     <Text Include="../../thirdparty/owemdjee/nanomsg-nng/docs/man/nng_http_server_add_handler.3http.adoc" />
     <Text Include="../../thirdparty/owemdjee/nanomsg-nng/docs/man/nng_http_server_del_handler.3http.adoc" />
     <Text Include="../../thirdparty/owemdjee/nanomsg-nng/docs/man/nng_http_server_get_addr.3http.adoc" />
@@ -536,7 +531,6 @@
     <Text Include="../../thirdparty/owemdjee/nanomsg-nng/docs/man/nng_http_server_set_tls.3http.adoc" />
     <Text Include="../../thirdparty/owemdjee/nanomsg-nng/docs/man/nng_http_server_start.3http.adoc" />
     <Text Include="../../thirdparty/owemdjee/nanomsg-nng/docs/man/nng_http_server_stop.3http.adoc" />
-    <Text Include="../../thirdparty/owemdjee/nanomsg-nng/docs/man/nng_ipc_options.5.adoc" />
     <Text Include="../../thirdparty/owemdjee/nanomsg-nng/docs/man/nng_listen.3.adoc" />
     <Text Include="../../thirdparty/owemdjee/nanomsg-nng/docs/man/nng_listener.5.adoc" />
     <Text Include="../../thirdparty/owemdjee/nanomsg-nng/docs/man/nng_listener_close.3.adoc" />
@@ -618,6 +612,7 @@
     <Text Include="../../thirdparty/owemdjee/nanomsg-nng/docs/ref/tran/inproc.md" />
     <Text Include="../../thirdparty/owemdjee/nanomsg-nng/docs/ref/tran/ipc.md" />
     <Text Include="../../thirdparty/owemdjee/nanomsg-nng/docs/ref/tran/socket.md" />
+    <Text Include="../../thirdparty/owemdjee/nanomsg-nng/docs/ref/tran/tcp.md" />
     <Text Include="../../thirdparty/owemdjee/nanomsg-nng/docs/ref/tran/udp.md" />
     <Text Include="../../thirdparty/owemdjee/nanomsg-nng/docs/ref/xref.md" />
     <Text Include="../../thirdparty/owemdjee/nanomsg-nng/etc/README.adoc" />
@@ -653,6 +648,7 @@
     <Text Include="../../thirdparty/owemdjee/nanomsg-nng/src/supplemental/http/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/nanomsg-nng/src/supplemental/tls/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/nanomsg-nng/src/supplemental/tls/mbedtls/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/nanomsg-nng/src/supplemental/tls/openssl/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/nanomsg-nng/src/supplemental/tls/wolfssl/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/nanomsg-nng/src/supplemental/websocket/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/nanomsg-nng/src/testing/CMakeLists.txt" />
