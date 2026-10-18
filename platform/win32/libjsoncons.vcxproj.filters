@@ -129,7 +129,7 @@
     <Filter Include="Misc Files\doc\ref\corelib\json">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0039}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\doc\ref\corelib\json_type_traits">
+    <Filter Include="Misc Files\doc\ref\corelib\legacy_reflect">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0040}</UniqueIdentifier>
     </Filter>
     <Filter Include="Misc Files\doc\ref\corelib\reflect">
@@ -821,9 +821,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/jsoncons/test/cbor/src/cbor_encoder_tests.cpp">
       <Filter>Source Files\test\cbor\src</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/jsoncons/test/cbor/src/cbor_event_reader_tests.cpp">
-      <Filter>Source Files\test\cbor\src</Filter>
-    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/jsoncons/test/cbor/src/cbor_event_visitor_tests.cpp">
       <Filter>Source Files\test\cbor\src</Filter>
     </ClCompile>
@@ -845,8 +842,14 @@
     <ClCompile Include="../../thirdparty/owemdjee/jsoncons/test/corelib/src/JSONTestSuite_tests.cpp">
       <Filter>Source Files\test\corelib\src</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/jsoncons/test/corelib/src/const_json_ptr_arg_tests.cpp">
+      <Filter>Source Files\test\corelib\src</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/jsoncons/test/corelib/src/decode_json_using_allocator_tests.cpp">
       <Filter>Source Files\test\corelib\src</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/jsoncons/test/corelib/src/detail/mdspan_tests.cpp">
+      <Filter>Source Files\test\corelib\src\detail</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/jsoncons/test/corelib/src/detail/optional_tests.cpp">
       <Filter>Source Files\test\corelib\src\detail</Filter>
@@ -872,6 +875,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/jsoncons/test/corelib/src/encode_decode_json_tests.cpp">
       <Filter>Source Files\test\corelib\src</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/jsoncons/test/corelib/src/generic_to_json_visitor_tests.cpp">
+      <Filter>Source Files\test\corelib\src</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/jsoncons/test/corelib/src/issue355_tests.cpp">
       <Filter>Source Files\test\corelib\src</Filter>
     </ClCompile>
@@ -891,9 +897,6 @@
       <Filter>Source Files\test\corelib\src</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/jsoncons/test/corelib/src/json_compare_tests.cpp">
-      <Filter>Source Files\test\corelib\src</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/jsoncons/test/corelib/src/json_const_pointer_arg_tests.cpp">
       <Filter>Source Files\test\corelib\src</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/jsoncons/test/corelib/src/json_constructor_tests.cpp">
@@ -944,7 +947,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/jsoncons/test/corelib/src/json_parser_tests.cpp">
       <Filter>Source Files\test\corelib\src</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/jsoncons/test/corelib/src/json_pointer_arg_tests.cpp">
+    <ClCompile Include="../../thirdparty/owemdjee/jsoncons/test/corelib/src/json_ptr_arg_tests.cpp">
       <Filter>Source Files\test\corelib\src</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/jsoncons/test/corelib/src/json_push_back_tests.cpp">
@@ -992,16 +995,16 @@
     <ClCompile Include="../../thirdparty/owemdjee/jsoncons/test/corelib/src/reflect/encode_traits_tests.cpp">
       <Filter>Source Files\test\corelib\src\reflect</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/jsoncons/test/corelib/src/reflect/json_conv_traits_chrono_tests.cpp">
+    <ClCompile Include="../../thirdparty/owemdjee/jsoncons/test/corelib/src/reflect/json_traits_chrono_tests.cpp">
       <Filter>Source Files\test\corelib\src\reflect</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/jsoncons/test/corelib/src/reflect/json_conv_traits_string_tests.cpp">
+    <ClCompile Include="../../thirdparty/owemdjee/jsoncons/test/corelib/src/reflect/json_traits_string_tests.cpp">
       <Filter>Source Files\test\corelib\src\reflect</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/jsoncons/test/corelib/src/reflect/json_conv_traits_tests.cpp">
+    <ClCompile Include="../../thirdparty/owemdjee/jsoncons/test/corelib/src/reflect/json_traits_tests.cpp">
       <Filter>Source Files\test\corelib\src\reflect</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/jsoncons/test/corelib/src/reflect/json_conv_traits_using_allocator_tests.cpp">
+    <ClCompile Include="../../thirdparty/owemdjee/jsoncons/test/corelib/src/reflect/json_traits_using_allocator_tests.cpp">
       <Filter>Source Files\test\corelib\src\reflect</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/jsoncons/test/corelib/src/reflect/reflect_traits_container_tests.cpp">
@@ -1061,13 +1064,13 @@
     <ClCompile Include="../../thirdparty/owemdjee/jsoncons/test/corelib/src/utility/conversion_tests.cpp">
       <Filter>Source Files\test\corelib\src\utility</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/jsoncons/test/corelib/src/utility/extension_traits_tests.cpp">
-      <Filter>Source Files\test\corelib\src\utility</Filter>
-    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/jsoncons/test/corelib/src/utility/from_integer_tests.cpp">
       <Filter>Source Files\test\corelib\src\utility</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/jsoncons/test/corelib/src/utility/heap_string_tests.cpp">
+      <Filter>Source Files\test\corelib\src\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/jsoncons/test/corelib/src/utility/more_type_traits_tests.cpp">
       <Filter>Source Files\test\corelib\src\utility</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/jsoncons/test/corelib/src/utility/read_number_tests.cpp">
@@ -1076,7 +1079,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/jsoncons/test/corelib/src/utility/string_utils_tests.cpp">
       <Filter>Source Files\test\corelib\src\utility</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/jsoncons/test/corelib/src/utility/unicode_conv_tests.cpp">
+    <ClCompile Include="../../thirdparty/owemdjee/jsoncons/test/corelib/src/utility/unicode_traits_tests.cpp">
       <Filter>Source Files\test\corelib\src\utility</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/jsoncons/test/corelib/src/utility/uri_tests.cpp">
@@ -1172,7 +1175,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/jsoncons/test/jsonschema/src/dynamic_ref_tests.cpp">
       <Filter>Source Files\test\jsonschema\src</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/jsoncons/test/jsonschema/src/format_validator_tests.cpp">
+    <ClCompile Include="../../thirdparty/owemdjee/jsoncons/test/jsonschema/src/format_validators_tests.cpp">
       <Filter>Source Files\test\jsonschema\src</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/jsoncons/test/jsonschema/src/json_schema_walk_tests.cpp">
@@ -1214,6 +1217,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/jsoncons/test/jsonschema/src/validation_report_tests.cpp">
       <Filter>Source Files\test\jsonschema\src</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/jsoncons/test/jsonschema/src/validation_with_pmr_allocator_tests.cpp">
+      <Filter>Source Files\test\jsonschema\src</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/jsoncons/test/mergepatch/src/mergepatch_test_suite.cpp">
       <Filter>Source Files\test\mergepatch\src</Filter>
     </ClCompile>
@@ -1230,9 +1236,6 @@
       <Filter>Source Files\test\msgpack\src</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/jsoncons/test/msgpack/src/msgpack_encoder_tests.cpp">
-      <Filter>Source Files\test\msgpack\src</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/jsoncons/test/msgpack/src/msgpack_event_reader_tests.cpp">
       <Filter>Source Files\test\msgpack\src</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/jsoncons/test/msgpack/src/msgpack_tests.cpp">
@@ -1298,6 +1301,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/jsoncons/include/jsoncons/decode_json.hpp">
       <Filter>Header Files\include\jsoncons</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/jsoncons/include/jsoncons/detail/a5hash.hpp">
+      <Filter>Header Files\include\jsoncons\detail</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/jsoncons/include/jsoncons/detail/endian.hpp">
       <Filter>Header Files\include\jsoncons\detail</Filter>
     </ClInclude>
@@ -1308,6 +1314,9 @@
       <Filter>Header Files\include\jsoncons\detail</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/jsoncons/include/jsoncons/detail/make_obj_using_allocator.hpp">
+      <Filter>Header Files\include\jsoncons\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/jsoncons/include/jsoncons/detail/mdspan.hpp">
       <Filter>Header Files\include\jsoncons\detail</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/jsoncons/include/jsoncons/detail/optional.hpp">
@@ -1322,16 +1331,10 @@
     <ClInclude Include="../../thirdparty/owemdjee/jsoncons/include/jsoncons/detail/utility.hpp">
       <Filter>Header Files\include\jsoncons\detail</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/jsoncons/include/jsoncons/diagnostics_visitor.hpp">
-      <Filter>Header Files\include\jsoncons</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/jsoncons/include/jsoncons/diagnostics_visitor2.hpp">
-      <Filter>Header Files\include\jsoncons</Filter>
-    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/jsoncons/include/jsoncons/encode_json.hpp">
       <Filter>Header Files\include\jsoncons</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/jsoncons/include/jsoncons/item_event_visitor.hpp">
+    <ClInclude Include="../../thirdparty/owemdjee/jsoncons/include/jsoncons/generic_visitor.hpp">
       <Filter>Header Files\include\jsoncons</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/jsoncons/include/jsoncons/json.hpp">
@@ -1364,7 +1367,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/jsoncons/include/jsoncons/json_fwd.hpp">
       <Filter>Header Files\include\jsoncons</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/jsoncons/include/jsoncons/json_object.hpp">
+    <ClInclude Include="../../thirdparty/owemdjee/jsoncons/include/jsoncons/json_literals.hpp">
       <Filter>Header Files\include\jsoncons</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/jsoncons/include/jsoncons/json_options.hpp">
@@ -1385,6 +1388,12 @@
     <ClInclude Include="../../thirdparty/owemdjee/jsoncons/include/jsoncons/json_visitor.hpp">
       <Filter>Header Files\include\jsoncons</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/jsoncons/include/jsoncons/key_value.hpp">
+      <Filter>Header Files\include\jsoncons</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/jsoncons/include/jsoncons/ordered_json_object.hpp">
+      <Filter>Header Files\include\jsoncons</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/jsoncons/include/jsoncons/pretty_print.hpp">
       <Filter>Header Files\include\jsoncons</Filter>
     </ClInclude>
@@ -1394,7 +1403,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/jsoncons/include/jsoncons/reflect/encode_traits.hpp">
       <Filter>Header Files\include\jsoncons\reflect</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/jsoncons/include/jsoncons/reflect/json_conv_traits.hpp">
+    <ClInclude Include="../../thirdparty/owemdjee/jsoncons/include/jsoncons/reflect/json_traits.hpp">
       <Filter>Header Files\include\jsoncons\reflect</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/jsoncons/include/jsoncons/reflect/reflect_traits_gen.hpp">
@@ -1407,6 +1416,9 @@
       <Filter>Header Files\include\jsoncons</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/jsoncons/include/jsoncons/sink.hpp">
+      <Filter>Header Files\include\jsoncons</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/jsoncons/include/jsoncons/sorted_json_object.hpp">
       <Filter>Header Files\include\jsoncons</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/jsoncons/include/jsoncons/source.hpp">
@@ -1430,7 +1442,13 @@
     <ClInclude Include="../../thirdparty/owemdjee/jsoncons/include/jsoncons/text_source_adaptor.hpp">
       <Filter>Header Files\include\jsoncons</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/jsoncons/include/jsoncons/typed_array_view.hpp">
+    <ClInclude Include="../../thirdparty/owemdjee/jsoncons/include/jsoncons/tracing_generic_visitor.hpp">
+      <Filter>Header Files\include\jsoncons</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/jsoncons/include/jsoncons/tracing_json_visitor.hpp">
+      <Filter>Header Files\include\jsoncons</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/jsoncons/include/jsoncons/typed_array.hpp">
       <Filter>Header Files\include\jsoncons</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/jsoncons/include/jsoncons/utility/bigint.hpp">
@@ -1445,7 +1463,13 @@
     <ClInclude Include="../../thirdparty/owemdjee/jsoncons/include/jsoncons/utility/conversion.hpp">
       <Filter>Header Files\include\jsoncons\utility</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/jsoncons/include/jsoncons/utility/function_objects.hpp">
+      <Filter>Header Files\include\jsoncons\utility</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/jsoncons/include/jsoncons/utility/heap_string.hpp">
+      <Filter>Header Files\include\jsoncons\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/jsoncons/include/jsoncons/utility/json_literals.hpp">
       <Filter>Header Files\include\jsoncons\utility</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/jsoncons/include/jsoncons/utility/more_type_traits.hpp">
@@ -1517,16 +1541,19 @@
     <ClInclude Include="../../thirdparty/owemdjee/jsoncons/include/jsoncons_ext/cbor/cbor_error.hpp">
       <Filter>Header Files\include\jsoncons_ext\cbor</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/jsoncons/include/jsoncons_ext/cbor/cbor_event_reader.hpp">
-      <Filter>Header Files\include\jsoncons_ext\cbor</Filter>
-    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/jsoncons/include/jsoncons_ext/cbor/cbor_options.hpp">
       <Filter>Header Files\include\jsoncons_ext\cbor</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/jsoncons/include/jsoncons_ext/cbor/cbor_parser.hpp">
       <Filter>Header Files\include\jsoncons_ext\cbor</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/jsoncons/include/jsoncons_ext/cbor/cbor_parser0.hpp">
+      <Filter>Header Files\include\jsoncons_ext\cbor</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/jsoncons/include/jsoncons_ext/cbor/cbor_reader.hpp">
+      <Filter>Header Files\include\jsoncons_ext\cbor</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/jsoncons/include/jsoncons_ext/cbor/cbor_typed_array_iterator.hpp">
       <Filter>Header Files\include\jsoncons_ext\cbor</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/jsoncons/include/jsoncons_ext/cbor/decode_cbor.hpp">
@@ -1619,13 +1646,16 @@
     <ClInclude Include="../../thirdparty/owemdjee/jsoncons/include/jsoncons_ext/jsonschema/common/eval_context.hpp">
       <Filter>Header Files\include\jsoncons_ext\jsonschema\common</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/jsoncons/include/jsoncons_ext/jsonschema/common/format.hpp">
+    <ClInclude Include="../../thirdparty/owemdjee/jsoncons/include/jsoncons_ext/jsonschema/common/format_validators.hpp">
       <Filter>Header Files\include\jsoncons_ext\jsonschema\common</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/jsoncons/include/jsoncons_ext/jsonschema/common/keyword_validator.hpp">
       <Filter>Header Files\include\jsoncons_ext\jsonschema\common</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/jsoncons/include/jsoncons_ext/jsonschema/common/keyword_validator_factory.hpp">
+      <Filter>Header Files\include\jsoncons_ext\jsonschema\common</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/jsoncons/include/jsoncons_ext/jsonschema/common/schema_readers.hpp">
       <Filter>Header Files\include\jsoncons_ext\jsonschema\common</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/jsoncons/include/jsoncons_ext/jsonschema/common/schema_validator.hpp">
@@ -1707,9 +1737,6 @@
       <Filter>Header Files\include\jsoncons_ext\msgpack</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/jsoncons/include/jsoncons_ext/msgpack/msgpack_error.hpp">
-      <Filter>Header Files\include\jsoncons_ext\msgpack</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/jsoncons/include/jsoncons_ext/msgpack/msgpack_event_reader.hpp">
       <Filter>Header Files\include\jsoncons_ext\msgpack</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/jsoncons/include/jsoncons_ext/msgpack/msgpack_options.hpp">
@@ -1934,6 +1961,9 @@
     <Text Include="../../thirdparty/owemdjee/jsoncons/doc/ref/cbor/encode_cbor.md">
       <Filter>Misc Files\doc\ref\cbor</Filter>
     </Text>
+    <Text Include="../../thirdparty/owemdjee/jsoncons/doc/ref/cbor/typed_arrays.md">
+      <Filter>Misc Files\doc\ref\cbor</Filter>
+    </Text>
     <Text Include="../../thirdparty/owemdjee/jsoncons/doc/ref/corelib/allocator_set.md">
       <Filter>Misc Files\doc\ref\corelib</Filter>
     </Text>
@@ -2120,19 +2150,22 @@
     <Text Include="../../thirdparty/owemdjee/jsoncons/doc/ref/corelib/json_type.md">
       <Filter>Misc Files\doc\ref\corelib</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/jsoncons/doc/ref/corelib/json_type_traits/Eigen-Matrix-example.md">
-      <Filter>Misc Files\doc\ref\corelib\json_type_traits</Filter>
+    <Text Include="../../thirdparty/owemdjee/jsoncons/doc/ref/corelib/legacy_reflect/Eigen-Matrix-example.md">
+      <Filter>Misc Files\doc\ref\corelib\legacy_reflect</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/jsoncons/doc/ref/corelib/json_type_traits/built-in-specializations.md">
-      <Filter>Misc Files\doc\ref\corelib\json_type_traits</Filter>
+    <Text Include="../../thirdparty/owemdjee/jsoncons/doc/ref/corelib/legacy_reflect/built-in-specializations.md">
+      <Filter>Misc Files\doc\ref\corelib\legacy_reflect</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/jsoncons/doc/ref/corelib/json_type_traits/custom-specializations.md">
-      <Filter>Misc Files\doc\ref\corelib\json_type_traits</Filter>
+    <Text Include="../../thirdparty/owemdjee/jsoncons/doc/ref/corelib/legacy_reflect/custom-specializations.md">
+      <Filter>Misc Files\doc\ref\corelib\legacy_reflect</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/jsoncons/doc/ref/corelib/json_type_traits/json_type_traits.md">
-      <Filter>Misc Files\doc\ref\corelib\json_type_traits</Filter>
+    <Text Include="../../thirdparty/owemdjee/jsoncons/doc/ref/corelib/legacy_reflect/json_type_traits.md">
+      <Filter>Misc Files\doc\ref\corelib\legacy_reflect</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/jsoncons/doc/ref/corelib/line_split_kind.md">
+      <Filter>Misc Files\doc\ref\corelib</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/jsoncons/doc/ref/corelib/mdarray_order.md">
       <Filter>Misc Files\doc\ref\corelib</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/jsoncons/doc/ref/corelib/ojson.md">
@@ -2144,13 +2177,19 @@
     <Text Include="../../thirdparty/owemdjee/jsoncons/doc/ref/corelib/read_result.md">
       <Filter>Misc Files\doc\ref\corelib</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/jsoncons/doc/ref/corelib/reflect.md">
-      <Filter>Misc Files\doc\ref\corelib</Filter>
-    </Text>
     <Text Include="../../thirdparty/owemdjee/jsoncons/doc/ref/corelib/reflect/Eigen-Matrix-example.md">
       <Filter>Misc Files\doc\ref\corelib\reflect</Filter>
     </Text>
+    <Text Include="../../thirdparty/owemdjee/jsoncons/doc/ref/corelib/reflect/decode_traits.md">
+      <Filter>Misc Files\doc\ref\corelib\reflect</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/jsoncons/doc/ref/corelib/reflect/encode_traits.md">
+      <Filter>Misc Files\doc\ref\corelib\reflect</Filter>
+    </Text>
     <Text Include="../../thirdparty/owemdjee/jsoncons/doc/ref/corelib/reflect/json_conv_traits.md">
+      <Filter>Misc Files\doc\ref\corelib\reflect</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/jsoncons/doc/ref/corelib/reflect/json_traits.md">
       <Filter>Misc Files\doc\ref\corelib\reflect</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/jsoncons/doc/ref/corelib/reflect/reflect-traits-gen.md">
@@ -2158,6 +2197,9 @@
     </Text>
     <Text Include="../../thirdparty/owemdjee/jsoncons/doc/ref/corelib/reflect/uses-allocator-construction-example.md">
       <Filter>Misc Files\doc\ref\corelib\reflect</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/jsoncons/doc/ref/corelib/reflection-traits.md">
+      <Filter>Misc Files\doc\ref\corelib</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/jsoncons/doc/ref/corelib/rename_object_key_filter.md">
       <Filter>Misc Files\doc\ref\corelib</Filter>
@@ -2183,7 +2225,13 @@
     <Text Include="../../thirdparty/owemdjee/jsoncons/doc/ref/corelib/staj_event_type.md">
       <Filter>Misc Files\doc\ref\corelib</Filter>
     </Text>
+    <Text Include="../../thirdparty/owemdjee/jsoncons/doc/ref/corelib/staj_events.md">
+      <Filter>Misc Files\doc\ref\corelib</Filter>
+    </Text>
     <Text Include="../../thirdparty/owemdjee/jsoncons/doc/ref/corelib/staj_object_iterator.md">
+      <Filter>Misc Files\doc\ref\corelib</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/jsoncons/doc/ref/corelib/typed_array_tags.md">
       <Filter>Misc Files\doc\ref\corelib</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/jsoncons/doc/ref/corelib/utility/bigint.md">
@@ -2429,9 +2477,6 @@
     <Text Include="../../thirdparty/owemdjee/jsoncons/doc/ref/jsonschema/json_schema/walk.md">
       <Filter>Misc Files\doc\ref\jsonschema\json_schema</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/jsoncons/doc/ref/jsonschema/json_validator.md">
-      <Filter>Misc Files\doc\ref\jsonschema</Filter>
-    </Text>
     <Text Include="../../thirdparty/owemdjee/jsoncons/doc/ref/jsonschema/jsonschema.md">
       <Filter>Misc Files\doc\ref\jsonschema</Filter>
     </Text>
@@ -2439,6 +2484,9 @@
       <Filter>Misc Files\doc\ref\jsonschema</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/jsoncons/doc/ref/jsonschema/schema_error.md">
+      <Filter>Misc Files\doc\ref\jsonschema</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/jsoncons/doc/ref/jsonschema/schema_property.md">
       <Filter>Misc Files\doc\ref\jsonschema</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/jsoncons/doc/ref/jsonschema/schema_version.md">
@@ -2450,10 +2498,10 @@
     <Text Include="../../thirdparty/owemdjee/jsoncons/doc/ref/jsonschema/validation_message.md">
       <Filter>Misc Files\doc\ref\jsonschema</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/jsoncons/doc/ref/jsonschema/validation_output.md">
+    <Text Include="../../thirdparty/owemdjee/jsoncons/doc/ref/jsonschema/walk_result.md">
       <Filter>Misc Files\doc\ref\jsonschema</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/jsoncons/doc/ref/jsonschema/walk_result.md">
+    <Text Include="../../thirdparty/owemdjee/jsoncons/doc/ref/jsonschema/walk_state.md">
       <Filter>Misc Files\doc\ref\jsonschema</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/jsoncons/doc/ref/mergepatch/apply_merge_patch.md">
@@ -2489,7 +2537,13 @@
     <Text Include="../../thirdparty/owemdjee/jsoncons/doc/ref/toon/encode_toon.md">
       <Filter>Misc Files\doc\ref\toon</Filter>
     </Text>
+    <Text Include="../../thirdparty/owemdjee/jsoncons/doc/ref/toon/key_folding_kind.md">
+      <Filter>Misc Files\doc\ref\toon</Filter>
+    </Text>
     <Text Include="../../thirdparty/owemdjee/jsoncons/doc/ref/toon/toon.md">
+      <Filter>Misc Files\doc\ref\toon</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/jsoncons/doc/ref/toon/toon_delimiter_kind.md">
       <Filter>Misc Files\doc\ref\toon</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/jsoncons/doc/ref/toon/toon_options.md">
@@ -3742,6 +3796,9 @@
     </Text>
     <Text Include="../../thirdparty/owemdjee/jsoncons/test/jmespath/input/examples/jmespath-examples.json">
       <Filter>Misc Files\test\jmespath\input\examples</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/jsoncons/test/jmespath/input/issues/issue-695.json">
+      <Filter>Misc Files\test\jmespath\input\issues</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/jsoncons/test/jmespath/input/issues/issues.json">
       <Filter>Misc Files\test\jmespath\input\issues</Filter>

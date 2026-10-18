@@ -213,8 +213,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/examples/standalone/beginner.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/cli/analyze_model_and_dataset.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/cli/benchmark_inference.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/cli/compile_model.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/cli/compile_model_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/cli/compute_variable_importances.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/cli/convert_dataset.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/cli/edit_model.cc" />
@@ -388,6 +386,12 @@
     <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/model/model_library.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/model/model_library_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/model/multitasker/multitasker.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/model/postprocessor/abstract_postprocessor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/model/postprocessor/abstract_postprocessor_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/model/postprocessor/postprocessor_library.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/model/postprocessor/postprocessor_library_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/model/postprocessor/smoothed_pav_calibrator/smoothed_pav_calibrator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/model/postprocessor/smoothed_pav_calibrator/smoothed_pav_calibrator_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/model/random_forest/random_forest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/model/random_forest/random_forest_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/javascript/inference/inference.cc" />
@@ -399,6 +403,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/cc/ydf.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/dataset/dataset.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/learner/custom_loss.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/learner/custom_metric.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/learner/learner.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/learner/worker.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/learner/wrapper/generate_wrapper.cc" />
@@ -415,6 +420,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/model/random_forest_model/random_forest_wrapper.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/utils/log.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/utils/numpy_data.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/utils/pybind_test_helper.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/tensorflow/ydf_tf/kernel.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/tensorflow/ydf_tf/op.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/decision_forest/8bits_numerical_features.cc" />
@@ -423,17 +429,11 @@
     <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/decision_forest/decision_forest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/decision_forest/decision_forest_serving.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/decision_forest/decision_forest_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/decision_forest/model_compiler.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/decision_forest/quick_scorer_extended.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/decision_forest/quick_scorer_extended_hwy.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/decision_forest/quick_scorer_extended_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/decision_forest/register_engines.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/decision_forest/utils.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/embed/c/c_embed.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/embed/c/c_embed_pred_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/embed/c/c_embed_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/embed/c/c_emitter.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/embed/c/c_target_lowering.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/embed/common.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/embed/cpp/cpp_embed.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/embed/cpp/cpp_embed_pred_test.cc" />
@@ -494,6 +494,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/distribution.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/distribution_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/documentation.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/endian_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/evaluation.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/evaluation_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/feature_importance.cc" />
@@ -518,7 +519,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/logging_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/math.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/math_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/mini_usage_google.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/model_analysis.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/model_analysis_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/own_or_borrow_test.cc" />
@@ -535,6 +535,10 @@
     <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/shap_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/sharded_io.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/sharded_io_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/smoothed_pav_calibration_fit.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/smoothed_pav_calibration_fit_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/smoothed_pav_calibration_inference.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/smoothed_pav_calibration_inference_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/snapshot.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/snapshot_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/status_macros_test.cc" />
@@ -651,6 +655,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/model/model_library.h" />
     <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/model/model_testing.h" />
     <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/model/multitasker/multitasker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/model/postprocessor/abstract_postprocessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/model/postprocessor/postprocessor_library.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/model/postprocessor/smoothed_pav_calibrator/smoothed_pav_calibrator.h" />
     <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/model/random_forest/random_forest.h" />
     <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/javascript/training/dataset/dataset.h" />
     <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/javascript/training/learner/learner.h" />
@@ -658,6 +665,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/javascript/training/util/status_casters.h" />
     <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/dataset/dataset.h" />
     <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/learner/custom_loss.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/learner/custom_metric.h" />
     <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/learner/learner.h" />
     <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/learner/worker.h" />
     <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/learner/wrapper/wrapper_generator.h" />
@@ -672,19 +680,15 @@
     <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/utils/custom_casters.h" />
     <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/utils/log.h" />
     <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/utils/numpy_data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/utils/pybind.h" />
     <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/utils/status_casters.h" />
     <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/decision_forest/8bits_numerical_features.h" />
     <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/decision_forest/decision_forest.h" />
     <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/decision_forest/decision_forest_serving.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/decision_forest/model_compiler.h" />
     <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/decision_forest/quick_scorer_extended.h" />
     <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/decision_forest/quick_scorer_extended_internal.h" />
     <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/decision_forest/register_engines.h" />
     <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/decision_forest/utils.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/embed/c/c_embed.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/embed/c/c_emitter.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/embed/c/c_ir.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/embed/c/c_target_lowering.h" />
     <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/embed/common.h" />
     <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/embed/cpp/cpp_embed.h" />
     <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/embed/cpp/cpp_emitter.h" />
@@ -729,6 +733,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/distribute_cli/distribute_cli_worker.h" />
     <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/distribution.h" />
     <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/documentation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/endian.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/endian_default.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/endian_google.h" />
     <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/evaluation.h" />
     <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/feature_importance.h" />
     <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/filesystem.h" />
@@ -745,7 +752,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/logging.h" />
     <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/logging_default.h" />
     <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/math.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/mini_usage_google.h" />
     <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/model_analysis.h" />
     <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/own_or_borrow.h" />
     <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/partial_dependence_plot.h" />
@@ -758,6 +764,8 @@
     <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/sharded_io.h" />
     <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/sharded_io_blob_sequence.h" />
     <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/sharded_io_tfrecord.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/smoothed_pav_calibration_fit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/smoothed_pav_calibration_inference.h" />
     <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/snapshot.h" />
     <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/status_macros.h" />
     <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/status_macros_default.h" />
@@ -907,6 +915,8 @@
     <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/model/gradient_boosted_trees/BUILD" />
     <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/model/isolation_forest/BUILD" />
     <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/model/multitasker/BUILD" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/model/postprocessor/BUILD" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/model/postprocessor/smoothed_pav_calibrator/BUILD" />
     <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/model/random_forest/BUILD" />
     <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/go/README.md" />
     <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/go/go.sum" />
@@ -922,7 +932,6 @@
     <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/javascript/inference/karma.conf.js" />
     <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/javascript/inference/npm/README.md" />
     <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/javascript/inference/npm/dist/readme.txt" />
-    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/javascript/inference/npm/package-lock.json" />
     <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/javascript/inference/npm/package.json" />
     <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/javascript/inference/npm/test/inference.test.js" />
     <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/javascript/inference/wrapper.js" />
@@ -1047,6 +1056,8 @@
     <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/learner/cart_learner_test.py" />
     <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/learner/custom_loss.py" />
     <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/learner/custom_loss_test.py" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/learner/custom_metric.py" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/learner/custom_metric_test.py" />
     <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/learner/distributed_learner_test.py" />
     <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/learner/feature_selector.py" />
     <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/learner/feature_selector_test.py" />
@@ -1158,6 +1169,7 @@
     <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/utils/log.py" />
     <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/utils/paths.py" />
     <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/utils/paths_test.py" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/utils/pybind_test.py" />
     <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/utils/string_lib.py" />
     <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/utils/string_lib_test.py" />
     <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/utils/test_utils.py" />
@@ -1166,7 +1178,6 @@
     <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/tensorflow/BUILD" />
     <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/tensorflow/MODULE.bazel" />
     <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/tensorflow/README.md" />
-    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/tensorflow/build_pip_pkg.sh" />
     <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/tensorflow/pip_pkg/setup.py" />
     <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/tensorflow/pip_pkg/test_pkg.py" />
     <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/tensorflow/tools/MODULE.bazel.legacy" />
@@ -1184,7 +1195,6 @@
     <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/BUILD" />
     <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/decision_forest/BUILD" />
     <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/embed/BUILD" />
-    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/embed/c/BUILD" />
     <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/embed/cpp/BUILD" />
     <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/embed/embed.bzl" />
     <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/embed/ir/BUILD" />

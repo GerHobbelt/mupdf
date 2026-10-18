@@ -287,21 +287,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/io_uring.cpp">
       <Filter>Source Files\examples</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/nvexec/maxwell_cpu_mt.cpp">
-      <Filter>Source Files\examples\nvexec</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/nvexec/maxwell_cpu_st.cpp">
-      <Filter>Source Files\examples\nvexec</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/nvexec/maxwell_distributed.cpp">
-      <Filter>Source Files\examples\nvexec</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/nvexec/maxwell_gpu_m.cpp">
-      <Filter>Source Files\examples\nvexec</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/nvexec/maxwell_gpu_s.cpp">
-      <Filter>Source Files\examples\nvexec</Filter>
-    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/nvexec/nvexec_bulk.cpp">
       <Filter>Source Files\examples\nvexec</Filter>
     </ClCompile>
@@ -314,8 +299,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/nvexec/nvexec_split.cpp">
       <Filter>Source Files\examples\nvexec</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/nvexec/nvtx.cpp">
-      <Filter>Source Files\examples\nvexec</Filter>
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/problem.cpp">
+      <Filter>Source Files\examples</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/retry.cpp">
       <Filter>Source Files\examples</Filter>
@@ -377,6 +362,15 @@
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/sequence/test_iterate.cpp">
       <Filter>Source Files\test\exec\sequence</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/sequence/test_merge.cpp">
+      <Filter>Source Files\test\exec\sequence</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/sequence/test_merge_each.cpp">
+      <Filter>Source Files\test\exec\sequence</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/sequence/test_merge_each_threaded.cpp">
+      <Filter>Source Files\test\exec\sequence</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/sequence/test_transform_each.cpp">
       <Filter>Source Files\test\exec\sequence</Filter>
     </ClCompile>
@@ -387,6 +381,9 @@
       <Filter>Source Files\test\exec</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/test_bwos_lifo_queue.cpp">
+      <Filter>Source Files\test\exec</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/test_completion_signatures.cpp">
       <Filter>Source Files\test\exec</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/test_create.cpp">
@@ -453,6 +450,9 @@
       <Filter>Source Files\test\exec</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/test_type_async_scope.cpp">
+      <Filter>Source Files\test\exec</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/test_unless_stop_requested.cpp">
       <Filter>Source Files\test\exec</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/test_variant_sender.cpp">
@@ -536,6 +536,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/rrd/rrd_split.cpp">
       <Filter>Source Files\test\rrd</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/rrd/sync_wait.cpp">
+      <Filter>Source Files\test\rrd</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/algos/adaptors/test_bulk.cpp">
       <Filter>Source Files\test\stdexec\algos\adaptors</Filter>
     </ClCompile>
@@ -567,9 +570,6 @@
       <Filter>Source Files\test\stdexec\algos\adaptors</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/algos/adaptors/test_on3.cpp">
-      <Filter>Source Files\test\stdexec\algos\adaptors</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/algos/adaptors/test_schedule_from.cpp">
       <Filter>Source Files\test\stdexec\algos\adaptors</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/algos/adaptors/test_split.cpp">
@@ -623,6 +623,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/algos/factories/test_read.cpp">
       <Filter>Source Files\test\stdexec\algos\factories</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/algos/factories/test_schedule.cpp">
+      <Filter>Source Files\test\stdexec\algos\factories</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/algos/factories/test_transfer_just.cpp">
       <Filter>Source Files\test\stdexec\algos\factories</Filter>
     </ClCompile>
@@ -642,6 +645,9 @@
       <Filter>Source Files\test\stdexec\concepts</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/concepts/test_concepts_sender.cpp">
+      <Filter>Source Files\test\stdexec\concepts</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/concepts/test_concepts_stop_tokens.cpp">
       <Filter>Source Files\test\stdexec\concepts</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/cpos/test_cpo_bulk.cpp">
@@ -740,9 +746,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/__detail/__atomic_intrusive_queue.hpp">
       <Filter>Header Files\include\exec\__detail</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/__detail/__atomic_ref.hpp">
-      <Filter>Header Files\include\exec\__detail</Filter>
-    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/__detail/__basic_sequence.hpp">
       <Filter>Header Files\include\exec\__detail</Filter>
     </ClInclude>
@@ -777,6 +780,9 @@
       <Filter>Header Files\include\exec</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/at_coroutine_exit.hpp">
+      <Filter>Header Files\include\exec</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/completion_signatures.hpp">
       <Filter>Header Files\include\exec</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/create.hpp">
@@ -854,6 +860,12 @@
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/sequence/iterate.hpp">
       <Filter>Header Files\include\exec\sequence</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/sequence/merge.hpp">
+      <Filter>Header Files\include\exec\sequence</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/sequence/merge_each.hpp">
+      <Filter>Header Files\include\exec\sequence</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/sequence/transform_each.hpp">
       <Filter>Header Files\include\exec\sequence</Filter>
     </ClInclude>
@@ -882,6 +894,9 @@
       <Filter>Header Files\include\exec</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/trampoline_scheduler.hpp">
+      <Filter>Header Files\include\exec</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/unless_stop_requested.hpp">
       <Filter>Header Files\include\exec</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/variant_sender.hpp">
@@ -962,6 +977,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/nvexec/stream/reduce.cuh">
       <Filter>Header Files\include\nvexec\stream</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/nvexec/stream/repeat_n.cuh">
+      <Filter>Header Files\include\nvexec\stream</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/nvexec/stream/schedule_from.cuh">
       <Filter>Header Files\include\nvexec\stream</Filter>
     </ClInclude>
@@ -995,6 +1013,12 @@
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__as_awaitable.hpp">
       <Filter>Header Files\include\stdexec\__detail</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__atomic.hpp">
+      <Filter>Header Files\include\stdexec\__detail</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__atomic_intrusive_queue.hpp">
+      <Filter>Header Files\include\stdexec\__detail</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__awaitable.hpp">
       <Filter>Header Files\include\stdexec\__detail</Filter>
     </ClInclude>
@@ -1010,10 +1034,16 @@
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__completion_signatures.hpp">
       <Filter>Header Files\include\stdexec\__detail</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__completion_signatures_of.hpp">
+      <Filter>Header Files\include\stdexec\__detail</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__concepts.hpp">
       <Filter>Header Files\include\stdexec\__detail</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__config.hpp">
+      <Filter>Header Files\include\stdexec\__detail</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__connect.hpp">
       <Filter>Header Files\include\stdexec\__detail</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__connect_awaitable.hpp">
@@ -1050,6 +1080,9 @@
       <Filter>Header Files\include\stdexec\__detail</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__force_include.hpp">
+      <Filter>Header Files\include\stdexec\__detail</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__get_completion_signatures.hpp">
       <Filter>Header Files\include\stdexec\__detail</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__inline_scheduler.hpp">
@@ -1094,6 +1127,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__preprocessor.hpp">
       <Filter>Header Files\include\stdexec\__detail</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__queries.hpp">
+      <Filter>Header Files\include\stdexec\__detail</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__query.hpp">
       <Filter>Header Files\include\stdexec\__detail</Filter>
     </ClInclude>
@@ -1127,13 +1163,13 @@
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__sender_adaptor_closure.hpp">
       <Filter>Header Files\include\stdexec\__detail</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__sender_concepts.hpp">
+      <Filter>Header Files\include\stdexec\__detail</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__sender_introspection.hpp">
       <Filter>Header Files\include\stdexec\__detail</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__senders.hpp">
-      <Filter>Header Files\include\stdexec\__detail</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__senders_core.hpp">
       <Filter>Header Files\include\stdexec\__detail</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__shared.hpp">
@@ -1185,6 +1221,9 @@
       <Filter>Header Files\include\stdexec\__detail</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__type_traits.hpp">
+      <Filter>Header Files\include\stdexec\__detail</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__typeinfo.hpp">
       <Filter>Header Files\include\stdexec\__detail</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__unstoppable.hpp">
@@ -1274,6 +1313,15 @@
     <Text Include="../../thirdparty/owemdjee/stdexec/cmake/Modules/CompilerHelpers.cmake">
       <Filter>Misc Files\cmake\Modules</Filter>
     </Text>
+    <Text Include="../../thirdparty/owemdjee/stdexec/cmake/Modules/ConfigureASIO.cmake">
+      <Filter>Misc Files\cmake\Modules</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/stdexec/cmake/Modules/ConfigureTBB.cmake">
+      <Filter>Misc Files\cmake\Modules</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/stdexec/cmake/Modules/ConfigureTaskflow.cmake">
+      <Filter>Misc Files\cmake\Modules</Filter>
+    </Text>
     <Text Include="../../thirdparty/owemdjee/stdexec/cmake/Modules/FindSphinx.cmake">
       <Filter>Misc Files\cmake\Modules</Filter>
     </Text>
@@ -1336,6 +1384,9 @@
     </Text>
     <Text Include="../../thirdparty/owemdjee/stdexec/include/nvexec/README.md">
       <Filter>Misc Files\include\nvexec</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/stdexec/sanitizer-ignorelist.txt">
+      <Filter>Misc Files</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/stdexec/test/CMakeLists.txt">
       <Filter>Misc Files\test</Filter>

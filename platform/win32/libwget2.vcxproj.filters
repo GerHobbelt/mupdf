@@ -99,26 +99,38 @@
     <Filter Include="Misc Files\unit-tests\files">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0029}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0030}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource Files\docs">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0031}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\examples">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0032}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\libwget">
+    <Filter Include="Misc Files\unit-tests\http-state">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0033}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\src">
+    <Filter Include="Misc Files\unit-tests\http-state\tests">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0032}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Misc Files\unit-tests\http-state\tests\data">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0031}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Misc Files\unit-tests\http-state\tests\data\parser">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0030}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0034}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\tests">
+    <Filter Include="Resource Files\docs">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0035}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\unit-tests">
+    <Filter Include="Source Files\examples">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0036}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\libwget">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0037}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0038}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\tests">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0039}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\unit-tests">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0040}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -488,10 +500,13 @@
     <ClCompile Include="../../thirdparty/owemdjee/wget2/tests/test-compression.c">
       <Filter>Source Files\tests</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/wget2/tests/test-connection-failure.c">
+      <Filter>Source Files\tests</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/wget2/tests/test-convert-file-only.c">
       <Filter>Source Files\tests</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/wget2/tests/test-cookies-http_state.c">
+    <ClCompile Include="../../thirdparty/owemdjee/wget2/tests/test-convert-links-css.c">
       <Filter>Source Files\tests</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/wget2/tests/test-cookies.c">
@@ -501,6 +516,9 @@
       <Filter>Source Files\tests</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/wget2/tests/test-cut-get-vars.c">
+      <Filter>Source Files\tests</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/wget2/tests/test-data-src.c">
       <Filter>Source Files\tests</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/wget2/tests/test-directory-clash.c">
@@ -704,6 +722,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/wget2/tests/test-save-content-on.c">
       <Filter>Source Files\tests</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/wget2/tests/test-span-hosts-domains.c">
+      <Filter>Source Files\tests</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/wget2/tests/test-spider-r.c">
       <Filter>Source Files\tests</Filter>
     </ClCompile>
@@ -728,6 +749,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/wget2/tests/test-unlink.c">
       <Filter>Source Files\tests</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/wget2/tests/test-waitretry.c">
+      <Filter>Source Files\tests</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/wget2/tests/test-wget-1.c">
       <Filter>Source Files\tests</Filter>
     </ClCompile>
@@ -750,6 +774,12 @@
       <Filter>Source Files\unit-tests</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/wget2/unit-tests/test-dl.c">
+      <Filter>Source Files\unit-tests</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/wget2/unit-tests/test-html-get-urls.c">
+      <Filter>Source Files\unit-tests</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/wget2/unit-tests/test-http-parse.c">
       <Filter>Source Files\unit-tests</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/wget2/unit-tests/test-parse-html.c">
@@ -1151,6 +1181,12 @@
     <Text Include="../../thirdparty/owemdjee/wget2/tests/gpg/trustdb.gpg">
       <Filter>Misc Files\tests\gpg</Filter>
     </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/tests/test-https-proxy-auth-server.py">
+      <Filter>Misc Files\tests</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/tests/test-https-proxy-auth.sh">
+      <Filter>Misc Files\tests</Filter>
+    </Text>
     <Text Include="../../thirdparty/owemdjee/wget2/tests/tests.txt">
       <Filter>Misc Files\tests</Filter>
     </Text>
@@ -1171,6 +1207,1332 @@
     </Text>
     <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/files/x.css">
       <Filter>Misc Files\unit-tests\files</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/0001-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/0001-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/0002-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/0002-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/0003-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/0003-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/0004-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/0004-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/0005-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/0005-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/0006-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/0006-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/0007-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/0007-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/0008-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/0008-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/0009-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/0009-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/0010-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/0010-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/0011-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/0011-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/0012-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/0012-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/0013-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/0013-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/0014-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/0014-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/0015-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/0015-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/0016-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/0016-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/0017-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/0017-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/0018-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/0018-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/0019-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/0019-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/0020-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/0020-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/0021-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/0021-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/0022-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/0022-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/0023-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/0023-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/0024-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/0024-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/0025-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/0025-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/0026-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/0026-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/0027-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/0027-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/attribute0001-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/attribute0001-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/attribute0002-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/attribute0002-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/attribute0003-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/attribute0003-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/attribute0004-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/attribute0004-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/attribute0005-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/attribute0005-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/attribute0006-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/attribute0006-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/attribute0007-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/attribute0007-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/attribute0008-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/attribute0008-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/attribute0009-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/attribute0009-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/attribute0010-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/attribute0010-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/attribute0011-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/attribute0011-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/attribute0012-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/attribute0012-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/attribute0013-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/attribute0013-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/attribute0014-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/attribute0014-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/attribute0015-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/attribute0015-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/attribute0016-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/attribute0016-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/attribute0017-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/attribute0017-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/attribute0018-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/attribute0018-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/attribute0019-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/attribute0019-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/attribute0020-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/attribute0020-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/attribute0021-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/attribute0021-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/attribute0022-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/attribute0022-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/attribute0023-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/attribute0023-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/attribute0024-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/attribute0024-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/attribute0025-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/attribute0025-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/attribute0026-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/attribute0026-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/charset0001-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/charset0001-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/charset0002-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/charset0002-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/charset0003-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/charset0003-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/charset0004-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/charset0004-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/chromium0001-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/chromium0001-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/chromium0002-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/chromium0002-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/chromium0003-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/chromium0003-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/chromium0004-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/chromium0004-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/chromium0005-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/chromium0005-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/chromium0006-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/chromium0006-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/chromium0007-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/chromium0007-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/chromium0008-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/chromium0008-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/chromium0009-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/chromium0009-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/chromium0010-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/chromium0010-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/chromium0011-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/chromium0011-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/chromium0012-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/chromium0012-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/chromium0013-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/chromium0013-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/chromium0014-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/chromium0014-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/chromium0015-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/chromium0015-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/chromium0016-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/chromium0016-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/chromium0017-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/chromium0017-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/chromium0018-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/chromium0018-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/chromium0019-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/chromium0019-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/chromium0021-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/chromium0021-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/comma0001-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/comma0001-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/comma0002-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/comma0002-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/comma0003-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/comma0003-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/comma0004-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/comma0004-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/comma0005-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/comma0005-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/comma0006-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/comma0006-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/comma0007-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/comma0007-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/disabled-chromium0020-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/disabled-chromium0020-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/disabled-chromium0022-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/disabled-chromium0022-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/disabled-chromium0023-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/disabled-chromium0023-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/disabled-path0029-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/disabled-path0029-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0001-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0001-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0002-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0002-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0003-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0003-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0004-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0004-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0005-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0005-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0006-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0006-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0007-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0007-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0008-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0008-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0009-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0009-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0010-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0010-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0011-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0011-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0012-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0012-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0013-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0013-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0014-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0014-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0015-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0015-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0016-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0016-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0017-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0017-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0018-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0018-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0019-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0019-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0020-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0020-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0021-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0021-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0022-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0022-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0023-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0023-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0024-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0024-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0025-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0025-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0026-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0026-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0027-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0027-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0028-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0028-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0029-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0029-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0031-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0031-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0033-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0033-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0034-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0034-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0035-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0035-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0036-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0036-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0037-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0037-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0038-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0038-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0039-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0039-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0040-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0040-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0041-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0041-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0042-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/domain0042-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/mozilla0001-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/mozilla0001-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/mozilla0002-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/mozilla0002-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/mozilla0003-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/mozilla0003-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/mozilla0004-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/mozilla0004-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/mozilla0005-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/mozilla0005-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/mozilla0006-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/mozilla0006-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/mozilla0007-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/mozilla0007-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/mozilla0008-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/mozilla0008-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/mozilla0009-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/mozilla0009-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/mozilla0010-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/mozilla0010-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/mozilla0011-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/mozilla0011-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/mozilla0012-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/mozilla0012-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/mozilla0013-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/mozilla0013-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/mozilla0014-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/mozilla0014-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/mozilla0015-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/mozilla0015-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/mozilla0016-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/mozilla0016-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/mozilla0017-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/mozilla0017-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0001-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0001-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0002-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0002-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0003-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0003-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0004-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0004-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0005-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0005-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0006-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0006-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0007-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0007-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0008-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0008-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0009-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0009-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0010-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0010-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0011-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0011-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0012-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0012-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0013-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0013-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0014-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0014-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0015-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0015-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0016-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0016-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0017-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0017-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0018-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0018-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0019-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0019-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0020-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0020-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0021-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0021-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0022-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0022-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0023-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0023-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0024-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0024-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0025-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0025-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0026-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0026-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0027-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0027-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0028-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0028-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0029-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0029-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0030-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0030-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0031-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0031-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0032-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0032-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0033-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/name0033-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/optional-domain0030-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/optional-domain0030-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/optional-domain0041-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/optional-domain0041-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/optional-domain0042-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/optional-domain0042-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/optional-domain0043-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/optional-domain0043-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/ordering0001-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/ordering0001-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0001-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0001-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0002-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0002-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0003-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0003-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0004-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0004-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0005-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0005-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0006-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0006-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0007-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0007-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0008-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0008-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0009-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0009-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0010-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0010-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0011-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0011-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0012-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0012-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0013-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0013-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0014-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0014-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0015-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0015-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0016-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0016-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0017-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0017-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0018-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0018-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0019-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0019-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0020-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0020-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0021-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0021-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0022-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0022-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0023-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0023-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0024-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0024-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0025-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0025-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0026-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0026-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0027-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0027-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0028-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0028-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0029-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0029-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0030-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0030-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0031-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0031-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0032-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/path0032-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/value0001-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/value0001-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/value0002-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/value0002-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/value0003-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/value0003-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/value0004-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/value0004-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/value0005-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/value0005-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/value0006-expected">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/wget2/unit-tests/http-state/tests/data/parser/value0006-test">
+      <Filter>Misc Files\unit-tests\http-state\tests\data\parser</Filter>
     </Text>
     <Xml Include="../../thirdparty/owemdjee/wget2/docs/DoxygenLayout.xml">
       <Filter>Misc Files\docs</Filter>

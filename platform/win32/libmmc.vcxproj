@@ -219,6 +219,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/mmc/src/mmc_host.c" />
     <ClCompile Include="../../thirdparty/owemdjee/mmc/src/mmc_mesh.c" />
     <ClCompile Include="../../thirdparty/owemdjee/mmc/src/mmc_neurojson.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mmc/src/mmc_optix_host.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mmc/src/mmc_optix_utils.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/mmc/src/mmc_rand_drand48.c" />
     <ClCompile Include="../../thirdparty/owemdjee/mmc/src/mmc_rand_logistic.c" />
     <ClCompile Include="../../thirdparty/owemdjee/mmc/src/mmc_rand_posix.c" />
@@ -262,6 +264,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/mmc/src/SFMT/SFMT-sse2.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mmc/src/SFMT/SFMT.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mmc/src/cjson/cJSON.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mmc/src/incbin.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mmc/src/mingw64/include/CL/cl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mmc/src/mingw64/include/CL/cl_d3d10.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mmc/src/mingw64/include/CL/cl_d3d11.h" />
@@ -285,11 +288,18 @@
     <ClInclude Include="../../thirdparty/owemdjee/mmc/src/mmc_cl_utils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mmc/src/mmc_const.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mmc/src/mmc_cu_host.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mmc/src/mmc_cuda_query_gpu.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mmc/src/mmc_fastmath.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mmc/src/mmc_highorder.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mmc/src/mmc_host.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mmc/src/mmc_mesh.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mmc/src/mmc_neurojson.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mmc/src/mmc_optix_cudabuffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mmc/src/mmc_optix_host.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mmc/src/mmc_optix_launchparam.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mmc/src/mmc_optix_macro.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mmc/src/mmc_optix_ray.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mmc/src/mmc_optix_utils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mmc/src/mmc_rand_common.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mmc/src/mmc_rand_drand48.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mmc/src/mmc_rand_logistic.h" />
@@ -299,11 +309,11 @@
     <ClInclude Include="../../thirdparty/owemdjee/mmc/src/mmc_raytrace.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mmc/src/mmc_tictoc.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mmc/src/mmc_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mmc/src/mmc_vector_types.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mmc/src/nifti1.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mmc/src/sse_math/sse_math.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mmc/src/ubj/ubj.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mmc/src/ubj/ubj_internal.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/mmc/src/vector_types.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mmc/src/zmat/easylzma/common_internal.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mmc/src/zmat/easylzma/easylzma/common.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mmc/src/zmat/easylzma/easylzma/compress.h" />
@@ -363,6 +373,7 @@
     <Text Include="../../thirdparty/owemdjee/mmc/examples/onecube/onecube.json" />
     <Text Include="../../thirdparty/owemdjee/mmc/examples/onecube/onecube_isotropic.json" />
     <Text Include="../../thirdparty/owemdjee/mmc/examples/onecube/run_test.sh" />
+    <Text Include="../../thirdparty/owemdjee/mmc/examples/optix/runtest.sh" />
     <Text Include="../../thirdparty/owemdjee/mmc/examples/planar/README.txt" />
     <Text Include="../../thirdparty/owemdjee/mmc/examples/planar/planar.inp" />
     <Text Include="../../thirdparty/owemdjee/mmc/examples/planar/pointsrc.inp" />
@@ -418,6 +429,7 @@
     <Text Include="../../thirdparty/owemdjee/mmc/mmclab/PKG_ADD" />
     <Text Include="../../thirdparty/owemdjee/mmc/mmclab/README.txt" />
     <Text Include="../../thirdparty/owemdjee/mmc/pmmc/README.md" />
+    <Text Include="../../thirdparty/owemdjee/mmc/pmmc/example/test_mesh_adjoint.py" />
     <Text Include="../../thirdparty/owemdjee/mmc/pmmc/pmmc/__init__.py" />
     <Text Include="../../thirdparty/owemdjee/mmc/pmmc/setup.py" />
     <Text Include="../../thirdparty/owemdjee/mmc/src/CMakeLists.txt" />

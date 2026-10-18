@@ -28,16 +28,16 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
     <Import Project="bin2coff.props" />
@@ -51,7 +51,13 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-<ItemDefinitionGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <UseStructuredOutput>true</UseStructuredOutput>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <UseStructuredOutput>true</UseStructuredOutput>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -68,8 +74,8 @@
       <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
@@ -105,52 +111,6 @@
     <Import Project="bin2coff.targets" />
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="dummy.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="bin2coff.props" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="bin2coff.rules" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="bin2coff.targets" />
-  </ItemGroup>
-  <ItemGroup>
-    <Xml Include="bin2coff.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="../../resources/fonts/droid/NOTICE" />
-    <Text Include="../../resources/fonts/han/LICENSE.txt" />
-    <Text Include="../../resources/fonts/han/README.txt" />
-    <Text Include="../../resources/fonts/noto/COPYING" />
-    <Text Include="../../resources/fonts/sil/OFL.txt" />
-    <Text Include="../../resources/fonts/sil/README.txt" />
-    <Text Include="../../resources/fonts/sil/subset.mes" />
-    <Text Include="../../resources/fonts/sil/subset.secs" />
-    <Text Include="../../resources/fonts/sil/subset.wgl" />
-    <Text Include="../../resources/fonts/sil/tocff.sh" />
-    <Text Include="../../resources/fonts/urw/OFL.txt" />
-    <Text Include="../../resources/fonts/urw/input/Dingbats.t1" />
-    <Text Include="../../resources/fonts/urw/input/NimbusBoxes.t1" />
-    <Text Include="../../resources/fonts/urw/input/NimbusMonoPS-Bold.t1" />
-    <Text Include="../../resources/fonts/urw/input/NimbusMonoPS-BoldItalic.t1" />
-    <Text Include="../../resources/fonts/urw/input/NimbusMonoPS-Italic.t1" />
-    <Text Include="../../resources/fonts/urw/input/NimbusMonoPS-Regular.t1" />
-    <Text Include="../../resources/fonts/urw/input/NimbusRoman-Bold.t1" />
-    <Text Include="../../resources/fonts/urw/input/NimbusRoman-BoldItalic.t1" />
-    <Text Include="../../resources/fonts/urw/input/NimbusRoman-Italic.t1" />
-    <Text Include="../../resources/fonts/urw/input/NimbusRoman-Regular.t1" />
-    <Text Include="../../resources/fonts/urw/input/NimbusSans-Bold.t1" />
-    <Text Include="../../resources/fonts/urw/input/NimbusSans-BoldItalic.t1" />
-    <Text Include="../../resources/fonts/urw/input/NimbusSans-Italic.t1" />
-    <Text Include="../../resources/fonts/urw/input/NimbusSans-Regular.t1" />
-    <Text Include="../../resources/fonts/urw/input/StandardSymbolsPS.t1" />
-    <Text Include="../../resources/fonts/urw/subset.box" />
-    <Text Include="../../resources/fonts/urw/subset.mes" />
-    <Text Include="../../resources/fonts/urw/subset.secs" />
-    <Text Include="../../resources/fonts/urw/subset.wgl" />
-    <Text Include="../../resources/fonts/urw/tocff.sh" />
     <bin2coff__cff_ Include="../../resources/fonts/sil/CharisSIL-Bold.cff" />
     <bin2coff__cff_ Include="../../resources/fonts/sil/CharisSIL-BoldItalic.cff" />
     <bin2coff__cff_ Include="../../resources/fonts/sil/CharisSIL-Italic.cff" />
@@ -339,6 +299,53 @@
     <bin2coff__ttf_ Include="../../resources/fonts/droid/DroidSansFallbackFull.ttf" />
     <bin2coff__ttf_ Include="../../resources/fonts/noto/NotoEmoji-Regular.ttf" />
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dummy.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="bin2coff.props" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="bin2coff.rules" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="bin2coff.targets" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="bin2coff.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="../../resources/fonts/droid/NOTICE" />
+    <Text Include="../../resources/fonts/han/LICENSE.txt" />
+    <Text Include="../../resources/fonts/han/README.txt" />
+    <Text Include="../../resources/fonts/noto/COPYING" />
+    <Text Include="../../resources/fonts/sil/OFL.txt" />
+    <Text Include="../../resources/fonts/sil/README.txt" />
+    <Text Include="../../resources/fonts/sil/subset.mes" />
+    <Text Include="../../resources/fonts/sil/subset.secs" />
+    <Text Include="../../resources/fonts/sil/subset.wgl" />
+    <Text Include="../../resources/fonts/sil/tocff.sh" />
+    <Text Include="../../resources/fonts/urw/OFL.txt" />
+    <Text Include="../../resources/fonts/urw/input/Dingbats.t1" />
+    <Text Include="../../resources/fonts/urw/input/NimbusBoxes.t1" />
+    <Text Include="../../resources/fonts/urw/input/NimbusMonoPS-Bold.t1" />
+    <Text Include="../../resources/fonts/urw/input/NimbusMonoPS-BoldItalic.t1" />
+    <Text Include="../../resources/fonts/urw/input/NimbusMonoPS-Italic.t1" />
+    <Text Include="../../resources/fonts/urw/input/NimbusMonoPS-Regular.t1" />
+    <Text Include="../../resources/fonts/urw/input/NimbusRoman-Bold.t1" />
+    <Text Include="../../resources/fonts/urw/input/NimbusRoman-BoldItalic.t1" />
+    <Text Include="../../resources/fonts/urw/input/NimbusRoman-Italic.t1" />
+    <Text Include="../../resources/fonts/urw/input/NimbusRoman-Regular.t1" />
+    <Text Include="../../resources/fonts/urw/input/NimbusSans-Bold.t1" />
+    <Text Include="../../resources/fonts/urw/input/NimbusSans-BoldItalic.t1" />
+    <Text Include="../../resources/fonts/urw/input/NimbusSans-Italic.t1" />
+    <Text Include="../../resources/fonts/urw/input/NimbusSans-Regular.t1" />
+    <Text Include="../../resources/fonts/urw/input/StandardSymbolsPS.t1" />
+    <Text Include="../../resources/fonts/urw/subset.box" />
+    <Text Include="../../resources/fonts/urw/subset.mes" />
+    <Text Include="../../resources/fonts/urw/subset.secs" />
+    <Text Include="../../resources/fonts/urw/subset.wgl" />
+    <Text Include="../../resources/fonts/urw/tocff.sh" />
+  </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>
-  

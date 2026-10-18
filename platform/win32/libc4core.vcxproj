@@ -207,11 +207,13 @@
   </ImportGroup>
   <ItemGroup>
     <ClCompile Include="../../thirdparty/owemdjee/c4core/bm/bm_atox.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/c4core/bm/bm_base64.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/c4core/bm/bm_charconv.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/c4core/bm/bm_format.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/c4core/bm/bm_itoa_threads.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/c4core/bm/bm_xtoa.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/c4core/bm/float/read.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/c4core/src/c4/alloc.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/c4core/src/c4/base64.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/c4core/src/c4/char_traits.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/c4core/src/c4/error.cpp" />
@@ -224,6 +226,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/c4core/test/c4/libtest/archetypes.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/c4core/test/c4/libtest/test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/c4core/test/c4/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/c4core/test/test_alloc.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/c4core/test/test_allocator.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/c4core/test/test_base64.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/c4core/test/test_bitmask.cpp" />
@@ -250,6 +253,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/c4core/test/test_utf.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/c4core/test/test_version.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/c4core/bm/bm_charconv.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/c4core/src/c4/alloc.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/c4core/src/c4/allocator.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/c4core/src/c4/base64.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/c4core/src/c4/bitmask.hpp" />
@@ -272,6 +276,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/c4core/src/c4/ext/rng/rng.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/c4core/src/c4/ext/sg14/inplace_function.h" />
     <ClInclude Include="../../thirdparty/owemdjee/c4core/src/c4/format.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/c4core/src/c4/format_base64.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/c4core/src/c4/gcc-4.8.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/c4core/src/c4/hash.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/c4core/src/c4/language.hpp" />
@@ -288,6 +293,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/c4core/src/c4/std/string.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/c4core/src/c4/std/string_fwd.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/c4core/src/c4/std/string_view.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/c4core/src/c4/std/string_view_fwd.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/c4core/src/c4/std/tuple.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/c4core/src/c4/std/vector.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/c4core/src/c4/std/vector_fwd.hpp" />
@@ -415,6 +421,8 @@
     <Text Include="../../thirdparty/owemdjee/c4core/changelog/0.2.0.md" />
     <Text Include="../../thirdparty/owemdjee/c4core/changelog/0.2.1.md" />
     <Text Include="../../thirdparty/owemdjee/c4core/changelog/0.2.10.md" />
+    <Text Include="../../thirdparty/owemdjee/c4core/changelog/0.2.11.md" />
+    <Text Include="../../thirdparty/owemdjee/c4core/changelog/0.2.12.md" />
     <Text Include="../../thirdparty/owemdjee/c4core/changelog/0.2.2.md" />
     <Text Include="../../thirdparty/owemdjee/c4core/changelog/0.2.3.md" />
     <Text Include="../../thirdparty/owemdjee/c4core/changelog/0.2.4.md" />
@@ -423,8 +431,14 @@
     <Text Include="../../thirdparty/owemdjee/c4core/changelog/0.2.7.md" />
     <Text Include="../../thirdparty/owemdjee/c4core/changelog/0.2.8.md" />
     <Text Include="../../thirdparty/owemdjee/c4core/changelog/0.2.9.md" />
+    <Text Include="../../thirdparty/owemdjee/c4core/changelog/0.3.0.md" />
+    <Text Include="../../thirdparty/owemdjee/c4core/changelog/0.4.0.md" />
+    <Text Include="../../thirdparty/owemdjee/c4core/changelog/0.5.0.md" />
+    <Text Include="../../thirdparty/owemdjee/c4core/changelog/0.6.0.md" />
     <Text Include="../../thirdparty/owemdjee/c4core/changelog/current.md" />
     <Text Include="../../thirdparty/owemdjee/c4core/compat.cmake" />
+    <Text Include="../../thirdparty/owemdjee/c4core/proj/check_abi.sh" />
+    <Text Include="../../thirdparty/owemdjee/c4core/proj/release.sh" />
     <Text Include="../../thirdparty/owemdjee/c4core/src/c4/c4core.natvis" />
     <Text Include="../../thirdparty/owemdjee/c4core/src/c4/ext/sg14/README.md" />
     <Text Include="../../thirdparty/owemdjee/c4core/tbump.toml" />
@@ -432,6 +446,7 @@
     <Text Include="../../thirdparty/owemdjee/c4core/test/printintegers.py" />
     <Text Include="../../thirdparty/owemdjee/c4core/test/test_install/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/c4core/test/test_singleheader/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/c4core/test/test_substr.cmake" />
     <Text Include="../../thirdparty/owemdjee/c4core/tools/amalgamate.py" />
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />

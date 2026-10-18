@@ -363,8 +363,10 @@
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/ppc64/ppc64_convert_utf8_to_utf32.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/ppc64/ppc64_utf8_length_from_latin1.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/ppc64/ppc64_validate_utf16.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/ppc64/ppc64_write_to_utf8.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/ppc64/templates.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/rvv/implementation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/rvv/rvv_base64.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/rvv/rvv_find.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/rvv/rvv_helpers.inl.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/src/rvv/rvv_latin1_to.inl.cpp" />
@@ -460,6 +462,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/helpers/test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/helpers/transcode_test_base.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/internal_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/nostdlibcxx_c_api_test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/null_safety_tests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/readme_tests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/reference/encode_latin1.cpp" />
@@ -494,6 +497,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/tests/validate_utf8_with_errors_tests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/tools/fastbase64.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/simdutf/tools/sutf.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/base64/arm_base64_spaces.h" />
     <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/base64/libbase64_spaces.h" />
     <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/base64/node_base64.h" />
     <ClInclude Include="../../thirdparty/owemdjee/simdutf/benchmarks/base64/openssl3_base64.h" />
@@ -609,6 +613,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/generic/utf16/utf32_length_from_utf16.h" />
     <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/generic/utf16/utf8_length_from_utf16.h" />
     <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/generic/utf16/utf8_length_from_utf16_bytemask.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/generic/utf16_to_utf8/utf16_to_utf8_with_replacement.h" />
     <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/generic/utf32.h" />
     <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/generic/utf8.h" />
     <ClInclude Include="../../thirdparty/owemdjee/simdutf/src/generic/utf8/utf16_length_from_utf8_bytemask.h" />
@@ -733,6 +738,10 @@
     <Image Include="../../thirdparty/owemdjee/simdutf/doc/utf16utf8.png" />
     <Image Include="../../thirdparty/owemdjee/simdutf/doc/utf8utf16.png" />
     <Image Include="../../thirdparty/owemdjee/simdutf/doc/widelogo.png" />
+    <Image Include="../../thirdparty/owemdjee/simdutf/site/assets/avx512.png" />
+    <Image Include="../../thirdparty/owemdjee/simdutf/site/assets/node2023.png" />
+    <Image Include="../../thirdparty/owemdjee/simdutf/site/assets/utf16utf8.png" />
+    <Image Include="../../thirdparty/owemdjee/simdutf/site/assets/utf8utf16.png" />
     <Text Include="../../thirdparty/owemdjee/simdutf/AI_USAGE_POLICY.md" />
     <Text Include="../../thirdparty/owemdjee/simdutf/AUTHORS" />
     <Text Include="../../thirdparty/owemdjee/simdutf/CMakeLists.txt" />
@@ -810,7 +819,11 @@
     <Text Include="../../thirdparty/owemdjee/simdutf/cmake/toolchains-dev/rvv-spike.cmake" />
     <Text Include="../../thirdparty/owemdjee/simdutf/doc/logo.svg" />
     <Text Include="../../thirdparty/owemdjee/simdutf/doc/shortinput.md" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/doc/simdutf-overrides.css" />
     <Text Include="../../thirdparty/owemdjee/simdutf/doxygen.py" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/man/fastbase64.1" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/man/fastbase64.coreutils.1" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/man/sutf.1" />
     <Text Include="../../thirdparty/owemdjee/simdutf/riscv/Dockerfile" />
     <Text Include="../../thirdparty/owemdjee/simdutf/riscv/README.md" />
     <Text Include="../../thirdparty/owemdjee/simdutf/riscv/remove-docker-station" />
@@ -828,6 +841,7 @@
     <Text Include="../../thirdparty/owemdjee/simdutf/scripts/base64/sseregular.py" />
     <Text Include="../../thirdparty/owemdjee/simdutf/scripts/base64/sseurl.py" />
     <Text Include="../../thirdparty/owemdjee/simdutf/scripts/base64/table.py" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/scripts/base64bench.sh" />
     <Text Include="../../thirdparty/owemdjee/simdutf/scripts/base64bench_print.py" />
     <Text Include="../../thirdparty/owemdjee/simdutf/scripts/benchmark-all.py" />
     <Text Include="../../thirdparty/owemdjee/simdutf/scripts/benchmark_print.py" />
@@ -845,6 +859,7 @@
     <Text Include="../../thirdparty/owemdjee/simdutf/scripts/docker/llvm.gpg" />
     <Text Include="../../thirdparty/owemdjee/simdutf/scripts/ppc64_convert_utf16_to_utf8.py" />
     <Text Include="../../thirdparty/owemdjee/simdutf/scripts/prepare_doxygen.sh" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/scripts/reflow_readme.py" />
     <Text Include="../../thirdparty/owemdjee/simdutf/scripts/release.py" />
     <Text Include="../../thirdparty/owemdjee/simdutf/scripts/shortinputplots.py" />
     <Text Include="../../thirdparty/owemdjee/simdutf/scripts/sse_convert_utf16_to_utf8.py" />
@@ -862,9 +877,12 @@
     <Text Include="../../thirdparty/owemdjee/simdutf/singleheader/README.md" />
     <Text Include="../../thirdparty/owemdjee/simdutf/singleheader/amalgamate.py" />
     <Text Include="../../thirdparty/owemdjee/simdutf/singleheader/test-features.py" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/site/index.html" />
     <Text Include="../../thirdparty/owemdjee/simdutf/src/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/simdutf/tests/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/simdutf/tests/embed/valid_utf8.txt" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/tests/fastbase64/test_fastbase64.py" />
+    <Text Include="../../thirdparty/owemdjee/simdutf/tests/fastbase64/test_system_fastbase64.py" />
     <Text Include="../../thirdparty/owemdjee/simdutf/tests/helpers/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/simdutf/tests/installation_tests/find/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/simdutf/tests/installation_tests/from_fetch/CMakeLists.txt" />

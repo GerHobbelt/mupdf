@@ -970,10 +970,12 @@
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/sci_gateway/cpp/sci_eye.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/sci_gateway/cpp/sci_floor.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/sci_gateway/cpp/sci_frexp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/sci_gateway/cpp/sci_gallery.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/sci_gateway/cpp/sci_gsort.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/sci_gateway/cpp/sci_imag.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/sci_gateway/cpp/sci_imult.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/sci_gateway/cpp/sci_int.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/sci_gateway/cpp/sci_isempty.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/sci_gateway/cpp/sci_isequal.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/sci_gateway/cpp/sci_isreal.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/sci_gateway/cpp/sci_issquare.cpp" />
@@ -1384,7 +1386,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphic_objects/src/jni/SurfaceData_wrap.c" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphic_objects/src/nographic_objects/Dllmainnographic_objects.c" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphic_objects/src/nographic_objects/nographic_objects.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/sci_gateway/c/sci_Legend.c" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/sci_gateway/c/sci_StringBox.c" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/sci_gateway/c/sci_addcolor.c" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/sci_gateway/c/sci_champ.c" />
@@ -1406,6 +1407,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/sci_gateway/c/sci_newaxes.c" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/sci_gateway/c/sci_param3d.c" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/sci_gateway/c/sci_param3d1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/sci_gateway/c/sci_percent_legend.c" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/sci_gateway/c/sci_plot2d.c" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/sci_gateway/c/sci_plot2d1.c" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/sci_gateway/c/sci_plot3d.c" />
@@ -1500,6 +1502,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/src/c/getHandleProperty/get_box_property.c" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/src/c/getHandleProperty/get_callback_property.c" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/src/c/getHandleProperty/get_callback_type_property.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/src/c/getHandleProperty/get_cdata_bounds_property.c" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/src/c/getHandleProperty/get_cdata_mapping_property.c" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/src/c/getHandleProperty/get_children_property.c" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/src/c/getHandleProperty/get_clip_box_property.c" />
@@ -1561,6 +1564,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/src/c/getHandleProperty/get_infobar_property.c" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/src/c/getHandleProperty/get_interp_color_mode.c" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/src/c/getHandleProperty/get_interp_color_vector.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/src/c/getHandleProperty/get_interpreter_property.c" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/src/c/getHandleProperty/get_isoview_property.c" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/src/c/getHandleProperty/get_labels_font_color_property.c" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/src/c/getHandleProperty/get_labels_font_size_property.c" />
@@ -1612,6 +1616,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/src/c/getHandleProperty/get_ticks_st_property.c" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/src/c/getHandleProperty/get_tics_color_property.c" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/src/c/getHandleProperty/get_tics_direction_property.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/src/c/getHandleProperty/get_tics_interpreters_property.c" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/src/c/getHandleProperty/get_tics_label_property.c" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/src/c/getHandleProperty/get_tics_segment_property.c" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/src/c/getHandleProperty/get_tics_style_property.c" />
@@ -1668,6 +1673,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/src/c/getHandleProperty/set_box_property.c" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/src/c/getHandleProperty/set_callback_property.c" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/src/c/getHandleProperty/set_callback_type_property.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/src/c/getHandleProperty/set_cdata_bounds_property.c" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/src/c/getHandleProperty/set_cdata_mapping_property.c" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/src/c/getHandleProperty/set_children_property.c" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/src/c/getHandleProperty/set_clip_box_property.c" />
@@ -1727,6 +1733,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/src/c/getHandleProperty/set_infobar_property.c" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/src/c/getHandleProperty/set_interp_color_mode_property.c" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/src/c/getHandleProperty/set_interp_color_vector_property.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/src/c/getHandleProperty/set_interpreter_property.c" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/src/c/getHandleProperty/set_isoview_property.c" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/src/c/getHandleProperty/set_label_font_style_property.c" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/src/c/getHandleProperty/set_labels_font_color_property.c" />
@@ -1779,6 +1786,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/src/c/getHandleProperty/set_ticks_st_property.c" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/src/c/getHandleProperty/set_tics_color_property.c" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/src/c/getHandleProperty/set_tics_direction_property.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/src/c/getHandleProperty/set_tics_interpreters_property.c" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/src/c/getHandleProperty/set_tics_labels_property.c" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/src/c/getHandleProperty/set_tics_segment_property.c" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/src/c/getHandleProperty/set_tics_style_property.c" />
@@ -1812,7 +1820,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/src/c/loadTextRenderingAPI.c" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/src/c/math_graphics.c" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/src/c/name2rgb.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/src/c/periEmpty.c" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/src/c/pixel_mode.c" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/src/c/sciCall.c" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/src/c/sciMatrix.c" />
@@ -2476,6 +2483,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos/src/cpp/Model.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos/src/cpp/Model_getObjectProperties.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos/src/cpp/Model_setObjectProperties.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos/src/cpp/SSPResource.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos/src/cpp/SSPResource_load.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos/src/cpp/SSPResource_save.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos/src/cpp/XMIResource.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos/src/cpp/XMIResource_load.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos/src/cpp/XMIResource_save.cpp" />
@@ -3193,7 +3203,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/umfpack/src/c/with_umfpack.c" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/umfpack/src/noumfpack/noumfpack.c" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/webtools/sci_gateway/c/sci_url_split.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/webtools/sci_gateway/cpp/checkCommonOpt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/webtools/sci_gateway/cpp/gateway_tools.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/webtools/sci_gateway/cpp/sci_fromJSON.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/webtools/sci_gateway/cpp/sci_http_delete.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/webtools/sci_gateway/cpp/sci_http_get.cpp" />
@@ -3205,7 +3215,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/webtools/sci_gateway/cpp/sci_toJSON.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/webtools/sci_gateway/cpp/sci_url_decode.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/webtools/sci_gateway/cpp/sci_url_encode.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/webtools/sci_gateway/cpp/setPreferences.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/webtools/sci_gateway/cpp/webtools_gw.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/webtools/src/c/DllmainWebtools.c" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/webtools/src/c/jsmn.c" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/webtools/src/cpp/json.cpp" />
@@ -3279,6 +3289,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/xcos/src/cpp/loadStatus.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/xcos/src/cpp/xcosUtilities.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/xcos/src/jni/JavaController_wrap.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/xcos/src/jni/JavaSSPResource_wrap.cxx" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/xcos/src/jni/JavaXMIResource_wrap.cxx" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/xcos/src/jni/Modelica.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/scilab/scilab/modules/xcos/src/jni/Palette.cpp" />
@@ -3637,11 +3648,11 @@
     <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/completion/includes/getPartLine.h" />
     <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/completion/includes/getfields.h" />
     <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/completion/includes/getfieldsdictionary.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/completion/includes/getfilesdictionary.h" />
     <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/completion/includes/toolsdictionary.h" />
     <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/completion/src/c/completeLine_wrap_java.h" />
     <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/completion/src/c/completion_generic.h" />
     <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/completion/src/c/completion_wrap_java.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/completion/src/c/getfilesdictionary.h" />
     <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/completion/src/cpp/EOFieldsGetter.hxx" />
     <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/completion/src/cpp/FieldsGetter.hxx" />
     <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/completion/src/cpp/FieldsManager.hxx" />
@@ -4638,6 +4649,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/renderer/src/norenderer/norenderer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos/includes/Controller.hxx" />
     <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos/includes/Model.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos/includes/SSPResource.hxx" />
     <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos/includes/View.hxx" />
     <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos/includes/XMIResource.hxx" />
     <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/scicos/includes/adapters_utilities.hxx" />
@@ -4970,10 +4982,11 @@
     <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/umfpack/src/c/taucs_scilab.h" />
     <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/webtools/includes/dynlib_webtools.h" />
     <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/webtools/includes/gw_webtools.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/webtools/includes/json.hxx" />
     <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/webtools/includes/webtools.h" />
     <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/webtools/includes/webtools_gw.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/webtools/sci_gateway/cpp/gateway_tools.hxx" />
     <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/webtools/src/c/jsmn.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/webtools/src/cpp/json.hxx" />
     <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/webtools/src/cpp/sciCurl.hxx" />
     <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/windows_tools/includes/FocusOnConsole.h" />
     <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/windows_tools/includes/InitializeWindows_tools.h" />
@@ -5021,6 +5034,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/xcos/includes/xcosUtilities.hxx" />
     <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/xcos/src/cpp/loadStatus.hxx" />
     <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/xcos/src/jni/JavaController_wrap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/xcos/src/jni/JavaSSPResource_wrap.h" />
     <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/xcos/src/jni/JavaXMIResource_wrap.h" />
     <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/xcos/src/jni/Modelica.hxx" />
     <ClInclude Include="../../thirdparty/owemdjee/scilab/scilab/modules/xcos/src/jni/Palette.hxx" />
@@ -5241,6 +5255,8 @@
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/gui/help/images/x_matrix_reals.png" />
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/gui/help/images/x_matrix_text.png" />
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/gui/images/icons/16x16/actions/SizeColumnsToFit.png" />
+    <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/gui/images/icons/16x16/actions/case-sensitive.png" />
+    <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/gui/images/icons/16x16/actions/clear.png" />
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/gui/images/icons/16x16/actions/code-navigator.png" />
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/gui/images/icons/16x16/actions/color-fill.png" />
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/gui/images/icons/16x16/actions/data_modify.png" />
@@ -5289,6 +5305,7 @@
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/gui/images/icons/16x16/actions/media-skip-backward.png" />
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/gui/images/icons/16x16/actions/media-skip-forward.png" />
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/gui/images/icons/16x16/actions/plot.png" />
+    <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/gui/images/icons/16x16/actions/regex.png" />
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/gui/images/icons/16x16/actions/save-and-execute.png" />
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/gui/images/icons/16x16/actions/scilab_search.png" />
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/gui/images/icons/16x16/actions/select_all.png" />
@@ -6219,6 +6236,7 @@
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/images/_LaTeX_fft.xml_1.png" />
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/images/_LaTeX_fft.xml_2.png" />
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/images/_LaTeX_filter.xml_1.png" />
+    <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/images/_LaTeX_frank.xml_1.png" />
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/images/_LaTeX_gamma.xml_1.png" />
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/images/_LaTeX_gamma.xml_2.png" />
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/images/_LaTeX_gamma.xml_3.png" />
@@ -6228,6 +6246,7 @@
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/images/_LaTeX_grand.xml_1.png" />
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/images/_LaTeX_grand.xml_2.png" />
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/images/_LaTeX_hank.xml_1.png" />
+    <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/images/_LaTeX_hilbm.xml_1.png" />
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/images/_LaTeX_histc.xml_1.png" />
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/images/_LaTeX_histplot.xml_1.png" />
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/images/_LaTeX_ida_solve.xml_1.png" />
@@ -6922,6 +6941,8 @@
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/images/marks.svg.png" />
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/images/math_rendering_features_in_graphic_1.png" />
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/images/math_rendering_features_in_graphic_2.png" />
+    <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/images/math_rendering_features_in_graphic_3.png" />
+    <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/images/math_rendering_features_in_graphic_4.png" />
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/images/media-floppy.png" />
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/images/media-playback-start.png" />
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/images/mese_1.png" />
@@ -7196,6 +7217,7 @@
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/images/surf_7.png" />
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/images/surf_8.png" />
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/images/surf_9.png" />
+    <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/images/surface_properties_1.png" />
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/images/svplot_1.png" />
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/images/tabul_1.png" />
     <Image Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/images/tan_1.png" />
@@ -8530,7 +8552,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/ast/tests/unit_tests/implicitlist.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/ast/tests/unit_tests/library.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/ast/tests/unit_tests/lt_le_gt_ge.dia.ref" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/ast/tests/unit_tests/matrix_exp.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/ast/tests/unit_tests/multiplication.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/ast/tests/unit_tests/ne.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/ast/tests/unit_tests/newtype.dia.ref" />
@@ -8946,7 +8967,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/cacsd/tests/unit_tests/plzr.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/cacsd/tests/unit_tests/rankqr.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/cacsd/tests/unit_tests/ricc.dia.ref" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/cacsd/tests/unit_tests/riccati.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/cacsd/tests/unit_tests/ss2tf.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/cacsd/tests/unit_tests/ss2zp.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/cacsd/tests/unit_tests/syslin.dia.ref" />
@@ -9063,6 +9083,7 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/completion/src/java/org/scilab/modules/completion/AbstractSciCompletionWindow.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/completion/src/java/org/scilab/modules/completion/Completion.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/completion/src/java/org/scilab/modules/completion/CompletionJNI.java" />
+    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/completion/src/java/org/scilab/modules/completion/SciCompletionItemListCellRenderer.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/completion/tests/nonreg_tests/bug_10982.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/completion/tests/nonreg_tests/bug_12393.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/completion/tests/nonreg_tests/bug_3051.dia.ref" />
@@ -9424,7 +9445,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/tests/unit_tests/inf_nan.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/tests/unit_tests/lasterror.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/tests/unit_tests/lines.dia.ref" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/tests/unit_tests/macr2tree.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/tests/unit_tests/mat_functions.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/tests/unit_tests/matelm.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/core/tests/unit_tests/matops.dia.ref" />
@@ -11239,7 +11259,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/tests/nonreg_tests/bug_11778.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/tests/nonreg_tests/bug_120.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/tests/nonreg_tests/bug_1201.dia.ref" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/tests/nonreg_tests/bug_12143.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/tests/nonreg_tests/bug_12163.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/tests/nonreg_tests/bug_12219.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/tests/nonreg_tests/bug_12334.dia.ref" />
@@ -11350,7 +11369,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/tests/nonreg_tests/bug_2366.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/tests/nonreg_tests/bug_2467.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/tests/nonreg_tests/bug_2478.dia.ref" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/tests/nonreg_tests/bug_2479.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/tests/nonreg_tests/bug_2482.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/tests/nonreg_tests/bug_2540.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/tests/nonreg_tests/bug_2568.dia.ref" />
@@ -11402,7 +11420,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/tests/nonreg_tests/bug_3111.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/tests/nonreg_tests/bug_3115.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/tests/nonreg_tests/bug_3116.dia.ref" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/tests/nonreg_tests/bug_3118.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/tests/nonreg_tests/bug_3124.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/tests/nonreg_tests/bug_3126.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/tests/nonreg_tests/bug_313.dia.ref" />
@@ -11419,7 +11436,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/tests/nonreg_tests/bug_3250.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/tests/nonreg_tests/bug_3258.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/tests/nonreg_tests/bug_3287.dia.ref" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/tests/nonreg_tests/bug_3289.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/tests/nonreg_tests/bug_3315.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/tests/nonreg_tests/bug_3349.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/tests/nonreg_tests/bug_3353.dia.ref" />
@@ -11476,7 +11492,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/tests/nonreg_tests/bug_6582.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/tests/nonreg_tests/bug_6644.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/tests/nonreg_tests/bug_6665.dia.ref" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/tests/nonreg_tests/bug_6720.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/tests/nonreg_tests/bug_6958.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/tests/nonreg_tests/bug_6959.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/tests/nonreg_tests/bug_7024.dia.ref" />
@@ -11512,6 +11527,8 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/tests/nonreg_tests/bug_9457.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/tests/nonreg_tests/bug_9464.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/tests/nonreg_tests/bug_paramfplot2d.dia.ref" />
+    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/tests/nonreg_tests/issue_14265.dia.ref" />
+    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/tests/unit_tests/%_legend.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/tests/unit_tests/Matplot.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/tests/unit_tests/arc.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/tests/unit_tests/auto_clear.dia.ref" />
@@ -11519,7 +11536,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/tests/unit_tests/axes.data_bounds.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/tests/unit_tests/axes.data_bounds_load.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/tests/unit_tests/bar_stacked.dia.ref" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/tests/unit_tests/captions.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/tests/unit_tests/clipping.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/tests/unit_tests/contour.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/graphics/tests/unit_tests/contour2d.dia.ref" />
@@ -12231,8 +12247,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/tests/nonreg_tests/bug_1768.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/tests/nonreg_tests/bug_1768.win.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/tests/nonreg_tests/bug_2987.dia.ref" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/tests/nonreg_tests/bug_5222.dia.ref" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/tests/nonreg_tests/bug_5330.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/tests/nonreg_tests/bug_5413.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/tests/nonreg_tests/bug_5486.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/tests/nonreg_tests/bug_5487.dia.ref" />
@@ -14199,6 +14213,7 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/renderer/src/java/org/scilab/modules/renderer/JoGLView/AxisDrawer.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/renderer/src/java/org/scilab/modules/renderer/JoGLView/DataManager.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/renderer/src/java/org/scilab/modules/renderer/JoGLView/DrawerVisitor.java" />
+    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/renderer/src/java/org/scilab/modules/renderer/JoGLView/Fac3dDrawer.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/renderer/src/java/org/scilab/modules/renderer/JoGLView/FecDrawer.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/renderer/src/java/org/scilab/modules/renderer/JoGLView/ScilabTextureManager.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/renderer/src/java/org/scilab/modules/renderer/JoGLView/arrowDrawing/ArrowDrawer.java" />
@@ -15440,7 +15455,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/statistics/tests/nonreg_tests/bug_2546.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/statistics/tests/nonreg_tests/bug_316.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/statistics/tests/nonreg_tests/bug_3640.dia.ref" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/statistics/tests/nonreg_tests/bug_3962.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/statistics/tests/nonreg_tests/bug_534.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/statistics/tests/nonreg_tests/bug_661.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/statistics/tests/nonreg_tests/bug_7204.dia.ref" />
@@ -15478,8 +15492,6 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/statistics/tests/unit_tests/meanf.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/statistics/tests/unit_tests/median.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/statistics/tests/unit_tests/nancumsum.dia.ref" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/statistics/tests/unit_tests/pca.dia.ref" />
-    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/statistics/tests/unit_tests/show_pca.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/statistics/tests/unit_tests/thrownan.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/statistics/tests/unit_tests/trimmean.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/statistics/tests/unit_tests/variance.dia.ref" />
@@ -15602,6 +15614,7 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/string/tests/nonreg_tests/bug_9858.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/string/tests/nonreg_tests/bug_9899.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/string/tests/nonreg_tests/issue_17083.dia.ref" />
+    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/string/tests/nonreg_tests/issue_17289.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/string/tests/unit_tests/ascii.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/string/tests/unit_tests/base.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/string/tests/unit_tests/convstr.dia.ref" />
@@ -15614,6 +15627,7 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/string/tests/unit_tests/isnum.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/string/tests/unit_tests/length.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/string/tests/unit_tests/outline.dia.ref" />
+    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/string/tests/unit_tests/outline.unix.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/string/tests/unit_tests/part_UTF_nw.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/string/tests/unit_tests/part_UTF_nwni.dia.ref" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/string/tests/unit_tests/regexp_pcre76.dia.ref" />
@@ -16391,6 +16405,8 @@
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/xcos/src/java/org/scilab/modules/xcos/Controller.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/xcos/src/java/org/scilab/modules/xcos/JavaController.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/xcos/src/java/org/scilab/modules/xcos/JavaControllerJNI.java" />
+    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/xcos/src/java/org/scilab/modules/xcos/JavaSSPResource.java" />
+    <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/xcos/src/java/org/scilab/modules/xcos/JavaSSPResourceJNI.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/xcos/src/java/org/scilab/modules/xcos/JavaXMIResource.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/xcos/src/java/org/scilab/modules/xcos/JavaXMIResourceJNI.java" />
     <Text Include="../../thirdparty/owemdjee/scilab/scilab/modules/xcos/src/java/org/scilab/modules/xcos/Kind.java" />
@@ -18487,8 +18503,12 @@
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/help/en_US/elementarymatrices/diag.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/help/en_US/elementarymatrices/empty.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/help/en_US/elementarymatrices/eye.xml" />
+    <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/help/en_US/elementarymatrices/frank.xml" />
+    <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/help/en_US/elementarymatrices/hilbm.xml" />
+    <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/help/en_US/elementarymatrices/invhilb.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/help/en_US/elementarymatrices/linspace.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/help/en_US/elementarymatrices/logspace.xml" />
+    <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/help/en_US/elementarymatrices/magic.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/help/en_US/elementarymatrices/meshgrid.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/help/en_US/elementarymatrices/ndgrid.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/help/en_US/elementarymatrices/ones.xml" />
@@ -18661,7 +18681,6 @@
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/help/fr_FR/elementarymatrices/random/samwr.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/help/fr_FR/elementarymatrices/repmat.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/help/fr_FR/elementarymatrices/squarewave.xml" />
-    <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/help/fr_FR/elementarymatrices/testmatrix.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/help/fr_FR/elementarymatrices/toeplitz.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/help/fr_FR/elementarymatrices/zeros.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/help/fr_FR/exponential/exp.xml" />
@@ -18776,7 +18795,6 @@
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/help/ja_JP/elementarymatrices/random/samplef.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/help/ja_JP/elementarymatrices/random/samwr.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/help/ja_JP/elementarymatrices/squarewave.xml" />
-    <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/help/ja_JP/elementarymatrices/testmatrix.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/help/ja_JP/elementarymatrices/zeros.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/help/ja_JP/exponential/exp.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/help/ja_JP/exponential/expm.xml" />
@@ -18909,7 +18927,6 @@
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/help/pt_BR/elementarymatrices/ones.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/help/pt_BR/elementarymatrices/random/rand.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/help/pt_BR/elementarymatrices/squarewave.xml" />
-    <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/help/pt_BR/elementarymatrices/testmatrix.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/help/pt_BR/elementarymatrices/zeros.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/help/pt_BR/exponential/exp.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/help/pt_BR/exponential/expm.xml" />
@@ -19041,7 +19058,6 @@
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/help/ru_RU/elementarymatrices/random/rand.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/help/ru_RU/elementarymatrices/repmat.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/help/ru_RU/elementarymatrices/squarewave.xml" />
-    <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/help/ru_RU/elementarymatrices/testmatrix.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/help/ru_RU/elementarymatrices/zeros.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/help/ru_RU/exponential/exp.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/elementary_functions/help/ru_RU/exponential/expm.xml" />
@@ -20450,6 +20466,7 @@
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/examples/example_4/help/en_US/example_4_function_7.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/examples/example_4/help/en_US/master.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/help/en_US/apropos.xml" />
+    <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/help/en_US/doc.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/help/en_US/head_comments.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/help/en_US/help.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/helptools/help/en_US/utilities/add_help_chapter.xml" />
@@ -22100,6 +22117,7 @@
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/statistics/help/en_US/7_nan_missing_data/thrownan.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/statistics/help/en_US/8_hypothesis_testing/ftest.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/statistics/help/en_US/8_hypothesis_testing/ftuneq.xml" />
+    <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/statistics/help/en_US/kmeans.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/statistics/help/en_US/polyfit.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/statistics/help/en_US/polyval.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/statistics/help/fr_FR/1_cdf/cdfbet.xml" />
@@ -22153,10 +22171,8 @@
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/statistics/help/ja_JP/4_distribution_empirical_shape/tabul.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/statistics/help/ja_JP/5_multivariate_stats/correl.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/statistics/help/ja_JP/5_multivariate_stats/covar.xml" />
-    <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/statistics/help/ja_JP/5_multivariate_stats/pca.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/statistics/help/ja_JP/5_multivariate_stats/princomp.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/statistics/help/ja_JP/5_multivariate_stats/reglin.xml" />
-    <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/statistics/help/ja_JP/5_multivariate_stats/show_pca.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/statistics/help/ja_JP/7_nan_missing_data/nancumsum.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/statistics/help/ja_JP/7_nan_missing_data/nand2mean.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/statistics/help/ja_JP/7_nan_missing_data/nanmean.xml" />
@@ -22423,7 +22439,6 @@
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/webtools/help/en_US/url_split.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/webtools/help/ja_JP/url_split.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/webtools/help/ru_RU/url_split.xml" />
-    <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/webtools/sci_gateway/webtools_gateway.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/windows_tools/help/en_US/consolebox.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/windows_tools/help/en_US/createGUID.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/windows_tools/help/en_US/dos.xml" />
@@ -22721,6 +22736,7 @@
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/xcos/help/en_US/scilab_utilities_functions/scicos_debug.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/xcos/help/en_US/scilab_utilities_functions/scicos_getvalue.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/xcos/help/en_US/scilab_utilities_functions/scicos_log.xml" />
+    <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/xcos/help/en_US/scilab_utilities_functions/set_io.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/xcos/help/en_US/scilab_utilities_functions/standard_define.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/xcos/help/en_US/scilab_utilities_functions/standard_inputs.xml" />
     <Xml Include="../../thirdparty/owemdjee/scilab/scilab/modules/xcos/help/en_US/scilab_utilities_functions/standard_origin.xml" />

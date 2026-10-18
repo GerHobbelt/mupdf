@@ -364,6 +364,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/tests/unittests/EventPropertiesTests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/tests/unittests/GuidTests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/tests/unittests/HttpClientCAPITests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/tests/unittests/HttpClientCurlTests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/tests/unittests/HttpClientManagerTests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/tests/unittests/HttpClientTests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/tests/unittests/HttpDeflateCompressionTests.cpp" />
@@ -419,7 +420,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/contrib/testzlib/testzlib.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/contrib/untgz/untgz.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/crc32.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/crc_folding.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/deflate.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/examples/enough.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/examples/fitblk.c" />
@@ -429,7 +429,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/examples/gzlog.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/examples/zpipe.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/examples/zran.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/fill_window_sse.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/gzclose.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/gzlib.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/gzread.c" />
@@ -438,13 +437,11 @@
     <ClCompile Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/inffast.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/inflate.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/inftrees.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/simd_stub.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/test/example.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/test/infcover.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/test/minigzip.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/trees.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/uncompr.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/x86.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/zutil.c" />
     <ClInclude Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/Solutions/net40/pch.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/Solutions/net40/targetver.h" />
@@ -523,7 +520,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/lib/include/mat/config-net40.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/lib/include/mat/config-versionPrefix.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/lib/include/mat/config.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/lib/include/mat/json.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/lib/include/mat/oacr.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/lib/include/public/AggregatedMetric.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/lib/include/public/CAPIClient.hpp" />
@@ -700,9 +696,11 @@
     <ClInclude Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/contrib/iostream2/zstream.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/contrib/iostream3/zfstream.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/contrib/minizip/crypt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/contrib/minizip/ints.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/contrib/minizip/ioapi.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/contrib/minizip/iowin32.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/contrib/minizip/mztools.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/contrib/minizip/skipset.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/contrib/minizip/unzip.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/contrib/minizip/zip.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/contrib/puff/puff.h" />
@@ -716,7 +714,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/inftrees.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/names.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/trees.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/x86.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/zconf.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/zlib.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/zutil.h" />
@@ -762,9 +759,6 @@
     <MASM Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/contrib/masmx86/match686.asm" />
     <ResourceCompile Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/Solutions/VersionInfo.rc" />
     <ResourceCompile Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/sqlite/sqlite3.rc" />
-    <ResourceCompile Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/contrib/vstudio/vc10/zlib.rc" />
-    <ResourceCompile Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/contrib/vstudio/vc11/zlib.rc" />
-    <ResourceCompile Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/contrib/vstudio/vc9/zlib.rc" />
     <ResourceCompile Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/win32/zlib1.rc" />
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/CODE_OF_CONDUCT.md" />
@@ -802,6 +796,7 @@
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/build-cmake-clang-vs2017.cmd" />
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/build-cmake-clang-vs2019.cmd" />
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/build-cmake-clang-vs2022.cmd" />
+    <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/build-codeql-cpp.bat" />
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/build-docker.cmd" />
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/build-docker.sh" />
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/build-gtest.sh" />
@@ -817,6 +812,7 @@
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/build-x64Release.bat" />
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/build-xamarin.sh" />
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/cgmanifest.json" />
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/docker/android-base-image/Dockerfile" />
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/docker/android-base-image/action.yml" />
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/docker/android-base-image/assemble.sh" />
@@ -1145,7 +1141,6 @@
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/LICENSE" />
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/Makefile" />
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/Makefile.in" />
-    <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/OWNERS" />
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/amiga/Makefile.pup" />
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/amiga/Makefile.sas" />
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/as400/bndsrc" />
@@ -1186,6 +1181,7 @@
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/contrib/masmx64/readme.txt" />
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/contrib/masmx86/bld_ml32.bat" />
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/contrib/masmx86/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/contrib/minizip/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/contrib/minizip/ChangeLogUnzip" />
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/contrib/minizip/Makefile" />
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/contrib/minizip/Makefile.am" />
@@ -1195,6 +1191,14 @@
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/contrib/minizip/miniunzip.1" />
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/contrib/minizip/minizip.1" />
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/contrib/minizip/minizip.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/contrib/minizip/minizip.pc.txt" />
+    <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/contrib/minizip/minizipConfig.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/contrib/minizip/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/contrib/minizip/test/add_subdirectory_exclude_test.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/contrib/minizip/test/add_subdirectory_test.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/contrib/minizip/test/find_package_no_components_test.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/contrib/minizip/test/find_package_test.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/contrib/minizip/test/find_package_wrong_components_test.cmake.in" />
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/contrib/pascal/example.pas" />
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/contrib/pascal/readme.txt" />
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/contrib/pascal/zlibpas.pas" />
@@ -1205,9 +1209,6 @@
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/contrib/untgz/Makefile" />
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/contrib/untgz/Makefile.msc" />
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/contrib/vstudio/readme.txt" />
-    <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/contrib/vstudio/vc10/zlibvc.def" />
-    <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/contrib/vstudio/vc11/zlibvc.def" />
-    <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/contrib/vstudio/vc9/zlibvc.def" />
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/doc/algorithm.txt" />
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/doc/rfc1950.txt" />
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/doc/rfc1951.txt" />

@@ -4871,6 +4871,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/pcl/test/sample_consensus/test_sample_consensus_quadric_models.cpp">
       <Filter>Source Files\test\sample_consensus</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/pcl/test/search/test_brute_force.cpp">
+      <Filter>Source Files\test\search</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/pcl/test/search/test_flann_search.cpp">
       <Filter>Source Files\test\search</Filter>
     </ClCompile>
@@ -4896,6 +4899,9 @@
       <Filter>Source Files\test\segmentation</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/pcl/test/segmentation/test_non_linear.cpp">
+      <Filter>Source Files\test\segmentation</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/pcl/test/segmentation/test_progressive_morphological_filter.cpp">
       <Filter>Source Files\test\segmentation</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/pcl/test/segmentation/test_random_walker.cpp">
@@ -6176,9 +6182,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/pcl/cuda/filters/include/pcl/cuda/filters/passthrough.h">
       <Filter>Header Files\cuda\filters\include\pcl\cuda\filters</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/pcl/cuda/filters/include/pcl/cuda/filters/voxel_grid.h">
-      <Filter>Header Files\cuda\filters\include\pcl\cuda\filters</Filter>
-    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/pcl/cuda/io/include/pcl/cuda/io/cloud_from_pcl.h">
       <Filter>Header Files\cuda\io\include\pcl\cuda\io</Filter>
     </ClInclude>
@@ -6835,9 +6838,6 @@
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/pcl/filters/include/pcl/filters/voxel_grid_occlusion_estimation.h">
       <Filter>Header Files\filters\include\pcl\filters</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/pcl/geometry/include/pcl/geometry/boost.h">
-      <Filter>Header Files\geometry\include\pcl\geometry</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/pcl/geometry/include/pcl/geometry/get_boundary.h">
       <Filter>Header Files\geometry\include\pcl\geometry</Filter>
@@ -7793,9 +7793,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/pcl/octree/include/pcl/octree/octree_search.h">
       <Filter>Header Files\octree\include\pcl\octree</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/pcl/outofcore/include/pcl/outofcore/boost.h">
-      <Filter>Header Files\outofcore\include\pcl\outofcore</Filter>
-    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/pcl/outofcore/include/pcl/outofcore/cJSON.h">
       <Filter>Header Files\outofcore\include\pcl\outofcore</Filter>
     </ClInclude>
@@ -8081,6 +8078,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/pcl/recognition/include/pcl/recognition/surface_normal_modality.h">
       <Filter>Header Files\recognition\include\pcl\recognition</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/pcl/registration/include/pcl/registration/anderson_acceleration.h">
+      <Filter>Header Files\registration\include\pcl\registration</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/pcl/registration/include/pcl/registration/bfgs.h">
       <Filter>Header Files\registration\include\pcl\registration</Filter>
     </ClInclude>
@@ -8159,6 +8159,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/pcl/registration/include/pcl/registration/exceptions.h">
       <Filter>Header Files\registration\include\pcl\registration</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/pcl/registration/include/pcl/registration/fricp.h">
+      <Filter>Header Files\registration\include\pcl\registration</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/pcl/registration/include/pcl/registration/gicp.h">
       <Filter>Header Files\registration\include\pcl\registration</Filter>
     </ClInclude>
@@ -8220,6 +8223,9 @@
       <Filter>Header Files\registration\include\pcl\registration\impl</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/pcl/registration/include/pcl/registration/impl/elch.hpp">
+      <Filter>Header Files\registration\include\pcl\registration\impl</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/pcl/registration/include/pcl/registration/impl/fricp.hpp">
       <Filter>Header Files\registration\include\pcl\registration\impl</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/pcl/registration/include/pcl/registration/impl/gicp.hpp">
@@ -8292,6 +8298,9 @@
       <Filter>Header Files\registration\include\pcl\registration\impl</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/pcl/registration/include/pcl/registration/impl/transformation_estimation_point_to_plane_weighted.hpp">
+      <Filter>Header Files\registration\include\pcl\registration\impl</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/pcl/registration/include/pcl/registration/impl/transformation_estimation_point_to_point_robust.hpp">
       <Filter>Header Files\registration\include\pcl\registration\impl</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/pcl/registration/include/pcl/registration/impl/transformation_estimation_svd.hpp">
@@ -8367,6 +8376,9 @@
       <Filter>Header Files\registration\include\pcl\registration</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/pcl/registration/include/pcl/registration/transformation_estimation_point_to_plane_weighted.h">
+      <Filter>Header Files\registration\include\pcl\registration</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/pcl/registration/include/pcl/registration/transformation_estimation_point_to_point_robust.h">
       <Filter>Header Files\registration\include\pcl\registration</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/pcl/registration/include/pcl/registration/transformation_estimation_svd.h">
@@ -9090,9 +9102,6 @@
       <Filter>Header Files\tracking\include\pcl\tracking</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/pcl/visualization/include/pcl/visualization/area_picking_event.h">
-      <Filter>Header Files\visualization\include\pcl\visualization</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/pcl/visualization/include/pcl/visualization/boost.h">
       <Filter>Header Files\visualization\include\pcl\visualization</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/pcl/visualization/include/pcl/visualization/cloud_viewer.h">

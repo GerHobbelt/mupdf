@@ -237,7 +237,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/Pillow/src/libImaging/Draw.c" />
     <ClCompile Include="../../thirdparty/owemdjee/Pillow/src/libImaging/Effects.c" />
     <ClCompile Include="../../thirdparty/owemdjee/Pillow/src/libImaging/EpsEncode.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/Pillow/src/libImaging/File.c" />
     <ClCompile Include="../../thirdparty/owemdjee/Pillow/src/libImaging/Fill.c" />
     <ClCompile Include="../../thirdparty/owemdjee/Pillow/src/libImaging/Filter.c" />
     <ClCompile Include="../../thirdparty/owemdjee/Pillow/src/libImaging/FliDecode.c" />
@@ -585,8 +584,8 @@
     <Image Include="../../thirdparty/owemdjee/Pillow/Tests/images/hopper_bad_exif.jpg" />
     <Image Include="../../thirdparty/owemdjee/Pillow/Tests/images/hopper_bw_500.png" />
     <Image Include="../../thirdparty/owemdjee/Pillow/Tests/images/hopper_draw.ico" />
-    <Image Include="../../thirdparty/owemdjee/Pillow/Tests/images/hopper_emboss.bmp" />
-    <Image Include="../../thirdparty/owemdjee/Pillow/Tests/images/hopper_emboss_more.bmp" />
+    <Image Include="../../thirdparty/owemdjee/Pillow/Tests/images/hopper_emboss_3x3.bmp" />
+    <Image Include="../../thirdparty/owemdjee/Pillow/Tests/images/hopper_emboss_5x5.bmp" />
     <Image Include="../../thirdparty/owemdjee/Pillow/Tests/images/hopper_gray.jpg" />
     <Image Include="../../thirdparty/owemdjee/Pillow/Tests/images/hopper_idat_after_image_end.png" />
     <Image Include="../../thirdparty/owemdjee/Pillow/Tests/images/hopper_mask.ico" />
@@ -776,7 +775,6 @@
     <Image Include="../../thirdparty/owemdjee/Pillow/Tests/images/p_16.png" />
     <Image Include="../../thirdparty/owemdjee/Pillow/Tests/images/p_trns_single.png" />
     <Image Include="../../thirdparty/owemdjee/Pillow/Tests/images/padded_idat.png" />
-    <Image Include="../../thirdparty/owemdjee/Pillow/Tests/images/pal8_offset.bmp" />
     <Image Include="../../thirdparty/owemdjee/Pillow/Tests/images/pal8rletrns.png" />
     <Image Include="../../thirdparty/owemdjee/Pillow/Tests/images/palette_negative.png" />
     <Image Include="../../thirdparty/owemdjee/Pillow/Tests/images/palette_not_needed_for_second_frame.gif" />
@@ -938,6 +936,7 @@
     <Image Include="../../thirdparty/owemdjee/Pillow/docs/resources/favicon.ico" />
     <Image Include="../../thirdparty/owemdjee/Pillow/docs/resources/pillow-logo-dark-text.png" />
     <Image Include="../../thirdparty/owemdjee/Pillow/docs/resources/pillow-logo.png" />
+    <Text Include="../../thirdparty/owemdjee/Pillow/AGENTS.md" />
     <Text Include="../../thirdparty/owemdjee/Pillow/CHANGES.rst" />
     <Text Include="../../thirdparty/owemdjee/Pillow/LICENSE" />
     <Text Include="../../thirdparty/owemdjee/Pillow/MANIFEST.in" />
@@ -946,6 +945,7 @@
     <Text Include="../../thirdparty/owemdjee/Pillow/RELEASING.md" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/README.rst" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/Pillow/Tests/benchmarks.py" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/conftest.py" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/createfontdatachunk.py" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/fonts/10x20-ISO8859-1-fewer-characters.pcf" />
@@ -1128,7 +1128,6 @@
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/hopper_jpg.tif" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/hopper_lzma.tif" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/hopper_lzw.tif" />
-    <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/hopper_naxis_zero.fits" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/hopper_rgb.xpm" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/hopper_unknown_pixel_mode.tif" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/hopper_webp.tif" />
@@ -1148,6 +1147,8 @@
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/libtiff_segfault.tif" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/m13.fits" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/m13_gzip.fits" />
+    <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/mask_1.cur" />
+    <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/mask_L.cur" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/multipage-lastframe.tif" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/multipage-mmap.tiff" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/multipage.tiff" />
@@ -1178,6 +1179,7 @@
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/rdf.tif" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/rgb_trns_ycbc.jp2" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/seek_too_large.tif" />
+    <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/separate_planar_extra_samples.tiff" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/sgi_crash.bin" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/sgi_overrun.bin" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/sgi_overrun_expandrow.bin" />
@@ -1225,8 +1227,13 @@
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/tiff_wrong_bits_per_sample.tiff" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/tiff_wrong_bits_per_sample_2.tiff" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/tiff_wrong_bits_per_sample_3.tiff" />
+    <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/timeout-041dd17dfde800360a47a172269df127af138c6b.dds" />
+    <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/timeout-52d106579505547091ef69b58341351a37c23e31.dds" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/timeout-6646305047838720" />
+    <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/timeout-755a4d204f4208e3597ac3391edebee196462bd0.dds" />
+    <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/timeout-c60a3d7314213624607bfb3e38d551a8b24a7435.dds" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/total-pages-zero.tif" />
+    <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/trailer_loop.pdf" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/uint16_1_4660.tif" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/unbound_variable.jp2" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/images/uncompressed_l.dds" />
@@ -1382,7 +1389,6 @@
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/test_imagetk.py" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/test_imagewin.py" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/test_imagewin_pointers.py" />
-    <Text Include="../../thirdparty/owemdjee/Pillow/Tests/test_lib_image.py" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/test_lib_pack.py" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/test_locale.py" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/test_main.py" />
@@ -1394,7 +1400,6 @@
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/test_pickle.py" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/test_psdraw.py" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/test_pyarrow.py" />
-    <Text Include="../../thirdparty/owemdjee/Pillow/Tests/test_pyroma.py" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/test_qt_image_qapplication.py" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/test_qt_image_toqimage.py" />
     <Text Include="../../thirdparty/owemdjee/Pillow/Tests/test_sgi_crash.py" />
@@ -1431,7 +1436,6 @@
     <Text Include="../../thirdparty/owemdjee/Pillow/depends/install_libavif.sh" />
     <Text Include="../../thirdparty/owemdjee/Pillow/depends/install_openjpeg.sh" />
     <Text Include="../../thirdparty/owemdjee/Pillow/depends/install_raqm.sh" />
-    <Text Include="../../thirdparty/owemdjee/Pillow/depends/install_raqm_cmake.sh" />
     <Text Include="../../thirdparty/owemdjee/Pillow/depends/install_webp.sh" />
     <Text Include="../../thirdparty/owemdjee/Pillow/depends/termux.sh" />
     <Text Include="../../thirdparty/owemdjee/Pillow/docs/COPYING" />
@@ -1448,6 +1452,7 @@
     <Text Include="../../thirdparty/owemdjee/Pillow/docs/handbook/image-file-formats.rst" />
     <Text Include="../../thirdparty/owemdjee/Pillow/docs/handbook/index.rst" />
     <Text Include="../../thirdparty/owemdjee/Pillow/docs/handbook/overview.rst" />
+    <Text Include="../../thirdparty/owemdjee/Pillow/docs/handbook/security.rst" />
     <Text Include="../../thirdparty/owemdjee/Pillow/docs/handbook/text-anchors.rst" />
     <Text Include="../../thirdparty/owemdjee/Pillow/docs/handbook/third-party-plugins.rst" />
     <Text Include="../../thirdparty/owemdjee/Pillow/docs/handbook/tutorial.rst" />
@@ -1514,6 +1519,9 @@
     <Text Include="../../thirdparty/owemdjee/Pillow/docs/releasenotes/12.0.0.rst" />
     <Text Include="../../thirdparty/owemdjee/Pillow/docs/releasenotes/12.1.0.rst" />
     <Text Include="../../thirdparty/owemdjee/Pillow/docs/releasenotes/12.1.1.rst" />
+    <Text Include="../../thirdparty/owemdjee/Pillow/docs/releasenotes/12.2.0.rst" />
+    <Text Include="../../thirdparty/owemdjee/Pillow/docs/releasenotes/12.3.0.rst" />
+    <Text Include="../../thirdparty/owemdjee/Pillow/docs/releasenotes/13.0.0.rst" />
     <Text Include="../../thirdparty/owemdjee/Pillow/docs/releasenotes/2.3.1.rst" />
     <Text Include="../../thirdparty/owemdjee/Pillow/docs/releasenotes/2.3.2.rst" />
     <Text Include="../../thirdparty/owemdjee/Pillow/docs/releasenotes/2.5.2.rst" />
@@ -1575,6 +1583,7 @@
     <Text Include="../../thirdparty/owemdjee/Pillow/docs/resources/anchor_vertical.svg" />
     <Text Include="../../thirdparty/owemdjee/Pillow/docs/resources/css/dark.css" />
     <Text Include="../../thirdparty/owemdjee/Pillow/docs/resources/js/activate_tab.js" />
+    <Text Include="../../thirdparty/owemdjee/Pillow/patches/README.md" />
     <Text Include="../../thirdparty/owemdjee/Pillow/pyproject.toml" />
     <Text Include="../../thirdparty/owemdjee/Pillow/selftest.py" />
     <Text Include="../../thirdparty/owemdjee/Pillow/setup.py" />
@@ -1693,6 +1702,7 @@
     <Text Include="../../thirdparty/owemdjee/Pillow/wheels/dependency_licenses/LIBYUV.txt" />
     <Text Include="../../thirdparty/owemdjee/Pillow/wheels/dependency_licenses/OPENJPEG.txt" />
     <Text Include="../../thirdparty/owemdjee/Pillow/wheels/dependency_licenses/RAQM.txt" />
+    <Text Include="../../thirdparty/owemdjee/Pillow/wheels/dependency_licenses/TCL_TK.txt" />
     <Text Include="../../thirdparty/owemdjee/Pillow/wheels/dependency_licenses/XAU.txt" />
     <Text Include="../../thirdparty/owemdjee/Pillow/wheels/dependency_licenses/XCB.txt" />
     <Text Include="../../thirdparty/owemdjee/Pillow/wheels/dependency_licenses/XDMCP.txt" />

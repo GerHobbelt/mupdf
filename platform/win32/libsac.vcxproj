@@ -207,25 +207,29 @@
   </ImportGroup>
   <ItemGroup>
     <ClCompile Include="../../thirdparty/owemdjee/sac/src/cmdline.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sac/src/coder/bpn.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/sac/src/common/md5.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/sac/src/common/utils.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/sac/src/file/file.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/sac/src/file/sac.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/sac/src/file/wav.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sac/src/libsac/bmap.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/sac/src/libsac/libsac.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/sac/src/libsac/map.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/sac/src/libsac/pred.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/sac/src/libsac/profile.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/sac/src/libsac/vle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sac/src/libsac/sparse.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/sac/src/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sac/src/model/domain.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sac/src/model/mixer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/sac/src/model/range.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/sac/src/opt/cma.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/sac/src/opt/dds.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/sac/src/opt/de.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/sac/src/opt/opt.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/sac/src/pred/lpc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sac/src/pred/ols.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/sac/src/pred/rls.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/sac/src/cmdline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sac/src/coder/bpn.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sac/src/common/alignbuf.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sac/src/common/bufio.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sac/src/common/histbuf.h" />
@@ -238,13 +242,12 @@
     <ClInclude Include="../../thirdparty/owemdjee/sac/src/file/sac.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sac/src/file/wav.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sac/src/global.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sac/src/libsac/bmap.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sac/src/libsac/cost.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sac/src/libsac/libsac.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/sac/src/libsac/map.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sac/src/libsac/pred.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sac/src/libsac/profile.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sac/src/libsac/sparse.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/sac/src/libsac/vle.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sac/src/model/counter.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sac/src/model/domain.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sac/src/model/mixer.h" />
@@ -258,13 +261,15 @@
     <ClInclude Include="../../thirdparty/owemdjee/sac/src/opt/ssc.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sac/src/pred/bias.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sac/src/pred/blend.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/sac/src/pred/lms.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/sac/src/pred/lms_cascade.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/sac/src/pred/lpc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sac/src/pred/cascade.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sac/src/pred/hm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sac/src/pred/ls.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sac/src/pred/nlms.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sac/src/pred/ols.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sac/src/pred/rls.h" />
     <Text Include="../../thirdparty/owemdjee/sac/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/sac/Makefile" />
     <Text Include="../../thirdparty/owemdjee/sac/README.md" />
-    <Text Include="../../thirdparty/owemdjee/sac/makefile" />
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>

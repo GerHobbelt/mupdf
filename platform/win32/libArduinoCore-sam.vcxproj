@@ -228,9 +228,14 @@
     <ClCompile Include="../../thirdparty/owemdjee/ArduinoCore-sam/cores/arduino/itoa.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ArduinoCore-sam/cores/arduino/main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArduinoCore-sam/cores/arduino/new.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ArduinoCore-sam/cores/arduino/syscalls_sam3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArduinoCore-sam/cores/arduino/sam/libcmsis.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArduinoCore-sam/cores/arduino/sam/libsam-part01.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArduinoCore-sam/cores/arduino/sam/libsam-part02.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArduinoCore-sam/cores/arduino/sam/libsam-part03.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArduinoCore-sam/cores/arduino/sam/libsam-part04.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArduinoCore-sam/cores/arduino/syscalls_sam3.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArduinoCore-sam/cores/arduino/watchdog.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ArduinoCore-sam/cores/arduino/wiring.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArduinoCore-sam/cores/arduino/wiring.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ArduinoCore-sam/cores/arduino/wiring_analog.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ArduinoCore-sam/cores/arduino/wiring_digital.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ArduinoCore-sam/cores/arduino/wiring_pulse.cpp" />
@@ -584,6 +589,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/ArduinoCore-sam/system/libsam/source/interrupt_sam_nvic.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ArduinoCore-sam/system/libsam/source/pio.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ArduinoCore-sam/system/libsam/source/pmc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArduinoCore-sam/system/libsam/source/pwm_corefreqmultiplier.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ArduinoCore-sam/system/libsam/source/pwmc.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ArduinoCore-sam/system/libsam/source/rstc.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ArduinoCore-sam/system/libsam/source/rtc.c" />
@@ -591,7 +597,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/ArduinoCore-sam/system/libsam/source/spi.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ArduinoCore-sam/system/libsam/source/ssc.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ArduinoCore-sam/system/libsam/source/tc.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/ArduinoCore-sam/system/libsam/source/timetick.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArduinoCore-sam/system/libsam/source/timetick.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArduinoCore-sam/system/libsam/source/timetick_corefreqmultiplier.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ArduinoCore-sam/system/libsam/source/trng.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ArduinoCore-sam/system/libsam/source/twi.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ArduinoCore-sam/system/libsam/source/udp.c" />
@@ -629,7 +636,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/ArduinoCore-sam/cores/arduino/avr/pgmspace.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ArduinoCore-sam/cores/arduino/binary.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ArduinoCore-sam/cores/arduino/itoa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArduinoCore-sam/cores/arduino/sync.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ArduinoCore-sam/cores/arduino/syscalls.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArduinoCore-sam/cores/arduino/system_layout.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ArduinoCore-sam/cores/arduino/watchdog.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ArduinoCore-sam/cores/arduino/wiring.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ArduinoCore-sam/cores/arduino/wiring_analog.h" />
@@ -2446,7 +2455,6 @@
     <Text Include="../../thirdparty/owemdjee/ArduinoCore-sam/system/CMSIS/Examples/cmsis_example/gcc_arm/coreutils-5.3.0-GnuWin32.README" />
     <Text Include="../../thirdparty/owemdjee/ArduinoCore-sam/system/CMSIS/Examples/cmsis_example/gcc_arm/libiconv2.dll" />
     <Text Include="../../thirdparty/owemdjee/ArduinoCore-sam/system/CMSIS/Examples/cmsis_example/gcc_arm/libintl3.dll" />
-    <Text Include="../../thirdparty/owemdjee/ArduinoCore-sam/system/CMSIS/Examples/cmsis_example/gcc_arm/log.txt" />
     <Text Include="../../thirdparty/owemdjee/ArduinoCore-sam/system/CMSIS/Examples/cmsis_example/gcc_arm/make-3.81-GnuWin32.README" />
     <Text Include="../../thirdparty/owemdjee/ArduinoCore-sam/system/CMSIS/Examples/cmsis_example/gcc_arm/sam3n_ek_flash.gdb" />
     <Text Include="../../thirdparty/owemdjee/ArduinoCore-sam/system/CMSIS/Examples/cmsis_example/gcc_arm/sam3n_ek_sram.gdb" />
@@ -2499,7 +2507,6 @@
     <Text Include="../../thirdparty/owemdjee/ArduinoCore-sam/variants/arduino_due_x/debug_scripts/gcc/arduino_due_x_sram.gdb" />
     <Text Include="../../thirdparty/owemdjee/ArduinoCore-sam/variants/arduino_due_x/debug_scripts/iar/arduino_due_flash.mac" />
     <Text Include="../../thirdparty/owemdjee/ArduinoCore-sam/variants/arduino_due_x/debug_scripts/iar/arduino_due_sram.mac" />
-    <Text Include="../../thirdparty/owemdjee/ArduinoCore-sam/variants/arduino_due_x/libsam_sam3x8e_gcc_rel.a.txt" />
     <Text Include="../../thirdparty/owemdjee/ArduinoCore-sam/variants/arduino_due_x/linker_scripts/iar/flash.icf" />
     <Text Include="../../thirdparty/owemdjee/ArduinoCore-sam/variants/arduino_due_x/linker_scripts/iar/sram.icf" />
   </ItemGroup>

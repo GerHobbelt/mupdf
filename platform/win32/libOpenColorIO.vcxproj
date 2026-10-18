@@ -418,8 +418,12 @@
     <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/libutils/imageioapphelpers/imageio.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/libutils/imageioapphelpers/imageio_exr.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/libutils/imageioapphelpers/imageio_oiio.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/libutils/oglapphelpers/dxapp.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/libutils/oglapphelpers/glsl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/libutils/oglapphelpers/graphicalapp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/libutils/oglapphelpers/hlsl.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/libutils/oglapphelpers/oglapp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/libutils/oglapphelpers/vulkanapp.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/ext/sampleicc/src/include/icProfileHeader.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/ext/sampleicc/src/include/iccProfileReader.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/ext/xxHash/src/include/xxhash.h" />
@@ -450,6 +454,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ImagePacking.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/Logging.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/LookParse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/LutLimits.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/MathUtils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/Mutex.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/NamedTransform.h" />
@@ -605,11 +610,16 @@
     <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/apputils/measure.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/apputils/strutil.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/libutils/imageioapphelpers/imageio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/libutils/oglapphelpers/dxapp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/libutils/oglapphelpers/dxutils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/libutils/oglapphelpers/glsl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/libutils/oglapphelpers/graphicalapp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/libutils/oglapphelpers/hlsl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/libutils/oglapphelpers/metalapp.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/libutils/oglapphelpers/msl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/libutils/oglapphelpers/mtltexture.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/libutils/oglapphelpers/oglapp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/libutils/oglapphelpers/vulkanapp.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/utils/NumberUtils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/utils/StringUtils.h" />
     <Font Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/static/plugins/slick/fonts/slick.ttf" />
@@ -885,6 +895,7 @@
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/releases/ocio_2_3.rst" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/releases/ocio_2_4.rst" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/releases/ocio_2_5.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/releases/ocio_2_6.rst" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/requirements.txt" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/LICENSE" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/README.md" />
@@ -959,6 +970,7 @@
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/ci/scripts/linux/apt/install_docs_env.sh" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/ci/scripts/linux/apt/install_doxygen.sh" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/ci/scripts/linux/apt/install_tests_env.sh" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/ci/scripts/linux/dnf/install_aswf_opencolorio.sh" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/ci/scripts/linux/dnf/install_docs_env.sh" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/ci/scripts/linux/dnf/install_doxygen.sh" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/ci/scripts/linux/dnf/install_tests_env.sh" />
@@ -1023,6 +1035,8 @@
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/cmake/utils/CompilerFlags.cmake" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/cmake/utils/Compilers.cmake" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/cmake/utils/CppVersion.cmake" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/cmake/utils/DebuggerEnvironment.cmake" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/cmake/utils/LocateDXCompilerRuntime.cmake" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/dev/windows/README.md" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/dev/windows/ocio.bat" />
     <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/dev/windows/ocio_deps.bat" />

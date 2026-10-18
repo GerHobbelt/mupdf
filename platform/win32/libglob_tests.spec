@@ -3,6 +3,6 @@ sources:
 	..\..\scripts\libglob\glob\version.h
 	
 also-ignore:
-	/standalaone/
+	/standalone/
 	/source/
 	

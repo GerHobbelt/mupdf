@@ -212,6 +212,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/theoretica/examples/example.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/theoretica/examples/gradient_descent.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/theoretica/examples/hamiltonian.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/theoretica/examples/hdf5_io.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/theoretica/examples/histogram.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/theoretica/examples/logfit.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/theoretica/examples/montecarlo_integral.cpp" />
@@ -229,6 +230,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/theoretica/test/prec/test_complex.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/theoretica/test/prec/test_core.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/theoretica/test/prec/test_interpolation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/theoretica/test/prec/test_io.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/theoretica/test/prec/test_optimization.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/theoretica/test/prec/test_polynomial.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/theoretica/test/prec/test_pseudorandom.cpp" />
@@ -259,18 +261,25 @@
     <ClInclude Include="../../thirdparty/owemdjee/theoretica/src/complex/complex_types.h" />
     <ClInclude Include="../../thirdparty/owemdjee/theoretica/src/complex/phasor.h" />
     <ClInclude Include="../../thirdparty/owemdjee/theoretica/src/complex/quat.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/theoretica/src/core/bit_op.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/theoretica/src/core/bits.h" />
     <ClInclude Include="../../thirdparty/owemdjee/theoretica/src/core/constants.h" />
     <ClInclude Include="../../thirdparty/owemdjee/theoretica/src/core/core_traits.h" />
     <ClInclude Include="../../thirdparty/owemdjee/theoretica/src/core/dataset.h" />
     <ClInclude Include="../../thirdparty/owemdjee/theoretica/src/core/error.h" />
     <ClInclude Include="../../thirdparty/owemdjee/theoretica/src/core/function.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/theoretica/src/core/iter_result.h" />
     <ClInclude Include="../../thirdparty/owemdjee/theoretica/src/core/ratio.h" />
     <ClInclude Include="../../thirdparty/owemdjee/theoretica/src/core/real_analysis.h" />
     <ClInclude Include="../../thirdparty/owemdjee/theoretica/src/core/reprod.h" />
     <ClInclude Include="../../thirdparty/owemdjee/theoretica/src/core/special.h" />
     <ClInclude Include="../../thirdparty/owemdjee/theoretica/src/interpolation/polynomial.h" />
     <ClInclude Include="../../thirdparty/owemdjee/theoretica/src/interpolation/splines.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/theoretica/src/io/csv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/theoretica/src/io/data_table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/theoretica/src/io/error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/theoretica/src/io/hdf5.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/theoretica/src/io/io.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/theoretica/src/io/strings.h" />
     <ClInclude Include="../../thirdparty/owemdjee/theoretica/src/optimization/extrema.h" />
     <ClInclude Include="../../thirdparty/owemdjee/theoretica/src/optimization/multi_extrema.h" />
     <ClInclude Include="../../thirdparty/owemdjee/theoretica/src/optimization/multi_roots.h" />
@@ -290,7 +299,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/theoretica/src/statistics/statistics.h" />
     <ClInclude Include="../../thirdparty/owemdjee/theoretica/src/theoretica.h" />
     <ClInclude Include="../../thirdparty/owemdjee/theoretica/src/theoretica_mini.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/theoretica/src/utility.h" />
+    <Image Include="../../thirdparty/owemdjee/theoretica/build/icon.png" />
     <Text Include="../../thirdparty/owemdjee/theoretica/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/theoretica/CODE_OF_CONDUCT.md" />
     <Text Include="../../thirdparty/owemdjee/theoretica/LICENSE" />
@@ -310,6 +319,15 @@
     <Text Include="../../thirdparty/owemdjee/theoretica/txt/ONBOARDING.md" />
     <Text Include="../../thirdparty/owemdjee/theoretica/txt/ROADMAP.md" />
     <Text Include="../../thirdparty/owemdjee/theoretica/txt/TESTING.md" />
+    <Text Include="../../thirdparty/owemdjee/theoretica/txt/tutorial/algebra.md" />
+    <Text Include="../../thirdparty/owemdjee/theoretica/txt/tutorial/autodiff.md" />
+    <Text Include="../../thirdparty/owemdjee/theoretica/txt/tutorial/calculus.md" />
+    <Text Include="../../thirdparty/owemdjee/theoretica/txt/tutorial/diffeq.md" />
+    <Text Include="../../thirdparty/owemdjee/theoretica/txt/tutorial/getting-started.md" />
+    <Text Include="../../thirdparty/owemdjee/theoretica/txt/tutorial/index.md" />
+    <Text Include="../../thirdparty/owemdjee/theoretica/txt/tutorial/polynomials.md" />
+    <Text Include="../../thirdparty/owemdjee/theoretica/txt/tutorial/root-finding.md" />
+    <Text Include="../../thirdparty/owemdjee/theoretica/txt/tutorial/statistics.md" />
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>

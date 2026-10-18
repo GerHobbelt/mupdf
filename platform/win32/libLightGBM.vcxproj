@@ -265,12 +265,14 @@
     <ClCompile Include="../../thirdparty/owemdjee/LightGBM/src/utils/openmp_wrapper.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/LightGBM/tests/cpp_tests/test_array_args.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/LightGBM/tests/cpp_tests/test_arrow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/LightGBM/tests/cpp_tests/test_arrow_deprecated.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/LightGBM/tests/cpp_tests/test_byte_buffer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/LightGBM/tests/cpp_tests/test_chunked_array.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/LightGBM/tests/cpp_tests/test_common.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/LightGBM/tests/cpp_tests/test_main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/LightGBM/tests/cpp_tests/test_serialize.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/LightGBM/tests/cpp_tests/test_single_row.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/LightGBM/tests/cpp_tests/test_split_info.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/LightGBM/tests/cpp_tests/test_stream.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/LightGBM/tests/cpp_tests/testutils.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/LightGBM/R-package/src/lightgbm_R.h" />
@@ -322,6 +324,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/LightGBM/include/LightGBM/utils/yamc/yamc_rwlock_sched.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/LightGBM/include/LightGBM/utils/yamc/yamc_shared_lock.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/LightGBM/src/application/predictor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/LightGBM/src/arrow/array.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/LightGBM/src/boosting/bagging.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/LightGBM/src/boosting/cuda/cuda_score_updater.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/LightGBM/src/boosting/cuda/nccl_gbdt.hpp" />
@@ -424,7 +427,7 @@
     <Text Include="../../thirdparty/owemdjee/LightGBM/R-package/R/lgb.cv.R" />
     <Text Include="../../thirdparty/owemdjee/LightGBM/R-package/R/lgb.drop_serialized.R" />
     <Text Include="../../thirdparty/owemdjee/LightGBM/R-package/R/lgb.importance.R" />
-    <Text Include="../../thirdparty/owemdjee/LightGBM/R-package/R/lgb.interprete.R" />
+    <Text Include="../../thirdparty/owemdjee/LightGBM/R-package/R/lgb.interpret.R" />
     <Text Include="../../thirdparty/owemdjee/LightGBM/R-package/R/lgb.make_serializable.R" />
     <Text Include="../../thirdparty/owemdjee/LightGBM/R-package/R/lgb.model.dt.tree.R" />
     <Text Include="../../thirdparty/owemdjee/LightGBM/R-package/R/lgb.plot.importance.R" />
@@ -472,7 +475,7 @@
     <Text Include="../../thirdparty/owemdjee/LightGBM/R-package/tests/testthat/test_lgb.Booster.R" />
     <Text Include="../../thirdparty/owemdjee/LightGBM/R-package/tests/testthat/test_lgb.convert_with_rules.R" />
     <Text Include="../../thirdparty/owemdjee/LightGBM/R-package/tests/testthat/test_lgb.importance.R" />
-    <Text Include="../../thirdparty/owemdjee/LightGBM/R-package/tests/testthat/test_lgb.interprete.R" />
+    <Text Include="../../thirdparty/owemdjee/LightGBM/R-package/tests/testthat/test_lgb.interpret.R" />
     <Text Include="../../thirdparty/owemdjee/LightGBM/R-package/tests/testthat/test_lgb.model.dt.tree.R" />
     <Text Include="../../thirdparty/owemdjee/LightGBM/R-package/tests/testthat/test_lgb.plot.importance.R" />
     <Text Include="../../thirdparty/owemdjee/LightGBM/R-package/tests/testthat/test_lgb.plot.interpretation.R" />
@@ -491,6 +494,7 @@
     <Text Include="../../thirdparty/owemdjee/LightGBM/build_r.R" />
     <Text Include="../../thirdparty/owemdjee/LightGBM/cmake/IntegratedOpenCL.cmake" />
     <Text Include="../../thirdparty/owemdjee/LightGBM/cmake/Sanitizer.cmake" />
+    <Text Include="../../thirdparty/owemdjee/LightGBM/cmake/Utils.cmake" />
     <Text Include="../../thirdparty/owemdjee/LightGBM/docker/README.md" />
     <Text Include="../../thirdparty/owemdjee/LightGBM/docker/dockerfile-cli" />
     <Text Include="../../thirdparty/owemdjee/LightGBM/docker/dockerfile-python" />
@@ -580,8 +584,8 @@
     <Text Include="../../thirdparty/owemdjee/LightGBM/examples/xendcg/rank.train" />
     <Text Include="../../thirdparty/owemdjee/LightGBM/examples/xendcg/rank.train.query" />
     <Text Include="../../thirdparty/owemdjee/LightGBM/examples/xendcg/train.conf" />
-    <Text Include="../../thirdparty/owemdjee/LightGBM/include/LightGBM/arrow.tpp" />
     <Text Include="../../thirdparty/owemdjee/LightGBM/include/LightGBM/cuda/cuda_utils.hu" />
+    <Text Include="../../thirdparty/owemdjee/LightGBM/pixi.toml" />
     <Text Include="../../thirdparty/owemdjee/LightGBM/python-package/README.rst" />
     <Text Include="../../thirdparty/owemdjee/LightGBM/python-package/lightgbm/__init__.py" />
     <Text Include="../../thirdparty/owemdjee/LightGBM/python-package/lightgbm/basic.py" />
@@ -611,7 +615,9 @@
     <Text Include="../../thirdparty/owemdjee/LightGBM/tests/python_package_test/test_dask.py" />
     <Text Include="../../thirdparty/owemdjee/LightGBM/tests/python_package_test/test_dual.py" />
     <Text Include="../../thirdparty/owemdjee/LightGBM/tests/python_package_test/test_engine.py" />
+    <Text Include="../../thirdparty/owemdjee/LightGBM/tests/python_package_test/test_pandas.py" />
     <Text Include="../../thirdparty/owemdjee/LightGBM/tests/python_package_test/test_plotting.py" />
+    <Text Include="../../thirdparty/owemdjee/LightGBM/tests/python_package_test/test_polars.py" />
     <Text Include="../../thirdparty/owemdjee/LightGBM/tests/python_package_test/test_sklearn.py" />
     <Text Include="../../thirdparty/owemdjee/LightGBM/tests/python_package_test/test_utilities.py" />
     <Text Include="../../thirdparty/owemdjee/LightGBM/tests/python_package_test/utils.py" />

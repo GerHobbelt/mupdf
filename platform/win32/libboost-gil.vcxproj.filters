@@ -125,50 +125,59 @@
     <Filter Include="Misc Files\doc">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0036}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\doc\_static">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0037}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Misc Files\doc\_templates">
+    <Filter Include="Misc Files\doc\modules">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0038}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\doc\design">
+    <Filter Include="Misc Files\doc\modules\ROOT">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0037}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Misc Files\doc\modules\ROOT\pages">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0039}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\doc\histogram">
+    <Filter Include="Misc Files\doc\modules\ROOT\pages\design">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0040}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\doc\histogram\extension">
+    <Filter Include="Misc Files\doc\modules\ROOT\pages\histogram">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0041}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\doc\image_processing">
+    <Filter Include="Misc Files\doc\modules\ROOT\pages\histogram\extension">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0042}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\doc\image_processing\contrast_enhancement">
+    <Filter Include="Misc Files\doc\modules\ROOT\pages\image_processing">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0043}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\doc\tutorial">
+    <Filter Include="Misc Files\doc\modules\ROOT\pages\image_processing\contrast_enhancement">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0044}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\meta">
+    <Filter Include="Misc Files\doc\modules\ROOT\pages\tutorial">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0045}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files">
+    <Filter Include="Misc Files\meta">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0046}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files\doc">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0048}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource Files\doc\_static">
+    <Filter Include="Resource Files">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0047}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files\doc\image_processing">
+    <Filter Include="Resource Files\doc">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0051}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\doc\modules">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0050}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\doc\modules\ROOT">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0049}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files\doc\images">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0050}</UniqueIdentifier>
+    <Filter Include="Resource Files\doc\modules\ROOT\images">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0048}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\doc">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0052}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/boost/libs/gil/doc/mrdocs.cpp">
+      <Filter>Source Files\doc</Filter>
+    </ClCompile>
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/gil/include/boost/gil.hpp">
       <Filter>Header Files\include\boost</Filter>
     </ClInclude>
@@ -688,6 +697,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/gil/include/boost/gil/image_processing/convolve.hpp">
       <Filter>Header Files\include\boost\gil\image_processing</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/gil/include/boost/gil/image_processing/distance_transform.hpp">
+      <Filter>Header Files\include\boost\gil\image_processing</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/gil/include/boost/gil/image_processing/filter.hpp">
       <Filter>Header Files\include\boost\gil\image_processing</Filter>
     </ClInclude>
@@ -713,6 +725,9 @@
       <Filter>Header Files\include\boost\gil\image_processing</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/gil/include/boost/gil/image_processing/scaling.hpp">
+      <Filter>Header Files\include\boost\gil\image_processing</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/gil/include/boost/gil/image_processing/sharpening.hpp">
       <Filter>Header Files\include\boost\gil\image_processing</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/gil/include/boost/gil/image_processing/threshold.hpp">
@@ -871,53 +886,32 @@
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/gil/include/boost/gil/virtual_locator.hpp">
       <Filter>Header Files\include\boost\gil</Filter>
     </ClInclude>
-    <Image Include="../../thirdparty/owemdjee/boost/libs/gil/doc/_static/boost-gil.png">
-      <Filter>Resource Files\doc\_static</Filter>
+    <Image Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/images/Moravec-window-corner.png">
+      <Filter>Resource Files\doc\modules\ROOT\images</Filter>
     </Image>
-    <Image Include="../../thirdparty/owemdjee/boost/libs/gil/doc/_static/boost.png">
-      <Filter>Resource Files\doc\_static</Filter>
+    <Image Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/images/Moravec-window-edge.png">
+      <Filter>Resource Files\doc\modules\ROOT\images</Filter>
     </Image>
-    <Image Include="../../thirdparty/owemdjee/boost/libs/gil/doc/_static/gil.png">
-      <Filter>Resource Files\doc\_static</Filter>
+    <Image Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/images/gil.png">
+      <Filter>Resource Files\doc\modules\ROOT\images</Filter>
     </Image>
-    <Image Include="../../thirdparty/owemdjee/boost/libs/gil/doc/_static/home.png">
-      <Filter>Resource Files\doc\_static</Filter>
+    <Image Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/images/he_chart.png">
+      <Filter>Resource Files\doc\modules\ROOT\images</Filter>
     </Image>
-    <Image Include="../../thirdparty/owemdjee/boost/libs/gil/doc/_static/logo.png">
-      <Filter>Resource Files\doc\_static</Filter>
+    <Image Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/images/interleaved.jpg">
+      <Filter>Resource Files\doc\modules\ROOT\images</Filter>
     </Image>
-    <Image Include="../../thirdparty/owemdjee/boost/libs/gil/doc/_static/next.png">
-      <Filter>Resource Files\doc\_static</Filter>
+    <Image Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/images/mandel.jpg">
+      <Filter>Resource Files\doc\modules\ROOT\images</Filter>
     </Image>
-    <Image Include="../../thirdparty/owemdjee/boost/libs/gil/doc/_static/prev.png">
-      <Filter>Resource Files\doc\_static</Filter>
+    <Image Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/images/monkey_steps.jpg">
+      <Filter>Resource Files\doc\modules\ROOT\images</Filter>
     </Image>
-    <Image Include="../../thirdparty/owemdjee/boost/libs/gil/doc/_static/up.png">
-      <Filter>Resource Files\doc\_static</Filter>
+    <Image Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/images/pixel_locator.gif">
+      <Filter>Resource Files\doc\modules\ROOT\images</Filter>
     </Image>
-    <Image Include="../../thirdparty/owemdjee/boost/libs/gil/doc/image_processing/Moravec-window-corner.png">
-      <Filter>Resource Files\doc\image_processing</Filter>
-    </Image>
-    <Image Include="../../thirdparty/owemdjee/boost/libs/gil/doc/image_processing/Moravec-window-edge.png">
-      <Filter>Resource Files\doc\image_processing</Filter>
-    </Image>
-    <Image Include="../../thirdparty/owemdjee/boost/libs/gil/doc/images/gil.png">
-      <Filter>Resource Files\doc\images</Filter>
-    </Image>
-    <Image Include="../../thirdparty/owemdjee/boost/libs/gil/doc/images/interleaved.jpg">
-      <Filter>Resource Files\doc\images</Filter>
-    </Image>
-    <Image Include="../../thirdparty/owemdjee/boost/libs/gil/doc/images/mandel.jpg">
-      <Filter>Resource Files\doc\images</Filter>
-    </Image>
-    <Image Include="../../thirdparty/owemdjee/boost/libs/gil/doc/images/monkey_steps.jpg">
-      <Filter>Resource Files\doc\images</Filter>
-    </Image>
-    <Image Include="../../thirdparty/owemdjee/boost/libs/gil/doc/images/pixel_locator.gif">
-      <Filter>Resource Files\doc\images</Filter>
-    </Image>
-    <Image Include="../../thirdparty/owemdjee/boost/libs/gil/doc/images/planar.jpg">
-      <Filter>Resource Files\doc\images</Filter>
+    <Image Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/images/planar.jpg">
+      <Filter>Resource Files\doc\modules\ROOT\images</Filter>
     </Image>
     <Text Include="../../thirdparty/owemdjee/boost/libs/gil/CMakeLists.txt">
       <Filter>Misc Files</Filter>
@@ -943,206 +937,215 @@
     <Text Include="../../thirdparty/owemdjee/boost/libs/gil/conanfile.txt">
       <Filter>Misc Files</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/Jamfile">
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/CMakeLists.txt">
       <Filter>Misc Files\doc</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/Makefile">
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/Jamfile">
       <Filter>Misc Files\doc</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/README.md">
       <Filter>Misc Files\doc</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/_static/boost-gil.svg">
-      <Filter>Misc Files\doc\_static</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/_static/boost.css">
-      <Filter>Misc Files\doc\_static</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/_static/doxygen.css">
-      <Filter>Misc Files\doc\_static</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/_static/gil.svg">
-      <Filter>Misc Files\doc\_static</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/_static/style.css">
-      <Filter>Misc Files\doc\_static</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/_templates/layout.html">
-      <Filter>Misc Files\doc\_templates</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/conf.py">
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/antora.yml">
       <Filter>Misc Files\doc</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/design/basics.rst">
-      <Filter>Misc Files\doc\design</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/design/channel.rst">
-      <Filter>Misc Files\doc\design</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/design/color_base.rst">
-      <Filter>Misc Files\doc\design</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/design/color_space.rst">
-      <Filter>Misc Files\doc\design</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/design/concepts.rst">
-      <Filter>Misc Files\doc\design</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/design/conclusions.rst">
-      <Filter>Misc Files\doc\design</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/design/dynamic_image.rst">
-      <Filter>Misc Files\doc\design</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/design/examples.rst">
-      <Filter>Misc Files\doc\design</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/design/extending.rst">
-      <Filter>Misc Files\doc\design</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/design/image.rst">
-      <Filter>Misc Files\doc\design</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/design/image_view.rst">
-      <Filter>Misc Files\doc\design</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/design/index.rst">
-      <Filter>Misc Files\doc\design</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/design/metafunctions.rst">
-      <Filter>Misc Files\doc\design</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/design/pixel.rst">
-      <Filter>Misc Files\doc\design</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/design/pixel_iterator.rst">
-      <Filter>Misc Files\doc\design</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/design/pixel_locator.rst">
-      <Filter>Misc Files\doc\design</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/design/point.rst">
-      <Filter>Misc Files\doc\design</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/design/technicalities.rst">
-      <Filter>Misc Files\doc\design</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/doxyfile">
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/build_antora.sh">
       <Filter>Misc Files\doc</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/doxygen-boost.css">
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/gil-playbook.yml">
       <Filter>Misc Files\doc</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/footer.html">
-      <Filter>Misc Files\doc</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/header.html">
-      <Filter>Misc Files\doc</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/histogram/create.rst">
-      <Filter>Misc Files\doc\histogram</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/histogram/cumulative.rst">
-      <Filter>Misc Files\doc\histogram</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/histogram/extend.rst">
-      <Filter>Misc Files\doc\histogram</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/histogram/extension/index.rst">
-      <Filter>Misc Files\doc\histogram\extension</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/histogram/extension/overview.rst">
-      <Filter>Misc Files\doc\histogram\extension</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/histogram/extension/std.rst">
-      <Filter>Misc Files\doc\histogram\extension</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/histogram/fill.rst">
-      <Filter>Misc Files\doc\histogram</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/histogram/index.rst">
-      <Filter>Misc Files\doc\histogram</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/histogram/limitations.rst">
-      <Filter>Misc Files\doc\histogram</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/histogram/overview.rst">
-      <Filter>Misc Files\doc\histogram</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/histogram/stl_compatibility.rst">
-      <Filter>Misc Files\doc\histogram</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/histogram/subhistogram.rst">
-      <Filter>Misc Files\doc\histogram</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/histogram/utilities.rst">
-      <Filter>Misc Files\doc\histogram</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/image_processing/affine-region-detectors.rst">
-      <Filter>Misc Files\doc\image_processing</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/image_processing/basics.rst">
-      <Filter>Misc Files\doc\image_processing</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/image_processing/contrast_enhancement/histogram_equalization.rst">
-      <Filter>Misc Files\doc\image_processing\contrast_enhancement</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/image_processing/contrast_enhancement/histogram_matching.rst">
-      <Filter>Misc Files\doc\image_processing\contrast_enhancement</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/image_processing/contrast_enhancement/index.rst">
-      <Filter>Misc Files\doc\image_processing\contrast_enhancement</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/image_processing/contrast_enhancement/overview.rst">
-      <Filter>Misc Files\doc\image_processing\contrast_enhancement</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/image_processing/index.rst">
-      <Filter>Misc Files\doc\image_processing</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/image_processing/overview.rst">
-      <Filter>Misc Files\doc\image_processing</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/index.html">
       <Filter>Misc Files\doc</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/index.rst">
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/nav.adoc">
+      <Filter>Misc Files\doc\modules\ROOT</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/pages/design/basics.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages\design</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/pages/design/channel.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages\design</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/pages/design/color_base.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages\design</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/pages/design/color_space.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages\design</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/pages/design/concepts.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages\design</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/pages/design/conclusions.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages\design</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/pages/design/dynamic_image.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages\design</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/pages/design/examples.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages\design</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/pages/design/extending.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages\design</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/pages/design/image.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages\design</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/pages/design/image_view.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages\design</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/pages/design/index.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages\design</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/pages/design/metafunctions.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages\design</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/pages/design/pixel.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages\design</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/pages/design/pixel_iterator.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages\design</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/pages/design/pixel_locator.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages\design</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/pages/design/point.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages\design</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/pages/design/technicalities.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages\design</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/pages/examples.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/pages/histogram/create.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages\histogram</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/pages/histogram/cumulative.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages\histogram</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/pages/histogram/extend.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages\histogram</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/pages/histogram/extension/index.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages\histogram\extension</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/pages/histogram/extension/overview.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages\histogram\extension</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/pages/histogram/extension/std.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages\histogram\extension</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/pages/histogram/fill.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages\histogram</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/pages/histogram/index.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages\histogram</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/pages/histogram/limitations.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages\histogram</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/pages/histogram/overview.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages\histogram</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/pages/histogram/stl_compatibility.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages\histogram</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/pages/histogram/subhistogram.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages\histogram</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/pages/histogram/utilities.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages\histogram</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/pages/image_processing/affine-region-detectors.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages\image_processing</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/pages/image_processing/basics.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages\image_processing</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/pages/image_processing/contrast_enhancement/adaptive_histogram_equalization.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages\image_processing\contrast_enhancement</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/pages/image_processing/contrast_enhancement/histogram_equalization.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages\image_processing\contrast_enhancement</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/pages/image_processing/contrast_enhancement/histogram_matching.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages\image_processing\contrast_enhancement</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/pages/image_processing/contrast_enhancement/index.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages\image_processing\contrast_enhancement</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/pages/image_processing/convolution.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages\image_processing</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/pages/image_processing/distance_transform.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages\image_processing</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/pages/image_processing/index.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages\image_processing</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/pages/image_processing/morphology.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages\image_processing</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/pages/image_processing/overview.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages\image_processing</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/pages/image_processing/sharpening.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages\image_processing</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/pages/image_processing/thresholding.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages\image_processing</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/pages/index.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/pages/installation.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/pages/io.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/pages/naming.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/pages/numeric.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/pages/reference.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/pages/toolbox.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/pages/tutorial/gradient.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages\tutorial</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/pages/tutorial/histogram.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages\tutorial</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/modules/ROOT/pages/tutorial/video.adoc">
+      <Filter>Misc Files\doc\modules\ROOT\pages\tutorial</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/mrdocs.yml">
       <Filter>Misc Files\doc</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/installation.rst">
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/package-lock.json">
       <Filter>Misc Files\doc</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/io.rst">
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/package.json">
       <Filter>Misc Files\doc</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/naming.rst">
-      <Filter>Misc Files\doc</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/numeric.rst">
-      <Filter>Misc Files\doc</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/reference.dox">
-      <Filter>Misc Files\doc</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/requirements.txt">
-      <Filter>Misc Files\doc</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/toolbox.rst">
-      <Filter>Misc Files\doc</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/tutorial/gradient.rst">
-      <Filter>Misc Files\doc\tutorial</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/tutorial/histogram.rst">
-      <Filter>Misc Files\doc\tutorial</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/doc/tutorial/video.rst">
-      <Filter>Misc Files\doc\tutorial</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/boost/libs/gil/index.html">
       <Filter>Misc Files</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/boost/libs/gil/meta/libraries.json">
       <Filter>Misc Files\meta</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/package-lock.json">
+      <Filter>Misc Files</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/boost/libs/gil/pixi.toml">
+      <Filter>Misc Files</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/boost/libs/gil/sublibs">
       <Filter>Misc Files</Filter>

@@ -405,6 +405,9 @@
     <Filter Include="Source Files\absl\time\internal\cctz\src">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0129}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\absl\types">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0132}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/c_header_test.c">
@@ -413,7 +416,13 @@
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/casts.cc">
       <Filter>Source Files\absl\base</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/cpu_detect.cc">
+      <Filter>Source Files\absl\base\internal</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/cycleclock.cc">
+      <Filter>Source Files\absl\base\internal</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/hardening.cc">
       <Filter>Source Files\absl\base\internal</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/low_level_alloc.cc">
@@ -443,9 +452,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/thread_identity.cc">
       <Filter>Source Files\absl\base\internal</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/throw_delegate.cc">
-      <Filter>Source Files\absl\base\internal</Filter>
-    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/tracing.cc">
       <Filter>Source Files\absl\base\internal</Filter>
     </ClCompile>
@@ -453,6 +459,9 @@
       <Filter>Source Files\absl\base\internal</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/log_severity.cc">
+      <Filter>Source Files\absl\base</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/throw_delegate.cc">
       <Filter>Source Files\absl\base</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/container/internal/hashtablez_sampler.cc">
@@ -466,9 +475,6 @@
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/crc/crc32c.cc">
       <Filter>Source Files\absl\crc</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/crc/internal/cpu_detect.cc">
-      <Filter>Source Files\absl\crc\internal</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/crc/internal/crc.cc">
       <Filter>Source Files\absl\crc\internal</Filter>
@@ -492,9 +498,6 @@
       <Filter>Source Files\absl\debugging</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/internal/address_is_readable.cc">
-      <Filter>Source Files\absl\debugging\internal</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/internal/borrowed_fixup_buffer.cc">
       <Filter>Source Files\absl\debugging\internal</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/internal/decode_rust_punycode.cc">
@@ -689,6 +692,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/status/status.cc">
       <Filter>Source Files\absl\status</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/status/status_builder.cc">
+      <Filter>Source Files\absl\status</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/status/status_payload_printer.cc">
       <Filter>Source Files\absl\status</Filter>
     </ClCompile>
@@ -857,6 +863,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/time/clock.cc">
       <Filter>Source Files\absl\time</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/time/clock_interface.cc">
+      <Filter>Source Files\absl\time</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/time/duration.cc">
       <Filter>Source Files\absl\time</Filter>
     </ClCompile>
@@ -896,8 +905,14 @@
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/time/internal/cctz/src/zone_info_source.cc">
       <Filter>Source Files\absl\time\internal\cctz\src</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/time/simulated_clock.cc">
+      <Filter>Source Files\absl\time</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/time/time.cc">
       <Filter>Source Files\absl\time</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/types/source_location.cc">
+      <Filter>Source Files\absl\types</Filter>
     </ClCompile>
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/algorithm/algorithm.h">
       <Filter>Header Files\absl\algorithm</Filter>
@@ -932,6 +947,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/atomic_hook_test_helper.h">
       <Filter>Header Files\absl\base\internal</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/cpu_detect.h">
+      <Filter>Header Files\absl\base\internal</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/cycleclock.h">
       <Filter>Header Files\absl\base\internal</Filter>
     </ClInclude>
@@ -954,6 +972,9 @@
       <Filter>Header Files\absl\base\internal</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/exception_testing.h">
+      <Filter>Header Files\absl\base\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/hardening.h">
       <Filter>Header Files\absl\base\internal</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/hide_ptr.h">
@@ -1019,9 +1040,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/thread_identity.h">
       <Filter>Header Files\absl\base\internal</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/throw_delegate.h">
-      <Filter>Header Files\absl\base\internal</Filter>
-    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/internal/tracing.h">
       <Filter>Header Files\absl\base\internal</Filter>
     </ClInclude>
@@ -1065,6 +1083,9 @@
       <Filter>Header Files\absl\base</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/thread_annotations.h">
+      <Filter>Header Files\absl\base</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/base/throw_delegate.h">
       <Filter>Header Files\absl\base</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/cleanup/cleanup.h">
@@ -1214,9 +1235,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/crc/crc32c.h">
       <Filter>Header Files\absl\crc</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/crc/internal/cpu_detect.h">
-      <Filter>Header Files\absl\crc\internal</Filter>
-    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/crc/internal/crc.h">
       <Filter>Header Files\absl\crc\internal</Filter>
     </ClInclude>
@@ -1251,9 +1269,6 @@
       <Filter>Header Files\absl\debugging\internal</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/internal/addresses.h">
-      <Filter>Header Files\absl\debugging\internal</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/internal/borrowed_fixup_buffer.h">
       <Filter>Header Files\absl\debugging\internal</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/internal/bounded_utf8_length_sequence.h">
@@ -1397,6 +1412,12 @@
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/functional/any_invocable.h">
       <Filter>Header Files\absl\functional</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/functional/any_invocable_test.h">
+      <Filter>Header Files\absl\functional</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/functional/bind_back.h">
+      <Filter>Header Files\absl\functional</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/functional/bind_front.h">
       <Filter>Header Files\absl\functional</Filter>
     </ClInclude>
@@ -1404,6 +1425,9 @@
       <Filter>Header Files\absl\functional</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/functional/internal/any_invocable.h">
+      <Filter>Header Files\absl\functional\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/functional/internal/back_binder.h">
       <Filter>Header Files\absl\functional\internal</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/functional/internal/front_binder.h">
@@ -1721,6 +1745,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/random/mock_distributions.h">
       <Filter>Header Files\absl\random</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/random/mocking_access.h">
+      <Filter>Header Files\absl\random</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/random/mocking_bit_gen.h">
       <Filter>Header Files\absl\random</Filter>
     </ClInclude>
@@ -1755,6 +1782,12 @@
       <Filter>Header Files\absl\status\internal</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/status/status.h">
+      <Filter>Header Files\absl\status</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/status/status_builder.h">
+      <Filter>Header Files\absl\status</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/status/status_macros.h">
       <Filter>Header Files\absl\status</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/status/status_matchers.h">
@@ -1886,9 +1919,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/strings/internal/resize_uninitialized.h">
       <Filter>Header Files\absl\strings\internal</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/strings/internal/stl_type_traits.h">
-      <Filter>Header Files\absl\strings\internal</Filter>
-    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/strings/internal/str_format/arg.h">
       <Filter>Header Files\absl\strings\internal\str_format</Filter>
     </ClInclude>
@@ -1923,6 +1953,9 @@
       <Filter>Header Files\absl\strings\internal</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/strings/internal/stringify_sink.h">
+      <Filter>Header Files\absl\strings\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/strings/internal/stringify_stream.h">
       <Filter>Header Files\absl\strings\internal</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/strings/internal/utf8.h">
@@ -2021,6 +2054,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/time/clock.h">
       <Filter>Header Files\absl\time</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/time/clock_interface.h">
+      <Filter>Header Files\absl\time</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/time/internal/cctz/include/cctz/civil_time.h">
       <Filter>Header Files\absl\time\internal\cctz\include\cctz</Filter>
     </ClInclude>
@@ -2069,19 +2105,34 @@
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/time/internal/test_util.h">
       <Filter>Header Files\absl\time\internal</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/time/simulated_clock.h">
+      <Filter>Header Files\absl\time</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/time/time.h">
       <Filter>Header Files\absl\time</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/types/any.h">
       <Filter>Header Files\absl\types</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/types/any_span.h">
+      <Filter>Header Files\absl\types</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/types/compare.h">
       <Filter>Header Files\absl\types</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/types/internal/any_span.h">
+      <Filter>Header Files\absl\types\internal</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/types/internal/span.h">
       <Filter>Header Files\absl\types\internal</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/types/optional.h">
+      <Filter>Header Files\absl\types</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/types/optional_ref.h">
+      <Filter>Header Files\absl\types</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/types/source_location.h">
       <Filter>Header Files\absl\types</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/types/span.h">

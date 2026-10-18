@@ -326,6 +326,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/libuv/src/win/util.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libuv/src/win/winapi.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libuv/src/win/winsock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libuv/test/appcontainer.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libuv/test/benchmark-async-pummel.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libuv/test/benchmark-async.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libuv/test/benchmark-fs-stat.c" />
@@ -394,6 +395,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/libuv/test/test-hrtime.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libuv/test/test-idle.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libuv/test/test-idna.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libuv/test/test-io-64-safe.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libuv/test/test-iouring-pollhup.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libuv/test/test-ip-name.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libuv/test/test-ip4-addr.c" />
@@ -413,6 +415,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/libuv/test/test-mutexes.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libuv/test/test-not-readable-nor-writable-on-read-error.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libuv/test/test-not-writable-after-shutdown.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libuv/test/test-osx-resident-set-memory.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libuv/test/test-osx-select.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libuv/test/test-pass-always.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libuv/test/test-ping-pong.c" />
@@ -427,6 +430,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/libuv/test/test-pipe-server-close.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libuv/test/test-pipe-set-fchmod.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libuv/test/test-pipe-set-non-blocking.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libuv/test/test-pipe-write.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libuv/test/test-platform-output.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libuv/test/test-poll-close-doesnt-corrupt-stack.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libuv/test/test-poll-close.c" />
@@ -451,6 +455,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/libuv/test/test-signal-multiple-loops.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libuv/test/test-signal-pending-on-close.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libuv/test/test-signal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libuv/test/test-sizeof.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libuv/test/test-socket-buffer-size.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libuv/test/test-spawn.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libuv/test/test-stdio-over-pipes.c" />
@@ -483,6 +488,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/libuv/test/test-tcp-write-after-connect.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libuv/test/test-tcp-write-fail.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libuv/test/test-tcp-write-in-a-row.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libuv/test/test-tcp-write-in-read-cb-backend-timeout.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libuv/test/test-tcp-write-queue-order.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libuv/test/test-tcp-write-to-half-open-connection.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libuv/test/test-tcp-writealot.c" />
@@ -530,6 +536,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/libuv/test/test-uname.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libuv/test/test-walk-handles.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libuv/test/test-watcher-cross-stop.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libuv/test/test-write-cancel.c" />
     <ClInclude Include="../../thirdparty/owemdjee/libuv/docs/code/plugin/plugin.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libuv/include/uv.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libuv/include/uv/aix.h" />
@@ -634,7 +641,9 @@
     <Text Include="../../thirdparty/owemdjee/libuv/docs/src/request.rst" />
     <Text Include="../../thirdparty/owemdjee/libuv/docs/src/signal.rst" />
     <Text Include="../../thirdparty/owemdjee/libuv/docs/src/sphinx-plugins/manpage.py" />
+    <Text Include="../../thirdparty/owemdjee/libuv/docs/src/static/architecture.txt" />
     <Text Include="../../thirdparty/owemdjee/libuv/docs/src/static/diagrams.key/Metadata/DocumentIdentifier" />
+    <Text Include="../../thirdparty/owemdjee/libuv/docs/src/static/loop_iteration.txt" />
     <Text Include="../../thirdparty/owemdjee/libuv/docs/src/stream.rst" />
     <Text Include="../../thirdparty/owemdjee/libuv/docs/src/tcp.rst" />
     <Text Include="../../thirdparty/owemdjee/libuv/docs/src/threading.rst" />

@@ -220,16 +220,11 @@
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/hello_coro.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/hello_world.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/io_uring.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/nvexec/maxwell_cpu_mt.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/nvexec/maxwell_cpu_st.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/nvexec/maxwell_distributed.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/nvexec/maxwell_gpu_m.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/nvexec/maxwell_gpu_s.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/nvexec/nvexec_bulk.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/nvexec/nvexec_launch.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/nvexec/nvexec_reduce.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/nvexec/nvexec_split.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/nvexec/nvtx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/problem.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/retry.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/scope.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/examples/server_theme/on_transfer.cpp" />
@@ -250,10 +245,14 @@
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/sequence/test_empty_sequence.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/sequence/test_ignore_all_values.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/sequence/test_iterate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/sequence/test_merge.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/sequence/test_merge_each.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/sequence/test_merge_each_threaded.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/sequence/test_transform_each.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/test_any_sender.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/test_at_coroutine_exit.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/test_bwos_lifo_queue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/test_completion_signatures.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/test_create.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/test_env.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/test_finally.cpp" />
@@ -276,6 +275,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/test_timed_thread_scheduler.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/test_trampoline_scheduler.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/test_type_async_scope.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/test_unless_stop_requested.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/test_variant_sender.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/test_when_any.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/exec/test_windows_thread_pool_context.cpp" />
@@ -303,6 +303,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/nvexec/upon_stopped.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/rrd/async_scope.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/rrd/rrd_split.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/rrd/sync_wait.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/algos/adaptors/test_bulk.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/algos/adaptors/test_continues_on.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/algos/adaptors/test_ensure_started.cpp" />
@@ -314,7 +315,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/algos/adaptors/test_on.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/algos/adaptors/test_on2.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/algos/adaptors/test_on3.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/algos/adaptors/test_schedule_from.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/algos/adaptors/test_split.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/algos/adaptors/test_starts_on.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/algos/adaptors/test_stopped_as_error.cpp" />
@@ -332,6 +332,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/algos/factories/test_just_error.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/algos/factories/test_just_stopped.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/algos/factories/test_read.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/algos/factories/test_schedule.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/algos/factories/test_transfer_just.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/algos/other/test_execute.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/concepts/test_awaitables.cpp" />
@@ -339,6 +340,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/concepts/test_concept_scheduler.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/concepts/test_concepts_receiver.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/concepts/test_concepts_sender.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/concepts/test_concepts_stop_tokens.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/cpos/test_cpo_bulk.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/cpos/test_cpo_connect.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/stdexec/test/stdexec/cpos/test_cpo_ensure_started.cpp" />
@@ -371,7 +373,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/asioexec/executor_with_default.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/asioexec/use_sender.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/__detail/__atomic_intrusive_queue.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/__detail/__atomic_ref.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/__detail/__basic_sequence.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/__detail/__bit_cast.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/__detail/__bwos_lifo_queue.hpp" />
@@ -384,6 +385,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/any_sender_of.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/async_scope.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/at_coroutine_exit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/completion_signatures.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/create.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/env.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/finally.hpp" />
@@ -409,6 +411,8 @@
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/sequence/empty_sequence.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/sequence/ignore_all_values.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/sequence/iterate.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/sequence/merge.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/sequence/merge_each.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/sequence/transform_each.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/sequence_senders.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/single_thread_context.hpp" />
@@ -419,6 +423,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/timed_scheduler.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/timed_thread_scheduler.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/trampoline_scheduler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/unless_stop_requested.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/variant_sender.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/when_any.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/exec/windows/filetime_clock.hpp" />
@@ -445,6 +450,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/nvexec/stream/launch.cuh" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/nvexec/stream/let_xxx.cuh" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/nvexec/stream/reduce.cuh" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/nvexec/stream/repeat_n.cuh" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/nvexec/stream/schedule_from.cuh" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/nvexec/stream/split.cuh" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/nvexec/stream/start_detached.cuh" />
@@ -456,13 +462,17 @@
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/nvexec/stream_context.cuh" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__any_receiver_ref.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__as_awaitable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__atomic.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__atomic_intrusive_queue.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__awaitable.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__basic_sender.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__bulk.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__completion_behavior.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__completion_signatures.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__completion_signatures_of.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__concepts.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__config.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__connect.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__connect_awaitable.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__continues_on.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__cpo.hpp" />
@@ -475,6 +485,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__execution_fwd.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__execution_legacy.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__force_include.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__get_completion_signatures.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__inline_scheduler.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__into_variant.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__intrusive_mpsc_queue.hpp" />
@@ -489,6 +500,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__operation_states.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__optional.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__preprocessor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__queries.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__query.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__ranges.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__read_env.hpp" />
@@ -500,9 +512,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__schedulers.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__scope.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__sender_adaptor_closure.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__sender_concepts.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__sender_introspection.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__senders.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__senders_core.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__shared.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__spin_loop_pause.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__split.hpp" />
@@ -520,6 +532,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__transform_sender.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__tuple.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__type_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__typeinfo.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__unstoppable.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__upon_error.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/stdexec/include/stdexec/__detail/__upon_stopped.hpp" />
@@ -549,6 +562,9 @@
     <Text Include="../../thirdparty/owemdjee/stdexec/MAINTAINERS.md" />
     <Text Include="../../thirdparty/owemdjee/stdexec/README.md" />
     <Text Include="../../thirdparty/owemdjee/stdexec/cmake/Modules/CompilerHelpers.cmake" />
+    <Text Include="../../thirdparty/owemdjee/stdexec/cmake/Modules/ConfigureASIO.cmake" />
+    <Text Include="../../thirdparty/owemdjee/stdexec/cmake/Modules/ConfigureTBB.cmake" />
+    <Text Include="../../thirdparty/owemdjee/stdexec/cmake/Modules/ConfigureTaskflow.cmake" />
     <Text Include="../../thirdparty/owemdjee/stdexec/cmake/Modules/FindSphinx.cmake" />
     <Text Include="../../thirdparty/owemdjee/stdexec/cmake/Modules/Findnuma.cmake" />
     <Text Include="../../thirdparty/owemdjee/stdexec/cmake/clangd_compile_info.cmake" />
@@ -570,6 +586,7 @@
     <Text Include="../../thirdparty/owemdjee/stdexec/include/asioexec/asio_config.hpp.in" />
     <Text Include="../../thirdparty/owemdjee/stdexec/include/execpools/asio/asio_config.hpp.in" />
     <Text Include="../../thirdparty/owemdjee/stdexec/include/nvexec/README.md" />
+    <Text Include="../../thirdparty/owemdjee/stdexec/sanitizer-ignorelist.txt" />
     <Text Include="../../thirdparty/owemdjee/stdexec/test/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/stdexec/test/asioexec/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/stdexec/test/exec/CMakeLists.txt" />

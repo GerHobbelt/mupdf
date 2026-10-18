@@ -221,7 +221,11 @@
     <ClCompile Include="../../thirdparty/owemdjee/libeigen/benchmarks/Core/bench_reductions.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libeigen/benchmarks/Core/bench_reverse.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libeigen/benchmarks/Core/bench_selfadjoint_product.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libeigen/benchmarks/Core/bench_symv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libeigen/benchmarks/Core/bench_syr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libeigen/benchmarks/Core/bench_syr2.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libeigen/benchmarks/Core/bench_triangular_product.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libeigen/benchmarks/Core/bench_trmv.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libeigen/benchmarks/Core/bench_trsm.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libeigen/benchmarks/Core/bench_vecadd.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libeigen/benchmarks/Eigenvalues/bench_eig33.cpp" />
@@ -231,6 +235,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/libeigen/benchmarks/Geometry/bench_quatmul.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libeigen/benchmarks/Geometry/bench_transforms.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libeigen/benchmarks/LU/bench_lu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libeigen/benchmarks/LU/bench_rcond.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libeigen/benchmarks/QR/bench_qr.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libeigen/benchmarks/SVD/bench_jacobi_sweep.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libeigen/benchmarks/SVD/bench_svd.cpp" />
@@ -323,6 +328,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/libeigen/test/clz.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libeigen/test/commainitializer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libeigen/test/complex_qz.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libeigen/test/condition_estimator.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libeigen/test/conjugate_gradient.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libeigen/test/conservative_resize.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libeigen/test/constexpr.cpp" />
@@ -385,6 +391,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/libeigen/test/mixingtypes.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libeigen/test/nestbyvalue.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libeigen/test/nesting_ops.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libeigen/test/no_automatic_resizing.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libeigen/test/nomalloc.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libeigen/test/nullary.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libeigen/test/num_dimensions.cpp" />
@@ -463,6 +470,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/libeigen/test/triangular.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libeigen/test/tuple_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libeigen/test/type_alias.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libeigen/test/ulp_accuracy/ulp_accuracy.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libeigen/test/umeyama.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libeigen/test/umfpack_support.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libeigen/test/unalignedcount.cpp" />
@@ -889,6 +897,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/libeigen/test/split_test_helper.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libeigen/test/svd_common.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libeigen/test/svd_fill.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libeigen/test/ulp_accuracy/mpfr_reference.h" />
     <Text Include="../../thirdparty/owemdjee/libeigen/CHANGELOG.md" />
     <Text Include="../../thirdparty/owemdjee/libeigen/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libeigen/COPYING.MPL2" />
@@ -1008,6 +1017,7 @@
     <Text Include="../../thirdparty/owemdjee/libeigen/setup.cfg" />
     <Text Include="../../thirdparty/owemdjee/libeigen/signature_of_eigen3_matrix_library" />
     <Text Include="../../thirdparty/owemdjee/libeigen/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libeigen/test/ulp_accuracy/README.md" />
   </ItemGroup>
   <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
 </Project>

@@ -84,10 +84,10 @@
     <Filter Include="Misc Files\test">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0025}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\test\disabled">
+    <Filter Include="Misc Files\test\infiniteloop">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0024}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\test\infiniteloop">
+    <Filter Include="Misc Files\test\loadbuffer">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0026}</UniqueIdentifier>
     </Filter>
     <Filter Include="Misc Files\test\unittest">
@@ -198,6 +198,12 @@
     <Filter Include="Source Files\src\utils">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0062}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\test">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0064}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\test\loadbuffer">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0063}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="../../thirdparty/owemdjee/gravity/api/exec_c.c">
@@ -292,6 +298,9 @@
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/gravity/src/utils/gravity_utils.c">
       <Filter>Source Files\src\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/gravity/test/loadbuffer/json_bounds.c">
+      <Filter>Source Files\test\loadbuffer</Filter>
     </ClCompile>
     <ClInclude Include="../../thirdparty/owemdjee/gravity/binding/GravityObjC/ObjC/gravity_objc.h">
       <Filter>Header Files\binding\GravityObjC\ObjC</Filter>
@@ -408,6 +417,9 @@
       <Filter>Resource Files\docs\assets\images</Filter>
     </Image>
     <Text Include="../../thirdparty/owemdjee/gravity/ARCHITECTURE.md">
+      <Filter>Misc Files</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/gravity/CHANGELOG.md">
       <Filter>Misc Files</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/gravity/CLAUDE.md">
@@ -566,15 +578,6 @@
     <Text Include="../../thirdparty/owemdjee/gravity/src/optionals/README.md">
       <Filter>Misc Files\src\optionals</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/gravity/test/disabled/README.txt">
-      <Filter>Misc Files\test\disabled</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/gravity/test/disabled/heap.gravity">
-      <Filter>Misc Files\test\disabled</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/gravity/test/disabled/loop1.gravity">
-      <Filter>Misc Files\test\disabled</Filter>
-    </Text>
     <Text Include="../../thirdparty/owemdjee/gravity/test/infiniteloop/loop2.gravity">
       <Filter>Misc Files\test\infiniteloop</Filter>
     </Text>
@@ -586,6 +589,42 @@
     </Text>
     <Text Include="../../thirdparty/owemdjee/gravity/test/infiniteloop/loop5.gravity">
       <Filter>Misc Files\test\infiniteloop</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/gravity/test/loadbuffer/anon_identifier.json">
+      <Filter>Misc Files\test\loadbuffer</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/gravity/test/loadbuffer/entry_is_an_array.json">
+      <Filter>Misc Files\test\loadbuffer</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/gravity/test/loadbuffer/entry_is_empty.json">
+      <Filter>Misc Files\test\loadbuffer</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/gravity/test/loadbuffer/entry_not_an_object.json">
+      <Filter>Misc Files\test\loadbuffer</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/gravity/test/loadbuffer/identifier_not_a_string.json">
+      <Filter>Misc Files\test\loadbuffer</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/gravity/test/loadbuffer/identifier_twice.json">
+      <Filter>Misc Files\test\loadbuffer</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/gravity/test/loadbuffer/missing_identifier.json">
+      <Filter>Misc Files\test\loadbuffer</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/gravity/test/loadbuffer/root_not_an_object.json">
+      <Filter>Misc Files\test\loadbuffer</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/gravity/test/loadbuffer/run_all.sh">
+      <Filter>Misc Files\test\loadbuffer</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/gravity/test/loadbuffer/truncated.json">
+      <Filter>Misc Files\test\loadbuffer</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/gravity/test/loadbuffer/unknown_object_type.json">
+      <Filter>Misc Files\test\loadbuffer</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/gravity/test/loadbuffer/valid_roundtrip.gravity">
+      <Filter>Misc Files\test\loadbuffer</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/01-syntax/class_declaration.gravity">
       <Filter>Misc Files\test\unittest\01-syntax</Filter>
@@ -809,6 +848,12 @@
     <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/bugfix_const_folding.gravity">
       <Filter>Misc Files\test\unittest</Filter>
     </Text>
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/bugfix_const_folding_float_rem.gravity">
+      <Filter>Misc Files\test\unittest</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/bugfix_crlf_lineno.gravity">
+      <Filter>Misc Files\test\unittest</Filter>
+    </Text>
     <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/bugfix_fiber_abort_noargs.gravity">
       <Filter>Misc Files\test\unittest</Filter>
     </Text>
@@ -830,6 +875,9 @@
     <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/bugfix_int_random_range.gravity">
       <Filter>Misc Files\test\unittest</Filter>
     </Text>
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/bugfix_json_deserialize_type_confusion.gravity">
+      <Filter>Misc Files\test\unittest</Filter>
+    </Text>
     <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/bugfix_json_stringify_escape.gravity">
       <Filter>Misc Files\test\unittest</Filter>
     </Text>
@@ -837,6 +885,12 @@
       <Filter>Misc Files\test\unittest</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/bugfix_list_next_bounds.gravity">
+      <Filter>Misc Files\test\unittest</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/bugfix_list_sorted_map_capacity.gravity">
+      <Filter>Misc Files\test\unittest</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/bugfix_list_storeat_grow_bounds.gravity">
       <Filter>Misc Files\test\unittest</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/bugfix_list_storeat_resize.gravity">
@@ -869,6 +923,9 @@
     <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/bugfix_reverse_range.gravity">
       <Filter>Misc Files\test\unittest</Filter>
     </Text>
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/bugfix_stack_overflow_large_regwin.gravity">
+      <Filter>Misc Files\test\unittest</Filter>
+    </Text>
     <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/bugfix_string_count.gravity">
       <Filter>Misc Files\test\unittest</Filter>
     </Text>
@@ -885,6 +942,9 @@
       <Filter>Misc Files\test\unittest</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/bugfix_string_upper_lower.gravity">
+      <Filter>Misc Files\test\unittest</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/bugfix_utf8_charbytes_bounds.gravity">
       <Filter>Misc Files\test\unittest</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/chained_call.gravity">
@@ -1151,6 +1211,9 @@
     <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/game_loop.gravity">
       <Filter>Misc Files\test\unittest</Filter>
     </Text>
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/heap.gravity">
+      <Filter>Misc Files\test\unittest</Filter>
+    </Text>
     <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/include_test.gravity">
       <Filter>Misc Files\test\unittest</Filter>
     </Text>
@@ -1257,6 +1320,9 @@
       <Filter>Misc Files\test\unittest</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/local_enum.gravity">
+      <Filter>Misc Files\test\unittest</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/loop1.gravity">
       <Filter>Misc Files\test\unittest</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/gravity/test/unittest/loops/test_do.gravity">

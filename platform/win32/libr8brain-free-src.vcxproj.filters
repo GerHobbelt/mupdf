@@ -15,10 +15,10 @@
     <Filter Include="Header Files\DLL">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0001}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\pffft_double">
+    <Filter Include="Header Files\fft">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0002}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\pffft_double\simd">
+    <Filter Include="Header Files\fft\simd">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0003}</UniqueIdentifier>
     </Filter>
     <Filter Include="Misc Files\DLL">
@@ -48,10 +48,10 @@
     <Filter Include="Source Files\bench">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0012}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\other">
+    <Filter Include="Source Files\fft">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0013}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\pffft_double">
+    <Filter Include="Source Files\other">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0014}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -80,6 +80,12 @@
     <ClCompile Include="../../thirdparty/owemdjee/r8brain-free-src/example.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/r8brain-free-src/fft/pffft.c">
+      <Filter>Source Files\fft</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/r8brain-free-src/fft/pffft_double.c">
+      <Filter>Source Files\fft</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/r8brain-free-src/other/calcCorrTable.cpp">
       <Filter>Source Files\other</Filter>
     </ClCompile>
@@ -97,15 +103,6 @@
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/r8brain-free-src/other/winopt.cpp">
       <Filter>Source Files\other</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/r8brain-free-src/pffft.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/r8brain-free-src/pffft_double/pffft_double.c">
-      <Filter>Source Files\pffft_double</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/r8brain-free-src/r8bbase.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClInclude Include="../../thirdparty/owemdjee/r8brain-free-src/CDSPBlockConvolver.h">
       <Filter>Header Files</Filter>
@@ -143,35 +140,35 @@
     <ClInclude Include="../../thirdparty/owemdjee/r8brain-free-src/DLL/r8bsrc.h">
       <Filter>Header Files\DLL</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/r8brain-free-src/fft4g.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="../../thirdparty/owemdjee/r8brain-free-src/fft/fft4g.h">
+      <Filter>Header Files\fft</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/r8brain-free-src/pffft.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="../../thirdparty/owemdjee/r8brain-free-src/fft/pffft.h">
+      <Filter>Header Files\fft</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/r8brain-free-src/pffft_double/pffft_double.h">
-      <Filter>Header Files\pffft_double</Filter>
+    <ClInclude Include="../../thirdparty/owemdjee/r8brain-free-src/fft/pffft_double.h">
+      <Filter>Header Files\fft</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/r8brain-free-src/pffft_double/pffft_priv_impl.h">
-      <Filter>Header Files\pffft_double</Filter>
+    <ClInclude Include="../../thirdparty/owemdjee/r8brain-free-src/fft/pffft_priv_impl.h">
+      <Filter>Header Files\fft</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/r8brain-free-src/pffft_double/simd/pf_avx_double.h">
-      <Filter>Header Files\pffft_double\simd</Filter>
+    <ClInclude Include="../../thirdparty/owemdjee/r8brain-free-src/fft/simd/pf_avx_double.h">
+      <Filter>Header Files\fft\simd</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/r8brain-free-src/pffft_double/simd/pf_double.h">
-      <Filter>Header Files\pffft_double\simd</Filter>
+    <ClInclude Include="../../thirdparty/owemdjee/r8brain-free-src/fft/simd/pf_double.h">
+      <Filter>Header Files\fft\simd</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/r8brain-free-src/pffft_double/simd/pf_neon_double.h">
-      <Filter>Header Files\pffft_double\simd</Filter>
+    <ClInclude Include="../../thirdparty/owemdjee/r8brain-free-src/fft/simd/pf_neon_double.h">
+      <Filter>Header Files\fft\simd</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/r8brain-free-src/pffft_double/simd/pf_neon_double_from_avx.h">
-      <Filter>Header Files\pffft_double\simd</Filter>
+    <ClInclude Include="../../thirdparty/owemdjee/r8brain-free-src/fft/simd/pf_neon_double_from_avx.h">
+      <Filter>Header Files\fft\simd</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/r8brain-free-src/pffft_double/simd/pf_scalar_double.h">
-      <Filter>Header Files\pffft_double\simd</Filter>
+    <ClInclude Include="../../thirdparty/owemdjee/r8brain-free-src/fft/simd/pf_scalar_double.h">
+      <Filter>Header Files\fft\simd</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/r8brain-free-src/pffft_double/simd/pf_sse2_double.h">
-      <Filter>Header Files\pffft_double\simd</Filter>
+    <ClInclude Include="../../thirdparty/owemdjee/r8brain-free-src/fft/simd/pf_sse2_double.h">
+      <Filter>Header Files\fft\simd</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/r8brain-free-src/r8bbase.h">
       <Filter>Header Files</Filter>

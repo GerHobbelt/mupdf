@@ -158,6 +158,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/crypto/boringssl/boringssl.c">
       <Filter>Source Files\crypto\boringssl</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/crypto/cryptotest.c">
+      <Filter>Source Files\crypto</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/crypto/gnutls/gnutls.c">
       <Filter>Source Files\crypto\gnutls</Filter>
     </ClCompile>
@@ -171,6 +174,9 @@
       <Filter>Source Files\crypto\quictls</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/crypto/shared.c">
+      <Filter>Source Files\crypto</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/crypto/shared_test.c">
       <Filter>Source Files\crypto</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/crypto/wolfssl/wolfssl.c">
@@ -191,13 +197,19 @@
     <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/examples/gtlssimpleclient.c">
       <Filter>Source Files\examples</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/examples/h09client.cc">
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/examples/hq_client_proto_codec.cc">
       <Filter>Source Files\examples</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/examples/h09server.cc">
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/examples/hq_server_proto_codec.cc">
       <Filter>Source Files\examples</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/examples/http.cc">
+      <Filter>Source Files\examples</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/examples/http3_client_proto_codec.cc">
+      <Filter>Source Files\examples</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/examples/http3_server_proto_codec.cc">
       <Filter>Source Files\examples</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/examples/server.cc">
@@ -374,6 +386,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_err.c">
       <Filter>Source Files\lib</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_fmt.c">
+      <Filter>Source Files\lib</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_frame_chain.c">
       <Filter>Source Files\lib</Filter>
     </ClCompile>
@@ -464,7 +479,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_version.c">
       <Filter>Source Files\lib</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_window_filter.c">
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_wf.c">
       <Filter>Source Files\lib</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/tests/main.c">
@@ -497,6 +512,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_dcidtr_test.c">
       <Filter>Source Files\tests</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_fmt_test.c">
+      <Filter>Source Files\tests</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_gaptr_test.c">
       <Filter>Source Files\tests</Filter>
     </ClCompile>
@@ -507,6 +525,9 @@
       <Filter>Source Files\tests</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_log_test.c">
+      <Filter>Source Files\tests</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_macro_test.c">
       <Filter>Source Files\tests</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_map_test.c">
@@ -566,7 +587,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_vec_test.c">
       <Filter>Source Files\tests</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_window_filter_test.c">
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_wf_test.c">
       <Filter>Source Files\tests</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/third-party/http-parser/bench.c">
@@ -608,6 +629,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/crypto/shared.h">
       <Filter>Header Files\crypto</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/crypto/shared_test.h">
+      <Filter>Header Files\crypto</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/examples/client.h">
       <Filter>Header Files\examples</Filter>
     </ClInclude>
@@ -617,13 +641,19 @@
     <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/examples/debug.h">
       <Filter>Header Files\examples</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/examples/h09client.h">
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/examples/hq_client_proto_codec.h">
       <Filter>Header Files\examples</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/examples/h09server.h">
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/examples/hq_server_proto_codec.h">
       <Filter>Header Files\examples</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/examples/http.h">
+      <Filter>Header Files\examples</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/examples/http3_client_proto_codec.h">
+      <Filter>Header Files\examples</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/examples/http3_server_proto_codec.h">
       <Filter>Header Files\examples</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/examples/network.h">
@@ -815,6 +845,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_err.h">
       <Filter>Header Files\lib</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_fmt.h">
+      <Filter>Header Files\lib</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_frame_chain.h">
       <Filter>Header Files\lib</Filter>
     </ClInclude>
@@ -917,7 +950,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_vec.h">
       <Filter>Header Files\lib</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_window_filter.h">
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_wf.h">
       <Filter>Header Files\lib</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_acktr_test.h">
@@ -947,6 +980,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_dcidtr_test.h">
       <Filter>Header Files\tests</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_fmt_test.h">
+      <Filter>Header Files\tests</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_gaptr_test.h">
       <Filter>Header Files\tests</Filter>
     </ClInclude>
@@ -957,6 +993,9 @@
       <Filter>Header Files\tests</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_log_test.h">
+      <Filter>Header Files\tests</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_macro_test.h">
       <Filter>Header Files\tests</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_map_test.h">
@@ -1016,7 +1055,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_vec_test.h">
       <Filter>Header Files\tests</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_window_filter_test.h">
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_wf_test.h">
       <Filter>Header Files\tests</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/third-party/http-parser/http_parser.h">
@@ -1255,6 +1294,9 @@
     </Text>
     <Text Include="../../thirdparty/owemdjee/ngtcp2/examples/tests/test_05_ciphers.py">
       <Filter>Misc Files\examples\tests</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/fmtgen.py">
+      <Filter>Misc Files</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/ngtcp2/interop/Dockerfile">
       <Filter>Misc Files\interop</Filter>

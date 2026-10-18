@@ -1032,6 +1032,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/pcl/test/sample_consensus/test_sample_consensus_line_models.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pcl/test/sample_consensus/test_sample_consensus_plane_models.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pcl/test/sample_consensus/test_sample_consensus_quadric_models.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcl/test/search/test_brute_force.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pcl/test/search/test_flann_search.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pcl/test/search/test_kdtree.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pcl/test/search/test_kdtree_nanoflann.cpp" />
@@ -1041,6 +1042,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/pcl/test/search/test_search.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pcl/test/segmentation/test_concave_prism.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pcl/test/segmentation/test_non_linear.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcl/test/segmentation/test_progressive_morphological_filter.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pcl/test/segmentation/test_random_walker.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pcl/test/segmentation/test_segmentation.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pcl/test/surface/test_concave_hull.cpp" />
@@ -1467,7 +1469,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/pcl/cuda/features/include/pcl/cuda/features/normal_3d_kernels.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/cuda/filters/include/pcl/cuda/filters/filter.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/cuda/filters/include/pcl/cuda/filters/passthrough.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/pcl/cuda/filters/include/pcl/cuda/filters/voxel_grid.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/cuda/io/include/pcl/cuda/io/cloud_from_pcl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/cuda/io/include/pcl/cuda/io/cloud_to_pcl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/cuda/io/include/pcl/cuda/io/debayering.h" />
@@ -1687,7 +1688,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/pcl/filters/include/pcl/filters/voxel_grid_covariance.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/filters/include/pcl/filters/voxel_grid_label.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/filters/include/pcl/filters/voxel_grid_occlusion_estimation.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/pcl/geometry/include/pcl/geometry/boost.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/geometry/include/pcl/geometry/get_boundary.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/geometry/include/pcl/geometry/impl/polygon_operations.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/geometry/include/pcl/geometry/line_iterator.h" />
@@ -2006,7 +2006,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/pcl/octree/include/pcl/octree/octree_pointcloud_singlepoint.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/octree/include/pcl/octree/octree_pointcloud_voxelcentroid.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/octree/include/pcl/octree/octree_search.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/pcl/outofcore/include/pcl/outofcore/boost.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/outofcore/include/pcl/outofcore/cJSON.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/outofcore/include/pcl/outofcore/impl/lru_cache.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/outofcore/include/pcl/outofcore/impl/monitor_queue.hpp" />
@@ -2102,6 +2101,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/pcl/recognition/include/pcl/recognition/region_xy.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/recognition/include/pcl/recognition/sparse_quantized_multi_mod_template.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/recognition/include/pcl/recognition/surface_normal_modality.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcl/registration/include/pcl/registration/anderson_acceleration.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/registration/include/pcl/registration/bfgs.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/registration/include/pcl/registration/boost_graph.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/registration/include/pcl/registration/convergence_criteria.h" />
@@ -2128,6 +2128,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/pcl/registration/include/pcl/registration/edge_measurements.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/registration/include/pcl/registration/elch.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/registration/include/pcl/registration/exceptions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcl/registration/include/pcl/registration/fricp.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/registration/include/pcl/registration/gicp.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/registration/include/pcl/registration/gicp6d.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/registration/include/pcl/registration/graph_handler.h" />
@@ -2149,6 +2150,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/pcl/registration/include/pcl/registration/impl/correspondence_types.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/registration/include/pcl/registration/impl/default_convergence_criteria.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/registration/include/pcl/registration/impl/elch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcl/registration/include/pcl/registration/impl/fricp.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/registration/include/pcl/registration/impl/gicp.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/registration/include/pcl/registration/impl/ia_fpcs.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/registration/include/pcl/registration/impl/ia_kfpcs.hpp" />
@@ -2173,6 +2175,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/pcl/registration/include/pcl/registration/impl/transformation_estimation_point_to_plane_lls.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/registration/include/pcl/registration/impl/transformation_estimation_point_to_plane_lls_weighted.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/registration/include/pcl/registration/impl/transformation_estimation_point_to_plane_weighted.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcl/registration/include/pcl/registration/impl/transformation_estimation_point_to_point_robust.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/registration/include/pcl/registration/impl/transformation_estimation_svd.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/registration/include/pcl/registration/impl/transformation_estimation_svd_scale.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/registration/include/pcl/registration/impl/transformation_estimation_symmetric_point_to_plane_lls.hpp" />
@@ -2198,6 +2201,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/pcl/registration/include/pcl/registration/transformation_estimation_point_to_plane_lls.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/registration/include/pcl/registration/transformation_estimation_point_to_plane_lls_weighted.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/registration/include/pcl/registration/transformation_estimation_point_to_plane_weighted.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcl/registration/include/pcl/registration/transformation_estimation_point_to_point_robust.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/registration/include/pcl/registration/transformation_estimation_svd.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/registration/include/pcl/registration/transformation_estimation_svd_scale.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/registration/include/pcl/registration/transformation_estimation_symmetric_point_to_plane_lls.h" />
@@ -2439,7 +2443,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/pcl/tracking/include/pcl/tracking/tracker.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/tracking/include/pcl/tracking/tracking.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/visualization/include/pcl/visualization/area_picking_event.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/pcl/visualization/include/pcl/visualization/boost.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/visualization/include/pcl/visualization/cloud_viewer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/visualization/include/pcl/visualization/common/actor_map.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pcl/visualization/include/pcl/visualization/common/common.h" />

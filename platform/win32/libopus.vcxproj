@@ -208,8 +208,7 @@
   <ItemGroup>
     <ClCompile Include="../../thirdparty/owemdjee/opus/celt/arm/arm_celt_map.c" />
     <ClCompile Include="../../thirdparty/owemdjee/opus/celt/arm/armcpu.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/opus/celt/arm/celt_fft_ne10.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/opus/celt/arm/celt_mdct_ne10.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/celt/arm/celt_mdct_tx.c" />
     <ClCompile Include="../../thirdparty/owemdjee/opus/celt/arm/celt_neon_intr.c" />
     <ClCompile Include="../../thirdparty/owemdjee/opus/celt/arm/pitch_neon_intr.c" />
     <ClCompile Include="../../thirdparty/owemdjee/opus/celt/bands.c" />
@@ -217,9 +216,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/opus/celt/celt_decoder.c" />
     <ClCompile Include="../../thirdparty/owemdjee/opus/celt/celt_encoder.c" />
     <ClCompile Include="../../thirdparty/owemdjee/opus/celt/celt_lpc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/celt/celt_tx_tables.c" />
     <ClCompile Include="../../thirdparty/owemdjee/opus/celt/cwrs.c" />
     <ClCompile Include="../../thirdparty/owemdjee/opus/celt/dump_modes/dump_modes.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/opus/celt/dump_modes/dump_modes_arm_ne10.c" />
     <ClCompile Include="../../thirdparty/owemdjee/opus/celt/entcode.c" />
     <ClCompile Include="../../thirdparty/owemdjee/opus/celt/entdec.c" />
     <ClCompile Include="../../thirdparty/owemdjee/opus/celt/entenc.c" />
@@ -227,6 +226,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/opus/celt/laplace.c" />
     <ClCompile Include="../../thirdparty/owemdjee/opus/celt/mathops.c" />
     <ClCompile Include="../../thirdparty/owemdjee/opus/celt/mdct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/celt/mdct_pfa.c" />
     <ClCompile Include="../../thirdparty/owemdjee/opus/celt/mini_kfft.c" />
     <ClCompile Include="../../thirdparty/owemdjee/opus/celt/modes.c" />
     <ClCompile Include="../../thirdparty/owemdjee/opus/celt/opus_custom_demo.c" />
@@ -454,6 +454,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/opus/src/opus_multistream_encoder.c" />
     <ClCompile Include="../../thirdparty/owemdjee/opus/src/opus_projection_decoder.c" />
     <ClCompile Include="../../thirdparty/owemdjee/opus/src/opus_projection_encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opus/src/osce_compare.c" />
     <ClCompile Include="../../thirdparty/owemdjee/opus/src/qext_compare.c" />
     <ClCompile Include="../../thirdparty/owemdjee/opus/src/repacketizer.c" />
     <ClCompile Include="../../thirdparty/owemdjee/opus/src/repacketizer_demo.c" />
@@ -469,6 +470,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/opus/celt/_kiss_fft_guts.h" />
     <ClInclude Include="../../thirdparty/owemdjee/opus/celt/arch.h" />
     <ClInclude Include="../../thirdparty/owemdjee/opus/celt/arm/armcpu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/celt/arm/celt_arm_asm.h" />
     <ClInclude Include="../../thirdparty/owemdjee/opus/celt/arm/fft_arm.h" />
     <ClInclude Include="../../thirdparty/owemdjee/opus/celt/arm/fixed_arm64.h" />
     <ClInclude Include="../../thirdparty/owemdjee/opus/celt/arm/fixed_armv4.h" />
@@ -481,6 +483,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/opus/celt/bands.h" />
     <ClInclude Include="../../thirdparty/owemdjee/opus/celt/celt.h" />
     <ClInclude Include="../../thirdparty/owemdjee/opus/celt/celt_lpc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opus/celt/celt_tx_tables.h" />
     <ClInclude Include="../../thirdparty/owemdjee/opus/celt/cpu_support.h" />
     <ClInclude Include="../../thirdparty/owemdjee/opus/celt/cwrs.h" />
     <ClInclude Include="../../thirdparty/owemdjee/opus/celt/dump_modes/dump_modes_arch.h" />
@@ -510,9 +513,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/opus/celt/rate.h" />
     <ClInclude Include="../../thirdparty/owemdjee/opus/celt/stack_alloc.h" />
     <ClInclude Include="../../thirdparty/owemdjee/opus/celt/static_modes_fixed.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/opus/celt/static_modes_fixed_arm_ne10.h" />
     <ClInclude Include="../../thirdparty/owemdjee/opus/celt/static_modes_float.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/opus/celt/static_modes_float_arm_ne10.h" />
     <ClInclude Include="../../thirdparty/owemdjee/opus/celt/vq.h" />
     <ClInclude Include="../../thirdparty/owemdjee/opus/celt/x86/celt_lpc_sse.h" />
     <ClInclude Include="../../thirdparty/owemdjee/opus/celt/x86/pitch_sse.h" />
@@ -622,7 +623,9 @@
     <Text Include="../../thirdparty/owemdjee/opus/autogen.sh" />
     <Text Include="../../thirdparty/owemdjee/opus/celt/arm/arm2gnu.pl" />
     <Text Include="../../thirdparty/owemdjee/opus/celt/arm/armopts.s.in" />
+    <Text Include="../../thirdparty/owemdjee/opus/celt/arm/celt_neon_aarch64.S" />
     <Text Include="../../thirdparty/owemdjee/opus/celt/arm/celt_pitch_xcorr_arm.s" />
+    <Text Include="../../thirdparty/owemdjee/opus/celt/arm/celt_tx_neon.S" />
     <Text Include="../../thirdparty/owemdjee/opus/celt/dump_modes/Makefile" />
     <Text Include="../../thirdparty/owemdjee/opus/celt_headers.mk" />
     <Text Include="../../thirdparty/owemdjee/opus/celt_sources.mk" />
@@ -776,6 +779,7 @@
     <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/silk_16_to_48.py" />
     <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/stndrd/evaluation/commonvoice_clip_selection.py" />
     <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/stndrd/evaluation/create_input_data.sh" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/stndrd/evaluation/distort_models.py" />
     <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/stndrd/evaluation/evaluate.py" />
     <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/stndrd/evaluation/highband_eval.py" />
     <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/stndrd/evaluation/lace_loss_metric.py" />
@@ -787,6 +791,7 @@
     <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/stndrd/evaluation/moc2.py" />
     <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/stndrd/evaluation/nbwe_dcr1.tar" />
     <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/stndrd/evaluation/process_dataset.sh" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/stndrd/evaluation/run_bwe_test.py" />
     <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/stndrd/evaluation/run_nomad.py" />
     <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/stndrd/evaluation/run_osce_test.py" />
     <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/stndrd/evaluation/tests/NBWE_ACR.tar" />
@@ -795,6 +800,10 @@
     <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/stndrd/evaluation/tests/nolace.tar" />
     <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/stndrd/presentation/endoscopy.py" />
     <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/stndrd/presentation/playback.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/stndrd/qualification/Readme.md" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/stndrd/qualification/create_bitstreams.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/stndrd/qualification/moc.py" />
+    <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/stndrd/qualification/run_osce_tests.py" />
     <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/test_bwe_model.py" />
     <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/test_model.py" />
     <Text Include="../../thirdparty/owemdjee/opus/dnn/torch/osce/test_vocoder.py" />
