@@ -242,6 +242,10 @@
     <ClCompile Include="../../thirdparty/freetype/src/gxvalid/gxvopbd.c" />
     <ClCompile Include="../../thirdparty/freetype/src/gxvalid/gxvprop.c" />
     <ClCompile Include="../../thirdparty/freetype/src/gxvalid/gxvtrak.c" />
+    <ClCompile Include="../../thirdparty/freetype/src/hvf/hvf.c" />
+    <ClCompile Include="../../thirdparty/freetype/src/hvf/hvfdrv.c" />
+    <ClCompile Include="../../thirdparty/freetype/src/hvf/hvfload.c" />
+    <ClCompile Include="../../thirdparty/freetype/src/hvf/hvfobjs.c" />
     <ClCompile Include="../../thirdparty/freetype/src/lzw/ftlzw.c" />
     <ClCompile Include="../../thirdparty/freetype/src/lzw/ftzopen.c" />
     <ClCompile Include="../../thirdparty/freetype/src/otvalid/otvalid.c" />
@@ -326,6 +330,7 @@
     <ClCompile Include="../../thirdparty/freetype/src/truetype/ttinterp.c" />
     <ClCompile Include="../../thirdparty/freetype/src/truetype/ttobjs.c" />
     <ClCompile Include="../../thirdparty/freetype/src/truetype/ttpload.c" />
+    <ClCompile Include="../../thirdparty/freetype/src/truetype/ttvarc.c" />
     <ClCompile Include="../../thirdparty/freetype/src/type1/t1afm.c" />
     <ClCompile Include="../../thirdparty/freetype/src/type1/t1driver.c" />
     <ClCompile Include="../../thirdparty/freetype/src/type1/t1gload.c" />
@@ -338,6 +343,7 @@
     <ClCompile Include="../../thirdparty/freetype/src/type42/t42parse.c" />
     <ClCompile Include="../../thirdparty/freetype/src/type42/type42.c" />
     <ClCompile Include="../../thirdparty/freetype/src/winfonts/winfnt.c" />
+    <ClInclude Include="../../thirdparty/freetype/builds/plan9/p9lib.h" />
     <ClInclude Include="../../thirdparty/freetype/devel/ft2build.h" />
     <ClInclude Include="../../thirdparty/freetype/devel/ftoption.h" />
     <ClInclude Include="../../thirdparty/freetype/include/freetype/config/ftconfig.h" />
@@ -428,6 +434,7 @@
     <ClInclude Include="../../thirdparty/freetype/include/freetype/internal/services/svttcmap.h" />
     <ClInclude Include="../../thirdparty/freetype/include/freetype/internal/services/svtteng.h" />
     <ClInclude Include="../../thirdparty/freetype/include/freetype/internal/services/svttglyf.h" />
+    <ClInclude Include="../../thirdparty/freetype/include/freetype/internal/services/svvarc.h" />
     <ClInclude Include="../../thirdparty/freetype/include/freetype/internal/services/svwinfnt.h" />
     <ClInclude Include="../../thirdparty/freetype/include/freetype/internal/sfnt.h" />
     <ClInclude Include="../../thirdparty/freetype/include/freetype/internal/svginterface.h" />
@@ -500,6 +507,10 @@
     <ClInclude Include="../../thirdparty/freetype/src/gxvalid/gxvmod.h" />
     <ClInclude Include="../../thirdparty/freetype/src/gxvalid/gxvmort.h" />
     <ClInclude Include="../../thirdparty/freetype/src/gxvalid/gxvmorx.h" />
+    <ClInclude Include="../../thirdparty/freetype/src/hvf/hvfdrv.h" />
+    <ClInclude Include="../../thirdparty/freetype/src/hvf/hvferror.h" />
+    <ClInclude Include="../../thirdparty/freetype/src/hvf/hvfload.h" />
+    <ClInclude Include="../../thirdparty/freetype/src/hvf/hvfobjs.h" />
     <ClInclude Include="../../thirdparty/freetype/src/lzw/ftzopen.h" />
     <ClInclude Include="../../thirdparty/freetype/src/otvalid/otvalid.h" />
     <ClInclude Include="../../thirdparty/freetype/src/otvalid/otvcommn.h" />
@@ -586,6 +597,7 @@
     <ClInclude Include="../../thirdparty/freetype/src/truetype/ttinterp.h" />
     <ClInclude Include="../../thirdparty/freetype/src/truetype/ttobjs.h" />
     <ClInclude Include="../../thirdparty/freetype/src/truetype/ttpload.h" />
+    <ClInclude Include="../../thirdparty/freetype/src/truetype/ttvarc.h" />
     <ClInclude Include="../../thirdparty/freetype/src/type1/t1afm.h" />
     <ClInclude Include="../../thirdparty/freetype/src/type1/t1driver.h" />
     <ClInclude Include="../../thirdparty/freetype/src/type1/t1errors.h" />
@@ -651,6 +663,7 @@
     <Text Include="../../thirdparty/freetype/builds/os2/os2-def.mk" />
     <Text Include="../../thirdparty/freetype/builds/os2/os2-dev.mk" />
     <Text Include="../../thirdparty/freetype/builds/os2/os2-gcc.mk" />
+    <Text Include="../../thirdparty/freetype/builds/plan9/README" />
     <Text Include="../../thirdparty/freetype/builds/symbian/bld.inf" />
     <Text Include="../../thirdparty/freetype/builds/toplevel.mk" />
     <Text Include="../../thirdparty/freetype/builds/windows/detect.mk" />
@@ -709,6 +722,7 @@
     <Text Include="../../thirdparty/freetype/docs/raster.txt" />
     <Text Include="../../thirdparty/freetype/docs/release" />
     <Text Include="../../thirdparty/freetype/meson_options.txt" />
+    <Text Include="../../thirdparty/freetype/mkfile" />
     <Text Include="../../thirdparty/freetype/modules.cfg" />
     <Text Include="../../thirdparty/freetype/objs/README" />
     <Text Include="../../thirdparty/freetype/src/autofit/afblue.cin" />
@@ -729,6 +743,8 @@
     <Text Include="../../thirdparty/freetype/src/gxvalid/README" />
     <Text Include="../../thirdparty/freetype/src/gxvalid/module.mk" />
     <Text Include="../../thirdparty/freetype/src/gxvalid/rules.mk" />
+    <Text Include="../../thirdparty/freetype/src/hvf/module.mk" />
+    <Text Include="../../thirdparty/freetype/src/hvf/rules.mk" />
     <Text Include="../../thirdparty/freetype/src/lzw/rules.mk" />
     <Text Include="../../thirdparty/freetype/src/otvalid/module.mk" />
     <Text Include="../../thirdparty/freetype/src/otvalid/rules.mk" />
