@@ -717,6 +717,7 @@ libxo
 libxslt
 libyaml
 libyaml-examples
+libyaml-more-examples
 libzint
 libzip
 libzmq

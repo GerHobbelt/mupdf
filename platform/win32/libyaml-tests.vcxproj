@@ -88,7 +88,7 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <DisableSpecificWarnings>;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4057;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus /Zc:preprocessor %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
 </ItemDefinitionGroup>
@@ -206,32 +206,26 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/libyaml/src/api.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libyaml/src/dumper.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libyaml/src/emitter.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libyaml/src/loader.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libyaml/src/parser.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libyaml/src/reader.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libyaml/src/scanner.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libyaml/src/writer.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libyaml/tests/example-deconstructor-alt.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libyaml/tests/example-deconstructor.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libyaml/tests/example-reformatter-alt.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libyaml/tests/example-reformatter.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libyaml/tests/run-dumper.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libyaml/tests/run-emitter-test-suite.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libyaml/tests/run-emitter.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libyaml/tests/run-loader.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libyaml/tests/run-parser-test-suite.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libyaml/tests/run-parser.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libyaml/tests/run-scanner.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyaml/tests/test-CVE-2024-35325.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyaml/tests/test-CVE-2024-35326.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyaml/tests/test-CVE-2024-35328.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyaml/tests/test-CVE-2024-35329.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyaml/tests/test-CVE-TM-emit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyaml/tests/test-CVE-TM-poc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyaml/tests/test-alloc.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libyaml/tests/test-bom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyaml/tests/test-directive-inheritance.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyaml/tests/test-emitter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyaml/tests/test-load-error.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libyaml/tests/test-nesting.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libyaml/tests/test-reader.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyaml/tests/test-realloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyaml/tests/test-tag-uri.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyaml/tests/test-unicode-4byte.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libyaml/tests/test-version.c" />
     <ClInclude Include="../../thirdparty/owemdjee/libyaml/include/yaml.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libyaml/src/yaml_private.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libyaml/tests/monolithic_examples.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libyaml/tests/test-alloc.h" />
     <Text Include="../../thirdparty/owemdjee/libyaml/Adopters.md" />
     <Text Include="../../thirdparty/owemdjee/libyaml/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libyaml/Changes" />
@@ -265,11 +259,9 @@
     <Text Include="../../thirdparty/owemdjee/libyaml/pkg/docker/Makefile" />
     <Text Include="../../thirdparty/owemdjee/libyaml/pkg/docker/output/ReadMe" />
     <Text Include="../../thirdparty/owemdjee/libyaml/pkg/docker/scripts/libyaml-dist.sh" />
-    <Text Include="../../thirdparty/owemdjee/libyaml/src/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/libyaml/tests/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libyaml/tests/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/libyaml/tests/ReadMe.md" />
-    <Text Include="../../thirdparty/owemdjee/libyaml/tests/run-all-tests.sh" />
     <Text Include="../../thirdparty/owemdjee/libyaml/yaml-0.1.pc.in" />
     <Text Include="../../thirdparty/owemdjee/libyaml/yamlConfig.cmake.in" />
   </ItemGroup>

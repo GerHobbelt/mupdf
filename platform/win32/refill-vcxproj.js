@@ -331,6 +331,8 @@ const projectMap = {
 	"protobuf_compiler": "protobuf",
 	"libprotobuf_conformance": "protobuf",
 
+	"libyaml-more": "libyaml-examples",
+	
 	"reactpp": "cpp.react",
 	"simd-everywhere": "simde",
 	"libTsetlinMachine": "pyTsetlinMachine",
